@@ -1,6 +1,6 @@
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import 'isomorphic-fetch';
-import { AppRouter } from '../../server/trpc/routers';
+import { AppRouter } from '../server/trpc/routers';
 import { InjectionToken } from "@angular/core";
 
 // watch cors here
