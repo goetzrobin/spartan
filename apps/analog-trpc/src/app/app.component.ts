@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   host: {
-    class: 'block h-full'
+    class: 'max-w-screen-md mx-auto block h-full bg-zinc-900 text-zinc-50'
   },
   changeDetection: ChangeDetectionStrategy.Default,
   template: ` <router-outlet></router-outlet> `,

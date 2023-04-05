@@ -1,30 +1,54 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
 } from '@angular/core';
 import { TrpcClient } from '../trpc-client';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe, DatePipe, NgFor } from "@angular/common";
 import { FormsModule, NgForm } from "@angular/forms";
+import { note } from "@prisma/client";
 
+const inputTw = 'focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-0 block w-full appearance-none rounded-lg px-3 py-2 transition-colors text-base leading-tight md:text-sm bg-black/[.05] dark:bg-zinc-50/10 focus:bg-white dark:focus:bg-dark placeholder:text-zinc-500 dark:placeholder:text-zinc-400 contrast-more:border contrast-more:border-current'
 @Component({
   selector: 'analog-trpc-home',
   standalone: true,
-  imports: [AsyncPipe, FormsModule, NgFor],
+  imports: [AsyncPipe, FormsModule, NgFor, DatePipe],
   host: {
     class: 'block h-full p-4'
   },
   template: `
-    <h1 class="mt-20 mb-8 text-5xl">SPARTAN</h1>
-    <h1 class="mb-4 text-xl">Supabase + Prisma + Analog + tRpc + Tailwind + Angular + Nx </h1>
-    <form class='py-2 flex items-center' #f="ngForm" (ngSubmit)="addPost(f)">
-      <input required autocomplete="off" class="p-2 w-full border rounded-md" name="newTitle" [(ngModel)]="newTitle" />
-      <button class="ml-2 w-12 border rounded-md border-sky-600/20 hover:bg-sky-600 bg-sky-500 text-sky-50 p-2">+</button>
+    <div class="flex flex-col-reverse mt-20 mb-8 items-center">
+      <h1 class="font-medium italic text-6xl text-[#DD0031] font-semibold">SPARTAN
+      </h1>
+        <img class="block rotate-45 h-40 w-40" alt="Spartan Logo" src="/assets/spartan.svg" />
+    </div>
+    <h1 class="mb-4 text-center">
+      <span class="text-[#DD0031]">S</span>upabase -
+      <span class="text-[#DD0031]">P</span>risma -
+      <span class="text-[#DD0031]">A</span>nalog -
+      t<span class="text-[#DD0031]">R</span>pc -
+      <span class="text-[#DD0031]">T</span>ailwind -
+      <span class="text-[#DD0031]">A</span>ngular -
+      <span class="text-[#DD0031]">N</span>x
+    </h1>
+    <form class="py-2 flex items-center" #f="ngForm" (ngSubmit)="addPost(f)">
+      <input required autocomplete="off" class="${inputTw}" name="newTitle" [(ngModel)]="newTitle" />
+      <button class="ml-2 w-10 text-base leading-tight text-sm border rounded-md border-red-600/20 hover:bg-red-900 bg-red-800 text-red-50 p-2">+
+      </button>
     </form>
     <div>
-      <p class="mb-4 p-2 font-normal border rounded-md flex items-center justify-between" *ngFor="let post of posts; let i = index">{{ post }}
-        <button class="w-12 border rounded-md border-red-600/20 hover:bg-red-600 bg-red-500 text-red-50 p-2" (click)="removePost(i)">x</button></p>
+      <div class="mb-4 p-4 font-normal border border-zinc-500/40 rounded-md" *ngFor="let post of posts">
+        <div class="flex items-center justify-between">
+        <p class="text-sm text-zinc-400">{{post.created_at | date}}</p>
+        <button class="text-xs h-6 flex items-center border rounded-md border-red-600/20 hover:bg-red-950 bg-zinc-900 p-2"
+                (click)="removePost(post.id)">x
+        </button>
+        </div>
+
+        <p class="mb-4">{{ post.note }}</p>
+
+      </div>
+
     </div>
   `,
 })
