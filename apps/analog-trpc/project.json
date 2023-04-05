@@ -69,4 +69,5 @@
     }
   },
   "tags": [],
+  "implicitDependencies": ["trpc"]
 }
