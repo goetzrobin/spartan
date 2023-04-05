@@ -2620,6 +2620,18 @@
   dependencies:
     esquery "^1.0.1"
 
+"@prisma/client@^4.12.0":
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-4.12.0.tgz#119b692888b1fe0fd3305c7d0e0ac48520aa6839"
+  integrity sha512-j9/ighfWwux97J2dS15nqhl60tYoH8V0IuSsgZDb6bCFcQD3fXbXmxjYC8GHhIgOk3lB7Pq+8CwElz2MiDpsSg==
+  dependencies:
+    "@prisma/engines-version" "4.12.0-67.659ef412370fa3b41cd7bf6e94587c1dfb7f67e7"
+
+"@prisma/engines-version@4.12.0-67.659ef412370fa3b41cd7bf6e94587c1dfb7f67e7":
+  version "4.12.0-67.659ef412370fa3b41cd7bf6e94587c1dfb7f67e7"
+  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-4.12.0-67.659ef412370fa3b41cd7bf6e94587c1dfb7f67e7.tgz#51a1cc5c886564b542acde64a873645d0dee2566"
+  integrity sha512-JIHNj5jlXb9mcaJwakM0vpgRYJIAurxTUqM0iX0tfEQA5XLZ9ONkIckkhuAKdAzocZ+80GYg7QSsfpjg7OxbOA==
+
 "@prisma/engines@4.12.0":
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-4.12.0.tgz#68d99078b70b2d9c339d0e8cbf2e99f00b72aa8c"
@@ -4630,6 +4642,13 @@ copy-anything@^2.0.1:
   integrity sha512-1j20GZTsvKNkc4BY3NpMOM8tt///wY3FpIzozTOFO2ffuZcV61nojHXVKIy3WM+7ADCy5FVhdZYHYDdgTU0yJw==
   dependencies:
     is-what "^3.14.1"
+
+copy-anything@^3.0.2:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/copy-anything/-/copy-anything-3.0.3.tgz#206767156f08da0e02efd392f71abcdf79643559"
+  integrity sha512-fpW2W/BqEzqPp29QS+MwwfisHCQZtiduTe/m8idFo0xbti9fIZ2WVhAsCv4ggFVH3AgCkVdpoOCtQC6gBrdhjw==
+  dependencies:
+    is-what "^4.1.8"
 
 copy-webpack-plugin@11.0.0:
   version "11.0.0"
@@ -7165,6 +7184,11 @@ is-what@^3.14.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/is-what/-/is-what-3.14.1.tgz#e1222f46ddda85dead0fd1c9df131760e77755c1"
   integrity sha512-sNxgpk9793nzSs7bA6JQJGeIuRBQhAaNGG77kzYQgMkrID+lS6SlK07K5LaptscDlSaIgH+GPFzf+d75FVxozA==
+
+is-what@^4.1.8:
+  version "4.1.8"
+  resolved "https://registry.yarnpkg.com/is-what/-/is-what-4.1.8.tgz#0e2a8807fda30980ddb2571c79db3d209b14cbe4"
+  integrity sha512-yq8gMao5upkPoGEU9LsB2P+K3Kt8Q3fQFCGyNCWOAnJAMzEXVV9drYb0TXr42TTliLLhKIBvulgAXgtLLnwzGA==
 
 is-wsl@^2.2.0:
   version "2.2.0"
@@ -11008,6 +11032,13 @@ sucrase@^3.29.0:
     mz "^2.7.0"
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
+
+superjson@^1.12.2:
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/superjson/-/superjson-1.12.2.tgz#072471f1e6add2d95a38b77fef8c7a199d82103a"
+  integrity sha512-ugvUo9/WmvWOjstornQhsN/sR9mnGtWGYeTxFuqLb4AiT4QdUavjGFRALCPKWWnAiUJ4HTpytj5e0t5HoMRkXg==
+  dependencies:
+    copy-anything "^3.0.2"
 
 supports-color@^5.3.0:
   version "5.5.0"

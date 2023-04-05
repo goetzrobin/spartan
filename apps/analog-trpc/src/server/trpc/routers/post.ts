@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { router, publicProcedure } from '../trpc';
 
-const posts: string[] = ['hi'];
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 export const postRouter = router({
   create: publicProcedure
@@ -9,12 +10,17 @@ export const postRouter = router({
       z.object({
         title: z.string(),
       }),
-    ).mutation(({ input }) => posts.push(input.title)),
-  list: publicProcedure.query(() => {
-    return posts;
-  }),
+    ).mutation(({ input }) => prisma.note.create({data: {
+      note: input.title
+      }})),
+  list: publicProcedure.query( () =>   prisma.note.findMany()
+  ),
   remove: publicProcedure
   .input(z.object({
-    id: z.number()
-  })).mutation(({input}) => posts.splice(input.id, 1))
+    id: z.bigint()
+  })).mutation(({input}) => prisma.note.delete({
+      where: {
+        id: input.id
+      }
+    }))
 });

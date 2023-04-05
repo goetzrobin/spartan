@@ -30,7 +30,7 @@ import { FormsModule, NgForm } from "@angular/forms";
 })
 export default class HomeComponent implements OnInit {
   private _trpc = inject(TrpcClient);
-  public posts: string[] = [];
+  public posts: note[] = [];
   public newTitle = '';
 
   public ngOnInit() {
@@ -47,8 +47,8 @@ export default class HomeComponent implements OnInit {
     form.form.reset();
   }
 
-  public removePost(index: number) {
-    this._trpc.post.remove.mutate({id: index}).then(() => this.fetchPosts())
+  public removePost(id: bigint) {
+    this._trpc.post.remove.mutate({id}).then(() => this.fetchPosts())
   }
 
   private fetchPosts() {
