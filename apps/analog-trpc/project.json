@@ -1,0 +1,72 @@
+{
+  "name": "analog-trpc",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/analog-trpc/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/vite:build",
+      "outputs": [
+        "{options.outputPath}",
+        "dist/apps/analog-trpc/.nitro",
+        "dist/apps/analog-trpc/ssr",
+        "dist/apps/analog-trpc/analog"
+      ],
+      "options": {
+        "configFile": "vite.config.ts",
+        "outputPath": "dist/apps/analog-trpc/client"
+      },
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "sourcemap": false,
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "analog-trpc:build",
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "analog-trpc:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "analog-trpc:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "analog-trpc:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/analog-trpc/**/*.ts",
+          "apps/analog-trpc/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["apps/analog-trpc/coverage"],
+      "options": {
+        "config": "vite.config.ts"
+      }
+    }
+  },
+  "tags": [],
+}
