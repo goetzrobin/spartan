@@ -20,13 +20,17 @@
     "@nrwl/angular": "15.9.2",
     "@trpc/client": "^10.18.0",
     "@trpc/server": "^10.18.0",
-    "zod": "^3.21.4",
     "front-matter": "^4.0.2",
+    "h3": "^1.6.2",
     "isomorphic-fetch": "^3.0.0",
     "marked": "^4.2.12",
+    "ofetch": "^1.0.1",
+    "ohash": "^1.0.0",
     "prismjs": "^1.29.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "ufo": "^1.1.1",
+    "zod": "^3.21.4",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
