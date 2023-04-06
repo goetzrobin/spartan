@@ -8,7 +8,7 @@
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "node_modules/@nx-analog-test/trpc",
+        "outputPath": "node_modules/@spartan/trpc",
         "main": "libs/trpc/src/index.ts",
         "tsConfig": "libs/trpc/tsconfig.lib.json",
         "assets": ["libs/trpc/*.md"]
