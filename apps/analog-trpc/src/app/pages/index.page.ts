@@ -1,16 +1,22 @@
 import {
   Component,
-  OnInit,
   inject,
 } from '@angular/core';
 import {TrpcClient} from '../trpc-client';
 import {AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf} from "@angular/common";
 import {FormsModule, NgForm} from "@angular/forms";
 import {note} from "@prisma/client";
-import {waitFor} from "../../waitfor";
+import {RouteMeta} from "@analogjs/router";
+import {ActivatedRoute} from "@angular/router";
+import {firstValueFrom, map} from "rxjs";
+
+export const routeMeta: RouteMeta = {
+  resolve: {notes: () => inject(TrpcClient).note.list.query()}
+}
 
 const inputTw = 'focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-0 block w-full appearance-none rounded-lg px-3 py-2 transition-colors text-base leading-tight md:text-sm bg-black/[.05] dark:bg-zinc-50/10 focus:bg-white dark:focus:bg-dark placeholder:text-zinc-500 dark:placeholder:text-zinc-400 contrast-more:border contrast-more:border-current';
 const btnTw = 'focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:outline-0 flex items-center justify-center rounded-lg px-2 py-1.5 text-sm font-bold tracking-tight shadow-xl shadow-red-500/20 bg-[#DD0031] hover:bg-opacity-70 text-zinc-800 hover:text-primary-darker'
+
 @Component({
   selector: 'analog-trpc-home',
   standalone: true,
@@ -39,56 +45,49 @@ const btnTw = 'focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:out
     </form>
     <div class="mt-4">
       <div class="mb-4 p-4 font-normal border border-zinc-500/40 rounded-md"
-           *ngFor="let post of posts; trackBy: noteTrackBy">
+           *ngFor="let note of (notes | async) ?? []; trackBy: noteTrackBy">
         <div class="flex items-center justify-between">
-          <p class="text-sm text-zinc-400">{{post.created_at | date}}</p>
+          <p class="text-sm text-zinc-400">{{note.created_at | date}}</p>
           <button class="!text-xs h-6 !bg-opacity-10 hover:!bg-opacity-50 !text-zinc-50 ${btnTw}"
-                  (click)="removePost(post.id)">x
+                  (click)="removePost(note.id)">x
           </button>
         </div>
-        <p class="mb-4">{{ post.note }}</p>
+        <p class="mb-4">{{ note.note }}</p>
       </div>
 
-      <div class="text-center rounded-xl p-20 bg-zinc-950/40" *ngIf="!loadingPosts && posts.length === 0">
-        <h3 class="text-xl font-medium">No posts yet!</h3>
+      <div class="text-center rounded-xl p-20 bg-zinc-950/40" *ngIf="!loadingPosts && (notes | async)?.length === 0">
+        <h3 class="text-xl font-medium">No notes yet!</h3>
         <p class="text-zinc-400">Add a new one and see them appear here...</p>
       </div>
     </div>
   `,
 })
-export default class HomeComponent implements OnInit {
+export default class HomeComponent {
   private _trpc = inject(TrpcClient);
-
   public loadingPosts = false;
-  public posts: note[] = [];
+  public notes: Promise<note[]> = firstValueFrom(inject(ActivatedRoute).data.pipe(map(({notes}) => notes)));
   public newTitle = '';
   public noteTrackBy = (index: number, note: note) => note.id;
-
-
-  public ngOnInit() {
-    this.fetchPosts();
-  }
 
   public addPost(form: NgForm) {
     if (!form.valid) {
       form.form.markAllAsTouched();
       return;
     }
-    this._trpc.post.create.mutate({title: this.newTitle}).then(() => this.fetchPosts())
+    this._trpc.note.create.mutate({title: this.newTitle}).then(() => this.fetchPosts())
     this.newTitle = '';
     form.form.reset();
   }
 
   public removePost(id: bigint) {
-    this._trpc.post.remove.mutate({id}).then(() => this.fetchPosts())
+    this._trpc.note.remove.mutate({id}).then(() => this.fetchPosts())
   }
 
   private fetchPosts() {
     this.loadingPosts = true;
-    waitFor(this._trpc.post.list.query()).then(posts => {
-      this.posts = posts;
+    this.notes = this._trpc.note.list.query().then(notes => {
       this.loadingPosts = false;
-      console.log(posts)
-    });
+      return notes
+    })
   }
 }

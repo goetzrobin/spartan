@@ -4,7 +4,7 @@ import { router, publicProcedure } from '../trpc';
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-export const postRouter = router({
+export const noteRouter = router({
   create: publicProcedure
     .input(
       z.object({
