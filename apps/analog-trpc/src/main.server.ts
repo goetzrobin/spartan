@@ -16,6 +16,5 @@ export default async function render(url: string, document: string) {
     document,
     url,
   });
-  console.log(html)
   return html;
 }
