@@ -9,6 +9,8 @@ import { RouterOutlet } from '@angular/router';
     class: 'max-w-screen-md mx-auto block h-full bg-zinc-900 text-zinc-50'
   },
   changeDetection: ChangeDetectionStrategy.Default,
-  template: ` <router-outlet></router-outlet> `,
+  template: `
+    <router-outlet></router-outlet> `
 })
-export class AppComponent {}
+export class AppComponent {
+}

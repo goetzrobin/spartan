@@ -5,6 +5,7 @@
   "sourceRoot": "apps/analog-trpc/src",
   "targets": {
     "build": {
+      "dependsOn": ["^build"],
       "executor": "@nrwl/vite:build",
       "outputs": [
         "{options.outputPath}",
@@ -69,5 +70,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["trpc"]
+  "implicitDependencies": ["trpc", "trpc-client"]
 }

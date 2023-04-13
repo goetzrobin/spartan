@@ -2,8 +2,10 @@
 
 <img alt="The tip of a spear with the Angular A inside" width="350px" src="./spartan.svg" title="Spartan logo"/>
 
-Example application running on [Supabase](https://supabase.com/), [Prisma](https://www.prisma.io/), [Analog](https://analogjs.org/), 
-[tRPC](https://trpc.io/), [Tailwind](https://tailwindcss.com/), [Angular](https://angular.io/), and [Nx](https://nx.dev/).
+Example application running
+on [Supabase](https://supabase.com/), [Prisma](https://www.prisma.io/), [Analog](https://analogjs.org/),
+[tRPC](https://trpc.io/), [Tailwind](https://tailwindcss.com/), [Angular](https://angular.io/),
+and [Nx](https://nx.dev/).
 
 ## Prerequisites
 
@@ -19,7 +21,9 @@ Run `yarn` or `yarn install` to install the dependencies of this project
 
 Your dependencies include Prisma, which is a great tool to manage your application's database.
 We need two things to connect our application to our Supabase postgres instance:
+
 - Add a  `.env` file at the root of your Nx workspace and add the following code snippet
+
 ```
 # Environment variables declared in this file are automatically made available to Prisma.
 # See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
@@ -30,21 +34,24 @@ We need two things to connect our application to our Supabase postgres instance:
 DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-SUPABASE-REFERENCE-ID].supabase.co:5432/postgres?schema=public"
 
 ```
+
 - Alternatively, you can also run a postgres instance locally and pass the URL the same way!
 - We can push the schema defined in our `schema.prisma` file to our DB running `yarn prisma db push`.
 - Finally, we create our prisma client by running `yarn prisma generate`.
 
 Now our DB should be all set up and ready to go!
 
-## Building the tRPC and analog integration
-
-Run `yarn nx build trpc` to create the `@spartan/trpc` integration.
-
-Note: This should happen automatically since the `analog-trpc` app depends on the `trpc` lib, but it does not currently.
-
 ## Development server
 
-Run `yarn nx serve analog-trpc` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Run `yarn nx serve analog-trpc` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload
+if you change any of the source files.
+
+Nx will also automatically build `analog-trpc`'s dependencies, which are `trpc` and `trpc-client`.
+
+To build them manually you can run the following commands:
+
+- `yarn nx build trpc` to build the `@spartan/trpc` integration with Analog's nitro backend.
+- `yarn nx build trpc-client` to build the `@spartan/trpc-client` Angular integration.
 
 ## Understand this workspace
 
@@ -52,4 +59,5 @@ Run `yarn nx graph` to see a diagram of the dependencies of the projects.
 
 ## Further help
 
-Reach out to me on [Twitter](https://twitter.com/goetzrobin/) or [GitHub](https://github.com/goetzrobin) if you run into any issues.
+Reach out to me on [Twitter](https://twitter.com/goetzrobin/) or [GitHub](https://github.com/goetzrobin) if you run into
+any issues.

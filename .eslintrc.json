@@ -29,6 +29,12 @@
               }
             ]
           }
+        ],
+        "@angular-eslint/no-host-metadata-property": [
+          2,
+          {
+            "allowStatic": true
+          }
         ]
       }
     },
@@ -62,14 +68,7 @@
       "env": {
         "jest": true
       },
-      "rules": {
-        "@angular-eslint/no-host-metadata-property": [
-          2,
-          {
-            "allowStatic": true
-          }
-        ]
-      }
+      "rules": {}
     }
   ]
 }

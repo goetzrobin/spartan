@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@spartan/trpc": ["libs/trpc/src/index.ts"]
+      "@spartan/trpc": ["node_modules/@spartan/trpc", "libs/trpc/src/index.ts"],
+      "@spartan/trpc-client": ["node_modules/@spartan/trpc-client","libs/trpc-client/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -6,12 +6,7 @@
 
 import type { ResponseMeta } from '@trpc/server/http';
 import { resolveHTTPResponse } from '@trpc/server/http';
-import type {
-  AnyRouter,
-  ProcedureType,
-  inferRouterContext,
-  inferRouterError,
-} from '@trpc/server';
+import type { AnyRouter, inferRouterContext, inferRouterError, ProcedureType } from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import { createURL } from 'ufo';
 import type { H3Event } from 'h3';
@@ -63,23 +58,23 @@ function getPath(event: H3Event): string | null {
   const { params } = event.context;
 
   if (typeof params?.['trpc'] === 'string') {
-    return params["trpc"];
+    return params['trpc'];
   }
 
-  if (params?.["trpc"] && Array.isArray(params["trpc"])) {
-    return (params["trpc"] as string[]).join('/');
+  if (params?.['trpc'] && Array.isArray(params['trpc'])) {
+    return (params['trpc'] as string[]).join('/');
   }
 
   return null;
 }
 
 export function createTrpcNitroHandler<TRouter extends AnyRouter>({
-  router,
-  createContext,
-  responseMeta,
-  onError,
-  batching,
-}: ResolveHTTPRequestOptions<TRouter>) {
+                                                                    router,
+                                                                    createContext,
+                                                                    responseMeta,
+                                                                    onError,
+                                                                    batching
+                                                                  }: ResolveHTTPRequestOptions<TRouter>) {
   return defineEventHandler(async (event) => {
     const { req, res } = event.node;
 
@@ -93,17 +88,17 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
         error: new TRPCError({
           message:
             'Param "trpc" not found - is the file named `[trpc]`.ts or `[...trpc].ts`?',
-          code: 'INTERNAL_SERVER_ERROR',
+          code: 'INTERNAL_SERVER_ERROR'
         }),
         type: 'unknown',
         ctx: undefined,
         path: undefined,
-        input: undefined,
+        input: undefined
       });
 
       throw createError({
         statusCode: 500,
-        statusMessage: JSON.stringify(error),
+        statusMessage: JSON.stringify(error)
       });
     }
 
@@ -115,7 +110,7 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
         method: req.method!,
         headers: req.headers,
         body: isMethod(event, 'GET') ? null : await readBody(event),
-        query: $url.searchParams,
+        query: $url.searchParams
       },
       path,
       createContext: async () => await createContext?.(event),
@@ -123,9 +118,9 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
       onError: (o) => {
         onError?.({
           ...o,
-          req,
+          req
         });
-      },
+      }
     });
 
     const { status, headers, body } = httpResponse;
@@ -133,10 +128,10 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
     res.statusCode = status;
 
     headers &&
-      Object.keys(headers).forEach((key) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        res.setHeader(key, headers[key]!);
-      });
+    Object.keys(headers).forEach((key) => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      res.setHeader(key, headers[key]!);
+    });
 
     return body;
   });
