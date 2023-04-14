@@ -30,7 +30,7 @@ There are two ways to get up and running with Supabase:
 1. Connecting directly to your managed instance on [supabase.com](https://supabase.com/)
 2. Locally using [Docker](https://www.docker.com/)
 
-### Connecting to supabase.com
+### Option 1: Connecting to supabase.com instance
 
 This way is super easy! Simply by creating your account, you will also have set up your first project.
 This means that you are ready to connect to your projects database already!
@@ -50,7 +50,7 @@ DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-SUPABASE-REFERENCE-
 
 ```
 
-### Connecting to local supabase instance
+### Option 2: Connecting to local supabase instance
 
 Supabase also allows you to run a version of their system locally!
 To get up and running you can follow [this guide](https://supabase.com/docs/guides/cli/local-development)!
@@ -73,7 +73,7 @@ supabase login
 Create your access token from https://app.supabase.com/account/tokens and paste it into your
 terminal window.
 
-#### Create supabase project
+#### Create Supabase project
 
 ```shell
 # if you are in the spartan directory move UP!!!
@@ -88,7 +88,7 @@ cd spartan-supabase
 git init
 ```
 
-#### Start supabase services
+#### Start Supabase services
 
 ```shell
 supabase init
@@ -102,7 +102,7 @@ supabase start
 
 ##### Important: Make sure Docker is running and configured correctly!
 
-I had Docker already installed and running. However, my setup is not compatible with the config supabase expects by
+I had Docker already installed and running. However, my setup is not compatible with the config Supabase expects by
 default.
 I ran the following command to get it to work for now:
 
@@ -147,16 +147,16 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:54322/postgres?schema=pub
 
 ```
 
-Perfect! You should be connect to your local Supabase Postgres instance now!
+Perfect! You should be able to connect to your local Supabase Postgres instance now!
 
-#### Also important: Stop at Database Migrations
+#### Important: Stop at Database Migrations
 
 You can stop the guide when you get to "Database Migrations". We will take care of this in the next step!
 
 ### Initializing the DB
 
 Now that we have successfully set up our DB we need to set up our database schema.
-Primsa makes this a breeeze!!
+Primsa makes this super easy!!
 
 - We can push the schema defined in our `schema.prisma` file to our DB running
 
