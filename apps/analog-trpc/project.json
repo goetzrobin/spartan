@@ -5,7 +5,9 @@
   "sourceRoot": "apps/analog-trpc/src",
   "targets": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "executor": "@nrwl/vite:build",
       "outputs": [
         "{options.outputPath}",
@@ -53,7 +55,9 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
         "lintFilePatterns": [
           "apps/analog-trpc/**/*.ts",
@@ -63,12 +67,16 @@
     },
     "test": {
       "executor": "@nrwl/vite:test",
-      "outputs": ["apps/analog-trpc/coverage"],
+      "outputs": [
+        "apps/analog-trpc/coverage"
+      ],
       "options": {
         "config": "vite.config.ts"
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["trpc", "trpc-client"]
+  "implicitDependencies": [
+    "trpc"
+  ]
 }

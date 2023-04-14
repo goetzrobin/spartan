@@ -18,46 +18,34 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@analogjs/content@0.2.0-beta.0":
-  version "0.2.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@analogjs/content/-/content-0.2.0-beta.0.tgz#e018f18abbf0e1e85d8a1cd5869954397033dd99"
-  integrity sha512-UG1adZv+tOB0gL/HOvE1c/4fbc2KontaZCIYr734Ynscm783DGDKnuxJx1LHE+9jLJW+prwnRT7prw7fZDqIuw==
+"@analogjs/content@0.2.0-beta.1", "@analogjs/content@^0.2.0-beta.1":
+  version "0.2.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@analogjs/content/-/content-0.2.0-beta.1.tgz#390a624a64229065bf810079c9bef6e2eb0eddef"
+  integrity sha512-xd88XQaH7Xn3fFz1agH9IwiwCebCfjh6WFP/usD9CuWvU/iNzTH02ZKA9LVmH0aVHrn5fsg+FFslFtGyXcXP/w==
   dependencies:
     tslib "^2.3.0"
 
-"@analogjs/content@latest":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@analogjs/content/-/content-0.1.9.tgz#731e5d870cb5a74a0c0311a1d77af37073bbcc79"
-  integrity sha512-jTa8T5dqzhhnlZmI93MOq7VLSpbcEk/cHlzRxeK11d/o3kuuZt0WijeE0EK5nTn4s4AW8QxZ1/CALUknRHJNBg==
+"@analogjs/platform@0.2.0-beta.1":
+  version "0.2.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@analogjs/platform/-/platform-0.2.0-beta.1.tgz#649bd49e81bc96fc3a1ea2f55727e6603cbd974b"
+  integrity sha512-C95ke4z3l9lU7irIGo72FB5VLwucjogmd+gebZnPynytlpMzV8WwEsldyRP/imBd1GiyV0uJB7HBXl2cGqsG6Q==
   dependencies:
-    tslib "^2.3.0"
-
-"@analogjs/platform@0.2.0-beta.0":
-  version "0.2.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@analogjs/platform/-/platform-0.2.0-beta.0.tgz#b1ff68a38e7b068f8470ca8773cc999a1e6a28c6"
-  integrity sha512-5ru58fUT1/kdhRqztrVSnQaky6hH2k9j8TH322CElv+uFMMc4RtEnglhPYeMjTxtp08FnmKSPmTF649Vc8OXGQ==
-  dependencies:
-    "@analogjs/vite-plugin-angular" latest
+    "@analogjs/vite-plugin-angular" "^0.2.0-beta.1"
     nitropack "^1.0.0"
 
-"@analogjs/router@0.2.0-beta.0":
-  version "0.2.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@analogjs/router/-/router-0.2.0-beta.0.tgz#99274f16ef034e767bb62e0f9a556e855b45437a"
-  integrity sha512-2r4A4hjFNrqxq8oqbFfDNY7xY0WlJ+va9T7o+crJN/SIZeKXZNBWJs0Vyv8O5x/gIokALZ+IpYWIToemivcyqA==
+"@analogjs/router@0.2.0-beta.1":
+  version "0.2.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@analogjs/router/-/router-0.2.0-beta.1.tgz#7092f4c2dda6ba4d18cc8cecfa8838e4c8dbc3e6"
+  integrity sha512-WY6iM3TtJJcTQO9wfcVfz2xy6DKN81syWuatMwSr3qVD1Ch6g3YTfLuImTZsvF7ISiOP6BRXIPVYA1d4wyexzA==
   dependencies:
     tslib "^2.0.0"
   optionalDependencies:
-    "@analogjs/content" latest
+    "@analogjs/content" "^0.2.0-beta.1"
 
-"@analogjs/vite-plugin-angular@0.2.0-beta.0":
-  version "0.2.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@analogjs/vite-plugin-angular/-/vite-plugin-angular-0.2.0-beta.0.tgz#6f90f4806e0ab47b49765231b63c9725e1c3e138"
-  integrity sha512-4Eo8jlCyQJH0EHKEQT+pnixDJPxEnBA5PSvWht2UqN393h3zQ4CpucyAi+mlX+rfTyUK9qguWqWZfTylXms5JA==
-
-"@analogjs/vite-plugin-angular@latest":
-  version "0.2.0-alpha.29"
-  resolved "https://registry.yarnpkg.com/@analogjs/vite-plugin-angular/-/vite-plugin-angular-0.2.0-alpha.29.tgz#e3fc1fde3bfb586b28d55bb4301a4a10938604e2"
-  integrity sha512-aUT6LW+ohQ9XCPoUWCle8UGpquYeA4LTx0DDJi5KAcX9g96sakuWQ14dfnEnkju5OBBZArZLGAubLnQJKBT84g==
+"@analogjs/vite-plugin-angular@0.2.0-beta.1", "@analogjs/vite-plugin-angular@^0.2.0-beta.1":
+  version "0.2.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@analogjs/vite-plugin-angular/-/vite-plugin-angular-0.2.0-beta.1.tgz#fac9a89e17f46f01885fde5263233e95ccfb8c00"
+  integrity sha512-kJjX2+q8RZ/GDnA6yusa9wz/O1XoAOgyEBSbRkwQiS4nAdnkiTlfx8m7ORw7hi+i47euc12951T4FWn2iisRhQ==
 
 "@angular-devkit/architect@0.1600.0-rc.0":
   version "0.1600.0-rc.0"

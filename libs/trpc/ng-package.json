@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../node_modules/@spartan/trpc-client",
+  "dest": "../../node_modules/@spartan/trpc",
   "lib": {
     "entryFile": "src/index.ts"
   }

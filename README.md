@@ -20,9 +20,24 @@ Run `yarn` or `yarn install` to install the dependencies of this project
 ## Set up DB
 
 Your dependencies include Prisma, which is a great tool to manage your application's database.
-We need two things to connect our application to our Supabase postgres instance:
+As a database provider we will use Supabase an open source Firebase alternative that comes with
+a Postgres database, Authentication, instant APIs, Edge Functions, Realtime subscriptions, and Storage.
 
-- Add a  `.env` file at the root of your Nx workspace and add the following code snippet
+### Connect to DB
+
+There are two ways to get up and running with Supabase:
+
+1. Connecting directly to your managed instance on [supabase.com](https://supabase.com/)
+2. Locally using [Docker](https://www.docker.com/)
+
+### Connecting to supabase.com
+
+This way is super easy! Simply by creating your account, you will also have set up your first project.
+This means that you are ready to connect to your projects database already!
+
+Let's connect our application to our Supabase Postgres instance:
+
+Add a  `.env` file at the root of your Nx workspace and add the following code snippet
 
 ```
 # Environment variables declared in this file are automatically made available to Prisma.
@@ -35,23 +50,144 @@ DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-SUPABASE-REFERENCE-
 
 ```
 
-- Alternatively, you can also run a postgres instance locally and pass the URL the same way!
-- We can push the schema defined in our `schema.prisma` file to our DB running `yarn prisma db push`.
-- Finally, we create our prisma client by running `yarn prisma generate`.
+### Connecting to local supabase instance
 
-Now our DB should be all set up and ready to go!
+Supabase also allows you to run a version of their system locally!
+To get up and running you can follow [this guide](https://supabase.com/docs/guides/cli/local-development)!
+They do a great job explaining how to get started and there is plenty of resources to help you if you get stuck.
+
+If you want the quick and dirty way and are on a Mac. Here is what I did to get up and running:
+
+#### Install supabase CLI
+
+```shell
+brew install supabase/tap/supabase
+```
+
+#### Log into CLI
+
+```shell
+supabase login
+```
+
+Create your access token from https://app.supabase.com/account/tokens and paste it into your
+terminal window.
+
+#### Create supabase project
+
+```shell
+# if you are in the spartan directory move UP!!!
+cd ..
+# create your project folder
+mkdir spartan-supabase
+
+# move into the new folder
+cd spartan-supabase
+
+# start a new git repository — important, don't skip this step
+git init
+```
+
+#### Start supabase services
+
+```shell
+supabase init
+```
+
+and
+
+```shell
+supabase start
+```
+
+##### Important: Make sure Docker is running and configured correctly!
+
+I had Docker already installed and running. However, my setup is not compatible with the config supabase expects by
+default.
+I ran the following command to get it to work for now:
+
+```shell
+DOCKER_HOST=unix:///Users/[YOUR_USER_ACCOUNT_NAME]/.docker/run/docker.sock supabase start
+```
+
+For more info see [this issue on GitHub.](https://github.com/supabase/cli/issues/167)
+
+#### Connect to local DB
+
+The previous step can take a while as all the docker images have to be downloaded first.
+However, once everything completes you will see a console output that looks like this:
+
+```
+Started supabase local development setup.
+
+         API URL: http://localhost:54321
+          DB URL: postgresql://postgres:postgres@localhost:54322/postgres
+      Studio URL: http://localhost:54323
+    Inbucket URL: http://localhost:54324
+        anon key: eyJh......
+service_role key: eyJh......
+```
+
+Take your cyber-security hat off for a minute (we are working locally after all) and copy the connection string:
+
+```
+postgresql://postgres:postgres@localhost:54322/postgres
+````
+
+Add a `.env` file at the root of your Nx workspace and add the connection string like so:
+
+```
+# Environment variables declared in this file are automatically made available to Prisma.
+# See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
+
+# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
+# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+DATABASE_URL="postgresql://postgres:postgres@localhost:54322/postgres?schema=public"
+
+```
+
+Perfect! You should be connect to your local Supabase Postgres instance now!
+
+#### Also important: Stop at Database Migrations
+
+You can stop the guide when you get to "Database Migrations". We will take care of this in the next step!
+
+### Initializing the DB
+
+Now that we have successfully set up our DB we need to set up our database schema.
+Primsa makes this a breeeze!!
+
+- We can push the schema defined in our `schema.prisma` file to our DB running
+
+```shell
+yarn prisma db push
+```
+
+- Finally, we create our prisma client by running
+
+```shell
+yarn prisma generate
+```
+
+That's it! Now our DB should be all set up and ready to go!
 
 ## Development server
 
-Run `yarn nx serve analog-trpc` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload
+Run
+
+```shell
+yarn nx serve analog-trpc
+```
+
+for a dev server. Navigate to http://localhost:4200/. The app will automatically reload
 if you change any of the source files.
 
-Nx will also automatically build `analog-trpc`'s dependencies, which are `trpc` and `trpc-client`.
+Nx will also automatically build `analog-trpc`'s dependency: `trpc`.
 
 To build them manually you can run the following commands:
 
 - `yarn nx build trpc` to build the `@spartan/trpc` integration with Analog's nitro backend.
-- `yarn nx build trpc-client` to build the `@spartan/trpc-client` Angular integration.
 
 ## Understand this workspace
 

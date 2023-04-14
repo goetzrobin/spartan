@@ -10,10 +10,10 @@ export default defineConfig(({ mode }) => {
   return {
     publicDir: 'src/public',
     optimizeDeps: {
-      include: ['@angular/common', '@angular/forms'],
+      include: ['@angular/common', '@angular/forms', 'isomorphic-fetch']
     },
     build: {
-      target: ['es2020'],
+      target: ['es2020']
     },
     plugins: [
       analog({
@@ -24,29 +24,29 @@ export default defineConfig(({ mode }) => {
           tsconfig:
             mode === 'test'
               ? 'apps/analog-trpc/tsconfig.spec.json'
-              : 'apps/analog-trpc/tsconfig.app.json',
+              : 'apps/analog-trpc/tsconfig.app.json'
         },
         nitro: {
           rootDir: 'apps/analog-trpc',
           output: {
             dir: '../../../dist/apps/analog-trpc/analog',
-            publicDir: '../../../dist/apps/analog-trpc/analog/public',
+            publicDir: '../../../dist/apps/analog-trpc/analog/public'
           },
           publicAssets: [{ dir: `../../../dist/apps/analog-trpc/client` }],
           serverAssets: [
-            { baseName: 'public', dir: `./dist/apps/analog-trpc/client` },
+            { baseName: 'public', dir: `./dist/apps/analog-trpc/client` }
           ],
           buildDir: '../../dist/apps/analog-trpc/.nitro',
           prerender: {
-            routes: ['/'],
-          },
-        },
+            routes: ['/']
+          }
+        }
       }),
       tsConfigPaths({
-        root: '../../',
+        root: '../../'
       }),
       visualizer() as Plugin,
-      splitVendorChunkPlugin(),
+      splitVendorChunkPlugin()
     ],
     test: {
       globals: true,
@@ -54,11 +54,11 @@ export default defineConfig(({ mode }) => {
       setupFiles: ['src/test-setup.ts'],
       include: ['**/*.spec.ts'],
       cache: {
-        dir: `../../node_modules/.vitest`,
-      },
+        dir: `../../node_modules/.vitest`
+      }
     },
     define: {
-      'import.meta.vitest': mode !== 'production',
-    },
+      'import.meta.vitest': mode !== 'production'
+    }
   };
 });
