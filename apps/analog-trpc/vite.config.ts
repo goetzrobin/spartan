@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => {
     optimizeDeps: {
       include: ['@angular/common', '@angular/forms', 'isomorphic-fetch']
     },
+    ssr: {
+      noExternal: '@spartan/**'
+    },
     build: {
       target: ['es2020']
     },
