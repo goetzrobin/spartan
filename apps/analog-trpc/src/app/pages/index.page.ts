@@ -3,12 +3,7 @@ import { injectTRPCClient } from '../../trpc-client';
 import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { note } from '@prisma/client';
-import { injectActivatedRoute, RouteMeta } from '@analogjs/router';
-import { firstValueFrom, map } from 'rxjs';
-
-export const routeMeta: RouteMeta = {
-  resolve: { notes: () => injectTRPCClient().note.list.query() }
-};
+import { waitFor } from '../../wait-for';
 
 const inputTw = 'focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-0 block w-full appearance-none rounded-lg px-3 py-2 transition-colors text-base leading-tight md:text-sm bg-black/[.05] dark:bg-zinc-50/10 focus:bg-white dark:focus:bg-dark placeholder:text-zinc-500 dark:placeholder:text-zinc-400 contrast-more:border contrast-more:border-current';
 const btnTw = 'focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:outline-0 flex items-center justify-center rounded-lg px-2 py-1.5 text-sm font-bold tracking-tight shadow-xl shadow-red-500/20 bg-[#DD0031] hover:bg-opacity-70 text-zinc-800 hover:text-primary-darker';
@@ -60,13 +55,12 @@ const btnTw = 'focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:out
 })
 export default class HomeComponent implements OnInit {
   private _trpc = injectTRPCClient();
-  private _initialNotes = firstValueFrom(injectActivatedRoute().data.pipe(map(({ notes }) => notes)));
   public loadingPosts = false;
   public notes: note[] = [];
   public newTitle = '';
 
   public ngOnInit() {
-    this._initialNotes.then(notes => this.notes = notes);
+    waitFor(this._trpc.note.list.query().then(notes => this.notes = notes));
   }
 
   public noteTrackBy = (index: number, note: note) => {
