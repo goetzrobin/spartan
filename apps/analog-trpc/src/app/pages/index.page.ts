@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { injectTRPCClient } from '../../trpc-client';
 import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -53,13 +53,13 @@ const btnTw = 'focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:out
     </div>
   `
 })
-export default class HomeComponent implements OnInit {
+export default class HomeComponent {
   private _trpc = injectTRPCClient();
   public loadingPosts = false;
   public notes: note[] = [];
   public newTitle = '';
 
-  public ngOnInit() {
+  constructor() {
     waitFor(this._trpc.note.list.query().then(notes => this.notes = notes));
   }
 
