@@ -4,7 +4,7 @@
     "**/*"
   ],
   "plugins": [
-    "@nrwl/nx"
+    "@nx"
   ],
   "overrides": [
     {
@@ -15,7 +15,7 @@
         "*.jsx"
       ],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
@@ -44,7 +44,7 @@
         "*.tsx"
       ],
       "extends": [
-        "plugin:@nrwl/nx/typescript"
+        "plugin:@nx/typescript"
       ],
       "rules": {}
     },
@@ -54,7 +54,7 @@
         "*.jsx"
       ],
       "extends": [
-        "plugin:@nrwl/nx/javascript"
+        "plugin:@nx/javascript"
       ],
       "rules": {}
     },

@@ -17,7 +17,7 @@ const btnTw = 'focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:out
   },
   template: `
     <div class='justify-center flex mt-20 mb-8 items-center'>
-      <h1 class='font-medium italic text-6xl text-[#DD0031] font-bold'>SPARTAN</h1>
+      <h1 class='italic text-6xl text-[#DD0031] font-bold'>SPARTAN</h1>
       <img class='ml-2 block w-32' alt='Spartan Logo' src='/assets/spartan.svg' />
     </div>
     <h1 class='mb-4 italic font-medium text-xl text-zinc-300 text-center'>
