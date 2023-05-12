@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
       include: ['@angular/common', '@angular/forms', 'isomorphic-fetch']
     },
     ssr: {
-      noExternal: '@spartan/**'
+      noExternal: '@analogjs/trpc/**'
     },
     build: {
       target: ['es2020']

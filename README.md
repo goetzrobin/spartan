@@ -183,12 +183,6 @@ yarn nx serve analog-trpc
 for a dev server. Navigate to http://localhost:4200/. The app will automatically reload
 if you change any of the source files.
 
-Nx will also automatically build `analog-trpc`'s dependency: `trpc`.
-
-To build them manually you can run the following commands:
-
-- `yarn nx build trpc` to build the `@spartan/trpc` integration with Analog's nitro backend.
-
 ## Understand this workspace
 
 Run `yarn nx graph` to see a diagram of the dependencies of the projects.

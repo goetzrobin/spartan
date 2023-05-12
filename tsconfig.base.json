@@ -18,10 +18,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@spartan/trpc": [
-        "node_modules/@spartan/trpc",
-        "libs/trpc/src/index.ts"
-      ]
     }
   },
   "exclude": [
