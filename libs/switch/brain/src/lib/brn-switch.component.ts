@@ -14,15 +14,14 @@ import {
   ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { rxHostListener } from '@ng-spartan/core/brain';
+import { rxHostPressedListener } from '@ng-spartan/core/brain';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { filter, merge, of, switchMap } from 'rxjs';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
 export const BRN_SWITCH_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => SwitchComponent),
+  useExisting: forwardRef(() => BrnSwitchComponent),
   multi: true
 };
 
@@ -32,6 +31,7 @@ export const BRN_SWITCH_VALUE_ACCESSOR = {
   imports: [CommonModule],
   template: ` <input
     #checkBox
+    tabindex='-1'
     type='checkbox'
     role='switch'
     [id]='childId'
@@ -63,7 +63,7 @@ export const BRN_SWITCH_VALUE_ACCESSOR = {
   },
   providers: [BRN_SWITCH_VALUE_ACCESSOR]
 })
-export class SwitchComponent implements AfterContentInit, OnDestroy {
+export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
   private _elementRef = inject(ElementRef);
   private _focusMonitor = inject(FocusMonitor);
   private _cdr = inject(ChangeDetectorRef);
@@ -137,13 +137,7 @@ export class SwitchComponent implements AfterContentInit, OnDestroy {
   public changed = new EventEmitter<boolean>();
 
   constructor() {
-    merge(
-      rxHostListener('click'),
-      rxHostListener('keyup').pipe(switchMap((x) => {
-        return ((x as any).code === 'Space' || (x as any).code === 'Enter') ? of(true) : of(null);
-      }), filter(Boolean))
-    )
-      .subscribe(() => this.handleChange());
+    rxHostPressedListener().subscribe(() => this.handleChange());
   }
 
   public handleChange() {

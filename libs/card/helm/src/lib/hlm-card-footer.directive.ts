@@ -23,7 +23,7 @@ export type CardFooterVariants = VariantProps<typeof cardFooterVariants>
   selector: '[hlmCardFooter]',
   standalone: true
 })
-export class CardFooterDirective {
+export class HlmCardFooterDirective {
   private _inputs: ClassValue = '';
 
   private _direction: CardFooterVariants['direction'] = 'row';

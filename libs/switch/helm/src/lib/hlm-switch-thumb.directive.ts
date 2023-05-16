@@ -3,10 +3,10 @@ import { ClassValue } from 'clsx';
 import { hlm } from '@spartan/core/helm';
 
 @Directive({
-  selector: 'brn-switch-thumb[hlm]',
+  selector: 'brn-switch-thumb[hlm],[hlmSwitchThumb]',
   standalone: true
 })
-export class SwitchThumbDirective {
+export class HlmSwitchThumbDirective {
   private _inputs: ClassValue = '';
   @HostBinding('class')
   private _class = this.generateClass();

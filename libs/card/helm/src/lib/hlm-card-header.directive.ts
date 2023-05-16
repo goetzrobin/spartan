@@ -23,7 +23,7 @@ export type CardHeaderVariants = VariantProps<typeof cardHeaderVariants>
   selector: '[hlmCardHeader]',
   standalone: true
 })
-export class CardHeaderDirective {
+export class HlmCardHeaderDirective {
   private _inputs: ClassValue = '';
 
   private _direction: CardHeaderVariants['direction'] = 'column';

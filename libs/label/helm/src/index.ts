@@ -1,1 +1,1 @@
-export * from './lib/label.directive';
+export * from './lib/hlm-label.directive';

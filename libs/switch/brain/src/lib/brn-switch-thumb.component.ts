@@ -8,5 +8,5 @@ import { CommonModule } from '@angular/common';
   template: ``
 
 })
-export class SwitchThumbComponent {
+export class BrnSwitchThumbComponent {
 }

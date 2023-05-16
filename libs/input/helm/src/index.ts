@@ -1,1 +1,1 @@
-export * from './lib/input.directive';
+export * from './lib/hlm-input.directive';

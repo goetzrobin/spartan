@@ -36,7 +36,7 @@ type ButtonVariants = VariantProps<typeof buttonVariants>
   selector: '[hlmBtn]',
   standalone: true
 })
-export class ButtonDirective {
+export class HlmButtonDirective {
   private _variant: ButtonVariants['variant'] = 'default';
   @Input()
   get variant(): ButtonVariants['variant'] {

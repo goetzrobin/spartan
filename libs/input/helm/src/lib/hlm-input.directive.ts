@@ -24,7 +24,7 @@ type InputVariants = VariantProps<typeof inputVariants>
   selector: '[hlmInput]',
   standalone: true
 })
-export class InputDirective {
+export class HlmInputDirective {
   private _size: InputVariants['size'] = 'default';
   @Input()
   get size(): InputVariants['size'] {

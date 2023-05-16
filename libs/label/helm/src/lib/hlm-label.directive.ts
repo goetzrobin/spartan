@@ -3,31 +3,32 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { hlm } from '@spartan/core/helm';
 import { ClassValue } from 'clsx';
 
-const cardTitleVariants = cva(
-  'text-lg font-semibold leading-none tracking-tight',
+const labelVariants = cva(
+  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
   {
     variants: {},
     defaultVariants: {}
   }
 );
-export type CardTitleVariants = VariantProps<typeof cardTitleVariants>
+export type LabelVariants = VariantProps<typeof labelVariants>
 
 @Directive({
-  selector: '[hlmCardTitle]',
+  selector: '[hlmLabel]',
   standalone: true
 })
-export class CardTitleDirective {
+export class HlmLabelDirective {
   private _inputs: ClassValue = '';
 
   @Input()
-  set class(inputs: ClassValue) {
-    this._inputs = inputs;
+  set class(labels: ClassValue) {
+    this._inputs = labels;
     this._class = this.generateClasses();
   }
 
-  @HostBinding('class') _class = this.generateClasses();
+  @HostBinding('class')
+  private _class = this.generateClasses();
 
   private generateClasses() {
-    return hlm(cardTitleVariants(), this._inputs);
+    return hlm(labelVariants(), this._inputs);
   }
 }

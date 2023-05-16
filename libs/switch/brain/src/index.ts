@@ -1,2 +1,2 @@
-export * from './lib/switch.component';
-export * from './lib/switch-thumb.component';
+export * from './lib/brn-switch.component';
+export * from './lib/brn-switch-thumb.component';
