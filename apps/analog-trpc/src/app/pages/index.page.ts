@@ -1,80 +1,181 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { injectTRPCClient } from '../../trpc-client';
 import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { note } from '@prisma/client';
 import { waitFor } from '../../wait-for';
-
-const inputTw = 'focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-0 block w-full appearance-none rounded-lg px-3 py-2 transition-colors text-base leading-tight md:text-sm bg-black/[.05] dark:bg-zinc-50/10 focus:bg-white dark:focus:bg-dark placeholder:text-zinc-500 dark:placeholder:text-zinc-400 contrast-more:border contrast-more:border-current';
-const btnTw = 'focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:outline-0 flex items-center justify-center rounded-lg px-2 py-1.5 text-sm font-bold tracking-tight shadow-xl shadow-red-500/20 bg-[#DD0031] hover:bg-opacity-70 text-zinc-800 hover:text-primary-darker';
+import { SwitchHelmDirective, SwitchThumbDirective } from '@spartan/switch/helm';
+import { SwitchComponent, SwitchThumbComponent } from '@ng-spartan/switch/brain';
+import { ButtonDirective } from '@ng-spartan/button/helm';
+import { InputDirective } from '@ng-spartan/input/helm';
+import {
+  CardContentDirective,
+  CardDescriptionDirective,
+  CardDirective,
+  CardFooterDirective,
+  CardHeaderDirective,
+  CardTitleDirective
+} from '@ng-spartan/card/helm';
+import { RouterLink } from '@angular/router';
+import { ThemeService } from '../theme.service';
+import { LabelDirective } from '@ng-spartan/label/helm';
+import {
+  SignalFormBuilder,
+  SignalInputDirective,
+  SignalInputErrorDirective,
+  V,
+  withErrorComponent
+} from 'ng-signal-forms';
+import { InputErrorComponent } from '../input-error.component';
 
 @Component({
   selector: 'analog-trpc-home',
   standalone: true,
-  imports: [AsyncPipe, FormsModule, NgFor, DatePipe, NgIf, JsonPipe],
+  imports: [
+    AsyncPipe,
+    FormsModule,
+    NgFor,
+    DatePipe,
+    NgIf,
+    JsonPipe,
+
+    RouterLink,
+    SignalInputDirective,
+    SignalInputErrorDirective,
+
+    SwitchComponent,
+    SwitchHelmDirective, SwitchThumbComponent, SwitchThumbDirective,
+    ButtonDirective,
+    LabelDirective,
+    InputDirective,
+    CardDirective, CardHeaderDirective, CardTitleDirective, CardContentDirective, CardFooterDirective, CardDescriptionDirective
+  ],
+  providers: [withErrorComponent(InputErrorComponent)],
   host: {
     class: 'block h-full p-4'
   },
   template: `
-    <div class='justify-center flex mt-20 mb-8 items-center'>
-      <h1 class='italic text-6xl text-[#DD0031] font-bold'>SPARTAN</h1>
-      <img class='ml-2 block w-32' alt='Spartan Logo' src='/assets/spartan.svg' />
-    </div>
-    <h1 class='mb-4 italic font-medium text-xl text-zinc-300 text-center'>
-      <span class='text-[#DD0031]'>S</span>upabase -
-      <span class='text-[#DD0031]'>P</span>risma -
-      <span class='text-[#DD0031]'>A</span>nalog -
-      t<span class='text-[#DD0031]'>R</span>PC -
-      <span class='text-[#DD0031]'>T</span>ailwind -
-      <span class='text-[#DD0031]'>A</span>ngular -
-      <span class='text-[#DD0031]'>N</span>x
-    </h1>
-    <form class='py-2 flex items-center' #f='ngForm' (ngSubmit)='addPost(f)'>
-      <input required autocomplete='off' class='${inputTw}' name='newTitle' [(ngModel)]='newTitle' />
-      <button class='ml-2 ${btnTw}'>+
-      </button>
-    </form>
-    <div class='mt-4'>
-      <div class='mb-4 p-4 font-normal border border-zinc-500/40 rounded-md'
-           *ngFor='let note of notes ?? []; trackBy: noteTrackBy'>
-        <div class='flex items-center justify-between'>
-          <p class='text-sm text-zinc-400'>{{note.created_at | date}}</p>
-          <button class='!text-xs h-6 !bg-opacity-10 hover:!bg-opacity-50 !text-zinc-50 ${btnTw}'
-                  (click)='removePost(note.id)'>x
-          </button>
-        </div>
-        <p class='mb-4'>{{ note.note }}</p>
+    <div class='flex justify-between pt-4 pb-6'>
+      <div class='flex'>
+        <span class='font-semibold italic text-xl'>SPARTAN</span>
+        <img class='ml-2 w-14' src='/assets/spartan.svg'>
       </div>
 
-      <div class='text-center rounded-xl p-20 bg-zinc-950/40' *ngIf='!loadingPosts && notes.length === 0'>
-        <h3 class='text-xl font-medium'>No notes yet!</h3>
-        <p class='text-zinc-400'>Add a new one and see them appear here...</p>
+      <label hlmLabel class='flex items-center space-x-4'>
+        <span>Dark mode</span>
+        <brn-switch id='airplane' [checked]='(theme$ | async) ==="dark"' (changed)='toggleTheme()' hlm>
+          <brn-switch-thumb hlm />
+        </brn-switch>
+      </label>
+    </div>
+
+    <form class='py-2 flex flex-col items-end'>
+      <label hlmLabel class='w-full'>
+        Title
+        <input class='mt-1.5 w-full' placeholder='Buy groceries' hlmInput autocomplete='off'
+               name='newTitle'
+               ngModel
+               [formField]='form.controls.title'
+        />
+      </label>
+
+      <label hlmLabel class='w-full'>
+        Content
+        <textarea class='mt-1.5 w-full h-fit' placeholder='2x eggs, 1x milk,...' hlmInput autocomplete='off'
+                  name='newContent'
+                  ngModel
+                  rows='4'
+                  [formField]='form.controls.content'></textarea>
+      </label>
+
+      <button
+        hlmBtn
+        variant='secondary'
+        (click)='addPost()'
+      >Create Note
+      </button>
+    </form>
+    <div class='flex flex-col space-y-4 pt-4 pb-12'>
+      <div
+        hlmCard
+        *ngFor='let note of notes ?? []; trackBy: noteTrackBy'
+      >
+        <div hlmCardHeader class='relative'>
+          <h3 hlmCardTitle>{{note.title}}</h3>
+          <p hlmCardDescription>{{ note.created_at | date }}</p>
+          <button
+            class='absolute top-2 right-2'
+            hlmBtn
+            size='sm'
+            variant='ghost'
+            (click)='removePost(note.id)'
+          >
+            x
+          </button>
+        </div>
+        <p hlmCardContent>
+          {{note.content}}
+        </p>
+        <div hlmCardFooter class='justify-end'>
+          <a routerLink='/' hlmBtn variant='link'>Read more</a>
+        </div>
+      </div>
+
+      <div hlmCard class='border-transparent shadow-none' *ngIf='!loadingPosts && notes.length === 0'>
+        <div hlmCardContent class='h-52 flex flex-col items-center justify-center'>
+          <h3 hlmCardTitle>No notes yet!</h3>
+          <p hlmCardDescription>Add a new one and see them appear here...</p>
+        </div>
       </div>
     </div>
   `
 })
 export default class HomeComponent {
+  private _themeService = inject(ThemeService);
   private _trpc = injectTRPCClient();
+  private _sfb = inject(SignalFormBuilder);
+
   public loadingPosts = false;
   public notes: note[] = [];
-  public newTitle = '';
+
+  public form = this._sfb.createFormGroup(() => ({
+    title: this._sfb.createFormField<string>('', {
+      validators: [{
+        validator: V.required(),
+        message: () => 'Make sure to give your note a title'
+      }]
+    }),
+    content: this._sfb.createFormField('', {
+      validators: [{
+        validator: V.required(),
+        message: () => 'Add some content to your note'
+      }
+      ]
+    })
+  }));
+
+  public theme$ = this._themeService.theme$;
 
   constructor() {
-    waitFor(this._trpc.note.list.query().then(notes => this.notes = notes));
+    waitFor(this._trpc.note.list.query().then((notes) => (this.notes = notes)));
   }
 
   public noteTrackBy = (index: number, note: note) => {
     return note.id;
   };
 
-  public addPost(form: NgForm) {
-    if (!form.valid) {
-      form.form.markAllAsTouched();
+  public toggleTheme() {
+    this._themeService.toggle();
+  }
+
+  public addPost() {
+    if (this.form.state() !== 'VALID') {
+      Object.values(this.form.controls).forEach(control => control.markAsTouched());
       return;
     }
-    this._trpc.note.create.mutate({ title: this.newTitle }).then(() => this.fetchPosts());
-    this.newTitle = '';
-    form.form.reset();
+    const { title, content } = this.form.value();
+    this._trpc.note.create
+      .mutate({ title, content }).then(() => this.fetchPosts());
   }
 
   public removePost(id: bigint) {
@@ -83,7 +184,7 @@ export default class HomeComponent {
 
   private fetchPosts() {
     this.loadingPosts = true;
-    this._trpc.note.list.query().then(notes => {
+    this._trpc.note.list.query().then((notes) => {
       this.loadingPosts = false;
       this.notes = notes;
     });

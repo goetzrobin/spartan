@@ -9,6 +9,7 @@ datasource db {
 
 model note {
   id         BigInt    @id(map: "notes_pkey") @default(autoincrement())
+  title      String
+  content    String?
   created_at DateTime? @default(now()) @db.Timestamptz(6)
-  note       String?
 }
