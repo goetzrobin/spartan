@@ -1,6 +1,6 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { cva, VariantProps } from 'class-variance-authority';
-import { hlm } from '@spartan/ui/core/helm';
+import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 const buttonVariants = cva(
@@ -13,25 +13,25 @@ const buttonVariants = cva(
         outline: 'border border-input hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'underline-offset-4 hover:underline text-primary',
+        link: 'underline-offset-4 hover:underline text-primary'
       },
       size: {
         default: 'h-10 py-2 px-4',
         sm: 'h-9 px-3 rounded-md',
-        lg: 'h-11 px-8 rounded-md',
-      },
+        lg: 'h-11 px-8 rounded-md'
+      }
     },
     defaultVariants: {
       variant: 'default',
-      size: 'default',
-    },
+      size: 'default'
+    }
   }
 );
 type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 @Directive({
   selector: '[hlmBtn]',
-  standalone: true,
+  standalone: true
 })
 export class HlmButtonDirective {
   private _variant: ButtonVariants['variant'] = 'default';

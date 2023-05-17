@@ -1,7 +1,7 @@
 import { Component, ElementRef, forwardRef, inject, signal } from '@angular/core';
 import { BrnAccordionComponent } from './brn-accordion.component';
 import { BrnAccordionItemComponent } from './brn-accordion-item.component';
-import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan/ui/core/brain';
+import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@ng-spartan/ui/core/brain';
 
 @Component({
   selector: 'brn-accordion-trigger',
@@ -9,8 +9,8 @@ import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@
   providers: [
     {
       provide: SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN,
-      useExisting: forwardRef(() => BrnAccordionTriggerComponent),
-    },
+      useExisting: forwardRef(() => BrnAccordionTriggerComponent)
+    }
   ],
   host: {
     '[attr.data-state]': 'state()',
@@ -18,11 +18,12 @@ import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@
     '[attr.aria-controls]': 'ariaControls',
     role: 'heading',
     'aria-level': '3',
-    '[id]': 'id',
+    '[id]': 'id'
   },
-  template: ` <button [class]="btnClass()" [attr.data-state]="state()" (click)="toggleAccordionItem()">
-    <ng-content />
-  </button>`,
+  template: `
+    <button [class]='btnClass()' [attr.data-state]='state()' (click)='toggleAccordionItem()'>
+      <ng-content />
+    </button>`
 })
 export class BrnAccordionTriggerComponent implements CustomElementClassSettable {
   private _accordion = inject(BrnAccordionComponent);

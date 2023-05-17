@@ -11,10 +11,10 @@ import {
   OnDestroy,
   Output,
   signal,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { rxHostPressedListener } from '@spartan/ui/core/brain';
+import { rxHostPressedListener } from '@ng-spartan/ui/core/brain';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
@@ -22,7 +22,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 export const BRN_SWITCH_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => BrnSwitchComponent),
-  multi: true,
+  multi: true
 };
 
 @Component({
@@ -60,9 +60,9 @@ export const BRN_SWITCH_VALUE_ACCESSOR = {
     '[attr.data-state]': 'checked ? "checked" : "unchecked"',
     '[attr.data-focus-visible]': 'focusVisible()',
     '[attr.data-focus]': 'focused()',
-    '[attr.data-disabled]': 'disabled',
+    '[attr.data-disabled]': 'disabled'
   },
-  providers: [BRN_SWITCH_VALUE_ACCESSOR],
+  providers: [BRN_SWITCH_VALUE_ACCESSOR]
 })
 export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
   private _elementRef = inject(ElementRef);
@@ -125,8 +125,10 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
     return this._disabled;
   }
 
-  protected _onChange = (_: any) => {};
-  private _onTouched = () => {};
+  protected _onChange = (_: any) => {
+  };
+  private _onTouched = () => {
+  };
 
   @ViewChild('checkBox', { static: true })
   public checkbox?: ElementRef<HTMLInputElement>;

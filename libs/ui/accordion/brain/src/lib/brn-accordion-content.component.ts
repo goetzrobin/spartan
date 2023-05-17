@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, forwardRef, inject, signal } from '@angular/core';
 import { BrnAccordionItemComponent } from './brn-accordion-item.component';
-import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan/ui/core/brain';
+import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@ng-spartan/ui/core/brain';
 
 @Component({
   selector: 'brn-accordion-content',
@@ -8,19 +8,20 @@ import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@
   providers: [
     {
       provide: SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN,
-      useExisting: forwardRef(() => BrnAccordionContentComponent),
-    },
+      useExisting: forwardRef(() => BrnAccordionContentComponent)
+    }
   ],
   host: {
     '[attr.data-state]': 'state()',
     '[attr.aria-labeledby]': 'ariaLabeledBy',
     role: 'region',
     '[style.--brn-collapsible-content-height]': 'initialHeight + "px"',
-    '[id]': 'id',
+    '[id]': 'id'
   },
-  template: ` <p [class]="contentClass()">
-    <ng-content />
-  </p>`,
+  template: `
+    <p [class]='contentClass()'>
+      <ng-content />
+    </p>`
 })
 export class BrnAccordionContentComponent implements AfterViewInit, CustomElementClassSettable {
   private _item = inject(BrnAccordionItemComponent);

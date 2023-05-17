@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
       include: ['@angular/common', '@angular/forms', 'isomorphic-fetch']
     },
     ssr: {
-      noExternal: ['@analogjs/trpc/**', '@ng-spartan/helm/**', 'ng-signal-forms/**']
+      noExternal: ['@analogjs/trpc/**', '@ng-spartan/**', 'ng-signal-forms/**']
     },
     build: {
       target: ['es2020']
@@ -30,6 +30,7 @@ export default defineConfig(({ mode }) => {
               : 'apps/analog-trpc/tsconfig.app.json'
         },
         nitro: {
+          preset: 'vercel',
           rootDir: 'apps/analog-trpc',
           output: {
             dir: '../../../dist/apps/analog-trpc/analog',

@@ -1,17 +1,17 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { cva, VariantProps } from 'class-variance-authority';
-import { hlm } from '@spartan/ui/core/helm';
+import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 const cardVariants = cva('rounded-lg border border-border bg-card text-card-foreground shadow-sm', {
   variants: {},
-  defaultVariants: {},
+  defaultVariants: {}
 });
 export type CardVariants = VariantProps<typeof cardVariants>;
 
 @Directive({
   selector: '[hlmCard]',
-  standalone: true,
+  standalone: true
 })
 export class HlmCardDirective {
   private _inputs: ClassValue = '';

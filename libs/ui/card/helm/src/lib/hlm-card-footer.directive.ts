@@ -1,24 +1,24 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { cva, VariantProps } from 'class-variance-authority';
-import { hlm } from '@spartan/ui/core/helm';
+import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 const cardFooterVariants = cva('flex p-6 pt-0', {
   variants: {
     direction: {
       row: 'flex-row items-center space-x-1.5',
-      column: 'flex-col space-y-1.5',
-    },
+      column: 'flex-col space-y-1.5'
+    }
   },
   defaultVariants: {
-    direction: 'row',
-  },
+    direction: 'row'
+  }
 });
 export type CardFooterVariants = VariantProps<typeof cardFooterVariants>;
 
 @Directive({
   selector: '[hlmCardFooter]',
-  standalone: true,
+  standalone: true
 })
 export class HlmCardFooterDirective {
   private _inputs: ClassValue = '';

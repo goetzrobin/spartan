@@ -1,20 +1,20 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { cva, VariantProps } from 'class-variance-authority';
-import { hlm } from '@spartan/ui/core/helm';
+import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 const labelVariants = cva(
   'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
   {
     variants: {},
-    defaultVariants: {},
+    defaultVariants: {}
   }
 );
 export type LabelVariants = VariantProps<typeof labelVariants>;
 
 @Directive({
   selector: '[hlmLabel]',
-  standalone: true,
+  standalone: true
 })
 export class HlmLabelDirective {
   private _inputs: ClassValue = '';

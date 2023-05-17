@@ -1,16 +1,17 @@
 import { AfterContentInit, Component, computed, ContentChildren, Input, QueryList, signal } from '@angular/core';
 import { BrnAccordionTriggerComponent } from './brn-accordion-trigger.component';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { rxHostListener } from '@spartan/ui/core/brain';
+import { rxHostListener } from '@ng-spartan/ui/core/brain';
 
 @Component({
   selector: 'brn-accordion',
   standalone: true,
   host: {
     '[attr.data-state]': 'state()',
-    '[attr.data-orientation]': 'orientation',
+    '[attr.data-orientation]': 'orientation'
   },
-  template: ` <ng-content />`,
+  template: `
+    <ng-content />`
 })
 export class BrnAccordionComponent implements AfterContentInit {
   @Input()

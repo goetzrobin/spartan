@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "spartan",
+  "npmScope": "ng-spartan",
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx/tasks-runners/default",

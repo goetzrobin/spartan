@@ -1,6 +1,6 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { cva, VariantProps } from 'class-variance-authority';
-import { hlm } from '@spartan/ui/core/helm';
+import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 const inputVariants = cva(
@@ -10,19 +10,19 @@ const inputVariants = cva(
       size: {
         default: 'h-10 py-2 px-4',
         sm: 'h-9 px-3',
-        lg: 'h-11 px-8',
-      },
+        lg: 'h-11 px-8'
+      }
     },
     defaultVariants: {
-      size: 'default',
-    },
+      size: 'default'
+    }
   }
 );
 type InputVariants = VariantProps<typeof inputVariants>;
 
 @Directive({
   selector: '[hlmInput]',
-  standalone: true,
+  standalone: true
 })
 export class HlmInputDirective {
   private _size: InputVariants['size'] = 'default';

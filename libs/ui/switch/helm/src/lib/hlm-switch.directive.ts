@@ -1,10 +1,10 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan/ui/core/helm';
+import { hlm } from '@ng-spartan/ui/core/helm';
 
 @Directive({
   selector: 'brn-switch[hlm],[hlmSwitch]',
-  standalone: true,
+  standalone: true
 })
 export class UiSwitchHelmDirective {
   @HostBinding('class')
