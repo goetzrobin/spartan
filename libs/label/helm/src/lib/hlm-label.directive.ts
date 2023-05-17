@@ -1,6 +1,6 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { cva, VariantProps } from 'class-variance-authority';
-import { hlm } from '@spartan/core/helm';
+import { hlm } from '@ng-spartan/core/helm';
 import { ClassValue } from 'clsx';
 
 const labelVariants = cva(

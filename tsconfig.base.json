@@ -18,8 +18,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ng-spartan/label/helm": [
-        "libs/label/helm/src/index.ts"
+      "@ng-spartan/accordion/brain": [
+        "libs/accordion/brain/src/index.ts"
+      ],
+      "@ng-spartan/accordion/helm": [
+        "libs/accordion/helm/src/index.ts"
       ],
       "@ng-spartan/button/helm": [
         "libs/button/helm/src/index.ts"
@@ -27,19 +30,22 @@
       "@ng-spartan/card/helm": [
         "libs/card/helm/src/index.ts"
       ],
+      "@ng-spartan/core/brain": [
+        "libs/core/brain/src/index.ts"
+      ],
       "@ng-spartan/input/helm": [
         "libs/input/helm/src/index.ts"
       ],
-      "@ng-spartan/core/brain": [
-        "libs/core/brain/src/index.ts"
+      "@ng-spartan/label/helm": [
+        "libs/label/helm/src/index.ts"
       ],
       "@ng-spartan/switch/brain": [
         "libs/switch/brain/src/index.ts"
       ],
-      "@spartan/core/helm": [
+      "@ng-spartan/core/helm": [
         "libs/core/helm/src/index.ts"
       ],
-      "@spartan/switch/helm": [
+      "@ng-spartan/switch/helm": [
         "libs/switch/helm/src/index.ts"
       ]
     }

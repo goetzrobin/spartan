@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, ElementRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, fromEvent, Observable, tap } from 'rxjs';
+import { debounceTime, filter, fromEvent, merge, Observable, of, switchMap, tap } from 'rxjs';
 
 export function rxHostListener<T extends Event>(event: string): Observable<T> {
   const cdr = inject(ChangeDetectorRef);
@@ -49,4 +49,19 @@ function process<T>(element: HTMLElement, prop: string): (value: T) => void {
       element[key] = parsed;
     }
   };
+}
+
+export function rxHostPressedListener() {
+  let lastTimeStamp;
+  return merge(
+    rxHostListener('click').pipe(tap(el => {
+      lastTimeStamp = el.timeStamp;
+      console.log(el);
+    })),
+    rxHostListener('keyup').pipe(switchMap((x) => {
+      console.log(x);
+      return ((x as any).code === 'Space' || (x as any).code === 'Enter') ? of(true) : of(null);
+    }), filter(Boolean))
+  ).pipe(
+    debounceTime(0));
 }

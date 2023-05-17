@@ -1,6 +1,6 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan/core/helm';
+import { hlm } from '@ng-spartan/core/helm';
 
 @Directive({
   selector: 'brn-switch[hlm],[hlmSwitch]',
