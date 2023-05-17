@@ -24,6 +24,9 @@
       "@ng-spartan/accordion/helm": [
         "libs/accordion/helm/src/index.ts"
       ],
+      "@ng-spartan/alert/helm": [
+        "libs/alert/helm/src/index.ts"
+      ],
       "@ng-spartan/button/helm": [
         "libs/button/helm/src/index.ts"
       ],
