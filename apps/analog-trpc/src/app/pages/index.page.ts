@@ -4,21 +4,21 @@ import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { note } from '@prisma/client';
 import { waitFor } from '../../wait-for';
-import { SwitchHelmDirective, SwitchThumbDirective } from '@spartan/switch/helm';
-import { SwitchComponent, SwitchThumbComponent } from '@ng-spartan/switch/brain';
-import { ButtonDirective } from '@ng-spartan/button/helm';
-import { InputDirective } from '@ng-spartan/input/helm';
+import { HlmSwitchThumbDirective, SwitchHelmDirective } from '@ng-spartan/switch/helm';
+import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@ng-spartan/switch/brain';
+import { HlmButtonDirective } from '@ng-spartan/button/helm';
+import { HlmInputDirective } from '@ng-spartan/input/helm';
 import {
-  CardContentDirective,
-  CardDescriptionDirective,
-  CardDirective,
-  CardFooterDirective,
-  CardHeaderDirective,
-  CardTitleDirective
+  HlmCardContentDirective,
+  HlmCardDescriptionDirective,
+  HlmCardDirective,
+  HlmCardFooterDirective,
+  HlmCardHeaderDirective,
+  HlmCardTitleDirective
 } from '@ng-spartan/card/helm';
 import { RouterLink } from '@angular/router';
 import { ThemeService } from '../theme.service';
-import { LabelDirective } from '@ng-spartan/label/helm';
+import { HlmLabelDirective } from '@ng-spartan/label/helm';
 import {
   SignalFormBuilder,
   SignalInputDirective,
@@ -27,6 +27,19 @@ import {
   withErrorComponent
 } from 'ng-signal-forms';
 import { InputErrorComponent } from '../input-error.component';
+import {
+  BrnAccordionComponent,
+  BrnAccordionContentComponent,
+  BrnAccordionItemComponent,
+  BrnAccordionTriggerComponent
+} from '@ng-spartan/accordion/brain';
+import {
+  HlmAccordionContentDirective,
+  HlmAccordionDirective,
+  HlmAccordionIconComponent,
+  HlmAccordionItemDirective,
+  HlmAccordionTriggerDirective
+} from '@ng-spartan/accordion/helm';
 
 @Component({
   selector: 'analog-trpc-home',
@@ -43,16 +56,18 @@ import { InputErrorComponent } from '../input-error.component';
     SignalInputDirective,
     SignalInputErrorDirective,
 
-    SwitchComponent,
-    SwitchHelmDirective, SwitchThumbComponent, SwitchThumbDirective,
-    ButtonDirective,
-    LabelDirective,
-    InputDirective,
-    CardDirective, CardHeaderDirective, CardTitleDirective, CardContentDirective, CardFooterDirective, CardDescriptionDirective
+    BrnSwitchComponent,
+    SwitchHelmDirective, BrnSwitchThumbComponent, HlmSwitchThumbDirective,
+    HlmButtonDirective,
+    HlmLabelDirective,
+    HlmInputDirective,
+    HlmCardDirective, HlmCardHeaderDirective, HlmCardTitleDirective, HlmCardContentDirective, HlmCardFooterDirective, HlmCardDescriptionDirective,
+
+    BrnAccordionComponent, BrnAccordionItemComponent, BrnAccordionTriggerComponent, BrnAccordionContentComponent, HlmAccordionDirective, HlmAccordionItemDirective, HlmAccordionContentDirective, HlmAccordionTriggerDirective, HlmAccordionIconComponent
   ],
   providers: [withErrorComponent(InputErrorComponent)],
   host: {
-    class: 'block h-full p-4'
+    class: 'block px-4 pt-4 pb-16'
   },
   template: `
     <div class='flex justify-between pt-4 pb-6'>
@@ -128,6 +143,45 @@ import { InputErrorComponent } from '../input-error.component';
         </div>
       </div>
     </div>
+
+
+    <brn-accordion hlm>
+      <brn-accordion-item hlm>
+        <brn-accordion-trigger hlm>
+          <span>What is SPARTAN</span>
+          <hlm-accordion-icon />
+        </brn-accordion-trigger>
+        <brn-accordion-content hlm>
+          It is a collection of full-stack technologies that provide
+          end-to-end type-safety.
+        </brn-accordion-content>
+      </brn-accordion-item>
+
+      <brn-accordion-item hlm>
+        <brn-accordion-trigger hlm>
+          <span>What technologies are used</span>
+          <hlm-accordion-icon />
+        </brn-accordion-trigger>
+        <brn-accordion-content hlm>
+          Supabase, Prisma, Angular, tRPC, Tailwind, Analog, and Nx.
+        </brn-accordion-content>
+      </brn-accordion-item>
+
+      <brn-accordion-item hlm>
+        <brn-accordion-trigger hlm>
+          <span>Introducing <span class='font-semibold italic text-[#DD0031]'>SPARTAN</span> helm & brain</span>
+          <hlm-accordion-icon />
+        </brn-accordion-trigger>
+        <brn-accordion-content hlm>
+          The components used on this page are also the intiial building blocks of a new UI library.
+          It is made up of headless UI providers, the brain components/directives, which add ARIA compliant markup and
+          interactions.
+          On top of the brain we add helm(et) directives, which add <a hlmBtn variant='link' class='h-6 px-0.5'
+                                                                       href='https://ui.shadcn.com' target='_blank'>shadcn</a>-like
+          styles to our application.
+        </brn-accordion-content>
+      </brn-accordion-item>
+    </brn-accordion>
   `
 })
 export default class HomeComponent {
