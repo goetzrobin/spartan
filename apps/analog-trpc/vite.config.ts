@@ -30,11 +30,11 @@ export default defineConfig(({ mode }) => {
               : 'apps/analog-trpc/tsconfig.app.json'
         },
         nitro: {
-          preset: 'vercel-edge',
+          preset: 'vercel',
           rootDir: 'apps/analog-trpc',
           output: {
-            dir: '../../../dist/apps/analog-trpc/analog',
-            publicDir: '../../../dist/apps/analog-trpc/analog/public'
+            dir: '../../../.vercel/output',
+            publicDir: '../../../.vercel/output/static'
           },
           publicAssets: [{ dir: `../../../dist/apps/analog-trpc/client` }],
           serverAssets: [
