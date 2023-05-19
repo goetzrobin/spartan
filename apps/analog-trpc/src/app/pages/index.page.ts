@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { injectTRPCClient } from '../../trpc-client';
 import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -46,6 +46,7 @@ import {
   HlmAlertIconDirective,
   HlmAlertTitleDirective
 } from '@ng-spartan/ui/alert/helm';
+import { catchError, Observable, of, Subject, switchMap, take, tap } from 'rxjs';
 
 @Component({
   selector: 'analog-trpc-home',
@@ -137,31 +138,46 @@ import {
         ></textarea>
       </label>
 
-      <button hlmBtn variant='secondary' (click)='addPost()'>Create Note</button>
+      <button hlmBtn
+              [disabled]='createLoad()'
+              variant='secondary' (click)='addPost()'>{{createLoad() ? "Creating" : "Create"}} Note
+      </button>
     </form>
     <div class='flex flex-col space-y-4 pt-4 pb-12'>
-      <div hlmCard *ngFor='let note of notes ?? []; trackBy: noteTrackBy'>
-        <div hlmCardHeader class='relative'>
-          <h3 hlmCardTitle>{{ note.title }}</h3>
-          <p hlmCardDescription>{{ note.created_at | date }}</p>
-          <button class='absolute top-2 right-2' hlmBtn size='sm' variant='ghost' (click)='removePost(note.id)'>
-            x
-          </button>
-        </div>
-        <p hlmCardContent>
-          {{ note.content }}
-        </p>
-        <div hlmCardFooter class='justify-end'>
-          <a routerLink='/' hlmBtn variant='link'>Read more</a>
+
+      <div hlmCard class='border-transparent shadow-none'
+           *ngIf='initialLoad()'>
+        <div hlmCardContent class='h-52 flex flex-col items-center justify-center'>
+          <h3 hlmCardTitle>Loading notes...</h3>
+          <p hlmCardDescription>They should appear here any time...</p>
         </div>
       </div>
 
-      <div hlmCard class='border-transparent shadow-none' *ngIf='!loadingPosts && notes.length === 0'>
-        <div hlmCardContent class='h-52 flex flex-col items-center justify-center'>
-          <h3 hlmCardTitle>No notes yet!</h3>
-          <p hlmCardDescription>Add a new one and see them appear here...</p>
+      <ng-container *ngIf='showNotesArray()'>
+        <div hlmCard *ngFor='let note of (notes().value ?? []); trackBy: noteTrackBy'>
+          <div hlmCardHeader class='relative'>
+            <h3 hlmCardTitle>{{ note.title }}</h3>
+            <p hlmCardDescription>{{ note.created_at | date }}</p>
+            <button [disabled]='deleteLoad()' class='absolute top-2 right-2' hlmBtn size='sm' variant='ghost'
+                    (click)='removePost(note.id)'>
+              x
+            </button>
+          </div>
+          <p hlmCardContent>
+            {{ note.content }}
+          </p>
+          <div hlmCardFooter class='justify-end'>
+            <a routerLink='/' hlmBtn variant='link'>Read more</a>
+          </div>
         </div>
-      </div>
+
+        <div hlmCard class='border-transparent shadow-none' *ngIf='noNotes()'>
+          <div hlmCardContent class='h-52 flex flex-col items-center justify-center'>
+            <h3 hlmCardTitle>No notes yet!</h3>
+            <p hlmCardDescription>Add a new one and see them appear here...</p>
+          </div>
+        </div>
+      </ng-container>
     </div>
 
     <brn-accordion hlm>
@@ -216,9 +232,44 @@ export default class HomeComponent {
   private _themeService = inject(ThemeService);
   private _trpc = injectTRPCClient();
   private _sfb = inject(SignalFormBuilder);
+  private _refreshNotes$ = new Subject<void>();
+  private _notes$ = this._refreshNotes$.pipe(
+    switchMap(() => this._trpc.note.list.query()),
+    tap(result => this.notes.mutate(state => {
+      state.status = 'success';
+      state.value = result;
+      state.error = null;
+    })),
+    catchError(err => {
+      this.notes.mutate(state => {
+        state.value = [];
+        state.status = 'error';
+        state.error = err;
+      });
+      return of([]);
+    })
+  );
 
-  public loadingPosts = false;
-  public notes: note[] = [];
+  public notes = signal<{
+    status: 'idle' | 'loading' | 'success' | 'error';
+    value: note[];
+    error: any | null;
+    updatedFrom: 'initial' | 'create' | 'delete';
+    idBeingDeleted?: bigint
+  }>({
+    status: 'idle',
+    value: [],
+    error: null,
+    updatedFrom: 'initial'
+  });
+  public initialLoad = computed(() => this.notes().status === 'loading'
+    && this.notes().updatedFrom === 'initial');
+  public createLoad = computed(() => this.notes().status === 'loading'
+    && this.notes().updatedFrom === 'create');
+  public deleteLoad = computed(() => this.notes().status === 'loading'
+    && this.notes().updatedFrom === 'delete');
+  public noNotes = computed(() => this.notes().value.length === 0);
+  public showNotesArray = computed(() => this.notes().updatedFrom !== 'initial' || this.notes().status === 'success');
 
   public form = this._sfb.createFormGroup(() => ({
     title: this._sfb.createFormField<string>('', {
@@ -242,7 +293,9 @@ export default class HomeComponent {
   public theme$ = this._themeService.theme$;
 
   constructor() {
-    waitFor(this._trpc.note.list.query().then((notes) => (this.notes = notes)));
+    this._notes$.subscribe();
+    void waitFor(this._notes$);
+    this.updateNotes('initial');
   }
 
   public noteTrackBy = (index: number, note: note) => {
@@ -259,18 +312,26 @@ export default class HomeComponent {
       return;
     }
     const { title, content } = this.form.value();
-    this._trpc.note.create.mutate({ title, content }).then(() => this.fetchPosts());
+    this.updateNotes('create', this._trpc.note.create.mutate({ title, content }));
   }
 
   public removePost(id: bigint) {
-    this._trpc.note.remove.mutate({ id }).then(() => this.fetchPosts());
+    this.updateNotes('delete', this._trpc.note.remove.mutate({ id }), id);
   }
 
-  private fetchPosts() {
-    this.loadingPosts = true;
-    this._trpc.note.list.query().then((notes) => {
-      this.loadingPosts = false;
-      this.notes = notes;
-    });
+  private updateNotes(updatedFrom: 'initial' | 'create' | 'delete', operation?: Observable<note | note[]>, idBeingDeleted?: bigint) {
+    this.notes.update(state => ({
+      status: 'loading',
+      value: state.value,
+      error: null,
+      updatedFrom,
+      idBeingDeleted
+    }));
+    if (!operation) {
+      this._refreshNotes$.next();
+      return;
+    }
+    operation.pipe(take(1))
+      .subscribe(() => this._refreshNotes$.next());
   }
 }
