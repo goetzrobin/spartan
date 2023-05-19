@@ -30,6 +30,16 @@
         }
       }
     },
+    "vercel-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "",
+        "command": "yarn prisma generate"
+      },
+      "dependsOn": [
+        "build"
+      ]
+    },
     "serve": {
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
