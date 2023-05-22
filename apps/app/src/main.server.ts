@@ -14,7 +14,7 @@ const bootstrap = () => bootstrapApplication(AppComponent, config);
 export default async function render(url: string, document: string) {
   const html = await renderApplication(bootstrap, {
     document,
-    url
+    url,
   });
   return html;
 }

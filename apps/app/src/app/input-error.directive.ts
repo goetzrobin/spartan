@@ -6,7 +6,7 @@ import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[ngModel][formField]',
   hostDirectives: [SignalInputErrorDirective],
-  standalone: true
+  standalone: true,
 })
 export class SpartanInputErrorDirective implements OnInit {
   private _injector = inject(Injector);
@@ -14,14 +14,20 @@ export class SpartanInputErrorDirective implements OnInit {
   private readonly _signalInput = inject(SignalInputDirective, { optional: true });
 
   ngOnInit() {
-    effect(() => {
-      if (this._signalInput?.formField?.touchedState() === 'TOUCHED' && Object.values(this._signalInput?.formField?.errors() ?? {}).length > 0) {
-        if (this._label) this._label.variant = 'error';
-      } else {
-        if (this._label) this._label.variant = 'default';
+    effect(
+      () => {
+        if (
+          this._signalInput?.formField?.touchedState() === 'TOUCHED' &&
+          Object.values(this._signalInput?.formField?.errors() ?? {}).length > 0
+        ) {
+          if (this._label) this._label.variant = 'error';
+        } else {
+          if (this._label) this._label.variant = 'default';
+        }
+      },
+      {
+        injector: this._injector,
       }
-    }, {
-      injector: this._injector
-    });
+    );
   }
 }

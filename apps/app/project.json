@@ -1,23 +1,16 @@
 {
-  "name": "analog-trpc",
+  "name": "app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/analog-trpc/src",
+  "sourceRoot": "apps/app/src",
   "targets": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}",
-        "dist/apps/analog-trpc/.nitro",
-        "dist/apps/analog-trpc/ssr",
-        "dist/apps/analog-trpc/analog"
-      ],
+      "outputs": ["{options.outputPath}", "dist/apps/app/.nitro", "dist/apps/app/ssr", "dist/apps/app/analog"],
       "options": {
-        "configFile": "apps/analog-trpc/vite.config.ts",
-        "outputPath": "dist/apps/analog-trpc/client"
+        "configFile": "apps/app/vite.config.ts",
+        "outputPath": "dist/apps/app/client"
       },
       "defaultConfiguration": "production",
       "configurations": {
@@ -36,56 +29,46 @@
         "cwd": "",
         "command": "yarn prisma generate"
       },
-      "dependsOn": [
-        "build"
-      ]
+      "dependsOn": ["build"]
     },
     "serve": {
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "analog-trpc:build",
+        "buildTarget": "app:build",
         "port": 4200
       },
       "configurations": {
         "development": {
-          "buildTarget": "analog-trpc:build:development",
+          "buildTarget": "app:build:development",
           "hmr": true
         },
         "production": {
-          "buildTarget": "analog-trpc:build:production"
+          "buildTarget": "app:build:production"
         }
       }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "analog-trpc:build"
+        "browserTarget": "app:build"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/analog-trpc/**/*.ts",
-          "apps/analog-trpc/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/app/**/*.ts", "apps/app/**/*.html"]
       }
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": [
-        "apps/analog-trpc/coverage"
-      ],
+      "outputs": ["apps/app/coverage"],
       "options": {
         "config": "vite.config.ts"
       }
     }
   },
   "tags": [],
-  "implicitDependencies": [
-  ]
+  "implicitDependencies": []
 }

@@ -11,11 +11,9 @@ import { HlmInputErrorDirective } from '@ng-spartan/ui/input/helm';
   host: {
     class: 'block mt-1 min-h-[20px] mb-4',
     // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-    '[class.invisible]': 'touchedState() === \'UNTOUCHED\''
+    '[class.invisible]': "touchedState() === 'UNTOUCHED'",
   },
-  template: `
-    <p *ngFor='let message of errorMessages()'>{{ message }}</p>
-  `
+  template: ` <p *ngFor="let message of errorMessages()">{{ message }}</p> `,
 })
 export class InputErrorComponent {
   private _formField = injectErrorField();
@@ -23,8 +21,6 @@ export class InputErrorComponent {
   public errors = this._formField.errors;
 
   public errorMessages = computed(() =>
-    Object.values(this.errors() ?? {}).map(
-      (error) => error.message ?? 'Field invalid'
-    )
+    Object.values(this.errors() ?? {}).map((error) => error.message ?? 'Field invalid')
   );
 }

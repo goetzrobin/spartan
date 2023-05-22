@@ -4,7 +4,7 @@ import { ReplaySubject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
   // A. Setting up our dependencies
@@ -41,9 +41,7 @@ export class ThemeService {
     // if we are in the browser we know we have access to localstorage
     if (isPlatformBrowser(this._platformId)) {
       // we load the appropriate value from the localStorage into our _theme$ replaysubject
-      this._theme$.next(
-        localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
-      );
+      this._theme$.next(localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
     }
   }
 
@@ -66,8 +64,7 @@ export class ThemeService {
 
   // D. Expose a public function that allows us to change the theme from anywhere in our application
   public toggle(): void {
-    const newTheme =
-      localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
+    const newTheme = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
     localStorage.setItem('theme', newTheme);
     this._theme$.next(newTheme);
   }

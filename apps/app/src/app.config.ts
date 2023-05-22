@@ -3,11 +3,6 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideFileRouter } from '@analogjs/router';
 import { provideTRPCClient } from './trpc-client';
 
-
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideFileRouter(),
-    provideClientHydration(),
-    provideTRPCClient()
-  ]
+  providers: [provideFileRouter(), provideClientHydration(), provideTRPCClient()],
 };
