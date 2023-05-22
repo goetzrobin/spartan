@@ -1,16 +1,20 @@
 import { Component, computed } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { injectErrorField } from 'ng-signal-forms';
+import { HlmInputErrorDirective } from '@ng-spartan/ui/input/helm';
 
 @Component({
   selector: 'analog-trpc-input-error',
   standalone: true,
-  imports: [NgIf, NgFor],
+  imports: [NgIf, NgFor, HlmInputErrorDirective],
+  hostDirectives: [HlmInputErrorDirective],
+  host: {
+    class: 'block mt-1 min-h-[20px] mb-4',
+    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+    '[class.invisible]': 'touchedState() === \'UNTOUCHED\''
+  },
   template: `
-    <div class='mt-1 h-8 pt-1 font-normal opacity-60'
-         [class.invisible]="touchedState() === 'UNTOUCHED'">
-      <p *ngFor='let message of errorMessages()'>{{ message }}</p>
-    </div>
+    <p *ngFor='let message of errorMessages()'>{{ message }}</p>
   `
 })
 export class InputErrorComponent {

@@ -4,10 +4,17 @@ import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 const labelVariants = cva(
-  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+  'text-sm font-medium leading-none [&:has([hlmInput]:disabled)]:cursor-not-allowed [&:has([hlmInput]:disabled)]:opacity-70',
   {
-    variants: {},
-    defaultVariants: {}
+    variants: {
+      variant: {
+        default: '',
+        error: 'text-destructive'
+      }
+    },
+    defaultVariants: {
+      variant: 'error'
+    }
   }
 );
 export type LabelVariants = VariantProps<typeof labelVariants>;
@@ -19,6 +26,18 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 export class HlmLabelDirective {
   private _inputs: ClassValue = '';
 
+  private _variant: LabelVariants['variant'] = 'default';
+
+  @Input()
+  get variant(): LabelVariants['variant'] {
+    return this._variant;
+  }
+
+  set variant(value: LabelVariants['variant']) {
+    this._variant = value;
+    this._class = this.generateClasses();
+  }
+
   @Input()
   set class(labels: ClassValue) {
     this._inputs = labels;
@@ -29,6 +48,6 @@ export class HlmLabelDirective {
   private _class = this.generateClasses();
 
   private generateClasses() {
-    return hlm(labelVariants(), this._inputs);
+    return hlm(labelVariants({ variant: this._variant }), this._inputs);
   }
 }

@@ -19,13 +19,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { ThemeService } from '../theme.service';
 import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import {
-  SignalFormBuilder,
-  SignalInputDirective,
-  SignalInputErrorDirective,
-  V,
-  withErrorComponent
-} from 'ng-signal-forms';
+import { SignalFormBuilder, SignalInputDirective, V, withErrorComponent } from 'ng-signal-forms';
 import { InputErrorComponent } from '../input-error.component';
 import {
   BrnAccordionComponent,
@@ -47,6 +41,8 @@ import {
   HlmAlertTitleDirective
 } from '@ng-spartan/ui/alert/helm';
 import { catchError, Observable, of, Subject, switchMap, take, tap } from 'rxjs';
+import { SpartanInputErrorDirective } from '../input-error.directive';
+import { HlmSpinnerComponent } from '@ng-spartan/ui/spinner/helm';
 
 @Component({
   selector: 'analog-trpc-home',
@@ -61,7 +57,7 @@ import { catchError, Observable, of, Subject, switchMap, take, tap } from 'rxjs'
 
     RouterLink,
     SignalInputDirective,
-    SignalInputErrorDirective,
+    SpartanInputErrorDirective,
 
     BrnSwitchComponent,
     UiSwitchHelmDirective,
@@ -89,7 +85,8 @@ import { catchError, Observable, of, Subject, switchMap, take, tap } from 'rxjs'
     HlmAlertDirective,
     HlmAlertIconDirective,
     HlmAlertTitleDirective,
-    HlmAlertDescriptionDirective
+    HlmAlertDescriptionDirective,
+    HlmSpinnerComponent
   ],
   providers: [withErrorComponent(InputErrorComponent)],
   host: {
@@ -140,7 +137,9 @@ import { catchError, Observable, of, Subject, switchMap, take, tap } from 'rxjs'
 
       <button hlmBtn
               [disabled]='createLoad()'
-              variant='secondary' (click)='addPost()'>{{createLoad() ? "Creating" : "Create"}} Note
+              variant='secondary' (click)='addPost()'>
+        <span>{{createLoad() ? "Creating" : "Create"}} Note</span>
+        <hlm-spinner *ngIf='createLoad()' class='ml-2' size='sm' />
       </button>
     </form>
     <div class='flex flex-col space-y-4 pt-4 pb-12'>
@@ -160,7 +159,11 @@ import { catchError, Observable, of, Subject, switchMap, take, tap } from 'rxjs'
             <p hlmCardDescription>{{ note.created_at | date }}</p>
             <button [disabled]='deleteLoad()' class='absolute top-2 right-2' hlmBtn size='sm' variant='ghost'
                     (click)='removePost(note.id)'>
-              x
+              <hlm-spinner *ngIf='deleteLoad()' size='xs' />
+              <svg *ngIf='!deleteLoad()' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'
+                   stroke-width='1.5' stroke='currentColor' class='w-4 h-4'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12' />
+              </svg>
             </button>
           </div>
           <p hlmCardContent>
@@ -308,11 +311,12 @@ export default class HomeComponent {
 
   public addPost() {
     if (this.form.state() !== 'VALID') {
-      Object.values(this.form.controls).forEach((control) => control.markAsTouched());
+      this.form.markAllAsTouched();
       return;
     }
     const { title, content } = this.form.value();
     this.updateNotes('create', this._trpc.note.create.mutate({ title, content }));
+    this.form.reset();
   }
 
   public removePost(id: bigint) {
