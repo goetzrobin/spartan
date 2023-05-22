@@ -45,6 +45,9 @@
       "@ng-spartan/ui/label/helm": [
         "libs/ui/label/helm/src/index.ts"
       ],
+      "@ng-spartan/ui/spinner/helm": [
+        "libs/ui/spinner/helm/src/index.ts"
+      ],
       "@ng-spartan/ui/switch/brain": [
         "libs/ui/switch/brain/src/index.ts"
       ],
