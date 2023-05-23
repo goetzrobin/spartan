@@ -11,46 +11,46 @@ export default defineConfig(({ mode }) => {
   return {
     publicDir: 'src/public',
     optimizeDeps: {
-      include: ['@angular/common', '@angular/forms', 'isomorphic-fetch'],
+      include: ['@angular/common', '@angular/forms', 'isomorphic-fetch']
     },
     ssr: {
-      noExternal: ['@analogjs/trpc/**', '@ng-spartan/**', 'ng-signal-forms/**'],
+      noExternal: ['@analogjs/trpc/**', '@ng-spartan/**', 'ng-signal-forms/**']
     },
     build: {
-      target: ['es2020'],
+      target: ['es2020']
     },
     plugins: [
       replace({
         preventAssignment: true,
-        'http://127.0.0.1:4200': 'https://spartan-goetzrobin.vercel.app',
+        'http://127.0.0.1:4200': 'https://spartan-goetzrobin.vercel.app'
       }),
       analog({
-        ssrBuildDir: '../../dist/apps/analog-trpc/ssr',
-        entryServer: 'apps/analog-trpc/src/main.server.ts',
+        ssrBuildDir: '../../dist/apps/app/ssr',
+        entryServer: 'apps/app/src/main.server.ts',
         vite: {
           inlineStylesExtension: 'css',
-          tsconfig: mode === 'test' ? 'apps/analog-trpc/tsconfig.spec.json' : 'apps/analog-trpc/tsconfig.app.json',
+          tsconfig: mode === 'test' ? 'apps/app/tsconfig.spec.json' : 'apps/app/tsconfig.app.json'
         },
         nitro: {
           preset: 'vercel',
-          rootDir: 'apps/analog-trpc',
+          rootDir: 'apps/app',
           output: {
             dir: '../../../.vercel/output',
-            publicDir: '../../../.vercel/output/static',
+            publicDir: '../../../.vercel/output/static'
           },
-          publicAssets: [{ dir: `../../../dist/apps/analog-trpc/client` }],
-          serverAssets: [{ baseName: 'public', dir: `./dist/apps/analog-trpc/client` }],
-          buildDir: '../../dist/apps/analog-trpc/.nitro',
+          publicAssets: [{ dir: `../../../dist/apps/app/client` }],
+          serverAssets: [{ baseName: 'public', dir: `./dist/apps/app/client` }],
+          buildDir: '../../dist/apps/app/.nitro',
           prerender: {
-            routes: ['/'],
-          },
-        },
+            routes: ['/']
+          }
+        }
       }),
       tsConfigPaths({
-        root: '../../',
+        root: '../../'
       }),
       visualizer() as Plugin,
-      splitVendorChunkPlugin(),
+      splitVendorChunkPlugin()
     ],
     test: {
       globals: true,
@@ -58,11 +58,11 @@ export default defineConfig(({ mode }) => {
       setupFiles: ['src/test-setup.ts'],
       include: ['**/*.spec.ts'],
       cache: {
-        dir: `../../node_modules/.vitest`,
-      },
+        dir: `../../node_modules/.vitest`
+      }
     },
     define: {
-      'import.meta.vitest': mode !== 'production',
-    },
+      'import.meta.vitest': mode !== 'production'
+    }
   };
 });
