@@ -1,38 +1,30 @@
 import { z } from 'zod';
 import { publicProcedure, router } from '../trpc';
-
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { db, notes } from '../../../db';
+import { eq } from 'drizzle-orm';
 
 export const noteRouter = router({
   create: publicProcedure
     .input(
       z.object({
         title: z.string(),
-        content: z.string(),
+        content: z.string()
       })
     )
-    .mutation(({ input }) =>
-      prisma.note.create({
-        data: {
-          title: input.title,
-          content: input.content,
-        },
-      })
+    .mutation(async ({ input }) => await db.insert(notes)
+      .values({ content: input.content, title: input.title }).returning()
     ),
-  list: publicProcedure.query(() => prisma.note.findMany()),
+  list: publicProcedure.query(async () => {
+    const selectedNotes = await db.select().from(notes);
+    return selectedNotes.map(note => ({ ...note, id: +note.id }));
+  }),
   remove: publicProcedure
     .input(
       z.object({
-        id: z.bigint(),
+        id: z.number()
       })
     )
-    .mutation(({ input }) =>
-      prisma.note.delete({
-        where: {
-          id: input.id,
-        },
-      })
-    ),
+    .mutation(async ({ input }) =>
+      await db.delete(notes).where(eq(notes.id, input.id)).returning()
+    )
 });

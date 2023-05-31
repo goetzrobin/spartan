@@ -18,6 +18,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "~/*": [
+        "apps/app/src/*"
+      ],
       "@ng-spartan/ui/accordion/brain": [
         "libs/ui/accordion/brain/src/index.ts"
       ],

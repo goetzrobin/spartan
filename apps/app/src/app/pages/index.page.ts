@@ -2,8 +2,6 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { injectTRPCClient } from '../../trpc-client';
 import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { note } from '@prisma/client';
-import { waitFor } from '../../wait-for';
 import { HlmSwitchThumbDirective, UiSwitchHelmDirective } from '@ng-spartan/ui/switch/helm';
 import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@ng-spartan/ui/switch/brain';
 import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
@@ -41,9 +39,11 @@ import {
   HlmAlertTitleDirective
 } from '@ng-spartan/ui/alert/helm';
 import { catchError, Observable, of, Subject, switchMap, take, tap } from 'rxjs';
-import { SpartanInputErrorDirective } from '../input-error.directive';
+import { SpartanInputErrorDirective } from '~/app/input-error.directive';
 import { HlmSpinnerComponent } from '@ng-spartan/ui/spinner/helm';
 import { HlmSkeletonComponent } from '@ng-spartan/ui/skeleton/helm';
+import { Note } from '~/db';
+import { waitFor } from '@analogjs/trpc';
 
 @Component({
   selector: 'analog-trpc-home',
@@ -146,10 +146,10 @@ import { HlmSkeletonComponent } from '@ng-spartan/ui/skeleton/helm';
     </form>
     <div class='flex flex-col space-y-4 pt-4 pb-12'>
       <ng-container *ngIf='showNotesArray()'>
-        <div hlmCard *ngFor='let note of notes().value ?? []; trackBy: noteTrackBy'>
+        <div hlmCard *ngFor='let note of state().notes ?? []; trackBy: noteTrackBy'>
           <div hlmCardHeader class='relative'>
             <h3 hlmCardTitle>{{ note.title }}</h3>
-            <p hlmCardDescription>{{ note.created_at | date }}</p>
+            <p hlmCardDescription>{{ note.createdAt | date }}</p>
             <button
               [disabled]='deleteIdInProgress() === note.id'
               class='absolute top-2 right-2'
@@ -221,34 +221,34 @@ import { HlmSkeletonComponent } from '@ng-spartan/ui/skeleton/helm';
         </brn-accordion-trigger>
         <brn-accordion-content hlm> Supabase, Prisma, Angular, tRPC, Tailwind, Analog, and Nx.</brn-accordion-content>
       </brn-accordion-item>
-
-      <div class='mt-12' hlmAlert>
-        <svg
-          hlmAlertIcon
-          class='h-4 w-4'
-          xmlns='http://www.w3.org/2000/svg'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke-width='1.5'
-          stroke='currentColor'
-        >
-          <path
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            d='M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z'
-          />
-        </svg>
-
-        <h4 hlmAlertTitle>Introducing <span class='font-semibold italic text-[#DD0031]'>SPARTAN</span> helm & brain</h4>
-        <p hlmAlertDesc>
-          The components used on this page are also the intiial building blocks of a new UI library. It is made up of
-          headless UI providers, the brain components/directives, which add ARIA compliant markup and interactions. On
-          top of the brain we add helm(et) directives, which add
-          <a hlmBtn variant='link' class='h-6 px-0.5' href='https://ui.shadcn.com' target='_blank'>shadcn</a>-like
-          styles to our application.
-        </p>
-      </div>
     </brn-accordion>
+
+    <div class='mt-12' hlmAlert>
+      <svg
+        hlmAlertIcon
+        class='h-4 w-4'
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        viewBox='0 0 24 24'
+        stroke-width='1.5'
+        stroke='currentColor'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          d='M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z'
+        />
+      </svg>
+
+      <h4 hlmAlertTitle>Introducing <span class='font-semibold italic text-[#DD0031]'>SPARTAN</span> helm & brain</h4>
+      <p hlmAlertDesc>
+        The components used on this page are also the intiial building blocks of a new UI library. It is made up of
+        headless UI providers, the brain components/directives, which add ARIA compliant markup and interactions. On
+        top of the brain we add helm(et) directives, which add
+        <a hlmBtn variant='link' class='h-6 px-0.5' href='https://ui.shadcn.com' target='_blank'>shadcn</a>-like
+        styles to our application.
+      </p>
+    </div>
   `
 })
 export default class HomeComponent {
@@ -259,15 +259,15 @@ export default class HomeComponent {
   private _notes$ = this._refreshNotes$.pipe(
     switchMap(() => this._trpc.note.list.query()),
     tap((result) =>
-      this.notes.mutate((state) => {
+      this.state.mutate((state) => {
         state.status = 'success';
-        state.value = result;
+        state.notes = result;
         state.error = null;
       })
     ),
     catchError((err) => {
-      this.notes.mutate((state) => {
-        state.value = [];
+      this.state.mutate((state) => {
+        state.notes = [];
         state.status = 'error';
         state.error = err;
       });
@@ -275,23 +275,23 @@ export default class HomeComponent {
     })
   );
 
-  public notes = signal<{
+  public state = signal<{
     status: 'idle' | 'loading' | 'success' | 'error';
-    value: note[];
+    notes: Note[];
     error: any | null;
     updatedFrom: 'initial' | 'create' | 'delete';
-    idBeingDeleted?: bigint;
+    idBeingDeleted?: number;
   }>({
     status: 'idle',
-    value: [],
+    notes: [],
     error: null,
     updatedFrom: 'initial'
   });
-  public initialLoad = computed(() => this.notes().status === 'loading' && this.notes().updatedFrom === 'initial');
-  public createLoad = computed(() => this.notes().status === 'loading' && this.notes().updatedFrom === 'create');
-  public deleteIdInProgress = computed(() => this.notes().status === 'loading' && this.notes().updatedFrom === 'delete' ? this.notes().idBeingDeleted : undefined);
-  public noNotes = computed(() => this.notes().value.length === 0);
-  public showNotesArray = computed(() => this.notes().updatedFrom !== 'initial' || this.notes().status === 'success');
+  public initialLoad = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'initial');
+  public createLoad = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'create');
+  public deleteIdInProgress = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'delete' ? this.state().idBeingDeleted : undefined);
+  public noNotes = computed(() => this.state().notes.length === 0);
+  public showNotesArray = computed(() => this.state().updatedFrom !== 'initial' || this.state().status === 'success');
 
   public form = this._sfb.createFormGroup(() => ({
     title: this._sfb.createFormField<string>('', {
@@ -320,7 +320,7 @@ export default class HomeComponent {
     this.updateNotes('initial');
   }
 
-  public noteTrackBy = (index: number, note: note) => {
+  public noteTrackBy = (index: number, note: Note) => {
     return note.id;
   };
 
@@ -338,18 +338,18 @@ export default class HomeComponent {
     this.form.reset();
   }
 
-  public removePost(id: bigint) {
+  public removePost(id: number) {
     this.updateNotes('delete', this._trpc.note.remove.mutate({ id }), id);
   }
 
   private updateNotes(
     updatedFrom: 'initial' | 'create' | 'delete',
-    operation?: Observable<note | note[]>,
-    idBeingDeleted?: bigint
+    operation?: Observable<Note | Note[]>,
+    idBeingDeleted?: number
   ) {
-    this.notes.update((state) => ({
+    this.state.update((state) => ({
       status: 'loading',
-      value: state.value,
+      notes: state.notes,
       error: null,
       updatedFrom,
       idBeingDeleted
