@@ -23,7 +23,6 @@ export class HlmAccordionTriggerDirective {
   @Input()
   set class(inputs: ClassValue) {
     this._inputs = inputs;
-    console.log(this._host);
     if (this._host) {
       this._host?.setClassToCustomElement(this._class);
     } else {

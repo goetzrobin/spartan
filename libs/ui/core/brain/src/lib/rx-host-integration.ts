@@ -53,12 +53,10 @@ export function rxHostPressedListener() {
     rxHostListener('click').pipe(
       tap((el) => {
         lastTimeStamp = el.timeStamp;
-        console.log(el);
       })
     ),
     rxHostListener('keyup').pipe(
       switchMap((x) => {
-        console.log(x);
         return (x as any).code === 'Space' || (x as any).code === 'Enter' ? of(true) : of(null);
       }),
       filter(Boolean)

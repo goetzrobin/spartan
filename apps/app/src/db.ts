@@ -13,5 +13,5 @@ export const notes = pgTable('note', {
 export type Note = InferModel<typeof notes>;
 export type NewNote = InferModel<typeof notes, 'insert'>;
 
-const connectionString = process.env['DATABASE_URL'] ?? '';
-export const db = drizzle(postgres(connectionString));
+const client = postgres(process.env['DATABASE_URL'] ?? '');
+export const db = drizzle(client);

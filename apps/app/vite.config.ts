@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
       include: ['@angular/common', '@angular/forms', 'isomorphic-fetch']
     },
     ssr: {
-      noExternal: ['pg', '@analogjs/trpc/**', '@ng-spartan/**', '@angular/cdk/**', 'ng-signal-forms/**']
+      noExternal: ['@analogjs/trpc/**', '@ng-spartan/**', '@angular/cdk/**', 'ng-signal-forms/**']
     },
     build: {
       target: ['es2020']
@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
           tsconfig: mode === 'test' ? 'apps/app/tsconfig.spec.json' : 'apps/app/tsconfig.app.json'
         },
         nitro: {
-          preset: 'vercel-edge',
+          preset: 'vercel',
           output: {
             dir: '../../../../.vercel/output',
             publicDir: '../../../../.vercel/output/static'
