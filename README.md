@@ -3,7 +3,7 @@
 <img alt="The tip of a spear with the Angular A inside" width="350px" src="./spartan.svg" title="Spartan logo"/>
 
 Example application running
-on [Supabase](https://supabase.com/), [Prisma](https://www.prisma.io/), [Analog](https://analogjs.org/),
+on [Supabase](https://supabase.com/), [Drizzle]([https://www.prisma.io/](https://orm.drizzle.team/), [Analog](https://analogjs.org/),
 [tRPC](https://trpc.io/), [Tailwind](https://tailwindcss.com/), [Angular](https://angular.io/),
 and [Nx](https://nx.dev/).
 
