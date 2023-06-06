@@ -159,6 +159,7 @@ import { waitFor } from '@analogjs/trpc';
               (click)='removePost(note.id)'
             >
               <hlm-spinner *ngIf='deleteIdInProgress() === note.id' size='xs' />
+              <span class="sr-only">Delete note with title: {{note.title}}</span>
               <svg
                 *ngIf='deleteIdInProgress() !== note.id'
                 xmlns='http://www.w3.org/2000/svg'
