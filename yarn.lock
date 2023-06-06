@@ -15,48 +15,48 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@analogjs/content@0.2.0-beta.14", "@analogjs/content@^0.2.0-beta.14":
-  version "0.2.0-beta.14"
-  resolved "https://registry.yarnpkg.com/@analogjs/content/-/content-0.2.0-beta.14.tgz#a13c9861535dea616482fab5e927cebe030320fe"
-  integrity sha512-zcN/CBjfzAmEdHm2Cu/cLJHdbwA+tEAKmdxnjUOaVdlxHjV9lFoi9eqeOsBJq+wt+X4y46lJ/vmPg0fuiM0NRA==
+"@analogjs/content@0.2.0-beta.15", "@analogjs/content@^0.2.0-beta.15":
+  version "0.2.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@analogjs/content/-/content-0.2.0-beta.15.tgz#1ca92ed23746c8b97d0ec14a3a0088dea31669ad"
+  integrity sha512-wz+uduRJ/ljtgmrM1x14RFe17NCa8BXcPGkxYH3n+KBjxBVBVytFL0hBuCGNLG8aKP6g+kyFE5QKdCTu54vc1Q==
   dependencies:
     tslib "^2.3.0"
 
-"@analogjs/platform@0.2.0-beta.14":
-  version "0.2.0-beta.14"
-  resolved "https://registry.yarnpkg.com/@analogjs/platform/-/platform-0.2.0-beta.14.tgz#294216387abebb0b77f2d20e7a735142f3daa9bb"
-  integrity sha512-zcLe02zc0UgPold7Ihw6cZcg3gqs4ElSF0ut5T2+2o8jgT+bV1zHLh9CK1ejxmR1MZAvDQWDoq4h9ntzNELH6w==
+"@analogjs/platform@0.2.0-beta.15":
+  version "0.2.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@analogjs/platform/-/platform-0.2.0-beta.15.tgz#880396d6e400f0a15f178accb38295757cea09fd"
+  integrity sha512-h+Om3mnG4pHdvf0P7bq3mTj2EzBO74lA76Lu3AbU2WOf24q1FvAbDZUBRrD5+HXLtD6r6x0xwxqwzGAzzGruvg==
   dependencies:
-    "@analogjs/vite-plugin-angular" "^0.2.0-beta.14"
-    "@analogjs/vite-plugin-nitro" "^0.2.0-beta.14"
+    "@analogjs/vite-plugin-angular" "^0.2.0-beta.15"
+    "@analogjs/vite-plugin-nitro" "^0.2.0-beta.15"
     "@nx/devkit" "^16.0.0"
     nitropack "^2.0.0"
 
-"@analogjs/router@0.2.0-beta.14":
-  version "0.2.0-beta.14"
-  resolved "https://registry.yarnpkg.com/@analogjs/router/-/router-0.2.0-beta.14.tgz#8e48b08656b807cbac0bbfa8a7f6afdd6e88bec7"
-  integrity sha512-YgWS6iWMckv/RVpNXfo5UXhA0/vObfgYmb2bnR40pKXsOqU33PGDiUpSmT3o5ed4WthgC6dOlGvcbazekKOYsA==
+"@analogjs/router@0.2.0-beta.15":
+  version "0.2.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@analogjs/router/-/router-0.2.0-beta.15.tgz#307a327fc1bd7c7ea21b3246ed2982bbee2af4ba"
+  integrity sha512-KiRbKv9PkdNz0etcU6BDuKVJWivX15gtnfCWFLae+p1n4xGPNPGowOf4C70bGLLKTN4k/u6khPP1sS0/Y3N5fw==
   dependencies:
     tslib "^2.0.0"
   optionalDependencies:
-    "@analogjs/content" "^0.2.0-beta.14"
+    "@analogjs/content" "^0.2.0-beta.15"
 
-"@analogjs/trpc@0.2.0-beta.14":
-  version "0.2.0-beta.14"
-  resolved "https://registry.yarnpkg.com/@analogjs/trpc/-/trpc-0.2.0-beta.14.tgz#df45bc04c126ea03f91f0d14d199dfd89422e1a6"
-  integrity sha512-LLFchzTTN5QWOdTl9xzv5Xp6VKTKYQ5DjcBdXRlzb5oCJPhsljKIp0jHqKz01Ti92+am32RZba4lYg/2SLZYwQ==
+"@analogjs/trpc@0.2.0-beta.15":
+  version "0.2.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@analogjs/trpc/-/trpc-0.2.0-beta.15.tgz#b628b2b0ace2125b3135811f4346fdf5892b9662"
+  integrity sha512-KKhyFgtcYRq6lSDPD/41JulNvg8mV7eQ5vzsHAQ1ex1dFzmap2hEzRtzLaI09y4LgiD7R5jluf/g1agyoNBD+g==
   dependencies:
     tslib "^2.3.0"
 
-"@analogjs/vite-plugin-angular@0.2.0-beta.14", "@analogjs/vite-plugin-angular@^0.2.0-beta.14":
-  version "0.2.0-beta.14"
-  resolved "https://registry.yarnpkg.com/@analogjs/vite-plugin-angular/-/vite-plugin-angular-0.2.0-beta.14.tgz#589cccc9bfd3fd93cdb24926155b12b2d2a9f34c"
-  integrity sha512-PILmXc3tvVwhR48X6dC/6QrcZSJQeIHznLgUD6dnwAj1/9EmrMWu1Ay+/Gn/8e8uZG1XwGetOTwltwJkhybkRg==
+"@analogjs/vite-plugin-angular@0.2.0-beta.15", "@analogjs/vite-plugin-angular@^0.2.0-beta.15":
+  version "0.2.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@analogjs/vite-plugin-angular/-/vite-plugin-angular-0.2.0-beta.15.tgz#f7bb4c2d25d133ed8ce1bb9e0e21c7e8cf4fcdf2"
+  integrity sha512-8eFRYuFhfteDhyE4Zua2H0Bs51nqhk1ASp5zbS7ihgNBlb3Z0tKx0IGdFnT6qH4aZw0ix4HvU0YOMwVH2K3u0Q==
 
-"@analogjs/vite-plugin-nitro@^0.2.0-beta.14":
-  version "0.2.0-beta.14"
-  resolved "https://registry.yarnpkg.com/@analogjs/vite-plugin-nitro/-/vite-plugin-nitro-0.2.0-beta.14.tgz#bda5e6258fceafad4c46139f70b5ca73ce11b9b7"
-  integrity sha512-TjYb/ApNh5e+XR3mN9n0qN7yx8PadzyPZmeGSogTEG672E9WbV1f5/gCN6ulmYifH+7GNmhQI456y4t0Z+p2Bg==
+"@analogjs/vite-plugin-nitro@^0.2.0-beta.15":
+  version "0.2.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@analogjs/vite-plugin-nitro/-/vite-plugin-nitro-0.2.0-beta.15.tgz#14f640789f12d3b313c303b68dd918aa6660bab9"
+  integrity sha512-YxF2drUb5jO/OH6JbqQ7y4ss4JTHAK5p/5+LgAs2yjntG9LwFDLq4cohg+17DF0/0tEC9BIVFeDTgVoSF4ucMA==
   dependencies:
     nitropack "^2.0.0"
 
