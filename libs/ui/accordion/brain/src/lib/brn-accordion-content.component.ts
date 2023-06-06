@@ -13,7 +13,7 @@ import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@
   ],
   host: {
     '[attr.data-state]': 'state()',
-    '[attr.aria-labeledby]': 'ariaLabeledBy',
+    '[attr.aria-labelledby]': 'ariaLabeledBy',
     role: 'region',
     '[style.--brn-collapsible-content-height]': 'initialHeight + "px"',
     '[id]': 'id'
