@@ -30,6 +30,9 @@
       "@ng-spartan/ui/alert/helm": [
         "libs/ui/alert/helm/src/index.ts"
       ],
+      "@ng-spartan/ui/badge/helm": [
+        "libs/ui/badge/helm/src/index.ts"
+      ],
       "@ng-spartan/ui/button/helm": [
         "libs/ui/button/helm/src/index.ts"
       ],

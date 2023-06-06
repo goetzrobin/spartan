@@ -21,7 +21,7 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [ ] Alert Dialog
 - [ ] Aspect Ratio
 - [ ] Avatar
-- [ ] Badge
+- [x] Badge
 - [x] Button
 - [ ] Calendar
 - [x] Card
