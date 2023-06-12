@@ -47,7 +47,7 @@ import {
           <span>What technologies are used</span>
           <hlm-accordion-icon />
         </brn-accordion-trigger>
-        <brn-accordion-content hlm> Supabase, Prisma, Angular, tRPC, Tailwind, Analog, and Nx.</brn-accordion-content>
+        <brn-accordion-content hlm> Supabase, Drizzle, Angular, tRPC, Tailwind, Analog, and Nx.</brn-accordion-content>
       </brn-accordion-item>
     </brn-accordion>
   `
