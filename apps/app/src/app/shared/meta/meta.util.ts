@@ -1,7 +1,7 @@
-export const indexMeta = [
+export const metaWith = (title: string, description: string) => [
   {
     name: 'description',
-    content: 'SPARTAN is an experiment that aims to bring type-safe full-stack development to Angular.'
+    content: description
   },
   {
     name: 'author',
@@ -9,7 +9,7 @@ export const indexMeta = [
   },
   {
     property: 'og:title',
-    content: 'Type-safe Angular full-stack development powered by Analog'
+    content: title
   },
   {
     property: 'og:site_name',
@@ -25,7 +25,7 @@ export const indexMeta = [
   },
   {
     property: 'og:description',
-    content: 'SPARTAN is an experiment that aims to bring type-safe full-stack development to Angular.'
+    content: description
   },
   {
     property: 'og:image',
@@ -38,11 +38,11 @@ export const indexMeta = [
   },
   {
     property: 'twitter:title',
-    content: 'Type-safe Angular full-stack development powered by Analog'
+    content: title
   },
   {
     property: 'twitter:description',
-    content: 'SPARTAN is an experiment that aims to bring type-safe full-stack development to Angular.'
+    content: description
   },
   {
     property: 'twitter:image',

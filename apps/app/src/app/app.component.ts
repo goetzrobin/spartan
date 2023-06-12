@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './header.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 @Component({
   selector: 'analog-trpc-root',

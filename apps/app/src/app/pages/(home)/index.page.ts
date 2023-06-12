@@ -14,18 +14,18 @@ import { waitFor } from '@analogjs/trpc';
 import { catchError, Observable, of, Subject, switchMap, take, tap } from 'rxjs';
 import { injectTRPCClient } from '~/trpc-client';
 import { Note } from '~/db';
-import { SpartanInputErrorDirective } from '~/app/input-error.directive';
-import { InputErrorComponent } from '~/app/input-error.component';
+import { SpartanInputErrorDirective } from '~/app/shared/input-error/input-error.directive';
+import { InputErrorComponent } from '~/app/shared/input-error/input-error.component';
 import { NoteComponent } from './components/note.component';
 import { FaqComponent } from './components/faq.component';
 import { NoteSkeletonComponent } from './components/note-skeleton.component';
 import { NotesEmptyComponent } from './components/notes-empty.component';
 import { UiLibAnnouncementAlertComponent } from './components/ui-lib-announcement-alert.component';
-import { indexMeta } from './index.meta';
+import { metaWith } from '~/app/shared/meta/meta.util';
 
 
 export const routeMeta: RouteMeta = {
-  meta: indexMeta
+  meta: metaWith('Type-safe Angular full-stack development powered by Analog', 'SPARTAN is an experiment that aims to bring type-safe full-stack development to Angular.')
 };
 
 @Component({
