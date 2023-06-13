@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => {
         },
         nitro: {
           preset: 'vercel',
-          prerender: {routes: ['/typography']},
+          prerender: {routes: ['/','/typography']},
           output: {
             dir: '../../../../.vercel/output',
             publicDir: '../../../../.vercel/output/static'
