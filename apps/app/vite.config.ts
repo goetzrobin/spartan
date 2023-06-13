@@ -31,7 +31,8 @@ export default defineConfig(({ mode }) => {
     plugins: [
       replace({
         preventAssignment: true,
-        'http://127.0.0.1:4200': 'https://spartan-goetzrobin.vercel.app'
+        'http://127.0.0.1:4200': 'https://spartan-goetzrobin.vercel.app',
+        '__LASTMOD__': new Date().toISOString()
       }),
       analog({
         vite: {
