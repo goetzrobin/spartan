@@ -25,8 +25,8 @@ export class BrnAvatarFallbackDirective implements OnInit, OnDestroy {
 
   private mutation$?: MutationObserver;
 
-  @Input() set brnAvatarFallback(value: boolean) {
-    this.autoColor.set(value);
+  @Input() set brnAvatarFallback(value: boolean | string) {
+    this.autoColor.set(typeof value === 'boolean' && value);
   }
 
   ngOnInit() {
