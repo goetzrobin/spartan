@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { BrnAvatarImageDirective } from './brn-avatar-image.directive';
 
 @Component({
@@ -11,12 +12,12 @@ import { BrnAvatarImageDirective } from './brn-avatar-image.directive';
       <img brnAvatarImage #bad="avatarImage" />
       <span>{{ bad.canShow() }}</span>
     </div>
-    <div id="good">
-      <img
-        src="https://images.unsplash.com/photo-1686630079100-fbbe083d2bd4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-        brnAvatarImage
-        #good="avatarImage"
-      />
+    <div id="unloaded">
+      <img src="https://picsum.photos/200/300" brnAvatarImage #unloaded="avatarImage" />
+      <span>{{ unloaded.canShow() }}</span>
+    </div>
+    <div id="loaded">
+      <img src="https://picsum.photos/200/300" brnAvatarImage #good="avatarImage" />
       <span>{{ good.canShow() }}</span>
     </div>
   `,
@@ -42,9 +43,17 @@ describe('BrnAvatarImageDirective', () => {
     expect(bad.querySelector('span').textContent).toEqual('false');
   });
 
-  it('should return true when image has a valid src', () => {
+  it('should return false when image has a valid src but isnt loaded', async () => {
     fixture.detectChanges();
-    const good = fixture.nativeElement.querySelector('#good');
-    expect(good.querySelector('span').textContent).toEqual('true');
+    await fixture.whenRenderingDone();
+    const unloaded = fixture.nativeElement.querySelector('#unloaded');
+    expect(unloaded.querySelector('span').textContent).toEqual('false');
+  });
+
+  it('should return true when the image is loaded without error', async () => {
+    fixture.debugElement.query(By.css('#loaded img')).triggerEventHandler('load', null);
+    fixture.detectChanges();
+    const unloaded = fixture.nativeElement.querySelector('#loaded');
+    expect(unloaded.querySelector('span').textContent).toEqual('true');
   });
 });
