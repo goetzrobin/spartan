@@ -33,7 +33,7 @@ describe('InitialsPipe', () => {
     expect(pipe.transform(name, false)).toBe('jD');
     expect(pipe.transform(otherName, false)).toBe('ms');
     expect(pipe.transform(randomName, false)).toBe(
-      `${randomName.charAt(0)}${randomName.charAt(randomName.indexOf(' ') + 1)}`
+      `${randomName.charAt(0)}${randomName.charAt(randomName.lastIndexOf(' ') + 1)}`
     );
   });
 

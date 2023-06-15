@@ -4,7 +4,6 @@ const toInitial =
   (capitalize = true) =>
   (word: string) => {
     const initial = word.charAt(0);
-    console.log(capitalize);
     return capitalize ? initial.toLocaleUpperCase() : initial;
   };
 

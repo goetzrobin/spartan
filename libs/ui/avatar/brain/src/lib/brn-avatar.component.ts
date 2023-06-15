@@ -1,6 +1,5 @@
-import { NgIf, NgIfContext } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { BrnAvatarFallbackDirective } from './fallback';
+import { NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ContentChild, ViewEncapsulation } from '@angular/core';
 import { BrnAvatarImageDirective } from './image';
 
 @Component({
@@ -9,12 +8,16 @@ import { BrnAvatarImageDirective } from './image';
   imports: [NgIf],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  template: `<ng-content select="[brnAvatarImage]" *ngIf="image?.canShow(); else fallbackTemplate" />`,
+  template: `
+    <ng-container *ngIf="image?.canShow(); else fallback">
+      <ng-content select="[brnAvatarImage]" />
+    </ng-container>
+    <ng-template #fallback>
+      <ng-content select="[brnAvatarFallback]" />
+    </ng-template>
+  `,
 })
 export class BrnAvatarComponent {
-  @ContentChild(BrnAvatarFallbackDirective, { static: true, read: TemplateRef })
-  protected readonly fallbackTemplate: TemplateRef<NgIfContext<boolean | undefined>> | null = null;
-
   @ContentChild(BrnAvatarImageDirective, { static: true })
   protected readonly image: BrnAvatarImageDirective | null = null;
 }
