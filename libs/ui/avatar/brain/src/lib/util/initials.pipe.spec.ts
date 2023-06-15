@@ -28,7 +28,7 @@ describe('InitialsPipe', () => {
   it('should not capitalize the initials, when the capitalize flag is set to false', () => {
     const name = 'john Doe';
     const otherName = 'mary ann smith';
-    const randomName = faker.person.fullName();
+    const randomName = faker.person.firstName() + ' ' + faker.person.lastName();
 
     expect(pipe.transform(name, false)).toBe('jD');
     expect(pipe.transform(otherName, false)).toBe('ms');

@@ -10,7 +10,7 @@ describe('isBright', () => {
   });
 
   it('should return true for a light hex code', () => {
-    expect(isBright('#a55c80')).toBe(true);
+    expect(isBright('#e394bb')).toBe(true);
   });
 
   it('should return false for a dark hex code', () => {

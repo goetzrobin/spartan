@@ -1,15 +1,17 @@
 import { Component, PLATFORM_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HlmAvatarFallbackDirective } from './hlm-avatar-fallback.directive';
+import { hexColorFor, isBright } from '@ng-spartan/ui/avatar/brain';
 
 @Component({
   selector: 'hlm-mock',
   standalone: true,
   imports: [HlmAvatarFallbackDirective],
-  template: `<span [hlmAvatarFallback]="userCls">fallback2</span>`,
+  template: `<span hlmAvatarFallback [class]="userCls" [autoColor]="false">fallback2</span>`,
 })
 class HlmMockComponent {
   userCls = '';
+  autoColor = false;
 }
 
 describe('HlmAvatarFallbackDirective', () => {
@@ -41,4 +43,26 @@ describe('HlmAvatarFallbackDirective', () => {
       expect(fixture.nativeElement.querySelector('img').className).toContain('test-class');
     });
   });
+
+  describe('autoColor', () => {
+    beforeEach(() => {
+      component.autoColor = true;
+      fixture.detectChanges();
+    });
+
+    it('should remove the bg-muted class from the component', () => {
+      setTimeout(() => {
+        expect(fixture.nativeElement.querySelector('span').className).not.toContain('bg-muted');
+      });
+    });
+
+    it('should remove add a text color class and hex backgroundColor style depending on its content', () => {
+      const hex = hexColorFor('fallback2');
+      const textCls = isBright(hex) ? 'text-black' : 'text-white';
+      setTimeout(() => {
+        expect(fixture.nativeElement.querySelector('span').className).toContain(textCls);
+        expect(fixture.nativeElement.querySelector('span').style.backgroundColor).toBe(hex);
+      });
+    });
+  })
 });
