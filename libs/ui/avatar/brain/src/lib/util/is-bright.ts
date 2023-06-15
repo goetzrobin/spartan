@@ -11,4 +11,4 @@ const cleanup = (hex: string) => {
     .join('');
 };
 
-export const isBright = (hex: string) => parseInt(cleanup(hex), 16) > 0xffffff / 2;
+export const isBright = (hex: string) => parseInt(cleanup(hex), 16) > 0xffffff / 1.25;
