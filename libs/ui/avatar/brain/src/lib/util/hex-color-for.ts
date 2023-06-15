@@ -1,13 +1,20 @@
-const hashString = (str: string) => {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return hash;
-};
+function hashString(str: string) {
+  let h;
+  for (let i = 0; i < str.length; i++) h = (Math.imul(31, h || 0) + str.charCodeAt(i)) | 0;
 
-export const hexColorFor = (str: string) => {
-  const hash = hashString(str);
+  return h || 0;
+}
+
+function hashManyTimes(times = 5, str: string) {
+  let h = hashString(str);
+
+  for (let i = 0; i < times; i++) h = hashString(String(h));
+
+  return h;
+}
+
+export function hexColorFor(str: string) {
+  const hash = str.length <= 2 ? hashManyTimes(5, str) : hashString(str);
 
   let color = '#';
 
@@ -17,4 +24,4 @@ export const hexColorFor = (str: string) => {
   }
 
   return color;
-};
+}
