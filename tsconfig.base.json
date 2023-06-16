@@ -19,6 +19,8 @@
       "@ng-spartan/ui/accordion/helm": ["libs/ui/accordion/helm/src/index.ts"],
       "@ng-spartan/ui/alert/helm": ["libs/ui/alert/helm/src/index.ts"],
       "@ng-spartan/ui/aspect-ratio/helm": ["libs/ui/aspect-ratio/helm/src/index.ts"],
+      "@ng-spartan/ui/avatar/brain": ["libs/ui/avatar/brain/src/index.ts"],
+      "@ng-spartan/ui/avatar/helm": ["libs/ui/avatar/helm/src/index.ts"],
       "@ng-spartan/ui/badge/helm": ["libs/ui/badge/helm/src/index.ts"],
       "@ng-spartan/ui/button/helm": ["libs/ui/button/helm/src/index.ts"],
       "@ng-spartan/ui/card/helm": ["libs/ui/card/helm/src/index.ts"],
