@@ -1,0 +1,23 @@
+{
+	"files.eol": "\n",
+	"editor.tabSize": 2,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true,
+		"source.organizeImports": true,
+		"source.sortMembers": true
+	},
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"eslint.options": {
+		"extensions": [".js", ".ts", ".html"]
+	},
+	"eslint.validate": ["javascript", "typescript", "html"],
+	"material-icon-theme.folders.associations": {
+		"nav": "routes",
+		"shell": "container",
+		"ui": "components",
+		"feature": "angular",
+		"data-access": "api",
+		"quote": "core"
+	}
+}
