@@ -1,5 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HlmAvatarComponent } from './hlm-avatar.component';
+import { Component } from '@angular/core';
+import { BrnAvatarFallbackDirective, BrnAvatarImageDirective } from '@ng-spartan/ui/avatar/brain';
+
+
+@Component({
+  selector: 'hlm-mock',
+  imports: [BrnAvatarImageDirective, BrnAvatarFallbackDirective, HlmAvatarComponent],
+  template: `
+    <hlm-avatar id="fallbackOnly">
+      <span brnAvatarFallback>fallback</span>
+    </hlm-avatar>
+  `,
+  standalone: true,
+})
+class MockComponent {}
+
 
 describe('HlmAvatarComponent', () => {
   let component: HlmAvatarComponent;
@@ -37,6 +53,11 @@ describe('HlmAvatarComponent', () => {
     expect(fixture.nativeElement.className).toContain('h-14');
     expect(fixture.nativeElement.className).toContain('w-14');
     expect(fixture.nativeElement.className).toContain('text-lg');
+  });
 
+  it('should support brn directives', () => {
+    const mockFixture = TestBed.createComponent(MockComponent);
+    mockFixture.detectChanges();
+    expect(mockFixture.nativeElement.querySelector('span').textContent).toBe('fallback');
   });
 });

@@ -40,10 +40,10 @@ const generateClasses = (variant: AvatarVariants['variant'], userCls: ClassValue
   standalone: true,
   template: `
     <ng-container *ngIf="image?.canShow(); else fallback">
-      <ng-content select="[hlmAvatarImage]" />
+      <ng-content select="[hlmAvatarImage],[brnAvatarImage]" />
     </ng-container>
     <ng-template #fallback>
-      <ng-content select="[hlmAvatarFallback]" />
+      <ng-content select="[hlmAvatarFallback],[brnAvatarFallback]" />
     </ng-template>
   `,
 })
