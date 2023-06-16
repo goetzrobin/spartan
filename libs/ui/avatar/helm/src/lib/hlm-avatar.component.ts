@@ -16,9 +16,9 @@ import { ClassValue } from 'clsx';
 const avatarVariants = cva('relative flex shrink-0 overflow-hidden rounded-full', {
   variants: {
     variant: {
-      small: 'h-6 w-6',
+      small: 'h-6 w-6 text-xs',
       medium: 'h-10 w-10',
-      large: 'h-14 w-14',
+      large: 'h-14 w-14 text-lg',
     },
   },
   defaultVariants: {
@@ -48,26 +48,26 @@ const generateClasses = (variant: AvatarVariants['variant'], userCls: ClassValue
   `,
 })
 export class HlmAvatarComponent extends BrnAvatarComponent {
-  private readonly variant = signal<AvatarVariants['variant']>('medium');
+  private readonly _variant = signal<AvatarVariants['variant']>('medium');
   private readonly userCls = signal<ClassValue>('');
 
-  @Input('variant')
-  set setVariant(variant: AvatarVariants['variant']) {
-    this.variant.set(variant);
+  @Input()
+  set variant(variant: AvatarVariants['variant']) {
+    this._variant.set(variant);
   }
 
-  @Input('class')
-  set setUserCls(cls: ClassValue) {
+  @Input()
+  set class(cls: ClassValue) {
     this.userCls.set(cls);
   }
 
   @HostBinding('class')
-  protected cls = generateClasses(this.variant(), this.userCls());
+  protected cls = generateClasses(this._variant(), this.userCls());
 
   constructor() {
     super();
     effect(() => {
-      this.cls = generateClasses(this.variant(), this.userCls());
+      this.cls = generateClasses(this._variant(), this.userCls());
     });
   }
 }
