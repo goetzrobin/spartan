@@ -10,66 +10,29 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "apps/app/src/*"
-      ],
-      "@ng-spartan/ui/accordion/brain": [
-        "libs/ui/accordion/brain/src/index.ts"
-      ],
-      "@ng-spartan/ui/accordion/helm": [
-        "libs/ui/accordion/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/alert/helm": [
-        "libs/ui/alert/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/badge/helm": [
-        "libs/ui/badge/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/button/helm": [
-        "libs/ui/button/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/card/helm": [
-        "libs/ui/card/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/core/brain": [
-        "libs/ui/core/brain/src/index.ts"
-      ],
-      "@ng-spartan/ui/core/helm": [
-        "libs/ui/core/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/input/helm": [
-        "libs/ui/input/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/label/helm": [
-        "libs/ui/label/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/skeleton/helm": [
-        "libs/ui/skeleton/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/spinner/helm": [
-        "libs/ui/spinner/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/switch/brain": [
-        "libs/ui/switch/brain/src/index.ts"
-      ],
-      "@ng-spartan/ui/switch/helm": [
-        "libs/ui/switch/helm/src/index.ts"
-      ],
-      "@ng-spartan/ui/typography/helm": [
-        "libs/ui/typography/helm/src/index.ts"
-      ]
+      "@ng-spartan/ui/accordion/brain": ["libs/ui/accordion/brain/src/index.ts"],
+      "@ng-spartan/ui/accordion/helm": ["libs/ui/accordion/helm/src/index.ts"],
+      "@ng-spartan/ui/alert/helm": ["libs/ui/alert/helm/src/index.ts"],
+      "@ng-spartan/ui/aspect-ratio/helm": ["libs/ui/aspect-ratio/helm/src/index.ts"],
+      "@ng-spartan/ui/badge/helm": ["libs/ui/badge/helm/src/index.ts"],
+      "@ng-spartan/ui/button/helm": ["libs/ui/button/helm/src/index.ts"],
+      "@ng-spartan/ui/card/helm": ["libs/ui/card/helm/src/index.ts"],
+      "@ng-spartan/ui/core/brain": ["libs/ui/core/brain/src/index.ts"],
+      "@ng-spartan/ui/core/helm": ["libs/ui/core/helm/src/index.ts"],
+      "@ng-spartan/ui/input/helm": ["libs/ui/input/helm/src/index.ts"],
+      "@ng-spartan/ui/label/helm": ["libs/ui/label/helm/src/index.ts"],
+      "@ng-spartan/ui/skeleton/helm": ["libs/ui/skeleton/helm/src/index.ts"],
+      "@ng-spartan/ui/spinner/helm": ["libs/ui/spinner/helm/src/index.ts"],
+      "@ng-spartan/ui/switch/brain": ["libs/ui/switch/brain/src/index.ts"],
+      "@ng-spartan/ui/switch/helm": ["libs/ui/switch/helm/src/index.ts"],
+      "@ng-spartan/ui/typography/helm": ["libs/ui/typography/helm/src/index.ts"],
+      "~/*": ["apps/app/src/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

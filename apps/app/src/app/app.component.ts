@@ -7,11 +7,11 @@ import { HeaderComponent } from './shared/header/header.component';
   standalone: true,
   imports: [RouterOutlet, HeaderComponent],
   host: {
-    class: 'max-w-screen-lg mx-auto text-foreground block h-full'
+    class: 'max-w-screen-lg mx-auto text-foreground block h-full',
   },
   template: `
     <analog-trpc-header />
-    <router-outlet></router-outlet> `
+    <router-outlet></router-outlet>
+  `,
 })
-export class AppComponent {
-}
+export class AppComponent {}
