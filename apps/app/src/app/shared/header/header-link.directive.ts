@@ -17,8 +17,7 @@ export class HeaderLinkDirective {
 
   constructor() {
     this._hlmBtn.variant = 'link';
-    this._hlmBtn.class = 'hover:opacity-80 opacity-50';
     this._rlActive.routerLinkActiveOptions = { exact: true };
-    this._rlActive.routerLinkActive = '!opacity-100';
+    this._rlActive.routerLinkActive = '!text-[#DD0031]';
   }
 }
