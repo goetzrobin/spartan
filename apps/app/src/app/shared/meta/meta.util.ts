@@ -1,51 +1,51 @@
 export const metaWith = (title: string, description: string) => [
   {
     name: 'description',
-    content: description
+    content: description,
   },
   {
     name: 'author',
-    content: 'Robin Goetz'
+    content: 'Robin Goetz',
   },
   {
     property: 'og:title',
-    content: title
+    content: title,
   },
   {
     property: 'og:site_name',
-    content: 'SPARTAN'
+    content: 'SPARTAN',
   },
   {
     property: 'og:type',
-    content: 'website'
+    content: 'website',
   },
   {
     property: 'og:url',
-    content: 'https://spartan-goetzrobin.vercel.app/'
+    content: 'https://spartan-goetzrobin.vercel.app/',
   },
   {
     property: 'og:description',
-    content: description
+    content: description,
   },
   {
     property: 'og:image',
-    content: 'https://spartan-goetzrobin.vercel.app/assets/og-image.png'
+    content: 'https://spartan-goetzrobin.vercel.app/assets/og-image.png',
   },
 
   {
     property: 'twitter:card',
-    content: 'summary_large_image'
+    content: 'summary_large_image',
   },
   {
     property: 'twitter:title',
-    content: title
+    content: title,
   },
   {
     property: 'twitter:description',
-    content: description
+    content: description,
   },
   {
     property: 'twitter:image',
-    content: 'https://spartan-goetzrobin.vercel.app/assets/og-image.png'
-  }
+    content: 'https://spartan-goetzrobin.vercel.app/assets/og-image.png',
+  },
 ];

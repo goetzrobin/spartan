@@ -4,7 +4,7 @@ import { hlm } from '@ng-spartan/ui/core/helm';
 
 @Directive({
   selector: 'brn-switch-thumb[hlm],[hlmSwitchThumb]',
-  standalone: true
+  standalone: true,
 })
 export class HlmSwitchThumbDirective {
   private _inputs: ClassValue = '';

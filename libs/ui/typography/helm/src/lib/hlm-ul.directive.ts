@@ -6,7 +6,7 @@ export const hlmUl = 'my-6 ml-6 list-disc [&>li]:mt-2';
 
 @Directive({
   selector: '[hlmUl]',
-  standalone: true
+  standalone: true,
 })
 export class HlmUlDirective {
   private _inputs: ClassValue = '';

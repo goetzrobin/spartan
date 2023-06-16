@@ -2,11 +2,10 @@ import { Component, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
 import { hlm } from '@ng-spartan/ui/core/helm';
 
-
 @Component({
   selector: 'hlm-skeleton',
   standalone: true,
-  template: ``
+  template: ``,
 })
 export class HlmSkeletonComponent {
   private _inputs: ClassValue = '';

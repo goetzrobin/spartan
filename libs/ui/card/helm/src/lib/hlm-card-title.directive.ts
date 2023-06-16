@@ -5,13 +5,13 @@ import { ClassValue } from 'clsx';
 
 const cardTitleVariants = cva('text-lg font-semibold leading-none tracking-tight', {
   variants: {},
-  defaultVariants: {}
+  defaultVariants: {},
 });
 export type CardTitleVariants = VariantProps<typeof cardTitleVariants>;
 
 @Directive({
   selector: '[hlmCardTitle]',
-  standalone: true
+  standalone: true,
 })
 export class HlmCardTitleDirective {
   private _inputs: ClassValue = '';

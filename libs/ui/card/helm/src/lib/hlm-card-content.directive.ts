@@ -5,13 +5,13 @@ import { ClassValue } from 'clsx';
 
 const cardContentVariants = cva('p-6 pt-0', {
   variants: {},
-  defaultVariants: {}
+  defaultVariants: {},
 });
 export type CardContentVariants = VariantProps<typeof cardContentVariants>;
 
 @Directive({
   selector: '[hlmCardContent]',
-  standalone: true
+  standalone: true,
 })
 export class HlmCardContentDirective {
   private _inputs: ClassValue = '';

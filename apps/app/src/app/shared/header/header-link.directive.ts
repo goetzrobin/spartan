@@ -6,10 +6,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[appHeaderLink]',
   standalone: true,
-  hostDirectives: [HlmButtonDirective, {
-    directive: RouterLink,
-    inputs: ['routerLink: appHeaderLink']
-  }, RouterLinkActive]
+  hostDirectives: [
+    HlmButtonDirective,
+    {
+      directive: RouterLink,
+      inputs: ['routerLink: appHeaderLink'],
+    },
+    RouterLinkActive,
+  ],
 })
 export class HeaderLinkDirective {
   private _hlmBtn = inject(HlmButtonDirective);

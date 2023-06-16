@@ -8,10 +8,9 @@ import { rxHostListener } from '@ng-spartan/ui/core/brain';
   standalone: true,
   host: {
     '[attr.data-state]': 'state()',
-    '[attr.data-orientation]': 'orientation'
+    '[attr.data-orientation]': 'orientation',
   },
-  template: `
-    <ng-content />`
+  template: ` <ng-content />`,
 })
 export class BrnAccordionComponent implements AfterContentInit {
   @Input()

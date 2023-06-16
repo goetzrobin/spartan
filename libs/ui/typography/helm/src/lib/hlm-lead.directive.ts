@@ -6,7 +6,7 @@ export const hlmLead = 'text-xl text-muted-foreground';
 
 @Directive({
   selector: '[hlmLead]',
-  standalone: true
+  standalone: true,
 })
 export class HlmLeadDirective {
   private _inputs: ClassValue = '';

@@ -9,19 +9,19 @@ const labelVariants = cva(
     variants: {
       variant: {
         default: '',
-        error: 'text-destructive'
-      }
+        error: 'text-destructive',
+      },
     },
     defaultVariants: {
-      variant: 'error'
-    }
+      variant: 'error',
+    },
   }
 );
 export type LabelVariants = VariantProps<typeof labelVariants>;
 
 @Directive({
   selector: '[hlmLabel]',
-  standalone: true
+  standalone: true,
 })
 export class HlmLabelDirective {
   private _inputs: ClassValue = '';

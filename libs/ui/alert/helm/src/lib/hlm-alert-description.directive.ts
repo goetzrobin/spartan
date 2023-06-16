@@ -4,13 +4,13 @@ import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 const alertDescriptionVariants = cva('text-sm [&_p]:leading-relaxed', {
-  variants: {}
+  variants: {},
 });
 export type AlertDescriptionVariants = VariantProps<typeof alertDescriptionVariants>;
 
 @Directive({
   selector: '[hlmAlertDesc],[hlmAlertDescription]',
-  standalone: true
+  standalone: true,
 })
 export class HlmAlertDescriptionDirective {
   private _inputs: ClassValue = '';

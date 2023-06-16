@@ -1,0 +1,89 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+env:
+  NODE_OPTIONS: --max-old-space-size=6144
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      # Required by wagoid/commitlint-github-action
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # Required by wagoid/commitlint-github-action
+          fetch-depth: 0
+      - name: Lint commit messages
+        uses: wagoid/commitlint-github-action@v5
+        with:
+          failOnWarnings: true
+          helpURL: https://github.com/goetzrobin/spartan/blob/main/CONTRIBUTING.md#-commit-message-guidelines
+
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: corepack enable
+      - run: yarn --version
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install
+        run: yarn --frozen-lockfile --prefer-offline
+
+      - name: Validate
+        run: yarn prettier --check .
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: corepack enable
+      - run: yarn --version
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install
+        run: yarn install --frozen-lockfile --prefer-offline
+      - name: Build
+        run: yarn build
+
+  unit:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: corepack enable
+      - run: yarn --version
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install
+        run: yarn install --frozen-lockfile --prefer-offline
+      - name: Test
+        run: yarn test

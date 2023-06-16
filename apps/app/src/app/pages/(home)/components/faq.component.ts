@@ -3,21 +3,21 @@ import {
   BrnAccordionComponent,
   BrnAccordionContentComponent,
   BrnAccordionItemComponent,
-  BrnAccordionTriggerComponent
+  BrnAccordionTriggerComponent,
 } from '@ng-spartan/ui/accordion/brain';
 import {
   HlmAccordionContentDirective,
   HlmAccordionDirective,
   HlmAccordionIconComponent,
   HlmAccordionItemDirective,
-  HlmAccordionTriggerDirective
+  HlmAccordionTriggerDirective,
 } from '@ng-spartan/ui/accordion/helm';
 
 @Component({
   selector: 'analog-trpc-faq',
   standalone: true,
   host: {
-    class: 'block'
+    class: 'block',
   },
   imports: [
     BrnAccordionComponent,
@@ -28,7 +28,7 @@ import {
     HlmAccordionDirective,
     HlmAccordionIconComponent,
     HlmAccordionItemDirective,
-    HlmAccordionTriggerDirective
+    HlmAccordionTriggerDirective,
   ],
   template: `
     <brn-accordion hlm>
@@ -50,7 +50,6 @@ import {
         <brn-accordion-content hlm> Supabase, Drizzle, Angular, tRPC, Tailwind, Analog, and Nx.</brn-accordion-content>
       </brn-accordion-item>
     </brn-accordion>
-  `
+  `,
 })
-export class FaqComponent {
-}
+export class FaqComponent {}

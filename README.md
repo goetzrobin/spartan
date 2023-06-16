@@ -37,7 +37,7 @@ This means that you are ready to connect to your projects database already!
 
 Let's connect our application to our Supabase Postgres instance:
 
-Add a  `.env` file at the root of your Nx workspace and add the following code snippet
+Add a `.env` file at the root of your Nx workspace and add the following code snippet
 
 ```
 # Environment variables declared in this file are automatically made available to Prisma.
@@ -132,7 +132,7 @@ Take your cyber-security hat off for a minute (we are working locally after all)
 
 ```
 postgresql://postgres:postgres@localhost:54322/postgres
-````
+```
 
 Add a `.env` file at the root of your Nx workspace and add the connection string like so:
 

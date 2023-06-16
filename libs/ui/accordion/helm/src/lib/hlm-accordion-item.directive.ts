@@ -4,7 +4,7 @@ import { hlm } from '@ng-spartan/ui/core/helm';
 
 @Directive({
   selector: '[hlmAccordionItem],brn-accordion-item[hlm]',
-  standalone: true
+  standalone: true,
 })
 export class HlmAccordionItemDirective {
   @HostBinding('class')

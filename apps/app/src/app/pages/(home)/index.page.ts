@@ -23,9 +23,11 @@ import { NotesEmptyComponent } from './components/notes-empty.component';
 import { UiLibAnnouncementAlertComponent } from './components/ui-lib-announcement-alert.component';
 import { metaWith } from '~/app/shared/meta/meta.util';
 
-
 export const routeMeta: RouteMeta = {
-  meta: metaWith('Type-safe Angular full-stack development powered by Analog', 'SPARTAN is an experiment that aims to bring type-safe full-stack development to Angular.')
+  meta: metaWith(
+    'Type-safe Angular full-stack development powered by Analog',
+    'SPARTAN is an experiment that aims to bring type-safe full-stack development to Angular.'
+  ),
 };
 
 @Component({
@@ -56,68 +58,64 @@ export const routeMeta: RouteMeta = {
     NoteSkeletonComponent,
     NotesEmptyComponent,
     HlmSpinnerComponent,
-    UiLibAnnouncementAlertComponent
+    UiLibAnnouncementAlertComponent,
   ],
   providers: [withErrorComponent(InputErrorComponent)],
   host: {
-    class: 'block px-4 pt-4 pb-16'
+    class: 'block px-4 pt-4 pb-16',
   },
   template: `
-    <form class='py-2 flex flex-col items-end'>
-      <label hlmLabel class='w-full'>
+    <form class="py-2 flex flex-col items-end">
+      <label hlmLabel class="w-full">
         Title
         <input
-          class='mt-1.5 w-full'
-          placeholder='Buy groceries'
+          class="mt-1.5 w-full"
+          placeholder="Buy groceries"
           hlmInput
-          autocomplete='off'
-          name='newTitle'
+          autocomplete="off"
+          name="newTitle"
           ngModel
-          [formField]='form.controls.title'
+          [formField]="form.controls.title"
         />
       </label>
 
-      <label hlmLabel class='w-full'>
+      <label hlmLabel class="w-full">
         Content
         <textarea
-          class='mt-1.5 w-full h-fit'
-          placeholder='2x eggs, 1x milk,...'
+          class="mt-1.5 w-full h-fit"
+          placeholder="2x eggs, 1x milk,..."
           hlmInput
-          autocomplete='off'
-          name='newContent'
+          autocomplete="off"
+          name="newContent"
           ngModel
-          rows='4'
-          [formField]='form.controls.content'
+          rows="4"
+          [formField]="form.controls.content"
         ></textarea>
       </label>
 
-      <button hlmBtn [disabled]='createLoad()' variant='secondary' (click)='createNote()'>
+      <button hlmBtn [disabled]="createLoad()" variant="secondary" (click)="createNote()">
         <span>{{ createLoad() ? 'Creating' : 'Create' }} Note</span>
-        <hlm-spinner *ngIf='createLoad()' class='ml-2' size='sm' />
+        <hlm-spinner *ngIf="createLoad()" class="ml-2" size="sm" />
       </button>
     </form>
-    <div class='flex flex-col space-y-4 pt-4 pb-12'>
-      <ng-container *ngIf='showNotesArray()'>
+    <div class="flex flex-col space-y-4 pt-4 pb-12">
+      <ng-container *ngIf="showNotesArray()">
         <analog-trpc-note
-          *ngFor='let note of state().notes ?? []; trackBy: noteTrackBy'
-          [note]='note'
-          [deletionInProgress]='deleteIdInProgress() === note.id'
-          (deleteClicked)='deleteNote(note.id)'
+          *ngFor="let note of state().notes ?? []; trackBy: noteTrackBy"
+          [note]="note"
+          [deletionInProgress]="deleteIdInProgress() === note.id"
+          (deleteClicked)="deleteNote(note.id)"
         />
-        <analog-trpc-notes-empty class='border-transparent shadow-none' *ngIf='noNotes()'>
-
-        </analog-trpc-notes-empty>
+        <analog-trpc-notes-empty class="border-transparent shadow-none" *ngIf="noNotes()"> </analog-trpc-notes-empty>
       </ng-container>
 
-      <analog-trpc-note-skeleton *ngIf='initialLoad() || createLoad()' />
-
+      <analog-trpc-note-skeleton *ngIf="initialLoad() || createLoad()" />
     </div>
 
     <analog-trpc-faq />
 
-    <analog-trpc-ui-lib-announcement-alert class='mt-12' />
-
-  `
+    <analog-trpc-ui-lib-announcement-alert class="mt-12" />
+  `,
 })
 export default class HomeComponent {
   private _trpc = injectTRPCClient();
@@ -152,34 +150,36 @@ export default class HomeComponent {
     status: 'idle',
     notes: [],
     error: null,
-    updatedFrom: 'initial'
+    updatedFrom: 'initial',
   });
   public initialLoad = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'initial');
   public createLoad = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'create');
-  public deleteIdInProgress = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'delete' ? this.state().idBeingDeleted : undefined);
+  public deleteIdInProgress = computed(() =>
+    this.state().status === 'loading' && this.state().updatedFrom === 'delete' ? this.state().idBeingDeleted : undefined
+  );
   public noNotes = computed(() => this.state().notes.length === 0);
-  public showNotesArray = computed(() => this.state().updatedFrom === 'delete' ||
-    this.state().notes.length > 0 || this.state().status === 'success');
+  public showNotesArray = computed(
+    () => this.state().updatedFrom === 'delete' || this.state().notes.length > 0 || this.state().status === 'success'
+  );
 
   public form = this._sfb.createFormGroup(() => ({
     title: this._sfb.createFormField<string>('', {
       validators: [
         {
           validator: V.required(),
-          message: () => 'Make sure to give your note a title'
-        }
-      ]
+          message: () => 'Make sure to give your note a title',
+        },
+      ],
     }),
     content: this._sfb.createFormField('', {
       validators: [
         {
           validator: V.required(),
-          message: () => 'Add some content to your note'
-        }
-      ]
-    })
+          message: () => 'Add some content to your note',
+        },
+      ],
+    }),
   }));
-
 
   constructor() {
     this._notes$.subscribe();
@@ -215,7 +215,7 @@ export default class HomeComponent {
       notes: state.notes,
       error: null,
       updatedFrom,
-      idBeingDeleted
+      idBeingDeleted,
     }));
     if (!operation) {
       this._refreshNotes$.next();

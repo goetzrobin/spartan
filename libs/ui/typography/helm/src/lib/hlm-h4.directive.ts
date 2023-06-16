@@ -6,7 +6,7 @@ export const hlmH4 = 'scroll-m-20 text-xl font-semibold tracking-tight';
 
 @Directive({
   selector: '[hlmH4]',
-  standalone: true
+  standalone: true,
 })
 export class HlmH4Directive {
   private _inputs: ClassValue = '';

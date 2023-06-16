@@ -12,46 +12,46 @@ export default defineConfig(({ mode }) => {
   return {
     publicDir: 'src/public',
     server: {
-      host: '127.0.0.1'
+      host: '127.0.0.1',
     },
     optimizeDeps: {
-      include: ['@angular/common', '@angular/forms', 'isomorphic-fetch']
+      include: ['@angular/common', '@angular/forms', 'isomorphic-fetch'],
     },
     ssr: {
-      noExternal: ['@analogjs/trpc/**', '@ng-spartan/**', '@angular/cdk/**', 'ng-signal-forms/**']
+      noExternal: ['@analogjs/trpc/**', '@ng-spartan/**', '@angular/cdk/**', 'ng-signal-forms/**'],
     },
     build: {
-      target: ['es2020']
+      target: ['es2020'],
     },
     resolve: {
       alias: {
-        '~': path.resolve(__dirname, './src')
-      }
+        '~': path.resolve(__dirname, './src'),
+      },
     },
     plugins: [
       replace({
         preventAssignment: true,
         'http://127.0.0.1:4200': 'https://spartan-goetzrobin.vercel.app',
-        '__LASTMOD__': new Date().toISOString()
+        __LASTMOD__: new Date().toISOString(),
       }),
       analog({
         vite: {
-          tsconfig: mode === 'test' ? 'apps/app/tsconfig.spec.json' : 'apps/app/tsconfig.app.json'
+          tsconfig: mode === 'test' ? 'apps/app/tsconfig.spec.json' : 'apps/app/tsconfig.app.json',
         },
         nitro: {
           preset: 'vercel',
-          prerender: {routes: ['/','/typography']},
+          prerender: { routes: ['/', '/typography'] },
           output: {
             dir: '../../../../.vercel/output',
-            publicDir: '../../../../.vercel/output/static'
-          }
-        }
+            publicDir: '../../../../.vercel/output/static',
+          },
+        },
       }),
       tsConfigPaths({
-        root: '../../'
+        root: '../../',
       }),
       visualizer() as Plugin,
-      splitVendorChunkPlugin()
+      splitVendorChunkPlugin(),
     ],
     test: {
       globals: true,
@@ -59,11 +59,11 @@ export default defineConfig(({ mode }) => {
       setupFiles: ['src/test-setup.ts'],
       include: ['**/*.spec.ts'],
       cache: {
-        dir: `../../node_modules/.vitest`
-      }
+        dir: `../../node_modules/.vitest`,
+      },
     },
     define: {
-      'import.meta.vitest': mode !== 'production'
-    }
+      'import.meta.vitest': mode !== 'production',
+    },
   };
 });

@@ -19,8 +19,8 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [x] Accordion
 - [x] Alert
 - [ ] Alert Dialog - [RFC](https://github.com/goetzrobin/spartan/issues/4)
-- [ ] Aspect Ratio
-- [ ] Avatar
+- [x] Aspect Ratio
+- [x] Avatar
 - [x] Badge
 - [x] Button
 - [ ] Calendar

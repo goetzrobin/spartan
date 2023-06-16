@@ -64,5 +64,5 @@ describe('HlmAvatarFallbackDirective', () => {
         expect(fixture.nativeElement.querySelector('span').style.backgroundColor).toBe(hex);
       });
     });
-  })
+  });
 });

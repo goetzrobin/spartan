@@ -3,7 +3,6 @@ import { HlmAvatarComponent } from './hlm-avatar.component';
 import { Component } from '@angular/core';
 import { BrnAvatarFallbackDirective, BrnAvatarImageDirective } from '@ng-spartan/ui/avatar/brain';
 
-
 @Component({
   selector: 'hlm-mock',
   imports: [BrnAvatarImageDirective, BrnAvatarFallbackDirective, HlmAvatarComponent],
@@ -15,7 +14,6 @@ import { BrnAvatarFallbackDirective, BrnAvatarImageDirective } from '@ng-spartan
   standalone: true,
 })
 class MockComponent {}
-
 
 describe('HlmAvatarComponent', () => {
   let component: HlmAvatarComponent;

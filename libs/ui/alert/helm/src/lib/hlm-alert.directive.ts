@@ -10,12 +10,12 @@ const alertVariants = cva(
       variant: {
         default: 'bg-background text-foreground',
         destructive:
-          'text-destructive border-destructive/50 dark:border-destructive [&>[hlmAlertIcon]]:text-destructive text-destructive'
-      }
+          'text-destructive border-destructive/50 dark:border-destructive [&>[hlmAlertIcon]]:text-destructive text-destructive',
+      },
     },
     defaultVariants: {
-      variant: 'default'
-    }
+      variant: 'default',
+    },
   }
 );
 export type AlertVariants = VariantProps<typeof alertVariants>;
@@ -24,8 +24,8 @@ export type AlertVariants = VariantProps<typeof alertVariants>;
   selector: '[hlmAlert]',
   standalone: true,
   host: {
-    role: 'alert'
-  }
+    role: 'alert',
+  },
 })
 export class HlmAlertDirective {
   private _variant: AlertVariants['variant'] = 'default';

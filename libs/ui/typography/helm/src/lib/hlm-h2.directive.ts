@@ -2,11 +2,12 @@ import { Directive, HostBinding, Input } from '@angular/core';
 import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
-export const hlmH2 = 'scroll-m-20 border-border border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0';
+export const hlmH2 =
+  'scroll-m-20 border-border border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0';
 
 @Directive({
   selector: '[hlmH2]',
-  standalone: true
+  standalone: true,
 })
 export class HlmH2Directive {
   private _inputs: ClassValue = '';

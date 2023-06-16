@@ -8,20 +8,19 @@ import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@
   providers: [
     {
       provide: SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN,
-      useExisting: forwardRef(() => BrnAccordionContentComponent)
-    }
+      useExisting: forwardRef(() => BrnAccordionContentComponent),
+    },
   ],
   host: {
     '[attr.data-state]': 'state()',
     '[attr.aria-labelledby]': 'ariaLabeledBy',
     role: 'region',
     '[style.--brn-collapsible-content-height]': 'initialHeight + "px"',
-    '[id]': 'id'
+    '[id]': 'id',
   },
-  template: `
-    <p [class]='contentClass()'>
-      <ng-content />
-    </p>`
+  template: ` <p [class]="contentClass()">
+    <ng-content />
+  </p>`,
 })
 export class BrnAccordionContentComponent implements AfterViewInit, CustomElementClassSettable {
   private _item = inject(BrnAccordionItemComponent);

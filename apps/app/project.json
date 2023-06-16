@@ -63,10 +63,7 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["apps/app/coverage"],
-      "options": {
-        "config": "vite.config.ts"
-      }
+      "outputs": ["apps/app/coverage"]
     }
   },
   "tags": [],

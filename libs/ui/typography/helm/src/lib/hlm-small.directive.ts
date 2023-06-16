@@ -6,7 +6,7 @@ export const hlmSmall = 'text-sm font-medium leading-none';
 
 @Directive({
   selector: '[hlmSmall]',
-  standalone: true
+  standalone: true,
 })
 export class HlmSmallDirective {
   private _inputs: ClassValue = '';

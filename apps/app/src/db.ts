@@ -7,7 +7,7 @@ export const notes = pgTable('note', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
   content: text('content'),
-  createdAt: timestamp('created_at').defaultNow().notNull()
+  createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
 export type Note = InferModel<typeof notes>;

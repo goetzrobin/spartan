@@ -6,7 +6,7 @@ export const hlmLarge = 'text-lg font-semibold';
 
 @Directive({
   selector: '[hlmLarge]',
-  standalone: true
+  standalone: true,
 })
 export class HlmLargeDirective {
   private _inputs: ClassValue = '';

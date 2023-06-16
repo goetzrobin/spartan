@@ -6,10 +6,8 @@ import { PreloadAllModules, withNavigationErrorHandler, withPreloading } from '@
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideFileRouter(
-      withNavigationErrorHandler(console.log),
-      withPreloading(PreloadAllModules)
-      ),
-       provideClientHydration(), 
-       provideTRPCClient()]
+    provideFileRouter(withNavigationErrorHandler(console.log), withPreloading(PreloadAllModules)),
+    provideClientHydration(),
+    provideTRPCClient(),
+  ],
 };

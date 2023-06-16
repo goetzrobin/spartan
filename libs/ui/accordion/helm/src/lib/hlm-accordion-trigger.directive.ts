@@ -7,8 +7,8 @@ import { SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@ng-spartan/ui/core/brain';
   selector: '[hlmAccordionTrigger],brn-accordion-trigger[hlm]',
   standalone: true,
   host: {
-    '[style.--tw-ring-offset-shadow]': '"0 0 #000"'
-  }
+    '[style.--tw-ring-offset-shadow]': '"0 0 #000"',
+  },
 })
 export class HlmAccordionTriggerDirective {
   private _host = inject(SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN, { optional: true });
