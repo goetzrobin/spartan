@@ -43,7 +43,7 @@ import { HeaderLinkDirective } from './header-link.directive';
 
     <label hlmLabel class="flex items-center space-x-4">
       <span class="sr-only sm:not-sr-only">Dark mode</span>
-      <brn-switch id="airplane" [checked]="(theme$ | async) === 'dark'" (changed)="toggleTheme()" hlm>
+      <brn-switch id="darkMode" [checked]="(theme$ | async) === 'dark'" (changed)="toggleTheme()" hlm>
         <brn-switch-thumb hlm />
       </brn-switch>
     </label>

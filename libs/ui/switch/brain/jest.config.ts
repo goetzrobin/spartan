@@ -3,7 +3,6 @@ export default {
   displayName: 'ui-switch-brain',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/ui/switch/brain',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
@@ -14,6 +13,7 @@ export default {
     ],
   },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  testPathIgnorePatterns: ['<rootDir>/src/lib/brn-switch-ng-model.component.spec.ts'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

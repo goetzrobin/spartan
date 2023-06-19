@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -12,12 +13,13 @@ import {
   Output,
   signal,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { rxHostPressedListener } from '@ng-spartan/ui/core/brain';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { NgStyle } from '@angular/common';
 
 export const BRN_SWITCH_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -25,17 +27,21 @@ export const BRN_SWITCH_VALUE_ACCESSOR = {
   multi: true,
 };
 
+const CONTAINER_POST_FIX = '-switch';
+
 @Component({
   selector: 'brn-switch',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgStyle],
   template: `
     <input
       #checkBox
       tabindex="-1"
       type="checkbox"
       role="switch"
-      [id]="childId"
+      [id]="forChild(id) ?? ''"
+      [name]="forChild(name) ?? ''"
+      [value]="_checked() ? 'on' : 'off'"
       [ngStyle]='{
     position: "absolute",
     width: "1px",
@@ -47,7 +53,7 @@ export const BRN_SWITCH_VALUE_ACCESSOR = {
     whiteSpace: "nowrap",
     borderWidth: "0",
     }'
-      [checked]="checked"
+      [checked]="_checked()"
       [attr.aria-label]="ariaLabel"
       [attr.aria-labelledby]="ariaLabelledby"
       [attr.aria-describedby]="ariaDescribedby"
@@ -57,40 +63,56 @@ export const BRN_SWITCH_VALUE_ACCESSOR = {
   `,
   host: {
     tabindex: '0',
-    '[attr.data-state]': 'checked ? "checked" : "unchecked"',
+    '[attr.data-state]': '_checked() ? "checked" : "unchecked"',
     '[attr.data-focus-visible]': 'focusVisible()',
     '[attr.data-focus]': 'focused()',
     '[attr.data-disabled]': 'disabled',
+    '[attr.aria-labelledby]': 'null',
+    '[attr.aria-label]': 'null',
+    '[attr.aria-describedby]': 'null',
   },
   providers: [BRN_SWITCH_VALUE_ACCESSOR],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
   private _elementRef = inject(ElementRef);
   private _focusMonitor = inject(FocusMonitor);
   private _cdr = inject(ChangeDetectorRef);
 
-  public _checked = signal(false);
-
   public focusVisible = signal(false);
   public focused = signal(false);
 
-  @HostBinding('id')
-  public ownId = '';
-  public childId = '';
-
-  @Input()
-  public set id(value: string) {
-    this.ownId = value + '-switch';
-    this.childId = value;
-  }
-
+  protected _checked = signal(false);
   @Input()
   set checked(value: BooleanInput) {
     this._checked.set(coerceBooleanProperty(value));
   }
 
-  get checked() {
-    return this._checked();
+  /** Used to set the id on the underlying input element. */
+  @HostBinding('attr.id')
+  private _id: string | null = null;
+  @Input()
+  get id(): string | null {
+    return this._id;
+  }
+
+  set id(value: string | null) {
+    if (!value) return;
+    this._id = value + CONTAINER_POST_FIX;
+  }
+
+  /** Used to set the name attribute on the underlying input element. */
+  @HostBinding('attr.name')
+  private _name: string | null = null;
+  @Input()
+  get name(): string | null {
+    return this._name;
+  }
+
+  set name(value: string | null) {
+    if (!value) return;
+    this._name = value + CONTAINER_POST_FIX;
   }
 
   /** Used to set the aria-label attribute on the underlying input element. */
@@ -102,6 +124,9 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
   ariaLabelledby: string | null = null;
 
   /** Used to set the aria-describedby attribute on the underlying input element. */
+  @HostBinding('attr.aria-describedby')
+  private _ariaDescribedby: string | null = null;
+
   @Input('aria-describedby')
   ariaDescribedby: string | null = null;
 
@@ -138,13 +163,12 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
     rxHostPressedListener().subscribe(() => this.handleChange());
   }
 
-  public handleChange() {
+  handleChange() {
+    const previousChecked = this._checked();
     if (!this.checkbox) return;
-    this.checkbox.nativeElement.value = this.checkbox?.nativeElement.value === 'on' ? 'off' : 'on';
-    this.checkbox.nativeElement.dispatchEvent(new Event('change'));
-    this._checked.set(this.checkbox.nativeElement.value === 'on');
-    this._onChange(this._checked());
-    this.changed.emit(this._checked());
+    this._checked.set(!previousChecked);
+    this._onChange(!previousChecked);
+    this.changed.emit(!previousChecked);
   }
 
   ngAfterContentInit() {
@@ -174,6 +198,14 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
     this.checkbox.nativeElement.dispatchEvent(new Event('change'));
   }
 
+  ngOnDestroy() {
+    this._focusMonitor.stopMonitoring(this._elementRef);
+  }
+
+  forChild(parentValue: string | null | undefined): string | null {
+    return parentValue ? parentValue.replace(CONTAINER_POST_FIX, '') : null;
+  }
+
   /** Implemented as part of ControlValueAccessor. */
   writeValue(value: any): void {
     this.checked = !!value;
@@ -193,9 +225,5 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     this._cdr.markForCheck();
-  }
-
-  ngOnDestroy() {
-    this._focusMonitor.stopMonitoring(this._elementRef);
   }
 }
