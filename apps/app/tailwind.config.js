@@ -6,7 +6,7 @@ module.exports = {
   darkMode: 'class',
   presets: [require('../../hlm-tailwind-preset.js')],
   content: [
-    './index.html',
+    join(__dirname, 'index.html'),
     join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}'),
     ...createGlobPatternsForDependencies(__dirname),
   ],
