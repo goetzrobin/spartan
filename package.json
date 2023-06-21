@@ -7,6 +7,7 @@
     "ng": "nx",
     "prepare": "git config core.hookspath .githooks",
     "start": "nx serve app",
+    "storybook": "nx storybook ui-storybook",
     "build": "nx run-many --target build --all --parallel=1",
     "e2e": "nx run-many --target e2e --all --parallel=1",
     "test": "nx run-many --target test --all",
