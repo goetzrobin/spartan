@@ -16,6 +16,7 @@ const config = {
     name: '@storybook/angular',
     options: {},
   },
+  staticDirs: ['../public'], //👈 Configures the static asset folder in Storybook
 };
 
 export default config;
