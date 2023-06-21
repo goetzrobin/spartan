@@ -8,9 +8,9 @@ const meta: Meta<AspectRatio> = {
   args: { ratio: '16/9' },
   argTypes: {
     ratio: {
-      options: ['16/9', '1/1', '5/4', '3/2', 1.234], // An array of serializable values
+      options: ['16/9', '1/1', '5/4', '3/2', 1.234],
       control: {
-        type: 'select', // Type 'select' is automatically inferred when 'options' is defined
+        type: 'select',
       },
     },
   },
