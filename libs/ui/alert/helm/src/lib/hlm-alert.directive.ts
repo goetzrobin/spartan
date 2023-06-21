@@ -34,6 +34,11 @@ export class HlmAlertDirective {
     return this._variant;
   }
 
+  set variant(variant: AlertVariants['variant']) {
+    this._variant = variant;
+    this._class = this.generateClasses();
+  }
+
   set size(value: AlertVariants['variant']) {
     this._variant = value;
     this._class = this.generateClasses();
