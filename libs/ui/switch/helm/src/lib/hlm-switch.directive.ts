@@ -6,7 +6,7 @@ import { hlm } from '@ng-spartan/ui/core/helm';
   selector: 'brn-switch[hlm],[hlmSwitch]',
   standalone: true,
 })
-export class UiSwitchHelmDirective {
+export class HlmSwitchDirective {
   @HostBinding('class')
   private _class = this.generateClass();
   private _inputs: ClassValue = '';

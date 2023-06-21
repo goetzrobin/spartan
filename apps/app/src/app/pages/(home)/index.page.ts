@@ -2,8 +2,6 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouteMeta } from '@analogjs/router';
-import { HlmSwitchThumbDirective, UiSwitchHelmDirective } from '@ng-spartan/ui/switch/helm';
-import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@ng-spartan/ui/switch/brain';
 import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
 import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
 import { RouterLink } from '@angular/router';
@@ -45,10 +43,6 @@ export const routeMeta: RouteMeta = {
     SignalInputDirective,
     SpartanInputErrorDirective,
 
-    BrnSwitchComponent,
-    UiSwitchHelmDirective,
-    BrnSwitchThumbComponent,
-    HlmSwitchThumbDirective,
     HlmButtonDirective,
     HlmLabelDirective,
     HlmInputDirective,
@@ -106,7 +100,7 @@ export const routeMeta: RouteMeta = {
           [deletionInProgress]="deleteIdInProgress() === note.id"
           (deleteClicked)="deleteNote(note.id)"
         />
-        <analog-trpc-notes-empty class="border-transparent shadow-none" *ngIf="noNotes()"> </analog-trpc-notes-empty>
+        <analog-trpc-notes-empty class="border-transparent shadow-none" *ngIf="noNotes()"></analog-trpc-notes-empty>
       </ng-container>
 
       <analog-trpc-note-skeleton *ngIf="initialLoad() || createLoad()" />

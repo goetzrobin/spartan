@@ -30,6 +30,7 @@
       "@ng-spartan/ui/label/helm": ["libs/ui/label/helm/src/index.ts"],
       "@ng-spartan/ui/skeleton/helm": ["libs/ui/skeleton/helm/src/index.ts"],
       "@ng-spartan/ui/spinner/helm": ["libs/ui/spinner/helm/src/index.ts"],
+      "@ng-spartan/ui/storybook": ["libs/ui/storybook/src/index.ts"],
       "@ng-spartan/ui/switch/brain": ["libs/ui/switch/brain/src/index.ts"],
       "@ng-spartan/ui/switch/helm": ["libs/ui/switch/helm/src/index.ts"],
       "@ng-spartan/ui/typography/helm": ["libs/ui/typography/helm/src/index.ts"],

@@ -3,7 +3,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@ng-spartan/ui/switch/brain';
 import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { HlmSwitchThumbDirective, UiSwitchHelmDirective } from '@ng-spartan/ui/switch/helm';
+import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@ng-spartan/ui/switch/helm';
 import { ThemeService } from '../theme.service';
 import { HeaderLinkDirective } from './header-link.directive';
 
@@ -17,7 +17,7 @@ import { HeaderLinkDirective } from './header-link.directive';
     BrnSwitchThumbComponent,
     HlmLabelDirective,
     HlmSwitchThumbDirective,
-    UiSwitchHelmDirective,
+    HlmSwitchDirective,
     HeaderLinkDirective,
     RouterLink,
   ],
