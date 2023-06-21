@@ -11,7 +11,7 @@ const cardHeaderVariants = cva('flex p-6', {
     },
   },
   defaultVariants: {
-    direction: 'row',
+    direction: 'column',
   },
 });
 export type CardHeaderVariants = VariantProps<typeof cardHeaderVariants>;
