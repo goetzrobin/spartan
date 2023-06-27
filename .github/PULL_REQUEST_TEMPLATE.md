@@ -63,6 +63,7 @@ What kind of change does this PR introduce?
 - [ ] toast
 - [ ] toggle
 - [ ] tooltip
+- [ ] typography
 
 ## What is the current behavior?
 

@@ -55,3 +55,4 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [ ] Toast
 - [x] Toggle
 - [ ] Tooltip - [RFC](https://github.com/goetzrobin/spartan/issues/5)
+- [x] Typography

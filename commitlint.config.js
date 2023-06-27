@@ -46,6 +46,7 @@ module.exports = {
         'toast',
         'toggle',
         'tooltip',
+        'typography',
       ],
     ],
   },

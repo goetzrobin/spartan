@@ -54,7 +54,7 @@ export const Default: Story = {
       The people of the kingdom, feeling uplifted by the laughter, started to tell jokes and puns again, and soon the
       entire kingdom was in on the joke.
     </p>
-=    <p class='${hlmP}'>
+     <p class='${hlmP}'>
       The king, seeing how much happier his subjects were, realized the error of his ways and repealed the joke tax.
       Jokester was declared a hero, and the kingdom lived happily ever after.
     </p>

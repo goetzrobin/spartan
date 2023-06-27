@@ -51,6 +51,7 @@ body:
         - toast
         - toggle
         - tooltip
+        - typography
         - Docs
         - Don't know / other
     validations:
