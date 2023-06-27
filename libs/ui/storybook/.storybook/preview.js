@@ -12,3 +12,15 @@ export const decorators = [
     attributeName: 'data-mode',
   }),
 ];
+
+const preview = {
+  parameters: {
+    options: {
+      storySort: {
+        method: 'alphabetical',
+      },
+    },
+  },
+};
+
+export default preview;
