@@ -9,7 +9,7 @@ to an existing HTML element or a combination of both if the UI component is more
 On top of these brain components we put our helmet. Our helmet adds SPARTAN-like swagger to our UI.
 Most of the time our helmets are added by applying the hlm + component name directive.
 An example:
-`<button hlmBtn >...</button>` this applies the SPARTAn styles to the button element.
+`<button hlmBtn >...</button>` this applies the SPARTAN styles to the button element.
 
 Appearance only UI components that do not provide any other functionality are also
 Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a skeleton UI.
@@ -18,7 +18,7 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 
 - [x] Accordion
 - [x] Alert
-- [ ] Alert Dialog - [RFC](https://github.com/goetzrobin/spartan/issues/4)
+- [ ] Alert Dialog
 - [x] Aspect Ratio
 - [x] Avatar
 - [x] Badge
@@ -26,7 +26,7 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [ ] Calendar
 - [x] Card
 - [ ] Checkbox
-- [ ] Collapsible
+- [x] Collapsible
 - [ ] Combobox
 - [ ] Command
 - [ ] Context Menu
@@ -54,5 +54,5 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [x] Textarea (covered by hlmInput directive)
 - [ ] Toast
 - [x] Toggle
-- [ ] Tooltip - [RFC](https://github.com/goetzrobin/spartan/issues/5)
+- [ ] Tooltip
 - [x] Typography
