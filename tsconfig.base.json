@@ -26,6 +26,7 @@
       "@ng-spartan/ui/card/helm": ["libs/ui/card/helm/src/index.ts"],
       "@ng-spartan/ui/core/brain": ["libs/ui/core/brain/src/index.ts"],
       "@ng-spartan/ui/core/helm": ["libs/ui/core/helm/src/index.ts"],
+      "@ng-spartan/ui/icon/helm": ["libs/ui/icon/helm/src/index.ts"],
       "@ng-spartan/ui/input/helm": ["libs/ui/input/helm/src/index.ts"],
       "@ng-spartan/ui/label/helm": ["libs/ui/label/helm/src/index.ts"],
       "@ng-spartan/ui/skeleton/helm": ["libs/ui/skeleton/helm/src/index.ts"],

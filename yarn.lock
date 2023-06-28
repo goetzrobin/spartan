@@ -3386,6 +3386,20 @@
   dependencies:
     is-promise "^4.0.0"
 
+"@ng-icons/core@^25.1.0":
+  version "25.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/core/-/core-25.1.0.tgz#71f02c042492b30d322a933f8514fea725128620"
+  integrity sha512-odZhHaIv/AtZBpkQI3RHgZwpPAfUD55bDche4fADfQmUbF8vWUCHJp81G4wk7pi57IajJTm095a1xjn4CFK6yw==
+  dependencies:
+    tslib "^2.2.0"
+
+"@ng-icons/radix-icons@^25.1.0":
+  version "25.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/radix-icons/-/radix-icons-25.1.0.tgz#bb83d40bfad091f5b7285f10ea57592ca670bdb0"
+  integrity sha512-J6FaTyuz5bvtghT6GhnGg+7VUrXuf6UK2vAKDKBs59BYgjM6FZnnlk0iknhfaMztgPj6BJFLitVOLeZCAuigCQ==
+  dependencies:
+    tslib "^2.2.0"
+
 "@ngtools/webpack@16.0.3":
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-16.0.3.tgz#e96b5626ae24ccfad8d20876d43ba9433508a599"
@@ -16075,6 +16089,11 @@ tslib@^2.0.1, tslib@^2.0.3, tslib@^2.3.1:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.3.tgz#24944ba2d990940e6e982c4bea147aba80209913"
   integrity sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==
+
+tslib@^2.2.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.0.tgz#b295854684dbda164e181d259a22cd779dcd7bc3"
+  integrity sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==
 
 tsutils@^3.21.0:
   version "3.21.0"
