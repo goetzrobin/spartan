@@ -19,12 +19,7 @@
             ]
           }
         ],
-        "@angular-eslint/no-host-metadata-property": [
-          2,
-          {
-            "allowStatic": true
-          }
-        ]
+        "@angular-eslint/no-host-metadata-property": 0
       }
     },
     {
