@@ -41,7 +41,7 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [ ] Menubar
 - [ ] Navigation Menu
 - [ ] Popover
-- [ ] Progress
+- [x] Progress
 - [ ] Radio Group
 - [ ] Scroll Area
 - [ ] Select
