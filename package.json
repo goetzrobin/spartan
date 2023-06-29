@@ -8,13 +8,15 @@
     "prepare": "git config core.hookspath .githooks",
     "start": "nx serve app",
     "storybook": "nx storybook ui-storybook",
+    "build-storybook": "nx build-storybook ui-storybook",
     "build": "nx run-many --target build --all --parallel=1",
     "e2e": "nx run-many --target e2e --all --parallel=1",
     "test": "nx run-many --target test --all",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "hook:commit-msg": "npx --no -- commitlint --edit $1",
     "hook:pre-commit": "lint-staged",
-    "prettify": "prettier --write ."
+    "prettify": "prettier --write .",
+    "chromatic": "chromatic --project-token=chpt_845c7a47afdb884"
   },
   "private": true,
   "dependencies": {
@@ -104,6 +106,7 @@
     "@vitest/ui": "0.31.4",
     "autoprefixer": "^10.4.0",
     "axe-core": "^4.7.2",
+    "chromatic": "^6.19.9",
     "conventional-changelog": "^3.1.25",
     "conventional-changelog-cli": "^2.2.2",
     "cypress": "^12.2.0",
@@ -135,5 +138,7 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-tsconfig-paths": "4.2.0",
     "vitest": "0.31.4"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "spartan@0.0.0"
 }
