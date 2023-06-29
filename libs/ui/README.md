@@ -36,6 +36,7 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [ ] Dropdown Menu
 - [ ] Hover Card
 - [x] Input
+- [x] Icon
 - [x] Label
 - [ ] Menubar
 - [ ] Navigation Menu
@@ -50,7 +51,7 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [ ] Slider
 - [x] Switch
 - [ ] Table
-- [ ] Tabs
+- [x] Tabs
 - [x] Textarea (covered by hlmInput directive)
 - [ ] Toast
 - [x] Toggle
