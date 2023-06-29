@@ -45,7 +45,7 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [ ] Radio Group
 - [ ] Scroll Area
 - [ ] Select
-- [ ] Separator
+- [x] Separator
 - [ ] Sheet
 - [x] Skeleton
 - [ ] Slider
