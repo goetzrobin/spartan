@@ -32,7 +32,7 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [ ] Context Menu
 - [ ] Data Table
 - [ ] Date Picker
-- [ ] Dialog
+- [x] Dialog
 - [ ] Dropdown Menu
 - [ ] Hover Card
 - [x] Input
