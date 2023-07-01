@@ -4,10 +4,10 @@ import { ClassValue } from 'clsx';
 import { EXPOSES_STATE_TOKEN } from '@ng-spartan/ui/core/brain';
 
 @Directive({
-  selector: '[hlmDialogContent],[brnDialogContent][hlm]',
+  selector: '[hlmAlertDialogContent],[brnAlertDialogContent][hlm]',
   standalone: true,
 })
-export class HlmDialogOverlayDirective {
+export class HlmAlertDialogContentDirective {
   private _inputs: ClassValue = '';
   private _statusProvider = inject(EXPOSES_STATE_TOKEN, { host: true });
   public state = this._statusProvider.state;
@@ -30,7 +30,7 @@ export class HlmDialogOverlayDirective {
 
   private generateClasses() {
     return hlm(
-      'border-border grid w-full max-w-lg relative gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[2%]  data-[state=open]:slide-in-from-top-[2%] sm:rounded-lg md:w-full',
+      'relative grid w-full max-w-lg gap-4 border-border border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[2%]  data-[state=open]:slide-in-from-top-[2%] sm:rounded-lg md:w-full',
       this._inputs
     );
   }

@@ -39,7 +39,7 @@ export class BrnDialogComponent {
   public readonly state = this._dialogService.state;
   public readonly dialogId = dialogSequence++;
 
-  private _options: BrnDialogOptions = {
+  protected _options: BrnDialogOptions = {
     role: 'dialog',
     id: 'brn-dialog-' + this.dialogId,
     attachPositions: [],

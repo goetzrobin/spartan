@@ -3,10 +3,10 @@ import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 @Directive({
-  selector: '[hlmDialogDescription],[brnDialogDescription][hlm]',
+  selector: '[hlmAlertDialogClose],[brnAlertDialogClose][hlm]',
   standalone: true,
 })
-export class HlmDialogDescriptionDirective {
+export class HlmAlertDialogCloseDirective {
   @HostBinding('class')
   _class = this.generateClasses();
   private _inputs: ClassValue = '';
@@ -18,6 +18,9 @@ export class HlmDialogDescriptionDirective {
   }
 
   private generateClasses() {
-    return hlm('text-sm text-muted-foreground', this._inputs);
+    return hlm(
+      'absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground',
+      this._inputs
+    );
   }
 }
