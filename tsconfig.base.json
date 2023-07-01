@@ -33,6 +33,8 @@
       "@ng-spartan/ui/icon/helm": ["libs/ui/icon/helm/src/index.ts"],
       "@ng-spartan/ui/input/helm": ["libs/ui/input/helm/src/index.ts"],
       "@ng-spartan/ui/label/helm": ["libs/ui/label/helm/src/index.ts"],
+      "@ng-spartan/ui/sheet/brain": ["libs/ui/sheet/brain/src/index.ts"],
+      "@ng-spartan/ui/sheet/helm": ["libs/ui/sheet/helm/src/index.ts"],
       "@ng-spartan/ui/skeleton/helm": ["libs/ui/skeleton/helm/src/index.ts"],
       "@ng-spartan/ui/spinner/helm": ["libs/ui/spinner/helm/src/index.ts"],
       "@ng-spartan/ui/storybook": ["libs/ui/storybook/src/index.ts"],
