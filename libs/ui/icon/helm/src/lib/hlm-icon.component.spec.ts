@@ -10,7 +10,7 @@ import { HlmIconComponent } from './hlm-icon.component';
   standalone: true,
   imports: [HlmIconComponent],
   providers: [provideIcons({ radixCheck })],
-  template: `<hlm-icon class="test" name="radixCheck" size="24px" color="red" strokeWidth="2" />`,
+  template: `<hlm-icon class="test" name="radixCheck" size="medium" color="red" strokeWidth="2" />`,
 })
 class HlmMockComponent {}
 
@@ -32,9 +32,17 @@ describe('HlmIconComponent', () => {
   it('should pass the size, color and strokeWidth props and the classes to the ng-icon component', () => {
     const debugEl = r.fixture.debugElement.query(By.directive(NgIconComponent));
     const component = debugEl.componentInstance as NgIconComponent;
-    expect(component.size).toBe('24px');
     expect(component.color).toBe('red');
     expect(component.strokeWidth).toBe('2');
-    expect(debugEl.classes['test']).toBe(true);
+  });
+
+  it('should add the appropriate size variant class', () => {
+    expect(r.container.querySelector('hlm-icon')?.classList).toContain('h-6');
+    expect(r.container.querySelector('hlm-icon')?.classList).toContain('w-6');
+  });
+
+  it('should compose the user classes', () => {
+    expect(r.container.querySelector('hlm-icon')?.classList).toContain('inline-flex');
+    expect(r.container.querySelector('hlm-icon')?.classList).toContain('test');
   });
 });

@@ -13,7 +13,7 @@
     "e2e": "nx run-many --target e2e --all --parallel=1",
     "test": "nx run-many --target test --all",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "hook:commit-msg": "npx --no -- commitlint --edit $1",
+    "hook:commit-msg": "npx --no -- commitlint -e",
     "hook:pre-commit": "lint-staged",
     "prettify": "prettier --write .",
     "chromatic": "chromatic --project-token=chpt_845c7a47afdb884"
