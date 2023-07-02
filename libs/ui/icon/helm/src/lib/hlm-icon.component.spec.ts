@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { radixCheck } from '@ng-icons/radix-icons';
@@ -10,9 +10,11 @@ import { HlmIconComponent } from './hlm-icon.component';
   standalone: true,
   imports: [HlmIconComponent],
   providers: [provideIcons({ radixCheck })],
-  template: `<hlm-icon class="test" name="radixCheck" size="medium" color="red" strokeWidth="2" />`,
+  template: `<hlm-icon class="test" ngIconClass="test2" name="radixCheck" [size]="size" color="red" strokeWidth="2" />`,
 })
-class HlmMockComponent {}
+class HlmMockComponent {
+  @Input() size = 'base';
+}
 
 describe('HlmIconComponent', () => {
   let r: RenderResult<HlmMockComponent>;
@@ -34,6 +36,8 @@ describe('HlmIconComponent', () => {
     const component = debugEl.componentInstance as NgIconComponent;
     expect(component.color).toBe('red');
     expect(component.strokeWidth).toBe('2');
+    expect(component.size).toBe('100%');
+    expect(debugEl.nativeElement.classList).toContain('test2');
   });
 
   it('should add the appropriate size variant class', () => {
@@ -44,5 +48,14 @@ describe('HlmIconComponent', () => {
   it('should compose the user classes', () => {
     expect(r.container.querySelector('hlm-icon')?.classList).toContain('inline-flex');
     expect(r.container.querySelector('hlm-icon')?.classList).toContain('test');
+  });
+
+  it('should forward the size property if the size is not a pre-defined size', async () => {
+    await r.rerender({ componentInputs: { size: '2rem' } });
+    r.fixture.detectChanges();
+    const debugEl = r.fixture.debugElement.query(By.directive(NgIconComponent));
+    expect(debugEl.componentInstance.size).toBe('2rem');
+    expect(r.container.querySelector('hlm-icon')?.classList).not.toContain('h-6');
+    expect(r.container.querySelector('hlm-icon')?.classList).not.toContain('w-6');
   });
 });

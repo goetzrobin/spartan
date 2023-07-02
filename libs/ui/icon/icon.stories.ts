@@ -5,7 +5,7 @@ import { HlmIconComponent } from './helm/src';
 
 type IconProps = {
   name: string;
-  size: 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
+  size: string;
   color: string;
   strokeWidth: number;
   className: string;
@@ -30,13 +30,13 @@ export const Default: Story = {
   }),
   args: {
     name: 'radixCheck',
-    size: 'medium',
+    size: 'sm',
     color: 'red',
     className: '',
     strokeWidth: 1,
   },
   argTypes: {
-    size: { control: 'select', options: ['xSmall', 'small', 'medium', 'large', 'xLarge'] },
+    size: { control: 'select', options: ['xs', 'sm', 'base', 'lg', 'xl', 'none', '2rem', '25px', '10'] },
     name: { control: 'select', options: Object.keys(radixIcons) },
     color: { control: 'color' },
   },
