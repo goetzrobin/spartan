@@ -1,6 +1,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { BrnProgressComponent, BrnProgressIndicatorComponent } from './brain/src';
 import { HlmProgressDirective, HlmProgressIndicatorDirective } from './helm/src';
+import { HlmLabelDirective } from '../label/helm/src';
 
 const meta: Meta<{ value: number }> = {
   title: 'Progress',
@@ -11,6 +12,7 @@ const meta: Meta<{ value: number }> = {
         BrnProgressIndicatorComponent,
         HlmProgressDirective,
         HlmProgressIndicatorDirective,
+        HlmLabelDirective,
       ],
     }),
   ],
@@ -26,25 +28,27 @@ export const Default: Story = {
   render: ({ value }) => ({
     props: { value },
     template: `
-    <h1 id='loading'>Loading (not started)</h1>
-    <brn-progress aria-labelledby='loading' hlm value="0">
+<div class='max-w-xl'>
+    <h2 hlmLabel id='loading'>Loading (not started)</h2>
+    <brn-progress class='mt-2 mb-8' aria-labelledby='loading' hlm value="0">
       <brn-progress-indicator hlm/>
     </brn-progress>
 
-    <h1 id='loading-started'>Loading (started)</h1>
-    <brn-progress aria-labelledby='loading-started' hlm [value]="value">
+    <h2 hlmLabel id='loading-started'>Loading (started)</h2>
+    <brn-progress class='mt-2 mb-8' aria-labelledby='loading-started' hlm [value]="value">
       <brn-progress-indicator hlm/>
     </brn-progress>
 
-    <h1 id='indeterminate'>Indeterminate</h1>
-    <brn-progress aria-labelledby='indeterminate' hlm [value]="null">
+    <h2 hlmLabel id='indeterminate'>Indeterminate</h2>
+    <brn-progress class='mt-2 mb-8' aria-labelledby='indeterminate' hlm [value]="null">
       <brn-progress-indicator hlm/>
     </brn-progress>
 
-    <h1 id='complete'>Complete</h1>
-    <brn-progress aria-labelledby='complete' hlm value="100">
+    <h2 hlmLabel id='complete'>Complete</h2>
+    <brn-progress class='mt-2 mb-8' aria-labelledby='complete' hlm value="100">
       <brn-progress-indicator hlm/>
     </brn-progress>
+    </div>
     `,
   }),
 };
