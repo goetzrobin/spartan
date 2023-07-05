@@ -12,6 +12,7 @@ import {
 import { BrnDialogOptions, BrnDialogService, provideBrnDialog } from './brn-dialog.service';
 import {
   ConnectedPosition,
+  FlexibleConnectedPositionStrategyOrigin,
   OverlayPositionBuilder,
   PositionStrategy,
   ScrollStrategy,
@@ -35,7 +36,7 @@ export class BrnDialogComponent {
   private readonly _vcr = inject(ViewContainerRef);
   private _contentTemplate: TemplateRef<any> | undefined;
   public readonly positionBuilder = inject(OverlayPositionBuilder);
-  public readonly sso = inject(ScrollStrategyOptions);
+  public readonly ssos = inject(ScrollStrategyOptions);
   public readonly state = this._dialogService.state;
   public readonly dialogId = dialogSequence++;
 
@@ -43,16 +44,16 @@ export class BrnDialogComponent {
     role: 'dialog',
     id: 'brn-dialog-' + this.dialogId,
     attachPositions: [],
-    attachToSelf: false,
+    attachTo: null,
     autoFocus: 'first-tabbable',
     backdropClass: '',
     closeDelay: 0,
     closeOnOutsidePointerEvents: true,
     hasBackdrop: true,
     panelClass: '',
-    positionStrategy: this.positionBuilder.global().centerHorizontally().centerVertically(),
+    positionStrategy: null,
     restoreFocus: true,
-    scrollStrategy: this.sso.block(),
+    scrollStrategy: null,
     disableClose: false,
     ariaDescribedBy: 'brn-dialog-description-' + this.dialogId,
     ariaLabelledBy: 'brn-dialog-title-' + this.dialogId,
@@ -88,8 +89,8 @@ export class BrnDialogComponent {
     this._options['closeOnOutsidePointerEvents'] = coerceBooleanProperty(closeOnOutsidePointerEvents);
   }
   @Input()
-  set attachToSelf(attachToSelf: BooleanInput) {
-    this._options['attachToSelf'] = coerceBooleanProperty(attachToSelf);
+  set attachTo(attachTo: FlexibleConnectedPositionStrategyOrigin | null | undefined) {
+    this._options['attachTo'] = attachTo;
   }
   @Input()
   set attachPositions(attachPositions: ConnectedPosition[]) {

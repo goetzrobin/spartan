@@ -15,7 +15,7 @@ let idSequence = 0;
   },
 })
 export class BrnDialogTriggerDirective {
-  private _brnDialog = inject(BrnDialogComponent);
+  protected _brnDialog = inject(BrnDialogComponent);
   protected _id = signal('brn-dialog-trigger-' + idSequence++);
   state = this._brnDialog.state;
   dialogId = 'brn-dialog-' + this._brnDialog.dialogId;

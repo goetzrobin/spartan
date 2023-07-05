@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  HostBinding,
-  Input,
-  ViewEncapsulation,
   computed,
   effect,
+  HostBinding,
+  Input,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
 import { IconName, NgIconComponent } from '@ng-icons/core';
 import { hlm } from '@ng-spartan/ui/core/helm';
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
 const DEFINED_SIZES = ['xs', 'sm', 'base', 'lg', 'xl', 'none'] as const;

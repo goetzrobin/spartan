@@ -13,6 +13,7 @@ import {
 import { AutoFocusTarget, Dialog, DIALOG_DATA, DIALOG_SCROLL_STRATEGY_PROVIDER, DialogRef } from '@angular/cdk/dialog';
 import {
   ConnectedPosition,
+  FlexibleConnectedPositionStrategyOrigin,
   OverlayPositionBuilder,
   PositionStrategy,
   ScrollStrategy,
@@ -29,12 +30,12 @@ export type BrnDialogOptions = {
   hasBackdrop: boolean;
   panelClass: string | string[];
   backdropClass: string | string[];
-  positionStrategy: PositionStrategy;
-  scrollStrategy: ScrollStrategy;
+  positionStrategy: PositionStrategy | null | undefined;
+  scrollStrategy: ScrollStrategy | null | undefined;
   restoreFocus: boolean | string | ElementRef;
   closeDelay: number;
   closeOnOutsidePointerEvents: boolean;
-  attachToSelf: boolean;
+  attachTo: FlexibleConnectedPositionStrategyOrigin | null | undefined;
   attachPositions: ConnectedPosition[];
   autoFocus: AutoFocusTarget | string;
   disableClose: boolean;
@@ -67,7 +68,6 @@ export class BrnDialogService implements OnDestroy {
 
   private _cdkDialog = inject(Dialog);
   private _renderer = inject(Renderer2);
-  private _elementRef = inject(ElementRef);
   private _positionBuilder = inject(OverlayPositionBuilder);
   private _sso = inject(ScrollStrategyOptions);
   private _dialogRef?: DialogRef;
@@ -99,8 +99,8 @@ export class BrnDialogService implements OnDestroy {
     }
     const positionStrategy =
       options?.positionStrategy ??
-      (options?.attachToSelf && options?.attachPositions
-        ? this._positionBuilder?.flexibleConnectedTo(this._elementRef).withPositions(options.attachPositions ?? [])
+      (options?.attachTo && options?.attachPositions && options?.attachPositions?.length > 0
+        ? this._positionBuilder?.flexibleConnectedTo(options.attachTo).withPositions(options.attachPositions ?? [])
         : this._positionBuilder.global().centerHorizontally().centerVertically());
     const contextOrData = { ...context, close: () => this.close(options?.closeDelay) };
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
