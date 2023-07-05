@@ -65,9 +65,9 @@ export const Ghost: Story = {
   render: () => ({
     template: `
     <div class='flex space-x-3'>
-        <button variant='link' hlmBtn>Click me</button>
-        <button variant='link' hlmBtn size='lg'>Large Click me</button>
-        <button variant='link' hlmBtn size='sm'>Small Click me</button>
+        <button variant='ghost' hlmBtn>Click me</button>
+        <button variant='ghost' hlmBtn size='lg'>Large Click me</button>
+        <button variant='ghost' hlmBtn size='sm'>Small Click me</button>
     </div>
     `,
   }),
@@ -77,9 +77,9 @@ export const Link: Story = {
   render: () => ({
     template: `
     <div class='flex space-x-3'>
-        <button hlmBtn>Click me</button>
-        <button hlmBtn size='lg'>Large Click me</button>
-        <button hlmBtn size='sm'>Small Click me</button>
+        <button variant='link' hlmBtn>Click me</button>
+        <button variant='link' hlmBtn size='lg'>Large Click me</button>
+        <button variant='link' hlmBtn size='sm'>Small Click me</button>
     </div>
     `,
   }),
