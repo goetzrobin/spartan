@@ -48,6 +48,7 @@
     "isomorphic-fetch": "^3.0.0",
     "marked": "^4.2.12",
     "ng-signal-forms": "^1.2.0",
+    "ngx-scrollbar": "^13.0.1",
     "ofetch": "^1.0.1",
     "ohash": "^1.0.0",
     "postgres": "^3.3.5",

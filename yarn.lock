@@ -12517,6 +12517,13 @@ ng-signal-forms@^1.2.0:
   dependencies:
     tslib "^2.3.0"
 
+ngx-scrollbar@^13.0.1:
+  version "13.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-scrollbar/-/ngx-scrollbar-13.0.1.tgz#3c31c4fb348ce428485d1346c3e6281cf5e3da8e"
+  integrity sha512-K7pvsYcuSnZ4YXnFYiDpNimmgwxc+bbWlqIjburXIUvJNbeig2xxaaOHSYF16YGanNdAYEQfXkJ3ulvTmAzI+A==
+  dependencies:
+    tslib "^2.3.1"
+
 nice-napi@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/nice-napi/-/nice-napi-1.0.2.tgz#dc0ab5a1eac20ce548802fc5686eaa6bc654927b"
