@@ -33,7 +33,7 @@ const iconVariants = cva('inline-flex', {
   },
 });
 
-type IconSize = Omit<DefinedSizes, string> | string;
+type IconSize = DefinedSizes | string;
 
 const generateClasses = (size: IconSize, userCls: ClassValue) => {
   const variant = isDefinedSize(size) ? size : 'none';
