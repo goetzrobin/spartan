@@ -94,7 +94,7 @@ export class BrnDialogService implements OnDestroy {
     context?: DialogContext,
     options?: Partial<BrnDialogOptions>
   ): void {
-    if (this._open()) {
+    if (this._open() || (options?.id && this._cdkDialog.getDialogById(options.id))) {
       return;
     }
     const positionStrategy =

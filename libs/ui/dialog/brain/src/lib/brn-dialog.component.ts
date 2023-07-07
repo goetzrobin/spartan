@@ -73,8 +73,14 @@ export class BrnDialogComponent {
     this._options['positionStrategy'] = positionStrategy;
   }
   @Input()
-  set scrollStrategy(scrollStrategy: ScrollStrategy) {
-    this._options['scrollStrategy'] = scrollStrategy;
+  set scrollStrategy(scrollStrategy: ScrollStrategy | 'close' | 'reposition') {
+    if (scrollStrategy === 'close') {
+      this._options['scrollStrategy'] = this.ssos.close();
+    } else if (scrollStrategy === 'reposition') {
+      this._options['scrollStrategy'] = this.ssos.reposition();
+    } else {
+      this._options['scrollStrategy'] = scrollStrategy;
+    }
   }
   @Input()
   set restoreFocus(restoreFocus: boolean | string | ElementRef) {
