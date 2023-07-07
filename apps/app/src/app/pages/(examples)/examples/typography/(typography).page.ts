@@ -12,11 +12,11 @@ export const routeMeta: RouteMeta = {
 };
 
 @Component({
-  selector: 'analog-trpc-typography',
+  selector: 'spartan-typography',
   standalone: true,
   imports: [HlmButtonDirective],
   host: {
-    class: 'block px-4 pt-12 pb-24',
+    class: 'block p-2 sm:p-4 pb-16',
   },
   template: `
     <h1 class="${hlmH1}">The Joke Tax Chronicles</h1>

@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @Component({
-  selector: 'analog-trpc-root',
+  selector: 'spartan-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   host: {
-    class: 'max-w-screen-lg mx-auto text-foreground block h-full',
+    class: 'text-foreground block h-full',
   },
   template: `
-    <analog-trpc-header />
-    <router-outlet></router-outlet>
+    <spartan-header />
+    <main class="h-full">
+      <div class="sm:p-0 max-w-screen-xl mx-auto">
+        <router-outlet />
+      </div>
+      <spartan-footer />
+    </main>
   `,
 })
 export class AppComponent {}

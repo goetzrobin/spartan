@@ -4,7 +4,7 @@ import { injectErrorField } from 'ng-signal-forms';
 import { HlmInputErrorDirective } from '@ng-spartan/ui/input/helm';
 
 @Component({
-  selector: 'analog-trpc-input-error',
+  selector: 'spartan-input-error',
   standalone: true,
   imports: [NgIf, NgFor, HlmInputErrorDirective],
   hostDirectives: [HlmInputErrorDirective],

@@ -8,34 +8,31 @@
     <link rel="icon" type="image/x-icon" href="/assets/spartan.svg" />
     <link rel="stylesheet" href="/src/styles.css" />
     <script>
-      if (
-        // check if user had saved dark as their
-        // theme when accessing page before
-        localStorage.theme === 'dark' ||
-        // or user's requesting dark color
-        // scheme through operating system
-        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        // then if we have access to the document and the element
-        // we add the dark class to the html element and
-        // store the dark value in the localStorage
+      if (localStorage.theme === 'dark') {
         if (document && document.documentElement) {
           document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
         }
-      } else {
-        // else if we have access to the document and the element
-        // we remove the dark class to the html element and
-        // store the value light in the localStorage
+      } else if (localStorage.theme === 'light') {
         if (document && document.documentElement) {
           document.documentElement.classList.remove('dark');
           localStorage.setItem('theme', 'light');
+        }
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        localStorage.setItem('theme', 'system');
+        localStorage.setItem('systemTheme', 'dark');
+        if (document && document.documentElement) {
+          document.documentElement.classList.add('dark');
+        }
+      } else {
+        localStorage.setItem('systemTheme', 'light');
+        if (document && document.documentElement) {
+          document.documentElement.classList.remove('dark');
         }
       }
     </script>
   </head>
   <body class="h-full bg-background text-foreground">
-    <analog-trpc-root></analog-trpc-root>
+    <spartan-root></spartan-root>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

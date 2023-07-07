@@ -3,25 +3,25 @@ import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[appHeaderLink]',
+  selector: '[spartanNavLink]',
   standalone: true,
   hostDirectives: [
     HlmButtonDirective,
     {
       directive: RouterLink,
-      inputs: ['routerLink: appHeaderLink'],
+      inputs: ['routerLink: spartanNavLink'],
     },
     RouterLinkActive,
   ],
 })
-export class HeaderLinkDirective {
+export class NavLinkDirective {
   private _hlmBtn = inject(HlmButtonDirective);
   private _rlActive = inject(RouterLinkActive);
 
   constructor() {
     this._hlmBtn.variant = 'link';
-    this._rlActive.routerLinkActiveOptions = { exact: true };
-    this._rlActive.routerLinkActive = '!text-[#DD0031]';
+    this._hlmBtn.size = 'sm';
+    this._hlmBtn.class = 'opacity-70 font-medium';
+    this._rlActive.routerLinkActive = '!opacity-100';
   }
 }

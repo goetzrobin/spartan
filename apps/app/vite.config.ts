@@ -18,7 +18,14 @@ export default defineConfig(({ mode }) => {
       include: ['@angular/common', '@angular/forms', 'isomorphic-fetch'],
     },
     ssr: {
-      noExternal: ['@analogjs/trpc/**', '@ng-spartan/**', '@angular/cdk/**', 'ng-signal-forms/**'],
+      noExternal: [
+        '@analogjs/trpc/**',
+        '@ng-spartan/**',
+        '@angular/cdk/**',
+        '@ng-icons/**',
+        'ngx-scrollbar/**',
+        'ng-signal-forms/**',
+      ],
     },
     build: {
       target: ['es2020'],

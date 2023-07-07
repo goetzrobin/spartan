@@ -14,22 +14,17 @@ import { injectTRPCClient } from '~/trpc-client';
 import { Note } from '~/db';
 import { SpartanInputErrorDirective } from '~/app/shared/input-error/input-error.directive';
 import { InputErrorComponent } from '~/app/shared/input-error/input-error.component';
+import { metaWith } from '~/app/shared/meta/meta.util';
 import { NoteComponent } from './components/note.component';
-import { FaqComponent } from './components/faq.component';
 import { NoteSkeletonComponent } from './components/note-skeleton.component';
 import { NotesEmptyComponent } from './components/notes-empty.component';
-import { UiLibAnnouncementAlertComponent } from './components/ui-lib-announcement-alert.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
-  meta: metaWith(
-    'Type-safe Angular full-stack development powered by Analog',
-    'SPARTAN is an experiment that aims to bring type-safe full-stack development to Angular.'
-  ),
+  meta: metaWith('Notes example - SPARTAN', 'A notes example displaying the SPARTAN stack and new UI primitives'),
 };
 
 @Component({
-  selector: 'analog-trpc-home',
+  selector: 'spartan-notes-example',
   standalone: true,
   imports: [
     AsyncPipe,
@@ -48,15 +43,13 @@ export const routeMeta: RouteMeta = {
     HlmInputDirective,
 
     NoteComponent,
-    FaqComponent,
     NoteSkeletonComponent,
     NotesEmptyComponent,
     HlmSpinnerComponent,
-    UiLibAnnouncementAlertComponent,
   ],
   providers: [withErrorComponent(InputErrorComponent)],
   host: {
-    class: 'block px-4 pt-4 pb-16',
+    class: 'block p-2 sm:p-4 pb-16',
   },
   template: `
     <form class="py-2 flex flex-col items-end">
@@ -105,13 +98,9 @@ export const routeMeta: RouteMeta = {
 
       <analog-trpc-note-skeleton *ngIf="initialLoad() || createLoad()" />
     </div>
-
-    <analog-trpc-faq />
-
-    <analog-trpc-ui-lib-announcement-alert class="mt-12" />
   `,
 })
-export default class HomeComponent {
+export default class NotesExamplePageComponent {
   private _trpc = injectTRPCClient();
   private _sfb = inject(SignalFormBuilder);
   private _refreshNotes$ = new Subject<void>();
