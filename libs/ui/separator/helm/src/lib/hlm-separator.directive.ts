@@ -32,7 +32,7 @@ export class HlmSeparatorDirective {
 
   private generateClasses() {
     return hlm(
-      'inline-flex shrink-0 bg-border',
+      'inline-flex shrink-0 border-0 bg-border',
       this._orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
       this._inputs
     );
