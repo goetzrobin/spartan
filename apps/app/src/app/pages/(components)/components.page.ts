@@ -3,7 +3,7 @@ import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ContainerDirective } from '~/app/shared/layout/container.directive';
-import { SidePanelComponent } from '~/app/shared/layout/side-panel/side-panel.component';
+import { SideNavComponent } from '~/app/shared/layout/side-nav/side-nav.component';
 import { RedirectDirective } from '~/app/shared/meta/redirect.directive';
 import { BreadcrumbsComponent } from '~/app/shared/breadcrumbs/breadcrumbs.component';
 import { TwoSectionPageDirective } from '~/app/shared/layout/two-section-page.directive';
@@ -19,11 +19,11 @@ export const routeMeta: RouteMeta = {
 @Component({
   selector: 'spartan-components',
   standalone: true,
-  imports: [RouterOutlet, SidePanelComponent, BreadcrumbsComponent, TwoSectionPageDirective, MainSectionDirective],
+  imports: [RouterOutlet, SideNavComponent, BreadcrumbsComponent, TwoSectionPageDirective, MainSectionDirective],
   hostDirectives: [ContainerDirective, RedirectDirective],
   template: `
-    <spartan-side-panel />
-    <section class="px-4 sm:px-0 py-6 lg:gap-10 lg:py-8">
+    <spartan-side-nav />
+    <section class="px-4 sm:px-0 py-6 lg:py-8">
       <spartan-breadcrumbs />
       <router-outlet />
     </section>

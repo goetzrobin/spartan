@@ -2,17 +2,17 @@ import { Directive, HostBinding, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Directive({
-  selector: '[spartanSidePanelLink]',
+  selector: '[spartanSideNavLink]',
   standalone: true,
   hostDirectives: [
     {
       directive: RouterLink,
-      inputs: ['routerLink: spartanSidePanelLink'],
+      inputs: ['routerLink: spartanSideNavLink'],
     },
     RouterLinkActive,
   ],
 })
-export class SidePanelLinkDirective {
+export class SideNavLinkDirective {
   private _rlActive = inject(RouterLinkActive);
   @HostBinding('class')
   public class =

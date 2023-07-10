@@ -11,11 +11,11 @@ import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
 import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1, radixViewVertical } from '@ng-icons/radix-icons';
-import { SidePanelNavComponent } from '~/app/shared/layout/side-panel/side-panel-nav.component';
+import { SideNavContentComponent } from '~/app/shared/layout/side-nav/side-nav-content.component';
 import { HlmScrollAreaComponent } from '@ng-spartan/ui/scroll-area/helm';
 import { RouterLink } from '@angular/router';
 import { NavLinkDirective } from '~/app/shared/spartan-nav-link.directive';
-import { SidePanelLinkDirective } from '~/app/shared/layout/side-panel/side-panel-link.directive';
+import { SideNavLinkDirective } from '~/app/shared/layout/side-nav/side-nav-link.directive';
 
 @Component({
   selector: 'spartan-mobile-nav',
@@ -33,11 +33,11 @@ import { SidePanelLinkDirective } from '~/app/shared/layout/side-panel/side-pane
 
     HlmButtonDirective,
     HlmIconComponent,
-    SidePanelNavComponent,
+    SideNavContentComponent,
     HlmScrollAreaComponent,
     RouterLink,
     NavLinkDirective,
-    SidePanelLinkDirective,
+    SideNavLinkDirective,
   ],
   providers: [provideIcons({ radixViewVertical, radixCross1 })],
   template: `

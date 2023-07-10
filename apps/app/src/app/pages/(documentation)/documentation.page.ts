@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ContainerDirective } from '~/app/shared/layout/container.directive';
-import { SidePanelComponent } from '~/app/shared/layout/side-panel/side-panel.component';
+import { SideNavComponent } from '~/app/shared/layout/side-nav/side-nav.component';
 import { RedirectDirective } from '~/app/shared/meta/redirect.directive';
 import { BreadcrumbsComponent } from '~/app/shared/breadcrumbs/breadcrumbs.component';
 import { RouteMeta } from '@analogjs/router';
@@ -16,14 +16,14 @@ export const routeMeta: RouteMeta = {
 @Component({
   selector: 'spartan-documentation',
   standalone: true,
-  imports: [RouterOutlet, SidePanelComponent, BreadcrumbsComponent, TwoSectionPageDirective, MainSectionDirective],
+  imports: [RouterOutlet, SideNavComponent, BreadcrumbsComponent, TwoSectionPageDirective, MainSectionDirective],
   hostDirectives: [ContainerDirective, RedirectDirective],
   host: {
     class: '',
   },
   template: `
-    <spartan-side-panel />
-    <section class="px-4 sm:px-0 py-6 lg:gap-10 lg:py-8">
+    <spartan-side-nav />
+    <section class="px-4 sm:px-0 py-6 lg:py-8">
       <spartan-breadcrumbs />
       <router-outlet />
     </section>

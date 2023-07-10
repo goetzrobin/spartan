@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'spartan-side-panel-links',
+  selector: 'spartan-side-nav-links',
   standalone: true,
   host: {
     tabindex: '-1',
@@ -9,4 +9,4 @@ import { Component } from '@angular/core';
   },
   template: '<ng-content/>',
 })
-export class SidePanelLinksComponent {}
+export class SideNavLinksComponent {}

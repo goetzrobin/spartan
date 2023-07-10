@@ -1,10 +1,10 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[spartanSidePanelHeading]',
+  selector: '[spartanSideNavHeading]',
   standalone: true,
 })
-export class SidePanelHeadingDirective {
+export class SideNavHeadingDirective {
   @HostBinding('class')
   public class = 'mb-1 rounded-md px-2 py-1 font-semibold';
 }

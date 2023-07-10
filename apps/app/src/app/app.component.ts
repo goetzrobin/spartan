@@ -8,7 +8,7 @@ import { FooterComponent } from './shared/footer/footer.component';
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
   host: {
-    class: 'text-foreground block h-full',
+    class: 'text-foreground block h-full antialiased',
   },
   template: `
     <spartan-header />

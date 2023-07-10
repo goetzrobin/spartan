@@ -32,7 +32,7 @@ export class HlmAccordionTriggerDirective {
 
   generateClass() {
     return hlm(
-      'w-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 flex flex-1 items-center justify-between py-4 px-0.5 font-medium underline-offset-4 hover:underline [&[data-state=open]>hlm-accordion-icon]:rotate-180',
+      'w-full focus-visible:outline-none text-sm focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 flex flex-1 items-center justify-between py-4 px-0.5 font-medium underline-offset-4 hover:underline [&[data-state=open]>hlm-accordion-icon]:rotate-180',
       this._inputs
     );
   }

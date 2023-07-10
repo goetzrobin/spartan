@@ -20,7 +20,8 @@ import { hlm } from '@ng-spartan/ui/core/helm';
     }"
   >
     <ng-content />
-  </ng-scrollbar>`,
+    <!--  </ng-scrollbar>-->
+  </ng-scrollbar> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
