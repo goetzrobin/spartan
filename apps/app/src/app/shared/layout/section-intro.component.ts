@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { hlmMuted } from '@ng-spartan/ui/typography/helm';
+import { hlmLead } from '@ng-spartan/ui/typography/helm';
 
 @Component({
   selector: 'spartan-section-intro',
@@ -9,7 +9,7 @@ import { hlmMuted } from '@ng-spartan/ui/typography/helm';
   },
   template: `
     <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">{{ name }}</h1>
-    <p class="${hlmMuted}">{{ lead }}</p>
+    <p class="${hlmLead}">{{ lead }}</p>
   `,
 })
 export class SectionIntroComponent {

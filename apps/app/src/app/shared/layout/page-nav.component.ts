@@ -6,12 +6,12 @@ import { HlmScrollAreaComponent } from '@ng-spartan/ui/scroll-area/helm';
   standalone: true,
   imports: [HlmScrollAreaComponent],
   host: {
-    class: 'hidden sm:block',
+    class: 'hidden sm:block text-sm',
   },
   template: `<hlm-scroll-area class="h-[calc(100vh-3.5rem)]">
     <div class="space-y-2">
       <h3 class="font-medium">On this page</h3>
-      <ul class="m-0 list-none">
+      <ul class="flex flex-col m-0 list-none">
         <ng-content />
       </ul>
     </div>

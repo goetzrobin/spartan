@@ -81,7 +81,7 @@ import { SideNavLinkDirective } from '~/app/shared/layout/side-nav/side-nav-link
               Examples
             </a>
           </div>
-          <spartan-side-panel-nav (linkClicked)="ctx.close()" />
+          <spartan-side-nav-content (linkClicked)="ctx.close()" />
         </hlm-scroll-area>
         <button brnSheetClose hlm>
           <span class="sr-only">Close</span>

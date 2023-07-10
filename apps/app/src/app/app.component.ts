@@ -13,7 +13,7 @@ import { FooterComponent } from './shared/footer/footer.component';
   template: `
     <spartan-header />
     <main class="h-full">
-      <div class="sm:p-0 max-w-screen-xl mx-auto">
+      <div class="md:px-6 max-w-screen-xl mx-auto">
         <router-outlet />
       </div>
       <spartan-footer />
