@@ -42,16 +42,14 @@ export default defineConfig(({ mode }) => {
         __LASTMOD__: new Date().toISOString(),
       }),
       analog({
-        vite: {
-          tsconfig: mode === 'test' ? 'apps/app/tsconfig.spec.json' : 'apps/app/tsconfig.app.json',
+        prerender: {
+          sitemap: {
+            host: 'https://spartan-goetzrobin.vercel.app',
+          },
+          routes: ['/', '/documentation/introduction', '/examples/notes', '/examples/typography'],
         },
         nitro: {
           preset: 'vercel',
-          prerender: { routes: ['/', '/typography'] },
-          output: {
-            dir: '../../../../.vercel/output',
-            publicDir: '../../../../.vercel/output/static',
-          },
         },
       }),
       tsConfigPaths({
