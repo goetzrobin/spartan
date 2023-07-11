@@ -38,14 +38,11 @@ export default defineConfig(({ mode }) => {
     plugins: [
       replace({
         preventAssignment: true,
-        'http://127.0.0.1:4200': 'https://spartan-goetzrobin.vercel.app',
+        'http://127.0.0.1:4200': 'https://www.spartan.ng',
         __LASTMOD__: new Date().toISOString(),
       }),
       analog({
         prerender: {
-          sitemap: {
-            host: 'https://spartan-goetzrobin.vercel.app',
-          },
           routes: [
             '/',
             '/documentation/introduction',
@@ -55,12 +52,12 @@ export default defineConfig(({ mode }) => {
             '/examples/notes',
             '/examples/typography',
           ],
+          sitemap: {
+            host: 'https://www.spartan.ng',
+          },
         },
         nitro: {
           preset: 'vercel',
-          routeRules: {
-            '/**': { cors: true },
-          },
         },
       }),
       tsConfigPaths({
