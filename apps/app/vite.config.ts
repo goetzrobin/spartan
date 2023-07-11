@@ -46,10 +46,21 @@ export default defineConfig(({ mode }) => {
           sitemap: {
             host: 'https://spartan-goetzrobin.vercel.app',
           },
-          routes: ['/', '/documentation/introduction', '/examples/notes', '/examples/typography'],
+          routes: [
+            '/',
+            '/documentation/introduction',
+
+            '/components/accordion',
+
+            '/examples/notes',
+            '/examples/typography',
+          ],
         },
         nitro: {
           preset: 'vercel',
+          routeRules: {
+            '/**': { cors: true },
+          },
         },
       }),
       tsConfigPaths({
