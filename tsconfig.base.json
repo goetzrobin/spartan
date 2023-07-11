@@ -46,6 +46,8 @@
       "@ng-spartan/ui/storybook": ["libs/ui/storybook/src/index.ts"],
       "@ng-spartan/ui/switch/brain": ["libs/ui/switch/brain/src/index.ts"],
       "@ng-spartan/ui/switch/helm": ["libs/ui/switch/helm/src/index.ts"],
+      "@ng-spartan/ui/tabs/brain": ["libs/ui/tabs/brain/src/index.ts"],
+      "@ng-spartan/ui/tabs/helm": ["libs/ui/tabs/helm/src/index.ts"],
       "@ng-spartan/ui/typography/helm": ["libs/ui/typography/helm/src/index.ts"],
       "~/*": ["apps/app/src/*"]
     }

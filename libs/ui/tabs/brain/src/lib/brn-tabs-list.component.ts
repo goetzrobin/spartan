@@ -3,7 +3,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
+  HostBinding,
   inject,
+  Input,
   QueryList,
   ViewEncapsulation,
 } from '@angular/core';
@@ -16,7 +18,7 @@ import { rxHostListener } from '@ng-spartan/ui/core/brain';
 @Component({
   selector: 'brn-tabs-list',
   standalone: true,
-  template: `<ng-content />`,
+  template: ` <ng-content />`,
   host: {
     role: 'tablist',
     '[attr.aria-orientation]': '_orientation()',
@@ -35,6 +37,10 @@ export class BrnTabsListComponent implements AfterContentInit {
   private readonly _keyDownListener = rxHostListener('keydown');
 
   private _keyManager?: FocusKeyManager<BrnTabsTriggerDirective>;
+
+  @HostBinding('attr.aria-label')
+  @Input('aria-label')
+  ariaLabel: string | undefined;
 
   @ContentChildren(BrnTabsTriggerDirective, { descendants: true })
   public triggers?: QueryList<BrnTabsTriggerDirective>;

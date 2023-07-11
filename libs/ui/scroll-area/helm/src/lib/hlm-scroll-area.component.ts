@@ -7,21 +7,22 @@ import { hlm } from '@ng-spartan/ui/core/helm';
   selector: 'hlm-scroll-area',
   standalone: true,
   imports: [NgScrollbarModule],
-  template: `<ng-scrollbar
-    [autoHeightDisabled]="autoHeightDisabled"
-    [autoWidthDisabled]="autoWidthDisabled"
-    [track]="track"
-    [style]="{
-  '--scrollbar-border-radius': '100px',
-  '--scrollbar-padding': '1px',
-  '--scrollbar-thumb-color': 'hsl(var(--border)',
-  '--scrollbar-thumb-hover-color': 'hsl(var(--border)',
-  '--scrollbar-size': '7px',
-    }"
-  >
-    <ng-content />
-    <!--  </ng-scrollbar>-->
-  </ng-scrollbar> `,
+  template: `
+    <ng-scrollbar
+      [autoHeightDisabled]="autoHeightDisabled"
+      [autoWidthDisabled]="autoWidthDisabled"
+      [track]="track"
+      [style]="{
+          '--scrollbar-border-radius': '100px',
+          '--scrollbar-padding': '1px',
+          '--scrollbar-thumb-color': 'hsl(var(--border)',
+          '--scrollbar-thumb-hover-color': 'hsl(var(--border)',
+          '--scrollbar-size': '7px',
+            }"
+    >
+      <ng-content />
+    </ng-scrollbar>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })

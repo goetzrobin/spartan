@@ -41,7 +41,6 @@ export const Default: Story = {
   render: () => ({
     template: `
       <brn-accordion hlm>
-
       <brn-accordion-item hlm>
         <brn-accordion-trigger hlm>
           <span>What is SPARTAN</span>

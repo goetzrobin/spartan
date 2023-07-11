@@ -23,7 +23,7 @@ export const routeMeta: RouteMeta = {
   hostDirectives: [ContainerDirective, RedirectDirective],
   template: `
     <spartan-side-nav />
-    <section class="px-4 sm:px-0 py-6 lg:py-8">
+    <section class="flex flex-col lg:py-8 overflow-x-hidden px-4 py-6 sm:px-0">
       <spartan-breadcrumbs />
       <router-outlet />
     </section>
