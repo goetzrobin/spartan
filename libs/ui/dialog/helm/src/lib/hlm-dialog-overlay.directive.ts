@@ -7,7 +7,7 @@ import { SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@ng-spartan/ui/core/brain';
   selector: '[hlmDialogOverlay],brn-dialog-overlay[hlm]',
   standalone: true,
 })
-export class HlmDialogContentDirective {
+export class HlmDialogOverlayDirective {
   private _host = inject(SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN, { optional: true, host: true });
   _class = this.generateClasses();
   private _inputs: ClassValue = '';

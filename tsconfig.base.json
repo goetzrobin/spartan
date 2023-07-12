@@ -26,6 +26,8 @@
       "@ng-spartan/ui/badge/helm": ["libs/ui/badge/helm/src/index.ts"],
       "@ng-spartan/ui/button/helm": ["libs/ui/button/helm/src/index.ts"],
       "@ng-spartan/ui/card/helm": ["libs/ui/card/helm/src/index.ts"],
+      "@ng-spartan/ui/command/brain": ["libs/ui/command/brain/src/index.ts"],
+      "@ng-spartan/ui/command/helm": ["libs/ui/command/helm/src/index.ts"],
       "@ng-spartan/ui/core/brain": ["libs/ui/core/brain/src/index.ts"],
       "@ng-spartan/ui/core/helm": ["libs/ui/core/helm/src/index.ts"],
       "@ng-spartan/ui/dialog/brain": ["libs/ui/dialog/brain/src/index.ts"],

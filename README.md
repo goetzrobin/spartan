@@ -21,9 +21,9 @@ A storybook project is set up. You can run it with:
 yarn storybook
 ```
 
-#### Progress (27/40)
+#### Progress (28/40)
 
-We finished porting over 27/40 UI primitives. See a more detailed breakdown [here!](./libs/ui/README.md)
+We finished porting over 28/40 UI primitives. See a more detailed breakdown [here!](./libs/ui/README.md)
 
 ### e2e testing
 
