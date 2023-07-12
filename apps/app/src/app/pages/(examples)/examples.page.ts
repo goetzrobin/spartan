@@ -1,11 +1,10 @@
 import { RouteMeta } from '@analogjs/router';
 import { metaWith } from '~/app/shared/meta/meta.util';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { hlmH1, hlmLead } from '@ng-spartan/ui/typography/helm';
 import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
 import { NavLinkDirective } from '~/app/shared/spartan-nav-link.directive';
-import { RedirectDirective } from '~/app/shared/meta/redirect.directive';
 
 export const routeMeta: RouteMeta = {
   meta: metaWith('Examples - SPARTAN', 'Examples built with the SPARTAN stack and its UI primitives'),
@@ -15,7 +14,6 @@ export const routeMeta: RouteMeta = {
   selector: 'spartan-examples',
   standalone: true,
   imports: [RouterOutlet, HlmButtonDirective, RouterLink, NavLinkDirective],
-  hostDirectives: [RedirectDirective],
   host: {
     class: 'block p-4 pt-6 sm:pb-16 sm:pt-12',
   },
@@ -40,10 +38,4 @@ export const routeMeta: RouteMeta = {
     </div>
   `,
 })
-export default class ExamplesPageComponent {
-  private _redirect = inject(RedirectDirective, { host: true });
-  constructor() {
-    this._redirect.endsWith = 'examples';
-    this._redirect.commands = ['notes'];
-  }
-}
+export default class ExamplesPageComponent {}

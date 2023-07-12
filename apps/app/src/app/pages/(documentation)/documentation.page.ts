@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ContainerDirective } from '~/app/shared/layout/container.directive';
 import { SideNavComponent } from '~/app/shared/layout/side-nav/side-nav.component';
-import { RedirectDirective } from '~/app/shared/meta/redirect.directive';
 import { BreadcrumbsComponent } from '~/app/shared/breadcrumbs/breadcrumbs.component';
 import { RouteMeta } from '@analogjs/router';
 import { TwoSectionPageDirective } from '~/app/shared/layout/two-section-page.directive';
@@ -17,7 +16,7 @@ export const routeMeta: RouteMeta = {
   selector: 'spartan-documentation',
   standalone: true,
   imports: [RouterOutlet, SideNavComponent, BreadcrumbsComponent, TwoSectionPageDirective, MainSectionDirective],
-  hostDirectives: [ContainerDirective, RedirectDirective],
+  hostDirectives: [ContainerDirective],
   host: {
     class: '',
   },
@@ -29,10 +28,4 @@ export const routeMeta: RouteMeta = {
     </section>
   `,
 })
-export default class ExamplesPageComponent {
-  private _redirect = inject(RedirectDirective, { host: true });
-  constructor() {
-    this._redirect.endsWith = 'documentation';
-    this._redirect.commands = ['introduction'];
-  }
-}
+export default class ExamplesPageComponent {}

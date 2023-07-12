@@ -1,10 +1,9 @@
 import { RouteMeta } from '@analogjs/router';
 import { metaWith } from '~/app/shared/meta/meta.util';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ContainerDirective } from '~/app/shared/layout/container.directive';
 import { SideNavComponent } from '~/app/shared/layout/side-nav/side-nav.component';
-import { RedirectDirective } from '~/app/shared/meta/redirect.directive';
 import { BreadcrumbsComponent } from '~/app/shared/breadcrumbs/breadcrumbs.component';
 import { TwoSectionPageDirective } from '~/app/shared/layout/two-section-page.directive';
 import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
@@ -20,7 +19,7 @@ export const routeMeta: RouteMeta = {
   selector: 'spartan-components',
   standalone: true,
   imports: [RouterOutlet, SideNavComponent, BreadcrumbsComponent, TwoSectionPageDirective, MainSectionDirective],
-  hostDirectives: [ContainerDirective, RedirectDirective],
+  hostDirectives: [ContainerDirective],
   template: `
     <spartan-side-nav />
     <section class="flex flex-col lg:py-8 overflow-x-hidden px-4 py-6 sm:px-0">
@@ -29,10 +28,4 @@ export const routeMeta: RouteMeta = {
     </section>
   `,
 })
-export default class ComponentsPageComponent {
-  private _redirect = inject(RedirectDirective, { host: true });
-  constructor() {
-    this._redirect.endsWith = 'components';
-    this._redirect.commands = ['accordion'];
-  }
-}
+export default class ComponentsPageComponent {}
