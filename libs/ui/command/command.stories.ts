@@ -156,7 +156,6 @@ class CommandDialogComponent {
   public state = signal<'closed' | 'open'>('closed');
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
-    console.log(event);
     if ((event.metaKey || event.ctrlKey) && (event.key === 'k' || event.key === 'K')) {
       this.state.set('open');
     }
