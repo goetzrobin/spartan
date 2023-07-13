@@ -20,7 +20,8 @@ import { NoteSkeletonComponent } from './components/note-skeleton.component';
 import { NotesEmptyComponent } from './components/notes-empty.component';
 
 export const routeMeta: RouteMeta = {
-  meta: metaWith('Notes example - SPARTAN', 'A notes example displaying the SPARTAN stack and new UI primitives'),
+  meta: metaWith('spartan/examples - Notes', 'A notes example displaying the SPARTAN stack and new UI primitives'),
+  title: 'spartan/examples - Notes',
 };
 
 @Component({

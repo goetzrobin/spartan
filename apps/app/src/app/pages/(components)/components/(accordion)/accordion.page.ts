@@ -18,9 +18,10 @@ import { AccordionPreviewComponent, codeImports, codeSkeleton, codeString } from
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Accordion' },
   meta: metaWith(
-    'Accordion - SPARTAN',
+    'spartan/ui - Accordion',
     'A vertically stacked set of interactive headings that each reveal a section of content.'
   ),
+  title: 'spartan/ui - Accordion',
 };
 
 @Component({
@@ -49,7 +50,9 @@ export const routeMeta: RouteMeta = {
       />
 
       <spartan-tabs firstTab="Preview" secondTab="Code">
-        <div spartanCodePreview firstTab><spartan-accordion-preview /></div>
+        <div spartanCodePreview firstTab>
+          <spartan-accordion-preview />
+        </div>
         <spartan-code secondTab [code]="code" />
       </spartan-tabs>
 

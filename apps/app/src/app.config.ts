@@ -7,7 +7,7 @@ import { PreloadAllModules, withInMemoryScrolling, withNavigationErrorHandler, w
 export const appConfig: ApplicationConfig = {
   providers: [
     provideFileRouter(
-      withInMemoryScrolling({ anchorScrolling: 'enabled' }),
+      withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
       withNavigationErrorHandler(console.log),
       withPreloading(PreloadAllModules)
     ),

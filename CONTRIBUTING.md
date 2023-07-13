@@ -1,6 +1,6 @@
 # Contributing
 
-SPARTAN UI is an MIT-licensed open source project with its ongoing development made by contributors.
+spartan is an MIT-licensed open source project with its ongoing development made by contributors.
 
 ## Contributing to the UI library
 
@@ -11,7 +11,7 @@ locate the relevant code in one of the `libs/ui` sub-folder.
 
 ### Setup
 
-SPARTAN uses [Yarn Classic](https://classic.yarnpkg.com/) to manage its dependencies.
+spartan uses [Yarn Classic](https://classic.yarnpkg.com/) to manage its dependencies.
 
 Before opening a pull request, run the following command from the root
 folder to make sure your development dependencies are up-to-date:
@@ -30,7 +30,7 @@ yarn dev
 
 ### Build
 
-SPARTAN uses [Nx](https://nx.dev) for builds. To build all projects locally, run the following command from the root
+spartan uses [Nx](https://nx.dev) for builds. To build all projects locally, run the following command from the root
 folder:
 
 ```shell
@@ -39,14 +39,14 @@ yarn build
 
 ### Testing
 
-SPARTAN uses [Jest](https://jestjs.io) for tests. To test all projects locally, run the following command from the root
+spartan uses [Jest](https://jestjs.io) for tests. To test all projects locally, run the following command from the root
 folder:
 
 ```shell
 yarn test
 ```
 
-## Contributing to the docs and SPARTAN website
+## Contributing to the docs and spartan website
 
 Coming soon...
 

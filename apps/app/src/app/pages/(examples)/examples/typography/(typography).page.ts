@@ -6,9 +6,10 @@ import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
 
 export const routeMeta: RouteMeta = {
   meta: metaWith(
-    'Typography for SPARTAN',
+    'spartan/examples - Typography',
     "SPARTAN comes with helpful directives that enforce consistent styling across your application's typography."
   ),
+  title: 'spartan/examples - Typography',
 };
 
 @Component({

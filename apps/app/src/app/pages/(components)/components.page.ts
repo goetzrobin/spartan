@@ -9,10 +9,14 @@ import { TwoSectionPageDirective } from '~/app/shared/layout/two-section-page.di
 import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
 
 export const routeMeta: RouteMeta = {
-  meta: metaWith('Components - SPARTAN', 'SPARTAN UI stack'),
+  meta: metaWith(
+    'spartan/ui - Components',
+    'spartan/ui provides unstyled components that are accessible by default. It also gives you beautiful shadcn like styling options.'
+  ),
   data: {
     breadcrumb: 'Components',
   },
+  title: 'spartan/ui - Components',
 };
 
 @Component({

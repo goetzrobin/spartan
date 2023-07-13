@@ -7,7 +7,8 @@ import { MainSectionDirective } from '~/app/shared/layout/main-section.directive
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Not Found' },
-  meta: metaWith('Page not found - SPARTAN', 'Seems like you got lost browsing SPARTAN.'),
+  meta: metaWith('spartan/stack - Page not found', 'Seems like you got lost browsing the spartan/stack.'),
+  title: 'spartan/stack - Page not found',
 };
 
 @Component({

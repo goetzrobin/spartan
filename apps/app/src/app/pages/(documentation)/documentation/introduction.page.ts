@@ -24,14 +24,16 @@ import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav-
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav-link.component';
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
-import { hlmCode } from '@ng-spartan/ui/typography/helm';
+import { hlmCode, hlmP } from '@ng-spartan/ui/typography/helm';
+import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Introduction' },
   meta: metaWith(
-    'Introduction - SPARTAN',
-    'SPARTAN is a collection of tools to superpower your Angular full-stack development.'
+    'spartan - Introduction',
+    'spartan is a collection of tools to superpower your Angular full-stack development.'
   ),
+  title: 'spartan - Introduction',
 };
 
 @Component({
@@ -57,6 +59,7 @@ export const routeMeta: RouteMeta = {
     PageBottomNavLinkComponent,
     PageBottomNavComponent,
     PageBottomNavPlaceholderComponent,
+    HlmButtonDirective,
   ],
   hostDirectives: [TwoSectionPageDirective],
   template: `
@@ -69,11 +72,11 @@ export const routeMeta: RouteMeta = {
         It provides you with an opinionated stack set up with a single command and a set of accessible UI primitives.
       </p>
       <spartan-section-sub-heading id="spartan-stack">spartan/stack</spartan-section-sub-heading>
-      <p class="mb-6">
+      <p class="${hlmP}">
         The <code class="${hlmCode}">spartan/stack</code> is a collection of technologies that provide you with a
         typesafe developer experience from the template all the way to the database.
       </p>
-      <p class="mb-12">
+      <p class="${hlmP}">
         While we keep updating the stack to provide the best available technologies,
         <code class="${hlmCode}">spartan/stack</code> is currently made up of the following:
         <code class="${hlmCode}">Supabase</code>, <code class="${hlmCode}">Angular</code>,
@@ -81,16 +84,22 @@ export const routeMeta: RouteMeta = {
         <code class="${hlmCode}">AnalogJs</code>, <code class="${hlmCode}">Nx</code>, and
         <code class="${hlmCode}">Drizzle</code>
       </p>
+      <div class="flex items-center justify-end mb-12">
+        <a routerLink="/stack" variant="outline" size="sm" hlmBtn outline="">Check out spartan/stack</a>
+      </div>
       <spartan-section-sub-heading id="spartan-ui">spartan/ui</spartan-section-sub-heading>
-      <p class="mb-6">
+      <p class="${hlmP}">
         <code class="${hlmCode}">spartan/ui</code> is built on the
         <code class="${hlmCode}">spartan/ui/brain</code> library that provides accessible, but unstyled primitives that
         build the foundation of an inclusive user interface.
       </p>
-      <p class="mb-6">
+      <p class="${hlmP}">
         On top we put <code class="${hlmCode}">spartan/ui/helm</code> library that gives our primitives a beautifully
         designed <span class="font-medium">shadcn</span> look.
       </p>
+      <div class="flex items-center justify-end mb-12">
+        <a routerLink="/components" variant="outline" size="sm" hlmBtn outline="">Check out spartan/ui</a>
+      </div>
       <spartan-section-sub-heading id="faq">FAQ</spartan-section-sub-heading>
       <brn-accordion hlm>
         <brn-accordion-item hlm>

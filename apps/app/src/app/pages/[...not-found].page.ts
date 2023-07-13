@@ -7,7 +7,9 @@ import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
 import { RouterLink } from '@angular/router';
 
 export const routeMeta: RouteMeta = {
-  meta: metaWith('Page not found - SPARTAN', 'Seems like you got lost browsing SPARTAN.'),
+  data: { breadcrumb: 'Not Found' },
+  meta: metaWith('spartan - Page not found', 'Seems like you got lost browsing spartan.'),
+  title: 'spartan - Page not found',
 };
 
 @Component({

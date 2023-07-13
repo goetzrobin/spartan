@@ -9,10 +9,11 @@ import { TwoSectionPageDirective } from '~/app/shared/layout/two-section-page.di
 import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
 
 export const routeMeta: RouteMeta = {
-  meta: metaWith('spartan/stack', 'SPARTAN full-stack'),
+  meta: metaWith('spartan/stack - The stack', "spartan's opinionated full-stack..."),
   data: {
     breadcrumb: 'Stack',
   },
+  title: 'spartan/stack - The stack',
 };
 
 @Component({
