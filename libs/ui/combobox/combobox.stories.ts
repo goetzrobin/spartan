@@ -1,0 +1,130 @@
+import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
+import { Component, signal } from '@angular/core';
+import { provideIcons } from '@ng-icons/core';
+import * as radixIcons from '@ng-icons/radix-icons';
+import { HlmIconComponent } from '../icon/helm/src';
+import { HlmButtonDirective } from '../button/helm/src';
+import { HlmCommandPrimitives } from '../command/helm/src';
+import { BrnCommandComponents } from '../command/brain/src';
+import { BrnPopoverComponent, BrnPopoverContentDirective, BrnPopoverTriggerDirective } from '../popover/brain/src';
+import { HlmPopoverContentDirective } from '../popover/helm/src';
+import { NgForOf } from '@angular/common';
+
+const meta: Meta<{}> = {
+  title: 'Combobox',
+  decorators: [
+    moduleMetadata({
+      providers: [provideIcons(radixIcons)],
+      imports: [BrnCommandComponents, HlmCommandPrimitives, HlmIconComponent, HlmButtonDirective],
+    }),
+  ],
+};
+
+export default meta;
+type Story = StoryObj<{}>;
+type Framework = { label: string; value: string };
+
+@Component({
+  selector: 'combobox-component',
+  standalone: true,
+  imports: [
+    BrnCommandComponents,
+    HlmCommandPrimitives,
+    HlmIconComponent,
+    HlmButtonDirective,
+    BrnPopoverComponent,
+    BrnPopoverTriggerDirective,
+    HlmPopoverContentDirective,
+    BrnPopoverContentDirective,
+    NgForOf,
+  ],
+  template: `
+    <brn-popover [state]="state()" (stateChanged)="stateChanged($event)" sideOffset="5" closeDelay="100">
+      <button class="w-[200px] justify-between" id="edit-profile" variant="outline" brnPopoverTrigger hlmBtn>
+        {{ currentFramework() ? currentFramework().label : 'Select framework...' }}
+        <hlm-icon size="sm" name="radixCaretSort" />
+      </button>
+      <brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="p-0 w-[200px]">
+        <hlm-cmd-input-wrapper>
+          <hlm-icon name="radixMagnifyingGlass" />
+          <input placeholder="Search framework..." brnCmdInput hlm />
+        </hlm-cmd-input-wrapper>
+        <div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
+        <brn-cmd-list hlm>
+          <brn-cmd-group hlm>
+            <button
+              *ngFor="let framework of frameworks"
+              brnCmdItem
+              [value]="framework.value"
+              (selected)="commandSelected(framework)"
+              hlm
+            >
+              <hlm-icon
+                [class.opacity-0]="currentFramework()?.value !== framework.value"
+                name="radixCheck"
+                hlmCmdIcon
+              />
+              {{ framework.label }}
+            </button>
+          </brn-cmd-group>
+        </brn-cmd-list>
+      </brn-cmd>
+    </brn-popover>
+  `,
+})
+class ComboboxComponent {
+  public frameworks = [
+    {
+      label: 'AnalogJs',
+      value: 'analogjs',
+    },
+    {
+      label: 'Angular',
+      value: 'angular',
+    },
+    {
+      label: 'Vue',
+      value: 'vue',
+    },
+    {
+      label: 'Nuxt',
+      value: 'nuxt',
+    },
+    {
+      label: 'React',
+      value: 'react',
+    },
+    {
+      label: 'NextJs',
+      value: 'nextjs',
+    },
+  ];
+  public currentFramework = signal<Framework | undefined>(undefined);
+  public state = signal<'closed' | 'open'>('closed');
+
+  stateChanged(state: 'open' | 'closed') {
+    this.state.set(state);
+  }
+
+  commandSelected(framework: Framework) {
+    this.state.set('closed');
+    if (this.currentFramework()?.value === framework.value) {
+      this.currentFramework.set(undefined);
+    } else {
+      this.currentFramework.set(framework);
+    }
+  }
+}
+
+export const Default: Story = {
+  decorators: [
+    moduleMetadata({
+      providers: [provideIcons(radixIcons)],
+      imports: [ComboboxComponent],
+    }),
+  ],
+  render: () => ({
+    template: '<combobox-component/>',
+  }),
+};
