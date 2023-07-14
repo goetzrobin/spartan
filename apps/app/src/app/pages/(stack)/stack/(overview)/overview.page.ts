@@ -12,7 +12,7 @@ import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.componen
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
-import { ArchitectureDiagramComponent } from '~/app/pages/(stack)/stack/(overview)/architecture-diagram.component';
+import { ArchitectureDiagramComponent } from '~/app/pages/(stack)/stack/(overview)/components/architecture-diagram.component';
 import { hlmCode, hlmP, hlmUl } from '@ng-spartan/ui/typography/helm';
 import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
 
@@ -102,10 +102,6 @@ const stackLink = 'h-6 underline text-base px-0.5';
         </li>
       </ul>
 
-      <spartan-section-sub-heading id="quick-start">Quick Start</spartan-section-sub-heading>
-      <p class="${hlmP} mb-6">Use the our CLI to get started with one simple command:</p>
-      <spartan-code language="sh" code="npx create spartan.ng/stack" />
-
       <spartan-page-bottom-nav>
         <spartan-page-bottom-nav-link href="technologies" label="Technologies" />
         <spartan-page-bottom-nav-placeholder />
@@ -114,7 +110,6 @@ const stackLink = 'h-6 underline text-base px-0.5';
     <spartan-page-nav>
       <spartan-page-nav-link fragment="motivation" label="Motivation" />
       <spartan-page-nav-link fragment="stack" label="The Stack" />
-      <spartan-page-nav-link fragment="quick-start" label="Quick Start" />
     </spartan-page-nav>
   `,
 })
