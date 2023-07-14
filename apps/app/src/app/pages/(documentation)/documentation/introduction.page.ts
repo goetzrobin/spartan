@@ -1,7 +1,6 @@
 import { RouteMeta } from '@analogjs/router';
 import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
-import { TwoSectionPageDirective } from '~/app/shared/layout/two-section-page.directive';
 import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
 import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
@@ -19,10 +18,10 @@ import {
   HlmAccordionTriggerDirective,
 } from '@ng-spartan/ui/accordion/helm';
 import { RouterLink } from '@angular/router';
-import { SideNavComponent } from '~/app/shared/layout/page-nav.component';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav-link.component';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav.component';
+import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
+import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
+import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { hlmCode, hlmP } from '@ng-spartan/ui/typography/helm';
 import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
@@ -43,7 +42,7 @@ export const routeMeta: RouteMeta = {
     MainSectionDirective,
     SectionIntroComponent,
     SectionSubHeadingComponent,
-    SideNavComponent,
+    PageNavComponent,
     BrnAccordionComponent,
     BrnAccordionContentComponent,
     BrnAccordionItemComponent,
@@ -54,14 +53,13 @@ export const routeMeta: RouteMeta = {
     HlmAccordionItemDirective,
     HlmAccordionTriggerDirective,
     RouterLink,
-    SideNavComponent,
+    PageNavComponent,
     PageNavLinkComponent,
     PageBottomNavLinkComponent,
     PageBottomNavComponent,
     PageBottomNavPlaceholderComponent,
     HlmButtonDirective,
   ],
-  hostDirectives: [TwoSectionPageDirective],
   template: `
     <section spartanMainSection>
       <spartan-section-intro name="Introduction" lead="Cutting-edge tools powering Angular full-stack development." />
@@ -84,7 +82,7 @@ export const routeMeta: RouteMeta = {
         <code class="${hlmCode}">AnalogJs</code>, <code class="${hlmCode}">Nx</code>, and
         <code class="${hlmCode}">Drizzle</code>
       </p>
-      <div class="flex items-center justify-end mb-12">
+      <div class="flex items-center justify-end mb-2">
         <a routerLink="/stack" variant="outline" size="sm" hlmBtn outline="">Check out spartan/stack</a>
       </div>
       <spartan-section-sub-heading id="spartan-ui">spartan/ui</spartan-section-sub-heading>
@@ -97,7 +95,7 @@ export const routeMeta: RouteMeta = {
         On top we put <code class="${hlmCode}">spartan/ui/helm</code> library that gives our primitives a beautifully
         designed <span class="font-medium">shadcn</span> look.
       </p>
-      <div class="flex items-center justify-end mb-12">
+      <div class="flex items-center justify-end mb-2">
         <a routerLink="/components" variant="outline" size="sm" hlmBtn outline="">Check out spartan/ui</a>
       </div>
       <spartan-section-sub-heading id="faq">FAQ</spartan-section-sub-heading>
@@ -144,8 +142,8 @@ export const routeMeta: RouteMeta = {
       </brn-accordion>
 
       <spartan-page-bottom-nav>
+        <spartan-page-bottom-nav-link href="about" label="About" />
         <spartan-page-bottom-nav-placeholder />
-        <spartan-page-bottom-nav-link href="cli" label="CLI" />
       </spartan-page-bottom-nav>
     </section>
 

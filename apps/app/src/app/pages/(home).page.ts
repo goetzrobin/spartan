@@ -13,7 +13,7 @@ import {
 } from '@ng-spartan/ui/card/helm';
 import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
-import { radixLayers, radixMix } from '@ng-icons/radix-icons';
+import { radixLayers, radixMix, radixStar } from '@ng-icons/radix-icons';
 
 export const routeMeta: RouteMeta = {
   meta: metaWith(
@@ -43,11 +43,16 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
   host: {
     class: 'block p-4 pb-12 pt-6 sm:pb-24 sm:pt-12',
   },
-  providers: [provideIcons({ radixLayers, radixMix })],
+  providers: [provideIcons({ radixLayers, radixMix, radixStar })],
   template: `
     <section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
       <div class="${container} max-w-[64rem]">
-        <a target="_blank" href="https://github.com/goetzrobin/spartan" hlmBadge variant="destructive"
+        <a
+          target="_blank"
+          href="https://github.com/goetzrobin/spartan"
+          hlmBadge
+          variant="destructive"
+          class="bg-[#DD0031] hover:bg-[#DD0031] hover:bg-opacity-80"
           >This is madness. This is spartan.</a
         >
         <h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
@@ -66,8 +71,9 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
             target="_blank"
             rel="noreferrer"
             href="https://github.com/goetzrobin/spartan"
-            >GitHub</a
-          >
+            >Star on GitHub
+            <hlm-icon class="h-4 w-4 ml-2" name="radixStar" />
+          </a>
         </div>
       </div>
     </section>
@@ -83,7 +89,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
       <div class="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem]">
         <a routerLink="/stack" hlmCard class="group">
           <div hlmCardHeader>
-            <hlm-icon class="transition-colors group-hover:text-destructive" name="radixLayers" size="xl" />
+            <hlm-icon class="transition-colors group-hover:text-[#DD0031]" name="radixLayers" size="xl" />
             <h3 hlmCardTitle>spartan/stack</h3>
             <p hlmCardDescription>
               Opinionated full-stack based on Supabase, Angular, tRPC, Tailwind, AnalogJs, Nx and Drizzle.
@@ -93,7 +99,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 
         <a routerLink="/documentation" hlmCard class="group">
           <div hlmCardHeader>
-            <hlm-icon class="transition-colors group-hover:text-destructive" name="radixMix" size="xl" />
+            <hlm-icon class="transition-colors group-hover:text-[#DD0031]" name="radixMix" size="xl" />
             <h3 hlmCardTitle>spartan/ui</h3>
             <p hlmCardDescription>Accessible, composable UI primitives that come styled or unstyled.</p>
           </div>

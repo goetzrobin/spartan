@@ -1,17 +1,16 @@
 import { RouteMeta } from '@analogjs/router';
 import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
-import { TwoSectionPageDirective } from '~/app/shared/layout/two-section-page.directive';
 import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
 import { CodeComponent } from '~/app/shared/code/code.component';
 import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { CodePreviewDirective } from '~/app/shared/code/code-preview.directive';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav-link.component';
-import { SideNavComponent } from '~/app/shared/layout/page-nav.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav.component';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav-link.component';
+import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
+import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
+import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { AccordionPreviewComponent, codeImports, codeSkeleton, codeString } from './accordion.preview';
 
@@ -36,12 +35,11 @@ export const routeMeta: RouteMeta = {
     AccordionPreviewComponent,
     CodePreviewDirective,
     PageNavLinkComponent,
-    SideNavComponent,
+    PageNavComponent,
     PageBottomNavComponent,
     PageBottomNavLinkComponent,
     PageBottomNavPlaceholderComponent,
   ],
-  hostDirectives: [TwoSectionPageDirective],
   template: `
     <section spartanMainSection>
       <spartan-section-intro
@@ -69,8 +67,8 @@ export const routeMeta: RouteMeta = {
       </div>
 
       <spartan-page-bottom-nav>
-        <spartan-page-bottom-nav-placeholder />
         <spartan-page-bottom-nav-link href="alert" label="Alert" />
+        <spartan-page-bottom-nav-placeholder />
       </spartan-page-bottom-nav>
     </section>
     <spartan-page-nav>

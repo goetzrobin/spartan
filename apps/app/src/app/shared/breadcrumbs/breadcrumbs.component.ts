@@ -25,10 +25,16 @@ export interface Breadcrumb {
         *ngIf="breadcrumbs && breadcrumbs.length > 0"
         class="mb-4 flex items-center space-x-1 text-sm text-muted-foreground"
       >
-        <a [href]="breadcrumbs[0].url" [routerLink]="breadcrumbs[0].url">{{ breadcrumbs[0].label }}</a>
+        <a
+          class="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          [href]="breadcrumbs[0].url"
+          [routerLink]="breadcrumbs[0].url"
+          >{{ breadcrumbs[0].label }}</a
+        >
         <ng-container *ngFor="let breadcrumb of breadcrumbs.slice(1, breadcrumbs.length); let last = last">
           <hlm-icon class="h-4 w-4" name="radixChevronRight" />
           <a
+            class="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             [class]="last ? 'text-foreground' : 'text-muted-foreground'"
             [href]="breadcrumb.url"
             [routerLink]="breadcrumb.url"

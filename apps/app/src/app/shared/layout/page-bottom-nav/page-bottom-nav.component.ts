@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'spartan-page-bottom-nav',
   standalone: true,
   host: {
-    class: 'mt-12 flex items-center justify-between',
+    class: 'mt-12 flex flex-row-reverse items-center justify-between',
   },
   template: `<ng-content />`,
 })

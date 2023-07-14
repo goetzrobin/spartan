@@ -4,7 +4,7 @@ import { Directive } from '@angular/core';
   selector: '[spartanMainSection]',
   standalone: true,
   host: {
-    class: 'p-1 sm:p-0 w-full min-h-[calc(100vh-3.5rem)]',
+    class: 'flex flex-col p-1 sm:p-0 w-full min-h-[calc(100vh-3.5rem)]',
   },
 })
 export class MainSectionDirective {}

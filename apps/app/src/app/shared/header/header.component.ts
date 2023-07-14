@@ -21,14 +21,14 @@ import { HeaderMobileNavComponent } from '~/app/shared/header/header-mobile-nav.
   ],
   providers: [provideIcons({ radixTwitterLogo, radixGithubLogo })],
   host: {
-    class: 'block p-2 sm:px-4 border-b border-border',
+    class: 'block sticky w-full top-0 z-40 bg-background/95 bg-blur-lg p-2 sm:px-4 border-b border-border',
   },
   template: `
     <div class="flex justify-between items-center w-full max-w-screen-xl mx-auto">
       <nav class="flex items-center">
         <a hlmBtn variant="ghost" class="hidden sm:block mr-3 rounded-full h-9 w-9 p-1.5" routerLink="/">
           <svg
-            class="h-full w-full text-destructive"
+            class="h-full w-full text-[#DD0031]"
             width="587"
             height="587"
             viewBox="0 0 587 587"
@@ -42,7 +42,7 @@ import { HeaderMobileNavComponent } from '~/app/shared/header/header-mobile-nav.
               fill="currentColor"
             />
           </svg>
-          <span class="sr-only">SPARTAN</span>
+          <span class="sr-only">spartan</span>
         </a>
 
         <spartan-mobile-nav class="sm:hidden" />

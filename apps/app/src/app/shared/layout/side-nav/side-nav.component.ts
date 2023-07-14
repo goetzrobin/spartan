@@ -7,9 +7,9 @@ import { SideNavContentComponent } from './side-nav-content.component';
   standalone: true,
   imports: [HlmScrollAreaComponent, SideNavContentComponent],
   host: {
-    class: 'hidden sm:block',
+    class: 'fixed text-sm top-12 pr-2 pt-6 pb-12 flex z-30 -ml-2 hidden w-full shrink-0 md:sticky md:block',
   },
-  template: `<hlm-scroll-area class="h-[calc(100vh-3.5rem)] text-sm py-6 pl-8 pr-6 lg:py-8">
+  template: `<hlm-scroll-area class="h-[calc(100vh-3.5rem)]">
     <spartan-side-nav-content />
   </hlm-scroll-area>`,
 })

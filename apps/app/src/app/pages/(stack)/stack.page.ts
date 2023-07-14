@@ -1,12 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ContainerDirective } from '~/app/shared/layout/container.directive';
-import { SideNavComponent } from '~/app/shared/layout/side-nav/side-nav.component';
-import { BreadcrumbsComponent } from '~/app/shared/breadcrumbs/breadcrumbs.component';
-import { TwoSectionPageDirective } from '~/app/shared/layout/two-section-page.directive';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
+import { PageComponent } from '~/app/shared/layout/page.component';
 
 export const routeMeta: RouteMeta = {
   meta: metaWith('spartan/stack - The stack', "spartan's opinionated full-stack..."),
@@ -19,14 +14,7 @@ export const routeMeta: RouteMeta = {
 @Component({
   selector: 'spartan-stack',
   standalone: true,
-  imports: [RouterOutlet, SideNavComponent, BreadcrumbsComponent, TwoSectionPageDirective, MainSectionDirective],
-  hostDirectives: [ContainerDirective],
-  template: `
-    <spartan-side-nav />
-    <section class="px-4 sm:px-0 py-6 lg:gap-10 lg:py-8">
-      <spartan-breadcrumbs />
-      <router-outlet />
-    </section>
-  `,
+  imports: [PageComponent],
+  template: ` <spartan-page />`,
 })
 export default class StackPageComponent {}

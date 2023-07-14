@@ -7,11 +7,9 @@ import { hlmMuted } from '@ng-spartan/ui/typography/helm';
   standalone: true,
   imports: [HlmButtonDirective],
   host: {
-    class: 'block border-t border-border px-4 py-8',
+    class: 'block border-t bg-background/95 bg-blur-lg border-border px-4 py-8',
   },
   template: `<footer class="text-sm max-w-screen-xl mx-auto ${hlmMuted}">
-    Created by
-    <a class="h-6 text-sm px-0.5" hlmBtn href="https://twitter.com/shadcn" target="_blank" variant="link">shadcn.</a>
     Built by
     <a class="h-6 text-sm px-0.5" hlmBtn href="https://twitter.com/goetzrobin" target="_blank" variant="link"
       >goetzrobin</a

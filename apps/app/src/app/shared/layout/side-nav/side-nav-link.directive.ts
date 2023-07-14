@@ -1,5 +1,6 @@
-import { Directive, HostBinding, inject } from '@angular/core';
+import { Directive, inject, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
   selector: '[spartanSideNavLink]',
@@ -11,12 +12,21 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     },
     RouterLinkActive,
   ],
+  host: {
+    '[tabindex]': '_disabled ? "-1" : "0"',
+    '[class.text-gray-300]': '_disabled',
+    '[class.pointer-events-none]': '_disabled',
+    class:
+      'group relative flex w-full justify-between items-center rounded-md border border-transparent px-2 py-1 hover:underline text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+  },
 })
 export class SideNavLinkDirective {
   private _rlActive = inject(RouterLinkActive);
-  @HostBinding('class')
-  public class =
-    'group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline text-muted-foreground';
+  protected _disabled = false;
+  @Input()
+  set disabled(value: BooleanInput) {
+    this._disabled = coerceBooleanProperty(value);
+  }
   constructor() {
     this._rlActive.routerLinkActive = 'font-medium !text-foreground';
   }

@@ -12,7 +12,7 @@ import { NgIf } from '@angular/common';
   imports: [RouterLink, NgIf, HlmButtonDirective, HlmIconComponent],
   providers: [provideIcons({ radixChevronRight, radixChevronLeft })],
   template: `
-    <a hlmBtn variant="outline" [routerLink]="['..', href]" [relativeTo]="activatedRoute">
+    <a hlmBtn variant="outline" [routerLink]="routerLink" [relativeTo]="isAbsolute ? undefined : activatedRoute">
       <hlm-icon class="mr-2 h-4 w-4" name="radixChevronLeft" *ngIf="direction === 'previous'" />
       {{ label }}
       <hlm-icon class="ml-2 h-4 w-4" name="radixChevronRight" *ngIf="direction === 'next'" />
@@ -27,4 +27,11 @@ export class PageBottomNavLinkComponent {
   href = '';
   @Input()
   label = '';
+
+  protected isAbsolute() {
+    return this.href.startsWith('/');
+  }
+  protected get routerLink() {
+    return this.isAbsolute() ? this.href : ['..', this.href];
+  }
 }
