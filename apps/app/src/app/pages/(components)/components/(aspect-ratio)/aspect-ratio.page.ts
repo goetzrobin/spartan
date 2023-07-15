@@ -12,19 +12,16 @@ import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.componen
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
-import { AccordionPreviewComponent, codeImports, codeSkeleton, codeString } from './accordion.preview';
+import { AspectRatioPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './aspect-ratio.preview';
 
 export const routeMeta: RouteMeta = {
-  data: { breadcrumb: 'Accordion' },
-  meta: metaWith(
-    'spartan/ui - Accordion',
-    'A vertically stacked set of interactive headings that each reveal a section of content.'
-  ),
-  title: 'spartan/ui - Accordion',
+  data: { breadcrumb: 'Aspect Ratio' },
+  meta: metaWith('spartan/ui - Aspect Ratio', 'Displays content within a desired ratio.'),
+  title: 'spartan/ui - Aspect Ratio',
 };
 
 @Component({
-  selector: 'spartan-accordion',
+  selector: 'spartan-aspect-ratio',
   standalone: true,
   imports: [
     MainSectionDirective,
@@ -32,43 +29,40 @@ export const routeMeta: RouteMeta = {
     SectionIntroComponent,
     SectionSubHeadingComponent,
     TabsComponent,
-    AccordionPreviewComponent,
     CodePreviewDirective,
     PageNavLinkComponent,
     PageNavComponent,
     PageBottomNavComponent,
     PageBottomNavLinkComponent,
     PageBottomNavPlaceholderComponent,
+    AspectRatioPreviewComponent,
   ],
   template: `
     <section spartanMainSection>
-      <spartan-section-intro
-        name="Accordion"
-        lead="A vertically stacked set of interactive headings that each reveal a section of content."
-      />
+      <spartan-section-intro name="Aspect Ratio" lead="Displays content within a desired ratio." />
 
       <spartan-tabs firstTab="Preview" secondTab="Code">
         <div spartanCodePreview firstTab>
-          <spartan-accordion-preview />
+          <spartan-aspect-ratio-preview class="h-full w-full" />
         </div>
-        <spartan-code secondTab [code]="code" />
+        <spartan-code secondTab [code]="defaultCode" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan.ng/ui/accordion" />
-        <spartan-code secondTab language="sh" code="npm install @spartan.ng/ui/accordion" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan.ng/ui/alert-dialog" />
+        <spartan-code secondTab language="sh" code="npm install @spartan.ng/ui/alert-dialog" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
       <div class="space-y-4">
-        <spartan-code [code]="imports" />
-        <spartan-code [code]="codeSkeleton" />
+        <spartan-code [code]="defaultImports" />
+        <spartan-code [code]="defaultSkeleton" />
       </div>
 
       <spartan-page-bottom-nav>
-        <spartan-page-bottom-nav-link href="alert" label="Alert" />
-        <spartan-page-bottom-nav-placeholder />
+        <spartan-page-bottom-nav-link href="avatar" label="Avatar" />
+        <spartan-page-bottom-nav-link direction="previous" href="alert-dialog" label="Alert Dialog" />
       </spartan-page-bottom-nav>
     </section>
     <spartan-page-nav>
@@ -77,9 +71,8 @@ export const routeMeta: RouteMeta = {
     </spartan-page-nav>
   `,
 })
-export default class AccordionPageComponent {
-  code = codeString;
-  imports = codeImports;
-  skeleton = codeSkeleton;
-  protected readonly codeSkeleton = codeSkeleton;
+export default class AlertPageComponent {
+  readonly defaultCode = defaultCode;
+  readonly defaultSkeleton = defaultSkeleton;
+  readonly defaultImports = defaultImports;
 }

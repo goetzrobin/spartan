@@ -12,19 +12,21 @@ import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.componen
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
-import { AccordionPreviewComponent, codeImports, codeSkeleton, codeString } from './accordion.preview';
+import { AlertPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './alert.preview';
+import { hlmH4 } from '@ng-spartan/ui/typography/helm';
+import {
+  AlertDestructiveComponent,
+  destructiveCode,
+} from '~/app/pages/(components)/components/(alert)/alert--destructive.example';
 
 export const routeMeta: RouteMeta = {
-  data: { breadcrumb: 'Accordion' },
-  meta: metaWith(
-    'spartan/ui - Accordion',
-    'A vertically stacked set of interactive headings that each reveal a section of content.'
-  ),
-  title: 'spartan/ui - Accordion',
+  data: { breadcrumb: 'Alert' },
+  meta: metaWith('spartan/ui - Alert', 'Displays a callout for user attention.'),
+  title: 'spartan/ui - Alert',
 };
 
 @Component({
-  selector: 'spartan-accordion',
+  selector: 'spartan-alert',
   standalone: true,
   imports: [
     MainSectionDirective,
@@ -32,54 +34,70 @@ export const routeMeta: RouteMeta = {
     SectionIntroComponent,
     SectionSubHeadingComponent,
     TabsComponent,
-    AccordionPreviewComponent,
+    AlertPreviewComponent,
     CodePreviewDirective,
     PageNavLinkComponent,
     PageNavComponent,
     PageBottomNavComponent,
     PageBottomNavLinkComponent,
     PageBottomNavPlaceholderComponent,
+    AlertDestructiveComponent,
   ],
   template: `
     <section spartanMainSection>
-      <spartan-section-intro
-        name="Accordion"
-        lead="A vertically stacked set of interactive headings that each reveal a section of content."
-      />
+      <spartan-section-intro name="Alert" lead="Displays a callout for user attention." />
 
       <spartan-tabs firstTab="Preview" secondTab="Code">
         <div spartanCodePreview firstTab>
-          <spartan-accordion-preview />
+          <spartan-alert-preview />
         </div>
-        <spartan-code secondTab [code]="code" />
+        <spartan-code secondTab [code]="defaultCode" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan.ng/ui/accordion" />
-        <spartan-code secondTab language="sh" code="npm install @spartan.ng/ui/accordion" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan.ng/ui/alert" />
+        <spartan-code secondTab language="sh" code="npm install @spartan.ng/ui/alert" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
       <div class="space-y-4">
-        <spartan-code [code]="imports" />
-        <spartan-code [code]="codeSkeleton" />
+        <spartan-code [code]="defaultImports" />
+        <spartan-code [code]="defaultSkeleton" />
       </div>
 
+      <spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
+      <h3 class="mt-6 mb-2 ${hlmH4}">Default</h3>
+      <spartan-tabs firstTab="Preview" secondTab="Code">
+        <div spartanCodePreview firstTab>
+          <spartan-alert-preview />
+        </div>
+        <spartan-code secondTab [code]="defaultCode" />
+      </spartan-tabs>
+      <h3 class="mt-6 mb-2 ${hlmH4}">Destructive</h3>
+      <spartan-tabs firstTab="Preview" secondTab="Code">
+        <div spartanCodePreview firstTab>
+          <spartan-alert-destructive />
+        </div>
+        <spartan-code secondTab [code]="destructiveCode" />
+      </spartan-tabs>
+
       <spartan-page-bottom-nav>
-        <spartan-page-bottom-nav-link href="alert" label="Alert" />
-        <spartan-page-bottom-nav-placeholder />
+        <spartan-page-bottom-nav-link href="alert-dialog" label="Alert Dialog" />
+        <spartan-page-bottom-nav-link direction="previous" href="accordion" label="Accordion" />
       </spartan-page-bottom-nav>
     </section>
     <spartan-page-nav>
       <spartan-page-nav-link fragment="installation" label="Installation" />
       <spartan-page-nav-link fragment="usage" label="Usage" />
+      <spartan-page-nav-link fragment="examples" label="Examples" />
     </spartan-page-nav>
   `,
 })
-export default class AccordionPageComponent {
-  code = codeString;
-  imports = codeImports;
-  skeleton = codeSkeleton;
-  protected readonly codeSkeleton = codeSkeleton;
+export default class AlertPageComponent {
+  readonly defaultCode = defaultCode;
+  readonly defaultSkeleton = defaultSkeleton;
+  readonly defaultImports = defaultImports;
+
+  readonly destructiveCode = destructiveCode;
 }

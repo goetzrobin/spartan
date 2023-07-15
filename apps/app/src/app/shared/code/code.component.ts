@@ -47,7 +47,7 @@ declare const Prism: typeof import('prismjs');
   template: ` <button (click)="copyToClipBoard()" hlmBtn variant="ghost" class="h-6 w-6 p-1 absolute top-2 right-2">
       <hlm-icon size="xs" [name]="copied ? 'radixCheck' : 'radixClipboard'" />
     </button>
-    <div class="max-w-[95vw] p-4 overflow-auto" [innerHTML]="_content"></div>`,
+    <div class="w-full max-w-[95vw] xl:max-w-[40vw] p-4 overflow-auto" [innerHTML]="_content"></div>`,
   styles: [
     `
       .spartan-scroll .token.class-name {
