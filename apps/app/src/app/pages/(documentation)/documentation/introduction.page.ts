@@ -25,6 +25,9 @@ import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { hlmCode, hlmP } from '@ng-spartan/ui/typography/helm';
 import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { provideIcons } from '@ng-icons/core';
+import { radixChevronRight } from '@ng-icons/radix-icons';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Introduction' },
@@ -59,7 +62,9 @@ export const routeMeta: RouteMeta = {
     PageBottomNavComponent,
     PageBottomNavPlaceholderComponent,
     HlmButtonDirective,
+    HlmIconComponent,
   ],
+  providers: [provideIcons({ radixChevronRight })],
   template: `
     <section spartanMainSection>
       <spartan-section-intro name="Introduction" lead="Cutting-edge tools powering Angular full-stack development." />
@@ -83,7 +88,9 @@ export const routeMeta: RouteMeta = {
         <code class="${hlmCode}">Drizzle</code>
       </p>
       <div class="flex items-center justify-end mb-2">
-        <a routerLink="/stack" variant="outline" size="sm" hlmBtn outline="">Check out spartan/stack</a>
+        <a routerLink="/stack" variant="outline" size="sm" hlmBtn outline=""
+          >Check out spartan/stack <hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+        </a>
       </div>
       <spartan-section-sub-heading id="spartan-ui">spartan/ui</spartan-section-sub-heading>
       <p class="${hlmP}">
@@ -96,7 +103,9 @@ export const routeMeta: RouteMeta = {
         designed <span class="font-medium">shadcn</span> look.
       </p>
       <div class="flex items-center justify-end mb-2">
-        <a routerLink="/components" variant="outline" size="sm" hlmBtn outline="">Check out spartan/ui</a>
+        <a routerLink="/components" variant="outline" size="sm" hlmBtn outline=""
+          >Check out spartan/ui <hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+        </a>
       </div>
       <spartan-section-sub-heading id="faq">FAQ</spartan-section-sub-heading>
       <brn-accordion hlm>

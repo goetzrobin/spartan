@@ -106,7 +106,7 @@ export const routeMeta: RouteMeta = {
       <spartan-architecture-diagram-drizzle />
       <p class="${hlmP}">
         We're just a few steps away from having complete typesafety from our database to the template generating the
-        DOM. Prisma is the tool that will bring us there. Drizzle is a Node.js and TypeScript ORM. It allows you to
+        DOM. Drizzle is the tool that will bring us there. Drizzle is a Node.js and TypeScript ORM. It allows you to
         create performant SQL queries, with autocompletion powered by TypeScript. They also have incredible memes!
       </p>
 
@@ -136,7 +136,7 @@ export const routeMeta: RouteMeta = {
       </p>
 
       <spartan-page-bottom-nav>
-        <spartan-page-bottom-nav-link href="/components/accordion" label="spartan/ui" />
+        <spartan-page-bottom-nav-link href="installation" label="Installation" />
         <spartan-page-bottom-nav-link direction="previous" href="overview" label="Overview" />
       </spartan-page-bottom-nav>
     </section>

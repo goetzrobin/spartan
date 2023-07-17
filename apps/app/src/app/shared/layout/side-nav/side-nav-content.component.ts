@@ -33,7 +33,7 @@ import { SideNavComponent } from './side-nav-coming-soon.component';
       <spartan-side-nav-links>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/stack/overview">Overview</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/stack/technologies">Technologies</a>
-        <a disabled spartanSideNavLink="/stack/installation">Installation<spartan-side-nav-cs /></a>
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/stack/installation">Installation</a>
       </spartan-side-nav-links>
     </div>
 
@@ -60,7 +60,7 @@ import { SideNavComponent } from './side-nav-coming-soon.component';
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/button">Button</a>
         <a disabled spartanSideNavLink="/components/calendar">Calendar<spartan-side-nav-cs /></a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/card">Card</a>
-        <a (click)="linkClicked.emit()" spartanSideNavLink="/components/checkbox">Checkbox</a>
+        <a disabled spartanSideNavLink="/components/checkbox">Checkbox<spartan-side-nav-cs /></a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/collapsible">Collapsible</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/combobox">Combobox</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/command">Command</a>
@@ -90,7 +90,7 @@ import { SideNavComponent } from './side-nav-coming-soon.component';
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/textarea">Textarea</a>
         <a disabled spartanSideNavLink="/components/toast">Toast<spartan-side-nav-cs /></a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/toggle">Toggle</a>
-        <a (click)="linkClicked.emit()" spartanSideNavLink="/components/tooltip">Tooltip</a>
+        <a disabled spartanSideNavLink="/components/tooltip">Tooltip<spartan-side-nav-cs /></a>
       </spartan-side-nav-links>
     </div>`,
 })

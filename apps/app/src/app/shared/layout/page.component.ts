@@ -12,7 +12,7 @@ import { PageNavOutletComponent } from '~/app/shared/layout/page-nav/page-nav-ou
   imports: [RouterOutlet, SideNavComponent, BreadcrumbsComponent, MainSectionDirective, PageNavOutletComponent],
   hostDirectives: [ContainerDirective],
   template: ` <spartan-side-nav />
-    <main class="sticky top-0 py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+    <main class="sticky top-0 py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[minmax(0,1fr)_300px]">
       <div>
         <spartan-breadcrumbs />
         <router-outlet />

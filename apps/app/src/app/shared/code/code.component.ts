@@ -23,6 +23,8 @@ import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCheck, radixClipboard } from '@ng-icons/radix-icons';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { NgIf } from '@angular/common';
 
 declare const Prism: typeof import('prismjs');
 
@@ -38,16 +40,23 @@ declare const Prism: typeof import('prismjs');
     HlmScrollAreaComponent,
     HlmButtonDirective,
     HlmIconComponent,
+    NgIf,
   ],
   providers: [provideIcons({ radixClipboard, radixCheck })],
   host: {
     class:
       'spartan-scroll relative flex font-mono rounded-md text-sm block max-h-[650px] text-white bg-zinc-950 dark:bg-zinc-900',
   },
-  template: ` <button (click)="copyToClipBoard()" hlmBtn variant="ghost" class="h-6 w-6 p-1 absolute top-2 right-2">
+  template: ` <button
+      *ngIf="!_disableCopy"
+      (click)="copyToClipBoard()"
+      hlmBtn
+      variant="ghost"
+      class="h-6 w-6 p-1 absolute top-2 right-2"
+    >
       <hlm-icon size="xs" [name]="copied ? 'radixCheck' : 'radixClipboard'" />
     </button>
-    <div class="w-full max-w-[95vw] xl:max-w-[40vw] p-4 overflow-auto" [innerHTML]="_content"></div>`,
+    <div class="whitespace-nowrap w-full p-4 overflow-auto" [innerHTML]="_content"></div>`,
   styles: [
     `
       .spartan-scroll .token.class-name {
@@ -93,6 +102,12 @@ export class CodeComponent {
   private readonly marked: typeof marked;
   protected _content = '';
   protected copied = false;
+
+  protected _disableCopy = false;
+  @Input()
+  set disableCopy(value: BooleanInput) {
+    this._disableCopy = coerceBooleanProperty(value);
+  }
 
   private _language: 'ts' | 'sh' = 'ts';
   @Input()
