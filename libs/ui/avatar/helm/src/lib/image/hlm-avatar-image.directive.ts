@@ -1,10 +1,10 @@
-import { Directive, HostBinding, Input, effect, inject, signal } from '@angular/core';
+import { Directive, effect, HostBinding, inject, Input, signal } from '@angular/core';
 import { BrnAvatarImageDirective } from '@ng-spartan/ui/avatar/brain';
 import { hlm } from '@ng-spartan/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 const generateClasses = (userCls: ClassValue) => {
-  return hlm('aspect-square h-full w-full', userCls);
+  return hlm('aspect-square object-cover h-full w-full', userCls);
 };
 
 @Directive({

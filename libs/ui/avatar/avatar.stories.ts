@@ -32,8 +32,6 @@ export const Default: Story = {
       <span class='bg-emerald-600 text-emerald-50' hlmAvatarFallback>MT</span>
     </hlm-avatar>
     </div>
-
-
 `,
   }),
 };
