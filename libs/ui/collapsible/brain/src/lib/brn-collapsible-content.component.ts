@@ -41,6 +41,7 @@ export class BrnCollapsibleContentComponent implements AfterContentInit {
   }
 
   ngAfterContentInit() {
+    if (typeof this._elementRef.nativeElement.getBoundingClientRect !== 'function') return;
     const rect = this._elementRef.nativeElement.getBoundingClientRect();
     if (!rect) return;
     this._width.set(rect.width);
