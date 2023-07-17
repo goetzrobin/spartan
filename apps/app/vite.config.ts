@@ -38,9 +38,24 @@ export default defineConfig(({ mode }) => {
         prerender: {
           routes: [
             '/',
+
             '/documentation/introduction',
+            '/documentation/about',
+            '/documentation/cli',
 
             '/components/accordion',
+            '/components/alert',
+            '/components/alert-dialog',
+            '/components/aspect-ratio',
+            '/components/avatar',
+            '/components/badge',
+            '/components/button',
+            '/components/card',
+            '/components/collapsible',
+
+            '/stack/overview',
+            '/stack/technologies',
+            '/stack/installation',
 
             '/examples/notes',
             '/examples/typography',
