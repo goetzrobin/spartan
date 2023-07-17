@@ -53,6 +53,7 @@ export default defineConfig(({ mode }) => {
             '/components/card',
             '/components/collapsible',
             '/components/combobox',
+            '/components/command',
 
             '/stack/overview',
             '/stack/technologies',
