@@ -84,12 +84,24 @@ const aboutLink = 'h-6 underline text-base px-0.5';
       <div>
         <p class="${hlmP}">
           First and foremost credit goes to the incredible
+          <a hlmBtn variant="link" class="${aboutLink}" href="https://brandonroberts.dev/blog">Brandon Roberts</a> and
           <a hlmBtn variant="link" class="${aboutLink}" href="https://shadcn.com">shadcn.</a>
-          The ui library he has created is simply beautiful and spartan/ui tries its best to emulate its style and
+        </p>
+
+        <p class="${hlmP}">
+          Brandon's AnalogJs is the absolute backbone of the spartan/stack and brings incredible value to the Angular
+          ecosystem.
+        </p>
+        <p class="${hlmP}">
+          The ui library shadcn has created is simply beautiful and spartan/ui tries its best to emulate its style and
           quality.
         </p>
         <p class="${hlmP}">Other awesome work we are building upon is:</p>
         <ul class="${hlmUl}">
+          <li>
+            <a class="${aboutLink}" hlmBtn href="https://analogjs.org" target="_blank" variant="link">AnalogJs</a>
+            - The fullstack Angular meta-framework .
+          </li>
           <li>
             <a class="${aboutLink}" hlmBtn href="https://ui.shadcn.com" target="_blank" variant="link">ui.shadcn.com</a>
             - Styles for ui primitives.
@@ -131,6 +143,12 @@ const aboutLink = 'h-6 underline text-base px-0.5';
               >ngx-scrollbar</a
             >
             - Custom overlay-scrollbars with native scrolling mechanism.
+          </li>
+          <li>
+            <a class="${aboutLink}" hlmBtn href="https://ng-icons.github.io/ng-icons" target="_blank" variant="link"
+              >ng-icons</a
+            >
+            - The ultimate icon library for Angular.
           </li>
         </ul>
       </div>
