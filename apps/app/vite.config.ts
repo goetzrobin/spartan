@@ -63,6 +63,8 @@ export default defineConfig(({ mode }) => {
             '/components/progress',
             '/components/radio-group',
             '/components/scroll-area',
+            '/components/separator',
+            '/components/sheet',
 
             '/stack/overview',
             '/stack/technologies',
