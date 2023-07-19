@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { NgScrollbarModule, ScrollbarTrack } from 'ngx-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ClassValue } from 'clsx';
 import { hlm } from '@ng-spartan/ui/core/helm';
 
@@ -39,7 +39,7 @@ export class HlmScrollAreaComponent {
   }
 
   @Input()
-  public track: ScrollbarTrack = 'all';
+  public track: 'vertical' | 'horizontal' | 'all' = 'all';
   @Input()
   autoHeightDisabled = false;
   @Input()
