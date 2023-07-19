@@ -61,6 +61,8 @@ export default defineConfig(({ mode }) => {
             '/components/menubar',
             '/components/popover',
             '/components/progress',
+            '/components/radio-group',
+            '/components/scroll-area',
 
             '/stack/overview',
             '/stack/technologies',
