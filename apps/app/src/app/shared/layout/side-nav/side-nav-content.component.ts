@@ -16,7 +16,7 @@ import { SideNavComponent } from './side-nav-coming-soon.component';
     SideNavComponent,
   ],
   host: {
-    class: 'block',
+    class: 'block pr-1',
   },
   template: ` <div class="pb-4">
       <h4 spartanSideNavHeading>Getting Started</h4>

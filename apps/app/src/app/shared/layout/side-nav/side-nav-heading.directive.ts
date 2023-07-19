@@ -6,5 +6,5 @@ import { Directive, HostBinding } from '@angular/core';
 })
 export class SideNavHeadingDirective {
   @HostBinding('class')
-  public class = 'mb-1 rounded-md px-2 py-1 font-semibold';
+  public class = 'flex items-center justify-between mb-1 rounded-md px-2 py-1 font-semibold';
 }
