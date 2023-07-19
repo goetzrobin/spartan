@@ -26,7 +26,7 @@ const toggleVariants = cva(
 type ToggleVariants = VariantProps<typeof toggleVariants>;
 
 @Directive({
-  selector: '[hlmToggle]',
+  selector: '[hlmToggle],[brnToggle][hlm]',
   standalone: true,
 })
 export class HlmToggleDirective {
