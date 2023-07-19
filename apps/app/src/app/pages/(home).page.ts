@@ -20,6 +20,7 @@ export const routeMeta: RouteMeta = {
     'spartan - Cutting-edge tools powering Angular full-stack development',
     'Build next level, full-stack applications with AnalogJs and the spartan/stack. Make them accessible and look incredible with spartan/ui.'
   ),
+  title: 'spartan - Cutting-edge tools powering Angular full-stack development',
 };
 
 const container = 'mx-auto flex flex-col items-center gap-4 text-center';
