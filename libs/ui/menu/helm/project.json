@@ -42,6 +42,12 @@
       "options": {
         "lintFilePatterns": ["libs/ui/menu/helm/**/*.ts", "libs/ui/menu/helm/**/*.html"]
       }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "ui-menu-helm"
+      }
     }
   }
 }

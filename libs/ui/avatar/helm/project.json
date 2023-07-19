@@ -42,6 +42,12 @@
       "options": {
         "lintFilePatterns": ["libs/ui/avatar/helm/**/*.ts", "libs/ui/avatar/helm/**/*.html"]
       }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "ui-avatar-helm"
+      }
     }
   }
 }

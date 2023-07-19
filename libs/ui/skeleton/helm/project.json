@@ -42,6 +42,12 @@
       "options": {
         "lintFilePatterns": ["libs/ui/skeleton/helm/**/*.ts", "libs/ui/skeleton/helm/**/*.html"]
       }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "ui-skeleton-helm"
+      }
     }
   }
 }

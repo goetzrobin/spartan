@@ -1,5 +1,8 @@
 {
   "name": "@spartan-ng/ui-core-brain",
   "version": "0.0.1",
-  "type": "commonjs"
+  "type": "commonjs",
+  "publishConfig": {
+    "access": "public"
+  }
 }

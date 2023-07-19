@@ -134,6 +134,7 @@
     "lint-staged": "^13.1.0",
     "ng-packagr": "16.1.0",
     "nx": "16.3.2",
+    "nx-release": "^3.1.5",
     "postcss": "^8.4.21",
     "postcss-import": "~15.1.0",
     "postcss-preset-env": "~8.0.1",

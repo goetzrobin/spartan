@@ -42,6 +42,12 @@
       "options": {
         "lintFilePatterns": ["libs/ui/switch/brain/**/*.ts", "libs/ui/switch/brain/**/*.html"]
       }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "ui-switch-brain"
+      }
     }
   }
 }

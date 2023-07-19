@@ -42,6 +42,12 @@
       "options": {
         "lintFilePatterns": ["libs/ui/button/helm/**/*.ts", "libs/ui/button/helm/**/*.html"]
       }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "ui-button-helm"
+      }
     }
   }
 }

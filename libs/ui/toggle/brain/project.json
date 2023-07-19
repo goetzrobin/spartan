@@ -42,6 +42,12 @@
       "options": {
         "lintFilePatterns": ["libs/ui/toggle/brain/**/*.ts", "libs/ui/toggle/brain/**/*.html"]
       }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "ui-toggle-brain"
+      }
     }
   }
 }

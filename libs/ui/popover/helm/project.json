@@ -42,6 +42,12 @@
       "options": {
         "lintFilePatterns": ["libs/ui/popover/helm/**/*.ts", "libs/ui/popover/helm/**/*.html"]
       }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "ui-popover-helm"
+      }
     }
   }
 }

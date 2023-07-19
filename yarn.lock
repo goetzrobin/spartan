@@ -3389,6 +3389,13 @@
   dependencies:
     "@nx/devkit" "16.3.2"
 
+"@nrwl/devkit@16.5.0":
+  version "16.5.0"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-16.5.0.tgz#b116f7637f501449a702b268d18cd806dada3360"
+  integrity sha512-O/CH43gM2sumfO1BX7f20B4rniE9P48XwMEQoi1HssdzL+IstHWw5Q9BO2uoSCNpu5x04V/VzX/8yFmoFmOJ7g==
+  dependencies:
+    "@nx/devkit" "16.5.0"
+
 "@nrwl/eslint-plugin-nx@16.3.2":
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/@nrwl/eslint-plugin-nx/-/eslint-plugin-nx-16.3.2.tgz#575e634dd19ea9e13f89b1f63bab300b53cf1bea"
@@ -3523,6 +3530,18 @@
     ejs "^3.1.7"
     ignore "^5.0.4"
     semver "7.3.4"
+    tmp "~0.2.1"
+    tslib "^2.3.0"
+
+"@nx/devkit@16.5.0":
+  version "16.5.0"
+  resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-16.5.0.tgz#aacb35a0a4b151e251691469fcf836c0506d4f15"
+  integrity sha512-IfGGKwgOBZshgRtL0V0IOuTaW8mnuSFft708fQfRyw8ArpNeyJbdbIvd9lCsHAFaKE5VTIKug4C48tyQikM7eA==
+  dependencies:
+    "@nrwl/devkit" "16.5.0"
+    ejs "^3.1.7"
+    ignore "^5.0.4"
+    semver "7.5.3"
     tmp "~0.2.1"
     tslib "^2.3.0"
 
@@ -12748,6 +12767,16 @@ nwsapi@^2.2.2:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.4.tgz#fd59d5e904e8e1f03c25a7d5a15cfa16c714a1e5"
   integrity sha512-NHj4rzRo0tQdijE9ZqAx6kYDcoRwYwSYzCA8MY3JzfxlrvEU0jhnhJT9BhqhJs7I/dKcrDm6TyulaRqZPIhN5g==
 
+nx-release@^3.1.5:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/nx-release/-/nx-release-3.1.5.tgz#c2976c4f28328436e29c0f35b7fe2ceeec2a3b0e"
+  integrity sha512-5we3jNaQidJZMqyusOy7p9shNwXhHp8SDxR6dnQlGgsZ34e6Vz6stm4hW/CN9ZpX0njoxQIQVtcXqE5KFtkThw==
+  dependencies:
+    "@nx/devkit" "16.5.0"
+    chalk "^4.1.2"
+    ora "^5.4.1"
+    process "0.11.10"
+
 nx@16.3.2:
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/nx/-/nx-16.3.2.tgz#92a2d7ef06d15b3b111b7cf9d35de08de0a22d90"
@@ -14029,7 +14058,7 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-process@^0.11.10:
+process@0.11.10, process@^0.11.10:
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
   integrity sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==
