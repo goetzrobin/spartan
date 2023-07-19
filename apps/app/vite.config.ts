@@ -60,6 +60,7 @@ export default defineConfig(({ mode }) => {
             '/components/label',
             '/components/menubar',
             '/components/popover',
+            '/components/progress',
 
             '/stack/overview',
             '/stack/technologies',
