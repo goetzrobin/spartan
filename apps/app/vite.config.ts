@@ -57,6 +57,7 @@ export default defineConfig(({ mode }) => {
             '/components/dialog',
             '/components/dropdown-menu',
             '/components/input',
+            '/components/label',
 
             '/stack/overview',
             '/stack/technologies',
