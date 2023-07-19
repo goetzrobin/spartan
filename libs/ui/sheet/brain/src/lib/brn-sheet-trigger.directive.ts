@@ -1,5 +1,6 @@
-import { Directive } from '@angular/core';
+import { Directive, inject, Input } from '@angular/core';
 import { BrnDialogTriggerDirective } from '@ng-spartan/ui/dialog/brain';
+import { BrnSheetComponent } from './brn-sheet.component';
 
 @Directive({
   selector: 'button[brnSheetTrigger]',
@@ -13,4 +14,15 @@ import { BrnDialogTriggerDirective } from '@ng-spartan/ui/dialog/brain';
     '[attr.aria-controls]': 'dialogId',
   },
 })
-export class BrnSheetTriggerDirective extends BrnDialogTriggerDirective {}
+export class BrnSheetTriggerDirective extends BrnDialogTriggerDirective {
+  private _sheet = inject(BrnSheetComponent, { optional: true });
+  @Input()
+  side: 'top' | 'bottom' | 'left' | 'right' | undefined;
+
+  override open() {
+    if (this._sheet && this.side) {
+      this._sheet.setSide = this.side;
+    }
+    super.open();
+  }
+}
