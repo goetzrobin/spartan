@@ -65,7 +65,11 @@ export default defineConfig(({ mode }) => {
             '/components/scroll-area',
             '/components/separator',
             '/components/sheet',
+            '/components/skeleton',
+            '/components/switch',
+            '/components/tabs',
             '/components/textarea',
+            '/components/toggle',
 
             '/stack/overview',
             '/stack/technologies',

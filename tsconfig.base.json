@@ -57,6 +57,8 @@
       "@ng-spartan/ui/switch/helm": ["libs/ui/switch/helm/src/index.ts"],
       "@ng-spartan/ui/tabs/brain": ["libs/ui/tabs/brain/src/index.ts"],
       "@ng-spartan/ui/tabs/helm": ["libs/ui/tabs/helm/src/index.ts"],
+      "@ng-spartan/ui/toggle/brain": ["libs/ui/toggle/brain/src/index.ts"],
+      "@ng-spartan/ui/toggle/helm": ["libs/ui/toggle/helm/src/index.ts"],
       "@ng-spartan/ui/typography/helm": ["libs/ui/typography/helm/src/index.ts"],
       "~/*": ["apps/app/src/*"]
     }
