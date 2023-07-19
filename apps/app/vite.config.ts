@@ -59,6 +59,7 @@ export default defineConfig(({ mode }) => {
             '/components/input',
             '/components/label',
             '/components/menubar',
+            '/components/popover',
 
             '/stack/overview',
             '/stack/technologies',
