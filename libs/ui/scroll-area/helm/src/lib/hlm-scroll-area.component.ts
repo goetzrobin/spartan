@@ -9,6 +9,7 @@ import { hlm } from '@ng-spartan/ui/core/helm';
   imports: [NgScrollbarModule],
   template: `
     <ng-scrollbar
+      [visibility]="visibility"
       [autoHeightDisabled]="autoHeightDisabled"
       [autoWidthDisabled]="autoWidthDisabled"
       [track]="track"
@@ -43,6 +44,8 @@ export class HlmScrollAreaComponent {
   autoHeightDisabled = false;
   @Input()
   autoWidthDisabled = false;
+  @Input()
+  visibility: 'hover' | 'always' | 'native' = 'native';
 
   private generateClasses() {
     return hlm('block', this._inputs);
