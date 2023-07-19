@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HlmBadgeDirective } from '@spartan-ng/ui/badge/helm';
+import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 
 @Component({
   selector: 'spartan-badge-preview',
@@ -13,7 +13,7 @@ export class BadgePreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmBadgeDirective } from '@spartan-ng/ui/badge/helm';
+import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 
 @Component({
   selector: 'spartan-badge-preview',
@@ -27,7 +27,7 @@ export class BadgePreviewComponent {}
 `;
 
 export const defaultImports = `
-import { HlmBadgeDirective } from '@spartan-ng/ui/badge/helm';
+import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 `;
 
 export const defaultSkeleton = `

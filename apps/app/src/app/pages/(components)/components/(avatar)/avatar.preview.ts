@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HlmAvatarComponent, HlmAvatarFallbackDirective, HlmAvatarImageDirective } from '@spartan-ng/ui/avatar/helm';
+import { HlmAvatarComponent, HlmAvatarFallbackDirective, HlmAvatarImageDirective } from '@spartan-ng/ui-avatar-helm';
 
 @Component({
   selector: 'spartan-avatar-preview',
@@ -16,7 +16,7 @@ export class AvatarPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmAvatarComponent } from '@spartan-ng/ui/avatar/helm';
+import { HlmAvatarComponent } from '@spartan-ng/ui-avatar-helm';
 
 @Component({
   selector: 'spartan-avatar-preview',
@@ -33,7 +33,7 @@ export class AvatarPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { HlmAvatarComponent } from '@spartan-ng/ui/avatar/helm';
+import { HlmAvatarComponent } from '@spartan-ng/ui-avatar-helm';
 `;
 
 export const defaultSkeleton = `

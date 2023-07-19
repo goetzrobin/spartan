@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmCardContentDirective,
   HlmCardDescriptionDirective,
@@ -7,12 +7,12 @@ import {
   HlmCardFooterDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
-} from '@spartan-ng/ui/card/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+} from '@spartan-ng/ui-card-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixBell, radixCheck } from '@ng-icons/radix-icons';
-import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui/switch/brain';
-import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@spartan-ng/ui/switch/helm';
+import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui-switch-brain';
+import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@spartan-ng/ui-switch-helm';
 import { NgForOf } from '@angular/common';
 
 @Component({
@@ -92,7 +92,7 @@ export class CardNotificationsComponent {
 
 export const cardNotificationsCode = `
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmCardContentDirective,
   HlmCardDescriptionDirective,
@@ -100,12 +100,12 @@ import {
   HlmCardFooterDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
-} from '@spartan-ng/ui/card/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+} from '@spartan-ng/ui-card-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixBell, radixCheck } from '@ng-icons/radix-icons';
-import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui/switch/brain';
-import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@spartan-ng/ui/switch/helm';
+import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui-switch-brain';
+import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@spartan-ng/ui-switch-helm';
 import { NgForOf } from '@angular/common';
 
 @Component({

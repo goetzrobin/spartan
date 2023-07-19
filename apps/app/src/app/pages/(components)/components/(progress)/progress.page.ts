@@ -13,7 +13,7 @@ import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-head
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, ProgressPreviewComponent } from './progress.preview';
 import { indeterminateCode, ProgressIndeterminatePreviewComponent } from './progress--indeterminate.preview';
-import { hlmH4 } from '@spartan-ng/ui/typography/helm';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Progress' },
@@ -56,8 +56,8 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui/progress" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui/progress" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-progress" />
+        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-progress" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

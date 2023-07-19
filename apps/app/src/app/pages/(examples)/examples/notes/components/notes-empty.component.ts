@@ -5,7 +5,7 @@ import {
   HlmCardDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
-} from '@spartan-ng/ui/card/helm';
+} from '@spartan-ng/ui-card-helm';
 
 @Component({
   selector: 'analog-trpc-notes-empty',

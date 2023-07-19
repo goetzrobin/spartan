@@ -1,5 +1,5 @@
 {
-  "name": "@spartan-ng/ui/core/helm",
+  "name": "@spartan-ng/ui-core-helm",
   "version": "0.0.1",
   "type": "commonjs",
   "dependencies": {

@@ -1,6 +1,6 @@
 import { Directive, effect, HostBinding, inject, Input, signal } from '@angular/core';
-import { BrnAvatarImageDirective } from '@spartan-ng/ui/avatar/brain';
-import { hlm } from '@spartan-ng/ui/core/helm';
+import { BrnAvatarImageDirective } from '@spartan-ng/ui-avatar-brain';
+import { hlm } from '@spartan-ng/ui-core-helm';
 import { ClassValue } from 'clsx';
 
 const generateClasses = (userCls: ClassValue) => {

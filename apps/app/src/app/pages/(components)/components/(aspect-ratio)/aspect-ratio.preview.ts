@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HlmAspectRatioDirective } from '@spartan-ng/ui/aspect-ratio/helm';
+import { HlmAspectRatioDirective } from '@spartan-ng/ui-aspectratio-helm';
 
 @Component({
   selector: 'spartan-aspect-ratio-preview',
@@ -17,7 +17,7 @@ export class AspectRatioPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmAspectRatioDirective } from '@spartan-ng/ui/aspect-ratio/helm';
+import { HlmAspectRatioDirective } from '@spartan-ng/ui-aspectratio-helm';
 
 @Component({
   selector: 'spartan-aspect-ratio-preview',
@@ -35,7 +35,7 @@ export class AspectRatioPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { HlmAspectRatioDirective } from '@spartan-ng/ui/aspect-ratio/helm';
+import { HlmAspectRatioDirective } from '@spartan-ng/ui-aspectratio-helm';
 `;
 
 export const defaultSkeleton = `

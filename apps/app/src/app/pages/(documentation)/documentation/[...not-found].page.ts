@@ -1,7 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
-import { hlmMuted } from '@spartan-ng/ui/typography/helm';
+import { hlmMuted } from '@spartan-ng/ui-typography-helm';
 import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
 
 export const routeMeta: RouteMeta = {

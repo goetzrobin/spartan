@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NavLinkDirective } from '../spartan-nav-link.directive';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixGithubLogo, radixTwitterLogo } from '@ng-icons/radix-icons';
 import { HeaderThemePickerComponent } from './header-theme-picker.component';

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, inject, ViewEncapsulation } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { RouterLink } from '@angular/router';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { radixChevronRight } from '@ng-icons/radix-icons';
 import { NgForOf, NgIf } from '@angular/common';
 import { BreadcrumbService } from '~/app/shared/breadcrumbs/breadcrumb.service';

@@ -1,6 +1,6 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan-ng/ui/core/helm';
+import { hlm } from '@spartan-ng/ui-core-helm';
 import { cva, VariantProps } from 'class-variance-authority';
 
 const listVariants = cva('inline-flex items-center justify-center rounded-md bg-muted p-1 text-muted-foreground', {

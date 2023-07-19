@@ -13,7 +13,7 @@ import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { ButtonPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './button.preview';
-import { hlmH4 } from '@spartan-ng/ui/typography/helm';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { ButtonDestructiveComponent, destructiveCode } from './button--destructive.example';
 import { ButtonOutlineComponent, outlineCode } from './button--outline.example';
 import { ButtonSecondaryComponent, secondaryCode } from './button--secondary.example';
@@ -75,8 +75,8 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui/button" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui/button" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-button" />
+        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-button" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

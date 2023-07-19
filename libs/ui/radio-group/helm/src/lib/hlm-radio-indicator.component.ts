@@ -1,9 +1,9 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCircle, radixDotFilled } from '@ng-icons/radix-icons';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan-ng/ui/core/helm';
+import { hlm } from '@spartan-ng/ui-core-helm';
 
 const btnLike =
   'aspect-square rounded-full ring-offset-background group-[.cdk-keyboard-focused]:ring-2 group-[.cdk-keyboard-focused]:ring-ring group-[.cdk-keyboard-focused]:ring-offset-2 group-[.brn-radio-disabled]:cursor-not-allowed group-[.brn-radio-disabled]:opacity-50';

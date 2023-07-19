@@ -5,8 +5,8 @@ import {
   HlmCardDirective,
   HlmCardFooterDirective,
   HlmCardHeaderDirective,
-} from '@spartan-ng/ui/card/helm';
-import { HlmSkeletonComponent } from '@spartan-ng/ui/skeleton/helm';
+} from '@spartan-ng/ui-card-helm';
+import { HlmSkeletonComponent } from '@spartan-ng/ui-skeleton-helm';
 
 @Component({
   selector: 'analog-trpc-note-skeleton',

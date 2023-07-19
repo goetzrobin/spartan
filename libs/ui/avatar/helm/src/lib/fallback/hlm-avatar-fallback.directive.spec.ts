@@ -1,7 +1,7 @@
 import { Component, PLATFORM_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HlmAvatarFallbackDirective } from './hlm-avatar-fallback.directive';
-import { hexColorFor, isBright } from '@spartan-ng/ui/avatar/brain';
+import { hexColorFor, isBright } from '@spartan-ng/ui-avatar-brain';
 
 @Component({
   selector: 'hlm-mock',

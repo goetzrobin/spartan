@@ -4,8 +4,8 @@ import {
   BrnTabsContentDirective,
   BrnTabsListComponent,
   BrnTabsTriggerDirective,
-} from '@spartan-ng/ui/tabs/brain';
-import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from '@spartan-ng/ui/tabs/helm';
+} from '@spartan-ng/ui-tabs-brain';
+import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
 import {
   HlmCardContentDirective,
   HlmCardDescriptionDirective,
@@ -13,11 +13,11 @@ import {
   HlmCardFooterDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
-} from '@spartan-ng/ui/card/helm';
-import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
-import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
-import { HlmBadgeDirective } from '@spartan-ng/ui/badge/helm';
+} from '@spartan-ng/ui-card-helm';
+import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 
 @Component({
   selector: 'spartan-tabs-vertical',

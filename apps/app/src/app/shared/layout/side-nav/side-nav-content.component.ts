@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui/scroll-area/helm';
+import { HlmScrollAreaComponent } from '@spartan-ng/ui-scroll-area-helm';
 import { SideNavLinkDirective } from './side-nav-link.directive';
 import { SideNavLinksComponent } from './side-nav-links.directive';
 import { SideNavHeadingDirective } from './side-nav-heading.directive';

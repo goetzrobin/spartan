@@ -11,7 +11,7 @@ import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link
 import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
-import { hlmH4 } from '@spartan-ng/ui/typography/helm';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { defaultCode, defaultImports, defaultSkeleton, TogglePreviewComponent } from './toggle.preview';
 import { disabledCode, ToggleDisabledPreviewComponent } from './toggle--disabled.preview';
 import { largeCode, ToggleLargePreviewComponent } from './toggle--large.preview';
@@ -60,8 +60,8 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui/toggle" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui/toggle" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-toggle" />
+        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-toggle" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

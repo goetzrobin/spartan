@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixChevronLeft, radixChevronRight } from '@ng-icons/radix-icons';
 import { NgIf } from '@angular/common';

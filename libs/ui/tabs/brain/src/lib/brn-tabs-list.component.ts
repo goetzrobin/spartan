@@ -13,7 +13,7 @@ import { BrnTabsComponent } from './brn-tabs.component';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 import { take } from 'rxjs';
-import { rxHostListener } from '@spartan-ng/ui/core/brain';
+import { rxHostListener } from '@spartan-ng/ui-core-brain';
 
 @Component({
   selector: 'brn-tabs-list',

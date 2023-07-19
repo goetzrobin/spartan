@@ -13,7 +13,7 @@ import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { ComboboxPreviewComponent, defaultCode } from './combobox.preview';
-import { hlmCode, hlmP } from '@spartan-ng/ui/typography/helm';
+import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Combobox' },

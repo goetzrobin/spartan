@@ -6,7 +6,7 @@ import { SectionIntroComponent } from '~/app/shared/layout/section-intro.compone
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui/typography/helm';
+import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
 import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { CodeComponent } from '~/app/shared/code/code.component';
@@ -16,11 +16,11 @@ import {
   HlmAlertDirective,
   HlmAlertIconDirective,
   HlmAlertTitleDirective,
-} from '@spartan-ng/ui/alert/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+} from '@spartan-ng/ui-alert-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixExclamationTriangle } from '@ng-icons/radix-icons';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Installation' },

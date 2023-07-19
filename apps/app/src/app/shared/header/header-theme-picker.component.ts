@@ -4,14 +4,14 @@ import {
   BrnPopoverComponent,
   BrnPopoverContentDirective,
   BrnPopoverTriggerDirective,
-} from '@spartan-ng/ui/popover/brain';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
-import { HlmPopoverContentDirective } from '@spartan-ng/ui/popover/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+} from '@spartan-ng/ui-popover-brain';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixMoon } from '@ng-icons/radix-icons';
-import { BrnMenuDirective, BrnMenuItemCheckboxDirective, BrnMenuTriggerDirective } from '@spartan-ng/ui/menu/brain';
-import { HlmMenuDirective, HlmMenuItemCheckComponent, HlmMenuItemDirective } from '@spartan-ng/ui/menu/helm';
+import { BrnMenuDirective, BrnMenuItemCheckboxDirective, BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import { HlmMenuDirective, HlmMenuItemCheckComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

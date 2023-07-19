@@ -4,8 +4,8 @@ import {
   BrnTabsContentDirective,
   BrnTabsListComponent,
   BrnTabsTriggerDirective,
-} from '@spartan-ng/ui/tabs/brain';
-import { HlmTabsContentDirective } from '@spartan-ng/ui/tabs/helm';
+} from '@spartan-ng/ui-tabs-brain';
+import { HlmTabsContentDirective } from '@spartan-ng/ui-tabs-helm';
 import { marked } from 'marked';
 import { gfmHeadingId } from 'marked-gfm-heading-id';
 import { markedHighlight } from 'marked-highlight';
@@ -17,9 +17,9 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-typescript';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui/scroll-area/helm';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmScrollAreaComponent } from '@spartan-ng/ui-scroll-area-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCheck, radixClipboard } from '@ng-icons/radix-icons';
 import { Clipboard } from '@angular/cdk/clipboard';

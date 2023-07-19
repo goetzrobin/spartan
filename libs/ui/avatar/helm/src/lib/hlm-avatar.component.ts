@@ -8,8 +8,8 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { BrnAvatarComponent } from '@spartan-ng/ui/avatar/brain';
-import { hlm } from '@spartan-ng/ui/core/helm';
+import { BrnAvatarComponent } from '@spartan-ng/ui-avatar-brain';
+import { hlm } from '@spartan-ng/ui-core-helm';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 

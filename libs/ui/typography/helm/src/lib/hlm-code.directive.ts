@@ -1,5 +1,5 @@
 import { Directive, HostBinding, Input } from '@angular/core';
-import { hlm } from '@spartan-ng/ui/core/helm';
+import { hlm } from '@spartan-ng/ui-core-helm';
 import { ClassValue } from 'clsx';
 
 export const hlmCode = 'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold';

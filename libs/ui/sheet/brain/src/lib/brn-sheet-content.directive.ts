@@ -1,6 +1,6 @@
 import { Directive, forwardRef, inject } from '@angular/core';
-import { EXPOSES_SIDE_TOKEN, EXPOSES_STATE_TOKEN } from '@spartan-ng/ui/core/brain';
-import { BrnDialogContentDirective } from '@spartan-ng/ui/dialog/brain';
+import { EXPOSES_SIDE_TOKEN, EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core-brain';
+import { BrnDialogContentDirective } from '@spartan-ng/ui-dialog-brain';
 import { BrnSheetComponent } from './brn-sheet.component';
 
 @Directive({

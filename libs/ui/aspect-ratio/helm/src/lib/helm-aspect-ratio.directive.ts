@@ -1,6 +1,6 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { AfterViewInit, Directive, effect, ElementRef, HostBinding, inject, Input, signal } from '@angular/core';
-import { hlm } from '@spartan-ng/ui/core/helm';
+import { hlm } from '@spartan-ng/ui-core-helm';
 import { ClassValue } from 'clsx';
 
 const generateParentClasses = (userCls: ClassValue) => hlm(`relative w-full`, userCls);

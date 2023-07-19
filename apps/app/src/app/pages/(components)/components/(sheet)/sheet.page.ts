@@ -13,7 +13,7 @@ import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-head
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, SheetPreviewComponent } from './sheet.preview';
 import { SheetSidePreviewComponent, sideCode } from './sheet--side.preview';
-import { hlmH4 } from '@spartan-ng/ui/typography/helm';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Sheet' },
@@ -56,8 +56,8 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui/sheet" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui/sheet" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-sheet" />
+        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-sheet" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

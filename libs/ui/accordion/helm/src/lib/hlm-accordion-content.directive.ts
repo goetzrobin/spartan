@@ -12,9 +12,9 @@ import {
   signal,
 } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan-ng/ui/core/helm';
+import { hlm } from '@spartan-ng/ui-core-helm';
 import { isPlatformBrowser } from '@angular/common';
-import { SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui/core/brain';
+import { SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui-core-brain';
 
 @Directive({
   selector: '[hlmAccordionContent],brn-accordion-content[hlm]',

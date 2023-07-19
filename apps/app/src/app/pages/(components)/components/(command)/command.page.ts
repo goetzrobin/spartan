@@ -13,8 +13,8 @@ import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { CommandPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './command.preview';
-import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui/typography/helm';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { commandDialogCode, CommandDialogComponent } from './command--dialog.example';
 import { RouterLink } from '@angular/router';
 
@@ -63,8 +63,8 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui/command" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui/command" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-command" />
+        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-command" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

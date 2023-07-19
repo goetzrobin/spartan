@@ -9,8 +9,8 @@ import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page
 import { ComingSoonComponent } from '~/app/shared/layout/coming-soon.component';
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
-import { hlmCode, hlmP, hlmUl } from '@spartan-ng/ui/typography/helm';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { hlmCode, hlmP, hlmUl } from '@spartan-ng/ui-typography-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'About' },

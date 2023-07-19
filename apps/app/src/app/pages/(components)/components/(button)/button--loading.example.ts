@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
-import { HlmSpinnerComponent } from '@spartan-ng/ui/spinner/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixSymbol } from '@ng-icons/radix-icons';
 
@@ -18,7 +18,7 @@ export class ButtonLoadingComponent {}
 
 export const loadingCode = `
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
 @Component({
   selector: 'spartan-button-icon',

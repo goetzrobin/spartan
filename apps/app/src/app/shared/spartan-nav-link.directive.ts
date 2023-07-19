@@ -1,5 +1,5 @@
 import { Directive, inject } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Directive({

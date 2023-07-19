@@ -12,7 +12,7 @@ import { SectionIntroComponent } from '~/app/shared/layout/section-intro.compone
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, InputPreviewComponent } from './input.preview';
-import { hlmH4 } from '@spartan-ng/ui/typography/helm';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { fileCode, InputFilePreviewComponent } from '~/app/pages/(components)/components/(input)/input--file.preview';
 import { disabledCode, InputDisabledPreviewComponent } from './input--disabled.preview';
 import { InputLabelPreviewComponent, labelCode } from './input--label.preview';
@@ -62,8 +62,8 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui/input" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui/input" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-input" />
+        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-input" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

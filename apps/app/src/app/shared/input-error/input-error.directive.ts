@@ -1,6 +1,6 @@
 import { Directive, effect, inject, Injector, OnInit } from '@angular/core';
 import { SignalInputDirective, SignalInputErrorDirective } from 'ng-signal-forms';
-import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector

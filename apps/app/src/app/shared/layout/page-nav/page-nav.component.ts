@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui/scroll-area/helm';
+import { HlmScrollAreaComponent } from '@spartan-ng/ui-scroll-area-helm';
 import { pageNavTmpl } from '~/app/shared/layout/page-nav/page-nav-outlet.component';
 
 @Component({

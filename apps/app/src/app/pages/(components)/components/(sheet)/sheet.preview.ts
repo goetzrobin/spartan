@@ -7,7 +7,7 @@ import {
   BrnSheetOverlayComponent,
   BrnSheetTitleDirective,
   BrnSheetTriggerDirective,
-} from '@spartan-ng/ui/sheet/brain';
+} from '@spartan-ng/ui-sheet-brain';
 import {
   HlmSheetCloseDirective,
   HlmSheetContentDirective,
@@ -16,13 +16,13 @@ import {
   HlmSheetHeaderComponent,
   HlmSheetOverlayDirective,
   HlmSheetTitleDirective,
-} from '@spartan-ng/ui/sheet/helm';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
-import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+} from '@spartan-ng/ui-sheet-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
-import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 
 @Component({
   selector: 'spartan-sheet-preview',
@@ -90,7 +90,7 @@ import {
   BrnSheetOverlayComponent,
   BrnSheetTitleDirective,
   BrnSheetTriggerDirective,
-} from '@spartan-ng/ui/sheet/brain';
+} from '@spartan-ng/ui-sheet-brain';
 import {
   HlmSheetCloseDirective,
   HlmSheetContentDirective,
@@ -99,13 +99,13 @@ import {
   HlmSheetHeaderComponent,
   HlmSheetOverlayDirective,
   HlmSheetTitleDirective,
-} from '@spartan-ng/ui/sheet/helm';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
-import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+} from '@spartan-ng/ui-sheet-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
-import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 
 @Component({
   selector: 'spartan-sheet-preview',
@@ -174,7 +174,7 @@ import {
   BrnSheetOverlayComponent,
   BrnSheetTitleDirective,
   BrnSheetTriggerDirective,
-} from '@spartan-ng/ui/sheet/brain';
+} from '@spartan-ng/ui-sheet-brain';
 import {
   HlmSheetCloseDirective,
   HlmSheetContentDirective,
@@ -183,7 +183,7 @@ import {
   HlmSheetHeaderComponent,
   HlmSheetOverlayDirective,
   HlmSheetTitleDirective,
-} from '@spartan-ng/ui/sheet/helm';
+} from '@spartan-ng/ui-sheet-helm';
 `;
 export const defaultSkeleton = `
 <brn-sheet>

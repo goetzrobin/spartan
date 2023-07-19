@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 
 @Component({
   selector: 'spartan-input-disabled',
@@ -11,7 +11,7 @@ export class InputDisabledPreviewComponent {}
 
 export const disabledCode = `
 import { Component } from '@angular/core';
-import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 
 @Component({
   selector: 'spartan-input-disabled',

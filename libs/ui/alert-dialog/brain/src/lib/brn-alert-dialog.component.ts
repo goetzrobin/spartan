@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
-import { BrnDialogComponent, provideBrnDialog } from '@spartan-ng/ui/dialog/brain';
+import { BrnDialogComponent, provideBrnDialog } from '@spartan-ng/ui-dialog-brain';
 
 @Component({
   selector: 'brn-alert-dialog',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HlmToggleDirective } from '@spartan-ng/ui/toggle/helm';
-import { BrnToggleDirective } from '@spartan-ng/ui/toggle/brain';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmToggleDirective } from '@spartan-ng/ui-toggle-helm';
+import { BrnToggleDirective } from '@spartan-ng/ui-toggle-brain';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixFontItalic } from '@ng-icons/radix-icons';
 
@@ -21,9 +21,9 @@ export class ToggleWithTextPreviewComponent {}
 
 export const withTextCode = `
 import { Component } from '@angular/core';
-import { HlmToggleDirective } from '@spartan-ng/ui/toggle/helm';
-import { BrnToggleDirective } from '@spartan-ng/ui/toggle/brain';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmToggleDirective } from '@spartan-ng/ui-toggle-helm';
+import { BrnToggleDirective } from '@spartan-ng/ui-toggle-brain';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixFontItalic } from '@ng-icons/radix-icons';
 

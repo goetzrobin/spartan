@@ -9,23 +9,23 @@ import {
   BrnAccordionContentComponent,
   BrnAccordionItemComponent,
   BrnAccordionTriggerComponent,
-} from '@spartan-ng/ui/accordion/brain';
+} from '@spartan-ng/ui-accordion-brain';
 import {
   HlmAccordionContentDirective,
   HlmAccordionDirective,
   HlmAccordionIconComponent,
   HlmAccordionItemDirective,
   HlmAccordionTriggerDirective,
-} from '@spartan-ng/ui/accordion/helm';
+} from '@spartan-ng/ui-accordion-helm';
 import { RouterLink } from '@angular/router';
 import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
-import { hlmCode, hlmP } from '@spartan-ng/ui/typography/helm';
-import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
-import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixChevronRight } from '@ng-icons/radix-icons';
 
