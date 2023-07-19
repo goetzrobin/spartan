@@ -17,7 +17,10 @@ import { hlmH4 } from '@ng-spartan/ui/typography/helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Sheet' },
-  meta: metaWith('spartan/ui - Sheet', 'Visually or semantically separates content.'),
+  meta: metaWith(
+    'spartan/ui - Sheet',
+    'Extends the Dialog component to display content that complements the main content of the screen.'
+  ),
   title: 'spartan/ui - Sheet',
 };
 @Component({
@@ -39,7 +42,10 @@ export const routeMeta: RouteMeta = {
   ],
   template: `
     <section spartanMainSection>
-      <spartan-section-intro name="Sheet" lead="Visually or semantically separates content." />
+      <spartan-section-intro
+        name="Sheet"
+        lead="Extends the Dialog component to display content that complements the main content of the screen."
+      />
 
       <spartan-tabs firstTab="Preview" secondTab="Code">
         <div spartanCodePreview firstTab>
