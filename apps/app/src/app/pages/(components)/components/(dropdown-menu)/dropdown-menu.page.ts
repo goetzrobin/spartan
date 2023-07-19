@@ -11,9 +11,8 @@ import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link
 import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
-import { defaultCode, defaultImports, defaultSkeleton, DialogPreviewComponent } from './dialog.preview';
-import { contextMenuCode, DialogContextMenuPreviewComponent } from './dialog-context-menu.preview';
-import { hlmCode, hlmP } from '@ng-spartan/ui/typography/helm';
+import { defaultCode, defaultImports, defaultSkeleton, DropdownPreviewComponent } from './dropdown-menu.preview';
+import { dropdownWithStateCode, DropdownWithStatePreviewComponent } from './dropdown-with-state.preview';
 import {
   HlmAlertDescriptionDirective,
   HlmAlertDirective,
@@ -21,19 +20,18 @@ import {
   HlmAlertTitleDirective,
 } from '@ng-spartan/ui/alert/helm';
 import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
-import { provideIcons } from '@ng-icons/core';
-import { radixExclamationTriangle } from '@ng-icons/radix-icons';
+import { hlmH4 } from '@ng-spartan/ui/typography/helm';
 
 export const routeMeta: RouteMeta = {
-  data: { breadcrumb: 'Dialog' },
+  data: { breadcrumb: 'Dropdown' },
   meta: metaWith(
-    'spartan/ui - Dialog',
-    'A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.'
+    'spartan/ui - Dropdown',
+    'Displays a menu to the user — such as a set of actions or functions — triggered by a button.'
   ),
-  title: 'spartan/ui - Dialog',
+  title: 'spartan/ui - Dropdown',
 };
 @Component({
-  selector: 'spartan-dialog',
+  selector: 'spartan-dropdown-menu',
   standalone: true,
   imports: [
     MainSectionDirective,
@@ -46,34 +44,33 @@ export const routeMeta: RouteMeta = {
     PageNavComponent,
     PageBottomNavComponent,
     PageBottomNavLinkComponent,
-    DialogPreviewComponent,
-    DialogPreviewComponent,
-    DialogContextMenuPreviewComponent,
+    DropdownPreviewComponent,
+    DropdownPreviewComponent,
+    DropdownWithStatePreviewComponent,
     HlmAlertDirective,
     HlmAlertDescriptionDirective,
     HlmIconComponent,
     HlmAlertIconDirective,
     HlmAlertTitleDirective,
   ],
-  providers: [provideIcons({ radixExclamationTriangle })],
   template: `
     <section spartanMainSection>
       <spartan-section-intro
-        name="Dialog"
-        lead="A window overlaid on either the primary window or another dialog window, rendering the content underneath inert."
+        name="Dropdown"
+        lead="Displays a menu to the user — such as a set of actions or functions — triggered by a button."
       />
 
       <spartan-tabs firstTab="Preview" secondTab="Code">
         <div spartanCodePreview firstTab>
-          <spartan-dialog-preview />
+          <spartan-dropdown-preview />
         </div>
         <spartan-code secondTab [code]="defaultCode" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan.ng/ui/dialog" />
-        <spartan-code secondTab language="sh" code="npm install @spartan.ng/ui/dialog" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan.ng/ui/menu" />
+        <spartan-code secondTab language="sh" code="npm install @spartan.ng/ui/menu" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
@@ -82,43 +79,30 @@ export const routeMeta: RouteMeta = {
         <spartan-code [code]="defaultSkeleton" />
       </div>
 
-      <spartan-section-sub-heading id="inside-menu">Inside Menu</spartan-section-sub-heading>
-      <p class="${hlmP} mb-6">
-        You can nest dialogs inside context or dropdown menus. Make sure to wrap the menu-item inside the
-        <code class="${hlmCode}">brn-dialog</code> component and apply the
-        <code class="${hlmCode}">BrnDialogTrigger</code> directive. Another option is to use the
-        <code class="${hlmCode}">brnDialogTriggerFor</code> alternative, which takes in a reference to the brn-dialog.
-        That way you can avoid nesting the template.
-      </p>
-      <div hlmAlert class="mb-6" variant="destructive">
-        <hlm-icon name="radixExclamationTriangle" hlmAlertIcon />
-        <p hlmAlertTitle>Note</p>
-        <p hlmAlertDescription>
-          Using brnDialogTriggerFor outside of the current menu seems to close the menu when dismissing the dialog.
-        </p>
-      </div>
+      <spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
+      <h3 class="mt-6 mb-2 ${hlmH4}">Stateful</h3>
       <spartan-tabs firstTab="Preview" secondTab="Code">
         <div spartanCodePreview firstTab>
-          <spartan-dialog-context-menu />
+          <spartan-dropdown-with-state />
         </div>
-        <spartan-code secondTab [code]="contextMenuCode" />
+        <spartan-code secondTab [code]="dropdownWithStateCode" />
       </spartan-tabs>
 
       <spartan-page-bottom-nav>
-        <spartan-page-bottom-nav-link href="dropdown-menu" label="Dropdown Menu" />
-        <spartan-page-bottom-nav-link direction="previous" href="context-menu" label="Context Menu" />
+        <spartan-page-bottom-nav-link href="input" label="Input" />
+        <spartan-page-bottom-nav-link direction="previous" href="dialog" label="Dialog" />
       </spartan-page-bottom-nav>
     </section>
     <spartan-page-nav>
       <spartan-page-nav-link fragment="installation" label="Installation" />
       <spartan-page-nav-link fragment="usage" label="Usage" />
-      <spartan-page-nav-link fragment="inside-menu" label="Inside Menu" />
+      <spartan-page-nav-link fragment="examples" label="Examples" />
     </spartan-page-nav>
   `,
 })
-export default class DialogPageComponent {
+export default class DropdownPageComponent {
   protected readonly defaultCode = defaultCode;
   protected readonly defaultSkeleton = defaultSkeleton;
   protected readonly defaultImports = defaultImports;
-  protected readonly contextMenuCode = contextMenuCode;
+  protected readonly dropdownWithStateCode = dropdownWithStateCode;
 }
