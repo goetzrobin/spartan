@@ -10,7 +10,7 @@ import {
   Renderer2,
   signal,
 } from '@angular/core';
-import { hlm } from '@ng-spartan/ui/core/helm';
+import { hlm } from '@spartan-ng/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 @Directive({

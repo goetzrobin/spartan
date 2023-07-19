@@ -1,9 +1,9 @@
 import { RouteMeta } from '@analogjs/router';
 import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
-import { hlmH3, hlmMuted } from '@ng-spartan/ui/typography/helm';
-import { HlmSeparatorDirective } from '@ng-spartan/ui/separator/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { hlmH3, hlmMuted } from '@spartan-ng/ui/typography/helm';
+import { HlmSeparatorDirective } from '@spartan-ng/ui/separator/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 import { RouterLink } from '@angular/router';
 
 export const routeMeta: RouteMeta = {

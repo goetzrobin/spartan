@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, computed, ContentChildren, Input, QueryList, signal } from '@angular/core';
 import { BrnAccordionTriggerComponent } from './brn-accordion-trigger.component';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { rxHostListener } from '@ng-spartan/ui/core/brain';
+import { rxHostListener } from '@spartan-ng/ui/core/brain';
 
 @Component({
   selector: 'brn-accordion',

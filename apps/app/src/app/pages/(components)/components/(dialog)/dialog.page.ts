@@ -13,14 +13,14 @@ import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-head
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, DialogPreviewComponent } from './dialog.preview';
 import { contextMenuCode, DialogContextMenuPreviewComponent } from './dialog-context-menu.preview';
-import { hlmCode, hlmP } from '@ng-spartan/ui/typography/helm';
+import { hlmCode, hlmP } from '@spartan-ng/ui/typography/helm';
 import {
   HlmAlertDescriptionDirective,
   HlmAlertDirective,
   HlmAlertIconDirective,
   HlmAlertTitleDirective,
-} from '@ng-spartan/ui/alert/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+} from '@spartan-ng/ui/alert/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixExclamationTriangle } from '@ng-icons/radix-icons';
 
@@ -72,8 +72,8 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan.ng/ui/dialog" />
-        <spartan-code secondTab language="sh" code="npm install @spartan.ng/ui/dialog" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui/dialog" />
+        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui/dialog" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

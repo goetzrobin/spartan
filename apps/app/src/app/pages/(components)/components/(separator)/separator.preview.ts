@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HlmSeparatorDirective } from '@ng-spartan/ui/separator/helm';
-import { BrnSeparatorComponent } from '@ng-spartan/ui/separator/brain';
+import { HlmSeparatorDirective } from '@spartan-ng/ui/separator/helm';
+import { BrnSeparatorComponent } from '@spartan-ng/ui/separator/brain';
 
 @Component({
   selector: 'spartan-separator-preview',
@@ -27,8 +27,8 @@ export class SeparatorPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmSeparatorDirective } from '@ng-spartan/ui/separator/helm';
-import { BrnSeparatorComponent } from '@ng-spartan/ui/separator/brain';
+import { HlmSeparatorDirective } from '@spartan-ng/ui/separator/helm';
+import { BrnSeparatorComponent } from '@spartan-ng/ui/separator/brain';
 
 @Component({
   selector: 'spartan-separator-preview',
@@ -55,8 +55,8 @@ export class SeparatorPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { HlmSeparatorDirective } from '@ng-spartan/ui/separator/helm';
-import { BrnSeparatorComponent } from '@ng-spartan/ui/separator/brain';
+import { HlmSeparatorDirective } from '@spartan-ng/ui/separator/helm';
+import { BrnSeparatorComponent } from '@spartan-ng/ui/separator/brain';
 `;
 export const defaultSkeleton = `
 <brn-separator hlmSeparator/>

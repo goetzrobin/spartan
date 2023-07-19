@@ -2,15 +2,15 @@ import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   HostBinding,
   Input,
-  ViewEncapsulation,
-  effect,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { BrnAvatarComponent } from '@ng-spartan/ui/avatar/brain';
-import { hlm } from '@ng-spartan/ui/core/helm';
-import { VariantProps, cva } from 'class-variance-authority';
+import { BrnAvatarComponent } from '@spartan-ng/ui/avatar/brain';
+import { hlm } from '@spartan-ng/ui/core/helm';
+import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
 const avatarVariants = cva('relative flex shrink-0 overflow-hidden rounded-full', {

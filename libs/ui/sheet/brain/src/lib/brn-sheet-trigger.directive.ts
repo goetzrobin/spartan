@@ -1,5 +1,5 @@
 import { Directive, inject, Input } from '@angular/core';
-import { BrnDialogTriggerDirective } from '@ng-spartan/ui/dialog/brain';
+import { BrnDialogTriggerDirective } from '@spartan-ng/ui/dialog/brain';
 import { BrnSheetComponent } from './brn-sheet.component';
 
 @Directive({

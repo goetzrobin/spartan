@@ -7,7 +7,7 @@ import {
   BrnMenuItemDirective,
   BrnMenuItemRadioDirective,
   BrnMenuTriggerDirective,
-} from '@ng-spartan/ui/menu/brain';
+} from '@spartan-ng/ui/menu/brain';
 import {
   HlmMenuDirective,
   HlmMenuItemCheckComponent,
@@ -19,9 +19,9 @@ import {
   HlmMenuSeparatorComponent,
   HlmMenuShortcutComponent,
   HlmSubMenuDirective,
-} from '@ng-spartan/ui/menu/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+} from '@spartan-ng/ui/menu/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 
 @Component({
   selector: 'spartan-context-menu-preview',
@@ -137,7 +137,7 @@ import {
   BrnMenuItemDirective,
   BrnMenuItemRadioDirective,
   BrnMenuTriggerDirective,
-} from '@ng-spartan/ui/menu/brain';
+} from '@spartan-ng/ui/menu/brain';
 import {
   HlmMenuDirective,
   HlmMenuItemCheckComponent,
@@ -149,9 +149,9 @@ import {
   HlmMenuSeparatorComponent,
   HlmMenuShortcutComponent,
   HlmSubMenuDirective,
-} from '@ng-spartan/ui/menu/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+} from '@spartan-ng/ui/menu/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 
 @Component({
   selector: 'spartan-context-menu-preview',
@@ -267,7 +267,7 @@ import {
   BrnMenuItemDirective,
   BrnMenuItemRadioDirective,
   BrnMenuTriggerDirective,
-} from '@ng-spartan/ui/menu/brain';
+} from '@spartan-ng/ui/menu/brain';
 import {
   HlmMenuDirective,
   HlmMenuItemCheckComponent,
@@ -279,7 +279,7 @@ import {
   HlmMenuSeparatorComponent,
   HlmMenuShortcutComponent,
   HlmSubMenuDirective,
-} from '@ng-spartan/ui/menu/helm';
+} from '@spartan-ng/ui/menu/helm';
 `;
 
 export const defaultSkeleton = `

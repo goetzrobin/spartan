@@ -1,5 +1,5 @@
 {
-  "name": "@ng-spartan/ui/sheet/brain",
+  "name": "@spartan-ng/ui/sheet/brain",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^16.0.0",

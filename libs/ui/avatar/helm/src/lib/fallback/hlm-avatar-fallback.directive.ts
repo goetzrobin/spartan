@@ -1,6 +1,6 @@
-import { Directive, HostBinding, computed, effect, inject } from '@angular/core';
-import { BrnAvatarFallbackDirective, hexColorFor, isBright } from '@ng-spartan/ui/avatar/brain';
-import { hlm } from '@ng-spartan/ui/core/helm';
+import { computed, Directive, effect, HostBinding, inject } from '@angular/core';
+import { BrnAvatarFallbackDirective, hexColorFor, isBright } from '@spartan-ng/ui/avatar/brain';
+import { hlm } from '@spartan-ng/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 const generateClasses = (userCls: ClassValue, colorCls: ClassValue = 'bg-muted') => {

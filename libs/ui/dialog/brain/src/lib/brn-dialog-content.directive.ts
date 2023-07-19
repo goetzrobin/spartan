@@ -1,6 +1,6 @@
 import { Directive, forwardRef, inject, Input, TemplateRef } from '@angular/core';
 import { BrnDialogComponent } from './brn-dialog.component';
-import { EXPOSES_STATE_TOKEN } from '@ng-spartan/ui/core/brain';
+import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui/core/brain';
 
 @Directive({
   selector: '[brnDialogContent]',

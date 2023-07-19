@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 
 @Component({
   selector: 'spartan-button-link',
@@ -11,7 +11,7 @@ export class ButtonLinkComponent {}
 
 export const linkCode = `
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 
 @Component({
   selector: 'spartan-button-link',

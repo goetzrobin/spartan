@@ -4,4 +4,4 @@ export interface ExposesSide {
   side: Signal<'top' | 'bottom' | 'left' | 'right'>;
 }
 
-export const EXPOSES_SIDE_TOKEN = new InjectionToken<ExposesSide>('@ng-spartan EXPOSES_SIDE_TOKEN');
+export const EXPOSES_SIDE_TOKEN = new InjectionToken<ExposesSide>('@spartan-ng EXPOSES_SIDE_TOKEN');

@@ -7,7 +7,7 @@ import {
   BrnAlertDialogOverlayComponent,
   BrnAlertDialogTitleDirective,
   BrnAlertDialogTriggerDirective,
-} from '@ng-spartan/ui/alert-dialog/brain';
+} from '@spartan-ng/ui/alert-dialog/brain';
 import {
   HlmAlertDialogActionButtonDirective,
   HlmAlertDialogCancelButtonDirective,
@@ -17,9 +17,9 @@ import {
   HlmAlertDialogHeaderComponent,
   HlmAlertDialogOverlayDirective,
   HlmAlertDialogTitleDirective,
-} from '@ng-spartan/ui/alert-dialog/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+} from '@spartan-ng/ui/alert-dialog/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
 
@@ -80,7 +80,7 @@ import {
   BrnAlertDialogOverlayComponent,
   BrnAlertDialogTitleDirective,
   BrnAlertDialogTriggerDirective,
-} from '@ng-spartan/ui/alert-dialog/brain';
+} from '@spartan-ng/ui/alert-dialog/brain';
 import {
   HlmAlertDialogActionButtonDirective,
   HlmAlertDialogCancelButtonDirective,
@@ -90,9 +90,9 @@ import {
   HlmAlertDialogHeaderComponent,
   HlmAlertDialogOverlayDirective,
   HlmAlertDialogTitleDirective,
-} from '@ng-spartan/ui/alert-dialog/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+} from '@spartan-ng/ui/alert-dialog/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
 
@@ -153,7 +153,7 @@ import {
   BrnAlertDialogOverlayComponent,
   BrnAlertDialogTitleDirective,
   BrnAlertDialogTriggerDirective,
-} from '@ng-spartan/ui/alert-dialog/brain';
+} from '@spartan-ng/ui/alert-dialog/brain';
 import {
   HlmAlertDialogActionButtonDirective,
   HlmAlertDialogCancelButtonDirective,
@@ -163,7 +163,7 @@ import {
   HlmAlertDialogHeaderComponent,
   HlmAlertDialogOverlayDirective,
   HlmAlertDialogTitleDirective,
-} from '@ng-spartan/ui/alert-dialog/helm';
+} from '@spartan-ng/ui/alert-dialog/helm';
 `;
 
 export const defaultSkeleton = `

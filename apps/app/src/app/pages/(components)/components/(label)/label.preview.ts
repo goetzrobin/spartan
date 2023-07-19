@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
 
 @Component({
   selector: 'spartan-label-preview',
@@ -17,8 +17,8 @@ export class LabelPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
 
 @Component({
   selector: 'spartan-label-preview',
@@ -35,6 +35,6 @@ export class LabelPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
 `;
 export const defaultSkeleton = `<label hlmLabel>Label<input/></label>`;

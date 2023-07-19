@@ -4,8 +4,8 @@ import {
   HlmAlertDirective,
   HlmAlertIconDirective,
   HlmAlertTitleDirective,
-} from '@ng-spartan/ui/alert/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+} from '@spartan-ng/ui/alert/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixExclamationTriangle } from '@ng-icons/radix-icons';
 
@@ -37,8 +37,8 @@ import {
   HlmAlertDirective,
   HlmAlertIconDirective,
   HlmAlertTitleDirective,
-} from '@ng-spartan/ui/alert/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+} from '@spartan-ng/ui/alert/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixExclamationTriangle } from '@ng-icons/radix-icons';
 

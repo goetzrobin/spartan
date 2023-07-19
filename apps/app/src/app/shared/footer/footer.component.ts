@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { hlmMuted } from '@ng-spartan/ui/typography/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { hlmMuted } from '@spartan-ng/ui/typography/helm';
 
 @Component({
   selector: 'spartan-footer',

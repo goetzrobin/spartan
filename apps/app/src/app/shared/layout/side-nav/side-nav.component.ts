@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HlmScrollAreaComponent } from '@ng-spartan/ui/scroll-area/helm';
+import { HlmScrollAreaComponent } from '@spartan-ng/ui/scroll-area/helm';
 import { SideNavContentComponent } from './side-nav-content.component';
 
 @Component({

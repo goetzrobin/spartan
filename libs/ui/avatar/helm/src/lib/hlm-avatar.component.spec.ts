@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HlmAvatarComponent } from './hlm-avatar.component';
 import { Component } from '@angular/core';
-import { BrnAvatarFallbackDirective, BrnAvatarImageDirective } from '@ng-spartan/ui/avatar/brain';
+import { BrnAvatarFallbackDirective, BrnAvatarImageDirective } from '@spartan-ng/ui/avatar/brain';
 
 @Component({
   selector: 'hlm-mock',

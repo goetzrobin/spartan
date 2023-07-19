@@ -1,7 +1,7 @@
 import { Directive, effect, ElementRef, HostBinding, inject, Input, Renderer2 } from '@angular/core';
-import { hlm } from '@ng-spartan/ui/core/helm';
+import { hlm } from '@spartan-ng/ui/core/helm';
 import { ClassValue } from 'clsx';
-import { EXPOSES_STATE_TOKEN } from '@ng-spartan/ui/core/brain';
+import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui/core/brain';
 
 @Directive({
   selector: '[hlmPopoverContent],[brnPopoverContent][hlm]',

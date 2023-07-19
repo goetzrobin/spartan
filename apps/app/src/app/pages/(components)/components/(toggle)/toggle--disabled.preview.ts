@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HlmToggleDirective } from '@ng-spartan/ui/toggle/helm';
-import { BrnToggleDirective } from '@ng-spartan/ui/toggle/brain';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmToggleDirective } from '@spartan-ng/ui/toggle/helm';
+import { BrnToggleDirective } from '@spartan-ng/ui/toggle/brain';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixUnderline } from '@ng-icons/radix-icons';
 
@@ -20,9 +20,9 @@ export class ToggleDisabledPreviewComponent {}
 
 export const disabledCode = `
 import { Component } from '@angular/core';
-import { HlmToggleDirective } from '@ng-spartan/ui/toggle/helm';
-import { BrnToggleDirective } from '@ng-spartan/ui/toggle/brain';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmToggleDirective } from '@spartan-ng/ui/toggle/helm';
+import { BrnToggleDirective } from '@spartan-ng/ui/toggle/brain';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixUnderline } from '@ng-icons/radix-icons';
 

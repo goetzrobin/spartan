@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
 import {
@@ -11,7 +11,7 @@ import {
   BrnDialogOverlayComponent,
   BrnDialogTitleDirective,
   BrnDialogTriggerDirective,
-} from '@ng-spartan/ui/dialog/brain';
+} from '@spartan-ng/ui/dialog/brain';
 import {
   HlmDialogCloseDirective,
   HlmDialogContentDirective,
@@ -20,9 +20,9 @@ import {
   HlmDialogHeaderComponent,
   HlmDialogOverlayDirective,
   HlmDialogTitleDirective,
-} from '@ng-spartan/ui/dialog/helm';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
+} from '@spartan-ng/ui/dialog/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
 
 @Component({
   selector: 'spartan-dialog-preview',
@@ -84,8 +84,8 @@ export class DialogPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
 import {
@@ -96,7 +96,7 @@ import {
   BrnDialogOverlayComponent,
   BrnDialogTitleDirective,
   BrnDialogTriggerDirective,
-} from '@ng-spartan/ui/dialog/brain';
+} from '@spartan-ng/ui/dialog/brain';
 import {
   HlmDialogCloseDirective,
   HlmDialogContentDirective,
@@ -105,9 +105,9 @@ import {
   HlmDialogHeaderComponent,
   HlmDialogOverlayDirective,
   HlmDialogTitleDirective,
-} from '@ng-spartan/ui/dialog/helm';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
+} from '@spartan-ng/ui/dialog/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
 
 @Component({
   selector: 'spartan-dialog-preview',
@@ -177,7 +177,7 @@ import {
   BrnDialogOverlayComponent,
   BrnDialogTitleDirective,
   BrnDialogTriggerDirective,
-} from '@ng-spartan/ui/dialog/brain';
+} from '@spartan-ng/ui/dialog/brain';
 import {
   HlmDialogCloseDirective,
   HlmDialogContentDirective,
@@ -186,7 +186,7 @@ import {
   HlmDialogHeaderComponent,
   HlmDialogOverlayDirective,
   HlmDialogTitleDirective,
-} from '@ng-spartan/ui/dialog/helm';
+} from '@spartan-ng/ui/dialog/helm';
 `;
 
 export const defaultSkeleton = `

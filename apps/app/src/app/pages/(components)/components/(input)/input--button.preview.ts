@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 
 @Component({
   selector: 'spartan-input-button',
@@ -17,9 +17,9 @@ export class InputButtonPreviewComponent {}
 
 export const buttonCode = `
 import { Component } from '@angular/core';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 
 @Component({
   selector: 'spartan-input-button',

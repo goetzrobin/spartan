@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmSpinnerComponent } from '@ng-spartan/ui/spinner/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmSpinnerComponent } from '@spartan-ng/ui/spinner/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixChevronRight } from '@ng-icons/radix-icons';
 
@@ -16,9 +16,9 @@ export class ButtonIconComponent {}
 
 export const iconCode = `
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmSpinnerComponent } from '@ng-spartan/ui/spinner/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmSpinnerComponent } from '@spartan-ng/ui/spinner/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixChevronRight } from '@ng-icons/radix-icons';
 

@@ -81,7 +81,7 @@ export const Transposed: Story = {
       </div>
       <p hlmCardContent>
        <label class='block' hlmLabel>E-mail
-       <input class='w-full mt-1.5' placeholder='you@spartan.ng' hlmInput>
+       <input class='w-full mt-1.5' placeholder='you@spartan-ng' hlmInput>
        </label>
          <label class='block my-4' hlmLabel>Password
        <input class='w-full mt-1.5' type='password' hlmInput>

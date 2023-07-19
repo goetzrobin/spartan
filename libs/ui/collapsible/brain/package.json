@@ -1,5 +1,5 @@
 {
-  "name": "@ng-spartan/ui/collapsible/brain",
+  "name": "@spartan-ng/ui/collapsible/brain",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^16.0.0",

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrnRadioComponent, BrnRadioGroupComponent } from '@ng-spartan/ui/radio-group/brain';
-import { HlmRadioDirective, HlmRadioGroupDirective, HlmRadioIndicatorComponent } from '@ng-spartan/ui/radio-group/helm';
-import { HlmSmallDirective } from '@ng-spartan/ui/typography/helm';
+import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/ui/radio-group/brain';
+import { HlmRadioDirective, HlmRadioGroupDirective, HlmRadioIndicatorComponent } from '@spartan-ng/ui/radio-group/helm';
+import { HlmSmallDirective } from '@spartan-ng/ui/typography/helm';
 
 @Component({
   selector: 'spartan-radio-group-preview',
@@ -45,9 +45,9 @@ export class RadioGroupPreviewComponent {
 export const defaultCode = `
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrnRadioComponent, BrnRadioGroupComponent } from '@ng-spartan/ui/radio-group/brain';
-import { HlmRadioDirective, HlmRadioGroupDirective, HlmRadioIndicatorComponent } from '@ng-spartan/ui/radio-group/helm';
-import { HlmSmallDirective } from '@ng-spartan/ui/typography/helm';
+import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/ui/radio-group/brain';
+import { HlmRadioDirective, HlmRadioGroupDirective, HlmRadioIndicatorComponent } from '@spartan-ng/ui/radio-group/helm';
+import { HlmSmallDirective } from '@spartan-ng/ui/typography/helm';
 
 @Component({
   selector: 'spartan-radio-group-preview',
@@ -89,12 +89,12 @@ export class RadioGroupPreviewComponent {
 `;
 
 export const defaultImports = `
-import { BrnRadioComponent, BrnRadioGroupComponent } from '@ng-spartan/ui/radio-group/brain';
+import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/ui/radio-group/brain';
 import {
   HlmRadioDirective,
   HlmRadioGroupDirective,
   HlmRadioIndicatorComponent,
-} from '@ng-spartan/ui/radio-group/helm';
+} from '@spartan-ng/ui/radio-group/helm';
 `;
 export const defaultSkeleton = `
 <brn-radio-group hlm>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@ng-spartan/ui/switch/brain';
-import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@ng-spartan/ui/switch/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui/switch/brain';
+import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@spartan-ng/ui/switch/helm';
 
 @Component({
   selector: 'spartan-switch-preview',
@@ -26,9 +26,9 @@ export class SwitchPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@ng-spartan/ui/switch/brain';
-import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@ng-spartan/ui/switch/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui/switch/brain';
+import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@spartan-ng/ui/switch/helm';
 
 @Component({
   selector: 'spartan-switch-preview',
@@ -53,8 +53,8 @@ export class SwitchPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@ng-spartan/ui/switch/brain';
-import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@ng-spartan/ui/switch/helm';
+import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui/switch/brain';
+import { HlmSwitchDirective, HlmSwitchThumbDirective } from '@spartan-ng/ui/switch/helm';
 `;
 export const defaultSkeleton = `
 <brn-switch hlm>

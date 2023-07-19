@@ -1,5 +1,5 @@
 {
-  "name": "@ng-spartan/ui/alert-dialog/brain",
+  "name": "@spartan-ng/ui/alert-dialog/brain",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^16.0.0",

@@ -1,14 +1,14 @@
 import { Component, signal } from '@angular/core';
-import { BrnCommandComponents } from '@ng-spartan/ui/command/brain';
-import { HlmCommandPrimitives } from '@ng-spartan/ui/command/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { BrnCommandComponents } from '@spartan-ng/ui/command/brain';
+import { HlmCommandPrimitives } from '@spartan-ng/ui/command/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 import {
   BrnPopoverComponent,
   BrnPopoverContentDirective,
   BrnPopoverTriggerDirective,
-} from '@ng-spartan/ui/popover/brain';
-import { HlmPopoverContentDirective } from '@ng-spartan/ui/popover/helm';
+} from '@spartan-ng/ui/popover/brain';
+import { HlmPopoverContentDirective } from '@spartan-ng/ui/popover/helm';
 import { NgForOf } from '@angular/common';
 import { provideIcons } from '@ng-icons/core';
 import { radixCaretSort, radixCheck, radixMagnifyingGlass } from '@ng-icons/radix-icons';
@@ -110,16 +110,16 @@ export class ComboboxPreviewComponent {
 
 export const defaultCode = `
 import { Component, signal } from '@angular/core';
-import { BrnCommandComponents } from '@ng-spartan/ui/command/brain';
-import { HlmCommandPrimitives } from '@ng-spartan/ui/command/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { BrnCommandComponents } from '@spartan-ng/ui/command/brain';
+import { HlmCommandPrimitives } from '@spartan-ng/ui/command/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 import {
   BrnPopoverComponent,
   BrnPopoverContentDirective,
   BrnPopoverTriggerDirective,
-} from '@ng-spartan/ui/popover/brain';
-import { HlmPopoverContentDirective } from '@ng-spartan/ui/popover/helm';
+} from '@spartan-ng/ui/popover/brain';
+import { HlmPopoverContentDirective } from '@spartan-ng/ui/popover/helm';
 import { NgForOf } from '@angular/common';
 import { provideIcons } from '@ng-icons/core';
 import { radixCaretSort, radixCheck, radixMagnifyingGlass } from '@ng-icons/radix-icons';

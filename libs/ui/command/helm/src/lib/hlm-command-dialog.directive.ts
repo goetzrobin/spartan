@@ -1,7 +1,7 @@
 import { Directive, effect, ElementRef, HostBinding, inject, Input, Renderer2 } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@ng-spartan/ui/core/helm';
-import { EXPOSES_STATE_TOKEN } from '@ng-spartan/ui/core/brain';
+import { hlm } from '@spartan-ng/ui/core/helm';
+import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui/core/brain';
 import { HlmCommandDirective } from './hlm-command.directive';
 
 @Directive({

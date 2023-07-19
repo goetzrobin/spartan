@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@ng-spartan/ui/core/helm';
+import { hlm } from '@spartan-ng/ui/core/helm';
 
 @Component({
   selector: 'hlm-alert-dialog-header',

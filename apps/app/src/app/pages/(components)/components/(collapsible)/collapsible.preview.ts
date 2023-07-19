@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 import {
   BrnCollapsibleComponent,
   BrnCollapsibleContentComponent,
   BrnCollapsibleTriggerDirective,
-} from '@ng-spartan/ui/collapsible/brain';
+} from '@spartan-ng/ui/collapsible/brain';
 
 @Component({
   selector: 'spartan-collapsible-preview',
@@ -49,12 +49,12 @@ export class CollapsiblePreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 import {
   BrnCollapsibleComponent,
   BrnCollapsibleContentComponent,
   BrnCollapsibleTriggerDirective,
-} from '@ng-spartan/ui/collapsible/brain';
+} from '@spartan-ng/ui/collapsible/brain';
 
 @Component({
   selector: 'spartan-collapsible-preview',
@@ -103,7 +103,7 @@ import {
   BrnCollapsibleComponent,
   BrnCollapsibleContentComponent,
   BrnCollapsibleTriggerDirective,
-} from '@ng-spartan/ui/collapsible/brain';
+} from '@spartan-ng/ui/collapsible/brain';
 `;
 
 export const defaultSkeleton = `

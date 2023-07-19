@@ -4,14 +4,14 @@ import {
   BrnAccordionContentComponent,
   BrnAccordionItemComponent,
   BrnAccordionTriggerComponent,
-} from '@ng-spartan/ui/accordion/brain';
+} from '@spartan-ng/ui/accordion/brain';
 import {
   HlmAccordionContentDirective,
   HlmAccordionDirective,
   HlmAccordionIconComponent,
   HlmAccordionItemDirective,
   HlmAccordionTriggerDirective,
-} from '@ng-spartan/ui/accordion/helm';
+} from '@spartan-ng/ui/accordion/helm';
 
 @Component({
   selector: 'spartan-accordion-preview',
@@ -68,14 +68,14 @@ import {
   BrnAccordionContentComponent,
   BrnAccordionItemComponent,
   BrnAccordionTriggerComponent,
-} from '@ng-spartan/ui/accordion/brain';
+} from '@spartan-ng/ui/accordion/brain';
 import {
   HlmAccordionContentDirective,
   HlmAccordionDirective,
   HlmAccordionIconComponent,
   HlmAccordionItemDirective,
   HlmAccordionTriggerDirective,
-} from '@ng-spartan/ui/accordion/helm';
+} from '@spartan-ng/ui/accordion/helm';
 
 @Component({
   selector: 'spartan-accordion-preview',
@@ -132,14 +132,14 @@ import {
   BrnAccordionContentComponent,
   BrnAccordionItemComponent,
   BrnAccordionTriggerComponent,
-} from '@ng-spartan/ui/accordion/brain';
+} from '@spartan-ng/ui/accordion/brain';
 import {
   HlmAccordionContentDirective,
   HlmAccordionDirective,
   HlmAccordionIconComponent,
   HlmAccordionItemDirective,
   HlmAccordionTriggerDirective,
-} from '@ng-spartan/ui/accordion/helm';
+} from '@spartan-ng/ui/accordion/helm';
 `;
 
 export const codeSkeleton = `

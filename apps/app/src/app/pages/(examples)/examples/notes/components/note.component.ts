@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 import {
   HlmCardContentDirective,
   HlmCardDescriptionDirective,
@@ -8,11 +8,11 @@ import {
   HlmCardFooterDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
-} from '@ng-spartan/ui/card/helm';
-import { HlmSpinnerComponent } from '@ng-spartan/ui/spinner/helm';
+} from '@spartan-ng/ui/card/helm';
+import { HlmSpinnerComponent } from '@spartan-ng/ui/spinner/helm';
 import { RouterLink } from '@angular/router';
 import { Note } from '~/db';
-import { HlmBadgeDirective } from '@ng-spartan/ui/badge/helm';
+import { HlmBadgeDirective } from '@spartan-ng/ui/badge/helm';
 
 @Component({
   selector: 'analog-trpc-note',

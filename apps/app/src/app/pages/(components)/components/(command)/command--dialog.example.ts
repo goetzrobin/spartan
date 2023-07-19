@@ -1,17 +1,17 @@
 import { Component, HostListener, signal } from '@angular/core';
-import { BrnCommandComponents } from '@ng-spartan/ui/command/brain';
-import { HlmCommandPrimitives } from '@ng-spartan/ui/command/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { BrnCommandComponents } from '@spartan-ng/ui/command/brain';
+import { HlmCommandPrimitives } from '@spartan-ng/ui/command/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 import {
   BrnDialogCloseDirective,
   BrnDialogComponent,
   BrnDialogContentDirective,
   BrnDialogOverlayComponent,
   BrnDialogTriggerDirective,
-} from '@ng-spartan/ui/dialog/brain';
-import { HlmDialogOverlayDirective } from '@ng-spartan/ui/dialog/helm';
-import { HlmCodeDirective } from '@ng-spartan/ui/typography/helm';
+} from '@spartan-ng/ui/dialog/brain';
+import { HlmDialogOverlayDirective } from '@spartan-ng/ui/dialog/helm';
+import { HlmCodeDirective } from '@spartan-ng/ui/typography/helm';
 import { provideIcons } from '@ng-icons/core';
 import {
   radixCalendar,

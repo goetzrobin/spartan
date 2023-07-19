@@ -5,5 +5,5 @@ export interface CustomElementClassSettable {
 }
 
 export const SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN = new InjectionToken<CustomElementClassSettable>(
-  '@ng-spartan SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN'
+  '@spartan-ng SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN'
 );

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { hlmLead } from '@ng-spartan/ui/typography/helm';
+import { hlmLead } from '@spartan-ng/ui/typography/helm';
 
 @Component({
   selector: 'spartan-section-intro',

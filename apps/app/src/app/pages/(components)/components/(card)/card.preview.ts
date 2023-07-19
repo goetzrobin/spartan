@@ -6,10 +6,10 @@ import {
   HlmCardFooterDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
-} from '@ng-spartan/ui/card/helm';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+} from '@spartan-ng/ui/card/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 
 @Component({
   selector: 'spartan-card-preview',
@@ -64,10 +64,10 @@ import {
   HlmCardFooterDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
-} from '@ng-spartan/ui/card/helm';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+} from '@spartan-ng/ui/card/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 
 @Component({
   selector: 'spartan-card-preview',
@@ -122,7 +122,7 @@ import {
   HlmCardFooterDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
-} from '@ng-spartan/ui/card/helm';
+} from '@spartan-ng/ui/card/helm';
 `;
 
 export const defaultSkeleton = `

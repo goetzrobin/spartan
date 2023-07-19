@@ -15,7 +15,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { rxHostPressedListener } from '@ng-spartan/ui/core/brain';
+import { rxHostPressedListener } from '@spartan-ng/ui/core/brain';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';

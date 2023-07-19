@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import {
   radixAvatar,
@@ -23,7 +23,7 @@ import {
   BrnMenuGroupDirective,
   BrnMenuItemDirective,
   BrnMenuTriggerDirective,
-} from '@ng-spartan/ui/menu/brain';
+} from '@spartan-ng/ui/menu/brain';
 import {
   HlmMenuDirective,
   HlmMenuItemDirective,
@@ -33,7 +33,7 @@ import {
   HlmMenuSeparatorComponent,
   HlmMenuShortcutComponent,
   HlmSubMenuDirective,
-} from '@ng-spartan/ui/menu/helm';
+} from '@spartan-ng/ui/menu/helm';
 
 @Component({
   selector: 'spartan-dropdown-preview',
@@ -183,8 +183,8 @@ export class DropdownPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import {
   radixAvatar,
@@ -207,7 +207,7 @@ import {
   BrnMenuGroupDirective,
   BrnMenuItemDirective,
   BrnMenuTriggerDirective,
-} from '@ng-spartan/ui/menu/brain';
+} from '@spartan-ng/ui/menu/brain';
 import {
   HlmMenuDirective,
   HlmMenuItemDirective,
@@ -217,7 +217,7 @@ import {
   HlmMenuSeparatorComponent,
   HlmMenuShortcutComponent,
   HlmSubMenuDirective,
-} from '@ng-spartan/ui/menu/helm';
+} from '@spartan-ng/ui/menu/helm';
 
 @Component({
   selector: 'spartan-dropdown-preview',
@@ -372,7 +372,7 @@ import {
   BrnMenuGroupDirective,
   BrnMenuItemDirective,
   BrnMenuTriggerDirective,
-} from '@ng-spartan/ui/menu/brain';
+} from '@spartan-ng/ui/menu/brain';
 import {
   HlmMenuDirective,
   HlmMenuItemDirective,
@@ -382,7 +382,7 @@ import {
   HlmMenuSeparatorComponent,
   HlmMenuShortcutComponent,
   HlmSubMenuDirective,
-} from '@ng-spartan/ui/menu/helm';
+} from '@spartan-ng/ui/menu/helm';
 `;
 
 export const defaultSkeleton = `
@@ -397,7 +397,7 @@ export const defaultSkeleton = `
         Profile
         <hlm-menu-shortcut>⇧⌘P</hlm-menu-shortcut>
       </button>
-      
+
       <hlm-menu-separator />
 
       <button hlm brnMenuItem [brnMenuTriggerFor]="invite">

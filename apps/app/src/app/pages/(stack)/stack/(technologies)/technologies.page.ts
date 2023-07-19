@@ -6,7 +6,7 @@ import { SectionIntroComponent } from '~/app/shared/layout/section-intro.compone
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { hlmP } from '@ng-spartan/ui/typography/helm';
+import { hlmP } from '@spartan-ng/ui/typography/helm';
 import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { ArchitectureDiagramAngularComponent } from '~/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-angular.component';

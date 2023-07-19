@@ -1,9 +1,9 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@ng-spartan/ui/core/helm';
+import { hlm } from '@spartan-ng/ui/core/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCheck } from '@ng-icons/radix-icons';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 
 @Component({
   selector: 'hlm-menu-item-check',

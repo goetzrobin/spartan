@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
 
 @Component({
   selector: 'spartan-textarea-preview',
@@ -14,7 +14,7 @@ export class TextAreaPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
 
 @Component({
   selector: 'spartan-textarea-preview',
@@ -26,7 +26,7 @@ export class TextAreaPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
 `;
 export const defaultSkeleton = `
 <textarea hlmInput placeholder="Type your message here."></textarea>

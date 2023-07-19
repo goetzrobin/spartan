@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { BrnCommandComponents } from '@ng-spartan/ui/command/brain';
-import { HlmCommandPrimitives } from '@ng-spartan/ui/command/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { BrnCommandComponents } from '@spartan-ng/ui/command/brain';
+import { HlmCommandPrimitives } from '@spartan-ng/ui/command/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 import { provideIcons } from '@ng-icons/core';
 import {
   radixCalendar,
@@ -69,10 +69,10 @@ export class CommandPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { BrnCommandComponents } from '@ng-spartan/ui/command/brain';
-import { HlmCommandPrimitives } from '@ng-spartan/ui/command/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { BrnCommandComponents } from '@spartan-ng/ui/command/brain';
+import { HlmCommandPrimitives } from '@spartan-ng/ui/command/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 import { provideIcons } from '@ng-icons/core';
 import {
   radixCalendar,
@@ -139,8 +139,8 @@ export class CommandPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { BrnCommandComponents } from '@ng-spartan/ui/command/brain';
-import { HlmCommandPrimitives } from '@ng-spartan/ui/command/helm';
+import { BrnCommandComponents } from '@spartan-ng/ui/command/brain';
+import { HlmCommandPrimitives } from '@spartan-ng/ui/command/helm';
 `;
 
 export const defaultSkeleton = `

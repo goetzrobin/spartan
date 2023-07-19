@@ -8,7 +8,7 @@ import {
   untracked,
   ViewEncapsulation,
 } from '@angular/core';
-import { BrnDialogComponent, provideBrnDialog } from '@ng-spartan/ui/dialog/brain';
+import { BrnDialogComponent, provideBrnDialog } from '@spartan-ng/ui/dialog/brain';
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
 export type BrnPopoverAlign = 'start' | 'center' | 'end';

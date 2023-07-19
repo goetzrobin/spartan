@@ -7,7 +7,7 @@ import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.componen
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { ComingSoonComponent } from '~/app/shared/layout/coming-soon.component';
-import { hlmP } from '@ng-spartan/ui/typography/helm';
+import { hlmP } from '@spartan-ng/ui/typography/helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Changelog' },

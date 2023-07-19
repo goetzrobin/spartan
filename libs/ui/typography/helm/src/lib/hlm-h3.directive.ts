@@ -1,5 +1,5 @@
 import { Directive, HostBinding, Input } from '@angular/core';
-import { hlm } from '@ng-spartan/ui/core/helm';
+import { hlm } from '@spartan-ng/ui/core/helm';
 import { ClassValue } from 'clsx';
 
 export const hlmH3 = 'scroll-m-20 text-2xl font-semibold tracking-tight';

@@ -1,7 +1,7 @@
 import { Component, ElementRef, forwardRef, inject, signal } from '@angular/core';
 import { BrnAccordionComponent } from './brn-accordion.component';
 import { BrnAccordionItemComponent } from './brn-accordion-item.component';
-import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@ng-spartan/ui/core/brain';
+import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui/core/brain';
 
 @Component({
   selector: 'brn-accordion-trigger',

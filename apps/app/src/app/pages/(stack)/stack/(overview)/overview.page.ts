@@ -13,8 +13,8 @@ import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { ArchitectureDiagramComponent } from '~/app/pages/(stack)/stack/(overview)/components/architecture-diagram.component';
-import { hlmCode, hlmP, hlmUl } from '@ng-spartan/ui/typography/helm';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { hlmCode, hlmP, hlmUl } from '@spartan-ng/ui/typography/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Overview' },

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 
 @Component({
   selector: 'spartan-button-preview',
@@ -11,7 +11,7 @@ export class ButtonPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 
 @Component({
   selector: 'spartan-button-preview',
@@ -23,7 +23,7 @@ export class ButtonPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
 `;
 
 export const defaultSkeleton = `

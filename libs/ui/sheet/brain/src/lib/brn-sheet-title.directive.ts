@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { BrnDialogTitleDirective } from '@ng-spartan/ui/dialog/brain';
+import { BrnDialogTitleDirective } from '@spartan-ng/ui/dialog/brain';
 
 @Directive({
   selector: '[brnSheetTitle]',

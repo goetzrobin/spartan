@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@ng-spartan/ui/progress/brain';
-import { HlmProgressDirective, HlmProgressIndicatorDirective } from '@ng-spartan/ui/progress/helm';
+import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng/ui/progress/brain';
+import { HlmProgressDirective, HlmProgressIndicatorDirective } from '@spartan-ng/ui/progress/helm';
 
 @Component({
   selector: 'spartan-progress-indeterminate',
@@ -16,8 +16,8 @@ export class ProgressIndeterminatePreviewComponent {}
 
 export const indeterminateCode = `
 import { Component } from '@angular/core';
-import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@ng-spartan/ui/progress/brain';
-import { HlmProgressDirective, HlmProgressIndicatorDirective } from '@ng-spartan/ui/progress/helm';
+import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng/ui/progress/brain';
+import { HlmProgressDirective, HlmProgressIndicatorDirective } from '@spartan-ng/ui/progress/helm';
 
 @Component({
   selector: 'spartan-progress-indeterminate',

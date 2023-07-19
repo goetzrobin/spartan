@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
 import {
@@ -11,7 +11,7 @@ import {
   BrnDialogOverlayComponent,
   BrnDialogTitleDirective,
   BrnDialogTriggerDirective,
-} from '@ng-spartan/ui/dialog/brain';
+} from '@spartan-ng/ui/dialog/brain';
 import {
   HlmDialogCloseDirective,
   HlmDialogContentDirective,
@@ -20,11 +20,11 @@ import {
   HlmDialogHeaderComponent,
   HlmDialogOverlayDirective,
   HlmDialogTitleDirective,
-} from '@ng-spartan/ui/dialog/helm';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
-import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from '@ng-spartan/ui/menu/helm';
-import { BrnContextMenuTriggerDirective, BrnMenuDirective, BrnMenuGroupDirective } from '@ng-spartan/ui/menu/brain';
+} from '@spartan-ng/ui/dialog/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from '@spartan-ng/ui/menu/helm';
+import { BrnContextMenuTriggerDirective, BrnMenuDirective, BrnMenuGroupDirective } from '@spartan-ng/ui/menu/brain';
 
 @Component({
   selector: 'spartan-dialog-context-menu',
@@ -112,8 +112,8 @@ export class DialogContextMenuPreviewComponent {}
 
 export const contextMenuCode = `
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@ng-spartan/ui/button/helm';
-import { HlmIconComponent } from '@ng-spartan/ui/icon/helm';
+import { HlmButtonDirective } from '@spartan-ng/ui/button/helm';
+import { HlmIconComponent } from '@spartan-ng/ui/icon/helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
 import {
@@ -124,7 +124,7 @@ import {
   BrnDialogOverlayComponent,
   BrnDialogTitleDirective,
   BrnDialogTriggerDirective,
-} from '@ng-spartan/ui/dialog/brain';
+} from '@spartan-ng/ui/dialog/brain';
 import {
   HlmDialogCloseDirective,
   HlmDialogContentDirective,
@@ -133,11 +133,11 @@ import {
   HlmDialogHeaderComponent,
   HlmDialogOverlayDirective,
   HlmDialogTitleDirective,
-} from '@ng-spartan/ui/dialog/helm';
-import { HlmLabelDirective } from '@ng-spartan/ui/label/helm';
-import { HlmInputDirective } from '@ng-spartan/ui/input/helm';
-import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from '@ng-spartan/ui/menu/helm';
-import { BrnContextMenuTriggerDirective, BrnMenuDirective, BrnMenuGroupDirective } from '@ng-spartan/ui/menu/brain';
+} from '@spartan-ng/ui/dialog/helm';
+import { HlmLabelDirective } from '@spartan-ng/ui/label/helm';
+import { HlmInputDirective } from '@spartan-ng/ui/input/helm';
+import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from '@spartan-ng/ui/menu/helm';
+import { BrnContextMenuTriggerDirective, BrnMenuDirective, BrnMenuGroupDirective } from '@spartan-ng/ui/menu/brain';
 
 @Component({
   selector: 'spartan-dialog-context-menu',
