@@ -54,6 +54,7 @@ export default defineConfig(({ mode }) => {
             '/components/collapsible',
             '/components/combobox',
             '/components/command',
+            '/components/dialog',
 
             '/stack/overview',
             '/stack/technologies',

@@ -64,7 +64,7 @@ import { SideNavComponent } from './side-nav-coming-soon.component';
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/collapsible">Collapsible</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/combobox">Combobox</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/command">Command</a>
-        <a (click)="linkClicked.emit()" spartanSideNavLink="/components/menu">Context Menu</a>
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/components/context-menu">Context Menu</a>
         <a disabled spartanSideNavLink="/components/table">Data Table<spartan-side-nav-cs /></a>
         <a disabled spartanSideNavLink="/components/picker">Date Picker<spartan-side-nav-cs /></a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/dialog">Dialog</a>

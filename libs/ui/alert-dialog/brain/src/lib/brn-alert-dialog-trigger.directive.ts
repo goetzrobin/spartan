@@ -1,8 +1,9 @@
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { BrnDialogTriggerDirective } from '@ng-spartan/ui/dialog/brain';
+import { BrnAlertDialogComponent } from './brn-alert-dialog.component';
 
 @Directive({
-  selector: 'button[brnAlertDialogTrigger]',
+  selector: 'button[brnAlertDialogTrigger],button[brnAlertDialogTriggerFor]',
   standalone: true,
   host: {
     '[id]': '_id()',
@@ -13,4 +14,9 @@ import { BrnDialogTriggerDirective } from '@ng-spartan/ui/dialog/brain';
     '[attr.aria-controls]': 'dialogId',
   },
 })
-export class BrnAlertDialogTriggerDirective extends BrnDialogTriggerDirective {}
+export class BrnAlertDialogTriggerDirective extends BrnDialogTriggerDirective {
+  @Input()
+  set brnAlertDialogTriggerFor(brnDialog: BrnAlertDialogComponent) {
+    super.brnDialogTriggerFor = brnDialog;
+  }
+}

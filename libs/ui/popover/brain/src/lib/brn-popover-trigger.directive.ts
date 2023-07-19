@@ -14,9 +14,10 @@ import { BrnDialogTriggerDirective } from '@ng-spartan/ui/dialog/brain';
   },
 })
 export class BrnPopoverTriggerDirective extends BrnDialogTriggerDirective {
-  private _host = inject(ElementRef);
+  private _host = inject(ElementRef, { host: true });
   constructor() {
     super();
+    if (!this._brnDialog) return;
     this._brnDialog.attachTo = this._host.nativeElement;
   }
 }

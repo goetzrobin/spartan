@@ -109,11 +109,6 @@ export class BrnDialogComponent {
   }
 
   @Input()
-  set closeOnBackdropClick(closeDelay: NumberInput) {
-    this._options['closeDelay'] = coerceNumberProperty(closeDelay);
-  }
-
-  @Input()
   set closeOnOutsidePointerEvents(closeOnOutsidePointerEvents: BooleanInput) {
     this._options['closeOnOutsidePointerEvents'] = coerceBooleanProperty(closeOnOutsidePointerEvents);
   }
