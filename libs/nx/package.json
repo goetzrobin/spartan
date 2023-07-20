@@ -1,0 +1,6 @@
+{
+  "name": "@spartan-ng/nx",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "executors": "./executors.json"
+}

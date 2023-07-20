@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "NPM publish executor",
+  "description": "",
+  "type": "object",
+  "properties": {}
+}

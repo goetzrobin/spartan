@@ -44,7 +44,7 @@
       }
     },
     "release": {
-      "executor": "nx-release:build-update-publish",
+      "executor": "@spartan-ng/nx:build-update-publish",
       "options": {
         "libName": "ui-progress-helm"
       }

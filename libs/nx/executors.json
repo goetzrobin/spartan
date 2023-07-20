@@ -1,0 +1,19 @@
+{
+  "executors": {
+    "npm-publish": {
+      "implementation": "./src/executors/npm-publish/executor",
+      "schema": "./src/executors/npm-publish/schema.json",
+      "description": "npm-publish executor"
+    },
+    "update-version": {
+      "implementation": "./src/executors/update-version/executor",
+      "schema": "./src/executors/update-version/schema.json",
+      "description": "update-version executor"
+    },
+    "build-update-publish": {
+      "implementation": "./src/executors/build-update-publish/executor",
+      "schema": "./src/executors/build-update-publish/schema.json",
+      "description": "build-update-publish executor"
+    }
+  }
+}
