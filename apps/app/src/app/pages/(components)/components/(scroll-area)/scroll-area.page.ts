@@ -50,8 +50,8 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-scroll-area" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-scroll-area" />
+        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-scrollarea" />
+        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-scrollarea" />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

@@ -17,7 +17,7 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-typescript';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui-scroll-area-helm';
+import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';

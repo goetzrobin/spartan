@@ -24,8 +24,6 @@ jobs:
           cache-dependency-path: '**/yarn.lock'
       - name: Install
         run: yarn install --frozen-lockfile --prefer-offline
-      - name: Build
-        run: yarn build
       - name: Release
         run: npx semantic-release
         env:

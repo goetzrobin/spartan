@@ -12,7 +12,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1, radixViewVertical } from '@ng-icons/radix-icons';
 import { SideNavContentComponent } from '~/app/shared/layout/side-nav/side-nav-content.component';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui-scroll-area-helm';
+import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
 import { RouterLink } from '@angular/router';
 import { NavLinkDirective } from '~/app/shared/spartan-nav-link.directive';
 import { SideNavLinkDirective } from '~/app/shared/layout/side-nav/side-nav-link.directive';
