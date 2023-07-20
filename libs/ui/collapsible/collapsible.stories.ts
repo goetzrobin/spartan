@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { BrnCollapsibleComponent } from './brain/src';
-import { BrnCollapsibleTriggerDirective } from './brain/src/lib/brn-collapsible-trigger.directive';
-import { BrnCollapsibleContentComponent } from './brain/src/lib/brn-collapsible-content.component';
+import { BrnCollapsibleComponent, BrnCollapsibleContentComponent, BrnCollapsibleTriggerDirective } from './brain/src';
 import { HlmButtonDirective } from '../button/helm/src';
 
 const meta: Meta<{}> = {
