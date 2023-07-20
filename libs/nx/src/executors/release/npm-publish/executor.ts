@@ -10,7 +10,7 @@ export default async function runExecutor(options: NpmPublishExecutorSchema, con
   execSync(
     `cd ${sourceRoot} && echo '//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}' > .npmrc && npm publish`
   );
-  await sleep(5000);
+  await sleep(3000);
   return {
     success: true,
   };
