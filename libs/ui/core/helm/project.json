@@ -40,7 +40,7 @@
       }
     },
     "release": {
-      "executor": "@spartan-ng/nx:build-update-publish",
+      "executor": "@spartan-ng/tools:build-update-publish",
       "options": {
         "libName": "ui-core-helm"
       }
