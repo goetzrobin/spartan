@@ -6,7 +6,7 @@ import { SectionIntroComponent } from '~/app/shared/layout/section-intro.compone
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { hlmP } from '@spartan-ng/ui-typography-helm';
+import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
 import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { ArchitectureDiagramAngularComponent } from '~/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-angular.component';
@@ -128,7 +128,8 @@ export const routeMeta: RouteMeta = {
       <p class="${hlmP}">
         Finally, every good application needs a great UI. Although it's easier said than done, there are tools that help
         us do our best work. Tailwind is one of those essential tools for me. Tailwind is "a utility-first CSS framework
-        packed with classes like flex, pt-4, text-center and rotate-90."
+        packed with classes like <code class="${hlmCode}">flex</code>, <code class="${hlmCode}">pt-4</code>,
+        <code class="${hlmCode}">text-center</code> and <code class="${hlmCode}">rotate-90</code>."
       </p>
       <p class="${hlmP}">
         These utility classes let you to modify the layout, color, spacing, font, shadows, and more to create a
