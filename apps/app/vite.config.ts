@@ -84,6 +84,7 @@ export default defineConfig(({ mode }) => {
         },
         nitro: {
           preset: 'vercel',
+          serveStatic: false,
         },
       }),
       tsConfigPaths({
