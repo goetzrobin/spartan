@@ -22,7 +22,7 @@ export const routeMeta: RouteMeta = {
     'spartan/stack - Overview',
     'The spartan/stack is an opinionated full-stack that consists of multiple technologies providing e2e type safety to Angular developers.'
   ),
-  title: 'spartan/ui - Overview',
+  title: 'spartan/stack - Overview',
 };
 
 const stackLink = 'h-6 underline text-base px-0.5';
