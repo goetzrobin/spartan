@@ -7,7 +7,7 @@ import { NpmPublishExecutorSchema } from './schema';
 
 export default async function runExecutor(options: NpmPublishExecutorSchema, context: ExecutorContext) {
   const sourceRoot = `./dist/${getRoot(context)}`;
-  execSync(`cd ${sourceRoot} && npm publish ${process.env.TAG ? '--tag ' + process.env.TAG : ''}`);
+  execSync(`cd ${sourceRoot} && npm publish${process.env.TAG ? ' --tag ' + process.env.TAG : ''}`);
   return {
     success: true,
   };
