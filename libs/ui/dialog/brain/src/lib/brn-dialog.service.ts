@@ -153,6 +153,8 @@ export class BrnDialogService implements OnDestroy {
   }
 
   public close(delay = 0): void {
+    if (!this._open()) return;
+
     this._open.set(false);
     setTimeout(() => {
       this._dialogRef?.close();

@@ -26,6 +26,7 @@ import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput 
 
 let dialogSequence = 0;
 
+export type BrnDialogState = 'open' | 'closed';
 @Component({
   selector: 'brn-dialog',
   standalone: true,
@@ -66,7 +67,7 @@ export class BrnDialogComponent {
   };
 
   @Input('state')
-  set newState(state: 'open' | 'closed') {
+  set newState(state: BrnDialogState) {
     if (state === 'open') {
       this.open();
     }
@@ -75,7 +76,7 @@ export class BrnDialogComponent {
     }
   }
   @Output()
-  public readonly stateChanged = new EventEmitter<'open' | 'closed'>();
+  public readonly stateChanged = new EventEmitter<BrnDialogState>();
 
   @Input()
   set role(role: 'dialog' | 'alertdialog') {
