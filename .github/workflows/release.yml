@@ -1,9 +1,6 @@
 name: release
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 env:
   NODE_OPTIONS: --max-old-space-size=6144
