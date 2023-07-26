@@ -36,7 +36,10 @@ export const routeMeta: RouteMeta = {
   ],
   providers: [provideIcons({ radixRocket })],
   template: `
-    <div hlmAlert class="m-2 p-4 rounded-lg text-destructive-foreground border border-border bg-destructive">
+    <div
+      hlmAlert
+      class="max-w-[95vw] my-2 mx-auto p-4 rounded-lg text-destructive-foreground border border-border bg-destructive"
+    >
       <hlm-icon hlmAlertIcon name="radixRocket" class="!text-destructive-foreground" />
       <h2 hlmAlertTitle>Components are coming soon...</h2>
       <p hlmAlertDesc>

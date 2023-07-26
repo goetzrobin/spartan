@@ -44,10 +44,10 @@ declare const Prism: typeof import('prismjs');
   ],
   providers: [provideIcons({ radixClipboard, radixCheck })],
   host: {
-    class:
-      'spartan-scroll relative flex font-mono rounded-md text-sm block max-h-[650px] text-white bg-zinc-950 dark:bg-zinc-900',
+    class: 'spartan-scroll relative block font-mono rounded-md text-sm text-white bg-zinc-950 dark:bg-zinc-900',
   },
-  template: ` <button
+  template: `
+    <button
       *ngIf="!_disableCopy"
       (click)="copyToClipBoard()"
       hlmBtn
@@ -56,7 +56,10 @@ declare const Prism: typeof import('prismjs');
     >
       <hlm-icon size="xs" [name]="copied ? 'radixCheck' : 'radixClipboard'" />
     </button>
-    <div class="whitespace-nowrap w-full p-4 overflow-auto" [innerHTML]="_content"></div>`,
+    <div class="w-full whitespace-nowrap overflow-auto p-4 max-h-[650px]">
+      <div class="max-w-full max-w-screen" [innerHTML]="_content"></div>
+    </div>
+  `,
   styles: [
     `
       .spartan-scroll .token.class-name {
