@@ -3092,7 +3092,7 @@
     tmp "~0.2.1"
     tslib "^2.3.0"
 
-"@nx/devkit@16.5.5", "@nx/devkit@^16.0.0":
+"@nx/devkit@16.5.5", "@nx/devkit@^16.0.0", "@nx/devkit@^16.5.5":
   version "16.5.5"
   resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-16.5.5.tgz#815a2ed91c3b561697817a46cf7bb4dd3f3f4d0c"
   integrity sha512-9YaQ3s5VMgTXo5cEuaVc2b6btZU2REmHsgn/V4Gi3nSmwBHvIn86gtlh4BoBFinHpqge1chG/dC+B7yoXioQmQ==
@@ -3341,7 +3341,7 @@
   resolved "https://registry.yarnpkg.com/@nx/nx-win32-x64-msvc/-/nx-win32-x64-msvc-16.5.5.tgz#86ef12c1180fb7a1c7fdc93f5de31c683818f31a"
   integrity sha512-fB8miPr887GIGBDhyT6VX7MWX5aC40izEi+4GGSk38oh5dOUK9TLwjAEW/3vBE01fj5Hjcy0CPN7RA45fh/WUw==
 
-"@nx/plugin@16.5.5":
+"@nx/plugin@16.5.5", "@nx/plugin@^16.5.5":
   version "16.5.5"
   resolved "https://registry.yarnpkg.com/@nx/plugin/-/plugin-16.5.5.tgz#ae90694b7a09e8d11ef4e3463d95fe9adb483a70"
   integrity sha512-9KaTqjXsVU1wDu48JABEKjFZrVDHmpwDihzvWHSdZBRD21Cl9azwQ9eZ7sRQD4NkRc9H6ui5QQuT22BHS0SIAQ==
