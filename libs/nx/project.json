@@ -56,7 +56,13 @@
           "codeCoverage": true
         }
       }
+    },
+    "release": {
+      "executor": "@spartan-ng/tools:build-update-publish",
+      "options": {
+        "libName": "nx"
+      }
     }
   },
-  "tags": []
+  "tags": ["scope:nx"]
 }
