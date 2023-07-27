@@ -1,14 +1,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { BrnTabsComponent, BrnTabsContentDirective, BrnTabsListComponent, BrnTabsTriggerDirective } from './brain/src';
-import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from './helm/src';
-import {
-  HlmCardContentDirective,
-  HlmCardDescriptionDirective,
-  HlmCardDirective,
-  HlmCardFooterDirective,
-  HlmCardHeaderDirective,
-  HlmCardTitleDirective,
-} from '../card/helm/src';
+import { BrnTabsImports } from './brain/src';
+import { HlmTabsImports } from './helm/src';
+import { HlmCardImports } from '../card/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
@@ -28,21 +21,9 @@ const meta: Meta<TabsStory> = {
   decorators: [
     moduleMetadata({
       imports: [
-        BrnTabsComponent,
-        BrnTabsListComponent,
-        BrnTabsTriggerDirective,
-        BrnTabsContentDirective,
-
-        HlmTabsListDirective,
-        HlmTabsTriggerDirective,
-        HlmTabsContentDirective,
-
-        HlmCardContentDirective,
-        HlmCardDescriptionDirective,
-        HlmCardDirective,
-        HlmCardFooterDirective,
-        HlmCardHeaderDirective,
-        HlmCardTitleDirective,
+        BrnTabsImports,
+        HlmTabsImports,
+        HlmCardImports,
 
         HlmLabelDirective,
         HlmInputDirective,

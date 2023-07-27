@@ -1,26 +1,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import {
-  BrnContextMenuTriggerDirective,
-  BrnMenuDirective,
-  BrnMenuGroupDirective,
-  BrnMenuItemCheckboxDirective,
-  BrnMenuItemDirective,
-  BrnMenuItemRadioDirective,
-  BrnMenuTriggerDirective,
-} from './brain/src';
-import {
-  HlmMenuDirective,
-  HlmMenuItemCheckComponent,
-  HlmMenuItemDirective,
-  HlmMenuItemIconDirective,
-  HlmMenuItemRadioComponent,
-  HlmMenuItemSubIndicatorComponent,
-  HlmMenuLabelComponent,
-  HlmMenuSeparatorComponent,
-  HlmMenuShortcutComponent,
-  HlmSubMenuDirective,
-} from './helm/src';
+import { BrnContextMenuImports } from './brain/src';
+import { HlmMenuImports } from './helm/src';
 import { provideIcons } from '@ng-icons/core';
 import * as radixIcons from '@ng-icons/radix-icons';
 import { HlmIconComponent } from '../icon/helm/src';
@@ -30,29 +11,7 @@ const meta: Meta<{}> = {
   decorators: [
     moduleMetadata({
       providers: [provideIcons(radixIcons)],
-      imports: [
-        BrnMenuDirective,
-        BrnMenuItemDirective,
-        BrnMenuTriggerDirective,
-        BrnContextMenuTriggerDirective,
-        BrnMenuGroupDirective,
-        BrnMenuItemCheckboxDirective,
-        BrnMenuItemRadioDirective,
-
-        HlmMenuDirective,
-        HlmSubMenuDirective,
-        HlmMenuItemDirective,
-        HlmMenuItemSubIndicatorComponent,
-        HlmMenuLabelComponent,
-        HlmMenuShortcutComponent,
-        HlmMenuSeparatorComponent,
-        HlmMenuItemIconDirective,
-        HlmMenuItemCheckComponent,
-        HlmMenuItemRadioComponent,
-
-        HlmButtonDirective,
-        HlmIconComponent,
-      ],
+      imports: [BrnContextMenuImports, HlmMenuImports, HlmButtonDirective, HlmIconComponent],
     }),
   ],
 };

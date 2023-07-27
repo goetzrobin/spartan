@@ -6,7 +6,7 @@ import { hlm } from '@spartan-ng/ui-core-helm';
 const spinnerVariants = cva('inline-block', {
   variants: {
     variant: {
-      default: 'animate-spin [&>svg]:text-foreground/30 [&>svg]:fill-[#DD0031]',
+      default: 'animate-spin [&>svg]:text-foreground/30 [&>svg]:fill-accent',
     },
     size: {
       xs: 'h-4 w-4',

@@ -1,25 +1,8 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import {
-  BrnSheetCloseDirective,
-  BrnSheetComponent,
-  BrnSheetContentDirective,
-  BrnSheetDescriptionDirective,
-  BrnSheetOverlayComponent,
-  BrnSheetTitleDirective,
-  BrnSheetTriggerDirective,
-} from './brain/src';
-import {
-  HlmSheetCloseDirective,
-  HlmSheetContentDirective,
-  HlmSheetDescriptionDirective,
-  HlmSheetFooterComponent,
-  HlmSheetHeaderComponent,
-  HlmSheetOverlayDirective,
-  HlmSheetTitleDirective,
-} from './helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
-import { provideIcons } from '@ng-icons/core';
+import { BrnSheetImports } from './brain/src';
+import { HlmSheetImports } from './helm/src';
 import { radixCross1 } from '@ng-icons/radix-icons';
+import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 
@@ -31,25 +14,7 @@ const meta: Meta<SheetProps> = {
   },
   decorators: [
     moduleMetadata({
-      imports: [
-        BrnSheetComponent,
-        BrnSheetOverlayComponent,
-        BrnSheetTriggerDirective,
-        BrnSheetContentDirective,
-        BrnSheetCloseDirective,
-        BrnSheetTitleDirective,
-        BrnSheetDescriptionDirective,
-        HlmSheetOverlayDirective,
-        HlmSheetContentDirective,
-        HlmSheetHeaderComponent,
-        HlmSheetFooterComponent,
-        HlmSheetTitleDirective,
-        HlmSheetDescriptionDirective,
-        HlmSheetCloseDirective,
-        HlmButtonDirective,
-        HlmInputDirective,
-        HlmIconComponent,
-      ],
+      imports: [BrnSheetImports, HlmSheetImports, HlmButtonDirective, HlmInputDirective, HlmIconComponent],
       providers: [provideIcons({ radixCross1 })],
     }),
   ],
@@ -73,18 +38,18 @@ export const Default: Story = {
           Make changes to your profile here. Click save when you're done.
           </p>
         </hlm-sheet-header>
-                <div class="grid gap-4 py-4">
-          <div class="grid grid-cols-4 items-center gap-4">
-            <label hlmLabel for="name" class="text-right">
+                <div class='grid gap-4 py-4'>
+          <div class='grid grid-cols-4 items-center gap-4'>
+            <label hlmLabel for='name' class='text-right'>
               Name
             </label>
-            <input hlmInput id="name" value="Pedro Duarte" class="col-span-3" />
+            <input hlmInput id='name' value='Pedro Duarte' class='col-span-3' />
           </div>
-          <div class="grid grid-cols-4 items-center gap-4">
-            <label hlmLabel for="username" class="text-right">
+          <div class='grid grid-cols-4 items-center gap-4'>
+            <label hlmLabel for='username' class='text-right'>
               Username
             </label>
-            <input hlmInput id="username" value="@peduarte" class="col-span-3" />
+            <input hlmInput id='username' value='@peduarte' class='col-span-3' />
           </div>
         </div>
         <hlm-sheet-footer>

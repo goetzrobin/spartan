@@ -1,15 +1,15 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
 import { hlm } from '@spartan-ng/ui-core-helm';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { radixChevronRight } from '@ng-icons/radix-icons';
+import { HlmIconComponent, provideIcons } from '@spartan-ng/icon-helm';
 
 @Component({
   selector: 'hlm-menu-item-sub-indicator',
   standalone: true,
   providers: [provideIcons({ radixChevronRight })],
-  imports: [NgIconComponent],
-  template: ` <ng-icon name="radixChevronRight" /> `,
+  imports: [HlmIconComponent],
+  template: ` <hlm-icon size="none" class="h-full w-full" name="radixChevronRight" /> `,
 })
 export class HlmMenuItemSubIndicatorComponent {
   @HostBinding('class')

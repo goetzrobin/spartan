@@ -1,18 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { BrnCollapsibleComponent, BrnCollapsibleContentComponent, BrnCollapsibleTriggerDirective } from './brain/src';
+import { BrnCollapsibleImports } from './brain/src';
 import { HlmButtonDirective } from '../button/helm/src';
 
 const meta: Meta<{}> = {
   title: 'Collapsible',
   decorators: [
     moduleMetadata({
-      imports: [
-        HlmButtonDirective,
-        BrnCollapsibleComponent,
-        BrnCollapsibleTriggerDirective,
-        BrnCollapsibleContentComponent,
-      ],
+      imports: [HlmButtonDirective, BrnCollapsibleImports],
     }),
   ],
 };

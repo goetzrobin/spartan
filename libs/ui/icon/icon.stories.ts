@@ -1,7 +1,6 @@
-import { provideIcons } from '@ng-icons/core';
 import * as radixIcons from '@ng-icons/radix-icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HlmIconComponent } from './helm/src';
+import { HlmIconComponent, provideIcons } from './helm/src';
 
 type IconProps = {
   name: string;

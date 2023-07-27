@@ -25,7 +25,7 @@ export * from './lib/hlm-command-separator.directive';
 export * from './lib/hlm-command-shortcut.component';
 export * from './lib/hlm-command-dialog.directive';
 
-export const HlmCommandPrimitives = [
+export const HlmCommandImports = [
   HlmCommandDirective,
   HlmCommandInputDirective,
   HlmCommandItemDirective,

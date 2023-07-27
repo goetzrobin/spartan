@@ -17,7 +17,7 @@ export * from './lib/brn-command-list.component';
 export * from './lib/brn-command-loader.directive';
 export * from './lib/brn-command-separator.component';
 
-export const BrnCommandComponents = [
+export const BrnCommandImports = [
   CmdkModule,
   BrnCommandComponent,
   BrnCommandEmptyDirective,

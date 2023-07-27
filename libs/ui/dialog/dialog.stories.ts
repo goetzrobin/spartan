@@ -1,22 +1,6 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import {
-  BrnDialogCloseDirective,
-  BrnDialogComponent,
-  BrnDialogContentDirective,
-  BrnDialogDescriptionDirective,
-  BrnDialogOverlayComponent,
-  BrnDialogTitleDirective,
-  BrnDialogTriggerDirective,
-} from './brain/src';
-import {
-  HlmDialogCloseDirective,
-  HlmDialogContentDirective,
-  HlmDialogDescriptionDirective,
-  HlmDialogFooterComponent,
-  HlmDialogHeaderComponent,
-  HlmDialogOverlayDirective,
-  HlmDialogTitleDirective,
-} from './helm/src';
+import { BrnDialogImports } from './brain/src';
+import { HlmDialogImports } from './helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
@@ -29,20 +13,8 @@ const meta: Meta<{}> = {
   decorators: [
     moduleMetadata({
       imports: [
-        BrnDialogComponent,
-        BrnDialogOverlayComponent,
-        BrnDialogTriggerDirective,
-        BrnDialogContentDirective,
-        BrnDialogCloseDirective,
-        BrnDialogTitleDirective,
-        BrnDialogDescriptionDirective,
-        HlmDialogOverlayDirective,
-        HlmDialogContentDirective,
-        HlmDialogHeaderComponent,
-        HlmDialogFooterComponent,
-        HlmDialogTitleDirective,
-        HlmDialogDescriptionDirective,
-        HlmDialogCloseDirective,
+        BrnDialogImports,
+        HlmDialogImports,
         HlmLabelDirective,
         HlmButtonDirective,
         HlmInputDirective,
@@ -62,29 +34,29 @@ export const Default: Story = {
     <brn-dialog closeDelay='100'>
     <brn-dialog-overlay hlm/>
     <button id='edit-profile' brnDialogTrigger hlmBtn>Edit Profile</button>
-    <div hlmDialogContent class="sm:max-w-[425px]"  *brnDialogContent='let ctx'>
+    <div hlmDialogContent class='sm:max-w-[425px]'  *brnDialogContent='let ctx'>
          <hlm-dialog-header>
           <h3 brnDialogTitle hlm>Edit profile</h3>
           <p brnDialogDescription hlm>
             Make changes to your profile here. Click save when you're done.
           </p>
         </hlm-dialog-header>
-        <div class="grid gap-4 py-4">
-          <div class="grid grid-cols-4 items-center gap-4">
-            <label hlmLabel for="name" class="text-right">
+        <div class='grid gap-4 py-4'>
+          <div class='grid grid-cols-4 items-center gap-4'>
+            <label hlmLabel for='name' class='text-right'>
               Name
             </label>
-            <input hlmInput id="name" value="Pedro Duarte" class="col-span-3" />
+            <input hlmInput id='name' value='Pedro Duarte' class='col-span-3' />
           </div>
-          <div class="grid grid-cols-4 items-center gap-4">
-            <label hlmLabel for="username" class="text-right">
+          <div class='grid grid-cols-4 items-center gap-4'>
+            <label hlmLabel for='username' class='text-right'>
               Username
             </label>
-            <input hlmInput id="username" value="@peduarte" class="col-span-3" />
+            <input hlmInput id='username' value='@peduarte' class='col-span-3' />
           </div>
         </div>
         <hlm-dialog-footer>
-          <button hlmBtn type="submit">Save changes</button>
+          <button hlmBtn type='submit'>Save changes</button>
         </hlm-dialog-footer>
         <button brnDialogClose hlm>
         <span class='sr-only'>Close</span>

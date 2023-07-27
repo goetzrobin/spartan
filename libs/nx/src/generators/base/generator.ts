@@ -35,6 +35,17 @@ async function initializeAngularLibrary(tree: Tree, options: HlmBaseGeneratorSch
   });
 }
 
+function buildDependencyArray(options: HlmBaseGeneratorSchema) {
+  let dependencies = {
+    '@spartan-ng/ui-helm-core': SPARTAN_HELM_CORE_VERSION,
+    '@spartan-ng/ui-brain-core': SPARTAN_BRAIN_CORE_VERSION,
+  };
+  if (options.additionalDependencies) {
+    dependencies = { ...dependencies, ...options.additionalDependencies };
+  }
+  return dependencies;
+}
+
 export async function hlmBaseGenerator(tree: Tree, options: HlmBaseGeneratorSchema) {
   const targetLibDir = getTargetLibraryDirectory(options, tree);
   await initializeAngularLibrary(tree, options);
@@ -44,16 +55,8 @@ export async function hlmBaseGenerator(tree: Tree, options: HlmBaseGeneratorSche
     path.join(targetLibDir, 'src'),
     options
   );
-  const spartanDependencyTask = addDependenciesToPackageJson(
-    tree,
-    {
-      '@spartan-ng/ui-helm-core': SPARTAN_HELM_CORE_VERSION,
-      '@spartan-ng/ui-brain-core': SPARTAN_BRAIN_CORE_VERSION,
-    },
-    {},
-    path.join(targetLibDir, 'package.json')
-  );
-  await spartanDependencyTask();
+  const dependencies = buildDependencyArray(options);
+  await addDependenciesToPackageJson(tree, dependencies, {}, path.join(targetLibDir, 'package.json'))();
 }
 
 export default hlmBaseGenerator;

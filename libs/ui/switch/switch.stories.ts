@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 
-import { BrnSwitchComponent, BrnSwitchThumbComponent } from './brain/src';
-import { HlmSwitchDirective, HlmSwitchThumbDirective } from './helm/src';
+import { BrnSwitchComponent, BrnSwitchImports } from './brain/src';
+import { HlmSwitchImports } from './helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 
 const meta: Meta<BrnSwitchComponent> = {
@@ -10,13 +10,7 @@ const meta: Meta<BrnSwitchComponent> = {
   component: BrnSwitchComponent,
   decorators: [
     moduleMetadata({
-      imports: [
-        BrnSwitchComponent,
-        BrnSwitchThumbComponent,
-        HlmSwitchThumbDirective,
-        HlmSwitchDirective,
-        HlmLabelDirective,
-      ],
+      imports: [BrnSwitchImports, HlmSwitchImports, HlmLabelDirective],
     }),
   ],
 };

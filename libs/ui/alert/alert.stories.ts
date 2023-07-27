@@ -1,17 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import {
-  HlmAlertDescriptionDirective,
-  HlmAlertDirective,
-  HlmAlertIconDirective,
-  HlmAlertTitleDirective,
-} from './helm/src';
+import { HlmAlertDirective, HlmAlertImports } from './helm/src';
 
 const meta: Meta<HlmAlertDirective> = {
   title: 'Alert',
   decorators: [
     moduleMetadata({
-      imports: [HlmAlertDirective, HlmAlertDescriptionDirective, HlmAlertIconDirective, HlmAlertTitleDirective],
+      imports: [HlmAlertImports],
     }),
   ],
 };

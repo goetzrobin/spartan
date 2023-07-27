@@ -5,9 +5,9 @@ import { provideIcons } from '@ng-icons/core';
 import * as radixIcons from '@ng-icons/radix-icons';
 import { HlmIconComponent } from '../icon/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmCommandPrimitives } from '../command/helm/src';
-import { BrnCommandComponents } from '../command/brain/src';
-import { BrnPopoverComponent, BrnPopoverContentDirective, BrnPopoverTriggerDirective } from '../popover/brain/src';
+import { HlmCommandImports } from '../command/helm/src';
+import { BrnCommandImports } from '../command/brain/src';
+import { BrnPopoverImports } from '../popover/brain/src';
 import { HlmPopoverContentDirective } from '../popover/helm/src';
 import { NgForOf } from '@angular/common';
 
@@ -16,7 +16,7 @@ const meta: Meta<{}> = {
   decorators: [
     moduleMetadata({
       providers: [provideIcons(radixIcons)],
-      imports: [BrnCommandComponents, HlmCommandPrimitives, HlmIconComponent, HlmButtonDirective],
+      imports: [BrnCommandImports, HlmCommandImports, HlmIconComponent, HlmButtonDirective],
     }),
   ],
 };
@@ -29,15 +29,13 @@ type Framework = { label: string; value: string };
   selector: 'combobox-component',
   standalone: true,
   imports: [
-    BrnCommandComponents,
-    HlmCommandPrimitives,
+    NgForOf,
+    BrnCommandImports,
+    HlmCommandImports,
+    BrnPopoverImports,
+    HlmPopoverContentDirective,
     HlmIconComponent,
     HlmButtonDirective,
-    BrnPopoverComponent,
-    BrnPopoverTriggerDirective,
-    HlmPopoverContentDirective,
-    BrnPopoverContentDirective,
-    NgForOf,
   ],
   template: `
     <brn-popover [state]="state()" (stateChanged)="stateChanged($event)" sideOffset="5" closeDelay="100">

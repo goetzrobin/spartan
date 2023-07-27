@@ -6,7 +6,9 @@
     "@angular/core": "^16.0.0"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "@spartan-ng/ui-core-brain": "^0.0.1-alpha.10",
+    "@spartan-ng/ui-core-helm": "^0.0.1-alpha.10"
   },
   "sideEffects": false
 }

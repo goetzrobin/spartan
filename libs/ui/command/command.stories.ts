@@ -5,24 +5,18 @@ import { provideIcons } from '@ng-icons/core';
 import * as radixIcons from '@ng-icons/radix-icons';
 import { HlmIconComponent } from '../icon/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
-import {
-  BrnDialogCloseDirective,
-  BrnDialogComponent,
-  BrnDialogContentDirective,
-  BrnDialogOverlayComponent,
-  BrnDialogTriggerDirective,
-} from '../dialog/brain/src';
+import { BrnDialogImports } from '../dialog/brain/src';
 import { HlmDialogOverlayDirective } from '../dialog/helm/src';
 import { HlmCodeDirective } from '../typography/helm/src';
-import { HlmCommandPrimitives } from './helm/src';
-import { BrnCommandComponents } from './brain/src';
+import { HlmCommandImports } from './helm/src';
+import { BrnCommandImports } from './brain/src';
 
 const meta: Meta<{}> = {
   title: 'Command',
   decorators: [
     moduleMetadata({
       providers: [provideIcons(radixIcons)],
-      imports: [BrnCommandComponents, HlmCommandPrimitives, HlmIconComponent, HlmButtonDirective],
+      imports: [BrnCommandImports, HlmCommandImports, HlmIconComponent, HlmButtonDirective],
     }),
   ],
 };
@@ -82,17 +76,13 @@ export const Default: Story = {
   selector: 'command-dialog-component',
   standalone: true,
   imports: [
-    BrnCommandComponents,
-    HlmCommandPrimitives,
+    BrnCommandImports,
+    HlmCommandImports,
+    BrnDialogImports,
+    HlmDialogOverlayDirective,
+
     HlmIconComponent,
     HlmButtonDirective,
-
-    BrnDialogComponent,
-    BrnDialogCloseDirective,
-    BrnDialogTriggerDirective,
-    BrnDialogContentDirective,
-    BrnDialogOverlayComponent,
-    HlmDialogOverlayDirective,
     HlmCodeDirective,
   ],
   template: `
@@ -154,12 +144,14 @@ export const Default: Story = {
 class CommandDialogComponent {
   public command = signal('');
   public state = signal<'closed' | 'open'>('closed');
+
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     if ((event.metaKey || event.ctrlKey) && (event.key === 'k' || event.key === 'K')) {
       this.state.set('open');
     }
   }
+
   stateChanged(state: 'open' | 'closed') {
     this.state.set(state);
   }

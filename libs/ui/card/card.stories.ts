@@ -1,13 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import {
-  HlmCardContentDirective,
-  HlmCardDescriptionDirective,
-  HlmCardDirective,
-  HlmCardFooterDirective,
-  HlmCardHeaderDirective,
-  HlmCardTitleDirective,
-} from './helm/src';
+import { HlmCardDirective, HlmCardImports } from './helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
@@ -17,19 +10,7 @@ const meta: Meta<HlmCardDirective> = {
   title: 'Card',
   decorators: [
     moduleMetadata({
-      imports: [
-        HlmCardContentDirective,
-        HlmCardDescriptionDirective,
-        HlmCardDirective,
-        HlmCardFooterDirective,
-        HlmCardHeaderDirective,
-        HlmCardTitleDirective,
-
-        HlmLabelDirective,
-        HlmInputDirective,
-        HlmButtonDirective,
-        HlmBadgeDirective,
-      ],
+      imports: [HlmCardImports, HlmLabelDirective, HlmInputDirective, HlmButtonDirective, HlmBadgeDirective],
     }),
   ],
 };

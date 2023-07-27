@@ -1,11 +1,11 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { BrnRadioComponent, BrnRadioGroupComponent } from './brain/src';
+import { BrnRadioGroupImports } from './brain/src';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HlmIconComponent } from '../icon/helm/src';
 import { provideIcons } from '@ng-icons/core';
 import { radixCircle, radixRadiobutton } from '@ng-icons/radix-icons';
-import { HlmRadioDirective, HlmRadioGroupDirective, HlmRadioIndicatorComponent } from './helm/src';
+import { HlmRadioGroupImports } from './helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmCodeDirective, HlmSmallDirective } from '../typography/helm/src';
 
@@ -13,13 +13,10 @@ import { HlmCodeDirective, HlmSmallDirective } from '../typography/helm/src';
   selector: 'radio-group-example',
   standalone: true,
   imports: [
+    HlmRadioGroupImports,
+    BrnRadioGroupImports,
     FormsModule,
-    BrnRadioGroupComponent,
-    BrnRadioComponent,
     HlmIconComponent,
-    HlmRadioIndicatorComponent,
-    HlmRadioDirective,
-    HlmRadioGroupDirective,
     HlmButtonDirective,
     HlmCodeDirective,
     HlmSmallDirective,

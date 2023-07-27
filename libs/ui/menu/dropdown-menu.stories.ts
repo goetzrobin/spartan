@@ -3,6 +3,7 @@ import { HlmButtonDirective } from '../button/helm/src';
 import {
   BrnMenuDirective,
   BrnMenuGroupDirective,
+  BrnMenuImports,
   BrnMenuItemCheckboxDirective,
   BrnMenuItemDirective,
   BrnMenuItemRadioDirective,
@@ -10,6 +11,7 @@ import {
 } from './brain/src';
 import {
   HlmMenuDirective,
+  HlmMenuImports,
   HlmMenuItemCheckComponent,
   HlmMenuItemDirective,
   HlmMenuItemIconDirective,
@@ -31,24 +33,7 @@ const meta: Meta<{}> = {
   decorators: [
     moduleMetadata({
       providers: [provideIcons(radixIcons)],
-      imports: [
-        BrnMenuDirective,
-        BrnMenuItemDirective,
-        BrnMenuTriggerDirective,
-        BrnMenuGroupDirective,
-
-        HlmMenuDirective,
-        HlmSubMenuDirective,
-        HlmMenuItemDirective,
-        HlmMenuItemSubIndicatorComponent,
-        HlmMenuLabelComponent,
-        HlmMenuShortcutComponent,
-        HlmMenuSeparatorComponent,
-        HlmMenuItemIconDirective,
-
-        HlmButtonDirective,
-        HlmIconComponent,
-      ],
+      imports: [BrnMenuImports, HlmMenuImports, HlmButtonDirective, HlmIconComponent],
     }),
   ],
 };

@@ -1,35 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import {
-  BrnAccordionComponent,
-  BrnAccordionContentComponent,
-  BrnAccordionItemComponent,
-  BrnAccordionTriggerComponent,
-} from './brain/src';
-import {
-  HlmAccordionContentDirective,
-  HlmAccordionDirective,
-  HlmAccordionIconComponent,
-  HlmAccordionItemDirective,
-  HlmAccordionTriggerDirective,
-} from './helm/src';
+import { BrnAccordionComponent, BrnAccordionImports } from './brain/src';
+import { HlmAccordionImports } from './helm/src';
 
 const meta: Meta<BrnAccordionComponent> = {
   title: 'Accordion',
   component: BrnAccordionComponent,
   decorators: [
     moduleMetadata({
-      imports: [
-        BrnAccordionComponent,
-        BrnAccordionContentComponent,
-        BrnAccordionItemComponent,
-        BrnAccordionTriggerComponent,
-        HlmAccordionContentDirective,
-        HlmAccordionDirective,
-        HlmAccordionIconComponent,
-        HlmAccordionItemDirective,
-        HlmAccordionTriggerDirective,
-      ],
+      imports: [BrnAccordionImports, HlmAccordionImports],
     }),
   ],
 };

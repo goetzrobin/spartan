@@ -1,24 +1,6 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import {
-  BrnAlertDialogCloseDirective,
-  BrnAlertDialogComponent,
-  BrnAlertDialogContentDirective,
-  BrnAlertDialogDescriptionDirective,
-  BrnAlertDialogOverlayComponent,
-  BrnAlertDialogTitleDirective,
-  BrnAlertDialogTriggerDirective,
-} from './brain/src';
-import {
-  HlmAlertDialogActionButtonDirective,
-  HlmAlertDialogCancelButtonDirective,
-  HlmAlertDialogCloseDirective,
-  HlmAlertDialogContentDirective,
-  HlmAlertDialogDescriptionDirective,
-  HlmAlertDialogFooterComponent,
-  HlmAlertDialogHeaderComponent,
-  HlmAlertDialogOverlayDirective,
-  HlmAlertDialogTitleDirective,
-} from './helm/src';
+import { BrnAlertDialogImports } from './brain/src';
+import { HlmAlertDialogImports } from './helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
@@ -28,26 +10,7 @@ const meta: Meta<{}> = {
   title: 'Alert Dialog',
   decorators: [
     moduleMetadata({
-      imports: [
-        BrnAlertDialogComponent,
-        BrnAlertDialogOverlayComponent,
-        BrnAlertDialogTriggerDirective,
-        BrnAlertDialogContentDirective,
-        BrnAlertDialogCloseDirective,
-        BrnAlertDialogTitleDirective,
-        BrnAlertDialogDescriptionDirective,
-        HlmAlertDialogOverlayDirective,
-        HlmAlertDialogContentDirective,
-        HlmAlertDialogHeaderComponent,
-        HlmAlertDialogFooterComponent,
-        HlmAlertDialogTitleDirective,
-        HlmAlertDialogDescriptionDirective,
-        HlmAlertDialogCloseDirective,
-        HlmAlertDialogCancelButtonDirective,
-        HlmAlertDialogActionButtonDirective,
-        HlmButtonDirective,
-        HlmIconComponent,
-      ],
+      imports: [BrnAlertDialogImports, HlmAlertDialogImports, HlmButtonDirective, HlmIconComponent],
       providers: [provideIcons({ radixCross1 })],
     }),
   ],

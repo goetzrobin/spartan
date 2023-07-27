@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@spartan-ng/accordion": ["libs/hello/accordion/src/index.ts"],
+      "@spartan-ng/button-helm": ["libs/ui/button/helm/src/index.ts"],
+      "@spartan-ng/icon-helm": ["libs/ui/icon/helm/src/index.ts"],
       "@spartan-ng/nx": ["libs/nx/src/index.ts"],
       "@spartan-ng/tools": ["libs/tools/src/index.ts"],
       "@spartan-ng/ui-accordion-brain": ["libs/ui/accordion/brain/src/index.ts"],

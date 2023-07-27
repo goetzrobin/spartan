@@ -4,4 +4,5 @@ export interface HlmBaseGeneratorSchema {
   directory?: string;
   rootProject?: boolean;
   tags?: string;
+  additionalDependencies?: Record<string, string>;
 }
