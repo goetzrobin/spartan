@@ -1,0 +1,9 @@
+import { Tree } from '@nx/devkit';
+import { Hlm<%= className %>GeneratorSchema } from './schema';
+import hlmBaseGenerator from '../base/generator';
+
+export async function hlm<%= className %>Generator(tree: Tree, options: Hlm<%= className %>GeneratorSchema) {
+  await hlmBaseGenerator(tree, {...options, internalName: '<%= internalName %>', publicName: '<%= publicName %>'});
+}
+
+export default hlm<%= className %>Generator;

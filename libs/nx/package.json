@@ -2,5 +2,9 @@
   "name": "@spartan-ng/nx",
   "version": "0.0.1",
   "type": "commonjs",
-  "executors": "./executors.json"
+  "dependencies": {
+    "@nx/angular": "^16.3.2"
+  },
+  "executors": "./executors.json",
+  "generators": "./generators.json"
 }
