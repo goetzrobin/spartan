@@ -3,6 +3,7 @@ import { Hlm<%= className %>GeneratorSchema } from './schema';
 import hlmBaseGenerator from '../base/generator';
 
 export async function hlm<%= className %>Generator(tree: Tree, options: Hlm<%= className %>GeneratorSchema) {
+  <% if (hasAdditionalDependencies) { %>options.additionalDependencies = <%- JSON.stringify(additionalDependencies) %><% } %>
   await hlmBaseGenerator(tree, {...options, internalName: '<%= internalName %>', publicName: '<%= publicName %>'});
 }
 
