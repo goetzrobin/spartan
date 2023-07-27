@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "HelmAlertdialog",
+  "title": "",
+  "type": "object",
+  "properties": {}
+}

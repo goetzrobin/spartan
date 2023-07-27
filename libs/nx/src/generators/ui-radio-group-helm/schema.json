@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "HelmRadiogroup",
+  "title": "",
+  "type": "object",
+  "properties": {}
+}

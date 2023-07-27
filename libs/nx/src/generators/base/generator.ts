@@ -31,6 +31,7 @@ async function initializeAngularLibrary(tree: Tree, options: HlmBaseGeneratorSch
     prefix: 'hlm',
     skipModule: true,
     directory: options.directory,
+    tags: options.tags,
   });
 }
 

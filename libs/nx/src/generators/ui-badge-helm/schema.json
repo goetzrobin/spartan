@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "HelmBadge",
+  "title": "",
+  "type": "object",
+  "properties": {}
+}

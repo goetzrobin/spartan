@@ -3,4 +3,5 @@ export interface HlmBaseGeneratorSchema {
   publicName: string;
   directory?: string;
   rootProject?: boolean;
+  tags?: string;
 }

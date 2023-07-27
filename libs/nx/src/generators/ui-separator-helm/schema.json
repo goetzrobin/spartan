@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "HelmSeparator",
+  "title": "",
+  "type": "object",
+  "properties": {}
+}

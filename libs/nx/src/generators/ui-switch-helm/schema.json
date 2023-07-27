@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "HelmSwitch",
+  "title": "",
+  "type": "object",
+  "properties": {}
+}

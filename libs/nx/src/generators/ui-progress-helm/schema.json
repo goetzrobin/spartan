@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "HelmProgress",
+  "title": "",
+  "type": "object",
+  "properties": {}
+}
