@@ -3,6 +3,7 @@ import * as child_process from 'child_process';
 import * as projectHelpers from '../helpers/projects.helpers';
 
 import executor from './executor';
+import * as process from 'process';
 
 describe('NpmPublish Executor', () => {
   it('should execSync with a default libPath if no libPath was provided', async () => {
@@ -14,7 +15,8 @@ describe('NpmPublish Executor', () => {
     /* eslint-disable */
     jest.spyOn(projectHelpers, 'getRoot').mockReturnValue(mockRoot);
 
-    const expectedCommand = `cd ./dist/${mockRoot} && npm publish`;
+    process.env.TAG = 'next';
+    const expectedCommand = `cd ./dist/${mockRoot} && npm publish --tag next`;
     const output = await executor({}, context);
 
     expect(child_process.execSync).toHaveBeenCalledWith(expectedCommand);
