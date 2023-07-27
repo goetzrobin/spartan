@@ -3,7 +3,7 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ui/progress/helm/src",
   "prefix": "helm",
-  "tags": [],
+  "tags": ["scope:helm"],
   "projectType": "library",
   "targets": {
     "build": {

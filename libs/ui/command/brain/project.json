@@ -3,7 +3,7 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ui/command/brain/src",
   "prefix": "hlm",
-  "tags": [],
+  "tags": ["scope:brain"],
   "projectType": "library",
   "targets": {
     "build": {

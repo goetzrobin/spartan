@@ -3,7 +3,7 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ui/avatar/brain/src",
   "prefix": "brn",
-  "tags": [],
+  "tags": ["scope:brain"],
   "projectType": "library",
   "targets": {
     "build": {
