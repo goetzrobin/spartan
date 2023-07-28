@@ -8,6 +8,7 @@ import {
 import { HlmBaseGeneratorSchema } from './schema';
 import * as path from 'path';
 import { SPARTAN_BRAIN_CORE_VERSION, SPARTAN_HELM_CORE_VERSION } from './versions';
+import { installPackageJsonDependencies } from '@ngneat/cmdk/schematics/ng-add/utils';
 
 function getTargetLibraryDirectory(options: HlmBaseGeneratorSchema, tree: Tree) {
   const { layoutDirectory, projectDirectory } = extractLayoutDirectory(options.directory);
@@ -56,7 +57,8 @@ export async function hlmBaseGenerator(tree: Tree, options: HlmBaseGeneratorSche
     options
   );
   const dependencies = buildDependencyArray(options);
-  await addDependenciesToPackageJson(tree, dependencies, {}, path.join(targetLibDir, 'package.json'))();
+  await addDependenciesToPackageJson(tree, dependencies, {});
+  await installPackageJsonDependencies();
 }
 
 export default hlmBaseGenerator;
