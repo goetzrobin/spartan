@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { BrnDialogComponent } from './lib/brn-dialog.component';
 import { BrnDialogOverlayComponent } from './lib/brn-dialog-overlay.component';
 import { BrnDialogTriggerDirective } from './lib/brn-dialog-trigger.directive';
@@ -24,4 +26,10 @@ export const BrnDialogImports = [
   BrnDialogContentDirective,
   BrnDialogTitleDirective,
   BrnDialogDescriptionDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...BrnDialogImports],
+  exports: [...BrnDialogImports],
+})
+export class BrnDialogModule {}

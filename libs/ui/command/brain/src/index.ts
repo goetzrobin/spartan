@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { BrnCommandComponent } from './lib/brn-command.component';
 import { CmdkModule } from '@ngneat/cmdk';
 import { BrnCommandSeparatorComponent } from './lib/brn-command-separator.component';
@@ -28,4 +30,10 @@ export const BrnCommandImports = [
   BrnCommandLoaderDirective,
   BrnCommandSeparatorComponent,
   BrnCommandSeparatorComponent,
-];
+] as const;
+
+@NgModule({
+  imports: [...BrnCommandImports],
+  exports: [...BrnCommandImports],
+})
+export class BrnCommandModule {}

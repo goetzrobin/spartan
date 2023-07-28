@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { HlmDialogCloseDirective } from './lib/hlm-dialog-close.directive';
 import { HlmDialogContentDirective } from './lib/hlm-dialog-content.directive';
 import { HlmDialogDescriptionDirective } from './lib/hlm-dialog-description.directive';
@@ -22,4 +24,10 @@ export const HlmDialogImports = [
   HlmDialogHeaderComponent,
   HlmDialogOverlayDirective,
   HlmDialogTitleDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...HlmDialogImports],
+  exports: [...HlmDialogImports],
+})
+export class HlmDialogModule {}

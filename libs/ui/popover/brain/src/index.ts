@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { BrnPopoverComponent } from './lib/brn-popover.component';
 import { BrnPopoverTriggerDirective } from './lib/brn-popover-trigger.directive';
 import { BrnPopoverCloseDirective } from './lib/brn-popover-close.directive';
@@ -13,4 +15,10 @@ export const BrnPopoverImports = [
   BrnPopoverTriggerDirective,
   BrnPopoverCloseDirective,
   BrnPopoverContentDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...BrnPopoverImports],
+  exports: [...BrnPopoverImports],
+})
+export class BrnPopoverModule {}

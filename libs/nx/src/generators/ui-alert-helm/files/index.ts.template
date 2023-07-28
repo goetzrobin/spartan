@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { HlmAlertDirective } from './lib/hlm-alert.directive';
 import { HlmAlertTitleDirective } from './lib/hlm-alert-title.directive';
 import { HlmAlertDescriptionDirective } from './lib/hlm-alert-description.directive';
@@ -13,4 +15,10 @@ export const HlmAlertImports = [
   HlmAlertTitleDirective,
   HlmAlertDescriptionDirective,
   HlmAlertIconDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...HlmAlertImports],
+  exports: [...HlmAlertImports],
+})
+export class HlmAlertModule {}

@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { BrnAlertDialogComponent } from './lib/brn-alert-dialog.component';
 import { BrnAlertDialogOverlayComponent } from './lib/brn-alert-dialog-overlay.component';
 import { BrnAlertDialogTriggerDirective } from './lib/brn-alert-dialog-trigger.directive';
@@ -22,4 +24,10 @@ export const BrnAlertDialogImports = [
   BrnAlertDialogContentDirective,
   BrnAlertDialogTitleDirective,
   BrnAlertDialogDescriptionDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...BrnAlertDialogImports],
+  exports: [...BrnAlertDialogImports],
+})
+export class BrnAlertDialogModule {}

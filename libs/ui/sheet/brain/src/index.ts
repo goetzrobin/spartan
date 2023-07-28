@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { BrnSheetComponent } from './lib/brn-sheet.component';
 import { BrnSheetOverlayComponent } from './lib/brn-sheet-overlay.component';
 import { BrnSheetTriggerDirective } from './lib/brn-sheet-trigger.directive';
@@ -22,4 +24,10 @@ export const BrnSheetImports = [
   BrnSheetContentDirective,
   BrnSheetTitleDirective,
   BrnSheetDescriptionDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...BrnSheetImports],
+  exports: [...BrnSheetImports],
+})
+export class BrnSheetModule {}

@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { HlmRadioGroupDirective } from './lib/hlm-radio-group.directive';
 import { HlmRadioDirective } from './lib/hlm-radio.directive';
 import { HlmRadioIndicatorComponent } from './lib/hlm-radio-indicator.component';
@@ -7,3 +9,9 @@ export * from './lib/hlm-radio-group.directive';
 export * from './lib/hlm-radio-indicator.component';
 
 export const HlmRadioGroupImports = [HlmRadioGroupDirective, HlmRadioDirective, HlmRadioIndicatorComponent];
+
+@NgModule({
+  imports: [...HlmRadioGroupImports],
+  exports: [...HlmRadioGroupImports],
+})
+export class BrnRadioGroupModule {}

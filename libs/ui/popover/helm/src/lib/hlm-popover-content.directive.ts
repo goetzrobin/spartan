@@ -1,7 +1,7 @@
-import { Directive, effect, ElementRef, HostBinding, inject, Input, Renderer2 } from '@angular/core';
+import { Directive, effect, ElementRef, HostBinding, inject, Input, Renderer2, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core-helm';
 import { ClassValue } from 'clsx';
-import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core-brain';
+import { injectExposesStateProvider } from '@spartan-ng/ui-core-brain';
 
 @Directive({
   selector: '[hlmPopoverContent],[brnPopoverContent][hlm]',
@@ -9,8 +9,8 @@ import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core-brain';
 })
 export class HlmPopoverContentDirective {
   private _inputs: ClassValue = '';
-  private _statusProvider = inject(EXPOSES_STATE_TOKEN, { host: true });
-  public state = this._statusProvider.state;
+  private _stateProvider = injectExposesStateProvider({ host: true });
+  public state = this._stateProvider?.state ?? signal('closed');
   private _renderer = inject(Renderer2);
   private _element = inject(ElementRef);
 

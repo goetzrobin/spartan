@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { HlmAccordionDirective } from './lib/hlm-accordion.directive';
 import { HlmAccordionItemDirective } from './lib/hlm-accordion-item.directive';
 import { HlmAccordionTriggerDirective } from './lib/hlm-accordion-trigger.directive';
@@ -16,4 +18,10 @@ export const HlmAccordionImports = [
   HlmAccordionTriggerDirective,
   HlmAccordionContentDirective,
   HlmAccordionIconComponent,
-];
+] as const;
+
+@NgModule({
+  imports: [...HlmAccordionImports],
+  exports: [...HlmAccordionImports],
+})
+export class HlmAccordionModule {}

@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { BrnTabsComponent } from './lib/brn-tabs.component';
 import { BrnTabsListComponent } from './lib/brn-tabs-list.component';
 import { BrnTabsTriggerDirective } from './lib/brn-tabs-trigger.directive';
@@ -13,4 +15,10 @@ export const BrnTabsImports = [
   BrnTabsListComponent,
   BrnTabsTriggerDirective,
   BrnTabsContentDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...BrnTabsImports],
+  exports: [...BrnTabsImports],
+})
+export class BrnTabsModule {}

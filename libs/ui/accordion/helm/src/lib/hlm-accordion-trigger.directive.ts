@@ -1,7 +1,7 @@
-import { Directive, HostBinding, inject, Input } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
 import { hlm } from '@spartan-ng/ui-core-helm';
-import { SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui-core-brain';
+import { injectCustomClassSettable } from '@spartan-ng/ui-core-brain';
 
 @Directive({
   selector: '[hlmAccordionTrigger],brn-accordion-trigger[hlm]',
@@ -11,7 +11,7 @@ import { SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui-core-brain';
   },
 })
 export class HlmAccordionTriggerDirective {
-  private _host = inject(SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN, { optional: true });
+  private _host = injectCustomClassSettable({ optional: true });
   @HostBinding('class')
   private _class = !this._host ? this.generateClass() : '';
   private _inputs: ClassValue = '';

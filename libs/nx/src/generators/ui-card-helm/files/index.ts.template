@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { HlmCardDirective } from './lib/hlm-card.directive';
 import { HlmCardHeaderDirective } from './lib/hlm-card-header.directive';
 import { HlmCardFooterDirective } from './lib/hlm-card-footer.directive';
@@ -19,4 +21,10 @@ export const HlmCardImports = [
   HlmCardTitleDirective,
   HlmCardDescriptionDirective,
   HlmCardContentDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...HlmCardImports],
+  exports: [...HlmCardImports],
+})
+export class HlmCardModule {}

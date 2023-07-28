@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { BrnMenuTriggerDirective } from './lib/brn-menu-trigger.directive';
 import { BrnMenuDirective } from './lib/brn-menu.directive';
 import { BrnMenuGroupDirective } from './lib/brn-menu-group.directive';
@@ -21,7 +23,31 @@ export const BrnMenuItemImports = [
   BrnMenuItemDirective,
   BrnMenuItemRadioDirective,
   BrnMenuItemCheckboxDirective,
-];
-export const BrnMenuImports = [BrnMenuTriggerDirective, BrnMenuDirective, BrnMenuItemImports];
-export const BrnMenuBarImports = [...BrnMenuImports, BrnMenuBarDirective];
-export const BrnContextMenuImports = [...BrnMenuImports, BrnContextMenuTriggerDirective];
+] as const;
+export const BrnMenuImports = [BrnMenuTriggerDirective, BrnMenuDirective, ...BrnMenuItemImports] as const;
+export const BrnMenuBarImports = [...BrnMenuImports, BrnMenuBarDirective] as const;
+export const BrnContextMenuImports = [...BrnMenuImports, BrnContextMenuTriggerDirective] as const;
+
+@NgModule({
+  imports: [...BrnMenuItemImports],
+  exports: [...BrnMenuItemImports],
+})
+export class BrnMenuItemModule {}
+
+@NgModule({
+  imports: [...BrnMenuImports],
+  exports: [...BrnMenuImports],
+})
+export class BrnMenuModule {}
+
+@NgModule({
+  imports: [...BrnMenuBarImports],
+  exports: [...BrnMenuBarImports],
+})
+export class BrnMenuBarModule {}
+
+@NgModule({
+  imports: [...BrnContextMenuImports],
+  exports: [...BrnContextMenuImports],
+})
+export class BrnContextMenuModule {}

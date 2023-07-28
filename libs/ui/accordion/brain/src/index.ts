@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { BrnAccordionComponent } from './lib/brn-accordion.component';
 import { BrnAccordionContentComponent } from './lib/brn-accordion-content.component';
 import { BrnAccordionItemComponent } from './lib/brn-accordion-item.component';
@@ -13,4 +15,10 @@ export const BrnAccordionImports = [
   BrnAccordionContentComponent,
   BrnAccordionItemComponent,
   BrnAccordionTriggerComponent,
-];
+] as const;
+
+@NgModule({
+  imports: [...BrnAccordionImports],
+  exports: [...BrnAccordionImports],
+})
+export class HlmAccordionModule {}

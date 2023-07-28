@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { HlmSheetCloseDirective } from './lib/hlm-sheet-close.directive';
 import { HlmSheetContentDirective } from './lib/hlm-sheet-content.directive';
 import { HlmSheetDescriptionDirective } from './lib/hlm-sheet-description.directive';
@@ -20,4 +22,10 @@ export const HlmSheetImports = [
   HlmSheetFooterComponent,
   HlmSheetOverlayDirective,
   HlmSheetTitleDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...HlmSheetImports],
+  exports: [...HlmSheetImports],
+})
+export class HlmSheetModule {}

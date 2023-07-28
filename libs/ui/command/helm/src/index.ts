@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { HlmCommandDirective } from './lib/hlm-command.directive';
 import { HlmCommandInputDirective } from './lib/hlm-command-input.directive';
 import { HlmCommandItemDirective } from './lib/hlm-command-item.directive';
@@ -38,4 +40,10 @@ export const HlmCommandImports = [
   HlmCommandInputWrapperComponent,
   HlmCommandDialogCloseButtonDirective,
   HlmCommandDialogDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...HlmCommandImports],
+  exports: [...HlmCommandImports],
+})
+export class HlmCommandModule {}

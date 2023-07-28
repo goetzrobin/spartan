@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+
 import { HlmAlertDialogCloseDirective } from './lib/hlm-alert-dialog-close.directive';
 import { HlmAlertDialogContentDirective } from './lib/hlm-alert-dialog-content.directive';
 import { HlmAlertDialogDescriptionDirective } from './lib/hlm-alert-dialog-description.directive';
@@ -28,4 +30,10 @@ export const HlmAlertDialogImports = [
   HlmAlertDialogTitleDirective,
   HlmAlertDialogActionButtonDirective,
   HlmAlertDialogCancelButtonDirective,
-];
+] as const;
+
+@NgModule({
+  imports: [...HlmAlertDialogImports],
+  exports: [...HlmAlertDialogImports],
+})
+export class HlmAlertDialogModule {}
