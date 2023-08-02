@@ -1,10 +1,7 @@
 import { Tree } from '@nx/devkit';
-import { Hlm<%= className %>GeneratorSchema } from './schema';
-import hlmBaseGenerator from '../base/generator';
+import { HlmBaseGeneratorSchema } from '../../../base/schema';
+import hlmBaseGenerator from '../../../base/generator';
 
-export async function hlm<%= className %>Generator(tree: Tree, options: Hlm<%= className %>GeneratorSchema) {
-  <% if (hasAdditionalDependencies) { %>options.additionalDependencies = <%- JSON.stringify(additionalDependencies) %><% } %>
-  await hlmBaseGenerator(tree, {...options, internalName: '<%= internalName %>', publicName: '<%= publicName %>'});
+export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
+  return await hlmBaseGenerator(tree, {...options, primitiveName: '<%= primitiveName %>', internalName: '<%= internalName %>', publicName: '<%= publicName %>'});
 }
-
-export default hlm<%= className %>Generator;

@@ -1,3 +1,0 @@
-import { HlmBaseGeneratorSchema } from '../base/schema'
-
-export interface Hlm<%= className %>GeneratorSchema extends HlmBaseGeneratorSchema {}

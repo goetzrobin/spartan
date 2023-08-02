@@ -2,7 +2,7 @@ import { names, ProjectConfiguration, readJson, Tree, workspaceRoot } from '@nx/
 import * as path from 'path';
 import { HlmToNxGeneratorGeneratorSchema } from './schema';
 import { prompt } from 'enquirer';
-import { addPrimitiveToGeneratorsJSON } from './lib/add-primitive-to-generators-json';
+import { addPrimitiveToSupportedUILibraries } from './lib/add-primitive-to-supported-ui-libraries';
 import { getProjectsAndNames } from './lib/get-project-names';
 import { copyFilesFromHlmLibToGenerator, createSharedGeneratorFiles, recursivelyDelete } from './lib/file-management';
 
@@ -14,14 +14,12 @@ async function createGeneratorFromHlmLibrary(
   options: HlmToNxGeneratorGeneratorSchema
 ) {
   const srcPath = path.join(workspaceRoot, projects.get(internalName).sourceRoot);
-  const projectRoot = `libs/nx/src/generators/${internalName}`;
+  const projectRoot = `libs/nx/src/generators/ui/libs/${internalName}`;
   const filesPath = path.join(projectRoot, 'files');
   const allDependencies = readJson(tree, path.join(projects.get(internalName).root, 'package.json'))['dependencies'];
   const { tslib, ...additionalDependencies } = allDependencies;
-  options['hasAdditionalDependencies'] = Object.keys(additionalDependencies).length > 0;
-  options['additionalDependencies'] = additionalDependencies;
   recursivelyDelete(tree, filesPath);
-  addPrimitiveToGeneratorsJSON(tree, generatorName, internalName);
+  addPrimitiveToSupportedUILibraries(tree, generatorName, internalName, additionalDependencies);
   copyFilesFromHlmLibToGenerator(tree, srcPath, filesPath, options);
   createSharedGeneratorFiles(tree, projectRoot, options);
 }
@@ -44,7 +42,7 @@ export async function hlmToNxGeneratorGenerator(tree: Tree, options: HlmToNxGene
     options = { ...options, ...cleanNames };
     options['internalName'] = internalName;
     options['publicName'] = primitiveName + '-helm';
-    options['generatorName'] = primitiveName;
+    options['primitiveName'] = primitiveName;
 
     createGeneratorFromHlmLibrary(projects, primitiveName, internalName, tree, options);
   });
