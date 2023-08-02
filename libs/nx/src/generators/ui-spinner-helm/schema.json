@@ -1,7 +1,0 @@
-{
-  "$schema": "http://json-schema.org/schema",
-  "$id": "HelmSpinner",
-  "title": "",
-  "type": "object",
-  "properties": {}
-}

@@ -1,0 +1,164 @@
+{
+  "accordion": {
+    "internalName": "ui-accordion-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "alert": {
+    "internalName": "ui-alert-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "alertdialog": {
+    "internalName": "ui-alert-dialog-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "aspectratio": {
+    "internalName": "ui-aspect-ratio-helm",
+    "additionalDependencies": {
+      "@angular/cdk": "^16.0.0",
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "avatar": {
+    "internalName": "ui-avatar-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "badge": {
+    "internalName": "ui-badge-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "button": {
+    "internalName": "ui-button-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "card": {
+    "internalName": "ui-card-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "command": {
+    "internalName": "ui-command-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "dialog": {
+    "internalName": "ui-dialog-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "icon": {
+    "internalName": "ui-icon-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1",
+      "@ng-icons/core": "^25.1.0"
+    }
+  },
+  "input": {
+    "internalName": "ui-input-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "label": {
+    "internalName": "ui-label-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "menu": {
+    "internalName": "ui-menu-helm",
+    "additionalDependencies": {
+      "@angular/cdk": "^16.0.0",
+      "@spartan-ng/ui-core": "0.0.1-alpha.1",
+      "@ng-icons/radix-icons": "^25.1.0"
+    }
+  },
+  "popover": {
+    "internalName": "ui-popover-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "progress": {
+    "internalName": "ui-progress-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "radiogroup": {
+    "internalName": "ui-radio-group-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1",
+      "@ng-icons/radix-icons": "^25.1.0"
+    }
+  },
+  "scrollarea": {
+    "internalName": "ui-scroll-area-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1",
+      "ngx-scrollbar": "^13.0.1"
+    }
+  },
+  "separator": {
+    "internalName": "ui-separator-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "sheet": {
+    "internalName": "ui-sheet-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "skeleton": {
+    "internalName": "ui-skeleton-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "spinner": {
+    "internalName": "ui-spinner-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "switch": {
+    "internalName": "ui-switch-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "tabs": {
+    "internalName": "ui-tabs-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "toggle": {
+    "internalName": "ui-toggle-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  },
+  "typography": {
+    "internalName": "ui-typography-helm",
+    "additionalDependencies": {
+      "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    }
+  }
+}

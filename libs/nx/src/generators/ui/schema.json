@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "HlmUIGeneratorSchema",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "directory": {
+      "type": "string",
+      "description": "A directory where the libraries are placed.",
+      "x-prompt": "Choose a directory to place your spartan libraries, e.g. libs/ui",
+      "x-priority": "important"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Add tags to the library (used for linting)."
+    },
+    "skipBrainDependencies": {
+      "type": "boolean",
+      "x-prompt": "Skip installing the associated spartan/ui/brain dependencies?",
+      "description": "Skip installing the associated spartan/ui/brain dependencies?"
+    }
+  }
+}
