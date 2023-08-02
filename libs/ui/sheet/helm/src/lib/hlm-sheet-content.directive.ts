@@ -28,8 +28,8 @@ const sheetVariants = cva(
 })
 export class HlmSheetContentDirective {
   private _inputs: ClassValue = '';
-  private _stateProvider = injectExposesStateProvider({ self: true });
-  private _sideProvider = injectExposedSideProvider({ self: true });
+  private _stateProvider = injectExposesStateProvider({ host: true });
+  private _sideProvider = injectExposedSideProvider({ host: true });
   public state = this._stateProvider?.state ?? signal('closed');
   private _renderer = inject(Renderer2);
   private _element = inject(ElementRef);

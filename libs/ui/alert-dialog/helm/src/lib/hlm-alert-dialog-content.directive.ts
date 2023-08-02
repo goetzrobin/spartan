@@ -8,15 +8,13 @@ import { ClassValue } from 'clsx';
 })
 export class HlmAlertDialogContentDirective {
   private _inputs: ClassValue = '';
-  private _statusProvider = injectExposesStateProvider({ optional: true, self: true });
-  public state = this._statusProvider?.state ?? signal('closed');
+  private _stateProvider = injectExposesStateProvider({ optional: true, host: true });
+  public state = this._stateProvider?.state ?? signal('closed');
   private _renderer = inject(Renderer2);
   private _element = inject(ElementRef);
 
   constructor() {
-    effect(() => {
-      this._renderer.setAttribute(this._element.nativeElement, 'data-state', this.state());
-    });
+    effect(() => this._renderer.setAttribute(this._element.nativeElement, 'data-state', this.state()));
   }
 
   @HostBinding('class')

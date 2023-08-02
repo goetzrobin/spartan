@@ -7,7 +7,7 @@ import { ClassValue } from 'clsx';
   standalone: true,
 })
 export class HlmDialogOverlayDirective {
-  private _host = injectCustomClassSettable({ optional: true, self: true });
+  private _host = injectCustomClassSettable({ optional: true, host: true });
   _class = this.generateClasses();
   private _inputs: ClassValue = '';
 
