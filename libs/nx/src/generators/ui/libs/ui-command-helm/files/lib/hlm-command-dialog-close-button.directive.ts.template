@@ -1,7 +1,7 @@
 import { Directive, HostBinding, inject, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
 import { hlm } from '@spartan-ng/ui-core';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmButtonDirective } from '@spartan-ng/button-helm';
 
 @Directive({
   selector: '[hlmCmdDialogCloseBtn]',

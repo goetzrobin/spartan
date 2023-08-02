@@ -7,19 +7,19 @@ import { ClassValue } from 'clsx';
   standalone: true,
 })
 export class HlmAlertDialogOverlayDirective {
-  private _host = injectCustomClassSettable({ optional: true, host: true });
+  private _classSettable = injectCustomClassSettable({ optional: true, host: true });
   _class = this.generateClasses();
   private _inputs: ClassValue = '';
 
   constructor() {
-    this._host?.setClassToCustomElement(this._class);
+    this._classSettable?.setClassToCustomElement(this._class);
   }
 
   @Input()
   set class(inputs: ClassValue) {
     this._inputs = inputs;
     this._class = this.generateClasses();
-    this._host?.setClassToCustomElement(this._class);
+    this._classSettable?.setClassToCustomElement(this._class);
   }
 
   private generateClasses() {

@@ -16,10 +16,11 @@ async function createGeneratorFromHlmLibrary(
   const srcPath = path.join(workspaceRoot, projects.get(internalName).sourceRoot);
   const projectRoot = `libs/nx/src/generators/ui/libs/${internalName}`;
   const filesPath = path.join(projectRoot, 'files');
-  const allDependencies = readJson(tree, path.join(projects.get(internalName).root, 'package.json'))['dependencies'];
-  const { tslib, ...additionalDependencies } = allDependencies;
+  const peerDependencies = readJson(tree, path.join(projects.get(internalName).root, 'package.json'))[
+    'peerDependencies'
+  ];
   recursivelyDelete(tree, filesPath);
-  addPrimitiveToSupportedUILibraries(tree, generatorName, internalName, additionalDependencies);
+  addPrimitiveToSupportedUILibraries(tree, generatorName, internalName, peerDependencies);
   copyFilesFromHlmLibToGenerator(tree, srcPath, filesPath, options);
   createSharedGeneratorFiles(tree, projectRoot, options);
 }

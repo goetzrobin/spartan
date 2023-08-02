@@ -3,11 +3,11 @@
   "version": "0.0.1-alpha.10",
   "peerDependencies": {
     "@angular/common": "^16.0.0",
-    "@angular/core": "^16.0.0"
+    "@angular/core": "^16.0.0",
+    "@spartan-ng/ui-core": "0.0.1-alpha.1"
   },
   "dependencies": {
-    "tslib": "^2.3.0",
-    "@spartan-ng/ui-core": "0.0.1-alpha.1"
+    "tslib": "^2.3.0"
   },
   "sideEffects": false,
   "publishConfig": {

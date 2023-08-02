@@ -17,7 +17,7 @@ export async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema) 
   const tasks: GeneratorCallback[] = [];
   for (const primitiveName of primitivesToCreate) {
     const internalName = availablePrimitives[primitiveName]['internalName'];
-    const additionalDependencies = availablePrimitives[primitiveName]['additionalDependencies'];
+    const peerDependencies = availablePrimitives[primitiveName]['peerDependencies'];
     const installTask = await (
       (await import(
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -31,7 +31,7 @@ export async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema) 
       internalName: '',
       publicName: '',
       primitiveName: '',
-      additionalDependencies,
+      peerDependencies,
       skipBrainDependencies: options.skipBrainDependencies,
       directory: options.directory,
       tags: options.tags,

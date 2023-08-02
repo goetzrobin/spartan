@@ -38,8 +38,8 @@ export function buildDependencyArray(options: HlmBaseGeneratorSchema) {
   let dependencies = {
     '@spartan-ng/ui-core': SPARTAN_CORE_VERSION,
   };
-  if (options.additionalDependencies) {
-    dependencies = { ...dependencies, ...options.additionalDependencies };
+  if (options.peerDependencies) {
+    dependencies = { ...dependencies, ...options.peerDependencies };
   }
   if (!options.skipBrainDependencies) {
     const brainDependency = BRAIN_DEPENDENCY_MAP[options.primitiveName];

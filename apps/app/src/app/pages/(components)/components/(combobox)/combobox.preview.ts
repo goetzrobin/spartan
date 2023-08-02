@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { BrnCommandComponents } from '@spartan-ng/ui-command-brain';
-import { HlmCommandPrimitives } from '@spartan-ng/ui-command-helm';
+import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
+import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
@@ -19,8 +19,8 @@ type Framework = { label: string; value: string };
   selector: 'spartan-combobox-preview',
   standalone: true,
   imports: [
-    BrnCommandComponents,
-    HlmCommandPrimitives,
+    BrnCommandImports,
+    HlmCommandImports,
     HlmIconComponent,
     HlmButtonDirective,
     BrnPopoverComponent,
@@ -110,8 +110,8 @@ export class ComboboxPreviewComponent {
 
 export const defaultCode = `
 import { Component, signal } from '@angular/core';
-import { BrnCommandComponents } from '@spartan-ng/ui-command-brain';
-import { HlmCommandPrimitives } from '@spartan-ng/ui-command-helm';
+import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
+import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
@@ -130,8 +130,8 @@ type Framework = { label: string; value: string };
   selector: 'spartan-combobox-preview',
   standalone: true,
   imports: [
-    BrnCommandComponents,
-    HlmCommandPrimitives,
+    BrnCommandImports,
+    HlmCommandImports,
     HlmIconComponent,
     HlmButtonDirective,
     BrnPopoverComponent,
