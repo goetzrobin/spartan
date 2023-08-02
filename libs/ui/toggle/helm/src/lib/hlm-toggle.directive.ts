@@ -1,6 +1,6 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { cva, VariantProps } from 'class-variance-authority';
-import { hlm } from '@spartan-ng/ui-core-helm';
+import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 const toggleVariants = cva(
