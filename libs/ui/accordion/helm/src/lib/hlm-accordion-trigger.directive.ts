@@ -1,7 +1,6 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan-ng/ui-core-helm';
-import { injectCustomClassSettable } from '@spartan-ng/ui-core-brain';
+import { hlm, injectCustomClassSettable } from '@spartan-ng/ui-core';
 
 @Directive({
   selector: '[hlmAccordionTrigger],brn-accordion-trigger[hlm]',

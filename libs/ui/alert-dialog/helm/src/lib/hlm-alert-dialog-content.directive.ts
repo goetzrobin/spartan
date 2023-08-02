@@ -1,7 +1,6 @@
 import { Directive, effect, ElementRef, HostBinding, inject, Input, Renderer2, signal } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core-helm';
+import { hlm, injectExposesStateProvider } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
-import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core-brain';
 
 @Directive({
   selector: '[hlmAlertDialogContent],[brnAlertDialogContent][hlm]',
@@ -9,7 +8,7 @@ import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core-brain';
 })
 export class HlmAlertDialogContentDirective {
   private _inputs: ClassValue = '';
-  private _statusProvider = inject(EXPOSES_STATE_TOKEN, { optional: true, host: true });
+  private _statusProvider = injectExposesStateProvider({ optional: true, self: true });
   public state = this._statusProvider?.state ?? signal('closed');
   private _renderer = inject(Renderer2);
   private _element = inject(ElementRef);

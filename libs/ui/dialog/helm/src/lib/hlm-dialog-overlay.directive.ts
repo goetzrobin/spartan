@@ -1,14 +1,13 @@
 import { Directive, Input } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core-helm';
+import { hlm, injectCustomClassSettable } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
-import { injectCustomClassSettable } from '@spartan-ng/ui-core-brain';
 
 @Directive({
   selector: '[hlmDialogOverlay],brn-dialog-overlay[hlm]',
   standalone: true,
 })
 export class HlmDialogOverlayDirective {
-  private _host = injectCustomClassSettable({ optional: true, host: true });
+  private _host = injectCustomClassSettable({ optional: true, self: true });
   _class = this.generateClasses();
   private _inputs: ClassValue = '';
 

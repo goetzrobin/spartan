@@ -1,6 +1,6 @@
 import { Directive, HostBinding, inject, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan-ng/ui-core-helm';
+import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/icon-helm';
 
 @Directive({

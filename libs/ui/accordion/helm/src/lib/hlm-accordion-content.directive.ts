@@ -12,9 +12,8 @@ import {
   signal,
 } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan-ng/ui-core-helm';
+import { hlm, injectCustomClassSettable } from '@spartan-ng/ui-core';
 import { isPlatformBrowser } from '@angular/common';
-import { SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui-core-brain';
 
 @Directive({
   selector: '[hlmAccordionContent],brn-accordion-content[hlm]',
@@ -24,7 +23,7 @@ import { SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui-core-brain';
   },
 })
 export class HlmAccordionContentDirective implements OnInit {
-  private _host = inject(SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN, { optional: true });
+  private _host = injectCustomClassSettable({ optional: true });
   private _element = inject(ElementRef).nativeElement;
   private _injector = inject(Injector);
   public _platformId = inject(PLATFORM_ID);

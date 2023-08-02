@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan-ng/ui-core-helm';
+import { hlm } from '@spartan-ng/ui-core';
 
 @Component({
   selector: 'hlm-scroll-area',

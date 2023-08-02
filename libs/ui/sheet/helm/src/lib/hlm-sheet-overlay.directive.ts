@@ -1,7 +1,6 @@
 import { Directive, Input } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core-helm';
+import { hlm, injectCustomClassSettable } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
-import { injectCustomClassSettable } from '@spartan-ng/ui-core-brain';
 
 @Directive({
   selector: '[hlmSheetOverlay],brn-sheet-overlay[hlm]',

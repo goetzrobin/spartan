@@ -1,7 +1,6 @@
 import { Directive, effect, ElementRef, HostBinding, inject, Input, Renderer2, signal } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core-helm';
+import { hlm, injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
-import { injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/ui-core-brain';
 import { cva } from 'class-variance-authority';
 
 const sheetVariants = cva(
@@ -29,8 +28,8 @@ const sheetVariants = cva(
 })
 export class HlmSheetContentDirective {
   private _inputs: ClassValue = '';
-  private _stateProvider = injectExposesStateProvider({ host: true });
-  private _sideProvider = injectExposedSideProvider({ host: true });
+  private _stateProvider = injectExposesStateProvider({ self: true });
+  private _sideProvider = injectExposedSideProvider({ self: true });
   public state = this._stateProvider?.state ?? signal('closed');
   private _renderer = inject(Renderer2);
   private _element = inject(ElementRef);

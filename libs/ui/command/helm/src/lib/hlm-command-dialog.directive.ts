@@ -1,7 +1,6 @@
-import { Directive, effect, ElementRef, HostBinding, inject, Input, Renderer2 } from '@angular/core';
+import { Directive, effect, ElementRef, HostBinding, inject, Input, Renderer2, signal } from '@angular/core';
 import { ClassValue } from 'clsx';
-import { hlm } from '@spartan-ng/ui-core-helm';
-import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core-brain';
+import { hlm, injectExposesStateProvider } from '@spartan-ng/ui-core';
 import { HlmCommandDirective } from './hlm-command.directive';
 
 @Directive({
@@ -10,8 +9,8 @@ import { HlmCommandDirective } from './hlm-command.directive';
   hostDirectives: [HlmCommandDirective],
 })
 export class HlmCommandDialogDirective {
-  private _statusProvider = inject(EXPOSES_STATE_TOKEN, { host: true });
-  public state = this._statusProvider.state;
+  private _stateProvider = injectExposesStateProvider({ self: true });
+  public state = this._stateProvider?.state ?? signal('closed').asReadonly();
   private _renderer = inject(Renderer2);
   private _element = inject(ElementRef);
 

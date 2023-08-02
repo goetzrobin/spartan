@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { AutoFocusTarget, Dialog, DIALOG_DATA, DIALOG_SCROLL_STRATEGY_PROVIDER, DialogRef } from '@angular/cdk/dialog';
 import {
+  ComponentType,
   ConnectedPosition,
   FlexibleConnectedPositionStrategyOrigin,
   OverlayPositionBuilder,
@@ -19,7 +20,6 @@ import {
   ScrollStrategy,
   ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
-import { ComponentType } from 'react';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 export const provideBrnDialog = () => [Dialog, BrnDialogService, DIALOG_SCROLL_STRATEGY_PROVIDER];

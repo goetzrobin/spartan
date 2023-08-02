@@ -1,26 +1,25 @@
-import { Directive, inject, Input } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core-helm';
+import { Directive, Input } from '@angular/core';
+import { hlm, injectCustomClassSettable } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
-import { SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui-core-brain';
 
 @Directive({
   selector: '[hlmAlertDialogOverlay],brn-alert-dialog-overlay[hlm]',
   standalone: true,
 })
 export class HlmAlertDialogOverlayDirective {
-  private _host = inject(SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN, { optional: true, host: true });
+  private _classSettable = injectCustomClassSettable({ optional: true, self: true });
   _class = this.generateClasses();
   private _inputs: ClassValue = '';
 
   constructor() {
-    this._host?.setClassToCustomElement(this._class);
+    this._classSettable?.setClassToCustomElement(this._class);
   }
 
   @Input()
   set class(inputs: ClassValue) {
     this._inputs = inputs;
     this._class = this.generateClasses();
-    this._host?.setClassToCustomElement(this._class);
+    this._classSettable?.setClassToCustomElement(this._class);
   }
 
   private generateClasses() {

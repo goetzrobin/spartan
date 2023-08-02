@@ -1,5 +1,5 @@
 import { Directive, forwardRef } from '@angular/core';
-import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core-brain';
+import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core';
 import { BrnDialogContentDirective } from '@spartan-ng/ui-dialog-brain';
 
 @Directive({
