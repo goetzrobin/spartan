@@ -16,6 +16,7 @@ import { BrnToggleDirective } from './brn-toggle.directive';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ToggleSyncable } from './toggle-syncable';
+import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
 
 export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -40,6 +41,10 @@ export class BrnButtonToggleChange {
       provide: ToggleSyncable,
       useExisting: forwardRef(() => BrnToggleGroupComponent),
     },
+    {
+      provide: ToggleGroupCanBeNullableProvider,
+      useExisting: forwardRef(() => BrnToggleGroupComponent),
+    },
   ],
   host: {
     role: 'group',
@@ -51,10 +56,14 @@ export class BrnButtonToggleChange {
   exportAs: 'brnToggleGroup',
   template: `<ng-content />`,
 })
-export class BrnToggleGroupComponent implements ControlValueAccessor, OnInit, AfterContentInit, ToggleSyncable {
+export class BrnToggleGroupComponent
+  implements ControlValueAccessor, OnInit, AfterContentInit, ToggleSyncable, ToggleGroupCanBeNullableProvider
+{
   private _changeDetector = inject(ChangeDetectorRef);
   private _vertical = false;
   private _multiple = false;
+  private _nullable = false;
+  private _skipNullableCheck = false;
   private _disabled = false;
   private _selectionModel?: SelectionModel<BrnToggleDirective>;
 
@@ -128,6 +137,16 @@ export class BrnToggleGroupComponent implements ControlValueAccessor, OnInit, Af
 
   /** Whether multiple button toggles can be selected. */
   @Input()
+  get nullable(): boolean {
+    return this._nullable;
+  }
+  set nullable(value: BooleanInput) {
+    this._nullable = coerceBooleanProperty(value);
+    this._markTogglesForCheck();
+  }
+
+  /** Whether multiple button toggles can be selected. */
+  @Input()
   get multiple(): boolean {
     return this._multiple;
   }
@@ -181,8 +200,10 @@ export class BrnToggleGroupComponent implements ControlValueAccessor, OnInit, Af
   _syncToggle(toggle: BrnToggleDirective, state: 'on' | 'off', isUserInput = false) {
     if (state === 'on') {
       if (!this.multiple) {
+        this._skipNullableCheck = true;
         const togglesToBeOff = this._buttonToggles?.filter((t) => t !== toggle) ?? [];
         togglesToBeOff.filter((t) => t.toggleOff());
+        this._skipNullableCheck = false;
       }
       this._selectValue(toggle.value);
     }
@@ -193,6 +214,14 @@ export class BrnToggleGroupComponent implements ControlValueAccessor, OnInit, Af
       }
     }
     this._updateModelValue(toggle, isUserInput);
+  }
+
+  _canBeNullable(value: any) {
+    if (this._nullable || this._skipNullableCheck) return true;
+    if (this._multiple) {
+      return !((this.value as any[]).length === 1 && this.value[0] === value);
+    }
+    return this.value !== value;
   }
 
   /** Updates the selection state of the toggles in the group based on a value. */

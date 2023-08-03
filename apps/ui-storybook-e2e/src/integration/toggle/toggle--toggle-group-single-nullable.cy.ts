@@ -1,7 +1,7 @@
-describe('toggle--toggle-group-single', () => {
+describe('toggle--toggle-group-single-nullable', () => {
   describe('default', () => {
     beforeEach(() => {
-      cy.visit('/iframe.html?id=toggle--toggle-group-single');
+      cy.visit('/iframe.html?id=toggle--toggle-group-single-nullable');
       cy.injectAxe();
     });
 
@@ -12,27 +12,21 @@ describe('toggle--toggle-group-single', () => {
           'landmark-one-main': { enabled: false },
         },
       });
-      cy.findByText(/City selected/i).contains(/sparta/i);
+      cy.findByText(/City selected/i).contains(/no city/i);
       cy.findByRole('group').should('exist');
       cy.findByRole('group').children('button').should('have.length', 4);
       cy.findByRole('group')
         .children('button')
-        .not(':contains("Sparta")')
         .each((btn) => cy.wrap(btn).should('have.attr', 'aria-pressed', 'false'));
-      cy.findByRole('group')
-        .findByText(/sparta/i)
-        .should('have.attr', 'aria-pressed', 'true')
-        .should('have.attr', 'data-state', 'on');
     };
 
     it(`
-    1. should sparta selected by default.
-    2. should have toggle-group with role=group and 3 buttons toggled off and sparta toggled on.
-    3. click on sparta should not unselect sparta.
+    1. should have no city selected by default.
+    2. should have toggle-group with role=group and 4 buttons all toggled off.
+    3. click on sparta should select sparta.
     4. click on syracuse should unselect sparta and select syracuse
     5. click on athens should unselect syracuse and select athens
     6. click on set-to-syracuse button should unselect athens and select syracuse
-    7. click on syracuse should not unselect syracuse
     `, () => {
       // 1. + 2.
       verifyToggleGroupSetup();
@@ -86,29 +80,15 @@ describe('toggle--toggle-group-single', () => {
         .not(':contains("Syracuse")')
         .each((btn) => cy.wrap(btn).should('have.attr', 'aria-pressed', 'false'));
       cy.findByText(/City selected/i).contains(/syracuse/i);
-      // 7.
-      cy.findByRole('group')
-        .findByText(/syracuse/i)
-        .click();
-      cy.findByRole('group')
-        .findByText(/syracuse/i)
-        .should('have.attr', 'aria-pressed', 'true')
-        .should('have.attr', 'data-state', 'on');
-      cy.findByRole('group')
-        .children('button')
-        .not(':contains("Syracuse")')
-        .each((btn) => cy.wrap(btn).should('have.attr', 'aria-pressed', 'false'));
-      cy.findByText(/City selected/i).contains(/syracuse/i);
     });
 
     it(`
-    1. should sparta selected by default.
-    2. should have toggle-group with role=group and 3 buttons toggled off and sparta toggled on.
-    3. tab to and space on sparta should not unselect sparta.
+    1. should have no city selected by default.
+    2. should have toggle-group with role=group and 4 buttons all toggled off.
+    3. tab to and space on sparta should select sparta.
     4. tab to and enter on syracuse should unselect sparta and select syracuse
     5. tab to and space on athens should unselect syracuse and select athens
     6. tab to and enter on set-to-syracuse button should unselect athens and select syracuse
-    7. tab to and space on syracuse should not unselect syracuse
     `, () => {
       // 1. + 2.
       verifyToggleGroupSetup();
@@ -155,18 +135,6 @@ describe('toggle--toggle-group-single', () => {
       cy.realPress('Tab');
       cy.realPress('Tab');
       cy.realPress('Tab');
-      cy.realPress('Enter');
-      cy.findByRole('group')
-        .findByText(/syracuse/i)
-        .should('have.attr', 'aria-pressed', 'true')
-        .should('have.attr', 'data-state', 'on');
-      cy.findByRole('group')
-        .children('button')
-        .not(':contains("Syracuse")')
-        .each((btn) => cy.wrap(btn).should('have.attr', 'aria-pressed', 'false'));
-      cy.findByText(/City selected/i).contains(/syracuse/i);
-      // 7.
-      cy.realPress(['Shift', 'Tab']);
       cy.realPress('Enter');
       cy.findByRole('group')
         .findByText(/syracuse/i)

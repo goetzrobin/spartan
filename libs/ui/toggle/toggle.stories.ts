@@ -51,6 +51,24 @@ export const WithText: Story = {
 };
 
 type City = { name: string; population: number };
+const CITIES = [
+  {
+    name: 'Sparta',
+    population: 23234233,
+  },
+  {
+    name: 'Athens',
+    population: 989889,
+  },
+  {
+    name: 'Corinth',
+    population: 988989,
+  },
+  {
+    name: 'Syracuse',
+    population: 998889,
+  },
+];
 
 @Component({
   selector: 'hlm-toggle-group-story',
@@ -58,7 +76,7 @@ type City = { name: string; population: number };
   imports: [BrnToggleGroupModule, HlmToggleGroupModule, HlmButtonDirective, FormsModule, NgForOf, NgIf],
   template: `
     <div class="flex space-x-4">
-      <brn-toggle-group hlm [multiple]="multiple" [(ngModel)]="selected">
+      <brn-toggle-group hlm [nullable]="nullable" [multiple]="multiple" [(ngModel)]="selected">
         <button variant="outline" *ngFor="let city of cities; let last = last" [value]="city" hlm brnToggle>
           {{ city.name }}
         </button>
@@ -72,24 +90,10 @@ type City = { name: string; population: number };
 class HlmToggleGroupStoryComponent {
   @Input()
   multiple = false;
-  public readonly cities: City[] = [
-    {
-      name: 'Sparta',
-      population: 23234233,
-    },
-    {
-      name: 'Athens',
-      population: 989889,
-    },
-    {
-      name: 'Corinth',
-      population: 988989,
-    },
-    {
-      name: 'Syracuse',
-      population: 998889,
-    },
-  ];
+  @Input()
+  nullable = false;
+  public readonly cities: City[] = CITIES;
+  @Input()
   public selected?: City | City[];
 
   get selectedCities() {
@@ -103,31 +107,66 @@ class HlmToggleGroupStoryComponent {
   }
 
   setToSyracuse() {
-    console.log(this.multiple);
     this.selected = this.multiple ? [this.cities[3]] : this.cities[3];
   }
 }
 
-export const ToggleGroupSingle: Story = {
+export const ToggleGroupSingleNullable: Story = {
+  name: 'Toggle Group - Single Nullable',
+  decorators: [
+    moduleMetadata({
+      imports: [HlmToggleGroupStoryComponent],
+    }),
+  ],
+  render: () => ({
+    template: '<hlm-toggle-group-story nullable="true"/>',
+  }),
+};
+
+export const ToggleGroupMultipleNullable: StoryObj<{ cities: City[] }> = {
+  name: 'Toggle Group - Multiple Nullable',
+  decorators: [
+    moduleMetadata({
+      imports: [HlmToggleGroupStoryComponent],
+    }),
+  ],
+  args: {
+    cities: [CITIES[0]],
+  },
+  render: ({ cities }) => ({
+    props: { cities },
+    template: '<hlm-toggle-group-story nullable="true" multiple="true"/>',
+  }),
+};
+
+export const ToggleGroupSingle: StoryObj<{ city: City }> = {
   name: 'Toggle Group - Single',
   decorators: [
     moduleMetadata({
       imports: [HlmToggleGroupStoryComponent],
     }),
   ],
-  render: () => ({
-    template: '<hlm-toggle-group-story/>',
+  args: {
+    city: CITIES[0],
+  },
+  render: ({ city }) => ({
+    props: { city },
+    template: '<hlm-toggle-group-story [selected]="city"/>',
   }),
 };
 
-export const ToggleGroupMultiple: Story = {
+export const ToggleGroupMultiple: StoryObj<{ cities: City[] }> = {
   name: 'Toggle Group - Multiple',
   decorators: [
     moduleMetadata({
       imports: [HlmToggleGroupStoryComponent],
     }),
   ],
-  render: () => ({
-    template: '<hlm-toggle-group-story multiple="true"/>',
+  args: {
+    cities: [CITIES[0]],
+  },
+  render: ({ cities }) => ({
+    props: { cities },
+    template: '<hlm-toggle-group-story [selected]="cities" multiple="true"/>',
   }),
 };

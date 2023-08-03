@@ -1,6 +1,17 @@
-import { ChangeDetectorRef, computed, Directive, effect, inject, Input, signal } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  computed,
+  Directive,
+  effect,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  signal,
+} from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ToggleSyncable } from './toggle-syncable';
+import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
@@ -17,7 +28,9 @@ import { ToggleSyncable } from './toggle-syncable';
 export class BrnToggleDirective {
   private _cdr = inject(ChangeDetectorRef);
   private _toggleSyncable = inject(ToggleSyncable, { optional: true });
+  private _tgCanBeNullableProvider = inject(ToggleGroupCanBeNullableProvider, { optional: true });
 
+  private _lastToggleOnInGroupThatSupportsMultipleAndIsNotNullable = signal(false);
   private _disabled = signal<true | undefined>(undefined);
   private _state = signal<'on' | 'off'>('off');
 
@@ -31,20 +44,32 @@ export class BrnToggleDirective {
   set disabled(value: BooleanInput) {
     this._disabled.set(coerceBooleanProperty(value) ? true : undefined);
   }
-
+  @Input('state')
+  set setState(value: 'on' | 'off') {
+    this._state.set(value);
+  }
+  @Output()
+  toggled = new EventEmitter<'on' | 'off'>();
   constructor() {
     effect(
       () => {
-        this._toggleSyncable?._syncToggle(this, this.state(), true);
+        const state = this.state();
+        this._toggleSyncable?._syncToggle(this, state, true);
+        this.toggled.emit(state);
       },
       { allowSignalWrites: true },
     );
   }
 
   toggle() {
-    this._state.set(this._state() === 'on' ? 'off' : 'on');
+    if (this._state() === 'on') {
+      this.toggleOff();
+    } else {
+      this.toggleOn();
+    }
   }
   toggleOff() {
+    if (this._tgCanBeNullableProvider && !this._tgCanBeNullableProvider._canBeNullable(this.value)) return;
     this._state.set('off');
   }
   toggleOn() {
