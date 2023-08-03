@@ -1,8 +1,9 @@
-import { Directive, ElementRef, inject } from '@angular/core';
+import { Directive, ElementRef, inject, Input } from '@angular/core';
 import { BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
+import { BrnPopoverComponent } from './brn-popover.component';
 
 @Directive({
-  selector: 'button[brnPopoverTrigger]',
+  selector: 'button[brnPopoverTrigger],button[brnPopoverTriggerFor]',
   standalone: true,
   host: {
     '[id]': '_id()',
@@ -19,5 +20,10 @@ export class BrnPopoverTriggerDirective extends BrnDialogTriggerDirective {
     super();
     if (!this._brnDialog) return;
     this._brnDialog.attachTo = this._host.nativeElement;
+  }
+
+  @Input()
+  set brnPopoverTriggerFor(brnDialog: BrnPopoverComponent) {
+    super.brnDialogTriggerFor = brnDialog;
   }
 }
