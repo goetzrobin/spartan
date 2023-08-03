@@ -43,7 +43,7 @@ import {
           <hlm-accordion-icon />
         </brn-accordion-trigger>
         <brn-accordion-content hlm>
-          Yes. It comes with default styles that matches the other components' aesthetic.
+          Yes. It comes with default styles that match the other components' aesthetics.
         </brn-accordion-content>
       </brn-accordion-item>
 
@@ -107,7 +107,7 @@ import {
           <hlm-accordion-icon />
         </brn-accordion-trigger>
         <brn-accordion-content hlm>
-          Yes. It comes with default styles that matches the other components' aesthetic.
+          Yes. It comes with default styles that match the other components' aesthetics.
         </brn-accordion-content>
       </brn-accordion-item>
 

@@ -63,23 +63,23 @@ export const routeMeta: RouteMeta = {
       <spartan-section-sub-heading id="analogjs">AnalogJs</spartan-section-sub-heading>
       <spartan-architecture-diagram-analog />
       <p class="${hlmP}">
-        Analog is a meta-framework for Angular. It provides you with all the benefits of Angular, but extends its
+        AnalogJs is a meta-framework for Angular. It provides you with all the benefits of Angular but extends its
         capabilities with even more:
       </p>
 
       <p class="${hlmP}">
-        Analog uses Vite for serving and building as well as Vitest for testing. Vite is a next generation JavaScript
+        AnalogJs uses Vite for serving and building as well as Vitest for testing. Vite is a next-generation JavaScript
         bundler that is super fast. It also gives us access to the Vite ecosystem with hundreds of very powerful
         plugins.
       </p>
 
       <p class="${hlmP}">
-        Another incredible advantage of Analog is that it comes equipped to handle both Server-Side Rendering (SSR) and
-        Static Site Generation (SSG) for Angular applications. With Analog, Angular can easily power marketing websites,
-        blog pages, and more! As Analog is SSR by default, no further configuration is necessary.
+        Another incredible advantage of AnalogJs is that it comes equipped to handle both Server-Side Rendering (SSR) and
+        Static Site Generation (SSG) for Angular applications. With AnalogJs, Angular can easily power marketing websites,
+        blog pages, and more! As AnalogJs is SSR by default, no further configuration is necessary.
       </p>
       <p class="${hlmP}">
-        Last but not least, Analog supports API (server) routes and file-based routing for Angular apps. In an AnalogJs
+        Last but not least, AnalogJs supports API (server) routes and file-based routing for Angular apps. In an AnalogJs
         application, the folder hierarchy and filenames determine the routing. You won't ever need to declare a route
         array again.
       </p>
@@ -96,7 +96,7 @@ export const routeMeta: RouteMeta = {
       <spartan-architecture-diagram-trpc />
       <p class="${hlmP}">
         tRPC stands for TypeScript Remote Procedure Call, and is a lightweight library for remotely calling backend
-        functions on the client side. It makes communication between the backend and frontend incredibly easy taking
+        functions on the client side. It makes communication between the backend and frontend incredibly easy, taking
         advantage of TypeScript inference to automatically warn you of errors on your client before you even save the
         change on your server file! Using tRPC will feel like using an SDK for your API's server code, giving you
         confidence in your endpoints.
@@ -105,22 +105,22 @@ export const routeMeta: RouteMeta = {
       <spartan-section-sub-heading id="drizzle">Drizzle</spartan-section-sub-heading>
       <spartan-architecture-diagram-drizzle />
       <p class="${hlmP}">
-        We're just a few steps away from having complete typesafety from our database to the template generating the
+        We're just a few steps away from having complete type safety from our database to the template generating the
         DOM. Drizzle is the tool that will bring us there. Drizzle is a Node.js and TypeScript ORM. It allows you to
-        create performant SQL queries, with autocompletion powered by TypeScript. They also have incredible memes!
+        create performant SQL queries with autocompletion powered by TypeScript. They also have incredible memes!
       </p>
 
       <spartan-section-sub-heading id="supabase">Supabase</spartan-section-sub-heading>
       <spartan-architecture-diagram-supabase />
       <p class="${hlmP}">
-        PostgreSQL is one of the worlds most scalable databases. It is a sophisticated object-relational system applying
+        PostgreSQL is one of the world's most scalable databases. It is a sophisticated object-relational system applying
         SQL. Postgres allows you to securely store vast quantities of complex data. It enables developers to build the
         most sophisticated programs, carry out administrative operations, and establish integral environments. It is an
-        open source technology trusted by millions of developers.
+        open-source technology trusted by millions of developers.
       </p>
       <p class="${hlmP}">
         It turns out that every Supabase project is powered by a dedicated PostgreSQL database. Supabase is a fantastic
-        open source Firebase replacement that is powered by the aforementioned Postgres database. It also provides a lot
+        open-source Firebase replacement powered by the aforementioned Postgres database. It also provides a lot
         more features as your project expands and becomes more involved.
       </p>
 
@@ -132,7 +132,7 @@ export const routeMeta: RouteMeta = {
         <code class="${hlmCode}">text-center</code> and <code class="${hlmCode}">rotate-90</code>."
       </p>
       <p class="${hlmP}">
-        These utility classes let you to modify the layout, color, spacing, font, shadows, and more to create a
+        These utility classes let you modify the layout, color, spacing, font, shadows, and more to create a
         distinctive component design without leaving your HTML or adding any additional CSS code.
       </p>
 

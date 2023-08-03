@@ -69,10 +69,10 @@ export const routeMeta: RouteMeta = {
     <section spartanMainSection>
       <spartan-section-intro name="Introduction" lead="Cutting-edge tools powering Angular full-stack development." />
       <p class="mb-6">
-        <code class="${hlmCode}">spartan</code> allows you to build next level, full-stack applications with AnalogJs.
+        <code class="${hlmCode}">spartan</code> allows you to build next-level, full-stack applications with AnalogJs.
       </p>
       <p>
-        It provides you with an opinionated stack set up with a single command and a set of accessible UI primitives.
+        It provides an opinionated stack with a single command and a set of accessible UI primitives.
       </p>
       <spartan-section-sub-heading id="spartan-stack">spartan/stack</spartan-section-sub-heading>
       <p class="${hlmP}">

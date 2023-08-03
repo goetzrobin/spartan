@@ -18,7 +18,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Context Menu' },
   meta: metaWith(
     'spartan/ui - Context Menu',
-    'Displays a menu to the user — such as a set of actions or functions — triggered by a right click.'
+    'Displays a menu to the user — such as a set of actions or functions — triggered by a right-click.'
   ),
   title: 'spartan/ui - Context Menu',
 };

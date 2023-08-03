@@ -15,7 +15,7 @@ import { radixRocket } from '@ng-icons/radix-icons';
 export const routeMeta: RouteMeta = {
   meta: metaWith(
     'spartan/ui - Components',
-    'spartan/ui provides unstyled components that are accessible by default. It also gives you beautiful shadcn like styling options.'
+    'spartan/ui provides unstyled components that are accessible by default. It also gives you beautiful shadcn-like styling options.'
   ),
   data: {
     breadcrumb: 'Components',

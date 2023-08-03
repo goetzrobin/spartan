@@ -64,7 +64,7 @@ export const routeMeta: RouteMeta = {
 
       <p class="${hlmP}">
         The <code class="${hlmCode}">spartan/stack</code> starts with an Nx workspace. Even better, AnalogJs comes with
-        first class Nx support and a preset, which will set up our favorite meta-framework for you out of the box!
+        first-class Nx support and a preset, which will set up our favorite meta-framework for you out of the box!
       </p>
 
       <p class="${hlmP}">Enter the following command:</p>
@@ -91,7 +91,7 @@ export const routeMeta: RouteMeta = {
       <spartan-section-sub-heading id="analogjs">AnalogJs, Angular, TailwindCSS, and tRPC</spartan-section-sub-heading>
 
       <p class="${hlmP}">
-        With this simple command you will have a working Nx workspace that includes an example AnalogJs application,
+        With this simple command, you will have a working Nx workspace that includes an example AnalogJs application,
         with TailwindCSS and tRPC already set up!
       </p>
 
@@ -112,7 +112,7 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="drizzle">Drizzle</spartan-section-sub-heading>
       <p class="${hlmP}">
-        Currently, we use an in memory array to store the notes of our example application. Let's persist our data in an
+        Currently, we use an in-memory array to store the notes of our example application. Let's persist our data in an
         actual database. To interact with our DB, we will use the Drizzle ORM. Let's first install the necessary
         dependencies:
       </p>
@@ -158,7 +158,7 @@ export const db = drizzle(client);"
 
       <p class="${hlmP}">
         We first declare our notes table and make Drizzle aware of all its columns and their respective types. We then
-        declare some helper types, that we will use when we retrieve and create our Notes. Finally, we initialize our
+        declare some helper types we will use when retrieving and creating our Notes. Finally, we initialize our
         Postgres client and pass it to Drizzle
       </p>
 
@@ -283,7 +283,7 @@ mkdir spartan-supabase
 # move into the new folder
 cd spartan-supabase
 
-# start a new git repository — important, dont skip this step
+# start a new git repository — important, don't skip this step
 git init"
           >
           </spartan-code>
@@ -313,7 +313,7 @@ git init"
           <spartan-code
             disableCopy
             code="
-Started supabase local development setup.
+Started Supabase local development setup.
 
 API URL: http://localhost:54321
 DB URL: postgresql://postgres:postgres@localhost:54322/postgres
@@ -364,12 +364,12 @@ create table note (
       <spartan-section-sub-heading id="production">Build for Production</spartan-section-sub-heading>
       <spartan-code class="mt-3" language="sh" code="npx nx build [YOUR_APP_NAME]" />
       <p class="${hlmP}">
-        Finally, let's build a production bundle of our application. Run the command above. By default Analog will build
-        a NodeJs compatible output, which you can run with the following command:
+        Finally, let's build a production bundle of our application. Run the command above. By default, AnalogJs will build
+        a NodeJs-compatible output, which you can run with the following command:
       </p>
       <spartan-code class="mt-3" language="sh" code="node dist/[YOUR_APP_NAME]/analog/index.mjs" />
       <p class="${hlmP}">
-        Analog also supports multiple build presets, which makes it easy to deploy your application to most of the major
+        AnalogJs also supports multiple build presets, which makes it easy to deploy your application to most of the major
         cloud providers. This includes Vercel, Cloudflare, Azure, AWS, and more.
       </p>
       <div class="flex items-center justify-end mt-4">

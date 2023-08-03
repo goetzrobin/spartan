@@ -50,12 +50,12 @@ Follow the directions below to get it up and running:
 
 ### Install Dependencies
 
-Run `yarn` or `yarn install` to install the dependencies of this project
+Run `yarn` or `yarn install` to install the dependencies of this project.
 
 ### Set up DB
 
-Your dependencies include Prisma, which is a great tool to manage your application's database.
-As a database provider we will use Supabase an open source Firebase alternative that comes with
+Your dependencies include Prisma, which is a great tool for managing your application's database.
+As a database provider, we use Supabase, an open-source Firebase alternative that comes with
 a Postgres database, Authentication, instant APIs, Edge Functions, Realtime subscriptions, and Storage.
 
 ### Connect to DB
@@ -68,7 +68,7 @@ There are two ways to get up and running with Supabase:
 #### Option 1: Connecting to supabase.com instance
 
 This way is super easy! Simply by creating your account, you will also have set up your first project.
-This means that you are ready to connect to your projects database already!
+This means that you are ready to connect to your project's database already!
 
 Let's connect our application to our Supabase Postgres instance:
 
@@ -85,11 +85,11 @@ DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-SUPABASE-REFERENCE-
 
 ```
 
-#### Option 2: Connecting to local supabase instance
+#### Option 2: Connecting to local Supabase instance
 
 Supabase also allows you to run a version of their system locally!
-To get up and running you can follow [this guide](https://supabase.com/docs/guides/cli/local-development)!
-They do a great job explaining how to get started and there is plenty of resources to help you if you get stuck.
+To get up and running, follow [this guide](https://supabase.com/docs/guides/cli/local-development)!
+They do a great job explaining how to get started, and there is plenty of resources to help you if you get stuck.
 
 If you want the quick and dirty way and are on a Mac. Here is what I did to get up and running:
 
@@ -108,10 +108,10 @@ supabase login
 Create your access token from https://app.supabase.com/account/tokens and paste it into your
 terminal window.
 
-##### Create Supabase project
+##### Create a Supabase project
 
 ```shell
-# if you are in the spartan directory move UP!!!
+# If you are in the spartan directory, move UP!!!
 cd ..
 # create your project folder
 mkdir spartan-supabase
@@ -145,15 +145,15 @@ I ran the following command to get it to work for now:
 DOCKER_HOST=unix:///Users/[YOUR_USER_ACCOUNT_NAME]/.docker/run/docker.sock supabase start
 ```
 
-For more info see [this issue on GitHub.](https://github.com/supabase/cli/issues/167)
+For more info, see [this issue on GitHub.](https://github.com/supabase/cli/issues/167)
 
 ##### Connect to local DB
 
-The previous step can take a while as all the docker images have to be downloaded first.
-However, once everything completes you will see a console output that looks like this:
+The previous step can take a while as all the docker images must be downloaded first.
+However, once everything completes, you will see a console output that looks like this:
 
 ```
-Started supabase local development setup.
+Started Supabase local development setup.
 
          API URL: http://localhost:54321
           DB URL: postgresql://postgres:postgres@localhost:54322/postgres
@@ -190,8 +190,8 @@ You can stop the guide when you get to "Database Migrations". We will take care 
 
 #### Initializing the DB
 
-Now that we have successfully set up our DB we need to set up our database schema.
-Primsa makes this super easy!!
+Now that we have successfully set up our DB, we need to set up our database schema.
+Prisma makes this super easy!!
 
 - We can push the schema defined in our `schema.prisma` file to our DB running
 
@@ -199,7 +199,7 @@ Primsa makes this super easy!!
 yarn prisma db push
 ```
 
-- Finally, we create our prisma client by running
+- Finally, we create our Prisma client by running
 
 ```shell
 yarn prisma generate

@@ -58,7 +58,7 @@ const stackLink = 'h-6 underline text-base px-0.5';
       <spartan-section-sub-heading id="motivation">Motivation</spartan-section-sub-heading>
       <p class="${hlmP}">
         The <code class="${hlmCode}">spartan/stack</code> streamlines the setup of end-to-end typesafe Angular
-        full-stack applications. It is opinionated and based off of insights from working with Angular and Typescript
+        full-stack applications. It is opinionated and based on insights from working with Angular and Typescript
         within a full-stack environment for a long time. The <code class="${hlmCode}">spartan/stack</code> helps you
         build your applications faster and better.
       </p>
@@ -70,7 +70,7 @@ const stackLink = 'h-6 underline text-base px-0.5';
           <a hlmBtn class="${stackLink}" size="sm" href="https://supabase.com" target="_blank" variant="link"
             >Supabase</a
           >
-          - Hosted, scallable database solution. Opensource and super easy to set up.
+          - Hosted, scalable database solution. Opensource and super easy to set up.
         </li>
         <li>
           <a hlmBtn class="${stackLink}" size="sm" href="https://angular.io" target="_blank" variant="link">Angular</a>
@@ -84,7 +84,7 @@ const stackLink = 'h-6 underline text-base px-0.5';
           <a hlmBtn class="${stackLink}" size="sm" href="https://tailwindcss.com" target="_blank" variant="link"
             >TailwindCSS</a
           >
-          - Utility first CSS framework with great design baked into it.
+          - Utility-first CSS framework with great design baked into it.
         </li>
         <li>
           <a hlmBtn class="${stackLink}" size="sm" href="https://analogjs.org" target="_blank" variant="link"
