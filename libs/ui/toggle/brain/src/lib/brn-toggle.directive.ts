@@ -30,7 +30,6 @@ export class BrnToggleDirective {
   private _toggleSyncable = inject(ToggleSyncable, { optional: true });
   private _tgCanBeNullableProvider = inject(ToggleGroupCanBeNullableProvider, { optional: true });
 
-  private _lastToggleOnInGroupThatSupportsMultipleAndIsNotNullable = signal(false);
   private _disabled = signal<true | undefined>(undefined);
   private _state = signal<'on' | 'off'>('off');
 
