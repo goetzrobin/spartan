@@ -14,12 +14,12 @@ import { hlm } from '@spartan-ng/ui-core';
       [autoWidthDisabled]="autoWidthDisabled"
       [track]="track"
       [style]="{
-          '--scrollbar-border-radius': '100px',
-          '--scrollbar-padding': '1px',
-          '--scrollbar-thumb-color': 'hsl(var(--border)',
-          '--scrollbar-thumb-hover-color': 'hsl(var(--border)',
-          '--scrollbar-size': '7px',
-            }"
+        '--scrollbar-border-radius': '100px',
+        '--scrollbar-padding': '1px',
+        '--scrollbar-thumb-color': 'hsl(var(--border)',
+        '--scrollbar-thumb-hover-color': 'hsl(var(--border)',
+        '--scrollbar-size': '7px'
+      }"
     >
       <ng-content />
     </ng-scrollbar>

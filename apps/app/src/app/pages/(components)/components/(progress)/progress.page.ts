@@ -19,7 +19,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Progress' },
   meta: metaWith(
     'spartan/ui - Progress',
-    'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.'
+    'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
   ),
   title: 'spartan/ui - Progress',
 };

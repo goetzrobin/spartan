@@ -74,14 +74,14 @@ export const routeMeta: RouteMeta = {
       </p>
 
       <p class="${hlmP}">
-        Another incredible advantage of AnalogJs is that it comes equipped to handle both Server-Side Rendering (SSR) and
-        Static Site Generation (SSG) for Angular applications. With AnalogJs, Angular can easily power marketing websites,
-        blog pages, and more! As AnalogJs is SSR by default, no further configuration is necessary.
+        Another incredible advantage of AnalogJs is that it comes equipped to handle both Server-Side Rendering (SSR)
+        and Static Site Generation (SSG) for Angular applications. With AnalogJs, Angular can easily power marketing
+        websites, blog pages, and more! As AnalogJs is SSR by default, no further configuration is necessary.
       </p>
       <p class="${hlmP}">
-        Last but not least, AnalogJs supports API (server) routes and file-based routing for Angular apps. In an AnalogJs
-        application, the folder hierarchy and filenames determine the routing. You won't ever need to declare a route
-        array again.
+        Last but not least, AnalogJs supports API (server) routes and file-based routing for Angular apps. In an
+        AnalogJs application, the folder hierarchy and filenames determine the routing. You won't ever need to declare a
+        route array again.
       </p>
 
       <spartan-section-sub-heading id="angular">Angular</spartan-section-sub-heading>
@@ -113,15 +113,15 @@ export const routeMeta: RouteMeta = {
       <spartan-section-sub-heading id="supabase">Supabase</spartan-section-sub-heading>
       <spartan-architecture-diagram-supabase />
       <p class="${hlmP}">
-        PostgreSQL is one of the world's most scalable databases. It is a sophisticated object-relational system applying
-        SQL. Postgres allows you to securely store vast quantities of complex data. It enables developers to build the
-        most sophisticated programs, carry out administrative operations, and establish integral environments. It is an
-        open-source technology trusted by millions of developers.
+        PostgreSQL is one of the world's most scalable databases. It is a sophisticated object-relational system
+        applying SQL. Postgres allows you to securely store vast quantities of complex data. It enables developers to
+        build the most sophisticated programs, carry out administrative operations, and establish integral environments.
+        It is an open-source technology trusted by millions of developers.
       </p>
       <p class="${hlmP}">
         It turns out that every Supabase project is powered by a dedicated PostgreSQL database. Supabase is a fantastic
-        open-source Firebase replacement powered by the aforementioned Postgres database. It also provides a lot
-        more features as your project expands and becomes more involved.
+        open-source Firebase replacement powered by the aforementioned Postgres database. It also provides a lot more
+        features as your project expands and becomes more involved.
       </p>
 
       <spartan-section-sub-heading id="tailwind">TailwindCSS</spartan-section-sub-heading>
@@ -132,8 +132,8 @@ export const routeMeta: RouteMeta = {
         <code class="${hlmCode}">text-center</code> and <code class="${hlmCode}">rotate-90</code>."
       </p>
       <p class="${hlmP}">
-        These utility classes let you modify the layout, color, spacing, font, shadows, and more to create a
-        distinctive component design without leaving your HTML or adding any additional CSS code.
+        These utility classes let you modify the layout, color, spacing, font, shadows, and more to create a distinctive
+        component design without leaving your HTML or adding any additional CSS code.
       </p>
 
       <spartan-page-bottom-nav>

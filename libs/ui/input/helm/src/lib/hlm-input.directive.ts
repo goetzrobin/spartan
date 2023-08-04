@@ -16,7 +16,7 @@ const inputVariants = cva(
     defaultVariants: {
       size: 'default',
     },
-  }
+  },
 );
 type InputVariants = VariantProps<typeof inputVariants>;
 

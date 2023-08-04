@@ -33,7 +33,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Introduction' },
   meta: metaWith(
     'spartan - Introduction',
-    'spartan is a collection of tools to superpower your Angular full-stack development.'
+    'spartan is a collection of tools to superpower your Angular full-stack development.',
   ),
   title: 'spartan - Introduction',
 };
@@ -71,9 +71,7 @@ export const routeMeta: RouteMeta = {
       <p class="mb-6">
         <code class="${hlmCode}">spartan</code> allows you to build next-level, full-stack applications with AnalogJs.
       </p>
-      <p>
-        It provides an opinionated stack with a single command and a set of accessible UI primitives.
-      </p>
+      <p>It provides an opinionated stack with a single command and a set of accessible UI primitives.</p>
       <spartan-section-sub-heading id="spartan-stack">spartan/stack</spartan-section-sub-heading>
       <p class="${hlmP}">
         The <code class="${hlmCode}">spartan/stack</code> is a collection of technologies that provide you with a

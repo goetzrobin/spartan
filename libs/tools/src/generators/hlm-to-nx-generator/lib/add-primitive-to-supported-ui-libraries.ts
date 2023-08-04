@@ -5,7 +5,7 @@ export const addPrimitiveToSupportedUILibraries = (
   tree: Tree,
   generatorName: string,
   internalName: string,
-  peerDependencies: Record<string, string>
+  peerDependencies: Record<string, string>,
 ) => {
   updateJson(tree, 'libs/nx/src/generators/ui/supported-ui-libraries.json', (old) => ({
     ...old,

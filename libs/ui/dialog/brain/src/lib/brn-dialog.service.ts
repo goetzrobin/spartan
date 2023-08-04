@@ -92,7 +92,7 @@ export class BrnDialogService implements OnDestroy {
     vcr: ViewContainerRef,
     content: ComponentType<unknown> | TemplateRef<unknown>,
     context?: DialogContext,
-    options?: Partial<BrnDialogOptions>
+    options?: Partial<BrnDialogOptions>,
   ): void {
     if (this._open() || (options?.id && this._cdkDialog.getDialogById(options.id))) {
       return;
@@ -138,7 +138,7 @@ export class BrnDialogService implements OnDestroy {
       this._dialogRef.keydownEvents
         .pipe(
           filter((e) => e.key === 'Escape'),
-          takeUntil(this._destroyed$)
+          takeUntil(this._destroyed$),
         )
         .subscribe(() => {
           this.close(options?.closeDelay);

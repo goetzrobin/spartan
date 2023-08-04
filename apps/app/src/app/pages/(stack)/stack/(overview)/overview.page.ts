@@ -20,7 +20,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Overview' },
   meta: metaWith(
     'spartan/stack - Overview',
-    'The spartan/stack is an opinionated full-stack that consists of multiple technologies providing e2e type safety to Angular developers.'
+    'The spartan/stack is an opinionated full-stack that consists of multiple technologies providing e2e type safety to Angular developers.',
   ),
   title: 'spartan/stack - Overview',
 };
@@ -58,9 +58,9 @@ const stackLink = 'h-6 underline text-base px-0.5';
       <spartan-section-sub-heading id="motivation">Motivation</spartan-section-sub-heading>
       <p class="${hlmP}">
         The <code class="${hlmCode}">spartan/stack</code> streamlines the setup of end-to-end typesafe Angular
-        full-stack applications. It is opinionated and based on insights from working with Angular and Typescript
-        within a full-stack environment for a long time. The <code class="${hlmCode}">spartan/stack</code> helps you
-        build your applications faster and better.
+        full-stack applications. It is opinionated and based on insights from working with Angular and Typescript within
+        a full-stack environment for a long time. The <code class="${hlmCode}">spartan/stack</code> helps you build your
+        applications faster and better.
       </p>
 
       <spartan-section-sub-heading id="stack">The Stack</spartan-section-sub-heading>

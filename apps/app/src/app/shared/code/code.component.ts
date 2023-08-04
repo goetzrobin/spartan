@@ -165,7 +165,7 @@ export class CodeComponent {
         gfm: true,
         breaks: false,
         mangle: false,
-      }
+      },
     );
 
     this.marked = marked;

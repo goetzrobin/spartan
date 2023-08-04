@@ -9,7 +9,7 @@ export const appConfig: ApplicationConfig = {
     provideFileRouter(
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
       withNavigationErrorHandler(console.log),
-      withPreloading(PreloadAllModules)
+      withPreloading(PreloadAllModules),
     ),
     provideClientHydration(),
     provideTrpcClient(),

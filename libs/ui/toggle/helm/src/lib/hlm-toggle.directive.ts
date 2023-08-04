@@ -21,7 +21,7 @@ const toggleVariants = cva(
       variant: 'default',
       size: 'default',
     },
-  }
+  },
 );
 type ToggleVariants = VariantProps<typeof toggleVariants>;
 

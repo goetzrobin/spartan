@@ -18,7 +18,7 @@ import { radixLayers, radixMix, radixStar } from '@ng-icons/radix-icons';
 export const routeMeta: RouteMeta = {
   meta: metaWith(
     'spartan - Cutting-edge tools powering Angular full-stack development',
-    'Build next-level, full-stack applications with AnalogJs and the spartan/stack. Make them accessible and look incredible with spartan/ui.'
+    'Build next-level, full-stack applications with AnalogJs and the spartan/stack. Make them accessible and look incredible with spartan/ui.',
   ),
   title: 'spartan - Cutting-edge tools powering Angular full-stack development',
 };

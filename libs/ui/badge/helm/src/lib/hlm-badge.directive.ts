@@ -17,7 +17,7 @@ const badgeVariants = cva(
     defaultVariants: {
       variant: 'default',
     },
-  }
+  },
 );
 type badgeVariants = VariantProps<typeof badgeVariants>;
 

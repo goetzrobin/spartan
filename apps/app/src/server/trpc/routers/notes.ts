@@ -9,10 +9,10 @@ export const noteRouter = router({
       z.object({
         title: z.string(),
         content: z.string(),
-      })
+      }),
     )
     .mutation(
-      async ({ input }) => await db.insert(notes).values({ content: input.content, title: input.title }).returning()
+      async ({ input }) => await db.insert(notes).values({ content: input.content, title: input.title }).returning(),
     ),
   list: publicProcedure.query(async () => {
     const selectedNotes = await db.select().from(notes);
@@ -22,7 +22,7 @@ export const noteRouter = router({
     .input(
       z.object({
         id: z.number(),
-      })
+      }),
     )
     .mutation(async ({ input }) => await db.delete(notes).where(eq(notes.id, input.id)).returning()),
 });

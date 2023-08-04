@@ -364,13 +364,13 @@ create table note (
       <spartan-section-sub-heading id="production">Build for Production</spartan-section-sub-heading>
       <spartan-code class="mt-3" language="sh" code="npx nx build [YOUR_APP_NAME]" />
       <p class="${hlmP}">
-        Finally, let's build a production bundle of our application. Run the command above. By default, AnalogJs will build
-        a NodeJs-compatible output, which you can run with the following command:
+        Finally, let's build a production bundle of our application. Run the command above. By default, AnalogJs will
+        build a NodeJs-compatible output, which you can run with the following command:
       </p>
       <spartan-code class="mt-3" language="sh" code="node dist/[YOUR_APP_NAME]/analog/index.mjs" />
       <p class="${hlmP}">
-        AnalogJs also supports multiple build presets, which makes it easy to deploy your application to most of the major
-        cloud providers. This includes Vercel, Cloudflare, Azure, AWS, and more.
+        AnalogJs also supports multiple build presets, which makes it easy to deploy your application to most of the
+        major cloud providers. This includes Vercel, Cloudflare, Azure, AWS, and more.
       </p>
       <div class="flex items-center justify-end mt-4">
         <a
