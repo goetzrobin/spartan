@@ -2,6 +2,7 @@ import {
   computed,
   effect,
   ElementRef,
+  EventEmitter,
   inject,
   Injectable,
   OnDestroy,
@@ -65,6 +66,7 @@ const cssClassesToArray = (classes: string | string[] | undefined | null, defaul
 @Injectable()
 export class BrnDialogService implements OnDestroy {
   private _destroyed$ = new Subject<void>();
+  private _previousTimeout: ReturnType<typeof setTimeout> | undefined;
 
   private _cdkDialog = inject(Dialog);
   private _renderer = inject(Renderer2);
@@ -76,6 +78,8 @@ export class BrnDialogService implements OnDestroy {
   public state = computed(() => (this._open() ? 'open' : 'closed'));
   private _overlay: HTMLElement | null = null;
   private _backdrop: HTMLElement | null = null;
+
+  public closed = new EventEmitter<void>();
 
   constructor() {
     effect(() => {
@@ -92,7 +96,7 @@ export class BrnDialogService implements OnDestroy {
     vcr: ViewContainerRef,
     content: ComponentType<unknown> | TemplateRef<unknown>,
     context?: DialogContext,
-    options?: Partial<BrnDialogOptions>,
+    options?: Partial<BrnDialogOptions>
   ): void {
     if (this._open() || (options?.id && this._cdkDialog.getDialogById(options.id))) {
       return;
@@ -138,7 +142,7 @@ export class BrnDialogService implements OnDestroy {
       this._dialogRef.keydownEvents
         .pipe(
           filter((e) => e.key === 'Escape'),
-          takeUntil(this._destroyed$),
+          takeUntil(this._destroyed$)
         )
         .subscribe(() => {
           this.close(options?.closeDelay);
@@ -147,6 +151,7 @@ export class BrnDialogService implements OnDestroy {
 
     this._dialogRef.closed.pipe(takeUntil(this._destroyed$)).subscribe(() => {
       this._open.set(false);
+      this.closed.emit();
     });
 
     this._open.set(true);
@@ -156,7 +161,12 @@ export class BrnDialogService implements OnDestroy {
     if (!this._open()) return;
 
     this._open.set(false);
-    setTimeout(() => {
+
+    if (this._previousTimeout) {
+      clearTimeout(this._previousTimeout);
+    }
+
+    this._previousTimeout = setTimeout(() => {
       this._dialogRef?.close();
     }, delay);
   }

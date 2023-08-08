@@ -1,13 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   ElementRef,
-  EventEmitter,
   inject,
   Input,
   Output,
-  Signal,
   TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
@@ -45,6 +42,7 @@ export class BrnDialogComponent {
   public readonly state = this._dialogService.state;
   public readonly dialogId = dialogSequence++;
 
+  private _context = {};
   protected _options: BrnDialogOptions = {
     role: 'dialog',
     id: 'brn-dialog-' + this.dialogId,
@@ -66,6 +64,9 @@ export class BrnDialogComponent {
     ariaModal: true,
   };
 
+  @Output()
+  public readonly closed = this._dialogService.closed;
+
   @Input('state')
   set newState(state: BrnDialogState) {
     if (state === 'open') {
@@ -75,8 +76,6 @@ export class BrnDialogComponent {
       this.close(this._options['closeDelay']);
     }
   }
-  @Output()
-  public readonly stateChanged = new EventEmitter<BrnDialogState>();
 
   @Input()
   set role(role: 'dialog' | 'alertdialog') {
@@ -163,24 +162,13 @@ export class BrnDialogComponent {
     this.setAriaModal(coerceBooleanProperty(isModal));
   }
 
-  private _context = { status: this._dialogService.state };
-
-  constructor() {
-    effect(
-      () => {
-        this.stateChanged.emit(this.state());
-      },
-      { allowSignalWrites: true },
-    );
-  }
-
-  open<DialogContext extends { status: Signal<'open' | 'closed'> }>() {
+  open<DialogContext>() {
     if (!this._contentTemplate) return;
     this._dialogService.open<DialogContext>(
       this._vcr,
       this._contentTemplate,
-      (this._context ?? {}) as DialogContext,
-      this._options,
+      this._context as DialogContext,
+      this._options
     );
   }
 
