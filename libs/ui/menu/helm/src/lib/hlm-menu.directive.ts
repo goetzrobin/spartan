@@ -15,7 +15,7 @@ const menuVariants = cva(
     defaultVariants: {
       variant: 'default',
     },
-  },
+  }
 );
 type MenuVariants = VariantProps<typeof menuVariants>;
 

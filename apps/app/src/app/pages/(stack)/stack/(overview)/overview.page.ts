@@ -20,7 +20,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Overview' },
   meta: metaWith(
     'spartan/stack - Overview',
-    'The spartan/stack is an opinionated full-stack that consists of multiple technologies providing e2e type safety to Angular developers.',
+    'The spartan/stack is an opinionated full-stack that consists of multiple technologies providing e2e type safety to Angular developers.'
   ),
   title: 'spartan/stack - Overview',
 };

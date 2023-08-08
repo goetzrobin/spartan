@@ -14,7 +14,7 @@ describe('BrnSwitchComponent', () => {
     `,
       {
         imports: [BrnSwitchComponent, BrnSwitchThumbComponent],
-      },
+      }
     );
     return {
       user: userEvent.setup(),
@@ -35,7 +35,7 @@ describe('BrnSwitchComponent', () => {
     `,
       {
         imports: [BrnSwitchComponent, BrnSwitchThumbComponent],
-      },
+      }
     );
     return {
       user: userEvent.setup(),
@@ -58,7 +58,7 @@ describe('BrnSwitchComponent', () => {
     `,
       {
         imports: [BrnSwitchComponent, BrnSwitchThumbComponent],
-      },
+      }
     );
     return {
       user: userEvent.setup(),
@@ -80,7 +80,7 @@ describe('BrnSwitchComponent', () => {
     `,
       {
         imports: [BrnSwitchComponent, BrnSwitchThumbComponent],
-      },
+      }
     );
     return {
       user: userEvent.setup(),
@@ -96,7 +96,7 @@ describe('BrnSwitchComponent', () => {
     inputElement: HTMLElement,
     switchElement: HTMLElement,
     shouldBeChecked: boolean,
-    opts?: Options,
+    opts?: Options
   ) => {
     expect(inputElement).toBeInTheDocument();
     expect(inputElement).toHaveAttribute('role', 'switch');

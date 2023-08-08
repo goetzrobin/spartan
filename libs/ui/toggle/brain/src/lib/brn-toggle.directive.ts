@@ -66,7 +66,7 @@ export class BrnToggleDirective {
         this._toggleSyncable?._syncToggle(this, state);
         this.toggled.emit(state);
       },
-      { allowSignalWrites: true },
+      { allowSignalWrites: true }
     );
   }
 

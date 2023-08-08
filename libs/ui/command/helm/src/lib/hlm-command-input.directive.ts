@@ -20,7 +20,7 @@ export class HlmCommandInputDirective {
   generateClass() {
     return hlm(
       'h-11 w-full bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
-      this._inputs,
+      this._inputs
     );
   }
 }

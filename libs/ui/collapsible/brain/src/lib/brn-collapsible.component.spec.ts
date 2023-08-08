@@ -23,7 +23,7 @@ describe('BrnCollapsibleComponent', () => {
     `,
       {
         imports: [BrnCollapsibleComponent, BrnCollapsibleContentComponent, BrnCollapsibleTriggerDirective],
-      },
+      }
     );
     return {
       user: userEvent.setup(),

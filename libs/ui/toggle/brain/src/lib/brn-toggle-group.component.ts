@@ -26,10 +26,7 @@ export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR: any = {
 
 let uniqueIdCounter = 0;
 export class BrnButtonToggleChange {
-  constructor(
-    public source: BrnToggleDirective,
-    public value: any,
-  ) {}
+  constructor(public source: BrnToggleDirective, public value: any) {}
 }
 
 @Component({

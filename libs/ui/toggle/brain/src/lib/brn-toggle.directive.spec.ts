@@ -10,7 +10,7 @@ describe('BrnToggleDirective', () => {
     `,
       {
         imports: [BrnToggleDirective],
-      },
+      }
     );
     return {
       user: userEvent.setup(),

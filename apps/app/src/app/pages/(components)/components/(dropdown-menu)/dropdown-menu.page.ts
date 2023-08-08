@@ -19,7 +19,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Dropdown' },
   meta: metaWith(
     'spartan/ui - Dropdown',
-    'Displays a menu to the user — such as a set of actions or functions — triggered by a button.',
+    'Displays a menu to the user — such as a set of actions or functions — triggered by a button.'
   ),
   title: 'spartan/ui - Dropdown',
 };

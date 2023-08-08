@@ -19,14 +19,11 @@ export class BreadcrumbService {
   // Observable exposing the breadcrumb hierarchy
   readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
 
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.events
       .pipe(
         // Filter the NavigationEnd events as the breadcrumb is updated only when the route reaches its end
-        filter((event) => event instanceof NavigationEnd),
+        filter((event) => event instanceof NavigationEnd)
       )
       .subscribe(() => {
         // Construct the breadcrumb hierarchy

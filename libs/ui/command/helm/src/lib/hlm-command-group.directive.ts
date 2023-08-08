@@ -22,7 +22,7 @@ export class HlmCommandGroupDirective {
       'block [&[cmdk-hidden="true"]]:hidden\n' +
         '[&_.cmdk-group-label]:px-2 [&_.cmdk-group-label]:py-1.5 [&_.cmdk-group-label]:text-xs [&_.cmdk-group-label]:font-medium [&_.cmdk-group-label]:text-muted-foreground\n' +
         '[&_.cmdk-group-content]:flex [&_.cmdk-group-content]:flex-col [&_.cmdk-group-content]:flex-col overflow-hidden p-1 text-foreground',
-      this._inputs,
+      this._inputs
     );
   }
 }

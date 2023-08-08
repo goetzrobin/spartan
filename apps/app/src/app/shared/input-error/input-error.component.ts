@@ -21,6 +21,6 @@ export class InputErrorComponent {
   public errors = this._formField.errors;
 
   public errorMessages = computed(() =>
-    Object.values(this.errors() ?? {}).map((error) => error.message ?? 'Field invalid'),
+    Object.values(this.errors() ?? {}).map((error) => error.message ?? 'Field invalid')
   );
 }

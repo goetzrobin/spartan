@@ -21,9 +21,7 @@ describe('InitialsPipe', () => {
     expect(pipe.transform(name)).toBe('JD');
     expect(pipe.transform(otherName)).toBe('MS');
     expect(pipe.transform(randomName)).toBe(
-      `${randomName.charAt(0).toLocaleUpperCase()}${randomName
-        .charAt(randomName.indexOf(' ') + 1)
-        .toLocaleUpperCase()}`,
+      `${randomName.charAt(0).toLocaleUpperCase()}${randomName.charAt(randomName.indexOf(' ') + 1).toLocaleUpperCase()}`
     );
   });
 
@@ -35,7 +33,7 @@ describe('InitialsPipe', () => {
     expect(pipe.transform(name, false)).toBe('jD');
     expect(pipe.transform(otherName, false)).toBe('ms');
     expect(pipe.transform(randomName, false)).toBe(
-      `${randomName.charAt(0)}${randomName.charAt(randomName.lastIndexOf(' ') + 1)}`,
+      `${randomName.charAt(0)}${randomName.charAt(randomName.lastIndexOf(' ') + 1)}`
     );
   });
 

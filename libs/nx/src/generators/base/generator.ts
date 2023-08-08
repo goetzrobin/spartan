@@ -14,7 +14,7 @@ export async function hlmBaseGenerator(tree: Tree, options: HlmBaseGeneratorSche
     tree,
     path.join(__dirname, '..', 'ui', 'libs', options.internalName, 'files'),
     path.join(targetLibDir, 'src'),
-    options,
+    options
   );
 
   const dependencies = buildDependencyArray(options);

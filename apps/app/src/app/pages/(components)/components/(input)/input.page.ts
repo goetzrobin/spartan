@@ -22,7 +22,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Input' },
   meta: metaWith(
     'spartan/ui - Input',
-    'Gives an input field or a component a distinct look that indicates its input capabilities.',
+    'Gives an input field or a component a distinct look that indicates its input capabilities.'
   ),
   title: 'spartan/ui - Input',
 };

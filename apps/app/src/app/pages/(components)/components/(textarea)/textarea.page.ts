@@ -18,7 +18,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Textarea' },
   meta: metaWith(
     'spartan/ui - Textarea',
-    'Gives a textarea field or a component a distinct look that indicates its input capabilities.',
+    'Gives a textarea field or a component a distinct look that indicates its input capabilities.'
   ),
   title: 'spartan/ui - Textarea',
 };

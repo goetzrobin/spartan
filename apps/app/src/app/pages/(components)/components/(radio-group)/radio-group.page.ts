@@ -17,7 +17,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Radio Group' },
   meta: metaWith(
     'spartan/ui - Radio Group',
-    'A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.',
+    'A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.'
   ),
   title: 'spartan/ui - Radio Group',
 };

@@ -18,7 +18,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Alert Dialog' },
   meta: metaWith(
     'spartan/ui - Alert Dialog',
-    'A modal dialog that interrupts the user with important content and expects a response.',
+    'A modal dialog that interrupts the user with important content and expects a response.'
   ),
   title: 'spartan/ui - Alert Dialog',
 };

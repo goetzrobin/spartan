@@ -9,7 +9,7 @@ export function rxHostListener<T extends Event>(event: string): Observable<T> {
   return fromEvent<T>(inject(ElementRef).nativeElement, event).pipe(
     debounceTime(0),
     tap(() => cdr.markForCheck()), // Trigger CD like @HostListener would
-    takeUntilDestroyed(), // Unsubscribe
+    takeUntilDestroyed() // Unsubscribe
   );
 }
 
@@ -53,13 +53,13 @@ export function rxHostPressedListener() {
     rxHostListener('click').pipe(
       tap((el) => {
         lastTimeStamp = el.timeStamp;
-      }),
+      })
     ),
     rxHostListener('keyup').pipe(
       switchMap((x) => {
         return (x as any).code === 'Space' || (x as any).code === 'Enter' ? of(true) : of(null);
       }),
-      filter(Boolean),
-    ),
+      filter(Boolean)
+    )
   ).pipe(debounceTime(0));
 }

@@ -11,7 +11,7 @@ async function createGeneratorFromHlmLibrary(
   generatorName: string,
   internalName: string,
   tree: Tree,
-  options: HlmToNxGeneratorGeneratorSchema,
+  options: HlmToNxGeneratorGeneratorSchema
 ) {
   const srcPath = path.join(workspaceRoot, projects.get(internalName).sourceRoot);
   const projectRoot = `libs/nx/src/generators/ui/libs/${internalName}`;

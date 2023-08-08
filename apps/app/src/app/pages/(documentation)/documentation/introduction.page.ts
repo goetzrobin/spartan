@@ -33,7 +33,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Introduction' },
   meta: metaWith(
     'spartan - Introduction',
-    'spartan is a collection of tools to superpower your Angular full-stack development.',
+    'spartan is a collection of tools to superpower your Angular full-stack development.'
   ),
   title: 'spartan - Introduction',
 };
