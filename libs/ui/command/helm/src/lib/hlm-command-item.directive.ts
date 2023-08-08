@@ -26,7 +26,7 @@ export class HlmCommandItemDirective {
         'aria-selected:bg-accent aria-selected:text-accent-foreground\n' +
         'hover:bg-accent/50\n' +
         'disabled:pointer-events-none disabled:opacity-50',
-      this._inputs
+      this._inputs,
     );
   }
 }

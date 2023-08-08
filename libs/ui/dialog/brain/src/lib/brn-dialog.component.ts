@@ -170,7 +170,7 @@ export class BrnDialogComponent {
       () => {
         this.stateChanged.emit(this.state());
       },
-      { allowSignalWrites: true }
+      { allowSignalWrites: true },
     );
   }
 
@@ -180,7 +180,7 @@ export class BrnDialogComponent {
       this._vcr,
       this._contentTemplate,
       (this._context ?? {}) as DialogContext,
-      this._options
+      this._options,
     );
   }
 

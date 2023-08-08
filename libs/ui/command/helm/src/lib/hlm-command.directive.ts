@@ -20,7 +20,7 @@ export class HlmCommandDirective {
   generateClass() {
     return hlm(
       'flex h-full w-full flex-col overflow-hidden rounded-md border border-border bg-popover text-popover-foreground',
-      this._inputs
+      this._inputs,
     );
   }
 }

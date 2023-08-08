@@ -28,7 +28,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Dialog' },
   meta: metaWith(
     'spartan/ui - Dialog',
-    'A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.'
+    'A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.',
   ),
   title: 'spartan/ui - Dialog',
 };

@@ -42,17 +42,17 @@ const CONTAINER_POST_FIX = '-switch';
       [id]="forChild(id) ?? ''"
       [name]="forChild(name) ?? ''"
       [value]="_checked() ? 'on' : 'off'"
-      [ngStyle]='{
-    position: "absolute",
-    width: "1px",
-    height: "1px",
-    padding: "0",
-    margin: -"1px",
-    overflow: "hidden",
-    clip: "rect(0, 0, 0, 0)",
-    whiteSpace: "nowrap",
-    borderWidth: "0",
-    }'
+      [ngStyle]="{
+        position: 'absolute',
+        width: '1px',
+        height: '1px',
+        padding: '0',
+        margin: -'1px',
+        overflow: 'hidden',
+        clip: 'rect(0, 0, 0, 0)',
+        whiteSpace: 'nowrap',
+        borderWidth: '0'
+      }"
       [checked]="_checked()"
       [attr.aria-label]="ariaLabel"
       [attr.aria-labelledby]="ariaLabelledby"

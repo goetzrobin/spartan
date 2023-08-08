@@ -18,7 +18,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Accordion' },
   meta: metaWith(
     'spartan/ui - Accordion',
-    'A vertically stacked set of interactive headings that each reveal a section of content.'
+    'A vertically stacked set of interactive headings that each reveal a section of content.',
   ),
   title: 'spartan/ui - Accordion',
 };

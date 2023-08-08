@@ -83,7 +83,7 @@ const aboutLink = 'h-6 underline text-base px-0.5';
       <spartan-section-sub-heading id="credits">Credits</spartan-section-sub-heading>
       <div>
         <p class="${hlmP}">
-          First and foremost credit goes to the incredible
+          First and foremost, credit goes to the incredible
           <a hlmBtn variant="link" class="${aboutLink}" href="https://brandonroberts.dev/blog">Brandon Roberts</a> and
           <a hlmBtn variant="link" class="${aboutLink}" href="https://shadcn.com">shadcn.</a>
         </p>
@@ -93,22 +93,22 @@ const aboutLink = 'h-6 underline text-base px-0.5';
           ecosystem.
         </p>
         <p class="${hlmP}">
-          The ui library shadcn has created is simply beautiful and spartan/ui tries its best to emulate its style and
+          The UI library shadcn has created is simply beautiful and spartan/ui tries its best to emulate its style and
           quality.
         </p>
         <p class="${hlmP}">Other awesome work we are building upon is:</p>
         <ul class="${hlmUl}">
           <li>
             <a class="${aboutLink}" hlmBtn href="https://analogjs.org" target="_blank" variant="link">AnalogJs</a>
-            - The fullstack Angular meta-framework .
+            - The full-stack Angular meta-framework.
           </li>
           <li>
             <a class="${aboutLink}" hlmBtn href="https://ui.shadcn.com" target="_blank" variant="link">ui.shadcn.com</a>
-            - Styles for ui primitives.
+            - Styles for UI primitives.
           </li>
           <li>
             <a class="${aboutLink}" hlmBtn href="https://radix-ui.com" target="_blank" variant="link">Radix</a>
-            - Patterns & inspiration for accessible unstyled ui primitives.
+            - Patterns & inspiration for accessible unstyled UI primitives.
           </li>
           <li>
             <a class="${aboutLink}" hlmBtn href="https://material.angular.io" target="_blank" variant="link"

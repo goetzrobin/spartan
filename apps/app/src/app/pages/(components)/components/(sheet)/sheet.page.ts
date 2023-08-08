@@ -19,7 +19,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Sheet' },
   meta: metaWith(
     'spartan/ui - Sheet',
-    'Extends the Dialog component to display content that complements the main content of the screen.'
+    'Extends the Dialog component to display content that complements the main content of the screen.',
   ),
   title: 'spartan/ui - Sheet',
 };

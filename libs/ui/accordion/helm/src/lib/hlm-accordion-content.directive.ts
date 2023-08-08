@@ -74,7 +74,7 @@ export class HlmAccordionContentDirective implements OnInit {
       {
         injector: this._injector,
         allowSignalWrites: true,
-      }
+      },
     );
   }
 

@@ -112,7 +112,7 @@ export default class NotesExamplePageComponent {
         state.status = 'success';
         state.notes = result;
         state.error = null;
-      })
+      }),
     ),
     catchError((err) => {
       this.state.mutate((state) => {
@@ -121,7 +121,7 @@ export default class NotesExamplePageComponent {
         state.error = err;
       });
       return of([]);
-    })
+    }),
   );
 
   public state = signal<{
@@ -139,11 +139,13 @@ export default class NotesExamplePageComponent {
   public initialLoad = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'initial');
   public createLoad = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'create');
   public deleteIdInProgress = computed(() =>
-    this.state().status === 'loading' && this.state().updatedFrom === 'delete' ? this.state().idBeingDeleted : undefined
+    this.state().status === 'loading' && this.state().updatedFrom === 'delete'
+      ? this.state().idBeingDeleted
+      : undefined,
   );
   public noNotes = computed(() => this.state().notes.length === 0);
   public showNotesArray = computed(
-    () => this.state().updatedFrom === 'delete' || this.state().notes.length > 0 || this.state().status === 'success'
+    () => this.state().updatedFrom === 'delete' || this.state().notes.length > 0 || this.state().status === 'success',
   );
 
   public form = this._sfb.createFormGroup(() => ({
@@ -192,7 +194,7 @@ export default class NotesExamplePageComponent {
   private updateNotes(
     updatedFrom: 'initial' | 'create' | 'delete',
     operation?: Observable<Note | Note[]>,
-    idBeingDeleted?: number
+    idBeingDeleted?: number,
   ) {
     this.state.update((state) => ({
       status: 'loading',

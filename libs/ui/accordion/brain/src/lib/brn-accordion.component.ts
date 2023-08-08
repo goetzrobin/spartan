@@ -52,8 +52,8 @@ export class BrnAccordionComponent implements AfterContentInit {
       this._openItemIds.mutate((ids) =>
         ids.splice(
           ids.findIndex((openId) => id === openId),
-          1
-        )
+          1,
+        ),
       );
       return;
     } else if (this.type === 'single') {

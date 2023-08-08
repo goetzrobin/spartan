@@ -17,7 +17,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Menubar' },
   meta: metaWith(
     'spartan/ui - Menubar',
-    'A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.'
+    'A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.',
   ),
   title: 'spartan/ui - Menubar',
 };

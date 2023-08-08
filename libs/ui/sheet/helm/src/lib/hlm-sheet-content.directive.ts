@@ -19,7 +19,7 @@ const sheetVariants = cva(
     defaultVariants: {
       side: 'right',
     },
-  }
+  },
 );
 
 @Directive({

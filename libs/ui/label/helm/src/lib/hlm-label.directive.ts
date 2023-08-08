@@ -15,7 +15,7 @@ const labelVariants = cva(
     defaultVariants: {
       variant: 'error',
     },
-  }
+  },
 );
 export type LabelVariants = VariantProps<typeof labelVariants>;
 

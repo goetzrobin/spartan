@@ -20,7 +20,7 @@ export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Tabs' },
   meta: metaWith(
     'spartan/ui - Tabs',
-    'A set of layered sections of content—known as tab panels—that are displayed one at a time.'
+    'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
   ),
   title: 'spartan/ui - Tabs',
 };

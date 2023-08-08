@@ -71,12 +71,12 @@ describe('switch', () => {
 
     it(
       '[Tab][Enter] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
-      executeTabEnterTests
+      executeTabEnterTests,
     );
 
     it(
       '[Tab][Space] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
-      executeTabSpaceTests
+      executeTabSpaceTests,
     );
   });
 
@@ -88,19 +88,19 @@ describe('switch', () => {
 
     it(
       'click interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
-      executeClickOnLabelTests
+      executeClickOnLabelTests,
     );
 
     it(
       '[Tab][Enter] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
       // this is the same as label does not change keyboard interaction
-      executeTabEnterTests
+      executeTabEnterTests,
     );
 
     it(
       '[Tab][Space] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
       // this is the same as label does not change keyboard interaction
-      executeTabSpaceTests
+      executeTabSpaceTests,
     );
   });
 
@@ -112,19 +112,19 @@ describe('switch', () => {
 
     it(
       'click interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
-      executeClickOnLabelTests
+      executeClickOnLabelTests,
     );
 
     it(
       '[Tab][Enter] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
       // this is the same as label does not change keyboard interaction
-      executeTabEnterTests
+      executeTabEnterTests,
     );
 
     it(
       '[Tab][Space] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
       // this is the same as label does not change keyboard interaction
-      executeTabSpaceTests
+      executeTabSpaceTests,
     );
   });
 });

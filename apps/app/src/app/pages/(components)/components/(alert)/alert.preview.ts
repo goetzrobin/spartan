@@ -25,7 +25,7 @@ import { radixCube } from '@ng-icons/radix-icons';
       <hlm-icon hlmAlertIcon name="radixCube" />
       <h4 hlmAlertTitle>Introducing spartan/ui!</h4>
       <p hlmAlertDesc>
-        spartan/ui is made up of unstyled ui providers, the spartan/ui/brain.<br />
+        spartan/ui is made up of unstyled UI providers, the spartan/ui/brain.<br />
         On top we add spartan/ui/helm(et) with shadcn-like styles.
       </p>
     </div>
@@ -61,7 +61,7 @@ import { radixCube } from '@ng-icons/radix-icons';
       <hlm-icon hlmAlertIcon name="radixCube" />
       <h4 hlmAlertTitle>Introducing spartan/ui!</h4>
       <p hlmAlertDesc>
-        spartan/ui is made up of unstyled ui providers, the spartan/ui/brain.<br />
+        spartan/ui is made up of unstyled UI providers, the spartan/ui/brain.<br />
         On top we add spartan/ui/helm(et) with shadcn-like styles.
       </p>
     </div>
@@ -84,7 +84,7 @@ export const defaultSkeleton = `
       <hlm-icon hlmAlertIcon name="radixCube" />
       <h4 hlmAlertTitle>Introducing spartan/ui!</h4>
       <p hlmAlertDesc>
-        spartan/ui is made up of unstyled ui providers, the spartan/ui/brain.<br />
+        spartan/ui is made up of unstyled UI providers, the spartan/ui/brain.<br />
         On top we add spartan/ui/helm(et) with shadcn-like styles.
       </p>
     </div>
