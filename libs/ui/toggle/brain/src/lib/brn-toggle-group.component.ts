@@ -205,7 +205,7 @@ export class BrnToggleGroupComponent
         togglesToBeOff.filter((t) => t.toggleOff());
         this._skipNullableCheck = false;
       }
-      this._selectValue(toggle.value);
+      this._selectValue(toggle.value, true);
     }
     if (state === 'off') {
       if (!this.multiple && toggle.value === this.value) this.value = undefined;
@@ -213,7 +213,7 @@ export class BrnToggleGroupComponent
         this.value = (this.value as any[]).filter((value) => value !== toggle.value);
       }
     }
-    this._updateModelValue(toggle, isUserInput);
+    this._updateModelValue(toggle);
   }
 
   _canBeNullable(value: any) {
@@ -253,27 +253,22 @@ export class BrnToggleGroupComponent
   }
 
   /** Selects a value if there's a toggle that corresponds to it. */
-  private _selectValue(value: any) {
+  private _selectValue(value: any, userInput = false) {
     if (!this._selectionModel) return;
     const correspondingOption = (this._buttonToggles ?? []).find((toggle) => {
       return toggle.value != null && toggle.value === value;
     });
 
     if (correspondingOption) {
-      correspondingOption.toggleOn();
+      if (!userInput) {
+        correspondingOption.toggleOn();
+      }
       this._selectionModel.select(correspondingOption);
     }
   }
 
-  /** Syncs up the group's value with the model and emits the change event. */
-  private _updateModelValue(toggle: BrnToggleDirective, isUserInput: boolean) {
-    // Only emit the change event for user input.
-    if (isUserInput) {
-      this._emitChangeEvent(toggle);
-    }
-
-    // Note: we emit this one no matter whether it was a user interaction, because
-    // it is used by Angular to sync up the two-way data binding.
+  private _updateModelValue(toggle: BrnToggleDirective) {
+    this._emitChangeEvent(toggle);
     this.valueChange.emit(this.value);
   }
 

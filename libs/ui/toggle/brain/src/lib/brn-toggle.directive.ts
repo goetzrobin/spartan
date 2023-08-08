@@ -39,21 +39,31 @@ export class BrnToggleDirective {
 
   @Input()
   value: any;
+
   @Input()
   set disabled(value: BooleanInput) {
     this._disabled.set(coerceBooleanProperty(value) ? true : undefined);
   }
+
   @Input('state')
   set setState(value: 'on' | 'off') {
     this._state.set(value);
   }
+
+  private _disableToggleClick = false;
+  @Input()
+  set disableToggleClick(value: BooleanInput) {
+    this._disableToggleClick = coerceBooleanProperty(value);
+  }
+
   @Output()
   toggled = new EventEmitter<'on' | 'off'>();
+
   constructor() {
     effect(
       () => {
         const state = this.state();
-        this._toggleSyncable?._syncToggle(this, state, true);
+        this._toggleSyncable?._syncToggle(this, state);
         this.toggled.emit(state);
       },
       { allowSignalWrites: true },
@@ -61,19 +71,23 @@ export class BrnToggleDirective {
   }
 
   toggle() {
+    if (this._disableToggleClick) return;
     if (this._state() === 'on') {
       this.toggleOff();
     } else {
       this.toggleOn();
     }
   }
+
   toggleOff() {
     if (this._tgCanBeNullableProvider && !this._tgCanBeNullableProvider._canBeNullable(this.value)) return;
     this._state.set('off');
   }
+
   toggleOn() {
     this._state.set('on');
   }
+
   public _markForCheck() {
     this._cdr.markForCheck();
   }
