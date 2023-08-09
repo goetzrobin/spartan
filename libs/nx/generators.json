@@ -4,6 +4,11 @@
       "factory": "./src/generators/ui/generator",
       "schema": "./src/generators/ui/schema.json",
       "description": "spartan-ng ui generator"
+    },
+    "ui-theme": {
+      "factory": "./src/generators/theme/generator",
+      "schema": "./src/generators/theme/schema.json",
+      "description": "spartan-ng theme generator"
     }
   }
 }

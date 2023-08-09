@@ -48,6 +48,7 @@ module.exports = {
         'toggle',
         'tooltip',
         'typography',
+        'nx',
       ],
     ],
   },
