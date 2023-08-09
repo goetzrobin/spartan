@@ -1,7 +1,6 @@
 export const SupportedThemeGeneratorMap = {
   zinc: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -45,11 +44,9 @@ export const SupportedThemeGeneratorMap = {
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
   }
-}
-  `,
+`,
   slate: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --muted: 210 40% 96.1%;
@@ -93,11 +90,9 @@ export const SupportedThemeGeneratorMap = {
     --destructive-foreground: 210 40% 98%;
     --ring: 212.7 26.8% 83.9;
   }
-}
-  `,
+`,
   stone: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
    --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
     --muted: 60 4.8% 95.9%;
@@ -141,11 +136,9 @@ export const SupportedThemeGeneratorMap = {
     --destructive-foreground: 60 9.1% 97.8%;
     --ring: 24 5.7% 82.9%;
   }
-}
-  `,
+`,
   gray: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --muted: 220 14.3% 95.9%;
@@ -189,11 +182,9 @@ export const SupportedThemeGeneratorMap = {
     --destructive-foreground: 210 20% 98%;
     --ring: 216 12.2% 83.9%;
   }
-}
-  `,
+`,
   neutral: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --muted: 0 0% 96.1%;
@@ -237,11 +228,9 @@ export const SupportedThemeGeneratorMap = {
     --destructive-foreground: 0 0% 98%;
     --ring: 0 0% 83.1%;
   }
-}
-  `,
+`,
   red: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --muted: 0 0% 96.1%;
@@ -285,11 +274,9 @@ export const SupportedThemeGeneratorMap = {
     --destructive-foreground: 0 0% 98%;
     --ring: 0 72.2% 50.6%;
   }
-}
-  `,
+`,
   rose: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -333,11 +320,9 @@ export const SupportedThemeGeneratorMap = {
     --input: 240 3.7% 15.9%;
     --ring: 346.8 77.2% 49.8%;
   }
-}
-  `,
+`,
   blue: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -381,11 +366,9 @@ export const SupportedThemeGeneratorMap = {
     --input: 240 3.7% 15.9%;
     --ring: 346.8 77.2% 49.8%;
   }
-}
-  `,
+`,
   green: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -429,11 +412,9 @@ export const SupportedThemeGeneratorMap = {
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
   }
-}
-  `,
+`,
   orange: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
@@ -477,11 +458,9 @@ export const SupportedThemeGeneratorMap = {
     --input: 12 6.5% 15.1%;
     --ring: 20.5 90.2% 48.2%;
   }
-}
-  `,
+`,
   yellow: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
     --muted: 60 4.8% 95.9%;
@@ -525,11 +504,9 @@ export const SupportedThemeGeneratorMap = {
     --destructive-foreground: 60 9.1% 97.8%;
     --ring: 35.5 91.7% 32.9%;
   }
-}
-  `,
+`,
   violet: (radius: number, prefix = '') => `
-@layer base {
-  :root${prefix} {
+:root${prefix} {
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --muted: 220 14.3% 95.9%;
@@ -573,8 +550,7 @@ export const SupportedThemeGeneratorMap = {
     --destructive-foreground: 210 20% 98%;
     --ring: 263.4 70% 50.4%;
   }
-}
-  `,
+`,
 };
 
 export const SupportedThemes = Object.keys(SupportedThemeGeneratorMap);
