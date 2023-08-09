@@ -1,7 +1,8 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmBadgeDirective } from './helm/src';
 
-const meta: Meta<{}> = {
+type BadgeStory = { isStatic: boolean };
+const meta: Meta<BadgeStory> = {
   title: 'Badge',
   decorators: [
     moduleMetadata({
@@ -11,20 +12,28 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<BadgeStory>;
 
 export const Default: Story = {
-  render: () => ({
+  args: {
+    isStatic: false,
+  },
+  render: ({ isStatic }) => ({
+    props: { isStatic },
     template: `
-    <span hlmBadge>I am a badge</span>
+    <span hlmBadge [static]='isStatic'>I am a badge</span>
     `,
   }),
 };
 
 export const Destructive: Story = {
-  render: () => ({
+  args: {
+    isStatic: false,
+  },
+  render: ({ isStatic }) => ({
+    props: { isStatic },
     template: `
-    <span hlmBadge variant='destructive'>I am a destructive badge</span>
+    <span hlmBadge [static]='isStatic' variant='destructive'>I am a destructive badge</span>
     `,
   }),
 };
@@ -38,9 +47,13 @@ export const Outline: Story = {
 };
 
 export const Secondary: Story = {
-  render: () => ({
+  args: {
+    isStatic: false,
+  },
+  render: ({ isStatic }) => ({
+    props: { isStatic },
     template: `
-            <span hlmBadge variant='secondary'>I am a secondary badge</span>
+            <span hlmBadge [static]='isStatic' variant='secondary'>I am a secondary badge</span>
     `,
   }),
 };
