@@ -22,7 +22,7 @@ export class ThemeService {
   private _systemDarkMode$ = new ReplaySubject<'light' | 'dark' | 'system'>(1);
   public darkMode$ = this._darkMode$.asObservable();
 
-  private _theme = signal<Theme>('default');
+  private _theme = signal<Theme | undefined>(undefined);
   public theme = this._theme.asReadonly();
 
   constructor() {
