@@ -52,8 +52,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
           target="_blank"
           href="https://github.com/goetzrobin/spartan"
           hlmBadge
-          variant="destructive"
-          class="bg-[#DD0031] hover:bg-[#DD0031] hover:bg-opacity-80"
+          class="!bg-primary !text-foreground-primary !hover:bg-primary/90"
           >This is madness. This is spartan.</a
         >
         <h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
@@ -90,7 +89,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
       <div class="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem]">
         <a routerLink="/stack" hlmCard class="group">
           <div hlmCardHeader>
-            <hlm-icon class="transition-colors group-hover:text-[#DD0031]" name="radixLayers" size="xl" />
+            <hlm-icon class="transition-colors group-hover:text-primary" name="radixLayers" size="xl" />
             <h3 hlmCardTitle>spartan/stack</h3>
             <p hlmCardDescription>
               Opinionated full-stack based on Supabase, Angular, tRPC, Tailwind, AnalogJs, Nx and Drizzle.
@@ -100,7 +99,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 
         <a routerLink="/documentation" hlmCard class="group">
           <div hlmCardHeader>
-            <hlm-icon class="transition-colors group-hover:text-[#DD0031]" name="radixMix" size="xl" />
+            <hlm-icon class="transition-colors group-hover:text-primary" name="radixMix" size="xl" />
             <h3 hlmCardTitle>spartan/ui</h3>
             <p hlmCardDescription>Accessible, composable UI primitives that come styled or unstyled.</p>
           </div>

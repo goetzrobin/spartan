@@ -8,6 +8,8 @@ import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
   host: {
     class: 'inline-block',
   },
-  template: `<span class="font-medium text-white rounded-lg bg-destructive text-[0.5rem] py-0.5 px-1">soon</span>`,
+  template: `<span class="font-medium text-primary-foreground rounded-lg bg-primary text-[0.5rem] py-0.5 px-1"
+    >soon</span
+  >`,
 })
 export class SideNavComponent {}

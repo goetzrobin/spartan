@@ -7,6 +7,7 @@ import { provideIcons } from '@ng-icons/core';
 import { radixGithubLogo, radixTwitterLogo } from '@ng-icons/radix-icons';
 import { HeaderThemePickerComponent } from './header-theme-picker.component';
 import { HeaderMobileNavComponent } from '~/app/shared/header/header-mobile-nav.component';
+import { HeaderDarkModeComponent } from '~/app/shared/header/header-dark-mode.component';
 
 @Component({
   selector: 'spartan-header',
@@ -18,6 +19,7 @@ import { HeaderMobileNavComponent } from '~/app/shared/header/header-mobile-nav.
     HeaderThemePickerComponent,
     NavLinkDirective,
     HeaderMobileNavComponent,
+    HeaderDarkModeComponent,
   ],
   providers: [provideIcons({ radixTwitterLogo, radixGithubLogo })],
   host: {
@@ -28,7 +30,7 @@ import { HeaderMobileNavComponent } from '~/app/shared/header/header-mobile-nav.
       <nav class="flex items-center">
         <a hlmBtn variant="ghost" class="hidden sm:block mr-3 rounded-full h-9 w-9 p-1.5" routerLink="/">
           <svg
-            class="h-full w-full text-[#DD0031]"
+            class="h-full w-full text-primary"
             width="587"
             height="587"
             viewBox="0 0 587 587"
@@ -65,6 +67,7 @@ import { HeaderMobileNavComponent } from '~/app/shared/header/header-mobile-nav.
           <hlm-icon name="radixGithubLogo" size="sm" />
         </a>
         <spartan-theme-picker />
+        <spartan-dark-mode />
       </div>
     </div>
   `,

@@ -1,11 +1,14 @@
-import { inject, Injectable, PLATFORM_ID, RendererFactory2 } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID, RendererFactory2, signal } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { combineLatest, ReplaySubject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MediaMatcher } from '@angular/cdk/layout';
 
-const THEMES = ['light', 'dark', 'system'] as const;
-export type Theme = (typeof THEMES)[number];
+const DarkModes = ['light', 'dark', 'system'] as const;
+export type DarkMode = (typeof DarkModes)[number];
+
+export const AppThemes = ['default', 'gray', 'red', 'green'] as const;
+export type Theme = (typeof AppThemes)[number];
 
 @Injectable({
   providedIn: 'root',
@@ -15,27 +18,31 @@ export class ThemeService {
   private _renderer = inject(RendererFactory2).createRenderer(null, null);
   private _document = inject(DOCUMENT);
   private _query = inject(MediaMatcher).matchMedia('(prefers-color-scheme: dark)');
-  private _theme$ = new ReplaySubject<'light' | 'dark' | 'system'>(1);
-  private _systemTheme$ = new ReplaySubject<'light' | 'dark' | 'system'>(1);
-  public theme$ = this._theme$.asObservable();
+  private _darkMode$ = new ReplaySubject<'light' | 'dark' | 'system'>(1);
+  private _systemDarkMode$ = new ReplaySubject<'light' | 'dark' | 'system'>(1);
+  public darkMode$ = this._darkMode$.asObservable();
+
+  private _theme = signal<Theme>('default');
+  public theme = this._theme.asReadonly();
 
   constructor() {
-    this._systemTheme$.next(this._query.matches ? 'dark' : 'light');
-    this._query.onchange = (e: MediaQueryListEvent) => this._systemTheme$.next(e.matches ? 'dark' : 'light');
-    this.syncThemeFromLocalStorage();
-    this.toggleClassOnThemeChanges();
+    this._systemDarkMode$.next(this._query.matches ? 'dark' : 'light');
+    this._query.onchange = (e: MediaQueryListEvent) => this._systemDarkMode$.next(e.matches ? 'dark' : 'light');
+    this.syncInitialStateFromLocalStorage();
+    this.toggleClassOnDarkModeChanges();
   }
 
-  private syncThemeFromLocalStorage(): void {
+  private syncInitialStateFromLocalStorage(): void {
     if (isPlatformBrowser(this._platformId)) {
-      this._theme$.next((localStorage.getItem('theme') as Theme) ?? 'system');
+      this._darkMode$.next((localStorage.getItem('darkMode') as DarkMode) ?? 'system');
+      this.setTheme((localStorage.getItem('theme') as Theme) ?? 'default');
     }
   }
-  private toggleClassOnThemeChanges(): void {
-    combineLatest([this.theme$, this._systemTheme$])
+  private toggleClassOnDarkModeChanges(): void {
+    combineLatest([this.darkMode$, this._systemDarkMode$])
       .pipe(takeUntilDestroyed())
-      .subscribe(([theme, systemTheme]) => {
-        if (theme === 'dark' || (theme === 'system' && systemTheme === 'dark')) {
+      .subscribe(([darkMode, systemDarkMode]) => {
+        if (darkMode === 'dark' || (darkMode === 'system' && systemDarkMode === 'dark')) {
           this._renderer.addClass(this._document.documentElement, 'dark');
         } else {
           if (this._document.documentElement.className.includes('dark')) {
@@ -44,8 +51,23 @@ export class ThemeService {
         }
       });
   }
+  public setDarkMode(newMode: DarkMode): void {
+    localStorage.setItem('darkMode', newMode);
+    this._darkMode$.next(newMode);
+  }
+
   public setTheme(newTheme: Theme): void {
+    console.log(newTheme, this._theme());
+    const oldTheme = this._theme();
+    this._renderer.removeClass(this._document.body, `theme-${oldTheme}`);
+    this._theme.set(newTheme);
+
+    if (newTheme === 'default') {
+      localStorage.removeItem('theme');
+      return;
+    }
+
+    this._renderer.addClass(this._document.body, `theme-${newTheme}`);
     localStorage.setItem('theme', newTheme);
-    this._theme$.next(newTheme);
   }
 }

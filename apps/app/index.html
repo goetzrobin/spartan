@@ -8,23 +8,21 @@
     <link rel="icon" type="image/x-icon" href="/assets/spartan.svg" />
     <link rel="stylesheet" href="/src/styles.css" />
     <script>
-      if (localStorage.theme === 'dark') {
+      if (localStorage.darkMode === 'dark') {
         if (document && document.documentElement) {
           document.documentElement.classList.add('dark');
         }
-      } else if (localStorage.theme === 'light') {
+      } else if (localStorage.darkMode === 'light') {
         if (document && document.documentElement) {
           document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
+          localStorage.setItem('darkMode', 'light');
         }
       } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        localStorage.setItem('theme', 'system');
-        localStorage.setItem('systemTheme', 'dark');
+        localStorage.setItem('darkMode', 'system');
         if (document && document.documentElement) {
           document.documentElement.classList.add('dark');
         }
       } else {
-        localStorage.setItem('systemTheme', 'light');
         if (document && document.documentElement) {
           document.documentElement.classList.remove('dark');
         }

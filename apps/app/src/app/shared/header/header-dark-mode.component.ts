@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AppThemes, Theme, ThemeService } from '../theme.service';
+import { DarkMode, ThemeService } from '../theme.service';
 import {
   BrnPopoverComponent,
   BrnPopoverContentDirective,
@@ -9,13 +9,13 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
-import { radixColorWheel } from '@ng-icons/radix-icons';
+import { radixMoon } from '@ng-icons/radix-icons';
 import { BrnMenuDirective, BrnMenuItemCheckboxDirective, BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuDirective, HlmMenuItemCheckComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm';
-import { AsyncPipe, NgForOf, TitleCasePipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'spartan-theme-picker',
+  selector: 'spartan-dark-mode',
   standalone: true,
   imports: [
     BrnPopoverComponent,
@@ -31,36 +31,34 @@ import { AsyncPipe, NgForOf, TitleCasePipe } from '@angular/common';
     AsyncPipe,
     HlmMenuItemDirective,
     HlmMenuItemCheckComponent,
-    NgForOf,
-    TitleCasePipe,
   ],
-  providers: [provideIcons({ radixColorWheel })],
+  providers: [provideIcons({ radixMoon })],
   template: `
-    <button size="sm" variant="ghost" align="end" [brnMenuTriggerFor]="themes" hlmBtn>
-      <hlm-icon name="radixColorWheel" size="sm" />
+    <button size="sm" variant="ghost" align="end" [brnMenuTriggerFor]="theme" hlmBtn>
+      <hlm-icon name="radixMoon" size="sm" />
       <span class="sr-only">Open menu to change theme</span>
     </button>
-    <ng-template #themes>
+    <ng-template #theme>
       <div hlm brnMenu class="w-40">
-        <button
-          hlm
-          brnMenuItemCheckbox
-          *ngFor="let theme of _supportedThemes"
-          [checked]="_currentTheme() === theme"
-          (click)="setTheme(theme)"
-        >
+        <button hlm brnMenuItemCheckbox [checked]="(theme$ | async) === 'light'" (click)="setTheme('light')">
           <hlm-menu-item-check />
-          {{ theme | titlecase }}
+          Light
+        </button>
+        <button hlm brnMenuItemCheckbox [checked]="(theme$ | async) === 'dark'" (click)="setTheme('dark')">
+          <hlm-menu-item-check />
+          Dark
+        </button>
+        <button hlm brnMenuItemCheckbox [checked]="(theme$ | async) === 'system'" (click)="setTheme('system')">
+          <hlm-menu-item-check /> System
         </button>
       </div>
     </ng-template>
   `,
 })
-export class HeaderThemePickerComponent {
-  private readonly _themeService = inject(ThemeService);
-  protected readonly _currentTheme = this._themeService.theme;
-  protected readonly _supportedThemes = AppThemes;
-  public setTheme(theme: Theme) {
-    this._themeService.setTheme(theme);
+export class HeaderDarkModeComponent {
+  private _themeService = inject(ThemeService);
+  theme$ = this._themeService.darkMode$;
+  public setTheme(theme: DarkMode) {
+    this._themeService.setDarkMode(theme);
   }
 }

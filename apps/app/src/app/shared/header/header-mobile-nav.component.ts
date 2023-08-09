@@ -51,7 +51,7 @@ import { SideNavLinkDirective } from '~/app/shared/layout/side-nav/side-nav-link
         <div class="flex items-center pb-2">
           <a (click)="ctx.close()" hlmBtn variant="ghost" class="mr-2 rounded-full h-10 w-10 p-1.5" routerLink="/">
             <svg
-              class="h-full w-full text-[#DD0031]"
+              class="h-full w-full text-primary"
               width="587"
               height="587"
               viewBox="0 0 587 587"

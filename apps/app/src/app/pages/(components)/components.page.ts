@@ -38,9 +38,9 @@ export const routeMeta: RouteMeta = {
   template: `
     <div
       hlmAlert
-      class="max-w-[95vw] my-2 mx-auto p-4 rounded-lg text-destructive-foreground border border-border bg-destructive"
+      class="max-w-[95vw] my-2 mx-auto p-4 rounded-lg text-primary-foreground border border-border bg-primary"
     >
-      <hlm-icon hlmAlertIcon name="radixRocket" class="!text-destructive-foreground" />
+      <hlm-icon hlmAlertIcon name="radixRocket" class="!text-primary-foreground" />
       <h2 hlmAlertTitle>Components are coming soon...</h2>
       <p hlmAlertDesc>
         We are actively working on publishing these components. They will soon be released.
