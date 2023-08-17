@@ -4,6 +4,14 @@
   "title": "",
   "type": "object",
   "properties": {
+    "name": {
+      "type": "string",
+      "description": "Primitive name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
     "directory": {
       "type": "string",
       "description": "A directory where the libraries are placed.",

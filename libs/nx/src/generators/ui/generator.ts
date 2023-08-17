@@ -8,13 +8,18 @@ export default async function hlmUIGenerator(tree: Tree, options: HlmUIGenerator
   const tasks: GeneratorCallback[] = [];
   const availablePrimitives = await import('./supported-ui-libraries.json');
   const availablePrimitiveNames = Object.keys(availablePrimitives);
-  const response: { primitives: string[] } = await prompt({
-    type: 'multiselect',
-    required: true,
-    name: 'primitives',
-    message: 'Choose which primitives you want to copy',
-    choices: ['all', ...availablePrimitiveNames],
-  });
+  let response: { primitives: string[] } = { primitives: [] };
+  if (options.name && availablePrimitiveNames.includes(options.name)) {
+    response.primitives.push(options.name);
+  } else {
+    response = await prompt({
+      type: 'multiselect',
+      required: true,
+      name: 'primitives',
+      message: 'Choose which primitives you want to copy',
+      choices: ['all', ...availablePrimitiveNames],
+    });
+  }
   tasks.push(
     ...(await createPrimitiveLibraries(response, availablePrimitiveNames, availablePrimitives, tree, options))
   );
