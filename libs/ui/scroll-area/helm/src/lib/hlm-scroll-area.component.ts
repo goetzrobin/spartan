@@ -1,28 +1,27 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ClassValue } from 'clsx';
 import { hlm } from '@spartan-ng/ui-core';
 
 @Component({
   selector: 'hlm-scroll-area',
   standalone: true,
-  imports: [NgScrollbarModule],
+  // imports: [NgScrollbarModule],
   template: `
-    <ng-scrollbar
-      [visibility]="visibility"
-      [autoHeightDisabled]="autoHeightDisabled"
-      [autoWidthDisabled]="autoWidthDisabled"
-      [track]="track"
-      [style]="{
-        '--scrollbar-border-radius': '100px',
-        '--scrollbar-padding': '1px',
-        '--scrollbar-thumb-color': 'hsl(var(--border)',
-        '--scrollbar-thumb-hover-color': 'hsl(var(--border)',
-        '--scrollbar-size': '7px'
-      }"
-    >
-      <ng-content />
-    </ng-scrollbar>
+    <!--    <ng-scrollbar-->
+    <!--      [visibility]="visibility"-->
+    <!--      [autoHeightDisabled]="autoHeightDisabled"-->
+    <!--      [autoWidthDisabled]="autoWidthDisabled"-->
+    <!--      [track]="track"-->
+    <!--      [style]="{-->
+    <!--        '&#45;&#45;scrollbar-border-radius': '100px',-->
+    <!--        '&#45;&#45;scrollbar-padding': '1px',-->
+    <!--        '&#45;&#45;scrollbar-thumb-color': 'hsl(var(&#45;&#45;border)',-->
+    <!--        '&#45;&#45;scrollbar-thumb-hover-color': 'hsl(var(&#45;&#45;border)',-->
+    <!--        '&#45;&#45;scrollbar-size': '7px'-->
+    <!--      }"-->
+    <!--    >-->
+    <ng-content />
+    <!--    </ng-scrollbar>-->
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,

@@ -4,7 +4,7 @@
   "peerDependencies": {
     "@angular/common": "^16.0.0",
     "@angular/core": "^16.0.0",
-    "@spartan-ng/ui-core": "0.0.1-alpha.1",
+    "@spartan-ng/ui-core": "0.0.1-alpha.303",
     "ngx-scrollbar": "^13.0.1"
   },
   "dependencies": {
