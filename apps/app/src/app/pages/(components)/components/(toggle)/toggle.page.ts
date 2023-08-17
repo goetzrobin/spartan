@@ -19,6 +19,7 @@ import { outlineCode, ToggleOutlinePreviewComponent } from './toggle--outline.pr
 import { smallCode, ToggleSmallPreviewComponent } from './toggle--small.preview';
 import { ToggleWithTextPreviewComponent, withTextCode } from './toggle--with-text.preview';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Toggle' },
@@ -46,6 +47,7 @@ export const routeMeta: RouteMeta = {
     ToggleSmallPreviewComponent,
     ToggleWithTextPreviewComponent,
     PageBottomNavPlaceholderComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -59,9 +61,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-toggle" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-toggle" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui toggle" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

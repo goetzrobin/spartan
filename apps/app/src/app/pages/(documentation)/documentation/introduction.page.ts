@@ -101,7 +101,7 @@ export const routeMeta: RouteMeta = {
         designed <span class="font-medium">shadcn</span> look.
       </p>
       <div class="flex items-center justify-end mb-2">
-        <a routerLink="/components" variant="outline" size="sm" hlmBtn outline=""
+        <a routerLink="/documentation/installation" variant="outline" size="sm" hlmBtn outline=""
           >Check out spartan/ui <hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
         </a>
       </div>
@@ -149,7 +149,7 @@ export const routeMeta: RouteMeta = {
       </brn-accordion>
 
       <spartan-page-bottom-nav>
-        <spartan-page-bottom-nav-link href="about" label="About" />
+        <spartan-page-bottom-nav-link href="cli" label="CLI" />
         <spartan-page-bottom-nav-placeholder />
       </spartan-page-bottom-nav>
     </section>

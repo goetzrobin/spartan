@@ -41,11 +41,12 @@ export const routeMeta: RouteMeta = {
       class="max-w-[95vw] my-2 mx-auto p-4 rounded-lg text-primary-foreground border border-border bg-primary"
     >
       <hlm-icon hlmAlertIcon name="radixRocket" class="!text-primary-foreground" />
-      <h2 hlmAlertTitle>Components are coming soon...</h2>
+      <h2 hlmAlertTitle>Components are in alpha</h2>
       <p hlmAlertDesc>
-        We are actively working on publishing these components. They will soon be released.
-        <a class="underline" target="_blank" href="https://github.com/goetzrobin/spartan">Star us on GitHub</a> and
-        follow along as we build the next Angular UI library. Check out the preview below to see what they'll look like:
+        Try them out! We'd love to hear your feedback! Expect breaking changes!
+        <a class="underline" target="_blank" href="https://github.com/goetzrobin/spartan"
+          >Become the one making those changes on GitHub!</a
+        >
       </p>
     </div>
     <spartan-page />

@@ -15,6 +15,7 @@ import { defaultCode, defaultImports, defaultSkeleton, TabsPreviewComponent } fr
 import { InputPreviewComponent } from '~/app/pages/(components)/components/(input)/input.preview';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { TabsVerticalPreviewComponent, verticalCode } from './tabs--vertical.preview';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Tabs' },
@@ -41,6 +42,7 @@ export const routeMeta: RouteMeta = {
     TabsPreviewComponent,
     InputPreviewComponent,
     TabsVerticalPreviewComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -57,9 +59,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-tabs" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-tabs" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui tabs" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

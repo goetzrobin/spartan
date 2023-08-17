@@ -12,6 +12,7 @@ import { SectionIntroComponent } from '~/app/shared/layout/section-intro.compone
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, RadioGroupPreviewComponent } from './radio-group.preview';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Radio Group' },
@@ -36,6 +37,7 @@ export const routeMeta: RouteMeta = {
     PageBottomNavComponent,
     PageBottomNavLinkComponent,
     RadioGroupPreviewComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -52,9 +54,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-radio-group" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-radio-group" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui radiogroup" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

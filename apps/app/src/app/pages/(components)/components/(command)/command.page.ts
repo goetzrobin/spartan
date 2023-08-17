@@ -17,6 +17,7 @@ import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { commandDialogCode, CommandDialogComponent } from './command--dialog.example';
 import { RouterLink } from '@angular/router';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Command' },
@@ -43,6 +44,7 @@ export const routeMeta: RouteMeta = {
     HlmButtonDirective,
     CommandDialogComponent,
     RouterLink,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -62,9 +64,9 @@ export const routeMeta: RouteMeta = {
       </p>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-command" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-command" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui command" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

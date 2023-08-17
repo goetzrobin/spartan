@@ -39,11 +39,13 @@ const aboutLink = 'h-6 underline text-base px-0.5';
       <spartan-section-intro name="About" lead="Powered by amazing open source projects." />
 
       <spartan-section-sub-heading first id="about">About</spartan-section-sub-heading>
-      <p class="leading-7">
-        <a hlmBtn variant="link" class="${aboutLink}" href="https://spartan.ng">spartan.ng</a>
-        is a project by
-        <a hlmBtn variant="link" class="${aboutLink}" href="https://twitter.com/goetzrobin">goetzrobin</a>.
-      </p>
+      <section>
+        <p class="${hlmP}">
+          <a hlmBtn variant="link" class="${aboutLink}" href="https://spartan.ng">spartan.ng</a>
+          is a project by
+          <a hlmBtn variant="link" class="${aboutLink}" href="https://twitter.com/goetzrobin">goetzrobin</a>.
+        </p>
+      </section>
 
       <spartan-section-sub-heading id="spartans">
         <span class="flex items-center">
@@ -65,8 +67,8 @@ const aboutLink = 'h-6 underline text-base px-0.5';
           </svg>
         </span>
       </spartan-section-sub-heading>
-      <div class="leading-7">
-        <ul class="${hlmUl} mt-0">
+      <section>
+        <ul class="${hlmP} ${hlmUl} mt-0">
           <li>
             <a class="${aboutLink}" hlmBtn href="https://twitter.com/goetzrobin" target="_blank" variant="link"
               >goetzrobin</a
@@ -77,11 +79,17 @@ const aboutLink = 'h-6 underline text-base px-0.5';
             <a class="${aboutLink}" hlmBtn href="https://github.com/mihajm" target="_blank" variant="link">mihajm</a>
             - working on spartan/ui.
           </li>
+          <li>
+            <a class="${aboutLink}" hlmBtn href="https://github.com/AdditionAddict" target="_blank" variant="link"
+              >AdditionAddict</a
+            >
+            - supporting spartan/stack & spartan/ui.
+          </li>
         </ul>
-      </div>
+      </section>
 
       <spartan-section-sub-heading id="credits">Credits</spartan-section-sub-heading>
-      <div>
+      <section>
         <p class="${hlmP}">
           First and foremost, credit goes to the incredible
           <a hlmBtn variant="link" class="${aboutLink}" href="https://brandonroberts.dev/blog">Brandon Roberts</a> and
@@ -151,17 +159,21 @@ const aboutLink = 'h-6 underline text-base px-0.5';
             - The ultimate icon library for Angular.
           </li>
         </ul>
-      </div>
+      </section>
 
       <spartan-section-sub-heading id="license">License</spartan-section-sub-heading>
-      <p class="leading-7">
-        MIT &copy; {{ currentYear }} -
-        <a hlmBtn variant="link" class="underline text-base px-0.5" href="https://twitter.com/goetzrobin">goetzrobin</a>
-      </p>
+      <section>
+        <p class="${hlmP}">
+          MIT &copy; {{ currentYear }} -
+          <a hlmBtn variant="link" class="underline text-base px-0.5" href="https://twitter.com/goetzrobin"
+            >goetzrobin</a
+          >
+        </p>
+      </section>
 
       <spartan-page-bottom-nav>
         <spartan-page-bottom-nav-link href="/stack/overview" label="Stack" />
-        <spartan-page-bottom-nav-link direction="previous" href="introduction" label="Introduction" />
+        <spartan-page-bottom-nav-link direction="previous" href="changelog" label="Changelog" />
       </spartan-page-bottom-nav>
     </section>
 

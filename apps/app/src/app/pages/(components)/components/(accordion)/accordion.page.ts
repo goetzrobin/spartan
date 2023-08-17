@@ -13,6 +13,7 @@ import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { AccordionPreviewComponent, codeImports, codeSkeleton, codeString } from './accordion.preview';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Accordion' },
@@ -39,6 +40,7 @@ export const routeMeta: RouteMeta = {
     PageBottomNavComponent,
     PageBottomNavLinkComponent,
     PageBottomNavPlaceholderComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -55,9 +57,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-accordion" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-accordion" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui accordion" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

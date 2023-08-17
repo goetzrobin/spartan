@@ -29,6 +29,7 @@ import {
   loadingCode,
 } from '~/app/pages/(components)/components/(button)/button--loading.example';
 import { anchorCode, ButtonAnchorComponent } from '~/app/pages/(components)/components/(button)/button--anchor.example';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Button' },
@@ -61,6 +62,7 @@ export const routeMeta: RouteMeta = {
     ButtonWithIconComponent,
     ButtonLoadingComponent,
     ButtonAnchorComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -74,9 +76,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-button" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-button" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui button" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

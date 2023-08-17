@@ -12,6 +12,7 @@ import { SectionIntroComponent } from '~/app/shared/layout/section-intro.compone
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, SkeletonPreviewComponent } from './skeleton.preview';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Skeleton' },
@@ -33,6 +34,7 @@ export const routeMeta: RouteMeta = {
     PageBottomNavComponent,
     PageBottomNavLinkComponent,
     SkeletonPreviewComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -46,9 +48,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-skeleton" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-skeleton" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui skeleton" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

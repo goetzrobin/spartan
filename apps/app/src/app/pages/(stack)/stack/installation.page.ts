@@ -235,7 +235,7 @@ export const noteRouter = router({
       </ol>
 
       <spartan-tabs firstTab="supabase.com" secondTab="Local">
-        <div class="p-4" firstTab>
+        <div class="px-4 pt-4 pb-8" firstTab>
           <h3 class="${hlmH4}">Option 1: Connecting to supabase.com instance</h3>
           <p class="${hlmP}">
             This way is super easy! Simply by creating your account, you will also have set up your first project. This
@@ -252,7 +252,7 @@ export const noteRouter = router({
           />
         </div>
 
-        <div class="p-4" secondTab>
+        <div class="px-4 pt-4 pb-8" secondTab>
           <h3 class="${hlmH4}">Option 2: Connecting to local Supabase instance</h3>
           <p class="${hlmP}">
             Supabase also allows you to run a version of their system locally! To get up and running you can follow this
@@ -391,7 +391,7 @@ create table note (
       </p>
 
       <spartan-page-bottom-nav>
-        <spartan-page-bottom-nav-link href="/components/accordion" label="spartan/ui" />
+        <spartan-page-bottom-nav-link href="/documentation/installation" label="spartan/ui" />
         <spartan-page-bottom-nav-link direction="previous" href="technologies" label="Technologies" />
       </spartan-page-bottom-nav>
     </section>

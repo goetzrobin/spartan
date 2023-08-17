@@ -14,6 +14,7 @@ import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { CardPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './card.preview';
 import { cardNotificationsCode, CardNotificationsComponent } from './card--notifications.example';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Card' },
@@ -38,6 +39,7 @@ export const routeMeta: RouteMeta = {
     PageBottomNavPlaceholderComponent,
     CardPreviewComponent,
     CardNotificationsComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -51,9 +53,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-card" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-card" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui card" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

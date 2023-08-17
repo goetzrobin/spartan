@@ -17,6 +17,7 @@ import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { BadgeDestructiveComponent, destructiveCode } from './badge--destructive.example';
 import { BadgeOutlineExampleComponent, outlineCode } from './badge--outline.example';
 import { BadgeSecondaryExampleComponent, secondaryCode } from './badge--secondary.example';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Badge' },
@@ -43,6 +44,7 @@ export const routeMeta: RouteMeta = {
     BadgeDestructiveComponent,
     BadgeOutlineExampleComponent,
     BadgeSecondaryExampleComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -56,9 +58,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-badge" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-badge" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui badge" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

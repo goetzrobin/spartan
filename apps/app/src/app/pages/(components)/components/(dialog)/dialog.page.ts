@@ -23,6 +23,7 @@ import {
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixExclamationTriangle } from '@ng-icons/radix-icons';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Dialog' },
@@ -54,6 +55,7 @@ export const routeMeta: RouteMeta = {
     HlmIconComponent,
     HlmAlertIconDirective,
     HlmAlertTitleDirective,
+    InstallationCsComponent,
   ],
   providers: [provideIcons({ radixExclamationTriangle })],
   template: `
@@ -71,9 +73,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-dialog" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-dialog" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui dialog" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

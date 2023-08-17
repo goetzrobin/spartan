@@ -14,6 +14,7 @@ import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, SheetPreviewComponent } from './sheet.preview';
 import { SheetSidePreviewComponent, sideCode } from './sheet--side.preview';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Sheet' },
@@ -39,6 +40,7 @@ export const routeMeta: RouteMeta = {
     PageBottomNavLinkComponent,
     SheetPreviewComponent,
     SheetSidePreviewComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -55,9 +57,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-sheet" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-sheet" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui sheet" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

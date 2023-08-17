@@ -14,6 +14,7 @@ import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, DropdownPreviewComponent } from './dropdown-menu.preview';
 import { dropdownWithStateCode, DropdownWithStatePreviewComponent } from './dropdown-with-state.preview';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Dropdown' },
@@ -40,6 +41,7 @@ export const routeMeta: RouteMeta = {
     DropdownPreviewComponent,
     DropdownPreviewComponent,
     DropdownWithStatePreviewComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -56,9 +58,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-menu" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-menu" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui menu" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

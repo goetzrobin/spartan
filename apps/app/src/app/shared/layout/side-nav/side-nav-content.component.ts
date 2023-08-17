@@ -22,8 +22,8 @@ import { SideNavComponent } from './side-nav-coming-soon.component';
       <h4 spartanSideNavHeading>Getting Started</h4>
       <spartan-side-nav-links>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/introduction">Introduction</a>
-        <a disabled spartanSideNavLink="/documentation/cli">CLI<spartan-side-nav-cs /></a>
-        <!--        <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/changelog">Changelog</a>-->
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/cli">CLI</a>
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/changelog">Changelog</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/about">About & Credits</a>
       </spartan-side-nav-links>
     </div>
@@ -38,13 +38,13 @@ import { SideNavComponent } from './side-nav-coming-soon.component';
     </div>
 
     <div class="pb-4">
-      <h4 spartanSideNavHeading>UI<spartan-side-nav-cs /></h4>
+      <h4 spartanSideNavHeading>UI</h4>
       <spartan-side-nav-links>
-        <a disabled spartanSideNavLink="/documentation/installation">Installation</a>
-        <a disabled spartanSideNavLink="/documentation/theming">Theming</a>
-        <a disabled spartanSideNavLink="/documentation/dark-mode">Dark mode</a>
-        <a disabled spartanSideNavLink="/documentation/typography">Typography</a>
-        <a disabled spartanSideNavLink="/documentation/figma">Figma</a>
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/installation">Installation</a>
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/theming">Theming</a>
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/dark-mode">Dark mode</a>
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/typography">Typography</a>
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/figma">Figma</a>
       </spartan-side-nav-links>
     </div>
 

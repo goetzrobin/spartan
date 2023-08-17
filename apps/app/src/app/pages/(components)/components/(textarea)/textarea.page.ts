@@ -13,6 +13,7 @@ import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-head
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, TextAreaPreviewComponent } from './textarea.preview';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Textarea' },
@@ -37,6 +38,7 @@ export const routeMeta: RouteMeta = {
     PageBottomNavComponent,
     PageBottomNavLinkComponent,
     TextAreaPreviewComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -59,9 +61,9 @@ export const routeMeta: RouteMeta = {
       </p>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-input" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-input" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui input" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

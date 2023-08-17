@@ -18,6 +18,7 @@ import {
   AlertDestructiveComponent,
   destructiveCode,
 } from '~/app/pages/(components)/components/(alert)/alert--destructive.example';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Alert' },
@@ -42,6 +43,7 @@ export const routeMeta: RouteMeta = {
     PageBottomNavLinkComponent,
     PageBottomNavPlaceholderComponent,
     AlertDestructiveComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -55,9 +57,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-alert" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-alert" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui alert" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

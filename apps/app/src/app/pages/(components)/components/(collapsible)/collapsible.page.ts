@@ -13,6 +13,7 @@ import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { CollapsiblePreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './collapsible.preview';
+import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Collapsible' },
@@ -36,6 +37,7 @@ export const routeMeta: RouteMeta = {
     PageBottomNavLinkComponent,
     PageBottomNavPlaceholderComponent,
     CollapsiblePreviewComponent,
+    InstallationCsComponent,
   ],
   template: `
     <section spartanMainSection>
@@ -49,9 +51,9 @@ export const routeMeta: RouteMeta = {
       </spartan-tabs>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-      <spartan-tabs class="mt-4" firstTab="yarn" secondTab="npm">
-        <spartan-code firstTab language="sh" code="yarn install @spartan-ng/ui-collapsible" />
-        <spartan-code secondTab language="sh" code="npm install @spartan-ng/ui-collapsible" />
+      <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui collapsible" />
+        <spartan-installation-cs secondTab />
       </spartan-tabs>
 
       <spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
