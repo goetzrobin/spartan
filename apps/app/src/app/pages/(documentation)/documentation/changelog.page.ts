@@ -11,6 +11,7 @@ import { hlmCode, hlmH4, hlmP, hlmUl } from '@spartan-ng/ui-typography-helm';
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { RouterLink } from '@angular/router';
+import { HlmButtonDirective } from '@spartan-ng/button-helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Changelog' },
@@ -31,6 +32,7 @@ export const routeMeta: RouteMeta = {
     SectionSubHeadingComponent,
     PageNavLinkComponent,
     RouterLink,
+    HlmButtonDirective,
   ],
   template: `
     <section spartanMainSection>
@@ -123,6 +125,14 @@ export const routeMeta: RouteMeta = {
           <li><a class="font-medium hover:underline" routerLink="/components/toggle">Toggle</a></li>
           <li><a class="font-medium hover:underline" routerLink="/components/typography">Typography</a></li>
         </ul>
+        <h3 class="${hlmH4} mt-12">Getting Started</h3>
+        <p class="${hlmP}">
+          Excited to try any of these? What are you waiting for? Head over to the installation page and start your
+          spartan journey!
+        </p>
+        <div class="m-10 flex items-center justify-center">
+          <a hlmBtn size="lg" routerLink="/documentation/installation">Get started with spartan/ui</a>
+        </div>
       </section>
       <spartan-page-bottom-nav>
         <spartan-page-bottom-nav-link href="about" label="About" />
