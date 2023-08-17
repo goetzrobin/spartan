@@ -25,7 +25,7 @@ export function addThemeToApplicationStyles(
   }
 
   if (!stylesEntryPoint) {
-    stylesEntryPoint = findStylesEntryPoint(tree, options, project);
+    stylesEntryPoint = findStylesEntryPoint(tree, project);
 
     if (!stylesEntryPoint) {
       throw new Error(
@@ -36,19 +36,20 @@ export function addThemeToApplicationStyles(
   }
 
   const stylesEntryPointContent = tree.read(stylesEntryPoint, 'utf-8');
-
+  const rootFontSans = stylesEntryPointContent.includes('--font-sans')
+    ? ''
+    : `:root {
+     --font-sans: ''
+     }`;
   tree.write(
     stylesEntryPoint,
     stripIndents`${stylesEntryPointContent}
+    ${rootFontSans}
   ${SupportedThemeGeneratorMap[options.theme](options.radius, prefix)}`
   );
 }
 
-function findStylesEntryPoint(
-  tree: Tree,
-  options: AddThemeToApplicationStylesOptions,
-  project: ProjectConfiguration
-): string | undefined {
+function findStylesEntryPoint(tree: Tree, project: ProjectConfiguration): string | undefined {
   // first check for common names
   const possibleStylesEntryPoints = [
     joinPathFragments(project.sourceRoot ?? project.root, 'styles.css'),

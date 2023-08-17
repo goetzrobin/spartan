@@ -2,7 +2,6 @@ import { GeneratorCallback, runTasksInSerial, Tree } from '@nx/devkit';
 import { HlmUIGeneratorSchema } from './schema';
 import { prompt } from 'enquirer';
 import { HlmBaseGeneratorSchema } from '../base/schema';
-import addThemeToApplicationGenerator from '../theme/generator';
 
 export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema) {
   const tasks: GeneratorCallback[] = [];
@@ -23,16 +22,6 @@ export default async function hlmUIGenerator(tree: Tree, options: HlmUIGenerator
   tasks.push(
     ...(await createPrimitiveLibraries(response, availablePrimitiveNames, availablePrimitives, tree, options))
   );
-
-  const shouldAddTheme: { answer: boolean } = await prompt({
-    type: 'confirm',
-    required: true,
-    name: 'answer',
-    message: 'Would you like to set up a theme for one of your applications?',
-  });
-  if (shouldAddTheme.answer) {
-    await addThemeToApplicationGenerator(tree);
-  }
 
   return runTasksInSerial(...tasks);
 }
