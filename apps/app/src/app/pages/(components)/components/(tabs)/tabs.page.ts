@@ -60,7 +60,7 @@ export const routeMeta: RouteMeta = {
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
-        <spartan-code firstTab language="sh" code="npx nx @spartan-ng/nx:ui tabs" />
+        <spartan-code firstTab language="sh" code="npx nx g @spartan-ng/nx:ui tabs" />
         <spartan-installation-cs secondTab />
       </spartan-tabs>
 

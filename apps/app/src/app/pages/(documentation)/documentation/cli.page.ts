@@ -60,7 +60,7 @@ export const routeMeta: RouteMeta = {
             To add <code class="${hlmCode}">spartan</code> to your Nx workspace simply install the plugin with the
             command below:
           </p>
-          <spartan-code class="mt-4" code="npm i @spartan-ng/nx" />
+          <spartan-code class="mt-4" code="npm i -D @spartan-ng/nx" />
         </div>
 
         <h3 class="mt-12 ${hlmH4}">ui</h3>
@@ -68,10 +68,10 @@ export const routeMeta: RouteMeta = {
           <p class="${hlmP}">
             To add <code class="${hlmCode}">spartan/ui</code> primitives to your workspace run the following command:
           </p>
-          <spartan-code class="mt-4" code="npx nx @spartan-ng/nx:ui" />
+          <spartan-code class="mt-4" code="npx nx g @spartan-ng/nx:ui" />
           <p class="${hlmP}">
             You can then select which primitives you want to add. For each primitive we create a buildable library at a
-            path of your choice. Finally, you can add a theme to one of your applications.
+            path of your choice.
           </p>
 
           <div class="mt-4" hlmAlert variant="destructive">

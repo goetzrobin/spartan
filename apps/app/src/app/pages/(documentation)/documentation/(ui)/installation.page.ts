@@ -12,8 +12,9 @@ import { CodeComponent } from '~/app/shared/code/code.component';
 import { HlmButtonDirective } from '@spartan-ng/button-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/icon-helm';
 import { RouterLink } from '@angular/router';
-import { radixChevronRight } from '@ng-icons/radix-icons';
+import { radixChevronRight, radixExclamationTriangle } from '@ng-icons/radix-icons';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
+import { HlmAlertModule } from '@spartan-ng/ui-alert-helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Installation' },
@@ -36,8 +37,9 @@ export const routeMeta: RouteMeta = {
     HlmIconComponent,
     RouterLink,
     PageNavLinkComponent,
+    HlmAlertModule,
   ],
-  providers: [provideIcons({ radixChevronRight })],
+  providers: [provideIcons({ radixChevronRight, radixExclamationTriangle })],
   template: `
     <section spartanMainSection>
       <spartan-section-intro name="Installation" lead="Getting up and running with spartan." />
@@ -46,7 +48,7 @@ export const routeMeta: RouteMeta = {
           Adding <code class="${hlmCode}">spartan/ui</code> to your project requires only a couple steps!
         </p>
         <p class="${hlmP}">If you are already using Nx, start with installing our plugin:</p>
-        <spartan-code class="mt-4" code="npm i @spartan-ng/nx" />
+        <spartan-code class="mt-4" code="npm i -D @spartan-ng/nx" />
       </section>
       <spartan-section-sub-heading id="prerequisites">Prerequisites</spartan-section-sub-heading>
       <section>
@@ -103,7 +105,7 @@ module.exports = {
         <p class="${hlmP}">
           Again, if you are using Nx, we have written a plugin that will take care of the heavy lifting:
         </p>
-        <spartan-code class="mt-4" code="npx nx @spartan-ng/nx:ui-theme" />
+        <spartan-code class="mt-4" code="npx nx g @spartan-ng/nx:ui-theme" />
         <p class="${hlmP}">To learn more about the Nx plugin check out the CLI docs below.</p>
         <div class="flex items-center justify-end my-2">
           <a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline=""
@@ -120,6 +122,7 @@ module.exports = {
           class="mt-4 mb-6"
           code="
 :root {
+  --font-sans: '';
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
   --card: 0 0% 100%;
@@ -178,13 +181,27 @@ module.exports = {
           choose which primitives to add to your project. It will add all brain dependencies and copy helm code into its
           own library:
         </p>
-        <spartan-code class="mt-4" code="npx nx @spartan-ng/nx:ui" />
+        <spartan-code class="mt-4" code="npx nx g @spartan-ng/nx:ui" />
         <p class="${hlmP}">To learn more about the Nx plugin check out the CLI docs below.</p>
         <div class="flex items-center justify-end my-2">
           <a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline=""
             >CLI documentation
             <hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
           </a>
+        </div>
+        <div class="mt-4" hlmAlert variant="destructive">
+          <hlm-icon name="radixExclamationTriangle" hlmAlertIcon />
+          <p hlmAlertTitle>
+            Known issue: Dependencies are added to package.json, but their peer dependencies are not automatically
+            installed
+          </p>
+          <p hlmAlertDescription>
+            It seems like the Nx generator does not install the peer dependencies for new dependencies added to the
+            package.json of the project when running the "install dependencies" task inside its execution context.
+            <span class="block mt-2 font-medium">
+              Workaround: Manually run <span class="font-semibold">npm i</span> after the plugin adds the primtives.
+            </span>
+          </p>
         </div>
         <p class="${hlmP}">
           If you are not using Nx (yet) you can follow the guide on how to manually install the primitive on the
