@@ -212,7 +212,13 @@ That's it! Now our DB should be all set up and ready to go!
 Run
 
 ```shell
-yarn nx serve analog-trpc
+yarn nx serve app
+```
+
+or
+
+```shell
+yarn dev
 ```
 
 for a dev server. Navigate to http://localhost:4200/. The app will automatically reload
