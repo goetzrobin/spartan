@@ -64,7 +64,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
           Build next-level, full-stack applications with AnalogJs and the spartan/stack. Make them accessible and look
           incredible with spartan/ui.
         </p>
-        <div class="space-x-4">
+        <div class="flex flex-wrap gap-4 justify-center">
           <a hlmBtn size="lg" routerLink="/documentation">Get Started</a
           ><a
             hlmBtn
