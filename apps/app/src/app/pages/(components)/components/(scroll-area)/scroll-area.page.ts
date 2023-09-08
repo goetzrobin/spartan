@@ -13,13 +13,7 @@ import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-head
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, ScrollAreaPreviewComponent } from './scroll-area.preview';
 import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
-import {
-  HlmAlertDescriptionDirective,
-  HlmAlertDirective,
-  HlmAlertIconDirective,
-  HlmAlertTitleDirective,
-} from '@spartan-ng/ui-alert-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/icon-helm';
+import { provideIcons } from '@spartan-ng/icon-helm';
 import { radixExclamationTriangle } from '@ng-icons/radix-icons';
 
 export const routeMeta: RouteMeta = {
@@ -43,11 +37,6 @@ export const routeMeta: RouteMeta = {
     PageBottomNavLinkComponent,
     ScrollAreaPreviewComponent,
     InstallationCsComponent,
-    HlmAlertDirective,
-    HlmAlertTitleDirective,
-    HlmAlertDescriptionDirective,
-    HlmIconComponent,
-    HlmAlertIconDirective,
   ],
   providers: [provideIcons({ radixExclamationTriangle })],
   template: `
@@ -63,20 +52,6 @@ export const routeMeta: RouteMeta = {
         </div>
         <spartan-code secondTab [code]="defaultCode" />
       </spartan-tabs>
-
-      <div class="mt-4" hlmAlert variant="destructive">
-        <hlm-icon name="radixExclamationTriangle" hlmAlertIcon />
-        <p hlmAlertTitle>Known issue with AnalogJS: HTMLElement not defined</p>
-        <p hlmAlertDescription>
-          hlm-scroll-area uses the NgScrollbar library under the hood. Unfortunately, it depends on directly injecting
-          some underlying HTMLElement's. AnalogJS' development server is currently throwing an error because of this. It
-          does not affect the build. Build and production bundles work correctly.
-          <span class="block mt-2 font-medium">
-            Our ugly workaround right now: Comment out the NgScrollbarModule import and component in the HlmScrollArea
-            component during development.
-          </span>
-        </p>
-      </div>
 
       <spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
       <spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
