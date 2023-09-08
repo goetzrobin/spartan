@@ -124,7 +124,8 @@ export const routeMeta: RouteMeta = {
         <p hlmAlertDesc>
           <code class="${hlmCode}">postgres</code> is a CommonJs package, which directly exposes an augmented function.
           Therefore, we need to adjust our <code class="${hlmCode}">[YOUR_APP_NAME]/tsconfig.json</code> file to tell
-          the TS compiler how to deal with it properly. Add the following line to <code class="${hlmCode}">compilerOptions</code>:
+          the TS compiler how to deal with it properly. Add the following line to
+          <code class="${hlmCode}">compilerOptions</code>:
         </p>
         <spartan-code class="mt-3" language="sh" code='"allowSyntheticDefaultImports": true' />
       </div>
