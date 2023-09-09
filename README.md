@@ -15,7 +15,16 @@ spartan/stack and spartan/ui libraries.
 
 All of spartan is an MIT-licensed open source project with its ongoing development made possible by contributors and sponsors.
 
-Our initial 300 contributors or sponsors are featured on the front page of [spartan.ng](https://spartan.ng)
+Our initial 300 contributors and sponsors are featured here and on the front page of [spartan.ng](https://spartan.ng)
+
+1. [goetzrobin](https://github.com/goetzrobin)
+2. [mihajm](https://github.com/mihajm)
+3. [ajitzero](https://github.com/ajitzero)
+4. [arturgawlik](https://github.com/arturgawlik)
+5. [deepakrudrapaul](https://github.com/deepakrudrapaul)
+6. [evanfuture](https://github.com/evanfuture)
+7. [AdditionAddict](https://github.com/AdditionAddict)
+8. [Altamimi-Dev](https://github.com/Altamimi-Dev)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 

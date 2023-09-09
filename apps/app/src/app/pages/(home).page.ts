@@ -99,7 +99,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
           </div>
         </a>
 
-        <a routerLink="/documentation" hlmCard class="group">
+        <a routerLink="/documentation/installation" hlmCard class="group">
           <div hlmCardHeader>
             <hlm-icon class="transition-colors group-hover:text-primary" name="radixMix" size="xl" />
             <h3 hlmCardTitle>spartan/ui</h3>
