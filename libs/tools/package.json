@@ -3,5 +3,9 @@
   "version": "0.0.1",
   "type": "commonjs",
   "executors": "./executors.json",
-  "generators": "./generators.json"
+  "generators": "./generators.json",
+  "dependencies": {
+    "process": "0.11.10",
+    "enquirer": "2.3.6"
+  }
 }

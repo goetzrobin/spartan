@@ -1,13 +1,14 @@
 {
   "name": "@spartan-ng/ui-command-brain",
-  "version": "0.0.1-alpha.303",
+  "version": "0.0.1-alpha.304",
   "peerDependencies": {
     "@angular/common": "^16.0.0",
-    "@angular/core": "^16.0.0"
+    "@angular/core": "^16.0.0",
+    "@ngneat/cmdk": "^1.0.1",
+    "@ngneat/overview": "^5.1.1",
+    "@ngneat/until-destroy": "^9.2.3"
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
+  "dependencies": {},
   "sideEffects": false,
   "publishConfig": {
     "access": "public"

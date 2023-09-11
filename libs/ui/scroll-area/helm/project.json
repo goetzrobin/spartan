@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/scroll-area/helm/**/*.ts", "libs/ui/scroll-area/helm/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/scroll-area/helm/**/*.ts",
+          "libs/ui/scroll-area/helm/**/*.html",
+          "libs/ui/scroll-area/helm/package.json",
+          "libs/ui/scroll-area/helm/project.json"
+        ]
       }
     },
     "release": {

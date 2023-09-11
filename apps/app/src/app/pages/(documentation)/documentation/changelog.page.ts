@@ -11,7 +11,7 @@ import { hlmCode, hlmH4, hlmP, hlmUl } from '@spartan-ng/ui-typography-helm';
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { RouterLink } from '@angular/router';
-import { HlmButtonDirective } from '@spartan-ng/button-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Changelog' },

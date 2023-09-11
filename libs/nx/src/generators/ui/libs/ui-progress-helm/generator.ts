@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'progress',
     internalName: 'ui-progress-helm',
-    publicName: 'progress-helm',
+    publicName: 'ui-progress-helm',
   });
 }

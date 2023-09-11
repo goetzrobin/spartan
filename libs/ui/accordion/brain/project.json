@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/accordion/brain/**/*.ts", "libs/ui/accordion/brain/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/accordion/brain/**/*.ts",
+          "libs/ui/accordion/brain/**/*.html",
+          "libs/ui/accordion/brain/package.json",
+          "libs/ui/accordion/brain/project.json"
+        ]
       }
     },
     "release": {

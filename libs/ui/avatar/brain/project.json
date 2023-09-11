@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/avatar/brain/**/*.ts", "libs/ui/avatar/brain/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/avatar/brain/**/*.ts",
+          "libs/ui/avatar/brain/**/*.html",
+          "libs/ui/avatar/brain/package.json",
+          "libs/ui/avatar/brain/project.json"
+        ]
       }
     },
     "release": {

@@ -19,9 +19,6 @@ import {
   HlmAlertDialogTitleDirective,
 } from '@spartan-ng/ui-alertdialog-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { provideIcons } from '@ng-icons/core';
-import { radixCross1 } from '@ng-icons/radix-icons';
 
 @Component({
   selector: 'spartan-alert-dialog-preview',
@@ -45,9 +42,7 @@ import { radixCross1 } from '@ng-icons/radix-icons';
     HlmAlertDialogActionButtonDirective,
 
     HlmButtonDirective,
-    HlmIconComponent,
   ],
-  providers: [provideIcons({ radixCross1 })],
   template: `
     <brn-alert-dialog closeDelay="100">
       <brn-alert-dialog-overlay hlm />
@@ -92,9 +87,6 @@ import {
   HlmAlertDialogTitleDirective,
 } from '@spartan-ng/ui-alertdialog-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { provideIcons } from '@ng-icons/core';
-import { radixCross1 } from '@ng-icons/radix-icons';
 
 @Component({
   selector: 'spartan-alert-dialog-preview',
@@ -118,9 +110,7 @@ import { radixCross1 } from '@ng-icons/radix-icons';
     HlmAlertDialogActionButtonDirective,
 
     HlmButtonDirective,
-    HlmIconComponent,
   ],
-  providers: [provideIcons({ radixCross1 })],
   template: \`
     <brn-alert-dialog closeDelay="100">
       <brn-alert-dialog-overlay hlm />

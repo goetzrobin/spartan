@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'button',
     internalName: 'ui-button-helm',
-    publicName: 'button-helm',
+    publicName: 'ui-button-helm',
   });
 }

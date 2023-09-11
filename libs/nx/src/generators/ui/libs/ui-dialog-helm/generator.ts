@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'dialog',
     internalName: 'ui-dialog-helm',
-    publicName: 'dialog-helm',
+    publicName: 'ui-dialog-helm',
   });
 }

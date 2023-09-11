@@ -67,6 +67,7 @@ export class BrnDialogComponent {
   @Output()
   public readonly closed = this._dialogService.closed;
 
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('state')
   set newState(state: BrnDialogState) {
     if (state === 'open') {

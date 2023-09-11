@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/button/helm/**/*.ts", "libs/ui/button/helm/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/button/helm/**/*.ts",
+          "libs/ui/button/helm/**/*.html",
+          "libs/ui/button/helm/package.json",
+          "libs/ui/button/helm/project.json"
+        ]
       }
     },
     "release": {

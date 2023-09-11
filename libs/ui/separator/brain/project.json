@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/separator/brain/**/*.ts", "libs/ui/separator/brain/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/separator/brain/**/*.ts",
+          "libs/ui/separator/brain/**/*.html",
+          "libs/ui/separator/brain/package.json",
+          "libs/ui/separator/brain/project.json"
+        ]
       }
     },
     "release": {

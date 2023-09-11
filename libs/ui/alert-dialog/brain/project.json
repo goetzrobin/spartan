@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/alert-dialog/brain/**/*.ts", "libs/ui/alert-dialog/brain/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/alert-dialog/brain/**/*.ts",
+          "libs/ui/alert-dialog/brain/**/*.html",
+          "libs/ui/alert-dialog/brain/package.json",
+          "libs/ui/alert-dialog/brain/project.json"
+        ]
       }
     },
     "release": {

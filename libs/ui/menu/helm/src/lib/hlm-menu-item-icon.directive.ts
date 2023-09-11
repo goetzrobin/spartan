@@ -1,7 +1,7 @@
 import { Directive, HostBinding, inject, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
 import { hlm } from '@spartan-ng/ui-core';
-import { HlmIconComponent } from '@spartan-ng/icon-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
 @Directive({
   selector: '[hlmMenuIcon]',

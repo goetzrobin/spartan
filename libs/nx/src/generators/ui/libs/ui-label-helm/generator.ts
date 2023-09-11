@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'label',
     internalName: 'ui-label-helm',
-    publicName: 'label-helm',
+    publicName: 'ui-label-helm',
   });
 }

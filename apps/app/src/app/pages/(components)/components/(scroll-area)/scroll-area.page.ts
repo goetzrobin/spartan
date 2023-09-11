@@ -13,7 +13,7 @@ import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-head
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
 import { defaultCode, defaultImports, defaultSkeleton, ScrollAreaPreviewComponent } from './scroll-area.preview';
 import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
-import { provideIcons } from '@spartan-ng/icon-helm';
+import { provideIcons } from '@spartan-ng/ui-icon-helm';
 import { radixExclamationTriangle } from '@ng-icons/radix-icons';
 
 export const routeMeta: RouteMeta = {

@@ -8,6 +8,7 @@ export interface AddThemeToApplicationStylesOptions {
   project: string;
   theme: SupportedTheme;
   radius: number;
+  addCdkStyles: boolean;
   stylesEntryPoint?: string;
   prefix?: string;
 }
@@ -36,16 +37,28 @@ export function addThemeToApplicationStyles(
   }
 
   const stylesEntryPointContent = tree.read(stylesEntryPoint, 'utf-8');
+
+  let ckdOverlayImport = '';
+  if (options.addCdkStyles) {
+    const CDK_IMPORT = `@import '@angular/cdk/overlay-prebuilt.css';`;
+    ckdOverlayImport = stylesEntryPointContent.includes(CDK_IMPORT) ? '' : CDK_IMPORT;
+  }
+
   const rootFontSans = stylesEntryPointContent.includes('--font-sans')
     ? ''
     : `:root {
      --font-sans: ''
      }`;
+
   tree.write(
     stylesEntryPoint,
-    stripIndents`${stylesEntryPointContent}
+    stripIndents`
+    ${ckdOverlayImport}
+
+    ${stylesEntryPointContent}
+
     ${rootFontSans}
-  ${SupportedThemeGeneratorMap[options.theme](options.radius, prefix)}`
+    ${SupportedThemeGeneratorMap[options.theme](options.radius, prefix)}`
   );
 }
 

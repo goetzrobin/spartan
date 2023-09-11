@@ -41,11 +41,9 @@ export function buildDependencyArray(options: HlmBaseGeneratorSchema) {
   if (options.peerDependencies) {
     dependencies = { ...dependencies, ...options.peerDependencies };
   }
-  if (!options.skipBrainDependencies) {
-    const brainDependency = BRAIN_DEPENDENCY_MAP[options.primitiveName];
-    if (brainDependency) {
-      dependencies = { ...dependencies, ['@spartan-ng/ui-' + options.primitiveName + '-brain']: brainDependency };
-    }
+  const brainDependency = BRAIN_DEPENDENCY_MAP[options.primitiveName];
+  if (brainDependency) {
+    dependencies = { ...dependencies, ['@spartan-ng/ui-' + options.primitiveName + '-brain']: brainDependency };
   }
   return dependencies;
 }

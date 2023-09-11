@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/alert-dialog/helm/**/*.ts", "libs/ui/alert-dialog/helm/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/alert-dialog/helm/**/*.ts",
+          "libs/ui/alert-dialog/helm/**/*.html",
+          "libs/ui/alert-dialog/helm/package.json",
+          "libs/ui/alert-dialog/helm/project.json"
+        ]
       }
     },
     "release": {

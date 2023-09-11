@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/command/brain/**/*.ts", "libs/ui/command/brain/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/command/brain/**/*.ts",
+          "libs/ui/command/brain/**/*.html",
+          "libs/ui/command/brain/package.json",
+          "libs/ui/command/brain/project.json"
+        ]
       }
     },
     "release": {

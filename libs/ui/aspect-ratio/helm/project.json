@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/aspect-ratio/helm/**/*.ts", "libs/ui/aspect-ratio/helm/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/aspect-ratio/helm/**/*.ts",
+          "libs/ui/aspect-ratio/helm/**/*.html",
+          "libs/ui/aspect-ratio/helm/package.json",
+          "libs/ui/aspect-ratio/helm/project.json"
+        ]
       }
     },
     "release": {

@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'radiogroup',
     internalName: 'ui-radio-group-helm',
-    publicName: 'radiogroup-helm',
+    publicName: 'ui-radiogroup-helm',
   });
 }

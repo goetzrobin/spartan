@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'sheet',
     internalName: 'ui-sheet-helm',
-    publicName: 'sheet-helm',
+    publicName: 'ui-sheet-helm',
   });
 }

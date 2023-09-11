@@ -150,7 +150,9 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
     return this._disabled;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected _onChange = (_: any) => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private _onTouched = () => {};
 
   @ViewChild('checkBox', { static: true })

@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/separator/helm/**/*.ts", "libs/ui/separator/helm/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/separator/helm/**/*.ts",
+          "libs/ui/separator/helm/**/*.html",
+          "libs/ui/separator/helm/package.json",
+          "libs/ui/separator/helm/project.json"
+        ]
       }
     },
     "release": {

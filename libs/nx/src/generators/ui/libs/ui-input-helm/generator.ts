@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'input',
     internalName: 'ui-input-helm',
-    publicName: 'input-helm',
+    publicName: 'ui-input-helm',
   });
 }

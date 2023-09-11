@@ -8,7 +8,10 @@ import { BooleanInput } from '@angular/cdk/coercion';
   hostDirectives: [
     {
       directive: CdkMenuItemCheckbox,
-      outputs: ['cdkMenuItemTriggered: triggered'],
+      // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+      outputs:
+        // eslint-disable-next-line @angular-eslint/no-output-rename
+        ['cdkMenuItemTriggered: triggered'],
     },
   ],
 })

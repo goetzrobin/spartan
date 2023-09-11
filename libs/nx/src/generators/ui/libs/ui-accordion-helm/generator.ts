@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'accordion',
     internalName: 'ui-accordion-helm',
-    publicName: 'accordion-helm',
+    publicName: 'ui-accordion-helm',
   });
 }

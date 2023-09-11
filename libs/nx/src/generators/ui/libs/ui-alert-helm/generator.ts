@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'alert',
     internalName: 'ui-alert-helm',
-    publicName: 'alert-helm',
+    publicName: 'ui-alert-helm',
   });
 }

@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'avatar',
     internalName: 'ui-avatar-helm',
-    publicName: 'avatar-helm',
+    publicName: 'ui-avatar-helm',
   });
 }

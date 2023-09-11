@@ -30,8 +30,8 @@ import { SpartanLogoComponent } from '~/app/shared/spartan-logo.component';
   template: `
     <div class="flex justify-between items-center w-full max-w-screen-xl mx-auto">
       <nav class="flex items-center">
-        <a hlmBtn variant="ghost" class="hidden sm:flex mr-3 w-12 p-1.5" routerLink="/">
-          <spartan-logo class="text-primary" />
+        <a hlmBtn variant="ghost" class="hidden sm:flex mr-3 p-1.5" routerLink="/">
+          <spartan-logo class="w-14" />
           <span class="sr-only">spartan</span>
         </a>
 

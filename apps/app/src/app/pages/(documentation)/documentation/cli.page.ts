@@ -12,7 +12,7 @@ import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
 import { CodeComponent } from '~/app/shared/code/code.component';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { HlmAlertModule } from '@spartan-ng/ui-alert-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/icon-helm';
+import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { radixExclamationTriangle } from '@ng-icons/radix-icons';
 
 export const routeMeta: RouteMeta = {

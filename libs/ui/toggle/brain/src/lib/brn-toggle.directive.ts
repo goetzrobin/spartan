@@ -45,6 +45,7 @@ export class BrnToggleDirective {
     this._disabled.set(coerceBooleanProperty(value) ? true : undefined);
   }
 
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('state')
   set setState(value: 'on' | 'off') {
     this._state.set(value);

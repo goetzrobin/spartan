@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'card',
     internalName: 'ui-card-helm',
-    publicName: 'card-helm',
+    publicName: 'ui-card-helm',
   });
 }

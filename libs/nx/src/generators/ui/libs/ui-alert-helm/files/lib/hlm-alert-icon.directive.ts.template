@@ -1,5 +1,5 @@
 import { Directive, inject } from '@angular/core';
-import { HlmIconComponent } from '@spartan-ng/icon-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
 @Directive({
   selector: '[hlmAlertIcon]',

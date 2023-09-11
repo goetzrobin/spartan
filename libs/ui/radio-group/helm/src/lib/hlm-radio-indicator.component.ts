@@ -1,6 +1,4 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/icon-helm';
-import { radixCircle, radixDotFilled } from '@ng-icons/radix-icons';
 import { ClassValue } from 'clsx';
 import { hlm } from '@spartan-ng/ui-core';
 
@@ -10,8 +8,6 @@ const btnLike =
 @Component({
   selector: 'hlm-radio-indicator',
   standalone: true,
-  imports: [HlmIconComponent],
-  providers: [provideIcons({ radixCircle, radixDotFilled })],
   host: {
     class: 'relative',
   },

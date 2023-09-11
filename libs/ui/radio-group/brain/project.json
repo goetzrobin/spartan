@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/radio-group/brain/**/*.ts", "libs/ui/radio-group/brain/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/radio-group/brain/**/*.ts",
+          "libs/ui/radio-group/brain/**/*.html",
+          "libs/ui/radio-group/brain/package.json",
+          "libs/ui/radio-group/brain/project.json"
+        ]
       }
     },
     "release": {

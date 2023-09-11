@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'toggle',
     internalName: 'ui-toggle-helm',
-    publicName: 'toggle-helm',
+    publicName: 'ui-toggle-helm',
   });
 }

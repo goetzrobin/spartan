@@ -21,11 +21,6 @@
     "tags": {
       "type": "string",
       "description": "Add tags to the library (used for linting)."
-    },
-    "skipBrainDependencies": {
-      "type": "boolean",
-      "x-prompt": "Skip installing the associated spartan/ui/brain dependencies?",
-      "description": "Skip installing the associated spartan/ui/brain dependencies?"
     }
   }
 }

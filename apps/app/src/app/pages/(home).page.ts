@@ -1,7 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/button-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { RouterLink } from '@angular/router';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import {
@@ -11,7 +11,7 @@ import {
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
-import { HlmIconComponent } from '@spartan-ng/icon-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixLayers, radixMix, radixStar } from '@ng-icons/radix-icons';
 import { ThreeHundredComponent } from './(home)/components/three-hundred.component';

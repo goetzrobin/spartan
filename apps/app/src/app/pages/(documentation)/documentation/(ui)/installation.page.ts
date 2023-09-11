@@ -9,8 +9,8 @@ import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
 import { CodeComponent } from '~/app/shared/code/code.component';
-import { HlmButtonDirective } from '@spartan-ng/button-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/icon-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { RouterLink } from '@angular/router';
 import { radixChevronRight, radixExclamationTriangle } from '@ng-icons/radix-icons';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';

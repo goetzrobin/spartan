@@ -1,13 +1,13 @@
 {
   "name": "@spartan-ng/ui-tabs-brain",
-  "version": "0.0.1-alpha.303",
+  "version": "0.0.1-alpha.304",
   "peerDependencies": {
-    "@angular/common": "^16.0.0",
-    "@angular/core": "^16.0.0"
+    "@angular/core": "^16.0.0",
+    "@angular/cdk": "^16.0.0",
+    "rxjs": "~7.8.0",
+    "@spartan-ng/ui-core": "0.0.1-alpha.304"
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
+  "dependencies": {},
   "sideEffects": false,
   "publishConfig": {
     "access": "public"

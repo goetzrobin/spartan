@@ -30,6 +30,7 @@ export class ThreeHundredComponent {
     'evanfuture',
     'AdditionAddict',
     'Altamimi-Dev',
+    'ferat',
   ];
   protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
   protected readonly _trackBy: TrackByFunction<number | string> = (n) => n;

@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'command',
     internalName: 'ui-command-helm',
-    publicName: 'command-helm',
+    publicName: 'ui-command-helm',
   });
 }

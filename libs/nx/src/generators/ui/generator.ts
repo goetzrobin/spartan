@@ -1,12 +1,13 @@
-import { GeneratorCallback, runTasksInSerial, Tree } from '@nx/devkit';
+import { addDependenciesToPackageJson, GeneratorCallback, runTasksInSerial, Tree } from '@nx/devkit';
 import { HlmUIGeneratorSchema } from './schema';
 import { prompt } from 'enquirer';
 import { HlmBaseGeneratorSchema } from '../base/schema';
+import { SPARTAN_COLLAPSIBLE_BRAIN_VERSION } from '../base/versions';
 
 export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema) {
   const tasks: GeneratorCallback[] = [];
   const availablePrimitives = await import('./supported-ui-libraries.json');
-  const availablePrimitiveNames = Object.keys(availablePrimitives);
+  const availablePrimitiveNames = [...Object.keys(availablePrimitives), 'collapsible', 'menubar', 'contextmenu'];
   let response: { primitives: string[] } = { primitives: [] };
   if (options.name && availablePrimitiveNames.includes(options.name)) {
     response.primitives.push(options.name);
@@ -37,6 +38,20 @@ async function createPrimitiveLibraries(
 ) {
   const primitivesToCreate = response.primitives.includes('all') ? availablePrimitiveNames : response.primitives;
   const tasks: GeneratorCallback[] = [];
+
+  await addIconForDependentPrimitive(primitivesToCreate, ['alert', 'command', 'menu']);
+  await addButtonForDependentPrimitive(primitivesToCreate, ['alertdialog', 'command']);
+  await replaceContextAndMenuBar(primitivesToCreate);
+
+  if (primitivesToCreate.includes('collapsible')) {
+    tasks.push(
+      addDependenciesToPackageJson(tree, { '@spartan-ng/ui-collapsible-brain': SPARTAN_COLLAPSIBLE_BRAIN_VERSION }, {})
+    );
+  }
+  if (primitivesToCreate.length === 1 && primitivesToCreate[0] === 'collapsible') {
+    return tasks;
+  }
+
   for (const primitiveName of primitivesToCreate) {
     const internalName = availablePrimitives[primitiveName]['internalName'];
     const peerDependencies = availablePrimitives[primitiveName]['peerDependencies'];
@@ -59,7 +74,64 @@ async function createPrimitiveLibraries(
       tags: options.tags,
       rootProject: options.rootProject,
     });
+
     tasks.push(installTask);
   }
+
   return tasks;
 }
+
+const addIconForDependentPrimitive = async (primitivesToCreate: string[], primitivesDependingOnIcon: string[]) => {
+  if (primitivesDependingOnIcon.some((primitive) => primitivesToCreate.includes(primitive))) {
+    //TODO: Need to check if icon is already installed and skip if it already is
+    const installIcon = (
+      await prompt({
+        type: 'confirm',
+        name: 'installIcon',
+        initial: true,
+        message:
+          'Some of the primitives you are trying to install depend on the icon primitive. Do you want to add it to your project?',
+      })
+    )['installIcon'];
+    if (installIcon) {
+      primitivesToCreate.push('icon');
+    }
+  }
+};
+const addButtonForDependentPrimitive = async (primitivesToCreate: string[], primitivesDependingOnBtn: string[]) => {
+  if (primitivesDependingOnBtn.some((primitive) => primitivesToCreate.includes(primitive))) {
+    //TODO: Need to check if icon is already installed and skip if it already is
+    const installBtn = (
+      await prompt({
+        type: 'confirm',
+        name: 'installBtn',
+        initial: true,
+        message:
+          'Some of the primitives you are trying to install depend on the button primitive. Do you want to add it to your project?',
+      })
+    )['installBtn'];
+    if (installBtn) {
+      primitivesToCreate.push('button');
+    }
+  }
+};
+const replaceContextAndMenuBar = async (primtivesToCreate: string[]) => {
+  const contextIndex = primtivesToCreate.indexOf('contextmenu');
+  if (contextIndex >= 0) {
+    await prompt({
+      type: 'confirm',
+      name: 'contextMenu',
+      message: 'The context menu is implemented as part of the menu-helm primitive. Adding menu primitive.',
+    });
+    primtivesToCreate.splice(contextIndex, 1);
+  }
+  const menubarIndex = primtivesToCreate.indexOf('menubar');
+  if (menubarIndex >= 0) {
+    await prompt({
+      type: 'confirm',
+      name: 'menubar',
+      message: 'The menubar is implemented as part of the menu-helm primitive. Adding menu primitive.',
+    });
+    primtivesToCreate.splice(menubarIndex, 1);
+  }
+};

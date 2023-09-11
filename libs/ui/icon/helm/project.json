@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/icon/helm/**/*.ts", "libs/ui/icon/helm/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/icon/helm/**/*.ts",
+          "libs/ui/icon/helm/**/*.html",
+          "libs/ui/icon/helm/package.json",
+          "libs/ui/icon/helm/project.json"
+        ]
       }
     },
     "release": {

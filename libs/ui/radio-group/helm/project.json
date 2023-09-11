@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/radio-group/helm/**/*.ts", "libs/ui/radio-group/helm/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/radio-group/helm/**/*.ts",
+          "libs/ui/radio-group/helm/**/*.html",
+          "libs/ui/radio-group/helm/package.json",
+          "libs/ui/radio-group/helm/project.json"
+        ]
       }
     },
     "release": {

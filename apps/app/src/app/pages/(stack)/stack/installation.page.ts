@@ -11,12 +11,7 @@ import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.componen
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { CodeComponent } from '~/app/shared/code/code.component';
 import { TabsComponent } from '~/app/shared/layout/tabs.component';
-import {
-  HlmAlertDescriptionDirective,
-  HlmAlertDirective,
-  HlmAlertIconDirective,
-  HlmAlertTitleDirective,
-} from '@spartan-ng/ui-alert-helm';
+import { HlmAlertModule } from '@spartan-ng/ui-alert-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixChevronRight, radixExclamationTriangle } from '@ng-icons/radix-icons';
@@ -44,11 +39,7 @@ export const routeMeta: RouteMeta = {
     PageNavLinkComponent,
     CodeComponent,
     TabsComponent,
-    HlmAlertDescriptionDirective,
-    HlmAlertDirective,
-    HlmAlertDescriptionDirective,
-    HlmAlertIconDirective,
-    HlmAlertTitleDirective,
+    HlmAlertModule,
     HlmIconComponent,
     HlmButtonDirective,
     AccordionPreviewComponent,
@@ -248,10 +239,22 @@ export const noteRouter = router({
             <code class="${hlmCode}">.env</code> file at the root of your Nx workspace and add the following code
             snippet:
           </p>
+
           <spartan-code
             class="mt-3"
             code='DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-SUPABASE-REFERENCE-ID].supabase.co:5432/postgres"'
           />
+
+          <div class="mt-4" hlmAlert>
+            <hlm-icon name="radixExclamationTriangle" hlmAlertIcon />
+            <p hlmAlertTitle>Make sure to add .env to your .gitignore file.</p>
+            <p hlmAlertDescription>
+              You do not want to accidentally commit your secrets to GitHub. To exclude the file from git add a new line
+              to the
+              <code class="${hlmCode}">.gitignore</code>-file and add <code class="${hlmCode}">.env</code> on a new
+              line.
+            </p>
+          </div>
         </div>
 
         <div class="px-4 pt-4 pb-8" secondTab>

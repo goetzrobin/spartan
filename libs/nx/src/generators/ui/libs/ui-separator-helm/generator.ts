@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'separator',
     internalName: 'ui-separator-helm',
-    publicName: 'separator-helm',
+    publicName: 'ui-separator-helm',
   });
 }

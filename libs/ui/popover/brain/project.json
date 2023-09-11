@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/popover/brain/**/*.ts", "libs/ui/popover/brain/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/popover/brain/**/*.ts",
+          "libs/ui/popover/brain/**/*.html",
+          "libs/ui/popover/brain/package.json",
+          "libs/ui/popover/brain/project.json"
+        ]
       }
     },
     "release": {

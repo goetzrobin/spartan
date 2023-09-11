@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/spinner/helm/**/*.ts", "libs/ui/spinner/helm/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/spinner/helm/**/*.ts",
+          "libs/ui/spinner/helm/**/*.html",
+          "libs/ui/spinner/helm/package.json",
+          "libs/ui/spinner/helm/project.json"
+        ]
       }
     }
   }

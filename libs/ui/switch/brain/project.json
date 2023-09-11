@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/switch/brain/**/*.ts", "libs/ui/switch/brain/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/switch/brain/**/*.ts",
+          "libs/ui/switch/brain/**/*.html",
+          "libs/ui/switch/brain/package.json",
+          "libs/ui/switch/brain/project.json"
+        ]
       }
     },
     "release": {

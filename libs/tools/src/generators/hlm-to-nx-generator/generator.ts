@@ -42,7 +42,7 @@ export async function hlmToNxGeneratorGenerator(tree: Tree, options: HlmToNxGene
     const cleanNames = names(primitiveName);
     options = { ...options, ...cleanNames };
     options['internalName'] = internalName;
-    options['publicName'] = primitiveName + '-helm';
+    options['publicName'] = 'ui-' + primitiveName + '-helm';
     options['primitiveName'] = primitiveName;
 
     createGeneratorFromHlmLibrary(projects, primitiveName, internalName, tree, options);

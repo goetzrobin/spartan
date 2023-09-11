@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'aspectratio',
     internalName: 'ui-aspect-ratio-helm',
-    publicName: 'aspectratio-helm',
+    publicName: 'ui-aspectratio-helm',
   });
 }

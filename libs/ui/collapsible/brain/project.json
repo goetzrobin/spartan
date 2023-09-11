@@ -40,7 +40,12 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/ui/collapsible/brain/**/*.ts", "libs/ui/collapsible/brain/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ui/collapsible/brain/**/*.ts",
+          "libs/ui/collapsible/brain/**/*.html",
+          "libs/ui/collapsible/brain/package.json",
+          "libs/ui/collapsible/brain/project.json"
+        ]
       }
     },
     "release": {

@@ -2,7 +2,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
 import { hlm } from '@spartan-ng/ui-core';
 import { radixDotFilled } from '@ng-icons/radix-icons';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/icon-helm';
+import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 
 @Component({
   selector: 'hlm-menu-item-radio',

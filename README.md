@@ -25,6 +25,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 6. [evanfuture](https://github.com/evanfuture)
 7. [AdditionAddict](https://github.com/AdditionAddict)
 8. [Altamimi-Dev](https://github.com/Altamimi-Dev)
+9. [ferat](https://github.com/ferat)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 

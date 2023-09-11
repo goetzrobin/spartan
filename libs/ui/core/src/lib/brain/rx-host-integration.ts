@@ -38,9 +38,11 @@ function process<T>(element: HTMLElement, prop: string): (value: T) => void {
     } else if (isClass) {
       element.classList.toggle(key, !!value);
     } else if (isStyle) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       element.style[key] = parsed;
     } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       element[key] = parsed;
     }

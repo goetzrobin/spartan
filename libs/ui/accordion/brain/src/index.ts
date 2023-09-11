@@ -21,4 +21,4 @@ export const BrnAccordionImports = [
   imports: [...BrnAccordionImports],
   exports: [...BrnAccordionImports],
 })
-export class HlmAccordionModule {}
+export class BrnAccordionModule {}

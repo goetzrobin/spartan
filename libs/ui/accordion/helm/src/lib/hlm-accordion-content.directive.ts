@@ -51,6 +51,7 @@ export class HlmAccordionContentDirective implements OnInit {
       this._changes = new MutationObserver((mutations: MutationRecord[]) => {
         mutations.forEach((mutation: MutationRecord) => {
           if (mutation.attributeName !== 'data-state') return;
+          // eslint-disable-next-line
           const state = (mutation.target as any).attributes.getNamedItem(mutation.attributeName)?.value;
           this.state.set(state);
         });

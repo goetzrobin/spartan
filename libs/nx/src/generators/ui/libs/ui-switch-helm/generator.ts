@@ -7,6 +7,6 @@ export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
     ...options,
     primitiveName: 'switch',
     internalName: 'ui-switch-helm',
-    publicName: 'switch-helm',
+    publicName: 'ui-switch-helm',
   });
 }
