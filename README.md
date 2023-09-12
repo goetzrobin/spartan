@@ -26,6 +26,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 7. [AdditionAddict](https://github.com/AdditionAddict)
 8. [Altamimi-Dev](https://github.com/Altamimi-Dev)
 9. [ferat](https://github.com/ferat)
+10. [jeremy-js-devweb](https://github.com/jeremy-js-devweb)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
