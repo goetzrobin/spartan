@@ -1,4 +1,4 @@
-import { Directive, effect, inject, Input, signal } from '@angular/core';
+import { Directive, effect, inject, Input, signal, TemplateRef } from '@angular/core';
 import { CdkContextMenuTrigger } from '@angular/cdk/menu';
 
 export type BrnCtxMenuAlign = 'start' | 'center' | 'end' | undefined;
@@ -6,7 +6,7 @@ export type BrnCtxMenuAlign = 'start' | 'center' | 'end' | undefined;
 @Directive({
   selector: '[brnCtxMenuTriggerFor]',
   standalone: true,
-  hostDirectives: [{ directive: CdkContextMenuTrigger, inputs: ['cdkContextMenuTriggerFor: brnCtxMenuTriggerFor'] }],
+  hostDirectives: [CdkContextMenuTrigger],
 })
 export class BrnContextMenuTriggerDirective {
   private readonly _cdkTrigger = inject(CdkContextMenuTrigger, { host: true });
@@ -14,6 +14,11 @@ export class BrnContextMenuTriggerDirective {
   @Input()
   set align(value: BrnCtxMenuAlign) {
     this._align.set(value);
+  }
+
+  @Input()
+  set brnCtxMenuTriggerFor(value: TemplateRef<unknown> | null) {
+    this._cdkTrigger.menuTemplateRef = value;
   }
 
   constructor() {
