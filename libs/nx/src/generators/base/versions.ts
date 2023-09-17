@@ -1,3 +1,6 @@
+// angular dependency
+export const FALLBACK_ANGULAR_VERSION = '^16.0.0';
+// spartan dependencies
 export const SPARTAN_ACCORDION_BRAIN_VERSION = '0.0.1-alpha.304';
 export const SPARTAN_ALERT_DIALOG_BRAIN_VERSION = '0.0.1-alpha.304';
 export const SPARTAN_AVATAR_BRAIN_VERSION = '0.0.1-alpha.304';
@@ -14,3 +17,7 @@ export const SPARTAN_SHEET_BRAIN_VERSION = '0.0.1-alpha.304';
 export const SPARTAN_SWITCH_VERSION = '0.0.1-alpha.304';
 export const SPARTAN_TABS_VERSION = '0.0.1-alpha.304';
 export const SPARTAN_TOGGLE_VERSION = '0.0.1-alpha.304';
+// dev dependencies
+export const TAILWIND_MERGE_VERSION = '^1.14.0';
+export const TAILWINDCSS_VERSION = '^3.0.2';
+export const TAILWIND_ANIMATE_VERSION = '^1.0.6';

@@ -15,6 +15,9 @@ import {
   SPARTAN_SWITCH_VERSION,
   SPARTAN_TABS_VERSION,
   SPARTAN_TOGGLE_VERSION,
+  TAILWIND_ANIMATE_VERSION,
+  TAILWIND_MERGE_VERSION,
+  TAILWINDCSS_VERSION,
 } from '../versions';
 
 const BRAIN_DEPENDENCY_MAP = {
@@ -34,16 +37,31 @@ const BRAIN_DEPENDENCY_MAP = {
   toggle: SPARTAN_TOGGLE_VERSION,
 };
 
-export function buildDependencyArray(options: HlmBaseGeneratorSchema) {
-  let dependencies = {
+const DEPENDENT_ON_DIALOG = ['alertdialog', 'sheet', 'popover'];
+
+export function buildDependencyArray(options: HlmBaseGeneratorSchema, angularVersion: string) {
+  let dependencies: Record<string, string> = {
     '@spartan-ng/ui-core': SPARTAN_CORE_VERSION,
+    '@angular/cdk': angularVersion,
   };
+
   if (options.peerDependencies) {
     dependencies = { ...dependencies, ...options.peerDependencies };
   }
-  const brainDependency = BRAIN_DEPENDENCY_MAP[options.primitiveName];
-  if (brainDependency) {
-    dependencies = { ...dependencies, ['@spartan-ng/ui-' + options.primitiveName + '-brain']: brainDependency };
+  const brainDependencyVersion = BRAIN_DEPENDENCY_MAP[options.primitiveName];
+  if (brainDependencyVersion) {
+    dependencies = { ...dependencies, ['@spartan-ng/ui-' + options.primitiveName + '-brain']: brainDependencyVersion };
+  }
+  if (brainDependencyVersion && DEPENDENT_ON_DIALOG.includes(options.primitiveName)) {
+    dependencies = { ...dependencies, ['@spartan-ng/ui-dialog-brain']: brainDependencyVersion };
   }
   return dependencies;
+}
+
+export function buildDevDependencyArray() {
+  return {
+    'tailwind-merge': TAILWIND_MERGE_VERSION,
+    tailwindcss: TAILWINDCSS_VERSION,
+    'tailwindcss-animate': TAILWIND_ANIMATE_VERSION,
+  };
 }

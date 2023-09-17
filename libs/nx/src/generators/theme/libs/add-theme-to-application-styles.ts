@@ -38,11 +38,8 @@ export function addThemeToApplicationStyles(
 
   const stylesEntryPointContent = tree.read(stylesEntryPoint, 'utf-8');
 
-  let ckdOverlayImport = '';
-  if (options.addCdkStyles) {
-    const CDK_IMPORT = `@import '@angular/cdk/overlay-prebuilt.css';`;
-    ckdOverlayImport = stylesEntryPointContent.includes(CDK_IMPORT) ? '' : CDK_IMPORT;
-  }
+  const CDK_IMPORT = `@import '@angular/cdk/overlay-prebuilt.css';`;
+  const ckdOverlayImport = stylesEntryPointContent.includes(CDK_IMPORT) ? '' : CDK_IMPORT;
 
   const rootFontSans = stylesEntryPointContent.includes('--font-sans')
     ? ''

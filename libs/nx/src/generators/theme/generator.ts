@@ -1,7 +1,7 @@
 import { ProjectConfiguration, Tree } from '@nx/devkit';
 import { prompt } from 'enquirer';
 import { addThemeToApplicationStyles } from './libs/add-theme-to-application-styles';
-import { getProjectsAndNames } from './util/get-project-names';
+import { getProjectsAndNames } from '../../utils/get-project-names';
 import { SupportedRadii, SupportedTheme, SupportedThemes } from './libs/supported-theme-generator-map';
 
 export default async function addThemeToApplicationGenerator(tree: Tree) {
@@ -40,14 +40,6 @@ export default async function addThemeToApplicationGenerator(tree: Tree) {
       initial: 2,
       message: 'Which corner radius do you want to use with your theme:',
       choices: [...SupportedRadii],
-    },
-    {
-      type: 'confirm',
-      name: 'addCdkStyles',
-      message:
-        'Add prebuilt overlay CSS styles from @angular/cdk? Select if you plan on using any of the dialog, sheet, alert dialog, or menu components.',
-      required: true,
-      initial: true,
     },
     {
       type: 'input',
