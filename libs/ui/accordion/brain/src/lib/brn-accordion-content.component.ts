@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, ElementRef, forwardRef, inject, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  forwardRef,
+  inject,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 import { BrnAccordionItemComponent } from './brn-accordion-item.component';
 import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui-core';
 
@@ -18,9 +27,11 @@ import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@
     '[style.--brn-collapsible-content-height]': 'initialHeight + "px"',
     '[id]': 'id',
   },
-  template: ` <p [class]="contentClass()">
+  template: ` <p [class]="contentClass()" [attr.data-state]="state()">
     <ng-content />
   </p>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class BrnAccordionContentComponent implements AfterViewInit, CustomElementClassSettable {
   private _item = inject(BrnAccordionItemComponent);
@@ -31,8 +42,8 @@ export class BrnAccordionContentComponent implements AfterViewInit, CustomElemen
   public ariaLabeledBy = 'brn-accordion-trigger-' + this._item.id;
   protected initialHeight = 0;
 
-  private _contentClass = signal('');
-  public contentClass = this._contentClass.asReadonly();
+  private readonly _contentClass = signal('');
+  public readonly contentClass = this._contentClass.asReadonly();
 
   constructor() {
     if (!this._item) {
