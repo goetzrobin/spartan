@@ -1,5 +1,6 @@
 import { HlmBaseGeneratorSchema } from '../schema';
 import {
+  NG_ICONS_VERSION,
   SPARTAN_ACCORDION_BRAIN_VERSION,
   SPARTAN_ALERT_DIALOG_BRAIN_VERSION,
   SPARTAN_AVATAR_BRAIN_VERSION,
@@ -54,6 +55,9 @@ export function buildDependencyArray(options: HlmBaseGeneratorSchema, angularVer
   }
   if (brainDependencyVersion && DEPENDENT_ON_DIALOG.includes(options.primitiveName)) {
     dependencies = { ...dependencies, ['@spartan-ng/ui-dialog-brain']: brainDependencyVersion };
+  }
+  if (options.primitiveName === 'icon') {
+    dependencies = { ...dependencies, '@ng-icons/core': NG_ICONS_VERSION };
   }
   return dependencies;
 }
