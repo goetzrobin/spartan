@@ -5,7 +5,8 @@
   "dependencies": {
     "@nx/angular": "^16.3.2",
     "@nx/devkit": "16.5.5",
-    "enquirer": "2.3.6"
+    "enquirer": "2.3.6",
+    "semver": "7.5.4"
   },
   "peerDependencies": {
     "tslib": "^2.3.0"
