@@ -4,7 +4,7 @@
     "peerDependencies": {
       "@angular/common": "^16.0.0",
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -12,7 +12,7 @@
     "internalName": "ui-alert-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "class-variance-authority": "^0.6.0",
       "clsx": "^1.2.1"
     }
@@ -21,7 +21,7 @@
     "internalName": "ui-alert-dialog-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -30,7 +30,7 @@
     "peerDependencies": {
       "@angular/core": "^16.0.0",
       "@angular/cdk": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -39,7 +39,7 @@
     "peerDependencies": {
       "@angular/common": "^16.0.0",
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1",
       "class-variance-authority": "^0.6.0"
     }
@@ -49,7 +49,7 @@
     "peerDependencies": {
       "@angular/core": "^16.0.0",
       "@angular/cdk": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "class-variance-authority": "^0.6.0",
       "clsx": "^1.2.1"
     }
@@ -58,7 +58,7 @@
     "internalName": "ui-button-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "class-variance-authority": "^0.6.0",
       "clsx": "^1.2.1"
     }
@@ -67,7 +67,7 @@
     "internalName": "ui-card-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "class-variance-authority": "^0.6.0",
       "clsx": "^1.2.1"
     }
@@ -76,7 +76,7 @@
     "internalName": "ui-command-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -84,7 +84,7 @@
     "internalName": "ui-dialog-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -92,7 +92,7 @@
     "internalName": "ui-icon-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "@ng-icons/core": "^25.1.0",
       "class-variance-authority": "^0.6.0",
       "clsx": "^1.2.1"
@@ -102,7 +102,7 @@
     "internalName": "ui-input-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "class-variance-authority": "^0.6.0",
       "clsx": "^1.2.1"
     }
@@ -111,7 +111,7 @@
     "internalName": "ui-label-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "class-variance-authority": "^0.6.0",
       "clsx": "^1.2.1"
     }
@@ -121,7 +121,7 @@
     "peerDependencies": {
       "@angular/core": "^16.0.0",
       "@angular/cdk": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "@ng-icons/radix-icons": "^25.1.0",
       "clsx": "^1.2.1",
       "class-variance-authority": "^0.6.0"
@@ -131,7 +131,7 @@
     "internalName": "ui-popover-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -139,7 +139,7 @@
     "internalName": "ui-progress-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -147,7 +147,7 @@
     "internalName": "ui-radio-group-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -155,7 +155,7 @@
     "internalName": "ui-scroll-area-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "ngx-scrollbar": "^13.0.1",
       "clsx": "^1.2.1"
     }
@@ -164,7 +164,7 @@
     "internalName": "ui-separator-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -172,7 +172,7 @@
     "internalName": "ui-sheet-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1",
       "class-variance-authority": "^0.6.0"
     }
@@ -181,7 +181,7 @@
     "internalName": "ui-skeleton-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -189,7 +189,7 @@
     "internalName": "ui-spinner-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "class-variance-authority": "^0.6.0",
       "clsx": "^1.2.1"
     }
@@ -198,7 +198,7 @@
     "internalName": "ui-switch-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   },
@@ -206,7 +206,7 @@
     "internalName": "ui-tabs-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1",
       "class-variance-authority": "^0.6.0"
     }
@@ -215,7 +215,7 @@
     "internalName": "ui-toggle-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1",
       "class-variance-authority": "^0.6.0"
     }
@@ -224,7 +224,7 @@
     "internalName": "ui-typography-helm",
     "peerDependencies": {
       "@angular/core": "^16.0.0",
-      "@spartan-ng/ui-core": "0.0.1-alpha.304",
+      "@spartan-ng/ui-core": "0.0.1-alpha.305",
       "clsx": "^1.2.1"
     }
   }
