@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, Input } from '@angular/core';
+import { computed, Directive, ElementRef, inject, Input } from '@angular/core';
 import { BrnTabsComponent } from './brn-tabs.component';
 
 @Directive({
@@ -8,10 +8,10 @@ import { BrnTabsComponent } from './brn-tabs.component';
     '[id]': 'labelId',
     type: 'button',
     role: 'tab',
-    '[tabindex]': '_value() === _key ? "0": "-1"',
-    '[attr.aria-selected]': '_value() === _key',
+    '[tabindex]': '_isSelected() ? "0": "-1"',
+    '[attr.aria-selected]': '_isSelected()',
     '[attr.aria-controls]': 'contentId',
-    '[attr.data-state]': "_value() === _key ? 'active' : 'inactive'",
+    '[attr.data-state]': "_isSelected() ? 'active' : 'inactive'",
     '[attr.data-orientation]': '_orientation()',
     '[attr.data-disabled]': "disabled ? '' : undefined",
     '(click)': 'activate()',
@@ -21,11 +21,11 @@ export class BrnTabsTriggerDirective {
   private _root = inject(BrnTabsComponent);
   private _elementRef = inject(ElementRef);
 
-  protected _key: string | undefined;
+  private _key: string | undefined;
   protected contentId: string | undefined;
   protected labelId: string | undefined;
   protected readonly _orientation = this._root.$orientation;
-  protected readonly _value = this._root.$value;
+  protected readonly _isSelected = computed(() => this._root.$value() === this._key);
 
   @Input('brnTabsTrigger')
   set triggerFor(key: string) {

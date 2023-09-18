@@ -27,7 +27,7 @@ import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@
     '[style.--brn-collapsible-content-height]': 'initialHeight + "px"',
     '[id]': 'id',
   },
-  template: ` <p [class]="contentClass()" [attr.data-state]="state()">
+  template: ` <p [class]="contentClass()">
     <ng-content />
   </p>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
