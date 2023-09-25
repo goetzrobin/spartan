@@ -3,7 +3,7 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ui/table/helm/src",
   "prefix": "spartan-ng",
-  "tags": [],
+  "tags": ["scope:helm"],
   "projectType": "library",
   "targets": {
     "build": {
@@ -43,7 +43,8 @@
         "lintFilePatterns": [
           "libs/ui/table/helm/**/*.ts",
           "libs/ui/table/helm/**/*.html",
-          "libs/ui/table/helm/package.json"
+          "libs/ui/table/helm/package.json",
+          "libs/ui/table/helm/project.json"
         ]
       }
     }
