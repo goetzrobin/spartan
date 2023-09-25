@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Component, computed, effect, signal } from '@angular/core';
-import { BrnTableModule, useBrnColumnManager } from './brain/src';
+import { BrnTableModule, PaginatorState, useBrnColumnManager } from './brain/src';
 import { faker } from '@faker-js/faker';
 import { HlmTableModule } from './helm/src';
 import { NgForOf, TitleCasePipe } from '@angular/common';
-import { PaginatorState } from './brain/src/lib/brn-paginator.directive';
 import { HlmButtonDirective } from '../button/helm/src';
 import { FormsModule } from '@angular/forms';
 import { HlmInputDirective } from '../input/helm/src';
