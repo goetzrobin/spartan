@@ -56,6 +56,8 @@
       "@spartan-ng/ui-storybook": ["libs/ui/storybook/src/index.ts"],
       "@spartan-ng/ui-switch-brain": ["libs/ui/switch/brain/src/index.ts"],
       "@spartan-ng/ui-switch-helm": ["libs/ui/switch/helm/src/index.ts"],
+      "@spartan-ng/ui-table-brain": ["libs/ui/table/brain/src/index.ts"],
+      "@spartan-ng/ui-table-helm": ["libs/ui/table/helm/src/index.ts"],
       "@spartan-ng/ui-tabs-brain": ["libs/ui/tabs/brain/src/index.ts"],
       "@spartan-ng/ui-tabs-helm": ["libs/ui/tabs/helm/src/index.ts"],
       "@spartan-ng/ui-toggle-brain": ["libs/ui/toggle/brain/src/index.ts"],
