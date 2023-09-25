@@ -1,6 +1,6 @@
 {
   "name": "@spartan-ng/ui-radiogroup-brain",
-  "version": "0.0.1-alpha.305",
+  "version": "0.0.1-alpha.306",
   "peerDependencies": {
     "@angular/core": "^16.0.0",
     "@angular/forms": "^16.0.0",
