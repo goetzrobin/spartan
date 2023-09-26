@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal, TrackByFunction } from '@angular/core';
 import { BrnTableModule, PaginatorState, useBrnColumnManager } from './brain/src';
 import { faker } from '@faker-js/faker';
 import { HlmTableModule } from './helm/src';
@@ -153,7 +153,7 @@ class TableStory {
   protected readonly _data = computed(() =>
     this._filteredUsers().slice(this._startEndIndex().start, this._startEndIndex().end + 1)
   );
-  protected readonly _trackBy = (user: { name: string }, index: number) => user.name;
+  protected readonly _trackBy: TrackByFunction<{ name: string }> = (index: number, user: { name: string }) => user.name;
   protected readonly _totalElements = computed(() => this._filteredUsers().length);
   protected readonly _onStateChange = (state: PaginatorState) => {
     this._startEndIndex.set({ start: state.startIndex, end: state.endIndex });
