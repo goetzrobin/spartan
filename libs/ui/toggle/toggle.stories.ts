@@ -76,7 +76,7 @@ const CITIES = [
   imports: [BrnToggleGroupModule, HlmToggleGroupModule, HlmButtonDirective, FormsModule, NgForOf, NgIf],
   template: `
     <div class="flex space-x-4">
-      <brn-toggle-group hlm [nullable]="nullable" [multiple]="multiple" [(ngModel)]="selected">
+      <brn-toggle-group hlm [disabled]="disabled" [nullable]="nullable" [multiple]="multiple" [(ngModel)]="selected">
         <button variant="outline" *ngFor="let city of cities; let last = last" [value]="city" hlm brnToggle>
           {{ city.name }}
         </button>
@@ -92,6 +92,8 @@ class HlmToggleGroupStoryComponent {
   multiple = false;
   @Input()
   nullable = false;
+  @Input()
+  disabled = false;
   public readonly cities: City[] = CITIES;
   @Input()
   public selected?: City | City[];
@@ -152,6 +154,21 @@ export const ToggleGroupSingle: StoryObj<{ city: City }> = {
   render: ({ city }) => ({
     props: { city },
     template: '<hlm-toggle-group-story [selected]="city"/>',
+  }),
+};
+export const ToggleGroupDisabled: StoryObj<{ city: City }> = {
+  name: 'Toggle Group - Disabled',
+  decorators: [
+    moduleMetadata({
+      imports: [HlmToggleGroupStoryComponent],
+    }),
+  ],
+  args: {
+    city: CITIES[0],
+  },
+  render: ({ city }) => ({
+    props: { city },
+    template: '<hlm-toggle-group-story [disabled]="true" [selected]="city"/>',
   }),
 };
 

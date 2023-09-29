@@ -4,7 +4,7 @@ import { BrnTableModule, PaginatorState, useBrnColumnManager } from './brain/src
 import { faker } from '@faker-js/faker';
 import { HlmTableModule } from './helm/src';
 import { NgForOf, TitleCasePipe } from '@angular/common';
-import { HlmButtonDirective } from '../button/helm/src';
+import { HlmButtonDirective, HlmButtonModule } from '../button/helm/src';
 import { FormsModule } from '@angular/forms';
 import { HlmInputDirective } from '../input/helm/src';
 import { debounceTime } from 'rxjs';
@@ -13,6 +13,8 @@ import { BrnMenuModule } from '../menu/brain/src';
 import { HlmMenuModule } from '../menu/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { radixChevronDown } from '@ng-icons/radix-icons';
+import { BrnToggleGroupModule } from '../toggle/brain/src';
+import { HlmToggleGroupModule } from '../toggle/helm/src';
 
 const createUsers = (numUsers = 5) => {
   return Array.from({ length: numUsers }, () => ({
@@ -171,21 +173,128 @@ class TableStory {
   }
 }
 
-const meta: Meta<{}> = {
-  title: 'Table',
-};
+@Component({
+  selector: 'table-toggle-story',
+  standalone: true,
+  imports: [
+    FormsModule,
+    NgForOf,
+    BrnTableModule,
+    HlmTableModule,
+    HlmButtonModule,
+    BrnToggleGroupModule,
+    HlmToggleGroupModule,
+  ],
+  template: `
+    <brn-toggle-group
+      aria-label="Show selected or all "
+      hlm
+      class="mb-2.5 w-full sm:w-fit"
+      [ngModel]="_onlyAbove180()"
+      (ngModelChange)="_setOnlyAboive180($event)"
+    >
+      <button class="w-full sm:w-40" variant="outline" [value]="false" hlm brnToggle>All</button>
+      <button class="w-full tabular-nums sm:w-40" variant="outline" [value]="true" hlm brnToggle>Above 150</button>
+    </brn-toggle-group>
+    <brn-table
+      hlm
+      stickyHeader
+      class="mt-4 block h-[337px] overflow-scroll border border-border rounded-md"
+      [dataSource]="_data()"
+      [displayedColumns]="_brnColumnManager.displayedColumns()"
+      [trackBy]="_trackBy"
+    >
+      <brn-column-def name="name">
+        <hlm-th truncate class="w-40" *brnHeaderDef>Name</hlm-th>
+        <hlm-td truncate class="w-40" *brnCellDef="let element">
+          {{ element.name }}
+        </hlm-td>
+      </brn-column-def>
+      <brn-column-def name="age">
+        <hlm-th class="w-40 justify-end" *brnHeaderDef>Age</hlm-th>
+        <hlm-td class="w-40 justify-end tabular-nums" *brnCellDef="let element">
+          {{ element.age }}
+        </hlm-td>
+      </brn-column-def>
+      <brn-column-def name="height">
+        <hlm-th class="w-40 justify-end" *brnHeaderDef>Height</hlm-th>
+        <hlm-td class="w-40 justify-end tabular-nums" *brnCellDef="let element">
+          {{ element.height }}
+        </hlm-td>
+      </brn-column-def>
+    </brn-table>
+    <div
+      class="mt-2 flex justify-between items-center"
+      *brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
+    >
+      <span class="text-sm tabular-nums"
+        >Showing entries {{ ctx.state().startIndex + 1 }} - {{ ctx.state().endIndex + 1 }} of
+        {{ _totalElements() }}</span
+      >
+      <div class="flex">
+        <select
+          [ngModel]="_pageSize()"
+          (ngModelChange)="_pageSize.set($event)"
+          hlmInput
+          size="sm"
+          class="inline-flex mr-1 pr-8"
+        >
+          <option [value]="size" *ngFor="let size of _availablePageSizes">{{ size === 10000 ? 'All' : size }}</option>
+        </select>
 
-export default meta;
-type Story = StoryObj<{}>;
+        <div class="flex space-x-1">
+          <button size="sm" variant="outline" hlmBtn [disabled]="!ctx.decrementable()" (click)="ctx.decrement()">
+            Previous
+          </button>
+          <button size="sm" variant="outline" hlmBtn [disabled]="!ctx.incrementable()" (click)="ctx.increment()">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+    <button size="sm" variant="outline" hlmBtn (click)="_loadNewUsers()">Mix it up</button>
+  `,
+})
+class TableToggleStory {
+  private readonly _startEndIndex = signal({ start: 0, end: 0 });
+  protected readonly _availablePageSizes = [10, 20, 50, 100, 10000];
+  protected readonly _pageSize = signal(this._availablePageSizes[0]);
 
-export const Default: Story = {
-  render: () => ({
-    moduleMetadata: {
-      imports: [TableStory],
-    },
-    template: `<table-story/>`,
-  }),
-};
+  protected readonly _onlyAbove180 = signal<boolean>(false);
+  protected readonly _brnColumnManager = useBrnColumnManager({
+    name: true,
+    age: false,
+    height: true,
+  });
+
+  private readonly _users = signal(createUsers(20));
+  private readonly _filteredUsers = computed(() => {
+    if (this._onlyAbove180()) return this._users().filter((u) => u.height > 180);
+    return this._users();
+  });
+  protected readonly _data = computed(() =>
+    this._filteredUsers().slice(this._startEndIndex().start, this._startEndIndex().end + 1)
+  );
+  protected readonly _trackBy: TrackByFunction<{ name: string }> = (index: number, user: { name: string }) => user.name;
+  protected readonly _totalElements = computed(() => this._filteredUsers().length);
+  protected readonly _onStateChange = (state: PaginatorState) => {
+    this._startEndIndex.set({ start: state.startIndex, end: state.endIndex });
+  };
+
+  protected _loadNewUsers() {
+    this._users.set(createUsers(Math.random() * 200));
+  }
+
+  protected _setOnlyAboive180(newVal: boolean) {
+    console.log('setting new val', newVal);
+    if (newVal) {
+      this._brnColumnManager.setInvisible('age');
+    } else {
+      this._brnColumnManager.setVisible('age');
+    }
+    this._onlyAbove180.set(newVal);
+  }
+}
 
 @Component({
   selector: 'table-presentation-only-story',
@@ -210,6 +319,22 @@ class TablePresentationOnlyStory {
   protected readonly _data = signal(createUsers(20));
 }
 
+const meta: Meta<{}> = {
+  title: 'Table',
+};
+
+export default meta;
+type Story = StoryObj<{}>;
+
+export const Default: Story = {
+  render: () => ({
+    moduleMetadata: {
+      imports: [TableStory],
+    },
+    template: `<table-story/>`,
+  }),
+};
+
 export const PresentationOnly: Story = {
   name: 'Presentation Only',
   render: () => ({
@@ -217,5 +342,14 @@ export const PresentationOnly: Story = {
       imports: [TablePresentationOnlyStory],
     },
     template: `<table-presentation-only-story/>`,
+  }),
+};
+
+export const Toggle: Story = {
+  render: () => ({
+    moduleMetadata: {
+      imports: [TableToggleStory],
+    },
+    template: `<table-toggle-story/>`,
   }),
 };

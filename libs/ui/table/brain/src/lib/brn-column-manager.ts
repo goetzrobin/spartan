@@ -1,32 +1,41 @@
-import { computed, signal } from '@angular/core';
+import { computed, Signal, signal } from '@angular/core';
 
-export class BrnColumnManager {
-  private readonly _initialColumnVisibility: { [key: string]: boolean } = {};
-  public readonly allColumns: string[] = [];
-  private readonly _columnVisibility = signal(this._initialColumnVisibility);
-  public readonly columnVisibility = this._columnVisibility.asReadonly();
-  public readonly displayedColumns = computed(() =>
-    Object.entries(this._columnVisibility())
+export class BrnColumnManager<T extends Record<string, boolean>> {
+  private readonly _initialColumnVisibility: T;
+  public readonly allColumns: (keyof T)[];
+  private readonly _columnVisibility;
+  public readonly columnVisibility;
+  public readonly displayedColumns: Signal<(keyof T)[]> = computed(() => {
+    return Object.entries(this._columnVisibility())
       .filter(([, value]) => value)
-      .map(([key]) => key)
-  );
+      .map(([key]) => key);
+  });
 
-  constructor(initialColumnVisibility: { [key: string]: boolean }) {
+  constructor(initialColumnVisibility: T) {
     this._initialColumnVisibility = initialColumnVisibility;
     this.allColumns = Object.keys(this._initialColumnVisibility);
+    this._columnVisibility = signal(this._initialColumnVisibility);
     this._columnVisibility.set(this._initialColumnVisibility);
+    this.columnVisibility = this._columnVisibility.asReadonly();
   }
 
   public readonly isColumnVisible = (name: string) => this.columnVisibility()[name];
   public readonly isColumnDisabled = (name: string) =>
     this.columnVisibility()[name] && this.displayedColumns().length === 1;
 
-  public toggleVisibility(columnName: string) {
+  public toggleVisibility(columnName: keyof T) {
     const columnVisibility = this._columnVisibility();
-    columnVisibility[columnName] = !columnVisibility[columnName];
-    this._columnVisibility.set(columnVisibility);
+    this._columnVisibility.set({ ...columnVisibility, [columnName]: !columnVisibility[columnName] });
+  }
+  public setVisible(columnName: keyof T) {
+    const columnVisibility = this._columnVisibility();
+    this._columnVisibility.set({ ...columnVisibility, [columnName]: true });
+  }
+  public setInvisible(columnName: keyof T) {
+    const columnVisibility = this._columnVisibility();
+    this._columnVisibility.set({ ...columnVisibility, [columnName]: false });
   }
 }
 
-export const useBrnColumnManager = (initialColumnVisibility: { [key: string]: boolean }) =>
+export const useBrnColumnManager = <T extends Record<string, boolean>>(initialColumnVisibility: T) =>
   new BrnColumnManager(initialColumnVisibility);

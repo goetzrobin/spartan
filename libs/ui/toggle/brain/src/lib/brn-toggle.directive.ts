@@ -1,17 +1,8 @@
-import {
-  ChangeDetectorRef,
-  computed,
-  Directive,
-  effect,
-  EventEmitter,
-  inject,
-  Input,
-  Output,
-  signal,
-} from '@angular/core';
+import { ChangeDetectorRef, computed, Directive, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ToggleSyncable } from './toggle-syncable';
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
+
+let uniqueId = 0;
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
@@ -26,19 +17,21 @@ import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable
   },
 })
 export class BrnToggleDirective {
-  private _cdr = inject(ChangeDetectorRef);
-  private _toggleSyncable = inject(ToggleSyncable, { optional: true });
-  private _tgCanBeNullableProvider = inject(ToggleGroupCanBeNullableProvider, { optional: true });
+  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _tgCanBeNullableProvider = inject(ToggleGroupCanBeNullableProvider, { optional: true });
 
-  private _disabled = signal<true | undefined>(undefined);
-  private _state = signal<'on' | 'off'>('off');
+  private readonly _disabled = signal<true | undefined>(undefined);
+  private readonly _state = signal<'on' | 'off'>('off', { equal: (a, b) => a === b });
 
-  state = this._state.asReadonly();
-  toggleDisabled = this._disabled.asReadonly();
-  isOn = computed(() => this.state() === 'on');
+  public readonly state = this._state.asReadonly();
+  public readonly toggleDisabled = this._disabled.asReadonly();
+  public readonly isOn = computed(() => this.state() === 'on');
 
   @Input()
-  value: any;
+  public id = 'brn-toggle-' + uniqueId++;
+
+  @Input()
+  public value: any;
 
   @Input()
   set disabled(value: BooleanInput) {
@@ -58,18 +51,7 @@ export class BrnToggleDirective {
   }
 
   @Output()
-  toggled = new EventEmitter<'on' | 'off'>();
-
-  constructor() {
-    effect(
-      () => {
-        const state = this.state();
-        this._toggleSyncable?._syncToggle(this, state);
-        this.toggled.emit(state);
-      },
-      { allowSignalWrites: true }
-    );
-  }
+  public readonly toggled = new EventEmitter<'on' | 'off'>();
 
   toggle() {
     if (this._disableToggleClick) return;
@@ -83,10 +65,12 @@ export class BrnToggleDirective {
   toggleOff() {
     if (this._tgCanBeNullableProvider && !this._tgCanBeNullableProvider._canBeNullable(this.value)) return;
     this._state.set('off');
+    this.toggled.emit('off');
   }
 
   toggleOn() {
     this._state.set('on');
+    this.toggled.emit('on');
   }
 
   public _markForCheck() {
