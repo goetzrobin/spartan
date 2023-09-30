@@ -1,14 +1,14 @@
 import { Directive, HostBinding, inject, Input, Output } from '@angular/core';
-import { CdkMenuItemCheckbox } from '@angular/cdk/menu';
+import { CdkMenuItemRadio } from '@angular/cdk/menu';
 import { BooleanInput } from '@angular/cdk/coercion';
 
 @Directive({
   selector: '[brnMenuItemRadio]',
   standalone: true,
-  hostDirectives: [CdkMenuItemCheckbox],
+  hostDirectives: [CdkMenuItemRadio],
 })
 export class BrnMenuItemRadioDirective {
-  private readonly _cdkMenuItem = inject(CdkMenuItemCheckbox, { host: true });
+  private readonly _cdkMenuItem = inject(CdkMenuItemRadio, { host: true });
   @HostBinding('class.checked')
   private _checked = this._cdkMenuItem.checked;
   get checked() {
