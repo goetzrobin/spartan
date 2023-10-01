@@ -27,6 +27,8 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 8. [Altamimi-Dev](https://github.com/Altamimi-Dev)
 9. [ferat](https://github.com/ferat)
 10. [jeremy-js-devweb](https://github.com/jeremy-js-devweb)
+11. [heddendorp](https://github.com/heddendorp)
+12. [tutkli](https://github.com/tutkli)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 

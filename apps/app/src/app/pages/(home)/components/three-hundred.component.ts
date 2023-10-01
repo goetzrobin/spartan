@@ -32,6 +32,8 @@ export class ThreeHundredComponent {
     'Altamimi-Dev',
     'ferat',
     'jeremy-js-devweb',
+    'heddendorp',
+    'tutkli',
   ];
   protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
   protected readonly _trackBy: TrackByFunction<number | string> = (n) => n;
