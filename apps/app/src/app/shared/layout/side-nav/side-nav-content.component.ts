@@ -70,7 +70,7 @@ import { SideNavComponent } from './side-nav-coming-soon.component';
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/dialog">Dialog</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/dropdown-menu">Dropdown Menu</a>
         <a disabled spartanSideNavLink="/components/form">Form<spartan-side-nav-cs /></a>
-        <a disabled spartanSideNavLink="/components/hover-card">Hover Card<spartan-side-nav-cs /></a>
+        <a (click)="linkClicked.emit()" spartanSideNavLink="/components/hover-card">Hover Card</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/input">Input</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/label">Label</a>
         <a (click)="linkClicked.emit()" spartanSideNavLink="/components/menubar">Menubar</a>
