@@ -14,4 +14,4 @@ export const HlmRadioGroupImports = [HlmRadioGroupDirective, HlmRadioDirective, 
   imports: [...HlmRadioGroupImports],
   exports: [...HlmRadioGroupImports],
 })
-export class BrnRadioGroupModule {}
+export class HlmRadioGroupModule {}
