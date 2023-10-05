@@ -20,7 +20,8 @@ export async function hlmBaseGenerator(tree: Tree, options: HlmBaseGeneratorSche
   );
 
   const angularVersion = getInstalledPackageVersion(tree, '@angular/core', FALLBACK_ANGULAR_VERSION, true);
-  const dependencies = buildDependencyArray(options, angularVersion);
+  const existingCdkVersion = getInstalledPackageVersion(tree, '@angular/cdk', FALLBACK_ANGULAR_VERSION, true);
+  const dependencies = buildDependencyArray(options, angularVersion, existingCdkVersion);
   const devDependencies = buildDevDependencyArray();
 
   tasks.push(addDependenciesToPackageJson(tree, dependencies, devDependencies));

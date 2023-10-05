@@ -10,6 +10,7 @@ export const SPARTAN_COMMAND_BRAIN_VERSION = '0.0.1-alpha.307';
 export const SPARTAN_COLLAPSIBLE_BRAIN_VERSION = '0.0.1-alpha.307';
 export const SPARTAN_CORE_VERSION = '0.0.1-alpha.307';
 export const SPARTAN_DIALOG_BRAIN_VERSION = '0.0.1-alpha.307';
+export const SPARTAN_HOVERCARD_BRAIN_VERSION = '0.0.1-alpha.307';
 export const SPARTAN_MENU_BRAIN_VERSION = '0.0.1-alpha.307';
 export const SPARTAN_POPOVER_BRAIN_VERSION = '0.0.1-alpha.307';
 export const SPARTAN_PROGRESS_BRAIN_VERSION = '0.0.1-alpha.307';

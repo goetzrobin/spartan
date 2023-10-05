@@ -236,5 +236,13 @@
       "@spartan-ng/ui-core": "0.0.1-alpha.307",
       "clsx": "^1.2.1"
     }
+  },
+  "hovercard": {
+    "internalName": "ui-hover-card-helm",
+    "peerDependencies": {
+      "@angular/core": "^16.0.0",
+      "@spartan-ng/ui-core": "0.0.1-alpha.307",
+      "clsx": "^1.2.1"
+    }
   }
 }

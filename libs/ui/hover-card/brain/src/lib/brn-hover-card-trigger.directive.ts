@@ -18,6 +18,7 @@ import {
 import {
   delay,
   distinctUntilChanged,
+  fromEvent,
   map,
   merge,
   Observable,
@@ -53,6 +54,7 @@ export class BrnHoverCardTriggerDirective implements OnInit, OnDestroy {
   public readonly focused$: Observable<boolean> = this._focusMonitor.monitor(this._el).pipe(map((e) => e !== null));
 
   public readonly hovered$: Observable<boolean> = merge(
+    fromEvent(this._el.nativeElement, 'click').pipe(map(() => false)),
     createHoverObservable(this._el.nativeElement, this._zone, this._destroy$),
     this._contentService.hovered$,
     this.focused$

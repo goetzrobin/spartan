@@ -106,6 +106,7 @@ export class BrnHoverCardContentService {
       this._config = {
         ...this._config,
         positionStrategy: this._positionStrategy,
+        scrollStrategy: this._overlay.scrollStrategies.reposition(),
       };
       this._positionChangesObservables$.next(this._positionStrategy.positionChanges);
     }

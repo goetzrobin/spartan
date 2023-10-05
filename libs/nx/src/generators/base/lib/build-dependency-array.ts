@@ -7,6 +7,7 @@ import {
   SPARTAN_COMMAND_BRAIN_VERSION,
   SPARTAN_CORE_VERSION,
   SPARTAN_DIALOG_BRAIN_VERSION,
+  SPARTAN_HOVERCARD_BRAIN_VERSION,
   SPARTAN_MENU_BRAIN_VERSION,
   SPARTAN_POPOVER_BRAIN_VERSION,
   SPARTAN_PROGRESS_BRAIN_VERSION,
@@ -28,6 +29,7 @@ const BRAIN_DEPENDENCY_MAP = {
   avatar: SPARTAN_AVATAR_BRAIN_VERSION,
   command: SPARTAN_COMMAND_BRAIN_VERSION,
   dialog: SPARTAN_DIALOG_BRAIN_VERSION,
+  hovercard: SPARTAN_HOVERCARD_BRAIN_VERSION,
   menu: SPARTAN_MENU_BRAIN_VERSION,
   popover: SPARTAN_POPOVER_BRAIN_VERSION,
   progress: SPARTAN_PROGRESS_BRAIN_VERSION,
@@ -42,10 +44,14 @@ const BRAIN_DEPENDENCY_MAP = {
 
 const DEPENDENT_ON_DIALOG = ['alertdialog', 'sheet', 'popover'];
 
-export function buildDependencyArray(options: HlmBaseGeneratorSchema, angularVersion: string) {
+export function buildDependencyArray(
+  options: HlmBaseGeneratorSchema,
+  angularVersion: string,
+  existingCdkVersion: string
+) {
   let dependencies: Record<string, string> = {
     '@spartan-ng/ui-core': SPARTAN_CORE_VERSION,
-    '@angular/cdk': angularVersion,
+    '@angular/cdk': existingCdkVersion ?? angularVersion,
   };
 
   if (options.peerDependencies) {

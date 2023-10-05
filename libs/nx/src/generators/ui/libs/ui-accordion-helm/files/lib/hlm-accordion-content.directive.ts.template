@@ -23,20 +23,19 @@ import { isPlatformBrowser } from '@angular/common';
   },
 })
 export class HlmAccordionContentDirective implements OnInit {
-  private _host = injectCustomClassSettable({ optional: true });
-  private _element = inject(ElementRef).nativeElement;
-  private _injector = inject(Injector);
-  public _platformId = inject(PLATFORM_ID);
+  private readonly _host = injectCustomClassSettable({ optional: true });
+  private readonly _element = inject(ElementRef).nativeElement;
+  private readonly _injector = inject(Injector);
+  private readonly _platformId = inject(PLATFORM_ID);
 
   @HostBinding('class')
   private _class = this.generateClass();
   private _inputs: ClassValue = '';
   private _changes?: MutationObserver;
 
-  protected initialHeight = 0;
-  public height = signal(-1);
-  public cssHeight = computed(() => (this.height() === -1 ? 'auto' : this.height() + 'px'));
-  public state = signal('closed');
+  public readonly height = signal('-1');
+  public readonly cssHeight = computed(() => (this.height() === '-1' ? 'auto' : this.height()));
+  public readonly state = signal('closed');
 
   @Input()
   set class(inputs: ClassValue) {
@@ -59,7 +58,6 @@ export class HlmAccordionContentDirective implements OnInit {
     }
 
     Promise.resolve().then(() => {
-      this.initialHeight = this._element.offsetHeight;
       this._changes?.observe(this._element, {
         attributes: true,
         childList: true,
@@ -70,7 +68,11 @@ export class HlmAccordionContentDirective implements OnInit {
     effect(
       () => {
         const isOpen = this.state() === 'open';
-        Promise.resolve().then(() => this.height.set(isOpen ? this.initialHeight : 0));
+        Promise.resolve().then(() => {
+          this.height.set(
+            isOpen ? getComputedStyle(this._element).getPropertyValue('--brn-collapsible-content-height') : '0px'
+          );
+        });
       },
       {
         injector: this._injector,
