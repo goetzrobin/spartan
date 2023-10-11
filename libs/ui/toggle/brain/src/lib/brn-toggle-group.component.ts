@@ -17,7 +17,7 @@ import { BrnToggleDirective } from './brn-toggle.directive';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
-import { map, merge } from 'rxjs';
+import { map, merge, of, startWith, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR: any = {
@@ -174,12 +174,19 @@ export class BrnToggleGroupComponent
     if (!this._selectionModel || !this._buttonToggles) return;
     this._selectionModel.select(...this._buttonToggles.filter((toggle) => toggle.isOn()));
 
-    merge(
-      ...this._buttonToggles
-        .toArray()
-        .map((toggle) => toggle.toggled.asObservable().pipe(map((state) => ({ toggle: toggle, state }))))
-    )
-      .pipe(takeUntilDestroyed(this._destroyRef))
+    this._buttonToggles.changes
+      .pipe(
+        startWith(this._buttonToggles),
+        switchMap(() => {
+          if (!this._buttonToggles) return of();
+          return merge(
+            ...this._buttonToggles
+              .toArray()
+              .map((toggle) => toggle.toggled.asObservable().pipe(map((state) => ({ toggle: toggle, state }))))
+          );
+        }),
+        takeUntilDestroyed(this._destroyRef)
+      )
       .subscribe(({ state, toggle }) => {
         if (!this._selectionModel) {
           return;

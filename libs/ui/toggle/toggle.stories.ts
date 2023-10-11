@@ -82,6 +82,7 @@ const CITIES = [
         </button>
       </brn-toggle-group>
       <button hlmBtn size="sm" (click)="setToSyracuse()">Set to Syracuse</button>
+      <button hlmBtn size="sm" (click)="addCity()">Add Piraeus</button>
     </div>
 
     <p class="${hlmP}">{{ multiple ? 'Cities' : 'City' }} selected: {{ selectedCities }}</p>
@@ -110,6 +111,13 @@ class HlmToggleGroupStoryComponent {
 
   setToSyracuse() {
     this.selected = this.multiple ? [this.cities[3]] : this.cities[3];
+  }
+
+  addCity() {
+    this.cities.push({
+      name: 'Piraeus',
+      population: 998889,
+    });
   }
 }
 
