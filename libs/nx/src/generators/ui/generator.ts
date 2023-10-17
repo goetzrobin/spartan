@@ -53,6 +53,8 @@ async function createPrimitiveLibraries(
   }
 
   for (const primitiveName of primitivesToCreate) {
+    if (primitiveName === 'collapsible') continue;
+
     const internalName = availablePrimitives[primitiveName]['internalName'];
     const peerDependencies = availablePrimitives[primitiveName]['peerDependencies'];
     const installTask = await (
