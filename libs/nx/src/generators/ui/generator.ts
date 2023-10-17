@@ -39,9 +39,11 @@ async function createPrimitiveLibraries(
   const primitivesToCreate = response.primitives.includes('all') ? availablePrimitiveNames : response.primitives;
   const tasks: GeneratorCallback[] = [];
 
-  await addIconForDependentPrimitive(primitivesToCreate, ['alert', 'command', 'menu']);
-  await addButtonForDependentPrimitive(primitivesToCreate, ['alertdialog', 'command']);
-  await replaceContextAndMenuBar(primitivesToCreate);
+  if (!response.primitives.includes('all')) {
+    await addIconForDependentPrimitive(primitivesToCreate, ['alert', 'command', 'menu']);
+    await addButtonForDependentPrimitive(primitivesToCreate, ['alertdialog', 'command']);
+    await replaceContextAndMenuBar(primitivesToCreate);
+  }
 
   if (primitivesToCreate.includes('collapsible')) {
     tasks.push(
