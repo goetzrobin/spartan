@@ -41,6 +41,14 @@ export const Disabled: Story = {
   }),
 };
 
+export const Error: Story = {
+  render: () => ({
+    template: `
+    <input aria-label='Email' class='w-80' hlmInput type='email' placeholder='Email' error/>
+    `,
+  }),
+};
+
 export const WithButton: Story = {
   name: 'With Button',
   render: () => ({
