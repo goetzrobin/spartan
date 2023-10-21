@@ -63,6 +63,7 @@ export class HlmInputDirective implements DoCheck {
 
   public ngDoCheck(): void {
     this._error = this._hasErrorState();
+    this._class = this.generateClasses();
   }
 
   private _hasErrorState(): boolean {
