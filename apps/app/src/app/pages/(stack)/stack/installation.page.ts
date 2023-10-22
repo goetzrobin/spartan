@@ -353,6 +353,8 @@ service_role key: eyJh......"
       <spartan-code
         class="mt-3"
         code="
+create sequence note_id_seq;
+
 create table note (
     id bigint not null default nextval('note_id_seq'::regclass),
     note text not null,
