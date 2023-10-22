@@ -60,7 +60,7 @@ export const routeMeta: RouteMeta = {
 
       <p class="${hlmP}">Enter the following command:</p>
 
-      <spartan-code class="mt-3" language="sh" code="npx create-nx-workspace@latest --preset=@analogjs/platform" />
+      <spartan-code class="mt-3" language="sh" code="npx create-nx-workspace@16 --preset=@analogjs/platform" />
 
       <p class="${hlmP}">You will be asked to choose a folder name for your workspace:</p>
       <spartan-code disableCopy class="mt-3" language="sh" code="Where would you like to create your workspace?" />
