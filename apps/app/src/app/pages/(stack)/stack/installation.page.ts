@@ -23,7 +23,7 @@ import { RouterLink } from '@angular/router';
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Installation' },
   meta: metaWith('spartan/stack - Installation', 'Get up and running with the spartan/stack.'),
-  title: 'spartan/ui - Installation',
+  title: 'spartan/stack - Installation',
 };
 
 @Component({
