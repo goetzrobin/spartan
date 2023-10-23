@@ -9,11 +9,14 @@ const labelVariants = cva(
     variants: {
       variant: {
         default: '',
-        error: 'text-destructive',
+      },
+      error: {
+        auto: '[&:has([hlmInput].ng-invalid.ng-touched)]:text-destructive',
+        true: 'text-destructive',
       },
     },
     defaultVariants: {
-      variant: 'error',
+      variant: 'default',
     },
   }
 );
@@ -38,6 +41,17 @@ export class HlmLabelDirective {
     this._class = this.generateClasses();
   }
 
+  private _error: LabelVariants['error'] = 'auto';
+  @Input()
+  get error(): LabelVariants['error'] {
+    return this._error;
+  }
+
+  set error(value: LabelVariants['error']) {
+    this._error = value;
+    this._class = this.generateClasses();
+  }
+
   @Input()
   set class(labels: ClassValue) {
     this._inputs = labels;
@@ -48,6 +62,6 @@ export class HlmLabelDirective {
   private _class = this.generateClasses();
 
   private generateClasses() {
-    return hlm(labelVariants({ variant: this._variant }), this._inputs);
+    return hlm(labelVariants({ variant: this._variant, error: this._error }), this._inputs);
   }
 }

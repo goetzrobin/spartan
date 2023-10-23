@@ -30,6 +30,8 @@ type InputVariants = VariantProps<typeof inputVariants>;
   standalone: true,
 })
 export class HlmInputDirective {
+  private _inputs: ClassValue = '';
+
   private _size: InputVariants['size'] = 'default';
   @Input()
   get size(): InputVariants['size'] {
@@ -51,8 +53,6 @@ export class HlmInputDirective {
     this._error = value;
     this._class = this.generateClasses();
   }
-
-  private _inputs: ClassValue = '';
 
   @Input()
   set class(inputs: ClassValue) {
