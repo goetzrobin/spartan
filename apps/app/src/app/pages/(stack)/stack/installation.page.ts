@@ -137,8 +137,7 @@ import postgres from 'postgres';
 
 export const notes = pgTable('note', {
   id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content'),
+  note: text('note').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
@@ -353,6 +352,8 @@ service_role key: eyJh......"
       <spartan-code
         class="mt-3"
         code="
+create sequence note_id_seq;
+
 create table note (
     id bigint not null default nextval('note_id_seq'::regclass),
     note text not null,
