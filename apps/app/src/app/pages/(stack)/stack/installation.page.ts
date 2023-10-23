@@ -137,8 +137,7 @@ import postgres from 'postgres';
 
 export const notes = pgTable('note', {
   id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content'),
+  note: text('note').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
