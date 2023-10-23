@@ -1,6 +1,5 @@
-import { Directive, DoCheck, HostBinding, Input, booleanAttribute, inject } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 import { cva, VariantProps } from 'class-variance-authority';
-import { NgControl } from '@angular/forms';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -14,11 +13,13 @@ const inputVariants = cva(
         lg: 'h-11 px-8',
       },
       error: {
+        auto: '[&.ng-invalid&.ng-touched]:text-destructive [&.ng-invalid&.ng-touched]:border-destructive [&.ng-invalid&.ng-touched]:focus-visible:ring-destructive',
         true: 'text-destructive border-destructive focus-visible:ring-destructive',
       },
     },
     defaultVariants: {
       size: 'default',
+      error: 'auto',
     },
   }
 );
@@ -28,9 +29,7 @@ type InputVariants = VariantProps<typeof inputVariants>;
   selector: '[hlmInput]',
   standalone: true,
 })
-export class HlmInputDirective implements DoCheck {
-  private _ngControl = inject(NgControl, { optional: true });
-
+export class HlmInputDirective {
   private _size: InputVariants['size'] = 'default';
   @Input()
   get size(): InputVariants['size'] {
@@ -42,8 +41,8 @@ export class HlmInputDirective implements DoCheck {
     this._class = this.generateClasses();
   }
 
-  private _error: InputVariants['error'] = false;
-  @Input({ transform: booleanAttribute })
+  private _error: InputVariants['error'] = 'auto';
+  @Input()
   get error(): InputVariants['error'] {
     return this._error;
   }
@@ -59,16 +58,6 @@ export class HlmInputDirective implements DoCheck {
   set class(inputs: ClassValue) {
     this._inputs = inputs;
     this._class = this.generateClasses();
-  }
-
-  public ngDoCheck(): void {
-    this._error = this._hasErrorState();
-    this._class = this.generateClasses();
-  }
-
-  private _hasErrorState(): boolean {
-    if (!this._ngControl) return !!this._error;
-    return !!(this._ngControl?.touched && this._ngControl?.invalid);
   }
 
   @HostBinding('class')
