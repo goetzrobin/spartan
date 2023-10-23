@@ -19,7 +19,7 @@ import { ArchitectureDiagramNxComponent } from '~/app/pages/(stack)/stack/(techn
 export const routeMeta: RouteMeta = {
   data: { breadcrumb: 'Technologies' },
   meta: metaWith('spartan/stack - Technologies', 'The spartan/stack'),
-  title: 'spartan/ui - Technologies',
+  title: 'spartan/stack - Technologies',
 };
 
 @Component({
