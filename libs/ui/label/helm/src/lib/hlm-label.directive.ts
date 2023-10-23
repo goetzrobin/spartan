@@ -17,6 +17,7 @@ const labelVariants = cva(
     },
     defaultVariants: {
       variant: 'default',
+      error: 'auto',
     },
   }
 );
