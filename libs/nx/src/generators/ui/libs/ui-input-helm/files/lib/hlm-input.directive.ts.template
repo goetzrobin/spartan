@@ -12,9 +12,14 @@ const inputVariants = cva(
         sm: 'h-9 px-3',
         lg: 'h-11 px-8',
       },
+      error: {
+        auto: '[&.ng-invalid.ng-touched]:text-destructive [&.ng-invalid.ng-touched]:border-destructive [&.ng-invalid.ng-touched]:focus-visible:ring-destructive',
+        true: 'text-destructive border-destructive focus-visible:ring-destructive',
+      },
     },
     defaultVariants: {
       size: 'default',
+      error: 'auto',
     },
   }
 );
@@ -25,6 +30,8 @@ type InputVariants = VariantProps<typeof inputVariants>;
   standalone: true,
 })
 export class HlmInputDirective {
+  private _inputs: ClassValue = '';
+
   private _size: InputVariants['size'] = 'default';
   @Input()
   get size(): InputVariants['size'] {
@@ -36,7 +43,16 @@ export class HlmInputDirective {
     this._class = this.generateClasses();
   }
 
-  private _inputs: ClassValue = '';
+  private _error: InputVariants['error'] = 'auto';
+  @Input()
+  get error(): InputVariants['error'] {
+    return this._error;
+  }
+
+  set error(value: InputVariants['error']) {
+    this._error = value;
+    this._class = this.generateClasses();
+  }
 
   @Input()
   set class(inputs: ClassValue) {
@@ -48,6 +64,6 @@ export class HlmInputDirective {
   private _class = this.generateClasses();
 
   private generateClasses() {
-    return hlm(inputVariants({ size: this._size }), this._inputs);
+    return hlm(inputVariants({ size: this._size, error: this._error }), this._inputs);
   }
 }
