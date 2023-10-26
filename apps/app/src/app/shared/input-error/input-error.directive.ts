@@ -20,9 +20,9 @@ export class SpartanInputErrorDirective implements OnInit {
           this._signalInput?.formField?.touchedState() === 'TOUCHED' &&
           Object.values(this._signalInput?.formField?.errors() ?? {}).length > 0
         ) {
-          if (this._label) this._label.variant = 'error';
+          if (this._label) this._label.error = true;
         } else {
-          if (this._label) this._label.variant = 'default';
+          if (this._label) this._label.error = 'auto';
         }
       },
       {
