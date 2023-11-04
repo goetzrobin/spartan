@@ -36,14 +36,15 @@ async function createPrimitiveLibraries(
   tree: Tree,
   options: HlmUIGeneratorSchema
 ) {
-  const primitivesToCreate = response.primitives.includes('all') ? availablePrimitiveNames : response.primitives;
+  const allPrimitivesSelected = response.primitives.includes('all');
+  const primitivesToCreate = allPrimitivesSelected ? availablePrimitiveNames : response.primitives;
   const tasks: GeneratorCallback[] = [];
 
   if (!response.primitives.includes('all')) {
     await addIconForDependentPrimitive(primitivesToCreate, ['alert', 'command', 'menu']);
     await addButtonForDependentPrimitive(primitivesToCreate, ['alertdialog', 'command']);
-    await replaceContextAndMenuBar(primitivesToCreate);
   }
+  await replaceContextAndMenuBar(primitivesToCreate, allPrimitivesSelected);
 
   if (primitivesToCreate.includes('collapsible')) {
     tasks.push(
@@ -119,23 +120,27 @@ const addButtonForDependentPrimitive = async (primitivesToCreate: string[], prim
     }
   }
 };
-const replaceContextAndMenuBar = async (primtivesToCreate: string[]) => {
+const replaceContextAndMenuBar = async (primtivesToCreate: string[], silent = false) => {
   const contextIndex = primtivesToCreate.indexOf('contextmenu');
   if (contextIndex >= 0) {
-    await prompt({
-      type: 'confirm',
-      name: 'contextMenu',
-      message: 'The context menu is implemented as part of the menu-helm primitive. Adding menu primitive.',
-    });
+    if (!silent) {
+      await prompt({
+        type: 'confirm',
+        name: 'contextMenu',
+        message: 'The context menu is implemented as part of the menu-helm primitive. Adding menu primitive.',
+      });
+    }
     primtivesToCreate.splice(contextIndex, 1);
   }
   const menubarIndex = primtivesToCreate.indexOf('menubar');
   if (menubarIndex >= 0) {
-    await prompt({
-      type: 'confirm',
-      name: 'menubar',
-      message: 'The menubar is implemented as part of the menu-helm primitive. Adding menu primitive.',
-    });
+    if (!silent) {
+      await prompt({
+        type: 'confirm',
+        name: 'menubar',
+        message: 'The menubar is implemented as part of the menu-helm primitive. Adding menu primitive.',
+      });
+    }
     primtivesToCreate.splice(menubarIndex, 1);
   }
 };
