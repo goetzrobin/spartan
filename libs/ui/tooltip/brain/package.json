@@ -1,0 +1,14 @@
+{
+	"name": "@spartan-ng/ui-tooltip-brain",
+	"version": "0.0.1-alpha.309",
+	"peerDependencies": {
+		"@angular/core": "17.0.2",
+		"@angular/cdk": "17.0.0",
+		"rxjs": "~7.8.0"
+	},
+	"dependencies": {},
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	}
+}
