@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   HostBinding,
   Input,
   signal,
@@ -35,11 +34,6 @@ const iconVariants = cva('inline-flex', {
 
 export type IconSize = DefinedSizes | string;
 
-const generateClasses = (size: IconSize, userCls: ClassValue) => {
-  const variant = isDefinedSize(size) ? size : 'none';
-  return hlm(iconVariants({ variant }), userCls);
-};
-
 const isDefinedSize = (size: IconSize): size is DefinedSizes => {
   return DEFINED_SIZES.includes(size as DefinedSizes);
 };
@@ -70,39 +64,45 @@ export class HlmIconComponent {
   @Input({ required: true })
   set name(value: IconName | string) {
     this._name.set(value);
+    this.cls = this.generateClasses();
   }
 
   @Input()
   set size(value: IconSize) {
     this._size.set(value);
+    this.cls = this.generateClasses();
   }
 
   @Input()
   set color(value: string | undefined) {
     this._color.set(value);
+    this.cls = this.generateClasses();
   }
 
   @Input()
   set strokeWidth(value: string | number | undefined) {
     this._strokeWidth.set(value);
+    this.cls = this.generateClasses();
   }
 
   @Input()
   set ngIconClass(cls: ClassValue) {
     this.ngIconCls.set(cls);
+    this.cls = this.generateClasses();
   }
 
   @Input()
   set class(cls: ClassValue) {
     this.userCls.set(cls);
+    this.cls = this.generateClasses();
   }
 
   @HostBinding('class')
-  protected cls = generateClasses(this._size(), this.userCls());
+  protected cls = this.generateClasses();
 
-  constructor() {
-    effect(() => {
-      this.cls = generateClasses(this._size(), this.userCls());
-    });
+  private generateClasses() {
+    const size: IconSize = this._size();
+    const variant = isDefinedSize(size) ? size : 'none';
+    return hlm(iconVariants({ variant }), this.userCls());
   }
 }
