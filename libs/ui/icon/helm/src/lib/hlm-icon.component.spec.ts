@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { radixCheck } from '@ng-icons/radix-icons';
@@ -8,6 +8,7 @@ import { HlmIconComponent } from './hlm-icon.component';
 @Component({
   selector: 'hlm-mock',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HlmIconComponent],
   providers: [provideIcons({ radixCheck })],
   template: `<hlm-icon class="test" ngIconClass="test2" name="radixCheck" [size]="size" color="red" strokeWidth="2" />`,
