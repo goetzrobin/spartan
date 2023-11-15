@@ -9,7 +9,7 @@ describe('context-menu', () => {
     });
 
     it('right click on area should open, hover over sub menu should open submenu, and click on open button again should close', () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },

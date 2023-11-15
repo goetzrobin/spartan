@@ -9,7 +9,7 @@ describe('dropdown-menu', () => {
     });
 
     it('click on open button should open, hover over sub menu should open submenu, and click on open button again should close', () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },
@@ -28,7 +28,7 @@ describe('dropdown-menu', () => {
     });
 
     it('down on open button should open, up and down should navigate, right over sub menu should open submenu, and left on sub should close it, and escape ope should close dropdown completely', () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },

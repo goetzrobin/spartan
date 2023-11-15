@@ -13,7 +13,7 @@ describe('command', () => {
     Typing CA should show calendar and calculator and select calendar because it comes first
     Click on billing should select billing
     `, () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },
@@ -87,7 +87,7 @@ describe('command', () => {
     Arrow down on billing should select billing
     Arrow up to calculator should select calculator
     `, () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },

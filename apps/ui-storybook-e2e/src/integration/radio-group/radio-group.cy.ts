@@ -12,7 +12,7 @@ describe('radio-group', () => {
     4. should check correct version when clicked on 15.8.0 radio
     5. should not change when clicked on disabled radio
     `, () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },
@@ -51,7 +51,7 @@ describe('radio-group', () => {
     6. should move checked radio with left and right arrows.
     5. should not move to disabled radio
     `, () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },

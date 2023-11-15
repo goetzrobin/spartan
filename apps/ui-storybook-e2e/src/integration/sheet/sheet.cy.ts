@@ -6,7 +6,7 @@ describe('sheet--default', () => {
     });
 
     it('click on trigger should open, click on close should close, click outside should close', () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },
@@ -35,7 +35,7 @@ describe('sheet--default', () => {
     });
 
     it('tab and enter on trigger should open, enter on close should close, escape should close', () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },
@@ -66,7 +66,7 @@ describe('sheet--default', () => {
     });
 
     it('tab and space on trigger should open, tabs should wrap, space on close should close', () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },

@@ -6,7 +6,7 @@ describe('tabs--default', () => {
     });
 
     it('should give the correct roles and data values to indicators with values and indeterminate if null', () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },

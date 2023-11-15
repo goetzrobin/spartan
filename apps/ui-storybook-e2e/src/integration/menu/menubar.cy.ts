@@ -7,7 +7,7 @@ describe('menubar', () => {
     });
 
     it('click on file should open menu and hovering around should open/close appropriate menus', () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },
@@ -57,7 +57,7 @@ describe('menubar', () => {
     });
 
     it('arrowdown on file should open menu and arrow left/right around should open/close appropriate menus', () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },

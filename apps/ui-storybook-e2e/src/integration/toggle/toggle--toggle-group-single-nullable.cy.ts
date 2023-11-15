@@ -6,7 +6,7 @@ describe('toggle--toggle-group-single-nullable', () => {
     });
 
     const verifyToggleGroupSetup = () => {
-      cy.checkA11y(null, {
+      cy.checkA11y('#storybook-root', {
         rules: {
           'page-has-heading-one': { enabled: false },
           'landmark-one-main': { enabled: false },
