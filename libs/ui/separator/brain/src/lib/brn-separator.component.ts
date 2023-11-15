@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { booleanAttribute, Component, Input } from '@angular/core';
 
 export type BrnSeparatorOrientation = 'horizontal' | 'vertical';
 @Component({
@@ -20,8 +19,8 @@ export class BrnSeparatorComponent {
   }
 
   protected _decorative = false;
-  @Input()
-  set decorative(value: BooleanInput) {
-    this._decorative = coerceBooleanProperty(value);
+  @Input({ transform: booleanAttribute })
+  set decorative(value: boolean) {
+    this._decorative = value;
   }
 }

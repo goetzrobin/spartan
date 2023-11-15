@@ -50,16 +50,11 @@ function process<T>(element: HTMLElement, prop: string): (value: T) => void {
 }
 
 export function rxHostPressedListener() {
-  let lastTimeStamp;
   return merge(
-    rxHostListener('click').pipe(
-      tap((el) => {
-        lastTimeStamp = el.timeStamp;
-      })
-    ),
-    rxHostListener('keyup').pipe(
+    rxHostListener('click'),
+    rxHostListener<KeyboardEvent>('keyup').pipe(
       switchMap((x) => {
-        return (x as any).code === 'Space' || (x as any).code === 'Enter' ? of(true) : of(null);
+        return x.code === 'Space' || x.code === 'Enter' ? of(true) : of(null);
       }),
       filter(Boolean)
     )

@@ -1,6 +1,7 @@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   AfterContentInit,
+  booleanAttribute,
   ChangeDetectorRef,
   Component,
   ContentChildren,
@@ -15,12 +16,11 @@ import {
 } from '@angular/core';
 import { BrnToggleDirective } from './brn-toggle.directive';
 import { SelectionModel } from '@angular/cdk/collections';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
 import { map, merge, of, startWith, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR: any = {
+export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => BrnToggleGroupComponent),
   multi: true,
@@ -29,6 +29,7 @@ export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR: any = {
 let uniqueIdCounter = 0;
 
 export class BrnButtonToggleChange {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(public source: BrnToggleDirective, public value: any) {}
 }
 
@@ -67,11 +68,11 @@ export class BrnToggleGroupComponent
   /**
    * The method to be called in order to update ngModel.
    */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
   private _controlValueAccessorChangeFn: (value: any) => void = () => {};
 
   /** onTouch function registered via registerOnTouch (ControlValueAccessor). */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
   private _onTouched: () => any = () => {};
 
   @ContentChildren(BrnToggleDirective, {
@@ -92,17 +93,18 @@ export class BrnToggleGroupComponent
     this._markTogglesForCheck();
   }
 
-  @Input()
+  @Input({ transform: booleanAttribute })
   get vertical(): boolean {
     return this._vertical;
   }
 
-  set vertical(value: BooleanInput) {
-    this._vertical = coerceBooleanProperty(value);
+  set vertical(value: boolean) {
+    this._vertical = value;
   }
 
   /** Value of the toggle group. */
   @Input()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   get value(): any {
     const selected = this._selectionModel ? this._selectionModel.selected : [];
 
@@ -113,6 +115,7 @@ export class BrnToggleGroupComponent
     return selected[0] ? selected[0].value : undefined;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   set value(newValue: any) {
     if (this._disabled) {
       return;
@@ -121,6 +124,7 @@ export class BrnToggleGroupComponent
     this.valueChange.emit(this.value);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Output() readonly valueChange = new EventEmitter<any>();
 
   /** Selected button toggles in the group. */
@@ -130,34 +134,34 @@ export class BrnToggleGroupComponent
   }
 
   /** Whether no button toggles need to be selected. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get nullable(): boolean {
     return this._nullable;
   }
 
-  set nullable(value: BooleanInput) {
-    this._nullable = coerceBooleanProperty(value);
+  set nullable(value: boolean) {
+    this._nullable = value;
     this._markTogglesForCheck();
   }
 
   /** Whether multiple button toggles can be selected. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get multiple(): boolean {
     return this._multiple;
   }
 
-  set multiple(value: BooleanInput) {
-    this._multiple = coerceBooleanProperty(value);
+  set multiple(value: boolean) {
+    this._multiple = value;
     this._markTogglesForCheck();
   }
 
-  @Input()
+  @Input({ transform: booleanAttribute })
   get disabled(): boolean {
     return this._disabled;
   }
 
-  set disabled(value: BooleanInput) {
-    this._disabled = coerceBooleanProperty(value);
+  set disabled(value: boolean) {
+    this._disabled = value;
     this._buttonToggles?.forEach((toggle) => (toggle.disabled = this._disabled));
     this._markTogglesForCheck();
   }
@@ -206,15 +210,18 @@ export class BrnToggleGroupComponent
       });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   writeValue(value: any) {
     this.value = value;
     this._cdr.markForCheck();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnChange(fn: (value: any) => void) {
     this._controlValueAccessorChangeFn = fn;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnTouched(fn: any) {
     this._onTouched = fn;
   }
@@ -223,15 +230,18 @@ export class BrnToggleGroupComponent
     this.disabled = isDisabled;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   _canBeNullable(value: any) {
     if (this._nullable || this._skipNullableCheck) return true;
     if (this._multiple) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return !((this.value as any[]).length === 1 && this.value[0] === value);
     }
     return this.value !== value;
   }
 
   /** Updates the selection state of the toggles in the group based on a value. */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _setSelectionByValue(value: any | any[]) {
     if (!this._buttonToggles) {
       return;
@@ -242,7 +252,7 @@ export class BrnToggleGroupComponent
         throw Error('Value must be an array in multiple-selection mode.');
       }
       this._clearSelection();
-      value.forEach((currentValue: any) => this._selectValue(currentValue));
+      value.forEach((currentValue) => this._selectValue(currentValue));
     } else {
       this._clearSelection();
       this._selectValue(value);
@@ -257,6 +267,7 @@ export class BrnToggleGroupComponent
   }
 
   /** Selects a value if there's a toggle that corresponds to it. */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _selectValue(value: any) {
     if (!this._selectionModel) return;
     const correspondingOption = (this._buttonToggles ?? []).find((toggle) => {

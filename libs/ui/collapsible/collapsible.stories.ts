@@ -23,7 +23,7 @@ export const Default: Story = {
     >
       <div class="flex items-center justify-between space-x-4 px-4">
         <h4 class="text-sm font-semibold">
-          @peduarte starred 3 repositories
+          &#64;peduarte starred 3 repositories
         </h4>
         <button brnCollapsibleTrigger hlmBtn variant="ghost" size="sm" class="w-9 p-0">
            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -33,14 +33,14 @@ export const Default: Story = {
           </button>
       </div>
       <div class="rounded-md border-border border px-4 py-3 font-mono text-sm">
-        @radix-ui/primitives
+        &#64;radix-ui/primitives
       </div>
       <brn-collapsible-content class="space-y-2">
         <div class="rounded-md border-border border px-4 py-3 font-mono text-sm">
-          @radix-ui/colors
+          &#64;radix-ui/colors
         </div>
         <div class="rounded-md border-border border px-4 py-3 font-mono text-sm">
-          @stitches/react
+          &#64;stitches/react
         </div>
       </brn-collapsible-content>
     </brn-collapsible>

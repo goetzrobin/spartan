@@ -1,8 +1,7 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { booleanAttribute, Directive, HostBinding, Input } from '@angular/core';
 import { cva, VariantProps } from 'class-variance-authority';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 const badgeVariants = cva(
   'inline-flex items-center border rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
@@ -56,14 +55,15 @@ export class HlmBadgeDirective {
     this._variant = value;
     this._class = this.generateClasses();
   }
+
   private _static: badgeVariants['static'] = false;
-  @Input()
+  @Input({ transform: booleanAttribute })
   get static(): badgeVariants['static'] {
     return this._static;
   }
 
-  set static(value: BooleanInput) {
-    this._static = coerceBooleanProperty(value);
+  set static(value: boolean) {
+    this._static = value;
     this._class = this.generateClasses();
   }
 

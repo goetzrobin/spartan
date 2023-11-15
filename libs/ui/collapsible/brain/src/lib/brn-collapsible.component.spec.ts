@@ -11,13 +11,13 @@ describe('BrnCollapsibleComponent', () => {
       `
      <brn-collapsible ${disabled ? 'disabled' : ''} data-testid='root'>
       <div>
-        <h4>@peduarte starred 3 repositories</h4>
+        <h4>&#64;peduarte starred 3 repositories</h4>
         <button brnCollapsibleTrigger data-testid='trigger'>Toggle</button>
       </div>
-      <div>@radix-ui/primitives</div>
+      <div>&#64;radix-ui/primitives</div>
       <brn-collapsible-content ${id ? 'id=' + id : ''} data-testid='content'>
-        <div>@radix-ui/colors</div>
-        <div>@stitches/react</div>
+        <div>&#64;radix-ui/colors</div>
+        <div>&#64;stitches/react</div>
       </brn-collapsible-content>
     </brn-collapsible>
     `,

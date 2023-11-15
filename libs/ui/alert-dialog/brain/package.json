@@ -2,7 +2,7 @@
   "name": "@spartan-ng/ui-alertdialog-brain",
   "version": "0.0.1-alpha.309",
   "peerDependencies": {
-    "@angular/core": "^16.0.0",
+    "@angular/core": "17.0.2",
     "@spartan-ng/ui-dialog-brain": "0.0.1-alpha.309",
     "@spartan-ng/ui-core": "0.0.1-alpha.309"
   },

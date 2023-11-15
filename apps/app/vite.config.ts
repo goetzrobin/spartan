@@ -3,7 +3,7 @@
 import analog from '@analogjs/platform';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, Plugin, splitVendorChunkPlugin } from 'vite';
-import tsConfigPaths from 'vite-tsconfig-paths';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import replace from '@rollup/plugin-replace';
 import * as path from 'path';
 
@@ -94,9 +94,7 @@ export default defineConfig(({ mode }) => {
           serveStatic: false,
         },
       }),
-      tsConfigPaths({
-        root: '../../',
-      }),
+      nxViteTsPaths(),
       visualizer() as Plugin,
       splitVendorChunkPlugin(),
     ],

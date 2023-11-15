@@ -2,8 +2,7 @@
   "name": "@spartan-ng/ui-tabs-brain",
   "version": "0.0.1-alpha.309",
   "peerDependencies": {
-    "@angular/core": "^16.0.0",
-    "@angular/cdk": "^16.0.0",
+    "@angular/core": "17.0.2",
     "rxjs": "~7.8.0",
     "@spartan-ng/ui-core": "0.0.1-alpha.309"
   },

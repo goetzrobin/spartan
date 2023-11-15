@@ -1,5 +1,14 @@
-import { ChangeDetectorRef, computed, Directive, EventEmitter, inject, Input, Output, signal } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+  booleanAttribute,
+  ChangeDetectorRef,
+  computed,
+  Directive,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  signal,
+} from '@angular/core';
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
 
 let uniqueId = 0;
@@ -31,11 +40,12 @@ export class BrnToggleDirective {
   public id = 'brn-toggle-' + uniqueId++;
 
   @Input()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public value: any;
 
-  @Input()
-  set disabled(value: BooleanInput) {
-    this._disabled.set(coerceBooleanProperty(value) ? true : undefined);
+  @Input({ transform: booleanAttribute })
+  set disabled(value: boolean) {
+    this._disabled.set(value ? true : undefined);
   }
 
   // eslint-disable-next-line @angular-eslint/no-input-rename
@@ -45,9 +55,9 @@ export class BrnToggleDirective {
   }
 
   private _disableToggleClick = false;
-  @Input()
-  set disableToggleClick(value: BooleanInput) {
-    this._disableToggleClick = coerceBooleanProperty(value);
+  @Input({ transform: booleanAttribute })
+  set disableToggleClick(value: boolean) {
+    this._disableToggleClick = value;
   }
 
   @Output()

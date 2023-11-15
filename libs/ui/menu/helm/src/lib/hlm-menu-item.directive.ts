@@ -1,7 +1,6 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { booleanAttribute, Directive, HostBinding, Input } from '@angular/core';
 import { ClassValue } from 'clsx';
 import { hlm } from '@spartan-ng/ui-core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
   selector: '[hlm][brnMenuItem], [hlm][brnMenuItemRadio], [hlm][brnMenuItemCheckbox]',
@@ -19,9 +18,9 @@ export class HlmMenuItemDirective {
   }
 
   private _inset = false;
-  @Input()
-  set inset(value: BooleanInput) {
-    this._inset = coerceBooleanProperty(value);
+  @Input({ transform: booleanAttribute })
+  set inset(value: boolean) {
+    this._inset = value;
     this._class = this.generateClass();
   }
 

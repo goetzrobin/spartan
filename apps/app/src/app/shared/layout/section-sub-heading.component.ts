@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { booleanAttribute, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'spartan-section-sub-heading',
@@ -16,8 +15,8 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 })
 export class SectionSubHeadingComponent {
   protected _first = false;
-  @Input()
-  set first(value: BooleanInput) {
-    this._first = coerceBooleanProperty(value);
+  @Input({ transform: booleanAttribute })
+  set first(value: boolean) {
+    this._first = value;
   }
 }

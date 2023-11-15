@@ -1,13 +1,5 @@
 import { NgIf } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  HostBinding,
-  Input,
-  signal,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, signal, ViewEncapsulation } from '@angular/core';
 import { BrnAvatarComponent } from '@spartan-ng/ui-avatar-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
@@ -27,10 +19,6 @@ const avatarVariants = cva('relative flex shrink-0 overflow-hidden rounded-full'
 });
 
 type AvatarVariants = VariantProps<typeof avatarVariants>;
-
-const generateClasses = (variant: AvatarVariants['variant'], userCls: ClassValue) => {
-  return hlm(avatarVariants({ variant }), userCls);
-};
 
 @Component({
   selector: 'hlm-avatar',
@@ -54,20 +42,19 @@ export class HlmAvatarComponent extends BrnAvatarComponent {
   @Input()
   set variant(variant: AvatarVariants['variant']) {
     this._variant.set(variant);
+    this.cls = this.generateClasses();
   }
 
   @Input()
   set class(cls: ClassValue) {
     this.userCls.set(cls);
+    this.cls = this.generateClasses();
   }
 
   @HostBinding('class')
-  protected cls = generateClasses(this._variant(), this.userCls());
+  protected cls = this.generateClasses();
 
-  constructor() {
-    super();
-    effect(() => {
-      this.cls = generateClasses(this._variant(), this.userCls());
-    });
+  private generateClasses() {
+    return hlm(avatarVariants({ variant: this._variant() }), this.userCls());
   }
 }

@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -8,13 +9,13 @@ import {
   EventEmitter,
   inject,
   Input,
+  numberAttribute,
   OnDestroy,
   OnInit,
   Output,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { BrnRadioGroupComponent } from './brn-radio-group.component';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import { FocusableOption, FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
@@ -80,27 +81,27 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
   public radioGroup = inject(BrnRadioGroupComponent, { optional: true });
 
   private _disabled = false;
-  @Input()
+  @Input({ transform: booleanAttribute })
   get disabled(): boolean {
     return this._disabled || (this.radioGroup !== null && this.radioGroup.disabled);
   }
-  set disabled(value: BooleanInput) {
-    this._setDisabled(coerceBooleanProperty(value));
+  set disabled(value: boolean) {
+    this._setDisabled(value);
   }
 
   private _defaultTabIndex = 0;
-  @Input()
-  set defaultTabIndex(value: NumberInput) {
-    this._defaultTabIndex = coerceNumberProperty(value);
+  @Input({ transform: numberAttribute })
+  set defaultTabIndex(value: number) {
+    this._defaultTabIndex = value;
   }
 
   private _tabIndex = 0;
-  @Input()
+  @Input({ transform: numberAttribute })
   get tabIndex(): number {
     return this.disabled ? -1 : this._tabIndex;
   }
-  set tabIndex(value: NumberInput) {
-    this._tabIndex = value != null ? coerceNumberProperty(value) : this._defaultTabIndex;
+  set tabIndex(value: number) {
+    this._tabIndex = value != null ? value : this._defaultTabIndex;
   }
 
   private _uniqueId = `brn-radio-${++nextUniqueId}`;
@@ -118,13 +119,13 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
   ariaDescribedby?: string;
 
   private _checked = false;
-  @Input()
+  @Input({ transform: booleanAttribute })
   get checked(): boolean {
     return this._checked;
   }
 
-  set checked(value: BooleanInput) {
-    const newCheckedState = coerceBooleanProperty(value);
+  set checked(value: boolean) {
+    const newCheckedState = value;
     if (this._checked !== newCheckedState) {
       this._checked = newCheckedState;
       if (newCheckedState && this.radioGroup && this.radioGroup.value !== this.value) {
@@ -143,12 +144,15 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _value: any = null;
   @Input({ required: true })
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   get value(): any {
     return this._value;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   set value(value: any) {
     if (this._value !== value) {
       this._value = value;
@@ -165,13 +169,13 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
   }
 
   private _required = false;
-  @Input()
+  @Input({ transform: booleanAttribute })
   get required(): boolean {
     return this._required || (this.radioGroup !== null && this.radioGroup.required);
   }
 
-  set required(value: BooleanInput) {
-    this._required = coerceBooleanProperty(value);
+  set required(value: boolean) {
+    this._required = value;
   }
 
   @Output()

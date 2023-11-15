@@ -7,7 +7,12 @@
     "build": {
       "dependsOn": ["^build"],
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}", "dist/apps/app/.nitro", "dist/apps/app/ssr", "dist/apps/app/analog"],
+      "outputs": [
+        "{options.outputPath}",
+        "{workspaceRoot}/dist/apps/app/.nitro",
+        "{workspaceRoot}/dist/apps/app/ssr",
+        "{workspaceRoot}/dist/apps/app/analog"
+      ],
       "options": {
         "configFile": "apps/app/vite.config.ts",
         "outputPath": "dist/apps/app/client"
@@ -51,11 +56,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "app:build"
+        "buildTarget": "app:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/app/**/*.ts", "apps/app/**/*.html"]
@@ -63,7 +68,7 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["apps/app/coverage"]
+      "outputs": ["{projectRoot}/coverage"]
     }
   },
   "tags": [],

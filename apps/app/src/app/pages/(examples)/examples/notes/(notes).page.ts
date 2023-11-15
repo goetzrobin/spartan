@@ -108,18 +108,20 @@ export default class NotesExamplePageComponent {
   private _notes$ = this._refreshNotes$.pipe(
     switchMap(() => this._trpc.note.list.query()),
     tap((result) =>
-      this.state.mutate((state) => {
-        state.status = 'success';
-        state.notes = result;
-        state.error = null;
-      })
+      this.state.update((state) => ({
+        ...state,
+        status: 'success',
+        notes: result,
+        error: null,
+      }))
     ),
     catchError((err) => {
-      this.state.mutate((state) => {
-        state.notes = [];
-        state.status = 'error';
-        state.error = err;
-      });
+      this.state.update((state) => ({
+        ...state,
+        notes: [],
+        status: 'error',
+        error: err,
+      }));
       return of([]);
     })
   );
@@ -127,7 +129,7 @@ export default class NotesExamplePageComponent {
   public state = signal<{
     status: 'idle' | 'loading' | 'success' | 'error';
     notes: Note[];
-    error: any | null;
+    error: unknown | null;
     updatedFrom: 'initial' | 'create' | 'delete';
     idBeingDeleted?: number;
   }>({

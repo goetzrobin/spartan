@@ -1,6 +1,5 @@
-import { Directive, inject, Input, Output } from '@angular/core';
+import { booleanAttribute, Directive, inject, Input, Output } from '@angular/core';
 import { CdkMenuItem } from '@angular/cdk/menu';
-import { BooleanInput } from '@angular/cdk/coercion';
 
 @Directive({
   selector: '[brnMenuItem]',
@@ -14,8 +13,8 @@ export class BrnMenuItemDirective {
     return this._cdkMenuItem.disabled;
   }
 
-  @Input()
-  set disabled(value: BooleanInput) {
+  @Input({ transform: booleanAttribute })
+  set disabled(value) {
     this._cdkMenuItem.disabled = value;
   }
 

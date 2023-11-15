@@ -1,6 +1,5 @@
-import { Directive, HostBinding, inject, Input, Output } from '@angular/core';
+import { booleanAttribute, Directive, HostBinding, inject, Input, Output } from '@angular/core';
 import { CdkMenuItemCheckbox } from '@angular/cdk/menu';
-import { BooleanInput } from '@angular/cdk/coercion';
 
 @Directive({
   selector: '[brnMenuItemCheckbox]',
@@ -14,17 +13,16 @@ export class BrnMenuItemCheckboxDirective {
   get checked() {
     return this._checked;
   }
-  @Input()
-  set checked(value: BooleanInput) {
-    this._cdkMenuItem.checked = value;
-    this._checked = this._cdkMenuItem.checked;
+  @Input({ transform: booleanAttribute })
+  set checked(value: boolean) {
+    this._checked = this._cdkMenuItem.checked = value;
   }
   get disabled() {
     return this._cdkMenuItem.disabled;
   }
-  @Input()
-  set disabled(value: BooleanInput) {
-    this._cdkMenuItem.disabled = value;
+  @Input({ transform: booleanAttribute })
+  set disabled(value: boolean) {
+    this._checked = this._cdkMenuItem.disabled = value;
   }
   @Output()
   triggered = this._cdkMenuItem.triggered;

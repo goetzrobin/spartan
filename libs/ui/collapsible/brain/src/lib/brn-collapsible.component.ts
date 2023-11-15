@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -7,7 +8,6 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 let collapsibleContentIdSequence = 0;
 export type BrnCollapsibleState = 'open' | 'closed';
@@ -29,9 +29,9 @@ export class BrnCollapsibleComponent {
   contentId = signal('brn-collapsible-content-' + collapsibleContentIdSequence++);
 
   private _disabled = signal<true | undefined>(undefined);
-  @Input()
-  set disabled(value: BooleanInput) {
-    this._disabled.set(coerceBooleanProperty(value) ? true : undefined);
+  @Input({ transform: booleanAttribute })
+  set disabled(value: boolean) {
+    this._disabled.set(value ? true : undefined);
   }
   collapsibleDisabled = this._disabled.asReadonly();
 

@@ -47,3 +47,5 @@ Thumbs.db
 #
 /stats.html
 build-storybook.log
+
+.nx/cache

@@ -1,5 +1,4 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, Input, inject, signal } from '@angular/core';
+import { booleanAttribute, Directive, ElementRef, inject, Input, signal } from '@angular/core';
 import { ClassValue } from 'clsx';
 
 @Directive({
@@ -16,7 +15,8 @@ export class BrnAvatarFallbackDirective {
     this.userCls.set(cls);
   }
 
-  @Input() set autoColor(value: BooleanInput) {
-    this.useAutoColor.set(coerceBooleanProperty(value));
+  @Input({ transform: booleanAttribute })
+  set autoColor(value: boolean) {
+    this.useAutoColor.set(value);
   }
 }

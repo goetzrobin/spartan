@@ -1,6 +1,5 @@
-import { Directive, HostBinding, inject, Input, Output } from '@angular/core';
+import { booleanAttribute, Directive, HostBinding, inject, Input, Output } from '@angular/core';
 import { CdkMenuItemRadio } from '@angular/cdk/menu';
-import { BooleanInput } from '@angular/cdk/coercion';
 
 @Directive({
   selector: '[brnMenuItemRadio]',
@@ -15,18 +14,17 @@ export class BrnMenuItemRadioDirective {
     return this._checked;
   }
 
-  @Input()
-  set checked(value: BooleanInput) {
-    this._cdkMenuItem.checked = value;
-    this._checked = this._cdkMenuItem.checked;
+  @Input({ transform: booleanAttribute })
+  set checked(value: boolean) {
+    this._checked = this._cdkMenuItem.checked = value;
   }
 
   get disabled() {
     return this._cdkMenuItem.disabled;
   }
 
-  @Input()
-  set disabled(value: BooleanInput) {
+  @Input({ transform: booleanAttribute })
+  set disabled(value) {
     this._cdkMenuItem.disabled = value;
   }
 

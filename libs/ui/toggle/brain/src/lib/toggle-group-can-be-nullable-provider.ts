@@ -5,5 +5,6 @@ export const ToggleGroupCanBeNullableProvider = new InjectionToken<ToggleGroupCa
 );
 
 export interface ToggleGroupCanBeNullableProvider {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   _canBeNullable: (value: any) => boolean;
 }

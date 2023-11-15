@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -16,7 +17,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { NgStyle } from '@angular/common';
@@ -84,9 +84,9 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
   public focused = signal(false);
 
   protected _checked = signal(false);
-  @Input()
-  set checked(value: BooleanInput) {
-    this._checked.set(coerceBooleanProperty(value));
+  @Input({ transform: booleanAttribute })
+  set checked(value: boolean) {
+    this._checked.set(value);
   }
 
   /** Used to set the id on the underlying input element. */
@@ -131,26 +131,26 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
   ariaDescribedby: string | null = null;
 
   private _required = false;
-  @Input()
+  @Input({ transform: booleanAttribute })
   get required(): boolean {
     return this._required;
   }
 
-  set required(value: BooleanInput) {
-    this._required = coerceBooleanProperty(value);
+  set required(value: boolean) {
+    this._required = value;
   }
 
   private _disabled = false;
-  @Input()
-  set disabled(value: BooleanInput) {
-    this._disabled = coerceBooleanProperty(value);
+  @Input({ transform: booleanAttribute })
+  set disabled(value: boolean) {
+    this._disabled = value;
   }
 
   get disabled() {
     return this._disabled;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
   protected _onChange = (_: any) => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private _onTouched = () => {};
@@ -208,17 +208,17 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
     return parentValue ? parentValue.replace(CONTAINER_POST_FIX, '') : null;
   }
 
-  /** Implemented as part of ControlValueAccessor. */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   writeValue(value: any): void {
     this.checked = !!value;
   }
 
-  /** Implemented as part of ControlValueAccessor. */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnChange(fn: any): void {
     this._onChange = fn;
   }
 
-  /** Implemented as part of ControlValueAccessor. */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnTouched(fn: any): void {
     this._onTouched = fn;
   }

@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  booleanAttribute,
   ChangeDetectorRef,
   Component,
   ContentChildren,
@@ -10,14 +11,13 @@ import {
   Output,
   QueryList,
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BrnRadioComponent } from './brn-radio.component';
 import { BrnRadioChange } from './brn-radio-change';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 let nextUniqueId = 0;
 
-export const BRN_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any = {
+export const BRN_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => BrnRadioGroupComponent),
   multi: true,
@@ -36,15 +36,16 @@ export const BRN_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any = {
 export class BrnRadioGroupComponent implements AfterContentInit {
   private _changeDetector = inject(ChangeDetectorRef);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _value: any = null;
   private _isInitialized = false;
 
   @ContentChildren(BrnRadioComponent, { descendants: true })
   private _radios?: QueryList<BrnRadioComponent>;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   _controlValueAccessorChangeFn: (value: any) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onTouched: () => any = () => {};
 
   private _name = `brn-radio-group-${nextUniqueId++}`;
@@ -65,10 +66,12 @@ export class BrnRadioGroupComponent implements AfterContentInit {
    * matching value.
    */
   @Input()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   get value(): any {
     return this._value;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   set value(newValue: any) {
     if (this._value !== newValue) {
       // Set this before proceeding to ensure no circular loop occurs with selection.
@@ -101,24 +104,24 @@ export class BrnRadioGroupComponent implements AfterContentInit {
   }
 
   private _disabled = false;
-  @Input()
+  @Input({ transform: booleanAttribute })
   get disabled(): boolean {
     return this._disabled;
   }
 
-  set disabled(value: BooleanInput) {
-    this._disabled = coerceBooleanProperty(value);
+  set disabled(value: boolean) {
+    this._disabled = value;
     this._markRadiosForCheck();
   }
 
   private _required = false;
-  @Input()
+  @Input({ transform: booleanAttribute })
   get required(): boolean {
     return this._required;
   }
 
-  set required(value: BooleanInput) {
-    this._required = coerceBooleanProperty(value);
+  set required(value: boolean) {
+    this._required = value;
     this._markRadiosForCheck();
   }
 
@@ -188,15 +191,18 @@ export class BrnRadioGroupComponent implements AfterContentInit {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   writeValue(value: any) {
     this.value = value;
     this._changeDetector.markForCheck();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnChange(fn: (value: any) => void) {
     this._controlValueAccessorChangeFn = fn;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnTouched(fn: any) {
     this.onTouched = fn;
   }

@@ -1,4 +1,4 @@
-import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import {
   BrnTabsComponent,
   BrnTabsContentDirective,
@@ -23,7 +23,6 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCheck, radixClipboard } from '@ng-icons/radix-icons';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NgIf } from '@angular/common';
 
 declare const Prism: typeof import('prismjs');
@@ -107,9 +106,9 @@ export class CodeComponent {
   protected copied = false;
 
   protected _disableCopy = false;
-  @Input()
-  set disableCopy(value: BooleanInput) {
-    this._disableCopy = coerceBooleanProperty(value);
+  @Input({ transform: booleanAttribute })
+  set disableCopy(value: boolean) {
+    this._disableCopy = value;
   }
 
   private _language: 'ts' | 'sh' = 'ts';

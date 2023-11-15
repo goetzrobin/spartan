@@ -2,9 +2,9 @@
   "name": "@spartan-ng/ui-toggle-brain",
   "version": "0.0.1-alpha.309",
   "peerDependencies": {
-    "@angular/core": "^16.0.0",
-    "@angular/forms": "^16.0.0",
-    "@angular/cdk": "^16.0.0"
+    "@angular/core": "17.0.2",
+    "@angular/forms": "17.0.2",
+    "@angular/cdk": "17.0.0"
   },
   "dependencies": {},
   "sideEffects": false,

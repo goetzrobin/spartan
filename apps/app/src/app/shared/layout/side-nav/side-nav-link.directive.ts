@@ -1,6 +1,5 @@
-import { Directive, inject, Input } from '@angular/core';
+import { booleanAttribute, Directive, inject, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
   selector: '[spartanSideNavLink]',
@@ -24,10 +23,11 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 export class SideNavLinkDirective {
   private _rlActive = inject(RouterLinkActive);
   protected _disabled = false;
-  @Input()
-  set disabled(value: BooleanInput) {
-    this._disabled = coerceBooleanProperty(value);
+  @Input({ transform: booleanAttribute })
+  set disabled(value: boolean) {
+    this._disabled = value;
   }
+
   constructor() {
     this._rlActive.routerLinkActive = 'font-medium !text-foreground';
   }

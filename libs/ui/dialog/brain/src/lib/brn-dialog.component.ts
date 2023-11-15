@@ -1,9 +1,11 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
   Input,
+  numberAttribute,
   Output,
   TemplateRef,
   ViewContainerRef,
@@ -19,11 +21,11 @@ import {
   ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
 import { AutoFocusTarget } from '@angular/cdk/dialog';
-import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
 let dialogSequence = 0;
 
 export type BrnDialogState = 'open' | 'closed';
+
 @Component({
   selector: 'brn-dialog',
   standalone: true,
@@ -36,7 +38,7 @@ export type BrnDialogState = 'open' | 'closed';
 export class BrnDialogComponent {
   private readonly _dialogService = inject(BrnDialogService);
   private readonly _vcr = inject(ViewContainerRef);
-  private _contentTemplate: TemplateRef<any> | undefined;
+  private _contentTemplate: TemplateRef<unknown> | undefined;
   public readonly positionBuilder = inject(OverlayPositionBuilder);
   public readonly ssos = inject(ScrollStrategyOptions);
   public readonly state = this._dialogService.state;
@@ -83,9 +85,9 @@ export class BrnDialogComponent {
     this._options['role'] = role;
   }
 
-  @Input()
-  set hasBackdrop(hasBackdrop: BooleanInput) {
-    this._options['hasBackdrop'] = coerceBooleanProperty(hasBackdrop);
+  @Input({ transform: booleanAttribute })
+  set hasBackdrop(hasBackdrop: boolean) {
+    this._options['hasBackdrop'] = hasBackdrop;
   }
 
   @Input()
@@ -109,9 +111,9 @@ export class BrnDialogComponent {
     this._options['restoreFocus'] = restoreFocus;
   }
 
-  @Input()
-  set closeOnOutsidePointerEvents(closeOnOutsidePointerEvents: BooleanInput) {
-    this._options['closeOnOutsidePointerEvents'] = coerceBooleanProperty(closeOnOutsidePointerEvents);
+  @Input({ transform: booleanAttribute })
+  set closeOnOutsidePointerEvents(closeOnOutsidePointerEvents: boolean) {
+    this._options['closeOnOutsidePointerEvents'] = closeOnOutsidePointerEvents;
   }
 
   @Input()
@@ -129,14 +131,14 @@ export class BrnDialogComponent {
     this._options['autoFocus'] = autoFocus;
   }
 
-  @Input()
-  set closeDelay(closeDelay: NumberInput) {
-    this._options['closeDelay'] = coerceNumberProperty(closeDelay);
+  @Input({ transform: numberAttribute })
+  set closeDelay(closeDelay: number) {
+    this._options['closeDelay'] = closeDelay;
   }
 
-  @Input()
-  set disableClose(disableClose: BooleanInput) {
-    this._options['disableClose'] = coerceBooleanProperty(disableClose);
+  @Input({ transform: booleanAttribute })
+  set disableClose(disableClose: boolean) {
+    this._options['disableClose'] = disableClose;
   }
 
   /* eslint-disable-next-line @angular-eslint/no-input-rename */
@@ -158,9 +160,12 @@ export class BrnDialogComponent {
   }
 
   /* eslint-disable-next-line @angular-eslint/no-input-rename */
-  @Input('aria-modal')
-  set ariaModal(isModal: BooleanInput) {
-    this.setAriaModal(coerceBooleanProperty(isModal));
+  @Input({
+    alias: 'aria-modal',
+    transform: booleanAttribute,
+  })
+  set ariaModal(isModal: boolean) {
+    this.setAriaModal(isModal);
   }
 
   open<DialogContext>() {
@@ -177,7 +182,7 @@ export class BrnDialogComponent {
     this._dialogService.close(delay ?? this._options.closeDelay);
   }
 
-  registerTemplate(tpl: TemplateRef<any>) {
+  registerTemplate(tpl: TemplateRef<unknown>) {
     this._contentTemplate = tpl;
   }
 
@@ -189,7 +194,9 @@ export class BrnDialogComponent {
     this._options['panelClass'] = panelClass ?? '';
   }
 
-  setContext(context: any) {
+  setContext(context: unknown) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     this._context = { ...this._context, ...context };
   }
 
