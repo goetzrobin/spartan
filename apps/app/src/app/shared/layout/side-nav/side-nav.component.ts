@@ -9,7 +9,7 @@ import { SideNavContentComponent } from './side-nav-content.component';
   host: {
     class: 'fixed text-sm top-12 px-2 pt-6 pb-12 flex z-30 -ml-2 hidden w-full shrink-0 md:sticky md:block',
   },
-  template: `<hlm-scroll-area visibility="hover" class="h-[calc(100vh-3.5rem)]">
+  template: `<hlm-scroll-area visibility="hover" class="h-[calc(100vh-3.5rem)]" [autoWidthDisabled]="true">
     <spartan-side-nav-content />
   </hlm-scroll-area>`,
 })
