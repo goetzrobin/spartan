@@ -57,7 +57,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
           class="!bg-primary !text-foreground-primary !hover:bg-primary/90"
           >This is madness. This is spartan.</a
         >
-        <h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 class="font-semibold lg:font-bold text-3xl sm:text-5xl md:text-6xl">
           Cutting-edge tools powering Angular full-stack development.
         </h1>
         <p class="max-w-[42rem] ${lead}">
