@@ -7,9 +7,14 @@ import { ClassValue } from 'clsx';
   exportAs: 'avatarFallback',
 })
 export class BrnAvatarFallbackDirective {
+  private readonly element = inject(ElementRef).nativeElement;
   readonly userCls = signal<ClassValue>('');
   readonly useAutoColor = signal(false);
   readonly textContent = inject(ElementRef).nativeElement.textContent;
+
+  getTextContent(): string {
+    return this.element.textContent;
+  }
 
   @Input() set class(cls: ClassValue | string) {
     this.userCls.set(cls);
