@@ -29,6 +29,11 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 10. [jeremy-js-devweb](https://github.com/jeremy-js-devweb)
 11. [heddendorp](https://github.com/heddendorp)
 12. [tutkli](https://github.com/tutkli)
+13. [Pascalmh](https://github.com/Pascalmh)
+14. [okkindel](https://github.com/okkindel)
+15. [marcjulian](https://github.com/marcjulian)
+16. [elite-benni](https://github.com/elite-benni)
+17. [oidre](https://github.com/oidre)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
