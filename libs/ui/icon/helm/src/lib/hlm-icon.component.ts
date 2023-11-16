@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  HostBinding,
-  Input,
-  signal,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, Input, signal, ViewEncapsulation } from '@angular/core';
 import { IconName, NgIconComponent } from '@ng-icons/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva } from 'class-variance-authority';
@@ -51,6 +43,9 @@ const isDefinedSize = (size: IconSize): size is DefinedSizes => {
     [color]="_color()"
     [strokeWidth]="_strokeWidth()"
   />`,
+  host: {
+    '[class]': 'generatedClasses()',
+  },
 })
 export class HlmIconComponent {
   protected readonly _name = signal<IconName | string>('');
@@ -61,48 +56,39 @@ export class HlmIconComponent {
   protected readonly ngIconSize = computed(() => (isDefinedSize(this._size()) ? '100%' : (this._size() as string)));
   protected readonly ngIconCls = signal<ClassValue>('');
 
+  protected readonly generatedClasses = computed(() => {
+    const size: IconSize = this._size();
+    const variant = isDefinedSize(size) ? size : 'none';
+    return hlm(iconVariants({ variant }), this.userCls());
+  });
+
   @Input({ required: true })
   set name(value: IconName | string) {
     this._name.set(value);
-    this.cls = this.generateClasses();
   }
 
   @Input()
   set size(value: IconSize) {
     this._size.set(value);
-    this.cls = this.generateClasses();
   }
 
   @Input()
   set color(value: string | undefined) {
     this._color.set(value);
-    this.cls = this.generateClasses();
   }
 
   @Input()
   set strokeWidth(value: string | number | undefined) {
     this._strokeWidth.set(value);
-    this.cls = this.generateClasses();
   }
 
   @Input()
   set ngIconClass(cls: ClassValue) {
     this.ngIconCls.set(cls);
-    this.cls = this.generateClasses();
   }
 
   @Input()
   set class(cls: ClassValue) {
     this.userCls.set(cls);
-    this.cls = this.generateClasses();
-  }
-
-  @HostBinding('class')
-  protected cls = this.generateClasses();
-
-  private generateClasses() {
-    const size: IconSize = this._size();
-    const variant = isDefinedSize(size) ? size : 'none';
-    return hlm(iconVariants({ variant }), this.userCls());
   }
 }

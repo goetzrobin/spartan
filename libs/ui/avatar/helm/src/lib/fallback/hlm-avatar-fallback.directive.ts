@@ -1,4 +1,4 @@
-import { computed, Directive, effect, HostBinding, inject } from '@angular/core';
+import { computed, Directive, inject } from '@angular/core';
 import { BrnAvatarFallbackDirective, hexColorFor, isBright } from '@spartan-ng/ui-avatar-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
@@ -22,34 +22,19 @@ const generateAutoColorTextCls = (hex?: string) => {
       inputs: ['class:class', 'autoColor:autoColor'],
     },
   ],
+  host: {
+    '[class]': 'generatedClasses()',
+    '[style.backgroundColor]': "hex() || ''",
+  },
 })
 export class HlmAvatarFallbackDirective {
   private readonly brn = inject(BrnAvatarFallbackDirective);
   private readonly hex = computed(() => {
-    if (!this.brn.useAutoColor() || !this.brn.textContent) return;
-    return hexColorFor(this.brn.textContent);
+    if (!this.brn.useAutoColor() || !this.brn.getTextContent()) return;
+    return hexColorFor(this.brn.getTextContent());
   });
 
   private readonly autoColorTextCls = computed(() => generateAutoColorTextCls(this.hex()));
 
-  @HostBinding('class')
-  protected cls = generateClasses(this.brn?.userCls(), this.autoColorTextCls());
-
-  @HostBinding('style.backgroundColor')
-  protected backgroundColor = this.hex() || '';
-
-  constructor() {
-    effect(() => {
-      const cls = generateClasses(this.brn.userCls(), this.autoColorTextCls());
-      Promise.resolve().then(() => {
-        this.cls = cls;
-      });
-    });
-    effect(() => {
-      const hex = this.hex() || '';
-      Promise.resolve().then(() => {
-        this.backgroundColor = hex;
-      });
-    });
-  }
+  protected readonly generatedClasses = computed(() => generateClasses(this.brn?.userCls(), this.autoColorTextCls()));
 }
