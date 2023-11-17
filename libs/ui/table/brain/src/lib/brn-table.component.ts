@@ -13,9 +13,8 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 	booleanAttribute,
-	forwardRef,
 } from '@angular/core';
-import { SET_TABLE_CLASSES_TOKEN, TableClassesSettable } from '@spartan-ng/ui-core';
+import { TableClassesSettable, provideTableClassesSettableExisting } from '@spartan-ng/ui-core';
 import { BrnColumnDefComponent } from './brn-column-def.component';
 
 export type BrnTableDataSourceInput<T> = CdkTableDataSourceInput<T>;
@@ -24,12 +23,7 @@ export type BrnTableDataSourceInput<T> = CdkTableDataSourceInput<T>;
 	selector: 'brn-table',
 	standalone: true,
 	imports: [CdkTableModule, NgIf],
-	providers: [
-		{
-			provide: SET_TABLE_CLASSES_TOKEN,
-			useExisting: forwardRef(<T>() => BrnTableComponent<T>),
-		},
-	],
+	providers: [provideTableClassesSettableExisting(<T>() => BrnTableComponent<T>)],
 	template: `
 		<cdk-table
 			#cdkTable

@@ -1,5 +1,9 @@
-import { Directive, forwardRef, inject } from '@angular/core';
-import { EXPOSES_SIDE_TOKEN, EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core';
+import { Directive, inject } from '@angular/core';
+import {
+	ExposesSide,
+	provideExposedSideProviderExisting,
+	provideExposesStateProviderExisting,
+} from '@spartan-ng/ui-core';
 import { BrnDialogContentDirective } from '@spartan-ng/ui-dialog-brain';
 import { BrnSheetComponent } from './brn-sheet.component';
 
@@ -7,16 +11,10 @@ import { BrnSheetComponent } from './brn-sheet.component';
 	selector: '[brnSheetContent]',
 	standalone: true,
 	providers: [
-		{
-			provide: EXPOSES_STATE_TOKEN,
-			useExisting: forwardRef(() => BrnSheetContentDirective),
-		},
-		{
-			provide: EXPOSES_SIDE_TOKEN,
-			useExisting: forwardRef(() => BrnSheetContentDirective),
-		},
+		provideExposesStateProviderExisting(() => BrnSheetContentDirective),
+		provideExposedSideProviderExisting(() => BrnSheetContentDirective),
 	],
 })
-export class BrnSheetContentDirective<T> extends BrnDialogContentDirective<T> {
+export class BrnSheetContentDirective<T> extends BrnDialogContentDirective<T> implements ExposesSide {
 	public readonly side = inject(BrnSheetComponent).side;
 }
