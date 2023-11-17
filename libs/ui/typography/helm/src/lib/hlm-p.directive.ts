@@ -5,22 +5,22 @@ import { ClassValue } from 'clsx';
 export const hlmP = 'leading-7 [&:not(:first-child)]:mt-6';
 
 @Directive({
-  selector: '[hlmP]',
-  standalone: true,
+	selector: '[hlmP]',
+	standalone: true,
 })
 export class HlmPDirective {
-  private _inputs: ClassValue = '';
+	private _inputs: ClassValue = '';
 
-  @Input()
-  set class(inputs: ClassValue) {
-    this._inputs = inputs;
-    this._class = this.generateClasses();
-  }
+	@Input()
+	set class(inputs: ClassValue) {
+		this._inputs = inputs;
+		this._class = this.generateClasses();
+	}
 
-  @HostBinding('class')
-  private _class = this.generateClasses();
+	@HostBinding('class')
+	private _class = this.generateClasses();
 
-  private generateClasses() {
-    return hlm(hlmP, this._inputs);
-  }
+	private generateClasses() {
+		return hlm(hlmP, this._inputs);
+	}
 }

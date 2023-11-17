@@ -1,51 +1,51 @@
 {
-  "name": "ui-table-brain",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/ui/table/brain/src",
-  "prefix": "brn",
-  "tags": ["scope:brain"],
-  "projectType": "library",
-  "targets": {
-    "build": {
-      "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-      "options": {
-        "project": "libs/ui/table/brain/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/ui/table/brain/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/ui/table/brain/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "libs/ui/table/brain/jest.config.ts"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/ui/table/brain/**/*.ts",
-          "libs/ui/table/brain/**/*.html",
-          "libs/ui/table/brain/package.json",
-          "libs/ui/table/brain/project.json"
-        ]
-      }
-    },
-    "release": {
-      "executor": "@spartan-ng/tools:build-update-publish",
-      "options": {
-        "libName": "ui-tabs-brain"
-      }
-    }
-  }
+	"name": "ui-table-brain",
+	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/ui/table/brain/src",
+	"prefix": "brn",
+	"tags": ["scope:brain"],
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/angular:package",
+			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+			"options": {
+				"project": "libs/ui/table/brain/ng-package.json"
+			},
+			"configurations": {
+				"production": {
+					"tsConfig": "libs/ui/table/brain/tsconfig.lib.prod.json"
+				},
+				"development": {
+					"tsConfig": "libs/ui/table/brain/tsconfig.lib.json"
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/ui/table/brain/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": [
+					"libs/ui/table/brain/**/*.ts",
+					"libs/ui/table/brain/**/*.html",
+					"libs/ui/table/brain/package.json",
+					"libs/ui/table/brain/project.json"
+				]
+			}
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
+			"options": {
+				"libName": "ui-tabs-brain"
+			}
+		}
+	}
 }

@@ -1,27 +1,27 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { BrnAlertDialogImports } from './brain/src';
-import { HlmAlertDialogImports } from './helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
+import { HlmIconComponent } from '../icon/helm/src';
+import { BrnAlertDialogImports } from './brain/src';
+import { HlmAlertDialogImports } from './helm/src';
 
 const meta: Meta<{}> = {
-  title: 'Alert Dialog',
-  decorators: [
-    moduleMetadata({
-      imports: [BrnAlertDialogImports, HlmAlertDialogImports, HlmButtonDirective, HlmIconComponent],
-      providers: [provideIcons({ radixCross1 })],
-    }),
-  ],
+	title: 'Alert Dialog',
+	decorators: [
+		moduleMetadata({
+			imports: [BrnAlertDialogImports, HlmAlertDialogImports, HlmButtonDirective, HlmIconComponent],
+			providers: [provideIcons({ radixCross1 })],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
     <brn-alert-dialog closeDelay='100'>
     <brn-alert-dialog-overlay hlm/>
     <button id='edit-profile' variant='outline' brnAlertDialogTrigger hlmBtn>Delete Account</button>
@@ -44,5 +44,5 @@ export const Default: Story = {
     </div>
     </brn-alert-dialog>
     `,
-  }),
+	}),
 };

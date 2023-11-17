@@ -5,22 +5,22 @@ import { ClassValue } from 'clsx';
 export const hlmUl = 'my-6 ml-6 list-disc [&>li]:mt-2';
 
 @Directive({
-  selector: '[hlmUl]',
-  standalone: true,
+	selector: '[hlmUl]',
+	standalone: true,
 })
 export class HlmUlDirective {
-  private _inputs: ClassValue = '';
+	private _inputs: ClassValue = '';
 
-  @Input()
-  set class(inputs: ClassValue) {
-    this._inputs = inputs;
-    this._class = this.generateClasses();
-  }
+	@Input()
+	set class(inputs: ClassValue) {
+		this._inputs = inputs;
+		this._class = this.generateClasses();
+	}
 
-  @HostBinding('class')
-  private _class = this.generateClasses();
+	@HostBinding('class')
+	private _class = this.generateClasses();
 
-  private generateClasses() {
-    return hlm(hlmUl, this._inputs);
-  }
+	private generateClasses() {
+		return hlm(hlmUl, this._inputs);
+	}
 }

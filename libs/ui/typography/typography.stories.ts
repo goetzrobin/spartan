@@ -3,20 +3,20 @@ import { moduleMetadata } from '@storybook/angular';
 import { hlmBlockquote, hlmH1, hlmH2, hlmH3, hlmLead, hlmP, hlmUl } from './helm/src';
 
 const meta: Meta<{}> = {
-  title: 'Typography',
-  decorators: [
-    moduleMetadata({
-      imports: [],
-    }),
-  ],
+	title: 'Typography',
+	decorators: [
+		moduleMetadata({
+			imports: [],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
     <h1 class="${hlmH1}">The Joke Tax Chronicles</h1>
     <p class="${hlmLead} mt-4">
       Once upon a time, in a far-off land, there was a very lazy king who spent all day lounging on his throne. One day,
@@ -62,5 +62,5 @@ export const Default: Story = {
       The moral of the story is: never underestimate the power of a good laugh and always be careful of bad ideas.
     </p>
     `,
-  }),
+	}),
 };

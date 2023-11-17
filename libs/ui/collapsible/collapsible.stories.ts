@@ -1,23 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { BrnCollapsibleImports } from './brain/src';
 import { HlmButtonDirective } from '../button/helm/src';
+import { BrnCollapsibleImports } from './brain/src';
 
 const meta: Meta<{}> = {
-  title: 'Collapsible',
-  decorators: [
-    moduleMetadata({
-      imports: [HlmButtonDirective, BrnCollapsibleImports],
-    }),
-  ],
+	title: 'Collapsible',
+	decorators: [
+		moduleMetadata({
+			imports: [HlmButtonDirective, BrnCollapsibleImports],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
     <brn-collapsible
           class="flex flex-col w-[350px] space-y-2"
     >
@@ -45,5 +45,5 @@ export const Default: Story = {
       </brn-collapsible-content>
     </brn-collapsible>
     `,
-  }),
+	}),
 };

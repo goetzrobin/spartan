@@ -1,69 +1,69 @@
 import { Directive, HostBinding, Input } from '@angular/core';
-import { cva, VariantProps } from 'class-variance-authority';
 import { hlm } from '@spartan-ng/ui-core';
+import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
 const inputVariants = cva(
-  'flex rounded-md border font-normal border-input bg-transparent text-sm ring-offset-background file:border-0 file:text-foreground file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-  {
-    variants: {
-      size: {
-        default: 'h-10 py-2 px-4',
-        sm: 'h-9 px-3',
-        lg: 'h-11 px-8',
-      },
-      error: {
-        auto: '[&.ng-invalid.ng-touched]:text-destructive [&.ng-invalid.ng-touched]:border-destructive [&.ng-invalid.ng-touched]:focus-visible:ring-destructive',
-        true: 'text-destructive border-destructive focus-visible:ring-destructive',
-      },
-    },
-    defaultVariants: {
-      size: 'default',
-      error: 'auto',
-    },
-  }
+	'flex rounded-md border font-normal border-input bg-transparent text-sm ring-offset-background file:border-0 file:text-foreground file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+	{
+		variants: {
+			size: {
+				default: 'h-10 py-2 px-4',
+				sm: 'h-9 px-3',
+				lg: 'h-11 px-8',
+			},
+			error: {
+				auto: '[&.ng-invalid.ng-touched]:text-destructive [&.ng-invalid.ng-touched]:border-destructive [&.ng-invalid.ng-touched]:focus-visible:ring-destructive',
+				true: 'text-destructive border-destructive focus-visible:ring-destructive',
+			},
+		},
+		defaultVariants: {
+			size: 'default',
+			error: 'auto',
+		},
+	},
 );
 type InputVariants = VariantProps<typeof inputVariants>;
 
 @Directive({
-  selector: '[hlmInput]',
-  standalone: true,
+	selector: '[hlmInput]',
+	standalone: true,
 })
 export class HlmInputDirective {
-  private _inputs: ClassValue = '';
+	private _inputs: ClassValue = '';
 
-  private _size: InputVariants['size'] = 'default';
-  @Input()
-  get size(): InputVariants['size'] {
-    return this._size;
-  }
+	private _size: InputVariants['size'] = 'default';
+	@Input()
+	get size(): InputVariants['size'] {
+		return this._size;
+	}
 
-  set size(value: InputVariants['size']) {
-    this._size = value;
-    this._class = this.generateClasses();
-  }
+	set size(value: InputVariants['size']) {
+		this._size = value;
+		this._class = this.generateClasses();
+	}
 
-  private _error: InputVariants['error'] = 'auto';
-  @Input()
-  get error(): InputVariants['error'] {
-    return this._error;
-  }
+	private _error: InputVariants['error'] = 'auto';
+	@Input()
+	get error(): InputVariants['error'] {
+		return this._error;
+	}
 
-  set error(value: InputVariants['error']) {
-    this._error = value;
-    this._class = this.generateClasses();
-  }
+	set error(value: InputVariants['error']) {
+		this._error = value;
+		this._class = this.generateClasses();
+	}
 
-  @Input()
-  set class(inputs: ClassValue) {
-    this._inputs = inputs;
-    this._class = this.generateClasses();
-  }
+	@Input()
+	set class(inputs: ClassValue) {
+		this._inputs = inputs;
+		this._class = this.generateClasses();
+	}
 
-  @HostBinding('class')
-  private _class = this.generateClasses();
+	@HostBinding('class')
+	private _class = this.generateClasses();
 
-  private generateClasses() {
-    return hlm(inputVariants({ size: this._size, error: this._error }), this._inputs);
-  }
+	private generateClasses() {
+		return hlm(inputVariants({ size: this._size, error: this._error }), this._inputs);
+	}
 }

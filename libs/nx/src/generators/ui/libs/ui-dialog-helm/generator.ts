@@ -1,12 +1,12 @@
 import { Tree } from '@nx/devkit';
-import { HlmBaseGeneratorSchema } from '../../../base/schema';
 import hlmBaseGenerator from '../../../base/generator';
+import { HlmBaseGeneratorSchema } from '../../../base/schema';
 
 export async function generator(tree: Tree, options: HlmBaseGeneratorSchema) {
-  return await hlmBaseGenerator(tree, {
-    ...options,
-    primitiveName: 'dialog',
-    internalName: 'ui-dialog-helm',
-    publicName: 'ui-dialog-helm',
-  });
+	return await hlmBaseGenerator(tree, {
+		...options,
+		primitiveName: 'dialog',
+		internalName: 'ui-dialog-helm',
+		publicName: 'ui-dialog-helm',
+	});
 }

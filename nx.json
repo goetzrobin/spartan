@@ -1,71 +1,71 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "targetDefaults": {
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"],
-      "cache": true
-    },
-    "serve": {
-      "dependsOn": ["^build"]
-    },
-    "e2e": {
-      "inputs": ["default", "^production"],
-      "cache": true
-    },
-    "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"],
-      "cache": true
-    },
-    "build-storybook": {
-      "inputs": ["default", "^production", "{projectRoot}/.storybook/**/*", "{projectRoot}/tsconfig.storybook.json"],
-      "cache": true
-    },
-    "@nx/jest:jest": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "cache": true,
-      "options": {
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
-    },
-    "@nx/vite:test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "cache": true
-    }
-  },
-  "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": [
-      "default",
-      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
-      "!{projectRoot}/tsconfig.spec.json",
-      "!{projectRoot}/jest.config.[jt]s",
-      "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-      "!{projectRoot}/.storybook/**/*",
-      "!{projectRoot}/tsconfig.storybook.json"
-    ],
-    "sharedGlobals": []
-  },
-  "generators": {
-    "@nx/angular:application": {
-      "style": "css",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nx/angular:library": {
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nx/angular:component": {
-      "style": "css"
-    }
-  }
+	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"targetDefaults": {
+		"build": {
+			"dependsOn": ["^build"],
+			"inputs": ["production", "^production"],
+			"cache": true
+		},
+		"serve": {
+			"dependsOn": ["^build"]
+		},
+		"e2e": {
+			"inputs": ["default", "^production"],
+			"cache": true
+		},
+		"lint": {
+			"inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"],
+			"cache": true
+		},
+		"build-storybook": {
+			"inputs": ["default", "^production", "{projectRoot}/.storybook/**/*", "{projectRoot}/tsconfig.storybook.json"],
+			"cache": true
+		},
+		"@nx/jest:jest": {
+			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+			"cache": true,
+			"options": {
+				"passWithNoTests": true
+			},
+			"configurations": {
+				"ci": {
+					"ci": true,
+					"codeCoverage": true
+				}
+			}
+		},
+		"@nx/vite:test": {
+			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+			"cache": true
+		}
+	},
+	"namedInputs": {
+		"default": ["{projectRoot}/**/*", "sharedGlobals"],
+		"production": [
+			"default",
+			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+			"!{projectRoot}/tsconfig.spec.json",
+			"!{projectRoot}/jest.config.[jt]s",
+			"!{projectRoot}/.eslintrc.json",
+			"!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+			"!{projectRoot}/.storybook/**/*",
+			"!{projectRoot}/tsconfig.storybook.json"
+		],
+		"sharedGlobals": []
+	},
+	"generators": {
+		"@nx/angular:application": {
+			"style": "css",
+			"linter": "eslint",
+			"unitTestRunner": "jest",
+			"e2eTestRunner": "cypress"
+		},
+		"@nx/angular:library": {
+			"linter": "eslint",
+			"unitTestRunner": "jest"
+		},
+		"@nx/angular:component": {
+			"style": "css"
+		}
+	}
 }

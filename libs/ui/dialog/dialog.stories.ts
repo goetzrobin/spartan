@@ -1,36 +1,36 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { BrnDialogImports } from './brain/src';
-import { HlmDialogImports } from './helm/src';
-import { HlmLabelDirective } from '../label/helm/src';
-import { HlmButtonDirective } from '../button/helm/src';
-import { HlmInputDirective } from '../input/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
 import { provideIcons } from '@ng-icons/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HlmButtonDirective } from '../button/helm/src';
+import { HlmIconComponent } from '../icon/helm/src';
+import { HlmInputDirective } from '../input/helm/src';
+import { HlmLabelDirective } from '../label/helm/src';
+import { BrnDialogImports } from './brain/src';
+import { HlmDialogImports } from './helm/src';
 
 const meta: Meta<{}> = {
-  title: 'Dialog',
-  decorators: [
-    moduleMetadata({
-      imports: [
-        BrnDialogImports,
-        HlmDialogImports,
-        HlmLabelDirective,
-        HlmButtonDirective,
-        HlmInputDirective,
-        HlmIconComponent,
-      ],
-      providers: [provideIcons({ radixCross1 })],
-    }),
-  ],
+	title: 'Dialog',
+	decorators: [
+		moduleMetadata({
+			imports: [
+				BrnDialogImports,
+				HlmDialogImports,
+				HlmLabelDirective,
+				HlmButtonDirective,
+				HlmInputDirective,
+				HlmIconComponent,
+			],
+			providers: [provideIcons({ radixCross1 })],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
     <brn-dialog closeDelay='100'>
     <brn-dialog-overlay hlm/>
     <button id='edit-profile' brnDialogTrigger hlmBtn>Edit Profile</button>
@@ -65,5 +65,5 @@ export const Default: Story = {
     </div>
     </brn-dialog>
     `,
-  }),
+	}),
 };

@@ -1,18 +1,18 @@
 {
-  "name": "@spartan-ng/nx",
-  "version": "0.0.1-alpha.318",
-  "type": "commonjs",
-  "dependencies": {
-    "@nx/devkit": "17.1.2",
-    "enquirer": "2.3.6",
-    "semver": "7.5.4"
-  },
-  "peerDependencies": {
-    "tslib": "^2.3.0"
-  },
-  "executors": "./executors.json",
-  "generators": "./generators.json",
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@spartan-ng/nx",
+	"version": "0.0.1-alpha.318",
+	"type": "commonjs",
+	"dependencies": {
+		"@nx/devkit": "17.1.2",
+		"enquirer": "2.3.6",
+		"semver": "7.5.4"
+	},
+	"peerDependencies": {
+		"tslib": "^2.3.0"
+	},
+	"executors": "./executors.json",
+	"generators": "./generators.json",
+	"publishConfig": {
+		"access": "public"
+	}
 }

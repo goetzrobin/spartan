@@ -4,19 +4,19 @@ import { BrnDialogContentDirective } from '@spartan-ng/ui-dialog-brain';
 import { BrnSheetComponent } from './brn-sheet.component';
 
 @Directive({
-  selector: '[brnSheetContent]',
-  standalone: true,
-  providers: [
-    {
-      provide: EXPOSES_STATE_TOKEN,
-      useExisting: forwardRef(() => BrnSheetContentDirective),
-    },
-    {
-      provide: EXPOSES_SIDE_TOKEN,
-      useExisting: forwardRef(() => BrnSheetContentDirective),
-    },
-  ],
+	selector: '[brnSheetContent]',
+	standalone: true,
+	providers: [
+		{
+			provide: EXPOSES_STATE_TOKEN,
+			useExisting: forwardRef(() => BrnSheetContentDirective),
+		},
+		{
+			provide: EXPOSES_SIDE_TOKEN,
+			useExisting: forwardRef(() => BrnSheetContentDirective),
+		},
+	],
 })
 export class BrnSheetContentDirective<T> extends BrnDialogContentDirective<T> {
-  public readonly side = inject(BrnSheetComponent).side;
+	public readonly side = inject(BrnSheetComponent).side;
 }

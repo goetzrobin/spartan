@@ -1,3 +1,3 @@
 export interface HlmToNxGeneratorGeneratorSchema {
-  additionalDependencies?: string;
+	additionalDependencies?: string;
 }

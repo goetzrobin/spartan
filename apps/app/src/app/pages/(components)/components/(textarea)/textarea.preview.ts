@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 
 @Component({
-  selector: 'spartan-textarea-preview',
-  standalone: true,
-  host: {
-    class: 'w-full',
-  },
-  imports: [HlmInputDirective],
-  template: ` <textarea class="min-h-[80px] w-full" hlmInput placeholder="Type your message here."></textarea> `,
+	selector: 'spartan-textarea-preview',
+	standalone: true,
+	host: {
+		class: 'w-full',
+	},
+	imports: [HlmInputDirective],
+	template: `
+		<textarea class="min-h-[80px] w-full" hlmInput placeholder="Type your message here."></textarea>
+	`,
 })
 export class TextAreaPreviewComponent {}
 

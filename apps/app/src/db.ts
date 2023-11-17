@@ -1,13 +1,13 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
+import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 
 export const notes = pgTable('note', {
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
+	id: serial('id').primaryKey(),
+	title: text('title').notNull(),
+	content: text('content'),
+	createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
 export type Note = InferSelectModel<typeof notes>;

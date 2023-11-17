@@ -1,15 +1,15 @@
 {
-  "name": "@spartan-ng/ui-sheet-helm",
-  "version": "0.0.1-alpha.10",
-  "peerDependencies": {
-    "@angular/core": "17.0.2",
-    "@spartan-ng/ui-core": "0.0.1-alpha.311",
-    "clsx": "^1.2.1",
-    "class-variance-authority": "^0.6.0"
-  },
-  "dependencies": {},
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@spartan-ng/ui-sheet-helm",
+	"version": "0.0.1-alpha.10",
+	"peerDependencies": {
+		"@angular/core": "17.0.2",
+		"@spartan-ng/ui-core": "0.0.1-alpha.311",
+		"clsx": "^1.2.1",
+		"class-variance-authority": "^0.6.0"
+	},
+	"dependencies": {},
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	}
 }

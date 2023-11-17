@@ -5,22 +5,22 @@ import { ClassValue } from 'clsx';
 export const hlmLarge = 'text-lg font-semibold';
 
 @Directive({
-  selector: '[hlmLarge]',
-  standalone: true,
+	selector: '[hlmLarge]',
+	standalone: true,
 })
 export class HlmLargeDirective {
-  private _inputs: ClassValue = '';
+	private _inputs: ClassValue = '';
 
-  @Input()
-  set class(inputs: ClassValue) {
-    this._inputs = inputs;
-    this._class = this.generateClasses();
-  }
+	@Input()
+	set class(inputs: ClassValue) {
+		this._inputs = inputs;
+		this._class = this.generateClasses();
+	}
 
-  @HostBinding('class')
-  private _class = this.generateClasses();
+	@HostBinding('class')
+	private _class = this.generateClasses();
 
-  private generateClasses() {
-    return hlm(hlmLarge, this._inputs);
-  }
+	private generateClasses() {
+		return hlm(hlmLarge, this._inputs);
+	}
 }

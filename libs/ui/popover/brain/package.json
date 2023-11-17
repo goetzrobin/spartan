@@ -1,14 +1,14 @@
 {
-  "name": "@spartan-ng/ui-popover-brain",
-  "version": "0.0.1-alpha.311",
-  "peerDependencies": {
-    "@angular/core": "17.0.2",
-    "@spartan-ng/ui-dialog-brain": "0.0.1-alpha.311",
-    "@spartan-ng/ui-core": "0.0.1-alpha.311"
-  },
-  "dependencies": {},
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@spartan-ng/ui-popover-brain",
+	"version": "0.0.1-alpha.311",
+	"peerDependencies": {
+		"@angular/core": "17.0.2",
+		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.311",
+		"@spartan-ng/ui-core": "0.0.1-alpha.311"
+	},
+	"dependencies": {},
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	}
 }

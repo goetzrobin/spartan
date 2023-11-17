@@ -7,7 +7,7 @@ export * from './lib/hlm-icon.component';
 export const provideIcons = provideIconsImport;
 
 @NgModule({
-  imports: [HlmIconComponent],
-  exports: [HlmIconComponent],
+	imports: [HlmIconComponent],
+	exports: [HlmIconComponent],
 })
 export class HlmIconModule {}

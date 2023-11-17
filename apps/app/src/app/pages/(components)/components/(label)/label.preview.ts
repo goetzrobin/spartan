@@ -3,15 +3,15 @@ import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 
 @Component({
-  selector: 'spartan-label-preview',
-  standalone: true,
-  imports: [HlmLabelDirective, HlmInputDirective],
-  template: `
-    <label hlmLabel
-      >E-Mail
-      <input class="w-80" hlmInput type="email" placeholder="Email" />
-    </label>
-  `,
+	selector: 'spartan-label-preview',
+	standalone: true,
+	imports: [HlmLabelDirective, HlmInputDirective],
+	template: `
+		<label hlmLabel>
+			E-Mail
+			<input class="w-80" hlmInput type="email" placeholder="Email" />
+		</label>
+	`,
 })
 export class LabelPreviewComponent {}
 

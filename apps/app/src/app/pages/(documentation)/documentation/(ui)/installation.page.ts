@@ -1,46 +1,46 @@
 import { RouteMeta } from '@analogjs/router';
-import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { RouterLink } from '@angular/router';
 import { radixChevronRight, radixExclamationTriangle } from '@ng-icons/radix-icons';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { HlmAlertModule } from '@spartan-ng/ui-alert-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
+import { CodeComponent } from '~/app/shared/code/code.component';
+import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
+import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
+import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
-  data: { breadcrumb: 'Installation' },
-  meta: metaWith('spartan - Installation', 'Getting up and running with spartan'),
-  title: 'spartan - Installation',
+	data: { breadcrumb: 'Installation' },
+	meta: metaWith('spartan - Installation', 'Getting up and running with spartan'),
+	title: 'spartan - Installation',
 };
 
 @Component({
-  selector: 'spartan-installation',
-  standalone: true,
-  imports: [
-    MainSectionDirective,
-    SectionIntroComponent,
-    PageBottomNavComponent,
-    PageBottomNavLinkComponent,
-    PageNavComponent,
-    SectionSubHeadingComponent,
-    CodeComponent,
-    HlmButtonDirective,
-    HlmIconComponent,
-    RouterLink,
-    PageNavLinkComponent,
-    HlmAlertModule,
-  ],
-  providers: [provideIcons({ radixChevronRight, radixExclamationTriangle })],
-  template: `
+	selector: 'spartan-installation',
+	standalone: true,
+	imports: [
+		MainSectionDirective,
+		SectionIntroComponent,
+		PageBottomNavComponent,
+		PageBottomNavLinkComponent,
+		PageNavComponent,
+		SectionSubHeadingComponent,
+		CodeComponent,
+		HlmButtonDirective,
+		HlmIconComponent,
+		RouterLink,
+		PageNavLinkComponent,
+		HlmAlertModule,
+	],
+	providers: [provideIcons({ radixChevronRight, radixExclamationTriangle })],
+	template: `
     <section spartanMainSection>
       <spartan-section-intro name="Installation" lead="Getting up and running with spartan." />
       <section>

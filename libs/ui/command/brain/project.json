@@ -1,51 +1,51 @@
 {
-  "name": "ui-command-brain",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/ui/command/brain/src",
-  "prefix": "hlm",
-  "tags": ["scope:brain"],
-  "projectType": "library",
-  "targets": {
-    "build": {
-      "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-      "options": {
-        "project": "libs/ui/command/brain/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/ui/command/brain/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/ui/command/brain/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "libs/ui/command/brain/jest.config.ts"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/ui/command/brain/**/*.ts",
-          "libs/ui/command/brain/**/*.html",
-          "libs/ui/command/brain/package.json",
-          "libs/ui/command/brain/project.json"
-        ]
-      }
-    },
-    "release": {
-      "executor": "@spartan-ng/tools:build-update-publish",
-      "options": {
-        "libName": "ui-command-brain"
-      }
-    }
-  }
+	"name": "ui-command-brain",
+	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/ui/command/brain/src",
+	"prefix": "hlm",
+	"tags": ["scope:brain"],
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/angular:package",
+			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+			"options": {
+				"project": "libs/ui/command/brain/ng-package.json"
+			},
+			"configurations": {
+				"production": {
+					"tsConfig": "libs/ui/command/brain/tsconfig.lib.prod.json"
+				},
+				"development": {
+					"tsConfig": "libs/ui/command/brain/tsconfig.lib.json"
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/ui/command/brain/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": [
+					"libs/ui/command/brain/**/*.ts",
+					"libs/ui/command/brain/**/*.html",
+					"libs/ui/command/brain/package.json",
+					"libs/ui/command/brain/project.json"
+				]
+			}
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
+			"options": {
+				"libName": "ui-command-brain"
+			}
+		}
+	}
 }
