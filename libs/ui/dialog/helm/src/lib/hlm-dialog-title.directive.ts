@@ -3,21 +3,21 @@ import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
-  selector: '[hlmDialogTitle],[brnDialogTitle][hlm]',
-  standalone: true,
+	selector: '[hlmDialogTitle],[brnDialogTitle][hlm]',
+	standalone: true,
 })
 export class HlmDialogTitleDirective {
-  @HostBinding('class')
-  _class = this.generateClasses();
-  private _inputs: ClassValue = '';
+	@HostBinding('class')
+	_class = this.generateClasses();
+	private _inputs: ClassValue = '';
 
-  @Input()
-  set class(inputs: ClassValue) {
-    this._inputs = inputs;
-    this._class = this.generateClasses();
-  }
+	@Input()
+	set class(inputs: ClassValue) {
+		this._inputs = inputs;
+		this._class = this.generateClasses();
+	}
 
-  private generateClasses() {
-    return hlm('text-lg font-semibold leading-none tracking-tight', this._inputs);
-  }
+	private generateClasses() {
+		return hlm('text-lg font-semibold leading-none tracking-tight', this._inputs);
+	}
 }

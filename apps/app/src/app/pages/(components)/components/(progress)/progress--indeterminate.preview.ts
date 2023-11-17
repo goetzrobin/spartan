@@ -3,14 +3,14 @@ import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng
 import { HlmProgressDirective, HlmProgressIndicatorDirective } from '@spartan-ng/ui-progress-helm';
 
 @Component({
-  selector: 'spartan-progress-indeterminate',
-  standalone: true,
-  imports: [BrnProgressComponent, BrnProgressIndicatorComponent, HlmProgressIndicatorDirective, HlmProgressDirective],
-  template: `
-    <brn-progress class="w-80" hlm aria-labelledby="loading">
-      <brn-progress-indicator hlm />
-    </brn-progress>
-  `,
+	selector: 'spartan-progress-indeterminate',
+	standalone: true,
+	imports: [BrnProgressComponent, BrnProgressIndicatorComponent, HlmProgressIndicatorDirective, HlmProgressDirective],
+	template: `
+		<brn-progress class="w-80" hlm aria-labelledby="loading">
+			<brn-progress-indicator hlm />
+		</brn-progress>
+	`,
 })
 export class ProgressIndeterminatePreviewComponent {}
 

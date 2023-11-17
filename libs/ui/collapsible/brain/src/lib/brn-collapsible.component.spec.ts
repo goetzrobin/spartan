@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { BrnCollapsibleComponent } from './brn-collapsible.component';
 import { BrnCollapsibleContentComponent } from './brn-collapsible-content.component';
 import { BrnCollapsibleTriggerDirective } from './brn-collapsible-trigger.directive';
+import { BrnCollapsibleComponent } from './brn-collapsible.component';
 
 describe('BrnCollapsibleComponent', () => {
-  const setup = async (id?: string, disabled = false) => {
-    const container = await render(
-      `
+	const setup = async (id?: string, disabled = false) => {
+		const container = await render(
+			`
      <brn-collapsible ${disabled ? 'disabled' : ''} data-testid='root'>
       <div>
         <h4>&#64;peduarte starred 3 repositories</h4>
@@ -21,126 +21,126 @@ describe('BrnCollapsibleComponent', () => {
       </brn-collapsible-content>
     </brn-collapsible>
     `,
-      {
-        imports: [BrnCollapsibleComponent, BrnCollapsibleContentComponent, BrnCollapsibleTriggerDirective],
-      }
-    );
-    return {
-      user: userEvent.setup(),
-      container,
-      triggerElement: screen.getByTestId('trigger'),
-    };
-  };
+			{
+				imports: [BrnCollapsibleComponent, BrnCollapsibleContentComponent, BrnCollapsibleTriggerDirective],
+			},
+		);
+		return {
+			user: userEvent.setup(),
+			container,
+			triggerElement: screen.getByTestId('trigger'),
+		};
+	};
 
-  type Options = {
-    root: HTMLElement;
-    trigger: HTMLElement;
-    content: HTMLElement;
-    id?: string;
-  };
-  const validateAttributes = async ({ root, trigger, content, id }: Options) => {
-    const idMatcher = id ?? expect.stringContaining('brn-collapsible-content');
-    expect(root).toBeInTheDocument();
-    expect(await axe(root)).toHaveNoViolations();
+	type Options = {
+		root: HTMLElement;
+		trigger: HTMLElement;
+		content: HTMLElement;
+		id?: string;
+	};
+	const validateAttributes = async ({ root, trigger, content, id }: Options) => {
+		const idMatcher = id ?? expect.stringContaining('brn-collapsible-content');
+		expect(root).toBeInTheDocument();
+		expect(await axe(root)).toHaveNoViolations();
 
-    expect(trigger).toBeInTheDocument();
-    expect(trigger).toHaveAttribute('aria-controls', idMatcher);
-    expect(await axe(trigger)).toHaveNoViolations();
+		expect(trigger).toBeInTheDocument();
+		expect(trigger).toHaveAttribute('aria-controls', idMatcher);
+		expect(await axe(trigger)).toHaveNoViolations();
 
-    expect(content).toBeInTheDocument();
-    expect(content).toHaveAttribute('id', idMatcher);
-    expect(await axe(trigger)).toHaveNoViolations();
-  };
-  const validateOpen = async (id?: string) => {
-    const root = await screen.findByTestId('root');
-    const trigger = await screen.findByTestId('trigger');
-    const content = await screen.findByTestId('content');
+		expect(content).toBeInTheDocument();
+		expect(content).toHaveAttribute('id', idMatcher);
+		expect(await axe(trigger)).toHaveNoViolations();
+	};
+	const validateOpen = async (id?: string) => {
+		const root = await screen.findByTestId('root');
+		const trigger = await screen.findByTestId('trigger');
+		const content = await screen.findByTestId('content');
 
-    expect(root).toHaveAttribute('data-state', 'open');
-    expect(trigger).toHaveAttribute('data-state', 'open');
-    expect(trigger).toHaveAttribute('aria-expanded', 'true');
-    expect(content).toHaveAttribute('data-state', 'open');
+		expect(root).toHaveAttribute('data-state', 'open');
+		expect(trigger).toHaveAttribute('data-state', 'open');
+		expect(trigger).toHaveAttribute('aria-expanded', 'true');
+		expect(content).toHaveAttribute('data-state', 'open');
 
-    await validateAttributes({ root, trigger, content, id });
-  };
-  const validateClosed = async (id?: string) => {
-    const root = await screen.findByTestId('root');
-    const trigger = await screen.findByTestId('trigger');
-    const content = await screen.findByTestId('content');
+		await validateAttributes({ root, trigger, content, id });
+	};
+	const validateClosed = async (id?: string) => {
+		const root = await screen.findByTestId('root');
+		const trigger = await screen.findByTestId('trigger');
+		const content = await screen.findByTestId('content');
 
-    expect(root).toHaveAttribute('data-state', 'closed');
-    expect(trigger).toHaveAttribute('data-state', 'closed');
-    expect(trigger).toHaveAttribute('aria-expanded', 'false');
-    expect(content).toHaveAttribute('data-state', 'closed');
+		expect(root).toHaveAttribute('data-state', 'closed');
+		expect(trigger).toHaveAttribute('data-state', 'closed');
+		expect(trigger).toHaveAttribute('aria-expanded', 'false');
+		expect(content).toHaveAttribute('data-state', 'closed');
 
-    await validateAttributes({ root, trigger, content, id });
-  };
+		await validateAttributes({ root, trigger, content, id });
+	};
 
-  it('not given id on content should create id and set it to aria-described. by default collapsible is closed', async () => {
-    await setup();
-    await validateClosed();
-  });
+	it('not given id on content should create id and set it to aria-described. by default collapsible is closed', async () => {
+		await setup();
+		await validateClosed();
+	});
 
-  it('given id on content should use id and set it to aria-described. by default collapsible is closed', async () => {
-    await setup('hello-world');
-    await validateClosed('hello-world');
-  });
+	it('given id on content should use id and set it to aria-described. by default collapsible is closed', async () => {
+		await setup('hello-world');
+		await validateClosed('hello-world');
+	});
 
-  it('mouse click on element toggles collapsible', async () => {
-    const { user, container, triggerElement } = await setup();
-    await validateClosed();
-    await user.click(triggerElement);
-    container.detectChanges();
-    await validateOpen();
-    await user.click(triggerElement);
-    container.detectChanges();
-    await validateClosed();
-  });
+	it('mouse click on element toggles collapsible', async () => {
+		const { user, container, triggerElement } = await setup();
+		await validateClosed();
+		await user.click(triggerElement);
+		container.detectChanges();
+		await validateOpen();
+		await user.click(triggerElement);
+		container.detectChanges();
+		await validateClosed();
+	});
 
-  it('focus with tab and enter toggles collapsible', async () => {
-    const { user, container } = await setup();
-    await validateClosed();
-    await user.keyboard('[Tab][Enter]');
-    container.detectChanges();
-    await validateOpen();
-    await user.keyboard('[Enter]');
-    container.detectChanges();
-    await validateClosed();
-    await user.keyboard('[Enter]');
-    container.detectChanges();
-    await validateOpen();
-  });
+	it('focus with tab and enter toggles collapsible', async () => {
+		const { user, container } = await setup();
+		await validateClosed();
+		await user.keyboard('[Tab][Enter]');
+		container.detectChanges();
+		await validateOpen();
+		await user.keyboard('[Enter]');
+		container.detectChanges();
+		await validateClosed();
+		await user.keyboard('[Enter]');
+		container.detectChanges();
+		await validateOpen();
+	});
 
-  it('focus with tab and space toggles collapsible', async () => {
-    const { user, container } = await setup();
-    await validateClosed();
-    await user.keyboard('[Tab][Space]');
-    container.detectChanges();
-    await validateOpen();
-    await user.keyboard('[Space]');
-    container.detectChanges();
-    await validateClosed();
-    await user.keyboard('[Space]');
-    container.detectChanges();
-    await validateOpen();
-  });
+	it('focus with tab and space toggles collapsible', async () => {
+		const { user, container } = await setup();
+		await validateClosed();
+		await user.keyboard('[Tab][Space]');
+		container.detectChanges();
+		await validateOpen();
+		await user.keyboard('[Space]');
+		container.detectChanges();
+		await validateClosed();
+		await user.keyboard('[Space]');
+		container.detectChanges();
+		await validateOpen();
+	});
 
-  it('disabled adds correct aria attributes and prevents toggle', async () => {
-    const { user, container, triggerElement } = await setup(undefined, true);
-    const root = await screen.findByTestId('root');
+	it('disabled adds correct aria attributes and prevents toggle', async () => {
+		const { user, container, triggerElement } = await setup(undefined, true);
+		const root = await screen.findByTestId('root');
 
-    expect(root).toHaveAttribute('disabled');
-    expect(triggerElement).toHaveAttribute('disabled');
+		expect(root).toHaveAttribute('disabled');
+		expect(triggerElement).toHaveAttribute('disabled');
 
-    await validateClosed();
-    await user.click(triggerElement);
-    container.detectChanges();
-    await validateClosed();
-    await user.keyboard('[Enter]');
-    container.detectChanges();
-    await validateClosed();
-    await user.keyboard('[Space]');
-    container.detectChanges();
-    await validateClosed();
-  });
+		await validateClosed();
+		await user.click(triggerElement);
+		container.detectChanges();
+		await validateClosed();
+		await user.keyboard('[Enter]');
+		container.detectChanges();
+		await validateClosed();
+		await user.keyboard('[Space]');
+		container.detectChanges();
+		await validateClosed();
+	});
 });

@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BrnHoverCardModule } from '@spartan-ng/ui-hovercard-brain';
-import { HlmHoverCardModule } from '@spartan-ng/ui-hovercard-helm';
-import { HlmAvatarModule } from '@spartan-ng/ui-avatar-helm';
 import { provideIcons } from '@ng-icons/core';
 import { radixCalendar } from '@ng-icons/radix-icons';
+import { HlmAvatarModule } from '@spartan-ng/ui-avatar-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { BrnHoverCardModule } from '@spartan-ng/ui-hovercard-brain';
+import { HlmHoverCardModule } from '@spartan-ng/ui-hovercard-helm';
+import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
 @Component({
-  selector: 'spartan-hover-card-preview',
-  standalone: true,
-  imports: [BrnHoverCardModule, HlmHoverCardModule, HlmButtonDirective, HlmIconComponent, HlmAvatarModule],
-  providers: [provideIcons({ radixCalendar })],
-  template: `
+	selector: 'spartan-hover-card-preview',
+	standalone: true,
+	imports: [BrnHoverCardModule, HlmHoverCardModule, HlmButtonDirective, HlmIconComponent, HlmAvatarModule],
+	providers: [provideIcons({ radixCalendar })],
+	template: `
     <brn-hover-card>
       <button hlmBtn variant="link" brnHoverCardTrigger>@analogjs</button>
       <div hlmHoverCardContent *brnHoverCardContent class="w-80">

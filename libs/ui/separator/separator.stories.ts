@@ -1,22 +1,22 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HlmSeparatorDirective } from './helm/src';
 import { BrnSeparatorComponent } from './brain/src';
+import { HlmSeparatorDirective } from './helm/src';
 
 const meta: Meta<{}> = {
-  title: 'Separator',
-  decorators: [
-    moduleMetadata({
-      imports: [BrnSeparatorComponent, HlmSeparatorDirective],
-    }),
-  ],
+	title: 'Separator',
+	decorators: [
+		moduleMetadata({
+			imports: [BrnSeparatorComponent, HlmSeparatorDirective],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
     <div>
       <div class='space-y-1'>
         <h4 class='text-sm font-medium leading-none'>Radix Primitives</h4>
@@ -34,5 +34,5 @@ export const Default: Story = {
       </div>
     </div>
        `,
-  }),
+	}),
 };

@@ -1,76 +1,76 @@
 {
-  "name": "app",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
-  "sourceRoot": "apps/app/src",
-  "targets": {
-    "build": {
-      "dependsOn": ["^build"],
-      "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}",
-        "{workspaceRoot}/dist/apps/app/.nitro",
-        "{workspaceRoot}/dist/apps/app/ssr",
-        "{workspaceRoot}/dist/apps/app/analog"
-      ],
-      "options": {
-        "configFile": "apps/app/vite.config.ts",
-        "outputPath": "dist/apps/app/client"
-      },
-      "defaultConfiguration": "production",
-      "configurations": {
-        "development": {
-          "mode": "development"
-        },
-        "production": {
-          "sourcemap": false,
-          "mode": "production"
-        }
-      }
-    },
-    "vercel-build": {
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "",
-        "command": "yarn prisma generate"
-      },
-      "dependsOn": ["build"]
-    },
-    "serve": {
-      "executor": "@nx/vite:dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "app:build",
-        "port": 4200
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "app:build:development",
-          "hmr": true
-        },
-        "production": {
-          "buildTarget": "app:build:production"
-        }
-      }
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "buildTarget": "app:build"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/app/**/*.ts", "apps/app/**/*.html"]
-      }
-    },
-    "test": {
-      "executor": "@nx/vite:test",
-      "outputs": ["{projectRoot}/coverage"]
-    }
-  },
-  "tags": [],
-  "implicitDependencies": []
+	"name": "app",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "application",
+	"sourceRoot": "apps/app/src",
+	"targets": {
+		"build": {
+			"dependsOn": ["^build"],
+			"executor": "@nx/vite:build",
+			"outputs": [
+				"{options.outputPath}",
+				"{workspaceRoot}/dist/apps/app/.nitro",
+				"{workspaceRoot}/dist/apps/app/ssr",
+				"{workspaceRoot}/dist/apps/app/analog"
+			],
+			"options": {
+				"configFile": "apps/app/vite.config.ts",
+				"outputPath": "dist/apps/app/client"
+			},
+			"defaultConfiguration": "production",
+			"configurations": {
+				"development": {
+					"mode": "development"
+				},
+				"production": {
+					"sourcemap": false,
+					"mode": "production"
+				}
+			}
+		},
+		"vercel-build": {
+			"executor": "nx:run-commands",
+			"options": {
+				"cwd": "",
+				"command": "yarn prisma generate"
+			},
+			"dependsOn": ["build"]
+		},
+		"serve": {
+			"executor": "@nx/vite:dev-server",
+			"defaultConfiguration": "development",
+			"options": {
+				"buildTarget": "app:build",
+				"port": 4200
+			},
+			"configurations": {
+				"development": {
+					"buildTarget": "app:build:development",
+					"hmr": true
+				},
+				"production": {
+					"buildTarget": "app:build:production"
+				}
+			}
+		},
+		"extract-i18n": {
+			"executor": "@angular-devkit/build-angular:extract-i18n",
+			"options": {
+				"buildTarget": "app:build"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["apps/app/**/*.ts", "apps/app/**/*.html"]
+			}
+		},
+		"test": {
+			"executor": "@nx/vite:test",
+			"outputs": ["{projectRoot}/coverage"]
+		}
+	},
+	"tags": [],
+	"implicitDependencies": []
 }

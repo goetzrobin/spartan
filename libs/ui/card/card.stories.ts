@@ -1,26 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { HlmCardDirective, HlmCardImports } from './helm/src';
-import { HlmLabelDirective } from '../label/helm/src';
-import { HlmInputDirective } from '../input/helm/src';
-import { HlmButtonDirective } from '../button/helm/src';
 import { HlmBadgeDirective } from '../badge/helm/src';
+import { HlmButtonDirective } from '../button/helm/src';
+import { HlmInputDirective } from '../input/helm/src';
+import { HlmLabelDirective } from '../label/helm/src';
+import { HlmCardDirective, HlmCardImports } from './helm/src';
 
 const meta: Meta<HlmCardDirective> = {
-  title: 'Card',
-  decorators: [
-    moduleMetadata({
-      imports: [HlmCardImports, HlmLabelDirective, HlmInputDirective, HlmButtonDirective, HlmBadgeDirective],
-    }),
-  ],
+	title: 'Card',
+	decorators: [
+		moduleMetadata({
+			imports: [HlmCardImports, HlmLabelDirective, HlmInputDirective, HlmButtonDirective, HlmBadgeDirective],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<HlmCardDirective>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
     <section class='max-w-lg mx-auto' hlmCard>
        <div hlmCardHeader>
         <h3 hlmCardTitle>Create new project</h3>
@@ -47,12 +47,12 @@ export const Default: Story = {
       </div>
     </section>
     `,
-  }),
+	}),
 };
 
 export const Transposed: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
     <section class='max-w-lg mx-auto' hlmCard>
        <div hlmCardHeader direction='row'>
         <h3 hlmCardTitle>AngularGPT</h3>
@@ -74,5 +74,5 @@ export const Transposed: Story = {
       </div>
     </section>
     `,
-  }),
+	}),
 };

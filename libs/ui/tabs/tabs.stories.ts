@@ -1,48 +1,48 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HlmBadgeDirective } from '../badge/helm/src';
+import { HlmButtonDirective } from '../button/helm/src';
+import { HlmCardImports } from '../card/helm/src';
+import { HlmInputDirective } from '../input/helm/src';
+import { HlmLabelDirective } from '../label/helm/src';
 import { BrnTabsImports } from './brain/src';
 import { HlmTabsImports } from './helm/src';
-import { HlmCardImports } from '../card/helm/src';
-import { HlmLabelDirective } from '../label/helm/src';
-import { HlmInputDirective } from '../input/helm/src';
-import { HlmButtonDirective } from '../button/helm/src';
-import { HlmBadgeDirective } from '../badge/helm/src';
 
 export type TabsStory = { activationMode: 'manual' | 'automatic' };
 const meta: Meta<TabsStory> = {
-  argTypes: {
-    activationMode: {
-      options: ['manual', 'automatic'],
-      control: {
-        type: 'select',
-      },
-    },
-  },
-  title: 'Tabs',
-  decorators: [
-    moduleMetadata({
-      imports: [
-        BrnTabsImports,
-        HlmTabsImports,
-        HlmCardImports,
+	argTypes: {
+		activationMode: {
+			options: ['manual', 'automatic'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
+	title: 'Tabs',
+	decorators: [
+		moduleMetadata({
+			imports: [
+				BrnTabsImports,
+				HlmTabsImports,
+				HlmCardImports,
 
-        HlmLabelDirective,
-        HlmInputDirective,
-        HlmButtonDirective,
-        HlmBadgeDirective,
-      ],
-    }),
-  ],
+				HlmLabelDirective,
+				HlmInputDirective,
+				HlmButtonDirective,
+				HlmBadgeDirective,
+			],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<TabsStory>;
 export const Default: Story = {
-  args: {
-    activationMode: 'automatic',
-  },
-  render: ({ activationMode }) => ({
-    props: { activationMode },
-    template: `
+	args: {
+		activationMode: 'automatic',
+	},
+	render: ({ activationMode }) => ({
+		props: { activationMode },
+		template: `
   <brn-tabs [activationMode]='activationMode' class='block max-w-3xl mx-auto' value='account'>
     <brn-tabs-list hlmTabsList class='grid w-full grid-cols-2' aria-label='tabs example'>
       <button hlmTabsTrigger brnTabsTrigger='account'>Account</button>
@@ -92,16 +92,16 @@ export const Default: Story = {
 </div>
   </brn-tabs>
 `,
-  }),
+	}),
 };
 
 export const Vertical: Story = {
-  args: {
-    activationMode: 'automatic',
-  },
-  render: ({ activationMode }) => ({
-    props: { activationMode },
-    template: `
+	args: {
+		activationMode: 'automatic',
+	},
+	render: ({ activationMode }) => ({
+		props: { activationMode },
+		template: `
         <brn-tabs class='flex flex-row space-x-2 max-w-3xl mx-auto' orientation='vertical'
               value='account'>
       <brn-tabs-list hlmTabsList orientation='vertical' aria-label='tabs example'>
@@ -166,5 +166,5 @@ export const Vertical: Story = {
       </div>
     </brn-tabs>
 `,
-  }),
+	}),
 };

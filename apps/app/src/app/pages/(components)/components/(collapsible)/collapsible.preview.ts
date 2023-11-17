@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
-  BrnCollapsibleComponent,
-  BrnCollapsibleContentComponent,
-  BrnCollapsibleTriggerDirective,
+	BrnCollapsibleComponent,
+	BrnCollapsibleContentComponent,
+	BrnCollapsibleTriggerDirective,
 } from '@spartan-ng/ui-collapsible-brain';
 
 @Component({
-  selector: 'spartan-collapsible-preview',
-  standalone: true,
-  imports: [
-    BrnCollapsibleComponent,
-    BrnCollapsibleTriggerDirective,
-    HlmButtonDirective,
-    BrnCollapsibleContentComponent,
-  ],
-  template: `
+	selector: 'spartan-collapsible-preview',
+	standalone: true,
+	imports: [
+		BrnCollapsibleComponent,
+		BrnCollapsibleTriggerDirective,
+		HlmButtonDirective,
+		BrnCollapsibleContentComponent,
+	],
+	template: `
     <brn-collapsible class="flex flex-col w-[350px] space-y-2">
       <div class="flex items-center justify-between space-x-4 px-4">
         <h4 class="text-sm font-semibold">@peduarte starred 3 repositories</h4>

@@ -3,20 +3,20 @@ import { moduleMetadata } from '@storybook/angular';
 import { HlmAlertDirective, HlmAlertImports } from './helm/src';
 
 const meta: Meta<HlmAlertDirective> = {
-  title: 'Alert',
-  decorators: [
-    moduleMetadata({
-      imports: [HlmAlertImports],
-    }),
-  ],
+	title: 'Alert',
+	decorators: [
+		moduleMetadata({
+			imports: [HlmAlertImports],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<HlmAlertDirective>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
       <div class='max-w-xl' hlmAlert>
        <svg
       hlmAlertIcon
@@ -43,12 +43,12 @@ export const Default: Story = {
     </p>
       </div>
     `,
-  }),
+	}),
 };
 
 export const Destructive: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
       <div hlmAlert class='max-w-xl' variant='destructive'>
       <svg hlmAlertIcon xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'>
         <path stroke-linecap='round' stroke-linejoin='round' d='M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z' />
@@ -60,5 +60,5 @@ export const Destructive: Story = {
     </p>
       </div>
     `,
-  }),
+	}),
 };

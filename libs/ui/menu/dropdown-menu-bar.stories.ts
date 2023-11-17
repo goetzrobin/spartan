@@ -1,35 +1,35 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HlmButtonDirective } from '../button/helm/src';
-import { BrnMenuBarImports, BrnMenuImports } from './brain/src';
-import { HlmMenuBarImports, HlmMenuImports } from './helm/src';
 import { provideIcons } from '@ng-icons/core';
 import * as radixIcons from '@ng-icons/radix-icons';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
+import { BrnMenuBarImports, BrnMenuImports } from './brain/src';
+import { HlmMenuBarImports, HlmMenuImports } from './helm/src';
 
 const meta: Meta<{}> = {
-  title: ' Menubar',
-  decorators: [
-    moduleMetadata({
-      providers: [provideIcons(radixIcons)],
-      imports: [
-        BrnMenuImports,
-        BrnMenuBarImports,
-        HlmMenuImports,
-        HlmMenuBarImports,
+	title: ' Menubar',
+	decorators: [
+		moduleMetadata({
+			providers: [provideIcons(radixIcons)],
+			imports: [
+				BrnMenuImports,
+				BrnMenuBarImports,
+				HlmMenuImports,
+				HlmMenuBarImports,
 
-        HlmButtonDirective,
-        HlmIconComponent,
-      ],
-    }),
-  ],
+				HlmButtonDirective,
+				HlmIconComponent,
+			],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
         <div hlm brnMenuBar class='w-fit'>
       <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]='file'>File</button>
       <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]='edit'>Edit</button>
@@ -183,5 +183,5 @@ export const Default: Story = {
       </div>
     </ng-template>
     `,
-  }),
+	}),
 };

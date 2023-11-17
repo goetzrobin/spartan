@@ -1,27 +1,27 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HlmButtonDirective } from '../button/helm/src';
-import { BrnContextMenuImports } from './brain/src';
-import { HlmMenuImports } from './helm/src';
 import { provideIcons } from '@ng-icons/core';
 import * as radixIcons from '@ng-icons/radix-icons';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
+import { BrnContextMenuImports } from './brain/src';
+import { HlmMenuImports } from './helm/src';
 
 const meta: Meta<{}> = {
-  title: 'Context Menu',
-  decorators: [
-    moduleMetadata({
-      providers: [provideIcons(radixIcons)],
-      imports: [BrnContextMenuImports, HlmMenuImports, HlmButtonDirective, HlmIconComponent],
-    }),
-  ],
+	title: 'Context Menu',
+	decorators: [
+		moduleMetadata({
+			providers: [provideIcons(radixIcons)],
+			imports: [BrnContextMenuImports, HlmMenuImports, HlmButtonDirective, HlmIconComponent],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
         <div [brnCtxMenuTriggerFor]='menu'
          class='border-border flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm'>
       Right click here
@@ -99,5 +99,5 @@ export const Default: Story = {
       </div>
     </ng-template>
     `,
-  }),
+	}),
 };

@@ -1,41 +1,41 @@
 import { RouteMeta } from '@analogjs/router';
-import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { hlmH1, hlmLead } from '@spartan-ng/ui-typography-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { hlmH1, hlmLead } from '@spartan-ng/ui-typography-helm';
+import { metaWith } from '~/app/shared/meta/meta.util';
 import { NavLinkDirective } from '~/app/shared/spartan-nav-link.directive';
 
 export const routeMeta: RouteMeta = {
-  meta: metaWith('Examples - SPARTAN', 'Examples built with the SPARTAN stack and its UI primitives'),
+	meta: metaWith('Examples - SPARTAN', 'Examples built with the SPARTAN stack and its UI primitives'),
 };
 
 @Component({
-  selector: 'spartan-examples',
-  standalone: true,
-  imports: [RouterOutlet, HlmButtonDirective, RouterLink, NavLinkDirective],
-  host: {
-    class: 'block p-4 pt-6 sm:pb-16 sm:pt-12',
-  },
-  template: `
-    <h1 class="${hlmH1}">Check out some examples.</h1>
-    <p class="mt-4 max-w-xl ${hlmLead}">
-      Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.
-    </p>
-    <div class="mt-6 space-x-2">
-      <a hlmBtn size="sm" routerLink="/documentation">Get Started</a>
-      <a hlmBtn size="sm" variant="outline" routerLink="/components">Components</a>
-    </div>
+	selector: 'spartan-examples',
+	standalone: true,
+	imports: [RouterOutlet, HlmButtonDirective, RouterLink, NavLinkDirective],
+	host: {
+		class: 'block p-4 pt-6 sm:pb-16 sm:pt-12',
+	},
+	template: `
+		<h1 class="${hlmH1}">Check out some examples.</h1>
+		<p class="${hlmLead} mt-4 max-w-xl">
+			Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.
+		</p>
+		<div class="mt-6 space-x-2">
+			<a hlmBtn size="sm" routerLink="/documentation">Get Started</a>
+			<a hlmBtn size="sm" variant="outline" routerLink="/components">Components</a>
+		</div>
 
-    <nav class="mb-2 mt-12">
-      <ul class="flex space-x-2">
-        <li><a class="!font-medium" spartanNavLink="/examples/notes">Notes</a></li>
-        <li><a class="!font-medium" spartanNavLink="/examples/typography">Typography</a></li>
-      </ul>
-    </nav>
-    <div class="rounded-lg border border-border overflow-hidden">
-      <router-outlet />
-    </div>
-  `,
+		<nav class="mb-2 mt-12">
+			<ul class="flex space-x-2">
+				<li><a class="!font-medium" spartanNavLink="/examples/notes">Notes</a></li>
+				<li><a class="!font-medium" spartanNavLink="/examples/typography">Typography</a></li>
+			</ul>
+		</nav>
+		<div class="border-border overflow-hidden rounded-lg border">
+			<router-outlet />
+		</div>
+	`,
 })
 export default class ExamplesPageComponent {}

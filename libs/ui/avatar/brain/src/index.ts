@@ -12,7 +12,7 @@ export * from './lib/util';
 export const BrnAvatarImports = [BrnAvatarComponent, BrnAvatarFallbackDirective, BrnAvatarImageDirective] as const;
 
 @NgModule({
-  imports: [...BrnAvatarImports],
-  exports: [...BrnAvatarImports],
+	imports: [...BrnAvatarImports],
+	exports: [...BrnAvatarImports],
 })
 export class BrnAvatarModule {}

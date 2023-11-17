@@ -1,33 +1,33 @@
+import { radixCross1 } from '@ng-icons/radix-icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HlmButtonDirective } from '../button/helm/src';
+import { HlmIconComponent, provideIcons } from '../icon/helm/src';
+import { HlmInputDirective } from '../input/helm/src';
 import { BrnSheetImports } from './brain/src';
 import { HlmSheetImports } from './helm/src';
-import { radixCross1 } from '@ng-icons/radix-icons';
-import { HlmIconComponent, provideIcons } from '../icon/helm/src';
-import { HlmButtonDirective } from '../button/helm/src';
-import { HlmInputDirective } from '../input/helm/src';
 
 export type SheetProps = { side: 'top' | 'bottom' | 'left' | 'right' };
 const meta: Meta<SheetProps> = {
-  title: 'Sheet',
-  argTypes: {
-    side: { control: 'select', options: ['top', 'bottom', 'left', 'right'] },
-  },
-  decorators: [
-    moduleMetadata({
-      imports: [BrnSheetImports, HlmSheetImports, HlmButtonDirective, HlmInputDirective, HlmIconComponent],
-      providers: [provideIcons({ radixCross1 })],
-    }),
-  ],
+	title: 'Sheet',
+	argTypes: {
+		side: { control: 'select', options: ['top', 'bottom', 'left', 'right'] },
+	},
+	decorators: [
+		moduleMetadata({
+			imports: [BrnSheetImports, HlmSheetImports, HlmButtonDirective, HlmInputDirective, HlmIconComponent],
+			providers: [provideIcons({ radixCross1 })],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<SheetProps>;
 
 export const Default: Story = {
-  args: { side: 'left' },
-  render: ({ side }) => ({
-    props: { side },
-    template: `
+	args: { side: 'left' },
+	render: ({ side }) => ({
+		props: { side },
+		template: `
     <brn-sheet [side]='side' closeDelay='100'>
     <brn-sheet-overlay hlm/>
     <button id='edit-profile' variant='outline' brnSheetTrigger hlmBtn>Edit Profile</button>
@@ -62,5 +62,5 @@ export const Default: Story = {
     </div>
     </brn-sheet>
     `,
-  }),
+	}),
 };

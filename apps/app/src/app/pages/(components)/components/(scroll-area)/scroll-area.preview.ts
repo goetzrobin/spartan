@@ -1,24 +1,26 @@
-import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
 import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
 
 @Component({
-  selector: 'spartan-scroll-area-preview',
-  standalone: true,
-  imports: [NgFor, HlmSeparatorDirective, HlmScrollAreaComponent],
-  template: ` <hlm-scroll-area class="h-72 w-48 rounded-md border border-border">
-    <div class="p-4">
-      <h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
-      <div class="text-sm" *ngFor="let tag of tags">
-        {{ tag }}
-        <div hlmSeparator class="my-2"></div>
-      </div>
-    </div>
-  </hlm-scroll-area>`,
+	selector: 'spartan-scroll-area-preview',
+	standalone: true,
+	imports: [NgFor, HlmSeparatorDirective, HlmScrollAreaComponent],
+	template: `
+		<hlm-scroll-area class="border-border h-72 w-48 rounded-md border">
+			<div class="p-4">
+				<h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
+				<div class="text-sm" *ngFor="let tag of tags">
+					{{ tag }}
+					<div hlmSeparator class="my-2"></div>
+				</div>
+			</div>
+		</hlm-scroll-area>
+	`,
 })
 export class ScrollAreaPreviewComponent {
-  tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
+	tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 }
 
 export const defaultCode = `

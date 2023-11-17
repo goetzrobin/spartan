@@ -4,21 +4,21 @@ import { BrnAccordionComponent, BrnAccordionImports } from './brain/src';
 import { HlmAccordionImports } from './helm/src';
 
 const meta: Meta<BrnAccordionComponent> = {
-  title: 'Accordion',
-  component: BrnAccordionComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [BrnAccordionImports, HlmAccordionImports],
-    }),
-  ],
+	title: 'Accordion',
+	component: BrnAccordionComponent,
+	decorators: [
+		moduleMetadata({
+			imports: [BrnAccordionImports, HlmAccordionImports],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<BrnAccordionComponent>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
       <brn-accordion hlm>
       <brn-accordion-item hlm>
         <brn-accordion-trigger hlm>
@@ -51,5 +51,5 @@ export const Default: Story = {
       </brn-accordion-item>
       </brn-accordion>
     `,
-  }),
+	}),
 };

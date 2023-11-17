@@ -1,51 +1,51 @@
 {
-  "name": "ui-dialog-helm",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/ui/dialog/helm/src",
-  "prefix": "helm",
-  "tags": ["scope:helm"],
-  "projectType": "library",
-  "targets": {
-    "build": {
-      "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-      "options": {
-        "project": "libs/ui/dialog/helm/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/ui/dialog/helm/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/ui/dialog/helm/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "libs/ui/dialog/helm/jest.config.ts"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/ui/dialog/helm/**/*.ts",
-          "libs/ui/dialog/helm/**/*.html",
-          "libs/ui/dialog/helm/package.json",
-          "libs/ui/dialog/helm/project.json"
-        ]
-      }
-    },
-    "release": {
-      "executor": "@spartan-ng/tools:build-update-publish",
-      "options": {
-        "libName": "ui-dialog-helm"
-      }
-    }
-  }
+	"name": "ui-dialog-helm",
+	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/ui/dialog/helm/src",
+	"prefix": "helm",
+	"tags": ["scope:helm"],
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/angular:package",
+			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+			"options": {
+				"project": "libs/ui/dialog/helm/ng-package.json"
+			},
+			"configurations": {
+				"production": {
+					"tsConfig": "libs/ui/dialog/helm/tsconfig.lib.prod.json"
+				},
+				"development": {
+					"tsConfig": "libs/ui/dialog/helm/tsconfig.lib.json"
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/ui/dialog/helm/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": [
+					"libs/ui/dialog/helm/**/*.ts",
+					"libs/ui/dialog/helm/**/*.html",
+					"libs/ui/dialog/helm/package.json",
+					"libs/ui/dialog/helm/project.json"
+				]
+			}
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
+			"options": {
+				"libName": "ui-dialog-helm"
+			}
+		}
+	}
 }

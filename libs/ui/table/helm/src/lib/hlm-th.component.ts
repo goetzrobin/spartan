@@ -1,43 +1,43 @@
-import { booleanAttribute, Component, Input, signal } from '@angular/core';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { ClassValue } from 'clsx';
+import { Component, Input, booleanAttribute, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
+import { ClassValue } from 'clsx';
 
 @Component({
-  selector: 'hlm-th',
-  standalone: true,
-  imports: [NgTemplateOutlet, NgIf],
-  host: {
-    '[class]': '_class()',
-  },
-  template: `
-    <ng-template #content>
-      <ng-content />
-    </ng-template>
-    <span *ngIf="truncate" class="flex-1 truncate">
-      <ng-container [ngTemplateOutlet]="content" />
-    </span>
-    <ng-container *ngIf="!truncate" [ngTemplateOutlet]="content" />
-  `,
+	selector: 'hlm-th',
+	standalone: true,
+	imports: [NgTemplateOutlet, NgIf],
+	host: {
+		'[class]': '_class()',
+	},
+	template: `
+		<ng-template #content>
+			<ng-content />
+		</ng-template>
+		<span *ngIf="truncate" class="flex-1 truncate">
+			<ng-container [ngTemplateOutlet]="content" />
+		</span>
+		<ng-container *ngIf="!truncate" [ngTemplateOutlet]="content" />
+	`,
 })
 export class HlmThComponent {
-  protected readonly _class = signal(this.generateClasses());
+	protected readonly _class = signal(this.generateClasses());
 
-  @Input({ transform: booleanAttribute })
-  public truncate = false;
+	@Input({ transform: booleanAttribute })
+	public truncate = false;
 
-  private _inputs: ClassValue = '';
+	private _inputs: ClassValue = '';
 
-  @Input()
-  set class(inputs: ClassValue) {
-    this._inputs = inputs;
-    this._class.set(this.generateClasses());
-  }
+	@Input()
+	set class(inputs: ClassValue) {
+		this._inputs = inputs;
+		this._class.set(this.generateClasses());
+	}
 
-  private generateClasses() {
-    return hlm(
-      'flex flex-none h-12 px-2 text-sm items-center font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
-      this._inputs
-    );
-  }
+	private generateClasses() {
+		return hlm(
+			'flex flex-none h-12 px-2 text-sm items-center font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
+			this._inputs,
+		);
+	}
 }

@@ -1,40 +1,40 @@
 import { RouteMeta } from '@analogjs/router';
-import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { ComingSoonComponent } from '~/app/shared/layout/coming-soon.component';
-import { hlmCode, hlmH4, hlmP, hlmUl } from '@spartan-ng/ui-typography-helm';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { RouterLink } from '@angular/router';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { hlmCode, hlmH4, hlmP, hlmUl } from '@spartan-ng/ui-typography-helm';
+import { ComingSoonComponent } from '~/app/shared/layout/coming-soon.component';
+import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
+import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
+import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
-  data: { breadcrumb: 'Changelog' },
-  meta: metaWith('spartan - Changelog', 'Latest updates and announcements.'),
-  title: 'spartan - Changelog',
+	data: { breadcrumb: 'Changelog' },
+	meta: metaWith('spartan - Changelog', 'Latest updates and announcements.'),
+	title: 'spartan - Changelog',
 };
 
 @Component({
-  selector: 'spartan-changelog',
-  standalone: true,
-  imports: [
-    MainSectionDirective,
-    SectionIntroComponent,
-    PageBottomNavComponent,
-    PageBottomNavLinkComponent,
-    PageNavComponent,
-    ComingSoonComponent,
-    SectionSubHeadingComponent,
-    PageNavLinkComponent,
-    RouterLink,
-    HlmButtonDirective,
-  ],
-  template: `
+	selector: 'spartan-changelog',
+	standalone: true,
+	imports: [
+		MainSectionDirective,
+		SectionIntroComponent,
+		PageBottomNavComponent,
+		PageBottomNavLinkComponent,
+		PageNavComponent,
+		ComingSoonComponent,
+		SectionSubHeadingComponent,
+		PageNavLinkComponent,
+		RouterLink,
+		HlmButtonDirective,
+	],
+	template: `
     <section spartanMainSection>
       <spartan-section-intro name="Changelog" lead="Latest updates and announcements." />
       <spartan-section-sub-heading id="initial-alpha" class="-mt-12"

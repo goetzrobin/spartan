@@ -1,51 +1,51 @@
 {
-  "name": "ui-popover-helm",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/ui/popover/helm/src",
-  "prefix": "helm",
-  "tags": ["scope:helm"],
-  "projectType": "library",
-  "targets": {
-    "build": {
-      "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-      "options": {
-        "project": "libs/ui/popover/helm/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/ui/popover/helm/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/ui/popover/helm/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "libs/ui/popover/helm/jest.config.ts"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/ui/popover/helm/**/*.ts",
-          "libs/ui/popover/helm/**/*.html",
-          "libs/ui/popover/helm/package.json",
-          "libs/ui/popover/helm/project.json"
-        ]
-      }
-    },
-    "release": {
-      "executor": "@spartan-ng/tools:build-update-publish",
-      "options": {
-        "libName": "ui-popover-helm"
-      }
-    }
-  }
+	"name": "ui-popover-helm",
+	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/ui/popover/helm/src",
+	"prefix": "helm",
+	"tags": ["scope:helm"],
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/angular:package",
+			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+			"options": {
+				"project": "libs/ui/popover/helm/ng-package.json"
+			},
+			"configurations": {
+				"production": {
+					"tsConfig": "libs/ui/popover/helm/tsconfig.lib.prod.json"
+				},
+				"development": {
+					"tsConfig": "libs/ui/popover/helm/tsconfig.lib.json"
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/ui/popover/helm/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": [
+					"libs/ui/popover/helm/**/*.ts",
+					"libs/ui/popover/helm/**/*.html",
+					"libs/ui/popover/helm/package.json",
+					"libs/ui/popover/helm/project.json"
+				]
+			}
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
+			"options": {
+				"libName": "ui-popover-helm"
+			}
+		}
+	}
 }

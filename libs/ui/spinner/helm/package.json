@@ -1,12 +1,12 @@
 {
-  "name": "@spartan-ng/ui-spinner-helm",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/core": "17.0.2",
-    "@spartan-ng/ui-core": "0.0.1-alpha.311",
-    "class-variance-authority": "^0.6.0",
-    "clsx": "^1.2.1"
-  },
-  "dependencies": {},
-  "sideEffects": false
+	"name": "@spartan-ng/ui-spinner-helm",
+	"version": "0.0.1",
+	"peerDependencies": {
+		"@angular/core": "17.0.2",
+		"@spartan-ng/ui-core": "0.0.1-alpha.311",
+		"class-variance-authority": "^0.6.0",
+		"clsx": "^1.2.1"
+	},
+	"dependencies": {},
+	"sideEffects": false
 }

@@ -1,22 +1,22 @@
 const config = {
-  stories: ['../../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-a11y',
-    {
-      name: '@storybook/addon-styling',
-      options: {
-        // Check out https://github.com/storybookjs/addon-styling/blob/main/docs/api.md
-        // For more details on this addon's options.
-        postCss: true,
-      },
-    },
-  ],
-  framework: {
-    name: '@storybook/angular',
-    options: {},
-  },
-  staticDirs: ['../public'], //👈 Configures the static asset folder in Storybook
+	stories: ['../../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+	addons: [
+		'@storybook/addon-essentials',
+		'@storybook/addon-a11y',
+		{
+			name: '@storybook/addon-styling',
+			options: {
+				// Check out https://github.com/storybookjs/addon-styling/blob/main/docs/api.md
+				// For more details on this addon's options.
+				postCss: true,
+			},
+		},
+	],
+	framework: {
+		name: '@storybook/angular',
+		options: {},
+	},
+	staticDirs: ['../public'], //👈 Configures the static asset folder in Storybook
 };
 
 export default config;

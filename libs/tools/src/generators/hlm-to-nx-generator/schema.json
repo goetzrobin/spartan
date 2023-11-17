@@ -1,7 +1,7 @@
 {
-  "$schema": "http://json-schema.org/schema",
-  "$id": "HlmToNxGenerator",
-  "title": "",
-  "type": "object",
-  "properties": {}
+	"$schema": "http://json-schema.org/schema",
+	"$id": "HlmToNxGenerator",
+	"title": "",
+	"type": "object",
+	"properties": {}
 }

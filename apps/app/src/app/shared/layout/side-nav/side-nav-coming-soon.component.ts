@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 
 @Component({
-  selector: 'spartan-side-nav-cs',
-  standalone: true,
-  imports: [HlmBadgeDirective],
-  host: {
-    class: 'inline-block',
-  },
-  template: `<span class="font-medium text-primary-foreground rounded-lg bg-primary text-[0.5rem] py-0.5 px-1"
-    >soon</span
-  >`,
+	selector: 'spartan-side-nav-cs',
+	standalone: true,
+	imports: [HlmBadgeDirective],
+	host: {
+		class: 'inline-block',
+	},
+	template: `
+		<span class="text-primary-foreground bg-primary rounded-lg px-1 py-0.5 text-[0.5rem] font-medium">soon</span>
+	`,
 })
 export class SideNavComponent {}

@@ -1,5 +1,5 @@
 export const SupportedThemeGeneratorMap = {
-  zinc: (radius: number, prefix = '') => `
+	zinc: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -45,7 +45,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 240 4.9% 83.9%;
   }
 `,
-  slate: (radius: number, prefix = '') => `
+	slate: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -91,7 +91,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 212.7 26.8% 83.9;
   }
 `,
-  stone: (radius: number, prefix = '') => `
+	stone: (radius: number, prefix = '') => `
 :root${prefix} {
    --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
@@ -137,7 +137,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 24 5.7% 82.9%;
   }
 `,
-  gray: (radius: number, prefix = '') => `
+	gray: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
@@ -183,7 +183,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 216 12.2% 83.9%;
   }
 `,
-  neutral: (radius: number, prefix = '') => `
+	neutral: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -229,7 +229,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 0 0% 83.1%;
   }
 `,
-  red: (radius: number, prefix = '') => `
+	red: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -275,7 +275,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 0 72.2% 50.6%;
   }
 `,
-  rose: (radius: number, prefix = '') => `
+	rose: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -321,7 +321,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 346.8 77.2% 49.8%;
   }
 `,
-  blue: (radius: number, prefix = '') => `
+	blue: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -367,7 +367,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 346.8 77.2% 49.8%;
   }
 `,
-  green: (radius: number, prefix = '') => `
+	green: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -413,7 +413,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 142.4 71.8% 29.2%;
   }
 `,
-  orange: (radius: number, prefix = '') => `
+	orange: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
@@ -459,7 +459,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 20.5 90.2% 48.2%;
   }
 `,
-  yellow: (radius: number, prefix = '') => `
+	yellow: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
@@ -505,7 +505,7 @@ export const SupportedThemeGeneratorMap = {
     --ring: 35.5 91.7% 32.9%;
   }
 `,
-  violet: (radius: number, prefix = '') => `
+	violet: (radius: number, prefix = '') => `
 :root${prefix} {
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;

@@ -1,9 +1,9 @@
 {
-  "generators": {
-    "hlm-to-nx-generator": {
-      "factory": "./src/generators/hlm-to-nx-generator/generator",
-      "schema": "./src/generators/hlm-to-nx-generator/schema.json",
-      "description": "hlm-to-nx-generator generator"
-    }
-  }
+	"generators": {
+		"hlm-to-nx-generator": {
+			"factory": "./src/generators/hlm-to-nx-generator/generator",
+			"schema": "./src/generators/hlm-to-nx-generator/schema.json",
+			"description": "hlm-to-nx-generator generator"
+		}
+	}
 }

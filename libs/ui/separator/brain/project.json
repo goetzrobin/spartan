@@ -1,51 +1,51 @@
 {
-  "name": "ui-separator-brain",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/ui/separator/brain/src",
-  "prefix": "brain",
-  "tags": ["scope:brain"],
-  "projectType": "library",
-  "targets": {
-    "build": {
-      "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-      "options": {
-        "project": "libs/ui/separator/brain/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/ui/separator/brain/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/ui/separator/brain/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "libs/ui/separator/brain/jest.config.ts"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/ui/separator/brain/**/*.ts",
-          "libs/ui/separator/brain/**/*.html",
-          "libs/ui/separator/brain/package.json",
-          "libs/ui/separator/brain/project.json"
-        ]
-      }
-    },
-    "release": {
-      "executor": "@spartan-ng/tools:build-update-publish",
-      "options": {
-        "libName": "ui-separator-brain"
-      }
-    }
-  }
+	"name": "ui-separator-brain",
+	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/ui/separator/brain/src",
+	"prefix": "brain",
+	"tags": ["scope:brain"],
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/angular:package",
+			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+			"options": {
+				"project": "libs/ui/separator/brain/ng-package.json"
+			},
+			"configurations": {
+				"production": {
+					"tsConfig": "libs/ui/separator/brain/tsconfig.lib.prod.json"
+				},
+				"development": {
+					"tsConfig": "libs/ui/separator/brain/tsconfig.lib.json"
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/ui/separator/brain/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": [
+					"libs/ui/separator/brain/**/*.ts",
+					"libs/ui/separator/brain/**/*.html",
+					"libs/ui/separator/brain/package.json",
+					"libs/ui/separator/brain/project.json"
+				]
+			}
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
+			"options": {
+				"libName": "ui-separator-brain"
+			}
+		}
+	}
 }

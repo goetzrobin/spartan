@@ -3,21 +3,21 @@ import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng
 import { HlmProgressDirective, HlmProgressIndicatorDirective } from '@spartan-ng/ui-progress-helm';
 
 @Component({
-  selector: 'spartan-progress-preview',
-  standalone: true,
-  imports: [BrnProgressComponent, BrnProgressIndicatorComponent, HlmProgressIndicatorDirective, HlmProgressDirective],
-  template: `
-    <brn-progress hlm class="w-80" aria-labelledby="loading" [value]="value">
-      <brn-progress-indicator hlm />
-    </brn-progress>
-  `,
+	selector: 'spartan-progress-preview',
+	standalone: true,
+	imports: [BrnProgressComponent, BrnProgressIndicatorComponent, HlmProgressIndicatorDirective, HlmProgressDirective],
+	template: `
+		<brn-progress hlm class="w-80" aria-labelledby="loading" [value]="value">
+			<brn-progress-indicator hlm />
+		</brn-progress>
+	`,
 })
 export class ProgressPreviewComponent implements OnInit {
-  value = 0;
+	value = 0;
 
-  ngOnInit() {
-    setTimeout(() => (this.value = 33), 2000);
-  }
+	ngOnInit() {
+		setTimeout(() => (this.value = 33), 2000);
+	}
 }
 
 export const defaultCode = `

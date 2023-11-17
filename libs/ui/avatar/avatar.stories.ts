@@ -2,20 +2,20 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmAvatarImports } from './helm/src';
 
 const meta: Meta<{}> = {
-  title: 'Avatar',
-  decorators: [
-    moduleMetadata({
-      imports: [HlmAvatarImports],
-    }),
-  ],
+	title: 'Avatar',
+	decorators: [
+		moduleMetadata({
+			imports: [HlmAvatarImports],
+		}),
+	],
 };
 
 export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
+	render: () => ({
+		template: `
     <div class='grid w-full items-center gap-4'>
     <hlm-avatar variant='small' id='avatar-small'>
     <img src='/mountains.jpg' alt='Spartan logo. A red spearhead with the Angular A'  hlmAvatarImage>
@@ -33,5 +33,5 @@ export const Default: Story = {
     </hlm-avatar>
     </div>
 `,
-  }),
+	}),
 };

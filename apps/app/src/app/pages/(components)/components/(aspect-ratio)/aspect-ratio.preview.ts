@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { HlmAspectRatioDirective } from '@spartan-ng/ui-aspectratio-helm';
 
 @Component({
-  selector: 'spartan-aspect-ratio-preview',
-  standalone: true,
-  imports: [HlmAspectRatioDirective],
-  template: `
-    <div class="overflow-hidden rounded-xl drop-shadow max-w-xl">
-      <div [hlmAspectRatio]="16 / 9">
-        <img alt="Mountain views" src="/assets/mountains.jpg" />
-      </div>
-    </div>
-  `,
+	selector: 'spartan-aspect-ratio-preview',
+	standalone: true,
+	imports: [HlmAspectRatioDirective],
+	template: `
+		<div class="max-w-xl overflow-hidden rounded-xl drop-shadow">
+			<div [hlmAspectRatio]="16 / 9">
+				<img alt="Mountain views" src="/assets/mountains.jpg" />
+			</div>
+		</div>
+	`,
 })
 export class AspectRatioPreviewComponent {}
 

@@ -1,69 +1,69 @@
 import { RouteMeta } from '@analogjs/router';
-import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
+import {
+	hlmBlockquote,
+	hlmCode,
+	hlmH1,
+	hlmH2,
+	hlmH3,
+	hlmH4,
+	hlmLarge,
+	hlmLead,
+	hlmMuted,
+	hlmP,
+	hlmSmall,
+	hlmUl,
+} from '@spartan-ng/ui-typography-helm';
+import { CodePreviewDirective } from '~/app/shared/code/code-preview.directive';
+import { CodeComponent } from '~/app/shared/code/code.component';
 import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import {
-  hlmBlockquote,
-  hlmCode,
-  hlmH1,
-  hlmH2,
-  hlmH3,
-  hlmH4,
-  hlmLarge,
-  hlmLead,
-  hlmMuted,
-  hlmP,
-  hlmSmall,
-  hlmUl,
-} from '@spartan-ng/ui-typography-helm';
-import { TabsComponent } from '~/app/shared/layout/tabs.component';
-import TypographyPreviewComponent, {
-  blockquoteCode,
-  codeCode,
-  h1Code,
-  h2Code,
-  h3Code,
-  h4Code,
-  largeCode,
-  leadCode,
-  listCode,
-  mutedCode,
-  pCode,
-  smallCode,
-  themingCode,
-} from './typography.preview';
-import { CodePreviewDirective } from '~/app/shared/code/code-preview.directive';
 import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
+import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
+import { TabsComponent } from '~/app/shared/layout/tabs.component';
+import { metaWith } from '~/app/shared/meta/meta.util';
+import TypographyPreviewComponent, {
+	blockquoteCode,
+	codeCode,
+	h1Code,
+	h2Code,
+	h3Code,
+	h4Code,
+	largeCode,
+	leadCode,
+	listCode,
+	mutedCode,
+	pCode,
+	smallCode,
+	themingCode,
+} from './typography.preview';
 
 export const routeMeta: RouteMeta = {
-  data: { breadcrumb: 'Typography' },
-  meta: metaWith('spartan - Typography', 'Styles for headings, paragraphs, lists... etc.'),
-  title: 'spartan - Typography',
+	data: { breadcrumb: 'Typography' },
+	meta: metaWith('spartan - Typography', 'Styles for headings, paragraphs, lists... etc.'),
+	title: 'spartan - Typography',
 };
 
 @Component({
-  selector: 'spartan-dark-mode',
-  standalone: true,
-  imports: [
-    MainSectionDirective,
-    SectionIntroComponent,
-    PageBottomNavComponent,
-    PageBottomNavLinkComponent,
-    PageNavComponent,
-    SectionSubHeadingComponent,
-    CodeComponent,
-    TabsComponent,
-    TypographyPreviewComponent,
-    CodePreviewDirective,
-    PageNavLinkComponent,
-  ],
-  template: `
+	selector: 'spartan-dark-mode',
+	standalone: true,
+	imports: [
+		MainSectionDirective,
+		SectionIntroComponent,
+		PageBottomNavComponent,
+		PageBottomNavLinkComponent,
+		PageNavComponent,
+		SectionSubHeadingComponent,
+		CodeComponent,
+		TabsComponent,
+		TypographyPreviewComponent,
+		CodePreviewDirective,
+		PageNavLinkComponent,
+	],
+	template: `
     <section spartanMainSection>
       <spartan-section-intro name="Typography" lead="Styles for headings, paragraphs, lists... etc." />
 
@@ -199,17 +199,17 @@ export const routeMeta: RouteMeta = {
   `,
 })
 export default class TypographyPageComponent {
-  protected readonly themingCode = themingCode;
-  protected readonly h1Code = h1Code;
-  protected readonly h2Code = h2Code;
-  protected readonly h3Code = h3Code;
-  protected readonly h4Code = h4Code;
-  protected readonly pCode = pCode;
-  protected readonly blockquoteCode = blockquoteCode;
-  protected readonly listCode = listCode;
-  protected readonly codeCode = codeCode;
-  protected readonly mutedCode = mutedCode;
-  protected readonly smallCode = smallCode;
-  protected readonly largeCode = largeCode;
-  protected readonly leadCode = leadCode;
+	protected readonly themingCode = themingCode;
+	protected readonly h1Code = h1Code;
+	protected readonly h2Code = h2Code;
+	protected readonly h3Code = h3Code;
+	protected readonly h4Code = h4Code;
+	protected readonly pCode = pCode;
+	protected readonly blockquoteCode = blockquoteCode;
+	protected readonly listCode = listCode;
+	protected readonly codeCode = codeCode;
+	protected readonly mutedCode = mutedCode;
+	protected readonly smallCode = smallCode;
+	protected readonly largeCode = largeCode;
+	protected readonly leadCode = leadCode;
 }

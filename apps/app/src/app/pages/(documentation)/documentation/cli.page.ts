@@ -1,44 +1,44 @@
 import { RouteMeta } from '@analogjs/router';
-import { metaWith } from '~/app/shared/meta/meta.util';
 import { Component } from '@angular/core';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { ComingSoonComponent } from '~/app/shared/layout/coming-soon.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
+import { radixExclamationTriangle } from '@ng-icons/radix-icons';
 import { HlmAlertModule } from '@spartan-ng/ui-alert-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { radixExclamationTriangle } from '@ng-icons/radix-icons';
+import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
+import { CodeComponent } from '~/app/shared/code/code.component';
+import { ComingSoonComponent } from '~/app/shared/layout/coming-soon.component';
+import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
+import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
+import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
-  data: { breadcrumb: 'CLI' },
-  meta: metaWith('spartan - CLI', 'Supercharge your spartan experience with our CLI.'),
-  title: 'spartan - CLI',
+	data: { breadcrumb: 'CLI' },
+	meta: metaWith('spartan - CLI', 'Supercharge your spartan experience with our CLI.'),
+	title: 'spartan - CLI',
 };
 
 @Component({
-  selector: 'spartan-cli',
-  standalone: true,
-  imports: [
-    MainSectionDirective,
-    SectionIntroComponent,
-    PageBottomNavComponent,
-    PageBottomNavLinkComponent,
-    PageNavComponent,
-    ComingSoonComponent,
-    SectionSubHeadingComponent,
-    CodeComponent,
-    PageNavLinkComponent,
-    HlmAlertModule,
-    HlmIconComponent,
-  ],
-  providers: [provideIcons({ radixExclamationTriangle })],
-  template: `
+	selector: 'spartan-cli',
+	standalone: true,
+	imports: [
+		MainSectionDirective,
+		SectionIntroComponent,
+		PageBottomNavComponent,
+		PageBottomNavLinkComponent,
+		PageNavComponent,
+		ComingSoonComponent,
+		SectionSubHeadingComponent,
+		CodeComponent,
+		PageNavLinkComponent,
+		HlmAlertModule,
+		HlmIconComponent,
+	],
+	providers: [provideIcons({ radixExclamationTriangle })],
+	template: `
     <section spartanMainSection>
       <spartan-section-intro name="CLI" lead="Supercharge your spartan experience with our CLI." />
       <section>
