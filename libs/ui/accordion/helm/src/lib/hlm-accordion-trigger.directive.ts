@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm, injectCustomClassSettable } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -7,13 +7,17 @@ import { ClassValue } from 'clsx';
 	standalone: true,
 	host: {
 		'[style.--tw-ring-offset-shadow]': '"0 0 #000"',
+		'[class]': 'generatedClasses()',
 	},
 })
 export class HlmAccordionTriggerDirective {
 	private _host = injectCustomClassSettable({ optional: true });
-	@HostBinding('class')
-	private _class = !this._host ? this.generateClass() : '';
-	private _inputs: ClassValue = '';
+
+	private _userCls = signal<ClassValue>('');
+
+	protected generatedClasses = computed(() => {
+		return !this._host ? this.generateClass() : '';
+	});
 
 	constructor() {
 		this._host?.setClassToCustomElement(this.generateClass());
@@ -21,18 +25,16 @@ export class HlmAccordionTriggerDirective {
 
 	@Input()
 	set class(inputs: ClassValue) {
-		this._inputs = inputs;
+		this._userCls.set(inputs);
+		// cannot set in effect because it sets a signal
 		if (this._host) {
-			this._host?.setClassToCustomElement(this._class);
-		} else {
-			this._class = this.generateClass();
+			this._host.setClassToCustomElement(this.generateClass());
 		}
 	}
-
 	generateClass() {
 		return hlm(
 			'w-full focus-visible:outline-none text-sm focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 flex flex-1 items-center justify-between py-4 px-0.5 font-medium underline-offset-4 hover:underline [&[data-state=open]>hlm-accordion-icon]:rotate-180',
-			this._inputs,
+			this._userCls(),
 		);
 	}
 }

@@ -1,23 +1,23 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlmAccordion],brn-accordion[hlm]',
 	standalone: true,
+	host: {
+		'[class]': 'generatedClasses()',
+	},
 })
 export class HlmAccordionDirective {
-	@HostBinding('class')
-	private _class = this.generateClass();
-	private _inputs: ClassValue = '';
+	private _userCls = signal<ClassValue>('');
 
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClass();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	generateClass() {
-		return hlm('flex flex-col', this._inputs);
-	}
+	protected generatedClasses = computed(() => {
+		return hlm('flex flex-col', this._userCls());
+	});
 }
