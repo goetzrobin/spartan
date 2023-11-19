@@ -1,30 +1,36 @@
 import { CdkMenuItemRadio } from '@angular/cdk/menu';
-import { booleanAttribute, Directive, HostBinding, inject, Input, Output } from '@angular/core';
+import { booleanAttribute, Directive, inject, Input, Output, signal } from '@angular/core';
 
 @Directive({
 	selector: '[brnMenuItemRadio]',
 	standalone: true,
 	hostDirectives: [CdkMenuItemRadio],
+	host: {
+		'[class.checked]': '_checked()',
+	},
 })
 export class BrnMenuItemRadioDirective {
 	private readonly _cdkMenuItem = inject(CdkMenuItemRadio, { host: true });
-	@HostBinding('class.checked')
-	private _checked = this._cdkMenuItem.checked;
 	get checked() {
-		return this._checked;
-	}
-
-	@Input({ transform: booleanAttribute })
-	set checked(value: boolean) {
-		this._checked = this._cdkMenuItem.checked = value;
+		return this._checked();
 	}
 
 	get disabled() {
 		return this._cdkMenuItem.disabled;
 	}
 
+	private _checked = signal(this._cdkMenuItem.checked);
 	@Input({ transform: booleanAttribute })
-	set disabled(value) {
+	set checked(value: boolean) {
+		this._cdkMenuItem.checked = value;
+		this._checked.set(value);
+	}
+
+	@Input({ transform: booleanAttribute })
+	set disabled(value: boolean) {
+		if (!value) {
+			this._checked.set(false);
+		}
 		this._cdkMenuItem.disabled = value;
 	}
 

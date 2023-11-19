@@ -4,10 +4,10 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ContentChildren,
-	HostBinding,
 	inject,
 	Input,
 	QueryList,
+	signal,
 	ViewEncapsulation,
 } from '@angular/core';
 import { rxHostListener } from '@spartan-ng/ui-core';
@@ -25,6 +25,7 @@ import { BrnTabsComponent } from './brn-tabs.component';
 		role: 'tablist',
 		'[attr.aria-orientation]': '_orientation()',
 		'[attr.data-orientation]': '_orientation()',
+		'[attr.aria-label]': '_ariaLabel()',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -40,9 +41,11 @@ export class BrnTabsListComponent implements AfterContentInit {
 
 	private _keyManager?: FocusKeyManager<BrnTabsTriggerDirective>;
 
-	@HostBinding('attr.aria-label')
+	protected readonly _ariaLabel = signal<string | undefined>(undefined);
 	@Input('aria-label')
-	ariaLabel: string | undefined;
+	set ariaLabel(value: string | undefined) {
+		this._ariaLabel.set(value);
+	}
 
 	@ContentChildren(BrnTabsTriggerDirective, { descendants: true })
 	public triggers?: QueryList<BrnTabsTriggerDirective>;

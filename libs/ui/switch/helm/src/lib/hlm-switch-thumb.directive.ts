@@ -1,26 +1,27 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
 	selector: 'brn-switch-thumb[hlm],[hlmSwitchThumb]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmSwitchThumbDirective {
-	private _inputs: ClassValue = '';
-	@HostBinding('class')
-	private _class = this.generateClass();
+	protected _computedClass = computed(() => this.generateClass());
 
+	private _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClass();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
 	private generateClass() {
 		return hlm(
 			'block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform group-data-[state=checked]:translate-x-5 group-data-[state=unchecked]:translate-x-0',
-			this._inputs,
+			this._userCls(),
 		);
 	}
 }

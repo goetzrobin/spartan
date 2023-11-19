@@ -1,11 +1,11 @@
 import { NgForOf, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { radixChevronRight } from '@ng-icons/radix-icons';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BreadcrumbService } from '~/app/shared/breadcrumbs/breadcrumb.service';
+import { BreadcrumbService } from './breadcrumb.service';
 
 export interface Breadcrumb {
 	label: string;
@@ -48,10 +48,10 @@ export interface Breadcrumb {
 	`,
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: '',
+	},
 })
 export class BreadcrumbsComponent {
 	public breadcrumbs = toSignal(inject(BreadcrumbService).breadcrumbs$);
-
-	@HostBinding('class')
-	public class = '';
 }
