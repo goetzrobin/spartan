@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, Input, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -6,7 +6,7 @@ import { ClassValue } from 'clsx';
 	selector: 'hlm-trow',
 	standalone: true,
 	host: {
-		'[class]': '_class()',
+		'[class]': '_computedClass()',
 		role: 'row',
 	},
 	template: `
@@ -14,23 +14,20 @@ import { ClassValue } from 'clsx';
 	`,
 })
 export class HlmTrowComponent {
-	protected readonly _class = signal(this.generateClasses());
-
 	@Input({ transform: booleanAttribute })
 	public truncate = false;
 
-	private _inputs: ClassValue = '';
-
+	private _userCls = signal<ClassValue>('');
 	@Input()
 	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class.set(this.generateClasses());
+		this._userCls.set(inputs);
 	}
 
-	private generateClasses() {
+	protected _computedClass = computed(() => this.generateClass());
+	private generateClass() {
 		return hlm(
 			'flex flex border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
-			this._inputs,
+			this._userCls(),
 		);
 	}
 }

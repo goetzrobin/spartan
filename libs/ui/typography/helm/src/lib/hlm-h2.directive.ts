@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -8,20 +8,19 @@ export const hlmH2 =
 @Directive({
 	selector: '[hlmH2]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmH2Directive {
-	private _inputs: ClassValue = '';
-
+	private _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	@HostBinding('class')
-	private _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(hlmH2, this._inputs);
+	protected _computedClass = computed(() => this.generateClass());
+	private generateClass() {
+		return hlm(hlmH2, this._userCls());
 	}
 }

@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -26,43 +26,31 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 @Directive({
 	selector: '[hlmLabel]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmLabelDirective {
-	private _inputs: ClassValue = '';
-
-	private _variant: LabelVariants['variant'] = 'default';
-
+	private _variant = signal<LabelVariants['variant']>('default');
 	@Input()
-	get variant(): LabelVariants['variant'] {
-		return this._variant;
-	}
-
 	set variant(value: LabelVariants['variant']) {
-		this._variant = value;
-		this._class = this.generateClasses();
+		this._variant.set(value);
 	}
 
-	private _error: LabelVariants['error'] = 'auto';
+	private _error = signal<LabelVariants['error']>('auto');
 	@Input()
-	get error(): LabelVariants['error'] {
-		return this._error;
-	}
-
 	set error(value: LabelVariants['error']) {
-		this._error = value;
-		this._class = this.generateClasses();
+		this._error.set(value);
 	}
 
+	private _userCls = signal<ClassValue>('');
 	@Input()
-	set class(labels: ClassValue) {
-		this._inputs = labels;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	@HostBinding('class')
-	private _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(labelVariants({ variant: this._variant, error: this._error }), this._inputs);
+	protected _computedClass = computed(() => this.generateClass());
+	private generateClass() {
+		return hlm(labelVariants({ variant: this._variant(), error: this._error() }), this._userCls());
 	}
 }

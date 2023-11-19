@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -22,26 +22,25 @@ type MenuVariants = VariantProps<typeof menuVariants>;
 @Directive({
 	selector: '[hlm][brnMenu]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmMenuDirective {
-	@HostBinding('class')
-	private _class = this.generateClasses();
-	private _inputs: ClassValue = '';
-
+	private _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	private _variant: MenuVariants['variant'] = 'default';
+	private _variant = signal<MenuVariants['variant']>('default');
 	@Input()
 	set variant(value: MenuVariants['variant']) {
-		this._variant = value;
-		this._class = this.generateClasses();
+		this._variant.set(value);
 	}
 
-	generateClasses() {
-		return hlm(menuVariants({ variant: this._variant }), this._inputs);
+	protected _computedClass = computed(() => this.generateClass());
+	generateClass() {
+		return hlm(menuVariants({ variant: this._variant() }), this._userCls());
 	}
 }

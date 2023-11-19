@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -28,42 +28,31 @@ type InputVariants = VariantProps<typeof inputVariants>;
 @Directive({
 	selector: '[hlmInput]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmInputDirective {
-	private _inputs: ClassValue = '';
-
-	private _size: InputVariants['size'] = 'default';
+	private _size = signal<InputVariants['size']>('default');
 	@Input()
-	get size(): InputVariants['size'] {
-		return this._size;
-	}
-
 	set size(value: InputVariants['size']) {
-		this._size = value;
-		this._class = this.generateClasses();
+		this._size.set(value);
 	}
 
-	private _error: InputVariants['error'] = 'auto';
+	private _error = signal<InputVariants['error']>('auto');
 	@Input()
-	get error(): InputVariants['error'] {
-		return this._error;
-	}
-
 	set error(value: InputVariants['error']) {
-		this._error = value;
-		this._class = this.generateClasses();
+		this._error.set(value);
 	}
 
+	private _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
+	protected _computedClass = computed(() => this.generateClass());
 
-	@HostBinding('class')
-	private _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(inputVariants({ size: this._size, error: this._error }), this._inputs);
+	private generateClass() {
+		return hlm(inputVariants({ size: this._size(), error: this._error() }), this._userCls());
 	}
 }

@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -19,31 +19,25 @@ type ListVariants = VariantProps<typeof listVariants>;
 @Directive({
 	selector: '[hlmTabsList]',
 	standalone: true,
-	host: {},
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmTabsListDirective {
-	@HostBinding('class')
-	private _class = this.generateClass();
-
-	private _inputs: ClassValue = '';
+	private _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClass();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	private _orientation: ListVariants['orientation'] = 'horizontal';
+	private _orientation = signal<ListVariants['orientation']>('horizontal');
 	@Input()
-	get orientation(): ListVariants['orientation'] {
-		return this._orientation;
-	}
-
 	set orientation(value: ListVariants['orientation']) {
-		this._orientation = value;
-		this._class = this.generateClass();
+		this._orientation.set(value);
 	}
 
+	protected _computedClass = computed(() => this.generateClass());
 	generateClass() {
-		return hlm(listVariants({ orientation: this._orientation }), this._inputs);
+		return hlm(listVariants({ orientation: this._orientation() }), this._userCls());
 	}
 }

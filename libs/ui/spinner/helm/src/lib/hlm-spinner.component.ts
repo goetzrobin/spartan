@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -25,6 +25,7 @@ export type SpinnerVariants = VariantProps<typeof spinnerVariants>;
 	selector: 'hlm-spinner',
 	standalone: true,
 	host: {
+		'[class]': '_computedClass()',
 		role: 'status',
 	},
 	template: `
@@ -42,30 +43,20 @@ export type SpinnerVariants = VariantProps<typeof spinnerVariants>;
 	`,
 })
 export class HlmSpinnerComponent {
-	private _inputs: ClassValue = '';
-
-	private _size: SpinnerVariants['size'] = 'default';
-
+	private _size = signal<SpinnerVariants['size']>('default');
 	@Input()
-	get size(): SpinnerVariants['size'] {
-		return this._size;
-	}
-
 	set size(value: SpinnerVariants['size']) {
-		this._size = value;
-		this._class = this.generateClasses();
+		this._size.set(value);
 	}
 
+	private _userCls = signal<ClassValue>('');
 	@Input()
-	set class(labels: ClassValue) {
-		this._inputs = labels;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	@HostBinding('class')
-	private _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(spinnerVariants({ size: this._size }), this._inputs);
+	protected _computedClass = computed(() => this.generateClass());
+	private generateClass() {
+		return hlm(spinnerVariants({ size: this._size() }), this._userCls());
 	}
 }
