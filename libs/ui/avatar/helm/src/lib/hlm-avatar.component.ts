@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, Input, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, Input, signal, ViewEncapsulation } from '@angular/core';
 import { BrnAvatarComponent } from '@spartan-ng/ui-avatar-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
@@ -34,27 +34,25 @@ type AvatarVariants = VariantProps<typeof avatarVariants>;
 			<ng-content select="[hlmAvatarFallback],[brnAvatarFallback]" />
 		</ng-template>
 	`,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmAvatarComponent extends BrnAvatarComponent {
 	private readonly _variant = signal<AvatarVariants['variant']>('medium');
-	private readonly userCls = signal<ClassValue>('');
+
+	private _userCls = signal<ClassValue>('');
+	protected _computedClass = computed(() => {
+		return hlm(avatarVariants({ variant: this._variant() }), this._userCls());
+	});
+
+	@Input()
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
+	}
 
 	@Input()
 	set variant(variant: AvatarVariants['variant']) {
 		this._variant.set(variant);
-		this.cls = this.generateClasses();
-	}
-
-	@Input()
-	set class(cls: ClassValue) {
-		this.userCls.set(cls);
-		this.cls = this.generateClasses();
-	}
-
-	@HostBinding('class')
-	protected cls = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(avatarVariants({ variant: this._variant() }), this.userCls());
 	}
 }

@@ -46,7 +46,7 @@ const isDefinedSize = (size: IconSize): size is DefinedSizes => {
 		/>
 	`,
 	host: {
-		'[class]': 'generatedClasses()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmIconComponent {
@@ -58,7 +58,7 @@ export class HlmIconComponent {
 	protected readonly ngIconSize = computed(() => (isDefinedSize(this._size()) ? '100%' : (this._size() as string)));
 	protected readonly ngIconCls = signal<ClassValue>('');
 
-	protected readonly generatedClasses = computed(() => {
+	protected readonly _computedClass = computed(() => {
 		const size: IconSize = this._size();
 		const variant = isDefinedSize(size) ? size : 'none';
 		return hlm(iconVariants({ variant }), this.userCls());
