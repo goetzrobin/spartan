@@ -6,18 +6,17 @@ import { ClassValue } from 'clsx';
 	selector: '[hlmAccordionItem],brn-accordion-item[hlm]',
 	standalone: true,
 	host: {
-		'[class]': 'generatedClasses()',
+		'[class]': '_generatedClasses()',
 	},
 })
 export class HlmAccordionItemDirective {
 	private _userCls = signal<ClassValue>('');
+	protected _generatedClasses = computed(() => {
+		return hlm('flex flex-1 flex-col border-b border-border', this._userCls());
+	});
 
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
-
-	protected generatedClasses = computed(() => {
-		return hlm('flex flex-1 flex-col border-b border-border', this._userCls());
-	});
 }

@@ -11,18 +11,17 @@ import { ClassValue } from 'clsx';
 		</svg>
 	`,
 	host: {
-		'[class]': 'generatedClasses()',
+		'[class]': '_generatedClasses()',
 	},
 })
 export class HlmAccordionIconComponent {
 	private _userCls = signal<ClassValue>('');
+	protected _generatedClasses = computed(() => {
+		return hlm('inline-block h-4 w-4 transition-transform duration-200', this._userCls());
+	});
 
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
-
-	protected generatedClasses = computed(() => {
-		return hlm('inline-block h-4 w-4 transition-transform duration-200', this._userCls());
-	});
 }
