@@ -19,7 +19,7 @@ import { ClassValue } from 'clsx';
 	standalone: true,
 	host: {
 		'[style.height]': 'cssHeight()',
-		'[class]': '_generatedClasses()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmAccordionContentDirective implements OnInit {
@@ -35,7 +35,7 @@ export class HlmAccordionContentDirective implements OnInit {
 	public readonly state = signal('closed');
 
 	private _userCls = signal<ClassValue>('');
-	protected _generatedClasses = computed(() => {
+	protected _computedClass = computed(() => {
 		return hlm('overflow-hidden text-sm transition-all', this._userCls());
 	});
 	@Input()

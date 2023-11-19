@@ -11,12 +11,12 @@ import { ClassValue } from 'clsx';
 		</svg>
 	`,
 	host: {
-		'[class]': '_generatedClasses()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmAccordionIconComponent {
 	private _userCls = signal<ClassValue>('');
-	protected _generatedClasses = computed(() => {
+	protected _computedClass = computed(() => {
 		return hlm('inline-block h-4 w-4 transition-transform duration-200', this._userCls());
 	});
 

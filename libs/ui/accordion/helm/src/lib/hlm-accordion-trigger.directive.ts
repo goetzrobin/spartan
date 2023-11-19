@@ -7,14 +7,14 @@ import { ClassValue } from 'clsx';
 	standalone: true,
 	host: {
 		'[style.--tw-ring-offset-shadow]': '"0 0 #000"',
-		'[class]': '_generatedClasses()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmAccordionTriggerDirective {
 	private _host = injectCustomClassSettable({ optional: true });
 
 	private _userCls = signal<ClassValue>('');
-	protected _generatedClasses = computed(() => {
+	protected _computedClass = computed(() => {
 		return !this._host ? this._generateClass() : '';
 	});
 

@@ -6,12 +6,12 @@ import { ClassValue } from 'clsx';
 	selector: '[hlmAccordion],brn-accordion[hlm]',
 	standalone: true,
 	host: {
-		'[class]': '_generatedClasses()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmAccordionDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _generatedClasses = computed(() => {
+	protected _computedClass = computed(() => {
 		return hlm('flex flex-col', this._userCls());
 	});
 

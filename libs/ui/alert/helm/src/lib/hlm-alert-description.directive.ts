@@ -12,12 +12,12 @@ export type AlertDescriptionVariants = VariantProps<typeof alertDescriptionVaria
 	selector: '[hlmAlertDesc],[hlmAlertDescription]',
 	standalone: true,
 	host: {
-		'[class]': '_generatedClasses()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmAlertDescriptionDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _generatedClasses = computed(() => {
+	protected _computedClass = computed(() => {
 		return hlm(alertDescriptionVariants(), this._userCls());
 	});
 

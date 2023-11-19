@@ -12,12 +12,12 @@ export type AlertTitleVariants = VariantProps<typeof alertTitleVariants>;
 	selector: '[hlmAlertTitle]',
 	standalone: true,
 	host: {
-		'[class]': '_generatedClasses()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmAlertTitleDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _generatedClasses = computed(() => {
+	protected _computedClass = computed(() => {
 		return hlm(alertTitleVariants(), this._userCls());
 	});
 
