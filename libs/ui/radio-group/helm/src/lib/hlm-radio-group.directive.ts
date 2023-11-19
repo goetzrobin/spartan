@@ -11,12 +11,12 @@ import { ClassValue } from 'clsx';
 })
 export class HlmRadioGroupDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 	generateClass() {
 		return hlm('block', this._userCls());
 	}

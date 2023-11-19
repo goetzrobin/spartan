@@ -12,12 +12,12 @@ import { ClassValue } from 'clsx';
 })
 export class HlmCommandInputWrapperComponent {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 	generateClass() {
 		return hlm(
 			'flex space-x-2 items-center border-b border-border px-3 [&_hlm-icon]:h-5 [&_hlm-icon]:w-5',

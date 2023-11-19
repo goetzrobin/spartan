@@ -22,12 +22,12 @@ export class HlmPopoverContentDirective {
 	}
 
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 
 	private generateClass() {
 		return hlm(

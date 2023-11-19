@@ -11,12 +11,12 @@ import { ClassValue } from 'clsx';
 })
 export class HlmCommandEmptyDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 	generateClass() {
 		return hlm('py-6 text-center text-sm', this._userCls());
 	}

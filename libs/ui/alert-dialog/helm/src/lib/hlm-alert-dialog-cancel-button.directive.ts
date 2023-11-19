@@ -13,18 +13,19 @@ import { ClassValue } from 'clsx';
 })
 export class HlmAlertDialogCancelButtonDirective {
 	private _hlmBtn = inject(HlmButtonDirective, { host: true });
-	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
 
+	private _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
-	private generateClass() {
-		return hlm('mt-2 sm:mt-0', this._userCls());
-	}
 	constructor() {
 		this._hlmBtn.variant = 'outline';
+	}
+
+	protected _computedClass = computed(() => this.generateClass());
+	private generateClass() {
+		return hlm('mt-2 sm:mt-0', this._userCls());
 	}
 }

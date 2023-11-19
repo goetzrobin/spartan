@@ -16,12 +16,12 @@ export class HlmAvatarImageDirective {
 	canShow = inject(BrnAvatarImageDirective).canShow;
 
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm('aspect-square object-cover h-full w-full', this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => {
+		return hlm('aspect-square object-cover h-full w-full', this._userCls());
+	});
 }

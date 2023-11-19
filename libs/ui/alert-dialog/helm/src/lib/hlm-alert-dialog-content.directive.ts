@@ -20,13 +20,12 @@ export class HlmAlertDialogContentDirective {
 	}
 
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
+	protected _computedClass = computed(() => this.generateClass());
 	private generateClass() {
 		return hlm(
 			'relative grid w-full max-w-lg gap-4 border-border border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[2%]  data-[state=open]:slide-in-from-top-[2%] sm:rounded-lg md:w-full',

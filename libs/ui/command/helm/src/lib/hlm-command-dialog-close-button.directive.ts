@@ -18,12 +18,12 @@ export class HlmCommandDialogCloseButtonDirective {
 	}
 
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 	generateClass() {
 		return hlm('!p-1 !h-5 !w-5', this._userCls());
 	}

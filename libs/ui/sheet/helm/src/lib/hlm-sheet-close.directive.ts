@@ -11,13 +11,12 @@ import { ClassValue } from 'clsx';
 })
 export class HlmSheetCloseDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
+	protected _computedClass = computed(() => this.generateClass());
 	private generateClass() {
 		return hlm(
 			'absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground',

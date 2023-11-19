@@ -11,12 +11,12 @@ import { ClassValue } from 'clsx';
 })
 export class HlmCommandListDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 	generateClass() {
 		return hlm('max-h-[300px] overflow-y-auto overflow-x-hidden', this._userCls());
 	}

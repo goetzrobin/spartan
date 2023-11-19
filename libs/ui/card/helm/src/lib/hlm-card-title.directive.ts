@@ -18,12 +18,12 @@ export type CardTitleVariants = VariantProps<typeof cardTitleVariants>;
 })
 export class HlmCardTitleDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm(cardTitleVariants(), this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => {
+		return hlm(cardTitleVariants(), this._userCls());
+	});
 }

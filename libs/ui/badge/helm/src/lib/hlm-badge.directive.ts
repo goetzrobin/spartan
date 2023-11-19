@@ -48,25 +48,25 @@ type badgeVariants = VariantProps<typeof badgeVariants>;
 	},
 })
 export class HlmBadgeDirective {
-	private readonly _variant = signal<badgeVariants['variant']>('default');
-	private readonly _static = signal<badgeVariants['static']>(false);
-
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm(badgeVariants({ variant: this._variant(), static: this._static() }), this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
+	private readonly _variant = signal<badgeVariants['variant']>('default');
 	@Input()
 	set variant(variant: badgeVariants['variant']) {
 		this._variant.set(variant);
 	}
+
+	private readonly _static = signal<badgeVariants['static']>(false);
 	@Input({ transform: booleanAttribute })
 	set static(value: badgeVariants['static']) {
 		this._static.set(value);
 	}
+
+	protected _computedClass = computed(() => {
+		return hlm(badgeVariants({ variant: this._variant(), static: this._static() }), this._userCls());
+	});
 }

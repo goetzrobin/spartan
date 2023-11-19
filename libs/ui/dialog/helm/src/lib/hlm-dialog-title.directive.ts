@@ -11,12 +11,12 @@ import { ClassValue } from 'clsx';
 })
 export class HlmDialogTitleDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 
 	private generateClass() {
 		return hlm('text-lg font-semibold leading-none tracking-tight', this._userCls());

@@ -25,18 +25,18 @@ export type CardHeaderVariants = VariantProps<typeof cardHeaderVariants>;
 })
 export class HlmCardHeaderDirective {
 	private _userCls = signal<ClassValue>('');
-	private _direction = signal<CardHeaderVariants['direction']>('column');
-
-	protected _computedClass = computed(() => {
-		return hlm(cardHeaderVariants({ direction: this._direction() }), this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	private _direction = signal<CardHeaderVariants['direction']>('column');
 	@Input()
 	set direction(direction: CardHeaderVariants['direction']) {
 		this._direction.set(direction);
 	}
+
+	protected _computedClass = computed(() => {
+		return hlm(cardHeaderVariants({ direction: this._direction() }), this._userCls());
+	});
 }

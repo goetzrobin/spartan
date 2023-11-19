@@ -10,11 +10,9 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmMenuItemDirective {
-	private _userCls = signal<ClassValue>('');
 	private _inset = signal<ClassValue>(false);
 
-	protected _computedClass = computed(() => this.generateClass());
-
+	private _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
@@ -24,6 +22,7 @@ export class HlmMenuItemDirective {
 		this._inset.set(value);
 	}
 
+	protected _computedClass = computed(() => this.generateClass());
 	generateClass() {
 		return hlm(
 			'group w-full relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50',

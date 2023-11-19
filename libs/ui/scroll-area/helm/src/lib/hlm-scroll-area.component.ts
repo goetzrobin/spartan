@@ -32,12 +32,12 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 })
 export class HlmScrollAreaComponent {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 
 	@Input()
 	public track: 'vertical' | 'horizontal' | 'all' = 'all';

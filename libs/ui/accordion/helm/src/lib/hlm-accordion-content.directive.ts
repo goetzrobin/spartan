@@ -35,13 +35,14 @@ export class HlmAccordionContentDirective implements OnInit {
 	public readonly state = signal('closed');
 
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm('overflow-hidden text-sm transition-all', this._userCls());
-	});
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => {
+		return hlm('overflow-hidden text-sm transition-all', this._userCls());
+	});
 
 	public ngOnInit() {
 		this._host?.setClassToCustomElement('pt-1 pb-4');

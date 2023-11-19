@@ -43,13 +43,12 @@ export class HlmSheetContentDirective {
 	}
 
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
+	protected _computedClass = computed(() => this.generateClass());
 	private generateClass() {
 		return hlm(sheetVariants({ side: this._sideProvider?.side() }), this._userCls());
 	}

@@ -14,12 +14,12 @@ import { ClassValue } from 'clsx';
 })
 export class HlmMenuShortcutComponent {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 	generateClass() {
 		return hlm('ml-auto font-light text-xs tracking-widest opacity-60', this._userCls());
 	}

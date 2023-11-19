@@ -13,15 +13,11 @@ import { ClassValue } from 'clsx';
 export class HlmAccordionTriggerDirective {
 	private _host = injectCustomClassSettable({ optional: true });
 
-	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return !this._host ? this._generateClass() : '';
-	});
-
 	constructor() {
 		this._host?.setClassToCustomElement(this._generateClass());
 	}
 
+	private _userCls = signal<ClassValue>('');
 	@Input()
 	set class(inputs: ClassValue) {
 		this._userCls.set(inputs);
@@ -30,6 +26,10 @@ export class HlmAccordionTriggerDirective {
 			this._host.setClassToCustomElement(this._generateClass());
 		}
 	}
+
+	protected _computedClass = computed(() => {
+		return !this._host ? this._generateClass() : '';
+	});
 	private _generateClass() {
 		return hlm(
 			'w-full focus-visible:outline-none text-sm focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 flex flex-1 items-center justify-between py-4 px-0.5 font-medium underline-offset-4 hover:underline [&[data-state=open]>hlm-accordion-icon]:rotate-180',

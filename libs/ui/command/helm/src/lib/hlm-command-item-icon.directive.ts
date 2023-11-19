@@ -18,12 +18,12 @@ export class HlmCommandItemIconDirective {
 		this._menuIcon.size = 'none';
 	}
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => this.generateClass());
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => this.generateClass());
 	generateClass() {
 		return hlm('mr-2 h-4 w-4', this._userCls());
 	}

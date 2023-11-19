@@ -38,25 +38,25 @@ type ButtonVariants = VariantProps<typeof buttonVariants>;
 	},
 })
 export class HlmButtonDirective {
-	private readonly _variant = signal<ButtonVariants['variant']>('default');
-	private readonly _size = signal<ButtonVariants['size']>('default');
-
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm(buttonVariants({ variant: this._variant(), size: this._size() }), this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
+	private readonly _variant = signal<ButtonVariants['variant']>('default');
 	@Input()
 	set variant(variant: ButtonVariants['variant']) {
 		this._variant.set(variant);
 	}
+
+	private readonly _size = signal<ButtonVariants['size']>('default');
 	@Input()
 	set size(size: ButtonVariants['size']) {
 		this._size.set(size);
 	}
+
+	protected _computedClass = computed(() => {
+		return hlm(buttonVariants({ variant: this._variant(), size: this._size() }), this._userCls());
+	});
 }

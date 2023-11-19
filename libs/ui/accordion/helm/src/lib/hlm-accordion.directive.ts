@@ -11,12 +11,12 @@ import { ClassValue } from 'clsx';
 })
 export class HlmAccordionDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm('flex flex-col', this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => {
+		return hlm('flex flex-col', this._userCls());
+	});
 }

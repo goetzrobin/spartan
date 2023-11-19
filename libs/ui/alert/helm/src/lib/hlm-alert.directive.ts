@@ -30,10 +30,6 @@ export type AlertVariants = VariantProps<typeof alertVariants>;
 })
 export class HlmAlertDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm(this._generateClasses(), this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
@@ -45,6 +41,9 @@ export class HlmAlertDirective {
 		this._variant.set(variant);
 	}
 
+	protected _computedClass = computed(() => {
+		return hlm(this._generateClasses(), this._userCls());
+	});
 	private _generateClasses() {
 		return hlm(alertVariants({ variant: this._variant() }), this._userCls());
 	}

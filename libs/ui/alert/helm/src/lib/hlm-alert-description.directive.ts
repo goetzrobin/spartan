@@ -17,12 +17,12 @@ export type AlertDescriptionVariants = VariantProps<typeof alertDescriptionVaria
 })
 export class HlmAlertDescriptionDirective {
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm(alertDescriptionVariants(), this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	protected _computedClass = computed(() => {
+		return hlm(alertDescriptionVariants(), this._userCls());
+	});
 }

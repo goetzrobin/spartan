@@ -39,20 +39,19 @@ type AvatarVariants = VariantProps<typeof avatarVariants>;
 	},
 })
 export class HlmAvatarComponent extends BrnAvatarComponent {
-	private readonly _variant = signal<AvatarVariants['variant']>('medium');
-
 	private _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm(avatarVariants({ variant: this._variant() }), this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
+	private readonly _variant = signal<AvatarVariants['variant']>('medium');
 	@Input()
 	set variant(variant: AvatarVariants['variant']) {
 		this._variant.set(variant);
 	}
+
+	protected _computedClass = computed(() => {
+		return hlm(avatarVariants({ variant: this._variant() }), this._userCls());
+	});
 }
