@@ -1,26 +1,26 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlm][brnCmdInput],[hlm][cmdkInput]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmCommandInputDirective {
-	@HostBinding('class')
-	private _class = this.generateClass();
-	private _inputs: ClassValue = '';
+	private _userCls = signal<ClassValue>('');
+	protected _computedClass = computed(() => this.generateClass());
 
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClass();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
-
 	generateClass() {
 		return hlm(
 			'h-11 w-full bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
-			this._inputs,
+			this._userCls(),
 		);
 	}
 }

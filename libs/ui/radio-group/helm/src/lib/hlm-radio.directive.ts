@@ -1,23 +1,23 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
 	selector: 'brn-radio[hlm],[hlmRadio]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmRadioDirective {
-	@HostBinding('class')
-	private _class = this.generateClass();
-	private _inputs: ClassValue = '';
+	private _userCls = signal<ClassValue>('');
+	protected _computedClass = computed(() => this.generateClass());
 
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClass();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
-
 	generateClass() {
-		return hlm('group [&.brn-radio-disabled]:text-muted-foreground flex items-center space-x-2', this._inputs);
+		return hlm('group [&.brn-radio-disabled]:text-muted-foreground flex items-center space-x-2', this._userCls());
 	}
 }

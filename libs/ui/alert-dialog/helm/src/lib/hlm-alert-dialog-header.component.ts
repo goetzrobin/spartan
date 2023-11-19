@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -8,19 +8,19 @@ import { ClassValue } from 'clsx';
 	template: `
 		<ng-content />
 	`,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmAlertDialogHeaderComponent {
-	@HostBinding('class')
-	private _class = this.generateClass();
-	private _inputs: ClassValue = '';
+	private _userCls = signal<ClassValue>('');
+	protected _computedClass = computed(() => this.generateClass());
 
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClass();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
-
 	generateClass() {
-		return hlm('flex flex-col space-y-2 text-center sm:text-left', this._inputs);
+		return hlm('flex flex-col space-y-2 text-center sm:text-left', this._userCls());
 	}
 }

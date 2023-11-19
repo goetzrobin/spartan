@@ -1,23 +1,24 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlmDialogTitle],[brnDialogTitle][hlm]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmDialogTitleDirective {
-	@HostBinding('class')
-	_class = this.generateClasses();
-	private _inputs: ClassValue = '';
+	private _userCls = signal<ClassValue>('');
+	protected _computedClass = computed(() => this.generateClass());
 
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	private generateClasses() {
-		return hlm('text-lg font-semibold leading-none tracking-tight', this._inputs);
+	private generateClass() {
+		return hlm('text-lg font-semibold leading-none tracking-tight', this._userCls());
 	}
 }
