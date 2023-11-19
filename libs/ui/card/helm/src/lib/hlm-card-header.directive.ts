@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -19,26 +19,24 @@ export type CardHeaderVariants = VariantProps<typeof cardHeaderVariants>;
 @Directive({
 	selector: '[hlmCardHeader]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmCardHeaderDirective {
-	private _inputs: ClassValue = '';
+	private _userCls = signal<ClassValue>('');
+	private _direction = signal<CardHeaderVariants['direction']>('column');
 
-	private _direction: CardHeaderVariants['direction'] = 'column';
-	@Input()
-	set direction(value: CardHeaderVariants['direction']) {
-		this._direction = value;
-		this._class = this.generateClasses();
-	}
+	protected _computedClass = computed(() => {
+		return hlm(cardHeaderVariants({ direction: this._direction() }), this._userCls());
+	});
 
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
-
-	@HostBinding('class') _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(cardHeaderVariants({ direction: this._direction }), this._inputs);
+	@Input()
+	set direction(direction: CardHeaderVariants['direction']) {
+		this._direction.set(direction);
 	}
 }

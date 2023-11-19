@@ -1,6 +1,6 @@
-import { booleanAttribute, Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, booleanAttribute, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { cva, VariantProps } from 'class-variance-authority';
+import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
 const badgeVariants = cva(
@@ -43,42 +43,30 @@ type badgeVariants = VariantProps<typeof badgeVariants>;
 @Directive({
 	selector: '[hlmBadge]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmBadgeDirective {
-	private _variant: badgeVariants['variant'] = 'default';
+	private readonly _variant = signal<badgeVariants['variant']>('default');
+	private readonly _static = signal<badgeVariants['static']>(false);
+
+	private _userCls = signal<ClassValue>('');
+	protected _computedClass = computed(() => {
+		return hlm(badgeVariants({ variant: this._variant(), static: this._static() }), this._userCls());
+	});
+
 	@Input()
-	get variant(): badgeVariants['variant'] {
-		return this._variant;
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	set variant(value: badgeVariants['variant']) {
-		this._variant = value;
-		this._class = this.generateClasses();
+	@Input()
+	set variant(variant: badgeVariants['variant']) {
+		this._variant.set(variant);
 	}
-
-	private _static: badgeVariants['static'] = false;
 	@Input({ transform: booleanAttribute })
-	get static(): badgeVariants['static'] {
-		return this._static;
-	}
-
-	set static(value: boolean) {
-		this._static = value;
-		this._class = this.generateClasses();
-	}
-
-	private _inputs: ClassValue = '';
-
-	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
-	}
-
-	@HostBinding('class')
-	private _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(badgeVariants({ variant: this._variant, static: this._static }), this._inputs);
+	set static(value: badgeVariants['static']) {
+		this._static.set(value);
 	}
 }

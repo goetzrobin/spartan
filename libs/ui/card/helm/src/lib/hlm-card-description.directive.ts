@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -12,19 +12,18 @@ export type CardDescriptionVariants = VariantProps<typeof cardDescriptionVariant
 @Directive({
 	selector: '[hlmCardDescription]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmCardDescriptionDirective {
-	private _inputs: ClassValue = '';
-	@HostBinding('class')
-	private _class = this.generateClasses();
+	private _userCls = signal<ClassValue>('');
+	protected _computedClass = computed(() => {
+		return hlm(cardDescriptionVariants(), this._userCls());
+	});
 
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
-	}
-
-	private generateClasses() {
-		return hlm(cardDescriptionVariants(), this._inputs);
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 }
