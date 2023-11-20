@@ -9,6 +9,7 @@ import {
 	ElementRef,
 	EventEmitter,
 	forwardRef,
+	HostBinding,
 	inject,
 	Input,
 	OnDestroy,
@@ -38,8 +39,8 @@ const CONTAINER_POST_FIX = '-switch';
 			tabindex="-1"
 			type="checkbox"
 			role="switch"
-			[id]="forChild(id) ?? ''"
-			[name]="forChild(name) ?? ''"
+			[id]="forChild(_id()) ?? ''"
+			[name]="forChild(_name()) ?? ''"
 			[value]="_checked() ? 'on' : 'off'"
 			[ngStyle]="{
 				position: 'absolute',
