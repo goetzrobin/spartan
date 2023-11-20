@@ -1,5 +1,10 @@
-import { Directive, forwardRef, inject, TemplateRef } from '@angular/core';
-import { EXPOSES_SIDE_TOKEN, EXPOSES_STATE_TOKEN, ExposesSide, ExposesState } from '@spartan-ng/ui-core';
+import { Directive, inject, TemplateRef } from '@angular/core';
+import {
+	ExposesSide,
+	ExposesState,
+	provideExposedSideProviderExisting,
+	provideExposesStateProviderExisting,
+} from '@spartan-ng/ui-core';
 import { BrnHoverCardContentService } from './brn-hover-card-content.service';
 
 @Directive({
@@ -7,14 +12,8 @@ import { BrnHoverCardContentService } from './brn-hover-card-content.service';
 	standalone: true,
 	exportAs: 'brnHoverCardContent',
 	providers: [
-		{
-			provide: EXPOSES_STATE_TOKEN,
-			useExisting: forwardRef(() => BrnHoverCardContentDirective),
-		},
-		{
-			provide: EXPOSES_SIDE_TOKEN,
-			useExisting: forwardRef(() => BrnHoverCardContentDirective),
-		},
+		provideExposedSideProviderExisting(() => BrnHoverCardContentDirective),
+		provideExposesStateProviderExisting(() => BrnHoverCardContentDirective),
 	],
 })
 export class BrnHoverCardContentDirective implements ExposesState, ExposesSide {

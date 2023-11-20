@@ -1,18 +1,13 @@
-import { Directive, forwardRef, inject, Input, TemplateRef } from '@angular/core';
-import { EXPOSES_STATE_TOKEN } from '@spartan-ng/ui-core';
+import { Directive, inject, Input, TemplateRef } from '@angular/core';
+import { ExposesState, provideExposesStateProviderExisting } from '@spartan-ng/ui-core';
 import { BrnDialogComponent } from './brn-dialog.component';
 
 @Directive({
 	selector: '[brnDialogContent]',
 	standalone: true,
-	providers: [
-		{
-			provide: EXPOSES_STATE_TOKEN,
-			useExisting: forwardRef(() => BrnDialogContentDirective),
-		},
-	],
+	providers: [provideExposesStateProviderExisting(() => BrnDialogContentDirective)],
 })
-export class BrnDialogContentDirective<T> {
+export class BrnDialogContentDirective<T> implements ExposesState {
 	private _brnDialog = inject(BrnDialogComponent);
 	private _template = inject(TemplateRef);
 	public state = this._brnDialog.state;

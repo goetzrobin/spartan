@@ -1,17 +1,12 @@
-import { Component, ElementRef, forwardRef, inject, signal } from '@angular/core';
-import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui-core';
+import { Component, ElementRef, inject, signal } from '@angular/core';
+import { CustomElementClassSettable, provideCustomClassSettableExisting } from '@spartan-ng/ui-core';
 import { BrnAccordionItemComponent } from './brn-accordion-item.component';
 import { BrnAccordionComponent } from './brn-accordion.component';
 
 @Component({
 	selector: 'brn-accordion-trigger',
 	standalone: true,
-	providers: [
-		{
-			provide: SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN,
-			useExisting: forwardRef(() => BrnAccordionTriggerComponent),
-		},
-	],
+	providers: [provideCustomClassSettableExisting(() => BrnAccordionTriggerComponent)],
 	host: {
 		'[attr.data-state]': 'state()',
 		'[attr.aria-expanded]': 'state() === "open"',
