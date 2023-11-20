@@ -32,7 +32,7 @@ const sheetVariants = cva(
 export class HlmSheetContentDirective {
 	private _stateProvider = injectExposesStateProvider({ host: true });
 	private _sideProvider = injectExposedSideProvider({ host: true });
-	public state = this._stateProvider?.state ?? signal('closed');
+	public state = this._stateProvider.state ?? signal('closed');
 	private _renderer = inject(Renderer2);
 	private _element = inject(ElementRef);
 
@@ -48,8 +48,9 @@ export class HlmSheetContentDirective {
 		this._userCls.set(userCls);
 	}
 
+
 	protected _computedClass = computed(() => this.generateClass());
 	private generateClass() {
-		return hlm(sheetVariants({ side: this._sideProvider?.side() }), this._userCls());
+		return hlm(sheetVariants({ side: this._sideProvider.side() }), this._userCls());
 	}
 }

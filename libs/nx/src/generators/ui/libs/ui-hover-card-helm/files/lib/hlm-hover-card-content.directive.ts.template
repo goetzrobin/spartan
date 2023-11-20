@@ -11,8 +11,8 @@ export class HlmHoverCardContentDirective {
 
   private _inputs: ClassValue = '';
 
-  public readonly state = this._statusProvider?.state ?? signal('closed').asReadonly();
-  public readonly side = this._sideProvider?.side ?? signal('bottom').asReadonly();
+  public readonly state = this._statusProvider.state ?? signal('closed').asReadonly();
+  public readonly side = this._sideProvider.side ?? signal('bottom').asReadonly();
 
   constructor() {
     effect(() => {

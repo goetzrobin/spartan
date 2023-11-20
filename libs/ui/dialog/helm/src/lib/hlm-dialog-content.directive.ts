@@ -11,7 +11,7 @@ import { ClassValue } from 'clsx';
 })
 export class HlmDialogContentDirective {
 	private _statusProvider = injectExposesStateProvider({ host: true });
-	public state = this._statusProvider?.state ?? signal('closed').asReadonly();
+	public state = this._statusProvider.state ?? signal('closed').asReadonly();
 	private _renderer = inject(Renderer2);
 	private _element = inject(ElementRef);
 

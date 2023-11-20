@@ -11,7 +11,7 @@ import { ClassValue } from 'clsx';
 })
 export class HlmPopoverContentDirective {
 	private _stateProvider = injectExposesStateProvider({ host: true });
-	public state = this._stateProvider?.state ?? signal('closed');
+	public state = this._stateProvider.state ?? signal('closed');
 	private _renderer = inject(Renderer2);
 	private _element = inject(ElementRef);
 

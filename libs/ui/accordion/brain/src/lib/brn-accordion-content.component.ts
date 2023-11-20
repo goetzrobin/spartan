@@ -3,23 +3,17 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
-	forwardRef,
 	inject,
 	signal,
 	ViewEncapsulation,
 } from '@angular/core';
-import { CustomElementClassSettable, SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN } from '@spartan-ng/ui-core';
+import { CustomElementClassSettable, provideCustomClassSettableExisting } from '@spartan-ng/ui-core';
 import { BrnAccordionItemComponent } from './brn-accordion-item.component';
 
 @Component({
 	selector: 'brn-accordion-content',
 	standalone: true,
-	providers: [
-		{
-			provide: SET_CLASS_TO_CUSTOM_ELEMENT_TOKEN,
-			useExisting: forwardRef(() => BrnAccordionContentComponent),
-		},
-	],
+	providers: [provideCustomClassSettableExisting(() => BrnAccordionContentComponent)],
 	host: {
 		'[attr.data-state]': 'state()',
 		'[attr.aria-labelledby]': 'ariaLabeledBy',
