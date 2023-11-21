@@ -16,6 +16,7 @@ export async function initializeAngularLibrary(tree: Tree, options: HlmBaseGener
 		importPath: '@spartan-ng/' + options.publicName,
 		prefix: 'hlm',
 		skipModule: true,
+		standalone: false,
 		directory: options.directory,
 		tags: options.tags,
 	});
