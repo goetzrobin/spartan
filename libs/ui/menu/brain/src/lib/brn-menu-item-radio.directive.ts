@@ -7,31 +7,32 @@ import { booleanAttribute, Directive, inject, Input, Output, signal } from '@ang
 	hostDirectives: [CdkMenuItemRadio],
 	host: {
 		'[class.checked]': '_checked()',
+		'[disabled]': '_disabled()',
 	},
 })
 export class BrnMenuItemRadioDirective {
 	private readonly _cdkMenuItem = inject(CdkMenuItemRadio, { host: true });
+
 	get checked() {
 		return this._checked();
 	}
 
 	get disabled() {
-		return this._cdkMenuItem.disabled;
+		return this._disabled();
 	}
 
-	private readonly _checked = signal(this._cdkMenuItem.checked);
+	protected readonly _checked = signal(this._cdkMenuItem.checked);
 	@Input({ transform: booleanAttribute })
 	set checked(value: boolean) {
 		this._cdkMenuItem.checked = value;
 		this._checked.set(value);
 	}
 
+	protected readonly _disabled = signal(this._cdkMenuItem.disabled);
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
-		if (!value) {
-			this._checked.set(false);
-		}
 		this._cdkMenuItem.disabled = value;
+		this._disabled.set(value);
 	}
 
 	@Output()

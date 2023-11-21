@@ -103,12 +103,12 @@ export const Default: Story = {
         <hlm-menu-separator />
 
         <div brnMenuGroup>
-          <button hlm brnMenuItem>
+          <button hlm brnMenuItem [disabled]='false'>
             <hlm-icon name='radixGithubLogo' hlmMenuIcon />
             <span>Github</span>
           </button>
 
-          <button hlm brnMenuItem>
+          <button hlm brnMenuItem [disabled]='true'>
             <hlm-icon name='radixQuestionMarkCircled' hlmMenuIcon />
             <span>Support</span>
           </button>

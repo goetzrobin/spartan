@@ -8,6 +8,26 @@ describe('dropdown-menu', () => {
 			cy.viewport(1000, 1000);
 		});
 
+		it(
+			'click on open button should open, menu item GitHub that has [disabled]="false" should not be disabled.' +
+				' Support that has [disabled]="true" should be disabled',
+			() => {
+				cy.checkA11y('#storybook-root', {
+					rules: {
+						'page-has-heading-one': { enabled: false },
+						'landmark-one-main': { enabled: false },
+					},
+				});
+				cy.findByText(/open/i).realClick();
+				cy.findByText(/github/i)
+					.parent()
+					.should('not.be.disabled');
+				cy.findByText(/support/i)
+					.parent()
+					.should('be.disabled');
+			},
+		);
+
 		it('click on open button should open, hover over sub menu should open submenu, and click on open button again should close', () => {
 			cy.checkA11y('#storybook-root', {
 				rules: {
