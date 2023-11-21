@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/nx",
-	"version": "0.0.1-alpha.320",
+	"version": "0.0.1-alpha.321",
 	"type": "commonjs",
 	"dependencies": {
 		"@nx/devkit": "^17.1.0",
