@@ -1,26 +1,26 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
-  selector: '[hlmPopoverClose],[brnPopoverClose][hlm]',
-  standalone: true,
+	selector: '[hlmPopoverClose],[brnPopoverClose][hlm]',
+	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmPopoverCloseDirective {
-  @HostBinding('class')
-  _class = this.generateClasses();
-  private _inputs: ClassValue = '';
+	private readonly _userCls = signal<ClassValue>('');
+	@Input()
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
+	}
 
-  @Input()
-  set class(inputs: ClassValue) {
-    this._inputs = inputs;
-    this._class = this.generateClasses();
-  }
-
-  private generateClasses() {
-    return hlm(
-      'absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground',
-      this._inputs
-    );
-  }
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm(
+			'absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground',
+			this._userCls(),
+		);
+	}
 }

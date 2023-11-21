@@ -17,17 +17,17 @@ export * from './lib/hlm-dialog-overlay.directive';
 export * from './lib/hlm-dialog-title.directive';
 
 export const HlmDialogImports = [
-  HlmDialogCloseDirective,
-  HlmDialogContentDirective,
-  HlmDialogDescriptionDirective,
-  HlmDialogFooterComponent,
-  HlmDialogHeaderComponent,
-  HlmDialogOverlayDirective,
-  HlmDialogTitleDirective,
+	HlmDialogCloseDirective,
+	HlmDialogContentDirective,
+	HlmDialogDescriptionDirective,
+	HlmDialogFooterComponent,
+	HlmDialogHeaderComponent,
+	HlmDialogOverlayDirective,
+	HlmDialogTitleDirective,
 ] as const;
 
 @NgModule({
-  imports: [...HlmDialogImports],
-  exports: [...HlmDialogImports],
+	imports: [...HlmDialogImports],
+	exports: [...HlmDialogImports],
 })
 export class HlmDialogModule {}

@@ -2,7 +2,7 @@
 	"name": "@spartan-ng/ui-core",
 	"version": "0.0.1-alpha.311",
 	"peerDependencies": {
-		"@angular/core": "17.0.2",
+		"@angular/core": "^17.0.0",
 		"rxjs": "^7.8.1",
 		"clsx": "^1.2.1",
 		"tailwind-merge": "^1.14.0",

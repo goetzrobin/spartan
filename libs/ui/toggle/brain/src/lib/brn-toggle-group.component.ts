@@ -1,18 +1,18 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import {
 	AfterContentInit,
+	booleanAttribute,
 	ChangeDetectorRef,
 	Component,
 	ContentChildren,
 	DestroyRef,
 	EventEmitter,
+	forwardRef,
+	inject,
 	Input,
 	OnInit,
 	Output,
 	QueryList,
-	booleanAttribute,
-	forwardRef,
-	inject,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -29,9 +29,9 @@ export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR = {
 let uniqueIdCounter = 0;
 
 export class BrnButtonToggleChange {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	constructor(
 		public source: BrnToggleDirective,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		public value: any,
 	) {}
 }

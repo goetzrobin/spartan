@@ -1,10 +1,10 @@
-import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import {
 	ChangeDetectionStrategy,
 	Component,
 	effect,
 	forwardRef,
 	Input,
+	numberAttribute,
 	signal,
 	untracked,
 	ViewEncapsulation,
@@ -31,9 +31,9 @@ export type BrnPopoverAlign = 'start' | 'center' | 'end';
 })
 export class BrnPopoverComponent extends BrnDialogComponent {
 	private readonly _sideOffset = signal(0);
-	@Input()
-	set sideOffset(value: NumberInput) {
-		this._sideOffset.set(coerceNumberProperty(value));
+	@Input({ transform: numberAttribute })
+	set sideOffset(value: number) {
+		this._sideOffset.set(value);
 	}
 
 	private readonly _align = signal<BrnPopoverAlign>('center');

@@ -1,40 +1,34 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 export type HlmSeparatorOrientation = 'horizontal' | 'vertical';
 @Directive({
-  selector: '[hlmSeparator],brn-separator[hlm]',
-  standalone: true,
+	selector: '[hlmSeparator],brn-separator[hlm]',
+	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmSeparatorDirective {
-  private _orientation: HlmSeparatorOrientation = 'horizontal';
-  @Input()
-  get orientation(): HlmSeparatorOrientation {
-    return this._orientation;
-  }
+	private readonly _orientation = signal<HlmSeparatorOrientation>('horizontal');
+	@Input()
+	set orientation(value: HlmSeparatorOrientation) {
+		this._orientation.set(value);
+	}
 
-  set orientation(value: HlmSeparatorOrientation) {
-    this._orientation = value;
-    this._class = this.generateClasses();
-  }
+	private readonly _userCls = signal<ClassValue>('');
+	@Input()
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
+	}
 
-  private _inputs: ClassValue = '';
-
-  @Input()
-  set class(inputs: ClassValue) {
-    this._inputs = inputs;
-    this._class = this.generateClasses();
-  }
-
-  @HostBinding('class')
-  private _class = this.generateClasses();
-
-  private generateClasses() {
-    return hlm(
-      'inline-flex shrink-0 border-0 bg-border',
-      this._orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
-      this._inputs
-    );
-  }
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm(
+			'inline-flex shrink-0 border-0 bg-border',
+			this._orientation() === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
+			this._userCls(),
+		);
+	}
 }
