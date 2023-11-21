@@ -24,13 +24,13 @@ type ListVariants = VariantProps<typeof listVariants>;
 	},
 })
 export class HlmTabsListDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
-	private _orientation = signal<ListVariants['orientation']>('horizontal');
+	private readonly _orientation = signal<ListVariants['orientation']>('horizontal');
 	@Input()
 	set orientation(value: ListVariants['orientation']) {
 		this._orientation.set(value);

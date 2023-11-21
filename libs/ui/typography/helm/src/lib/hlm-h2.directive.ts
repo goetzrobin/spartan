@@ -13,7 +13,7 @@ export const hlmH2 =
 	},
 })
 export class HlmH2Directive {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

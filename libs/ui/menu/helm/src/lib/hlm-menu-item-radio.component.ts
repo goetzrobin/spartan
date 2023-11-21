@@ -17,7 +17,7 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmMenuItemRadioComponent {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

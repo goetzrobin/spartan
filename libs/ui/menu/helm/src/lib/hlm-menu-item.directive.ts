@@ -10,9 +10,9 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmMenuItemDirective {
-	private _inset = signal<ClassValue>(false);
+	private readonly _inset = signal<ClassValue>(false);
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

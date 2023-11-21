@@ -12,7 +12,7 @@ export const hlmH1 = 'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text
 	},
 })
 export class HlmH1Directive {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

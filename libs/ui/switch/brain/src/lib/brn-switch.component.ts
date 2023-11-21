@@ -93,7 +93,7 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 
 	/** Used to set the id on the underlying input element. */
 
-	private _id = signal<string | null>(null);
+	private readonly _id = signal<string | null>(null);
 	@Input()
 	set id(value: string | null) {
 		if (!value) return;
@@ -101,7 +101,7 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	}
 
 	/** Used to set the name attribute on the underlying input element. */
-	private _name = signal<string | null>(null);
+	private readonly _name = signal<string | null>(null);
 	@Input()
 	set name(value: string | null) {
 		if (!value) return;

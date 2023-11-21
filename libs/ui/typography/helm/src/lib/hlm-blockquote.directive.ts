@@ -12,7 +12,7 @@ export const hlmBlockquote = 'mt-6 border-border border-l-2 pl-6 italic';
 	},
 })
 export class HlmBlockquoteDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

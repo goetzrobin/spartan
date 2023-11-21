@@ -30,7 +30,7 @@ export class BrnCollapsibleComponent {
 	state = signal<BrnCollapsibleState>('closed');
 	contentId = signal('brn-collapsible-content-' + collapsibleContentIdSequence++);
 
-	private _disabled = signal<true | undefined>(undefined);
+	private readonly _disabled = signal<true | undefined>(undefined);
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
 		this._disabled.set(value ? true : undefined);

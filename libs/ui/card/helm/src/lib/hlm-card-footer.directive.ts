@@ -24,13 +24,13 @@ export type CardFooterVariants = VariantProps<typeof cardFooterVariants>;
 	},
 })
 export class HlmCardFooterDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
-	private _direction = signal<CardFooterVariants['direction']>('row');
+	private readonly _direction = signal<CardFooterVariants['direction']>('row');
 	@Input()
 	set direction(direction: CardFooterVariants['direction']) {
 		this._direction.set(direction);

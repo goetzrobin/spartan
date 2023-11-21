@@ -22,7 +22,7 @@ export class BrnAccordionComponent implements AfterContentInit {
 	@Input()
 	public orientation: 'horizontal' | 'vertical' = 'horizontal';
 
-	private _openItemIds = signal<number[]>([]);
+	private readonly _openItemIds = signal<number[]>([]);
 	public openItemIds = this._openItemIds.asReadonly();
 	public state = computed(() => (this._openItemIds().length > 0 ? 'open' : 'closed'));
 	private _keyManager?: FocusKeyManager<BrnAccordionTriggerComponent>;

@@ -43,13 +43,13 @@ export type SpinnerVariants = VariantProps<typeof spinnerVariants>;
 	`,
 })
 export class HlmSpinnerComponent {
-	private _size = signal<SpinnerVariants['size']>('default');
+	private readonly _size = signal<SpinnerVariants['size']>('default');
 	@Input()
 	set size(value: SpinnerVariants['size']) {
 		this._size.set(value);
 	}
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

@@ -12,7 +12,7 @@ export const hlmMuted = 'text-sm text-muted-foreground';
 	},
 })
 export class HlmMutedDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

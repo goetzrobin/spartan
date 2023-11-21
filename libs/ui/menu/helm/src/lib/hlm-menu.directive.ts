@@ -27,13 +27,13 @@ type MenuVariants = VariantProps<typeof menuVariants>;
 	},
 })
 export class HlmMenuDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
-	private _variant = signal<MenuVariants['variant']>('default');
+	private readonly _variant = signal<MenuVariants['variant']>('default');
 	@Input()
 	set variant(value: MenuVariants['variant']) {
 		this._variant.set(value);

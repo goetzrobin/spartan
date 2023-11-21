@@ -17,7 +17,7 @@ export class HlmCommandDialogDirective {
 	private _renderer = inject(Renderer2);
 	private _element = inject(ElementRef);
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

@@ -31,7 +31,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 	},
 })
 export class HlmScrollAreaComponent {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

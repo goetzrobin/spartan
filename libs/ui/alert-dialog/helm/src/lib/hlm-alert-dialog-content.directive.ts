@@ -19,7 +19,7 @@ export class HlmAlertDialogContentDirective {
 		effect(() => this._renderer.setAttribute(this._element.nativeElement, 'data-state', this.state()));
 	}
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

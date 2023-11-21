@@ -12,7 +12,7 @@ export const hlmUl = 'my-6 ml-6 list-disc [&>li]:mt-2';
 	},
 })
 export class HlmUlDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

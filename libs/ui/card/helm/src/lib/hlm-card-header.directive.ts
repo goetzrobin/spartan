@@ -24,13 +24,13 @@ export type CardHeaderVariants = VariantProps<typeof cardHeaderVariants>;
 	},
 })
 export class HlmCardHeaderDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
-	private _direction = signal<CardHeaderVariants['direction']>('column');
+	private readonly _direction = signal<CardHeaderVariants['direction']>('column');
 	@Input()
 	set direction(direction: CardHeaderVariants['direction']) {
 		this._direction.set(direction);

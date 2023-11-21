@@ -12,7 +12,7 @@ export const hlmLead = 'text-xl text-muted-foreground';
 	},
 })
 export class HlmLeadDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

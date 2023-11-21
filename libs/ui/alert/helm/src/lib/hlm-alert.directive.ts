@@ -29,13 +29,13 @@ export type AlertVariants = VariantProps<typeof alertVariants>;
 	},
 })
 export class HlmAlertDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
 
-	private _variant = signal<AlertVariants['variant']>('default');
+	private readonly _variant = signal<AlertVariants['variant']>('default');
 	@Input()
 	set variant(variant: AlertVariants['variant']) {
 		this._variant.set(variant);

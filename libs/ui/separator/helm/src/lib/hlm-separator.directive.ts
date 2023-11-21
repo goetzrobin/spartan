@@ -11,13 +11,13 @@ export type HlmSeparatorOrientation = 'horizontal' | 'vertical';
 	},
 })
 export class HlmSeparatorDirective {
-	private _orientation = signal<HlmSeparatorOrientation>('horizontal');
+	private readonly _orientation = signal<HlmSeparatorOrientation>('horizontal');
 	@Input()
 	set orientation(value: HlmSeparatorOrientation) {
 		this._orientation.set(value);
 	}
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

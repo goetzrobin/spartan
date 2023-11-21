@@ -16,7 +16,7 @@ export type AlertDescriptionVariants = VariantProps<typeof alertDescriptionVaria
 	},
 })
 export class HlmAlertDescriptionDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

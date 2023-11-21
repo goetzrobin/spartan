@@ -31,19 +31,19 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 	},
 })
 export class HlmLabelDirective {
-	private _variant = signal<LabelVariants['variant']>('default');
+	private readonly _variant = signal<LabelVariants['variant']>('default');
 	@Input()
 	set variant(value: LabelVariants['variant']) {
 		this._variant.set(value);
 	}
 
-	private _error = signal<LabelVariants['error']>('auto');
+	private readonly _error = signal<LabelVariants['error']>('auto');
 	@Input()
 	set error(value: LabelVariants['error']) {
 		this._error.set(value);
 	}
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

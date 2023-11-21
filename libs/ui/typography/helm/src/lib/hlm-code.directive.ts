@@ -12,7 +12,7 @@ export const hlmCode = 'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-m
 	},
 })
 export class HlmCodeDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

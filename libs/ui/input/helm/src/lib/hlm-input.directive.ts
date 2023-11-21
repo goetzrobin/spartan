@@ -33,19 +33,19 @@ type InputVariants = VariantProps<typeof inputVariants>;
 	},
 })
 export class HlmInputDirective {
-	private _size = signal<InputVariants['size']>('default');
+	private readonly _size = signal<InputVariants['size']>('default');
 	@Input()
 	set size(value: InputVariants['size']) {
 		this._size.set(value);
 	}
 
-	private _error = signal<InputVariants['error']>('auto');
+	private readonly _error = signal<InputVariants['error']>('auto');
 	@Input()
 	set error(value: InputVariants['error']) {
 		this._error.set(value);
 	}
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

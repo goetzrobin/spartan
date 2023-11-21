@@ -17,7 +17,7 @@ export class HlmCommandItemIconDirective {
 		if (!this._menuIcon) return;
 		this._menuIcon.size = 'none';
 	}
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

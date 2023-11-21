@@ -17,7 +17,7 @@ export type CardContentVariants = VariantProps<typeof cardContentVariants>;
 	},
 })
 export class HlmCardContentDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

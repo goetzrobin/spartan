@@ -17,7 +17,7 @@ export class HlmTableComponent {
 	@Input({ transform: booleanAttribute })
 	public truncate = false;
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(inputs: ClassValue) {
 		this._userCls.set(inputs);

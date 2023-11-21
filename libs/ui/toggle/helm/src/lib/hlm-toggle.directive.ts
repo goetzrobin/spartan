@@ -33,19 +33,19 @@ type ToggleVariants = VariantProps<typeof toggleVariants>;
 	},
 })
 export class HlmToggleDirective {
-	private _variant = signal<ToggleVariants['variant']>('default');
+	private readonly _variant = signal<ToggleVariants['variant']>('default');
 	@Input()
 	set variant(value: ToggleVariants['variant']) {
 		this._variant.set(value);
 	}
 
-	private _size = signal<ToggleVariants['size']>('default');
+	private readonly _size = signal<ToggleVariants['size']>('default');
 	@Input()
 	set size(value: ToggleVariants['size']) {
 		this._size.set(value);
 	}
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

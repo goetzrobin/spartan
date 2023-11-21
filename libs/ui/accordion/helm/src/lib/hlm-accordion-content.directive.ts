@@ -34,7 +34,7 @@ export class HlmAccordionContentDirective implements OnInit {
 	public readonly cssHeight = computed(() => (this.height() === '-1' ? 'auto' : this.height()));
 	public readonly state = signal('closed');
 
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);

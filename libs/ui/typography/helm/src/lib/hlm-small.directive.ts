@@ -12,7 +12,7 @@ export const hlmSmall = 'text-sm font-medium leading-none';
 	},
 })
 export class HlmSmallDirective {
-	private _userCls = signal<ClassValue>('');
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
