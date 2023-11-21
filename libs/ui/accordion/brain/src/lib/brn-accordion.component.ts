@@ -51,7 +51,7 @@ export class BrnAccordionComponent implements AfterContentInit {
 
 	public toggleItem(id: number) {
 		if (this._openItemIds().includes(id)) {
-			this._openItemIds.update((ids) => ids.filter((openId) => id == openId));
+			this._openItemIds.update((ids) => ids.filter((openId) => id !== openId));
 			return;
 		} else if (this.type === 'single') {
 			this._openItemIds.set([]);
