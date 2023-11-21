@@ -4,7 +4,6 @@ import {
 	Directive,
 	effect,
 	ElementRef,
-	HostBinding,
 	inject,
 	Injector,
 	Input,
@@ -20,6 +19,7 @@ import { ClassValue } from 'clsx';
 	standalone: true,
 	host: {
 		'[style.height]': 'cssHeight()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmAccordionContentDirective implements OnInit {
@@ -28,19 +28,21 @@ export class HlmAccordionContentDirective implements OnInit {
 	private readonly _injector = inject(Injector);
 	private readonly _platformId = inject(PLATFORM_ID);
 
-	@HostBinding('class')
-	private _class = this.generateClass();
-	private _inputs: ClassValue = '';
 	private _changes?: MutationObserver;
 
 	public readonly height = signal('-1');
 	public readonly cssHeight = computed(() => (this.height() === '-1' ? 'auto' : this.height()));
 	public readonly state = signal('closed');
 
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClass();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
+	}
+
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm('overflow-hidden text-sm transition-all', this._userCls());
 	}
 
 	public ngOnInit() {
@@ -79,9 +81,5 @@ export class HlmAccordionContentDirective implements OnInit {
 				allowSignalWrites: true,
 			},
 		);
-	}
-
-	generateClass() {
-		return hlm('overflow-hidden text-sm transition-all', this._inputs);
 	}
 }

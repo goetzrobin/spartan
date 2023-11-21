@@ -39,8 +39,8 @@ const CONTAINER_POST_FIX = '-switch';
 			tabindex="-1"
 			type="checkbox"
 			role="switch"
-			[id]="forChild(id) ?? ''"
-			[name]="forChild(name) ?? ''"
+			[id]="forChild(_id()) ?? ''"
+			[name]="forChild(_name()) ?? ''"
 			[value]="_checked() ? 'on' : 'off'"
 			[ngStyle]="{
 				position: 'absolute',
@@ -70,6 +70,8 @@ const CONTAINER_POST_FIX = '-switch';
 		'[attr.aria-labelledby]': 'null',
 		'[attr.aria-label]': 'null',
 		'[attr.aria-describedby]': 'null',
+		'[attr.id]': '_id()',
+		'[attr.name]': '_name()',
 	},
 	providers: [BRN_SWITCH_VALUE_ACCESSOR],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -90,29 +92,20 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	}
 
 	/** Used to set the id on the underlying input element. */
-	@HostBinding('attr.id')
-	private _id: string | null = null;
-	@Input()
-	get id(): string | null {
-		return this._id;
-	}
 
+	protected readonly _id = signal<string | null>(null);
+	@Input()
 	set id(value: string | null) {
 		if (!value) return;
-		this._id = value + CONTAINER_POST_FIX;
+		this._id.set(value + CONTAINER_POST_FIX);
 	}
 
 	/** Used to set the name attribute on the underlying input element. */
-	@HostBinding('attr.name')
-	private _name: string | null = null;
+	protected readonly _name = signal<string | null>(null);
 	@Input()
-	get name(): string | null {
-		return this._name;
-	}
-
 	set name(value: string | null) {
 		if (!value) return;
-		this._name = value + CONTAINER_POST_FIX;
+		this._name.set(value + CONTAINER_POST_FIX);
 	}
 
 	/** Used to set the aria-label attribute on the underlying input element. */

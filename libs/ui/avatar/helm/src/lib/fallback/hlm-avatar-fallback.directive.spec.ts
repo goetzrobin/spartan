@@ -42,6 +42,12 @@ describe('HlmAvatarFallbackDirective', () => {
 		fixture.detectChanges();
 		expect(fixture.nativeElement.querySelector('span').className).toContain('test-class');
 	});
+	it('should merge bg-destructive correctly when set as user defined class, therefore removing bg-muted', async () => {
+		component.userCls = 'bg-destructive ';
+
+		fixture.detectChanges();
+		expect(fixture.nativeElement.querySelector('span').className).toContain('bg-destructive');
+	});
 
 	describe('autoColor', () => {
 		beforeEach(() => {

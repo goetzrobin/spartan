@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -19,26 +19,25 @@ export type CardFooterVariants = VariantProps<typeof cardFooterVariants>;
 @Directive({
 	selector: '[hlmCardFooter]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmCardFooterDirective {
-	private _inputs: ClassValue = '';
-
-	private _direction: CardFooterVariants['direction'] = 'row';
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set direction(value: CardFooterVariants['direction']) {
-		this._direction = value;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
+	private readonly _direction = signal<CardFooterVariants['direction']>('row');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set direction(direction: CardFooterVariants['direction']) {
+		this._direction.set(direction);
 	}
 
-	@HostBinding('class') _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(cardFooterVariants({ direction: this._direction }), this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm(cardFooterVariants({ direction: this._direction() }), this._userCls());
 	}
 }

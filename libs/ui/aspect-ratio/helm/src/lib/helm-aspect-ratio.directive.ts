@@ -1,9 +1,7 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
-import { AfterViewInit, Directive, effect, ElementRef, HostBinding, inject, Input, signal } from '@angular/core';
+import { AfterViewInit, computed, Directive, ElementRef, inject, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
-
-const generateParentClasses = (userCls: ClassValue) => hlm(`relative w-full`, userCls);
 
 const parseDividedString = (value: NumberInput): NumberInput => {
 	if (typeof value !== 'string' || !value.includes('/')) return value;
@@ -16,45 +14,40 @@ const parseDividedString = (value: NumberInput): NumberInput => {
 @Directive({
 	selector: '[hlmAspectRatio]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+		'[style.padding-bottom]': '_computedPaddingBottom()',
+	},
 })
 export class HlmAspectRatioDirective implements AfterViewInit {
-	private readonly ratio = signal(1);
-	private readonly userCls = signal<ClassValue>('');
-	private readonly el: HTMLElement = inject(ElementRef).nativeElement;
-	private readonly child = signal<Element | null>(this.el.firstElementChild);
+	private readonly _ratio = signal(1);
+	private readonly _el: HTMLElement = inject(ElementRef).nativeElement;
 
 	@Input()
 	set hlmAspectRatio(value: NumberInput) {
 		const coerced = coerceNumberProperty(parseDividedString(value));
-		this.ratio.set(coerced <= 0 ? 1 : coerced);
+		this._ratio.set(coerced <= 0 ? 1 : coerced);
 	}
+	protected _computedPaddingBottom = computed(() => {
+		return `${100 / this._ratio()}%`;
+	});
 
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set class(value: ClassValue) {
-		this.userCls.set(value);
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	@HostBinding('class')
-	protected cls = generateParentClasses(this.userCls());
-
-	constructor() {
-		effect(() => {
-			this.cls = generateParentClasses(this.userCls());
-		});
-
-		effect(() => {
-			this.el.style.paddingBottom = `${100 / this.ratio()}%`;
-		});
-
-		effect(() => {
-			const child = this.child();
-			if (!child) return;
-			child.classList.add('absolute', 'w-full', 'h-full', 'object-cover');
-		});
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm(`relative w-full`, this._userCls());
 	}
 
 	ngAfterViewInit() {
 		// support delayed addition of image to dom
-		if (!this.child()) this.child.set(this.el.firstElementChild);
+		const child = this._el.firstElementChild;
+		if (child) {
+			child.classList.add('absolute', 'w-full', 'h-full', 'object-cover');
+		}
 	}
 }

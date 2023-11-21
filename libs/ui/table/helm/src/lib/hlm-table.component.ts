@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, Input, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -6,7 +6,7 @@ import { ClassValue } from 'clsx';
 	selector: 'hlm-table',
 	standalone: true,
 	host: {
-		'[class]': '_class()',
+		'[class]': '_computedClass()',
 		role: 'table',
 	},
 	template: `
@@ -14,20 +14,17 @@ import { ClassValue } from 'clsx';
 	`,
 })
 export class HlmTableComponent {
-	protected readonly _class = signal(this.generateClasses());
-
 	@Input({ transform: booleanAttribute })
 	public truncate = false;
 
-	private _inputs: ClassValue = '';
-
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class.set(this.generateClasses());
+		this._userCls.set(inputs);
 	}
 
-	private generateClasses() {
-		return hlm('flex flex-col [&_hlm-trow:last-child]:border-0', this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm('flex flex-col [&_hlm-trow:last-child]:border-0', this._userCls());
 	}
 }

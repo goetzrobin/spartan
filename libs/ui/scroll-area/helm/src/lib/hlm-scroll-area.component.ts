@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -26,16 +26,20 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmScrollAreaComponent {
-	@HostBinding('class')
-	_class = this.generateClasses();
-	private _inputs: ClassValue = '';
-
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
+	}
+
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm('block', this._userCls());
 	}
 
 	@Input()
@@ -46,8 +50,4 @@ export class HlmScrollAreaComponent {
 	autoWidthDisabled = false;
 	@Input()
 	visibility: 'hover' | 'always' | 'native' = 'native';
-
-	private generateClasses() {
-		return hlm('block', this._inputs);
-	}
 }

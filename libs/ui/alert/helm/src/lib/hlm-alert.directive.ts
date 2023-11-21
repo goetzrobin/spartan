@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -25,37 +25,24 @@ export type AlertVariants = VariantProps<typeof alertVariants>;
 	standalone: true,
 	host: {
 		role: 'alert',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmAlertDirective {
-	private _variant: AlertVariants['variant'] = 'default';
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	get variant(): AlertVariants['variant'] {
-		return this._variant;
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
+	private readonly _variant = signal<AlertVariants['variant']>('default');
+	@Input()
 	set variant(variant: AlertVariants['variant']) {
-		this._variant = variant;
-		this._class = this.generateClasses();
+		this._variant.set(variant);
 	}
 
-	set size(value: AlertVariants['variant']) {
-		this._variant = value;
-		this._class = this.generateClasses();
-	}
-
-	private _inputs: ClassValue = '';
-
-	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
-	}
-
-	@HostBinding('class')
-	private _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(alertVariants({ variant: this._variant }), this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm(alertVariants({ variant: this._variant() }), this._userCls());
 	}
 }

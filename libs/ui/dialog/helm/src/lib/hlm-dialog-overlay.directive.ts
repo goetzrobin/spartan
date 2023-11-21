@@ -1,31 +1,33 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm, injectCustomClassSettable } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlmDialogOverlay],brn-dialog-overlay[hlm]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmDialogOverlayDirective {
-	private _host = injectCustomClassSettable({ optional: true, host: true });
-	_class = this.generateClasses();
-	private _inputs: ClassValue = '';
+	private _classSettable = injectCustomClassSettable({ optional: true, host: true });
 
 	constructor() {
-		this._host?.setClassToCustomElement(this._class);
+		this._classSettable?.setClassToCustomElement(this._computedClass());
 	}
 
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
-		this._host?.setClassToCustomElement(this._class);
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
+		this._classSettable?.setClassToCustomElement(this._computedClass());
 	}
 
-	private generateClasses() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(
 			'bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-			this._inputs,
+			this._userCls(),
 		);
 	}
 }

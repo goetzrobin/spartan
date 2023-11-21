@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -7,20 +7,19 @@ export const hlmLarge = 'text-lg font-semibold';
 @Directive({
 	selector: '[hlmLarge]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmLargeDirective {
-	private _inputs: ClassValue = '';
-
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	@HostBinding('class')
-	private _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(hlmLarge, this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm(hlmLarge, this._userCls());
 	}
 }

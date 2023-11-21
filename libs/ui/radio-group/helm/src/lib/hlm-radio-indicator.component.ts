@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -9,7 +9,7 @@ const btnLike =
 	selector: 'hlm-radio-indicator',
 	standalone: true,
 	host: {
-		class: 'relative',
+		'[class]': '_computedClass()',
 	},
 	template: `
 		<div
@@ -19,17 +19,14 @@ const btnLike =
 	`,
 })
 export class HlmRadioIndicatorComponent {
-	@HostBinding('class')
-	private _class = this.generateClass();
-	private _inputs: ClassValue = '';
-
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClass();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	generateClass() {
-		return hlm('inline-flex h-4 w-4', this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm('relative inline-flex h-4 w-4', this._userCls());
 	}
 }

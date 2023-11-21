@@ -1,5 +1,5 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, Input, booleanAttribute, signal } from '@angular/core';
+import { Component, Input, booleanAttribute, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -8,7 +8,7 @@ import { ClassValue } from 'clsx';
 	standalone: true,
 	imports: [NgTemplateOutlet, NgIf],
 	host: {
-		'[class]': '_class()',
+		'[class]': '_computedClass()',
 	},
 	template: `
 		<ng-template #content>
@@ -21,20 +21,17 @@ import { ClassValue } from 'clsx';
 	`,
 })
 export class HlmTdComponent {
-	protected readonly _class = signal(this.generateClasses());
-
 	@Input({ transform: booleanAttribute })
 	public truncate = false;
 
-	private _inputs: ClassValue = '';
-
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class.set(this.generateClasses());
+		this._userCls.set(inputs);
 	}
 
-	private generateClasses() {
-		return hlm('flex flex-none p-2 items-center [&:has([role=checkbox])]:pr-0', this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm('flex flex-none p-2 items-center [&:has([role=checkbox])]:pr-0', this._userCls());
 	}
 }

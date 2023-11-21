@@ -1,4 +1,4 @@
-import { Directive, effect, ElementRef, HostBinding, inject, Input, Renderer2, signal } from '@angular/core';
+import { computed, Directive, effect, ElementRef, inject, Input, Renderer2, signal } from '@angular/core';
 import { hlm, injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/ui-core';
 import { cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -25,9 +25,11 @@ const sheetVariants = cva(
 @Directive({
 	selector: '[hlmSheetContent],[brnSheetContent][hlm]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmSheetContentDirective {
-	private _inputs: ClassValue = '';
 	private _stateProvider = injectExposesStateProvider({ host: true });
 	private _sideProvider = injectExposedSideProvider({ host: true });
 	public state = this._stateProvider.state ?? signal('closed');
@@ -38,21 +40,16 @@ export class HlmSheetContentDirective {
 		effect(() => {
 			this._renderer.setAttribute(this._element.nativeElement, 'data-state', this.state());
 		});
-		effect(() => {
-			this._sideProvider.side();
-			this._class = this.generateClasses();
-		});
 	}
 
-	@HostBinding('class')
-	_class = this.generateClasses();
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	private generateClasses() {
-		return hlm(sheetVariants({ side: this._sideProvider.side() }), this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm(sheetVariants({ side: this._sideProvider.side() }), this._userCls());
 	}
 }

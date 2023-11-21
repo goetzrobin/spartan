@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -33,42 +33,31 @@ type ButtonVariants = VariantProps<typeof buttonVariants>;
 @Directive({
 	selector: '[hlmBtn]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmButtonDirective {
-	private _variant: ButtonVariants['variant'] = 'default';
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	get variant(): ButtonVariants['variant'] {
-		return this._variant;
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	set variant(value: ButtonVariants['variant']) {
-		this._variant = value;
-		this._class = this.generateClasses();
-	}
-
-	private _size: ButtonVariants['size'] = 'default';
+	private readonly _variant = signal<ButtonVariants['variant']>('default');
 	@Input()
-	get size(): ButtonVariants['size'] {
-		return this._size;
+	set variant(variant: ButtonVariants['variant']) {
+		this._variant.set(variant);
 	}
 
-	set size(value: ButtonVariants['size']) {
-		this._size = value;
-		this._class = this.generateClasses();
-	}
-
-	private _inputs: ClassValue = '';
-
+	private readonly _size = signal<ButtonVariants['size']>('default');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClasses();
+	set size(size: ButtonVariants['size']) {
+		this._size.set(size);
 	}
 
-	@HostBinding('class')
-	private _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm(buttonVariants({ variant: this._variant, size: this._size }), this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm(buttonVariants({ variant: this._variant(), size: this._size() }), this._userCls());
 	}
 }

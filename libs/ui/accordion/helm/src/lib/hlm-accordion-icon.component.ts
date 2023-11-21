@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -10,19 +10,19 @@ import { ClassValue } from 'clsx';
 			<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
 		</svg>
 	`,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmAccordionIconComponent {
-	@HostBinding('class')
-	private _class = this.generateClass();
-	private _inputs: ClassValue = '';
-
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set class(inputs: ClassValue) {
-		this._inputs = inputs;
-		this._class = this.generateClass();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	generateClass() {
-		return hlm('inline-block h-4 w-4 transition-transform duration-200', this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm('inline-block h-4 w-4 transition-transform duration-200', this._userCls());
 	}
 }

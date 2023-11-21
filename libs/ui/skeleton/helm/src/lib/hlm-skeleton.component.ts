@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -6,20 +6,19 @@ import { ClassValue } from 'clsx';
 	selector: 'hlm-skeleton',
 	standalone: true,
 	template: ``,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmSkeletonComponent {
-	private _inputs: ClassValue = '';
-
+	private readonly _userCls = signal<ClassValue>('');
 	@Input()
-	set class(labels: ClassValue) {
-		this._inputs = labels;
-		this._class = this.generateClasses();
+	set class(userCls: ClassValue) {
+		this._userCls.set(userCls);
 	}
 
-	@HostBinding('class')
-	private _class = this.generateClasses();
-
-	private generateClasses() {
-		return hlm('block animate-pulse rounded-md bg-muted', this._inputs);
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm('block animate-pulse rounded-md bg-muted', this._userCls());
 	}
 }
