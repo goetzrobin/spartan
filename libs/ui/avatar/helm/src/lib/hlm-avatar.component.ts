@@ -51,7 +51,8 @@ export class HlmAvatarComponent extends BrnAvatarComponent {
 		this._variant.set(variant);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(avatarVariants({ variant: this._variant() }), this._userCls());
-	});
+	}
 }

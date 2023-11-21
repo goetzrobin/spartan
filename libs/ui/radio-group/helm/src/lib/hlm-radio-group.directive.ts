@@ -16,8 +16,8 @@ export class HlmRadioGroupDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('block', this._userCls());
 	}
 }

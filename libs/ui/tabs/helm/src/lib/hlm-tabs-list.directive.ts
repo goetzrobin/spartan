@@ -36,8 +36,8 @@ export class HlmTabsListDirective {
 		this._orientation.set(value);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(listVariants({ orientation: this._orientation() }), this._userCls());
 	}
 }

@@ -16,8 +16,8 @@ export class HlmCommandInputDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(
 			'h-11 w-full bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
 			this._userCls(),

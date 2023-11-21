@@ -16,8 +16,8 @@ export class HlmCommandEmptyDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('py-6 text-center text-sm', this._userCls());
 	}
 }

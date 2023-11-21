@@ -23,8 +23,8 @@ export class HlmSeparatorDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(
 			'inline-flex shrink-0 border-0 bg-border',
 			this._orientation() === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',

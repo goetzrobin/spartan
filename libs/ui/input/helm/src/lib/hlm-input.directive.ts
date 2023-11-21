@@ -50,9 +50,8 @@ export class HlmInputDirective {
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
-	protected _computedClass = computed(() => this.generateClass());
-
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(inputVariants({ size: this._size(), error: this._error() }), this._userCls());
 	}
 }

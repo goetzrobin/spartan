@@ -36,7 +36,8 @@ export class HlmCardFooterDirective {
 		this._direction.set(direction);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(cardFooterVariants({ direction: this._direction() }), this._userCls());
-	});
+	}
 }

@@ -23,7 +23,8 @@ export class HlmCardDescriptionDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(cardDescriptionVariants(), this._userCls());
-	});
+	}
 }

@@ -18,8 +18,8 @@ export class HlmLeadDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(hlmLead, this._userCls());
 	}
 }

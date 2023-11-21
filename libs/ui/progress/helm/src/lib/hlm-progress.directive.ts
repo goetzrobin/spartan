@@ -16,8 +16,8 @@ export class HlmProgressDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('inline-flex relative h-4 w-full overflow-hidden rounded-full bg-secondary', this._userCls());
 	}
 }

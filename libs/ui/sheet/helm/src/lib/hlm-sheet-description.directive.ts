@@ -16,9 +16,8 @@ export class HlmSheetDescriptionDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('text-sm text-muted-foreground', this._userCls);
 	}
 }

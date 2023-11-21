@@ -39,8 +39,8 @@ export class HlmMenuDirective {
 		this._variant.set(value);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(menuVariants({ variant: this._variant() }), this._userCls());
 	}
 }

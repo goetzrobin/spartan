@@ -49,8 +49,8 @@ export class HlmLabelDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(labelVariants({ variant: this._variant(), error: this._error() }), this._userCls());
 	}
 }

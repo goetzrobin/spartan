@@ -41,10 +41,8 @@ export class HlmAlertDirective {
 		this._variant.set(variant);
 	}
 
-	protected _computedClass = computed(() => {
-		return hlm(this._generateClasses(), this._userCls());
-	});
-	private _generateClasses() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(alertVariants({ variant: this._variant() }), this._userCls());
 	}
 }

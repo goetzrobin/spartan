@@ -66,7 +66,8 @@ export class HlmBadgeDirective {
 		this._static.set(value);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(badgeVariants({ variant: this._variant(), static: this._static() }), this._userCls());
-	});
+	}
 }

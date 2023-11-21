@@ -19,8 +19,8 @@ export class HlmMenuShortcutComponent {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('ml-auto font-light text-xs tracking-widest opacity-60', this._userCls());
 	}
 }

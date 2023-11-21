@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, computed, signal } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { ClassValue } from 'clsx';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
@@ -37,7 +36,10 @@ export class HlmScrollAreaComponent {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm('block', this._userCls());
+	}
 
 	@Input()
 	public track: 'vertical' | 'horizontal' | 'all' = 'all';
@@ -47,8 +49,4 @@ export class HlmScrollAreaComponent {
 	autoWidthDisabled = false;
 	@Input()
 	visibility: 'hover' | 'always' | 'native' = 'native';
-
-	private generateClass() {
-		return hlm('block', this._userCls());
-	}
 }

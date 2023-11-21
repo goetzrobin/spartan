@@ -74,7 +74,7 @@ export class BrnDialogService implements OnDestroy {
 	private _sso = inject(ScrollStrategyOptions);
 	private _dialogRef?: DialogRef;
 
-	private _open = signal(false);
+	private readonly _open = signal(false);
 	public state = computed(() => (this._open() ? 'open' : 'closed'));
 	private _overlay: HTMLElement | null = null;
 	private _backdrop: HTMLElement | null = null;

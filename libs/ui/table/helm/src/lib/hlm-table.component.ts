@@ -23,8 +23,8 @@ export class HlmTableComponent {
 		this._userCls.set(inputs);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('flex flex-col [&_hlm-trow:last-child]:border-0', this._userCls());
 	}
 }

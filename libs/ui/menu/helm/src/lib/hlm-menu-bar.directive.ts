@@ -16,8 +16,8 @@ export class HlmMenuBarDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('border-border flex h-10 items-center space-x-1 rounded-md border bg-background p-1', this._userCls());
 	}
 }

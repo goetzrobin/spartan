@@ -16,7 +16,8 @@ export class HlmAccordionDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('flex flex-col', this._userCls());
-	});
+	}
 }

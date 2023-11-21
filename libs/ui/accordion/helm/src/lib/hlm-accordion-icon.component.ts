@@ -21,7 +21,8 @@ export class HlmAccordionIconComponent {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('inline-block h-4 w-4 transition-transform duration-200', this._userCls());
-	});
+	}
 }

@@ -19,7 +19,7 @@ export class BrnMenuItemCheckboxDirective {
 		return this._cdkMenuItem.disabled;
 	}
 
-	private _checked = signal(this._cdkMenuItem.checked);
+	private readonly _checked = signal(this._cdkMenuItem.checked);
 	@Input({ transform: booleanAttribute })
 	set checked(value: boolean) {
 		this._cdkMenuItem.checked = value;

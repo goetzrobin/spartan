@@ -23,8 +23,8 @@ export class HlmMenuItemIconDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('mr-2 h-4 w-4', this._userCls());
 	}
 }

@@ -23,7 +23,8 @@ export class HlmCardContentDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(cardContentVariants(), this._userCls());
-	});
+	}
 }

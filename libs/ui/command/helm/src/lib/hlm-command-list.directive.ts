@@ -16,8 +16,8 @@ export class HlmCommandListDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('max-h-[300px] overflow-y-auto overflow-x-hidden', this._userCls());
 	}
 }

@@ -17,8 +17,8 @@ export class HlmCommandInputWrapperComponent {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(
 			'flex space-x-2 items-center border-b border-border px-3 [&_hlm-icon]:h-5 [&_hlm-icon]:w-5',
 			this._userCls(),

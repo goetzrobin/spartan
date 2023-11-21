@@ -25,8 +25,8 @@ export class HlmMenuLabelComponent {
 		this._inset.set(value);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('block px-2 py-1.5 text-sm font-semibold', this._inset() && 'pl-10', this._userCls());
 	}
 }

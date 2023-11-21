@@ -30,7 +30,7 @@ export class BrnAccordionTriggerComponent implements CustomElementClassSettable 
 	public id = 'brn-accordion-trigger-' + this._item.id;
 	public ariaControls = 'brn-accordion-content-' + this._item.id;
 
-	private _btnClass = signal('');
+	private readonly _btnClass = signal('');
 	public btnClass = this._btnClass.asReadonly();
 
 	constructor() {

@@ -24,8 +24,8 @@ export class HlmAlertDialogCancelButtonDirective {
 		this._hlmBtn.variant = 'outline';
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('mt-2 sm:mt-0', this._userCls());
 	}
 }

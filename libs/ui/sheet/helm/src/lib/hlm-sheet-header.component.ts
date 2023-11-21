@@ -19,8 +19,8 @@ export class HlmSheetHeaderComponent {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('flex flex-col space-y-2 text-center sm:text-left', this._userCls());
 	}
 }

@@ -19,8 +19,8 @@ export class HlmDialogFooterComponent {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', this._userCls());
 	}
 }

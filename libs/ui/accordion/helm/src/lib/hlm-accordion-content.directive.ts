@@ -40,9 +40,10 @@ export class HlmAccordionContentDirective implements OnInit {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('overflow-hidden text-sm transition-all', this._userCls());
-	});
+	}
 
 	public ngOnInit() {
 		this._host?.setClassToCustomElement('pt-1 pb-4');

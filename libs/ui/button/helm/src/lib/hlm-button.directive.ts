@@ -1,5 +1,4 @@
-import { Directive, Input, computed, signal } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
+import { Directive, Input, signal } from '@angular/core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
@@ -56,7 +55,8 @@ export class HlmButtonDirective {
 		this._size.set(size);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(buttonVariants({ variant: this._variant(), size: this._size() }), this._userCls());
-	});
+	}
 }

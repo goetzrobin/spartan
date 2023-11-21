@@ -17,8 +17,8 @@ import { BrnCollapsibleComponent } from './brn-collapsible.component';
 export class BrnCollapsibleContentComponent implements AfterContentInit {
 	private _collapsible = inject(BrnCollapsibleComponent, { optional: true });
 	private _elementRef = inject(ElementRef);
-	private _height = signal(0);
-	private _width = signal(0);
+	private readonly _height = signal(0);
+	private readonly _width = signal(0);
 	public contentId = this._collapsible?.contentId ?? signal(undefined).asReadonly;
 
 	state = this._collapsible?.state ?? signal('closed').asReadonly();

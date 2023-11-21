@@ -23,8 +23,8 @@ export class HlmAlertDialogOverlayDirective {
 		this._classSettable?.setClassToCustomElement(this._computedClass());
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(
 			'bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
 			this._userCls(),

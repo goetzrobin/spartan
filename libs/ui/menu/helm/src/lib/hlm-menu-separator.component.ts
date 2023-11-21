@@ -17,8 +17,8 @@ export class HlmMenuSeparatorComponent {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('block -mx-1 my-1 h-px bg-muted', this._userCls());
 	}
 }

@@ -21,7 +21,8 @@ export class HlmAvatarImageDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('aspect-square object-cover h-full w-full', this._userCls());
-	});
+	}
 }

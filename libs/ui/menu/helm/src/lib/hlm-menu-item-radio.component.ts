@@ -23,8 +23,8 @@ export class HlmMenuItemRadioComponent {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('group-[.checked]:opacity-100 opacity-0 inline-block mr-2 h-5 w-5', this._userCls());
 	}
 }

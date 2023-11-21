@@ -23,8 +23,8 @@ export class HlmTrowComponent {
 		this._userCls.set(inputs);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(
 			'flex flex border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
 			this._userCls(),

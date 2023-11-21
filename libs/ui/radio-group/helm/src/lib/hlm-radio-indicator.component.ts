@@ -25,8 +25,8 @@ export class HlmRadioIndicatorComponent {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('relative inline-flex h-4 w-4', this._userCls());
 	}
 }

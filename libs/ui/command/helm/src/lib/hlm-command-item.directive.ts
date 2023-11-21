@@ -16,8 +16,8 @@ export class HlmCommandItemDirective {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(
 			'flex items-center relative cursor-default select-none rounded-sm px-2 py-1.5 text-sm outline-none\n' +
 				'aria-selected:bg-accent aria-selected:text-accent-foreground\n' +

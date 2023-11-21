@@ -30,8 +30,8 @@ export class HlmTdComponent {
 		this._userCls.set(inputs);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('flex flex-none p-2 items-center [&:has([role=checkbox])]:pr-0', this._userCls());
 	}
 }

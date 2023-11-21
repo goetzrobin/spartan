@@ -18,8 +18,8 @@ export class HlmH3Directive {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm(hlmH3, this._userCls());
 	}
 }

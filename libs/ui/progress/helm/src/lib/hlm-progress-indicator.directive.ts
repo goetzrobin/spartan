@@ -12,7 +12,7 @@ import { ClassValue } from 'clsx';
 export class HlmProgressIndicatorDirective implements DoCheck {
 	private _element = inject(ElementRef);
 	private _renderer = inject(Renderer2);
-	private _value = signal(0);
+	private readonly _value = signal(0);
 
 	private readonly _userCls = signal<ClassValue>('');
 	@Input()
@@ -20,8 +20,8 @@ export class HlmProgressIndicatorDirective implements DoCheck {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this.generateClass());
-	private generateClass() {
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
 		return hlm('inline-flex transform-gpu h-full w-full flex-1 bg-primary transition-all', this._userCls());
 	}
 

@@ -33,13 +33,14 @@ export class HlmAspectRatioDirective implements AfterViewInit {
 	});
 
 	private readonly _userCls = signal<ClassValue>('');
-	protected _computedClass = computed(() => {
-		return hlm(`relative w-full`, this._userCls());
-	});
-
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
+	}
+
+	protected _computedClass = computed(() => this._generateClass());
+	private _generateClass() {
+		return hlm(`relative w-full`, this._userCls());
 	}
 
 	ngAfterViewInit() {
