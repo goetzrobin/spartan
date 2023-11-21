@@ -12,7 +12,7 @@ import { HlmToggleDirective } from '@spartan-ng/ui-toggle-helm';
 	providers: [provideIcons({ radixFontItalic })],
 	template: `
 		<button size="lg" brnToggle hlm>
-			<hlm-icon size="sm" name="radixFontItalic" />
+			<hlm-icon size="lg" name="radixFontItalic" />
 		</button>
 	`,
 })
@@ -33,7 +33,7 @@ import { radixFontItalic } from '@ng-icons/radix-icons';
   providers: [provideIcons({ radixFontItalic })],
   template: \`
     <button size="lg" brnToggle hlm>
-      <hlm-icon size="sm" name="radixFontItalic" />
+      <hlm-icon size="lg" name="radixFontItalic" />
     </button>
   \`,
 })
