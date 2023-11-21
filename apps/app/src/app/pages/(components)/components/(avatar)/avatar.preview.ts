@@ -16,16 +16,16 @@ export class AvatarPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmAvatarComponent } from '@spartan-ng/ui-avatar-helm';
+import { HlmAvatarComponent, HlmAvatarFallbackDirective, HlmAvatarImageDirective } from '@spartan-ng/ui-avatar-helm';
 
 @Component({
   selector: 'spartan-avatar-preview',
   standalone: true,
-  imports: [HlmAvatarComponent],
+  imports: [HlmAvatarImageDirective, HlmAvatarComponent, HlmAvatarFallbackDirective],
   template: \`
-    <hlm-avatar>
-      <img src='/assets/avatar.png' alt='spartan logo. Resembling a spartanic shield' hlmAvatarImage />
-      <span class='bg-destructive text-white' hlmAvatarFallback>RG</span>
+    <hlm-avatar variant="large">
+      <img src="/assets/avatar.png" alt="spartan logo. Resembling a spartanic shield" hlmAvatarImage />
+      <span class="bg-[#FD005B] text-white" hlmAvatarFallback>RG</span>
     </hlm-avatar>
   \`,
 })
@@ -33,7 +33,7 @@ export class AvatarPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { HlmAvatarComponent } from '@spartan-ng/ui-avatar-helm';
+import { HlmAvatarImageDirective, HlmAvatarComponent, HlmAvatarFallbackDirective } from '@spartan-ng/ui-avatar-helm';
 `;
 
 export const defaultSkeleton = `
