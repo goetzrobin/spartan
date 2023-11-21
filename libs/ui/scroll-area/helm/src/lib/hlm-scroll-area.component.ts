@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, computed, signal } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	Input,
+	signal,
+	ViewEncapsulation,
+} from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -9,10 +17,10 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 	imports: [NgScrollbarModule],
 	template: `
 		<ng-scrollbar
-			[visibility]="visibility"
-			[autoHeightDisabled]="autoHeightDisabled"
-			[autoWidthDisabled]="autoWidthDisabled"
-			[track]="track"
+			[visibility]="_visibility()"
+			[autoHeightDisabled]="_autoHeightDisabled()"
+			[autoWidthDisabled]="_autoWidthDisabled()"
+			[track]="_track()"
 			[style]="{
 				'--scrollbar-border-radius': '100px',
 				'--scrollbar-padding': '1px',
@@ -31,23 +39,40 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 	},
 })
 export class HlmScrollAreaComponent {
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm('block', this._userCls());
-	}
+	protected readonly _computedClass = computed(() => hlm('block', this._class()));
 
 	@Input()
-	public track: 'vertical' | 'horizontal' | 'all' = 'all';
+	set class(value: ClassValue) {
+		this._class.set(value);
+	}
+
+	private readonly _class = signal<ClassValue>('');
+
 	@Input()
-	autoHeightDisabled = false;
+	set track(value: 'vertical' | 'horizontal' | 'all') {
+		this._track.set(value);
+	}
+
+	protected readonly _track = signal<'vertical' | 'horizontal' | 'all'>('all');
+
+	@Input({ transform: booleanAttribute })
+	set autoHeightDisabled(value: boolean) {
+		this._autoHeightDisabled.set(value);
+	}
+
+	protected readonly _autoHeightDisabled = signal(true);
+
+	@Input({ transform: booleanAttribute })
+	set_autoWidthDisabled(value: boolean) {
+		this._autoWidthDisabled.set(value);
+	}
+
+	protected readonly _autoWidthDisabled = signal(true);
+
 	@Input()
-	autoWidthDisabled = false;
-	@Input()
-	visibility: 'hover' | 'always' | 'native' = 'native';
+	set visibility(value: 'hover' | 'always' | 'native') {
+		this._visibility.set(value);
+	}
+
+	protected readonly _visibility = signal<'hover' | 'always' | 'native'>('native');
 }
