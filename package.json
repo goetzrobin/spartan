@@ -39,7 +39,7 @@
 		"@angular/platform-server": "17.0.2",
 		"@angular/router": "17.0.2",
 		"@ng-icons/core": "~25.2.0",
-		"@ngneat/cmdk": "~1.0.1",
+		"@ngneat/cmdk": "^2.0.0",
 		"@ngneat/overview": "~5.1.1",
 		"@ngneat/until-destroy": "~9.2.3",
 		"@nx/angular": "17.1.2",
