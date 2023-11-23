@@ -65,9 +65,11 @@ export class BrnAccordionComponent implements AfterContentInit {
 			this._keyManager?.onKeydown(event as KeyboardEvent);
 		});
 	}
+	public setActiveItem(id: number) {
+		this._keyManager?.setActiveItem(id);
+	}
 
 	public toggleItem(id: number) {
-		this._keyManager?.setActiveItem(id);
 		if (this._openItemIds().includes(id)) {
 			this._openItemIds.update((ids) => ids.filter((openId) => id !== openId));
 			return;

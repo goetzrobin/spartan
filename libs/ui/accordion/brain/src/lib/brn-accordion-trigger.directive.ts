@@ -1,5 +1,7 @@
 import { AfterContentInit, Directive, ElementRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
+import { fromEvent } from 'rxjs';
 import { BrnAccordionItemComponent } from './brn-accordion-item.component';
 import { BrnAccordionComponent } from './brn-accordion.component';
 
@@ -34,8 +36,14 @@ export class BrnAccordionTriggerDirective implements AfterContentInit {
 			throw Error('Accordion trigger can only be used inside an AccordionItem. Add brnAccordionItem to parent.');
 		}
 		this._HostPressedListener.subscribe(() => {
-			this.toggleAccordionItem();
+			this._accordion.toggleItem(this._item.id);
 		});
+
+		fromEvent(this._elementRef.nativeElement, 'focus')
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => {
+				this._accordion.setActiveItem(this._item.id);
+			});
 	}
 	ngAfterContentInit(): void {
 		console.log('BrnAccordionTriggerDirective.ngAfterContentInit');
@@ -43,9 +51,5 @@ export class BrnAccordionTriggerDirective implements AfterContentInit {
 
 	public focus() {
 		this._elementRef.nativeElement.focus();
-	}
-
-	protected toggleAccordionItem() {
-		this._accordion.toggleItem(this._item.id);
 	}
 }
