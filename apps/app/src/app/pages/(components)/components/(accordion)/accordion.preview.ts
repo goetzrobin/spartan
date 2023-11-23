@@ -3,7 +3,7 @@ import {
 	BrnAccordionComponent,
 	BrnAccordionContentComponent,
 	BrnAccordionItemComponent,
-	BrnAccordionTriggerComponent,
+	BrnAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-brain';
 import {
 	HlmAccordionContentDirective,
@@ -20,7 +20,7 @@ import {
 		BrnAccordionComponent,
 		BrnAccordionContentComponent,
 		BrnAccordionItemComponent,
-		BrnAccordionTriggerComponent,
+		BrnAccordionTriggerDirective,
 		HlmAccordionDirective,
 		HlmAccordionItemDirective,
 		HlmAccordionTriggerDirective,
@@ -30,28 +30,28 @@ import {
 	template: `
 		<brn-accordion hlm>
 			<brn-accordion-item hlm>
-				<brn-accordion-trigger hlm>
+				<button hlmAccordionTrigger>
 					<span>Is it accessible?</span>
 					<hlm-accordion-icon />
-				</brn-accordion-trigger>
+				</button>
 				<brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
 			</brn-accordion-item>
 
 			<brn-accordion-item hlm>
-				<brn-accordion-trigger hlm>
+				<button hlmAccordionTrigger>
 					<span>Is it styled</span>
 					<hlm-accordion-icon />
-				</brn-accordion-trigger>
+				</button>
 				<brn-accordion-content hlm>
 					Yes. It comes with default styles that match the other components' aesthetics.
 				</brn-accordion-content>
 			</brn-accordion-item>
 
 			<brn-accordion-item hlm>
-				<brn-accordion-trigger hlm>
+				<button hlmAccordionTrigger>
 					<span>Is it animated?</span>
 					<hlm-accordion-icon />
-				</brn-accordion-trigger>
+				</button>
 				<brn-accordion-content hlm>
 					Yes. It's animated by default, but you can disable it if you prefer.
 				</brn-accordion-content>
@@ -67,7 +67,7 @@ import {
   BrnAccordionComponent,
   BrnAccordionContentComponent,
   BrnAccordionItemComponent,
-  BrnAccordionTriggerComponent,
+  BrnAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-brain';
 import {
   HlmAccordionContentDirective,
@@ -84,7 +84,7 @@ import {
     BrnAccordionComponent,
     BrnAccordionContentComponent,
     BrnAccordionItemComponent,
-    BrnAccordionTriggerComponent,
+    BrnAccordionTriggerDirective,
     HlmAccordionDirective,
     HlmAccordionItemDirective,
     HlmAccordionTriggerDirective,
@@ -131,7 +131,7 @@ import {
   BrnAccordionComponent,
   BrnAccordionContentComponent,
   BrnAccordionItemComponent,
-  BrnAccordionTriggerComponent,
+  BrnAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-brain';
 import {
   HlmAccordionContentDirective,

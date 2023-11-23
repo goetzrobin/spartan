@@ -1,7 +1,7 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { AfterContentInit, Component, computed, ContentChildren, Input, QueryList, signal } from '@angular/core';
 import { rxHostListener } from '@spartan-ng/ui-core';
-import { BrnAccordionTriggerComponent } from './brn-accordion-trigger.component';
+import { BrnAccordionTriggerDirective } from './brn-accordion-trigger.directive';
 
 @Component({
 	selector: 'brn-accordion',
@@ -25,17 +25,34 @@ export class BrnAccordionComponent implements AfterContentInit {
 	private readonly _openItemIds = signal<number[]>([]);
 	public openItemIds = this._openItemIds.asReadonly();
 	public state = computed(() => (this._openItemIds().length > 0 ? 'open' : 'closed'));
-	private _keyManager?: FocusKeyManager<BrnAccordionTriggerComponent>;
+	private _keyManager?: FocusKeyManager<BrnAccordionTriggerDirective>;
 	private _keyDownListener = rxHostListener('keydown');
 
-	@ContentChildren(BrnAccordionTriggerComponent, { descendants: true })
-	public triggers?: QueryList<BrnAccordionTriggerComponent>;
+	constructor() {
+		addEventListener('keydown', (event) => {
+			// if one of the triggers is focused, prevent default on certain keys
+			for (const trigger of this.triggers?.toArray() ?? []) {
+				if (trigger.id === document.activeElement?.id) {
+					if ('key' in event) {
+						const keys = ['ArrowUp', 'ArrowDown', 'PageDown', 'PageUp', 'Home', 'End', ' ', 'Enter'];
+						if (keys.includes(event.key as string)) {
+							event.preventDefault();
+						}
+					}
+					return;
+				}
+			}
+		});
+	}
+
+	@ContentChildren(BrnAccordionTriggerDirective, { descendants: true })
+	public triggers?: QueryList<BrnAccordionTriggerDirective>;
 
 	public ngAfterContentInit() {
 		if (!this.triggers) {
 			return;
 		}
-		this._keyManager = new FocusKeyManager<BrnAccordionTriggerComponent>(this.triggers)
+		this._keyManager = new FocusKeyManager<BrnAccordionTriggerDirective>(this.triggers)
 			.withHorizontalOrientation(this.dir)
 			.withHomeAndEnd()
 			.withPageUpDown()
@@ -50,6 +67,7 @@ export class BrnAccordionComponent implements AfterContentInit {
 	}
 
 	public toggleItem(id: number) {
+		this._keyManager?.setActiveItem(id);
 		if (this._openItemIds().includes(id)) {
 			this._openItemIds.update((ids) => ids.filter((openId) => id !== openId));
 			return;

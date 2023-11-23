@@ -7,7 +7,7 @@ import {
 	BrnAccordionComponent,
 	BrnAccordionContentComponent,
 	BrnAccordionItemComponent,
-	BrnAccordionTriggerComponent,
+	BrnAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-brain';
 import {
 	HlmAccordionContentDirective,
@@ -49,7 +49,7 @@ export const routeMeta: RouteMeta = {
 		BrnAccordionComponent,
 		BrnAccordionContentComponent,
 		BrnAccordionItemComponent,
-		BrnAccordionTriggerComponent,
+		BrnAccordionTriggerDirective,
 		HlmAccordionContentDirective,
 		HlmAccordionDirective,
 		HlmAccordionIconComponent,

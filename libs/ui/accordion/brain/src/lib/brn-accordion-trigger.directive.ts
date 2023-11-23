@@ -1,12 +1,11 @@
-import { Component, ElementRef, inject, signal } from '@angular/core';
-import { CustomElementClassSettable, provideCustomClassSettableExisting } from '@spartan-ng/ui-core';
+import { AfterContentInit, Directive, ElementRef, inject } from '@angular/core';
+import { rxHostPressedListener } from '@spartan-ng/ui-core';
 import { BrnAccordionItemComponent } from './brn-accordion-item.component';
 import { BrnAccordionComponent } from './brn-accordion.component';
 
-@Component({
-	selector: 'brn-accordion-trigger',
+@Directive({
+	selector: '[brnAccordionTrigger]',
 	standalone: true,
-	providers: [provideCustomClassSettableExisting(() => BrnAccordionTriggerComponent)],
 	host: {
 		'[attr.data-state]': 'state()',
 		'[attr.aria-expanded]': 'state() === "open"',
@@ -15,23 +14,16 @@ import { BrnAccordionComponent } from './brn-accordion.component';
 		'aria-level': '3',
 		'[id]': 'id',
 	},
-	template: `
-		<button [class]="btnClass()" [attr.data-state]="state()" (click)="toggleAccordionItem()">
-			<ng-content />
-		</button>
-	`,
 })
-export class BrnAccordionTriggerComponent implements CustomElementClassSettable {
+export class BrnAccordionTriggerDirective implements AfterContentInit {
 	private _accordion = inject(BrnAccordionComponent);
 	private _item = inject(BrnAccordionItemComponent);
 	private _elementRef = inject(ElementRef);
+	private _HostPressedListener = rxHostPressedListener();
 
 	public state = this._item.state;
 	public id = 'brn-accordion-trigger-' + this._item.id;
 	public ariaControls = 'brn-accordion-content-' + this._item.id;
-
-	private readonly _btnClass = signal('');
-	public btnClass = this._btnClass.asReadonly();
 
 	constructor() {
 		if (!this._accordion) {
@@ -41,10 +33,12 @@ export class BrnAccordionTriggerComponent implements CustomElementClassSettable 
 		if (!this._item) {
 			throw Error('Accordion trigger can only be used inside an AccordionItem. Add brnAccordionItem to parent.');
 		}
+		this._HostPressedListener.subscribe(() => {
+			this.toggleAccordionItem();
+		});
 	}
-
-	public setClassToCustomElement(classes: string) {
-		this._btnClass.set(classes);
+	ngAfterContentInit(): void {
+		console.log('BrnAccordionTriggerDirective.ngAfterContentInit');
 	}
 
 	public focus() {
