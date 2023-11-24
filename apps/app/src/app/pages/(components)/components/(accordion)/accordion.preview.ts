@@ -131,7 +131,7 @@ export class AccordionPreviewComponent {}
 `;
 
 export const codeSkeleton = `
-<div BrnAccordion HlmAccrodionhlm>
+<div hlmAccordion>
   <div hlmAccordionItem>
     <button hlmAccordionTrigger>
       <span>Is it accessible?</span>

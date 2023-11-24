@@ -126,47 +126,45 @@ export const routeMeta: RouteMeta = {
 				</a>
 			</div>
 			<spartan-section-sub-heading id="faq">FAQ</spartan-section-sub-heading>
-			<div BrnAccordion>
-				<brn-accordion-item hlm>
-					<brn-accordion-trigger hlm>
+			<div hlmAccordion>
+				<div hlmAccordionItem>
+					<button hlmAccordionTrigger>
 						<span>What is spartan/stack</span>
 						<hlm-accordion-icon />
-					</brn-accordion-trigger>
+					</button>
 					<brn-accordion-content hlm>
 						It is a collection of full-stack technologies that power end-to-end type-safe Angular development.
 					</brn-accordion-content>
-				</brn-accordion-item>
+				</div>
 
-				<brn-accordion-item hlm>
-					<brn-accordion-trigger hlm>
+				<div hlmAccordionItem>
+					<button hlmAccordionTrigger>
 						<span>What is spartan/ui</span>
 						<hlm-accordion-icon />
-					</brn-accordion-trigger>
+					</button>
 					<brn-accordion-content hlm>
 						A collection of Angular UI primitives that are both beautiful and accessible.
 					</brn-accordion-content>
-				</brn-accordion-item>
-
-				<brn-accordion-item hlm>
-					<brn-accordion-trigger hlm>
+				</div>
+				<div hlmAccordionItem>
+					<button hlmAccordionTrigger>
 						<span>What is spartan/ui/brain</span>
 						<hlm-accordion-icon />
-					</brn-accordion-trigger>
+					</button>
 					<brn-accordion-content hlm>
 						A collection of unstyled UI primitives that provide accessibility out of the box.
 					</brn-accordion-content>
-				</brn-accordion-item>
-
-				<brn-accordion-item hlm>
-					<brn-accordion-trigger hlm>
+				</div>
+				<div hlmAccordionItem>
+					<button hlmAccordionTrigger>
 						<span>What is spartan/ui/helm</span>
 						<hlm-accordion-icon />
-					</brn-accordion-trigger>
+					</button>
 					<brn-accordion-content hlm>
 						Directives, sometimes additional components, that give spartan/brain a shadcn look.
 					</brn-accordion-content>
-				</brn-accordion-item>
-			</brn-accordion>
+				</div>
+			</div>
 
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="cli" label="CLI" />
