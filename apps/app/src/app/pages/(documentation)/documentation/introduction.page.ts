@@ -4,8 +4,8 @@ import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { radixChevronRight } from '@ng-icons/radix-icons';
 import {
-	BrnAccordionComponent,
 	BrnAccordionContentComponent,
+	BrnAccordionDirective,
 	BrnAccordionItemComponent,
 	BrnAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-brain';
@@ -46,7 +46,7 @@ export const routeMeta: RouteMeta = {
 		SectionIntroComponent,
 		SectionSubHeadingComponent,
 		PageNavComponent,
-		BrnAccordionComponent,
+		BrnAccordionDirective,
 		BrnAccordionContentComponent,
 		BrnAccordionItemComponent,
 		BrnAccordionTriggerDirective,
@@ -126,7 +126,7 @@ export const routeMeta: RouteMeta = {
 				</a>
 			</div>
 			<spartan-section-sub-heading id="faq">FAQ</spartan-section-sub-heading>
-			<brn-accordion hlm>
+			<div BrnAccordion>
 				<brn-accordion-item hlm>
 					<brn-accordion-trigger hlm>
 						<span>What is spartan/stack</span>

@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { BrnAccordionComponent } from './brn-accordion.component';
+import { BrnAccordionDirective } from './brn-accordion.directive';
 
 let itemIdGenerator = 0;
 
@@ -14,7 +14,7 @@ let itemIdGenerator = 0;
 	`,
 })
 export class BrnAccordionItemComponent {
-	private _accordion = inject(BrnAccordionComponent);
+	private _accordion = inject(BrnAccordionDirective);
 
 	public id = itemIdGenerator++;
 	public state = computed(() => (this._accordion.openItemIds().includes(this.id) ? 'open' : 'closed'));

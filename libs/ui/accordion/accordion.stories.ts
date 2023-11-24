@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { BrnAccordionComponent, BrnAccordionImports } from './brain/src';
+import { BrnAccordionDirective, BrnAccordionImports } from './brain/src';
 import { HlmAccordionImports } from './helm/src';
 
-const meta: Meta<BrnAccordionComponent> = {
+const meta: Meta<BrnAccordionDirective> = {
 	title: 'Accordion',
-	component: BrnAccordionComponent,
+	component: BrnAccordionDirective,
 	decorators: [
 		moduleMetadata({
 			imports: [BrnAccordionImports, HlmAccordionImports],
@@ -14,12 +14,12 @@ const meta: Meta<BrnAccordionComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<BrnAccordionComponent>;
+type Story = StoryObj<BrnAccordionDirective>;
 
 export const Default: Story = {
 	render: () => ({
 		template: `
-      <brn-accordion hlm>
+      <div brnAccordion hlmAccordion>
         <brn-accordion-item hlm>
           <button hlmAccordionTrigger>
             <span>What is SPARTAN</span>
@@ -49,7 +49,7 @@ export const Default: Story = {
             Directives, sometimes additional components, that provide shadcn like styles for the Angular ecosystem.
           </brn-accordion-content>
         </brn-accordion-item>
-      </brn-accordion>
+      </div>
     `,
 	}),
 };
