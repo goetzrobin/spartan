@@ -1,4 +1,4 @@
-import { AfterContentInit, Directive, ElementRef, inject } from '@angular/core';
+import { Directive, ElementRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
 import { fromEvent } from 'rxjs';
@@ -17,7 +17,7 @@ import { BrnAccordionDirective } from './brn-accordion.directive';
 		'[id]': 'id',
 	},
 })
-export class BrnAccordionTriggerDirective implements AfterContentInit {
+export class BrnAccordionTriggerDirective {
 	private _accordion = inject(BrnAccordionDirective);
 	private _item = inject(BrnAccordionItemDirective);
 	private _elementRef = inject(ElementRef);
@@ -44,9 +44,6 @@ export class BrnAccordionTriggerDirective implements AfterContentInit {
 			.subscribe(() => {
 				this._accordion.setActiveItem(this._item.id);
 			});
-	}
-	ngAfterContentInit(): void {
-		console.log('BrnAccordionTriggerDirective.ngAfterContentInit');
 	}
 
 	public focus() {

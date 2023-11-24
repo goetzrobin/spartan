@@ -21,7 +21,6 @@ export class HlmAccordionDirective {
 
 	protected _computedClass = computed(() => this._generateClass());
 	private _generateClass() {
-		console.log('orientation in hlmAccordiondir' + this._brn.orientation);
 		if (this._brn.orientation === 'horizontal') {
 			return hlm('flex flex-row ', this._userCls());
 		}
