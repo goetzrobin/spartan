@@ -2,7 +2,7 @@ import { AfterContentInit, Directive, ElementRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
 import { fromEvent } from 'rxjs';
-import { BrnAccordionItemComponent } from './brn-accordion-item.component';
+import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 import { BrnAccordionDirective } from './brn-accordion.directive';
 
 @Directive({
@@ -19,7 +19,7 @@ import { BrnAccordionDirective } from './brn-accordion.directive';
 })
 export class BrnAccordionTriggerDirective implements AfterContentInit {
 	private _accordion = inject(BrnAccordionDirective);
-	private _item = inject(BrnAccordionItemComponent);
+	private _item = inject(BrnAccordionItemDirective);
 	private _elementRef = inject(ElementRef);
 	private _HostPressedListener = rxHostPressedListener();
 

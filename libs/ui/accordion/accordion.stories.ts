@@ -19,8 +19,8 @@ type Story = StoryObj<BrnAccordionDirective>;
 export const Default: Story = {
 	render: () => ({
 		template: `
-      <div brnAccordion hlmAccordion>
-        <brn-accordion-item hlm>
+      <div hlmAccordion>
+        <brn-accordion-item>
           <button hlmAccordionTrigger>
             <span>What is SPARTAN</span>
             <hlm-accordion-icon />

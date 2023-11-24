@@ -1,4 +1,5 @@
 import { Directive, Input, computed, signal } from '@angular/core';
+import { BrnAccordionItemDirective } from '@spartan-ng/ui-accordion-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -8,6 +9,7 @@ import { ClassValue } from 'clsx';
 	host: {
 		'[class]': '_computedClass()',
 	},
+	hostDirectives: [BrnAccordionItemDirective],
 })
 export class HlmAccordionItemDirective {
 	private readonly _userCls = signal<ClassValue>('');

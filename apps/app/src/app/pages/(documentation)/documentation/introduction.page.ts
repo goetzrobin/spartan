@@ -6,7 +6,7 @@ import { radixChevronRight } from '@ng-icons/radix-icons';
 import {
 	BrnAccordionContentComponent,
 	BrnAccordionDirective,
-	BrnAccordionItemComponent,
+	BrnAccordionItemDirective,
 	BrnAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-brain';
 import {
@@ -48,7 +48,7 @@ export const routeMeta: RouteMeta = {
 		PageNavComponent,
 		BrnAccordionDirective,
 		BrnAccordionContentComponent,
-		BrnAccordionItemComponent,
+		BrnAccordionItemDirective,
 		BrnAccordionTriggerDirective,
 		HlmAccordionContentDirective,
 		HlmAccordionDirective,

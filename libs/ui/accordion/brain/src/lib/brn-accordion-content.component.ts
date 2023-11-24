@@ -8,7 +8,7 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { CustomElementClassSettable, provideCustomClassSettableExisting } from '@spartan-ng/ui-core';
-import { BrnAccordionItemComponent } from './brn-accordion-item.component';
+import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 
 @Component({
 	selector: 'brn-accordion-content',
@@ -30,7 +30,7 @@ import { BrnAccordionItemComponent } from './brn-accordion-item.component';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BrnAccordionContentComponent implements AfterViewInit, CustomElementClassSettable {
-	private _item = inject(BrnAccordionItemComponent);
+	private _item = inject(BrnAccordionItemDirective);
 	private _element = inject(ElementRef).nativeElement;
 
 	public state = this._item.state;

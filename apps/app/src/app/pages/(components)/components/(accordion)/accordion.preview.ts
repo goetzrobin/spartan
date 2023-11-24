@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
 	BrnAccordionContentComponent,
 	BrnAccordionDirective,
-	BrnAccordionItemComponent,
+	BrnAccordionItemDirective,
 	BrnAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-brain';
 import {
@@ -19,7 +19,7 @@ import {
 	imports: [
 		BrnAccordionDirective,
 		BrnAccordionContentComponent,
-		BrnAccordionItemComponent,
+		BrnAccordionItemDirective,
 		BrnAccordionTriggerDirective,
 		HlmAccordionDirective,
 		HlmAccordionItemDirective,
@@ -29,15 +29,15 @@ import {
 	],
 	template: `
 		<div hlmAccordion>
-			<brn-accordion-item hlm>
+			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					<span>Is it accessible?</span>
 					<hlm-accordion-icon />
 				</button>
 				<brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
-			</brn-accordion-item>
+			</div>
 
-			<brn-accordion-item hlm>
+			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					<span>Is it styled</span>
 					<hlm-accordion-icon />
@@ -45,9 +45,9 @@ import {
 				<brn-accordion-content hlm>
 					Yes. It comes with default styles that match the other components' aesthetics.
 				</brn-accordion-content>
-			</brn-accordion-item>
+			</div>
 
-			<brn-accordion-item hlm>
+			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					<span>Is it animated?</span>
 					<hlm-accordion-icon />
@@ -55,7 +55,7 @@ import {
 				<brn-accordion-content hlm>
 					Yes. It's animated by default, but you can disable it if you prefer.
 				</brn-accordion-content>
-			</brn-accordion-item>
+			</div>
 		</div>
 	`,
 })
@@ -66,7 +66,7 @@ import { Component } from '@angular/core';
 import {
   BrnAccordionDirective,
   BrnAccordionContentComponent,
-  BrnAccordionItemComponent,
+  BrnAccordionItemDirective,
   BrnAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-brain';
 import {
@@ -83,7 +83,7 @@ import {
   imports: [
     BrnAccordionDirective,
     BrnAccordionContentComponent,
-    BrnAccordionItemComponent,
+    BrnAccordionItemDirective,
     BrnAccordionTriggerDirective,
     HlmAccordionDirective,
     HlmAccordionItemDirective,
@@ -92,35 +92,35 @@ import {
     HlmAccordionIconComponent,
   ],
   template: \`
-    <div hlmAccordion>
-      <brn-accordion-item hlm>
-        <button hlmAccordionTrigger>
-          <span>Is it accessible?</span>
-          <hlm-accordion-icon />
-        </button>
-        <brn-accordion-content hlm> Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
-      </brn-accordion-item>
-
-      <brn-accordion-item hlm>
-        <button hlmAccordionTrigger>
-          <span>Is it styled</span>
-          <hlm-accordion-icon />
-        </button>
-        <brn-accordion-content hlm>
-          Yes. It comes with default styles that match the other components' aesthetics.
-        </brn-accordion-content>
-      </brn-accordion-item>
-
-      <brn-accordion-item hlm>
-        <button hlmAccordionTrigger>
-          <span>Is it animated?</span>
-          <hlm-accordion-icon />
-        </button>
-        <brn-accordion-content hlm>
-          Yes. It's animated by default, but you can disable it if you prefer.
-        </brn-accordion-content>
-      </brn-accordion-item>
+  <div hlmAccordion>
+    <div hlmAccordionItem>
+      <button hlmAccordionTrigger>
+        <span>Is it accessible?</span>
+        <hlm-accordion-icon />
+      </button>
+      <brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
     </div>
+
+    <div hlmAccordionItem>
+      <button hlmAccordionTrigger>
+        <span>Is it styled</span>
+        <hlm-accordion-icon />
+      </button>
+      <brn-accordion-content hlm>
+        Yes. It comes with default styles that match the other components' aesthetics.
+      </brn-accordion-content>
+    </div>
+
+    <div hlmAccordionItem>
+      <button hlmAccordionTrigger>
+        <span>Is it animated?</span>
+        <hlm-accordion-icon />
+      </button>
+      <brn-accordion-content hlm>
+        Yes. It's animated by default, but you can disable it if you prefer.
+      </brn-accordion-content>
+    </div>
+  </div>
   \`,
 })
 export class AccordionPreviewComponent {}
@@ -130,7 +130,7 @@ export const codeImports = `
 import {
   BrnAccordionDirective,
   BrnAccordionContentComponent,
-  BrnAccordionItemComponent,
+  BrnAccordionItemDirective,
   BrnAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-brain';
 import {
