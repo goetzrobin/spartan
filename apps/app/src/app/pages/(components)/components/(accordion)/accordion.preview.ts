@@ -61,8 +61,7 @@ import {
 })
 export class AccordionPreviewComponent {}
 
-export const codeString = `
-import { Component } from '@angular/core';
+export const codeImports = `
 import {
   BrnAccordionDirective,
   BrnAccordionContentComponent,
@@ -76,7 +75,12 @@ import {
   HlmAccordionItemDirective,
   HlmAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-helm';
+`;
 
+export const codeString =
+	"import { Component } from '@angular/core';" +
+	codeImports +
+	`
 @Component({
   selector: 'spartan-accordion-preview',
   standalone: true,
@@ -126,32 +130,16 @@ import {
 export class AccordionPreviewComponent {}
 `;
 
-export const codeImports = `
-import {
-  BrnAccordionDirective,
-  BrnAccordionContentComponent,
-  BrnAccordionItemDirective,
-  BrnAccordionTriggerDirective,
-} from '@spartan-ng/ui-accordion-brain';
-import {
-  HlmAccordionContentDirective,
-  HlmAccordionDirective,
-  HlmAccordionIconComponent,
-  HlmAccordionItemDirective,
-  HlmAccordionTriggerDirective,
-} from '@spartan-ng/ui-accordion-helm';
-`;
-
 export const codeSkeleton = `
 <div BrnAccordion HlmAccrodionhlm>
-  <brn-accordion-item hlm>
-    <brn-accordion-trigger hlm>
+  <div hlmAccordionItem>
+    <button hlmAccordionTrigger>
       <span>Is it accessible?</span>
       <hlm-accordion-icon />
-    </brn-accordion-trigger>
+    </button>
     <brn-accordion-content hlm>
       Yes. It adheres to the WAI-ARIA design pattern.
     </brn-accordion-content>
-  </brn-accordion-item>
+  </div>
 </div>
 `;
