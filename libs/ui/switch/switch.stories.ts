@@ -52,3 +52,16 @@ export const LabeledWithAriaLabeledBy: Story = {
     `,
 	}),
 };
+
+export const Disabled: Story = {
+	render: () => ({
+		template: `
+      <div class='flex items-center'>
+         <label id='testSwitchLabel' for='testSwitch' hlmLabel> Test Switch </label>
+       <brn-switch disabled="true" class='ml-2' id='testSwitch' aria-labelledby='testSwitchLabel' hlm>
+        <brn-switch-thumb hlm />
+        </brn-switch>
+      </div>
+    `,
+	}),
+};
