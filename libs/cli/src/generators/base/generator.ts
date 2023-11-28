@@ -1,4 +1,12 @@
-import { addDependenciesToPackageJson, generateFiles, GeneratorCallback, runTasksInSerial, Tree } from '@nx/devkit';
+import {
+	addDependenciesToPackageJson,
+	generateFiles,
+	GeneratorCallback,
+	joinPathFragments,
+	runTasksInSerial,
+	Tree,
+} from '@nx/devkit';
+import { addTsConfigPath } from '@nx/js';
 import * as path from 'path';
 import { getInstalledPackageVersion } from '../../utils/version-utils';
 import { buildDependencyArray, buildDevDependencyArray } from './lib/build-dependency-array';
@@ -10,8 +18,14 @@ import { FALLBACK_ANGULAR_VERSION } from './versions';
 export async function hlmBaseGenerator(tree: Tree, options: HlmBaseGeneratorSchema) {
 	const tasks: GeneratorCallback[] = [];
 	const targetLibDir = getTargetLibraryDirectory(options, tree);
-	tasks.push(await initializeAngularLibrary(tree, options));
 
+	if (options.angularCli) {
+		addTsConfigPath(tree, '@spartan-ng/' + options.publicName, [
+			`.${path.sep}${joinPathFragments(targetLibDir, 'src', 'index.ts')}`,
+		]);
+	} else {
+		tasks.push(await initializeAngularLibrary(tree, options));
+	}
 	generateFiles(
 		tree,
 		path.join(__dirname, '..', 'ui', 'libs', options.internalName, 'files'),

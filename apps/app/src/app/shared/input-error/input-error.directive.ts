@@ -27,6 +27,7 @@ export class SpartanInputErrorDirective implements OnInit {
 			},
 			{
 				injector: this._injector,
+				allowSignalWrites: true,
 			},
 		);
 	}

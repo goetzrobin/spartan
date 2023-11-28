@@ -4,7 +4,7 @@ import { HlmBaseGeneratorSchema } from '../base/schema';
 import { SPARTAN_COLLAPSIBLE_BRAIN_VERSION } from '../base/versions';
 import { HlmUIGeneratorSchema } from './schema';
 
-export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema) {
+export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema & { angularCli?: boolean }) {
 	const tasks: GeneratorCallback[] = [];
 	const availablePrimitives = await import('./supported-ui-libraries.json');
 	const availablePrimitiveNames = [...Object.keys(availablePrimitives), 'collapsible', 'menubar', 'contextmenu'];
@@ -34,7 +34,7 @@ async function createPrimitiveLibraries(
 	availablePrimitiveNames: string[],
 	availablePrimitives,
 	tree: Tree,
-	options: HlmUIGeneratorSchema,
+	options: HlmUIGeneratorSchema & { angularCli?: boolean },
 ) {
 	const allPrimitivesSelected = response.primitives.includes('all');
 	const primitivesToCreate = allPrimitivesSelected ? availablePrimitiveNames : response.primitives;
@@ -78,6 +78,7 @@ async function createPrimitiveLibraries(
 			directory: options.directory,
 			tags: options.tags,
 			rootProject: options.rootProject,
+			angularCli: options.angularCli,
 		});
 
 		tasks.push(installTask);

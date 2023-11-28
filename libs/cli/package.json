@@ -1,8 +1,9 @@
 {
-	"name": "@spartan-ng/nx",
-	"version": "0.0.1-alpha.321",
+	"name": "@spartan-ng/cli",
+	"version": "0.0.1-alpha.323",
 	"type": "commonjs",
 	"dependencies": {
+		"@nx/js": "^17.1.0",
 		"@nx/devkit": "^17.1.0",
 		"@nx/angular": "^17.1.0",
 		"enquirer": "2.3.6",
@@ -13,6 +14,7 @@
 	},
 	"executors": "./executors.json",
 	"generators": "./generators.json",
+	"schematics": "./generators.json",
 	"publishConfig": {
 		"access": "public"
 	}

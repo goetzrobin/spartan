@@ -1,34 +1,27 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
-import { ButtonAnchorComponent, anchorCode } from '~/app/pages/(components)/components/(button)/button--anchor.example';
-import {
-	ButtonLoadingComponent,
-	loadingCode,
-} from '~/app/pages/(components)/components/(button)/button--loading.example';
-import {
-	ButtonWithIconComponent,
-	withIconCode,
-} from '~/app/pages/(components)/components/(button)/button--with-icon.example';
-import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
-import { CodePreviewDirective } from '~/app/shared/code/code-preview.directive';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { TabsComponent } from '~/app/shared/layout/tabs.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
+import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
+import { CodeComponent } from '../../../../shared/code/code.component';
+import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
+import { PageBottomNavPlaceholderComponent } from '../../../../shared/layout/page-bottom-nav-placeholder.component';
+import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavLinkComponent } from '../../../../shared/layout/page-nav/page-nav-link.component';
+import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
+import { TabsComponent } from '../../../../shared/layout/tabs.component';
+import { metaWith } from '../../../../shared/meta/meta.util';
+import { anchorCode, ButtonAnchorComponent } from './button--anchor.example';
 import { ButtonDestructiveComponent, destructiveCode } from './button--destructive.example';
 import { ButtonGhostComponent, ghostCode } from './button--ghost.example';
 import { ButtonIconComponent, iconCode } from './button--icon.example';
 import { ButtonLinkComponent, linkCode } from './button--link.example';
+import { ButtonLoadingComponent, loadingCode } from './button--loading.example';
 import { ButtonOutlineComponent, outlineCode } from './button--outline.example';
 import { ButtonSecondaryComponent, secondaryCode } from './button--secondary.example';
+import { ButtonWithIconComponent, withIconCode } from './button--with-icon.example';
 import { ButtonPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './button.preview';
 
 export const routeMeta: RouteMeta = {
@@ -62,7 +55,6 @@ export const routeMeta: RouteMeta = {
 		ButtonWithIconComponent,
 		ButtonLoadingComponent,
 		ButtonAnchorComponent,
-		InstallationCsComponent,
 	],
 	template: `
 		<section spartanMainSection>
@@ -76,9 +68,9 @@ export const routeMeta: RouteMeta = {
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
-				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/nx:ui button" />
-				<spartan-installation-cs secondTab />
+			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
+				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/cli:ui button" />
+				<spartan-code secondTab language="sh" code="ng g @spartan-ng/cli:ui button" />
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

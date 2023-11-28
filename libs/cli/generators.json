@@ -10,5 +10,17 @@
 			"schema": "./src/generators/theme/schema.json",
 			"description": "spartan-ng theme generator"
 		}
+	},
+	"schematics": {
+		"ui": {
+			"factory": "./src/generators/ui/compat",
+			"schema": "./src/generators/ui/schema.json",
+			"description": "spartan-ng ui generator"
+		},
+		"ui-theme": {
+			"factory": "./src/generators/theme/compat",
+			"schema": "./src/generators/theme/schema.json",
+			"description": "spartan-ng theme generator"
+		}
 	}
 }
