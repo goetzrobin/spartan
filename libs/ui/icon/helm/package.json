@@ -3,7 +3,7 @@
 	"version": "0.0.1-alpha.10",
 	"peerDependencies": {
 		"@angular/core": "^17.0.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.313",
+		"@spartan-ng/ui-core": "0.0.1-alpha.314",
 		"@ng-icons/core": "^25.1.0",
 		"class-variance-authority": "^0.6.0",
 		"clsx": "^1.2.1"
