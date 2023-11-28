@@ -134,7 +134,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		this._required = value;
 	}
 
-	private _disabled = signal(false);
+	private readonly _disabled = signal(false);
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
 		this._disabled.set(value);

@@ -71,10 +71,31 @@ describe('BrnCheckboxComponent', () => {
 	const setupOutsideLabelWithForAndId = async () => {
 		const container = await render(
 			`
-     <label for='checkboxId'>
+     <label for='checkboxId' data-testid='label'>
      Checkbox Outside Label with id
      </label>
      <brn-checkbox id='checkboxId' name='checkboxName' data-testid='checkbox'>
+             <hlm-checkbox-checkicon />
+      </brn-checkbox>
+    `,
+			{
+				imports: [BrnCheckboxComponent, HlmCheckboxCheckIconComponent],
+			},
+		);
+		return {
+			user: userEvent.setup(),
+			container,
+			checkboxElement: screen.getByLabelText(/checkbox outside label with id/i),
+			labelElement: screen.getByText(/checkbox outside label with id/i),
+		};
+	};
+	const setupOutsideLabelWithForAndIdDisabled = async () => {
+		const container = await render(
+			`
+     <label for='checkboxId' data-testid='label'>
+     Checkbox Outside Label with id
+     </label>
+     <brn-checkbox disabled id='checkboxId' name='checkboxName' data-testid='checkbox'>
              <hlm-checkbox-checkicon />
       </brn-checkbox>
     `,
@@ -270,6 +291,21 @@ describe('BrnCheckboxComponent', () => {
 			await validateCheckboxOff(options);
 			await user.keyboard('[Space]');
 			await validateCheckboxOn(options);
+			const label = await screen.findByTestId('label');
+			expect(label).toHaveAttribute('data-disabled', 'false');
+		});
+		it('sets data-disabled to the label toggles do not change anything', async () => {
+			const { user } = await setupOutsideLabelWithForAndIdDisabled();
+			const options = { focus: false, focusVisible: false, disabled: true };
+			await validateCheckboxOff(options);
+			await user.keyboard('[Tab][Space]');
+			await validateCheckboxOff(options);
+			await user.keyboard('[Space]');
+			await validateCheckboxOff(options);
+			await user.keyboard('[Space]');
+			await validateCheckboxOff(options);
+			const label = await screen.findByTestId('label');
+			expect(label).toHaveAttribute('data-disabled', 'true');
 		});
 	});
 });
