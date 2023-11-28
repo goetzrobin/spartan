@@ -161,7 +161,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		rxHostPressedListener().subscribe(() => this.handleChange());
 		effect(() => {
 			const parent = this._renderer.parentNode(this._elementRef.nativeElement);
-			const label = parent.querySelector(`label[for="${this.forChild(this._id())}"]`);
+			const label = parent?.querySelector(`label[for="${this.forChild(this._id())}"]`);
 			if (!label) return;
 			this._renderer.setAttribute(label, 'data-disabled', this._disabled() ? 'true' : 'false');
 		});
