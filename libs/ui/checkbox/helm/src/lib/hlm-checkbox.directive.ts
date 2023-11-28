@@ -1,5 +1,4 @@
-import { Directive, Input, computed, inject, signal } from '@angular/core';
-import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
+import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -11,7 +10,6 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmCheckboxDirective {
-	private _brn = inject(BrnCheckboxComponent);
 	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
