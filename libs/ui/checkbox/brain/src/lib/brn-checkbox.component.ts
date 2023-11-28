@@ -15,6 +15,7 @@ import {
 	Input,
 	OnDestroy,
 	Output,
+	Renderer2,
 	signal,
 	ViewChild,
 	ViewEncapsulation,
@@ -79,6 +80,7 @@ const CONTAINER_POST_FIX = '-checkbox';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
+	private _renderer = inject(Renderer2);
 	private _elementRef = inject(ElementRef);
 	private _focusMonitor = inject(FocusMonitor);
 	private _cdr = inject(ChangeDetectorRef);
@@ -158,9 +160,10 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	constructor() {
 		rxHostPressedListener().subscribe(() => this.handleChange());
 		effect(() => {
-			const label = document.querySelector(`label[for="${this.forChild(this._id())}"]`);
+			const parent = this._renderer.parentNode(this._elementRef.nativeElement);
+			const label = parent.querySelector(`label[for="${this.forChild(this._id())}"]`);
 			if (!label) return;
-			label.setAttribute('data-disabled', this._disabled() ? 'true' : 'false');
+			this._renderer.setAttribute(label, 'data-disabled', this._disabled() ? 'true' : 'false');
 		});
 	}
 
