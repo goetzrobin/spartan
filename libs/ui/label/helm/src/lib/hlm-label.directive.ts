@@ -1,4 +1,4 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, computed, inject, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -30,7 +30,29 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 		'[class]': '_computedClass()',
 	},
 })
-export class HlmLabelDirective {
+export class HlmLabelDirective implements OnInit {
+	private readonly _element = inject(ElementRef).nativeElement;
+	private _changes?: MutationObserver;
+	private readonly _dataDisabled = signal<boolean>(false);
+
+	ngOnInit(): void {
+		this._changes = new MutationObserver((mutations: MutationRecord[]) => {
+			mutations.forEach((mutation: MutationRecord) => {
+				console.log('found mutation', mutation);
+				if (mutation.attributeName !== 'data-disabled') return;
+				// eslint-disable-next-line
+				const state = (mutation.target as any).attributes.getNamedItem(mutation.attributeName)?.value === 'true';
+				this._dataDisabled.set(state);
+			});
+		});
+		Promise.resolve().then(() => {
+			this._changes?.observe(this._element, {
+				attributes: true,
+				childList: true,
+				characterData: true,
+			});
+		});
+	}
 	private readonly _variant = signal<LabelVariants['variant']>('default');
 	@Input()
 	set variant(value: LabelVariants['variant']) {
@@ -51,6 +73,7 @@ export class HlmLabelDirective {
 
 	protected _computedClass = computed(() => this._generateClass());
 	private _generateClass() {
-		return hlm(labelVariants({ variant: this._variant(), error: this._error() }), this._userCls());
+		const disabledClass = this._dataDisabled() ? 'cursor-not-allowed opacity-70' : '';
+		return hlm(labelVariants({ variant: this._variant(), error: this._error() }), disabledClass, this._userCls());
 	}
 }

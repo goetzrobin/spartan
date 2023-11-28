@@ -6,6 +6,7 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	effect,
 	ElementRef,
 	EventEmitter,
 	forwardRef,
@@ -133,14 +134,14 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		this._required = value;
 	}
 
-	private _disabled = false;
+	private _disabled = signal(false);
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
-		this._disabled = value;
+		this._disabled.set(value);
 	}
 
 	get disabled() {
-		return this._disabled;
+		return this._disabled();
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
@@ -156,13 +157,15 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	constructor() {
 		rxHostPressedListener().subscribe(() => this.handleChange());
+		effect(() => {
+			const label = document.querySelector(`label[for="${this.forChild(this._id())}"]`);
+			if (!label) return;
+			label.setAttribute('data-disabled', this._disabled() ? 'true' : 'false');
+		});
 	}
 
 	handleChange() {
-		console.log('handleChange');
-		if (this.disabled) {
-			return;
-		}
+		if (this._disabled()) return;
 		const previousChecked = this._checked();
 		if (!this.checkbox) return;
 		this._checked.set(!previousChecked);

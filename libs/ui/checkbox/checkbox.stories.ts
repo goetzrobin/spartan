@@ -59,13 +59,27 @@ export const LabeledWithAriaLabeledBy: Story = {
 export const disabled: Story = {
 	render: () => ({
 		template: `
-    <form>
       <div class='flex items-center'>
          <label id='testCheckboxLabel' for='testCheckbox' hlmLabel> Test Checkbox </label>
        <brn-checkbox disabled class='ml-2' id='testCheckbox' aria-labelledby='testCheckboxLabel' hlm>
          <hlm-checkbox-checkicon />
         </brn-checkbox>
-      </div></form>
+      </div>
+
+      <div class='flex items-center pt-4'>
+        <brn-checkbox disabled id='testCheckbox2' aria-labelledby='testCheckboxLabel' hlm>
+          <hlm-checkbox-checkicon />
+        </brn-checkbox>
+        <label class ="ml-2" id='testCheckbox2Label' for='testCheckbox2' hlmLabel> Test Checkbox 2</label>
+      </div>
+
+
+      <div class='flex items-center pt-4'>
+      <brn-checkbox id='testCheckbox3' aria-labelledby='testCheckboxLabel' hlm>
+        <hlm-checkbox-checkicon />
+      </brn-checkbox>
+      <label class ="ml-2" id='testCheckbox2Label' for='testCheckbox2' hlmLabel> Test Checkbox 3 enabled</label>
+    </div>
     `,
 	}),
 };
