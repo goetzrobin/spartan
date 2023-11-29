@@ -240,10 +240,10 @@
   optionalDependencies:
     parse5 "^7.1.2"
 
-"@angular/cdk@^15.2.0":
-  version "15.2.9"
-  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-15.2.9.tgz#e22df07b296fec6dccf66d569c3acc3c504c2058"
-  integrity sha512-koaM07N1AIQ5oHU27l0/FoQSSoYAwlAYwVZ4Di3bYrJsTBNCN2Xsby7wI8gZxdepMnV4Fe9si382BDBov+oO4Q==
+"@angular/cdk@>=16.0.0":
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-17.0.1.tgz#f1852c79ed0c34ef5f76014c048d1184174b5b50"
+  integrity sha512-0hrXm2D0s0/vUtDoLFRWTs75k5WY/hQmfnsaJXHeqinbE3eKOxmQxL1i7ymnMSQthEWzgRAhzS3Nfs7Alw3dQA==
   dependencies:
     tslib "^2.3.0"
   optionalDependencies:
@@ -2979,31 +2979,31 @@
   dependencies:
     tslib "^2.2.0"
 
-"@ngneat/cmdk@~1.0.1":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@ngneat/cmdk/-/cmdk-1.0.1.tgz#5cfce213ae352a1c1a361e0fea3afd0a2f7c1a1a"
-  integrity sha512-Z4FlAQVEqUPijXq3lniXonCtZm9IKAeALPZuvHAxudAIDjXkhJYK7NztXL7oOPZxDNAt9qVjG4hNtkOGpJMeUQ==
+"@ngneat/cmdk@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ngneat/cmdk/-/cmdk-2.0.0.tgz#00f54e4fcd4496dc82d7f24dca556ba0f2d0702e"
+  integrity sha512-drGM1/iPlZx19i5x8lyPA/Thp0Znt+P5iOTHdL9ZEHLxkj+IKiPwmSMXuUIF2DuA0AOPGUIEhR6wGdicN9Fcyg==
   dependencies:
-    "@angular/cdk" "^15.2.0"
-    "@ngneat/overview" "^4.1.0"
-    "@ngneat/until-destroy" "^9.2.3"
+    "@angular/cdk" ">=16.0.0"
+    "@ngneat/overview" ">=5.0.0"
+    "@ngneat/until-destroy" ">=10.0.0"
     tslib "^2.3.0"
 
-"@ngneat/overview@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.npmjs.org/@ngneat/overview/-/overview-4.1.0.tgz#493f1b91199ac0235bd26deb3ed902fb2f110adb"
-  integrity sha512-tfq2ZolbP5nSZg9/l37eSyC2tLq2MAwZd0fs6TzTGwaJEaZga9Z2tJ+Q2ZzFQZYE37WqpJ/G5qsOwMAMn/dzfg==
-  dependencies:
-    tslib "^2.0.0"
-
-"@ngneat/overview@~5.1.1":
+"@ngneat/overview@>=5.0.0", "@ngneat/overview@~5.1.1":
   version "5.1.1"
-  resolved "https://registry.npmjs.org/@ngneat/overview/-/overview-5.1.1.tgz#0b7ff659c62078153dce0a300d47c65a233e0828"
+  resolved "https://registry.yarnpkg.com/@ngneat/overview/-/overview-5.1.1.tgz#0b7ff659c62078153dce0a300d47c65a233e0828"
   integrity sha512-Dz7yylhS08Mo+A8SXo7KyJBJMxD18Oq/G5v/ndvd5C8Gi3uOrAiXUjxvqRCPMxrg03FlkvEsD5/4TvMKtrUfAQ==
   dependencies:
     tslib "^2.0.0"
 
-"@ngneat/until-destroy@^9.2.3", "@ngneat/until-destroy@~9.2.3":
+"@ngneat/until-destroy@>=10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@ngneat/until-destroy/-/until-destroy-10.0.0.tgz#105db43d858bc1cec2f36272a296af68bed7bf43"
+  integrity sha512-xXFAabQ4YVJ82LYxdgUlaKZyR3dSbxqG3woSyaclzxfCgWMEDweCcM/GGYbNiHJa0WwklI98RXHvca+UyCxpeg==
+  dependencies:
+    tslib "^2.3.0"
+
+"@ngneat/until-destroy@~9.2.3":
   version "9.2.3"
   resolved "https://registry.npmjs.org/@ngneat/until-destroy/-/until-destroy-9.2.3.tgz#c435b686b6c714c9004e82b23a341595a49ba5b5"
   integrity sha512-ryX0vqDOdmYo53f7v5Ivbj1jcqOEX+vM1iiV9NYepWDha4VJp9lWrDFK9tRt2evAMzF/9u67JLzs4Xjcoh+Taw==

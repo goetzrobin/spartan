@@ -13,6 +13,7 @@ import { PageNavLinkComponent } from '../../../../shared/layout/page-nav/page-na
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
+import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
@@ -36,6 +37,7 @@ export const routeMeta: RouteMeta = {
 		HlmIconComponent,
 		RouterLink,
 		PageNavLinkComponent,
+		TabsComponent,
 	],
 	providers: [provideIcons({ radixChevronRight })],
 	template: `
@@ -47,8 +49,8 @@ export const routeMeta: RouteMeta = {
 					<code class="${hlmCode}">spartan/ui</code>
 					to your project requires only a couple steps!
 				</p>
-				<p class="${hlmP}">If you are already using Nx, start with installing our plugin:</p>
-				<spartan-code class="mt-4" code="npm i -D @spartan-ng/nx" />
+				<p class="${hlmP}">We support the Angular CLI & Nx! Start with installing our plugin:</p>
+				<spartan-code class="mt-4" code="npm i -D @spartan-ng/cli" />
 			</section>
 			<spartan-section-sub-heading id="prerequisites">Prerequisites</spartan-section-sub-heading>
 			<section>
@@ -76,9 +78,10 @@ export const routeMeta: RouteMeta = {
 					package comes with it own preset.
 				</p>
 				<p class="${hlmP}">Simply add it to the presets array of your config file:</p>
-				<spartan-code
-					class="mb-6 mt-4"
-					code="
+				<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
+					<spartan-code
+						firstTab
+						code="
 const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');
 const { join } = require('path');
 
@@ -95,7 +98,25 @@ module.exports = {
   plugins: [],
 };
 "
-				/>
+					/>
+					<spartan-code
+						secondTab
+						code="
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  presets: [require('@spartan-ng/ui-core/hlm-tailwind-preset')],
+  content: [
+    './src/**/*.{html,ts}',
+    './REPLACE_WITH_PATH_TO_YOUR_COMPONENTS_DIRECTORY/**/*.{html,ts}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+"
+					/>
+				</spartan-tabs>
 			</section>
 
 			<spartan-section-sub-heading id="adding-css-vars">Adding CSS variables</spartan-section-sub-heading>
@@ -111,7 +132,10 @@ module.exports = {
 				<p class="${hlmP}">
 					Again, if you are using Nx, we have written a plugin that will take care of the heavy lifting:
 				</p>
-				<spartan-code class="mt-4" code="npx nx g @spartan-ng/nx:ui-theme" />
+				<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
+					<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui-theme" />
+					<spartan-code secondTab code="ng g @spartan-ng/cli:ui-theme" />
+				</spartan-tabs>
 				<p class="${hlmP}">To learn more about the Nx plugin check out the CLI docs below.</p>
 				<div class="my-2 flex items-center justify-end">
 					<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
@@ -188,18 +212,17 @@ module.exports = {
 					choose which primitives to add to your project. It will add all brain dependencies and copy helm code into its
 					own library:
 				</p>
-				<spartan-code class="mt-4" code="npx nx g @spartan-ng/nx:ui" />
-				<p class="${hlmP}">To learn more about the Nx plugin check out the CLI docs below.</p>
+				<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
+					<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui" />
+					<spartan-code secondTab code="ng g @spartan-ng/cli:ui" />
+				</spartan-tabs>
+				<p class="${hlmP}">To learn more about the command line interface check out the docs below.</p>
 				<div class="my-2 flex items-center justify-end">
 					<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
 						CLI documentation
 						<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
 					</a>
 				</div>
-				<p class="${hlmP}">
-					If you are not using Nx (yet) you can follow the guide on how to manually install the primitive on the
-					respective documentation page.
-				</p>
 			</section>
 
 			<spartan-page-bottom-nav>

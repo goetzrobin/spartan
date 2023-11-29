@@ -12,6 +12,7 @@ import { PageNavLinkComponent } from '../../../shared/layout/page-nav/page-nav-l
 import { PageNavComponent } from '../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../shared/layout/section-sub-heading.component';
+import { TabsComponent } from '../../../shared/layout/tabs.component';
 import { metaWith } from '../../../shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
@@ -34,6 +35,7 @@ export const routeMeta: RouteMeta = {
 		CodeComponent,
 		PageNavLinkComponent,
 		HlmIconComponent,
+		TabsComponent,
 	],
 	providers: [provideIcons({ radixExclamationTriangle })],
 	template: `
@@ -57,9 +59,9 @@ export const routeMeta: RouteMeta = {
 					<p class="${hlmP}">
 						To add
 						<code class="${hlmCode}">spartan</code>
-						to your Nx workspace simply install the plugin with the command below:
+						to your Angular CLI project or Nx workspace simply install the plugin with the command below:
 					</p>
-					<spartan-code class="mt-4" code="npm i -D @spartan-ng/nx" />
+					<spartan-code class="mt-4" code="npm i -D @spartan-ng/cli" />
 				</div>
 
 				<h3 class="${hlmH4} mt-12">ui</h3>
@@ -69,7 +71,10 @@ export const routeMeta: RouteMeta = {
 						<code class="${hlmCode}">spartan/ui</code>
 						primitives to your workspace run the following command:
 					</p>
-					<spartan-code class="mt-4" code="npx nx g @spartan-ng/nx:ui" />
+					<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
+						<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui" />
+						<spartan-code secondTab code="ng g @spartan-ng/cli:ui" />
+					</spartan-tabs>
 					<p class="${hlmP}">
 						You can then select which primitives you want to add. For each primitive we create a buildable library at a
 						path of your choice.
@@ -79,7 +84,10 @@ export const routeMeta: RouteMeta = {
 				<h3 class="${hlmH4} mt-12">ui-theme</h3>
 				<div>
 					<p class="${hlmP}">Adding a theme can also be done on itself. Use the command below:</p>
-					<spartan-code class="mt-4" code="npm nx @spartan-ng/nx:ui-theme" />
+					<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
+						<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui-theme" />
+						<spartan-code secondTab code="ng g @spartan-ng/cli:ui-theme" />
+					</spartan-tabs>
 					<p class="${hlmP}">
 						You can then select which application you want to add the theme to. Where your styles entrypoint is located.
 						Which theme to add & what border radius to use.
@@ -93,7 +101,7 @@ export const routeMeta: RouteMeta = {
 		</section>
 
 		<spartan-page-nav>
-			<spartan-page-nav-link fragment="nx" label="@spartan-ng/nx" />
+			<spartan-page-nav-link fragment="nx" label="@spartan-ng/cli" />
 		</spartan-page-nav>
 	`,
 })
