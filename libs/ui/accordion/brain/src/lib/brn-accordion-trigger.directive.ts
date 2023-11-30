@@ -18,14 +18,14 @@ import { BrnAccordionDirective } from './brn-accordion.directive';
 	},
 })
 export class BrnAccordionTriggerDirective {
-	private _accordion = inject(BrnAccordionDirective);
-	private _item = inject(BrnAccordionItemDirective);
-	private _elementRef = inject(ElementRef);
-	private _HostPressedListener = rxHostPressedListener();
+	private readonly _accordion = inject(BrnAccordionDirective);
+	private readonly _item = inject(BrnAccordionItemDirective);
+	private readonly _elementRef = inject(ElementRef);
+	private readonly _hostPressedListener = rxHostPressedListener();
 
-	public state = this._item.state;
-	public id = 'brn-accordion-trigger-' + this._item.id;
-	public ariaControls = 'brn-accordion-content-' + this._item.id;
+	public readonly state = this._item.state;
+	public readonly id = 'brn-accordion-trigger-' + this._item.id;
+	public readonly ariaControls = 'brn-accordion-content-' + this._item.id;
 
 	constructor() {
 		if (!this._accordion) {
@@ -35,7 +35,7 @@ export class BrnAccordionTriggerDirective {
 		if (!this._item) {
 			throw Error('Accordion trigger can only be used inside an AccordionItem. Add brnAccordionItem to parent.');
 		}
-		this._HostPressedListener.subscribe(() => {
+		this._hostPressedListener.subscribe(() => {
 			this._accordion.toggleItem(this._item.id);
 		});
 

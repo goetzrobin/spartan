@@ -1,5 +1,7 @@
+import { radixChevronDown } from '@ng-icons/radix-icons';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
+import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { BrnAccordionDirective, BrnAccordionImports } from './brain/src';
 import { HlmAccordionImports } from './helm/src';
 
@@ -8,7 +10,8 @@ const meta: Meta<BrnAccordionDirective> = {
 	component: BrnAccordionDirective,
 	decorators: [
 		moduleMetadata({
-			imports: [BrnAccordionImports, HlmAccordionImports],
+			imports: [BrnAccordionImports, HlmAccordionImports, HlmIconComponent],
+			providers: [provideIcons({ radixChevronDown })],
 		}),
 	],
 };
@@ -22,16 +25,16 @@ export const Default: Story = {
       <div hlmAccordion>
         <div hlmAccordionItem>
           <button hlmAccordionTrigger>
-            <span>Is it accessible?</span>
-            <hlm-accordion-icon />
+            Is it accessible?
+            <hlm-icon hlmAccIcon />
           </button>
           <brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
         </div>
 
         <div hlmAccordionItem>
           <button hlmAccordionTrigger>
-            <span>Is it styled</span>
-            <hlm-accordion-icon />
+            Is it styled?
+            <hlm-icon hlmAccIcon />
           </button>
           <brn-accordion-content hlm>
             Yes. It comes with default styles that match the other components' aesthetics.
@@ -40,8 +43,8 @@ export const Default: Story = {
 
         <div hlmAccordionItem>
           <button hlmAccordionTrigger>
-            <span>Is it animated?</span>
-            <hlm-accordion-icon />
+            Is it animated?
+            <hlm-icon hlmAccIcon />
           </button>
           <brn-accordion-content hlm>
             Yes. It's animated by default, but you can disable it if you prefer.

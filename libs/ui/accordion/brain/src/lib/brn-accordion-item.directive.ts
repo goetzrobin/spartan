@@ -1,4 +1,4 @@
-import { Directive, computed, inject } from '@angular/core';
+import { computed, Directive, inject } from '@angular/core';
 import { BrnAccordionDirective } from './brn-accordion.directive';
 
 let itemIdGenerator = 0;
@@ -11,10 +11,10 @@ let itemIdGenerator = 0;
 	},
 })
 export class BrnAccordionItemDirective {
-	private _accordion = inject(BrnAccordionDirective);
+	private readonly _accordion = inject(BrnAccordionDirective);
 
-	public id = itemIdGenerator++;
-	public state = computed(() => (this._accordion.openItemIds().includes(this.id) ? 'open' : 'closed'));
+	public readonly id = itemIdGenerator++;
+	public readonly state = computed(() => (this._accordion.openItemIds().includes(this.id) ? 'open' : 'closed'));
 
 	constructor() {
 		if (!this._accordion) {
