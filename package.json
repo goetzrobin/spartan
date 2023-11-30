@@ -19,7 +19,8 @@
 		"hook:commit-msg": "npx --no -- commitlint -e",
 		"hook:pre-commit": "lint-staged",
 		"prettify": "prettier --write .",
-		"chromatic": "chromatic --project-token=chpt_845c7a47afdb884"
+		"chromatic": "chromatic --project-token=chpt_845c7a47afdb884",
+		"pre-publish": "yarn prepare-nx-plugin && yarn lint-fix-publishable && yarn prettify"
 	},
 	"private": true,
 	"dependencies": {
