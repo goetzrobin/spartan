@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, signal, ViewEncapsulation } from '@angular/core';
-import { CustomElementClassSettable, provideCustomClassSettableExisting } from '@spartan-ng/ui-core';
+import { CustomElementClassSettable } from '@spartan-ng/ui-core';
 import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 
 @Component({
 	selector: 'brn-accordion-content',
 	standalone: true,
-	providers: [provideCustomClassSettableExisting(() => BrnAccordionContentComponent)],
 	host: {
 		'[attr.data-state]': 'state()',
 		'[attr.aria-labelledby]': 'ariaLabeledBy',
@@ -23,11 +22,11 @@ import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BrnAccordionContentComponent implements CustomElementClassSettable {
-	private _item = inject(BrnAccordionItemDirective);
+	private readonly _item = inject(BrnAccordionItemDirective);
 
-	public state = this._item.state;
-	public id = 'brn-accordion-content-' + this._item.id;
-	public ariaLabeledBy = 'brn-accordion-trigger-' + this._item.id;
+	public readonly state = this._item.state;
+	public readonly id = 'brn-accordion-content-' + this._item.id;
+	public readonly ariaLabeledBy = 'brn-accordion-trigger-' + this._item.id;
 
 	protected readonly _contentClass = signal('');
 
