@@ -15,8 +15,8 @@ export class HlmAccordionContentDirective {
 
 	private readonly _userCls = signal<ClassValue>('');
 	protected readonly _computedClass = computed(() => {
-		const girdRows = this._brn?.state() === 'open' ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]';
-		return hlm('text-sm transition-all grid', girdRows, this._userCls());
+		const gridRows = this._brn?.state() === 'open' ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]';
+		return hlm('text-sm transition-all grid', gridRows, this._userCls());
 	});
 
 	@Input()
