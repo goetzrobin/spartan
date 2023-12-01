@@ -7,4 +7,5 @@ export interface HlmBaseGeneratorSchema {
 	tags?: string;
 	peerDependencies?: Record<string, string>;
 	skipBrainDependencies?: boolean;
+	angularCli?: boolean;
 }

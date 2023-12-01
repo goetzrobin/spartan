@@ -1,4 +1,4 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { computed, Directive, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -7,6 +7,10 @@ import { ClassValue } from 'clsx';
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
+		// This is needed after changes to the underlying CMDK library used for the BrnCommand primitive
+		// Ideally we would remove the dependency on this outside module. If you are open to that please
+		// reach out and if you are feeling super ambitious you can implement it yourself and open a PR!
+		'[style.display]': '"flex"',
 	},
 })
 export class HlmCommandItemDirective {
@@ -19,7 +23,7 @@ export class HlmCommandItemDirective {
 	protected _computedClass = computed(() => this._generateClass());
 	private _generateClass() {
 		return hlm(
-			'flex items-center relative cursor-default select-none rounded-sm px-2 py-1.5 text-sm outline-none\n' +
+			'items-center relative cursor-default select-none rounded-sm px-2 py-1.5 text-sm outline-none\n' +
 				'aria-selected:bg-accent aria-selected:text-accent-foreground\n' +
 				'hover:bg-accent/50\n' +
 				'disabled:pointer-events-none disabled:opacity-50',

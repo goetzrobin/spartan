@@ -19,15 +19,15 @@ import {
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
+import { MainSectionDirective } from '../../../shared/layout/main-section.directive';
+import { PageBottomNavPlaceholderComponent } from '../../../shared/layout/page-bottom-nav-placeholder.component';
+import { PageBottomNavLinkComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavLinkComponent } from '../../../shared/layout/page-nav/page-nav-link.component';
+import { PageNavComponent } from '../../../shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '../../../shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '../../../shared/layout/section-sub-heading.component';
+import { metaWith } from '../../../shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Introduction' },
@@ -98,7 +98,7 @@ export const routeMeta: RouteMeta = {
 				, and
 				<code class="${hlmCode}">Drizzle</code>
 			</p>
-			<div class="mb-2 flex items-center justify-end">
+			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/stack" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/stack
 					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
@@ -119,7 +119,7 @@ export const routeMeta: RouteMeta = {
 				<span class="font-medium">shadcn</span>
 				look.
 			</p>
-			<div class="mb-2 flex items-center justify-end">
+			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/documentation/installation" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/ui
 					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />

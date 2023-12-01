@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/ui-collapsible-brain",
-	"version": "0.0.1-alpha.313",
+	"version": "0.0.1-alpha.314",
 	"peerDependencies": {
 		"@angular/core": "17.0.2"
 	},
