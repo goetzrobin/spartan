@@ -83,15 +83,14 @@ export class BrnAccordionDirective implements AfterContentInit {
 	}
 
 	private preventDefaultEvents(event: KeyboardEvent) {
-		for (const trigger of this.triggers?.toArray() ?? []) {
-			if (trigger.id !== document.activeElement?.id) return;
-			if (!('key' in event)) return;
+		const trigger = this.triggers?.find((trigger) => trigger.id === document.activeElement?.id);
+		if (!trigger) return;
+		if (!('key' in event)) return;
 
-			const keys =
-				this.orientation === 'horizontal' ? HORIZONTAL_KEYS_TO_PREVENT_DEFAULT : VERTICAL_KEYS_TO_PREVENT_DEFAULT;
-			if (keys.includes(event.key as string)) {
-				event.preventDefault();
-			}
+		const keys =
+			this.orientation === 'horizontal' ? HORIZONTAL_KEYS_TO_PREVENT_DEFAULT : VERTICAL_KEYS_TO_PREVENT_DEFAULT;
+		if (keys.includes(event.key as string) && event.code !== 'NumpadEnter') {
+			event.preventDefault();
 		}
 	}
 }
