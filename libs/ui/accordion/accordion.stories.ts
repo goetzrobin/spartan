@@ -1,55 +1,56 @@
+import { radixChevronDown } from '@ng-icons/radix-icons';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { BrnAccordionComponent, BrnAccordionImports } from './brain/src';
+import { HlmIconComponent, provideIcons } from '../icon/helm/src';
+import { BrnAccordionDirective, BrnAccordionImports } from './brain/src';
 import { HlmAccordionImports } from './helm/src';
 
-const meta: Meta<BrnAccordionComponent> = {
+const meta: Meta<BrnAccordionDirective> = {
 	title: 'Accordion',
-	component: BrnAccordionComponent,
+	component: BrnAccordionDirective,
 	decorators: [
 		moduleMetadata({
-			imports: [BrnAccordionImports, HlmAccordionImports],
+			imports: [BrnAccordionImports, HlmAccordionImports, HlmIconComponent],
+			providers: [provideIcons({ radixChevronDown })],
 		}),
 	],
 };
 
 export default meta;
-type Story = StoryObj<BrnAccordionComponent>;
+type Story = StoryObj<BrnAccordionDirective>;
 
 export const Default: Story = {
 	render: () => ({
 		template: `
-      <brn-accordion hlm>
-      <brn-accordion-item hlm>
-        <brn-accordion-trigger hlm>
-          <span>What is SPARTAN</span>
-          <hlm-accordion-icon />
-        </brn-accordion-trigger>
-        <brn-accordion-content hlm>
-          It is a collection of full-stack technologies that provide end-to-end type-safety.
-        </brn-accordion-content>
-      </brn-accordion-item>
+      <div hlmAccordion>
+        <div hlmAccordionItem>
+          <button hlmAccordionTrigger>
+            Is it accessible?
+            <hlm-icon hlmAccIcon />
+          </button>
+          <brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
+        </div>
 
-      <brn-accordion-item hlm>
-        <brn-accordion-trigger hlm>
-          <span>What is SPARTAN Brain</span>
-          <hlm-accordion-icon />
-        </brn-accordion-trigger>
-        <brn-accordion-content hlm>
-          A collection of unstyled UI primitives that provide accessibility out of the box.
-        </brn-accordion-content>
-      </brn-accordion-item>
+        <div hlmAccordionItem>
+          <button hlmAccordionTrigger>
+            Is it styled?
+            <hlm-icon hlmAccIcon />
+          </button>
+          <brn-accordion-content hlm>
+            Yes. It comes with default styles that match the other components' aesthetics.
+          </brn-accordion-content>
+        </div>
 
-            <brn-accordion-item hlm>
-        <brn-accordion-trigger hlm>
-          <span>What is SPARTAN Helm</span>
-          <hlm-accordion-icon />
-        </brn-accordion-trigger>
-        <brn-accordion-content hlm>
-          Directives, sometimes additional components, that provide shadcn like styles for the Angular ecosystem.
-        </brn-accordion-content>
-      </brn-accordion-item>
-      </brn-accordion>
+        <div hlmAccordionItem>
+          <button hlmAccordionTrigger>
+            Is it animated?
+            <hlm-icon hlmAccIcon />
+          </button>
+          <brn-accordion-content hlm>
+            Yes. It's animated by default, but you can disable it if you prefer.
+          </brn-accordion-content>
+        </div>
+      </div>
     `,
 	}),
 };
