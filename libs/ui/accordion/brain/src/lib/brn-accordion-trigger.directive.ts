@@ -42,7 +42,7 @@ export class BrnAccordionTriggerDirective {
 		fromEvent(this._elementRef.nativeElement, 'focus')
 			.pipe(takeUntilDestroyed())
 			.subscribe(() => {
-				this._accordion.setActiveItem(this._item.id);
+				this._accordion.setActiveItem(this);
 			});
 	}
 
