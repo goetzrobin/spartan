@@ -29,6 +29,7 @@ export class BrnMenuDirective {
 		 * This is an ugly workaround to at least figure out the correct side of where a submenu
 		 * will appear and set the attribute to the host accordingly
 		 */
+		// eslint-disable-next-line
 		const overlayRef = (this._host as any)._parentTrigger.overlayRef;
 		const ps = overlayRef._positionStrategy;
 		const isRoot = this._host.menuStack.peek() === undefined;
