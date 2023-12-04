@@ -1,13 +1,15 @@
-import { FocusKeyManager } from '@angular/cdk/a11y';
+import { FocusKeyManager, FocusMonitor } from '@angular/cdk/a11y';
 import {
 	AfterContentInit,
-	computed,
 	ContentChildren,
 	Directive,
 	ElementRef,
-	inject,
 	Input,
+	NgZone,
+	OnDestroy,
 	QueryList,
+	computed,
+	inject,
 	signal,
 } from '@angular/core';
 import { BrnAccordionTriggerDirective } from './brn-accordion-trigger.directive';
@@ -32,10 +34,13 @@ const VERTICAL_KEYS_TO_PREVENT_DEFAULT = ['ArrowUp', 'ArrowDown', 'PageDown', 'P
 		'[attr.data-orientation]': 'orientation',
 	},
 })
-export class BrnAccordionDirective implements AfterContentInit {
+export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	private readonly _el = inject(ElementRef);
 	private _keyManager?: FocusKeyManager<BrnAccordionTriggerDirective>;
+	private _focusMonitor = inject(FocusMonitor);
+	private _ngZone = inject(NgZone);
 
+	private readonly _focused = signal<boolean>(false);
 	private readonly _openItemIds = signal<number[]>([]);
 	public readonly openItemIds = this._openItemIds.asReadonly();
 	public readonly state = computed(() => (this._openItemIds().length > 0 ? 'open' : 'closed'));
@@ -66,10 +71,16 @@ export class BrnAccordionDirective implements AfterContentInit {
 			this._keyManager?.onKeydown(event as KeyboardEvent);
 			this.preventDefaultEvents(event as KeyboardEvent);
 		});
+		this._focusMonitor.monitor(this._el, true).subscribe((origin) => this._focused.set(origin !== null));
 	}
 
-	public setActiveItem(id: number) {
-		this._keyManager?.setActiveItem(id);
+	ngOnDestroy(): void {
+		this._focusMonitor.stopMonitoring(this._el);
+	}
+
+	public setActiveItem(item: BrnAccordionTriggerDirective) {
+		// public setActiveItem(item: number) {
+		this._keyManager?.setActiveItem(item);
 	}
 
 	public toggleItem(id: number) {
@@ -83,8 +94,7 @@ export class BrnAccordionDirective implements AfterContentInit {
 	}
 
 	private preventDefaultEvents(event: KeyboardEvent) {
-		const trigger = this.triggers?.find((trigger) => trigger.id === document.activeElement?.id);
-		if (!trigger) return;
+		if (!this._focused()) return;
 		if (!('key' in event)) return;
 
 		const keys =
