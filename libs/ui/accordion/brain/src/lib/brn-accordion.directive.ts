@@ -6,6 +6,7 @@ import {
 	ElementRef,
 	Input,
 	NgZone,
+	OnDestroy,
 	QueryList,
 	computed,
 	inject,
@@ -33,7 +34,7 @@ const VERTICAL_KEYS_TO_PREVENT_DEFAULT = ['ArrowUp', 'ArrowDown', 'PageDown', 'P
 		'[attr.data-orientation]': 'orientation',
 	},
 })
-export class BrnAccordionDirective implements AfterContentInit {
+export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	private readonly _el = inject(ElementRef);
 	private _keyManager?: FocusKeyManager<BrnAccordionTriggerDirective>;
 	private _focusMonitor = inject(FocusMonitor);
@@ -70,11 +71,11 @@ export class BrnAccordionDirective implements AfterContentInit {
 			this._keyManager?.onKeydown(event as KeyboardEvent);
 			this.preventDefaultEvents(event as KeyboardEvent);
 		});
-		this._focusMonitor.monitor(this._el, true).subscribe((origin) =>
-			this._ngZone.run(() => {
-				this._focused.set(origin !== null);
-			}),
-		);
+		this._focusMonitor.monitor(this._el, true).subscribe((origin) => this._focused.set(origin !== null));
+	}
+
+	ngOnDestroy(): void {
+		this._focusMonitor.stopMonitoring(this._el);
 	}
 
 	public setActiveItem(item: BrnAccordionTriggerDirective) {
@@ -93,10 +94,7 @@ export class BrnAccordionDirective implements AfterContentInit {
 	}
 
 	private preventDefaultEvents(event: KeyboardEvent) {
-		// if (!this._focused()) return;
-
-		// const trigger = this.triggers?.find((trigger) => trigger.id === document.activeElement?.id);
-		// if (!trigger) return;
+		if (!this._focused()) return;
 		if (!('key' in event)) return;
 
 		const keys =
