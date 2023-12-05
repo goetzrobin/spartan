@@ -7,11 +7,11 @@ export class HlmTableDirective {
 
 	constructor() {
 		this._tableClassesSettable?.setTableClasses({
-			table: 'flex flex-col [&_cdk-row:last-child]:border-0',
+			table: 'flex flex-col text-sm [&_cdk-row:last-child]:border-0',
 			headerRow:
-				'flex  min-w-[100%] w-fit border-b border-border [&.cdk-table-sticky]:bg-background [&.cdk-table-sticky]:hover:bg-muted',
+				'flex min-w-[100%] w-fit border-b border-border [&.cdk-table-sticky]:bg-background [&.cdk-table-sticky]:hover:bg-muted',
 			bodyRow:
-				'flex min-w-[100%] w-fit border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
+				'flex min-w-[100%] w-fit border-b border-border transition-[background-color] hover:bg-muted/50 data-[state=selected]:bg-muted',
 		});
 	}
 }
