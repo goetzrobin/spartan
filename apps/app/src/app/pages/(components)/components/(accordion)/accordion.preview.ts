@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-	BrnAccordionContentComponent,
-	BrnAccordionDirective,
-	BrnAccordionItemDirective,
-	BrnAccordionTriggerDirective,
-} from '@spartan-ng/ui-accordion-brain';
+import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
 import {
 	HlmAccordionContentDirective,
 	HlmAccordionDirective,
@@ -18,10 +13,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 	selector: 'spartan-accordion-preview',
 	standalone: true,
 	imports: [
-		BrnAccordionDirective,
 		BrnAccordionContentComponent,
-		BrnAccordionItemDirective,
-		BrnAccordionTriggerDirective,
 		HlmAccordionDirective,
 		HlmAccordionItemDirective,
 		HlmAccordionTriggerDirective,
@@ -64,12 +56,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 export class AccordionPreviewComponent {}
 
 export const codeImports = `
-import {
-  BrnAccordionContentComponent,
-  BrnAccordionDirective,
-  BrnAccordionItemDirective,
-  BrnAccordionTriggerDirective,
-} from '@spartan-ng/ui-accordion-brain';
+import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
 import {
   HlmAccordionContentDirective,
   HlmAccordionDirective,
@@ -88,10 +75,7 @@ export const codeString =
 	selector: 'spartan-accordion-preview',
 	standalone: true,
 	imports: [
-		BrnAccordionDirective,
 		BrnAccordionContentComponent,
-		BrnAccordionItemDirective,
-		BrnAccordionTriggerDirective,
 		HlmAccordionDirective,
 		HlmAccordionItemDirective,
 		HlmAccordionTriggerDirective,

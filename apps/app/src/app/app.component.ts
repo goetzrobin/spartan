@@ -12,7 +12,7 @@ import { HeaderComponent } from './shared/header/header.component';
 	},
 	template: `
 		<spartan-header />
-		<div class="mx-auto max-w-screen-xl">
+		<div class="mx-auto max-w-screen-2xl">
 			<router-outlet />
 		</div>
 		<spartan-footer />

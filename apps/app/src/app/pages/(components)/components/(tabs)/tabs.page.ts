@@ -86,7 +86,7 @@ export const routeMeta: RouteMeta = {
 
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="textarea" label="Textarea" />
-				<spartan-page-bottom-nav-link direction="previous" href="switch" label="Switch" />
+				<spartan-page-bottom-nav-link direction="previous" href="table" label="Table" />
 			</spartan-page-bottom-nav>
 		</section>
 		<spartan-page-nav>
