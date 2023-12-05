@@ -38,7 +38,6 @@ export class HlmLabelDirective implements OnInit {
 	ngOnInit(): void {
 		this._changes = new MutationObserver((mutations: MutationRecord[]) => {
 			mutations.forEach((mutation: MutationRecord) => {
-				console.log('found mutation', mutation);
 				if (mutation.attributeName !== 'data-disabled') return;
 				// eslint-disable-next-line
 				const state = (mutation.target as any).attributes.getNamedItem(mutation.attributeName)?.value === 'true';

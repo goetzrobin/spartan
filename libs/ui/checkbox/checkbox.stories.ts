@@ -22,8 +22,7 @@ type Story = StoryObj<BrnCheckboxComponent>;
 export const Default: Story = {
 	render: () => ({
 		template: `
-      <label class='' hlmLabel>
-
+    <label id='checkbox-label' class='' hlmLabel>
        <brn-checkbox id='testCheckbox' aria-checked='checked' aria-label='test checkbox' hlm>
        <hlm-checkbox-checkicon />
       </brn-checkbox>
@@ -35,7 +34,7 @@ export const Default: Story = {
 export const InsideLabel: Story = {
 	render: () => ({
 		template: `
-      <label class='flex items-center' hlmLabel> Test Checkbox
+      <label id='checkbox-label' class='flex items-center' hlmLabel> Test Checkbox
         <brn-checkbox class='ml-2' id='testCheckbox' hlm>
           <hlm-checkbox-checkicon />
         </brn-checkbox>
@@ -47,11 +46,11 @@ export const InsideLabel: Story = {
 export const LabeledWithAriaLabeledBy: Story = {
 	render: () => ({
 		template: `
-      <div class='flex items-center'>
+      <div id='checkbox-label' class='flex items-center'>
          <label id='testCheckboxLabel' for='testCheckbox' hlmLabel> Test Checkbox </label>
-       <brn-checkbox class='ml-2' id='testCheckbox' aria-labelledby='testCheckboxLabel' hlm>
-         <hlm-checkbox-checkicon />
-        </brn-checkbox>
+         <brn-checkbox class='ml-2' id='testCheckbox' aria-labelledby='testCheckboxLabel' hlm>
+           <hlm-checkbox-checkicon />
+         </brn-checkbox>
       </div>
     `,
 	}),
@@ -60,7 +59,7 @@ export const disabled: Story = {
 	render: () => ({
 		template: `
       <div class='flex items-center'>
-         <label id='testCheckboxLabel' for='testCheckbox' hlmLabel> Test Checkbox </label>
+         <label id='checkbox-label' for='testCheckbox' hlmLabel> Test Checkbox </label>
        <brn-checkbox disabled class='ml-2' id='testCheckbox' aria-labelledby='testCheckboxLabel' hlm>
          <hlm-checkbox-checkicon />
         </brn-checkbox>
@@ -70,7 +69,7 @@ export const disabled: Story = {
         <brn-checkbox disabled id='testCheckbox2' aria-labelledby='testCheckboxLabel' hlm>
           <hlm-checkbox-checkicon />
         </brn-checkbox>
-        <label class ="ml-2" id='testCheckbox2Label' for='testCheckbox2' hlmLabel> Test Checkbox 2</label>
+        <label id='checkbox-label' class ="ml-2" for='testCheckbox2' hlmLabel> Test Checkbox 2</label>
       </div>
 
 
@@ -78,8 +77,21 @@ export const disabled: Story = {
       <brn-checkbox id='testCheckbox3' aria-labelledby='testCheckboxLabel' hlm>
         <hlm-checkbox-checkicon />
       </brn-checkbox>
-      <label class ="ml-2" id='testCheckbox2Label' for='testCheckbox2' hlmLabel> Test Checkbox 3 enabled</label>
+      <label id='checkbox-label2' class ="ml-2" for='testCheckbox2' hlmLabel> Test Checkbox 3 enabled</label>
     </div>
+    `,
+	}),
+};
+
+export const indeterminate: Story = {
+	render: () => ({
+		template: `
+      <div id='checkbox-label' class='flex items-center'>
+         <label id='testCheckboxLabel' for='testCheckbox' hlmLabel> Test Checkbox </label>
+         <brn-checkbox checked="indeterminate" class='ml-2' id='testCheckbox' aria-labelledby='testCheckboxLabel' hlm>
+           <hlm-checkbox-checkicon />
+         </brn-checkbox>
+      </div>
     `,
 	}),
 };

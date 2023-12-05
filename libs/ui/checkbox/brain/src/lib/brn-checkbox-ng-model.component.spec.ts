@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HlmCheckboxCheckIconComponent } from '@spartan-ng/ui-checkbox-helm';
 import { BrnCheckboxComponent } from './brn-checkbox.component';
 
 @Component({
@@ -9,12 +8,10 @@ import { BrnCheckboxComponent } from './brn-checkbox.component';
 	template: `
 		<label>
 			Airplane mode is: {{ airplaneMode ? 'on' : 'off' }}
-			<brn-checkbox [disabled]="disabled" [(ngModel)]="airplaneMode">
-				<hlm-checkbox-checkicon />
-			</brn-checkbox>
+			<brn-checkbox [disabled]="disabled" [(ngModel)]="airplaneMode"></brn-checkbox>
 		</label>
 	`,
-	imports: [BrnCheckboxComponent, FormsModule, HlmCheckboxCheckIconComponent],
+	imports: [BrnCheckboxComponent, FormsModule],
 })
 export class BrnCheckboxNgModelSpecComponent {
 	@Input()

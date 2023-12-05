@@ -1,4 +1,3 @@
-import { HlmCheckboxCheckIconComponent } from '@spartan-ng/ui-checkbox-helm';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
@@ -9,11 +8,10 @@ describe('BrnCheckboxComponent', () => {
 		const container = await render(
 			`
      <brn-checkbox id='checkboxId' name='checkboxName' data-testid='checkbox' aria-label='checkbox'>
-             <hlm-checkbox-checkicon />
       </brn-checkbox>
     `,
 			{
-				imports: [BrnCheckboxComponent, HlmCheckboxCheckIconComponent],
+				imports: [BrnCheckboxComponent],
 			},
 		);
 		return {
@@ -29,12 +27,11 @@ describe('BrnCheckboxComponent', () => {
      <label>
      Checkbox Inside Label
      <brn-checkbox id='checkboxId' data-testid='checkbox' name='checkboxName'>
-             <hlm-checkbox-checkicon />
       </brn-checkbox>
       </label>
     `,
 			{
-				imports: [BrnCheckboxComponent, HlmCheckboxCheckIconComponent],
+				imports: [BrnCheckboxComponent],
 			},
 		);
 		return {
@@ -53,11 +50,10 @@ describe('BrnCheckboxComponent', () => {
      Checkbox Outside Label with ariaLabelledBy
      </label>
      <brn-checkbox id='checkboxId' name='checkboxName' data-testid='checkbox' aria-labelledby='labelId'>
-             <hlm-checkbox-checkicon />
       </brn-checkbox>
     `,
 			{
-				imports: [BrnCheckboxComponent, HlmCheckboxCheckIconComponent],
+				imports: [BrnCheckboxComponent],
 			},
 		);
 		return {
@@ -75,11 +71,10 @@ describe('BrnCheckboxComponent', () => {
      Checkbox Outside Label with id
      </label>
      <brn-checkbox id='checkboxId' name='checkboxName' data-testid='checkbox'>
-             <hlm-checkbox-checkicon />
       </brn-checkbox>
     `,
 			{
-				imports: [BrnCheckboxComponent, HlmCheckboxCheckIconComponent],
+				imports: [BrnCheckboxComponent],
 			},
 		);
 		return {
@@ -96,11 +91,10 @@ describe('BrnCheckboxComponent', () => {
      Checkbox Outside Label with id
      </label>
      <brn-checkbox disabled id='checkboxId' name='checkboxName' data-testid='checkbox'>
-             <hlm-checkbox-checkicon />
       </brn-checkbox>
     `,
 			{
-				imports: [BrnCheckboxComponent, HlmCheckboxCheckIconComponent],
+				imports: [BrnCheckboxComponent],
 			},
 		);
 		return {

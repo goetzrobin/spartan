@@ -6,6 +6,7 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	computed,
 	effect,
 	ElementRef,
 	EventEmitter,
@@ -29,6 +30,11 @@ export const BRN_checkbox_VALUE_ACCESSOR = {
 	multi: true,
 };
 
+function indeterminateBooleanAttribute(value: unknown): boolean | 'indeterminate' {
+	if (value === 'indeterminate') return 'indeterminate';
+	return booleanAttribute(value);
+}
+
 const CONTAINER_POST_FIX = '-checkbox';
 
 @Component({
@@ -41,31 +47,22 @@ const CONTAINER_POST_FIX = '-checkbox';
 			tabindex="-1"
 			type="checkbox"
 			role="checkbox"
+			class="sr-only"
 			[id]="forChild(_id()) ?? ''"
 			[name]="forChild(_name()) ?? ''"
-			[value]="_checked() ? 'on' : 'off'"
-			[ngStyle]="{
-				position: 'absolute',
-				width: '2px',
-				height: '2px',
-				padding: '0',
-				margin: -'1px',
-				overflow: 'hidden',
-				clip: 'rect(0, 0, 0, 0)',
-				whiteSpace: 'nowrap',
-				borderWidth: '0'
-			}"
-			[checked]="_checked()"
+			[value]="_value()"
+			[checked]="isChecked()"
 			[attr.aria-label]="ariaLabel"
 			[attr.aria-labelledby]="ariaLabelledby"
 			[attr.aria-describedby]="ariaDescribedby"
 			[attr.aria-required]="required || null"
+			[attr.aria-checked]="_ariaChecked()"
 		/>
 		<ng-content />
 	`,
 	host: {
 		tabindex: '0',
-		'[attr.data-state]': '_checked() ? "checked" : "unchecked"',
+		'[attr.data-state]': '_dataState()',
 		'[attr.data-focus-visible]': 'focusVisible()',
 		'[attr.data-focus]': 'focused()',
 		'[attr.data-disabled]': 'disabled',
@@ -88,9 +85,24 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	public focusVisible = signal(false);
 	public focused = signal(false);
 
-	protected _checked = signal(false);
-	@Input({ transform: booleanAttribute })
-	set checked(value: boolean) {
+	protected _dataState = computed(() => {
+		if (this._checked() === 'indeterminate') return 'indeterminate';
+		return this._checked() ? 'checked' : 'unchecked';
+	});
+	protected _ariaChecked = computed(() => {
+		if (this._checked() === 'indeterminate') return 'mixed';
+		return this._checked() ? 'true' : 'false';
+	});
+	protected _value = computed(() => {
+		if (this._checked() === 'indeterminate') return '';
+		return this._checked() ? 'on' : 'off';
+	});
+
+	private readonly _checked = signal<boolean | 'indeterminate'>(false);
+	public readonly isChecked = this._checked.asReadonly();
+
+	@Input({ transform: indeterminateBooleanAttribute })
+	set checked(value: boolean | 'indeterminate') {
 		this._checked.set(value);
 	}
 
@@ -155,7 +167,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	public checkbox?: ElementRef<HTMLInputElement>;
 
 	@Output()
-	public changed = new EventEmitter<boolean>();
+	public changed = new EventEmitter<boolean | 'indeterminate'>();
 
 	constructor() {
 		rxHostPressedListener().subscribe(() => this.handleChange());
@@ -199,7 +211,13 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		});
 
 		if (!this.checkbox) return;
-		this.checkbox.nativeElement.value = this._checked() ? 'on' : 'off';
+
+		this.checkbox.nativeElement.indeterminate = this._checked() === 'indeterminate';
+		if (this.checkbox.nativeElement.indeterminate) {
+			this.checkbox.nativeElement.value = 'indeterminate';
+		} else {
+			this.checkbox.nativeElement.value = this._checked() ? 'on' : 'off';
+		}
 		this.checkbox.nativeElement.dispatchEvent(new Event('change'));
 	}
 
@@ -213,7 +231,11 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	writeValue(value: any): void {
-		this.checked = !!value;
+		if (value === 'indeterminate') {
+			this.checked = 'indeterminate';
+		} else {
+			this.checked = !!value;
+		}
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
