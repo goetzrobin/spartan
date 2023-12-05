@@ -23,7 +23,9 @@ describe('alert-dialog', () => {
 			cy.findByRole('alertdialog').should('have.attr', 'aria-modal', 'true');
 			cy.findByRole('alertdialog').should('have.attr', 'tabindex', '-1');
 
-			cy.findByRole('alertdialog').get('hlm-icon').click();
+			cy.findByRole('alertdialog')
+				.findByText(/cancel/i)
+				.click();
 			cy.findAllByText(/delete account/i).should('have.length', 1);
 			cy.findAllByText(/delete account/i).should('have.focus');
 			cy.findByText(/delete account/i).click();
@@ -39,7 +41,7 @@ describe('alert-dialog', () => {
 			cy.findAllByText(/delete account/i).should('have.focus');
 		});
 
-		it('tab and enter on trigger should open, enter on close should close, escape should close', () => {
+		it('tab and enter on trigger should open, enter on cancel should close, escape should close', () => {
 			cy.checkA11y('#storybook-root', {
 				rules: {
 					'page-has-heading-one': { enabled: false },
@@ -58,7 +60,6 @@ describe('alert-dialog', () => {
 			cy.findByRole('alertdialog').should('have.attr', 'aria-modal', 'true');
 			cy.findByRole('alertdialog').should('have.attr', 'tabindex', '-1');
 
-			cy.realPress(['Shift', 'Tab']);
 			cy.realPress('Enter');
 			cy.findAllByText(/delete account/i).should('have.length', 1);
 			cy.findAllByText(/delete account/i).should('have.focus');
@@ -70,7 +71,7 @@ describe('alert-dialog', () => {
 			cy.findAllByText(/delete account/i).should('have.focus');
 		});
 
-		it('tab and space on trigger should open, tabs should wrap, space on close should close', () => {
+		it('tab and space on trigger should open, tabs should wrap, space on cancel should close', () => {
 			cy.checkA11y('#storybook-root', {
 				rules: {
 					'page-has-heading-one': { enabled: false },
