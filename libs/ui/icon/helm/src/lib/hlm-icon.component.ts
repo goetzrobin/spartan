@@ -109,7 +109,7 @@ export class HlmIconComponent implements OnDestroy {
 		this._mutObs = undefined;
 	}
 
-	@Input({ required: true })
+	@Input()
 	set name(value: IconName | string) {
 		this._name.set(value);
 	}

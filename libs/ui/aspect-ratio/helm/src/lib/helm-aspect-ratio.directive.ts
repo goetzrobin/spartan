@@ -23,24 +23,22 @@ export class HlmAspectRatioDirective implements AfterViewInit {
 	private readonly _ratio = signal(1);
 	private readonly _el: HTMLElement = inject(ElementRef).nativeElement;
 
+	protected readonly _computedPaddingBottom = computed(() => {
+		return `${100 / this._ratio()}%`;
+	});
+
+	private readonly _userCls = signal<ClassValue>('');
+	protected readonly _computedClass = computed(() => hlm(`relative w-full`, this._userCls()));
+
 	@Input()
 	set hlmAspectRatio(value: NumberInput) {
 		const coerced = coerceNumberProperty(parseDividedString(value));
 		this._ratio.set(coerced <= 0 ? 1 : coerced);
 	}
-	protected _computedPaddingBottom = computed(() => {
-		return `${100 / this._ratio()}%`;
-	});
 
-	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(`relative w-full`, this._userCls());
 	}
 
 	ngAfterViewInit() {
