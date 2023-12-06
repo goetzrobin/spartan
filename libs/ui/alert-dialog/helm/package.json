@@ -1,16 +1,16 @@
 {
-	"name": "@spartan-ng/ui-alertdialog-helm",
-	"version": "0.0.1-alpha.10",
-	"peerDependencies": {
-		"@angular/core": "^17.0.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.316",
-		"clsx": "^1.2.1",
-		"@spartan-ng/ui-alertdialog-brain": "0.0.1-alpha.316",
-		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.316"
-	},
-	"dependencies": {},
-	"sideEffects": false,
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@spartan-ng/ui-alertdialog-helm",
+  "version": "0.0.1-alpha.10",
+  "peerDependencies": {
+    "@angular/core": "^17.0.0",
+    "@spartan-ng/ui-core": "0.0.1-alpha.316",
+    "clsx": "^1.2.1",
+    "@spartan-ng/ui-alertdialog-brain": "0.0.1-alpha.316",
+    "@spartan-ng/ui-dialog-brain": "0.0.1-alpha.316"
+  },
+  "dependencies": {},
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }
