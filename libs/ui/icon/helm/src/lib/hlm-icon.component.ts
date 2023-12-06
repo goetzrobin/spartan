@@ -20,7 +20,7 @@ const DEFINED_SIZES = ['xs', 'sm', 'base', 'lg', 'xl', 'none'] as const;
 
 type DefinedSizes = (typeof DEFINED_SIZES)[number];
 
-const iconVariants = cva('inline-flex', {
+export const iconVariants = cva('inline-flex', {
 	variants: {
 		variant: {
 			xs: 'h-3 w-3',

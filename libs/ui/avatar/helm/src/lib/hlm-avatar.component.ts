@@ -4,7 +4,7 @@ import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
-const avatarVariants = cva('relative flex shrink-0 overflow-hidden rounded-full', {
+export const avatarVariants = cva('relative flex shrink-0 overflow-hidden rounded-full', {
 	variants: {
 		variant: {
 			small: 'h-6 w-6 text-xs',
