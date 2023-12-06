@@ -11,8 +11,14 @@ import {
 } from '@spartan-ng/ui-dialog-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { BrnContextMenuTriggerDirective, BrnMenuDirective, BrnMenuGroupDirective } from '@spartan-ng/ui-menu-brain';
-import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from '@spartan-ng/ui-menu-helm';
+import { BrnContextMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import {
+	HlmMenuComponent,
+	HlmMenuGroupComponent,
+	HlmMenuItemDirective,
+	HlmMenuShortcutComponent,
+	hlmMenuItemVariants,
+} from '@spartan-ng/ui-menu-helm';
 
 @Component({
 	selector: 'spartan-dialog-context-menu',
@@ -32,13 +38,12 @@ import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from
 		HlmButtonDirective,
 		HlmInputDirective,
 
-		BrnMenuGroupDirective,
-		BrnMenuDirective,
 		BrnContextMenuTriggerDirective,
 
-		HlmMenuDirective,
 		HlmMenuItemDirective,
 		HlmMenuShortcutComponent,
+		HlmMenuComponent,
+		HlmMenuGroupComponent,
 	],
 	template: `
 		<div
@@ -49,20 +54,20 @@ import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from
 		</div>
 
 		<ng-template #menu>
-			<div hlm brnMenu class="w-64">
-				<div brnMenuGroup>
-					<button inset hlm brnMenuItem>
+			<hlm-menu class="w-64">
+				<hlm-menu-group>
+					<button inset hlmMenuItem>
 						Save
 						<hlm-menu-shortcut>⌘S</hlm-menu-shortcut>
 					</button>
 
-					<button disabled inset hlm brnMenuItem>
+					<button disabled inset hlmMenuItem>
 						Archive
 						<hlm-menu-shortcut>⌘A</hlm-menu-shortcut>
 					</button>
 
-					<hlm-dialog #dialog="hlmDialog">
-						<button inset hlm brnMenuItem brnDialogTrigger>
+					<hlm-dialog>
+						<button [class]="_hlmMenuItemClasses" brnDialogTrigger>
 							Print
 							<hlm-menu-shortcut>⌘P</hlm-menu-shortcut>
 						</button>
@@ -80,12 +85,14 @@ import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from
 							</hlm-dialog-footer>
 						</hlm-dialog-content>
 					</hlm-dialog>
-				</div>
-			</div>
+				</hlm-menu-group>
+			</hlm-menu>
 		</ng-template>
 	`,
 })
-export class DialogContextMenuPreviewComponent {}
+export class DialogContextMenuPreviewComponent {
+	protected readonly _hlmMenuItemClasses = hlmMenuItemVariants({ inset: true });
+}
 
 export const contextMenuCode = `
 import { Component } from '@angular/core';
@@ -101,8 +108,14 @@ import {
 } from '@spartan-ng/ui-dialog-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { BrnContextMenuTriggerDirective, BrnMenuDirective, BrnMenuGroupDirective } from '@spartan-ng/ui-menu-brain';
-import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from '@spartan-ng/ui-menu-helm';
+import { BrnContextMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import {
+  HlmMenuComponent,
+  HlmMenuGroupComponent,
+  HlmMenuItemDirective,
+  HlmMenuShortcutComponent,
+  hlmMenuItemVariants,
+} from '@spartan-ng/ui-menu-helm';
 
 @Component({
   selector: 'spartan-dialog-context-menu',
@@ -122,13 +135,12 @@ import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from
     HlmButtonDirective,
     HlmInputDirective,
 
-    BrnMenuGroupDirective,
-    BrnMenuDirective,
     BrnContextMenuTriggerDirective,
 
-    HlmMenuDirective,
     HlmMenuItemDirective,
     HlmMenuShortcutComponent,
+    HlmMenuComponent,
+    HlmMenuGroupComponent,
   ],
   template: \`
     <div
@@ -139,20 +151,20 @@ import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from
     </div>
 
     <ng-template #menu>
-      <div hlm brnMenu class="w-64">
-        <div brnMenuGroup>
-          <button inset hlm brnMenuItem>
+      <hlm-menu class="w-64">
+        <hlm-menu-group>
+          <button inset hlmMenuItem>
             Save
             <hlm-menu-shortcut>⌘S</hlm-menu-shortcut>
           </button>
 
-          <button disabled inset hlm brnMenuItem>
+          <button disabled inset hlmMenuItem>
             Archive
             <hlm-menu-shortcut>⌘A</hlm-menu-shortcut>
           </button>
 
-          <hlm-dialog #dialog="hlmDialog">
-            <button inset hlm brnMenuItem brnDialogTrigger>
+          <hlm-dialog>
+            <button [class]="_hlmMenuItemClasses" brnDialogTrigger>
               Print
               <hlm-menu-shortcut>⌘P</hlm-menu-shortcut>
             </button>
@@ -170,10 +182,12 @@ import { HlmMenuDirective, HlmMenuItemDirective, HlmMenuShortcutComponent } from
               </hlm-dialog-footer>
             </hlm-dialog-content>
           </hlm-dialog>
-        </div>
-      </div>
+        </hlm-menu-group>
+      </hlm-menu>
     </ng-template>
   \`,
 })
-export class DialogContextMenuPreviewComponent {}
+export class DialogContextMenuPreviewComponent {
+  protected readonly _hlmMenuItemClasses = hlmMenuItemVariants({ inset: true });
+}
 `;

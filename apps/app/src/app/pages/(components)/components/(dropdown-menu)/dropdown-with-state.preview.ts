@@ -1,56 +1,47 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { radixReset } from '@ng-icons/radix-icons';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
-	BrnMenuDirective,
-	BrnMenuGroupDirective,
-	BrnMenuItemCheckboxDirective,
-	BrnMenuItemDirective,
-	BrnMenuItemRadioDirective,
-	BrnMenuTriggerDirective,
-} from '@spartan-ng/ui-menu-brain';
-import {
-	HlmMenuDirective,
+	HlmMenuComponent,
+	HlmMenuGroupComponent,
+	HlmMenuItemCheckboxDirective,
 	HlmMenuItemCheckComponent,
 	HlmMenuItemDirective,
 	HlmMenuItemIconDirective,
 	HlmMenuItemRadioComponent,
+	HlmMenuItemRadioDirective,
 	HlmMenuItemSubIndicatorComponent,
 	HlmMenuLabelComponent,
 	HlmMenuSeparatorComponent,
 	HlmMenuShortcutComponent,
-	HlmSubMenuDirective,
+	HlmSubMenuComponent,
 } from '@spartan-ng/ui-menu-helm';
 
 @Component({
 	selector: 'spartan-dropdown-with-state',
 	standalone: true,
 	imports: [
-		BrnMenuDirective,
-		BrnMenuItemDirective,
 		BrnMenuTriggerDirective,
-		BrnMenuGroupDirective,
-		BrnMenuItemRadioDirective,
-		BrnMenuItemCheckboxDirective,
 
-		HlmMenuDirective,
-		HlmSubMenuDirective,
+		HlmMenuComponent,
+		HlmSubMenuComponent,
 		HlmMenuItemDirective,
 		HlmMenuItemSubIndicatorComponent,
 		HlmMenuLabelComponent,
 		HlmMenuShortcutComponent,
 		HlmMenuSeparatorComponent,
 		HlmMenuItemIconDirective,
+		HlmMenuItemCheckComponent,
+		HlmMenuItemRadioComponent,
+		HlmMenuGroupComponent,
+		HlmMenuItemRadioDirective,
+		HlmMenuItemCheckboxDirective,
 
 		HlmButtonDirective,
 		HlmIconComponent,
-
-		NgFor,
-		HlmMenuItemCheckComponent,
-		HlmMenuItemRadioComponent,
 	],
 	providers: [provideIcons({ radixReset })],
 	template: `
@@ -58,56 +49,46 @@ import {
 			<button hlmBtn variant="outline" align="center" [brnMenuTriggerFor]="menu">Open</button>
 		</div>
 		<ng-template #menu>
-			<div hlm brnMenu class="w-56">
-				<div brnMenuGroup>
+			<hlm-menu class="w-56">
+				<hlm-menu-group>
 					<hlm-menu-label>Appearance</hlm-menu-label>
 
-					<button hlm brnMenuItemCheckbox [checked]="isPanel" (triggered)="isPanel = !isPanel">
+					<button hlmMenuItemCheckbox [checked]="isPanel" (triggered)="isPanel = !isPanel">
 						<hlm-menu-item-check />
 						<span>Panel</span>
 					</button>
 
-					<button
-						hlm
-						brnMenuItemCheckbox
-						disabled
-						[checked]="isActivityBar"
-						(triggered)="isActivityBar = !isActivityBar"
-					>
+					<button hlmMenuItemCheckbox disabled [checked]="isActivityBar" (triggered)="isActivityBar = !isActivityBar">
 						<hlm-menu-item-check />
 						<span>Activity Bar</span>
 					</button>
 
-					<button hlm brnMenuItemCheckbox [checked]="isStatusBar" (triggered)="isStatusBar = !isStatusBar">
+					<button hlmMenuItemCheckbox [checked]="isStatusBar" (triggered)="isStatusBar = !isStatusBar">
 						<hlm-menu-item-check />
 						<span>Status Bar</span>
 					</button>
-				</div>
+				</hlm-menu-group>
 
 				<hlm-menu-separator />
 
 				<hlm-menu-label>Panel Position</hlm-menu-label>
 
-				<div brnMenuGroup>
-					<button
-						hlm
-						brnMenuItemRadio
-						*ngFor="let size of panelPositions"
-						[checked]="size === selectedPosition"
-						(triggered)="selectedPosition = size"
-					>
-						<hlm-menu-item-radio />
-						<span>{{ size }}</span>
-					</button>
-				</div>
+				<hlm-menu-group>
+					@for (size of panelPositions; track size) {
+						<button hlmMenuItemRadio [checked]="size === selectedPosition" (triggered)="selectedPosition = size">
+							<hlm-menu-item-radio />
+							<span>{{ size }}</span>
+						</button>
+					}
+				</hlm-menu-group>
 
 				<hlm-menu-separator />
 
-				<button hlm brnMenuItem (triggered)="reset()">
+				<button hlmMenuItem (triggered)="reset()">
 					<hlm-icon name="radixReset" hlmMenuIcon />
 					Reset
 				</button>
-			</div>
+			</hlm-menu>
 		</ng-template>
 	`,
 })
@@ -129,115 +110,96 @@ export class DropdownWithStatePreviewComponent {
 
 export const dropdownWithStateCode = `
 import { Component } from '@angular/core';
+import { provideIcons } from '@ng-icons/core';
+import { radixReset } from '@ng-icons/radix-icons';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
-  HlmMenuDirective,
+  HlmMenuComponent,
+  HlmMenuGroupComponent,
+  HlmMenuItemCheckboxDirective,
   HlmMenuItemCheckComponent,
   HlmMenuItemDirective,
   HlmMenuItemIconDirective,
   HlmMenuItemRadioComponent,
+  HlmMenuItemRadioDirective,
   HlmMenuItemSubIndicatorComponent,
   HlmMenuLabelComponent,
   HlmMenuSeparatorComponent,
   HlmMenuShortcutComponent,
-  HlmSubMenuDirective,
+  HlmSubMenuComponent,
 } from '@spartan-ng/ui-menu-helm';
-import {
-  BrnMenuDirective,
-  BrnMenuGroupDirective,
-  BrnMenuItemCheckboxDirective,
-  BrnMenuItemDirective,
-  BrnMenuItemRadioDirective,
-  BrnMenuTriggerDirective,
-} from '@spartan-ng/ui-menu-brain';
-import { NgFor } from '@angular/common';
-import { provideIcons } from '@ng-icons/core';
-import { radixReset } from '@ng-icons/radix-icons';
 
 @Component({
   selector: 'spartan-dropdown-with-state',
   standalone: true,
   imports: [
-    BrnMenuDirective,
-    BrnMenuItemDirective,
     BrnMenuTriggerDirective,
-    BrnMenuGroupDirective,
-    BrnMenuItemRadioDirective,
-    BrnMenuItemCheckboxDirective,
 
-    HlmMenuDirective,
-    HlmSubMenuDirective,
+    HlmMenuComponent,
+    HlmSubMenuComponent,
     HlmMenuItemDirective,
     HlmMenuItemSubIndicatorComponent,
     HlmMenuLabelComponent,
     HlmMenuShortcutComponent,
     HlmMenuSeparatorComponent,
     HlmMenuItemIconDirective,
+    HlmMenuItemCheckComponent,
+    HlmMenuItemRadioComponent,
+    HlmMenuGroupComponent,
+    HlmMenuItemRadioDirective,
+    HlmMenuItemCheckboxDirective,
 
     HlmButtonDirective,
     HlmIconComponent,
-
-    NgFor,
-    HlmMenuItemCheckComponent,
-    HlmMenuItemRadioComponent,
   ],
   providers: [provideIcons({ radixReset })],
   template: \`
-    <div class="w-full flex justify-center items-center pt-[20%]">
+    <div class="flex w-full items-center justify-center pt-[20%]">
       <button hlmBtn variant="outline" align="center" [brnMenuTriggerFor]="menu">Open</button>
     </div>
     <ng-template #menu>
-      <div hlm brnMenu class="w-56">
-        <div brnMenuGroup>
+      <hlm-menu class="w-56">
+        <hlm-menu-group>
           <hlm-menu-label>Appearance</hlm-menu-label>
 
-          <button hlm brnMenuItemCheckbox [checked]="isPanel" (triggered)="isPanel = !isPanel">
+          <button hlmMenuItemCheckbox [checked]="isPanel" (triggered)="isPanel = !isPanel">
             <hlm-menu-item-check />
             <span>Panel</span>
           </button>
 
-          <button
-            hlm
-            brnMenuItemCheckbox
-            disabled
-            [checked]="isActivityBar"
-            (triggered)="isActivityBar = !isActivityBar"
-          >
+          <button hlmMenuItemCheckbox disabled [checked]="isActivityBar" (triggered)="isActivityBar = !isActivityBar">
             <hlm-menu-item-check />
             <span>Activity Bar</span>
           </button>
 
-          <button hlm brnMenuItemCheckbox [checked]="isStatusBar" (triggered)="isStatusBar = !isStatusBar">
+          <button hlmMenuItemCheckbox [checked]="isStatusBar" (triggered)="isStatusBar = !isStatusBar">
             <hlm-menu-item-check />
             <span>Status Bar</span>
           </button>
-        </div>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
         <hlm-menu-label>Panel Position</hlm-menu-label>
 
-        <div brnMenuGroup>
-          <button
-            hlm
-            brnMenuItemRadio
-            *ngFor="let size of panelPositions"
-            [checked]="size === selectedPosition"
-            (triggered)="selectedPosition = size"
-          >
-            <hlm-menu-item-radio />
-            <span>{{ size }}</span>
-          </button>
-        </div>
+        <hlm-menu-group>
+          @for (size of panelPositions; track size) {
+            <button hlmMenuItemRadio [checked]="size === selectedPosition" (triggered)="selectedPosition = size">
+              <hlm-menu-item-radio />
+              <span>{{ size }}</span>
+            </button>
+          }
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem (triggered)="reset()">
+        <button hlmMenuItem (triggered)="reset()">
           <hlm-icon name="radixReset" hlmMenuIcon />
           Reset
         </button>
-      </div>
+      </hlm-menu>
     </ng-template>
   \`,
 })

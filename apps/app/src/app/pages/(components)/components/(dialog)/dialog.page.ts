@@ -96,7 +96,16 @@ export const routeMeta: RouteMeta = {
 				<hlm-icon name="radixExclamationTriangle" hlmAlertIcon />
 				<p hlmAlertTitle>Note</p>
 				<p hlmAlertDescription>
-					Using brnDialogTriggerFor outside of the current menu seems to close the menu when dismissing the dialog.
+					Do not use the
+					<code class="${hlmCode}">HlmMenuItem</code>
+					or
+					<code class="${hlmCode}">BrnMenuItem</code>
+					directives as they conflict with
+					<code class="${hlmCode}">BrnDialogTrigger</code>
+					&
+					<code class="${hlmCode}">brnDialogTriggerFor!</code>
+					We expose the hlm variants so you can directly use them to style your elements. Check out the code of the
+					example below!
 				</p>
 			</div>
 			<spartan-tabs firstTab="Preview" secondTab="Code">

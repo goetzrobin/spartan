@@ -1,44 +1,33 @@
 import { Component } from '@angular/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
-	BrnMenuBarDirective,
-	BrnMenuDirective,
-	BrnMenuGroupDirective,
-	BrnMenuItemCheckboxDirective,
-	BrnMenuItemDirective,
-	BrnMenuItemRadioDirective,
-	BrnMenuTriggerDirective,
-} from '@spartan-ng/ui-menu-brain';
-import {
-	HlmMenuBarDirective,
+	HlmMenuBarComponent,
 	HlmMenuBarItemDirective,
-	HlmMenuDirective,
+	HlmMenuComponent,
+	HlmMenuGroupComponent,
+	HlmMenuItemCheckboxDirective,
 	HlmMenuItemCheckComponent,
 	HlmMenuItemDirective,
 	HlmMenuItemIconDirective,
 	HlmMenuItemRadioComponent,
+	HlmMenuItemRadioDirective,
 	HlmMenuItemSubIndicatorComponent,
 	HlmMenuLabelComponent,
 	HlmMenuSeparatorComponent,
 	HlmMenuShortcutComponent,
-	HlmSubMenuDirective,
+	HlmSubMenuComponent,
 } from '@spartan-ng/ui-menu-helm';
 
 @Component({
 	selector: 'spartan-menubar-preview',
 	standalone: true,
 	imports: [
-		BrnMenuBarDirective,
-		BrnMenuDirective,
-		BrnMenuItemDirective,
 		BrnMenuTriggerDirective,
-		BrnMenuGroupDirective,
-		BrnMenuItemCheckboxDirective,
-		BrnMenuItemRadioDirective,
 
-		HlmMenuDirective,
-		HlmMenuBarDirective,
-		HlmSubMenuDirective,
+		HlmMenuComponent,
+		HlmMenuBarComponent,
+		HlmSubMenuComponent,
 		HlmMenuItemDirective,
 		HlmMenuItemSubIndicatorComponent,
 		HlmMenuLabelComponent,
@@ -48,136 +37,139 @@ import {
 		HlmMenuBarItemDirective,
 		HlmMenuItemCheckComponent,
 		HlmMenuItemRadioComponent,
+		HlmMenuGroupComponent,
 
 		HlmButtonDirective,
+		HlmMenuItemCheckboxDirective,
+		HlmMenuItemRadioDirective,
 	],
 	template: `
-		<div hlm brnMenuBar class="w-fit">
-			<button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]="file">File</button>
-			<button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]="edit">Edit</button>
-			<button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]="view">View</button>
-			<button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]="profiles">Profiles</button>
-		</div>
+		<hlm-menu-bar class="w-fit">
+			<button hlmMenuBarItem [brnMenuTriggerFor]="file">File</button>
+			<button hlmMenuBarItem [brnMenuTriggerFor]="edit">Edit</button>
+			<button hlmMenuBarItem [brnMenuTriggerFor]="view">View</button>
+			<button hlmMenuBarItem [brnMenuTriggerFor]="profiles">Profiles</button>
+		</hlm-menu-bar>
 
 		<ng-template #file>
-			<div hlm brnMenu variant="menubar" class="w-48">
-				<div brnMenuGroup>
-					<button hlm brnMenuItem>
+			<hlm-menu variant="menubar" class="w-48">
+				<hlm-menu-group>
+					<button hlmMenuItem>
 						New Tab
 						<hlm-menu-shortcut>⌘T</hlm-menu-shortcut>
 					</button>
-					<button hlm brnMenuItem>
+					<button hlmMenuItem>
 						New Window
 						<hlm-menu-shortcut>⌘N</hlm-menu-shortcut>
 					</button>
-					<button hlm brnMenuItem disabled>New Incognito Window</button>
-				</div>
+					<button hlmMenuItem disabled>New Incognito Window</button>
+				</hlm-menu-group>
 
 				<hlm-menu-separator />
 
-				<button hlm brnMenuItem [brnMenuTriggerFor]="share">
+				<button hlmMenuItem [brnMenuTriggerFor]="share">
 					Share
 					<hlm-menu-item-sub-indicator />
 				</button>
 
 				<hlm-menu-separator />
 
-				<button hlm brnMenuItem>
+				<button hlmMenuItem>
 					Print...
 					<hlm-menu-shortcut>⌘P</hlm-menu-shortcut>
 				</button>
-			</div>
+			</hlm-menu>
 		</ng-template>
 		<ng-template #share>
-			<div hlm brnSubMenu>
-				<button hlm brnMenuItem>Email link</button>
-				<button hlm brnMenuItem>Messages</button>
-				<button hlm brnMenuItem>Notes</button>
-			</div>
+			<hlm-sub-menu>
+				<button hlmMenuItem>Email link</button>
+				<button hlmMenuItem>Messages</button>
+				<button hlmMenuItem>Notes</button>
+			</hlm-sub-menu>
 		</ng-template>
 
 		<ng-template #edit>
-			<div hlm brnMenu variant="menubar" class="w-48">
-				<div brnMenuGroup>
-					<button hlm brnMenuItem>
+			<hlm-menu variant="menubar" class="w-48">
+				<hlm-menu-group>
+					<button hlmMenuItem>
 						Undo
 						<hlm-menu-shortcut>⌘Z</hlm-menu-shortcut>
 					</button>
-					<button hlm brnMenuItem>
+					<button hlmMenuItem>
 						Redo
 						<hlm-menu-shortcut>⇧⌘Z</hlm-menu-shortcut>
 					</button>
-				</div>
+				</hlm-menu-group>
 
 				<hlm-menu-separator />
 
-				<button hlm brnMenuItem [brnMenuTriggerFor]="find">
+				<button hlmMenuItem [brnMenuTriggerFor]="find">
 					Share
 					<hlm-menu-item-sub-indicator />
 				</button>
 
 				<hlm-menu-separator />
 
-				<button hlm brnMenuItem>Cut</button>
-				<button hlm brnMenuItem>Copy</button>
-				<button hlm brnMenuItem>Paste</button>
-			</div>
+				<button hlmMenuItem>Cut</button>
+				<button hlmMenuItem>Copy</button>
+				<button hlmMenuItem>Paste</button>
+			</hlm-menu>
 		</ng-template>
 		<ng-template #find>
-			<div hlm brnSubMenu>
-				<button hlm brnMenuItem>Search the web</button>
+			<hlm-sub-menu>
+				<button hlmMenuItem>Search the web</button>
 				<hlm-menu-separator />
-				<button hlm brnMenuItem>Find...</button>
-				<button hlm brnMenuItem>Find Next</button>
-				<button hlm brnMenuItem>Find Previous</button>
-			</div>
+				<button hlmMenuItem>Find...</button>
+				<button hlmMenuItem>Find Next</button>
+				<button hlmMenuItem>Find Previous</button>
+			</hlm-sub-menu>
 		</ng-template>
 
 		<ng-template #view>
-			<div hlm brnMenu variant="menubar">
-				<button hlm brnMenuItemCheckbox>
+			<hlm-menu variant="menubar">
+				<button hlmMenuItemCheckbox>
 					<hlm-menu-item-check />
 					Always Show Bookmarks Bar
 				</button>
-				<button hlm brnMenuItemCheckbox checked>
+				<button hlmMenuItemCheckbox checked>
 					<hlm-menu-item-check />
 					Always Show Full URLs
 				</button>
 				<hlm-menu-separator />
-				<button inset hlm brnMenuItem>
+				<button inset hlmMenuItem>
 					Reload
 					<hlm-menu-shortcut>⌘R</hlm-menu-shortcut>
 				</button>
-				<button inset disabled hlm brnMenuItem>
+				<button inset disabled hlmMenuItem>
 					Force Reload
 					<hlm-menu-shortcut>⇧⌘R</hlm-menu-shortcut>
 				</button>
 				<hlm-menu-separator />
-				<button inset hlm brnMenuItem>Toggle Fullscreen</button>
+				<button inset hlmMenuItem>Toggle Fullscreen</button>
 				<hlm-menu-separator />
-				<button inset hlm brnMenuItem>Hide Sidebar</button>
-			</div>
+				<button inset hlmMenuItem>Hide Sidebar</button>
+			</hlm-menu>
 		</ng-template>
 
 		<ng-template #profiles>
-			<div hlm brnMenu variant="menubar" class="w-48">
-				<button hlm brnMenuItemRadio>
+			<hlm-menu variant="menubar" class="w-48">
+				<button hlmMenuItemRadio>
 					<hlm-menu-item-radio />
 					Andy
 				</button>
-				<button hlm brnMenuItemRadio checked>
+				<button hlmMenuItemRadio checked>
 					<hlm-menu-item-radio />
 					Benoit
 				</button>
-				<button hlm brnMenuItemRadio>
+				<button hlmMenuItemRadio>
 					<hlm-menu-item-radio />
 					Lewis
 				</button>
 				<hlm-menu-separator />
-				<button inset hlm brnMenuItem>Edit...</button>
+				<button inset hlmMenuItem>Edit...</button>
 				<hlm-menu-separator />
-				<button inset hlm brnMenuItem>Add Profile...</button>
-			</div>
+				<button inset hlmMenuItem>Add Profile...</button>
+			</hlm-menu>
 		</ng-template>
 	`,
 })
@@ -185,46 +177,35 @@ export class MenubarPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
-  BrnMenuBarDirective,
-  BrnMenuDirective,
-  BrnMenuGroupDirective,
-  BrnMenuItemCheckboxDirective,
-  BrnMenuItemDirective,
-  BrnMenuItemRadioDirective,
-  BrnMenuTriggerDirective,
-} from '@spartan-ng/ui-menu-brain';
-import {
-  HlmMenuBarDirective,
+  HlmMenuBarComponent,
   HlmMenuBarItemDirective,
-  HlmMenuDirective,
+  HlmMenuComponent,
+  HlmMenuGroupComponent,
+  HlmMenuItemCheckboxDirective,
   HlmMenuItemCheckComponent,
   HlmMenuItemDirective,
   HlmMenuItemIconDirective,
   HlmMenuItemRadioComponent,
+  HlmMenuItemRadioDirective,
   HlmMenuItemSubIndicatorComponent,
   HlmMenuLabelComponent,
   HlmMenuSeparatorComponent,
   HlmMenuShortcutComponent,
-  HlmSubMenuDirective,
+  HlmSubMenuComponent,
 } from '@spartan-ng/ui-menu-helm';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
 @Component({
   selector: 'spartan-menubar-preview',
   standalone: true,
   imports: [
-    BrnMenuBarDirective,
-    BrnMenuDirective,
-    BrnMenuItemDirective,
     BrnMenuTriggerDirective,
-    BrnMenuGroupDirective,
-    BrnMenuItemCheckboxDirective,
-    BrnMenuItemRadioDirective,
 
-    HlmMenuDirective,
-    HlmMenuBarDirective,
-    HlmSubMenuDirective,
+    HlmMenuComponent,
+    HlmMenuBarComponent,
+    HlmSubMenuComponent,
     HlmMenuItemDirective,
     HlmMenuItemSubIndicatorComponent,
     HlmMenuLabelComponent,
@@ -234,136 +215,139 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
     HlmMenuBarItemDirective,
     HlmMenuItemCheckComponent,
     HlmMenuItemRadioComponent,
+    HlmMenuGroupComponent,
 
     HlmButtonDirective,
+    HlmMenuItemCheckboxDirective,
+    HlmMenuItemRadioDirective,
   ],
   template: \`
-    <div hlm brnMenuBar class="w-fit">
-      <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]="file">File</button>
-      <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]="edit">Edit</button>
-      <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]="view">View</button>
-      <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]="profiles">Profiles</button>
-    </div>
+    <hlm-menu-bar class="w-fit">
+      <button hlmMenuBarItem [brnMenuTriggerFor]="file">File</button>
+      <button hlmMenuBarItem [brnMenuTriggerFor]="edit">Edit</button>
+      <button hlmMenuBarItem [brnMenuTriggerFor]="view">View</button>
+      <button hlmMenuBarItem [brnMenuTriggerFor]="profiles">Profiles</button>
+    </hlm-menu-bar>
 
     <ng-template #file>
-      <div hlm brnMenu variant="menubar" class="w-48">
-        <div brnMenuGroup>
-          <button hlm brnMenuItem>
+      <hlm-menu variant="menubar" class="w-48">
+        <hlm-menu-group>
+          <button hlmMenuItem>
             New Tab
             <hlm-menu-shortcut>⌘T</hlm-menu-shortcut>
           </button>
-          <button hlm brnMenuItem>
+          <button hlmMenuItem>
             New Window
             <hlm-menu-shortcut>⌘N</hlm-menu-shortcut>
           </button>
-          <button hlm brnMenuItem disabled>New Incognito Window</button>
-        </div>
+          <button hlmMenuItem disabled>New Incognito Window</button>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem [brnMenuTriggerFor]="share">
+        <button hlmMenuItem [brnMenuTriggerFor]="share">
           Share
           <hlm-menu-item-sub-indicator />
         </button>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           Print...
           <hlm-menu-shortcut>⌘P</hlm-menu-shortcut>
         </button>
-      </div>
+      </hlm-menu>
     </ng-template>
     <ng-template #share>
-      <div hlm brnSubMenu>
-        <button hlm brnMenuItem>Email link</button>
-        <button hlm brnMenuItem>Messages</button>
-        <button hlm brnMenuItem>Notes</button>
-      </div>
+      <hlm-sub-menu>
+        <button hlmMenuItem>Email link</button>
+        <button hlmMenuItem>Messages</button>
+        <button hlmMenuItem>Notes</button>
+      </hlm-sub-menu>
     </ng-template>
 
     <ng-template #edit>
-      <div hlm brnMenu variant="menubar" class="w-48">
-        <div brnMenuGroup>
-          <button hlm brnMenuItem>
+      <hlm-menu variant="menubar" class="w-48">
+        <hlm-menu-group>
+          <button hlmMenuItem>
             Undo
             <hlm-menu-shortcut>⌘Z</hlm-menu-shortcut>
           </button>
-          <button hlm brnMenuItem>
+          <button hlmMenuItem>
             Redo
             <hlm-menu-shortcut>⇧⌘Z</hlm-menu-shortcut>
           </button>
-        </div>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem [brnMenuTriggerFor]="find">
+        <button hlmMenuItem [brnMenuTriggerFor]="find">
           Share
           <hlm-menu-item-sub-indicator />
         </button>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem>Cut</button>
-        <button hlm brnMenuItem>Copy</button>
-        <button hlm brnMenuItem>Paste</button>
-      </div>
+        <button hlmMenuItem>Cut</button>
+        <button hlmMenuItem>Copy</button>
+        <button hlmMenuItem>Paste</button>
+      </hlm-menu>
     </ng-template>
     <ng-template #find>
-      <div hlm brnSubMenu>
-        <button hlm brnMenuItem>Search the web</button>
+      <hlm-sub-menu>
+        <button hlmMenuItem>Search the web</button>
         <hlm-menu-separator />
-        <button hlm brnMenuItem>Find...</button>
-        <button hlm brnMenuItem>Find Next</button>
-        <button hlm brnMenuItem>Find Previous</button>
-      </div>
+        <button hlmMenuItem>Find...</button>
+        <button hlmMenuItem>Find Next</button>
+        <button hlmMenuItem>Find Previous</button>
+      </hlm-sub-menu>
     </ng-template>
 
     <ng-template #view>
-      <div hlm brnMenu variant="menubar">
-        <button hlm brnMenuItemCheckbox>
+      <hlm-menu variant="menubar">
+        <button hlmMenuItemCheckbox>
           <hlm-menu-item-check />
           Always Show Bookmarks Bar
         </button>
-        <button hlm brnMenuItemCheckbox checked>
+        <button hlmMenuItemCheckbox checked>
           <hlm-menu-item-check />
           Always Show Full URLs
         </button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>
+        <button inset hlmMenuItem>
           Reload
           <hlm-menu-shortcut>⌘R</hlm-menu-shortcut>
         </button>
-        <button inset disabled hlm brnMenuItem>
+        <button inset disabled hlmMenuItem>
           Force Reload
           <hlm-menu-shortcut>⇧⌘R</hlm-menu-shortcut>
         </button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>Toggle Fullscreen</button>
+        <button inset hlmMenuItem>Toggle Fullscreen</button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>Hide Sidebar</button>
-      </div>
+        <button inset hlmMenuItem>Hide Sidebar</button>
+      </hlm-menu>
     </ng-template>
 
     <ng-template #profiles>
-      <div hlm brnMenu variant="menubar" class="w-48">
-        <button hlm brnMenuItemRadio>
+      <hlm-menu variant="menubar" class="w-48">
+        <button hlmMenuItemRadio>
           <hlm-menu-item-radio />
           Andy
         </button>
-        <button hlm brnMenuItemRadio checked>
+        <button hlmMenuItemRadio checked>
           <hlm-menu-item-radio />
           Benoit
         </button>
-        <button hlm brnMenuItemRadio>
+        <button hlmMenuItemRadio>
           <hlm-menu-item-radio />
           Lewis
         </button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>Edit...</button>
+        <button inset hlmMenuItem>Edit...</button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>Add Profile...</button>
-      </div>
+        <button inset hlmMenuItem>Add Profile...</button>
+      </hlm-menu>
     </ng-template>
   \`,
 })
@@ -371,54 +355,50 @@ export class MenubarPreviewComponent {}
 `;
 
 export const defaultImports = `
+import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
-  BrnMenuBarDirective,
-  BrnMenuDirective,
-  BrnMenuGroupDirective,
-  BrnMenuItemCheckboxDirective,
-  BrnMenuItemDirective,
-  BrnMenuItemRadioDirective,
-  BrnMenuTriggerDirective,
-} from '@spartan-ng/ui-menu-brain';
-import {
-  HlmMenuBarDirective,
+  HlmMenuBarComponent,
   HlmMenuBarItemDirective,
-  HlmMenuDirective,
+  HlmMenuComponent,
+  HlmMenuGroupComponent,
+  HlmMenuItemCheckboxDirective,
   HlmMenuItemCheckComponent,
   HlmMenuItemDirective,
   HlmMenuItemIconDirective,
   HlmMenuItemRadioComponent,
+  HlmMenuItemRadioDirective,
   HlmMenuItemSubIndicatorComponent,
   HlmMenuLabelComponent,
   HlmMenuSeparatorComponent,
   HlmMenuShortcutComponent,
-  HlmSubMenuDirective,
+  HlmSubMenuComponent,
 } from '@spartan-ng/ui-menu-helm';
 `;
 export const defaultSkeleton = `
-<div hlm brnMenuBar class="w-fit">
-    <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]="file">File</button>
+<hlm-menu-bar class='w-fit'>
+    <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]='file'>File</button>
 </div>
 
 <ng-template #file>
-    <div hlm brnMenu variant="menubar" class="w-48">
-        <div brnMenuGroup>
-            <button hlm brnMenuItem>
-                New Tab
-                <hlm-menu-shortcut>⌘T</hlm-menu-shortcut>
-            </button>
-        </div>
+  <hlm-menu variant='menubar' class='w-48'>
+    <div brnMenuGroup>
+      <button hlmMenuItem>
+        New Tab
+        <hlm-menu-shortcut>⌘T</hlm-menu-shortcut>
+      </button>
+    </div>
 
-        <hlm-menu-separator />
+    <hlm-menu-separator />
 
-        <button hlm brnMenuItem [brnMenuTriggerFor]="share">
-            Share
-            <hlm-menu-item-sub-indicator />
-        </button>
+    <button hlmMenuItem [brnMenuTriggerFor]='share'>
+      Share
+      <hlm-menu-item-sub-indicator />
+    </button>
+  </hlm-menu>
 </ng-template>
 <ng-template #share>
-    <div hlm brnSubMenu>
-        <button hlm brnMenuItem>Email link</button>
-    </div>
+  <hlm-sub-menu>
+    <button hlmMenuItem>Email link</button>
+  </hlm-sub-menu>
 </ng-template>
 `;
