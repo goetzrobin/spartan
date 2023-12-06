@@ -13,6 +13,7 @@ let idSequence = 0;
 		'[attr.data-state]': 'state()',
 		'[attr.aria-controls]': 'dialogId',
 	},
+	exportAs: 'brnDialogTrigger',
 })
 export class BrnDialogTriggerDirective {
 	protected _brnDialog = inject(BrnDialogComponent, { optional: true });

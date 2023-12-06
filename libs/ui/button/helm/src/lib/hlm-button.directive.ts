@@ -1,9 +1,9 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { computed, Directive, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
 	'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background',
 	{
 		variants: {

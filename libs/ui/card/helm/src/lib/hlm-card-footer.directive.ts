@@ -1,9 +1,9 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { computed, Directive, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
-const cardFooterVariants = cva('flex p-6 pt-0', {
+export const cardFooterVariants = cva('flex p-6 pt-0', {
 	variants: {
 		direction: {
 			row: 'flex-row items-center space-x-1.5',
