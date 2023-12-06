@@ -74,9 +74,9 @@ yarn e2e
 
 To add your own `e2e` tests add them to the `apps/ui-storybook-e2e` application.
 
-### Progress (30/41)
+### Progress (33/41)
 
-We finished porting over 30/41 UI primitives. See a more detailed breakdown [here!](./libs/ui/README.md)
+We finished porting over 33/41 UI primitives. See a more detailed breakdown [here!](./libs/ui/README.md)
 
 ## spartan/stack
 
