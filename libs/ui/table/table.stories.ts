@@ -190,7 +190,7 @@ class TableStory {
 			hlm
 			class="mb-2.5 w-full sm:w-fit"
 			[ngModel]="_onlyAbove180()"
-			(ngModelChange)="_setOnlyAboive180($event)"
+			(ngModelChange)="_setOnlyAbove180($event)"
 		>
 			<button class="w-full sm:w-40" variant="outline" [value]="false" hlm brnToggle>All</button>
 			<button class="w-full tabular-nums sm:w-40" variant="outline" [value]="true" hlm brnToggle>Above 150</button>
@@ -283,8 +283,7 @@ class TableToggleStory {
 		this._users.set(createUsers(Math.random() * 200));
 	}
 
-	protected _setOnlyAboive180(newVal: boolean) {
-		console.log('setting new val', newVal);
+	protected _setOnlyAbove180(newVal: boolean) {
 		if (newVal) {
 			this._brnColumnManager.setInvisible('age');
 		} else {

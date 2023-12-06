@@ -38,6 +38,7 @@ export class ThreeHundredComponent {
 		'elite-benni',
 		'oidre',
 		'nartc',
+		'santoshyadavdev',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
 }

@@ -1,5 +1,4 @@
 import { CdkRowDef, CdkTable, CdkTableDataSourceInput, CdkTableModule } from '@angular/cdk/table';
-import { NgIf } from '@angular/common';
 import {
 	AfterContentInit,
 	ChangeDetectionStrategy,
@@ -22,7 +21,7 @@ export type BrnTableDataSourceInput<T> = CdkTableDataSourceInput<T>;
 @Component({
 	selector: 'brn-table',
 	standalone: true,
-	imports: [CdkTableModule, NgIf],
+	imports: [CdkTableModule],
 	providers: [provideTableClassesSettableExisting(<T>() => BrnTableComponent<T>)],
 	template: `
 		<cdk-table
@@ -36,7 +35,7 @@ export type BrnTableDataSourceInput<T> = CdkTableDataSourceInput<T>;
 			<ng-content />
 
 			<cdk-header-row [class]="headerRowClasses" *cdkHeaderRowDef="displayedColumns; sticky: stickyHeader" />
-			<ng-container *ngIf="!customTemplateDataRows">
+			@if (!customTemplateDataRows) {
 				<cdk-row
 					[tabindex]="!!onRowClick ? 0 : -1"
 					[attr.role]="!!onRowClick ? 'button' : 'row'"
@@ -46,7 +45,7 @@ export type BrnTableDataSourceInput<T> = CdkTableDataSourceInput<T>;
 					[class]="bodyRowClasses"
 					*cdkRowDef="let row; columns: displayedColumns"
 				/>
-			</ng-container>
+			}
 
 			<ng-template cdkNoDataRow>
 				<ng-content select="[brnNoDataRow]" />

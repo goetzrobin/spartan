@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, Input, signal, ViewEncapsulation } from '@angular/core';
 import { BrnAvatarComponent } from '@spartan-ng/ui-avatar-brain';
 import { hlm } from '@spartan-ng/ui-core';
@@ -24,22 +23,21 @@ type AvatarVariants = VariantProps<typeof avatarVariants>;
 	selector: 'hlm-avatar',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgIf],
 	standalone: true,
-	template: `
-		<ng-container *ngIf="image?.canShow(); else fallback">
-			<ng-content select="[hlmAvatarImage],[brnAvatarImage]" />
-		</ng-container>
-		<ng-template #fallback>
-			<ng-content select="[hlmAvatarFallback],[brnAvatarFallback]" />
-		</ng-template>
-	`,
 	host: {
 		'[class]': '_computedClass()',
 	},
+	template: `
+		@if (image?.canShow()) {
+			<ng-content select="[hlmAvatarImage],[brnAvatarImage]" />
+		} @else {
+			<ng-content select="[hlmAvatarFallback],[brnAvatarFallback]" />
+		}
+	`,
 })
 export class HlmAvatarComponent extends BrnAvatarComponent {
 	private readonly _userCls = signal<ClassValue>('');
+
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
@@ -51,8 +49,7 @@ export class HlmAvatarComponent extends BrnAvatarComponent {
 		this._variant.set(variant);
 	}
 
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(avatarVariants({ variant: this._variant() }), this._userCls());
-	}
+	protected readonly _computedClass = computed(() =>
+		hlm(avatarVariants({ variant: this._variant() }), this._userCls()),
+	);
 }

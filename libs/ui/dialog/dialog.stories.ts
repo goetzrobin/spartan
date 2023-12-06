@@ -1,8 +1,5 @@
-import { provideIcons } from '@ng-icons/core';
-import { radixCross1 } from '@ng-icons/radix-icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { BrnDialogImports } from './brain/src';
@@ -12,15 +9,7 @@ const meta: Meta<{}> = {
 	title: 'Dialog',
 	decorators: [
 		moduleMetadata({
-			imports: [
-				BrnDialogImports,
-				HlmDialogImports,
-				HlmLabelDirective,
-				HlmButtonDirective,
-				HlmInputDirective,
-				HlmIconComponent,
-			],
-			providers: [provideIcons({ radixCross1 })],
+			imports: [BrnDialogImports, HlmDialogImports, HlmLabelDirective, HlmButtonDirective, HlmInputDirective],
 		}),
 	],
 };
@@ -31,10 +20,9 @@ type Story = StoryObj<{}>;
 export const Default: Story = {
 	render: () => ({
 		template: `
-    <brn-dialog closeDelay='100'>
-    <brn-dialog-overlay hlm/>
+    <hlm-dialog>
     <button id='edit-profile' brnDialogTrigger hlmBtn>Edit Profile</button>
-    <div hlmDialogContent class='sm:max-w-[425px]'  *brnDialogContent='let ctx'>
+    <hlm-dialog-content class='sm:max-w-[425px]' *brnDialogContent='let ctx'>
          <hlm-dialog-header>
           <h3 brnDialogTitle hlm>Edit profile</h3>
           <p brnDialogDescription hlm>
@@ -58,12 +46,8 @@ export const Default: Story = {
         <hlm-dialog-footer>
           <button hlmBtn type='submit'>Save changes</button>
         </hlm-dialog-footer>
-        <button brnDialogClose hlm>
-        <span class='sr-only'>Close</span>
-        <hlm-icon class='flex h-4 w-4' size='100%' name='radixCross1'/>
-        </button>
-    </div>
-    </brn-dialog>
+    </hlm-dialog-content>
+    </hlm-dialog>
     `,
 	}),
 };

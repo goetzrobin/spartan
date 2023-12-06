@@ -68,11 +68,8 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/collapsible">Collapsible</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/combobox">Combobox</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/command">Command</a>
-				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/context-menu">Context Menu</a>
-				<a disabled spartanSideNavLink="/components/table">
-					Data Table
-					<spartan-side-nav-cs />
-				</a>
+				<a spartanSideNavLink="/components/context-menu">Context Menu</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/data-table">Data Table</a>
 				<a disabled spartanSideNavLink="/components/picker">
 					Date Picker
 					<spartan-side-nav-cs />
@@ -107,10 +104,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					<spartan-side-nav-cs />
 				</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/switch">Switch</a>
-				<a disabled spartanSideNavLink="/components/table">
-					Table
-					<spartan-side-nav-cs />
-				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/table">Table</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/tabs">Tabs</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/textarea">Textarea</a>
 				<a disabled spartanSideNavLink="/components/toast">

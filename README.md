@@ -35,6 +35,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 16. [elite-benni](https://github.com/elite-benni)
 17. [oidre](https://github.com/oidre)
 18. [nartc](https://github.com/nartc)
+19. [santoshyadavdev](https://github.com/santoshyadavdev)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
