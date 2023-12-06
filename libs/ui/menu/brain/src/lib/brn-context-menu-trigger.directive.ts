@@ -1,5 +1,6 @@
 import { CdkContextMenuTrigger } from '@angular/cdk/menu';
 import { Directive, effect, inject, Input, signal, TemplateRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type BrnCtxMenuAlign = 'start' | 'center' | 'end' | undefined;
 
@@ -22,6 +23,20 @@ export class BrnContextMenuTriggerDirective {
 	}
 
 	constructor() {
+		// once the trigger opens we wait until the next tick and then grab the last position
+		// used to position the menu. we store this in our trigger which the brnMenu directive has
+		// access to through DI
+		this._cdkTrigger.opened
+			.pipe(takeUntilDestroyed())
+			.subscribe(() =>
+				setTimeout(
+					() =>
+						((this._cdkTrigger as any)['_spartanLastPosition'] = (
+							this._cdkTrigger as any
+						).overlayRef._positionStrategy._lastPosition),
+				),
+			);
+
 		effect(() => {
 			const align = this._align();
 			if (!align) return;

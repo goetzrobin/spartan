@@ -28,16 +28,19 @@ export class BrnMenuDirective {
 		/**
 		 * This is an ugly workaround to at least figure out the correct side of where a submenu
 		 * will appear and set the attribute to the host accordingly
+		 *
+		 * First of all we take advantage of the menu stack not being aware of the root
+		 * object immediately after it is added. This code executes before the root element is added,
+		 * which means the stack is still empty and the peek method returns undefined.
 		 */
-		// eslint-disable-next-line
-		const overlayRef = (this._host as any)._parentTrigger.overlayRef;
-		const ps = overlayRef._positionStrategy;
 		const isRoot = this._host.menuStack.peek() === undefined;
-		const side = isRoot
-			? (ps._lastPosition ?? ps._preferredPositions[0]).originY
-			: (ps._lastPosition ?? ps._preferredPositions[0]).originX === 'end'
-			  ? 'right'
-			  : 'left';
-		this._side.set(side);
+		setTimeout(() => {
+			// our menu trigger directive leaves the last position used for use immediately after opening
+			// we can access it here and determine the correct side.
+			// eslint-disable-next-line
+			const ps = (this._host as any)._parentTrigger._spartanLastPosition;
+			const side = isRoot ? ps.originY : ps.originX === 'end' ? 'right' : 'left';
+			this._side.set(side);
+		});
 	}
 }

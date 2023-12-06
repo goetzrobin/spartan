@@ -1,39 +1,18 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import * as radixIcons from '@ng-icons/radix-icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import {
-	BrnMenuDirective,
-	BrnMenuGroupDirective,
-	BrnMenuImports,
-	BrnMenuItemCheckboxDirective,
-	BrnMenuItemDirective,
-	BrnMenuItemRadioDirective,
-	BrnMenuTriggerDirective,
-} from './brain/src';
-import {
-	HlmMenuDirective,
-	HlmMenuImports,
-	HlmMenuItemCheckComponent,
-	HlmMenuItemDirective,
-	HlmMenuItemIconDirective,
-	HlmMenuItemRadioComponent,
-	HlmMenuItemSubIndicatorComponent,
-	HlmMenuLabelComponent,
-	HlmMenuSeparatorComponent,
-	HlmMenuShortcutComponent,
-	HlmSubMenuDirective,
-} from './helm/src';
+import { BrnMenuTriggerDirective } from './brain/src';
+import { HlmMenuImports, HlmMenuItemCheckComponent, HlmMenuItemRadioComponent } from './helm/src';
 
 const meta: Meta<{}> = {
 	title: 'Dropdown Menu',
 	decorators: [
 		moduleMetadata({
 			providers: [provideIcons(radixIcons)],
-			imports: [BrnMenuImports, HlmMenuImports, HlmButtonDirective, HlmIconComponent],
+			imports: [BrnMenuTriggerDirective, HlmMenuImports, HlmButtonDirective, HlmIconComponent],
 		}),
 	],
 };
@@ -49,104 +28,104 @@ export const Default: Story = {
       <button hlmBtn variant='outline' align='end' [brnMenuTriggerFor]='menu'>Open</button>
     </div>
     <ng-template #menu>
-      <div hlm brnMenu class='w-56'>
+      <hlm-menu class='w-56'>
         <hlm-menu-label>My Account</hlm-menu-label>
         <hlm-menu-separator />
-        <div brnMenuGroup>
-          <button hlm brnMenuItem>
+        <hlm-menu-group>
+          <button hlmMenuItem>
             <hlm-icon name='radixPerson' hlmMenuIcon />
             <span>Profile</span>
             <hlm-menu-shortcut>⇧⌘P</hlm-menu-shortcut>
           </button>
 
-          <button hlm brnMenuItem>
+          <button hlmMenuItem>
             <hlm-icon name='radixCardStack' hlmMenuIcon />
             <span>Billing</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
 
-          <button hlm brnMenuItem>
+          <button hlmMenuItem>
             <hlm-icon name='radixGear' hlmMenuIcon />
             <span>Settings</span>
             <hlm-menu-shortcut>⌘S</hlm-menu-shortcut>
           </button>
 
-          <button hlm brnMenuItem>
+          <button hlmMenuItem>
             <hlm-icon name='radixKeyboard' hlmMenuIcon />
             <span>Keyboard Shortcuts</span>
             <hlm-menu-shortcut>⌘K</hlm-menu-shortcut>
           </button>
-        </div>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
-        <div brnMenuGroup>
-          <button hlm brnMenuItem>
+        <hlm-menu-group>
+          <button hlmMenuItem>
             <hlm-icon name='radixAvatar' hlmMenuIcon />
             <span>Team</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
 
-          <button hlm brnMenuItem [brnMenuTriggerFor]='invite'>
+          <button hlmMenuItem [brnMenuTriggerFor]='invite'>
             <hlm-icon name='radixFace' hlmMenuIcon />
             <span>Invite Users</span>
             <hlm-menu-item-sub-indicator />
           </button>
 
-          <button hlm brnMenuItem>
+          <button hlmMenuItem>
             <hlm-icon name='radixPlus' hlmMenuIcon />
             <span>New Team</span>
             <hlm-menu-shortcut>⌘+T</hlm-menu-shortcut>
           </button>
-        </div>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
-        <div brnMenuGroup>
-          <button hlm brnMenuItem [disabled]='false'>
+        <hlm-menu-group>
+          <button hlmMenuItem [disabled]='false'>
             <hlm-icon name='radixGithubLogo' hlmMenuIcon />
             <span>Github</span>
           </button>
 
-          <button hlm brnMenuItem [disabled]='true'>
+          <button hlmMenuItem [disabled]='true'>
             <hlm-icon name='radixQuestionMarkCircled' hlmMenuIcon />
             <span>Support</span>
           </button>
 
-          <button hlm brnMenuItem disabled>
+          <button hlmMenuItem disabled>
             <hlm-icon name='radixCode' hlmMenuIcon />
             <span>API</span>
           </button>
-        </div>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           <hlm-icon name='radixExit' hlmMenuIcon />
           <span>Logout</span>
           <hlm-menu-shortcut>⇧⌘Q</hlm-menu-shortcut>
         </button>
 
-      </div>
+      </hlm-menu>
     </ng-template>
 
     <ng-template #invite>
-      <div hlm brnSubMenu>
-        <button hlm brnMenuItem>
+      <hlm-sub-menu>
+        <button hlmMenuItem>
           <hlm-icon name='radixEnvelopeClosed' hlmMenuIcon />
           Email
         </button>
 
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           <hlm-icon name='radixChatBubble' hlmMenuIcon />
           Message
         </button>
         <hlm-menu-separator />
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           <hlm-icon name='radixPlusCircled' hlmMenuIcon />
           <span>More</span>
         </button>
-      </div>
+      </hlm-sub-menu>
     </ng-template>
     `,
 	}),
@@ -156,26 +135,13 @@ export const Default: Story = {
 	selector: 'stateful-dropdown-story',
 	standalone: true,
 	imports: [
-		BrnMenuDirective,
-		BrnMenuItemDirective,
 		BrnMenuTriggerDirective,
-		BrnMenuGroupDirective,
-		BrnMenuItemRadioDirective,
-		BrnMenuItemCheckboxDirective,
 
-		HlmMenuDirective,
-		HlmSubMenuDirective,
-		HlmMenuItemDirective,
-		HlmMenuItemSubIndicatorComponent,
-		HlmMenuLabelComponent,
-		HlmMenuShortcutComponent,
-		HlmMenuSeparatorComponent,
-		HlmMenuItemIconDirective,
+		HlmMenuImports,
 
 		HlmButtonDirective,
 		HlmIconComponent,
 
-		NgFor,
 		HlmMenuItemCheckComponent,
 		HlmMenuItemRadioComponent,
 	],
@@ -184,56 +150,46 @@ export const Default: Story = {
 			<button hlmBtn variant="outline" align="center" [brnMenuTriggerFor]="menu">Open</button>
 		</div>
 		<ng-template #menu>
-			<div hlm brnMenu class="w-56">
-				<div brnMenuGroup>
+			<hlm-menu class="w-56">
+				<hlm-menu-group>
 					<hlm-menu-label>Appearance</hlm-menu-label>
 
-					<button hlm brnMenuItemCheckbox [checked]="isPanel" (triggered)="isPanel = !isPanel">
+					<button hlmMenuItemCheckbox [checked]="isPanel" (triggered)="isPanel = !isPanel">
 						<hlm-menu-item-check />
 						<span>Panel</span>
 					</button>
 
-					<button
-						hlm
-						brnMenuItemCheckbox
-						disabled
-						[checked]="isActivityBar"
-						(triggered)="isActivityBar = !isActivityBar"
-					>
+					<button hlmMenuItemCheckbox disabled [checked]="isActivityBar" (triggered)="isActivityBar = !isActivityBar">
 						<hlm-menu-item-check />
 						<span>Activity Bar</span>
 					</button>
 
-					<button hlm brnMenuItemCheckbox [checked]="isStatusBar" (triggered)="isStatusBar = !isStatusBar">
+					<button hlmMenuItemCheckbox [checked]="isStatusBar" (triggered)="isStatusBar = !isStatusBar">
 						<hlm-menu-item-check />
 						<span>Status Bar</span>
 					</button>
-				</div>
+				</hlm-menu-group>
 
 				<hlm-menu-separator />
 
 				<hlm-menu-label>Panel Position</hlm-menu-label>
 
-				<div brnMenuGroup>
-					<button
-						hlm
-						brnMenuItemRadio
-						*ngFor="let size of panelPositions"
-						[checked]="size === selectedPosition"
-						(triggered)="selectedPosition = size"
-					>
-						<hlm-menu-item-radio />
-						<span>{{ size }}</span>
-					</button>
-				</div>
+				<hlm-menu-group>
+					@for (size of panelPositions; track size) {
+						<button hlmMenuItemRadio [checked]="size === selectedPosition" (triggered)="selectedPosition = size">
+							<hlm-menu-item-radio />
+							<span>{{ size }}</span>
+						</button>
+					}
+				</hlm-menu-group>
 
 				<hlm-menu-separator />
 
-				<button hlm brnMenuItem (triggered)="reset()">
+				<button hlmMenuItem (triggered)="reset()">
 					<hlm-icon name="radixReset" hlmMenuIcon />
 					Reset
 				</button>
-			</div>
+			</hlm-menu>
 		</ng-template>
 	`,
 })
