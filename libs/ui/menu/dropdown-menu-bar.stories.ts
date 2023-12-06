@@ -3,7 +3,7 @@ import * as radixIcons from '@ng-icons/radix-icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import { BrnMenuBarImports, BrnMenuImports } from './brain/src';
+import { BrnMenuTriggerDirective } from './brain/src';
 import { HlmMenuBarImports, HlmMenuImports } from './helm/src';
 
 const meta: Meta<{}> = {
@@ -11,15 +11,7 @@ const meta: Meta<{}> = {
 	decorators: [
 		moduleMetadata({
 			providers: [provideIcons(radixIcons)],
-			imports: [
-				BrnMenuImports,
-				BrnMenuBarImports,
-				HlmMenuImports,
-				HlmMenuBarImports,
-
-				HlmButtonDirective,
-				HlmIconComponent,
-			],
+			imports: [BrnMenuTriggerDirective, HlmMenuImports, HlmMenuBarImports, HlmButtonDirective, HlmIconComponent],
 		}),
 	],
 };
@@ -30,157 +22,157 @@ type Story = StoryObj<{}>;
 export const Default: Story = {
 	render: () => ({
 		template: `
-        <div hlm brnMenuBar class='w-fit'>
-      <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]='file'>File</button>
-      <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]='edit'>Edit</button>
-      <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]='view'>View</button>
-      <button hlmMenuBarItem brnMenuItem [brnMenuTriggerFor]='profiles'>Profiles</button>
-    </div>
+        <hlm-menu-bar class='w-fit'>
+      <button hlmMenuBarItem [brnMenuTriggerFor]='file'>File</button>
+      <button hlmMenuBarItem [brnMenuTriggerFor]='edit'>Edit</button>
+      <button hlmMenuBarItem [brnMenuTriggerFor]='view'>View</button>
+      <button hlmMenuBarItem [brnMenuTriggerFor]='profiles'>Profiles</button>
+    </hlm-menu-bar>
 
     <ng-template #file>
-      <div hlm brnMenu variant='menubar' class='w-48'>
-        <div brnMenuGroup>
-          <button hlm brnMenuItem>
+      <hlm-menu variant='menubar' class='w-48'>
+        <hlm-menu-group>
+          <button hlmMenuItem>
             New Tab
             <hlm-menu-shortcut>⌘T</hlm-menu-shortcut>
           </button>
-          <button hlm brnMenuItem>
+          <button hlmMenuItem>
             New Window
             <hlm-menu-shortcut>⌘N</hlm-menu-shortcut>
           </button>
-          <button hlm brnMenuItem disabled>New Incognito Window</button>
+          <button hlmMenuItem disabled>New Incognito Window</button>
 
-        </div>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem [brnMenuTriggerFor]='share'>
+        <button hlmMenuItem [brnMenuTriggerFor]='share'>
           Share
           <hlm-menu-item-sub-indicator />
         </button>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           Print...
           <hlm-menu-shortcut>⌘P</hlm-menu-shortcut>
         </button>
 
-      </div>
+      </hlm-menu>
     </ng-template>
     <ng-template #share>
-      <div hlm brnSubMenu>
-        <button hlm brnMenuItem>
+      <hlm-sub-menu>
+        <button hlmMenuItem>
           Email link
         </button>
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           Messages
         </button>
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           Notes
         </button>
-      </div>
+      </hlm-sub-menu>
     </ng-template>
 
     <ng-template #edit>
-      <div hlm brnMenu variant='menubar' class='w-48'>
-        <div brnMenuGroup>
-          <button hlm brnMenuItem>
+      <hlm-menu variant='menubar' class='w-48'>
+        <hlm-menu-group>
+          <button hlmMenuItem>
             Undo
             <hlm-menu-shortcut>⌘Z</hlm-menu-shortcut>
           </button>
-          <button hlm brnMenuItem>
+          <button hlmMenuItem>
             Redo
             <hlm-menu-shortcut>⇧⌘Z</hlm-menu-shortcut>
           </button>
-        </div>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem [brnMenuTriggerFor]='find'>
+        <button hlmMenuItem [brnMenuTriggerFor]='find'>
           Share
           <hlm-menu-item-sub-indicator />
         </button>
 
         <hlm-menu-separator />
 
-        <button hlm brnMenuItem>Cut</button>
-        <button hlm brnMenuItem>Copy</button>
-        <button hlm brnMenuItem>Paste</button>
+        <button hlmMenuItem>Cut</button>
+        <button hlmMenuItem>Copy</button>
+        <button hlmMenuItem>Paste</button>
 
-      </div>
+      </hlm-menu>
     </ng-template>
     <ng-template #find>
-      <div hlm brnSubMenu>
-        <button hlm brnMenuItem>
+      <hlm-sub-menu>
+        <button hlmMenuItem>
           Search the web
         </button>
         <hlm-menu-separator />
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           Find...
         </button>
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           Find Next
         </button>
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           Find Previous
         </button>
-      </div>
+      </hlm-sub-menu>
     </ng-template>
 
     <ng-template #view>
-      <div hlm brnMenu variant='menubar'>
-        <button hlm brnMenuItemCheckbox>
+      <hlm-menu variant='menubar'>
+        <button hlmMenuItemCheckbox>
           <hlm-menu-item-check />
           Always Show Bookmarks Bar
         </button>
-        <button hlm brnMenuItemCheckbox checked>
+        <button hlmMenuItemCheckbox checked>
           <hlm-menu-item-check />
           Always Show Full URLs
         </button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>
+        <button inset hlmMenuItem>
           Reload
           <hlm-menu-shortcut>⌘R</hlm-menu-shortcut>
         </button>
-        <button inset disabled hlm brnMenuItem>
+        <button inset disabled hlmMenuItem>
           Force Reload
           <hlm-menu-shortcut>⇧⌘R</hlm-menu-shortcut>
         </button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>
+        <button inset hlmMenuItem>
           Toggle Fullscreen
         </button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>
+        <button inset hlmMenuItem>
           Hide Sidebar
         </button>
-      </div>
+      </hlm-menu>
     </ng-template>
 
     <ng-template #profiles>
-      <div hlm brnMenu variant='menubar' class='w-48'>
-        <button hlm brnMenuItemRadio>
+      <hlm-menu variant='menubar' class='w-48'>
+        <button hlmMenuItemRadio>
           <hlm-menu-item-radio />
           Andy
         </button>
-        <button hlm brnMenuItemRadio checked>
+        <button hlmMenuItemRadio checked>
           <hlm-menu-item-radio />
           Benoit
         </button>
-        <button hlm brnMenuItemRadio>
+        <button hlmMenuItemRadio>
           <hlm-menu-item-radio />
           Lewis
         </button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>
+        <button inset hlmMenuItem>
           Edit...
         </button>
         <hlm-menu-separator />
-        <button inset hlm brnMenuItem>
+        <button inset hlmMenuItem>
           Add Profile...
         </button>
-      </div>
+      </hlm-menu>
     </ng-template>
     `,
 	}),

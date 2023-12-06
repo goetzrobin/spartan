@@ -1,15 +1,20 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { Component, computed, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
+import { BrnMenuDirective } from '@spartan-ng/ui-menu-brain';
 import { ClassValue } from 'clsx';
 
-@Directive({
-	selector: '[hlm][brnSubMenu]',
+@Component({
+	selector: 'hlm-sub-menu',
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
 	},
+	hostDirectives: [BrnMenuDirective],
+	template: `
+		<ng-content />
+	`,
 })
-export class HlmSubMenuDirective {
+export class HlmSubMenuComponent {
 	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {

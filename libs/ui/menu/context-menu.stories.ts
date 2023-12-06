@@ -1,17 +1,20 @@
-import { provideIcons } from '@ng-icons/core';
-import * as radixIcons from '@ng-icons/radix-icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import { BrnContextMenuImports } from './brain/src';
+import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from './brain/src';
 import { HlmMenuImports } from './helm/src';
 
 const meta: Meta<{}> = {
 	title: 'Context Menu',
 	decorators: [
 		moduleMetadata({
-			providers: [provideIcons(radixIcons)],
-			imports: [BrnContextMenuImports, HlmMenuImports, HlmButtonDirective, HlmIconComponent],
+			imports: [
+				BrnContextMenuTriggerDirective,
+				BrnMenuTriggerDirective,
+				HlmMenuImports,
+				HlmButtonDirective,
+				HlmIconComponent,
+			],
 		}),
 	],
 };
@@ -28,75 +31,74 @@ export const Default: Story = {
     </div>
 
     <ng-template #menu>
-      <div hlm brnMenu class='w-64'>
-        <div brnMenuGroup>
-          <button inset hlm brnMenuItem>
+      <hlm-menu class='w-64'>
+        <hlm-menu-group>
+          <button inset hlmMenuItem>
             Back
             <hlm-menu-shortcut>⌘[</hlm-menu-shortcut>
           </button>
 
-          <button disabled inset hlm brnMenuItem>
+          <button disabled inset hlmMenuItem>
             Forward
             <hlm-menu-shortcut>⌘]</hlm-menu-shortcut>
           </button>
 
-          <button disabled inset hlm brnMenuItem>
+          <button disabled inset hlmMenuItem>
             Reload
             <hlm-menu-shortcut>⌘R</hlm-menu-shortcut>
           </button>
 
-          <button inset hlm brnMenuItem [brnMenuTriggerFor]='moreTools'>
+          <button inset hlmMenuItem [brnMenuTriggerFor]='moreTools'>
             More Tools
             <hlm-menu-item-sub-indicator />
           </button>
-
-        </div>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
 
-        <div brnMenuGroup>
-          <button hlm brnMenuItemCheckbox checked>
+        <hlm-menu-group>
+          <button hlmMenuItemCheckbox checked>
             <hlm-menu-item-check />
             Show Booksmarks Bar
             <hlm-menu-shortcut>⌘⇧B</hlm-menu-shortcut>
           </button>
-          <button hlm brnMenuItemCheckbox>
+          <button hlmMenuItemCheckbox>
             <hlm-menu-item-check />
             Show full URLs
           </button>
-        </div>
+        </hlm-menu-group>
 
         <hlm-menu-separator />
         <hlm-menu-label inset>People</hlm-menu-label>
         <hlm-menu-separator />
-        <div brnMenuGroup>
-          <button hlm brnMenuItemRadio checked>
+        <hlm-menu-group>
+          <button hlmMenuItemRadio checked>
             <hlm-menu-item-radio />
             Pedro Duarte
           </button>
-          <button hlm brnMenuItemRadio>
+          <button hlmMenuItemRadio>
             <hlm-menu-item-radio />
             Colm Tuite
           </button>
-        </div>
-      </div>
+        </hlm-menu-group>
+      </hlm-menu>
     </ng-template>
 
     <ng-template #moreTools>
-      <div hlm brnSubMenu class='w-48'>
-        <button hlm brnMenuItem>
+      <hlm-sub-menu class='w-48'>
+        <button hlmMenuItem>
           Save Page as...
           <hlm-menu-shortcut>⇧⌘S</hlm-menu-shortcut>
         </button>
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           Create Shortcut...
         </button>
-        <button hlm brnMenuItem>
+        <button hlmMenuItem>
           Name Window...
         </button>
         <hlm-menu-separator />
-        <button hlm brnMenuItem>Developer Tools</button>
-      </div>
+        <button hlmMenuItem>Developer Tools</button>
+      </hlm-sub-menu>
     </ng-template>
     `,
 	}),
