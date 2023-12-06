@@ -36,6 +36,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 17. [oidre](https://github.com/oidre)
 18. [nartc](https://github.com/nartc)
 19. [santoshyadavdev](https://github.com/santoshyadavdev)
+20. [markostanimirovic](https://github.com/markostanimirovic)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
