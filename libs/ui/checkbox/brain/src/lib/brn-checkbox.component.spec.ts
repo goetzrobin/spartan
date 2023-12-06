@@ -24,9 +24,29 @@ describe('BrnCheckboxComponent', () => {
 	const setupInsideLabel = async () => {
 		const container = await render(
 			`
-     <label>
+     <label data-testid='label'>
      Checkbox Inside Label
      <brn-checkbox id='checkboxId' data-testid='checkbox' name='checkboxName'>
+      </brn-checkbox>
+      </label>
+    `,
+			{
+				imports: [BrnCheckboxComponent],
+			},
+		);
+		return {
+			user: userEvent.setup(),
+			container,
+			checkboxElement: screen.getByLabelText(/checkbox inside label/i),
+			labelElement: screen.getByText(/checkbox inside label/i),
+		};
+	};
+	const setupInsideLabelDisabled = async () => {
+		const container = await render(
+			`
+     <label data-testid='label'>
+     Checkbox Inside Label
+     <brn-checkbox disabled id='checkboxId' data-testid='checkbox' name='checkboxName'>
       </brn-checkbox>
       </label>
     `,
@@ -46,7 +66,7 @@ describe('BrnCheckboxComponent', () => {
 		const container = await render(
 			`
      <!-- need for because arialabelledby only provides accessible name -->
-     <label id='labelId' for='checkboxId'>
+     <label id='labelId' for='checkboxId' data-testid='label'>
      Checkbox Outside Label with ariaLabelledBy
      </label>
      <brn-checkbox id='checkboxId' name='checkboxName' data-testid='checkbox' aria-labelledby='labelId'>
@@ -211,6 +231,19 @@ describe('BrnCheckboxComponent', () => {
 			await validateCheckboxOff(options);
 			await user.keyboard('[Space]');
 			await validateCheckboxOn(options);
+		});
+		it('disabled', async () => {
+			const { user } = await setupInsideLabelDisabled();
+			// await validateCheckboxOff({ focus: false, focusVisible: false, disabled: true });
+			const options = { focus: false, focusVisible: false, disabled: true };
+			await user.keyboard('[Tab][Space]');
+			await validateCheckboxOff(options);
+			await user.keyboard('[Space]');
+			await validateCheckboxOff(options);
+			await user.keyboard('[Space]');
+			await validateCheckboxOff(options);
+			const label = await screen.findByTestId('label');
+			expect(label).toHaveAttribute('data-disabled', 'true');
 		});
 	});
 

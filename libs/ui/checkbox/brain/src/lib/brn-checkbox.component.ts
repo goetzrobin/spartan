@@ -65,7 +65,7 @@ const CONTAINER_POST_FIX = '-checkbox';
 		'[attr.data-state]': '_dataState()',
 		'[attr.data-focus-visible]': 'focusVisible()',
 		'[attr.data-focus]': 'focused()',
-		'[attr.data-disabled]': 'disabled',
+		'[attr.data-disabled]': '_disabled()',
 		'[attr.aria-labelledby]': 'null',
 		'[attr.aria-label]': 'null',
 		'[attr.aria-describedby]': 'null',
@@ -148,7 +148,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		this._required = value;
 	}
 
-	private readonly _disabled = signal(false);
+	protected readonly _disabled = signal(false);
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
 		this._disabled.set(value);
@@ -173,6 +173,12 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		rxHostPressedListener().subscribe(() => this.handleChange());
 		effect(() => {
 			const parent = this._renderer.parentNode(this._elementRef.nativeElement);
+			if (!parent) return;
+			// check if parent is a label and assume it is for this checkbox
+			if (parent?.tagName === 'LABEL') {
+				this._renderer.setAttribute(parent, 'data-disabled', this._disabled() ? 'true' : 'false');
+				return;
+			}
 			const label = parent?.querySelector(`label[for="${this.forChild(this._id())}"]`);
 			if (!label) return;
 			this._renderer.setAttribute(label, 'data-disabled', this._disabled() ? 'true' : 'false');

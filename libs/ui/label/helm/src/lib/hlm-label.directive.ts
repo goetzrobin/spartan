@@ -3,24 +3,26 @@ import { hlm } from '@spartan-ng/ui-core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
-const labelVariants = cva(
-	'text-sm font-medium leading-none [&:has([hlmInput]:disabled)]:cursor-not-allowed [&:has([hlmInput]:disabled)]:opacity-70',
-	{
-		variants: {
-			variant: {
-				default: '',
-			},
-			error: {
-				auto: '[&:has([hlmInput].ng-invalid.ng-touched)]:text-destructive',
-				true: 'text-destructive',
-			},
+const labelVariants = cva('text-sm font-medium leading-none', {
+	variants: {
+		variant: {
+			default: '',
 		},
-		defaultVariants: {
-			variant: 'default',
-			error: 'auto',
+		error: {
+			auto: '[&:has([hlmInput].ng-invalid.ng-touched)]:text-destructive',
+			true: 'text-destructive',
+		},
+		disabled: {
+			auto: '[&:has([hlmInput]:disabled)]:opacity-70',
+			true: 'opacity-70',
+			false: '',
 		},
 	},
-);
+	defaultVariants: {
+		variant: 'default',
+		error: 'auto',
+	},
+});
 export type LabelVariants = VariantProps<typeof labelVariants>;
 
 @Directive({
@@ -33,7 +35,7 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 export class HlmLabelDirective implements OnInit {
 	private readonly _element = inject(ElementRef).nativeElement;
 	private _changes?: MutationObserver;
-	private readonly _dataDisabled = signal<boolean>(false);
+	private readonly _dataDisabled = signal<boolean | 'auto'>('auto');
 
 	ngOnInit(): void {
 		this._changes = new MutationObserver((mutations: MutationRecord[]) => {
@@ -41,7 +43,7 @@ export class HlmLabelDirective implements OnInit {
 				if (mutation.attributeName !== 'data-disabled') return;
 				// eslint-disable-next-line
 				const state = (mutation.target as any).attributes.getNamedItem(mutation.attributeName)?.value === 'true';
-				this._dataDisabled.set(state);
+				this._dataDisabled.set(state ?? 'auto');
 			});
 		});
 		Promise.resolve().then(() => {
@@ -72,7 +74,9 @@ export class HlmLabelDirective implements OnInit {
 
 	protected _computedClass = computed(() => this._generateClass());
 	private _generateClass() {
-		const disabledClass = this._dataDisabled() ? 'cursor-not-allowed opacity-70' : '';
-		return hlm(labelVariants({ variant: this._variant(), error: this._error() }), disabledClass, this._userCls());
+		return hlm(
+			labelVariants({ variant: this._variant(), error: this._error(), disabled: this._dataDisabled() }),
+			this._userCls(),
+		);
 	}
 }
