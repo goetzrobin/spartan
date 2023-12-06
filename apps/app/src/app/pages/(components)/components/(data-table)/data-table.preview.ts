@@ -201,7 +201,7 @@ const PAYMENT_DATA: Payment[] = [
 		<brn-table
 			hlm
 			stickyHeader
-			class="border-border mt-4 block h-[335px] overflow-scroll rounded-md border"
+			class="border-border mt-4 block h-[335px] overflow-auto rounded-md border"
 			[dataSource]="_filteredPaginatedPayments()"
 			[displayedColumns]="_allDisplayedColumns()"
 			[trackBy]="_trackBy"

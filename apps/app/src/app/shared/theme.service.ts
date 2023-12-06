@@ -57,7 +57,6 @@ export class ThemeService {
 	}
 
 	public setTheme(newTheme: Theme): void {
-		console.log(newTheme, this._theme());
 		const oldTheme = this._theme();
 		this._renderer.removeClass(this._document.body, `theme-${oldTheme}`);
 		this._theme.set(newTheme);
