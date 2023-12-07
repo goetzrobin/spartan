@@ -1,4 +1,5 @@
-import { computed, Directive, ElementRef, inject, Input, OnInit, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { computed, Directive, ElementRef, inject, Input, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -36,11 +37,13 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 	},
 })
 export class HlmLabelDirective implements OnInit {
+	private readonly _isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 	private readonly _element = inject(ElementRef).nativeElement;
 	private _changes?: MutationObserver;
 	private readonly _dataDisabled = signal<boolean | 'auto'>('auto');
 
 	ngOnInit(): void {
+		if (!this._isBrowser) return;
 		this._changes = new MutationObserver((mutations: MutationRecord[]) => {
 			mutations.forEach((mutation: MutationRecord) => {
 				if (mutation.attributeName !== 'data-disabled') return;
@@ -49,12 +52,10 @@ export class HlmLabelDirective implements OnInit {
 				this._dataDisabled.set(state ?? 'auto');
 			});
 		});
-		Promise.resolve().then(() => {
-			this._changes?.observe(this._element, {
-				attributes: true,
-				childList: true,
-				characterData: true,
-			});
+		this._changes?.observe(this._element, {
+			attributes: true,
+			childList: true,
+			characterData: true,
 		});
 	}
 	private readonly _variant = signal<LabelVariants['variant']>('default');
@@ -75,11 +76,10 @@ export class HlmLabelDirective implements OnInit {
 		this._userCls.set(userCls);
 	}
 
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(
+	protected readonly _computedClass = computed(() =>
+		hlm(
 			labelVariants({ variant: this._variant(), error: this._error(), disabled: this._dataDisabled() }),
 			this._userCls(),
-		);
-	}
+		),
+	);
 }
