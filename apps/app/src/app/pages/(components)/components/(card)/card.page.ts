@@ -71,7 +71,7 @@ export const routeMeta: RouteMeta = {
 			</spartan-tabs>
 
 			<spartan-page-bottom-nav>
-				<spartan-page-bottom-nav-link href="collapsible" label="Collapsible" />
+				<spartan-page-bottom-nav-link href="checkbox" label="Checkbox" />
 				<spartan-page-bottom-nav-link direction="previous" href="button" label="Button" />
 			</spartan-page-bottom-nav>
 		</section>
