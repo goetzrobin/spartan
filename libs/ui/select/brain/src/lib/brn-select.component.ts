@@ -7,10 +7,8 @@ import {
 	ContentChild,
 	ContentChildren,
 	Input,
-	OnInit,
 	QueryList,
 	ViewChild,
-	booleanAttribute,
 	inject,
 	signal,
 } from '@angular/core';
@@ -22,6 +20,7 @@ import { BrnSelectContentDirective } from './brn-select-content.directive';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 import { BrnSelectService } from './brn-select.service';
+
 let nextId = 0;
 
 @Component({
@@ -30,25 +29,21 @@ let nextId = 0;
 	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [BrnSelectService, CdkListbox],
-	host: {
-		class: 'inline-block',
-	},
 	template: `
 		<!-- Select -->
 		@if (!labelProvided() && placeholder) {
-			<label class="hidden" [id]="backupLabelId()">{{ placeholder }}</label>
+			<label class="hidden" [id]="backupLabelId()">{{ _placeholder() }}</label>
 		}
-		<ng-content select="brn-label"></ng-content>
-		<div cdk-overlay-origin (click)="toggle()" #fallbackOverlayOrigin="cdkOverlayOrigin" #trigger>
-			<ng-content select="brn-select-trigger"></ng-content>
-			<ng-content select="hlm-select-trigger"></ng-content>
+		<ng-content select="label[hlmLabel],label[brnLabel]"></ng-content>
+		<div cdk-overlay-origin (click)="toggle()" #trigger="cdkOverlayOrigin">
+			<ng-content select="hlm-select-trigger,[brnSelectTrigger]"></ng-content>
 		</div>
 		<ng-template
 			cdk-connected-overlay
 			cdkConnectedOverlayLockPosition
 			cdkConnectedOverlayHasBackdrop
 			cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-			[cdkConnectedOverlayOrigin]="fallbackOverlayOrigin"
+			[cdkConnectedOverlayOrigin]="trigger"
 			[cdkConnectedOverlayOpen]="isExpanded()"
 			[cdkConnectedOverlayPositions]="_positions"
 			[cdkConnectedOverlayWidth]="'auto'"
@@ -59,22 +54,29 @@ let nextId = 0;
 		</ng-template>
 	`,
 })
-export class BrnSelectComponent implements OnInit, ControlValueAccessor, AfterContentInit {
-	value = signal('');
+export class BrnSelectComponent implements ControlValueAccessor, AfterContentInit {
+	private _selectService = inject(BrnSelectService);
 
-	ngControl = inject(NgControl);
+	// eslint-disable-next-line @angular-eslint/no-input-rename
+	@Input({ alias: 'multiple' })
+	set multiple(multiple: boolean) {
+		this._selectService.state.update((state) => ({ ...state, multiple }));
+	}
+	readonly _multiple = this._selectService.multiple;
 
-	@Input() multiple = false;
+	// eslint-disable-next-line @angular-eslint/no-input-rename
+	@Input({ alias: 'placeholder' })
+	set placeholder(placeholder: string) {
+		this._selectService.state.update((state) => ({ ...state, placeholder }));
+	}
+	readonly _placeholder = this._selectService.placeholder;
 
-	@Input() placeholder: string = '';
-
-	/** Whether the select is disabled. */
-	@Input({ transform: booleanAttribute })
+	// eslint-disable-next-line @angular-eslint/no-input-rename
+	@Input({ alias: 'disabled' })
 	set disabled(disabled: boolean) {
-		this._disabled = disabled;
 		this._selectService.state.update((state) => ({ ...state, disabled }));
 	}
-	_disabled: boolean = false;
+	readonly _disabled = this._selectService.disabled;
 
 	@ContentChild(BrnLabelDirective)
 	protected selectLabel!: BrnLabelDirective;
@@ -93,13 +95,15 @@ export class BrnSelectComponent implements OnInit, ControlValueAccessor, AfterCo
 	@ViewChild(CdkConnectedOverlay)
 	protected _overlayDir!: CdkConnectedOverlay;
 
-	private _selectService = inject(BrnSelectService);
-
 	isExpanded = this._selectService.isExpanded;
 
 	backupLabelId = this._selectService.labelId;
 
 	labelProvided = signal(false);
+
+	value = signal('');
+
+	ngControl = inject(NgControl);
 
 	/*
 	 * This position config ensures that the top "start" corner of the overlay
@@ -125,14 +129,12 @@ export class BrnSelectComponent implements OnInit, ControlValueAccessor, AfterCo
 			originY: 'top',
 			overlayX: 'start',
 			overlayY: 'bottom',
-			panelClass: 'mat-mdc-select-panel-above',
 		},
 		{
 			originX: 'end',
 			originY: 'top',
 			overlayX: 'end',
 			overlayY: 'bottom',
-			panelClass: 'mat-mdc-select-panel-above',
 		},
 	];
 
@@ -148,7 +150,7 @@ export class BrnSelectComponent implements OnInit, ControlValueAccessor, AfterCo
 		// Watch for Listbox Selection Changes to trigger Collapse
 		this._selectService.listBoxValueChangeEvent$
 			.pipe(
-				tap(() => !this.multiple && this.close()),
+				tap(() => !this._multiple() && this.close()),
 				map((listboxEvent) => {
 					console.log(listboxEvent);
 					this.writeValue(listboxEvent.value);
@@ -157,14 +159,6 @@ export class BrnSelectComponent implements OnInit, ControlValueAccessor, AfterCo
 				takeUntilDestroyed(),
 			)
 			.subscribe();
-	}
-
-	ngOnInit(): void {
-		this._selectService.state.update((state) => ({
-			...state,
-			multiple: this.multiple,
-			placeholder: this.placeholder,
-		}));
 	}
 
 	ngAfterContentInit(): void {
@@ -185,6 +179,7 @@ export class BrnSelectComponent implements OnInit, ControlValueAccessor, AfterCo
 
 	/** Toggles the overlay panel open or closed. */
 	toggle(): void {
+		console.log('mdaksjnkjnj', this.isExpanded());
 		this.isExpanded() ? this.close() : this.open();
 	}
 
@@ -216,7 +211,7 @@ export class BrnSelectComponent implements OnInit, ControlValueAccessor, AfterCo
 
 	/** Whether the panel is allowed to open. */
 	protected _canOpen(): boolean {
-		return !this.isExpanded() && !this._disabled && this.options?.length > 0;
+		return !this.isExpanded() && !this._disabled() && this.options?.length > 0;
 	}
 
 	private _moveFocusToCDKList(): void {
