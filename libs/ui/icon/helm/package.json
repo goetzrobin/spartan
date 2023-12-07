@@ -1,17 +1,17 @@
 {
-  "name": "@spartan-ng/ui-icon-helm",
-  "version": "0.0.1-alpha.10",
-  "peerDependencies": {
-    "@angular/core": "^17.0.0",
-    "@angular/common": "^17.0.0",
-    "@spartan-ng/ui-core": "0.0.1-alpha.316",
-    "@ng-icons/core": "^25.1.0",
-    "class-variance-authority": "^0.6.0",
-    "clsx": "^1.2.1"
-  },
-  "dependencies": {},
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@spartan-ng/ui-icon-helm",
+	"version": "0.0.1-alpha.10",
+	"peerDependencies": {
+		"@angular/core": "^17.0.0",
+		"@angular/common": "^17.0.0",
+		"@spartan-ng/ui-core": "0.0.1-alpha.316",
+		"@ng-icons/core": "^25.1.0",
+		"class-variance-authority": "^0.6.0",
+		"clsx": "^1.2.1"
+	},
+	"dependencies": {},
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	}
 }

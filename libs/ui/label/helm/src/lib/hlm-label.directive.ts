@@ -9,22 +9,23 @@ export const labelVariants = cva(
 		variants: {
 			variant: {
 				default: '',
-	  	},
-      error: {
-        auto: '[&:has([hlmInput].ng-invalid.ng-touched)]:text-destructive',
-        true: 'text-destructive',
-      },
-      disabled: {
-        auto: '[&:has([hlmInput]:disabled)]:opacity-70',
-        true: 'opacity-70',
-        false: '',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-      error: 'auto',
-    },
-  });
+			},
+			error: {
+				auto: '[&:has([hlmInput].ng-invalid.ng-touched)]:text-destructive',
+				true: 'text-destructive',
+			},
+			disabled: {
+				auto: '[&:has([hlmInput]:disabled)]:opacity-70',
+				true: 'opacity-70',
+				false: '',
+			},
+		},
+		defaultVariants: {
+			variant: 'default',
+			error: 'auto',
+		},
+	},
+);
 export type LabelVariants = VariantProps<typeof labelVariants>;
 
 @Directive({
