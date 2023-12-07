@@ -1,5 +1,4 @@
 import { names, ProjectConfiguration, readJson, Tree, workspaceRoot } from '@nx/devkit';
-import { prompt } from 'enquirer';
 import * as path from 'path';
 import { addPrimitiveToSupportedUILibraries } from './lib/add-primitive-to-supported-ui-libraries';
 import { copyFilesFromHlmLibToGenerator, createSharedGeneratorFiles, recursivelyDelete } from './lib/file-management';
@@ -29,15 +28,7 @@ export async function hlmToNxGeneratorGenerator(tree: Tree, options: HlmToNxGene
 	const { projects, projectNames } = getProjectsAndNames(tree);
 	const projectNamesIgnoringCoreLibs = projectNames.filter((name) => !name.includes('core'));
 
-	const response: { libraries: string[] } = await prompt({
-		type: 'multiselect',
-		required: true,
-		name: 'libraries',
-		message: 'Choose which library you want to copy',
-		choices: ['all', ...projectNamesIgnoringCoreLibs],
-	});
-	const librariesToCopy = response.libraries.includes('all') ? projectNamesIgnoringCoreLibs : response.libraries;
-	librariesToCopy.forEach((internalName) => {
+	projectNamesIgnoringCoreLibs.forEach((internalName) => {
 		const primitiveName = internalName.replace('ui-', '').replace('-helm', '').replace('-', '');
 		const cleanNames = names(primitiveName);
 		options = { ...options, ...cleanNames };

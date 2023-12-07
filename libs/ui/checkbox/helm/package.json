@@ -3,8 +3,10 @@
 	"version": "0.0.1-alpha.10",
 	"peerDependencies": {
 		"@angular/core": "^17.0.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.313",
-		"clsx": "^1.2.1"
+		"@spartan-ng/ui-core": "0.0.1-alpha.317",
+		"@spartan-ng/ui-checkbox-brain": "0.0.1-alpha.317",
+		"clsx": "^1.2.1",
+		"@ng-icons/radix-icons": "^25.1.0"
 	},
 	"dependencies": {},
 	"sideEffects": false,

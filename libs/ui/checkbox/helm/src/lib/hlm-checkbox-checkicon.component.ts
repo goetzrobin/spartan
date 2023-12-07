@@ -1,9 +1,8 @@
 import { Component, computed, inject, Input, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
 import { radixCheck } from '@ng-icons/radix-icons';
 import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
 import { hlm } from '@spartan-ng/ui-core';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { ClassValue } from 'clsx';
 
 @Component({
