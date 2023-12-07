@@ -12,7 +12,7 @@ import {
 	standalone: true,
 	imports: [HlmTableComponent, HlmTrowComponent, HlmThComponent, HlmTdComponent, HlmCaptionComponent],
 	host: {
-		class: 'w-full overflow-x-scroll',
+		class: 'w-full overflow-x-auto',
 	},
 	template: `
 		<hlm-table class="w-fit min-w-[400px]">
@@ -102,7 +102,7 @@ import {
   standalone: true,
   imports: [HlmTableComponent, HlmTrowComponent, HlmThComponent, HlmTdComponent, HlmCaptionComponent],
   host: {
-    class: 'w-full overflow-x-scroll',
+    class: 'w-full overflow-x-auto',
   },
   template: \`
     <hlm-table class="w-full min-w-[400px]">
