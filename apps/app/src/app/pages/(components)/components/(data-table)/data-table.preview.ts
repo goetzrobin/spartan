@@ -1,17 +1,20 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { radixChevronDown, radixDotsHorizontal } from '@ng-icons/radix-icons';
+import { radixCaretSort, radixChevronDown, radixDotsHorizontal } from '@ng-icons/radix-icons';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
+import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
+import { HlmCheckboxCheckIconComponent, HlmCheckboxDirective } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
-import { BrnMenuModule } from '@spartan-ng/ui-menu-brain';
+import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
 import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng/ui-table-brain';
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
-import { debounceTime } from 'rxjs';
+import { debounceTime, map } from 'rxjs';
 
 export type Payment = {
 	id: string;
@@ -149,7 +152,7 @@ const PAYMENT_DATA: Payment[] = [
 	imports: [
 		FormsModule,
 
-		BrnMenuModule,
+		BrnMenuTriggerDirective,
 		HlmMenuModule,
 
 		BrnTableModule,
@@ -161,8 +164,12 @@ const PAYMENT_DATA: Payment[] = [
 		TitleCasePipe,
 		HlmIconComponent,
 		HlmInputDirective,
+
+		BrnCheckboxComponent,
+		HlmCheckboxCheckIconComponent,
+		HlmCheckboxDirective,
 	],
-	providers: [provideIcons({ radixChevronDown, radixDotsHorizontal })],
+	providers: [provideIcons({ radixChevronDown, radixDotsHorizontal, radixCaretSort })],
 	host: {
 		class: 'w-full',
 	},
@@ -170,7 +177,7 @@ const PAYMENT_DATA: Payment[] = [
 		<div class="flex flex-col justify-between gap-4 sm:flex-row">
 			<input
 				hlmInput
-				class="w-full"
+				class="w-full md:w-80"
 				placeholder="Filter emails..."
 				[ngModel]="_emailFilter()"
 				(ngModelChange)="_rawFilterInput.set($event)"
@@ -181,11 +188,10 @@ const PAYMENT_DATA: Payment[] = [
 				<hlm-icon name="radixChevronDown" class="ml-2" size="sm" />
 			</button>
 			<ng-template #menu>
-				<div hlm brnMenu class="w-32">
+				<hlm-menu class="w-32">
 					@for (columnName of _brnColumnManager.allColumns; track columnName) {
 						<button
-							hlm
-							brnMenuItemCheckbox
+							hlmMenuItemCheckbox
 							[disabled]="_brnColumnManager.isColumnDisabled(columnName)"
 							[checked]="_brnColumnManager.isColumnVisible(columnName)"
 							(triggered)="_brnColumnManager.toggleVisibility(columnName)"
@@ -194,7 +200,7 @@ const PAYMENT_DATA: Payment[] = [
 							<span>{{ columnName | titlecase }}</span>
 						</button>
 					}
-				</div>
+				</hlm-menu>
 			</ng-template>
 		</div>
 
@@ -202,10 +208,22 @@ const PAYMENT_DATA: Payment[] = [
 			hlm
 			stickyHeader
 			class="border-border mt-4 block h-[335px] overflow-auto rounded-md border"
-			[dataSource]="_filteredPaginatedPayments()"
+			[dataSource]="_filteredSortedPaginatedPayments()"
 			[displayedColumns]="_allDisplayedColumns()"
 			[trackBy]="_trackBy"
 		>
+			<brn-column-def name="select">
+				<hlm-th class="w-12" *brnHeaderDef>
+					<brn-checkbox hlm [checked]="_checkboxState()" (changed)="handleHeaderCheckboxChange()">
+						<hlm-checkbox-checkicon />
+					</brn-checkbox>
+				</hlm-th>
+				<hlm-td class="w-12" *brnCellDef="let element">
+					<brn-checkbox hlm [checked]="_isPaymentSelected(element)" (changed)="togglePayment(element)">
+						<hlm-checkbox-checkicon />
+					</brn-checkbox>
+				</hlm-td>
+			</brn-column-def>
 			<brn-column-def name="status">
 				<hlm-th truncate class="w-32 sm:w-40" *brnHeaderDef>Status</hlm-th>
 				<hlm-td truncate class="w-32 sm:w-40" *brnCellDef="let element">
@@ -213,7 +231,12 @@ const PAYMENT_DATA: Payment[] = [
 				</hlm-td>
 			</brn-column-def>
 			<brn-column-def name="email">
-				<hlm-th truncate class="w-60 lg:flex-1" *brnHeaderDef>Email</hlm-th>
+				<hlm-th class="w-60 lg:flex-1" *brnHeaderDef>
+					<button hlmBtn size="sm" variant="ghost" (click)="handleEmailSortChange()">
+						Email
+						<hlm-icon class="ml-1" size="sm" name="radixCaretSort" />
+					</button>
+				</hlm-th>
 				<hlm-td truncate class="w-60 lg:flex-1" *brnCellDef="let element">
 					{{ element.email }}
 				</hlm-td>
@@ -232,18 +255,18 @@ const PAYMENT_DATA: Payment[] = [
 					</button>
 
 					<ng-template #menu>
-						<div hlm brnMenu>
+						<hlm-menu>
 							<hlm-menu-label>Actions</hlm-menu-label>
 							<hlm-menu-separator />
-							<div brnMenuGroup>
-								<button hlm brnMenuItem>Copy payment ID</button>
-							</div>
+							<hlm-menu-group>
+								<button hlmMenuItem>Copy payment ID</button>
+							</hlm-menu-group>
 							<hlm-menu-separator />
-							<div brnMenuGroup>
-								<button hlm brnMenuItem>View customer</button>
-								<button hlm brnMenuItem>View payment details</button>
-							</div>
-						</div>
+							<hlm-menu-group>
+								<button hlmMenuItem>View customer</button>
+								<button hlmMenuItem>View payment details</button>
+							</hlm-menu-group>
+						</hlm-menu>
 					</ng-template>
 				</hlm-td>
 			</brn-column-def>
@@ -253,9 +276,7 @@ const PAYMENT_DATA: Payment[] = [
 			class="mt-4 flex flex-col justify-between sm:flex-row sm:items-center"
 			*brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
 		>
-			<span class="${hlmMuted} text-sm">
-				Showing entries {{ ctx.state().startIndex + 1 }} - {{ ctx.state().endIndex + 1 }} of {{ _totalElements() }}
-			</span>
+			<span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
 			<div class="mt-2 flex sm:mt-0">
 				<select
 					[ngModel]="_pageSize()"
@@ -290,12 +311,22 @@ export class DataTablePreviewComponent {
 	protected readonly _availablePageSizes = [5, 10, 20, 10000];
 	protected readonly _pageSize = signal(this._availablePageSizes[0]);
 
+	private readonly _selectionModel = new SelectionModel<Payment>(true);
+	protected readonly _isPaymentSelected = (payment: Payment) => this._selectionModel.isSelected(payment);
+	protected readonly _selected = toSignal(this._selectionModel.changed.pipe(map((change) => change.source.selected)), {
+		initialValue: [],
+	});
+
 	protected readonly _brnColumnManager = useBrnColumnManager({
 		status: true,
 		email: true,
 		amount: true,
 	});
-	protected readonly _allDisplayedColumns = computed(() => [...this._brnColumnManager.displayedColumns(), 'actions']);
+	protected readonly _allDisplayedColumns = computed(() => [
+		'select',
+		...this._brnColumnManager.displayedColumns(),
+		'actions',
+	]);
 
 	private readonly _payments = signal(PAYMENT_DATA);
 	private readonly _filteredPayments = computed(() => {
@@ -305,9 +336,28 @@ export class DataTablePreviewComponent {
 		}
 		return this._payments();
 	});
-	protected readonly _filteredPaginatedPayments = computed(() =>
-		this._filteredPayments().slice(this._displayedIndices().start, this._displayedIndices().end + 1),
+	private readonly _emailSort = signal<'ASC' | 'DESC' | null>(null);
+	protected readonly _filteredSortedPaginatedPayments = computed(() => {
+		const sort = this._emailSort();
+		const start = this._displayedIndices().start;
+		const end = this._displayedIndices().end + 1;
+		const payments = this._filteredPayments();
+		if (!sort) {
+			return payments.slice(start, end);
+		}
+		return [...payments]
+			.sort((p1, p2) => (sort === 'ASC' ? 1 : -1) * p1.email.localeCompare(p2.email))
+			.slice(start, end);
+	});
+	protected readonly _allFilteredPaginatedPaymentsSelected = computed(() =>
+		this._filteredSortedPaginatedPayments().every((payment) => this._selected().includes(payment)),
 	);
+	protected readonly _checkboxState = computed(() => {
+		const noneSelected = this._selected().length === 0;
+		const allSelectedOrIndeterminate = this._allFilteredPaginatedPaymentsSelected() ? true : 'indeterminate';
+		return noneSelected ? false : allSelectedOrIndeterminate;
+	});
+
 	protected readonly _trackBy: TrackByFunction<Payment> = (_: number, p: Payment) => p.id;
 	protected readonly _totalElements = computed(() => this._filteredPayments().length);
 	protected readonly _onStateChange = ({ startIndex, endIndex }: PaginatorState) =>
@@ -317,6 +367,30 @@ export class DataTablePreviewComponent {
 		// needed to sync the debounced filter to the name filter, but being able to override the
 		// filter when loading new users without debounce
 		effect(() => this._emailFilter.set(this._debouncedFilter() ?? ''), { allowSignalWrites: true });
+	}
+
+	protected togglePayment(payment: Payment) {
+		this._selectionModel.toggle(payment);
+	}
+
+	protected handleHeaderCheckboxChange() {
+		const previousCbState = this._checkboxState();
+		if (previousCbState === 'indeterminate' || !previousCbState) {
+			this._selectionModel.select(...this._filteredSortedPaginatedPayments());
+		} else {
+			this._selectionModel.deselect(...this._filteredSortedPaginatedPayments());
+		}
+	}
+
+	protected handleEmailSortChange() {
+		const sort = this._emailSort();
+		if (sort === 'ASC') {
+			this._emailSort.set('DESC');
+		} else if (sort === 'DESC') {
+			this._emailSort.set(null);
+		} else {
+			this._emailSort.set('ASC');
+		}
 	}
 }
 
