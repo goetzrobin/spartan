@@ -11,7 +11,7 @@ export class HlmTableDirective {
 			headerRow:
 				'flex min-w-[100%] w-fit border-b border-border [&.cdk-table-sticky]:bg-background [&.cdk-table-sticky]:hover:bg-muted',
 			bodyRow:
-				'flex min-w-[100%] w-fit border-b border-border transition-[background-color] hover:bg-muted/50 data-[state=selected]:bg-muted',
+				'flex min-w-[100%] w-fit border-b border-border transition-[background-color] hover:bg-muted/50 [&:has([role=checkbox][aria-checked=true])]:bg-muted',
 		});
 	}
 }
