@@ -4,7 +4,7 @@
 	"peerDependencies": {
 		"@angular/common": "^17.0.0",
 		"@angular/core": "^17.0.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.317",
+		"@spartan-ng/ui-core": "0.0.1-alpha.318",
 		"clsx": "^1.2.1"
 	},
 	"dependencies": {},

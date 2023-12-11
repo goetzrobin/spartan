@@ -1,9 +1,9 @@
-import { Component, Input, computed, signal } from '@angular/core';
+import { Component, computed, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
-const spinnerVariants = cva('inline-block', {
+export const spinnerVariants = cva('inline-block', {
 	variants: {
 		variant: {
 			default: 'animate-spin [&>svg]:text-foreground/30 [&>svg]:fill-accent',
