@@ -1,12 +1,12 @@
 import { generateFiles, Tree } from '@nx/devkit';
 import * as path from 'path';
-import { HlmToNxGeneratorGeneratorSchema } from '../schema';
+import { HlmToCliGeneratorGeneratorSchema } from '../schema';
 
 export const copyFilesFromHlmLibToGenerator = (
 	tree: Tree,
 	srcPath: string,
 	filesPath: string,
-	options: HlmToNxGeneratorGeneratorSchema,
+	options: HlmToCliGeneratorGeneratorSchema,
 ) => {
 	generateFiles(tree, srcPath, filesPath, options);
 	tree.delete(path.join(filesPath, 'test-setup.ts'));
@@ -16,7 +16,7 @@ export const copyFilesFromHlmLibToGenerator = (
 export const createSharedGeneratorFiles = (
 	tree: Tree,
 	projectRoot: string,
-	options: HlmToNxGeneratorGeneratorSchema,
+	options: HlmToCliGeneratorGeneratorSchema,
 ) => {
 	generateFiles(tree, path.join(__dirname, '..', 'files'), projectRoot, options);
 };

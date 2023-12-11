@@ -7,7 +7,7 @@
 		"ng": "nx",
 		"prepare": "git config core.hookspath .githooks",
 		"start": "nx serve app",
-		"prepare-nx-plugin": "nx g @spartan-ng/tools:hlm-to-nx-generator",
+		"prepare-cli": "nx g @spartan-ng/tools:hlm-to-cli-generator",
 		"lint-publishable": "nx run-many --target=lint --projects=tag:scope:core,tag:scope:brain,tag:scope:helm,tag:scope:cli --fix",
 		"lint-fix-publishable": "nx run-many --target=lint --projects=tag:scope:core,tag:scope:brain,tag:scope:helm,tag:scope:cli --fix",
 		"storybook": "nx storybook ui-storybook",

@@ -3,28 +3,31 @@ import * as path from 'path';
 import { addPrimitiveToSupportedUILibraries } from './lib/add-primitive-to-supported-ui-libraries';
 import { copyFilesFromHlmLibToGenerator, createSharedGeneratorFiles, recursivelyDelete } from './lib/file-management';
 import { getProjectsAndNames } from './lib/get-project-names';
-import { HlmToNxGeneratorGeneratorSchema } from './schema';
+import { HlmToCliGeneratorGeneratorSchema } from './schema';
+
+const BASE_PATH = path.join('libs', 'cli', 'src', 'generators', 'ui');
 
 async function createGeneratorFromHlmLibrary(
 	projects: Map<string, ProjectConfiguration>,
 	generatorName: string,
 	internalName: string,
 	tree: Tree,
-	options: HlmToNxGeneratorGeneratorSchema,
+	options: HlmToCliGeneratorGeneratorSchema,
 ) {
 	const srcPath = path.join(workspaceRoot, projects.get(internalName).sourceRoot);
-	const projectRoot = `libs/nx/src/generators/ui/libs/${internalName}`;
+	const projectRoot = path.join(BASE_PATH, 'libs', internalName);
+	const supportedUILibsJsonPath = path.join(BASE_PATH, 'supported-ui-libraries.json');
 	const filesPath = path.join(projectRoot, 'files');
 	const peerDependencies = readJson(tree, path.join(projects.get(internalName).root, 'package.json'))[
 		'peerDependencies'
 	];
 	recursivelyDelete(tree, filesPath);
-	addPrimitiveToSupportedUILibraries(tree, generatorName, internalName, peerDependencies);
+	addPrimitiveToSupportedUILibraries(tree, supportedUILibsJsonPath, generatorName, internalName, peerDependencies);
 	copyFilesFromHlmLibToGenerator(tree, srcPath, filesPath, options);
 	createSharedGeneratorFiles(tree, projectRoot, options);
 }
 
-export async function hlmToNxGeneratorGenerator(tree: Tree, options: HlmToNxGeneratorGeneratorSchema) {
+export async function hlmCliNxGeneratorGenerator(tree: Tree, options: HlmToCliGeneratorGeneratorSchema) {
 	const { projects, projectNames } = getProjectsAndNames(tree);
 	const projectNamesIgnoringCoreLibs = projectNames.filter((name) => !name.includes('core'));
 
@@ -40,4 +43,4 @@ export async function hlmToNxGeneratorGenerator(tree: Tree, options: HlmToNxGene
 	});
 }
 
-export default hlmToNxGeneratorGenerator;
+export default hlmCliNxGeneratorGenerator;
