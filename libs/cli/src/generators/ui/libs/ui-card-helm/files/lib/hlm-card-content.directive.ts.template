@@ -1,9 +1,9 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { computed, Directive, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
-const cardContentVariants = cva('p-6 pt-0', {
+export const cardContentVariants = cva('p-6 pt-0', {
 	variants: {},
 	defaultVariants: {},
 });

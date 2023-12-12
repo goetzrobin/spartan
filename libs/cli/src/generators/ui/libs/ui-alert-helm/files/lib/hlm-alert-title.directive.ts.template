@@ -1,9 +1,9 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { computed, Directive, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
-const alertTitleVariants = cva('mb-1 font-medium leading-none tracking-tight', {
+export const alertTitleVariants = cva('mb-1 font-medium leading-none tracking-tight', {
 	variants: {},
 });
 export type AlertTitleVariants = VariantProps<typeof alertTitleVariants>;

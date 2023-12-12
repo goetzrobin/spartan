@@ -1,4 +1,12 @@
-import { booleanAttribute, Component, computed, Input, signal } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	Input,
+	signal,
+	ViewEncapsulation,
+} from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -12,6 +20,8 @@ import { ClassValue } from 'clsx';
 	template: `
 		<ng-content />
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 })
 export class HlmTrowComponent {
 	@Input({ transform: booleanAttribute })

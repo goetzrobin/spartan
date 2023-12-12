@@ -1,9 +1,9 @@
 {
 	"generators": {
-		"hlm-to-nx-generator": {
-			"factory": "./src/generators/hlm-to-nx-generator/generator",
-			"schema": "./src/generators/hlm-to-nx-generator/schema.json",
-			"description": "hlm-to-nx-generator generator"
+		"hlm-to-cli-generator": {
+			"factory": "./src/generators/hlm-to-cli-generator/generator",
+			"schema": "./src/generators/hlm-to-cli-generator/schema.json",
+			"description": "hlm-to-cli-generator generator"
 		}
 	}
 }

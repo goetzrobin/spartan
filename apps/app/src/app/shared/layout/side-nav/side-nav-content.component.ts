@@ -64,10 +64,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					<spartan-side-nav-cs />
 				</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/card">Card</a>
-				<a disabled spartanSideNavLink="/components/checkbox">
-					Checkbox
-					<spartan-side-nav-cs />
-				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/checkbox">Checkbox</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/collapsible">Collapsible</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/combobox">Combobox</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/command">Command</a>

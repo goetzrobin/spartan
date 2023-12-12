@@ -1,5 +1,13 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, Input, booleanAttribute, computed, signal } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	Input,
+	ViewEncapsulation,
+	booleanAttribute,
+	computed,
+	signal,
+} from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -19,6 +27,8 @@ import { ClassValue } from 'clsx';
 		</span>
 		<ng-container *ngIf="!truncate" [ngTemplateOutlet]="content" />
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 })
 export class HlmThComponent {
 	@Input({ transform: booleanAttribute })
@@ -33,7 +43,7 @@ export class HlmThComponent {
 	protected _computedClass = computed(() => this._generateClass());
 	private _generateClass() {
 		return hlm(
-			'flex flex-none h-12 px-2 text-sm items-center font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
+			'flex flex-none h-12 px-4 text-sm items-center font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
 			this._userCls(),
 		);
 	}
