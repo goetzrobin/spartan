@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { HlmHoverCardContentDirective } from './lib/hlm-hover-card-content.directive';
+import { HlmHoverCardContentComponent } from './lib/hlm-hover-card-content.component';
 
-export { HlmHoverCardContentDirective } from './lib/hlm-hover-card-content.directive';
+export { HlmHoverCardContentComponent } from './lib/hlm-hover-card-content.component';
 
-export const HlmHoverCardImports = [HlmHoverCardContentDirective] as const;
+export const HlmHoverCardImports = [HlmHoverCardContentComponent] as const;
 
 @NgModule({
 	imports: [...HlmHoverCardImports],
