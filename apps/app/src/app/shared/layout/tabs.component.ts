@@ -18,7 +18,7 @@ const tabContent =
 		class: 'block',
 	},
 	template: `
-		<div brnTabs class="block" [value]="firstTab">
+		<div [brnTabs]="firstTab" class="block">
 			<div
 				brnTabsList
 				class="border-border text-muted-foreground mb-4 inline-flex h-9 w-full items-center justify-start rounded-none border-b bg-transparent p-0"

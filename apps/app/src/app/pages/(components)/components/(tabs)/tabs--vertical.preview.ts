@@ -40,7 +40,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 		class: 'block w-full max-w-lg min-h-[400px]',
 	},
 	template: `
-		<div brnTabs class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical" value="account">
+		<div brnTabs="account" class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical">
 			<div hlmTabsList hlm orientation="vertical" aria-label="tabs example">
 				<button class="w-full" hlmTabsTrigger="account">Account</button>
 				<button class="w-full" hlmTabsTrigger="password">Password</button>

@@ -38,7 +38,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 		class: 'block w-full max-w-lg',
 	},
 	template: `
-		<div brnTabs class="w-full" value="account">
+		<div brnTabs="account" class="w-full">
 			<div hlmTabsList class="grid w-full grid-cols-2" aria-label="tabs example">
 				<button hlmTabsTrigger="account">Account</button>
 				<button hlmTabsTrigger="password">Password</button>
@@ -136,7 +136,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 		class: 'block w-full max-w-lg',
 	},
 	template: \`
-		<div brnTabs class="w-full" value="account">
+		<div brnTabs="account" class="w-full">
 			<div hlmTabsList class="grid w-full grid-cols-2" aria-label="tabs example">
 				<button hlmTabsTrigger="account">Account</button>
 				<button hlmTabsTrigger="password">Password</button>
@@ -200,7 +200,7 @@ import {
 import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
 `;
 export const defaultSkeleton = `
-<div brnTabs class='block max-w-3xl mx-auto' value='account'>
+<div brnTabs='account' class='block max-w-3xl mx-auto'>
   <div hlmTabsList class='grid w-full grid-cols-2' aria-label='tabs example'>
     <button hlmTabsTrigger='account'>Account</button>
     <button hlmTabsTrigger='password'>Password</button>
