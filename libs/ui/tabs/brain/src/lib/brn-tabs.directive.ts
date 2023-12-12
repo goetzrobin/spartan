@@ -32,7 +32,7 @@ export class BrnTabsDirective {
 	$direction = this._direction.asReadonly();
 
 	protected readonly _value = signal<string | undefined>(undefined);
-	@Input()
+	@Input('brnTabs')
 	set value(value: string) {
 		this._value.set(value);
 	}

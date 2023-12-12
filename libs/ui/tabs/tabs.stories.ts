@@ -41,7 +41,7 @@ export const Default: Story = {
 	render: ({ activationMode }) => ({
 		props: { activationMode },
 		template: `
-  <div brnTabs [activationMode]='activationMode' class='block max-w-3xl mx-auto' value='account'>
+  <div brnTabs='account' [activationMode]='activationMode' class='block max-w-3xl mx-auto'>
     <div hlmTabsList class='grid w-full grid-cols-2' aria-label='tabs example'>
       <button hlmTabsTrigger='account'>Account</button>
       <button hlmTabsTrigger='password'>Password</button>
@@ -100,8 +100,7 @@ export const Vertical: Story = {
 	render: ({ activationMode }) => ({
 		props: { activationMode },
 		template: `
-        <div brnTabs class='flex flex-row space-x-2 max-w-3xl mx-auto' orientation='vertical'
-              value='account'>
+        <div brnTabs='account' class='flex flex-row space-x-2 max-w-3xl mx-auto' orientation='vertical'>
       <div hlmTabsList orientation='vertical' aria-label='tabs example'>
         <button class='w-full' hlmTabsTrigger='account'>Account</button>
         <button class='w-full' hlmTabsTrigger='password'>Password</button>
@@ -174,7 +173,7 @@ export const BrnOnly: Story = {
 	render: ({ activationMode }) => ({
 		props: { activationMode },
 		template: `
-  <div brnTabs [activationMode]='activationMode' class='block max-w-3xl mx-auto' value='account'>
+  <div brnTabs='account' [activationMode]='activationMode' class='block max-w-3xl mx-auto'>
     <div brnTabsList class='grid w-full grid-cols-2' aria-label='tabs example'>
       <button brnTabsTrigger='account'>Account</button>
       <button brnTabsTrigger='password'>Password</button>
