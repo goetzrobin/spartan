@@ -49,12 +49,12 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 	},
 	template: `
 		<brn-tabs class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical" value="account">
-			<brn-tabs-list hlmTabsList orientation="vertical" aria-label="tabs example">
-				<button class="w-full" hlmTabsTrigger brnTabsTrigger="account">Account</button>
-				<button class="w-full" hlmTabsTrigger brnTabsTrigger="password">Password</button>
-				<button class="w-full" hlmTabsTrigger brnTabsTrigger="danger">Danger Zone</button>
+			<brn-tabs-list hlm orientation="vertical" aria-label="tabs example">
+				<button class="w-full" hlmTabsTrigger="account">Account</button>
+				<button class="w-full" hlmTabsTrigger="password">Password</button>
+				<button class="w-full" hlmTabsTrigger="danger">Danger Zone</button>
 			</brn-tabs-list>
-			<div hlmTabsContent brnTabsContent="account">
+			<div hlmTabsContent="account">
 				<section hlmCard>
 					<div hlmCardHeader>
 						<h3 hlmCardTitle>Account</h3>
@@ -75,7 +75,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 					</div>
 				</section>
 			</div>
-			<div hlmTabsContent brnTabsContent="password">
+			<div hlmTabsContent="password">
 				<section hlmCard>
 					<div hlmCardHeader>
 						<h3 hlmCardTitle>Password</h3>
@@ -96,7 +96,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 					</div>
 				</section>
 			</div>
-			<div hlmTabsContent brnTabsContent="danger">
+			<div hlmTabsContent="danger">
 				<section hlmCard>
 					<div hlmCardHeader>
 						<h3 hlmCardTitle>Delete Account</h3>

@@ -44,11 +44,11 @@ export const Default: Story = {
 		props: { activationMode },
 		template: `
   <brn-tabs [activationMode]='activationMode' class='block max-w-3xl mx-auto' value='account'>
-    <brn-tabs-list hlmTabsList class='grid w-full grid-cols-2' aria-label='tabs example'>
-      <button hlmTabsTrigger brnTabsTrigger='account'>Account</button>
-      <button hlmTabsTrigger brnTabsTrigger='password'>Password</button>
+    <brn-tabs-list hlm class='grid w-full grid-cols-2' aria-label='tabs example'>
+      <button hlmTabsTrigger='account'>Account</button>
+      <button hlmTabsTrigger='password'>Password</button>
     </brn-tabs-list>
-    <div hlmTabsContent brnTabsContent='account'>
+    <div hlmTabsContent='account'>
      <section hlmCard>
        <div hlmCardHeader>
         <h3 hlmCardTitle>Account</h3>
@@ -69,7 +69,7 @@ export const Default: Story = {
       </div>
     </section>
     </div>
-    <div hlmTabsContent brnTabsContent='password'>
+    <div hlmTabsContent='password'>
     <section hlmCard>
        <div hlmCardHeader>
         <h3 hlmCardTitle>Password</h3>
@@ -104,12 +104,12 @@ export const Vertical: Story = {
 		template: `
         <brn-tabs class='flex flex-row space-x-2 max-w-3xl mx-auto' orientation='vertical'
               value='account'>
-      <brn-tabs-list hlmTabsList orientation='vertical' aria-label='tabs example'>
-        <button class='w-full' hlmTabsTrigger brnTabsTrigger='account'>Account</button>
-        <button class='w-full' hlmTabsTrigger brnTabsTrigger='password'>Password</button>
-        <button class='w-full' hlmTabsTrigger brnTabsTrigger='danger'>Danger Zone</button>
+      <brn-tabs-list hlm orientation='vertical' aria-label='tabs example'>
+        <button class='w-full' hlmTabsTrigger='account'>Account</button>
+        <button class='w-full' hlmTabsTrigger='password'>Password</button>
+        <button class='w-full' hlmTabsTrigger='danger'>Danger Zone</button>
       </brn-tabs-list>
-      <div hlmTabsContent brnTabsContent='account'>
+      <div hlmTabsContent='account'>
         <section hlmCard>
           <div hlmCardHeader>
             <h3 hlmCardTitle>Account</h3>
@@ -130,7 +130,7 @@ export const Vertical: Story = {
           </div>
         </section>
       </div>
-      <div hlmTabsContent brnTabsContent='password'>
+      <div hlmTabsContent='password'>
         <section hlmCard>
           <div hlmCardHeader>
             <h3 hlmCardTitle>Password</h3>
@@ -151,7 +151,7 @@ export const Vertical: Story = {
           </div>
         </section>
       </div>
-      <div hlmTabsContent brnTabsContent='danger'>
+      <div hlmTabsContent='danger'>
         <section hlmCard>
           <div hlmCardHeader>
             <h3 hlmCardTitle>Delete Account</h3>
@@ -165,6 +165,29 @@ export const Vertical: Story = {
         </section>
       </div>
     </brn-tabs>
+`,
+	}),
+};
+
+export const BrnOnly: Story = {
+	args: {
+		activationMode: 'automatic',
+	},
+	render: ({ activationMode }) => ({
+		props: { activationMode },
+		template: `
+  <brn-tabs [activationMode]='activationMode' class='block max-w-3xl mx-auto' value='account'>
+    <brn-tabs-list  class='grid w-full grid-cols-2' aria-label='tabs example'>
+      <button brnTabsTrigger='account'>Account</button>
+      <button brnTabsTrigger='password'>Password</button>
+    </brn-tabs-list>
+    <div brnTabsContent='account'>
+      Account content
+    </div>
+    <div brnTabsContent='password'>
+      Password content
+    </div>
+  </brn-tabs>
 `,
 	}),
 };

@@ -1,5 +1,6 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { Directive, Input, computed, inject, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
+import { BrnTabsTriggerDirective } from '@spartan-ng/ui-tabs-brain';
 import { ClassValue } from 'clsx';
 
 @Directive({
@@ -8,12 +9,19 @@ import { ClassValue } from 'clsx';
 	host: {
 		'[class]': '_computedClass()',
 	},
+	hostDirectives: [BrnTabsTriggerDirective],
 })
 export class HlmTabsTriggerDirective {
+	private readonly _brn = inject(BrnTabsTriggerDirective);
 	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
+	}
+
+	@Input('hlmTabsTrigger')
+	set triggerFor(key: string) {
+		this._brn?.setTriggerFor(key);
 	}
 
 	protected _computedClass = computed(() => this._generateClass());
