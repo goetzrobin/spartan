@@ -1,11 +1,4 @@
 import { booleanAttribute, Component, inject, Input, ViewEncapsulation } from '@angular/core';
-import {
-	BrnTabsComponent,
-	BrnTabsContentDirective,
-	BrnTabsListComponent,
-	BrnTabsTriggerDirective,
-} from '@spartan-ng/ui-tabs-brain';
-import { HlmTabsContentDirective } from '@spartan-ng/ui-tabs-helm';
 import { marked } from 'marked';
 import { gfmHeadingId } from 'marked-gfm-heading-id';
 import { markedHighlight } from 'marked-highlight';
@@ -30,17 +23,7 @@ declare const Prism: typeof import('prismjs');
 @Component({
 	selector: 'spartan-code',
 	standalone: true,
-	imports: [
-		BrnTabsComponent,
-		BrnTabsListComponent,
-		BrnTabsTriggerDirective,
-		HlmTabsContentDirective,
-		BrnTabsContentDirective,
-		HlmScrollAreaComponent,
-		HlmButtonDirective,
-		HlmIconComponent,
-		NgIf,
-	],
+	imports: [HlmScrollAreaComponent, HlmButtonDirective, HlmIconComponent, NgIf],
 	providers: [provideIcons({ radixClipboard, radixCheck })],
 	host: {
 		class: 'spartan-scroll relative block font-mono rounded-md text-sm text-white bg-zinc-950 dark:bg-zinc-900',

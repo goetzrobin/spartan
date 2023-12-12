@@ -1,37 +1,21 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import {
-	AfterContentInit,
-	ChangeDetectionStrategy,
-	Component,
-	ContentChildren,
-	inject,
-	Input,
-	QueryList,
-	signal,
-	ViewEncapsulation,
-} from '@angular/core';
+import { AfterContentInit, ContentChildren, Directive, inject, QueryList } from '@angular/core';
 import { rxHostListener } from '@spartan-ng/ui-core';
 import { take } from 'rxjs';
 import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
-import { BrnTabsComponent } from './brn-tabs.component';
+import { BrnTabsDirective } from './brn-tabs.directive';
 
-@Component({
-	selector: 'brn-tabs-list',
+@Directive({
+	selector: '[brnTabsList]',
 	standalone: true,
-	template: `
-		<ng-content />
-	`,
 	host: {
 		role: 'tablist',
 		'[attr.aria-orientation]': '_orientation()',
 		'[attr.data-orientation]': '_orientation()',
-		'[attr.aria-label]': '_ariaLabel()',
 	},
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	encapsulation: ViewEncapsulation.None,
 })
-export class BrnTabsListComponent implements AfterContentInit {
-	private _root = inject(BrnTabsComponent);
+export class BrnTabsListDirective implements AfterContentInit {
+	private _root = inject(BrnTabsDirective);
 
 	protected readonly _orientation = this._root.$orientation;
 	private readonly _direction = this._root.$direction;
@@ -40,12 +24,6 @@ export class BrnTabsListComponent implements AfterContentInit {
 	private readonly _keyDownListener = rxHostListener('keydown');
 
 	private _keyManager?: FocusKeyManager<BrnTabsTriggerDirective>;
-
-	protected readonly _ariaLabel = signal<string | undefined>(undefined);
-	@Input('aria-label')
-	set ariaLabel(value: string | undefined) {
-		this._ariaLabel.set(value);
-	}
 
 	@ContentChildren(BrnTabsTriggerDirective, { descendants: true })
 	public triggers?: QueryList<BrnTabsTriggerDirective>;

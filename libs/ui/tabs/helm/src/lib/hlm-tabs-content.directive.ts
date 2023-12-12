@@ -21,7 +21,6 @@ export class HlmTabsContentDirective {
 
 	@Input('hlmTabsContent')
 	set contentFor(key: string) {
-		console.log('contentFor', key);
 		this._brn?.setContentFor(key);
 	}
 

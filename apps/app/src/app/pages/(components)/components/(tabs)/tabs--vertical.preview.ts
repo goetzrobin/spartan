@@ -11,22 +11,14 @@ import {
 } from '@spartan-ng/ui-card-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import {
-	BrnTabsComponent,
-	BrnTabsContentDirective,
-	BrnTabsListComponent,
-	BrnTabsTriggerDirective,
-} from '@spartan-ng/ui-tabs-brain';
+import { BrnTabsDirective } from '@spartan-ng/ui-tabs-brain';
 import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
 
 @Component({
 	selector: 'spartan-tabs-vertical',
 	standalone: true,
 	imports: [
-		BrnTabsComponent,
-		BrnTabsListComponent,
-		BrnTabsTriggerDirective,
-		BrnTabsContentDirective,
+		BrnTabsDirective,
 
 		HlmTabsListDirective,
 		HlmTabsTriggerDirective,
@@ -48,12 +40,12 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 		class: 'block w-full max-w-lg min-h-[400px]',
 	},
 	template: `
-		<brn-tabs class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical" value="account">
-			<brn-tabs-list hlm orientation="vertical" aria-label="tabs example">
+		<div brnTabs class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical" value="account">
+			<div hlmTabsList hlm orientation="vertical" aria-label="tabs example">
 				<button class="w-full" hlmTabsTrigger="account">Account</button>
 				<button class="w-full" hlmTabsTrigger="password">Password</button>
 				<button class="w-full" hlmTabsTrigger="danger">Danger Zone</button>
-			</brn-tabs-list>
+			</div>
 			<div hlmTabsContent="account">
 				<section hlmCard>
 					<div hlmCardHeader>
@@ -107,7 +99,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 					</div>
 				</section>
 			</div>
-		</brn-tabs>
+		</div>
 	`,
 })
 export class TabsVerticalPreviewComponent {}

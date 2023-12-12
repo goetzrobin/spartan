@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
 	HlmCardContentDirective,
@@ -11,22 +10,14 @@ import {
 } from '@spartan-ng/ui-card-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import {
-	BrnTabsComponent,
-	BrnTabsContentDirective,
-	BrnTabsListComponent,
-	BrnTabsTriggerDirective,
-} from '@spartan-ng/ui-tabs-brain';
+import { BrnTabsDirective } from '@spartan-ng/ui-tabs-brain';
 import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
 
 @Component({
 	selector: 'spartan-tabs-preview',
 	standalone: true,
 	imports: [
-		BrnTabsComponent,
-		BrnTabsListComponent,
-		BrnTabsTriggerDirective,
-		BrnTabsContentDirective,
+		BrnTabsDirective,
 
 		HlmTabsListDirective,
 		HlmTabsTriggerDirective,
@@ -42,17 +33,16 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 		HlmLabelDirective,
 		HlmInputDirective,
 		HlmButtonDirective,
-		HlmBadgeDirective,
 	],
 	host: {
 		class: 'block w-full max-w-lg',
 	},
 	template: `
-		<brn-tabs class="w-full" value="account">
-			<brn-tabs-list hlm class="grid w-full grid-cols-2" aria-label="tabs example">
+		<div brnTabs class="w-full" value="account">
+			<div hlmTabsList class="grid w-full grid-cols-2" aria-label="tabs example">
 				<button hlmTabsTrigger="account">Account</button>
 				<button hlmTabsTrigger="password">Password</button>
-			</brn-tabs-list>
+			</div>
 			<div hlmTabsContent="account">
 				<section hlmCard>
 					<div hlmCardHeader>
@@ -95,14 +85,13 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 					</div>
 				</section>
 			</div>
-		</brn-tabs>
+		</div>
 	`,
 })
 export class TabsPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
 	HlmCardContentDirective,
@@ -115,9 +104,9 @@ import {
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import {
-	BrnTabsComponent,
+	BrnTabsDirective,
 	BrnTabsContentDirective,
-	BrnTabsListComponent,
+	BrnTabsListDirective,
 	BrnTabsTriggerDirective,
 } from '@spartan-ng/ui-tabs-brain';
 import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
@@ -126,10 +115,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 	selector: 'spartan-tabs-preview',
 	standalone: true,
 	imports: [
-		BrnTabsComponent,
-		BrnTabsListComponent,
-		BrnTabsTriggerDirective,
-		BrnTabsContentDirective,
+		BrnTabsDirective,
 
 		HlmTabsListDirective,
 		HlmTabsTriggerDirective,
@@ -145,17 +131,16 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 		HlmLabelDirective,
 		HlmInputDirective,
 		HlmButtonDirective,
-		HlmBadgeDirective,
 	],
 	host: {
 		class: 'block w-full max-w-lg',
 	},
 	template: \`
-		<brn-tabs class="w-full" value="account">
-			<brn-tabs-list hlm class="grid w-full grid-cols-2" aria-label="tabs example">
+		<div brnTabs class="w-full" value="account">
+			<div hlmTabsList class="grid w-full grid-cols-2" aria-label="tabs example">
 				<button hlmTabsTrigger="account">Account</button>
 				<button hlmTabsTrigger="password">Password</button>
-			</brn-tabs-list>
+			</div>
 			<div hlmTabsContent="account">
 				<section hlmCard>
 					<div hlmCardHeader>
@@ -198,7 +183,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 					</div>
 				</section>
 			</div>
-		</brn-tabs>
+		</div>
 	\`,
 })
 export class TabsPreviewComponent {}
@@ -207,24 +192,24 @@ export class TabsPreviewComponent {}
 
 export const defaultImports = `
 import {
-	BrnTabsComponent,
+	BrnTabsDirective,
 	BrnTabsContentDirective,
-	BrnTabsListComponent,
+	BrnTabsListDirective,
 	BrnTabsTriggerDirective,
 } from '@spartan-ng/ui-tabs-brain';
 import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
 `;
 export const defaultSkeleton = `
-<brn-tabs class='block max-w-3xl mx-auto' value='account'>
-  <brn-tabs-list hlm class='grid w-full grid-cols-2' aria-label='tabs example'>
+<div brnTabs class='block max-w-3xl mx-auto' value='account'>
+  <div hlmTabsList class='grid w-full grid-cols-2' aria-label='tabs example'>
     <button hlmTabsTrigger='account'>Account</button>
     <button hlmTabsTrigger='password'>Password</button>
-  </brn-tabs-list>
+  </div>
   <div hlmTabsContent='account'>
     Make your account here
   </div>
   <div hlmTabsContent='password'>
     Change your password here
   </div>
-</brn-tabs>
+</div>
 `;
