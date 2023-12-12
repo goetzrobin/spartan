@@ -27,8 +27,8 @@ export class HlmTooltipDirective {
 	constructor() {
 		if (this._brnTooltip) {
 			this._brnTooltip.exitAnimationDuration = 150;
-			this._brnTooltip.hideDelay = 500;
-			this._brnTooltip.showDelay = 700;
+			this._brnTooltip.hideDelay = 300;
+			this._brnTooltip.showDelay = 150;
 			this._brnTooltip.tooltipContentClasses =
 				'overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md fade-in-0 zoom-in-95 ' +
 				'data-[state=open]:animate-in ' +

@@ -10,8 +10,7 @@
 			"executor": "@nx/angular:package",
 			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
 			"options": {
-				"project": "libs/ui/tooltip/brain/ng-package.json",
-				"updateBuildableProjectDepsInPackageJson": true
+				"project": "libs/ui/tooltip/brain/ng-package.json"
 			},
 			"configurations": {
 				"production": {

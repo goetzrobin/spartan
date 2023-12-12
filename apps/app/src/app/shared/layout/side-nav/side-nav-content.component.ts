@@ -112,10 +112,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					<spartan-side-nav-cs />
 				</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/toggle">Toggle</a>
-				<a disabled spartanSideNavLink="/components/tooltip">
-					Tooltip
-					<spartan-side-nav-cs />
-				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/tooltip">Tooltip</a>
 			</spartan-side-nav-links>
 		</div>
 	`,
