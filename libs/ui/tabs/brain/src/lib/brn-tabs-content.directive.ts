@@ -29,10 +29,6 @@ export class BrnTabsContentDirective {
 		this._root.registerContent(key, this);
 	}
 
-	public setContentFor(key: string) {
-		this.contentFor = key;
-	}
-
 	public focus() {
 		this._elementRef.nativeElement.focus();
 	}

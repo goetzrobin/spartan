@@ -21,7 +21,9 @@ export class HlmTabsTriggerDirective {
 
 	@Input('hlmTabsTrigger')
 	set triggerFor(key: string) {
-		this._brn?.setTriggerFor(key);
+		if (this._brn) {
+			this._brn.triggerFor = key;
+		}
 	}
 
 	protected _computedClass = computed(() => this._generateClass());
