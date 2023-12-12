@@ -21,7 +21,9 @@ export class HlmTabsContentDirective {
 
 	@Input('hlmTabsContent')
 	set contentFor(key: string) {
-		this._brn?.setContentFor(key);
+		if (this._brn) {
+			this._brn.contentFor = key;
+		}
 	}
 
 	protected _computedClass = computed(() => this._generateClass());
