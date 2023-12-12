@@ -37,6 +37,10 @@ export class BrnTabsTriggerDirective {
 	@Input()
 	public disabled = false;
 
+	public setTriggerFor(key: string) {
+		this.triggerFor = key;
+	}
+
 	public focus() {
 		this._elementRef.nativeElement.focus();
 		if (this._root.$activationMode() === 'automatic') {

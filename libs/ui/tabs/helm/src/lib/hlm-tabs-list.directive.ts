@@ -20,7 +20,7 @@ export const listVariants = cva(
 type ListVariants = VariantProps<typeof listVariants>;
 
 @Directive({
-	selector: '[hlmTabsList]',
+	selector: '[hlmTabsList], brn-tabs-list[hlm]',
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
