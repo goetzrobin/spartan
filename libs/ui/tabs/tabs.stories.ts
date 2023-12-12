@@ -1,5 +1,4 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HlmBadgeDirective } from '../badge/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmCardImports } from '../card/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
@@ -28,7 +27,6 @@ const meta: Meta<TabsStory> = {
 				HlmLabelDirective,
 				HlmInputDirective,
 				HlmButtonDirective,
-				HlmBadgeDirective,
 			],
 		}),
 	],
@@ -43,11 +41,11 @@ export const Default: Story = {
 	render: ({ activationMode }) => ({
 		props: { activationMode },
 		template: `
-  <brn-tabs [activationMode]='activationMode' class='block max-w-3xl mx-auto' value='account'>
-    <brn-tabs-list hlm class='grid w-full grid-cols-2' aria-label='tabs example'>
+  <div brnTabs [activationMode]='activationMode' class='block max-w-3xl mx-auto' value='account'>
+    <div hlmTabsList class='grid w-full grid-cols-2' aria-label='tabs example'>
       <button hlmTabsTrigger='account'>Account</button>
       <button hlmTabsTrigger='password'>Password</button>
-    </brn-tabs-list>
+    </div>
     <div hlmTabsContent='account'>
      <section hlmCard>
        <div hlmCardHeader>
@@ -70,27 +68,27 @@ export const Default: Story = {
     </section>
     </div>
     <div hlmTabsContent='password'>
-    <section hlmCard>
-       <div hlmCardHeader>
-        <h3 hlmCardTitle>Password</h3>
-        <p hlmCardDescription>
-        Change your password here. After saving, you'll be logged out.
+      <section hlmCard>
+        <div hlmCardHeader>
+          <h3 hlmCardTitle>Password</h3>
+          <p hlmCardDescription>
+          Change your password here. After saving, you'll be logged out.
+          </p>
+        </div>
+        <p hlmCardContent>
+            <label class='block my-4' hlmLabel>Old Password
+        <input class='w-full mt-1.5' type='password' hlmInput>
+        </label>
+          <label class='block my-4' hlmLabel>New Password
+        <input class='w-full mt-1.5' type='password' hlmInput>
+        </label>
         </p>
-      </div>
-      <p hlmCardContent>
-          <label class='block my-4' hlmLabel>Old Password
-       <input class='w-full mt-1.5' type='password' hlmInput>
-       </label>
-         <label class='block my-4' hlmLabel>New Password
-       <input class='w-full mt-1.5' type='password' hlmInput>
-       </label>
-      </p>
-      <div hlmCardFooter>
-        <button hlmBtn>Save Password</button>
-      </div>
-    </section>
-</div>
-  </brn-tabs>
+        <div hlmCardFooter>
+          <button hlmBtn>Save Password</button>
+        </div>
+      </section>
+    </div>
+  </div>
 `,
 	}),
 };
@@ -102,13 +100,13 @@ export const Vertical: Story = {
 	render: ({ activationMode }) => ({
 		props: { activationMode },
 		template: `
-        <brn-tabs class='flex flex-row space-x-2 max-w-3xl mx-auto' orientation='vertical'
+        <div brnTabs class='flex flex-row space-x-2 max-w-3xl mx-auto' orientation='vertical'
               value='account'>
-      <brn-tabs-list hlm orientation='vertical' aria-label='tabs example'>
+      <div hlmTabsList orientation='vertical' aria-label='tabs example'>
         <button class='w-full' hlmTabsTrigger='account'>Account</button>
         <button class='w-full' hlmTabsTrigger='password'>Password</button>
         <button class='w-full' hlmTabsTrigger='danger'>Danger Zone</button>
-      </brn-tabs-list>
+      </div>
       <div hlmTabsContent='account'>
         <section hlmCard>
           <div hlmCardHeader>
@@ -164,7 +162,7 @@ export const Vertical: Story = {
           </div>
         </section>
       </div>
-    </brn-tabs>
+    </div>
 `,
 	}),
 };
@@ -176,18 +174,18 @@ export const BrnOnly: Story = {
 	render: ({ activationMode }) => ({
 		props: { activationMode },
 		template: `
-  <brn-tabs [activationMode]='activationMode' class='block max-w-3xl mx-auto' value='account'>
-    <brn-tabs-list  class='grid w-full grid-cols-2' aria-label='tabs example'>
+  <div brnTabs [activationMode]='activationMode' class='block max-w-3xl mx-auto' value='account'>
+    <div brnTabsList class='grid w-full grid-cols-2' aria-label='tabs example'>
       <button brnTabsTrigger='account'>Account</button>
       <button brnTabsTrigger='password'>Password</button>
-    </brn-tabs-list>
+    </div>
     <div brnTabsContent='account'>
       Account content
     </div>
     <div brnTabsContent='password'>
       Password content
     </div>
-  </brn-tabs>
+  </div>
 `,
 	}),
 };

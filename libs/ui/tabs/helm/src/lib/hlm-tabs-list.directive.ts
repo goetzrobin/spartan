@@ -1,5 +1,6 @@
 import { computed, Directive, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
+import { BrnTabsListDirective } from '@spartan-ng/ui-tabs-brain';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
@@ -20,8 +21,9 @@ export const listVariants = cva(
 type ListVariants = VariantProps<typeof listVariants>;
 
 @Directive({
-	selector: '[hlmTabsList], brn-tabs-list[hlm]',
+	selector: '[hlmTabsList]',
 	standalone: true,
+	hostDirectives: [BrnTabsListDirective],
 	host: {
 		'[class]': '_computedClass()',
 	},
