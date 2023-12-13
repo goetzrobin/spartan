@@ -19,7 +19,7 @@ import { HlmHoverCardModule } from './helm/src';
 	template: `
 		<brn-hover-card>
 			<button hlmBtn variant="link" brnHoverCardTrigger>&#64;analogjs</button>
-			<div hlmHoverCardContent *brnHoverCardContent class="w-80">
+			<hlm-hover-card-content *brnHoverCardContent class="w-80">
 				<div class="flex justify-between space-x-4">
 					<hlm-avatar variant="small" id="avatar-small">
 						<img src="https://analogjs.org/img/logos/analog-logo.svg" alt="AnalogLogo" hlmAvatarImage />
@@ -34,7 +34,7 @@ import { HlmHoverCardModule } from './helm/src';
 						</div>
 					</div>
 				</div>
-			</div>
+			</hlm-hover-card-content>
 		</brn-hover-card>
 	`,
 })
