@@ -1,5 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgStyle } from '@angular/common';
 import {
 	AfterContentInit,
 	booleanAttribute,
@@ -39,13 +39,24 @@ const CONTAINER_POST_FIX = '-checkbox';
 @Component({
 	selector: 'brn-checkbox',
 	standalone: true,
+	imports: [NgStyle],
 	template: `
 		<input
 			#checkBox
 			tabindex="-1"
 			type="checkbox"
 			role="checkbox"
-			class="sr-only"
+			[ngStyle]="{
+				position: 'absolute',
+				width: '1px',
+				height: '1px',
+				padding: '0',
+				margin: -'1px',
+				overflow: 'hidden',
+				clip: 'rect(0, 0, 0, 0)',
+				whiteSpace: 'nowrap',
+				borderWidth: '0'
+			}"
 			[id]="forChild(_id()) ?? ''"
 			[name]="forChild(_name()) ?? ''"
 			[value]="_value()"

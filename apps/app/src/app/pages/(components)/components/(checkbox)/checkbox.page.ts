@@ -51,9 +51,9 @@ export const routeMeta: RouteMeta = {
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Manual">
+			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
 				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/cli:ui checkbox" />
-				<spartan-installation-cs secondTab />
+				<spartan-code secondTab language="sh" code="ng g @spartan-ng/cli:ui checkbox" />
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
