@@ -42,10 +42,10 @@ export const Default: Story = {
 		props: { activationMode },
 		template: `
   <div brnTabs='account' [activationMode]='activationMode' class='block max-w-3xl mx-auto'>
-    <div hlmTabsList class='grid w-full grid-cols-2' aria-label='tabs example'>
+    <hlm-tabs-list class='grid w-full grid-cols-2' aria-label='tabs example'>
       <button hlmTabsTrigger='account'>Account</button>
       <button hlmTabsTrigger='password'>Password</button>
-    </div>
+    </hlm-tabs-list>
     <div hlmTabsContent='account'>
      <section hlmCard>
        <div hlmCardHeader>
@@ -101,11 +101,11 @@ export const Vertical: Story = {
 		props: { activationMode },
 		template: `
         <div brnTabs='account' class='flex flex-row space-x-2 max-w-3xl mx-auto' orientation='vertical'>
-      <div hlmTabsList orientation='vertical' aria-label='tabs example'>
+      <hlm-tabs-list orientation='vertical' aria-label='tabs example'>
         <button class='w-full' hlmTabsTrigger='account'>Account</button>
         <button class='w-full' hlmTabsTrigger='password'>Password</button>
         <button class='w-full' hlmTabsTrigger='danger'>Danger Zone</button>
-      </div>
+      </hlm-tabs-list>
       <div hlmTabsContent='account'>
         <section hlmCard>
           <div hlmCardHeader>

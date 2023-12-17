@@ -12,7 +12,7 @@ import {
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { BrnTabsDirective } from '@spartan-ng/ui-tabs-brain';
-import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
+import { HlmTabsContentDirective, HlmTabsListComponent, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
 
 @Component({
 	selector: 'spartan-tabs-vertical',
@@ -20,7 +20,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 	imports: [
 		BrnTabsDirective,
 
-		HlmTabsListDirective,
+		HlmTabsListComponent,
 		HlmTabsTriggerDirective,
 		HlmTabsContentDirective,
 
@@ -41,11 +41,11 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 	},
 	template: `
 		<div brnTabs="account" class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical">
-			<div hlmTabsList orientation="vertical" aria-label="tabs example">
+			<hlm-tabs-list orientation="vertical" aria-label="tabs example">
 				<button class="w-full" hlmTabsTrigger="account">Account</button>
 				<button class="w-full" hlmTabsTrigger="password">Password</button>
 				<button class="w-full" hlmTabsTrigger="danger">Danger Zone</button>
-			</div>
+			</hlm-tabs-list>
 			<div hlmTabsContent="account">
 				<section hlmCard>
 					<div hlmCardHeader>
@@ -118,7 +118,7 @@ import {
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { BrnTabsDirective } from '@spartan-ng/ui-tabs-brain';
-import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
+import { HlmTabsContentDirective, HlmTabsListComponent, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
 
 @Component({
 	selector: 'spartan-tabs-vertical',
@@ -126,7 +126,7 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 	imports: [
 		BrnTabsDirective,
 
-		HlmTabsListDirective,
+		HlmTabsListComponent,
 		HlmTabsTriggerDirective,
 		HlmTabsContentDirective,
 
@@ -147,11 +147,11 @@ import { HlmTabsContentDirective, HlmTabsListDirective, HlmTabsTriggerDirective 
 	},
 	template: \`
 		<div brnTabs="account" class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical">
-			<div hlmTabsList orientation="vertical" aria-label="tabs example">
+			<hlm-tabs-list orientation="vertical" aria-label="tabs example">
 				<button class="w-full" hlmTabsTrigger="account">Account</button>
 				<button class="w-full" hlmTabsTrigger="password">Password</button>
 				<button class="w-full" hlmTabsTrigger="danger">Danger Zone</button>
-			</div>
+			</hlm-tabs-list>
 			<div hlmTabsContent="account">
 				<section hlmCard>
 					<div hlmCardHeader>

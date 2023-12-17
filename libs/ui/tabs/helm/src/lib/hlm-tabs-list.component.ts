@@ -1,4 +1,4 @@
-import { computed, Directive, Input, signal } from '@angular/core';
+import { Component, computed, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnTabsListDirective } from '@spartan-ng/ui-tabs-brain';
 import { cva, VariantProps } from 'class-variance-authority';
@@ -20,15 +20,16 @@ export const listVariants = cva(
 );
 type ListVariants = VariantProps<typeof listVariants>;
 
-@Directive({
-	selector: '[hlmTabsList]',
+@Component({
+	selector: 'hlm-tabs-list',
 	standalone: true,
 	hostDirectives: [BrnTabsListDirective],
+	template: '<ng-content/>',
 	host: {
 		'[class]': '_computedClass()',
 	},
 })
-export class HlmTabsListDirective {
+export class HlmTabsListComponent {
 	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
