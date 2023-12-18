@@ -81,7 +81,7 @@ export const routeMeta: RouteMeta = {
 				<div spartanCodePreview firstTab>
 					<spartan-tabs-vertical />
 				</div>
-				<spartan-code secondTab [code]="defaultCode" />
+				<spartan-code secondTab [code]="verticalCode" />
 			</spartan-tabs>
 
 			<spartan-page-bottom-nav>

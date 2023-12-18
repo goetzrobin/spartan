@@ -1,5 +1,5 @@
 import { computed, Directive, ElementRef, inject, Input } from '@angular/core';
-import { BrnTabsComponent } from './brn-tabs.component';
+import { BrnTabsDirective } from './brn-tabs.directive';
 
 @Directive({
 	selector: 'button[brnTabsTrigger]',
@@ -18,7 +18,7 @@ import { BrnTabsComponent } from './brn-tabs.component';
 	},
 })
 export class BrnTabsTriggerDirective {
-	private _root = inject(BrnTabsComponent);
+	private _root = inject(BrnTabsDirective);
 	private _elementRef = inject(ElementRef);
 
 	private _key: string | undefined;

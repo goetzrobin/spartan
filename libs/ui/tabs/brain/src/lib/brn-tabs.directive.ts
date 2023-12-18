@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, signal, ViewEncapsulation } from '@angular/core';
+import { Directive, Input, signal } from '@angular/core';
 import { BrnTabsContentDirective } from './brn-tabs-content.directive';
 import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
@@ -6,20 +6,15 @@ export type BrnTabsOrientation = 'horizontal' | 'vertical';
 export type BrnTabsDirection = 'ltr' | 'rtl';
 export type BrnActivationMode = 'automatic' | 'manual';
 
-@Component({
-	selector: 'brn-tabs',
+@Directive({
+	selector: '[brnTabs]',
 	standalone: true,
-	template: `
-		<ng-content />
-	`,
 	host: {
 		'[attr.data-orientation]': '_orientation()',
 		'[attr.dir]': '_direction()',
 	},
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	encapsulation: ViewEncapsulation.None,
 })
-export class BrnTabsComponent {
+export class BrnTabsDirective {
 	protected readonly _orientation = signal<BrnTabsOrientation>('horizontal');
 	@Input()
 	set orientation(value: BrnTabsOrientation) {
@@ -37,7 +32,7 @@ export class BrnTabsComponent {
 	$direction = this._direction.asReadonly();
 
 	protected readonly _value = signal<string | undefined>(undefined);
-	@Input()
+	@Input('brnTabs')
 	set value(value: string) {
 		this._value.set(value);
 	}

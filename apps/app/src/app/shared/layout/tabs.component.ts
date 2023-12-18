@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import {
-	BrnTabsComponent,
 	BrnTabsContentDirective,
-	BrnTabsListComponent,
+	BrnTabsDirective,
+	BrnTabsListDirective,
 	BrnTabsTriggerDirective,
 } from '@spartan-ng/ui-tabs-brain';
 
@@ -13,26 +13,27 @@ const tabContent =
 @Component({
 	selector: 'spartan-tabs',
 	standalone: true,
-	imports: [BrnTabsComponent, BrnTabsListComponent, BrnTabsTriggerDirective, BrnTabsContentDirective],
+	imports: [BrnTabsDirective, BrnTabsListDirective, BrnTabsTriggerDirective, BrnTabsContentDirective],
 	host: {
 		class: 'block',
 	},
 	template: `
-		<brn-tabs class="block" [value]="firstTab">
-			<brn-tabs-list
+		<div [brnTabs]="firstTab" class="block">
+			<div
+				brnTabsList
 				class="border-border text-muted-foreground mb-4 inline-flex h-9 w-full items-center justify-start rounded-none border-b bg-transparent p-0"
 				[aria-label]="'Tablist showing ' + firstTab + ' and ' + secondTab"
 			>
 				<button class="${tabBtn}" [brnTabsTrigger]="firstTab">{{ firstTab }}</button>
 				<button class="${tabBtn}" [brnTabsTrigger]="secondTab">{{ secondTab }}</button>
-			</brn-tabs-list>
+			</div>
 			<div class="${tabContent}" [brnTabsContent]="firstTab">
 				<ng-content select="[firstTab]" />
 			</div>
 			<div class="${tabContent}" [brnTabsContent]="secondTab">
 				<ng-content select="[secondTab]" />
 			</div>
-		</brn-tabs>
+		</div>
 	`,
 })
 export class TabsComponent {

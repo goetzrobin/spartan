@@ -26,7 +26,7 @@ type ListVariants = VariantProps<typeof listVariants>;
 		'[class]': '_computedClass()',
 	},
 })
-export class HlmTabsListDirective {
+export class HlmTabsListComponent {
 	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
