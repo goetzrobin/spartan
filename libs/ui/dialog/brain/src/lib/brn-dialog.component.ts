@@ -11,6 +11,7 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
+	EventEmitter,
 	Input,
 	Output,
 	TemplateRef,
@@ -170,8 +171,12 @@ export class BrnDialogComponent {
 		this.setAriaModal(isModal);
 	}
 
+	@Output()
+	public stateChanged = new EventEmitter<BrnDialogState>();
+
 	open<DialogContext>() {
 		if (!this._contentTemplate) return;
+		this.stateChanged.emit('open');
 		this._dialogService.open<DialogContext>(
 			this._vcr,
 			this._contentTemplate,
