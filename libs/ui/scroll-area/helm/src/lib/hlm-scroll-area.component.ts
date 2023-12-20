@@ -63,7 +63,7 @@ export class HlmScrollAreaComponent {
 	protected readonly _autoHeightDisabled = signal(true);
 
 	@Input({ transform: booleanAttribute })
-	set_autoWidthDisabled(value: boolean) {
+	set autoWidthDisabled(value: boolean) {
 		this._autoWidthDisabled.set(value);
 	}
 
