@@ -158,7 +158,7 @@ export class BrnTooltipDirective implements OnDestroy, AfterViewInit {
 	private _tooltipInstance: BrnTooltipComponent | null = null;
 
 	/** Allows the user to define the position of the tooltip relative to the parent element */
-	private _position = signal<TooltipPosition>('above');
+	private readonly _position = signal<TooltipPosition>('above');
 	@Input()
 	get position(): TooltipPosition {
 		return this._position();
@@ -193,7 +193,7 @@ export class BrnTooltipDirective implements OnDestroy, AfterViewInit {
 	}
 
 	/** Disables the display of the tooltip. */
-	private _disabled = signal(false);
+	private readonly _disabled = signal(false);
 	@Input({ transform: booleanAttribute })
 	get disabled(): boolean {
 		return this._disabled();
@@ -211,7 +211,7 @@ export class BrnTooltipDirective implements OnDestroy, AfterViewInit {
 	}
 
 	/** The default delay in ms before showing the tooltip after show is called */
-	private _showDelay = signal(0);
+	private readonly _showDelay = signal(0);
 	@Input({ transform: numberAttribute })
 	get showDelay(): number {
 		return this._showDelay();
@@ -222,7 +222,7 @@ export class BrnTooltipDirective implements OnDestroy, AfterViewInit {
 	}
 
 	/** The default delay in ms before hiding the tooltip after hide is called */
-	private _hideDelay = signal(0);
+	private readonly _hideDelay = signal(0);
 	@Input({ transform: numberAttribute })
 	get hideDelay(): number {
 		return this._hideDelay();
@@ -237,7 +237,7 @@ export class BrnTooltipDirective implements OnDestroy, AfterViewInit {
 	}
 
 	/** The default duration in ms that exit animation takes before hiding */
-	private _exitAnimationDuration = signal(0);
+	private readonly _exitAnimationDuration = signal(0);
 	@Input({ transform: numberAttribute })
 	get exitAnimationDuration(): number {
 		return this._exitAnimationDuration();
@@ -252,7 +252,7 @@ export class BrnTooltipDirective implements OnDestroy, AfterViewInit {
 	}
 
 	/** The default delay in ms before hiding the tooltip after hide is called */
-	private _tooltipContentClasses = signal('');
+	private readonly _tooltipContentClasses = signal('');
 	@Input()
 	get tooltipContentClasses(): string {
 		return this._tooltipContentClasses();
@@ -280,7 +280,7 @@ export class BrnTooltipDirective implements OnDestroy, AfterViewInit {
 	 * - `off` - Disables touch gestures. Note that this will prevent the tooltip from
 	 *   showing on touch devices.
 	 */
-	private _touchGestures = signal<TooltipTouchGestures>('auto');
+	private readonly _touchGestures = signal<TooltipTouchGestures>('auto');
 	@Input()
 	set touchGestures(value: TooltipTouchGestures) {
 		this._touchGestures.set(value);
