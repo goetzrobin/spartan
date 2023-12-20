@@ -5,7 +5,8 @@
 		"@angular/core": "^17.0.0",
 		"@spartan-ng/ui-core": "0.0.1-alpha.318",
 		"clsx": "^1.2.1",
-		"class-variance-authority": "^0.6.0"
+		"class-variance-authority": "^0.6.0",
+		"@spartan-ng/ui-tabs-brain": "0.0.1-alpha.318"
 	},
 	"dependencies": {},
 	"sideEffects": false,
