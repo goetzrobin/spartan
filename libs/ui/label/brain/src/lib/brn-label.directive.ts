@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, HostBinding, Input, signal } from '@angular/core';
 
 let nextId = 0;
 
@@ -7,13 +7,18 @@ let nextId = 0;
 	standalone: true,
 })
 export class BrnLabelDirective {
-	id = `brn-label-${nextId++}`;
-
-	// eslint-disable-next-line @angular-eslint/no-input-rename
-	@Input('id') customId: string = '';
-
 	@HostBinding('id')
 	get elementId() {
-		return this.customId || this.id;
+		return this._id();
 	}
+
+	/* eslint-disable-next-line @angular-eslint/no-input-rename */
+	@Input('id')
+	set id(id: string) {
+		this._id.set(id || this._id());
+	}
+	get id() {
+		return this._id();
+	}
+	readonly _id = signal(`brn-label-${nextId++}`);
 }

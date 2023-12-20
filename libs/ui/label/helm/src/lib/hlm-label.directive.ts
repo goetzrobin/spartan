@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { computed, Directive, ElementRef, inject, Input, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
+import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
@@ -32,6 +33,12 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 @Directive({
 	selector: '[hlmLabel]',
 	standalone: true,
+	hostDirectives: [
+		{
+			directive: BrnLabelDirective,
+			inputs: ['id:id'],
+		},
+	],
 	host: {
 		'[class]': '_computedClass()',
 	},
