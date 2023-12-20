@@ -39,7 +39,14 @@ type Framework = { label: string; value: string };
 	],
 	template: `
 		<brn-popover [state]="state()" (closed)="close()" sideOffset="5" closeDelay="100">
-			<button class="w-[200px] justify-between" id="edit-profile" variant="outline" brnPopoverTrigger hlmBtn>
+			<button
+				class="w-[200px] justify-between"
+				id="edit-profile"
+				variant="outline"
+				brnPopoverTrigger
+				(click)="state.set('open')"
+				hlmBtn
+			>
 				{{ currentFramework() ? currentFramework().label : 'Select framework...' }}
 				<hlm-icon size="sm" name="radixCaretSort" />
 			</button>
@@ -51,20 +58,16 @@ type Framework = { label: string; value: string };
 				<div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
 				<brn-cmd-list hlm>
 					<brn-cmd-group hlm>
-						<button
-							*ngFor="let framework of frameworks"
-							brnCmdItem
-							[value]="framework.value"
-							(selected)="commandSelected(framework)"
-							hlm
-						>
-							<hlm-icon
-								[class.opacity-0]="currentFramework()?.value !== framework.value"
-								name="radixCheck"
-								hlmCmdIcon
-							/>
-							{{ framework.label }}
-						</button>
+						@for (framework of frameworks; track framework) {
+							<button brnCmdItem [value]="framework.value" (selected)="commandSelected(framework)" hlm>
+								<hlm-icon
+									[class.opacity-0]="currentFramework()?.value !== framework.value"
+									name="radixCheck"
+									hlmCmdIcon
+								/>
+								{{ framework.label }}
+							</button>
+						}
 					</brn-cmd-group>
 				</brn-cmd-list>
 			</brn-cmd>
