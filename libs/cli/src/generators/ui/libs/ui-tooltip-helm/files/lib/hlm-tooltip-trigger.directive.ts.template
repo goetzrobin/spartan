@@ -1,4 +1,4 @@
-import { Directive, inject } from '@angular/core';
+import { Directive, inject, Input, TemplateRef } from '@angular/core';
 import { BrnTooltipTriggerDirective } from '@spartan-ng/ui-tooltip-brain';
 
 @Directive({
@@ -8,7 +8,6 @@ import { BrnTooltipTriggerDirective } from '@spartan-ng/ui-tooltip-brain';
 		{
 			directive: BrnTooltipTriggerDirective,
 			inputs: [
-				'brnTooltipTrigger: hlmTooltipTrigger',
 				'brnTooltipDisabled: hlmTooltipDisabled',
 				'aria-describedby',
 				'position',
@@ -38,5 +37,11 @@ export class HlmTooltipTriggerDirective {
 				'data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 ' +
 				'data-[side=after]:slide-in-from-left-2 data-[side=before]:slide-in-from-right-2 ';
 		}
+	}
+
+	@Input()
+	set hlmTooltipTrigger(value: TemplateRef<unknown> | null | string) {
+		if (typeof value === 'string') return;
+		this._brnTooltipTrigger.content = value;
 	}
 }
