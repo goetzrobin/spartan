@@ -40,6 +40,7 @@ export class ThreeHundredComponent {
 		'nartc',
 		'santoshyadavdev',
 		'markostanimirovic',
+		'theo-matzavinos',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
 }
