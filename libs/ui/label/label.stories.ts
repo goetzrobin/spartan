@@ -1,10 +1,18 @@
 import { FormsModule } from '@angular/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from './helm/src';
 
 const meta: Meta<{}> = {
 	title: 'Label',
+	argTypes: {
+		id: {
+			control: 'text',
+		},
+		value: {
+			control: 'text',
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [HlmInputDirective, HlmLabelDirective, FormsModule],
@@ -16,9 +24,10 @@ export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-	render: () => ({
+	render: (args) => ({
+		props: args,
 		template: `
-    <label hlmLabel>E-Mail
+    <label hlmLabel ${argsToTemplate(args)}>E-Mail
         <input class='w-80' hlmInput type='email' placeholder='Email'/>
     </label>
     `,
@@ -26,10 +35,10 @@ export const Default: Story = {
 };
 
 export const InputRequired: Story = {
-	render: () => ({
-		props: { value: '' },
+	render: (args) => ({
+		props: args,
 		template: `
-    <label hlmLabel>E-Mail *
+    <label hlmLabel ${argsToTemplate(args)}>E-Mail *
         <input [(ngModel)]="value" class='w-80' hlmInput type='email' placeholder='Email *' required/>
     </label>
     `,
