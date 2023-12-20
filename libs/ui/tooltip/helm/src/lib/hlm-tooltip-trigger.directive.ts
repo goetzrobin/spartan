@@ -1,14 +1,14 @@
 import { Directive, inject } from '@angular/core';
-import { BrnTooltipDirective } from '@spartan-ng/ui-tooltip-brain';
+import { BrnTooltipTriggerDirective } from '@spartan-ng/ui-tooltip-brain';
 
 @Directive({
-	selector: '[hlmTooltip]',
+	selector: '[hlmTooltipTrigger]',
 	standalone: true,
 	hostDirectives: [
 		{
-			directive: BrnTooltipDirective,
+			directive: BrnTooltipTriggerDirective,
 			inputs: [
-				'brnTooltip: hlmTooltip',
+				'brnTooltipTrigger: hlmTooltipTrigger',
 				'brnTooltipDisabled: hlmTooltipDisabled',
 				'aria-describedby',
 				'position',
@@ -21,16 +21,16 @@ import { BrnTooltipDirective } from '@spartan-ng/ui-tooltip-brain';
 		},
 	],
 })
-export class HlmTooltipDirective {
-	private readonly _brnTooltip: BrnTooltipDirective = inject(BrnTooltipDirective, { host: true });
+export class HlmTooltipTriggerDirective {
+	private readonly _brnTooltipTrigger: BrnTooltipTriggerDirective = inject(BrnTooltipTriggerDirective, { host: true });
 
 	constructor() {
-		if (this._brnTooltip) {
-			this._brnTooltip.exitAnimationDuration = 150;
-			this._brnTooltip.hideDelay = 300;
-			this._brnTooltip.showDelay = 150;
+		if (this._brnTooltipTrigger) {
+			this._brnTooltipTrigger.exitAnimationDuration = 150;
+			this._brnTooltipTrigger.hideDelay = 300;
+			this._brnTooltipTrigger.showDelay = 150;
 			//TODO: Fix LTR animations
-			this._brnTooltip.tooltipContentClasses =
+			this._brnTooltipTrigger.tooltipContentClasses =
 				'overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md fade-in-0 zoom-in-95 ' +
 				'data-[state=open]:animate-in ' +
 				'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 ' +

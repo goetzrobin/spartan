@@ -26,7 +26,7 @@ import { Subject } from 'rxjs';
  * @docs-private
  */
 @Component({
-	selector: 'brn-tooltip',
+	selector: 'brn-tooltip-content',
 	standalone: true,
 	template: `
 		<div
@@ -50,7 +50,7 @@ import { Subject } from 'rxjs';
 	},
 	imports: [NgTemplateOutlet],
 })
-export class BrnTooltipComponent implements OnDestroy {
+export class BrnTooltipContentComponent implements OnDestroy {
 	private readonly _cdr = inject(ChangeDetectorRef);
 	private readonly _isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 	private readonly _renderer2 = inject(Renderer2);
