@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/ui-separator-brain",
-	"version": "0.0.1-alpha.318",
+	"version": "0.0.1-alpha.319",
 	"peerDependencies": {
 		"@angular/core": "^17.0.0"
 	},
