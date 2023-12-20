@@ -20,7 +20,7 @@
 		"hook:pre-commit": "lint-staged",
 		"prettify": "prettier --write .",
 		"chromatic": "chromatic --project-token=chpt_845c7a47afdb884",
-		"pre-publish": "yarn prepare-nx-plugin && yarn lint-fix-publishable && yarn prettify"
+		"pre-publish": "yarn lint-fix-publishable && yarn prepare-cli && yarn prettify"
 	},
 	"private": true,
 	"dependencies": {
