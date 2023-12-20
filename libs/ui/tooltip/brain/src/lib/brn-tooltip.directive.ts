@@ -194,7 +194,7 @@ export class BrnTooltipDirective implements OnDestroy, AfterViewInit {
 
 	/** Disables the display of the tooltip. */
 	private readonly _disabled = signal(false);
-	@Input({ transform: booleanAttribute })
+	@Input({ transform: booleanAttribute, alias: 'brnTooltipDisabled' })
 	get disabled(): boolean {
 		return this._disabled();
 	}

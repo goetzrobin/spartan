@@ -9,8 +9,8 @@ import { BrnTooltipDirective } from '@spartan-ng/ui-tooltip-brain';
 			directive: BrnTooltipDirective,
 			inputs: [
 				'brnTooltip: hlmTooltip',
+				'brnTooltipDisabled: hlmTooltipDisabled',
 				'aria-describedby',
-				'disabled',
 				'position',
 				'positionAtOrigin',
 				'hideDelay',
@@ -29,6 +29,7 @@ export class HlmTooltipDirective {
 			this._brnTooltip.exitAnimationDuration = 150;
 			this._brnTooltip.hideDelay = 300;
 			this._brnTooltip.showDelay = 150;
+			//TODO: Fix LTR animations
 			this._brnTooltip.tooltipContentClasses =
 				'overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md fade-in-0 zoom-in-95 ' +
 				'data-[state=open]:animate-in ' +
