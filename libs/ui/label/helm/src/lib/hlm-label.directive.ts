@@ -36,7 +36,7 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 	hostDirectives: [
 		{
 			directive: BrnLabelDirective,
-			inputs: ['id:id'],
+			inputs: ['id'],
 		},
 	],
 	host: {
