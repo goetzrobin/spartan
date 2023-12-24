@@ -12,7 +12,7 @@ import {
 	inject,
 	signal,
 } from '@angular/core';
-import { BrnAccordionTriggerDirective } from './brn-accordion-trigger.directive';
+import { BrnAccordionTriggerComponent } from './brn-accordion-trigger.component';
 
 const HORIZONTAL_KEYS_TO_PREVENT_DEFAULT = [
 	'ArrowLeft',
@@ -36,7 +36,7 @@ const VERTICAL_KEYS_TO_PREVENT_DEFAULT = ['ArrowUp', 'ArrowDown', 'PageDown', 'P
 })
 export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	private readonly _el = inject(ElementRef);
-	private _keyManager?: FocusKeyManager<BrnAccordionTriggerDirective>;
+	private _keyManager?: FocusKeyManager<BrnAccordionTriggerComponent>;
 	private _focusMonitor = inject(FocusMonitor);
 	private _ngZone = inject(NgZone);
 
@@ -45,8 +45,8 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	public readonly openItemIds = this._openItemIds.asReadonly();
 	public readonly state = computed(() => (this._openItemIds().length > 0 ? 'open' : 'closed'));
 
-	@ContentChildren(BrnAccordionTriggerDirective, { descendants: true })
-	public triggers?: QueryList<BrnAccordionTriggerDirective>;
+	@ContentChildren(BrnAccordionTriggerComponent, { descendants: true })
+	public triggers?: QueryList<BrnAccordionTriggerComponent>;
 
 	@Input()
 	public type: 'single' | 'multiple' = 'single';
@@ -59,7 +59,7 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 		if (!this.triggers) {
 			return;
 		}
-		this._keyManager = new FocusKeyManager<BrnAccordionTriggerDirective>(this.triggers)
+		this._keyManager = new FocusKeyManager<BrnAccordionTriggerComponent>(this.triggers)
 			.withHomeAndEnd()
 			.withPageUpDown()
 			.withWrap();
@@ -78,7 +78,7 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 		this._focusMonitor.stopMonitoring(this._el);
 	}
 
-	public setActiveItem(item: BrnAccordionTriggerDirective) {
+	public setActiveItem(item: BrnAccordionTriggerComponent) {
 		// public setActiveItem(item: number) {
 		this._keyManager?.setActiveItem(item);
 	}
