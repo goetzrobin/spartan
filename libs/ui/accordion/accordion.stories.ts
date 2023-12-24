@@ -22,35 +22,36 @@ type Story = StoryObj<BrnAccordionDirective>;
 export const Default: Story = {
 	render: () => ({
 		template: `
-      <div hlmAccordion>
-        <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+      <hlm-accordion>
+        <hlm-accordion-item>
+          <hlm-accordion-trigger>
             Is it accessible?
             <hlm-icon hlmAccIcon />
-          </button>
-          <brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
-        </div>
-
-        <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+          </hlm-accordion-trigger>
+          <hlm-accordion-content>
+            Yes. It adheres to the WAI-ARIA design pattern.
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+        <hlm-accordion-item>
+          <hlm-accordion-trigger>
             Is it styled?
             <hlm-icon hlmAccIcon />
-          </button>
-          <brn-accordion-content hlm>
+          </hlm-accordion-trigger>
+          <hlm-accordion-content>
             Yes. It comes with default styles that match the other components' aesthetics.
-          </brn-accordion-content>
-        </div>
+          </hlm-accordion-content>
+        </hlm-accordion-item>
 
-        <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+        <hlm-accordion-item>
+          <hlm-accordion-trigger>
             Is it animated?
             <hlm-icon hlmAccIcon />
-          </button>
-          <brn-accordion-content hlm>
+          </hlm-accordion-trigger>
+          <hlm-accordion-content>
             Yes. It's animated by default, but you can disable it if you prefer.
-          </brn-accordion-content>
-        </div>
-      </div>
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+      </hlm-accordion>
     `,
 	}),
 };
@@ -59,28 +60,28 @@ export const TwoAccordions: Story = {
 		template: `
       <div hlmAccordion>
         <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+          <hlm-accordion-trigger>
             Is it accessible?
             <hlm-icon hlmAccIcon />
-          </button>
+          </hlm-accordion-trigger>
           <brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
         </div>
 
         <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+          <hlm-accordion-trigger>
             Is it styled?
             <hlm-icon hlmAccIcon />
-          </button>
+          </hlm-accordion-trigger>
           <brn-accordion-content hlm>
             Yes. It comes with default styles that match the other components' aesthetics.
           </brn-accordion-content>
         </div>
 
         <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+          <hlm-accordion-trigger>
             Is it animated?
             <hlm-icon hlmAccIcon />
-          </button>
+          </hlm-accordion-trigger>
           <brn-accordion-content hlm>
             Yes. It's animated by default, but you can disable it if you prefer.
           </brn-accordion-content>
@@ -88,38 +89,38 @@ export const TwoAccordions: Story = {
       </div>
       <div hlmAccordion>
         <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+          <hlm-accordion-trigger>
             Is it accessible?
             <hlm-icon hlmAccIcon />
-          </button>
+          </hlm-accordion-trigger>
           <brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
         </div>
 
         <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+          <hlm-accordion-trigger>
             Is it styled?
             <hlm-icon hlmAccIcon />
-          </button>
+          </hlm-accordion-trigger>
           <brn-accordion-content hlm>
             Yes. It comes with default styles that match the other components' aesthetics.
           </brn-accordion-content>
         </div>
 
         <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+          <hlm-accordion-trigger>
             Is it styled?
             <hlm-icon hlmAccIcon />
-          </button>
+          </hlm-accordion-trigger>
           <brn-accordion-content hlm>
             Yes. It comes with default styles that match the other components' aesthetics.
           </brn-accordion-content>
         </div>
 
         <div hlmAccordionItem>
-          <button hlmAccordionTrigger>
+          <hlm-accordion-trigger>
               Is it styled?
               <hlm-icon hlmAccIcon />
-          </button>
+          </hlm-accordion-trigger>
           <brn-accordion-content hlm>
             Yes. It comes with default styles that match the other components' aesthetics.
           </brn-accordion-content>
