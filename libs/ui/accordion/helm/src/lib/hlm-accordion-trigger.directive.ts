@@ -1,18 +1,17 @@
-import { computed, Directive, Input, signal } from '@angular/core';
-import { BrnAccordionTriggerDirective } from '@spartan-ng/ui-accordion-brain';
+import { computed, Directive, HostBinding, inject, Input, signal } from '@angular/core';
+import { BrnAccordionTriggerComponent } from '@spartan-ng/ui-accordion-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
-	selector: '[hlmAccordionTrigger]',
+	selector: '[hlmAccordionTrigger],hlm-accordion-trigger:not(notHlm)',
 	standalone: true,
 	host: {
 		'[style.--tw-ring-offset-shadow]': '"0 0 #000"',
-		'[class]': '_computedClass()',
 	},
-	hostDirectives: [BrnAccordionTriggerDirective],
 })
 export class HlmAccordionTriggerDirective {
+	private brnAccordionTrigger = inject(BrnAccordionTriggerComponent);
 	private readonly _userCls = signal<ClassValue>('');
 	protected _computedClass = computed(() =>
 		hlm(
@@ -21,8 +20,21 @@ export class HlmAccordionTriggerDirective {
 		),
 	);
 
+	constructor() {
+		this.setClassOnBrn();
+	}
+
+	// eslint-disable-next-line @angular-eslint/no-input-rename
+	@HostBinding('attr.class')
 	@Input()
 	set class(inputs: ClassValue) {
 		this._userCls.set(inputs);
+		this.setClassOnBrn();
+	}
+
+	setClassOnBrn() {
+		if (this.brnAccordionTrigger) {
+			this.brnAccordionTrigger.class = this._computedClass();
+		}
 	}
 }
