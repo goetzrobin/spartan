@@ -7,7 +7,6 @@ import { ComingSoonComponent } from '../../../shared/layout/coming-soon.componen
 import { MainSectionDirective } from '../../../shared/layout/main-section.directive';
 import { PageBottomNavLinkComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../shared/layout/section-sub-heading.component';
@@ -30,7 +29,6 @@ export const routeMeta: RouteMeta = {
 		PageNavComponent,
 		ComingSoonComponent,
 		SectionSubHeadingComponent,
-		PageNavLinkComponent,
 		RouterLink,
 		HlmButtonDirective,
 	],
@@ -157,9 +155,7 @@ export const routeMeta: RouteMeta = {
 			</spartan-page-bottom-nav>
 		</section>
 
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="initial-alpha" label="August 2023 - Initial Alpha release" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class ChangelogPageComponent {}

@@ -9,7 +9,6 @@ import { CodeComponent } from '../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
 import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
@@ -36,7 +35,6 @@ export const routeMeta: RouteMeta = {
 		HlmButtonDirective,
 		HlmIconComponent,
 		RouterLink,
-		PageNavLinkComponent,
 		TabsComponent,
 	],
 	providers: [provideIcons({ radixChevronRight })],
@@ -231,13 +229,7 @@ module.exports = {
 			</spartan-page-bottom-nav>
 		</section>
 
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="prerequisites" label="Prerequisites" />
-			<spartan-page-nav-link fragment="installing-ui-core" label="Installing ui-core" />
-			<spartan-page-nav-link fragment="setting-up-tailwind" label="Setting up tailwind.config.js" />
-			<spartan-page-nav-link fragment="adding-css-vars" label="Adding CSS variables" />
-			<spartan-page-nav-link fragment="adding-primitives" label="Adding primitives" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class InstallationPageComponent {}

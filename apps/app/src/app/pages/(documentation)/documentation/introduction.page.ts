@@ -23,7 +23,6 @@ import { MainSectionDirective } from '../../../shared/layout/main-section.direct
 import { PageBottomNavPlaceholderComponent } from '../../../shared/layout/page-bottom-nav-placeholder.component';
 import { PageBottomNavLinkComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../shared/layout/section-sub-heading.component';
@@ -57,7 +56,6 @@ export const routeMeta: RouteMeta = {
 		HlmAccordionTriggerDirective,
 		RouterLink,
 		PageNavComponent,
-		PageNavLinkComponent,
 		PageBottomNavLinkComponent,
 		PageBottomNavComponent,
 		PageBottomNavPlaceholderComponent,
@@ -172,11 +170,7 @@ export const routeMeta: RouteMeta = {
 			</spartan-page-bottom-nav>
 		</section>
 
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="spartan-stack" label="spartan/stack" />
-			<spartan-page-nav-link fragment="spartan-ui" label="spartan/ui" />
-			<spartan-page-nav-link fragment="faq" label="FAQ" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class DocsIntroPageComponent {}

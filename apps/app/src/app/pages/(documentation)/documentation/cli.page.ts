@@ -8,7 +8,6 @@ import { ComingSoonComponent } from '../../../shared/layout/coming-soon.componen
 import { MainSectionDirective } from '../../../shared/layout/main-section.directive';
 import { PageBottomNavLinkComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../shared/layout/section-sub-heading.component';
@@ -33,7 +32,6 @@ export const routeMeta: RouteMeta = {
 		ComingSoonComponent,
 		SectionSubHeadingComponent,
 		CodeComponent,
-		PageNavLinkComponent,
 		HlmIconComponent,
 		TabsComponent,
 	],
@@ -64,7 +62,7 @@ export const routeMeta: RouteMeta = {
 					<spartan-code class="mt-4" code="npm i -D @spartan-ng/cli" />
 				</div>
 
-				<h3 class="${hlmH4} mt-12">ui</h3>
+				<h3 id="nx__ui" class="${hlmH4} mt-12">ui</h3>
 				<div>
 					<p class="${hlmP}">
 						To add
@@ -81,7 +79,7 @@ export const routeMeta: RouteMeta = {
 					</p>
 				</div>
 
-				<h3 class="${hlmH4} mt-12">ui-theme</h3>
+				<h3 id="nx__ui_theme" class="${hlmH4} mt-12">ui-theme</h3>
 				<div>
 					<p class="${hlmP}">Adding a theme can also be done on itself. Use the command below:</p>
 					<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
@@ -100,9 +98,7 @@ export const routeMeta: RouteMeta = {
 			</spartan-page-bottom-nav>
 		</section>
 
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="nx" label="@spartan-ng/cli" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class CliPageComponent {}
