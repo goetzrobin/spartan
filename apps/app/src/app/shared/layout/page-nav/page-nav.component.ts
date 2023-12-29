@@ -34,7 +34,6 @@ type SamePageAnchorLink = {
 				<div class="space-y-2 px-1">
 					<h3 class="font-medium">On this page</h3>
 					<ul class="m-0 flex list-none flex-col">
-						<ng-content />
 						@for (link of links(); track link.id) {
 							<spartan-page-nav-link [ngClass]="{ 'pl-4': link.isNested }" [fragment]="link.id" [label]="link.label" />
 						} @empty {
