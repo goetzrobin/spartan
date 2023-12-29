@@ -72,7 +72,7 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
-			<h3 class="${hlmH4} mb-2 mt-6">Dialog</h3>
+			<h3 id="examples__dialog" class="${hlmH4} mb-2 mt-6">Dialog</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-command-dialog />
@@ -80,7 +80,7 @@ export const routeMeta: RouteMeta = {
 				<spartan-code secondTab [code]="commandDialogCode" />
 			</spartan-tabs>
 
-			<h3 class="${hlmH4} mb-2 mt-6">Combobox</h3>
+			<h3 id="examples__combobox" class="${hlmH4} mb-2 mt-6">Combobox</h3>
 			<p class="${hlmP}">
 				You can use the
 				<code class="${hlmCode}">brn-command</code>

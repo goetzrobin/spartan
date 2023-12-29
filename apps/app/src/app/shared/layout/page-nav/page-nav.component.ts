@@ -57,16 +57,15 @@ export class PageNavComponent implements OnInit, AfterViewInit, OnDestroy {
 	private page: HTMLElement = (inject(ElementRef).nativeElement as HTMLElement).previousSibling as HTMLElement;
 
 	ngOnInit() {
-		const selectors = [
-			'section[spartanMainSection] spartan-section-sub-heading',
-			'section[spartanMainSection] > h3',
-			'section[spartanMainSection] section > h3',
-		];
+		const selectors = ['[spartanMainSection] spartan-section-sub-heading', '[spartanMainSection] > h3'];
 		const headings = Array.from(this.page.querySelectorAll(selectors.join(',')));
 		const links = headings.map((element) => {
 			const { id, children, localName, textContent } = element;
 			const isSubHeading = localName === 'spartan-section-sub-heading';
 			const label = (isSubHeading ? children[0].childNodes[0].textContent : textContent) ?? '[DEV] Empty heading!';
+			if (isDevMode() && id === '') {
+				console.error(`[DEV] id missing for heading "${label}"`);
+			}
 			return { id, label, isNested: !isSubHeading };
 		});
 		this.links.set(links);

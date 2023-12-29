@@ -69,42 +69,42 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
-			<h3 class="${hlmH4} mb-2 mt-6">Default</h3>
+			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Default</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-toggle-preview />
 				</div>
 				<spartan-code secondTab [code]="defaultCode" />
 			</spartan-tabs>
-			<h3 class="${hlmH4} mb-2 mt-6">Outline</h3>
+			<h3 id="examples__outline" class="${hlmH4} mb-2 mt-6">Outline</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-toggle-outline />
 				</div>
 				<spartan-code secondTab [code]="outlineCode" />
 			</spartan-tabs>
-			<h3 class="${hlmH4} mb-2 mt-6">With Text</h3>
+			<h3 id="examples__with_text" class="${hlmH4} mb-2 mt-6">With Text</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-toggle-with-text />
 				</div>
 				<spartan-code secondTab [code]="withTextCode" />
 			</spartan-tabs>
-			<h3 class="${hlmH4} mb-2 mt-6">Small</h3>
+			<h3 id="examples__small" class="${hlmH4} mb-2 mt-6">Small</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-toggle-small />
 				</div>
 				<spartan-code secondTab [code]="smallCode" />
 			</spartan-tabs>
-			<h3 class="${hlmH4} mb-2 mt-6">Large</h3>
+			<h3 id="examples__large" class="${hlmH4} mb-2 mt-6">Large</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-toggle-large />
 				</div>
 				<spartan-code secondTab [code]="largeCode" />
 			</spartan-tabs>
-			<h3 class="${hlmH4} mb-2 mt-6">Disabled</h3>
+			<h3 id="examples__disabled" class="${hlmH4} mb-2 mt-6">Disabled</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-toggle-disabled />

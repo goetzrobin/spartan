@@ -41,45 +41,37 @@ export const routeMeta: RouteMeta = {
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro name="Installation" lead="Getting up and running with spartan." />
-			<section>
-				<p class="${hlmP}">
-					Adding
-					<code class="${hlmCode}">spartan/ui</code>
-					to your project requires only a couple steps!
-				</p>
-				<p class="${hlmP}">We support the Angular CLI & Nx! Start with installing our plugin:</p>
-				<spartan-code class="mt-4" code="npm i -D @spartan-ng/cli" />
-			</section>
+			<p class="${hlmP}">
+				Adding
+				<code class="${hlmCode}">spartan/ui</code>
+				to your project requires only a couple steps!
+			</p>
+			<p class="${hlmP}">We support the Angular CLI & Nx! Start with installing our plugin:</p>
+			<spartan-code class="mt-4" code="npm i -D @spartan-ng/cli" />
 			<spartan-section-sub-heading id="prerequisites">Prerequisites</spartan-section-sub-heading>
-			<section>
-				<p class="${hlmP}">
-					<code class="${hlmCode}">spartan/ui</code>
-					is built on top of TailwindCSS. Make sure your application has a working TailwindCSS setup before you
-					continue.
-				</p>
-			</section>
+			<p class="${hlmP}">
+				<code class="${hlmCode}">spartan/ui</code>
+				is built on top of TailwindCSS. Make sure your application has a working TailwindCSS setup before you continue.
+			</p>
 			<spartan-section-sub-heading id="installing-ui-core">Installing ui-core</spartan-section-sub-heading>
-			<section>
-				<p class="${hlmP}">
-					<code class="${hlmCode}">spartan/ui</code>
-					comes with a core package. To get started install this package with the command below:
-				</p>
-				<spartan-code class="mt-4" code="npm i @spartan-ng/ui-core" />
-			</section>
+			<p class="${hlmP}">
+				<code class="${hlmCode}">spartan/ui</code>
+				comes with a core package. To get started install this package with the command below:
+			</p>
+			<spartan-code class="mt-4" code="npm i @spartan-ng/ui-core" />
 			<spartan-section-sub-heading id="setting-up-tailwind">Setting up tailwind.config.js</spartan-section-sub-heading>
-			<section>
-				<p class="${hlmP}">
-					You now have to add our spartan-specific configuration to your TailwindCSS setup. To make the setup of your
-					<code class="${hlmCode}">tailwind.config.js</code>
-					as easy as possible, the
-					<code class="${hlmCode}">&#64;spartan-ng/ui-core</code>
-					package comes with it own preset.
-				</p>
-				<p class="${hlmP}">Simply add it to the presets array of your config file:</p>
-				<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
-					<spartan-code
-						firstTab
-						code="
+			<p class="${hlmP}">
+				You now have to add our spartan-specific configuration to your TailwindCSS setup. To make the setup of your
+				<code class="${hlmCode}">tailwind.config.js</code>
+				as easy as possible, the
+				<code class="${hlmCode}">&#64;spartan-ng/ui-core</code>
+				package comes with it own preset.
+			</p>
+			<p class="${hlmP}">Simply add it to the presets array of your config file:</p>
+			<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
+				<spartan-code
+					firstTab
+					code="
 const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');
 const { join } = require('path');
 
@@ -96,10 +88,10 @@ module.exports = {
   plugins: [],
 };
 "
-					/>
-					<spartan-code
-						secondTab
-						code="
+				/>
+				<spartan-code
+					secondTab
+					code="
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   presets: [require('@spartan-ng/ui-core/hlm-tailwind-preset')],
@@ -113,43 +105,41 @@ module.exports = {
   plugins: [],
 };
 "
-					/>
-				</spartan-tabs>
-			</section>
+				/>
+			</spartan-tabs>
 
 			<spartan-section-sub-heading id="adding-css-vars">Adding CSS variables</spartan-section-sub-heading>
-			<section>
-				<p class="${hlmP}">
-					To complete your TailwindCSS setup, you need to add our spartan-specific CSS variables to your style
-					entrypoint. This is most likely a
-					<code class="${hlmCode}">styles.css</code>
-					in the
-					<code class="${hlmCode}">src</code>
-					folder of your application.
-				</p>
-				<p class="${hlmP}">
-					Again, if you are using Nx, we have written a plugin that will take care of the heavy lifting:
-				</p>
-				<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
-					<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui-theme" />
-					<spartan-code secondTab code="ng g @spartan-ng/cli:ui-theme" />
-				</spartan-tabs>
-				<p class="${hlmP}">To learn more about the Nx plugin check out the CLI docs below.</p>
-				<div class="my-2 flex items-center justify-end">
-					<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
-						CLI documentation
-						<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
-					</a>
-				</div>
-				<p class="${hlmP}">
-					If you are not using Nx (yet) you can copy the variables of the default theme below and manually add them to
-					your style entrypoint, such as
-					<code class="${hlmCode}">styles.css</code>
-					:
-				</p>
-				<spartan-code
-					class="mb-6 mt-4"
-					code="
+			<p class="${hlmP}">
+				To complete your TailwindCSS setup, you need to add our spartan-specific CSS variables to your style entrypoint.
+				This is most likely a
+				<code class="${hlmCode}">styles.css</code>
+				in the
+				<code class="${hlmCode}">src</code>
+				folder of your application.
+			</p>
+			<p class="${hlmP}">
+				Again, if you are using Nx, we have written a plugin that will take care of the heavy lifting:
+			</p>
+			<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
+				<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui-theme" />
+				<spartan-code secondTab code="ng g @spartan-ng/cli:ui-theme" />
+			</spartan-tabs>
+			<p class="${hlmP}">To learn more about the Nx plugin check out the CLI docs below.</p>
+			<div class="my-2 flex items-center justify-end">
+				<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
+					CLI documentation
+					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+				</a>
+			</div>
+			<p class="${hlmP}">
+				If you are not using Nx (yet) you can copy the variables of the default theme below and manually add them to
+				your style entrypoint, such as
+				<code class="${hlmCode}">styles.css</code>
+				:
+			</p>
+			<spartan-code
+				class="mb-6 mt-4"
+				code="
 :root {
   --font-sans: '';
   --background: 0 0% 100%;
@@ -196,32 +186,29 @@ module.exports = {
   --ring: 240 4.9% 83.9%;
 }
 "
-				/>
-				<p class="${hlmP}">
-					Also, make sure to check out the theming section to better understand the convention behind them and learn how
-					to customize your theme.
-				</p>
-			</section>
+			/>
+			<p class="${hlmP}">
+				Also, make sure to check out the theming section to better understand the convention behind them and learn how
+				to customize your theme.
+			</p>
 
 			<spartan-section-sub-heading id="adding-primitives">Adding primitives</spartan-section-sub-heading>
-			<section>
-				<p class="${hlmP}">
-					With the Nx plugin, adding primitives is as simple as running a single command. It will allow you to pick and
-					choose which primitives to add to your project. It will add all brain dependencies and copy helm code into its
-					own library:
-				</p>
-				<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
-					<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui" />
-					<spartan-code secondTab code="ng g @spartan-ng/cli:ui" />
-				</spartan-tabs>
-				<p class="${hlmP}">To learn more about the command line interface check out the docs below.</p>
-				<div class="my-2 flex items-center justify-end">
-					<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
-						CLI documentation
-						<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
-					</a>
-				</div>
-			</section>
+			<p class="${hlmP}">
+				With the Nx plugin, adding primitives is as simple as running a single command. It will allow you to pick and
+				choose which primitives to add to your project. It will add all brain dependencies and copy helm code into its
+				own library:
+			</p>
+			<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
+				<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui" />
+				<spartan-code secondTab code="ng g @spartan-ng/cli:ui" />
+			</spartan-tabs>
+			<p class="${hlmP}">To learn more about the command line interface check out the docs below.</p>
+			<div class="my-2 flex items-center justify-end">
+				<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
+					CLI documentation
+					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+				</a>
+			</div>
 
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="theming" label="Theming" />
