@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
 	AfterViewInit,
 	Component,
@@ -17,12 +18,13 @@ import { PageNavLinkComponent } from './page-nav-link.component';
 type SamePageAnchorLink = {
 	id: string;
 	label: string;
+	isNested: boolean;
 };
 
 @Component({
 	selector: 'spartan-page-nav',
 	standalone: true,
-	imports: [HlmScrollAreaComponent, PageNavLinkComponent],
+	imports: [HlmScrollAreaComponent, NgClass, PageNavLinkComponent],
 	host: {
 		class: 'hidden xl:block text-sm',
 	},
@@ -34,7 +36,7 @@ type SamePageAnchorLink = {
 					<ul class="m-0 flex list-none flex-col">
 						<ng-content />
 						@for (link of links(); track link.id) {
-							<spartan-page-nav-link [fragment]="link.id" [label]="link.label" />
+							<spartan-page-nav-link [ngClass]="{ 'pl-4': link.isNested }" [fragment]="link.id" [label]="link.label" />
 						} @empty {
 							@if (isDevMode()) {
 								[DEV] Nothing to see here!
@@ -56,11 +58,18 @@ export class PageNavComponent implements OnInit, AfterViewInit, OnDestroy {
 	private page: HTMLElement = (inject(ElementRef).nativeElement as HTMLElement).previousSibling as HTMLElement;
 
 	ngOnInit() {
-		const headings = Array.from(this.page.querySelectorAll('spartan-section-sub-heading'));
-		const links = headings.map(({ id, children }) => ({
-			id,
-			label: children[0].childNodes[0].textContent ?? '[DEV] Empty heading!',
-		}));
+		const selectors = [
+			'section[spartanMainSection] spartan-section-sub-heading',
+			'section[spartanMainSection] > h3',
+			'section[spartanMainSection] section > h3',
+		];
+		const headings = Array.from(this.page.querySelectorAll(selectors.join(',')));
+		const links = headings.map((element) => {
+			const { id, children, localName, textContent } = element;
+			const isSubHeading = localName === 'spartan-section-sub-heading';
+			const label = (isSubHeading ? children[0].childNodes[0].textContent : textContent) ?? '[DEV] Empty heading!';
+			return { id, label, isNested: !isSubHeading };
+		});
 		this.links.set(links);
 	}
 	ngAfterViewInit() {

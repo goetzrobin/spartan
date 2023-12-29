@@ -67,14 +67,14 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
-			<h3 class="${hlmH4} mb-2 mt-6">Default</h3>
+			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Default</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-tabs-preview />
 				</div>
 				<spartan-code secondTab [code]="defaultCode" />
 			</spartan-tabs>
-			<h3 class="${hlmH4} mb-2 mt-6">Vertical</h3>
+			<h3 id="examples__vertical" class="${hlmH4} mb-2 mt-6">Vertical</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-tabs-vertical />
