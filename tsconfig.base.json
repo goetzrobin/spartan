@@ -64,10 +64,10 @@
 			"@spartan-ng/ui-table-helm": ["libs/ui/table/helm/src/index.ts"],
 			"@spartan-ng/ui-tabs-brain": ["libs/ui/tabs/brain/src/index.ts"],
 			"@spartan-ng/ui-tabs-helm": ["libs/ui/tabs/helm/src/index.ts"],
-			"@spartan-ng/ui-tooltip-brain": ["libs/ui/tooltip/brain/src/index.ts"],
-			"@spartan-ng/ui-tooltip-helm": ["libs/ui/tooltip/helm/src/index.ts"],
 			"@spartan-ng/ui-toggle-brain": ["libs/ui/toggle/brain/src/index.ts"],
 			"@spartan-ng/ui-toggle-helm": ["libs/ui/toggle/helm/src/index.ts"],
+			"@spartan-ng/ui-tooltip-brain": ["libs/ui/tooltip/brain/src/index.ts"],
+			"@spartan-ng/ui-tooltip-helm": ["libs/ui/tooltip/helm/src/index.ts"],
 			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"],
 			"~/*": ["apps/app/src/*"]
 		}

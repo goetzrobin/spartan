@@ -1,14 +1,27 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import * as radixIcons from '@ng-icons/radix-icons';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { BrnMenuTriggerDirective } from './brain/src';
-import { HlmMenuImports, HlmMenuItemCheckComponent, HlmMenuItemRadioComponent } from './helm/src';
+import { HlmMenuComponent, HlmMenuImports, HlmMenuItemCheckComponent, HlmMenuItemRadioComponent } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmMenuComponent> = {
 	title: 'Dropdown Menu',
+	component: HlmMenuComponent,
+	tags: ['autodocs'],
+	args: {
+		variant: 'default',
+	},
+	argTypes: {
+		variant: {
+			options: ['default', 'menubar'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			providers: [provideIcons(radixIcons)],
@@ -18,17 +31,17 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmMenuComponent>;
 
 export const Default: Story = {
-	render: () => ({
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
-
     <div class='w-full flex justify-center items-center pt-[20%]'>
       <button hlmBtn variant='outline' align='end' [brnMenuTriggerFor]='menu'>Open</button>
     </div>
     <ng-template #menu>
-      <hlm-menu class='w-56'>
+      <hlm-menu ${argsToTemplate(args)} class='w-56'>
         <hlm-menu-label>My Account</hlm-menu-label>
         <hlm-menu-separator />
         <hlm-menu-group>

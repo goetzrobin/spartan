@@ -1,9 +1,28 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { BrnSeparatorComponent } from './brain/src';
 import { HlmSeparatorDirective } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<BrnSeparatorComponent> = {
 	title: 'Separator',
+	component: BrnSeparatorComponent,
+	tags: ['autodocs'],
+	args: {
+		orientation: 'horizontal',
+		decorative: false,
+	},
+	argTypes: {
+		orientation: {
+			options: ['horizontal', 'vertical'],
+			control: {
+				type: 'select',
+			},
+		},
+		decorative: {
+			control: {
+				type: 'boolean',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [BrnSeparatorComponent, HlmSeparatorDirective],
@@ -12,10 +31,11 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<BrnSeparatorComponent>;
 
 export const Default: Story = {
-	render: () => ({
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
     <div>
       <div class='space-y-1'>
@@ -24,7 +44,7 @@ export const Default: Story = {
           An open-source UI component library.
         </p>
       </div>
-      <brn-separator hlmSeparator class='my-4' />
+      <brn-separator hlmSeparator ${argsToTemplate(args)} class='my-4' />
       <div class='flex h-5 items-center space-x-4 text-sm'>
         <div>Blog</div>
         <brn-separator decorative hlmSeparator orientation='vertical' />

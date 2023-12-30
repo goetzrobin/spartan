@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { moduleMetadata } from '@storybook/angular';
+import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmSeparatorDirective } from '../separator/helm/src';
 import { HlmScrollAreaComponent } from './helm/src';
 
@@ -25,8 +25,40 @@ class ScrollAreaStoriesComponent {
 	tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 }
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmScrollAreaComponent> = {
 	title: 'Scroll Area',
+	component: HlmScrollAreaComponent,
+	tags: ['autodocs'],
+	args: {
+		track: 'all',
+		autoHeightDisabled: false,
+		autoWidthDisabled: false,
+		visibility: 'native',
+	},
+	argTypes: {
+		track: {
+			options: ['vertical', 'horizontal', 'all'],
+			control: {
+				type: 'select',
+			},
+		},
+		visibility: {
+			options: ['hover', 'always', 'native'],
+			control: {
+				type: 'select',
+			},
+		},
+		autoHeightDisabled: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		autoWidthDisabled: {
+			control: {
+				type: 'boolean',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [HlmScrollAreaComponent, ScrollAreaStoriesComponent],
@@ -35,7 +67,7 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmScrollAreaComponent>;
 
 export const Default: Story = {
 	render: () => ({
@@ -46,9 +78,10 @@ export const Default: Story = {
 };
 
 export const Vertical: Story = {
-	render: () => ({
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
-        <hlm-scroll-area class="w-72 rounded-md border border-border">
+        <hlm-scroll-area ${argsToTemplate(args)} class="w-72 rounded-md border border-border">
         <div class='p-6 whitespace-nowrap'>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium architecto,<br>
         asperiores beatae consequuntur dolor ducimus et exercitationem facilis fugiat magni<br>

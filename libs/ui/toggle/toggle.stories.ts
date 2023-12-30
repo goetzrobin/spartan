@@ -9,8 +9,10 @@ import { hlmP } from '../typography/helm/src';
 import { BrnToggleDirective, BrnToggleGroupModule } from './brain/src';
 import { HlmToggleDirective, HlmToggleGroupModule } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmToggleDirective> = {
 	title: 'Toggle',
+	component: HlmToggleDirective,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [HlmToggleDirective, BrnToggleDirective, HlmIconComponent],
@@ -20,7 +22,8 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmToggleDirective>;
+
 export const Default: Story = {
 	render: () => ({
 		template: `
