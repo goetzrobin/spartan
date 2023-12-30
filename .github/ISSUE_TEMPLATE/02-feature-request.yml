@@ -51,6 +51,7 @@ body:
         - toast
         - toggle
         - tooltip
+        - trpc
         - typography
         - Docs
         - Don't know / other

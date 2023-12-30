@@ -1,5 +1,5 @@
-import { createTrpcClient } from '@analogjs/trpc';
 import { inject } from '@angular/core';
+import { createTrpcClient } from '@spartan-ng/trpc';
 import superjson from 'superjson';
 import { AppRouter } from './server/trpc/routers';
 

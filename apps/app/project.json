@@ -69,6 +69,14 @@
 		"test": {
 			"executor": "@nx/vite:test",
 			"outputs": ["{projectRoot}/coverage"]
+		},
+		"serve-nitro": {
+			"executor": "nx:run-commands",
+			"options": {
+				"cwd": "",
+				"command": "PORT=4205 node dist/apps/app/analog/server/index.mjs"
+			},
+			"dependsOn": ["build"]
 		}
 	},
 	"tags": [],
