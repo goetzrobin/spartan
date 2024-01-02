@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { provideIcons } from '@ng-icons/core';
+import { radixChevronDown, radixChevronUp } from '@ng-icons/radix-icons';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
+import { HlmIconModule } from '../icon/helm/src';
 import { BrnSelectImports } from './brain/src';
 import { HlmSelectImports } from './helm/src';
 
@@ -13,7 +16,8 @@ const meta: Meta<{}> = {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports, HlmSelectImports],
+			imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports, HlmSelectImports, HlmIconModule],
+			providers: [provideIcons({ radixChevronUp, radixChevronDown })],
 		}),
 	],
 };
@@ -125,30 +129,54 @@ export const SelectWithLabel: Story = {
 	}),
 };
 
-// export const Scrollable: Story = {
-// 	render: (args) => ({
-// 		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
-// 		template: `
-//     <form [formGroup]="fruitGroup">
-// 	<brn-select formControlName="fruit" ${argsToTemplate(args)}>
-// 		<hlm-select-trigger>
-// 			<hlm-select-value />
-// 		</hlm-select-trigger>
-//     <hlm-select-content class="w-56 max-h-44">
-//       <hlm-option value="Refresh">Refresh</hlm-option>
-//       <hlm-option value="Settings">Settings</hlm-option>
-//       <hlm-option value="Help">Help</hlm-option>
-//       <hlm-option value="Signout">Sign out</hlm-option>
+export const autocomplete: Story = {
+	args: {
+		label: 'Fruit Selections',
+	},
+	render: (args) => ({
+		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
+		template: `
+  <form [formGroup]="fruitGroup">
+    <hlm-select formControlName="fruit" ${argsToTemplate(args)}>
+		<label hlmLabel>{{label}}</label>
+		<hlm-select-trigger> 
+			<hlm-select-value />
+		</hlm-select-trigger>
+		<hlm-select-content class="w-56">
+			<hlm-option value="Refresh">Refresh</hlm-option>
+			<hlm-option value="Settings">Settings</hlm-option>
+			<hlm-option value="Help">Help</hlm-option>
+			<hlm-option value="Signout">Sign out</hlm-option>
+		</hlm-select-content>
+    </hlm-select>
+  <form>`,
+	}),
+};
 
-//       <hlm-option value="Account">Account</hlm-option>
-//       <hlm-option value="Rewards">Rewards</hlm-option>
-//       <hlm-option value="Subscriptions">Subscriptions</hlm-option>
-//       <hlm-option value="Lending">Lending</hlm-option>
+export const Scrollable: Story = {
+	render: (args) => ({
+		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
+		template: `
+    <form [formGroup]="fruitGroup">
+	<hlm-select formControlName="fruit" ${argsToTemplate(args)}>
+		<hlm-select-trigger>
+			<hlm-select-value />
+		</hlm-select-trigger>
+    	<hlm-select-content class="w-56 max-h-44">
+			<hlm-option value="Refresh">Refresh</hlm-option>
+			<hlm-option value="Settings">Settings</hlm-option>
+			<hlm-option value="Help">Help</hlm-option>
+			<hlm-option value="Signout">Sign out</hlm-option>
 
-//       <hlm-option value="Deposit">Deposit</hlm-option>
-//       <hlm-option value="Withdrawel">Withdrawel</hlm-option>
-//     </hlm-select-content>
-// 	</brn-select>
-//   <form>`,
-// 	}),
-// };
+			<hlm-option value="Account">Account</hlm-option>
+			<hlm-option value="Rewards">Rewards</hlm-option>
+			<hlm-option value="Subscriptions">Subscriptions</hlm-option>
+			<hlm-option value="Lending">Lending</hlm-option>
+
+			<hlm-option value="Deposit">Deposit</hlm-option>
+			<hlm-option value="Withdrawel">Withdrawel</hlm-option>
+		</hlm-select-content>
+	</hlm-select>
+  <form>`,
+	}),
+};
