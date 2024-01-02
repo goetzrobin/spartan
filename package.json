@@ -27,7 +27,6 @@
 		"@analogjs/content": "0.2.19",
 		"@analogjs/platform": "0.2.19",
 		"@analogjs/router": "0.2.19",
-		"@analogjs/trpc": "0.2.19",
 		"@analogjs/vite-plugin-angular": "0.2.19",
 		"@angular/animations": "17.0.2",
 		"@angular/cdk": "17.0.0",

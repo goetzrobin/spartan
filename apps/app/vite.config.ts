@@ -18,14 +18,7 @@ export default defineConfig(({ mode }) => {
 			include: ['@angular/common', '@angular/forms', 'isomorphic-fetch'],
 		},
 		ssr: {
-			noExternal: [
-				'@analogjs/trpc/**',
-				'@spartan-ng/**',
-				'@angular/cdk/**',
-				'@ng-icons/**',
-				'ngx-scrollbar/**',
-				'ng-signal-forms/**',
-			],
+			noExternal: ['@spartan-ng/**', '@angular/cdk/**', '@ng-icons/**', 'ngx-scrollbar/**', 'ng-signal-forms/**'],
 		},
 		build: {
 			target: ['es2020'],
@@ -88,10 +81,6 @@ export default defineConfig(({ mode }) => {
 					sitemap: {
 						host: 'https://www.spartan.ng',
 					},
-				},
-				nitro: {
-					preset: 'vercel',
-					serveStatic: false,
 				},
 			}),
 			nxViteTsPaths(),

@@ -1,14 +1,14 @@
 {
 	"name": "trpc",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "/src",
+	"sourceRoot": "libs/trpc/src",
 	"prefix": "spartan-ng",
 	"tags": [],
 	"projectType": "library",
 	"targets": {
 		"build": {
 			"executor": "@angular-devkit/build-angular:ng-packagr",
-			"outputs": ["{workspaceRoot}/node_modules/@spartan-ng/trpc"],
+			"outputs": ["{workspaceRoot}/dist/libs/trpc"],
 			"options": {
 				"project": "libs/trpc/ng-package.json"
 			},
