@@ -38,6 +38,10 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 19. [santoshyadavdev](https://github.com/santoshyadavdev)
 20. [markostanimirovic](https://github.com/markostanimirovic)
 21. [theo-matzavinos](https://github.com/theo-matzavinos)
+22. [jkuri](https://github.com/jkuri)
+23. [dongphuong0905](https://github.com/dongphuong0905)
+24. [DominikPieper](https://github.com/DominikPieper)
+25. [brandonroberts](https://github.com/brandonroberts)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
