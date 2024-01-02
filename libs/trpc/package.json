@@ -30,5 +30,9 @@
 	"ng-update": {
 		"packageGroup": [],
 		"migrations": "./migrations/migration.json"
+	},
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
 	}
 }

@@ -3,7 +3,7 @@
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/trpc/src",
 	"prefix": "spartan-ng",
-	"tags": [],
+	"tags": ["trpc"],
 	"projectType": "library",
 	"targets": {
 		"build": {
@@ -27,6 +27,12 @@
 			"outputs": ["{options.outputFile}"],
 			"options": {
 				"lintFilePatterns": ["libs/trpc/**/*.ts", "libs/trpc/**/*.html"]
+			}
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
+			"options": {
+				"libName": "trpc"
 			}
 		}
 	}

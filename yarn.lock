@@ -51,13 +51,6 @@
   optionalDependencies:
     "@analogjs/content" "^0.2.19"
 
-"@analogjs/trpc@0.2.19":
-  version "0.2.19"
-  resolved "https://registry.npmjs.org/@analogjs/trpc/-/trpc-0.2.19.tgz#00cd755c762e6f84d34ceae426df440b1cb830c2"
-  integrity sha512-G68kXNj5xes0nclk3PCmtE9Q9Cugg2TfHOS7DiSfQv04Ntmv25ntnprti5/hJ8J3cp8GEe3LgLJ8CHxdeT/QHA==
-  dependencies:
-    tslib "^2.3.0"
-
 "@analogjs/vite-plugin-angular@0.2.19", "@analogjs/vite-plugin-angular@^0.2.19":
   version "0.2.19"
   resolved "https://registry.npmjs.org/@analogjs/vite-plugin-angular/-/vite-plugin-angular-0.2.19.tgz#3d07092a21c11211c476c5d59313e7400cff9339"
@@ -18658,6 +18651,11 @@ robust-predicates@^3.0.0:
   version "3.0.2"
   resolved "https://registry.npmjs.org/robust-predicates/-/robust-predicates-3.0.2.tgz#d5b28528c4824d20fc48df1928d41d9efa1ad771"
   integrity sha512-IXgzBWvWQwE6PrDI05OvmXUIruQTcoMDzRsOd5CDvHCVLcLHMTSYvOK5Cm46kWqlV3yAbuSpBZdJ5oP5OUoStg==
+
+rollup-plugin-typescript-paths@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npmjs.org/rollup-plugin-typescript-paths/-/rollup-plugin-typescript-paths-1.5.0.tgz#81922ad686623ab1b2549ec3fb6769ba7bdbe1ec"
+  integrity sha512-zly2aiGNjYJNq5YUi6eyGrQnCYUQ8b5czOtHZIGriwG9U3Ba2F9hlSklafXCdsNulK/IlNmE0Kzj0h+fVV32pA==
 
 rollup-plugin-visualizer@^5.9.2:
   version "5.9.2"
