@@ -89,6 +89,10 @@ export default defineConfig(({ mode }) => {
 						host: 'https://www.spartan.ng',
 					},
 				},
+				nitro: {
+					preset: 'vercel',
+					serveStatic: false,
+				},
 			}),
 			nxViteTsPaths(),
 			visualizer() as Plugin,
