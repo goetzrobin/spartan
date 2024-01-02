@@ -38,7 +38,7 @@ export const routeMeta: RouteMeta = {
 		<section spartanMainSection>
 			<spartan-section-intro name="Changelog" lead="Latest updates and announcements." />
 			<spartan-section-sub-heading id="initial-alpha" class="-mt-12">
-				August 2023 - Initial Alpha release
+				August 2024 - Initial Alpha release
 			</spartan-section-sub-heading>
 			<section>
 				<p class="${hlmP}">
@@ -158,7 +158,7 @@ export const routeMeta: RouteMeta = {
 		</section>
 
 		<spartan-page-nav>
-			<spartan-page-nav-link fragment="initial-alpha" label="August 2023 - Initial Alpha release" />
+			<spartan-page-nav-link fragment="initial-alpha" label="August 2024 - Initial Alpha release" />
 		</spartan-page-nav>
 	`,
 })
