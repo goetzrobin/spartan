@@ -1,13 +1,26 @@
 import { provideIcons } from '@ng-icons/core';
 import * as radixIcons from '@ng-icons/radix-icons';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { BrnMenuTriggerDirective } from './brain/src';
-import { HlmMenuBarImports, HlmMenuImports } from './helm/src';
+import { HlmMenuBarImports, HlmMenuComponent, HlmMenuImports } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmMenuComponent> = {
 	title: ' Menubar',
+	component: HlmMenuComponent,
+	tags: ['autodocs'],
+	args: {
+		variant: 'default',
+	},
+	argTypes: {
+		variant: {
+			options: ['default', 'menubar'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			providers: [provideIcons(radixIcons)],
@@ -17,10 +30,11 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmMenuComponent>;
 
 export const Default: Story = {
-	render: () => ({
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
         <hlm-menu-bar class='w-fit'>
       <button hlmMenuBarItem [brnMenuTriggerFor]='file'>File</button>
@@ -30,7 +44,7 @@ export const Default: Story = {
     </hlm-menu-bar>
 
     <ng-template #file>
-      <hlm-menu variant='menubar' class='w-48'>
+      <hlm-menu ${argsToTemplate(args)} variant='menubar' class='w-48'>
         <hlm-menu-group>
           <button hlmMenuItem>
             New Tab

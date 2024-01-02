@@ -8,6 +8,7 @@ import { HlmSwitchImports } from './helm/src';
 const meta: Meta<BrnSwitchComponent> = {
 	title: 'Switch',
 	component: BrnSwitchComponent,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [BrnSwitchImports, HlmSwitchImports, HlmLabelDirective],

@@ -1,37 +1,54 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HlmAvatarImports } from './helm/src';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HlmAvatarComponent, HlmAvatarImports } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmAvatarComponent> = {
 	title: 'Avatar',
+	component: HlmAvatarComponent,
+	tags: ['autodocs'],
+	argTypes: {
+		variant: {
+			options: ['small', 'medium', 'large'],
+			control: {
+				type: 'select',
+			},
+		},
+		class: {
+			control: { type: 'text' },
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [HlmAvatarImports],
 		}),
 	],
+	render: ({ ...args }) => ({
+		props: { args },
+		template: `
+    <hlm-avatar ${argsToTemplate(args)}>
+      <img src='/mountains.jpg' alt='Spartan logo. A red spearhead with the Angular A'  hlmAvatarImage>
+      <span class='bg-sky-600 text-sky-50' hlmAvatarFallback>MT</span>
+    </hlm-avatar>
+`,
+	}),
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmAvatarComponent>;
 
-export const Default: Story = {
-	render: () => ({
-		template: `
-    <div class='grid w-full items-center gap-4'>
-    <hlm-avatar variant='small' id='avatar-small'>
-    <img src='/mountains.jpg' alt='Spartan logo. A red spearhead with the Angular A'  hlmAvatarImage>
-      <span class='bg-sky-600 text-sky-50' hlmAvatarFallback>MT</span>
-    </hlm-avatar>
+export const Small: Story = {
+	args: {
+		variant: 'small',
+	},
+};
 
-     <hlm-avatar variant='medium' id='avatar-medium'>
-    <img src='/mountains.jpg' alt='Spartan logo. A red spearhead with the Angular A'  hlmAvatarImage>
-      <span class='bg-pink-600 text-pink-50' hlmAvatarFallback>MT</span>
-    </hlm-avatar>
+export const Medium: Story = {
+	args: {
+		variant: 'medium',
+	},
+};
 
-     <hlm-avatar variant='large' id='avatar-large'>
-    <img src='/mountains.jpg' alt='Spartan logo. A red spearhead with the Angular A'  hlmAvatarImage>
-      <span class='bg-emerald-600 text-emerald-50' hlmAvatarFallback>MT</span>
-    </hlm-avatar>
-    </div>
-`,
-	}),
+export const Large: Story = {
+	args: {
+		variant: 'large',
+	},
 };

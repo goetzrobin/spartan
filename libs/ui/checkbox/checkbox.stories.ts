@@ -9,6 +9,7 @@ import { HlmCheckboxImports } from './helm/src';
 const meta: Meta<BrnCheckboxComponent> = {
 	title: 'Checkbox',
 	component: BrnCheckboxComponent,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [BrnCheckboxImports, HlmCheckboxImports, HlmLabelDirective, HlmIconComponent],
@@ -26,7 +27,7 @@ export const Default: Story = {
        <brn-checkbox id='testCheckbox' aria-checked='mixed' aria-label='test checkbox' hlm>
        <hlm-checkbox-checkicon />
       </brn-checkbox>
-      </label>
+    </label>
     `,
 	}),
 };

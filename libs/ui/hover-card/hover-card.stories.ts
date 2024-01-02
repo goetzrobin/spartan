@@ -4,8 +4,9 @@ import { radixCalendar } from '@ng-icons/radix-icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmAvatarModule } from '../avatar/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
+import { HlmCardDirective } from '../card/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import { BrnHoverCardModule } from './brain/src';
+import { BrnHoverCardComponent, BrnHoverCardModule } from './brain/src';
 import { HlmHoverCardModule } from './helm/src';
 
 @Component({
@@ -40,8 +41,10 @@ import { HlmHoverCardModule } from './helm/src';
 })
 class HoverCardExampleComponent {}
 
-const meta: Meta<{}> = {
+const meta: Meta<BrnHoverCardComponent> = {
 	title: 'Hover Card',
+	component: HlmCardDirective,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [HoverCardExampleComponent],
@@ -50,7 +53,7 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<BrnHoverCardComponent>;
 
 export const Default: Story = {
 	render: () => ({

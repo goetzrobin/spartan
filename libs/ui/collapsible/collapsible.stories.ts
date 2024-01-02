@@ -1,10 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { moduleMetadata } from '@storybook/angular';
+import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { BrnCollapsibleImports } from './brain/src';
+import { BrnCollapsibleComponent, BrnCollapsibleImports } from './brain/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<BrnCollapsibleComponent> = {
 	title: 'Collapsible',
+	component: BrnCollapsibleComponent,
+	tags: ['autodocs'],
+	args: {
+		disabled: false,
+	},
+	argTypes: {
+		disabled: {
+			control: {
+				type: 'boolean',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [HlmButtonDirective, BrnCollapsibleImports],
@@ -16,11 +28,9 @@ export default meta;
 type Story = StoryObj<{}>;
 
 export const Default: Story = {
-	render: () => ({
+	render: ({ ...args }) => ({
 		template: `
-    <brn-collapsible
-          class="flex flex-col w-[350px] space-y-2"
-    >
+    <brn-collapsible class="flex flex-col w-[350px] space-y-2" ${argsToTemplate(args)}>
       <div class="flex items-center justify-between space-x-4 px-4">
         <h4 class="text-sm font-semibold">
           &#64;peduarte starred 3 repositories

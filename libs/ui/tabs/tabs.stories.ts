@@ -1,13 +1,15 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmCardImports } from '../card/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
-import { BrnTabsImports } from './brain/src';
+import { BrnTabsDirective, BrnTabsImports } from './brain/src';
 import { HlmTabsImports } from './helm/src';
 
-export type TabsStory = { activationMode: 'manual' | 'automatic' };
-const meta: Meta<TabsStory> = {
+const meta: Meta<BrnTabsDirective> = {
+	title: 'Tabs',
+	component: BrnTabsDirective,
+	tags: ['autodocs'],
 	argTypes: {
 		activationMode: {
 			options: ['manual', 'automatic'],
@@ -16,7 +18,6 @@ const meta: Meta<TabsStory> = {
 			},
 		},
 	},
-	title: 'Tabs',
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -33,15 +34,15 @@ const meta: Meta<TabsStory> = {
 };
 
 export default meta;
-type Story = StoryObj<TabsStory>;
+type Story = StoryObj<BrnTabsDirective>;
 export const Default: Story = {
 	args: {
 		activationMode: 'automatic',
 	},
-	render: ({ activationMode }) => ({
-		props: { activationMode },
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
-  <div brnTabs='account' [activationMode]='activationMode' class='block max-w-3xl mx-auto'>
+  <div brnTabs='account' ${argsToTemplate(args)} class='block max-w-3xl mx-auto'>
     <hlm-tabs-list class='grid w-full grid-cols-2' aria-label='tabs example'>
       <button hlmTabsTrigger='account'>Account</button>
       <button hlmTabsTrigger='password'>Password</button>

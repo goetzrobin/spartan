@@ -1,15 +1,17 @@
 import { Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { radixPlus } from '@ng-icons/radix-icons';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import { BrnTooltipContentDirective, TooltipPosition } from './brain/src';
+import { BrnTooltipContentDirective } from './brain/src';
 import { HlmTooltipComponent, HlmTooltipTriggerDirective } from './helm/src';
 
-const meta: Meta<{}> = {
-	argTypes: {},
+const meta: Meta<HlmTooltipComponent> = {
 	title: 'Tooltip',
+	component: HlmTooltipComponent,
+	tags: ['autodocs'],
+	argTypes: {},
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -25,7 +27,7 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{ position: TooltipPosition }>;
+type Story = StoryObj<HlmTooltipComponent>;
 export const Default: Story = {
 	argTypes: {
 		position: {
@@ -34,12 +36,14 @@ export const Default: Story = {
 			defaultValue: 'above',
 		},
 	},
-	render: (args) => ({
-		props: { position: args.position },
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
 <div class='p-40'>
   <hlm-tooltip>
-    <button hlmTooltipTrigger [position]='position' aria-describedby='Hello world' hlmBtn variant='outline'>Test</button>
+    <button hlmTooltipTrigger ${argsToTemplate(
+			args,
+		)} aria-describedby='Hello world' hlmBtn variant='outline'>Test</button>
     <span *brnTooltipContent class='flex items-center'>
       Add to library <hlm-icon class='ml-2' size='sm' name='radixPlus'/>
      </span>

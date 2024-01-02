@@ -5,6 +5,8 @@ import { HlmAspectRatioDirective } from './helm/src';
 export type AspectRatio = { ratio: string | number };
 const meta: Meta<AspectRatio> = {
 	title: 'Aspect Ratio',
+	component: HlmAspectRatioDirective,
+	tags: ['autodocs'],
 	args: { ratio: '16/9' },
 	argTypes: {
 		ratio: {
