@@ -42,6 +42,9 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 23. [dongphuong0905](https://github.com/dongphuong0905)
 24. [DominikPieper](https://github.com/DominikPieper)
 25. [brandonroberts](https://github.com/brandonroberts)
+26. [izikd-](https://github.com/izikd-)
+27. [ryancraigmartin](https://github.com/ryancraigmartin)
+28. [gaetanBloch](https://github.com/gaetanBloch)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
