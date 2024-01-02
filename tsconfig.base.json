@@ -17,6 +17,7 @@
 		"paths": {
 			"@spartan-ng/cli": ["libs/cli/src/index.ts"],
 			"@spartan-ng/tools": ["libs/tools/src/index.ts"],
+			"@spartan-ng/trpc": ["libs/trpc/src/index.ts"],
 			"@spartan-ng/ui-accordion-brain": ["libs/ui/accordion/brain/src/index.ts"],
 			"@spartan-ng/ui-accordion-helm": ["libs/ui/accordion/helm/src/index.ts"],
 			"@spartan-ng/ui-alert-helm": ["libs/ui/alert/helm/src/index.ts"],

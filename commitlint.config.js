@@ -47,6 +47,7 @@ module.exports = {
 				'toast',
 				'toggle',
 				'tooltip',
+				'trpc',
 				'typography',
 				'nx',
 			],
