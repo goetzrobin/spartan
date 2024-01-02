@@ -3,12 +3,11 @@ import {
 	Component,
 	DestroyRef,
 	ElementRef,
-	HostBinding,
+	inject,
 	Input,
 	OnInit,
-	ViewChild,
-	inject,
 	signal,
+	ViewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
@@ -17,10 +16,14 @@ import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 import { BrnAccordionDirective } from './brn-accordion.directive';
 
 @Component({
-	selector: 'brn-accordion-trigger, hlm-accordion-trigger',
+	selector: 'brn-accordion-trigger, hlm-accordion-trigger:not(notHlm)',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
+		// setting the host class to empty as we don't want our class
+		// input to affect the host element, but instead apply to
+		// the button in the template
+		'[attr.class]': "''",
 		'[style]': '"display:contents"',
 		role: 'heading',
 		'aria-level': '3',
@@ -75,8 +78,6 @@ export class BrnAccordionTriggerComponent implements OnInit {
 		this.trigger.nativeElement.focus();
 	}
 
-	// eslint-disable-next-line @angular-eslint/no-input-rename
-	@HostBinding('attr.class')
 	@Input()
 	set class(inputs: string) {
 		this._contentClass.set(inputs);

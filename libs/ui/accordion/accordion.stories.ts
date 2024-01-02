@@ -1,23 +1,20 @@
-import { radixChevronDown } from '@ng-icons/radix-icons';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { HlmIconComponent, provideIcons } from '../icon/helm/src';
-import { BrnAccordionDirective, BrnAccordionImports } from './brain/src';
+import { HlmIconComponent } from '../icon/helm/src';
+import { BrnAccordionImports } from './brain/src';
 import { HlmAccordionImports } from './helm/src';
 
-const meta: Meta<BrnAccordionDirective> = {
+const meta: Meta<{}> = {
 	title: 'Accordion',
-	component: BrnAccordionDirective,
 	decorators: [
 		moduleMetadata({
 			imports: [BrnAccordionImports, HlmAccordionImports, HlmIconComponent],
-			providers: [provideIcons({ radixChevronDown })],
 		}),
 	],
 };
 
 export default meta;
-type Story = StoryObj<BrnAccordionDirective>;
+type Story = StoryObj<{}>;
 
 export const Default: Story = {
 	render: () => ({

@@ -3,7 +3,7 @@ import { CustomElementClassSettable } from '@spartan-ng/ui-core';
 import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 
 @Component({
-	selector: 'brn-accordion-content, hlm-accordion-content',
+	selector: 'brn-accordion-content, hlm-accordion-content:not(notHlm)',
 	standalone: true,
 	host: {
 		'[attr.data-state]': 'state()',
