@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { BrnSelectService } from './brn-select.service';
 
 @Component({
-	selector: 'brn-select-value',
+	selector: 'brn-select-value, hlm-select-value',
 	template: `
 		<span>
 			{{ value() && value()?.length ? value() : placeholder() }}
