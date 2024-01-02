@@ -51,8 +51,8 @@ export class PageNavComponent implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild('pageNav', { static: true })
 	pageNavTpl?: TemplateRef<unknown>;
 
-	isDevMode = signal(isDevMode());
-	links = signal<SamePageAnchorLink[]>([]);
+	protected readonly isDevMode = signal(isDevMode());
+	protected readonly links = signal<SamePageAnchorLink[]>([]);
 
 	private page: HTMLElement = (inject(ElementRef).nativeElement as HTMLElement).previousSibling as HTMLElement;
 
