@@ -1,11 +1,10 @@
 import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { BrnSelectContentDirective } from '@spartan-ng/ui-select-brain';
 import { ClassValue } from 'clsx';
 
+// brn-select-content [hlm]
 @Directive({
 	selector: '[hlmSelectContent], hlm-select-content',
-	hostDirectives: [BrnSelectContentDirective],
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
