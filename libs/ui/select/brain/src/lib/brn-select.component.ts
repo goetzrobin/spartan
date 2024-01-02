@@ -16,7 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { map, tap } from 'rxjs';
-import { BrnSelectContentDirective } from './brn-select-content.directive';
+import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 import { BrnSelectService } from './brn-select.service';
@@ -24,7 +24,7 @@ import { BrnSelectService } from './brn-select.service';
 let nextId = 0;
 
 @Component({
-	selector: 'brn-select',
+	selector: 'brn-select, hlm-select',
 	standalone: true,
 	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -85,8 +85,8 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	protected selectTrigger!: BrnSelectTriggerDirective;
 
 	/** Overlay pane containing the options. */
-	@ContentChild(BrnSelectContentDirective)
-	protected selectContent!: BrnSelectContentDirective;
+	@ContentChild(BrnSelectContentComponent)
+	protected selectContent!: BrnSelectContentComponent;
 
 	@ContentChildren(BrnSelectOptionDirective, { descendants: true })
 	options!: QueryList<BrnSelectOptionDirective>;
@@ -139,6 +139,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	];
 
 	constructor() {
+		console.log('boom');
 		this._selectService.state.update((state) => ({
 			...state,
 			id: `brn-select-${nextId++}`,
@@ -179,7 +180,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	/** Toggles the overlay panel open or closed. */
 	toggle(): void {
-		console.log('mdaksjnkjnj', this.isExpanded());
 		this.isExpanded() ? this.close() : this.open();
 	}
 
