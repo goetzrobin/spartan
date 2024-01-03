@@ -3,7 +3,7 @@ import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angul
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from './helm/src';
 
-const meta: Meta<HlmLabelDirective> = {
+const meta: Meta<{}> = {
 	title: 'Label',
 	component: HlmLabelDirective,
 	tags: ['autodocs'],
@@ -24,6 +24,9 @@ const meta: Meta<HlmLabelDirective> = {
 				type: 'select',
 			},
 		},
+		id: {
+			control: 'text',
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -39,8 +42,8 @@ export const Default: Story = {
 	render: ({ ...args }) => ({
 		props: args,
 		template: `
-    <label hlmLabel>E-Mail
-        <input class='w-80' hlmInput ${argsToTemplate(args)} type='email' placeholder='Email'/>
+    <label hlmLabel ${argsToTemplate(args)}>E-Mail
+        <input class='w-80' hlmInput  type='email' placeholder='Email'/>
     </label>
     `,
 	}),
@@ -50,10 +53,8 @@ export const InputRequired: Story = {
 	render: ({ ...args }) => ({
 		props: { ...args, value: '' },
 		template: `
-    <label hlmLabel>E-Mail *
-        <input [(ngModel)]="value" class='w-80' hlmInput ${argsToTemplate(
-					args,
-				)} type='email' placeholder='Email *' required/>
+    <label hlmLabel ${argsToTemplate(args)}>E-Mail *
+        <input [(ngModel)]="value" class='w-80' hlmInput  type='email' placeholder='Email *' required/>
     </label>
     `,
 	}),

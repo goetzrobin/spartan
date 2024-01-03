@@ -42,6 +42,7 @@
 			"@spartan-ng/ui-hovercard-helm": ["libs/ui/hover-card/helm/src/index.ts"],
 			"@spartan-ng/ui-icon-helm": ["libs/ui/icon/helm/src/index.ts"],
 			"@spartan-ng/ui-input-helm": ["libs/ui/input/helm/src/index.ts"],
+			"@spartan-ng/ui-label-brain": ["libs/ui/label/brain/src/index.ts"],
 			"@spartan-ng/ui-label-helm": ["libs/ui/label/helm/src/index.ts"],
 			"@spartan-ng/ui-menu-brain": ["libs/ui/menu/brain/src/index.ts"],
 			"@spartan-ng/ui-menu-helm": ["libs/ui/menu/helm/src/index.ts"],
