@@ -16,7 +16,15 @@ export default defineConfig(({ mode }) => {
 			include: ['@angular/common', '@angular/forms', 'isomorphic-fetch'],
 		},
 		ssr: {
-			noExternal: ['@spartan-ng/**', '@angular/cdk/**', '@ng-icons/**', 'ngx-scrollbar/**', 'ng-signal-forms/**'],
+			noExternal: [
+				'@spartan-ng/**',
+				'@angular/cdk/**',
+				'@ng-icons/**',
+				'ngx-scrollbar/**',
+				'ng-signal-forms/**',
+				'@tanstack/angular-query-experimental/**',
+				'@tanstack/angular-query-devtools-experimental/**',
+			],
 		},
 		build: {
 			target: ['es2020'],

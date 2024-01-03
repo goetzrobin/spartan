@@ -1,16 +1,14 @@
 import { RouteMeta } from '@analogjs/router';
-import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { waitFor } from '@spartan-ng/trpc';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
+import { injectMutation, injectQuery } from '@tanstack/angular-query-experimental';
 import { SignalFormBuilder, SignalInputDirective, V, withErrorComponent } from 'ng-signal-forms';
-import { Observable, Subject, catchError, of, switchMap, take, tap } from 'rxjs';
-import { Note } from '../../../../../db';
+import { lastValueFrom } from 'rxjs';
 import { injectTRPCClient } from '../../../../../trpc-client';
 import { InputErrorComponent } from '../../../../shared/input-error/input-error.component';
 import { SpartanInputErrorDirective } from '../../../../shared/input-error/input-error.directive';
@@ -27,13 +25,10 @@ export const routeMeta: RouteMeta = {
 @Component({
 	selector: 'spartan-notes-example',
 	standalone: true,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.Emulated,
 	imports: [
-		AsyncPipe,
 		FormsModule,
-		NgFor,
-		DatePipe,
-		NgIf,
-		JsonPipe,
 
 		RouterLink,
 		SignalInputDirective,
@@ -53,7 +48,7 @@ export const routeMeta: RouteMeta = {
 		class: 'block p-2 sm:p-4 pb-16',
 	},
 	template: `
-		<form class="flex flex-col items-end py-2">
+		<form class="flex flex-col items-end py-2" (ngSubmit)="createNote()">
 			<label hlmLabel class="w-full">
 				Title
 				<input
@@ -81,76 +76,51 @@ export const routeMeta: RouteMeta = {
 				></textarea>
 			</label>
 
-			<button hlmBtn [disabled]="createLoad()" variant="secondary" (click)="createNote()">
-				<span>{{ createLoad() ? 'Creating' : 'Create' }} Note</span>
-				<hlm-spinner *ngIf="createLoad()" class="ml-2" size="sm" />
+			<button hlmBtn [disabled]="_createMutation.isPending()" variant="secondary">
+				@if (_createMutation.isPending()) {
+					Creating Note
+					<hlm-spinner class="ml-2" size="sm" />
+				} @else {
+					Create Note
+				}
 			</button>
 		</form>
 		<div class="flex flex-col space-y-4 pb-12 pt-4">
-			<ng-container *ngIf="showNotesArray()">
+			@for (note of _notesQuery.data() ?? []; track note.id) {
 				<analog-trpc-note
-					*ngFor="let note of state().notes ?? []; trackBy: noteTrackBy"
 					[note]="note"
-					[deletionInProgress]="deleteIdInProgress() === note.id"
-					(deleteClicked)="deleteNote(note.id)"
+					[deletionInProgress]="_deleteMutation.isPending()"
+					(deleteClicked)="_deleteMutation.mutate(note.id)"
 				/>
-				<analog-trpc-notes-empty class="border-transparent shadow-none" *ngIf="noNotes()"></analog-trpc-notes-empty>
-			</ng-container>
-
-			<analog-trpc-note-skeleton *ngIf="initialLoad() || createLoad()" />
+			} @empty {
+				<analog-trpc-notes-empty class="border-transparent shadow-none" />
+			}
+			@if (_notesQuery.isPending()) {
+				<analog-trpc-note-skeleton />
+			}
 		</div>
 	`,
 })
 export default class NotesExamplePageComponent {
-	private _trpc = injectTRPCClient();
-	private _sfb = inject(SignalFormBuilder);
-	private _refreshNotes$ = new Subject<void>();
-	private _notes$ = this._refreshNotes$.pipe(
-		switchMap(() => this._trpc.note.list.query()),
-		tap((result) =>
-			this.state.update((state) => ({
-				...state,
-				status: 'success',
-				notes: result,
-				error: null,
-			})),
-		),
-		catchError((err) => {
-			this.state.update((state) => ({
-				...state,
-				notes: [],
-				status: 'error',
-				error: err,
-			}));
-			return of([]);
-		}),
-	);
+	private readonly _sfb = inject(SignalFormBuilder);
+	private readonly _trpc = injectTRPCClient();
 
-	public state = signal<{
-		status: 'idle' | 'loading' | 'success' | 'error';
-		notes: Note[];
-		error: unknown | null;
-		updatedFrom: 'initial' | 'create' | 'delete';
-		idBeingDeleted?: number;
-	}>({
-		status: 'idle',
-		notes: [],
-		error: null,
-		updatedFrom: 'initial',
-	});
-	public initialLoad = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'initial');
-	public createLoad = computed(() => this.state().status === 'loading' && this.state().updatedFrom === 'create');
-	public deleteIdInProgress = computed(() =>
-		this.state().status === 'loading' && this.state().updatedFrom === 'delete'
-			? this.state().idBeingDeleted
-			: undefined,
-	);
-	public noNotes = computed(() => this.state().notes.length === 0);
-	public showNotesArray = computed(
-		() => this.state().updatedFrom === 'delete' || this.state().notes.length > 0 || this.state().status === 'success',
-	);
+	protected readonly _notesQuery = injectQuery(() => ({
+		queryKey: ['notes'],
+		queryFn: () => lastValueFrom(this._trpc.note.list.query()),
+	}));
 
-	public form = this._sfb.createFormGroup(() => ({
+	protected readonly _createMutation = injectMutation((client) => ({
+		mutationFn: (input: { title: string; content: string }) => lastValueFrom(this._trpc.note.create.mutate(input)),
+		onSuccess: () => client.invalidateQueries({ queryKey: ['notes'] }),
+	}));
+
+	protected readonly _deleteMutation = injectMutation((client) => ({
+		mutationFn: (id: number) => lastValueFrom(this._trpc.note.remove.mutate({ id })),
+		onSuccess: () => client.invalidateQueries({ queryKey: ['notes'] }),
+	}));
+
+	protected readonly form = this._sfb.createFormGroup(() => ({
 		title: this._sfb.createFormField<string>('', {
 			validators: [
 				{
@@ -169,46 +139,12 @@ export default class NotesExamplePageComponent {
 		}),
 	}));
 
-	constructor() {
-		this._notes$.subscribe();
-		void waitFor(this._notes$);
-		this.updateNotes('initial');
-	}
-
-	public noteTrackBy = (index: number, note: Note) => {
-		return note.id;
-	};
-
-	public createNote() {
-		if (this.form.state() !== 'VALID') {
+	createNote() {
+		if (!this.form.valid()) {
 			this.form.markAllAsTouched();
 			return;
 		}
-		const { title, content } = this.form.value();
-		this.updateNotes('create', this._trpc.note.create.mutate({ title, content }));
+		this._createMutation.mutate(this.form.value());
 		this.form.reset();
-	}
-
-	public deleteNote(id: number) {
-		this.updateNotes('delete', this._trpc.note.remove.mutate({ id }), id);
-	}
-
-	private updateNotes(
-		updatedFrom: 'initial' | 'create' | 'delete',
-		operation?: Observable<Note | Note[]>,
-		idBeingDeleted?: number,
-	) {
-		this.state.update((state) => ({
-			status: 'loading',
-			notes: state.notes,
-			error: null,
-			updatedFrom,
-			idBeingDeleted,
-		}));
-		if (!operation) {
-			this._refreshNotes$.next();
-			return;
-		}
-		operation.pipe(take(1)).subscribe(() => this._refreshNotes$.next());
 	}
 }
