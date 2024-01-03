@@ -27,9 +27,6 @@ const meta: Meta<{}> = {
 		id: {
 			control: 'text',
 		},
-		value: {
-			control: 'text',
-		},
 	},
 	decorators: [
 		moduleMetadata({
