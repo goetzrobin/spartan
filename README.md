@@ -52,7 +52,7 @@ You can find all UI primitives in the `libs/ui` folder.
 
 Each primitive is made up off a un-styled `brain` library, which provides all functionality and a `helm` library, which adds the styles.
 
-There's also a `libs/tools` folder, which contains the Nx-plugin code that allows users to add spartan/ui to their Nx workspace in a simple way.
+There's also a `libs/cli` folder, which contains the Nx-plugin & Angular CLI code that allows users to add spartan/ui to their Nx or Angular workspace in a simple way.
 
 ### Development with storybook
 
