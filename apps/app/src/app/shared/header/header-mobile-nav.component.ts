@@ -12,11 +12,11 @@ import {
 	BrnSheetOverlayComponent,
 	BrnSheetTriggerDirective,
 } from '@spartan-ng/ui-sheet-brain';
-import { HlmSheetCloseDirective, HlmSheetContentDirective, HlmSheetOverlayDirective } from '@spartan-ng/ui-sheet-helm';
-import { SideNavContentComponent } from '~/app/shared/layout/side-nav/side-nav-content.component';
-import { SideNavLinkDirective } from '~/app/shared/layout/side-nav/side-nav-link.directive';
-import { SpartanLogoComponent } from '~/app/shared/spartan-logo.component';
-import { NavLinkDirective } from '~/app/shared/spartan-nav-link.directive';
+import { HlmSheetCloseDirective, HlmSheetContentComponent, HlmSheetOverlayDirective } from '@spartan-ng/ui-sheet-helm';
+import { SideNavContentComponent } from '../layout/side-nav/side-nav-content.component';
+import { SideNavLinkDirective } from '../layout/side-nav/side-nav-link.directive';
+import { SpartanLogoComponent } from '../spartan-logo.component';
+import { NavLinkDirective } from '../spartan-nav-link.directive';
 
 @Component({
 	selector: 'spartan-mobile-nav',
@@ -30,7 +30,7 @@ import { NavLinkDirective } from '~/app/shared/spartan-nav-link.directive';
 
 		HlmSheetCloseDirective,
 		HlmSheetOverlayDirective,
-		HlmSheetContentDirective,
+		HlmSheetContentComponent,
 
 		HlmButtonDirective,
 		HlmIconComponent,

@@ -70,7 +70,7 @@ export const routeMeta: RouteMeta = {
 			<h3 class="${hlmH4} mb-2 mt-6">Sides</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
-					<spartan-sheet-side />
+					<spartan-sheet-side-preview />
 				</div>
 				<spartan-code secondTab [code]="sideCode" />
 			</spartan-tabs>
