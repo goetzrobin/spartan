@@ -1,13 +1,15 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { computed, Directive, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
+import { BrnDialogTitleDirective } from '@spartan-ng/ui-dialog-brain';
 import { ClassValue } from 'clsx';
 
 @Directive({
-	selector: '[hlmDialogTitle],[brnDialogTitle][hlm]',
+	selector: '[hlmDialogTitle]',
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
 	},
+	hostDirectives: [BrnDialogTitleDirective],
 })
 export class HlmDialogTitleDirective {
 	private readonly _userCls = signal<ClassValue>('');

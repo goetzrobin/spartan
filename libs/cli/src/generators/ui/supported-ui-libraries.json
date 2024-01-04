@@ -77,11 +77,8 @@
 		"internalName": "ui-command-helm",
 		"peerDependencies": {
 			"@angular/core": "^17.0.0",
-			"@spartan-ng/ui-core": "0.0.1-alpha.318",
-			"clsx": "^1.2.1",
-			"@ngneat/cmdk": "^2.0.0",
-			"@ngneat/overview": "^5.1.1",
-			"@ngneat/until-destroy": "^9.2.3"
+			"@spartan-ng/ui-core": "0.0.1-alpha.319",
+			"clsx": "^1.2.1"
 		}
 	},
 	"dialog": {
@@ -118,10 +115,10 @@
 		"internalName": "ui-label-helm",
 		"peerDependencies": {
 			"@angular/core": "^17.0.0",
-			"@angular/common": "^17.0.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.319",
 			"class-variance-authority": "^0.6.0",
-			"clsx": "^1.2.1"
+			"clsx": "^1.2.1",
+			"@spartan-ng/ui-label-brain": "0.0.1-alpha.319"
 		}
 	},
 	"menu": {
@@ -182,7 +179,10 @@
 			"@angular/core": "^17.0.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.319",
 			"clsx": "^1.2.1",
-			"class-variance-authority": "^0.6.0"
+			"class-variance-authority": "^0.6.0",
+			"@ng-icons/radix-icons": "^25.1.0",
+			"@spartan-ng/ui-sheet-brain": "0.0.1-alpha.319",
+			"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.319"
 		}
 	},
 	"skeleton": {
