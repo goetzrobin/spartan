@@ -18,6 +18,15 @@ describe('switch', () => {
 		cy.findByLabelText(/test switch/i).should('have.attr', 'value', 'on');
 		cy.get('brn-switch').should('have.attr', 'data-state', 'checked');
 	};
+	const verifySwitchValueTrue = () => {
+		cy.findByTestId('switchValue').should('include.text', 'true');
+	};
+	const verifySwitchValueFalse = () => {
+		cy.findByTestId('switchValue').should('include.text', 'false');
+	};
+	const verifySwitchTouched = () => {
+		cy.get('hlm-switch').should('have.class', 'ng-touched');
+	};
 
 	const executeTabEnterTests = () => {
 		verifySwitchSetup();
@@ -126,5 +135,27 @@ describe('switch', () => {
 			// this is the same as label does not change keyboard interaction
 			executeTabSpaceTests,
 		);
+	});
+	describe('form', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=switch--form');
+			cy.injectAxe();
+		});
+
+		it('click interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
+			verifySwitchSetup();
+			verifySwitchOff();
+
+			cy.get('brn-switch-thumb').click();
+			verifySwitchOn();
+			verifySwitchValueTrue();
+
+			cy.get('brn-switch').click();
+			verifySwitchOff();
+			verifySwitchValueFalse();
+			cy.realPress('Tab');
+			cy.realPress('Tab');
+			verifySwitchTouched();
+		});
 	});
 });

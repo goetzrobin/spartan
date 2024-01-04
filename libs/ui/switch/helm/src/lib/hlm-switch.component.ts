@@ -1,8 +1,15 @@
-import { Component, Input, computed, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, booleanAttribute, computed, forwardRef, signal } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui-switch-brain';
 import { ClassValue } from 'clsx';
 import { HlmSwitchThumbDirective } from './hlm-switch-thumb.directive';
+
+export const HLM_SWITCH_VALUE_ACCESSOR = {
+	provide: NG_VALUE_ACCESSOR,
+	useExisting: forwardRef(() => HlmSwitchComponent),
+	multi: true,
+};
 
 @Component({
 	selector: 'hlm-switch',
@@ -18,6 +25,9 @@ import { HlmSwitchThumbDirective } from './hlm-switch-thumb.directive';
 	template: `
 		<brn-switch
 			[class]="_computedClass()"
+			[checked]="_checked()"
+			(changed)="handleChange($event)"
+			(touched)="_onTouched()"
 			[id]="id"
 			[aria-label]="ariaLabel"
 			[aria-labelledby]="ariaLabelledby"
@@ -26,12 +36,48 @@ import { HlmSwitchThumbDirective } from './hlm-switch-thumb.directive';
 			<brn-switch-thumb hlm />
 		</brn-switch>
 	`,
+	providers: [HLM_SWITCH_VALUE_ACCESSOR],
 })
 export class HlmSwitchComponent {
 	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
+	}
+
+	@Output()
+	public changed = new EventEmitter<boolean>();
+
+	handleChange(value: boolean): void {
+		const previousChecked = this._checked();
+		this._checked.set(value);
+		this._onChange(!previousChecked);
+		this.changed.emit(!previousChecked);
+	}
+
+	/** CONROL VALUE ACCESSOR */
+	protected _checked = signal(false);
+	@Input({ transform: booleanAttribute })
+	set checked(value: boolean) {
+		this._checked.set(value);
+	}
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	writeValue(value: any): void {
+		this.checked = !!value;
+	}
+	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
+	protected _onChange = (_: any) => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	protected _onTouched = () => {};
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	registerOnChange(fn: any): void {
+		this._onChange = fn;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	registerOnTouched(fn: any): void {
+		this._onTouched = fn;
 	}
 
 	/** Used to set the id on the underlying brn element. */

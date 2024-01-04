@@ -153,6 +153,8 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 
 	@Output()
 	public changed = new EventEmitter<boolean>();
+	@Output()
+	public touched = new EventEmitter<void>();
 
 	constructor() {
 		rxHostPressedListener().subscribe(() => this.handleChange());
@@ -183,6 +185,7 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 					this.focusVisible.set(false);
 					this.focused.set(false);
 					this._onTouched();
+					this.touched.emit();
 					this._cdr.markForCheck();
 				});
 			}

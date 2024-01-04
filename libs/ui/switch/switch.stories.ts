@@ -1,9 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HlmLabelDirective } from '../label/helm/src';
 import { BrnSwitchComponent, BrnSwitchImports } from './brain/src';
 import { HlmSwitchImports } from './helm/src';
+
+@Component({
+	selector: 'switch-form',
+	standalone: true,
+	template: `
+		<label class="flex items-center" hlmLabel>
+			<hlm-switch [(ngModel)]="switchValue" id="testSwitch" />
+		</label>
+		<p data-testid="switchValue">
+			{{ switchValue }}
+		</p>
+	`,
+	imports: [HlmSwitchImports, FormsModule],
+})
+export class SwitchFormComponent {
+	public switchValue = false;
+}
 
 const meta: Meta<BrnSwitchComponent> = {
 	title: 'Switch',
@@ -11,7 +30,7 @@ const meta: Meta<BrnSwitchComponent> = {
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [BrnSwitchImports, HlmSwitchImports, HlmLabelDirective],
+			imports: [BrnSwitchImports, HlmSwitchImports, HlmLabelDirective, SwitchFormComponent, FormsModule],
 		}),
 	],
 };
@@ -55,6 +74,15 @@ export const Disabled: Story = {
          <label id='testSwitchLabel' for='testSwitch' hlmLabel> Test Switch </label>
        <hlm-switch disabled="true" class='ml-2' id='testSwitch' aria-labelledby='testSwitchLabel' />
       </div>
+    `,
+	}),
+};
+
+type FormStory = StoryObj<SwitchFormComponent>;
+export const Form: FormStory = {
+	render: () => ({
+		template: `
+    <switch-form />
     `,
 	}),
 };
