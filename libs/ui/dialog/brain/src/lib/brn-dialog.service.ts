@@ -80,16 +80,21 @@ export class BrnDialogService implements OnDestroy {
 	private _backdrop: HTMLElement | null = null;
 
 	public closed = new EventEmitter<void>();
+	public stateChange = new EventEmitter<'open' | 'closed'>();
 
 	constructor() {
-		effect(() => {
-			if (this._overlay) {
-				this._renderer.setAttribute(this._overlay, 'data-state', this.state());
-			}
-			if (this._backdrop) {
-				this._renderer.setAttribute(this._backdrop, 'data-state', this.state());
-			}
-		});
+		effect(
+			() => {
+				this.stateChange.emit(this.state());
+				if (this._overlay) {
+					this._renderer.setAttribute(this._overlay, 'data-state', this.state());
+				}
+				if (this._backdrop) {
+					this._renderer.setAttribute(this._backdrop, 'data-state', this.state());
+				}
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	public open<DialogContext>(

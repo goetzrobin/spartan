@@ -25,7 +25,7 @@
 			"@spartan-ng/ui-core": "0.0.1-alpha.319",
 			"clsx": "^1.2.1",
 			"@spartan-ng/ui-alertdialog-brain": "0.0.1-alpha.319",
-			"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.319"
+			"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.320"
 		}
 	},
 	"aspectratio": {
@@ -87,7 +87,7 @@
 			"@angular/core": "^17.0.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.319",
 			"clsx": "^1.2.1",
-			"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.319",
+			"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.320",
 			"@ng-icons/radix-icons": "^25.1.0"
 		}
 	},
