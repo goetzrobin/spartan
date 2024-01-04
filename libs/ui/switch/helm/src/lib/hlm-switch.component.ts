@@ -1,15 +1,23 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { Component, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
+import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui-switch-brain';
 import { ClassValue } from 'clsx';
+import { HlmSwitchThumbDirective } from './hlm-switch-thumb.directive';
 
-@Directive({
-	selector: 'brn-switch[hlm],[hlmSwitch]',
+@Component({
+	selector: 'hlm-switch',
+	imports: [BrnSwitchThumbComponent, BrnSwitchComponent, HlmSwitchThumbDirective],
 	standalone: true,
 	host: {
-		'[class]': '_computedClass()',
+		'[attr.class]': 'undefined',
 	},
+	template: `
+		<brn-switch [class]="_computedClass()">
+			<brn-switch-thumb hlm />
+		</brn-switch>
+	`,
 })
-export class HlmSwitchDirective {
+export class HlmSwitchComponent {
 	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
