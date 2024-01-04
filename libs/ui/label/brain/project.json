@@ -3,7 +3,7 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/label/brain/src",
 	"prefix": "brn",
-	"tags": [],
+	"tags": ["scope:brain"],
 	"projectType": "library",
 	"targets": {
 		"build": {
@@ -38,6 +38,12 @@
 					"libs/ui/label/brain/**/*.html",
 					"libs/ui/label/brain/package.json"
 				]
+			}
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
+			"options": {
+				"libName": "ui-label-brain"
 			}
 		}
 	}
