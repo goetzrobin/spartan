@@ -4,6 +4,7 @@ import analog from '@analogjs/platform';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import replace from '@rollup/plugin-replace';
 import * as path from 'path';
+import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, Plugin, splitVendorChunkPlugin } from 'vite';
 
@@ -11,21 +12,11 @@ import { defineConfig, Plugin, splitVendorChunkPlugin } from 'vite';
 export default defineConfig(({ mode }) => {
 	return {
 		publicDir: 'src/public',
-		server: {
-			host: '127.0.0.1',
-		},
 		optimizeDeps: {
 			include: ['@angular/common', '@angular/forms', 'isomorphic-fetch'],
 		},
 		ssr: {
-			noExternal: [
-				'@analogjs/trpc/**',
-				'@spartan-ng/**',
-				'@angular/cdk/**',
-				'@ng-icons/**',
-				'ngx-scrollbar/**',
-				'ng-signal-forms/**',
-			],
+			noExternal: ['@spartan-ng/**', '@angular/cdk/**', '@ng-icons/**', 'ngx-scrollbar/**', 'ng-signal-forms/**'],
 		},
 		build: {
 			target: ['es2020'],
@@ -58,11 +49,15 @@ export default defineConfig(({ mode }) => {
 						'/components/badge',
 						'/components/button',
 						'/components/card',
+						'/components/checkbox',
 						'/components/collapsible',
 						'/components/combobox',
 						'/components/command',
+						'/components/context-menu',
+						'/components/data-table',
 						'/components/dialog',
 						'/components/dropdown-menu',
+						'/components/hover-card',
 						'/components/input',
 						'/components/label',
 						'/components/menubar',
@@ -74,9 +69,11 @@ export default defineConfig(({ mode }) => {
 						'/components/sheet',
 						'/components/skeleton',
 						'/components/switch',
+						'/components/table',
 						'/components/tabs',
 						'/components/textarea',
 						'/components/toggle',
+						'/components/tooltip',
 
 						'/stack/overview',
 						'/stack/technologies',
@@ -90,8 +87,9 @@ export default defineConfig(({ mode }) => {
 					},
 				},
 				nitro: {
-					preset: 'vercel',
-					serveStatic: false,
+					rollupConfig: {
+						plugins: [typescriptPaths({ tsConfigPath: 'tsconfig.base.json', preserveExtensions: true })],
+					},
 				},
 			}),
 			nxViteTsPaths(),

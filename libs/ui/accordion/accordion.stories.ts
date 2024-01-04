@@ -8,6 +8,7 @@ import { HlmAccordionImports } from './helm/src';
 const meta: Meta<BrnAccordionDirective> = {
 	title: 'Accordion',
 	component: BrnAccordionDirective,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [BrnAccordionImports, HlmAccordionImports, HlmIconComponent],

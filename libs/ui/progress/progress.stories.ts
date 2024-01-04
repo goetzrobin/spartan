@@ -1,10 +1,20 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmLabelDirective } from '../label/helm/src';
-import { BrnProgressImports } from './brain/src';
+import { BrnProgressComponent, BrnProgressImports } from './brain/src';
 import { HlmProgressImports } from './helm/src';
 
-const meta: Meta<{ value: number }> = {
+const meta: Meta<BrnProgressComponent> = {
 	title: 'Progress',
+	component: BrnProgressComponent,
+	tags: ['autodocs'],
+	args: {
+		value: 30,
+	},
+	argTypes: {
+		value: {
+			control: { type: 'range', min: 0, max: 100, step: 2 },
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [BrnProgressImports, HlmProgressImports, HlmLabelDirective],
@@ -13,36 +23,61 @@ const meta: Meta<{ value: number }> = {
 };
 
 export default meta;
-type Story = StoryObj<{ value: number }>;
+type Story = StoryObj<BrnProgressComponent>;
 
-export const Default: Story = {
+export const LoadingNotStarted: Story = {
 	args: {
-		value: 30,
+		value: 0,
 	},
-	render: ({ value }) => ({
-		props: { value },
+	render: ({ ...args }) => ({
+		props: { ...args },
 		template: `
-<div class='max-w-xl'>
     <h2 hlmLabel id='loading'>Loading (not started)</h2>
-    <brn-progress class='mt-2 mb-8' aria-labelledby='loading' hlm value='0'>
+    <brn-progress class='mt-2 mb-8' aria-labelledby='loading' hlm ${argsToTemplate(args)}>
       <brn-progress-indicator hlm/>
     </brn-progress>
+    `,
+	}),
+};
 
-    <h2 hlmLabel id='loading-started'>Loading (started)</h2>
-    <brn-progress class='mt-2 mb-8' aria-labelledby='loading-started' hlm [value]='value'>
+export const LoadingStarted: Story = {
+	render: ({ ...args }) => ({
+		props: { ...args },
+		template: `
+    <h2 hlmLabel id='loading'>Loading (started)</h2>
+    <brn-progress class='mt-2 mb-8' aria-labelledby='loading started' hlm ${argsToTemplate(args)}>
       <brn-progress-indicator hlm/>
     </brn-progress>
+    `,
+	}),
+};
 
+export const Indeterminate: Story = {
+	args: {
+		value: null,
+	},
+	render: ({ ...args }) => ({
+		props: args,
+		template: `
     <h2 hlmLabel id='indeterminate'>Indeterminate</h2>
-    <brn-progress class='mt-2 mb-8' aria-labelledby='indeterminate' hlm [value]='null'>
+    <brn-progress class='mt-2 mb-8' aria-labelledby='indeterminate' hlm ${argsToTemplate(args)}>
       <brn-progress-indicator hlm/>
     </brn-progress>
+    `,
+	}),
+};
 
+export const Complete: Story = {
+	args: {
+		value: 100,
+	},
+	render: ({ ...args }) => ({
+		props: args,
+		template: `
     <h2 hlmLabel id='complete'>Complete</h2>
-    <brn-progress class='mt-2 mb-8' aria-labelledby='complete' hlm value='100'>
+    <brn-progress class='mt-2 mb-8' aria-labelledby='complete' hlm ${argsToTemplate(args)}>
       <brn-progress-indicator hlm/>
     </brn-progress>
-    </div>
     `,
 	}),
 };

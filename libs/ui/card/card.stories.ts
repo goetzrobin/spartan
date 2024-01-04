@@ -8,6 +8,8 @@ import { HlmCardDirective, HlmCardImports } from './helm/src';
 
 const meta: Meta<HlmCardDirective> = {
 	title: 'Card',
+	component: HlmCardDirective,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [HlmCardImports, HlmLabelDirective, HlmInputDirective, HlmButtonDirective, HlmBadgeDirective],

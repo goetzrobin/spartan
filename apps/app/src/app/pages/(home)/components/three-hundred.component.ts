@@ -41,6 +41,13 @@ export class ThreeHundredComponent {
 		'santoshyadavdev',
 		'markostanimirovic',
 		'theo-matzavinos',
+		'jkuri',
+		'dongphuong0905',
+		'DominikPieper',
+		'brandonroberts',
+		'izikd-',
+		'ryancraigmartin',
+		'gaetanBloch',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
 }

@@ -1,86 +1,80 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmButtonDirective> = {
 	title: 'Button',
+	component: HlmButtonDirective,
+	tags: ['autodocs'],
+	args: {
+		variant: 'default',
+		size: 'default',
+	},
+	argTypes: {
+		variant: {
+			options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
+			control: {
+				type: 'select',
+			},
+		},
+		size: {
+			options: ['default', 'sm', 'lg', 'icon'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [HlmButtonDirective],
 		}),
 	],
+	render: ({ ...args }) => ({
+		props: args,
+		template: `<button hlmBtn ${argsToTemplate(args)}>Click me</button>`,
+	}),
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmButtonDirective>;
 
 export const Default: Story = {
-	render: () => ({
-		template: `
-    <div class='flex space-x-3'>
-        <button hlmBtn>Click me</button>
-        <button hlmBtn size='lg'>Large Click me</button>
-        <button hlmBtn size='sm'>Small Click me</button>
-    </div>
-    `,
-	}),
+	args: {
+		variant: 'default',
+		size: 'default',
+	},
 };
 
 export const Destructive: Story = {
-	render: () => ({
-		template: `
-    <div class='flex space-x-3'>
-        <button variant='destructive' hlmBtn>Click me</button>
-        <button variant='destructive' hlmBtn size='lg'>Large Click me</button>
-        <button variant='destructive' hlmBtn size='sm'>Small Click me</button>
-    </div>
-    `,
-	}),
+	args: {
+		variant: 'destructive',
+		size: 'default',
+	},
 };
 
 export const Outline: Story = {
-	render: () => ({
-		template: `
-    <div class='flex space-x-3'>
-        <button variant='outline' hlmBtn>Click me</button>
-        <button variant='outline' hlmBtn size='lg'>Large Click me</button>
-        <button variant='outline' hlmBtn size='sm'>Small Click me</button>
-    </div>
-    `,
-	}),
+	args: {
+		variant: 'outline',
+		size: 'default',
+	},
 };
 
 export const Secondary: Story = {
-	render: () => ({
-		template: `
-    <div class='flex space-x-3'>
-        <button variant='secondary' hlmBtn>Click me</button>
-        <button variant='secondary' hlmBtn size='lg'>Large Click me</button>
-        <button variant='secondary' hlmBtn size='sm'>Small Click me</button>
-    </div>
-    `,
-	}),
+	args: {
+		variant: 'secondary',
+		size: 'default',
+	},
 };
 
 export const Ghost: Story = {
-	render: () => ({
-		template: `
-    <div class='flex space-x-3'>
-        <button variant='ghost' hlmBtn>Click me</button>
-        <button variant='ghost' hlmBtn size='lg'>Large Click me</button>
-        <button variant='ghost' hlmBtn size='sm'>Small Click me</button>
-    </div>
-    `,
-	}),
+	args: {
+		variant: 'ghost',
+		size: 'default',
+	},
 };
 
 export const Link: Story = {
-	render: () => ({
-		template: `
-    <div class='flex space-x-3'>
-        <button variant='link' hlmBtn>Click me</button>
-        <button variant='link' hlmBtn size='lg'>Large Click me</button>
-        <button variant='link' hlmBtn size='sm'>Small Click me</button>
-    </div>
-    `,
-	}),
+	args: {
+		variant: 'link',
+		size: 'default',
+	},
 };

@@ -1,14 +1,17 @@
 import { radixCross1 } from '@ng-icons/radix-icons';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
-import { BrnSheetImports } from './brain/src';
+import { BrnSheetComponent, BrnSheetImports } from './brain/src';
 import { HlmSheetImports } from './helm/src';
 
 export type SheetProps = { side: 'top' | 'bottom' | 'left' | 'right' };
 const meta: Meta<SheetProps> = {
 	title: 'Sheet',
+	component: BrnSheetComponent,
+	tags: ['autodocs'],
+	args: { side: 'left' },
 	argTypes: {
 		side: { control: 'select', options: ['top', 'bottom', 'left', 'right'] },
 	},
@@ -24,11 +27,10 @@ export default meta;
 type Story = StoryObj<SheetProps>;
 
 export const Default: Story = {
-	args: { side: 'left' },
-	render: ({ side }) => ({
-		props: { side },
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
-    <brn-sheet [side]='side' closeDelay='100'>
+    <brn-sheet ${argsToTemplate(args)} closeDelay='100'>
     <brn-sheet-overlay hlm/>
     <button id='edit-profile' variant='outline' brnSheetTrigger hlmBtn>Edit Profile</button>
     <div hlmSheetContent *brnSheetContent='let ctx'>

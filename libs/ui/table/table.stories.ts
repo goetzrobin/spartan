@@ -4,7 +4,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { faker } from '@faker-js/faker';
 import { radixChevronDown } from '@ng-icons/radix-icons';
-import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { debounceTime } from 'rxjs';
 import { HlmButtonDirective, HlmButtonModule } from '../button/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
@@ -14,7 +14,7 @@ import { HlmMenuModule } from '../menu/helm/src';
 import { BrnToggleGroupModule } from '../toggle/brain/src';
 import { HlmToggleGroupModule } from '../toggle/helm/src';
 import { BrnTableModule, PaginatorState, useBrnColumnManager } from './brain/src';
-import { HlmTableModule } from './helm/src';
+import { HlmTableComponent, HlmTableModule } from './helm/src';
 
 const createUsers = (numUsers = 5) => {
 	return Array.from({ length: numUsers }, () => ({
@@ -316,12 +316,19 @@ class TablePresentationOnlyStory {
 	protected readonly _data = signal(createUsers(20));
 }
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmTableComponent> = {
 	title: 'Table',
+	component: HlmTableComponent,
+	tags: ['autodocs'],
+	decorators: [
+		moduleMetadata({
+			imports: [TableStory, TableToggleStory],
+		}),
+	],
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmTableComponent>;
 
 export const Default: Story = {
 	render: () => ({
@@ -333,20 +340,13 @@ export const Default: Story = {
 };
 
 export const PresentationOnly: Story = {
-	name: 'Presentation Only',
 	render: () => ({
-		moduleMetadata: {
-			imports: [TablePresentationOnlyStory],
-		},
 		template: `<table-presentation-only-story/>`,
 	}),
 };
 
 export const Toggle: Story = {
 	render: () => ({
-		moduleMetadata: {
-			imports: [TableToggleStory],
-		},
 		template: `<table-toggle-story/>`,
 	}),
 };

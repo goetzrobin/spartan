@@ -1,26 +1,31 @@
 import { radixExclamationTriangle, radixInfoCircled } from '@ng-icons/radix-icons';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { moduleMetadata } from '@storybook/angular';
+import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { HlmAlertDirective, HlmAlertImports } from './helm/src';
 
 const meta: Meta<HlmAlertDirective> = {
 	title: 'Alert',
+	component: HlmAlertDirective,
+	tags: ['autodocs'],
+	argTypes: {
+		variant: {
+			options: ['default', 'destructive'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [HlmAlertImports, HlmIconComponent],
 			providers: [provideIcons({ radixInfoCircled, radixExclamationTriangle })],
 		}),
 	],
-};
-
-export default meta;
-type Story = StoryObj<HlmAlertDirective>;
-
-export const Default: Story = {
-	render: () => ({
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
-     <div class='max-w-xl' hlmAlert>
+     <div class='max-w-xl' hlmAlert ${argsToTemplate(args)}>
       <hlm-icon name='radixInfoCircled' hlmAlertIcon />
       <h4 hlmAlertTitle>Introducing SPARTAN helm & brain</h4>
       <p hlmAlertDesc>
@@ -34,10 +39,23 @@ export const Default: Story = {
 	}),
 };
 
+export default meta;
+type Story = StoryObj<HlmAlertDirective>;
+
+export const Default: Story = {
+	args: {
+		variant: 'default',
+	},
+};
+
 export const Destructive: Story = {
-	render: () => ({
+	args: {
+		variant: 'destructive',
+	},
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
-     <div hlmAlert class='max-w-xl' variant='destructive'>
+     <div hlmAlert class='max-w-xl' ${argsToTemplate(args)}>
       <hlm-icon name='radixExclamationTriangle' hlmAlertIcon />
       <h4 hlmAlertTitle>Something went wrong...</h4>
       <p hlmAlertDesc>

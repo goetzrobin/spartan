@@ -6,7 +6,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { HlmCodeDirective, HlmSmallDirective } from '../typography/helm/src';
-import { BrnRadioGroupImports } from './brain/src';
+import { BrnRadioGroupComponent, BrnRadioGroupImports } from './brain/src';
 import { HlmRadioGroupImports } from './helm/src';
 
 @Component({
@@ -56,8 +56,10 @@ class RadioGroupExampleComponent {
 	version: string | null = '16.1.4';
 }
 
-const meta: Meta<{}> = {
+const meta: Meta<BrnRadioGroupComponent> = {
 	title: 'Radio Group',
+	component: BrnRadioGroupComponent,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [RadioGroupExampleComponent],
@@ -67,7 +69,7 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<BrnRadioGroupComponent>;
 
 export const Default: Story = {
 	render: () => ({

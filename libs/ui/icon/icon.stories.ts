@@ -1,17 +1,11 @@
 import * as radixIcons from '@ng-icons/radix-icons';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmIconComponent, provideIcons } from './helm/src';
 
-type IconProps = {
-	name: string;
-	size: string;
-	color: string;
-	strokeWidth: number;
-	className: string;
-};
-
-const meta: Meta<IconProps> = {
+const meta: Meta<HlmIconComponent> = {
 	title: 'Icon',
+	component: HlmIconComponent,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [HlmIconComponent],
@@ -21,17 +15,14 @@ const meta: Meta<IconProps> = {
 };
 
 export default meta;
-type Story = StoryObj<IconProps>;
+type Story = StoryObj<HlmIconComponent>;
 
 export const Default: Story = {
-	render: ({ name, size, color, strokeWidth, className }) => ({
-		template: `<hlm-icon class="${className}" name="${name}" size="${size}" color="${color}" strokeWidth="${strokeWidth}" />`,
-	}),
 	args: {
 		name: 'radixCheck',
 		size: 'sm',
 		color: 'red',
-		className: '',
+		class: '',
 		strokeWidth: 1,
 	},
 	argTypes: {
@@ -39,17 +30,22 @@ export const Default: Story = {
 		name: { control: 'select', options: Object.keys(radixIcons) },
 		color: { control: 'color' },
 	},
+	render: ({ ...args }) => ({
+		props: args,
+		template: `<hlm-icon ${argsToTemplate(args)} />`,
+	}),
 };
 
 export const Tailwind: Story = {
-	render: ({ name, className }) => ({
-		template: `<hlm-icon name='${name}' class='${className}' />`,
-	}),
 	args: {
-		className: 'text-red-600 text-5xl',
+		class: 'text-red-600 text-5xl',
 		name: 'radixCheck',
 	},
 	argTypes: {
 		name: { control: 'select', options: Object.keys(radixIcons) },
 	},
+	render: ({ ...args }) => ({
+		props: args,
+		template: `<hlm-icon ${argsToTemplate(args)} />`,
+	}),
 };

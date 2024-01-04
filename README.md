@@ -38,6 +38,13 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 19. [santoshyadavdev](https://github.com/santoshyadavdev)
 20. [markostanimirovic](https://github.com/markostanimirovic)
 21. [theo-matzavinos](https://github.com/theo-matzavinos)
+22. [jkuri](https://github.com/jkuri)
+23. [dongphuong0905](https://github.com/dongphuong0905)
+24. [DominikPieper](https://github.com/DominikPieper)
+25. [brandonroberts](https://github.com/brandonroberts)
+26. [izikd-](https://github.com/izikd-)
+27. [ryancraigmartin](https://github.com/ryancraigmartin)
+28. [gaetanBloch](https://github.com/gaetanBloch)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
@@ -52,7 +59,7 @@ You can find all UI primitives in the `libs/ui` folder.
 
 Each primitive is made up off a un-styled `brain` library, which provides all functionality and a `helm` library, which adds the styles.
 
-There's also a `libs/nx` folder, which contains the Nx-plugin code that allows users to add spartan/ui to their Nx workspace in a simple way.
+There's also a `libs/cli` folder, which contains the Nx-plugin & Angular CLI code that allows users to add spartan/ui to their Nx or Angular workspace in a simple way.
 
 ### Development with storybook
 

@@ -3,10 +3,12 @@ import { HlmButtonDirective } from '../button/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { BrnDialogImports } from './brain/src';
-import { HlmDialogImports } from './helm/src';
+import { HlmDialogComponent, HlmDialogImports } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmDialogComponent> = {
 	title: 'Dialog',
+	component: HlmDialogComponent,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [BrnDialogImports, HlmDialogImports, HlmLabelDirective, HlmButtonDirective, HlmInputDirective],
@@ -15,7 +17,7 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmDialogComponent>;
 
 export const Default: Story = {
 	render: () => ({
