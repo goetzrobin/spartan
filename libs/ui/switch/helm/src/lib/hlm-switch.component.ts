@@ -9,10 +9,20 @@ import { HlmSwitchThumbDirective } from './hlm-switch-thumb.directive';
 	imports: [BrnSwitchThumbComponent, BrnSwitchComponent, HlmSwitchThumbDirective],
 	standalone: true,
 	host: {
-		'[attr.class]': 'undefined',
+		'[attr.class]': 'null',
+		'[attr.id]': 'null',
+		'[attr.aria-label]': 'null',
+		'[attr.aria-labelledby]': 'null',
+		'[attr.aria-describedby]': 'null',
 	},
 	template: `
-		<brn-switch [class]="_computedClass()">
+		<brn-switch
+			[class]="_computedClass()"
+			[id]="id"
+			[aria-label]="ariaLabel"
+			[aria-labelledby]="ariaLabelledby"
+			[aria-describedby]="ariaDescribedby"
+		>
 			<brn-switch-thumb hlm />
 		</brn-switch>
 	`,
@@ -23,6 +33,22 @@ export class HlmSwitchComponent {
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
+
+	/** Used to set the id on the underlying brn element. */
+	@Input()
+	id: string | null = null;
+
+	/** Used to set the aria-label attribute on the underlying brn element. */
+	@Input('aria-label')
+	ariaLabel: string | null = null;
+
+	/** Used to set the aria-labelledby attribute on the underlying brn element. */
+	@Input('aria-labelledby')
+	ariaLabelledby: string | null = null;
+
+	/** Used to set the aria-describedby attribute on the underlying brn element. */
+	@Input('aria-describedby')
+	ariaDescribedby: string | null = null;
 
 	protected _computedClass = computed(() => this._generateClass());
 	private _generateClass() {
