@@ -1,10 +1,11 @@
-import { NgClass } from '@angular/common';
+import { NgClass, isPlatformServer } from '@angular/common';
 import {
 	AfterViewInit,
 	Component,
 	ElementRef,
 	OnDestroy,
 	OnInit,
+	PLATFORM_ID,
 	TemplateRef,
 	ViewChild,
 	inject,
@@ -54,9 +55,22 @@ export class PageNavComponent implements OnInit, AfterViewInit, OnDestroy {
 	protected readonly isDevMode = signal(isDevMode());
 	protected readonly links = signal<SamePageAnchorLink[]>([]);
 
+	private readonly platformId = inject(PLATFORM_ID);
+
+	/**
+	 * Reference to the tag with the main content of the page.
+	 * For this to work, the component should be added immediately after a tag with the [spartanMainSection] directive.
+	 */
 	private page: HTMLElement = (inject(ElementRef).nativeElement as HTMLElement).previousSibling as HTMLElement;
 
 	ngOnInit() {
+		if (isPlatformServer(this.platformId)) {
+			if (isDevMode()) {
+				console.error('This component should not be used for non-SSG/SPA pages.');
+			}
+			return;
+		}
+
 		const selectors = ['[spartanMainSection] spartan-section-sub-heading', '[spartanMainSection] > h3'];
 		const headings = Array.from(this.page.querySelectorAll(selectors.join(',')));
 		const links = headings.map((element) => {
