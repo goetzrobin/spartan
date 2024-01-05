@@ -1,12 +1,12 @@
 {
 	"name": "@spartan-ng/ui-checkbox-brain",
-	"version": "0.0.1-alpha.319",
+	"version": "0.0.1-alpha.320",
 	"peerDependencies": {
 		"@angular/common": "^17.0.0",
 		"@angular/core": "^17.0.0",
 		"@angular/forms": "^17.0.0",
 		"@angular/cdk": "^17.0.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.319"
+		"@spartan-ng/ui-core": "0.0.1-alpha.320"
 	},
 	"dependencies": {},
 	"sideEffects": false,

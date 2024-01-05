@@ -4,7 +4,7 @@ import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
-	selector: '[hlmAlertDialogTitle],[brnAlertDialogTitle][hlm]',
+	selector: '[hlmAlertDialogTitle]',
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',

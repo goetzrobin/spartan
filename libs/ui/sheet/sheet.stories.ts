@@ -1,9 +1,7 @@
-import { radixCross1 } from '@ng-icons/radix-icons';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
-import { BrnSheetComponent, BrnSheetImports } from './brain/src';
+import { BrnSheetComponent, BrnSheetContentDirective, BrnSheetTriggerDirective } from './brain/src';
 import { HlmSheetImports } from './helm/src';
 
 export type SheetProps = { side: 'top' | 'bottom' | 'left' | 'right' };
@@ -17,8 +15,13 @@ const meta: Meta<SheetProps> = {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [BrnSheetImports, HlmSheetImports, HlmButtonDirective, HlmInputDirective, HlmIconComponent],
-			providers: [provideIcons({ radixCross1 })],
+			imports: [
+				BrnSheetTriggerDirective,
+				BrnSheetContentDirective,
+				HlmSheetImports,
+				HlmButtonDirective,
+				HlmInputDirective,
+			],
 		}),
 	],
 };
@@ -30,13 +33,12 @@ export const Default: Story = {
 	render: ({ ...args }) => ({
 		props: args,
 		template: `
-    <brn-sheet ${argsToTemplate(args)} closeDelay='100'>
-    <brn-sheet-overlay hlm/>
+    <hlm-sheet ${argsToTemplate(args)}>
     <button id='edit-profile' variant='outline' brnSheetTrigger hlmBtn>Edit Profile</button>
-    <div hlmSheetContent *brnSheetContent='let ctx'>
+    <hlm-sheet-content *brnSheetContent='let ctx'>
          <hlm-sheet-header>
-          <h3 brnSheetTitle hlm>Edit Profile</h3>
-          <p brnSheetDescription hlm>
+          <h3 hlmSheetTitle>Edit Profile</h3>
+          <p hlmSheetDescription>
           Make changes to your profile here. Click save when you're done.
           </p>
         </hlm-sheet-header>
@@ -57,12 +59,8 @@ export const Default: Story = {
         <hlm-sheet-footer>
           <button hlmBtn type='submit'>Save Changes</button>
         </hlm-sheet-footer>
-        <button brnSheetClose hlm>
-        <span class='sr-only'>Close</span>
-        <hlm-icon class='flex h-4 w-4' size='100%' name='radixCross1'/>
-        </button>
-    </div>
-    </brn-sheet>
+    </hlm-sheet-content>
+    </hlm-sheet>
     `,
 	}),
 };

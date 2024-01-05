@@ -1,7 +1,11 @@
-import { computed, Directive, effect, ElementRef, inject, Input, Renderer2, signal } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, Input, Renderer2, signal } from '@angular/core';
+import { radixCross1 } from '@ng-icons/radix-icons';
 import { hlm, injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/ui-core';
+import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { BrnSheetCloseDirective } from '@spartan-ng/ui-sheet-brain';
 import { cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
+import { HlmSheetCloseDirective } from './hlm-sheet-close.directive';
 
 export const sheetVariants = cva(
 	'fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500',
@@ -22,14 +26,24 @@ export const sheetVariants = cva(
 	},
 );
 
-@Directive({
-	selector: '[hlmSheetContent],[brnSheetContent][hlm]',
+@Component({
+	selector: 'hlm-sheet-content',
 	standalone: true,
+	imports: [HlmSheetCloseDirective, BrnSheetCloseDirective, HlmIconComponent],
+	providers: [provideIcons({ radixCross1 })],
 	host: {
 		'[class]': '_computedClass()',
+		'[attr.data-state]': 'state()',
 	},
+	template: `
+		<ng-content />
+		<button brnSheetClose hlm>
+			<span class="sr-only">Close</span>
+			<hlm-icon class="flex h-4 w-4" size="100%" name="radixCross1" />
+		</button>
+	`,
 })
-export class HlmSheetContentDirective {
+export class HlmSheetContentComponent {
 	private _stateProvider = injectExposesStateProvider({ host: true });
 	private _sideProvider = injectExposedSideProvider({ host: true });
 	public state = this._stateProvider.state ?? signal('closed');

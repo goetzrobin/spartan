@@ -26,8 +26,8 @@ export const Default: Story = {
     <button id='edit-profile' brnDialogTrigger hlmBtn>Edit Profile</button>
     <hlm-dialog-content class='sm:max-w-[425px]' *brnDialogContent='let ctx'>
          <hlm-dialog-header>
-          <h3 brnDialogTitle hlm>Edit profile</h3>
-          <p brnDialogDescription hlm>
+          <h3 hlmDialogTitle>Edit profile</h3>
+          <p hlmDialogDescription>
             Make changes to your profile here. Click save when you're done.
           </p>
         </hlm-dialog-header>
