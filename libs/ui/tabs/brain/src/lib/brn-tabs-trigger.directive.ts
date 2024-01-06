@@ -19,7 +19,7 @@ import { BrnTabsDirective } from './brn-tabs.directive';
 })
 export class BrnTabsTriggerDirective {
 	private _root = inject(BrnTabsDirective);
-	private _elementRef = inject(ElementRef);
+	public elementRef = inject(ElementRef);
 
 	private _key: string | undefined;
 	protected contentId: string | undefined;
@@ -38,7 +38,7 @@ export class BrnTabsTriggerDirective {
 	public disabled = false;
 
 	public focus() {
-		this._elementRef.nativeElement.focus();
+		this.elementRef.nativeElement.focus();
 		if (this._root.$activationMode() === 'automatic') {
 			this.activate();
 		}
@@ -47,5 +47,13 @@ export class BrnTabsTriggerDirective {
 	public activate() {
 		if (!this._key) return;
 		this._root.setValue(this._key);
+	}
+
+	get isSelected(): boolean {
+		return this._isSelected();
+	}
+
+	get key(): string | undefined {
+		return this._key;
 	}
 }
