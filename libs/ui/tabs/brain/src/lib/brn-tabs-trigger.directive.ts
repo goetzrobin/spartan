@@ -18,10 +18,11 @@ import { BrnTabsDirective } from './brn-tabs.directive';
 	},
 })
 export class BrnTabsTriggerDirective {
-	private _root = inject(BrnTabsDirective);
-	public elementRef = inject(ElementRef);
+	public readonly elementRef = inject(ElementRef);
 
+	private readonly _root = inject(BrnTabsDirective);
 	private _key: string | undefined;
+
 	protected contentId: string | undefined;
 	protected labelId: string | undefined;
 	protected readonly _orientation = this._root.$orientation;
