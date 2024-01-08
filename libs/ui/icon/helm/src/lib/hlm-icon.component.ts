@@ -93,7 +93,7 @@ export class HlmIconComponent implements OnDestroy {
 			this._mutObs = new MutationObserver((mutations: MutationRecord[]) => {
 				mutations.forEach((mutation: MutationRecord) => {
 					if (mutation.attributeName !== 'class') return;
-          this._hostClasses.set((mutation.target as Node & { className?: string })?.className ?? '');
+					this._hostClasses.set((mutation.target as Node & { className?: string })?.className ?? '');
 				});
 			});
 			this._mutObs.observe(this._host.nativeElement, {
