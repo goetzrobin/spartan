@@ -38,7 +38,7 @@ type Framework = { label: string; value: string };
 		HlmButtonDirective,
 	],
 	template: `
-		<brn-popover [state]="state()" (closed)="close()" sideOffset="5" closeDelay="100">
+		<brn-popover [state]="state()" (stateChanged)="stateChanged($event)" sideOffset="5" closeDelay="100">
 			<button
 				class="w-[200px] justify-between"
 				id="edit-profile"
@@ -104,8 +104,8 @@ class ComboboxComponent {
 	public currentFramework = signal<Framework | undefined>(undefined);
 	public state = signal<'closed' | 'open'>('closed');
 
-	close() {
-		this.state.set('closed');
+	stateChanged(state: 'open' | 'closed') {
+		this.state.set(state);
 	}
 
 	commandSelected(framework: Framework) {
