@@ -19,7 +19,6 @@ import { CodeComponent } from '../../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../../shared/layout/main-section.directive';
 import { PageBottomNavLinkComponent } from '../../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../../shared/layout/section-sub-heading.component';
@@ -61,7 +60,6 @@ export const routeMeta: RouteMeta = {
 		TabsComponent,
 		TypographyPreviewComponent,
 		CodePreviewDirective,
-		PageNavLinkComponent,
 	],
 	template: `
 		<section spartanMainSection>
@@ -181,21 +179,7 @@ export const routeMeta: RouteMeta = {
 			</spartan-page-bottom-nav>
 		</section>
 
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="installation" label="Installation" />
-			<spartan-page-nav-link fragment="h1" label="h1" />
-			<spartan-page-nav-link fragment="h2" label="h2" />
-			<spartan-page-nav-link fragment="h3" label="h3" />
-			<spartan-page-nav-link fragment="h4" label="h4" />
-			<spartan-page-nav-link fragment="p" label="p" />
-			<spartan-page-nav-link fragment="blockquote" label="blockquote" />
-			<spartan-page-nav-link fragment="list" label="list" />
-			<spartan-page-nav-link fragment="inline-code" label="Inline code" />
-			<spartan-page-nav-link fragment="muted" label="Muted" />
-			<spartan-page-nav-link fragment="small" label="Small" />
-			<spartan-page-nav-link fragment="large" label="Large" />
-			<spartan-page-nav-link fragment="lead" label="Lead" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class TypographyPageComponent {

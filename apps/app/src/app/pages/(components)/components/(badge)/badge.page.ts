@@ -7,7 +7,6 @@ import { MainSectionDirective } from '../../../../shared/layout/main-section.dir
 import { PageBottomNavPlaceholderComponent } from '../../../../shared/layout/page-bottom-nav-placeholder.component';
 import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
@@ -34,7 +33,6 @@ export const routeMeta: RouteMeta = {
 		SectionSubHeadingComponent,
 		TabsComponent,
 		CodePreviewDirective,
-		PageNavLinkComponent,
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
@@ -68,28 +66,28 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
-			<h3 class="${hlmH4} mb-2 mt-6">Default</h3>
+			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Default</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-badge-preview />
 				</div>
 				<spartan-code secondTab [code]="defaultCode" />
 			</spartan-tabs>
-			<h3 class="${hlmH4} mb-2 mt-6">Secondary</h3>
+			<h3 id="examples__secondary" class="${hlmH4} mb-2 mt-6">Secondary</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-badge-secondary />
 				</div>
 				<spartan-code secondTab [code]="secondaryCode" />
 			</spartan-tabs>
-			<h3 class="${hlmH4} mb-2 mt-6">Outline</h3>
+			<h3 id="examples__outline" class="${hlmH4} mb-2 mt-6">Outline</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-badge-outline />
 				</div>
 				<spartan-code secondTab [code]="outlineCode" />
 			</spartan-tabs>
-			<h3 class="${hlmH4} mb-2 mt-6">Destructive</h3>
+			<h3 id="examples__destructive" class="${hlmH4} mb-2 mt-6">Destructive</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-badge-destructive />
@@ -102,11 +100,7 @@ export const routeMeta: RouteMeta = {
 				<spartan-page-bottom-nav-link direction="previous" href="avatar" label="Avatar" />
 			</spartan-page-bottom-nav>
 		</section>
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="installation" label="Installation" />
-			<spartan-page-nav-link fragment="usage" label="Usage" />
-			<spartan-page-nav-link fragment="examples" label="Examples" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class BadgePageComponent {

@@ -9,7 +9,6 @@ import { MainSectionDirective } from '~/app/shared/layout/main-section.directive
 import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
 import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
@@ -37,7 +36,6 @@ const stackLink = 'h-6 underline text-base px-0.5';
 		SectionSubHeadingComponent,
 		TabsComponent,
 		CodePreviewDirective,
-		PageNavLinkComponent,
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
@@ -109,10 +107,7 @@ const stackLink = 'h-6 underline text-base px-0.5';
 				<spartan-page-bottom-nav-placeholder />
 			</spartan-page-bottom-nav>
 		</section>
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="motivation" label="Motivation" />
-			<spartan-page-nav-link fragment="stack" label="The Stack" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class AccordionPageComponent {}
