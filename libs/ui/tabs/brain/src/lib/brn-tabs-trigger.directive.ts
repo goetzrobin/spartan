@@ -8,10 +8,10 @@ import { BrnTabsDirective } from './brn-tabs.directive';
 		'[id]': 'labelId',
 		type: 'button',
 		role: 'tab',
-		'[tabindex]': '_isSelected() ? "0": "-1"',
-		'[attr.aria-selected]': '_isSelected()',
+		'[tabindex]': 'selected() ? "0": "-1"',
+		'[attr.aria-selected]': 'selected()',
 		'[attr.aria-controls]': 'contentId',
-		'[attr.data-state]': "_isSelected() ? 'active' : 'inactive'",
+		'[attr.data-state]': "selected() ? 'active' : 'inactive'",
 		'[attr.data-orientation]': '_orientation()',
 		'[attr.data-disabled]': "disabled ? '' : undefined",
 		'(click)': 'activate()',
@@ -26,7 +26,8 @@ export class BrnTabsTriggerDirective {
 	protected contentId: string | undefined;
 	protected labelId: string | undefined;
 	protected readonly _orientation = this._root.$orientation;
-	protected readonly _isSelected = computed(() => this._root.$value() === this._key);
+
+	public readonly selected = computed(() => this._root.$value() === this._key);
 
 	@Input('brnTabsTrigger')
 	set triggerFor(key: string) {
@@ -48,10 +49,6 @@ export class BrnTabsTriggerDirective {
 	public activate() {
 		if (!this._key) return;
 		this._root.setValue(this._key);
-	}
-
-	get isSelected(): boolean {
-		return this._isSelected();
 	}
 
 	get key(): string | undefined {
