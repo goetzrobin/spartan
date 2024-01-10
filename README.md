@@ -45,6 +45,10 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 26. [izikd-](https://github.com/izikd-)
 27. [ryancraigmartin](https://github.com/ryancraigmartin)
 28. [gaetanBloch](https://github.com/gaetanBloch)
+29. [gergobergo](https://github.com/gergobergo)
+30. [rpacheco124](https://github.com/rpacheco124)
+31. [benjaminforras](https://github.com/benjaminforras)
+32. [jstnjs](https://github.com/jstnjs)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 

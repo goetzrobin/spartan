@@ -48,6 +48,10 @@ export class ThreeHundredComponent {
 		'izikd-',
 		'ryancraigmartin',
 		'gaetanBloch',
+		'gergobergo',
+		'rpacheco124',
+		'benjaminforras',
+		'jstnjs',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
 }
