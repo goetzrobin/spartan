@@ -16,6 +16,7 @@ import { BrnTabsDirective } from './brn-tabs.directive';
 		'[attr.data-disabled]': "disabled ? '' : undefined",
 		'(click)': 'activate()',
 	},
+	exportAs: 'brnTabsTrigger',
 })
 export class BrnTabsTriggerDirective {
 	public readonly elementRef = inject(ElementRef);

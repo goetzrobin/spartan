@@ -11,6 +11,7 @@ import { BrnTabsDirective } from './brn-tabs.directive';
 		'[attr.aria-labelledby]': 'labelId',
 		'[hidden]': '_isSelected() === false',
 	},
+	exportAs: 'brnTabsContent',
 })
 export class BrnTabsContentDirective {
 	private _root = inject(BrnTabsDirective);
