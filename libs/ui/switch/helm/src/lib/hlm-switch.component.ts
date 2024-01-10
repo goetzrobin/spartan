@@ -16,7 +16,7 @@ export const HLM_SWITCH_VALUE_ACCESSOR = {
 	imports: [BrnSwitchThumbComponent, BrnSwitchComponent, HlmSwitchThumbDirective],
 	standalone: true,
 	host: {
-		'[attr.class]': 'null',
+		class: 'contents',
 		'[attr.id]': 'null',
 		'[attr.aria-label]': 'null',
 		'[attr.aria-labelledby]': 'null',
@@ -26,8 +26,9 @@ export const HLM_SWITCH_VALUE_ACCESSOR = {
 		<brn-switch
 			[class]="_computedClass()"
 			[checked]="_checked()"
-			(changed)="handleChange($event)"
+			(changed)="_onChange($event)"
 			(touched)="_onTouched()"
+			[disabled]="_disabled()"
 			[id]="id"
 			[aria-label]="ariaLabel"
 			[aria-labelledby]="ariaLabelledby"
@@ -49,35 +50,21 @@ export class HlmSwitchComponent {
 	public changed = new EventEmitter<boolean>();
 
 	handleChange(value: boolean): void {
-		const previousChecked = this._checked();
 		this._checked.set(value);
-		this._onChange(!previousChecked);
-		this.changed.emit(!previousChecked);
+		this._onChange(value);
+		this.changed.emit(value);
 	}
 
-	/** CONROL VALUE ACCESSOR */
 	protected _checked = signal(false);
 	@Input({ transform: booleanAttribute })
 	set checked(value: boolean) {
 		this._checked.set(value);
 	}
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	writeValue(value: any): void {
-		this.checked = !!value;
-	}
-	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
-	protected _onChange = (_: any) => {};
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	protected _onTouched = () => {};
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnChange(fn: any): void {
-		this._onChange = fn;
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnTouched(fn: any): void {
-		this._onTouched = fn;
+	protected readonly _disabled = signal(false);
+	@Input({ transform: booleanAttribute })
+	set disabled(value: boolean) {
+		this._disabled.set(value);
 	}
 
 	/** Used to set the id on the underlying brn element. */
@@ -96,11 +83,32 @@ export class HlmSwitchComponent {
 	@Input('aria-describedby')
 	ariaDescribedby: string | null = null;
 
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(
+	protected _computedClass = computed(() =>
+		hlm(
 			'group inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
+			this._disabled() ? 'cursor-not-allowed opacity-50' : '',
 			this._userCls(),
-		);
+		),
+	);
+
+	/** CONROL VALUE ACCESSOR */
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	writeValue(value: any): void {
+		this.checked = !!value;
+	}
+	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
+	protected _onChange = (_: any) => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	protected _onTouched = () => {};
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	registerOnChange(fn: any): void {
+		this._onChange = fn;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	registerOnTouched(fn: any): void {
+		this._onTouched = fn;
 	}
 }

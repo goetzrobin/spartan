@@ -43,7 +43,7 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 						<p class="text-sm font-medium leading-none">Push Notifications</p>
 						<p class="text-muted-foreground text-sm">Send notifications to device.</p>
 					</div>
-					<hlm-switch aria-label="Enable notifications" />
+					<hlm-switch class="ml-4" aria-label="Enable notifications" />
 				</div>
 				<div>
 					<div
