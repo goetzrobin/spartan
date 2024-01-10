@@ -162,6 +162,9 @@ create table
   ) tablespace pg_default;
 ```
 
+> [!NOTE] 
+> `.env` should be added to `.gitignore`
+
 ## Understand this workspace
 
 Run `yarn nx graph` to see a diagram of the dependencies of the projects.
