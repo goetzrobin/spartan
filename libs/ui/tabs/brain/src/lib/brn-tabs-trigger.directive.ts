@@ -8,24 +8,27 @@ import { BrnTabsDirective } from './brn-tabs.directive';
 		'[id]': 'labelId',
 		type: 'button',
 		role: 'tab',
-		'[tabindex]': '_isSelected() ? "0": "-1"',
-		'[attr.aria-selected]': '_isSelected()',
+		'[tabindex]': 'selected() ? "0": "-1"',
+		'[attr.aria-selected]': 'selected()',
 		'[attr.aria-controls]': 'contentId',
-		'[attr.data-state]': "_isSelected() ? 'active' : 'inactive'",
+		'[attr.data-state]': "selected() ? 'active' : 'inactive'",
 		'[attr.data-orientation]': '_orientation()',
 		'[attr.data-disabled]': "disabled ? '' : undefined",
 		'(click)': 'activate()',
 	},
+	exportAs: 'brnTabsTrigger',
 })
 export class BrnTabsTriggerDirective {
-	private _root = inject(BrnTabsDirective);
-	private _elementRef = inject(ElementRef);
+	public readonly elementRef = inject(ElementRef);
 
+	private readonly _root = inject(BrnTabsDirective);
 	private _key: string | undefined;
+
 	protected contentId: string | undefined;
 	protected labelId: string | undefined;
 	protected readonly _orientation = this._root.$orientation;
-	protected readonly _isSelected = computed(() => this._root.$value() === this._key);
+
+	public readonly selected = computed(() => this._root.$value() === this._key);
 
 	@Input('brnTabsTrigger')
 	set triggerFor(key: string) {
@@ -38,7 +41,7 @@ export class BrnTabsTriggerDirective {
 	public disabled = false;
 
 	public focus() {
-		this._elementRef.nativeElement.focus();
+		this.elementRef.nativeElement.focus();
 		if (this._root.$activationMode() === 'automatic') {
 			this.activate();
 		}
@@ -47,5 +50,9 @@ export class BrnTabsTriggerDirective {
 	public activate() {
 		if (!this._key) return;
 		this._root.setValue(this._key);
+	}
+
+	get key(): string | undefined {
+		return this._key;
 	}
 }

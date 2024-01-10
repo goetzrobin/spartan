@@ -13,6 +13,7 @@ export type BrnActivationMode = 'automatic' | 'manual';
 		'[attr.data-orientation]': '_orientation()',
 		'[attr.dir]': '_direction()',
 	},
+	exportAs: 'brnTabs',
 })
 export class BrnTabsDirective {
 	protected readonly _orientation = signal<BrnTabsOrientation>('horizontal');

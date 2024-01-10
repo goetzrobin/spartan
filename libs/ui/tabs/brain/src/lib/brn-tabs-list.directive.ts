@@ -13,6 +13,7 @@ import { BrnTabsDirective } from './brn-tabs.directive';
 		'[attr.aria-orientation]': '_orientation()',
 		'[attr.data-orientation]': '_orientation()',
 	},
+	exportAs: 'brnTabsList',
 })
 export class BrnTabsListDirective implements AfterContentInit {
 	private _root = inject(BrnTabsDirective);
