@@ -162,8 +162,7 @@ create table
   ) tablespace pg_default;
 ```
 
-> [!NOTE] 
-> `.env` should be added to `.gitignore`
+> [!NOTE] > `.env` should be added to `.gitignore`
 
 ## Understand this workspace
 
