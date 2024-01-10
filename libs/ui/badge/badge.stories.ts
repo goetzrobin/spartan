@@ -13,7 +13,7 @@ const meta: Meta<HlmBadgeDirective> = {
 			},
 		},
 		size: {
-			options: ['default', 'sm', 'lg'],
+			options: ['default', 'lg'],
 			control: {
 				type: 'select',
 			},

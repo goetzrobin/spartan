@@ -15,7 +15,6 @@ export const badgeVariants = cva(
 			},
 			size: {
 				default: 'text-xs',
-				sm: 'text-xs',
 				lg: 'text-sm',
 			},
 			static: { true: '', false: '' },
@@ -39,6 +38,7 @@ export const badgeVariants = cva(
 		],
 		defaultVariants: {
 			variant: 'default',
+			size: 'default',
 			static: false,
 		},
 	},
