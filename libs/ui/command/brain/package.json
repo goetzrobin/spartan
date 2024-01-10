@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/ui-command-brain",
-	"version": "0.0.1-alpha.320",
+	"version": "0.0.1-alpha.321",
 	"peerDependencies": {
 		"@angular/common": "^17.0.0",
 		"@angular/core": "^17.0.0",

@@ -1,10 +1,10 @@
 {
 	"name": "@spartan-ng/ui-popover-brain",
-	"version": "0.0.1-alpha.320",
+	"version": "0.0.1-alpha.321",
 	"peerDependencies": {
 		"@angular/core": "^17.0.0",
-		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.320",
-		"@spartan-ng/ui-core": "0.0.1-alpha.320"
+		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.321",
+		"@spartan-ng/ui-core": "0.0.1-alpha.321"
 	},
 	"dependencies": {},
 	"sideEffects": false,
