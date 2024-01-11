@@ -21,6 +21,8 @@ import { ThreeHundredItemComponent } from './th-item.component';
 export class ThreeHundredComponent {
 	protected readonly _contributors = [
 		'goetzrobin',
+		'thatsamsonkid',
+		'elite-benni',
 		'mihajm',
 		'ajitzero',
 		'arturgawlik',
@@ -35,7 +37,6 @@ export class ThreeHundredComponent {
 		'Pascalmh',
 		'okkindel',
 		'marcjulian',
-		'elite-benni',
 		'oidre',
 		'nartc',
 		'santoshyadavdev',
@@ -52,6 +53,7 @@ export class ThreeHundredComponent {
 		'rpacheco124',
 		'benjaminforras',
 		'jstnjs',
+		'r3ps4J',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
 }
