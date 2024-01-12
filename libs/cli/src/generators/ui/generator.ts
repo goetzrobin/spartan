@@ -88,6 +88,10 @@ async function createPrimitiveLibraries(
 }
 
 const addIconForDependentPrimitive = async (primitivesToCreate: string[], primitivesDependingOnIcon: string[]) => {
+	if (primitivesToCreate.includes('icon')) {
+		return;
+	}
+
 	if (primitivesDependingOnIcon.some((primitive) => primitivesToCreate.includes(primitive))) {
 		//TODO: Need to check if icon is already installed and skip if it already is
 		const installIcon = (
@@ -105,6 +109,10 @@ const addIconForDependentPrimitive = async (primitivesToCreate: string[], primit
 	}
 };
 const addButtonForDependentPrimitive = async (primitivesToCreate: string[], primitivesDependingOnBtn: string[]) => {
+	if (primitivesToCreate.includes('button')) {
+		return;
+	}
+
 	if (primitivesDependingOnBtn.some((primitive) => primitivesToCreate.includes(primitive))) {
 		//TODO: Need to check if icon is already installed and skip if it already is
 		const installBtn = (
