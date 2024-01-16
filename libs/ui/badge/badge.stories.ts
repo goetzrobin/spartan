@@ -12,6 +12,12 @@ const meta: Meta<HlmBadgeDirective> = {
 				type: 'select',
 			},
 		},
+		size: {
+			options: ['default', 'lg'],
+			control: {
+				type: 'select',
+			},
+		},
 		static: {
 			control: { type: 'boolean' },
 		},
