@@ -69,7 +69,7 @@
 		"react-dom": "^18.2.0",
 		"rxjs": "~7.8.0",
 		"superjson": "^2.2.1",
-		"tailwind-merge": "^1.12.0",
+		"tailwind-merge": "^2.2.0",
 		"tailwindcss-animate": "^1.0.5",
 		"tslib": "~2.6.0",
 		"ufo": "^1.1.1",
