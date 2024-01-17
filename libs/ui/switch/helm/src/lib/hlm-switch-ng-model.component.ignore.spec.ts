@@ -6,15 +6,26 @@ import { HlmSwitchComponent } from './hlm-switch.component';
 	standalone: true,
 	template: `
 		<label class="flex items-center" hlmLabel>
-			<hlm-switch [(ngModel)]="switchValue" id="testSwitchForm" aria-label="test switch" />
+			<hlm-switch
+				[(ngModel)]="switchValue"
+				id="testSwitchForm"
+				aria-label="test switch"
+				(changed)="handleChange($event)"
+			/>
 		</label>
-		<p data-testid="switchValue">
-			{{ switchValue }}
-		</p>
+
+		<p data-testid="switchValue">{{ switchValue }}</p>
+		<p data-testid="changedValue">{{ changedValueTo }}</p>
 	`,
 	imports: [HlmSwitchComponent, FormsModule],
 })
 export class SwitchFormComponent {
 	@Input()
 	public switchValue = false;
+
+	protected changedValueTo: boolean | undefined;
+
+	handleChange(value: boolean) {
+		this.changedValueTo = value;
+	}
 }

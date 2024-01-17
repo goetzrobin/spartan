@@ -26,7 +26,7 @@ export const HLM_SWITCH_VALUE_ACCESSOR = {
 		<brn-switch
 			[class]="_computedClass()"
 			[checked]="_checked()"
-			(changed)="_onChange($event)"
+			(changed)="_handleChange($event)"
 			(touched)="_onTouched()"
 			[disabled]="_disabled()"
 			[id]="id"
@@ -49,7 +49,7 @@ export class HlmSwitchComponent {
 	@Output()
 	public changed = new EventEmitter<boolean>();
 
-	handleChange(value: boolean): void {
+	protected _handleChange(value: boolean): void {
 		this._checked.set(value);
 		this._onChange(value);
 		this.changed.emit(value);

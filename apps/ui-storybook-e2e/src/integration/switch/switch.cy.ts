@@ -21,8 +21,14 @@ describe('switch', () => {
 	const verifySwitchValueTrue = () => {
 		cy.findByTestId('switchValue').should('include.text', 'true');
 	};
+	const verifyChangedValueTrue = () => {
+		cy.findByTestId('changedValue').should('include.text', 'true');
+	};
 	const verifySwitchValueFalse = () => {
 		cy.findByTestId('switchValue').should('include.text', 'false');
+	};
+	const verifyChangedValueFalse = () => {
+		cy.findByTestId('changedValue').should('include.text', 'false');
 	};
 	const verifySwitchTouched = () => {
 		cy.get('hlm-switch').should('have.class', 'ng-touched');
@@ -141,10 +147,12 @@ describe('switch', () => {
 			cy.get('brn-switch-thumb').click();
 			verifySwitchOn();
 			verifySwitchValueTrue();
+			verifyChangedValueTrue();
 
 			cy.get('brn-switch').click();
 			verifySwitchOff();
 			verifySwitchValueFalse();
+			verifyChangedValueFalse();
 			cy.realPress('Tab');
 			cy.realPress('Tab');
 			verifySwitchTouched();
