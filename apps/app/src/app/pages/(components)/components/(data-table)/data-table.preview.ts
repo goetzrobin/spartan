@@ -5,8 +5,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { radixCaretSort, radixChevronDown, radixDotsHorizontal } from '@ng-icons/radix-icons';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
-import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
-import { HlmCheckboxCheckIconComponent, HlmCheckboxDirective } from '@spartan-ng/ui-checkbox-helm';
+import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
@@ -165,9 +164,8 @@ const PAYMENT_DATA: Payment[] = [
 		HlmIconComponent,
 		HlmInputDirective,
 
-		BrnCheckboxComponent,
 		HlmCheckboxCheckIconComponent,
-		HlmCheckboxDirective,
+		HlmCheckboxComponent,
 	],
 	providers: [provideIcons({ radixChevronDown, radixDotsHorizontal, radixCaretSort })],
 	host: {
@@ -214,14 +212,10 @@ const PAYMENT_DATA: Payment[] = [
 		>
 			<brn-column-def name="select">
 				<hlm-th class="w-12" *brnHeaderDef>
-					<brn-checkbox hlm [checked]="_checkboxState()" (changed)="handleHeaderCheckboxChange()">
-						<hlm-checkbox-checkicon />
-					</brn-checkbox>
+					<hlm-checkbox [checked]="_checkboxState()" (changed)="handleHeaderCheckboxChange()" />
 				</hlm-th>
 				<hlm-td class="w-12" *brnCellDef="let element">
-					<brn-checkbox hlm [checked]="_isPaymentSelected(element)" (changed)="togglePayment(element)">
-						<hlm-checkbox-checkicon />
-					</brn-checkbox>
+					<hlm-checkbox [checked]="_isPaymentSelected(element)" (changed)="togglePayment(element)" />
 				</hlm-td>
 			</brn-column-def>
 			<brn-column-def name="status">
@@ -402,8 +396,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { radixCaretSort, radixChevronDown, radixDotsHorizontal } from '@ng-icons/radix-icons';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
-import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
-import { HlmCheckboxCheckIconComponent, HlmCheckboxDirective } from '@spartan-ng/ui-checkbox-helm';
+import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
@@ -562,9 +555,8 @@ const PAYMENT_DATA: Payment[] = [
     HlmIconComponent,
     HlmInputDirective,
 
-    BrnCheckboxComponent,
     HlmCheckboxCheckIconComponent,
-    HlmCheckboxDirective,
+    HlmCheckboxComponent,
   ],
   providers: [provideIcons({ radixChevronDown, radixDotsHorizontal, radixCaretSort })],
   host: {
@@ -611,14 +603,10 @@ const PAYMENT_DATA: Payment[] = [
     >
       <brn-column-def name="select">
         <hlm-th class="w-12" *brnHeaderDef>
-          <brn-checkbox hlm [checked]="_checkboxState()" (changed)="handleHeaderCheckboxChange()">
-            <hlm-checkbox-checkicon />
-          </brn-checkbox>
+          <hlm-checkbox [checked]="_checkboxState()" (changed)="handleHeaderCheckboxChange()"/>
         </hlm-th>
         <hlm-td class="w-12" *brnCellDef="let element">
-          <brn-checkbox hlm [checked]="_isPaymentSelected(element)" (changed)="togglePayment(element)">
-            <hlm-checkbox-checkicon />
-          </brn-checkbox>
+          <hlm-checkbox hlm [checked]="_isPaymentSelected(element)" (changed)="togglePayment(element)"/>
         </hlm-td>
       </brn-column-def>
       <brn-column-def name="status">

@@ -29,7 +29,7 @@ export const BRN_CHECKBOX_VALUE_ACCESSOR = {
 	multi: true,
 };
 
-function indeterminateBooleanAttribute(value: unknown): boolean | 'indeterminate' {
+export function indeterminateBooleanAttribute(value: unknown): boolean | 'indeterminate' {
 	if (value === 'indeterminate') return 'indeterminate';
 	return booleanAttribute(value);
 }
