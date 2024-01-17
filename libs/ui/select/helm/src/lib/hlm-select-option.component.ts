@@ -61,7 +61,7 @@ export class HlmSelectOptionComponent {
 
 	@Input()
 	set disabled(value: boolean) {
-		this.disabled = value;
+		this._disabled = value;
 	}
 	get disabled() {
 		return this._disabled;
