@@ -12,7 +12,7 @@ import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 		'[id]': 'id',
 	},
 	template: `
-		<div class="overflow-hidden">
+		<div style="overflow: hidden">
 			<p [class]="_contentClass()">
 				<ng-content />
 			</p>
