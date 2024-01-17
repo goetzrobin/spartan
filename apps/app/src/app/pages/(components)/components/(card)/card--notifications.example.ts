@@ -1,4 +1,3 @@
-import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { radixBell, radixCheck } from '@ng-icons/radix-icons';
@@ -27,7 +26,6 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 		HlmCardTitleDirective,
 		HlmIconComponent,
 		HlmSwitchComponent,
-		NgForOf,
 	],
 	providers: [provideIcons({ radixCheck, radixBell })],
 	template: `
@@ -46,16 +44,15 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 					<hlm-switch class="ml-4" aria-label="Enable notifications" />
 				</div>
 				<div>
-					<div
-						*ngFor="let notification of notifications"
-						class="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-					>
-						<span class="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500"></span>
-						<div class="space-y-1">
-							<p class="text-sm font-medium leading-none">{{ notification.title }}</p>
-							<p class="text-muted-foreground text-sm">{{ notification.description }}</p>
+					@for (notification of notifications; track notification.id) {
+						<div class="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
+							<span class="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500"></span>
+							<div class="space-y-1">
+								<p class="text-sm font-medium leading-none">{{ notification.title }}</p>
+								<p class="text-muted-foreground text-sm">{{ notification.description }}</p>
+							</div>
 						</div>
-					</div>
+					}
 				</div>
 			</div>
 			<div hlmCardFooter class="justify-between">
@@ -70,23 +67,24 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 export class CardNotificationsComponent {
 	protected notifications = [
 		{
+			id: 1,
 			title: 'Your call has been confirmed.',
 			description: '1 hour ago',
 		},
 		{
+			id: 2,
 			title: 'You have a new message!',
 			description: '1 hour ago',
 		},
 		{
+			id: 3,
 			title: 'Your subscription is expiring soon!',
 			description: '2 hours ago',
 		},
 	];
 }
 
-export const cardNotificationsCode = `
-import { NgForOf } from '@angular/common';
-import { Component } from '@angular/core';
+export const cardNotificationsCode = `import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { radixBell, radixCheck } from '@ng-icons/radix-icons';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -114,7 +112,6 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 		HlmCardTitleDirective,
 		HlmIconComponent,
 		HlmSwitchComponent,
-		NgForOf,
 	],
 	providers: [provideIcons({ radixCheck, radixBell })],
 	template: \`
@@ -130,19 +127,18 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 						<p class="text-sm font-medium leading-none">Push Notifications</p>
 						<p class="text-muted-foreground text-sm">Send notifications to device.</p>
 					</div>
-					<hlm-switch aria-label="Enable notifications" />
+					<hlm-switch class="ml-4" aria-label="Enable notifications" />
 				</div>
 				<div>
-					<div
-						*ngFor="let notification of notifications"
-						class="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-					>
-						<span class="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500"></span>
-						<div class="space-y-1">
-							<p class="text-sm font-medium leading-none">{{ notification.title }}</p>
-							<p class="text-muted-foreground text-sm">{{ notification.description }}</p>
+					@for (notification of notifications; track notification.id) {
+						<div class="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
+							<span class="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500"></span>
+							<div class="space-y-1">
+								<p class="text-sm font-medium leading-none">{{ notification.title }}</p>
+								<p class="text-muted-foreground text-sm">{{ notification.description }}</p>
+							</div>
 						</div>
-					</div>
+					}
 				</div>
 			</div>
 			<div hlmCardFooter class="justify-between">
@@ -157,14 +153,17 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 export class CardNotificationsComponent {
 	protected notifications = [
 		{
+			id: 1,
 			title: 'Your call has been confirmed.',
 			description: '1 hour ago',
 		},
 		{
+			id: 2,
 			title: 'You have a new message!',
 			description: '1 hour ago',
 		},
 		{
+			id: 3,
 			title: 'Your subscription is expiring soon!',
 			description: '2 hours ago',
 		},
