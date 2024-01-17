@@ -59,65 +59,65 @@ describe('checkbox', () => {
 		verifyCheckboxOff();
 	};
 
-	// describe('default', () => {
-	// 	beforeEach(() => {
-	// 		cy.visit('/iframe.html?id=checkbox--default');
-	// 		cy.injectAxe();
-	// 	});
+	describe('default', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=checkbox--default');
+			cy.injectAxe();
+		});
 
-	// 	it('click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click', () => {
-	// 		verifyCheckboxSetup('testCheckbox');
-	// 		verifyCheckboxOff();
+		it('click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click', () => {
+			verifyCheckboxSetup('testCheckbox');
+			verifyCheckboxOff();
 
-	// 		cy.get('#checkbox-label').click();
-	// 		verifyCheckboxOn();
+			cy.get('#checkbox-label').click();
+			verifyCheckboxOn();
 
-	// 		cy.get('brn-checkbox').click();
-	// 		verifyCheckboxOff();
-	// 	});
+			cy.get('brn-checkbox').click();
+			verifyCheckboxOff();
+		});
 
-	// 	it('[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again', () =>
-	// 		executeTabEnterTests('testCheckbox'));
+		it('[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again', () =>
+			executeTabEnterTests('testCheckbox'));
 
-	// 	it('[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space', () =>
-	// 		executeTabSpaceTests('testCheckbox'));
-	// });
+		it('[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space', () =>
+			executeTabSpaceTests('testCheckbox'));
+	});
 
-	// describe('inside label', () => {
-	// 	beforeEach(() => {
-	// 		cy.visit('/iframe.html?id=checkbox--inside-label');
-	// 		cy.injectAxe();
-	// 	});
+	describe('inside label', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=checkbox--inside-label');
+			cy.injectAxe();
+		});
 
-	// 	it('click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click', () =>
-	// 		executeClickOnLabelTests('testCheckbox'));
+		it('click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click', () =>
+			executeClickOnLabelTests('testCheckbox'));
 
-	// 	it('[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again', () =>
-	// 		// this is the same as label does not change keyboard interaction
-	// 		executeTabEnterTests('testCheckbox'));
+		it('[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again', () =>
+			// this is the same as label does not change keyboard interaction
+			executeTabEnterTests('testCheckbox'));
 
-	// 	it('[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space', () =>
-	// 		// this is the same as label does not change keyboard interaction
-	// 		executeTabSpaceTests('testCheckbox'));
-	// });
+		it('[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space', () =>
+			// this is the same as label does not change keyboard interaction
+			executeTabSpaceTests('testCheckbox'));
+	});
 
-	// describe('labeled with aria-labelledby', () => {
-	// 	beforeEach(() => {
-	// 		cy.visit('/iframe.html?id=checkbox--labeled-with-aria-labeled-by');
-	// 		cy.injectAxe();
-	// 	});
+	describe('labeled with aria-labelledby', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=checkbox--labeled-with-aria-labeled-by');
+			cy.injectAxe();
+		});
 
-	// 	it('click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click', () =>
-	// 		executeClickOnLabelTests('testCheckboxAria'));
+		it('click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click', () =>
+			executeClickOnLabelTests('testCheckboxAria'));
 
-	// 	it('[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again', () =>
-	// 		// this is the same as label does not change keyboard interaction
-	// 		executeTabEnterTests('testCheckboxAria'));
+		it('[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again', () =>
+			// this is the same as label does not change keyboard interaction
+			executeTabEnterTests('testCheckboxAria'));
 
-	// 	it('[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space', () =>
-	// 		// this is the same as label does not change keyboard interaction
-	// 		executeTabSpaceTests('testCheckboxAria'));
-	// });
+		it('[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space', () =>
+			// this is the same as label does not change keyboard interaction
+			executeTabSpaceTests('testCheckboxAria'));
+	});
 
 	describe('indeterminate', () => {
 		beforeEach(() => {
