@@ -14,7 +14,7 @@ export default {
 		],
 	},
 	transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
-	testPathIgnorePatterns: ['<rootDir>/src/lib/hlm-switch.ng-model.component.spec.ts'],
+	testPathIgnorePatterns: ['<rootDir>/src/lib/hlm-switch-ng-model.component.ignore.spec.ts'],
 	snapshotSerializers: [
 		'jest-preset-angular/build/serializers/no-ng-attributes',
 		'jest-preset-angular/build/serializers/ng-snapshot',

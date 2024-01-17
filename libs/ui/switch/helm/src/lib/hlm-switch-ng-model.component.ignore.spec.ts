@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HlmSwitchComponent } from './hlm-switch.component';
 @Component({
-	selector: 'hlm-switch-form',
+	selector: 'hlm-switch-ng-model',
 	standalone: true,
 	template: `
 		<label class="flex items-center" hlmLabel>

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
-import { BrnSwitchNgModelSpecComponent } from './brn-switch-ng-model.component.spec';
+import { BrnSwitchNgModelSpecComponent } from './brn-switch-ng-model.component.ignore.spec';
 
 describe('BrnSwitchComponentNgModelIntegration', () => {
 	const setup = async (airplaneMode = false, disabled = false) => {

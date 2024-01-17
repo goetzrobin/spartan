@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HlmLabelDirective } from '../label/helm/src';
 import { BrnSwitchComponent, BrnSwitchImports } from './brain/src';
 import { HlmSwitchImports } from './helm/src';
-import { SwitchFormComponent } from './helm/src/lib/hlm-switch.ng-model.component.spec';
+import { SwitchFormComponent } from './helm/src/lib/hlm-switch-ng-model.component.ignore.spec';
 
 const meta: Meta<BrnSwitchComponent> = {
 	title: 'Switch',
@@ -65,7 +65,7 @@ type FormStory = StoryObj<SwitchFormComponent>;
 export const Form: FormStory = {
 	render: () => ({
 		template: `
-    <hlm-switch-form />
+    <hlm-switch-ng-model />
     `,
 	}),
 };
@@ -77,7 +77,7 @@ export const FormTrue: FormStory = {
 	render: ({ ...args }) => ({
 		props: args,
 		template: `
-    <hlm-switch-form  ${argsToTemplate(args)} />
+    <hlm-switch-ng-model  ${argsToTemplate(args)} />
     `,
 	}),
 };
