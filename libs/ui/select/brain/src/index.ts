@@ -8,6 +8,7 @@ import { BrnSelectComponent } from './lib/brn-select.component';
 export * from './lib/brn-select-content.component';
 export * from './lib/brn-select-option.directive';
 export * from './lib/brn-select-trigger.directive';
+export * from './lib/brn-select-value.component';
 export * from './lib/brn-select.component';
 export * from './lib/brn-select.service';
 
