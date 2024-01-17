@@ -1,5 +1,4 @@
-import { Directive, ElementRef, OnDestroy, computed, inject } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Directive, ElementRef, computed, inject } from '@angular/core';
 import { BrnSelectService } from './brn-select.service';
 
 @Directive({
@@ -13,9 +12,7 @@ import { BrnSelectService } from './brn-select.service';
 		'[attr.aria-controls]': "selectContentId() + ''",
 	},
 })
-export class BrnSelectTriggerDirective implements OnDestroy {
-	unsubscribe = new Subject<boolean>();
-
+export class BrnSelectTriggerDirective {
 	private _selectService = inject(BrnSelectService);
 
 	readonly isExpanded = this._selectService.isExpanded;
@@ -29,10 +26,5 @@ export class BrnSelectTriggerDirective implements OnDestroy {
 
 	focus() {
 		this.el.nativeElement.focus();
-	}
-
-	ngOnDestroy(): void {
-		this.unsubscribe.next(true);
-		this.unsubscribe.complete();
 	}
 }
