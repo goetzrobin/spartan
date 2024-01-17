@@ -58,7 +58,6 @@ export class HlmCheckboxComponent {
 	protected _checked = signal<boolean | 'indeterminate'>(false);
 	@Input({ transform: indeterminateBooleanAttribute })
 	set checked(value: boolean | 'indeterminate') {
-		console.log('checked in hlm', value);
 		this._checked.set(value);
 	}
 
