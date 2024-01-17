@@ -16,9 +16,10 @@ import { BrnSelectService } from './brn-select.service';
 	host: {
 		'[attr.aria-labelledBy]': 'labelledBy()',
 		'[attr.aria-controlledBy]': "id() +'-trigger'",
-		class: 'flex flex-col',
 		styles: `
 		:host {
+			display: flex;
+			flex-direction: column;
 			scrollbar-width:"none";
 			-ms-overflow-style:"none";
 			-webkit-overflow-scrolling:"touch";
