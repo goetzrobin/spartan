@@ -1,4 +1,4 @@
-import { names, ProjectConfiguration, readJson, Tree, workspaceRoot } from '@nx/devkit';
+import { formatFiles, names, ProjectConfiguration, readJson, Tree, workspaceRoot } from '@nx/devkit';
 import * as path from 'path';
 import { addPrimitiveToSupportedUILibraries } from './lib/add-primitive-to-supported-ui-libraries';
 import { copyFilesFromHlmLibToGenerator, createSharedGeneratorFiles, recursivelyDelete } from './lib/file-management';
@@ -41,6 +41,8 @@ export async function hlmCliNxGeneratorGenerator(tree: Tree, options: HlmToCliGe
 
 		createGeneratorFromHlmLibrary(projects, primitiveName, internalName, tree, options);
 	});
+
+	await formatFiles(tree);
 }
 
 export default hlmCliNxGeneratorGenerator;
