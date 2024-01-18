@@ -24,7 +24,7 @@ export const HLM_CHECKBOX_VALUE_ACCESSOR = {
 			[disabled]="_disabled()"
 			[id]="id"
 		>
-			<hlm-checkbox-checkicon />
+			<hlm-checkbox-checkicon [iconName]="_checkIconName()" />
 		</brn-checkbox>
 	`,
 	host: {
@@ -41,6 +41,11 @@ export class HlmCheckboxComponent {
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
+	}
+	protected readonly _checkIconName = signal<string>('radixCheck');
+	@Input()
+	set checkIconName(checkIconName: string) {
+		this._checkIconName.set(checkIconName);
 	}
 
 	@Output()
