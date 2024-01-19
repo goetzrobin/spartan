@@ -14,7 +14,7 @@ import { ClassValue } from 'clsx';
 		'[class]': '_computedClass()',
 	},
 	template: `
-		<hlm-icon size="sm" name="radixCheck" />
+		<hlm-icon size="sm" [name]="_iconName()" />
 	`,
 })
 export class HlmCheckboxCheckIconComponent {
@@ -24,6 +24,12 @@ export class HlmCheckboxCheckIconComponent {
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
+	}
+
+	protected readonly _iconName = signal<string>('radixCheck');
+	@Input()
+	set iconName(iconName: string) {
+		this._iconName.set(iconName);
 	}
 
 	protected _computedClass = computed(() => this._generateClass());

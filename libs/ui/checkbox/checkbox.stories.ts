@@ -3,30 +3,27 @@ import { moduleMetadata } from '@storybook/angular';
 
 import { HlmIconComponent } from '../icon/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
-import { BrnCheckboxComponent, BrnCheckboxImports } from './brain/src';
-import { HlmCheckboxImports } from './helm/src';
+import { HlmCheckboxComponent, HlmCheckboxImports } from './helm/src';
 
-const meta: Meta<BrnCheckboxComponent> = {
+const meta: Meta<HlmCheckboxComponent> = {
 	title: 'Checkbox',
-	component: BrnCheckboxComponent,
+	component: HlmCheckboxComponent,
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [BrnCheckboxImports, HlmCheckboxImports, HlmLabelDirective, HlmIconComponent],
+			imports: [HlmCheckboxImports, HlmLabelDirective, HlmIconComponent],
 		}),
 	],
 };
 
 export default meta;
-type Story = StoryObj<BrnCheckboxComponent>;
+type Story = StoryObj<HlmCheckboxComponent>;
 
 export const Default: Story = {
 	render: () => ({
 		template: `
-    <label id='checkbox-label' class='' hlmLabel>
-       <brn-checkbox id='testCheckbox' aria-checked='mixed' aria-label='test checkbox' hlm>
-       <hlm-checkbox-checkicon />
-      </brn-checkbox>
+    <label id='checkbox-label' class='' hlmLabel> Test Checkbox
+       <hlm-checkbox id='testCheckbox' aria-checked='mixed' aria-label='test checkbox'/>
     </label>
     `,
 	}),
@@ -36,9 +33,7 @@ export const InsideLabel: Story = {
 	render: () => ({
 		template: `
       <label id='checkbox-label' class='flex items-center' hlmLabel> Test Checkbox
-        <brn-checkbox class='ml-2' id='testCheckbox' hlm>
-          <hlm-checkbox-checkicon />
-        </brn-checkbox>
+        <hlm-checkbox class='ml-2' id='testCheckbox'/>
       </label>
     `,
 	}),
@@ -48,10 +43,8 @@ export const LabeledWithAriaLabeledBy: Story = {
 	render: () => ({
 		template: `
       <div id='checkbox-label' class='flex items-center'>
-         <label id='testCheckboxLabel' for='testCheckbox' hlmLabel> Test Checkbox </label>
-         <brn-checkbox class='ml-2' id='testCheckbox' aria-labelledby='testCheckboxLabel' hlm>
-           <hlm-checkbox-checkicon />
-         </brn-checkbox>
+         <label id='testCheckbox' for='testCheckboxAria' hlmLabel> Test Checkbox </label>
+         <hlm-checkbox class='ml-2' id='testCheckboxAria' aria-labelledby='testCheckbox'/>
       </div>
     `,
 	}),
@@ -60,25 +53,18 @@ export const disabled: Story = {
 	render: () => ({
 		template: `
       <div class='flex items-center'>
-         <label id='checkbox-label' for='testCheckbox' hlmLabel> Test Checkbox </label>
-       <brn-checkbox disabled class='ml-2' id='testCheckbox' aria-labelledby='testCheckboxLabel' hlm>
-         <hlm-checkbox-checkicon />
-        </brn-checkbox>
+         <label id='checkbox-label' for='testCheckboxDis1' hlmLabel> Test Checkbox </label>
+       <hlm-checkbox disabled class='ml-2' id='testCheckboxDis1' aria-labelledby='testCheckbox'/>
       </div>
 
       <div class='flex items-center pt-4'>
-        <brn-checkbox disabled id='testCheckbox2' hlm>
-          <hlm-checkbox-checkicon />
-        </brn-checkbox>
-        <label class ="ml-2" for='testCheckbox2' hlmLabel> Test Checkbox 2</label>
+        <hlm-checkbox disabled id='testCheckboxDis2'/>
+        <label class ="ml-2" for='testCheckboxDis2' hlmLabel> Test Checkbox 2</label>
       </div>
 
-
       <div class='flex items-center pt-4'>
-      <brn-checkbox id='testCheckbox3' hlm>
-        <hlm-checkbox-checkicon />
-      </brn-checkbox>
-      <label class ="ml-2" for='testCheckbox3' hlmLabel> Test Checkbox 3 enabled</label>
+      <hlm-checkbox id='testCheckboxDis3' />
+      <label class ="ml-2" for='testCheckboxDis3' hlmLabel> Test Checkbox 3 enabled</label>
     </div>
     `,
 	}),
@@ -88,10 +74,8 @@ export const indeterminate: Story = {
 	render: () => ({
 		template: `
       <div id='checkbox-label' class='flex items-center'>
-         <label id='testCheckboxLabel' for='testCheckbox' hlmLabel> Test Checkbox </label>
-         <brn-checkbox hlm checked="indeterminate" class='ml-2' id='testCheckbox' aria-labelledby='testCheckboxLabel'>
-           <hlm-checkbox-checkicon />
-         </brn-checkbox>
+         <label id='testCheckbox' for='testCheckboxIndeterminate' hlmLabel> Test Checkbox </label>
+         <hlm-checkbox checked="indeterminate" class='ml-2' id='testCheckboxIndeterminate' aria-labelledby='testCheckbox'/>
       </div>
     `,
 	}),

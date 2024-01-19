@@ -1,16 +1,18 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { InstallationCsComponent } from '~/app/pages/(components)/components/installation-cs.component';
-import { CodePreviewDirective } from '~/app/shared/code/code-preview.directive';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { TabsComponent } from '~/app/shared/layout/tabs.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
+import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
+import { CodeComponent } from '../../../../shared/code/code.component';
+import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
+import { TabsComponent } from '../../../../shared/layout/tabs.component';
+import { metaWith } from '../../../../shared/meta/meta.util';
+import { InstallationCsComponent } from '../installation-cs.component';
+import { CheckboxOwnIconComponent, checkboxOwnIconCode } from './checkbox--own-icon.example';
 import { CheckboxPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './checkbox.preview';
 
 export const routeMeta: RouteMeta = {
@@ -33,6 +35,7 @@ export const routeMeta: RouteMeta = {
 		PageBottomNavLinkComponent,
 		CheckboxPreviewComponent,
 		InstallationCsComponent,
+		CheckboxOwnIconComponent,
 	],
 	template: `
 		<section spartanMainSection>
@@ -64,6 +67,18 @@ export const routeMeta: RouteMeta = {
 				<spartan-page-bottom-nav-link href="collapsible" label="Collapsible" />
 				<spartan-page-bottom-nav-link direction="previous" href="card" label="Card" />
 			</spartan-page-bottom-nav>
+			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
+			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Own Icon</h3>
+			<p class="py-2">Make sure to provide the Icon.</p>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-checkbox-own-icon />
+				</div>
+
+				<div secondTab>
+					<spartan-code [code]="checkboxOwnIconCode" />
+				</div>
+			</spartan-tabs>
 		</section>
 		<spartan-page-nav />
 	`,
@@ -72,4 +87,5 @@ export default class SkeletonPageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
+	protected readonly checkboxOwnIconCode = checkboxOwnIconCode;
 }
