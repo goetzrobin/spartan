@@ -1,5 +1,5 @@
 describe('switch', () => {
-	const verifySwitchSetup = () => {
+	const verifySwitchSetup = (id: string) => {
 		cy.checkA11y('#storybook-root', {
 			rules: {
 				'page-has-heading-one': { enabled: false },
@@ -8,7 +8,7 @@ describe('switch', () => {
 		});
 		cy.findByRole('switch').should('exist');
 		cy.findByRole('switch').should('have.attr', 'type', 'checkbox');
-		cy.findByRole('switch').should('have.id', 'testSwitch');
+		cy.findByRole('switch').should('have.id', id);
 	};
 	const verifySwitchOff = () => {
 		cy.findByLabelText(/test switch/i).should('have.attr', 'value', 'off');
@@ -18,9 +18,24 @@ describe('switch', () => {
 		cy.findByLabelText(/test switch/i).should('have.attr', 'value', 'on');
 		cy.get('brn-switch').should('have.attr', 'data-state', 'checked');
 	};
+	const verifySwitchValueTrue = () => {
+		cy.findByTestId('switchValue').should('include.text', 'true');
+	};
+	const verifyChangedValueTrue = () => {
+		cy.findByTestId('changedValue').should('include.text', 'true');
+	};
+	const verifySwitchValueFalse = () => {
+		cy.findByTestId('switchValue').should('include.text', 'false');
+	};
+	const verifyChangedValueFalse = () => {
+		cy.findByTestId('changedValue').should('include.text', 'false');
+	};
+	const verifySwitchTouched = () => {
+		cy.get('hlm-switch').should('have.class', 'ng-touched');
+	};
 
-	const executeTabEnterTests = () => {
-		verifySwitchSetup();
+	const executeTabEnterTests = (id: string) => {
+		verifySwitchSetup(id);
 		verifySwitchOff();
 
 		cy.realPress('Tab');
@@ -30,8 +45,8 @@ describe('switch', () => {
 		cy.realPress('Enter');
 		verifySwitchOff();
 	};
-	const executeTabSpaceTests = () => {
-		verifySwitchSetup();
+	const executeTabSpaceTests = (id: string) => {
+		verifySwitchSetup(id);
 		verifySwitchOff();
 
 		cy.realPress('Tab');
@@ -41,8 +56,8 @@ describe('switch', () => {
 		cy.realPress('Space');
 		verifySwitchOff();
 	};
-	const executeClickOnLabelTests = () => {
-		verifySwitchSetup();
+	const executeClickOnLabelTests = (id: string) => {
+		verifySwitchSetup(id);
 		verifySwitchOff();
 
 		cy.findByText(/test switch/i).click();
@@ -59,7 +74,7 @@ describe('switch', () => {
 		});
 
 		it('click interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
-			verifySwitchSetup();
+			verifySwitchSetup('testSwitchDefault');
 			verifySwitchOff();
 
 			cy.get('brn-switch-thumb').click();
@@ -69,15 +84,13 @@ describe('switch', () => {
 			verifySwitchOff();
 		});
 
-		it(
-			'[Tab][Enter] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
-			executeTabEnterTests,
-		);
+		it('[Tab][Enter] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
+			executeTabEnterTests('testSwitchDefault');
+		});
 
-		it(
-			'[Tab][Space] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
-			executeTabSpaceTests,
-		);
+		it('[Tab][Space] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
+			executeTabSpaceTests('testSwitchDefault');
+		});
 	});
 
 	describe('inside label', () => {
@@ -86,22 +99,19 @@ describe('switch', () => {
 			cy.injectAxe();
 		});
 
-		it(
-			'click interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
-			executeClickOnLabelTests,
-		);
+		it('click interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
+			executeClickOnLabelTests('testSwitchInsideLabel');
+		});
 
-		it(
-			'[Tab][Enter] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
+		it('[Tab][Enter] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
 			// this is the same as label does not change keyboard interaction
-			executeTabEnterTests,
-		);
+			executeTabEnterTests('testSwitchInsideLabel');
+		});
 
-		it(
-			'[Tab][Space] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
+		it('[Tab][Space] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
 			// this is the same as label does not change keyboard interaction
-			executeTabSpaceTests,
-		);
+			executeTabSpaceTests('testSwitchInsideLabel');
+		});
 	});
 
 	describe('labeled with aria-labelledby', () => {
@@ -110,21 +120,42 @@ describe('switch', () => {
 			cy.injectAxe();
 		});
 
-		it(
-			'click interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
-			executeClickOnLabelTests,
-		);
+		it('click interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
+			executeClickOnLabelTests('testSwitchLabeledWithAria');
+		});
 
-		it(
-			'[Tab][Enter] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
+		it('[Tab][Enter] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
 			// this is the same as label does not change keyboard interaction
-			executeTabEnterTests,
-		);
+			executeTabEnterTests('testSwitchLabeledWithAria');
+		});
 
-		it(
-			'[Tab][Space] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click',
+		it('[Tab][Space] interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
 			// this is the same as label does not change keyboard interaction
-			executeTabSpaceTests,
-		);
+			executeTabSpaceTests('testSwitchLabeledWithAria');
+		});
+	});
+	describe('form', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=switch--form');
+			cy.injectAxe();
+		});
+
+		it('click interactions should render as unchecked, become checked on thumb click, become unchecked on switch click', () => {
+			verifySwitchSetup('testSwitchForm');
+			verifySwitchOff();
+
+			cy.get('brn-switch-thumb').click();
+			verifySwitchOn();
+			verifySwitchValueTrue();
+			verifyChangedValueTrue();
+
+			cy.get('brn-switch').click();
+			verifySwitchOff();
+			verifySwitchValueFalse();
+			verifyChangedValueFalse();
+			cy.realPress('Tab');
+			cy.realPress('Tab');
+			verifySwitchTouched();
+		});
 	});
 });

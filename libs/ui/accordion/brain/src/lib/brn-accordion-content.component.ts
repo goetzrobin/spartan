@@ -3,7 +3,7 @@ import { CustomElementClassSettable } from '@spartan-ng/ui-core';
 import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 
 @Component({
-	selector: 'brn-accordion-content',
+	selector: 'brn-accordion-content, hlm-accordion-content',
 	standalone: true,
 	host: {
 		'[attr.data-state]': 'state()',
@@ -12,7 +12,7 @@ import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 		'[id]': 'id',
 	},
 	template: `
-		<div class="overflow-hidden">
+		<div style="overflow: hidden">
 			<p [class]="_contentClass()">
 				<ng-content />
 			</p>

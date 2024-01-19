@@ -1,5 +1,5 @@
 describe('checkbox', () => {
-	const verifyCheckboxSetup = () => {
+	const verifyCheckboxSetup = (id: string) => {
 		cy.checkA11y('#storybook-root', {
 			rules: {
 				'page-has-heading-one': { enabled: false },
@@ -8,7 +8,7 @@ describe('checkbox', () => {
 		});
 		cy.findByRole('checkbox').should('exist');
 		cy.findByRole('checkbox').should('have.attr', 'type', 'checkbox');
-		cy.findByRole('checkbox').should('have.id', 'testCheckbox');
+		cy.findByRole('checkbox').should('have.id', id);
 	};
 	const verifyCheckboxOff = () => {
 		cy.findByLabelText(/test checkbox/i).should('have.attr', 'value', 'off');
@@ -26,8 +26,8 @@ describe('checkbox', () => {
 		cy.findByRole('checkbox').should('have.attr', 'aria-checked', 'mixed');
 	};
 
-	const executeTabEnterTests = () => {
-		verifyCheckboxSetup();
+	const executeTabEnterTests = (id: string) => {
+		verifyCheckboxSetup(id);
 		verifyCheckboxOff();
 
 		cy.realPress('Tab');
@@ -37,8 +37,8 @@ describe('checkbox', () => {
 		cy.realPress('Enter');
 		verifyCheckboxOff();
 	};
-	const executeTabSpaceTests = () => {
-		verifyCheckboxSetup();
+	const executeTabSpaceTests = (id: string) => {
+		verifyCheckboxSetup(id);
 		verifyCheckboxOff();
 
 		cy.realPress('Tab');
@@ -48,8 +48,8 @@ describe('checkbox', () => {
 		cy.realPress('Space');
 		verifyCheckboxOff();
 	};
-	const executeClickOnLabelTests = () => {
-		verifyCheckboxSetup();
+	const executeClickOnLabelTests = (id: string) => {
+		verifyCheckboxSetup(id);
 		verifyCheckboxOff();
 
 		cy.findByText(/test checkbox/i).click();
@@ -66,7 +66,7 @@ describe('checkbox', () => {
 		});
 
 		it('click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click', () => {
-			verifyCheckboxSetup();
+			verifyCheckboxSetup('testCheckbox');
 			verifyCheckboxOff();
 
 			cy.get('#checkbox-label').click();
@@ -76,15 +76,11 @@ describe('checkbox', () => {
 			verifyCheckboxOff();
 		});
 
-		it(
-			'[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again',
-			executeTabEnterTests,
-		);
+		it('[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again', () =>
+			executeTabEnterTests('testCheckbox'));
 
-		it(
-			'[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space',
-			executeTabSpaceTests,
-		);
+		it('[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space', () =>
+			executeTabSpaceTests('testCheckbox'));
 	});
 
 	describe('inside label', () => {
@@ -93,22 +89,16 @@ describe('checkbox', () => {
 			cy.injectAxe();
 		});
 
-		it(
-			'click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click',
-			executeClickOnLabelTests,
-		);
+		it('click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click', () =>
+			executeClickOnLabelTests('testCheckbox'));
 
-		it(
-			'[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again',
+		it('[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again', () =>
 			// this is the same as label does not change keyboard interaction
-			executeTabEnterTests,
-		);
+			executeTabEnterTests('testCheckbox'));
 
-		it(
-			'[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space',
+		it('[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space', () =>
 			// this is the same as label does not change keyboard interaction
-			executeTabSpaceTests,
-		);
+			executeTabSpaceTests('testCheckbox'));
 	});
 
 	describe('labeled with aria-labelledby', () => {
@@ -117,22 +107,16 @@ describe('checkbox', () => {
 			cy.injectAxe();
 		});
 
-		it(
-			'click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click',
-			executeClickOnLabelTests,
-		);
+		it('click interactions should render as unchecked, become checked on label click, become unchecked on checkbox click', () =>
+			executeClickOnLabelTests('testCheckboxAria'));
 
-		it(
-			'[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again',
+		it('[Tab][Enter] interactions should render as unchecked, become checked when pressing enter, become unchecked when pressing enter again', () =>
 			// this is the same as label does not change keyboard interaction
-			executeTabEnterTests,
-		);
+			executeTabEnterTests('testCheckboxAria'));
 
-		it(
-			'[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space',
+		it('[Tab][Space] interactions should render as unchecked, become checked when pressing space, become unchecked when pressing enter space', () =>
 			// this is the same as label does not change keyboard interaction
-			executeTabSpaceTests,
-		);
+			executeTabSpaceTests('testCheckboxAria'));
 	});
 
 	describe('indeterminate', () => {
@@ -143,7 +127,7 @@ describe('checkbox', () => {
 
 		it('click interactions should render as indeterminate, become checked on label click, become unchecked on checkbox click', () => {
 			// click to get to the default state of unchecked
-			verifyCheckboxSetup();
+			verifyCheckboxSetup('testCheckboxIndeterminate');
 			verifyIndeterminateAttr();
 
 			cy.findByText(/test checkbox/i).click();
@@ -156,7 +140,7 @@ describe('checkbox', () => {
 		it('[Tab][Enter] interactions should render as indeterminate, become checked when pressing enter, become unchecked when pressing enter again', () => {
 			// this is the same as label does not change keyboard interaction
 			// click to get to the default state of unchecked
-			verifyCheckboxSetup();
+			verifyCheckboxSetup('testCheckboxIndeterminate');
 			verifyIndeterminateAttr();
 
 			cy.realPress('Tab');
@@ -169,7 +153,7 @@ describe('checkbox', () => {
 
 		it('[Tab][Space] interactions should render as indeterminate, become checked when pressing space, become unchecked when pressing enter space', () => {
 			// click to get to the default state of unchecked
-			verifyCheckboxSetup();
+			verifyCheckboxSetup('testCheckboxIndeterminate');
 			verifyIndeterminateAttr();
 
 			cy.realPress('Tab');

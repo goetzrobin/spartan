@@ -23,6 +23,6 @@ export const SPARTAN_TABS_VERSION = '0.0.1-alpha.321';
 export const SPARTAN_TABLE_VERSION = '0.0.1-alpha.321';
 export const SPARTAN_TOGGLE_VERSION = '0.0.1-alpha.321';
 // dev dependencies
-export const TAILWIND_MERGE_VERSION = '^1.14.0';
+export const TAILWIND_MERGE_VERSION = '^2.2.0';
 export const TAILWINDCSS_VERSION = '^3.0.2';
 export const TAILWIND_ANIMATE_VERSION = '^1.0.6';
