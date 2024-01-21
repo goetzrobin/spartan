@@ -1,7 +1,5 @@
 import { withThemeByDataAttribute } from '@storybook/addon-styling';
 
-import './tailwind.css';
-
 export const decorators = [
 	withThemeByDataAttribute({
 		themes: {
