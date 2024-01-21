@@ -1,0 +1,97 @@
+<li
+	[attr.aria-live]="toast().important ? 'assertive' : 'polite'"
+	aria-atomic="true"
+	role="status"
+	tabIndex="0"
+	#toastRef
+	data-sonner-toast
+	[attr.data-styled]="!(toast().unstyled || unstyled())"
+	[attr.data-mounted]="mounted()"
+	[attr.data-removed]="removed()"
+	[attr.data-visible]="isVisible()"
+	[attr.data-y-position]="coords()[0]"
+	[attr.data-x-position]="coords()[1]"
+	[attr.data-index]="index()"
+	[attr.data-front]="isFront()"
+	[attr.data-swiping]="swiping()"
+	[attr.data-dismissible]="dismissible()"
+	[attr.data-type]="toastType()"
+	[attr.data-invert]="invert()"
+	[attr.data-swipe-out]="swipeOut()"
+	[attr.data-expanded]="isExpanded()"
+	[style]="itemStyle()"
+	(pointerdown)="onPointerDown($event)"
+	(pointerup)="onPointerUp()"
+	(pointermove)="onPointerMove($event)"
+	[class]="toastClasses()"
+>
+	@if (closeButton()) {
+		<button
+			aria-label="Close toast"
+			[attr.data-disabled]="disabled()"
+			data-close-button
+			(click)="closeToast()"
+			[class]="closeButtonClasses()"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="12"
+				height="12"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			>
+				<line x1="18" y1="6" x2="6" y2="18"></line>
+				<line x1="6" y1="6" x2="18" y2="18"></line>
+			</svg>
+		</button>
+	}
+
+	<!-- @if (toastType || toast.icon) {
+        <div data-icon="">
+            {(toast.type === 'loading') && !toast.icon ? getLoadingIcon() : null}
+            {toast.icon || getAsset(toastType)}
+          </div>
+    }     -->
+
+	<div data-content>
+		@if (toast().title) {
+			<div data-title [class]="titleClasses()">
+				@if (toastTitleIsComponent()) {
+					<ng-container *ngComponentOutlet="toastTitleAsComponent(); inputs: toast().componentProps"></ng-container>
+				} @else {
+					{{ toast().title }}
+				}
+			</div>
+		}
+		@if (toast().description) {
+			<div data-description [class]="descriptionClasses()">
+				@if (toastDescriptionIsComponent()) {
+					component...
+				} @else {
+					{{ toast().description }}
+				}
+			</div>
+		}
+	</div>
+
+	@if (toast().cancel) {
+		<button
+			data-button
+			data-cancel
+			[style]="cancelButtonStyle()"
+			[class]="cancelButtonClasses()"
+			(click)="cancelToast()"
+		>
+			{{ toast().cancel!.label }}
+		</button>
+	}
+	@if (toast().action) {
+		<button data-button [style]="actionButtonStyle()" [class]="actionButtonClasses()" (click)="actionToast($event)">
+			{{ toast().action!.label }}
+		</button>
+	}
+</li>
