@@ -71,6 +71,7 @@
 			"@spartan-ng/ui-tooltip-brain": ["libs/ui/tooltip/brain/src/index.ts"],
 			"@spartan-ng/ui-tooltip-helm": ["libs/ui/tooltip/helm/src/index.ts"],
 			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"],
+			"@spartan-ng/ui-toast-brain": ["libs/ui/toast/brain/src/index.ts"],
 			"~/*": ["apps/app/src/*"]
 		}
 	},
