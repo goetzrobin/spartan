@@ -5,11 +5,8 @@ const config = {
 		'@storybook/addon-a11y',
 		{
 			name: '@storybook/addon-styling',
-			options: {
-				// Check out https://github.com/storybookjs/addon-styling/blob/main/docs/api.md
-				// For more details on this addon's options.
-				postCss: true,
-			},
+			// As recommended by addon, cannot use addon options with angular
+			// Check out https://github.com/storybookjs/addon-styling/blob/main/docs/api.md
 		},
 	],
 	framework: {

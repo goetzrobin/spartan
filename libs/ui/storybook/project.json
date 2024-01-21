@@ -12,7 +12,8 @@
 				"port": 4400,
 				"configDir": "libs/ui/storybook/.storybook",
 				"browserTarget": "ui-storybook:build-storybook",
-				"compodoc": false
+				"compodoc": false,
+				"styles": ["libs/ui/storybook/.storybook/tailwind.css"]
 			},
 			"configurations": {
 				"ci": {
@@ -27,7 +28,8 @@
 				"outputDir": "dist/storybook/ui-storybook",
 				"configDir": "libs/ui/storybook/.storybook",
 				"browserTarget": "ui-storybook:build-storybook",
-				"compodoc": false
+				"compodoc": false,
+				"styles": ["libs/ui/storybook/.storybook/tailwind.css"]
 			},
 			"configurations": {
 				"ci": {
