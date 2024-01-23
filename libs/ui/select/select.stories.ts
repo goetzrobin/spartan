@@ -163,6 +163,7 @@ export const Scrollable: Story = {
 			<hlm-select-value />
 		</hlm-select-trigger>
     	<hlm-select-content class="w-56 max-h-44">
+		<hlm-select-scroll-up><hlm-icon class="ml-2 h-4 w-4" name="radixChevronUp" /></hlm-select-scroll-up>
 			<hlm-option value="Refresh">Refresh</hlm-option>
 			<hlm-option value="Settings">Settings</hlm-option>
 			<hlm-option value="Help">Help</hlm-option>
@@ -175,6 +176,7 @@ export const Scrollable: Story = {
 
 			<hlm-option value="Deposit">Deposit</hlm-option>
 			<hlm-option value="Withdrawel">Withdrawel</hlm-option>
+			<hlm-select-scroll-down><hlm-icon class="ml-2 h-4 w-4" name="radixChevronDown" /></hlm-select-scroll-down>
 		</hlm-select-content>
 	</hlm-select>
   <form>`,
