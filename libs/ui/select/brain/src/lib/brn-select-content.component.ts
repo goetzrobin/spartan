@@ -1,7 +1,6 @@
 import { CdkListbox, ListboxValueChangeEvent } from '@angular/cdk/listbox';
-import { Component, ContentChild, ElementRef, HostListener, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ElementRef, ViewChild, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { tap } from 'rxjs';
 import { BrnSelectScrollDownDirective } from './brn-select-scroll-down.directive';
 import { BrnSelectScrollUpDirective } from './brn-select-scroll-up.directive';
@@ -11,77 +10,71 @@ import { BrnSelectService } from './brn-select.service';
 @Component({
 	selector: 'brn-select-content, hlm-select-content:not(noHlm)',
 	standalone: true,
-	imports: [BrnSelectScrollUpDirective, BrnSelectScrollDownDirective, HlmIconComponent],
+	imports: [BrnSelectScrollUpDirective, BrnSelectScrollDownDirective],
 	hostDirectives: [CdkListbox],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		'[attr.aria-labelledBy]': 'labelledBy()',
 		'[attr.aria-controlledBy]': "id() +'-trigger'",
-		styles: `
-		:host {
-			display: flex;
-			flex-direction: column;
-			scrollbar-width:"none";
-			-ms-overflow-style:"none";
-			-webkit-overflow-scrolling:"touch";
-		}`,
 	},
-	template: `
-		@if (canScrollUp()) {
-			@if (scrollUpBtn) {
-				<ng-content select="[brnSelectScrollUp]" />
-			} @else {
-				<div brnSelectScrollUp><hlm-icon class="ml-2 h-4 w-4" name="radixChevronUp" /></div>
+	styles: [
+		`
+			:host {
+				display: flex;
+				box-sizing: border-box;
+				flex-direction: column;
+				outline: none;
+				pointer-events: auto;
 			}
+		`,
+	],
+	template: `
+		@if (canScrollUp() && scrollUpBtn) {
+			<ng-content select="hlm-select-scroll-up" />
 		}
 		<div
-			class="relative w-full overflow-auto"
+			#viewport
+			(scroll)="handleScroll()"
 			style="flex: 1 1 0%;
+			position: relative;
+			width:100%;
+			overflow:auto;
+			min-height: 36px;
 			scrollbar-width:none;
 			-ms-overflow-style:none;
 			-webkit-overflow-scrolling:touch;"
 		>
 			<ng-content />
 		</div>
-		@if (canScrollDown()) {
-			@if (scrollDownBtn) {
-				<ng-content select="[brnSelectScrollDown]" />
-			} @else {
-				<div brnSelectScrollDown><hlm-icon class="ml-2 h-4 w-4" name="radixChevronDown" /></div>
-			}
+		@if (canScrollDown() && scrollDownBtn) {
+			<ng-content select="hlm-select-scroll-down" />
 		}
 	`,
 })
-export class BrnSelectContentComponent implements OnInit {
+export class BrnSelectContentComponent {
 	private _cdkListbox = inject(CdkListbox, { host: true });
-
 	private _selectService = inject(BrnSelectService);
 
-	private _el = inject(ElementRef);
+	protected labelledBy = this._selectService.labelId;
+	protected id = this._selectService.id;
+	protected multiple$ = toObservable(this._selectService.multiple);
+	protected canScrollUp = signal(false);
+	protected canScrollDown = signal(false);
 
-	labelledBy = this._selectService.labelId;
+	@ViewChild('viewport')
+	protected viewport!: ElementRef<HTMLElement>;
 
-	id = this._selectService.id;
-
-	multiple$ = toObservable(this._selectService.multiple);
-
-	canScrollUp = signal(false);
-	canScrollDown = signal(false);
-
-	@ContentChild(BrnSelectScrollUpDirective)
+	@ContentChild(BrnSelectScrollUpDirective, { static: false })
 	protected scrollUpBtn!: BrnSelectScrollUpDirective;
 
-	@ContentChild(BrnSelectScrollDownDirective)
+	@ContentChild(BrnSelectScrollDownDirective, { static: false })
 	protected scrollDownBtn!: BrnSelectScrollDownDirective;
 
-	@HostListener('scroll', ['event'])
 	handleScroll() {
-		this.canScrollUp.set(this._el.nativeElement.scrollTop > 0);
-		const maxScroll = this._el.nativeElement.scrollHeight - this._el.nativeElement.clientHeight;
-		this.canScrollDown.set(Math.ceil(this._el.nativeElement.scrollTop) < maxScroll);
+		this.canScrollUp.set(this.viewport.nativeElement.scrollTop > 0);
+		const maxScroll = this.viewport.nativeElement.scrollHeight - this.viewport.nativeElement.clientHeight;
+		this.canScrollDown.set(Math.ceil(this.viewport.nativeElement.scrollTop) < maxScroll);
 	}
-
-	// canScrollUp = this._selectService.canScrollUp;
-	// canScrollDown = this._selectService.canScrollDown;
 
 	constructor() {
 		this._cdkListbox.valueChange
@@ -98,11 +91,6 @@ export class BrnSelectContentComponent implements OnInit {
 				tap((multiple) => (this._cdkListbox.multiple = multiple)),
 			)
 			.subscribe();
-	}
-
-	ngOnInit(): void {
-		console.log('Init');
-		// this._el.nativeElement.addEventListener('scroll', handleScroll);
 	}
 
 	focusList(): void {
