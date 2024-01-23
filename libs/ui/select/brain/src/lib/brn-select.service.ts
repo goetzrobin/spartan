@@ -1,6 +1,6 @@
 import { ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { Injectable, computed, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 // import { connect } from 'ngxtension/connect';
 import { Subject, tap } from 'rxjs';
 
@@ -33,7 +33,10 @@ export class BrnSelectService {
 	readonly disabled = computed(() => this.state().disabled);
 	readonly isExpanded = computed(() => this.state().isExpanded);
 	readonly multiple = computed(() => this.state().multiple);
+
 	readonly value = computed(() => this.state().value);
+
+	private multiple$ = toObservable(this.multiple);
 
 	listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
 
@@ -49,5 +52,25 @@ export class BrnSelectService {
 				),
 			)
 			.subscribe();
+
+		this.multiple$
+			.pipe(
+				takeUntilDestroyed(),
+				tap((multiple) => {
+					// If the value switches from true to false, and more than one option is selected,
+					// all options are deselected.
+					if (!multiple && this.value().length > 1) {
+						this.deselectAllOptions();
+					}
+				}),
+			)
+			.subscribe();
+	}
+
+	deselectAllOptions() {
+		this.state.update((state) => ({
+			...state,
+			value: [],
+		}));
 	}
 }
