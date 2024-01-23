@@ -12,8 +12,11 @@ import { ClassValue } from 'clsx';
 		'[class]': '_computedClass()',
 	},
 	template: `
-		<span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center" [attr.data-state]="checkedState">
-			@if (isChecked) {
+		<span
+			class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center"
+			[attr.data-state]="this._brnSelectOption.checkedState()"
+		>
+			@if (this._brnSelectOption.selected()) {
 				<span aria-hidden="true">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +39,7 @@ import { ClassValue } from 'clsx';
 	`,
 })
 export class HlmSelectOptionComponent {
-	private _brnSelectOption = inject(BrnSelectOptionDirective, { host: true });
+	protected _brnSelectOption = inject(BrnSelectOptionDirective, { host: true });
 
 	baseClasses =
 		'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50';
@@ -67,12 +70,4 @@ export class HlmSelectOptionComponent {
 		return this._disabled;
 	}
 	private _disabled = false;
-
-	get isChecked() {
-		return this._brnSelectOption.isSelected();
-	}
-
-	get checkedState() {
-		return this._brnSelectOption.isSelected() ? 'checked' : 'unchecked';
-	}
 }

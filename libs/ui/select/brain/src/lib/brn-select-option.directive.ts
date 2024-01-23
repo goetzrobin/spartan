@@ -1,31 +1,45 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { CdkOption } from '@angular/cdk/listbox';
-import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Directive, ElementRef, Input, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
+import { BrnSelectService } from './brn-select.service';
 
 @Directive({
 	selector: '[brnOption]',
 	standalone: true,
 	hostDirectives: [CdkOption],
+	host: {
+		'(mouseenter)': 'hover()',
+	},
 })
 export class BrnSelectOptionDirective implements FocusableOption {
+	private _selectService = inject(BrnSelectService);
 	private _cdkSelectOption = inject(CdkOption, { host: true });
 
+	private elementRef = inject(ElementRef);
+	private _selected = signal<boolean>(false);
+
+	selected = computed(() => this._selected());
+	checkedState = computed(() => (this._selected() ? 'checked' : 'unchecked'));
+
 	constructor() {
-		this._cdkSelectOption._clicked
-			.asObservable()
+		toObservable(this._selectService.value)
 			.pipe(
+				tap((selectedValues: string | string[]) => {
+					if (Array.isArray(selectedValues)) {
+						const itemFound = (selectedValues as Array<unknown>).find((val) => val === this._cdkSelectOption.value);
+						this._selected.set(!!itemFound);
+					} else {
+						this._selected.set(this._cdkSelectOption.value === selectedValues);
+					}
+				}),
 				takeUntilDestroyed(),
-				tap((val) => console.log(val)),
 			)
 			.subscribe();
 	}
 
-	private elementRef = inject(ElementRef);
-
-	@HostListener('mouseenter', ['$event'])
-	hover(): void {
+	protected hover(): void {
 		this._cdkSelectOption.focus();
 	}
 
@@ -43,19 +57,7 @@ export class BrnSelectOptionDirective implements FocusableOption {
 	}
 	private _disabled = false;
 
-	get isChecked() {
-		return this._cdkSelectOption.isSelected();
-	}
-
-	get checkedState() {
-		return this._cdkSelectOption.isSelected() ? 'checked' : 'unchecked';
-	}
-
 	focus(): void {
 		this.elementRef.nativeElement.focus();
-	}
-
-	isSelected() {
-		return this._cdkSelectOption.isSelected();
 	}
 }
