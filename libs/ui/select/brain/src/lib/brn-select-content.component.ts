@@ -26,6 +26,16 @@ import { BrnSelectService } from './brn-select.service';
 				outline: none;
 				pointer-events: auto;
 			}
+
+			[data-brn-select-viewport] {
+				scrollbar-width: none;
+				-ms-overflow-style: none;
+				-webkit-overflow-scrolling: touch;
+			}
+
+			[data-brn-select-viewport]::-webkit-scrollbar {
+				display: none;
+			}
 		`,
 	],
 	template: `
@@ -33,16 +43,14 @@ import { BrnSelectService } from './brn-select.service';
 			<ng-content select="hlm-select-scroll-up" />
 		}
 		<div
+			data-brn-select-viewport
 			#viewport
 			(scroll)="handleScroll()"
 			style="flex: 1 1 0%;
 			position: relative;
 			width:100%;
 			overflow:auto;
-			min-height: 36px;
-			scrollbar-width:none;
-			-ms-overflow-style:none;
-			-webkit-overflow-scrolling:touch;"
+			min-height: 36px;"
 		>
 			<ng-content />
 		</div>
