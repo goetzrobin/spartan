@@ -40,6 +40,7 @@ module.exports = {
 				'sheet',
 				'skeleton',
 				'slider',
+				'spinner',
 				'switch',
 				'table',
 				'tabs',
