@@ -11,16 +11,19 @@ import { BrnSelectService } from './brn-select.service';
 	hostDirectives: [CdkOption],
 	host: {
 		'(mouseenter)': 'hover()',
+		'(blur)': 'blur()',
 	},
 })
 export class BrnSelectOptionDirective implements FocusableOption {
 	private _selectService = inject(BrnSelectService);
 	private _cdkSelectOption = inject(CdkOption, { host: true });
 
-	private elementRef = inject(ElementRef);
 	private _selected = signal<boolean>(false);
+	private _focused = signal<boolean>(false);
+	public elementRef = inject(ElementRef);
 
 	selected = computed(() => this._selected());
+	focused = computed(() => this._focused());
 	checkedState = computed(() => (this._selected() ? 'checked' : 'unchecked'));
 
 	constructor() {
@@ -39,10 +42,6 @@ export class BrnSelectOptionDirective implements FocusableOption {
 			.subscribe();
 	}
 
-	protected hover(): void {
-		this._cdkSelectOption.focus();
-	}
-
 	@Input()
 	set value(value: unknown | null) {
 		this._cdkSelectOption.value = value;
@@ -57,7 +56,17 @@ export class BrnSelectOptionDirective implements FocusableOption {
 	}
 	private _disabled = false;
 
+	protected hover(): void {
+		this.focus();
+	}
+
 	focus(): void {
-		this.elementRef.nativeElement.focus();
+		// this.elementRef.nativeElement.focus();
+		this._cdkSelectOption.focus();
+		this._focused.set(true);
+	}
+
+	blur(): void {
+		this._focused.set(false);
 	}
 }

@@ -162,7 +162,7 @@ export const Scrollable: Story = {
 		<hlm-select-trigger>
 			<hlm-select-value />
 		</hlm-select-trigger>
-    	<hlm-select-content class="w-56 max-h-44">
+    	<hlm-select-content class="w-56 max-h-96">
 		<hlm-select-scroll-up><hlm-icon class="ml-2 h-4 w-4" name="radixChevronUp" /></hlm-select-scroll-up>
 			<hlm-option value="Refresh">Refresh</hlm-option>
 			<hlm-option value="Settings">Settings</hlm-option>
@@ -176,6 +176,47 @@ export const Scrollable: Story = {
 
 			<hlm-option value="Deposit">Deposit</hlm-option>
 			<hlm-option value="Withdrawel">Withdrawel</hlm-option>
+			<hlm-option value="Word1">Word1</hlm-option>
+			<hlm-option value="Word2">Word2</hlm-option>
+			<hlm-option value="Word3">Word3</hlm-option>
+			<hlm-option value="Word4">Word4</hlm-option>
+			<hlm-option value="Word5">Word5</hlm-option>
+			<hlm-option value="Word6">Word6</hlm-option>
+			<hlm-option value="Word7">Word7</hlm-option>
+			<hlm-option value="Word8">Word8</hlm-option>
+			<hlm-option value="Word9">Word9</hlm-option>
+			<hlm-option value="Word10">Word10</hlm-option>
+			<hlm-option value="Word11">Word11</hlm-option>
+			<hlm-option value="Word12">Word12</hlm-option>
+			<hlm-option value="Word13">Word13</hlm-option>
+			<hlm-option value="Word14">Word14</hlm-option>
+			<hlm-option value="Word15">Word15</hlm-option>
+			<hlm-option value="Word16">Word16</hlm-option>
+			<hlm-option value="Word17">Word17</hlm-option>
+			<hlm-option value="Word18">Word18</hlm-option>
+			<hlm-option value="Word19">Word19</hlm-option>
+			<hlm-option value="Word20">Word20</hlm-option>
+			<hlm-option value="Word21">Word21</hlm-option>
+			<hlm-option value="Word22">Word22</hlm-option>
+			<hlm-option value="Word23">Word23</hlm-option>
+			<hlm-option value="Word24">Word24</hlm-option>
+			<hlm-option value="Word25">Word25</hlm-option>
+			<hlm-option value="Word26">Word26</hlm-option>
+			<hlm-option value="Word27">Word27</hlm-option>
+			<hlm-option value="Word28">Word28</hlm-option>
+			<hlm-option value="Word29">Word29</hlm-option>
+			<hlm-option value="Word30">Word30</hlm-option>
+			<hlm-option value="Word31">Word31</hlm-option>
+			<hlm-option value="Word32">Word32</hlm-option>
+			<hlm-option value="Word33">Word33</hlm-option>
+			<hlm-option value="Word34">Word34</hlm-option>
+			<hlm-option value="Word35">Word35</hlm-option>
+			<hlm-option value="Word36">Word36</hlm-option>
+			<hlm-option value="Word37">Word37</hlm-option>
+			<hlm-option value="Word38">Word38</hlm-option>
+			<hlm-option value="Word39">Word39</hlm-option>
+			<hlm-option value="Word40">Word40</hlm-option>
+
 			<hlm-select-scroll-down><hlm-icon class="ml-2 h-4 w-4" name="radixChevronDown" /></hlm-select-scroll-down>
 		</hlm-select-content>
 	</hlm-select>
