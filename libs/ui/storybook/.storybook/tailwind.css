@@ -65,6 +65,10 @@ select {
 	--ring: 240 3.7% 15.9%;
 }
 
+* {
+	border-color: hsl(var(--border));
+}
+
 body {
 	@apply bg-background text-foreground antialiased;
 	font-feature-settings:
