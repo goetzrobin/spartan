@@ -8,10 +8,6 @@ import { ClassValue } from 'clsx';
 	standalone: true,
 })
 export class HlmSelectDirective {
-	constructor() {
-		console.log('boom');
-	}
-
 	baseClasses = '';
 
 	private readonly classNames = signal<ClassValue>('');
