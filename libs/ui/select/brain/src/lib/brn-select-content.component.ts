@@ -118,14 +118,8 @@ export class BrnSelectContentComponent {
 	}
 
 	updateArrowDisplay(): void {
-		// console.log('updating');
-		// console.log(this.viewport.nativeElement.scrollTop > 0);
-
 		this.canScrollUp.set(this.viewport.nativeElement.scrollTop > 0);
 		const maxScroll = this.viewport.nativeElement.scrollHeight - this.viewport.nativeElement.clientHeight;
-		// console.log('maxscroll', maxScroll);
-		// console.log('scroll top', Math.ceil(this.viewport.nativeElement.scrollTop));
-		// console.log(Math.ceil(this.viewport.nativeElement.scrollTop) < maxScroll);
 		this.canScrollDown.set(Math.ceil(this.viewport.nativeElement.scrollTop) < maxScroll);
 	}
 

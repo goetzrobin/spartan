@@ -61,7 +61,6 @@ export class BrnSelectOptionDirective implements FocusableOption {
 	}
 
 	focus(): void {
-		// this.elementRef.nativeElement.focus();
 		this._cdkSelectOption.focus();
 		this._focused.set(true);
 	}

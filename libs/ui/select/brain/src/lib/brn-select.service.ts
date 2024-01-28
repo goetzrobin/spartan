@@ -1,7 +1,6 @@
-import { ListboxValueChangeEvent } from '@angular/cdk/listbox';
+import { CdkOption, ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-// import { connect } from 'ngxtension/connect';
 import { Subject, tap } from 'rxjs';
 
 @Injectable()
@@ -14,7 +13,7 @@ export class BrnSelectService {
 		isExpanded: boolean;
 		multiple: boolean;
 		disabled: boolean;
-		selectedOptions: Array<ListboxValueChangeEvent<unknown>>;
+		selectedOptions: Array<CdkOption | null>;
 		value: string | string[];
 	}>({
 		id: '',
@@ -46,13 +45,14 @@ export class BrnSelectService {
 		this.listBoxValueChangeEvent$
 			.pipe(
 				takeUntilDestroyed(),
-				tap((listBoxChange) =>
+				tap((listBoxChange) => {
+					const updatedSelections = this.multiple() ? this.getUpdatedOptions(listBoxChange) : [listBoxChange.option];
 					this.state.update((state) => ({
 						...state,
-						selectedOptions: this.multiple() ? [...state.selectedOptions, listBoxChange] : [listBoxChange],
+						selectedOptions: [...updatedSelections],
 						value: listBoxChange.value as string[],
-					})),
-				),
+					}));
+				}),
 			)
 			.subscribe();
 
@@ -68,6 +68,17 @@ export class BrnSelectService {
 				}),
 			)
 			.subscribe();
+	}
+
+	getUpdatedOptions(latestListboxChange: ListboxValueChangeEvent<unknown>): Array<CdkOption | null> {
+		const isNewSelection = latestListboxChange.value.findIndex((value) => value === latestListboxChange.option?.value);
+		if (isNewSelection === -1) {
+			const removedOptionIndex = this.selectedOptions().findIndex((option) => latestListboxChange.option === option);
+			const options = this.selectedOptions();
+			options.splice(removedOptionIndex, 1);
+			return options;
+		}
+		return [...this.selectedOptions(), latestListboxChange.option];
 	}
 
 	deselectAllOptions() {
