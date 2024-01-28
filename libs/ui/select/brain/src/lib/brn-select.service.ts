@@ -84,6 +84,7 @@ export class BrnSelectService {
 	deselectAllOptions() {
 		this.state.update((state) => ({
 			...state,
+			selectedOptions: [],
 			value: [],
 		}));
 	}
