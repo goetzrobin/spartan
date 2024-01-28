@@ -12,8 +12,9 @@ import { ClassValue } from 'clsx';
 		'[class]': '_computedClass()',
 	},
 	template: `
+		<ng-content />
 		<span
-			class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center"
+			class="absolute right-2 flex h-3.5 w-3.5 items-center justify-center"
 			[attr.data-state]="this._brnSelectOption.checkedState()"
 		>
 			@if (this._brnSelectOption.selected()) {
@@ -35,14 +36,13 @@ import { ClassValue } from 'clsx';
 				</span>
 			}
 		</span>
-		<ng-content />
 	`,
 })
 export class HlmSelectOptionComponent {
 	protected _brnSelectOption = inject(BrnSelectOptionDirective, { host: true });
 
 	baseClasses =
-		'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50';
+		'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50';
 
 	private readonly classNames = signal<ClassValue>('');
 
