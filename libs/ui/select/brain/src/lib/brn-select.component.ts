@@ -139,7 +139,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	];
 
 	constructor() {
-		console.log('boom');
 		this._selectService.state.update((state) => ({
 			...state,
 			id: `brn-select-${nextId++}`,
@@ -153,7 +152,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			.pipe(
 				tap(() => !this._multiple() && this.close()),
 				map((listboxEvent) => {
-					console.log(listboxEvent);
 					this.writeValue(listboxEvent.value);
 					this.onChange(listboxEvent.value);
 				}),
