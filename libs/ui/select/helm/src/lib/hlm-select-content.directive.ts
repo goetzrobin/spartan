@@ -2,7 +2,6 @@ import { Directive, Input, computed, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
-// brn-select-content [hlm]
 @Directive({
 	selector: '[hlmSelectContent], hlm-select-content',
 	standalone: true,
@@ -21,6 +20,15 @@ export class HlmSelectContentDirective {
 	set _class(classNames: ClassValue) {
 		this.classNames.set(classNames);
 	}
+
+	@Input()
+	set stickyLabels(value: boolean) {
+		this._stickyLabels.set(value);
+	}
+	get stickyLabels() {
+		return this._stickyLabels();
+	}
+	_stickyLabels = signal(false);
 
 	protected _computedClass = computed(() => this._generateClass());
 	private _generateClass() {
