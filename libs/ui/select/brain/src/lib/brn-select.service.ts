@@ -14,6 +14,7 @@ export class BrnSelectService {
 		isExpanded: boolean;
 		multiple: boolean;
 		disabled: boolean;
+		selectedOptions: Array<ListboxValueChangeEvent<unknown>>;
 		value: string | string[];
 	}>({
 		id: '',
@@ -23,6 +24,7 @@ export class BrnSelectService {
 		isExpanded: false,
 		multiple: false,
 		disabled: false,
+		selectedOptions: [],
 		value: '',
 	});
 
@@ -33,7 +35,7 @@ export class BrnSelectService {
 	readonly disabled = computed(() => this.state().disabled);
 	readonly isExpanded = computed(() => this.state().isExpanded);
 	readonly multiple = computed(() => this.state().multiple);
-
+	readonly selectedOptions = computed(() => this.state().selectedOptions);
 	readonly value = computed(() => this.state().value);
 
 	private multiple$ = toObservable(this.multiple);
@@ -47,6 +49,7 @@ export class BrnSelectService {
 				tap((listBoxChange) =>
 					this.state.update((state) => ({
 						...state,
+						selectedOptions: this.multiple() ? [...state.selectedOptions, listBoxChange] : [listBoxChange],
 						value: listBoxChange.value as string[],
 					})),
 				),
