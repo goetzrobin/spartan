@@ -14,6 +14,7 @@ import { BrnSelectService } from './brn-select.service';
 				display: -webkit-box;
 				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 1;
+				white-space: nowrap;
 			}
 		`,
 	],
