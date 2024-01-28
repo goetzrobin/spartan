@@ -5,7 +5,7 @@ import { BrnSelectService } from './brn-select.service';
 	selector: 'brn-select-value, hlm-select-value',
 	template: `
 		<span>
-			{{ value() && value()?.length ? value() : placeholder() }}
+			{{ value() ? value() : placeholder() }}
 		</span>
 	`,
 	styles: [
@@ -25,7 +25,10 @@ export class BrnSelectValueComponent {
 
 	readonly _value = this._selectService.selectedOptions;
 	readonly value = computed(() => {
-		const selectedLabels = this._value().map((selectedOption) => selectedOption.option?.getLabel());
+		if (this._value().length === 0) {
+			return null;
+		}
+		const selectedLabels = this._value().map((selectedOption) => selectedOption?.getLabel());
 		return selectedLabels.join(', ');
 	});
 
