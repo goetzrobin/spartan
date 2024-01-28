@@ -5,7 +5,7 @@ import { Directive, Input, signal } from '@angular/core';
 	standalone: true,
 	host: {
 		role: 'group',
-		'[aria-labelledby]': '_labelledBy()',
+		'[attr.aria-labelledby]': '_labelledBy()',
 	},
 })
 export class BrnSelectGroupDirective {
@@ -13,6 +13,9 @@ export class BrnSelectGroupDirective {
 	@Input('aria-labelledby')
 	set labelledBy(labelledBy: string) {
 		this._labelledBy.set(labelledBy);
+	}
+	get labelledBy() {
+		return this._labelledBy();
 	}
 	readonly _labelledBy = signal('');
 }
