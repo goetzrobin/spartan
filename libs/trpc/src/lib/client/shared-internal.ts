@@ -69,9 +69,9 @@ export type CreateTRPCClientBaseOptions<TRouter extends AnyRouter> =
 				 * @link https://trpc.io/docs/data-transformers
 				 **/
 				transformer?: 'You must set a transformer on the backend router';
-		  }
+			}
 		: TRouter['_def']['_config']['transformer'] extends DataTransformerOptions
-		  ? {
+			? {
 					/**
 					 * Data transformer
 					 *
@@ -81,8 +81,8 @@ export type CreateTRPCClientBaseOptions<TRouter extends AnyRouter> =
 					transformer: TRouter['_def']['_config']['transformer'] extends CombinedDataTransformer
 						? DataTransformerOptions
 						: TRouter['_def']['_config']['transformer'];
-		    }
-		  : {
+				}
+			: {
 					/**
 					 * Data transformer
 					 *
@@ -90,4 +90,4 @@ export type CreateTRPCClientBaseOptions<TRouter extends AnyRouter> =
 					 * @link https://trpc.io/docs/data-transformers
 					 **/
 					transformer?: /** @deprecated **/ ClientDataTransformerOptions | CombinedDataTransformer;
-		    };
+				};
