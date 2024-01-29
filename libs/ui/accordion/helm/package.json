@@ -3,9 +3,9 @@
 	"version": "0.0.1-alpha.10",
 	"peerDependencies": {
 		"@angular/core": "^17.0.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.321",
+		"@spartan-ng/ui-core": "0.0.1-alpha.322",
 		"clsx": "^1.2.1",
-		"@spartan-ng/ui-accordion-brain": "0.0.1-alpha.321",
+		"@spartan-ng/ui-accordion-brain": "0.0.1-alpha.322",
 		"@ng-icons/radix-icons": "^25.1.0"
 	},
 	"dependencies": {},
