@@ -1,7 +1,6 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { radixExclamationTriangle } from '@ng-icons/radix-icons';
-import { provideIcons } from '@spartan-ng/ui-icon-helm';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
@@ -12,15 +11,17 @@ import { SectionIntroComponent } from '../../../../shared/layout/section-intro.c
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { defaultCode, defaultImports, defaultSkeleton, ScrollAreaPreviewComponent } from './scroll-area.preview';
+import { SelectMultiplePreviewComponent, multipleCode } from './select--multiple.preview';
+import { SelectScrollablePreviewComponent, scrollableCode } from './select--scrollable.preview';
+import { SelectPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './select.preview';
 
 export const routeMeta: RouteMeta = {
-	data: { breadcrumb: 'Scroll Area' },
-	meta: metaWith('spartan/ui - Scroll Area', 'Augments native scroll functionality for custom, cross-browser styling.'),
-	title: 'spartan/ui - Scroll Area',
+	data: { breadcrumb: 'Select' },
+	meta: metaWith('spartan/ui - Select', 'A control that allows the user to toggle between checked and not checked.'),
+	title: 'spartan/ui - Select',
 };
 @Component({
-	selector: 'spartan-scroll-area',
+	selector: 'spartan-select',
 	standalone: true,
 	imports: [
 		MainSectionDirective,
@@ -32,27 +33,25 @@ export const routeMeta: RouteMeta = {
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
-		ScrollAreaPreviewComponent,
+		SelectPreviewComponent,
+		SelectMultiplePreviewComponent,
+		SelectScrollablePreviewComponent,
 	],
-	providers: [provideIcons({ radixExclamationTriangle })],
 	template: `
 		<section spartanMainSection>
-			<spartan-section-intro
-				name="Scroll Area"
-				lead="Augments native scroll functionality for custom, cross-browser styling."
-			/>
+			<spartan-section-intro name="Select" lead="Select a value from a list of options." />
 
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
-					<spartan-scroll-area-preview />
+					<spartan-select-preview />
 				</div>
 				<spartan-code secondTab [code]="defaultCode" />
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
 			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
-				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/cli:ui scrollarea" />
-				<spartan-code secondTab language="sh" code="ng g @spartan-ng/cli:ui scrollarea" />
+				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/cli:ui select" />
+				<spartan-code secondTab language="sh" code="ng g @spartan-ng/cli:ui select" />
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
@@ -61,16 +60,34 @@ export const routeMeta: RouteMeta = {
 				<spartan-code [code]="defaultSkeleton" />
 			</div>
 
+			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
+			<h3 id="examples__multiple" class="${hlmH4} mb-2 mt-6">Multiple</h3>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-select-multiple-preview />
+				</div>
+				<spartan-code secondTab [code]="multipleCode" />
+			</spartan-tabs>
+			<h3 id="examples__scrollable" class="${hlmH4} mb-2 mt-6">Scrollable with Groups</h3>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-select-scrollable-preview />
+				</div>
+				<spartan-code secondTab [code]="scrollableCode" />
+			</spartan-tabs>
+
 			<spartan-page-bottom-nav>
-				<spartan-page-bottom-nav-link href="select" label="Select" />
-				<spartan-page-bottom-nav-link direction="previous" href="radio-group" label="Radio Group" />
+				<spartan-page-bottom-nav-link href="separator" label="Separator" />
+				<spartan-page-bottom-nav-link direction="previous" href="scroll-area" label="Scroll Area" />
 			</spartan-page-bottom-nav>
 		</section>
 		<spartan-page-nav />
 	`,
 })
-export default class LabelPageComponent {
+export default class SkeletonPageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
+	protected readonly multipleCode = multipleCode;
+	protected readonly scrollableCode = scrollableCode;
 }
