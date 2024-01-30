@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: 'pnpm'
-          cache-dependency-path: '**/pnpm.lock'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Release
