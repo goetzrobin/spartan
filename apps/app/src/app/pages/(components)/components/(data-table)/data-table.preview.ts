@@ -187,15 +187,15 @@ const PAYMENT_DATA: Payment[] = [
 			</button>
 			<ng-template #menu>
 				<hlm-menu class="w-32">
-					@for (columnName of _brnColumnManager.allColumns; track columnName) {
+					@for (column of _brnColumnManager.allColumns; track column.name) {
 						<button
 							hlmMenuItemCheckbox
-							[disabled]="_brnColumnManager.isColumnDisabled(columnName)"
-							[checked]="_brnColumnManager.isColumnVisible(columnName)"
-							(triggered)="_brnColumnManager.toggleVisibility(columnName)"
+							[disabled]="_brnColumnManager.isColumnDisabled(column.name)"
+							[checked]="_brnColumnManager.isColumnVisible(column.name)"
+							(triggered)="_brnColumnManager.toggleVisibility(column.name)"
 						>
 							<hlm-menu-item-check />
-							<span>{{ columnName | titlecase }}</span>
+							<span>{{ column.label }}</span>
 						</button>
 					}
 				</hlm-menu>
@@ -312,9 +312,9 @@ export class DataTablePreviewComponent {
 	});
 
 	protected readonly _brnColumnManager = useBrnColumnManager({
-		status: true,
-		email: true,
-		amount: true,
+		status: { visible: true, label: 'Status' },
+		email: { visible: true, label: 'Email' },
+		amount: { visible: true, label: 'Amount ($)' },
 	});
 	protected readonly _allDisplayedColumns = computed(() => [
 		'select',
@@ -629,7 +629,7 @@ const PAYMENT_DATA: Payment[] = [
       <brn-column-def name="amount">
         <hlm-th class="w-20 justify-end" *brnHeaderDef>Amount</hlm-th>
         <hlm-td class="w-20 justify-end font-medium tabular-nums" *brnCellDef="let element">
-          \$ {{ element.amount | number: '1.2-2'}}
+          $ {{ element.amount | number: '1.2-2'}}
         </hlm-td>
       </brn-column-def>
       <brn-column-def name="actions">
