@@ -8,17 +8,16 @@ import {
 	ElementRef,
 	QueryList,
 	ViewChild,
+	effect,
 	inject,
 	signal,
 } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectScrollDownDirective } from './brn-select-scroll-down.directive';
 import { BrnSelectScrollUpDirective } from './brn-select-scroll-up.directive';
 import { BrnSelectService } from './brn-select.service';
 
-// TODO: need to do logic for up and down arrows
 @Component({
 	selector: 'brn-select-content, hlm-select-content:not(noHlm)',
 	standalone: true,
@@ -51,7 +50,10 @@ import { BrnSelectService } from './brn-select.service';
 		`,
 	],
 	template: `
-		<ng-template #scrollUp><ng-content select="hlm-select-scroll-up" /></ng-template>
+		<ng-template #scrollUp>
+			<ng-content select="hlm-select-scroll-up" />
+			<ng-content select="brnSelectScrollUp" />
+		</ng-template>
 		<ng-container *ngTemplateOutlet="canScrollUp() && scrollUpBtn ? scrollUp : null"></ng-container>
 		<div
 			data-brn-select-viewport
@@ -65,7 +67,10 @@ import { BrnSelectService } from './brn-select.service';
 		>
 			<ng-content />
 		</div>
-		<ng-template #scrollDown><ng-content select="hlm-select-scroll-down" /></ng-template>
+		<ng-template #scrollDown>
+			<ng-content select="brnSelectScrollDown" />
+			<ng-content select="hlm-select-scroll-down" />
+		</ng-template>
 		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn ? scrollDown : null"></ng-container>
 	`,
 })
@@ -76,7 +81,6 @@ export class BrnSelectContentComponent {
 
 	protected labelledBy = this._selectService.labelId;
 	protected id = this._selectService.id;
-	protected multiple$ = toObservable(this._selectService.multiple);
 	protected canScrollUp = signal(false);
 	protected canScrollDown = signal(false);
 
@@ -95,26 +99,13 @@ export class BrnSelectContentComponent {
 	constructor() {
 		this._cdkListbox.valueChange
 			.asObservable()
-			.pipe(
-				takeUntilDestroyed(),
-				tap((val: ListboxValueChangeEvent<unknown>) => this._selectService.listBoxValueChangeEvent$.next(val)),
-			)
-			.subscribe();
-
-		this.multiple$
-			.pipe(
-				takeUntilDestroyed(),
-				tap((multiple) => (this._cdkListbox.multiple = multiple)),
-			)
-			.subscribe();
-
-		toObservable(this._selectService.isExpanded)
 			.pipe(takeUntilDestroyed())
-			.subscribe((isExpanded) => {
-				if (isExpanded) {
-					setTimeout(() => this.updateArrowDisplay());
-				}
-			});
+			.subscribe((val: ListboxValueChangeEvent<unknown>) => this._selectService.listBoxValueChangeEvent$.next(val));
+
+		effect(() => {
+			this._cdkListbox.multiple = this._selectService.multiple();
+			this._selectService.isExpanded() && setTimeout(() => this.updateArrowDisplay());
+		});
 	}
 
 	updateArrowDisplay(): void {
@@ -145,9 +136,5 @@ export class BrnSelectContentComponent {
 		if (viewportSize + viewportScrollPosition + 100 > this.viewport.nativeElement.scrollHeight + 50) {
 			this.scrollDownBtn.stopEmittingEvents();
 		}
-	}
-
-	get options() {
-		return this._options.toArray();
 	}
 }
