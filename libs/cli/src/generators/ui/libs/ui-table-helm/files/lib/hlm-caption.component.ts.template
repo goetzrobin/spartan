@@ -5,8 +5,7 @@ import {
 	computed,
 	effect,
 	inject,
-	Input,
-	signal,
+	input,
 	ViewEncapsulation,
 } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
@@ -20,7 +19,7 @@ let captionIdSequence = 0;
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
-		'[id]': '_id()',
+		'[id]': 'id()',
 	},
 	template: `
 		<ng-content />
@@ -31,41 +30,20 @@ let captionIdSequence = 0;
 export class HlmCaptionComponent {
 	private readonly _table = inject(HlmTableComponent, { optional: true });
 
-	private readonly _hidden = signal(false);
-	private readonly _userCls = signal<ClassValue>('');
+	protected readonly id = input<string | null | undefined>(`${captionIdSequence++}`);
+
+	private readonly hidden = input(false, { transform: booleanAttribute });
+	private readonly class = input<ClassValue>('');
 	protected readonly _computedClass = computed(() =>
-		hlm(
-			'text-center block mt-4 text-sm text-muted-foreground',
-			this._hidden() ? 'sr-only' : 'order-last',
-			this._userCls(),
-		),
+		hlm('text-center block mt-4 text-sm text-muted-foreground', this.hidden() ? 'sr-only' : 'order-last', this.class()),
 	);
-	protected readonly _id = signal<string | null | undefined>(`${captionIdSequence++}`);
-
-	@Input({ transform: booleanAttribute })
-	public truncate = false;
-
-	@Input()
-	set class(inputs: ClassValue) {
-		this._userCls.set(inputs);
-	}
-
-	@Input()
-	set id(value: string | null | undefined) {
-		this._id.set(value);
-	}
-
-	@Input({ transform: booleanAttribute })
-	set hidden(value: boolean) {
-		this._hidden.set(value);
-	}
 
 	constructor() {
 		effect(
 			() => {
-				const id = this._id();
+				const id = this.id();
 				if (!this._table) return;
-				this._table.labeledBy = id;
+				this._table.labeledBy.set(id);
 			},
 			{ allowSignalWrites: true },
 		);

@@ -1,20 +1,21 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
+	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
-	Input,
-	ViewEncapsulation,
-	booleanAttribute,
 	computed,
-	signal,
+	inject,
+	input,
+	ViewEncapsulation,
 } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
+import { BrnColumnDefComponent } from '@spartan-ng/ui-table-brain';
 import { ClassValue } from 'clsx';
 
 @Component({
 	selector: 'hlm-th',
 	standalone: true,
-	imports: [NgTemplateOutlet, NgIf],
+	imports: [NgTemplateOutlet],
 	host: {
 		'[class]': '_computedClass()',
 	},
@@ -22,29 +23,27 @@ import { ClassValue } from 'clsx';
 		<ng-template #content>
 			<ng-content />
 		</ng-template>
-		<span *ngIf="truncate" class="flex-1 truncate">
+		@if (truncate()) {
+			<span class="flex-1 truncate">
+				<ng-container [ngTemplateOutlet]="content" />
+			</span>
+		} @else {
 			<ng-container [ngTemplateOutlet]="content" />
-		</span>
-		<ng-container *ngIf="!truncate" [ngTemplateOutlet]="content" />
+		}
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
 export class HlmThComponent {
-	@Input({ transform: booleanAttribute })
-	public truncate = false;
+	private readonly _columnDef? = inject(BrnColumnDefComponent, { optional: true });
+	private readonly class = input<ClassValue>('');
+	protected readonly truncate = input(false, { transform: booleanAttribute });
 
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(inputs: ClassValue) {
-		this._userCls.set(inputs);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(
+	protected readonly _computedClass = computed(() =>
+		hlm(
 			'flex flex-none h-12 px-4 text-sm items-center font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
-			this._userCls(),
-		);
-	}
+			this._columnDef?.class(),
+			this.class(),
+		),
+	);
 }
