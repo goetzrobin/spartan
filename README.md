@@ -63,28 +63,41 @@ And then add the beautiful shadcn styles with primitives (and components where n
 
 You can find all UI primitives in the `libs/ui` folder.
 
-Each primitive is made up off a un-styled `brain` library, which provides all functionality and a `helm` library, which adds the styles.
+Each primitive is made up off an un-styled `brain` library, which provides all functionality and a `helm` library, which adds the styles.
 
 There's also a `libs/cli` folder, which contains the Nx-plugin & Angular CLI code that allows users to add spartan/ui to their Nx or Angular workspace in a simple way.
+
+#### Install Dependencies
+
+Run `pnpm install` to install the dependencies of this project.
 
 ### Development with storybook
 
 A storybook project is set up and is the primary way to develop UI components. You can run it with:
 
 ```
-yarn storybook
+pnpm storybook
 ```
 
 At the root of each primitive's folder, e.g. `libs/ui/accordion` you will find a stories file, e.g, `accordion.stories.ts`.
 
 Use these files to add stories and drive development of the primitives.
 
+### Testing
+
+spartan uses [Jest](https://jestjs.io) for tests. To test all projects locally, run the following command from the root
+folder:
+
+```shell
+pnpm test
+```
+
 ### e2e testing
 
 Cypress e2e testing is set up to run on the storybook. You can run it with:
 
 ```
-yarn e2e
+pnpm e2e
 ```
 
 To add your own `e2e` tests add them to the `apps/ui-storybook-e2e` application.
@@ -114,26 +127,22 @@ Follow the directions below to get it up and running:
 
 #### Prerequisites
 
-- You will need `yarn` (or a different package manager) installed.
+- You will need `pnpm` (or a different package manager) installed.
 - You will need to set up a [Supabase](https://supabase.com/) account (it's free)
 - You will need [NodeJs](https://nodejs.org/en) installed. The version I have working is `18.13.0`.
-
-#### Install Dependencies
-
-Run `yarn` or `yarn install` to install the dependencies of this project.
 
 #### Development server
 
 Then you can run the following command:
 
 ```shell
-yarn nx serve app
+pnpm nx serve app
 ```
 
 or
 
 ```shell
-yarn dev
+pnpm dev
 ```
 
 for a dev server. Navigate to http://localhost:4200/. The app will automatically reload
@@ -168,7 +177,7 @@ create table
 
 ## Understand this workspace
 
-Run `yarn nx graph` to see a diagram of the dependencies of the projects.
+Run `pnpm nx graph` to see a diagram of the dependencies of the projects.
 
 ## Further help
 
