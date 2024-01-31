@@ -13,7 +13,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 	providers: [provideIcons({ radixChevronUp, radixChevronDown })],
 	template: `
 		<form [formGroup]="timeZoneGroup">
-			<hlm-select formControlName="timezone" scrollable="true" placeholder="Select a timezone">
+			<hlm-select formControlName="option" scrollable="true" placeholder="Select a timezone">
 				<hlm-select-trigger class="w-[280px]">
 					<hlm-select-value />
 				</hlm-select-trigger>
