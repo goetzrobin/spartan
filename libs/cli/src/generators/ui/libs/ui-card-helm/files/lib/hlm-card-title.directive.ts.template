@@ -1,7 +1,6 @@
-import { computed, Directive, Input, signal } from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
-import { ClassValue } from 'clsx';
 
 export const cardTitleVariants = cva('text-lg font-semibold leading-none tracking-tight', {
 	variants: {},
@@ -17,14 +16,7 @@ export type CardTitleVariants = VariantProps<typeof cardTitleVariants>;
 	},
 })
 export class HlmCardTitleDirective {
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
+	public readonly class = input('');
 
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(cardTitleVariants(), this._userCls());
-	}
+	protected readonly _computedClass = computed(() => hlm(cardTitleVariants(), this.class()));
 }
