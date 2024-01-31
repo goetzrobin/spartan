@@ -27,7 +27,7 @@ import {
 		<nav hlmPagination>
 			<ul hlmPaginationContent>
 				<li hlmPaginationItem>
-					<hlm-pagination-previous />
+					<hlm-pagination-previous href="#" />
 				</li>
 				<li hlmPaginationItem>
 					<a routerLink="#" hlmPaginationLink>1</a>
@@ -42,7 +42,7 @@ import {
 					<hlm-pagination-ellipsis />
 				</li>
 				<li hlmPaginationItem>
-					<hlm-pagination-next />
+					<hlm-pagination-next href="#" />
 				</li>
 			</ul>
 		</nav>
@@ -80,7 +80,7 @@ import {
 		<nav hlmPagination>
 			<ul hlmPaginationContent>
 				<li hlmPaginationItem>
-					<hlm-pagination-previous />
+					<hlm-pagination-previous href="#" />
 				</li>
 				<li hlmPaginationItem>
 					<a routerLink="#" hlmPaginationLink>1</a>
@@ -95,7 +95,7 @@ import {
 					<hlm-pagination-ellipsis />
 				</li>
 				<li hlmPaginationItem>
-					<hlm-pagination-next />
+					<hlm-pagination-next href="#" />
 				</li>
 			</ul>
 		</nav>
@@ -117,12 +117,26 @@ import {
 `;
 
 export const defaultSkeleton = `
-<section hlmCard>
-  <div hlmCardHeader>
-    <h3 hlmCardTitle>Card Title</h3>
-    <p hlmCardDescription>Card Description</p>
-  </div>
-  <p hlmCardContent>Card Content</p>
-  <p hlmCardFooter>Card Footer</p>
-</section>
+<nav hlmPagination>
+  <ul hlmPaginationContent>
+    <li hlmPaginationItem>
+      <hlm-pagination-previous href="#" />
+    </li>
+    <li hlmPaginationItem>
+      <a routerLink="#" hlmPaginationLink>1</a>
+    </li>
+    <li hlmPaginationItem>
+      <a routerLink="#" hlmPaginationLink isActive>2</a>
+    </li>
+    <li hlmPaginationItem>
+      <a routerLink="#" hlmPaginationLink>3</a>
+    </li>
+    <li hlmPaginationItem>
+      <hlm-pagination-ellipsis />
+    </li>
+    <li hlmPaginationItem>
+      <hlm-pagination-next href="#" />
+    </li>
+  </ul>
+</nav>
 `;

@@ -11,7 +11,7 @@ import { SectionIntroComponent } from '../../../../shared/layout/section-intro.c
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { PaginationPreviewComponent, defaultCode, defaultImports } from './pagination.preview';
+import { PaginationPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './pagination.preview';
 // import { cardNotificationsCode, CardNotificationsComponent } from './card--notifications.example';
 // import { CardPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './card.preview';
 
@@ -58,7 +58,7 @@ export const routeMeta: RouteMeta = {
 			<spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
 			<div class="space-y-4">
 				<spartan-code [code]="defaultImports" />
-				<!-- <spartan-code [code]="defaultSkeleton" /> -->
+				<spartan-code [code]="defaultSkeleton" />
 			</div>
 
 			<!-- <spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
@@ -79,7 +79,7 @@ export const routeMeta: RouteMeta = {
 })
 export default class PaginationPageComponent {
 	protected readonly defaultCode = defaultCode;
-	// protected readonly defaultSkeleton = defaultSkeleton;
+	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
 	// protected readonly cardNotificationsCode = cardNotificationsCode;
 }
