@@ -46,6 +46,7 @@
 			"@spartan-ng/ui-label-helm": ["libs/ui/label/helm/src/index.ts"],
 			"@spartan-ng/ui-menu-brain": ["libs/ui/menu/brain/src/index.ts"],
 			"@spartan-ng/ui-menu-helm": ["libs/ui/menu/helm/src/index.ts"],
+			"@spartan-ng/ui-pagination-helm": ["libs/ui/pagination/helm/src/index.ts"],
 			"@spartan-ng/ui-popover-brain": ["libs/ui/popover/brain/src/index.ts"],
 			"@spartan-ng/ui-popover-helm": ["libs/ui/popover/helm/src/index.ts"],
 			"@spartan-ng/ui-progress-brain": ["libs/ui/progress/brain/src/index.ts"],
