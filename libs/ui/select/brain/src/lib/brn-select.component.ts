@@ -9,6 +9,7 @@ import {
 	Input,
 	QueryList,
 	ViewChild,
+	computed,
 	inject,
 	signal,
 } from '@angular/core';
@@ -30,11 +31,12 @@ let nextId = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [BrnSelectService, CdkListbox],
 	template: `
-		<!-- Select -->
-		@if (!labelProvided() && placeholder) {
-			<label class="hidden" [id]="backupLabelId()">{{ _placeholder() }}</label>
+		@if (!labelProvided() && _placeholder()) {
+			<label class="hidden" [attr.id]="backupLabelId()">{{ _placeholder() }}</label>
+		} @else {
+			<ng-content select="label[hlmLabel],label[brnLabel]"></ng-content>
 		}
-		<ng-content select="label[hlmLabel],label[brnLabel]"></ng-content>
+
 		<div cdk-overlay-origin (click)="toggle()" #trigger="cdkOverlayOrigin">
 			<ng-content select="hlm-select-trigger,[brnSelectTrigger]"></ng-content>
 		</div>
@@ -78,7 +80,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	}
 	readonly _disabled = this._selectService.disabled;
 
-	@ContentChild(BrnLabelDirective)
+	@ContentChild(BrnLabelDirective, { descendants: false })
 	protected selectLabel!: BrnLabelDirective;
 
 	@ContentChild(BrnSelectTriggerDirective)
@@ -97,7 +99,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	isExpanded = this._selectService.isExpanded;
 
-	backupLabelId = this._selectService.labelId;
+	backupLabelId = computed(() => this._selectService.labelId());
 
 	labelProvided = signal(false);
 
@@ -168,7 +170,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 				...state,
 				labelId: this.selectLabel.id,
 			}));
-		} else if (this.placeholder) {
+		} else if (this._placeholder()) {
 			this._selectService.state.update((state) => ({
 				...state,
 				labelId: `${state.id}--label`,

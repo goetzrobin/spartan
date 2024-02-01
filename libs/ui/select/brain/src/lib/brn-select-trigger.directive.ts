@@ -10,6 +10,10 @@ import { BrnSelectService } from './brn-select.service';
 		'[disabled]': 'selectDisable()',
 		'[attr.aria-expanded]': 'isExpanded()',
 		'[attr.aria-controls]': "selectContentId() + ''",
+		'[attr.aria-labelledBy]': 'selectTriggerLabelledBy()',
+		'aria-autocomplete': 'none',
+		'[attr.dir]': 'ltr',
+		type: 'button',
 	},
 })
 export class BrnSelectTriggerDirective {
@@ -20,7 +24,13 @@ export class BrnSelectTriggerDirective {
 	readonly selectTriggerId = computed(() => `${this._selectService.id()}--trigger`);
 	readonly selectContentId = computed(() => `${this._selectService.id()}--content`);
 
-	readonly selectDisable = this._selectService.disabled;
+	readonly selectTriggerLabelledBy = computed(() => {
+		if (this._selectService.value().length > 0) {
+			return `${this._selectService.labelId()} ${this._selectService.id()}--value`;
+		}
+		return this._selectService.labelId();
+	});
+	readonly selectDisable = computed(() => this._selectService.disabled());
 
 	constructor(private el: ElementRef) {}
 
