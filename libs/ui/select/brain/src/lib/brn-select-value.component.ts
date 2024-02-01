@@ -4,10 +4,11 @@ import { BrnSelectService } from './brn-select.service';
 @Component({
 	selector: 'brn-select-value, hlm-select-value',
 	template: `
-		<span>
-			{{ value() ? value() : placeholder() }}
-		</span>
+		{{ value() || placeholder() }}
 	`,
+	host: {
+		'[id]': 'id()',
+	},
 	styles: [
 		`
 			:host {
@@ -15,6 +16,7 @@ import { BrnSelectService } from './brn-select.service';
 				-webkit-box-orient: vertical;
 				-webkit-line-clamp: 1;
 				white-space: nowrap;
+				pointer-events: none;
 			}
 		`,
 	],
@@ -24,14 +26,14 @@ import { BrnSelectService } from './brn-select.service';
 export class BrnSelectValueComponent {
 	private _selectService = inject(BrnSelectService);
 
-	readonly _value = this._selectService.selectedOptions;
+	readonly id = computed(() => `${this._selectService.id()}--value`);
+	readonly placeholder = computed(() => this._selectService.placeholder());
 	readonly value = computed(() => {
-		if (this._value().length === 0) {
+		const value = this._selectService.selectedOptions();
+		if (value.length === 0) {
 			return null;
 		}
-		const selectedLabels = this._value().map((selectedOption) => selectedOption?.getLabel());
+		const selectedLabels = value.map((selectedOption) => selectedOption?.getLabel());
 		return selectedLabels.join(', ');
 	});
-
-	readonly placeholder = this._selectService.placeholder;
 }
