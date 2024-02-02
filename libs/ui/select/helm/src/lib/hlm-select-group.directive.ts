@@ -1,4 +1,4 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { computed, Directive, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnSelectGroupDirective } from '@spartan-ng/ui-select-brain';
 import { ClassValue } from 'clsx';
@@ -12,16 +12,11 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmSelectGroupDirective {
-	private readonly classNames = signal<ClassValue>('');
-
+	private readonly _classNames = signal<ClassValue>('');
 	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'class' })
 	set _class(classNames: ClassValue) {
-		this.classNames.set(classNames);
+		this._classNames.set(classNames);
 	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(this.classNames());
-	}
+	protected readonly _computedClass = computed(() => hlm(this._classNames()));
 }

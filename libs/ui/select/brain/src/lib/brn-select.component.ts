@@ -16,7 +16,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { map, tap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -57,55 +56,48 @@ let nextId = 0;
 	`,
 })
 export class BrnSelectComponent implements ControlValueAccessor, AfterContentInit {
-	private _selectService = inject(BrnSelectService);
+	private readonly _selectService = inject(BrnSelectService);
 
 	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'multiple' })
 	set multiple(multiple: boolean) {
 		this._selectService.state.update((state) => ({ ...state, multiple }));
 	}
-	readonly _multiple = this._selectService.multiple;
+	protected readonly _multiple = this._selectService.multiple;
 
 	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'placeholder' })
 	set placeholder(placeholder: string) {
 		this._selectService.state.update((state) => ({ ...state, placeholder }));
 	}
-	readonly _placeholder = this._selectService.placeholder;
+	protected readonly _placeholder = this._selectService.placeholder;
 
 	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'disabled' })
 	set disabled(disabled: boolean) {
 		this._selectService.state.update((state) => ({ ...state, disabled }));
 	}
-	readonly _disabled = this._selectService.disabled;
+	protected readonly _disabled = this._selectService.disabled;
 
 	@ContentChild(BrnLabelDirective, { descendants: false })
 	protected selectLabel!: BrnLabelDirective;
-
 	@ContentChild(BrnSelectTriggerDirective)
 	protected selectTrigger!: BrnSelectTriggerDirective;
-
 	/** Overlay pane containing the options. */
 	@ContentChild(BrnSelectContentComponent)
 	protected selectContent!: BrnSelectContentComponent;
-
 	@ContentChildren(BrnSelectOptionDirective, { descendants: true })
-	options!: QueryList<BrnSelectOptionDirective>;
-
+	protected options!: QueryList<BrnSelectOptionDirective>;
 	/** Overlay pane containing the options. */
 	@ViewChild(CdkConnectedOverlay)
 	protected _overlayDir!: CdkConnectedOverlay;
 
-	isExpanded = this._selectService.isExpanded;
+	public readonly isExpanded = this._selectService.isExpanded;
+	public readonly backupLabelId = computed(() => this._selectService.labelId());
+	public readonly labelProvided = signal(false);
+	public readonly value = signal('');
 
-	backupLabelId = computed(() => this._selectService.labelId());
-
-	labelProvided = signal(false);
-
-	value = signal('');
-
-	ngControl = inject(NgControl, { optional: true, self: true });
+	public readonly ngControl = inject(NgControl, { optional: true, self: true });
 
 	private _onChange: (value: unknown) => void = () => {};
 	private _onTouched = () => {};
@@ -116,7 +108,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	 * the trigger completely). If the panel cannot fit below the trigger, it
 	 * will fall back to a position above the trigger.
 	 */
-	_positions: ConnectedPosition[] = [
+	protected _positions: ConnectedPosition[] = [
 		{
 			originX: 'start',
 			originY: 'bottom',
@@ -153,19 +145,16 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		}
 
 		// Watch for Listbox Selection Changes to trigger Collapse
-		this._selectService.listBoxValueChangeEvent$
-			.pipe(
-				tap(() => !this._multiple() && this.close()),
-				map((listboxEvent) => {
-					this.writeValue(listboxEvent.value);
-					this._onChange(listboxEvent.value);
-				}),
-				takeUntilDestroyed(),
-			)
-			.subscribe();
+		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe((listboxEvent) => {
+			if (this._multiple()) {
+				this.close();
+			}
+			this.writeValue(listboxEvent.value);
+			this._onChange(listboxEvent.value);
+		});
 	}
 
-	ngAfterContentInit(): void {
+	public ngAfterContentInit(): void {
 		// Check if Label Directive Provided and pass to service
 		if (this.selectLabel) {
 			this.labelProvided.set(true);
@@ -181,38 +170,37 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		}
 	}
 
-	/** Toggles the overlay panel open or closed. */
-	toggle(): void {
-		this.isExpanded() ? this.close() : this.open();
-	}
-
-	/** Opens the overlay panel. */
-	open(): void {
-		if (this._canOpen()) {
-			this._selectService.state.update((state) => ({
-				...state,
-				isExpanded: true,
-			}));
-			this._moveFocusToCDKList();
-		}
-	}
-
-	/** Closes the overlay panel and focuses the host element. */
-	close(): void {
+	public toggle(): void {
 		if (this.isExpanded()) {
-			if (this.selectTrigger) {
-				this.selectTrigger.focus();
-			}
-
-			this._selectService.state.update((state) => ({
-				...state,
-				isExpanded: false,
-			}));
-			this._onTouched();
+			this.close();
+		} else {
+			this.open();
 		}
 	}
 
-	/** Whether the panel is allowed to open. */
+	public open(): void {
+		if (!this._canOpen()) return;
+		this._selectService.state.update((state) => ({
+			...state,
+			isExpanded: true,
+		}));
+		this._moveFocusToCDKList();
+	}
+
+	public close(): void {
+		if (!this.isExpanded()) return;
+
+		if (this.selectTrigger) {
+			this.selectTrigger.focus();
+		}
+
+		this._selectService.state.update((state) => ({
+			...state,
+			isExpanded: false,
+		}));
+		this._onTouched();
+	}
+
 	protected _canOpen(): boolean {
 		return !this.isExpanded() && !this._disabled() && this.options?.length > 0;
 	}
@@ -222,16 +210,17 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	writeValue(value: any): void {
+	public writeValue(value: any): void {
 		this.value.set(value);
 	}
+
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnChange(fn: any): void {
+	public registerOnChange(fn: any): void {
 		this._onChange = fn;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnTouched(fn: any): void {
+	public registerOnTouched(fn: any): void {
 		this._onTouched = fn;
 	}
 }

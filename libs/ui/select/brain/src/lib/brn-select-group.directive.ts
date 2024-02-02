@@ -9,5 +9,5 @@ import { Directive, signal } from '@angular/core';
 	},
 })
 export class BrnSelectGroupDirective {
-	labelledBy = signal('');
+	public readonly labelledBy = signal('');
 }

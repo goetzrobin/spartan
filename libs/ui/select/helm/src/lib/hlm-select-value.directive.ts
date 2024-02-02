@@ -1,4 +1,4 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { computed, Directive, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -11,18 +11,13 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmSelectValueDirective {
-	baseClasses = 'overflow-hidden pointer-events-none text-ellipsis';
-
 	private readonly classNames = signal<ClassValue>('');
-
 	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'class' })
 	set _class(classNames: ClassValue) {
 		this.classNames.set(classNames);
 	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(this.baseClasses, this.classNames());
-	}
+	protected readonly _computedClass = computed(() =>
+		hlm('!inline-block w-[calc(100%)]] min-w-0 pointer-events-none truncate', this.classNames()),
+	);
 }

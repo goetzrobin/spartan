@@ -1,4 +1,4 @@
-import { Directive, ElementRef, computed, inject } from '@angular/core';
+import { computed, Directive, ElementRef, inject } from '@angular/core';
 import { BrnSelectService } from './brn-select.service';
 
 @Directive({
@@ -12,29 +12,26 @@ import { BrnSelectService } from './brn-select.service';
 		'[attr.aria-controls]': "selectContentId() + ''",
 		'[attr.aria-labelledBy]': 'selectTriggerLabelledBy()',
 		'aria-autocomplete': 'none',
-		'[attr.dir]': 'ltr',
+		'[attr.dir]': '"ltr"',
 		type: 'button',
 	},
 })
 export class BrnSelectTriggerDirective {
-	private _selectService = inject(BrnSelectService);
+	private readonly _selectService = inject(BrnSelectService);
+	private readonly el = inject(ElementRef);
 
-	readonly isExpanded = this._selectService.isExpanded;
-
-	readonly selectTriggerId = computed(() => `${this._selectService.id()}--trigger`);
-	readonly selectContentId = computed(() => `${this._selectService.id()}--content`);
-
-	readonly selectTriggerLabelledBy = computed(() => {
+	public readonly isExpanded = this._selectService.isExpanded;
+	public readonly selectTriggerId = computed(() => `${this._selectService.id()}--trigger`);
+	public readonly selectContentId = computed(() => `${this._selectService.id()}--content`);
+	public readonly selectDisable = computed(() => this._selectService.disabled());
+	public readonly selectTriggerLabelledBy = computed(() => {
 		if (this._selectService.value().length > 0) {
 			return `${this._selectService.labelId()} ${this._selectService.id()}--value`;
 		}
 		return this._selectService.labelId();
 	});
-	readonly selectDisable = computed(() => this._selectService.disabled());
 
-	constructor(private el: ElementRef) {}
-
-	focus() {
+	public focus() {
 		this.el.nativeElement.focus();
 	}
 }
