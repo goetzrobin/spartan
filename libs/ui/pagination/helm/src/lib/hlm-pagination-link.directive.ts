@@ -1,4 +1,5 @@
 import { booleanAttribute, computed, Directive, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { buttonVariants, ButtonVariants } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
@@ -12,6 +13,12 @@ export type PaginationLinkVariants = VariantProps<typeof paginationLinkVariants>
 @Directive({
 	selector: '[hlmPaginationLink]',
 	standalone: true,
+	hostDirectives: [
+		{
+			directive: RouterLink,
+			inputs: ['routerLink: link'],
+		},
+	],
 	host: {
 		'[class]': '_computedClass()',
 		'[attr.aria-current]': 'isActive() ? "page" : null',
@@ -21,6 +28,7 @@ export class HlmPaginationLinkDirective {
 	public readonly class = input('');
 	public readonly isActive = input(false, { transform: booleanAttribute });
 	public readonly size = input<ButtonVariants['size']>('icon');
+	public readonly link = input<string | any[] | null | undefined>();
 
 	protected _computedClass = computed(() =>
 		hlm(

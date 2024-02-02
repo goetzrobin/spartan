@@ -21,27 +21,27 @@ export const Default: Story = {
 	render: () => ({
 		template: `
     <nav hlmPagination>
-      <ul hlmPaginationContent>
-        <li hlmPaginationItem>
-          <hlm-pagination-previous href="#" />
-        </li>
-        <li hlmPaginationItem>
-          <a routerLink="#" hlmPaginationLink>1</a>
-        </li>
-        <li hlmPaginationItem>
-          <a routerLink="#" hlmPaginationLink isActive>2</a>
-        </li>
-        <li hlmPaginationItem>
-          <a routerLink="#" hlmPaginationLink>3</a>
-        </li>
-        <li hlmPaginationItem>
-          <hlm-pagination-ellipsis />
-        </li>
-        <li hlmPaginationItem>
-          <hlm-pagination-next href="#" />
-        </li>
-      </ul>
-    </nav>
+			<ul hlmPaginationContent>
+				<li hlmPaginationItem>
+					<hlm-pagination-previous link="#" />
+				</li>
+				<li hlmPaginationItem>
+					<a hlmPaginationLink link="#">1</a>
+				</li>
+				<li hlmPaginationItem>
+					<a hlmPaginationLink link="#" isActive>2</a>
+				</li>
+				<li hlmPaginationItem>
+					<a hlmPaginationLink link="#">3</a>
+				</li>
+				<li hlmPaginationItem>
+					<hlm-pagination-ellipsis />
+				</li>
+				<li hlmPaginationItem>
+					<hlm-pagination-next link="#" />
+				</li>
+			</ul>
+		</nav>
     `,
 	}),
 };

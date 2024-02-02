@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import {
 	HlmPaginationContentDirective,
 	HlmPaginationDirective,
@@ -21,28 +20,27 @@ import {
 		HlmPaginationNextComponent,
 		HlmPaginationLinkDirective,
 		HlmPaginationEllipsisComponent,
-		RouterLink,
 	],
 	template: `
 		<nav hlmPagination>
 			<ul hlmPaginationContent>
 				<li hlmPaginationItem>
-					<hlm-pagination-previous href="#" />
+					<hlm-pagination-previous link="/components/menubar" />
 				</li>
 				<li hlmPaginationItem>
-					<a routerLink="#" hlmPaginationLink>1</a>
+					<a hlmPaginationLink link="#">1</a>
 				</li>
 				<li hlmPaginationItem>
-					<a routerLink="#" hlmPaginationLink isActive>2</a>
+					<a hlmPaginationLink link="#" isActive>2</a>
 				</li>
 				<li hlmPaginationItem>
-					<a routerLink="#" hlmPaginationLink>3</a>
+					<a hlmPaginationLink link="#">3</a>
 				</li>
 				<li hlmPaginationItem>
 					<hlm-pagination-ellipsis />
 				</li>
 				<li hlmPaginationItem>
-					<hlm-pagination-next href="#" />
+					<hlm-pagination-next link="/components/popover" />
 				</li>
 			</ul>
 		</nav>
@@ -52,7 +50,6 @@ export class PaginationPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import {
 	HlmPaginationContentDirective,
 	HlmPaginationDirective,
@@ -74,28 +71,27 @@ import {
 		HlmPaginationNextComponent,
 		HlmPaginationLinkDirective,
 		HlmPaginationEllipsisComponent,
-		RouterLink,
 	],
 	template: \`
 		<nav hlmPagination>
 			<ul hlmPaginationContent>
 				<li hlmPaginationItem>
-					<hlm-pagination-previous href="#" />
+					<hlm-pagination-previous link="/components/menubar" />
 				</li>
 				<li hlmPaginationItem>
-					<a routerLink="#" hlmPaginationLink>1</a>
+					<a hlmPaginationLink link="#">1</a>
 				</li>
 				<li hlmPaginationItem>
-					<a routerLink="#" hlmPaginationLink isActive>2</a>
+					<a hlmPaginationLink link="#" isActive>2</a>
 				</li>
 				<li hlmPaginationItem>
-					<a routerLink="#" hlmPaginationLink>3</a>
+					<a hlmPaginationLink link="#">3</a>
 				</li>
 				<li hlmPaginationItem>
 					<hlm-pagination-ellipsis />
 				</li>
 				<li hlmPaginationItem>
-					<hlm-pagination-next href="#" />
+					<hlm-pagination-next link="/components/popover" />
 				</li>
 			</ul>
 		</nav>
@@ -120,22 +116,22 @@ export const defaultSkeleton = `
 <nav hlmPagination>
   <ul hlmPaginationContent>
     <li hlmPaginationItem>
-      <hlm-pagination-previous href="#" />
+      <hlm-pagination-previous link="/components/menubar" />
     </li>
     <li hlmPaginationItem>
-      <a routerLink="#" hlmPaginationLink>1</a>
+      <a hlmPaginationLink link="#">1</a>
     </li>
     <li hlmPaginationItem>
-      <a routerLink="#" hlmPaginationLink isActive>2</a>
+      <a hlmPaginationLink link="#" isActive>2</a>
     </li>
     <li hlmPaginationItem>
-      <a routerLink="#" hlmPaginationLink>3</a>
+      <a hlmPaginationLink link="#">3</a>
     </li>
     <li hlmPaginationItem>
       <hlm-pagination-ellipsis />
     </li>
     <li hlmPaginationItem>
-      <hlm-pagination-next href="#" />
+      <hlm-pagination-next link="/components/popover" />
     </li>
   </ul>
 </nav>

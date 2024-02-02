@@ -10,17 +10,14 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 	imports: [HlmPaginationLinkDirective, HlmIconComponent],
 	providers: [provideIcons({ radixDotsHorizontal })],
 	template: `
-		<span class="flex h-9 w-9 items-center justify-center">
+		<span [class]="_computedClass()">
 			<hlm-icon size="sm" name="radixDotsHorizontal" />
 			<span class="sr-only">More pages</span>
 		</span>
 	`,
-	host: {
-		'[class]': '_computedClass()',
-	},
 })
 export class HlmPaginationEllipsisComponent {
 	public readonly class = input('');
 
-	protected _computedClass = computed(() => hlm('', this.class()));
+	protected _computedClass = computed(() => hlm('flex h-9 w-9 items-center justify-center', this.class()));
 }
