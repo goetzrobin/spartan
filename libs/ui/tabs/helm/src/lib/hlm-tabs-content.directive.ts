@@ -1,4 +1,4 @@
-import { Directive, Input, computed, inject, signal } from '@angular/core';
+import { Directive, Input, computed, inject, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnTabsContentDirective } from '@spartan-ng/ui-tabs-brain';
 import { ClassValue } from 'clsx';
@@ -13,11 +13,6 @@ import { ClassValue } from 'clsx';
 })
 export class HlmTabsContentDirective {
 	private readonly _brn = inject(BrnTabsContentDirective);
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
 
 	@Input('hlmTabsContent')
 	set contentFor(key: string) {
@@ -26,11 +21,11 @@ export class HlmTabsContentDirective {
 		}
 	}
 
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() =>
+		hlm(
 			'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-			this._userCls(),
-		);
-	}
+			this._userClass(),
+		),
+	);
 }

@@ -1,4 +1,4 @@
-import { computed, Directive, Input, signal } from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnDialogDescriptionDirective } from '@spartan-ng/ui-dialog-brain';
 import { ClassValue } from 'clsx';
@@ -12,14 +12,6 @@ import { ClassValue } from 'clsx';
 	hostDirectives: [BrnDialogDescriptionDirective],
 })
 export class HlmDialogDescriptionDirective {
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm('text-sm text-muted-foreground', this._userCls());
-	}
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm('text-sm text-muted-foreground', this._userClass()));
 }
