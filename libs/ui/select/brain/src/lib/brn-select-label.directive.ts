@@ -8,10 +8,10 @@ import { BrnSelectGroupDirective } from './brn-select-group.directive';
 	standalone: true,
 })
 export class BrnSelectLabelDirective {
-	private group = inject(BrnSelectGroupDirective);
+	private group = inject(BrnSelectGroupDirective, { optional: true });
 	private label = inject(BrnLabelDirective, { host: true });
 
 	constructor() {
-		this.group.labelledBy = this.label.id;
+		this.group?.labelledBy.set(this.label.id);
 	}
 }
