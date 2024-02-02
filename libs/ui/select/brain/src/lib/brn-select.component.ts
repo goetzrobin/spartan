@@ -105,7 +105,10 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	value = signal('');
 
-	ngControl = inject(NgControl);
+	ngControl = inject(NgControl, { optional: true, self: true });
+
+	private _onChange: (value: unknown) => void = () => {};
+	private _onTouched = () => {};
 
 	/*
 	 * This position config ensures that the top "start" corner of the overlay
@@ -155,7 +158,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 				tap(() => !this._multiple() && this.close()),
 				map((listboxEvent) => {
 					this.writeValue(listboxEvent.value);
-					this.onChange(listboxEvent.value);
+					this._onChange(listboxEvent.value);
 				}),
 				takeUntilDestroyed(),
 			)
@@ -205,7 +208,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 				...state,
 				isExpanded: false,
 			}));
-			this.onTouched();
+			this._onTouched();
 		}
 	}
 
@@ -219,21 +222,16 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	onChange!: (value: any) => void;
-
-	onTouched!: () => void;
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	writeValue(value: any): void {
 		this.value.set(value);
 	}
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	registerOnChange(fn: any): void {
-		this.onChange = fn;
+		this._onChange = fn;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	registerOnTouched(fn: any): void {
-		this.onTouched = fn;
+		this._onTouched = fn;
 	}
 }
