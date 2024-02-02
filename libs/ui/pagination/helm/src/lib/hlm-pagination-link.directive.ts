@@ -16,7 +16,19 @@ export type PaginationLinkVariants = VariantProps<typeof paginationLinkVariants>
 	hostDirectives: [
 		{
 			directive: RouterLink,
-			inputs: ['routerLink: link'],
+			inputs: [
+				'target',
+				'queryParams',
+				'fragment',
+				'queryParamsHandling',
+				'state',
+				'info',
+				'relativeTo',
+				'preserveFragment',
+				'skipLocationChange',
+				'replaceUrl',
+				'routerLink: link',
+			],
 		},
 	],
 	host: {
