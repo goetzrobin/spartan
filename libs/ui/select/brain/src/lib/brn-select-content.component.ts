@@ -54,7 +54,7 @@ import { BrnSelectService } from './brn-select.service';
 			<ng-content select="hlm-select-scroll-up" />
 			<ng-content select="brnSelectScrollUp" />
 		</ng-template>
-		<ng-container *ngTemplateOutlet="canScrollUp() && scrollUpBtn ? scrollUp : null"></ng-container>
+		<ng-container *ngTemplateOutlet="canScrollUp() && scrollUpBtn ? scrollUp : null" />
 		<div
 			data-brn-select-viewport
 			#viewport
@@ -63,7 +63,9 @@ import { BrnSelectService } from './brn-select.service';
 			position: relative;
 			width:100%;
 			overflow:auto;
-			min-height: 36px;"
+			min-height: 36px;
+      padding-bottom: 2px;
+      margin-bottom: -2px;"
 		>
 			<ng-content />
 		</div>
@@ -71,18 +73,18 @@ import { BrnSelectService } from './brn-select.service';
 			<ng-content select="brnSelectScrollDown" />
 			<ng-content select="hlm-select-scroll-down" />
 		</ng-template>
-		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn ? scrollDown : null"></ng-container>
+		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn ? scrollDown : null" />
 	`,
 })
 export class BrnSelectContentComponent {
-	private _el: ElementRef<HTMLElement> = inject(ElementRef);
-	private _cdkListbox = inject(CdkListbox, { host: true });
-	private _selectService = inject(BrnSelectService);
+	private readonly _el: ElementRef<HTMLElement> = inject(ElementRef);
+	private readonly _cdkListbox = inject(CdkListbox, { host: true });
+	private readonly _selectService = inject(BrnSelectService);
 
-	protected labelledBy = this._selectService.labelId;
-	protected id = this._selectService.id;
-	protected canScrollUp = signal(false);
-	protected canScrollDown = signal(false);
+	protected readonly labelledBy = this._selectService.labelId;
+	protected readonly id = this._selectService.id;
+	protected readonly canScrollUp = signal(false);
+	protected readonly canScrollDown = signal(false);
 
 	@ViewChild('viewport')
 	protected viewport!: ElementRef<HTMLElement>;
@@ -108,28 +110,28 @@ export class BrnSelectContentComponent {
 		});
 	}
 
-	updateArrowDisplay(): void {
+	public updateArrowDisplay(): void {
 		this.canScrollUp.set(this.viewport.nativeElement.scrollTop > 0);
 		const maxScroll = this.viewport.nativeElement.scrollHeight - this.viewport.nativeElement.clientHeight;
 		this.canScrollDown.set(Math.ceil(this.viewport.nativeElement.scrollTop) < maxScroll);
 	}
 
-	handleScroll() {
+	public handleScroll() {
 		this.updateArrowDisplay();
 	}
 
-	focusList(): void {
+	public focusList(): void {
 		this._cdkListbox.focus();
 	}
 
-	moveFocusUp() {
+	public moveFocusUp() {
 		this.viewport.nativeElement.scrollBy({ top: -100, behavior: 'smooth' });
 		if (this.viewport.nativeElement.scrollTop === 0) {
 			this.scrollUpBtn.stopEmittingEvents();
 		}
 	}
 
-	moveFocusDown() {
+	public moveFocusDown() {
 		this.viewport.nativeElement.scrollBy({ top: 100, behavior: 'smooth' });
 		const viewportSize = this._el.nativeElement.scrollHeight;
 		const viewportScrollPosition = this.viewport.nativeElement.scrollTop;

@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, Input, signal } from '@angular/core';
+import { radixCheck } from '@ng-icons/radix-icons';
 import { hlm } from '@spartan-ng/ui-core';
+import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { BrnSelectOptionDirective } from '@spartan-ng/ui-select-brain';
 import { ClassValue } from 'clsx';
 
@@ -8,6 +10,7 @@ import { ClassValue } from 'clsx';
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [BrnSelectOptionDirective],
+	providers: [provideIcons({ radixCheck })],
 	host: {
 		'[class]': '_computedClass()',
 	},
@@ -18,44 +21,27 @@ import { ClassValue } from 'clsx';
 			[attr.data-state]="this._brnSelectOption.checkedState()"
 		>
 			@if (this._brnSelectOption.selected()) {
-				<span aria-hidden="true">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						class="h-4 w-4"
-					>
-						<polyline points="20 6 9 17 4 12"></polyline>
-					</svg>
-				</span>
+				<hlm-icon aria-hidden="true" name="radixCheck" />
 			}
 		</span>
 	`,
+	imports: [HlmIconComponent],
 })
 export class HlmSelectOptionComponent {
-	protected _brnSelectOption = inject(BrnSelectOptionDirective, { host: true });
-
-	baseClasses =
-		'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50';
+	protected readonly _brnSelectOption = inject(BrnSelectOptionDirective, { host: true });
 
 	private readonly classNames = signal<ClassValue>('');
-
 	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'class' })
 	set _class(classNames: ClassValue) {
 		this.classNames.set(classNames);
 	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(this.baseClasses, this.classNames());
-	}
+	protected readonly _computedClass = computed(() =>
+		hlm(
+			'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+			this.classNames(),
+		),
+	);
 
 	@Input()
 	set value(value: unknown | null) {
@@ -63,11 +49,5 @@ export class HlmSelectOptionComponent {
 	}
 
 	@Input()
-	set disabled(value: boolean) {
-		this._disabled = value;
-	}
-	get disabled() {
-		return this._disabled;
-	}
-	private _disabled = false;
+	public disabled = false;
 }

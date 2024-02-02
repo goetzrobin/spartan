@@ -31,7 +31,7 @@ export const Default: Story = {
 		template: `
     <form [formGroup]="fruitGroup">
 		<brn-select class="inline-block" ${argsToTemplate(args)} formControlName="fruit">
-			<hlm-select-trigger> 
+			<hlm-select-trigger class='w-56'>
 				<brn-select-value hlm />
 			</hlm-select-trigger>
 			<hlm-select-content class="w-56">
@@ -55,8 +55,8 @@ export const ReactiveFormControl: Story = {
 		<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
 		</div>
     	<form [formGroup]="fruitGroup">
-			<brn-select ${argsToTemplate(args)} formControlName="fruit" placeholder="Select a Fruit">
-				<hlm-select-trigger> 
+			<brn-select class='w-56' ${argsToTemplate(args)} formControlName="fruit" placeholder="Select a Fruit">
+				<hlm-select-trigger>
 					<brn-select-value hlm />
 				</hlm-select-trigger>
 				<hlm-select-content class="w-56">
@@ -80,8 +80,8 @@ export const NgModelFormControl: Story = {
 			<div class="mb-3">
 			<pre>Form Control Value: {{ model.fruit | json }}</pre>
 			</div>
-			<brn-select ${argsToTemplate(args)} [(ngModel)]="model.fruit" name="fruit">
-				<hlm-select-trigger> 
+			<brn-select class='w-56' ${argsToTemplate(args)} [(ngModel)]="model.fruit" name="fruit">
+				<hlm-select-trigger>
 					<brn-select-value hlm />
 				</hlm-select-trigger>
 				<hlm-select-content class="w-56">
@@ -104,7 +104,7 @@ export const SelectWithLabel: Story = {
   <form [formGroup]="fruitGroup">
     <brn-select formControlName="fruit" ${argsToTemplate(args)}>
 		<label hlmLabel>Select a Fruit</label>
-      	<hlm-select-trigger> 
+      	<hlm-select-trigger class='w-56'>
         	<brn-select-value />
       	</hlm-select-trigger>
       	<hlm-select-content class="w-56">
@@ -127,7 +127,7 @@ export const autocomplete: Story = {
   <form [formGroup]="fruitGroup">
     <hlm-select formControlName="fruit" ${argsToTemplate(args)}>
 		<label hlmLabel>Select a Fruit</label>
-		<hlm-select-trigger> 
+		<hlm-select-trigger class='w-56'>
 			<hlm-select-value />
 		</hlm-select-trigger>
 		<hlm-select-content class="w-56">
@@ -150,7 +150,7 @@ export const controless: Story = {
   <form>
     <hlm-select ${argsToTemplate({ disabled: args.disabled, placeholder: args.placeholder, mulitple: args.multiple })}>
 		<label hlmLabel>Select a Fruit</label>
-		<hlm-select-trigger> 
+		<hlm-select-trigger class='w-56'>
 			<hlm-select-value />
 		</hlm-select-trigger>
 		<hlm-select-content class="w-56">
@@ -226,7 +226,7 @@ export const Scrollable: Story = {
 			  </hlm-option>
 			  <hlm-option value="nzst">New Zealand Standard Time (NZST)</hlm-option>
 			  <hlm-option value="fjt">Fiji Time (FJT)</hlm-option>
-	
+
 			</hlm-select-group>
 
 			<hlm-select-group>
@@ -253,7 +253,7 @@ export const ScrollableWithStickyLabels: Story = {
 		<hlm-select-trigger class="w-[280px]">
 			<hlm-select-value />
 		</hlm-select-trigger>
-    	<hlm-select-content class="min-w-content max-h-96" [stickyLabels]="true">
+    	<hlm-select-content class="max-h-96" [stickyLabels]="true">
 		<hlm-select-scroll-up>
 			<hlm-icon class="ml-2 h-4 w-4" name="radixChevronUp" /></hlm-select-scroll-up>
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, Input } from '@angular/core';
 import { BrnSelectService } from './brn-select.service';
 
 @Component({
@@ -24,16 +24,20 @@ import { BrnSelectService } from './brn-select.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BrnSelectValueComponent {
-	private _selectService = inject(BrnSelectService);
+	private readonly _selectService = inject(BrnSelectService);
 
-	readonly id = computed(() => `${this._selectService.id()}--value`);
-	readonly placeholder = computed(() => this._selectService.placeholder());
-	readonly value = computed(() => {
+	public readonly id = computed(() => `${this._selectService.id()}--value`);
+	public readonly placeholder = computed(() => this._selectService.placeholder());
+	public readonly value = computed(() => {
 		const value = this._selectService.selectedOptions();
 		if (value.length === 0) {
 			return null;
 		}
 		const selectedLabels = value.map((selectedOption) => selectedOption?.getLabel());
-		return selectedLabels.join(', ');
+		return this.transformFn(selectedLabels);
 	});
+
+	@Input()
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	transformFn: (values: (string | undefined)[]) => any = (values) => (values ?? []).join(', ');
 }

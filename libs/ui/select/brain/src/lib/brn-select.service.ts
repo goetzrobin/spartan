@@ -1,11 +1,11 @@
 import { CdkOption, ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { Subject, tap } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class BrnSelectService {
-	state = signal<{
+	public readonly state = signal<{
 		id: string;
 		labelId: string;
 		panelId: string;
@@ -27,50 +27,38 @@ export class BrnSelectService {
 		value: '',
 	});
 
-	readonly id = computed(() => this.state().id);
-	readonly labelId = computed(() => this.state().labelId);
-	readonly panelId = computed(() => this.state().panelId);
-	readonly placeholder = computed(() => this.state().placeholder);
-	readonly disabled = computed(() => this.state().disabled);
-	readonly isExpanded = computed(() => this.state().isExpanded);
-	readonly multiple = computed(() => this.state().multiple);
-	readonly selectedOptions = computed(() => this.state().selectedOptions);
-	readonly value = computed(() => this.state().value);
+	public readonly id = computed(() => this.state().id);
+	public readonly labelId = computed(() => this.state().labelId);
+	public readonly panelId = computed(() => this.state().panelId);
+	public readonly placeholder = computed(() => this.state().placeholder);
+	public readonly disabled = computed(() => this.state().disabled);
+	public readonly isExpanded = computed(() => this.state().isExpanded);
+	public readonly multiple = computed(() => this.state().multiple);
+	public readonly selectedOptions = computed(() => this.state().selectedOptions);
+	public readonly value = computed(() => this.state().value);
 
-	private multiple$ = toObservable(this.multiple);
+	private readonly multiple$ = toObservable(this.multiple);
 
-	listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
+	public readonly listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
 
 	constructor() {
-		this.listBoxValueChangeEvent$
-			.pipe(
-				takeUntilDestroyed(),
-				tap((listBoxChange) => {
-					const updatedSelections = this.multiple() ? this.getUpdatedOptions(listBoxChange) : [listBoxChange.option];
-					this.state.update((state) => ({
-						...state,
-						selectedOptions: [...updatedSelections],
-						value: listBoxChange.value as string[],
-					}));
-				}),
-			)
-			.subscribe();
+		this.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe((listBoxChange) => {
+			const updatedSelections = this.multiple() ? this.getUpdatedOptions(listBoxChange) : [listBoxChange.option];
+			this.state.update((state) => ({
+				...state,
+				selectedOptions: [...updatedSelections],
+				value: listBoxChange.value as string[],
+			}));
+		});
 
-		this.multiple$
-			.pipe(
-				takeUntilDestroyed(),
-				tap((multiple) => {
-					// If the value switches from true to false, and more than one option is selected,
-					// all options are deselected.
-					if (!multiple && this.value().length > 1) {
-						this.deselectAllOptions();
-					}
-				}),
-			)
-			.subscribe();
+		this.multiple$.pipe(takeUntilDestroyed()).subscribe((multiple) => {
+			if (!multiple && this.value().length > 1) {
+				this.deselectAllOptions();
+			}
+		});
 	}
 
-	getUpdatedOptions(latestListboxChange: ListboxValueChangeEvent<unknown>): Array<CdkOption | null> {
+	public getUpdatedOptions(latestListboxChange: ListboxValueChangeEvent<unknown>): Array<CdkOption | null> {
 		const isNewSelection = latestListboxChange.value.findIndex((value) => value === latestListboxChange.option?.value);
 		if (isNewSelection === -1) {
 			const removedOptionIndex = this.selectedOptions().findIndex((option) => latestListboxChange.option === option);
@@ -81,7 +69,7 @@ export class BrnSelectService {
 		return [...this.selectedOptions(), latestListboxChange.option];
 	}
 
-	deselectAllOptions() {
+	public deselectAllOptions() {
 		this.state.update((state) => ({
 			...state,
 			selectedOptions: [],

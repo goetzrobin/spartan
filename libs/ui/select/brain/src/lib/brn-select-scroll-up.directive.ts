@@ -13,13 +13,13 @@ import { BrnSelectContentComponent } from './brn-select-content.component';
 	},
 })
 export class BrnSelectScrollUpDirective {
-	private _el = inject(ElementRef);
-	private _selectContent = inject(BrnSelectContentComponent);
+	private readonly _el = inject(ElementRef);
+	private readonly _selectContent = inject(BrnSelectContentComponent);
 
-	private endReached = new Subject<boolean>();
-	private _destroyRef = inject(DestroyRef);
+	private readonly endReached = new Subject<boolean>();
+	private readonly _destroyRef = inject(DestroyRef);
 
-	startEmittingEvents(): void {
+	public startEmittingEvents(): void {
 		const mouseLeave$ = fromEvent(this._el.nativeElement, 'mouseleave');
 
 		interval(100)
@@ -27,7 +27,7 @@ export class BrnSelectScrollUpDirective {
 			.subscribe(() => this._selectContent.moveFocusUp());
 	}
 
-	stopEmittingEvents(): void {
+	public stopEmittingEvents(): void {
 		this.endReached.next(true);
 	}
 }
