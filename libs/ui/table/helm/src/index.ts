@@ -1,26 +1,43 @@
 import { NgModule } from '@angular/core';
-
 import { HlmCaptionComponent } from './lib/hlm-caption.component';
-import { HlmTableComponent } from './lib/hlm-table.component';
+import { HlmCellDefDirective, HlmCellDirective } from './lib/hlm-cell-def.directive';
+import { HlmColumnDefDirective } from './lib/hlm-column-def.directive';
+import { HlmFooterDefDirective } from './lib/hlm-footer-def.directive';
+import { HlmHeaderCellDefDirective, HlmHeaderCellDirective } from './lib/hlm-header-def.directive';
+import {
+	HlmFooterRowComponent,
+	HlmFooterRowDefDirective,
+	HlmHeaderRowComponent,
+	HlmHeaderRowDefDirective,
+	HlmNoDataRowDirective,
+	HlmRowComponent,
+	HlmRowDefDirective,
+} from './lib/hlm-row-def.component';
 import { HlmTableDirective } from './lib/hlm-table.directive';
-import { HlmTdComponent } from './lib/hlm-td.component';
-import { HlmThComponent } from './lib/hlm-th.component';
-import { HlmTrowComponent } from './lib/hlm-trow.component';
 
 export { HlmCaptionComponent } from './lib/hlm-caption.component';
-export { HlmTableComponent } from './lib/hlm-table.component';
+export { HlmCellDefDirective, HlmCellDirective } from './lib/hlm-cell-def.directive';
+export { HlmColumnDefDirective } from './lib/hlm-column-def.directive';
+export { HlmFooterDefDirective } from './lib/hlm-footer-def.directive';
+export { HlmHeaderCellDefDirective, HlmHeaderCellDirective } from './lib/hlm-header-def.directive';
 export { HlmTableDirective } from './lib/hlm-table.directive';
-export { HlmTdComponent } from './lib/hlm-td.component';
-export { HlmThComponent } from './lib/hlm-th.component';
-export { HlmTrowComponent } from './lib/hlm-trow.component';
 
 export const HlmTableImports = [
-	HlmTableComponent,
 	HlmTableDirective,
 	HlmCaptionComponent,
-	HlmThComponent,
-	HlmTdComponent,
-	HlmTrowComponent,
+	HlmCellDefDirective,
+	HlmCellDirective,
+	HlmHeaderRowComponent,
+	HlmHeaderRowDefDirective,
+	HlmHeaderCellDirective,
+	HlmHeaderCellDefDirective,
+	HlmFooterDefDirective,
+	HlmFooterRowComponent,
+	HlmFooterRowDefDirective,
+	HlmColumnDefDirective,
+	HlmRowDefDirective,
+	HlmRowComponent,
+	HlmNoDataRowDirective,
 ] as const;
 
 @NgModule({

@@ -1,135 +1,64 @@
-import { CdkRowDef, CdkTable, CdkTableDataSourceInput, CdkTableModule } from '@angular/cdk/table';
+import { _DisposeViewRepeaterStrategy, _VIEW_REPEATER_STRATEGY } from '@angular/cdk/collections';
 import {
-	AfterContentInit,
-	ChangeDetectionStrategy,
-	Component,
-	ContentChildren,
-	EventEmitter,
-	Input,
-	Output,
-	QueryList,
-	TrackByFunction,
-	ViewChild,
-	ViewEncapsulation,
-	booleanAttribute,
-} from '@angular/core';
-import { TableClassesSettable, provideTableClassesSettableExisting } from '@spartan-ng/ui-core';
-import { BrnColumnDefComponent } from './brn-column-def.component';
+	CDK_TABLE,
+	CdkTable,
+	CdkTableDataSourceInput,
+	DataRowOutlet,
+	FooterRowOutlet,
+	HeaderRowOutlet,
+	NoDataRowOutlet,
+	STICKY_POSITIONING_LISTENER,
+	_COALESCED_STYLE_SCHEDULER,
+	_CoalescedStyleScheduler,
+} from '@angular/cdk/table';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 export type BrnTableDataSourceInput<T> = CdkTableDataSourceInput<T>;
 
 @Component({
-	selector: 'brn-table',
+	selector: 'brn-table, table[brnTable]',
 	standalone: true,
-	imports: [CdkTableModule],
-	providers: [provideTableClassesSettableExisting(<T>() => BrnTableComponent<T>)],
+	imports: [HeaderRowOutlet, DataRowOutlet, NoDataRowOutlet, FooterRowOutlet],
+	providers: [
+		{ provide: CDK_TABLE, useExisting: BrnTableComponent },
+		{ provide: CdkTable, useExisting: BrnTableComponent },
+		{ provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
+		{ provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
+		{ provide: STICKY_POSITIONING_LISTENER, useValue: null },
+	],
 	template: `
-		<cdk-table
-			#cdkTable
-			[class]="tableClasses"
-			[dataSource]="dataSource"
-			[fixedLayout]="fixedLayout"
-			[multiTemplateDataRows]="multiTemplateDataRows"
-			(contentChanged)="contentChanged.emit()"
-		>
+		<ng-content select="caption" />
+		<ng-content select="colgroup, col" />
+
+		<!--
+      Unprojected content throws a hydration error so we need this to capture it.
+      It gets removed on the client so it doesn't affect the layout.
+    -->
+		@if (_isServer) {
 			<ng-content />
+		}
 
-			<cdk-header-row [class]="headerRowClasses" *cdkHeaderRowDef="displayedColumns; sticky: stickyHeader" />
-			@if (!customTemplateDataRows) {
-				<cdk-row
-					[tabindex]="!!onRowClick ? 0 : -1"
-					[attr.role]="!!onRowClick ? 'button' : 'row'"
-					[class.row-interactive]="!!onRowClick"
-					(keydown.enter)="!!onRowClick && onRowClick(row)"
-					(click)="!!onRowClick && onRowClick(row)"
-					[class]="bodyRowClasses"
-					*cdkRowDef="let row; columns: displayedColumns"
-				/>
-			}
-
-			<ng-template cdkNoDataRow>
-				<ng-content select="[brnNoDataRow]" />
-			</ng-template>
-		</cdk-table>
+		@if (_isNativeHtmlTable) {
+			<thead role="rowgroup">
+				<ng-container headerRowOutlet />
+			</thead>
+			<tbody role="rowgroup">
+				<ng-container rowOutlet />
+				<ng-container noDataRowOutlet />
+			</tbody>
+			<tfoot role="rowgroup">
+				<ng-container footerRowOutlet />
+			</tfoot>
+		} @else {
+			<ng-container headerRowOutlet />
+			<ng-container rowOutlet />
+			<ng-container noDataRowOutlet />
+			<ng-container footerRowOutlet />
+		}
 	`,
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	// See note on CdkTable for explanation on why this uses the default change detection strategy.
+	// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
+	changeDetection: ChangeDetectionStrategy.Default,
 	encapsulation: ViewEncapsulation.None,
 })
-export class BrnTableComponent<T> implements TableClassesSettable, AfterContentInit {
-	@ViewChild('cdkTable', { read: CdkTable, static: true })
-	private _cdkTable?: CdkTable<T>;
-	// Cdk Table Inputs / Outputs
-	@Input()
-	public dataSource: BrnTableDataSourceInput<T> = [];
-	@Input({ transform: booleanAttribute })
-	public fixedLayout = false;
-	@Input({ transform: booleanAttribute })
-	public multiTemplateDataRows = false;
-	@Input()
-	public displayedColumns: string[] = [];
-
-	private _trackBy?: TrackByFunction<T>;
-	get trackBy(): TrackByFunction<T> | undefined {
-		return this._trackBy;
-	}
-
-	@Input()
-	set trackBy(value: TrackByFunction<T>) {
-		this._trackBy = value;
-		if (this._cdkTable) {
-			this._cdkTable.trackBy = this._trackBy;
-		}
-	}
-
-	@Output()
-	public readonly contentChanged: EventEmitter<void> = new EventEmitter<void>();
-
-	// Brn Inputs / Outputs
-	@Input({ transform: booleanAttribute })
-	public customTemplateDataRows = false;
-	@Input()
-	public onRowClick: ((element: T) => void) | undefined;
-
-	@Input({ transform: booleanAttribute })
-	public stickyHeader = false;
-	@Input()
-	public tableClasses = '';
-	@Input()
-	public headerRowClasses = '';
-	@Input()
-	public bodyRowClasses = '';
-
-	@ContentChildren(BrnColumnDefComponent) columnDefComponents!: QueryList<BrnColumnDefComponent>;
-	@ContentChildren(CdkRowDef) rowDefs!: QueryList<CdkRowDef<T>>;
-
-	// after the <ng-content> has been initialized, the column definitions are available.
-	// All that's left is to add them to the table ourselves:
-	public ngAfterContentInit(): void {
-		this.columnDefComponents.forEach((component) => {
-			if (!this._cdkTable) return;
-			if (component.cell) {
-				this._cdkTable.addColumnDef(component.columnDef);
-			}
-		});
-		this.rowDefs.forEach((rowDef) => {
-			if (!this._cdkTable) return;
-			this._cdkTable.addRowDef(rowDef);
-		});
-	}
-
-	public setTableClasses({
-		table,
-		headerRow,
-		bodyRow,
-	}: Partial<{ table: string; headerRow: string; bodyRow: string }>): void {
-		if (table) {
-			this.tableClasses = table;
-		}
-		if (headerRow) {
-			this.headerRowClasses = headerRow;
-		}
-		if (bodyRow) {
-			this.bodyRowClasses = bodyRow;
-		}
-	}
-}
+export class BrnTableComponent<T> extends CdkTable<T> {}
