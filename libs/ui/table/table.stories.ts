@@ -13,8 +13,8 @@ import { BrnMenuModule } from '../menu/brain/src';
 import { HlmMenuModule } from '../menu/helm/src';
 import { BrnToggleGroupModule } from '../toggle/brain/src';
 import { HlmToggleGroupModule } from '../toggle/helm/src';
-import { BrnTableComponent, BrnTableModule, PaginatorState, useBrnColumnManager } from './brain/src';
-import { HlmTableDirective, HlmTableModule } from './helm/src';
+import { BrnTableModule, PaginatorState, useBrnColumnManager } from './brain/src';
+import { HlmTableComponent, HlmTableModule } from './helm/src';
 
 const createUsers = (numUsers = 5) => {
 	return Array.from({ length: numUsers }, () => ({
@@ -70,8 +70,7 @@ const createUsers = (numUsers = 5) => {
 			</ng-template>
 		</div>
 
-		<brn-table
-			hlm
+		<hlm-table
 			stickyHeader
 			class="border-border mt-4 block h-[337px] overflow-scroll rounded-md border"
 			[dataSource]="_data()"
@@ -80,26 +79,26 @@ const createUsers = (numUsers = 5) => {
 			<hlm-header-row *hlmHeaderRowDef="_brnColumnManager.displayedColumns()" />
 			<hlm-row *hlmRowDef="let row; columns: _brnColumnManager.displayedColumns()" />
 
-			<ng-container [hlmColumnDef]="'name'" class="w-40">
-				<hlm-th truncate *hlmHeaderCellDef>Name</hlm-th>
-				<hlm-td truncate *hlmCellDef="let element">
+			<ng-container [hlmColumnDef]="'name'">
+				<hlm-th truncate class="w-40" *hlmHeaderCellDef>Name</hlm-th>
+				<hlm-td truncate class="w-40" *hlmCellDef="let element">
 					{{ element.name }}
 				</hlm-td>
 			</ng-container>
 
-			<ng-container [hlmColumnDef]="'age'" class="w-40 justify-end">
-				<hlm-th *hlmHeaderCellDef>Age</hlm-th>
-				<hlm-td class="tabular-nums" *hlmCellDef="let element">
+			<ng-container [hlmColumnDef]="'age'">
+				<hlm-th class="w-40 justify-end" *hlmHeaderCellDef>Age</hlm-th>
+				<hlm-td class="w-40 justify-end tabular-nums" *hlmCellDef="let element">
 					{{ element.age }}
 				</hlm-td>
 			</ng-container>
-			<ng-container [hlmColumnDef]="'height'" class="w-40 justify-end tabular-nums">
-				<hlm-th *hlmHeaderCellDef>Height</hlm-th>
-				<hlm-td *hlmCellDef="let element">
+			<ng-container [hlmColumnDef]="'height'">
+				<hlm-th class="w-40 justify-end tabular-nums" *hlmHeaderCellDef>Height</hlm-th>
+				<hlm-td class="w-40 justify-end tabular-nums" *hlmCellDef="let element">
 					{{ element.height }}
 				</hlm-td>
 			</ng-container>
-		</brn-table>
+		</hlm-table>
 		<div
 			class="mt-2 flex items-center justify-between"
 			*brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
@@ -139,7 +138,7 @@ class TableStory {
 	protected readonly _brnColumnManager = useBrnColumnManager({
 		name: { visible: true, label: 'Name' },
 		age: { visible: false, label: 'Alter' },
-		height: { visible: false, label: 'Größe' },
+		height: { visible: true, label: 'Größe' },
 	});
 
 	protected readonly _rawFilterInput = signal('');
@@ -197,8 +196,7 @@ class TableStory {
 			<button class="w-full sm:w-40" variant="outline" [value]="false" hlm brnToggle>All</button>
 			<button class="w-full tabular-nums sm:w-40" variant="outline" [value]="true" hlm brnToggle>Above 150</button>
 		</brn-toggle-group>
-		<brn-table
-			hlm
+		<hlm-table
 			stickyHeader
 			class="border-border mt-4 block h-[337px] overflow-scroll rounded-md border"
 			[dataSource]="_data()"
@@ -225,7 +223,7 @@ class TableStory {
 					{{ element.height }}
 				</hlm-td>
 			</ng-container>
-		</brn-table>
+		</hlm-table>
 		<div
 			class="mt-2 flex items-center justify-between"
 			*brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
@@ -302,7 +300,7 @@ class TableToggleStory {
 	standalone: true,
 	imports: [BrnTableModule, HlmTableModule, NgForOf],
 	template: `
-		<table brnTable hlm [dataSource]="_data()">
+		<table hlmTable [dataSource]="_data()">
 			<ng-container hlmColumnDef="username">
 				<th hlmHeaderCell *hlmHeaderCellDef truncate class="w-40">Name</th>
 				<td hlmCell *hlmCellDef="let row" truncate class="w-40">{{ row.name }}</td>
@@ -327,9 +325,9 @@ class TablePresentationOnlyStory {
 	protected readonly _data = signal(createUsers(20));
 }
 
-const meta: Meta<HlmTableDirective> = {
+const meta: Meta<HlmTableComponent<unknown>> = {
 	title: 'Table',
-	component: BrnTableComponent,
+	component: HlmTableComponent,
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
@@ -339,7 +337,7 @@ const meta: Meta<HlmTableDirective> = {
 };
 
 export default meta;
-type Story = StoryObj<HlmTableDirective>;
+type Story = StoryObj<HlmTableComponent<unknown>>;
 
 export const Default: Story = {
 	render: () => ({

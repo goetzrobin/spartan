@@ -13,17 +13,17 @@ import {
 	HlmRowComponent,
 	HlmRowDefDirective,
 } from './lib/hlm-row-def.component';
-import { HlmTableDirective } from './lib/hlm-table.directive';
+import { HlmTableComponent } from './lib/hlm-table.component';
 
 export { HlmCaptionComponent } from './lib/hlm-caption.component';
 export { HlmCellDefDirective, HlmCellDirective } from './lib/hlm-cell-def.directive';
 export { HlmColumnDefDirective } from './lib/hlm-column-def.directive';
 export { HlmFooterDefDirective } from './lib/hlm-footer-def.directive';
 export { HlmHeaderCellDefDirective, HlmHeaderCellDirective } from './lib/hlm-header-def.directive';
-export { HlmTableDirective } from './lib/hlm-table.directive';
+export { HlmTableComponent } from './lib/hlm-table.component';
 
 export const HlmTableImports = [
-	HlmTableDirective,
+	HlmTableComponent,
 	HlmCaptionComponent,
 	HlmCellDefDirective,
 	HlmCellDirective,

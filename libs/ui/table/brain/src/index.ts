@@ -30,7 +30,12 @@ export {
 	BrnRowComponent,
 	BrnRowDefDirective,
 } from './lib/brn-row-def.component';
-export { BrnTableComponent } from './lib/brn-table.component';
+export {
+	BRN_TABLE_TEMPLATE,
+	BrnTableComponent,
+	BrnTableDataSourceInput,
+	applyTableProviders,
+} from './lib/brn-table.component';
 
 export const BrnTableImports = [
 	BrnTableComponent,

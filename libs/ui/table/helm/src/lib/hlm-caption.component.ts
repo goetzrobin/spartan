@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
-import { HlmTableDirective } from './hlm-table.directive';
+import { HlmTableComponent } from './hlm-table.component';
 
 let captionIdSequence = 0;
 
@@ -28,7 +28,7 @@ let captionIdSequence = 0;
 	encapsulation: ViewEncapsulation.None,
 })
 export class HlmCaptionComponent {
-	private readonly _table = inject(HlmTableDirective, { optional: true });
+	private readonly _table = inject(HlmTableComponent, { optional: true });
 
 	protected readonly id = input<string | null | undefined>(`${captionIdSequence++}`);
 
