@@ -9,6 +9,15 @@ import {
 	CdkRowDef,
 } from '@angular/cdk/table';
 import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation } from '@angular/core';
+import {
+	BrnFooterRowComponent,
+	BrnFooterRowDefDirective,
+	BrnHeaderRowComponent,
+	BrnHeaderRowDefDirective,
+	BrnNoDataRowDirective,
+	BrnRowComponent,
+	BrnRowDefDirective,
+} from '@spartan-ng/ui-table-brain';
 
 // We can't reuse `CDK_ROW_TEMPLATE` because it's incompatible with local compilation mode.
 const ROW_TEMPLATE = `<ng-container cdkCellOutlet></ng-container>`;
@@ -24,7 +33,7 @@ const ROW_TEMPLATE = `<ng-container cdkCellOutlet></ng-container>`;
 	inputs: ['columns: hlmHeaderRowDef', 'sticky: hlmHeaderRowDefSticky'],
 	standalone: true,
 })
-export class HlmHeaderRowDefDirective extends CdkHeaderRowDef {}
+export class HlmHeaderRowDefDirective extends BrnHeaderRowDefDirective {}
 
 /**
  * Footer row definition for the b-table.
@@ -37,7 +46,7 @@ export class HlmHeaderRowDefDirective extends CdkHeaderRowDef {}
 	inputs: ['columns: hlmFooterRowDef', 'sticky: hlmFooterRowDefSticky'],
 	standalone: true,
 })
-export class HlmFooterRowDefDirective extends CdkFooterRowDef {}
+export class HlmFooterRowDefDirective extends BrnFooterRowDefDirective {}
 
 /**
  * Data row definition for the b-table.
@@ -51,7 +60,7 @@ export class HlmFooterRowDefDirective extends CdkFooterRowDef {}
 	inputs: ['columns: hlmRowDefColumns', 'when: hlmRowDefWhen'],
 	standalone: true,
 })
-export class HlmRowDefDirective<T> extends CdkRowDef<T> {}
+export class HlmRowDefDirective<T> extends BrnRowDefDirective<T> {}
 
 /** Header template container that contains the cell outlet. Adds the right class and role. */
 @Component({
@@ -71,7 +80,7 @@ export class HlmRowDefDirective<T> extends CdkRowDef<T> {}
 	standalone: true,
 	imports: [CdkCellOutlet],
 })
-export class HlmHeaderRowComponent extends CdkHeaderRow {}
+export class HlmHeaderRowComponent extends BrnHeaderRowComponent {}
 
 /** Footer template container that contains the cell outlet. Adds the right class and role. */
 @Component({
@@ -91,7 +100,7 @@ export class HlmHeaderRowComponent extends CdkHeaderRow {}
 	standalone: true,
 	imports: [CdkCellOutlet],
 })
-export class HlmFooterRowComponent extends CdkFooterRow {}
+export class HlmFooterRowComponent extends BrnFooterRowComponent {}
 
 /** Data row template container that contains the cell outlet. Adds the right class and role. */
 @Component({
@@ -111,7 +120,7 @@ export class HlmFooterRowComponent extends CdkFooterRow {}
 	standalone: true,
 	imports: [CdkCellOutlet],
 })
-export class HlmRowComponent extends CdkRow {}
+export class HlmRowComponent extends BrnRowComponent {}
 
 /** Row that can be used to display a message when no data is shown in the table. */
 @Directive({
@@ -119,6 +128,6 @@ export class HlmRowComponent extends CdkRow {}
 	providers: [{ provide: CdkNoDataRow, useExisting: HlmNoDataRowDirective }],
 	standalone: true,
 })
-export class HlmNoDataRowDirective extends CdkNoDataRow {
+export class HlmNoDataRowDirective extends BrnNoDataRowDirective {
 	override _contentClassName = 'hlm-no-data-row';
 }

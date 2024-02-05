@@ -1,12 +1,13 @@
-import { CdkHeaderCell, CdkHeaderCellDef } from '@angular/cdk/table';
+import { CdkHeaderCellDef } from '@angular/cdk/table';
 import { Directive, TemplateRef } from '@angular/core';
+import { BrnHeaderCellDefDirective, BrnHeaderCellDirective } from '@spartan-ng/ui-table-brain';
 
 @Directive({
 	standalone: true,
 	selector: '[hlmHeaderCellDef]',
 	providers: [{ provide: CdkHeaderCellDef, useExisting: HlmHeaderCellDefDirective }],
 })
-export class HlmHeaderCellDefDirective extends CdkHeaderCellDef {
+export class HlmHeaderCellDefDirective extends BrnHeaderCellDefDirective {
 	constructor(public override template: TemplateRef<unknown>) {
 		super(template);
 	}
@@ -23,4 +24,4 @@ export class HlmHeaderCellDefDirective extends CdkHeaderCellDef {
 	},
 	standalone: true,
 })
-export class HlmHeaderCellDirective extends CdkHeaderCell {}
+export class HlmHeaderCellDirective extends BrnHeaderCellDirective {}
