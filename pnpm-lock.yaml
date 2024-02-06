@@ -205,6 +205,9 @@ devDependencies:
   '@faker-js/faker':
     specifier: ^8.0.2
     version: 8.4.0
+  '@ng-icons/lucide':
+    specifier: ^26.3.0
+    version: 26.3.0
   '@ng-icons/radix-icons':
     specifier: ^25.1.0
     version: 25.6.1
@@ -4990,6 +4993,12 @@ packages:
     dependencies:
       tslib: 2.6.2
     dev: false
+
+  /@ng-icons/lucide@26.3.0:
+    resolution: {integrity: sha512-y9jxV28hWLYf74cC4EBOh8qMTBh+oczo47/nGU8iC/dZc9CXSUckbe8AMosqTDBY1gaBAZ/jLnwpg6EscHLapg==}
+    dependencies:
+      tslib: 2.6.2
+    dev: true
 
   /@ng-icons/radix-icons@25.6.1:
     resolution: {integrity: sha512-B7ZZpDF+h2SBI+9XZOWRthUvMRAPHTUR5/yCVYe56LYPLBTrVmK+Sjz8WsjECzNDEhaObRVtZXegmJ5g3cOQCQ==}
