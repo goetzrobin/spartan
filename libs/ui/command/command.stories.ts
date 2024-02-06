@@ -45,7 +45,7 @@ export const Default: Story = {
             Search Emoji
           </button>
           <button brnCmdItem hlm>
-            <hlm-icon name='lucidePlus' hlmCmdIcon />
+            <hlm-icon name='lucideCalculator' hlmCmdIcon />
             Calculator
           </button>
         </brn-cmd-group>
@@ -119,7 +119,7 @@ export const Default: Story = {
 							Search Emoji
 						</button>
 						<button brnCmdItem value="calculator" (selected)="commandSelected('calculator')" hlm>
-							<hlm-icon name="lucidePlus" hlmCmdIcon />
+							<hlm-icon name="lucideCalculator" hlmCmdIcon />
 							Calculator
 						</button>
 					</brn-cmd-group>
