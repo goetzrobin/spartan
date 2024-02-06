@@ -1,5 +1,5 @@
 import { Component, computed, Input, signal } from '@angular/core';
-import { radixCheck } from '@ng-icons/radix-icons';
+import { lucideCheck } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { ClassValue } from 'clsx';
@@ -7,10 +7,10 @@ import { ClassValue } from 'clsx';
 @Component({
 	selector: 'hlm-menu-item-check',
 	standalone: true,
-	providers: [provideIcons({ radixCheck })],
+	providers: [provideIcons({ lucideCheck })],
 	imports: [HlmIconComponent],
 	template: `
-		<hlm-icon size="none" class="h-full w-full" name="radixCheck" />
+		<hlm-icon size="none" class="h-full w-full" name="lucideCheck" />
 	`,
 	host: {
 		'[class]': '_computedClass()',
