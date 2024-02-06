@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
-import { radixCircle, radixRadiobutton } from '@ng-icons/radix-icons';
+import { lucideCircle, lucideCircleDot } from '@ng-icons/lucide';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
@@ -21,7 +21,7 @@ import { HlmRadioGroupImports } from './helm/src';
 		HlmCodeDirective,
 		HlmSmallDirective,
 	],
-	providers: [provideIcons({ radixRadiobutton, radixCircle })],
+	providers: [provideIcons({ lucideCircle, lucideCircleDot })],
 	template: `
 		<small hlmSmall class="font-semibold">Choose a version</small>
 		<brn-radio-group class="mb-4 space-y-1 font-mono text-sm font-medium" hlm [(ngModel)]="version">
