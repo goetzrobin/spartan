@@ -1,4 +1,4 @@
-import { radixChevronDown } from '@ng-icons/radix-icons';
+import { lucideChevronDown } from '@ng-icons/lucide';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
@@ -12,7 +12,7 @@ const meta: Meta<BrnAccordionDirective> = {
 	decorators: [
 		moduleMetadata({
 			imports: [BrnAccordionImports, HlmAccordionImports, HlmIconComponent],
-			providers: [provideIcons({ radixChevronDown })],
+			providers: [provideIcons({ lucideChevronDown })],
 		}),
 	],
 };
