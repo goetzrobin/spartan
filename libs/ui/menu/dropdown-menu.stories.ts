@@ -74,13 +74,13 @@ export const Default: Story = {
 
         <hlm-menu-group>
           <button hlmMenuItem>
-            <hlm-icon name='lucideUserCircle' hlmMenuIcon />
+            <hlm-icon name='lucideUsers' hlmMenuIcon />
             <span>Team</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem [brnMenuTriggerFor]='invite'>
-            <hlm-icon name='lucideSmile' hlmMenuIcon />
+            <hlm-icon name='lucideUserPlus' hlmMenuIcon />
             <span>Invite Users</span>
             <hlm-menu-item-sub-indicator />
           </button>
@@ -101,12 +101,12 @@ export const Default: Story = {
           </button>
 
           <button hlmMenuItem [disabled]='true'>
-            <hlm-icon name='lucideHelpCircle' hlmMenuIcon />
+            <hlm-icon name='lucideLifeBuoy' hlmMenuIcon />
             <span>Support</span>
           </button>
 
           <button hlmMenuItem disabled>
-            <hlm-icon name='lucideCode2' hlmMenuIcon />
+            <hlm-icon name='lucideCloud' hlmMenuIcon />
             <span>API</span>
           </button>
         </hlm-menu-group>
