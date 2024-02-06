@@ -1,4 +1,4 @@
-import { lucideAlertTriangle, lucideInfo } from '@ng-icons/lucide';
+import { lucideAlertCircle, lucideInfo } from '@ng-icons/lucide';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
@@ -19,7 +19,7 @@ const meta: Meta<HlmAlertDirective> = {
 	decorators: [
 		moduleMetadata({
 			imports: [HlmAlertImports, HlmIconComponent],
-			providers: [provideIcons({ lucideInfo, lucideAlertTriangle })],
+			providers: [provideIcons({ lucideInfo, lucideAlertCircle })],
 		}),
 	],
 	render: ({ ...args }) => ({
@@ -56,7 +56,7 @@ export const Destructive: Story = {
 		props: args,
 		template: `
      <div hlmAlert class='max-w-xl' ${argsToTemplate(args)}>
-      <hlm-icon name='lucideAlertTriangle' hlmAlertIcon />
+      <hlm-icon name='lucideAlertCircle' hlmAlertIcon />
       <h4 hlmAlertTitle>Something went wrong...</h4>
       <p hlmAlertDesc>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam at autem culpa debitis eius eveniet exercitationem, facilis illo magni mollitia, necessitatibus nesciunt quam quos recusandae tempore ullam velit veniam!
