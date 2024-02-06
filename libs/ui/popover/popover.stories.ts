@@ -1,4 +1,4 @@
-import { radixCross1 } from '@ng-icons/radix-icons';
+import { lucideX } from '@ng-icons/lucide';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
@@ -29,7 +29,7 @@ const meta: Meta<BrnPopoverComponent> = {
 				HlmInputDirective,
 				HlmIconComponent,
 			],
-			providers: [provideIcons({ radixCross1 })],
+			providers: [provideIcons({ lucideX })],
 		}),
 	],
 };
