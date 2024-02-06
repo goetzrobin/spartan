@@ -1,46 +1,48 @@
 @if (this.toasts().length > 0) {
 	<section [attr.aria-label]="'Notifications ' + hotkeyLabel()" tabIndex="-1">
 		@for (possiblePosition of possiblePositions(); track possiblePosition; let possiblePositionIndex = $index) {
-			<ol
-				tabIndex="-1"
-				#listRef
-				[class]="class()"
-				data-sonner-toaster
-				[attr.data-theme]="theme()"
-				[attr.data-rich-colors]="richColors()"
-				[attr.data-y-position]="possiblePosition.split('-')[0]"
-				[attr.data-x-position]="possiblePosition.split('-')[1]"
-				(blur)="handleBlur($event)"
-				(focus)="handleFocus($event)"
-				(mouseenter)="expanded.set(true)"
-				(mousemove)="expanded.set(true)"
-				(mouseleave)="handleMouseLeave()"
-				(pointerdown)="interacting.set(true)"
-				(pointerup)="interacting.set(false)"
-				[style]="toasterStyles()"
-			>
-				@for (toast of tempFunc(possiblePositionIndex, possiblePosition); track toast.id) {
-					<brn-toast
-						[index]="$index"
-						[toast]="toast"
-						[invert]="invert()"
-						[visibleToasts]="visibleToasts()"
-						[closeButton]="closeButton()"
-						[interacting]="interacting()"
-						[position]="possiblePosition"
-						[expandByDefault]="expand()"
-						[expanded]="expanded()"
-						[actionButtonStyle]="toastOptions().actionButtonStyle || ''"
-						[cancelButtonStyle]="toastOptions().cancelButtonStyle || ''"
-						[descriptionClass]="toastOptions().descriptionClass || ''"
-						[classes]="toastOptions().classes || {}"
-						[duration]="toastOptions().duration ?? duration()"
-						[unstyled]="toastOptions().unstyled || false"
-						[styles]="toastOptions().style || {}"
-						[gap]="gap() ?? 14"
-					/>
-				}
-			</ol>
+			<brn-toaster-position [position]="possiblePosition">
+				<ol
+					tabIndex="-1"
+					#listRef
+					[class]="class()"
+					data-sonner-toaster
+					[attr.data-theme]="theme()"
+					[attr.data-rich-colors]="richColors()"
+					[attr.data-y-position]="possiblePosition.split('-')[0]"
+					[attr.data-x-position]="possiblePosition.split('-')[1]"
+					(blur)="handleBlur($event)"
+					(focus)="handleFocus($event)"
+					(mouseenter)="expanded.set(true)"
+					(mousemove)="expanded.set(true)"
+					(mouseleave)="handleMouseLeave()"
+					(pointerdown)="interacting.set(true)"
+					(pointerup)="interacting.set(false)"
+					[style]="toasterStyles()"
+				>
+					@for (toast of tempFunc(possiblePositionIndex, possiblePosition); track toast.id) {
+						<brn-toast
+							[index]="$index"
+							[toast]="toast"
+							[invert]="invert()"
+							[visibleToasts]="visibleToasts()"
+							[closeButton]="closeButton()"
+							[interacting]="interacting()"
+							[position]="possiblePosition"
+							[expandByDefault]="expand()"
+							[expanded]="expanded()"
+							[actionButtonStyle]="toastOptions().actionButtonStyle || ''"
+							[cancelButtonStyle]="toastOptions().cancelButtonStyle || ''"
+							[descriptionClass]="toastOptions().descriptionClass || ''"
+							[classes]="toastOptions().classes || {}"
+							[duration]="toastOptions().duration ?? duration()"
+							[unstyled]="toastOptions().unstyled || false"
+							[styles]="toastOptions().style || {}"
+							[gap]="gap() ?? 14"
+						/>
+					}
+				</ol>
+			</brn-toaster-position>
 		}
 	</section>
 }

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, computed, inject, input, signal } from '@angular/core';
 import { BrnToastComponent } from './brn-toast.component';
 import { Position, ToastOptions } from './brn-toast.types';
+import { BrnToasterPositionComponent } from './brn-toaster-position.component';
 import { BrnToasterService } from './brn-toaster.service';
 
 type OListFocusEvent = FocusEvent & {
@@ -16,9 +17,8 @@ const VISIBLE_TOASTS_AMOUNT = 3;
 @Component({
 	selector: 'brn-toaster',
 	standalone: true,
-	imports: [CommonModule, BrnToastComponent],
+	imports: [CommonModule, BrnToastComponent, BrnToasterPositionComponent],
 	templateUrl: './brn-toaster.component.html',
-	styleUrls: ['./brn-toaster.component.css'],
 })
 export class BrnToasterComponent implements OnDestroy, OnInit {
 	toasterService = inject(BrnToasterService);
