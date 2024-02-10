@@ -4,7 +4,7 @@ import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
-	selector: '[hlmAccordionItem],brn-accordion-item[hlm]',
+	selector: '[hlmAccordionItem],brn-accordion-item[hlm],hlm-accordion-item',
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',

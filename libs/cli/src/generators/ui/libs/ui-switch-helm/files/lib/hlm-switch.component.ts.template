@@ -1,32 +1,20 @@
-import { booleanAttribute, Component, computed, EventEmitter, forwardRef, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, booleanAttribute, computed, forwardRef, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BrnCheckboxComponent, indeterminateBooleanAttribute } from '@spartan-ng/ui-checkbox-brain';
 import { hlm } from '@spartan-ng/ui-core';
+import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui-switch-brain';
 import { ClassValue } from 'clsx';
-import { HlmCheckboxCheckIconComponent } from './hlm-checkbox-checkicon.component';
+import { HlmSwitchThumbDirective } from './hlm-switch-thumb.directive';
 
-export const HLM_CHECKBOX_VALUE_ACCESSOR = {
+export const HLM_SWITCH_VALUE_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
-	useExisting: forwardRef(() => HlmCheckboxComponent),
+	useExisting: forwardRef(() => HlmSwitchComponent),
 	multi: true,
 };
 
 @Component({
-	selector: 'hlm-checkbox',
+	selector: 'hlm-switch',
+	imports: [BrnSwitchThumbComponent, BrnSwitchComponent, HlmSwitchThumbDirective],
 	standalone: true,
-	imports: [BrnCheckboxComponent, HlmCheckboxCheckIconComponent],
-	template: `
-		<brn-checkbox
-			[class]="_computedClass()"
-			[checked]="_checked()"
-			(changed)="_handleChange()"
-			(touched)="_onTouched()"
-			[disabled]="_disabled()"
-			[id]="id"
-		>
-			<hlm-checkbox-checkicon [class]="_checkIconClass()" [iconName]="_checkIconName()" />
-		</brn-checkbox>
-	`,
 	host: {
 		class: 'contents',
 		'[attr.id]': 'null',
@@ -34,41 +22,42 @@ export const HLM_CHECKBOX_VALUE_ACCESSOR = {
 		'[attr.aria-labelledby]': 'null',
 		'[attr.aria-describedby]': 'null',
 	},
-	providers: [HLM_CHECKBOX_VALUE_ACCESSOR],
+	template: `
+		<brn-switch
+			[class]="_computedClass()"
+			[checked]="_checked()"
+			(changed)="_handleChange($event)"
+			(touched)="_onTouched()"
+			[disabled]="_disabled()"
+			[id]="id"
+			[aria-label]="ariaLabel"
+			[aria-labelledby]="ariaLabelledby"
+			[aria-describedby]="ariaDescribedby"
+		>
+			<brn-switch-thumb hlm />
+		</brn-switch>
+	`,
+	providers: [HLM_SWITCH_VALUE_ACCESSOR],
 })
-export class HlmCheckboxComponent {
+export class HlmSwitchComponent {
 	private readonly _userCls = signal<ClassValue>('');
 	@Input()
 	set class(userCls: ClassValue) {
 		this._userCls.set(userCls);
 	}
-	protected readonly _checkIconName = signal<string>('radixCheck');
-	@Input()
-	set checkIconName(checkIconName: string) {
-		this._checkIconName.set(checkIconName);
-	}
-
-	protected readonly _checkIconClass = signal<string>('');
-	@Input()
-	set checkIconClass(checkIconName: string) {
-		this._checkIconClass.set(checkIconName);
-	}
 
 	@Output()
 	public changed = new EventEmitter<boolean>();
 
-	protected _handleChange(): void {
-		if (this._disabled()) return;
-
-		const previousChecked = this._checked();
-		this._checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
-		this._onChange(!previousChecked);
-		this.changed.emit(!previousChecked);
+	protected _handleChange(value: boolean): void {
+		this._checked.set(value);
+		this._onChange(value);
+		this.changed.emit(value);
 	}
 
-	protected _checked = signal<boolean | 'indeterminate'>(false);
-	@Input({ transform: indeterminateBooleanAttribute })
-	set checked(value: boolean | 'indeterminate') {
+	protected _checked = signal(false);
+	@Input({ transform: booleanAttribute })
+	set checked(value: boolean) {
 		this._checked.set(value);
 	}
 
@@ -96,8 +85,7 @@ export class HlmCheckboxComponent {
 
 	protected _computedClass = computed(() =>
 		hlm(
-			'group inline-flex border border-foreground shrink-0 cursor-pointer items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring' +
-				' focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=checked]:text-background data-[state=unchecked]:bg-foreground data-[state=checked]:bg-primary data-[state=unchecked]:bg-background',
+			'group inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
 			this._disabled() ? 'cursor-not-allowed opacity-50' : '',
 			this._userCls(),
 		),

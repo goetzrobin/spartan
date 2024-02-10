@@ -1,12 +1,4 @@
-import {
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	Input,
-	signal,
-	ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, signal, ViewEncapsulation } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -16,7 +8,7 @@ import { ClassValue } from 'clsx';
 	host: {
 		'[class]': '_computedClass()',
 		role: 'table',
-		'[attr.aria-labelledby]': '_labeledBy()',
+		'[attr.aria-labelledby]': 'labeledBy()',
 	},
 	template: `
 		<ng-content />
@@ -25,24 +17,16 @@ import { ClassValue } from 'clsx';
 	encapsulation: ViewEncapsulation.None,
 })
 export class HlmTableComponent {
-	@Input({ transform: booleanAttribute })
-	public truncate = false;
+	private readonly class = input<ClassValue>('');
+	protected readonly _computedClass = computed(() =>
+		hlm('flex flex-col text-sm [&_hlm-trow:last-child]:border-0', this.class()),
+	);
 
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(inputs: ClassValue) {
-		this._userCls.set(inputs);
-	}
+	// we aria-labelledby to be settable from outside but use the input by default.
+	private readonly _labeledByInput = input<string | null | undefined>(undefined, { alias: 'aria-labelledby' });
+	public readonly labeledBy = signal<string | null | undefined>(undefined);
 
-	protected readonly _labeledBy = signal<string | null | undefined>(undefined);
-	// eslint-disable-next-line @angular-eslint/no-input-rename
-	@Input({ alias: 'aria-labelledby' })
-	set labeledBy(value: string | null | undefined) {
-		this._labeledBy.set(value);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm('flex flex-col text-sm [&_hlm-trow:last-child]:border-0', this._userCls());
+	constructor() {
+		effect(() => this.labeledBy.set(this._labeledByInput()), { allowSignalWrites: true });
 	}
 }

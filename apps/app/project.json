@@ -32,7 +32,7 @@
 			"executor": "nx:run-commands",
 			"options": {
 				"cwd": "",
-				"command": "yarn prisma generate"
+				"command": "pnpm prisma generate"
 			},
 			"dependsOn": ["build"]
 		},

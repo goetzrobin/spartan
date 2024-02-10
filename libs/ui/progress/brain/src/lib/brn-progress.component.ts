@@ -54,7 +54,7 @@ export class BrnProgressComponent {
 		return this._value() == null || this._value() === undefined
 			? 'indeterminate'
 			: this._value() === this._max()
-			  ? 'complete'
-			  : 'loading';
+				? 'complete'
+				: 'loading';
 	});
 }

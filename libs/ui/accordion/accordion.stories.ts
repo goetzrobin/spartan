@@ -33,7 +33,7 @@ export const Default: Story = {
           Yes. It adheres to the WAI-ARIA design pattern.
         </hlm-accordion-content>
       </hlm-accordion-item>
-    
+
       <hlm-accordion-item>
         <button hlmAccordionTrigger>
           Is it styled?
@@ -44,7 +44,7 @@ export const Default: Story = {
           aesthetics.
         </hlm-accordion-content>
       </hlm-accordion-item>
-    
+
       <hlm-accordion-item>
         <button hlmAccordionTrigger>
           Is it animated?
@@ -71,7 +71,7 @@ export const TwoAccordions: Story = {
           Yes. It adheres to the WAI-ARIA design pattern.
           </hlm-accordion-content>
         </hlm-accordion-item>
-      
+
         <hlm-accordion-item>
           <button hlmAccordionTrigger>
           Is it styled?
@@ -81,7 +81,7 @@ export const TwoAccordions: Story = {
           Yes. It comes with default styles that match the other components' aesthetics.
           </hlm-accordion-content>
         </hlm-accordion-item>
-      
+
         <hlm-accordion-item>
           <button hlmAccordionTrigger>
           Is it animated?
@@ -92,7 +92,7 @@ export const TwoAccordions: Story = {
           </hlm-accordion-content>
         </hlm-accordion-item>
       </hlm-accordion>
-      
+
       <hlm-accordion>
         <hlm-accordion-item>
           <button hlmAccordionTrigger>
@@ -103,7 +103,7 @@ export const TwoAccordions: Story = {
           Yes. It adheres to the WAI-ARIA design pattern.
           </hlm-accordion-content>
         </hlm-accordion-item>
-      
+
         <hlm-accordion-item>
           <button hlmAccordionTrigger>
           Is it styled?
@@ -113,7 +113,7 @@ export const TwoAccordions: Story = {
           Yes. It comes with default styles that match the other components' aesthetics.
           </hlm-accordion-content>
         </hlm-accordion-item>
-      
+
         <hlm-accordion-item>
           <button hlmAccordionTrigger>
           Is it styled?
@@ -123,7 +123,7 @@ export const TwoAccordions: Story = {
           Yes. It comes with default styles that match the other components' aesthetics.
           </hlm-accordion-content>
         </hlm-accordion-item>
-      
+
         <hlm-accordion-item>
           <button hlmAccordionTrigger>
             Is it styled?

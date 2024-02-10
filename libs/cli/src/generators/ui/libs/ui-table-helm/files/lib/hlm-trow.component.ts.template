@@ -1,12 +1,4 @@
-import {
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	Input,
-	signal,
-	ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -24,20 +16,11 @@ import { ClassValue } from 'clsx';
 	encapsulation: ViewEncapsulation.None,
 })
 export class HlmTrowComponent {
-	@Input({ transform: booleanAttribute })
-	public truncate = false;
-
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(inputs: ClassValue) {
-		this._userCls.set(inputs);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(
+	private readonly class = input<ClassValue>('');
+	protected _computedClass = computed(() =>
+		hlm(
 			'flex flex border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
-			this._userCls(),
-		);
-	}
+			this.class(),
+		),
+	);
 }

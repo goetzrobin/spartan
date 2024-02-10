@@ -14,13 +14,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: corepack enable
-      - run: yarn --version
+      - run: pnpm --version
       - uses: actions/setup-node@v3
         with:
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile --prefer-offline
       - name: Release
         run: npx semantic-release
         env:

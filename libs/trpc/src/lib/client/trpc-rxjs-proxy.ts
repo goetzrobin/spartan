@@ -30,20 +30,20 @@ type DecorateProcedure<
 > = TProcedure extends AnyQueryProcedure
 	? {
 			query: Resolver<TProcedure>;
-	  }
+		}
 	: TProcedure extends AnyMutationProcedure
-	  ? {
+		? {
 				mutate: Resolver<TProcedure>;
-	    }
-	  : never;
+			}
+		: never;
 
 // Removed subscription and using new type
 type DecoratedProcedureRecord<TProcedures extends ProcedureRouterRecord, TRouter extends AnyRouter> = {
 	[TKey in keyof TProcedures]: TProcedures[TKey] extends AnyRouter
 		? DecoratedProcedureRecord<TProcedures[TKey]['_def']['record'], TProcedures[TKey]>
 		: TProcedures[TKey] extends AnyProcedure
-		  ? DecorateProcedure<TProcedures[TKey], TRouter>
-		  : never;
+			? DecorateProcedure<TProcedures[TKey], TRouter>
+			: never;
 };
 
 // Removed subscription and using new type
@@ -56,14 +56,12 @@ const clientCallTypeMap: Record<keyof DecorateProcedure<any, any>, ProcedureType
 type UntypedClientProperties = 'links' | 'runtime' | 'requestId' | '$request' | 'query' | 'mutation';
 
 // Nothing changed, only using new types
-export type CreateTrpcProxyClient<TRouter extends AnyRouter> = DecoratedProcedureRecord<
-	TRouter['_def']['record'],
-	TRouter
-> extends infer TProcedureRecord
-	? UntypedClientProperties & keyof TProcedureRecord extends never
-		? TProcedureRecord
-		: IntersectionError<UntypedClientProperties & keyof TProcedureRecord>
-	: never;
+export type CreateTrpcProxyClient<TRouter extends AnyRouter> =
+	DecoratedProcedureRecord<TRouter['_def']['record'], TRouter> extends infer TProcedureRecord
+		? UntypedClientProperties & keyof TProcedureRecord extends never
+			? TProcedureRecord
+			: IntersectionError<UntypedClientProperties & keyof TProcedureRecord>
+		: never;
 
 // Nothing changed, only using new types
 function createTRPCRxJSClientProxy<TRouter extends AnyRouter>(client: TRPCClient<TRouter>) {

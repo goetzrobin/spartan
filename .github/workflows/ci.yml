@@ -41,16 +41,16 @@ jobs:
         with:
           node-version-file: .node-version
       - run: corepack enable
-      - run: yarn --version
+      - run: pnpm --version
       - uses: actions/setup-node@v3
         with:
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
-        run: yarn --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Validate
-        run: yarn prettier --check .
+        run: pnpm prettier --check .
 
   build:
     runs-on: ubuntu-latest
@@ -60,15 +60,15 @@ jobs:
         with:
           node-version-file: .node-version
       - run: corepack enable
-      - run: yarn --version
+      - run: pnpm --version
       - uses: actions/setup-node@v3
         with:
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile --prefer-offline
       - name: Build
-        run: yarn build
+        run: pnpm build
 
   unit:
     runs-on: ubuntu-latest
@@ -80,15 +80,15 @@ jobs:
         with:
           node-version-file: .node-version
       - run: corepack enable
-      - run: yarn --version
+      - run: pnpm --version
       - uses: actions/setup-node@v3
         with:
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile --prefer-offline
       - name: Test
-        run: yarn test
+        run: pnpm test
 
   e2e:
     runs-on: ubuntu-latest
@@ -100,14 +100,14 @@ jobs:
         with:
           node-version-file: .node-version
       - run: corepack enable
-      - run: yarn --version
+      - run: pnpm --version
       - uses: actions/setup-node@v3
         with:
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile --prefer-offline
       - name: Install Cypress
         run: npx cypress install
       - name: End-to-end test
-        run: yarn e2e
+        run: pnpm e2e
