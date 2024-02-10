@@ -300,20 +300,20 @@ class TableToggleStory {
 	standalone: true,
 	imports: [BrnTableModule, HlmTableModule, NgForOf],
 	template: `
-		<table hlmTable [dataSource]="_data()">
+		<table hlmTable class="w-full" [dataSource]="_data()">
 			<ng-container hlmColumnDef="username">
-				<th hlmHeaderCell *hlmHeaderCellDef truncate class="w-40">Name</th>
-				<td hlmCell *hlmCellDef="let row" truncate class="w-40">{{ row.name }}</td>
+				<th hlmHeaderCell *hlmHeaderCellDef truncate>Name</th>
+				<td hlmCell *hlmCellDef="let row" truncate>{{ row.name }}</td>
 			</ng-container>
 
 			<ng-container hlmColumnDef="age">
-				<th hlmHeaderCell *hlmHeaderCellDef truncate class="w-40">Age</th>
-				<td hlmCell *hlmCellDef="let row" truncate class="w-40">{{ row.age }}</td>
+				<th hlmHeaderCell *hlmHeaderCellDef truncate>Age</th>
+				<td hlmCell *hlmCellDef="let row" truncate>{{ row.age }}</td>
 			</ng-container>
 
 			<ng-container hlmColumnDef="height">
-				<th hlmHeaderCell *hlmHeaderCellDef truncate class="w-40">Height</th>
-				<td hlmCell *hlmCellDef="let row" truncate class="w-40">{{ row.height }}</td>
+				<th hlmHeaderCell *hlmHeaderCellDef truncate>Height</th>
+				<td hlmCell *hlmCellDef="let row" truncate>{{ row.height }}</td>
 			</ng-container>
 
 			<tr hlmHeaderRow *hlmHeaderRowDef="['username', 'age', 'height']"></tr>

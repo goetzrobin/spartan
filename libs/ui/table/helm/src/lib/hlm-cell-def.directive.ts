@@ -1,6 +1,15 @@
 import { CdkCellDef } from '@angular/cdk/table';
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive, TemplateRef, computed, inject, input } from '@angular/core';
+import { hlm } from '@spartan-ng/ui-core';
 import { BrnCellDefDirective, BrnCellDirective } from '@spartan-ng/ui-table-brain';
+import { cva } from 'class-variance-authority';
+import { ClassValue } from 'clsx';
+import { HlmTableComponent } from './hlm-table.component';
+
+export const cellVariants = cva('p-4 [&:has([role=checkbox])]:pr-0', {
+	variants: { variant: { table: '', flex: 'flex flex-none items-center' } },
+	defaultVariants: { variant: 'table' },
+});
 
 @Directive({
 	standalone: true,
@@ -17,9 +26,18 @@ export class HlmCellDefDirective extends BrnCellDefDirective {
 @Directive({
 	selector: 'hlm-td, td[hlmCell]',
 	host: {
-		class: 'flex flex-none p-4 items-center [&:has([role=checkbox])]:pr-0',
+		'[class]': '_computedClass()',
 		style: 'word-wrap: break-word; min-height: inherit;',
 	},
 	standalone: true,
 })
-export class HlmCellDirective extends BrnCellDirective {}
+export class HlmCellDirective extends BrnCellDirective {
+	readonly tableVariant = inject(HlmTableComponent).variant;
+
+	private readonly class = input<ClassValue>('');
+	protected readonly _computedClass = computed(() => hlm(cellVariants({ variant: this.tableVariant() }), this.class()));
+
+	ngAfterViewInit() {
+		console.log(this.tableVariant());
+	}
+}

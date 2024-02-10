@@ -35,9 +35,22 @@ import {
 	BrnTableDataSourceInput,
 	applyTableProviders,
 } from '@spartan-ng/ui-table-brain';
+import { cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
 export type HlmTableDataSourceInput<T> = BrnTableDataSourceInput<T>;
+
+export const tableVariants = cva('text-sm [&_hlm-trow:last-child]:border-0', {
+	variants: {
+		variant: {
+			table: '',
+			flex: 'flex flex-col',
+		},
+	},
+	defaultVariants: {
+		variant: 'table',
+	},
+});
 
 @Component({
 	selector: 'hlm-table, table[hlmTable]',
@@ -56,10 +69,10 @@ export type HlmTableDataSourceInput<T> = BrnTableDataSourceInput<T>;
 	},
 })
 export class HlmTableComponent<T> extends BrnTableComponent<T> {
+	readonly variant = input<'table' | 'flex'>(this._isNativeHtmlTable ? 'table' : 'flex');
+
 	private readonly class = input<ClassValue>('');
-	protected readonly _computedClass = computed(() =>
-		hlm('flex flex-col text-sm [&_hlm-trow:last-child]:border-0', this.class()),
-	);
+	protected readonly _computedClass = computed(() => hlm(tableVariants({ variant: this.variant() }), this.class()));
 
 	// we aria-labelledby to be settable from outside but use the input by default.
 	private readonly _labeledByInput = input<string | null | undefined>(undefined, { alias: 'aria-labelledby' });
