@@ -1,10 +1,10 @@
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
-import { BrnToasterDemoComponent } from './brn-toaster-demo.component';
+import { HlmToasterDemoComponent } from './hlm-toaster-demo.component';
 
-const meta: Meta<BrnToasterDemoComponent> = {
+const meta: Meta<HlmToasterDemoComponent> = {
 	title: 'Toast',
-	component: BrnToasterDemoComponent,
+	component: HlmToasterDemoComponent,
 	tags: ['autodocs'],
 	// args: {
 	// 	orientation: 'horizontal',
@@ -25,18 +25,18 @@ const meta: Meta<BrnToasterDemoComponent> = {
 	// },
 	decorators: [
 		moduleMetadata({
-			imports: [BrnToasterDemoComponent],
+			imports: [HlmToasterDemoComponent],
 		}),
 	],
 };
 
 export default meta;
-type Story = StoryObj<BrnToasterDemoComponent>;
+type Story = StoryObj<HlmToasterDemoComponent>;
 
 export const Default: Story = {
 	render: () => ({
 		template: `
-	<brn-toaster-demo/>
+	<hlm-toaster-demo/>
        `,
 	}),
 };

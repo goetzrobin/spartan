@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { BrnToasterComponent } from './brain/src';
 import { BrnToasterService } from './brain/src/lib/brn-toaster.service';
+import { HlmToasterComponent } from './helm/src';
 
 @Component({
-	selector: 'brn-toaster-demo',
+	selector: 'hlm-toaster-demo',
 	standalone: true,
-	imports: [BrnToasterComponent],
+	imports: [HlmToasterComponent],
 	template: `
 		<button (click)="addToast()">Add toast</button>
-		<brn-toaster />
+		<hlm-toaster />
 	`,
 })
-export class BrnToasterDemoComponent {
+export class HlmToasterDemoComponent {
 	toasterService = inject(BrnToasterService);
 
 	addToast() {

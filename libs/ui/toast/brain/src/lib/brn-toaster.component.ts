@@ -25,7 +25,7 @@ export class BrnToasterComponent implements OnDestroy, OnInit {
 
 	@ViewChild('listRef') listRef!: ElementRef<HTMLOListElement>;
 
-	class = input('');
+	_class = input('');
 	style = input({});
 	invert = input(false);
 	theme = input<'light' | 'dark' | 'system'>('light');

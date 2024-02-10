@@ -5,7 +5,7 @@
 				<ol
 					tabIndex="-1"
 					#listRef
-					[class]="class()"
+					[class]="_class()"
 					data-sonner-toaster
 					[attr.data-theme]="theme()"
 					[attr.data-rich-colors]="richColors()"
@@ -34,6 +34,7 @@
 							[actionButtonStyle]="toastOptions().actionButtonStyle || ''"
 							[cancelButtonStyle]="toastOptions().cancelButtonStyle || ''"
 							[descriptionClass]="toastOptions().descriptionClass || ''"
+							[_class]="toastOptions().class || ''"
 							[classes]="toastOptions().classes || {}"
 							[duration]="toastOptions().duration ?? duration()"
 							[unstyled]="toastOptions().unstyled || false"

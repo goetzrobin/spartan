@@ -59,6 +59,7 @@ export class BrnToastComponent implements AfterViewInit, OnInit {
 	interacting = input.required<boolean>();
 	duration = input.required<number>();
 	toast = input.required<ToastT>();
+	_class = input.required<string>();
 	_classes = input<ToastClassnames>({}, { alias: 'classes' });
 	_invert = input.required<boolean>({ alias: 'invert' });
 
@@ -117,6 +118,7 @@ export class BrnToastComponent implements AfterViewInit, OnInit {
 
 	toastClasses = computed(() => {
 		return this.cn(
+			this._class(),
 			this.toastClass(),
 			this.classes()?.toast,
 			this.toast()?.classes?.toast,
@@ -171,10 +173,10 @@ export class BrnToastComponent implements AfterViewInit, OnInit {
 	startTimer() {
 		this.closeTimerStartTimeRef = new Date().getTime();
 		// Let the toast know it has started
-		this.timeoutId = setTimeout(() => {
-			this.toast().onAutoClose?.(this.toast());
-			this.deleteToast();
-		}, this.remainingTime);
+		// this.timeoutId = setTimeout(() => {
+		// 	this.toast().onAutoClose?.(this.toast());
+		// 	this.deleteToast();
+		// }, this.remainingTime);
 	}
 
 	deleteToast() {
