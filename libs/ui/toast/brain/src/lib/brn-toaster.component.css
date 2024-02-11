@@ -1,6 +1,6 @@
 [data-sonner-toaster] {
-	position: fixed;
-	width: var(--width);
+	/* position: fixed;
+	width: var(--width); */
 	font-family:
 		ui-sans-serif,
 		system-ui,
@@ -16,7 +16,7 @@
 		Segoe UI Emoji,
 		Segoe UI Symbol,
 		Noto Color Emoji;
-	--gray1: hsl(0, 0%, 99%);
+	/* --gray1: hsl(0, 0%, 99%);
 	--gray2: hsl(0, 0%, 97.3%);
 	--gray3: hsl(0, 0%, 95.1%);
 	--gray4: hsl(0, 0%, 93%);
@@ -27,17 +27,17 @@
 	--gray9: hsl(0, 0%, 56.1%);
 	--gray10: hsl(0, 0%, 52.3%);
 	--gray11: hsl(0, 0%, 43.5%);
-	--gray12: hsl(0, 0%, 9%);
-	--border-radius: 6px;
-	box-sizing: border-box;
+	--gray12: hsl(0, 0%, 9%); */
+	/* --border-radius: 6px; */
+	/* box-sizing: border-box;
 	padding: 0;
 	margin: 0;
 	list-style: none;
 	outline: none;
-	z-index: 999999999;
+	z-index: 999999999; */
 }
 
-[data-sonner-toaster][data-x-position='right'] {
+/* [data-sonner-toaster][data-x-position='right'] {
 	right: max(var(--offset), env(safe-area-inset-right));
 }
 
@@ -56,7 +56,7 @@
 
 [data-sonner-toaster][data-y-position='bottom'] {
 	bottom: max(var(--offset), env(safe-area-inset-bottom));
-}
+} */
 
 [data-sonner-toast] {
 	--y: translateY(100%);

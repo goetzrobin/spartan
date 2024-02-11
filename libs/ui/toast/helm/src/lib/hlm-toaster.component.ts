@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { BrnToasterComponent } from '@spartan-ng/ui-toast-brain';
 
 @Component({
@@ -7,10 +7,10 @@ import { BrnToasterComponent } from '@spartan-ng/ui-toast-brain';
 	imports: [BrnToasterComponent],
 	template: `
 		<brn-toaster
+			_class="w-[var(--width)] box-border p-0 m-0 list-none outline-none z-50"
 			[closeButton]="true"
 			[toastOptions]="{
-				class:
-					'group p-4 bg-white border border-gray-200 text-gray-800 rounded-md text-sm flex items-center gap-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.1)] relative',
+				class: this.toasterClass(),
 				classes: {
 					description: 'font-normal leading-snug text-inherit',
 					title: 'font-medium leading-normal text-inherit',
@@ -25,4 +25,8 @@ import { BrnToasterComponent } from '@spartan-ng/ui-toast-brain';
 		/>
 	`,
 })
-export class HlmToasterComponent {}
+export class HlmToasterComponent {
+	toasterClass = signal(
+		'group p-4 bg-white border border-gray-200 text-gray-800 rounded-md text-sm flex items-center gap-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.1)] relative after:content-[" "] after:absolute after:left-0 after:bottom-full after:w-full after:h-[var(--gap)]',
+	);
+}

@@ -1,7 +1,7 @@
 @if (this.toasts().length > 0) {
 	<section [attr.aria-label]="'Notifications ' + hotkeyLabel()" tabIndex="-1">
 		@for (possiblePosition of possiblePositions(); track possiblePosition; let possiblePositionIndex = $index) {
-			<brn-toaster-position [position]="possiblePosition">
+			<brn-toaster-position [position]="possiblePosition" [offset]="actualOffset()">
 				<ol
 					tabIndex="-1"
 					#listRef

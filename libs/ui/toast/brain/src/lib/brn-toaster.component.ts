@@ -63,10 +63,14 @@ export class BrnToasterComponent implements OnDestroy, OnInit {
 		) as Position[];
 	});
 
+	actualOffset = computed(() => {
+		return (typeof this.offset() === 'number' ? `${this.offset()}px` : this.offset() || VIEWPORT_OFFSET) as string;
+	});
+
 	toasterStyles = computed(() => {
 		return {
 			'--front-toast-height': `${this.heights()[0]?.height}px`,
-			'--offset': typeof this.offset() === 'number' ? `${this.offset()}px` : this.offset() || VIEWPORT_OFFSET,
+			'--offset': this.actualOffset(),
 			'--width': `${TOAST_WIDTH}px`,
 			'--gap': `${GAP}px`,
 			...this.style(),
