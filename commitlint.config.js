@@ -31,6 +31,7 @@ module.exports = {
 				'label',
 				'menubar',
 				'navigation-menu',
+				'pagination',
 				'popover',
 				'progress',
 				'radio-group',

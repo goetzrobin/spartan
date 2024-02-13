@@ -88,6 +88,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					Navigation Menu
 					<spartan-side-nav-cs />
 				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/pagination">Pagination</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/popover">Popover</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/progress">Progress</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/radio-group">Radio Group</a>

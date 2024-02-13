@@ -47,6 +47,7 @@ What kind of change does this PR introduce?
 - [ ] label
 - [ ] menubar
 - [ ] navigation-menu
+- [ ] pagination
 - [ ] popover
 - [ ] progress
 - [ ] radio-group
