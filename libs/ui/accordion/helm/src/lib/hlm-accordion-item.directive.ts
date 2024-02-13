@@ -1,4 +1,4 @@
-import { computed, Directive, Input, signal } from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { BrnAccordionItemDirective } from '@spartan-ng/ui-accordion-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
@@ -12,13 +12,8 @@ import { ClassValue } from 'clsx';
 	hostDirectives: [BrnAccordionItemDirective],
 })
 export class HlmAccordionItemDirective {
-	private readonly _userCls = signal<ClassValue>('');
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
-		hlm('flex flex-1 flex-col border-b border-border', this._userCls()),
+		hlm('flex flex-1 flex-col border-b border-border', this._userClass()),
 	);
-
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
 }

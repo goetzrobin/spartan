@@ -1,4 +1,4 @@
-import { Component, computed, inject, Input, signal } from '@angular/core';
+import { Component, computed, inject, input, Input, signal } from '@angular/core';
 import { radixCheck } from '@ng-icons/radix-icons';
 import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
 import { hlm } from '@spartan-ng/ui-core';
@@ -20,11 +20,11 @@ import { ClassValue } from 'clsx';
 export class HlmCheckboxCheckIconComponent {
 	private _brnCheckbox = inject(BrnCheckboxComponent);
 	protected _checked = this._brnCheckbox?.isChecked;
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
+	// TODO - this cannot be private for some reason
+	// build fails because hlm-checkbox.component.ts is giving the following error:
+	// Property '_userClass' is private and only accessible within class 'HlmCheckboxCheckIconComponent'.
+	// it should work as private but it doesn't
+	readonly _userClass = input<ClassValue>('', { alias: 'class' });
 
 	protected readonly _iconName = signal<string>('radixCheck');
 	@Input()
@@ -32,12 +32,11 @@ export class HlmCheckboxCheckIconComponent {
 		this._iconName.set(iconName);
 	}
 
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(
+	protected _computedClass = computed(() =>
+		hlm(
 			'h-4 w-4 leading-none group-data-[state=unchecked]:opacity-0',
 			this._checked() === 'indeterminate' ? 'opacity-50' : '',
-			this._userCls(),
-		);
-	}
+			this._userClass(),
+		),
+	);
 }

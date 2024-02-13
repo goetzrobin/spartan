@@ -1,4 +1,4 @@
-import { Component, Input, computed, signal } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { radixChevronRight } from '@ng-icons/radix-icons';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -17,14 +17,6 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmMenuItemSubIndicatorComponent {
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm('inline-block ml-auto h-4 w-4', this._userCls());
-	}
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm('inline-block ml-auto h-4 w-4', this._userClass()));
 }

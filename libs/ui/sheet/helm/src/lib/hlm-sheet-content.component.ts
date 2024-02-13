@@ -1,4 +1,4 @@
-import { Component, computed, effect, ElementRef, inject, Input, Renderer2, signal } from '@angular/core';
+import { Component, ElementRef, Renderer2, computed, effect, inject, input, signal } from '@angular/core';
 import { radixCross1 } from '@ng-icons/radix-icons';
 import { hlm, injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -56,14 +56,6 @@ export class HlmSheetContentComponent {
 		});
 	}
 
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(sheetVariants({ side: this._sideProvider.side() }), this._userCls());
-	}
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(sheetVariants({ side: this._sideProvider.side() }), this._userClass()));
 }
