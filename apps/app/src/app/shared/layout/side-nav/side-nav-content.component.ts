@@ -104,6 +104,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					Slider
 					<spartan-side-nav-cs />
 				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/spinner">Spinner</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/switch">Switch</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/table">Table</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/tabs">Tabs</a>
