@@ -146,7 +146,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 		// Watch for Listbox Selection Changes to trigger Collapse
 		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe((listboxEvent) => {
-			if (this._multiple()) {
+			if (!this._multiple()) {
 				this.close();
 			}
 			this.writeValue(listboxEvent.value);

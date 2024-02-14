@@ -26,7 +26,8 @@ import { BrnSelectService } from './brn-select.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		'[attr.aria-labelledBy]': 'labelledBy()',
-		'[attr.aria-controlledBy]': "id() +'-trigger'",
+		'[attr.aria-controlledBy]': "id() +'--trigger'",
+		'[id]': "id() + '--content'",
 	},
 	styles: [
 		`
