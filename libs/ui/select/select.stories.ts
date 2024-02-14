@@ -27,12 +27,11 @@ type Story = StoryObj<BrnSelectComponent>;
 
 export const Default: Story = {
 	render: (args) => ({
-		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl(), brnFruit: new FormControl() }) },
+		props: { ...args },
 		template: `
-    <form [formGroup]="fruitGroup">
-		<brn-select class="inline-block" ${argsToTemplate(args)} formControlName="fruit">
+		<hlm-select class="inline-block" ${argsToTemplate(args)}>
 			<hlm-select-trigger class='w-56'>
-				<brn-select-value hlm />
+				<hlm-select-value />
 			</hlm-select-trigger>
 			<hlm-select-content class="w-56">
 				<hlm-select-label>Fruits</hlm-select-label>
@@ -42,8 +41,7 @@ export const Default: Story = {
 				<hlm-option value="grapes">Grapes</hlm-option>
 				<hlm-option value="pineapple">Pineapple</hlm-option>
 		  </hlm-select-content>
-		</brn-select>
-  	<form>`,
+		</hlm-select>`,
 	}),
 };
 
@@ -80,7 +78,7 @@ export const NgModelFormControl: Story = {
 			<div class="mb-3">
 			<pre>Form Control Value: {{ model.fruit | json }}</pre>
 			</div>
-			<brn-select class='w-56' ${argsToTemplate(args)} [(ngModel)]="model.fruit" name="fruit">
+			<hlm-select class='w-56' ${argsToTemplate(args)} [(ngModel)]="model.fruit" name="fruit">
 				<hlm-select-trigger>
 					<brn-select-value hlm />
 				</hlm-select-trigger>
@@ -92,7 +90,7 @@ export const NgModelFormControl: Story = {
 					<hlm-option value="grapes">Grapes</hlm-option>
 					<hlm-option value="pineapple">Pineapple</hlm-option>
 				</hlm-select-content>
-			</brn-select>
+			</hlm-select>
 		</form>`,
 	}),
 };
@@ -102,7 +100,7 @@ export const SelectWithLabel: Story = {
 		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
 		template: `
   <form [formGroup]="fruitGroup">
-    <brn-select formControlName="fruit" ${argsToTemplate(args)}>
+    <hlm-select formControlName="fruit" ${argsToTemplate(args)}>
 		<label hlmLabel>Select a Fruit</label>
       	<hlm-select-trigger class='w-56'>
         	<brn-select-value />
@@ -115,52 +113,6 @@ export const SelectWithLabel: Story = {
 			<hlm-option value="grapes">Grapes</hlm-option>
 			<hlm-option value="pineapple">Pineapple</hlm-option>
       	</hlm-select-content>
-    </brn-select>
-  <form>`,
-	}),
-};
-
-export const autocomplete: Story = {
-	render: (args) => ({
-		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
-		template: `
-  <form [formGroup]="fruitGroup">
-    <hlm-select formControlName="fruit" ${argsToTemplate(args)}>
-		<label hlmLabel>Select a Fruit</label>
-		<hlm-select-trigger class='w-56'>
-			<hlm-select-value />
-		</hlm-select-trigger>
-		<hlm-select-content class="w-56">
-			<hlm-select-label>Fruits</hlm-select-label>
-			<hlm-option value="apple">Apple</hlm-option>
-			<hlm-option value="banana">Banana</hlm-option>
-			<hlm-option value="blueberry">Blueberry</hlm-option>
-			<hlm-option value="grapes">Grapes</hlm-option>
-			<hlm-option value="pineapple">Pineapple</hlm-option>
-		</hlm-select-content>
-    </hlm-select>
-  <form>`,
-	}),
-};
-
-export const controless: Story = {
-	render: (args) => ({
-		props: args,
-		template: `
-  <form>
-    <hlm-select ${argsToTemplate({ disabled: args.disabled, placeholder: args.placeholder, mulitple: args.multiple })}>
-		<label hlmLabel>Select a Fruit</label>
-		<hlm-select-trigger class='w-56'>
-			<hlm-select-value />
-		</hlm-select-trigger>
-		<hlm-select-content class="w-56">
-			<hlm-select-label>Fruits</hlm-select-label>
-			<hlm-option value="apple">Apple</hlm-option>
-			<hlm-option value="banana">Banana</hlm-option>
-			<hlm-option value="blueberry">Blueberry</hlm-option>
-			<hlm-option value="grapes">Grapes</hlm-option>
-			<hlm-option value="pineapple">Pineapple</hlm-option>
-		</hlm-select-content>
     </hlm-select>
   <form>`,
 	}),
