@@ -4,7 +4,7 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 @Component({
 	selector: 'spartan-spinner-preview',
 	standalone: true,
-	imports: [HlmSpinnerComponent, h],
+	imports: [HlmSpinnerComponent],
 	template: `
 		<hlm-spinner />
 	`,
