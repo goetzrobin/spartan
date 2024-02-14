@@ -10,7 +10,7 @@ import { BrnToasterComponent } from '@spartan-ng/ui-toast-brain';
 			_class="w-[var(--width)] box-border p-0 m-0 list-none outline-none z-50"
 			[closeButton]="true"
 			[toastOptions]="{
-				class: this.toasterClass(),
+				class: this.toastClass(),
 				classes: {
 					description: 'font-normal leading-snug text-inherit',
 					title: 'font-medium leading-normal text-inherit',
@@ -26,7 +26,7 @@ import { BrnToasterComponent } from '@spartan-ng/ui-toast-brain';
 	`,
 })
 export class HlmToasterComponent {
-	toasterClass = signal(
-		'group p-4 bg-white border border-gray-200 text-gray-800 rounded-md text-sm flex items-center gap-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.1)] relative after:content-[" "] after:absolute after:left-0 after:bottom-full after:w-full after:h-[var(--gap)]',
+	toastClass = signal(
+		'w-[var(--width)] opacity-0 group p-4 bg-white border border-gray-200 text-gray-800 rounded-md text-sm flex items-center gap-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.1)] after:content-[" "] after:absolute after:left-0 after:bottom-full after:w-full after:h-[var(--gap)]',
 	);
 }
