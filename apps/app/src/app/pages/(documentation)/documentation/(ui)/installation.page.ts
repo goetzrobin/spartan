@@ -53,6 +53,11 @@ export const routeMeta: RouteMeta = {
 				<code class="${hlmCode}">spartan/ui</code>
 				is built on top of TailwindCSS. Make sure your application has a working TailwindCSS setup before you continue.
 			</p>
+			<p class="${hlmP}">
+				<code class="${hlmCode}">spartan/ui</code>
+				also builds on top of angular/cdk. To install it run the following command:
+			</p>
+			<spartan-code class="mt-4" code="npm i @angular/cdk" />
 			<spartan-section-sub-heading id="installing-ui-core">Installing ui-core</spartan-section-sub-heading>
 			<p class="${hlmP}">
 				<code class="${hlmCode}">spartan/ui</code>
