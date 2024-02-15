@@ -104,7 +104,8 @@ export const Default: Story = {
 					<hlm-icon name="lucideSearch" />
 					<input placeholder="Type a command or search..." brnCmdInput hlm />
 					<button brnDialogClose hlmCmdDialogCloseBtn>
-						<hlm-icon name="lucideX" />
+						<!-- Using 1rem for size to mimick h-4 w-4 -->
+						<hlm-icon name="lucideX" size="1rem" class="items-center justify-center" />
 					</button>
 				</hlm-cmd-input-wrapper>
 				<div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
