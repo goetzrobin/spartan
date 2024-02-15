@@ -1,5 +1,5 @@
 import { Component, computed, Input, signal } from '@angular/core';
-import { radixDotFilled } from '@ng-icons/radix-icons';
+import { lucideCircle } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { ClassValue } from 'clsx';
@@ -7,11 +7,11 @@ import { ClassValue } from 'clsx';
 @Component({
 	selector: 'hlm-menu-item-radio',
 	standalone: true,
-	providers: [provideIcons({ radixDotFilled })],
+	providers: [provideIcons({ lucideCircle })],
 	imports: [HlmIconComponent],
 	template: `
-		<!-- Using 1rem for size to mimick h-4 w-4 -->
-		<hlm-icon size="1rem" class="*:*:fill-current" name="radixDotFilled" />
+		<!-- Using 0.5rem for size to mimick h-2 w-2 -->
+		<hlm-icon size="0.5rem" class="*:*:fill-current" name="lucideCircle" />
 	`,
 	host: {
 		'[class]': '_computedClass()',
