@@ -10,7 +10,8 @@ import { ClassValue } from 'clsx';
 	providers: [provideIcons({ radixDotFilled })],
 	imports: [HlmIconComponent],
 	template: `
-		<hlm-icon size="none" class="h-full w-full" name="radixDotFilled" />
+		<!-- Using 1rem for size to mimick h-4 w-4 -->
+		<hlm-icon size="1rem" class="*:*:fill-current" name="radixDotFilled" />
 	`,
 	host: {
 		'[class]': '_computedClass()',
@@ -25,6 +26,9 @@ export class HlmMenuItemRadioComponent {
 
 	protected _computedClass = computed(() => this._generateClass());
 	private _generateClass() {
-		return hlm('group-[.checked]:opacity-100 opacity-0 inline-block mr-2 h-5 w-5', this._userCls());
+		return hlm(
+			'group-[.checked]:opacity-100 opacity-0 absolute left-2 flex h-3.5 w-3.5 items-center justify-center',
+			this._userCls(),
+		);
 	}
 }
