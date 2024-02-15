@@ -121,7 +121,6 @@ class ComboboxComponent {
 export const Default: Story = {
 	decorators: [
 		moduleMetadata({
-			providers: [provideIcons(lucide)],
 			imports: [ComboboxComponent],
 		}),
 	],

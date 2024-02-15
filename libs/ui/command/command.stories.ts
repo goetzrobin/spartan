@@ -170,7 +170,6 @@ class CommandDialogComponent {
 export const Dialog: Story = {
 	decorators: [
 		moduleMetadata({
-			providers: [provideIcons(lucide)],
 			imports: [CommandDialogComponent],
 		}),
 	],

@@ -1,7 +1,6 @@
-import { lucideX } from '@ng-icons/lucide';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent, provideIcons } from '../icon/helm/src';
+import { HlmIconComponent } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { BrnPopoverComponent, BrnPopoverImports } from './brain/src';
@@ -29,7 +28,6 @@ const meta: Meta<BrnPopoverComponent> = {
 				HlmInputDirective,
 				HlmIconComponent,
 			],
-			providers: [provideIcons({ lucideX })],
 		}),
 	],
 };
