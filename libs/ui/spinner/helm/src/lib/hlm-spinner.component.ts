@@ -1,4 +1,4 @@
-import { Component, computed, Input, signal } from '@angular/core';
+import { Component, computed, input, Input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -12,6 +12,8 @@ export const spinnerVariants = cva('inline-block', {
 			xs: 'h-4 w-4',
 			sm: 'h-6 w-6',
 			default: 'w-8 h-8 ',
+			lg: 'w-12 h-12',
+			xl: 'w-16 h-16',
 		},
 	},
 	defaultVariants: {
@@ -49,14 +51,6 @@ export class HlmSpinnerComponent {
 		this._size.set(value);
 	}
 
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(spinnerVariants({ size: this._size() }), this._userCls());
-	}
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(spinnerVariants({ size: this._size() }), this._userClass()));
 }

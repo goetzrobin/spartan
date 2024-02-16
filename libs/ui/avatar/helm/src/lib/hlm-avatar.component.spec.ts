@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrnAvatarFallbackDirective, BrnAvatarImageDirective } from '@spartan-ng/ui-avatar-brain';
 import { HlmAvatarComponent } from './hlm-avatar.component';
@@ -7,13 +7,15 @@ import { HlmAvatarComponent } from './hlm-avatar.component';
 	selector: 'hlm-mock',
 	imports: [BrnAvatarImageDirective, BrnAvatarFallbackDirective, HlmAvatarComponent],
 	template: `
-		<hlm-avatar id="fallbackOnly">
+		<hlm-avatar [class]="class" id="fallbackOnly">
 			<span brnAvatarFallback>fallback</span>
 		</hlm-avatar>
 	`,
 	standalone: true,
 })
-class MockComponent {}
+class MockComponent {
+	@Input() class: string = '';
+}
 
 describe('HlmAvatarComponent', () => {
 	let component: HlmAvatarComponent;
@@ -34,9 +36,11 @@ describe('HlmAvatarComponent', () => {
 	});
 
 	it('should add any user defined classes', () => {
-		component.class = 'test-class';
-		fixture.detectChanges();
-		expect(fixture.nativeElement.className).toContain('test-class');
+		const mockFixture = TestBed.createComponent(MockComponent);
+		mockFixture.componentRef.setInput('class', 'test-class');
+		mockFixture.detectChanges();
+		const avatar = mockFixture.nativeElement.querySelector('hlm-avatar');
+		expect(avatar.className).toContain('test-class');
 	});
 
 	it('should change the size when the variant is changed', () => {

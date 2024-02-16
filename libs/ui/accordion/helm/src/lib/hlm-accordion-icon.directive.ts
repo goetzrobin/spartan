@@ -1,4 +1,4 @@
-import { computed, Directive, inject, Input, signal } from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { radixChevronDown } from '@ng-icons/radix-icons';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -15,15 +15,10 @@ import { ClassValue } from 'clsx';
 export class HlmAccordionIconDirective {
 	private readonly _hlmIcon = inject(HlmIconComponent);
 
-	private readonly _userCls = signal<ClassValue>('');
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('inline-block h-4 w-4 transition-transform duration-200', this._userCls()),
+		hlm('inline-block h-4 w-4 transition-transform duration-200', this._userClass()),
 	);
-
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
 
 	constructor() {
 		this._hlmIcon.name = 'radixChevronDown';

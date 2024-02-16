@@ -71,8 +71,10 @@ export const tableVariants = cva('text-sm [&_hlm-trow:last-child]:border-0', {
 export class HlmTableComponent<T> extends BrnTableComponent<T> {
 	readonly variant = input<'table' | 'flex'>(this._isNativeHtmlTable ? 'table' : 'flex');
 
-	private readonly class = input<ClassValue>('');
-	protected readonly _computedClass = computed(() => hlm(tableVariants({ variant: this.variant() }), this.class()));
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() =>
+		hlm(tableVariants({ variant: this.variant() }), this._userClass()),
+	);
 
 	// we aria-labelledby to be settable from outside but use the input by default.
 	private readonly _labeledByInput = input<string | null | undefined>(undefined, { alias: 'aria-labelledby' });

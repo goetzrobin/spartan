@@ -62,7 +62,7 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<spartan-page-bottom-nav>
-				<spartan-page-bottom-nav-link href="popover" label="Popover" />
+				<spartan-page-bottom-nav-link href="pagination" label="Pagination" />
 				<spartan-page-bottom-nav-link direction="previous" href="label" label="Label" />
 			</spartan-page-bottom-nav>
 		</section>

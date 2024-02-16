@@ -14,7 +14,7 @@ An example:
 Appearance only UI components that do not provide any other functionality are also
 Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a skeleton UI.
 
-## Roadmap (33/41)
+## Roadmap (34/41)
 
 - [x] Accordion
 - [x] Alert
@@ -40,6 +40,7 @@ Angular components, e.g. the `<hlm-skeleton/>` component allows you to build a s
 - [x] Label
 - [x] Menubar
 - [ ] Navigation Menu
+- [x] Pagination
 - [x] Popover
 - [x] Progress
 - [x] Radio Group
