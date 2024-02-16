@@ -53,6 +53,7 @@
 		"class-variance-authority": "^0.6.0",
 		"clsx": "^1.2.1",
 		"drizzle-orm": "^0.28.3",
+		"embla-carousel-angular": "^14.0.0",
 		"enquirer": "2.3.6",
 		"front-matter": "^4.0.2",
 		"h3": "^1.6.2",
