@@ -1,0 +1,13 @@
+.mat-calendar-table-header-divider {
+	position: relative;
+	height: 1px;
+}
+.mat-calendar-table-header-divider::after {
+	@apply bg-neutral-200;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -0.5rem;
+	right: -0.5rem;
+	height: 1px;
+}

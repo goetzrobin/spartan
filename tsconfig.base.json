@@ -36,6 +36,8 @@
 			"@spartan-ng/ui-command-brain": ["libs/ui/command/brain/src/index.ts"],
 			"@spartan-ng/ui-command-helm": ["libs/ui/command/helm/src/index.ts"],
 			"@spartan-ng/ui-core": ["libs/ui/core/src/index.ts"],
+			"@spartan-ng/ui-date-picker-brain": ["libs/ui/date-picker/brain/src/index.ts"],
+			"@spartan-ng/ui-date-picker-helm": ["libs/ui/date-picker/helm/src/index.ts"],
 			"@spartan-ng/ui-dialog-brain": ["libs/ui/dialog/brain/src/index.ts"],
 			"@spartan-ng/ui-dialog-helm": ["libs/ui/dialog/helm/src/index.ts"],
 			"@spartan-ng/ui-hovercard-brain": ["libs/ui/hover-card/brain/src/index.ts"],

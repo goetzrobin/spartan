@@ -1,0 +1,95 @@
+<!--
+  If there's not enough space in the first row, create a separate label row. We mark this row as
+  aria-hidden because we don't want it to be read out as one of the weeks in the month.
+-->
+@if (_firstRowOffset < labelMinRequiredCells) {
+<tr aria-hidden="true">
+	<td
+		class="mat-calendar-body-label h-0 pl-[--calendar-body-label-side-padding] pr-[--calendar-body-label-side-padding] text-start"
+		[attr.colspan]="numCols"
+		[style.paddingTop]="_cellPadding"
+		[style.paddingBottom]="_cellPadding"
+	>
+		{{label}}
+	</td>
+</tr>
+}
+
+<!-- Create the first row separately so we can include a special spacer cell. -->
+@for (row of rows; track row; let rowIndex = $index) {
+<tr role="row">
+	<!--
+      This cell is purely decorative, but we can't put `aria-hidden` or `role="presentation"` on it,
+      because it throws off the week days for the rest of the row on NVDA. The aspect ratio of the
+      table cells is maintained by setting the top and bottom padding as a percentage of the width
+      (a variant of the trick described here: https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).
+    -->
+	@if (rowIndex === 0 && _firstRowOffset) {
+	<td
+		class="mat-calendar-body-label h-0 pl-[--calendar-body-label-side-padding] pr-[--calendar-body-label-side-padding]"
+		[attr.colspan]="_firstRowOffset"
+	>
+		{{_firstRowOffset >= labelMinRequiredCells ? label : ''}}
+	</td>
+	}
+	<!--
+      Each gridcell in the calendar contains a button, which signals to assistive technology that the
+      cell is interactable, as well as the selection state via `aria-pressed`. See #23476 for
+      background.
+    -->
+	@for (item of row; track item; let colIndex = $index) {
+	<td
+		role="gridcell"
+		class="mat-calendar-body-cell-container relative h-0"
+		[style.width]="_cellWidth"
+		[style.paddingTop]="_cellPadding"
+		[style.paddingBottom]="_cellPadding"
+		[attr.data-mat-row]="rowIndex"
+		[attr.data-mat-col]="colIndex"
+	>
+		<button
+			type="button"
+			class="mat-calendar-body-cell group absolute left-0 top-0 m-0 h-full w-full text-center outline-none"
+			[ngClass]="item.cssClasses"
+			[tabindex]="_isActiveCell(rowIndex, colIndex) ? 0 : -1"
+			[class.mat-calendar-body-disabled]="!item.enabled"
+			[class.mat-calendar-body-active]="_isActiveCell(rowIndex, colIndex)"
+			[class.mat-calendar-body-range-start]="_isRangeStart(item.compareValue)"
+			[class.mat-calendar-body-range-end]="_isRangeEnd(item.compareValue)"
+			[class.mat-calendar-body-in-range]="_isInRange(item.compareValue)"
+			[class.mat-calendar-body-comparison-bridge-start]="_isComparisonBridgeStart(item.compareValue, rowIndex, colIndex)"
+			[class.mat-calendar-body-comparison-bridge-end]="_isComparisonBridgeEnd(item.compareValue, rowIndex, colIndex)"
+			[class.mat-calendar-body-comparison-start]="_isComparisonStart(item.compareValue)"
+			[class.mat-calendar-body-comparison-end]="_isComparisonEnd(item.compareValue)"
+			[class.mat-calendar-body-in-comparison-range]="_isInComparisonRange(item.compareValue)"
+			[class.mat-calendar-body-preview-start]="_isPreviewStart(item.compareValue)"
+			[class.mat-calendar-body-preview-end]="_isPreviewEnd(item.compareValue)"
+			[class.mat-calendar-body-in-preview]="_isInPreview(item.compareValue)"
+			[attr.aria-label]="item.ariaLabel"
+			[attr.aria-disabled]="!item.enabled || null"
+			[attr.aria-pressed]="_isSelected(item.compareValue)"
+			[attr.aria-current]="todayValue === item.compareValue ? 'date' : null"
+			[attr.aria-describedby]="_getDescribedby(item.compareValue)"
+			(click)="_cellClicked(item, $event)"
+			(focus)="_emitActiveDateChange(item, $event)"
+		>
+			<span
+				class="mat-calendar-body-cell-content mat-focus-indicator z-1 left-[--calendar-body-cell-content-margin] top-[--calendar-body-cell-content-margin] box-border flex h-[--calendar-body-cell-content-size] w-[--calendar-body-cell-content-size] items-center justify-center rounded-sm border-solid group-hover:bg-neutral-200"
+				[ngClass]="{
+					'bg-indigo-200': _isSelected(item.compareValue),
+					'bg-indigo-400': _isActiveCell(rowIndex, colIndex),
+					'mat-calendar-body-comparison-identical': _isComparisonIdentical(item.compareValue),
+					'border-indigo-500 border group-hover:bg-indigo-300': todayValue === item.compareValue
+				}"
+			>
+				{{item.displayValue}}
+			</span>
+			<span class="mat-calendar-body-cell-preview" aria-hidden="true"></span>
+		</button>
+	</td>
+	}
+</tr>
+}
+
+<label [id]="_startDateLabelId" class="hidden">{{startDateAccessibleName}}</label>
+<label [id]="_endDateLabelId" class="hidden">{{endDateAccessibleName}}</label>
