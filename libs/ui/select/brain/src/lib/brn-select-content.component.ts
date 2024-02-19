@@ -28,6 +28,7 @@ import { BrnSelectService } from './brn-select.service';
 		'[attr.aria-labelledBy]': 'labelledBy()',
 		'[attr.aria-controlledBy]': "id() +'--trigger'",
 		'[id]': "id() + '--content'",
+		'[attr.dir]': '_selectService.dir()',
 	},
 	styles: [
 		`

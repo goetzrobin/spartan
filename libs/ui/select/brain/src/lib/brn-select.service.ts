@@ -3,6 +3,8 @@ import { Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 
+type BrnReadDirection = 'ltr' | 'rtl';
+
 @Injectable()
 export class BrnSelectService {
 	public readonly state = signal<{
@@ -13,6 +15,7 @@ export class BrnSelectService {
 		isExpanded: boolean;
 		multiple: boolean;
 		disabled: boolean;
+		dir: BrnReadDirection;
 		selectedOptions: Array<CdkOption | null>;
 		value: string | string[];
 	}>({
@@ -23,6 +26,7 @@ export class BrnSelectService {
 		isExpanded: false,
 		multiple: false,
 		disabled: false,
+		dir: 'ltr',
 		selectedOptions: [],
 		value: '',
 	});
@@ -34,6 +38,7 @@ export class BrnSelectService {
 	public readonly disabled = computed(() => this.state().disabled);
 	public readonly isExpanded = computed(() => this.state().isExpanded);
 	public readonly multiple = computed(() => this.state().multiple);
+	public readonly dir = computed(() => this.state().dir);
 	public readonly selectedOptions = computed(() => this.state().selectedOptions);
 	public readonly value = computed(() => this.state().value);
 

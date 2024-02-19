@@ -34,6 +34,11 @@ export class BrnSelectValueComponent {
 			return null;
 		}
 		const selectedLabels = value.map((selectedOption) => selectedOption?.getLabel());
+
+		if (this._selectService.dir() === 'rtl') {
+			selectedLabels.reverse();
+		}
+
 		return this.transformFn(selectedLabels);
 	});
 

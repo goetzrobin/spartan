@@ -11,6 +11,7 @@ import { BrnSelectService } from './brn-select.service';
 	host: {
 		'(mouseenter)': 'hover()',
 		'(blur)': 'blur()',
+		'[attr.dir]': '_selectService.dir()',
 	},
 })
 export class BrnSelectOptionDirective implements FocusableOption {
@@ -24,6 +25,7 @@ export class BrnSelectOptionDirective implements FocusableOption {
 	public readonly selected = computed(() => this._selected());
 	public readonly focused = computed(() => this._focused());
 	public readonly checkedState = computed(() => (this._selected() ? 'checked' : 'unchecked'));
+	public readonly dir = computed(() => this._selectService.dir());
 
 	constructor() {
 		toObservable(this._selectService.value)

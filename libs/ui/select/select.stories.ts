@@ -13,6 +13,11 @@ const meta: Meta<BrnSelectComponent> = {
 		disabled: false,
 		placeholder: 'Select a timezone',
 		multiple: false,
+		// @ts-ignore
+		dir: 'ltr',
+	},
+	argTypes: {
+		dir: { control: 'radio', options: ['ltr', 'rtl'] },
 	},
 	decorators: [
 		moduleMetadata({

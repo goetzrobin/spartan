@@ -6,20 +6,25 @@ import {
 	Component,
 	ContentChild,
 	ContentChildren,
+	EventEmitter,
 	Input,
+	Output,
 	QueryList,
 	ViewChild,
 	computed,
 	inject,
+	input,
 	signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 import { BrnSelectService } from './brn-select.service';
+
+export type BrnReadDirection = 'ltr' | 'rtl';
 
 let nextId = 0;
 
@@ -79,6 +84,8 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	}
 	protected readonly _disabled = this._selectService.disabled;
 
+	dir = input<BrnReadDirection>('ltr');
+
 	@ContentChild(BrnLabelDirective, { descendants: false })
 	protected selectLabel!: BrnLabelDirective;
 	@ContentChild(BrnSelectTriggerDirective)
@@ -91,6 +98,9 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	/** Overlay pane containing the options. */
 	@ViewChild(CdkConnectedOverlay)
 	protected _overlayDir!: CdkConnectedOverlay;
+
+	@Output()
+	openedChange = new EventEmitter<boolean>();
 
 	public readonly isExpanded = this._selectService.isExpanded;
 	public readonly backupLabelId = computed(() => this._selectService.labelId());
@@ -152,6 +162,15 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			this.writeValue(listboxEvent.value);
 			this._onChange(listboxEvent.value);
 		});
+
+		toObservable(this.dir)
+			.pipe(takeUntilDestroyed())
+			.subscribe(() =>
+				this._selectService.state.update((state) => ({
+					...state,
+					dir: this.dir(),
+				})),
+			);
 	}
 
 	public ngAfterContentInit(): void {
@@ -161,11 +180,13 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			this._selectService.state.update((state) => ({
 				...state,
 				labelId: this.selectLabel.id,
+				dir: this.dir(),
 			}));
 		} else if (this._placeholder()) {
 			this._selectService.state.update((state) => ({
 				...state,
 				labelId: `${state.id}--label`,
+				dir: this.dir(),
 			}));
 		}
 	}
@@ -184,6 +205,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			...state,
 			isExpanded: true,
 		}));
+		this.openedChange.next(true);
 		this._moveFocusToCDKList();
 	}
 
@@ -193,7 +215,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		if (this.selectTrigger) {
 			this.selectTrigger.focus();
 		}
-
+		this.openedChange.next(false);
 		this._selectService.state.update((state) => ({
 			...state,
 			isExpanded: false,

@@ -12,7 +12,7 @@ import { BrnSelectService } from './brn-select.service';
 		'[attr.aria-controls]': "selectContentId() + ''",
 		'[attr.aria-labelledBy]': 'selectTriggerLabelledBy()',
 		'aria-autocomplete': 'none',
-		'[attr.dir]': '"ltr"',
+		'[attr.dir]': '_selectService.dir()',
 		type: 'button',
 	},
 })
