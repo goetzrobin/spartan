@@ -9,7 +9,7 @@ import { ClassValue } from 'clsx';
 	host: {
 		'[class]': '_computedClass()',
 	},
-	hostDirectives: [BrnAccordionDirective],
+	hostDirectives: [{ directive: BrnAccordionDirective, inputs: ['type', 'dir', 'orientation'] }],
 })
 export class HlmAccordionDirective {
 	private readonly _brn = inject(BrnAccordionDirective);
