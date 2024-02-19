@@ -4,9 +4,10 @@ import { BrnSelectImports } from '../index';
 
 describe('BrnSelectComponent', () => {
 	const setup = async () => {
+		const openChangeSpy = jest.fn();
 		const container = await render(
 			`
-            <brn-select class="inline-block" [multiple]="multiple">
+            <brn-select class="inline-block" [multiple]="multiple" (openedChange)="openedChange($event)">
 			<button brnSelectTrigger class='w-56' data-testid="brn-select-trigger">
 				<brn-select-value />
 			</button>
@@ -24,6 +25,7 @@ describe('BrnSelectComponent', () => {
 				imports: [...BrnSelectImports],
 				componentProperties: {
 					multiple: true,
+					openedChange: openChangeSpy,
 				},
 			},
 		);
@@ -31,8 +33,19 @@ describe('BrnSelectComponent', () => {
 			user: userEvent.setup(),
 			container,
 			trigger: screen.getByTestId('brn-select-trigger'),
+			openChangeSpy,
 		};
 	};
+
+	describe('default', () => {
+		it('openChanged should emit event on open and close', async () => {
+			const { user, trigger, openChangeSpy } = await setup();
+			await user.click(trigger);
+			expect(openChangeSpy).toHaveBeenCalledTimes(1);
+			await user.click(trigger);
+			expect(openChangeSpy).toHaveBeenCalledTimes(2);
+		});
+	});
 
 	describe('multiple option select', () => {
 		it('when multiple true -> false with multiple selected values, should reset', async () => {
