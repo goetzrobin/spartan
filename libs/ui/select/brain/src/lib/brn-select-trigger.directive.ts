@@ -17,8 +17,8 @@ import { BrnSelectService } from './brn-select.service';
 	},
 })
 export class BrnSelectTriggerDirective {
-	private readonly _selectService = inject(BrnSelectService);
 	private readonly el = inject(ElementRef);
+	protected readonly _selectService = inject(BrnSelectService);
 
 	public readonly isExpanded = this._selectService.isExpanded;
 	public readonly selectTriggerId = computed(() => `${this._selectService.id()}--trigger`);
@@ -30,6 +30,11 @@ export class BrnSelectTriggerDirective {
 		}
 		return this._selectService.labelId();
 	});
+
+	constructor() {
+		if (!this._selectService) return;
+		this._selectService._setSelectTrigger(this);
+	}
 
 	public focus() {
 		this.el.nativeElement.focus();

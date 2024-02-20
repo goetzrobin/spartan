@@ -15,8 +15,8 @@ import { BrnSelectService } from './brn-select.service';
 	},
 })
 export class BrnSelectOptionDirective implements FocusableOption {
-	private readonly _selectService = inject(BrnSelectService);
 	private readonly _cdkSelectOption = inject(CdkOption, { host: true });
+	protected readonly _selectService = inject(BrnSelectService);
 
 	private readonly _selected = signal<boolean>(false);
 	private readonly _focused = signal<boolean>(false);
@@ -47,7 +47,7 @@ export class BrnSelectOptionDirective implements FocusableOption {
 
 	@Input()
 	set disabled(value: boolean) {
-		this.disabled = value;
+		this._disabled = value;
 	}
 	get disabled() {
 		return this._disabled;

@@ -6,6 +6,9 @@ import { ClassValue } from 'clsx';
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'hlm-select, brn-select [hlm]',
 	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmSelectDirective {
 	private readonly _classNames = signal<ClassValue>('');
