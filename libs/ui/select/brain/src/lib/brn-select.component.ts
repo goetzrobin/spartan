@@ -38,11 +38,11 @@ let nextId = 0;
 		@if (!labelProvided() && _placeholder()) {
 			<label class="hidden" [attr.id]="backupLabelId()">{{ _placeholder() }}</label>
 		} @else {
-			<ng-content select="label[hlmLabel],label[brnLabel]"></ng-content>
+			<ng-content select="label[hlmLabel],label[brnLabel]" />
 		}
 
 		<div cdk-overlay-origin (click)="toggle()" #trigger="cdkOverlayOrigin">
-			<ng-content select="hlm-select-trigger,[brnSelectTrigger]"></ng-content>
+			<ng-content select="hlm-select-trigger,[brnSelectTrigger]" />
 		</div>
 		<ng-template
 			cdk-connected-overlay
@@ -56,7 +56,7 @@ let nextId = 0;
 			(backdropClick)="close()"
 			(detach)="close()"
 		>
-			<ng-content></ng-content>
+			<ng-content />
 		</ng-template>
 	`,
 })
@@ -88,8 +88,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	@ContentChild(BrnLabelDirective, { descendants: false })
 	protected selectLabel!: BrnLabelDirective;
-	@ContentChild(BrnSelectTriggerDirective)
-	protected selectTrigger!: BrnSelectTriggerDirective;
 	/** Overlay pane containing the options. */
 	@ContentChild(BrnSelectContentComponent)
 	protected selectContent!: BrnSelectContentComponent;
@@ -212,9 +210,10 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	public close(): void {
 		if (!this.isExpanded()) return;
 
-		if (this.selectTrigger) {
-			this.selectTrigger.focus();
+		if (this._selectService.selectTrigger) {
+			this._selectService.selectTrigger.focus();
 		}
+
 		this.openedChange.next(false);
 		this._selectService.state.update((state) => ({
 			...state,

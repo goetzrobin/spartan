@@ -57,6 +57,7 @@ describe('select', () => {
 
 			// close select
 			cy.get('body').click();
+			cy.get('[brnselecttrigger]').should('have.focus');
 		}
 	};
 

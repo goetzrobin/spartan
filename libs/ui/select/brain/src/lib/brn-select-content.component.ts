@@ -81,7 +81,7 @@ import { BrnSelectService } from './brn-select.service';
 export class BrnSelectContentComponent {
 	private readonly _el: ElementRef<HTMLElement> = inject(ElementRef);
 	private readonly _cdkListbox = inject(CdkListbox, { host: true });
-	private readonly _selectService = inject(BrnSelectService);
+	protected readonly _selectService = inject(BrnSelectService);
 
 	protected readonly labelledBy = this._selectService.labelId;
 	protected readonly id = this._selectService.id;

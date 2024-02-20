@@ -2,6 +2,7 @@ import { CdkOption, ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
+import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 
 type BrnReadDirection = 'ltr' | 'rtl';
 
@@ -46,6 +47,11 @@ export class BrnSelectService {
 
 	public readonly listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
 
+	private _selectTrigger?: BrnSelectTriggerDirective;
+	get selectTrigger() {
+		return this._selectTrigger;
+	}
+
 	constructor() {
 		this.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe((listBoxChange) => {
 			const updatedSelections = this.multiple() ? this.getUpdatedOptions(listBoxChange) : [listBoxChange.option];
@@ -80,5 +86,10 @@ export class BrnSelectService {
 			selectedOptions: [],
 			value: [],
 		}));
+	}
+
+	// Needed due to https://github.com/angular/angular/issues/20810
+	public _setSelectTrigger(trigger: BrnSelectTriggerDirective) {
+		this._selectTrigger = trigger;
 	}
 }
