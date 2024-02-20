@@ -160,8 +160,8 @@ export const Vertical: Story = {
 };
 
 export const BrnOnly: Story = {
-	render: ({ activationMode }) => ({
-		props: { activationMode },
+	render: () => ({
+		props: { activationMode: 'automatic' },
 		template: /* HTML */ `
 			<div brnTabs="account" [activationMode]="activationMode" class="mx-auto block max-w-3xl">
 				<div brnTabsList class="grid w-full grid-cols-2" aria-label="tabs example">
