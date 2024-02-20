@@ -13,8 +13,8 @@ export type PaginationVariants = VariantProps<typeof paginationVariants>;
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
-		'[attr.role]': 'navigation',
-		'[attr.aria-label]': 'pagination',
+		'[attr.role]': '"navigation"',
+		'[attr.aria-label]': '"pagination"',
 	},
 })
 export class HlmPaginationDirective {
