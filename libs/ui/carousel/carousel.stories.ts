@@ -24,51 +24,20 @@ export const Default: Story = {
     <div class="flex justify-center items-center w-full p-4">
       <hlm-carousel class="w-full max-w-xs">
         <hlm-carousel-content>
-          <hlm-carousel-item>
-            <div class="p-1">
-              <section hlmCard>
-                <p hlmCardContent class="flex aspect-square items-center justify-center p-6">
-                  <span class="text-4xl font-semibold">1</span>
-                </p>
-              </section>
-            </div>
-          </hlm-carousel-item>
-          <hlm-carousel-item>
-            <div class="p-1">
-              <section hlmCard>
-                <p hlmCardContent class="flex aspect-square items-center justify-center p-6">
-                  <span class="text-4xl font-semibold">2</span>
-                </p>
-              </section>
-            </div>
-          </hlm-carousel-item>
-          <hlm-carousel-item>
-            <div class="p-1">
-              <section hlmCard>
-                <p hlmCardContent class="flex aspect-square items-center justify-center p-6">
-                  <span class="text-4xl font-semibold">3</span>
-                </p>
-              </section>
-            </div>
-          </hlm-carousel-item>
-          <hlm-carousel-item>
-            <div class="p-1">
-              <section hlmCard>
-                <p hlmCardContent class="flex aspect-square items-center justify-center p-6">
-                  <span class="text-4xl font-semibold">4</span>
-                </p>
-              </section>
-            </div>
-          </hlm-carousel-item>
-          <hlm-carousel-item>
-            <div class="p-1">
-              <section hlmCard>
-                <p hlmCardContent class="flex aspect-square items-center justify-center p-6">
-                  <span class="text-4xl font-semibold">5</span>
-                </p>
-              </section>
-            </div>
-          </hlm-carousel-item>
+        ${Array.from(
+					{ length: 5 },
+					(_, i) => `
+        <hlm-carousel-item>
+          <div class="p-1">
+            <section hlmCard>
+              <p hlmCardContent class="flex aspect-square items-center justify-center p-6">
+                <span class="text-4xl font-semibold">${i + 1}</span>
+              </p>
+            </section>
+          </div>
+        </hlm-carousel-item>
+        `,
+				).join('\n')}
         </hlm-carousel-content>
         <button hlm-carousel-previous></button>
         <button hlm-carousel-next></button>
