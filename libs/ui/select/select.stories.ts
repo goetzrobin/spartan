@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideIcons } from '@ng-icons/core';
-import { radixChevronDown, radixChevronUp } from '@ng-icons/radix-icons';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
-import { HlmIconModule } from '../icon/helm/src';
 import { BrnSelectComponent, BrnSelectImports } from './brain/src';
 import { HlmSelectImports } from './helm/src';
 
@@ -21,8 +18,7 @@ const meta: Meta<BrnSelectComponent> = {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports, HlmSelectImports, HlmIconModule],
-			providers: [provideIcons({ radixChevronUp, radixChevronDown })],
+			imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports, HlmSelectImports],
 		}),
 	],
 };
@@ -133,8 +129,7 @@ export const Scrollable: Story = {
 			<hlm-select-value />
 		</hlm-select-trigger>
     	<hlm-select-content class="min-w-content max-h-96">
-		<hlm-select-scroll-up>
-			<hlm-icon class="ml-2 h-4 w-4" name="radixChevronUp" /></hlm-select-scroll-up>
+		<hlm-select-scroll-up/>
 
 			<hlm-select-group>
 				<hlm-select-label>North America</hlm-select-label>
@@ -194,7 +189,7 @@ export const Scrollable: Story = {
 				<hlm-option value="clt">Chile Standard Time (CLT)</hlm-option>
 			</hlm-select-group>
 
-			<hlm-select-scroll-down><hlm-icon class="ml-2 h-4 w-4" name="radixChevronDown" /></hlm-select-scroll-down>
+			<hlm-select-scroll-down/>
 		</hlm-select-content>
 	</hlm-select>
   <form>`,
@@ -211,8 +206,7 @@ export const ScrollableWithStickyLabels: Story = {
 			<hlm-select-value />
 		</hlm-select-trigger>
     	<hlm-select-content class="max-h-96" [stickyLabels]="true">
-		<hlm-select-scroll-up>
-			<hlm-icon class="ml-2 h-4 w-4" name="radixChevronUp" /></hlm-select-scroll-up>
+		<hlm-select-scroll-up/>
 
 			<hlm-select-group>
 				<hlm-select-label>North America</hlm-select-label>
@@ -271,7 +265,7 @@ export const ScrollableWithStickyLabels: Story = {
 				<hlm-option value="clt">Chile Standard Time (CLT)</hlm-option>
 			</hlm-select-group>
 
-			<hlm-select-scroll-down><hlm-icon class="ml-2 h-4 w-4" name="radixChevronDown" /></hlm-select-scroll-down>
+			<hlm-select-scroll-down/>
 		</hlm-select-content>
 	</hlm-select>
   <form>`,
