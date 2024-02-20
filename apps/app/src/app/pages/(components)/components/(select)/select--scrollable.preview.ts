@@ -1,24 +1,18 @@
 import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
-import { radixChevronDown, radixChevronUp } from '@ng-icons/radix-icons';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 @Component({
 	selector: 'spartan-select-scrollable-preview',
 	standalone: true,
-	imports: [BrnSelectImports, HlmSelectImports, HlmIconComponent],
-	providers: [provideIcons({ radixChevronUp, radixChevronDown })],
+	imports: [BrnSelectImports, HlmSelectImports],
 	template: `
 		<hlm-select scrollable="true" placeholder="Select a timezone">
 			<hlm-select-trigger class="w-[280px]">
 				<hlm-select-value />
 			</hlm-select-trigger>
 			<hlm-select-content class="min-w-content max-h-96">
-				<hlm-select-scroll-up>
-					<hlm-icon class="ml-2 h-4 w-4" name="radixChevronUp" />
-				</hlm-select-scroll-up>
+				<hlm-select-scroll-up />
 
 				<hlm-select-group>
 					<hlm-select-label>North America</hlm-select-label>
@@ -67,9 +61,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 					<hlm-option value="clt">Chile Standard Time (CLT)</hlm-option>
 				</hlm-select-group>
 
-				<hlm-select-scroll-down>
-					<hlm-icon class="ml-2 h-4 w-4" name="radixChevronDown" />
-				</hlm-select-scroll-down>
+				<hlm-select-scroll-down />
 			</hlm-select-content>
 		</hlm-select>
 	`,
@@ -77,26 +69,20 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 export class SelectScrollablePreviewComponent {}
 
 export const scrollableCode = `import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
-import { radixChevronDown, radixChevronUp } from '@ng-icons/radix-icons';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 @Component({
 	selector: 'spartan-select-scrollable-preview',
 	standalone: true,
-	imports: [BrnSelectImports, HlmSelectImports, HlmIconComponent],
-	providers: [provideIcons({ radixChevronUp, radixChevronDown })],
+	imports: [BrnSelectImports, HlmSelectImports],
 	template: \`
 		<hlm-select scrollable="true" placeholder="Select a timezone">
 			<hlm-select-trigger class="w-[280px]">
 				<hlm-select-value />
 			</hlm-select-trigger>
 			<hlm-select-content class="min-w-content max-h-96">
-				<hlm-select-scroll-up>
-					<hlm-icon class="ml-2 h-4 w-4" name="radixChevronUp" />
-				</hlm-select-scroll-up>
+				<hlm-select-scroll-up/>
 
 				<hlm-select-group>
 					<hlm-select-label>North America</hlm-select-label>
@@ -145,9 +131,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 					<hlm-option value="clt">Chile Standard Time (CLT)</hlm-option>
 				</hlm-select-group>
 
-				<hlm-select-scroll-down>
-					<hlm-icon class="ml-2 h-4 w-4" name="radixChevronDown" />
-				</hlm-select-scroll-down>
+				<hlm-select-scroll-down/>
 			</hlm-select-content>
 		</hlm-select>
 	\`,
