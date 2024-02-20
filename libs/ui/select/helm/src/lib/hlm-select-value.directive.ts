@@ -18,6 +18,9 @@ export class HlmSelectValueDirective {
 		this.classNames.set(classNames);
 	}
 	protected readonly _computedClass = computed(() =>
-		hlm('!inline-block w-[calc(100%)]] min-w-0 pointer-events-none truncate', this.classNames()),
+		hlm(
+			'!inline-block ltr:text-left rtl:text-right border-border w-[calc(100%)]] min-w-0 pointer-events-none truncate',
+			this.classNames(),
+		),
 	);
 }
