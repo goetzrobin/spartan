@@ -14,12 +14,15 @@ import { metaWith } from '../../../../shared/meta/meta.util';
 import { SpinnerPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './spinner.preview';
 
 export const routeMeta: RouteMeta = {
-	data: { breadcrumb: 'Switch' },
-	meta: metaWith('spartan/ui - Switch', 'A control that allows the user to toggle between checked and not checked.'),
-	title: 'spartan/ui - Switch',
+	data: { breadcrumb: 'Spinner' },
+	meta: metaWith(
+		'spartan/ui - Spinner',
+		'Shows a Loading spinner to indicate that the app is busy or the page is still loading.',
+	),
+	title: 'spartan/ui - Spinner',
 };
 @Component({
-	selector: 'spartan-switch',
+	selector: 'spartan-spinner',
 	standalone: true,
 	imports: [
 		MainSectionDirective,
@@ -89,7 +92,7 @@ export const routeMeta: RouteMeta = {
 		<spartan-page-nav />
 	`,
 })
-export default class SkeletonPageComponent {
+export default class SpinnerPageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;

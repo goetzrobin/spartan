@@ -102,9 +102,9 @@ pnpm e2e
 
 To add your own `e2e` tests add them to the `apps/ui-storybook-e2e` application.
 
-### Progress (34/41)
+### Progress (37/43)
 
-We finished porting over 33/41 UI primitives. See a more detailed breakdown [here!](./libs/ui/README.md)
+We finished porting over 37/43 UI primitives. See a more detailed breakdown [here!](./libs/ui/README.md)
 
 ## spartan/stack
 

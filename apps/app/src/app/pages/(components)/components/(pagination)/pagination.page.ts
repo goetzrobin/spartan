@@ -12,8 +12,6 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { PaginationPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './pagination.preview';
-// import { cardNotificationsCode, CardNotificationsComponent } from './card--notifications.example';
-// import { CardPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './card.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Pagination' },
@@ -36,7 +34,6 @@ export const routeMeta: RouteMeta = {
 		PageBottomNavLinkComponent,
 		PageBottomNavPlaceholderComponent,
 		PaginationPreviewComponent,
-		// CardNotificationsComponent,
 	],
 	template: `
 		<section spartanMainSection>
@@ -61,14 +58,6 @@ export const routeMeta: RouteMeta = {
 				<spartan-code [code]="defaultSkeleton" />
 			</div>
 
-			<!-- <spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
-			<spartan-tabs firstTab="Preview" secondTab="Code">
-				<div spartanCodePreview firstTab>
-
-				</div>
-				<spartan-code secondTab [code]="..." />
-			</spartan-tabs> -->
-
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="popover" label="Popover" />
 				<spartan-page-bottom-nav-link direction="previous" href="menubar" label="Menubar" />
@@ -81,5 +70,4 @@ export default class PaginationPageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
-	// protected readonly cardNotificationsCode = cardNotificationsCode;
 }
