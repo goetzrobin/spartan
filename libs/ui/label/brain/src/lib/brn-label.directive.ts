@@ -17,6 +17,9 @@ export class BrnLabelDirective implements OnInit {
 	set id(id: string) {
 		this._id.set(id || this._id());
 	}
+	get id() {
+		return this._id();
+	}
 
 	private readonly _isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 	private readonly _element = inject(ElementRef).nativeElement;

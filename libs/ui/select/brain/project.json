@@ -1,0 +1,44 @@
+{
+	"name": "ui-select-brain",
+	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/ui/select/brain/src",
+	"prefix": "brn",
+	"tags": [],
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/angular:package",
+			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+			"options": {
+				"project": "libs/ui/select/brain/ng-package.json"
+			},
+			"configurations": {
+				"production": {
+					"tsConfig": "libs/ui/select/brain/tsconfig.lib.prod.json"
+				},
+				"development": {
+					"tsConfig": "libs/ui/select/brain/tsconfig.lib.json"
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/ui/select/brain/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": [
+					"libs/ui/select/brain/**/*.ts",
+					"libs/ui/select/brain/**/*.html",
+					"libs/ui/select/brain/package.json"
+				]
+			}
+		}
+	}
+}

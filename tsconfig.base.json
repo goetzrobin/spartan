@@ -54,6 +54,8 @@
 			"@spartan-ng/ui-radiogroup-brain": ["libs/ui/radio-group/brain/src/index.ts"],
 			"@spartan-ng/ui-radiogroup-helm": ["libs/ui/radio-group/helm/src/index.ts"],
 			"@spartan-ng/ui-scrollarea-helm": ["libs/ui/scroll-area/helm/src/index.ts"],
+			"@spartan-ng/ui-select-brain": ["libs/ui/select/brain/src/index.ts"],
+			"@spartan-ng/ui-select-helm": ["libs/ui/select/helm/src/index.ts"],
 			"@spartan-ng/ui-separator-brain": ["libs/ui/separator/brain/src/index.ts"],
 			"@spartan-ng/ui-separator-helm": ["libs/ui/separator/helm/src/index.ts"],
 			"@spartan-ng/ui-sheet-brain": ["libs/ui/sheet/brain/src/index.ts"],
