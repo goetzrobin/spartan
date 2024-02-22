@@ -1,4 +1,4 @@
-import { computed, Directive, input } from '@angular/core';
+import { computed, Directive, inject, Input, input } from '@angular/core';
 import { BrnAccordionItemDirective } from '@spartan-ng/ui-accordion-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
@@ -16,4 +16,10 @@ export class HlmAccordionItemDirective {
 	protected readonly _computedClass = computed(() =>
 		hlm('flex flex-1 flex-col border-b border-border', this._userClass()),
 	);
+
+	private readonly _brn = inject(BrnAccordionItemDirective);
+	@Input()
+	set state(value: 'open' | 'closed') {
+		this._brn.setState(value);
+	}
 }

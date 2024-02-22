@@ -62,7 +62,87 @@ export const TwoAccordions: Story = {
 	render: () => ({
 		template: `
       <hlm-accordion>
+        <hlm-accordion-item [state]="'open'">
+          <button hlmAccordionTrigger>
+          Is it accessible?
+          <hlm-icon hlmAccIcon />
+          </button>
+          <hlm-accordion-content>
+          Yes. It adheres to the WAI-ARIA design pattern.
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+
         <hlm-accordion-item>
+          <button hlmAccordionTrigger>
+          Is it styled?
+          <hlm-icon hlmAccIcon />
+          </button>
+          <hlm-accordion-content>
+          Yes. It comes with default styles that match the other components' aesthetics.
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+
+        <hlm-accordion-item>
+          <button hlmAccordionTrigger>
+          Is it animated?
+          <hlm-icon hlmAccIcon />
+          </button>
+          <hlm-accordion-content>
+          Yes. It's animated by default, but you can disable it if you prefer.
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+      </hlm-accordion>
+
+      <hlm-accordion>
+        <hlm-accordion-item>
+          <button hlmAccordionTrigger>
+          Is it accessible?
+          <hlm-icon hlmAccIcon />
+          </button>
+          <hlm-accordion-content>
+          Yes. It adheres to the WAI-ARIA design pattern.
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+
+        <hlm-accordion-item>
+          <button hlmAccordionTrigger>
+          Is it styled?
+          <hlm-icon hlmAccIcon />
+          </button>
+          <hlm-accordion-content>
+          Yes. It comes with default styles that match the other components' aesthetics.
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+
+        <hlm-accordion-item>
+          <button hlmAccordionTrigger>
+          Is it styled?
+          <hlm-icon hlmAccIcon />
+          </button>
+          <hlm-accordion-content>
+          Yes. It comes with default styles that match the other components' aesthetics.
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+
+        <hlm-accordion-item>
+          <button hlmAccordionTrigger>
+            Is it styled?
+            <hlm-icon hlmAccIcon />
+          </button>
+          <hlm-accordion-content>
+          Yes. It comes with default styles that match the other components' aesthetics.
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+      </hlm-accordion>
+    `,
+	}),
+};
+
+export const TwoAccordionsMulti: Story = {
+	render: () => ({
+		template: `
+      <hlm-accordion [type]="'multiple'">
+        <hlm-accordion-item [state]="'open'">
           <button hlmAccordionTrigger>
           Is it accessible?
           <hlm-icon hlmAccIcon />

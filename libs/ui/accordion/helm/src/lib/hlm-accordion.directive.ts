@@ -1,4 +1,4 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { computed, Directive, inject, Input, input } from '@angular/core';
 import { BrnAccordionDirective } from '@spartan-ng/ui-accordion-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
@@ -18,4 +18,9 @@ export class HlmAccordionDirective {
 	protected readonly _computedClass = computed(() =>
 		hlm('flex', this._brn.orientation === 'horizontal' ? 'flex-row' : 'flex-col', this._userClass()),
 	);
+
+	@Input()
+	set type(type: 'single' | 'multiple') {
+		this._brn.type = type;
+	}
 }

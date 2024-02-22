@@ -9,9 +9,11 @@ import {
 	OnDestroy,
 	QueryList,
 	computed,
+	effect,
 	inject,
 	signal,
 } from '@angular/core';
+import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 import { BrnAccordionTriggerDirective } from './brn-accordion-trigger.directive';
 
 const HORIZONTAL_KEYS_TO_PREVENT_DEFAULT = [
@@ -41,9 +43,27 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	private _ngZone = inject(NgZone);
 
 	private readonly _focused = signal<boolean>(false);
+
 	private readonly _openItemIds = signal<number[]>([]);
-	public readonly openItemIds = this._openItemIds.asReadonly();
+	public readonly openItemIds = effect(
+		() => {
+			const openItemIds = this._items()
+				.filter((i) => i._state() === 'open')
+				.map((i) => i.id);
+			this._openItemIds.set(openItemIds);
+		},
+		{ allowSignalWrites: true },
+	);
 	public readonly state = computed(() => (this._openItemIds().length > 0 ? 'open' : 'closed'));
+
+	private readonly _items = signal<QueryList<BrnAccordionItemDirective>>(new QueryList());
+	@ContentChildren(BrnAccordionItemDirective, { descendants: true })
+	set items(value: QueryList<BrnAccordionItemDirective>) {
+		this._items.set(value);
+	}
+	get items() {
+		return this._items();
+	}
 
 	@ContentChildren(BrnAccordionTriggerDirective, { descendants: true })
 	public triggers?: QueryList<BrnAccordionTriggerDirective>;
@@ -79,18 +99,20 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	}
 
 	public setActiveItem(item: BrnAccordionTriggerDirective) {
-		// public setActiveItem(item: number) {
 		this._keyManager?.setActiveItem(item);
 	}
 
 	public toggleItem(id: number) {
-		if (this._openItemIds().includes(id)) {
-			this._openItemIds.update((ids) => ids.filter((openId) => id !== openId));
-			return;
-		} else if (this.type === 'single') {
-			this._openItemIds.set([]);
+		const item = this.items?.find((i) => i.id === id);
+		item!.toggle();
+
+		if (this.type === 'single') {
+			this.items?.filter((i) => i.id !== id).forEach((i) => i.setState('closed'));
 		}
-		this._openItemIds.update((ids) => [...ids, id]);
+	}
+
+	public setType(type: 'single' | 'multiple') {
+		this.type = type;
 	}
 
 	private preventDefaultEvents(event: KeyboardEvent) {

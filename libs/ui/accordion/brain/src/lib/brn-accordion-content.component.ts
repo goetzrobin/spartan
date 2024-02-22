@@ -24,7 +24,7 @@ import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 export class BrnAccordionContentComponent implements CustomElementClassSettable {
 	private readonly _item = inject(BrnAccordionItemDirective);
 
-	public readonly state = this._item.state;
+	public readonly state = this._item._state;
 	public readonly id = 'brn-accordion-content-' + this._item.id;
 	public readonly ariaLabeledBy = 'brn-accordion-trigger-' + this._item.id;
 

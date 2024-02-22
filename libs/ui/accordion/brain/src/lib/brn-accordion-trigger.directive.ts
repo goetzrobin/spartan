@@ -23,7 +23,7 @@ export class BrnAccordionTriggerDirective {
 	private readonly _elementRef = inject(ElementRef);
 	private readonly _hostPressedListener = rxHostPressedListener();
 
-	public readonly state = this._item.state;
+	public readonly state = this._item._state;
 	public readonly id = 'brn-accordion-trigger-' + this._item.id;
 	public readonly ariaControls = 'brn-accordion-content-' + this._item.id;
 
