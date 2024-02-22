@@ -8,7 +8,7 @@ import {
 	input,
 	untracked,
 } from '@angular/core';
-import { radixArrowLeft } from '@ng-icons/radix-icons';
+import { lucideArrowLeft } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -26,10 +26,10 @@ import { HlmCarouselComponent } from './hlm-carousel.component';
 		'(click)': 'carousel.scrollPrev()',
 	},
 	hostDirectives: [{ directive: HlmButtonDirective, inputs: ['variant', 'size'] }],
-	providers: [provideIcons({ radixArrowLeft: radixArrowLeft })],
+	providers: [provideIcons({ lucideArrowLeft })],
 	imports: [HlmIconComponent],
 	template: `
-		<hlm-icon size="sm" name="radixArrowLeft" />
+		<hlm-icon size="sm" name="lucideArrowLeft" />
 		<span class="sr-only">Previous slide</span>
 	`,
 })
