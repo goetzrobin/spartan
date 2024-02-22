@@ -42,7 +42,7 @@ import { EmblaCarouselDirective, EmblaEventType, EmblaPluginType, type EmblaOpti
 export class HlmCarouselComponent {
 	@ViewChild(EmblaCarouselDirective) protected emblaCarousel?: EmblaCarouselDirective;
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	_userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() => hlm('relative', this._userClass()));
 
 	orientation = input<'horizontal' | 'vertical'>('horizontal');

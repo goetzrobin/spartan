@@ -18,7 +18,7 @@ import { HlmCarouselComponent } from './hlm-carousel.component';
 export class HlmCarouselContentComponent {
 	private orientation = inject(HlmCarouselComponent).orientation;
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	_userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm('flex', this.orientation() === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', this._userClass()),
 	);

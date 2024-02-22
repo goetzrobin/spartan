@@ -35,7 +35,7 @@ import { HlmCarouselComponent } from './hlm-carousel.component';
 })
 export class HlmCarouselPreviousComponent {
 	protected carousel = inject(HlmCarouselComponent);
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	_userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(
 			'absolute h-8 w-8 rounded-full',
