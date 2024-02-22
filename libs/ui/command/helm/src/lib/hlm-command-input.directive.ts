@@ -10,7 +10,7 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmCommandInputDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 
 	protected _computedClass = computed(() =>
 		hlm(

@@ -15,7 +15,7 @@ import { ClassValue } from 'clsx';
 	encapsulation: ViewEncapsulation.None,
 })
 export class HlmAlertDialogFooterComponent {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
 		hlm('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', this._userClass()),
 	);

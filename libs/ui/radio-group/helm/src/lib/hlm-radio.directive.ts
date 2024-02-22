@@ -10,7 +10,7 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmRadioDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm('group [&.brn-radio-disabled]:text-muted-foreground flex items-center space-x-2', this._userClass()),
 	);

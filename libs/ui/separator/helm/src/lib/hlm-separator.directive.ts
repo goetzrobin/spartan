@@ -17,7 +17,7 @@ export class HlmSeparatorDirective {
 		this._orientation.set(value);
 	}
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(
 			'inline-flex shrink-0 border-0 bg-border',

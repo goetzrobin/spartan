@@ -45,7 +45,7 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 export class HlmLabelDirective {
 	private readonly _brn = inject(BrnLabelDirective, { host: true });
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
 		hlm(
 			labelVariants({

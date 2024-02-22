@@ -30,7 +30,7 @@ export type HlmMenuItemVariants = VariantProps<typeof hlmMenuItemVariants>;
 export class HlmMenuItemDirective {
 	private readonly _inset = signal<boolean>(false);
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() => hlm(hlmMenuItemVariants({ inset: this._inset() }), this._userClass()));
 
 	@Input({ transform: booleanAttribute })

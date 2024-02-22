@@ -45,7 +45,7 @@ export class HlmInputDirective {
 		this._error.set(value);
 	}
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(inputVariants({ size: this._size(), error: this._error() }), this._userClass()),
 	);

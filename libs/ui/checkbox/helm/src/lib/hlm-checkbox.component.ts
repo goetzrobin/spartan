@@ -47,7 +47,7 @@ export const HLM_CHECKBOX_VALUE_ACCESSOR = {
 	providers: [HLM_CHECKBOX_VALUE_ACCESSOR],
 })
 export class HlmCheckboxComponent {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(
 			'group inline-flex border border-foreground shrink-0 cursor-pointer items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring' +

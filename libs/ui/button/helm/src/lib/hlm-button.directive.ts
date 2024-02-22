@@ -38,7 +38,7 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
 	},
 })
 export class HlmButtonDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	private readonly _settableClass = signal<ClassValue>('');
 
 	protected _computedClass = computed(() =>
