@@ -1,6 +1,7 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	HostListener,
 	InputSignal,
 	Signal,
 	ViewChild,
@@ -31,7 +32,6 @@ import { EmblaCarouselDirective, EmblaEventType, EmblaPluginType, type EmblaOpti
 			[plugins]="plugins()"
 			[options]="emblaOptions()"
 			[subscribeToEvents]="['init', 'select', 'reInit']"
-			(keydown)="onKeydown($event)"
 			(emblaChange)="onEmblaEvent($event)"
 		>
 			<ng-content select="hlm-carousel-content" />
@@ -72,6 +72,7 @@ export class HlmCarouselComponent {
 		}
 	}
 
+	@HostListener('keydown', ['$event'])
 	protected onKeydown(event: KeyboardEvent) {
 		if (event.key === 'ArrowLeft') {
 			event.preventDefault();
