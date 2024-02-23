@@ -30,7 +30,7 @@ export class BrnTabsTriggerDirective {
 	protected contentId = computed(() => 'brn-tabs-content-' + this.triggerFor());
 	protected labelId = computed(() => 'brn-tabs-label-' + this.triggerFor());
 
-	// TODO chaning to input signal makes it not compatible with FocusKeyManager as it expects `disabled: boolean`
+	// leaving this as an @input to be compatible with the `FocusKeyManager` used in the `BrnTabsListDirective`
 	@Input()
 	public disabled = false;
 

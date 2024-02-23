@@ -24,7 +24,8 @@ export class BrnTabsDirective {
 	/** internal **/
 	$direction = this.direction;
 
-	// TODO changing to input signal is not working right now, because the value cannot be set programmatically
+	// leaving this as an @input and signal to be set programmatically
+	// current limitation by InputSignal which are readonly
 	protected readonly _value = signal<string | undefined>(undefined);
 	@Input('brnTabs')
 	set value(value: string) {
