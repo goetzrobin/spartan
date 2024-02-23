@@ -36,9 +36,6 @@ const meta: Meta<BrnTabsDirective> = {
 export default meta;
 type Story = StoryObj<BrnTabsDirective>;
 export const Default: Story = {
-	args: {
-		activationMode: 'automatic',
-	},
 	render: ({ ...args }) => ({
 		props: args,
 		template: /* HTML */ `
@@ -95,9 +92,6 @@ export const Default: Story = {
 };
 
 export const Vertical: Story = {
-	args: {
-		activationMode: 'automatic',
-	},
 	render: ({ activationMode }) => ({
 		props: { activationMode },
 		template: /* HTML */ `
@@ -166,11 +160,8 @@ export const Vertical: Story = {
 };
 
 export const BrnOnly: Story = {
-	args: {
-		activationMode: 'automatic',
-	},
-	render: ({ activationMode }) => ({
-		props: { activationMode },
+	render: () => ({
+		props: { activationMode: 'automatic' },
 		template: /* HTML */ `
 			<div brnTabs="account" [activationMode]="activationMode" class="mx-auto block max-w-3xl">
 				<div brnTabsList class="grid w-full grid-cols-2" aria-label="tabs example">
