@@ -11,7 +11,6 @@ import { TabsComponent } from './tabs.component';
 		class: 'block',
 	},
 	template: `
-		{{ tabValue() }}
 		<spartan-tabs
 			class="mt-4"
 			firstTab="Nx Plugin"
@@ -44,7 +43,6 @@ export class TabsCliComponent {
 		return this._cliService.CliMode() === 'nx' ? 'Nx Plugin' : 'Angular CLI';
 	});
 	protected onTabChanged(value: string) {
-		console.log('onTabChanged on TAB CLI COMP', value);
 		const val = value === 'Nx Plugin' ? 'nx' : 'cli';
 		this._cliService.setCliMode(val);
 	}

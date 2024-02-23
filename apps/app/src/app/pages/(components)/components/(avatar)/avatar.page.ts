@@ -30,6 +30,7 @@ export const routeMeta: RouteMeta = {
 		SectionSubHeadingComponent,
 		TabsComponent,
 		TabsCliComponent,
+		TabsCliComponent,
 		CodePreviewDirective,
 		PageNavComponent,
 		PageBottomNavComponent,
