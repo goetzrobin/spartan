@@ -85,12 +85,21 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 
 	public toggleItem(id: number) {
 		if (this._openItemIds().includes(id)) {
-			this._openItemIds.update((ids) => ids.filter((openId) => id !== openId));
+			this.closeItem(id);
 			return;
-		} else if (this.type === 'single') {
-			this._openItemIds.set([]);
+		}
+		this.openItem(id);
+	}
+
+	public openItem(id: number) {
+		if (this.type === 'single') {
+			this._openItemIds.set([id]);
+			return;
 		}
 		this._openItemIds.update((ids) => [...ids, id]);
+	}
+	public closeItem(id: number) {
+		this._openItemIds.update((ids) => ids.filter((openId) => id !== openId));
 	}
 
 	private preventDefaultEvents(event: KeyboardEvent) {
