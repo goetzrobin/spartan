@@ -1,4 +1,4 @@
-import { Directive, Input, input, signal } from '@angular/core';
+import { Directive, EventEmitter, Input, Output, input, signal } from '@angular/core';
 import { BrnTabsContentDirective } from './brn-tabs-content.directive';
 import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
@@ -23,6 +23,8 @@ export class BrnTabsDirective {
 	public readonly direction = input<BrnTabsDirection>('ltr');
 	/** internal **/
 	$direction = this.direction;
+	@Output()
+	readonly tabActivated = new EventEmitter<string>();
 
 	// leaving this as an @input and signal to be set programmatically
 	// current limitation by InputSignal which are readonly
@@ -54,7 +56,9 @@ export class BrnTabsDirective {
 			content,
 		};
 	}
-
+	emitTabActivated(key: string) {
+		this.tabActivated.emit(key);
+	}
 	setValue(key: string) {
 		this._value.set(key);
 	}
