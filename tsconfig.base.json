@@ -29,6 +29,7 @@
 			"@spartan-ng/ui-badge-helm": ["libs/ui/badge/helm/src/index.ts"],
 			"@spartan-ng/ui-button-helm": ["libs/ui/button/helm/src/index.ts"],
 			"@spartan-ng/ui-card-helm": ["libs/ui/card/helm/src/index.ts"],
+			"@spartan-ng/ui-carousel-helm": ["libs/ui/carousel/helm/src/index.ts"],
 			"@spartan-ng/ui-checkbox-brain": ["libs/ui/checkbox/brain/src/index.ts"],
 			"@spartan-ng/ui-checkbox-helm": ["libs/ui/checkbox/helm/src/index.ts"],
 			"@spartan-ng/ui-collapsible-brain": ["libs/ui/collapsible/brain/src/index.ts"],

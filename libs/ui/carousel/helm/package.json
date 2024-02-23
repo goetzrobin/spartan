@@ -1,0 +1,16 @@
+{
+	"name": "@spartan-ng/ui-carousel-helm",
+	"version": "0.0.1-alpha.335",
+	"peerDependencies": {
+		"@angular/core": "^17.1.0",
+		"@ng-icons/lucide": "^26.3.0",
+		"@spartan-ng/ui-core": "0.0.1-alpha.335",
+		"clsx": "^1.2.1",
+		"embla-carousel-angular": "^14.0.0"
+	},
+	"dependencies": {},
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	}
+}
