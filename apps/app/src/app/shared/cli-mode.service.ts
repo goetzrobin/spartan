@@ -6,11 +6,11 @@ export type CLIMode = 'cli' | 'nx';
 	providedIn: 'root',
 })
 export class CLIModeService {
-	private _CliMode = signal<CLIMode>('nx');
+	private _cliMode = signal<CLIMode>('nx');
 
 	public setCliMode(value: CLIMode): void {
-		this._CliMode.set(value);
+		this._cliMode.set(value);
 	}
 
-	public CliMode = this._CliMode.asReadonly();
+	public cliMode = this._cliMode.asReadonly();
 }

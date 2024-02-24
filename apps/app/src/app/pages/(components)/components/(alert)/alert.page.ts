@@ -54,8 +54,8 @@ export const routeMeta: RouteMeta = {
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
 			<spartan-cli-tabs
 				class="mt-4"
-				firstCode="npx nx g @spartan-ng/cli:ui alert"
-				secondCode="ng g @spartan-ng/cli:ui alert"
+				nxCode="npx nx g @spartan-ng/cli:ui alert"
+				ngCode="ng g @spartan-ng/cli:ui alert"
 			/>
 
 			<spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>

@@ -65,7 +65,7 @@ export const routeMeta: RouteMeta = {
 				<code class="${hlmCode}">spartan/ui</code>
 				primitives to your workspace run the following command:
 			</p>
-			<spartan-cli-tabs class="mt-4" firstCode="npx nx g @spartan-ng/cli:ui" secondCode="ng g @spartan-ng/cli:ui" />
+			<spartan-cli-tabs class="mt-4" nxCode="npx nx g @spartan-ng/cli:ui" ngCode="ng g @spartan-ng/cli:ui" />
 			<p class="${hlmP}">
 				You can then select which primitives you want to add. For each primitive we create a buildable library at a path
 				of your choice.
@@ -75,8 +75,8 @@ export const routeMeta: RouteMeta = {
 			<p class="${hlmP}">Adding a theme can also be done on itself. Use the command below:</p>
 			<spartan-cli-tabs
 				class="mt-4"
-				firstCode="npx nx g @spartan-ng/cli:ui-theme"
-				secondCode="ng g @spartan-ng/cli:ui-theme"
+				nxCode="npx nx g @spartan-ng/cli:ui-theme"
+				ngCode="ng g @spartan-ng/cli:ui-theme"
 			/>
 			<p class="${hlmP}">
 				You can then select which application you want to add the theme to. Where your styles entrypoint is located.

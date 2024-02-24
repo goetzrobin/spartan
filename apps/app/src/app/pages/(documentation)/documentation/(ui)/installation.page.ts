@@ -77,7 +77,7 @@ export const routeMeta: RouteMeta = {
 			<p class="${hlmP}">Simply add it to the presets array of your config file:</p>
 			<spartan-cli-tabs
 				class="mb-6 mt-4"
-				firstCode="
+				nxCode="
 const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');
 const { join } = require('path');
 
@@ -94,7 +94,7 @@ module.exports = {
   plugins: [],
 };
 "
-				secondCode="
+				ngCode="
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   presets: [require('@spartan-ng/ui-core/hlm-tailwind-preset')],
@@ -124,8 +124,8 @@ module.exports = {
 			</p>
 			<spartan-cli-tabs
 				class="mb-6 mt-4"
-				firstCode="npx nx g @spartan-ng/cli:ui-theme"
-				secondCode="ng g @spartan-ng/cli:ui-theme"
+				nxCode="npx nx g @spartan-ng/cli:ui-theme"
+				ngCode="ng g @spartan-ng/cli:ui-theme"
 			/>
 			<p class="${hlmP}">To learn more about the Nx plugin check out the CLI docs below.</p>
 			<div class="my-2 flex items-center justify-end">
@@ -201,11 +201,7 @@ module.exports = {
 				choose which primitives to add to your project. It will add all brain dependencies and copy helm code into its
 				own library:
 			</p>
-			<spartan-cli-tabs
-				class="mb-6 mt-4"
-				firstCode="npx nx g @spartan-ng/cli:ui"
-				secondCode="ng g @spartan-ng/cli:ui"
-			/>
+			<spartan-cli-tabs class="mb-6 mt-4" nxCode="npx nx g @spartan-ng/cli:ui" ngCode="ng g @spartan-ng/cli:ui" />
 			<p class="${hlmP}">To learn more about the command line interface check out the docs below.</p>
 			<div class="my-2 flex items-center justify-end">
 				<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
