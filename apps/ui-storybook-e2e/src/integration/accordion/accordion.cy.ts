@@ -189,4 +189,46 @@ describe('accordion', () => {
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-3');
 		});
 	});
+
+	describe('multiple and isOpened', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=accordion--set-open-state');
+			cy.injectAxe();
+		});
+
+		it('should open the first and the last Item', () => {
+			cy.get('hlm-accordion').should('have.attr', 'data-state', 'open');
+			cy.get('hlm-accordion-item').should('have.length', 3);
+			cy.get('hlm-accordion-item').first().as('firstItem');
+			cy.get('@firstItem').next().as('secondItem');
+			cy.get('@secondItem').next().as('thirdItem');
+
+			cy.get('@firstItem').should('have.attr', 'data-state', 'open');
+			cy.get('@secondItem').should('have.attr', 'data-state', 'closed');
+			cy.get('@thirdItem').should('have.attr', 'data-state', 'open');
+
+			cy.get('@firstItem')
+				.find('[hlmAccordionTrigger]')
+				.should('have.attr', 'role', 'heading')
+				.should('have.id', 'brn-accordion-trigger-0')
+				.should('have.attr', 'data-state', 'open')
+				.should('have.attr', 'aria-expanded', 'true');
+			cy.get('@firstItem')
+				.find('hlm-accordion-content')
+				.should('have.attr', 'role', 'region')
+				.should('have.id', 'brn-accordion-content-0')
+				.should('have.attr', 'data-state', 'open');
+			cy.get('@thirdItem')
+				.find('[hlmAccordionTrigger]')
+				.should('have.attr', 'role', 'heading')
+				.should('have.id', 'brn-accordion-trigger-2')
+				.should('have.attr', 'data-state', 'open')
+				.should('have.attr', 'aria-expanded', 'true');
+			cy.get('@thirdItem')
+				.find('hlm-accordion-content')
+				.should('have.attr', 'role', 'region')
+				.should('have.id', 'brn-accordion-content-2')
+				.should('have.attr', 'data-state', 'open');
+		});
+	});
 });

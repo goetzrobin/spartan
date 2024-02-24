@@ -62,7 +62,7 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<spartan-page-bottom-nav>
-				<spartan-page-bottom-nav-link href="separator" label="Separator" />
+				<spartan-page-bottom-nav-link href="select" label="Select" />
 				<spartan-page-bottom-nav-link direction="previous" href="radio-group" label="Radio Group" />
 			</spartan-page-bottom-nav>
 		</section>

@@ -277,5 +277,14 @@
 			"@angular/core": "^17.1.0",
 			"@spartan-ng/ui-tooltip-brain": "0.0.1-alpha.335"
 		}
+	},
+	"pagination": {
+		"internalName": "ui-pagination-helm",
+		"peerDependencies": {
+			"@angular/core": "^17.1.0",
+			"@spartan-ng/ui-core": "0.0.1-alpha.335",
+			"class-variance-authority": "^0.6.0",
+			"clsx": "^1.2.1"
+		}
 	}
 }

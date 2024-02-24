@@ -1,7 +1,7 @@
-import { booleanAttribute, computed, Directive, Input, signal } from '@angular/core';
+import { Directive, Input, booleanAttribute, computed, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnMenuItemDirective } from '@spartan-ng/ui-menu-brain';
-import { cva, VariantProps } from 'class-variance-authority';
+import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
 export const hlmMenuItemVariants = cva(
@@ -30,21 +30,11 @@ export type HlmMenuItemVariants = VariantProps<typeof hlmMenuItemVariants>;
 export class HlmMenuItemDirective {
 	private readonly _inset = signal<boolean>(false);
 
-	private readonly _userCls = signal<ClassValue>('');
-
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(hlmMenuItemVariants({ inset: this._inset() }), this._userClass()));
 
 	@Input({ transform: booleanAttribute })
 	set inset(value: boolean) {
 		this._inset.set(value);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-
-	private _generateClass() {
-		return hlm(hlmMenuItemVariants({ inset: this._inset() }), this._userCls());
 	}
 }

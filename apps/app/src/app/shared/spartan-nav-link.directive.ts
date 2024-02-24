@@ -21,7 +21,7 @@ export class NavLinkDirective {
 	constructor() {
 		this._hlmBtn.variant = 'link';
 		this._hlmBtn.size = 'sm';
-		this._hlmBtn.class = 'opacity-70 font-medium';
+		this._hlmBtn.setClass('opacity-70 font-medium');
 		this._rlActive.routerLinkActive = '!opacity-100';
 	}
 }

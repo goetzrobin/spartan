@@ -12,9 +12,6 @@ const meta: Meta<HlmAvatarComponent> = {
 				type: 'select',
 			},
 		},
-		class: {
-			control: { type: 'text' },
-		},
 	},
 	decorators: [
 		moduleMetadata({

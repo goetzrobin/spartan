@@ -65,7 +65,7 @@ export const routeMeta: RouteMeta = {
 
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="collapsible" label="Collapsible" />
-				<spartan-page-bottom-nav-link direction="previous" href="card" label="Card" />
+				<spartan-page-bottom-nav-link direction="previous" href="carousel" label="Carousel" />
 			</spartan-page-bottom-nav>
 			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
 			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Own Icon</h3>

@@ -1,16 +1,16 @@
-import { computed, Directive, ElementRef, inject, Input } from '@angular/core';
+import { computed, Directive, effect, ElementRef, inject, input, Input } from '@angular/core';
 import { BrnTabsDirective } from './brn-tabs.directive';
 
 @Directive({
 	selector: 'button[brnTabsTrigger]',
 	standalone: true,
 	host: {
-		'[id]': 'labelId',
+		'[id]': 'labelId()',
 		type: 'button',
 		role: 'tab',
 		'[tabindex]': 'selected() ? "0": "-1"',
 		'[attr.aria-selected]': 'selected()',
-		'[attr.aria-controls]': 'contentId',
+		'[attr.aria-controls]': 'contentId()',
 		'[attr.data-state]': "selected() ? 'active' : 'inactive'",
 		'[attr.data-orientation]': '_orientation()',
 		'[attr.data-disabled]': "disabled ? '' : undefined",
@@ -22,23 +22,23 @@ export class BrnTabsTriggerDirective {
 	public readonly elementRef = inject(ElementRef);
 
 	private readonly _root = inject(BrnTabsDirective);
-	private _key: string | undefined;
 
-	protected contentId: string | undefined;
-	protected labelId: string | undefined;
 	protected readonly _orientation = this._root.$orientation;
 
-	public readonly selected = computed(() => this._root.$value() === this._key);
+	triggerFor = input.required<string>({ alias: 'brnTabsTrigger' });
+	public readonly selected = computed(() => this._root.$value() === this.triggerFor());
+	protected contentId = computed(() => 'brn-tabs-content-' + this.triggerFor());
+	protected labelId = computed(() => 'brn-tabs-label-' + this.triggerFor());
 
-	@Input('brnTabsTrigger')
-	set triggerFor(key: string) {
-		this._key = key;
-		this.contentId = 'brn-tabs-content-' + this._key;
-		this.labelId = 'brn-tabs-label-' + this._key;
-		this._root.registerTrigger(key, this);
-	}
+	// leaving this as an @input to be compatible with the `FocusKeyManager` used in the `BrnTabsListDirective`
 	@Input()
 	public disabled = false;
+
+	constructor() {
+		effect(() => {
+			this._root.registerTrigger(this.triggerFor(), this);
+		});
+	}
 
 	public focus() {
 		this.elementRef.nativeElement.focus();
@@ -48,11 +48,11 @@ export class BrnTabsTriggerDirective {
 	}
 
 	public activate() {
-		if (!this._key) return;
-		this._root.setValue(this._key);
+		if (!this.triggerFor()) return;
+		this._root.setValue(this.triggerFor());
 	}
 
 	get key(): string | undefined {
-		return this._key;
+		return this.triggerFor();
 	}
 }

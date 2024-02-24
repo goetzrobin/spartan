@@ -35,6 +35,7 @@ body:
         - label
         - menubar
         - navigation-menu
+        - pagination
         - popover
         - progress
         - radio-group
@@ -44,6 +45,7 @@ body:
         - sheet
         - skeleton
         - slider
+        - spinner
         - switch
         - table
         - tabs

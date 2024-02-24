@@ -1,4 +1,4 @@
-import { Directive, Input, signal } from '@angular/core';
+import { Directive, Input, input, signal } from '@angular/core';
 import { BrnTabsContentDirective } from './brn-tabs-content.directive';
 import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
@@ -10,28 +10,22 @@ export type BrnActivationMode = 'automatic' | 'manual';
 	selector: '[brnTabs]',
 	standalone: true,
 	host: {
-		'[attr.data-orientation]': '_orientation()',
-		'[attr.dir]': '_direction()',
+		'[attr.data-orientation]': 'orientation()',
+		'[attr.dir]': 'direction()',
 	},
 	exportAs: 'brnTabs',
 })
 export class BrnTabsDirective {
-	protected readonly _orientation = signal<BrnTabsOrientation>('horizontal');
-	@Input()
-	set orientation(value: BrnTabsOrientation) {
-		this._orientation.set(value);
-	}
+	public readonly orientation = input<BrnTabsOrientation>('horizontal');
 	/** internal **/
-	$orientation = this._orientation.asReadonly();
+	$orientation = this.orientation;
 
-	protected readonly _direction = signal<BrnTabsDirection>('ltr');
-	@Input()
-	set direction(value: BrnTabsDirection) {
-		this._direction.set(value);
-	}
+	public readonly direction = input<BrnTabsDirection>('ltr');
 	/** internal **/
-	$direction = this._direction.asReadonly();
+	$direction = this.direction;
 
+	// leaving this as an @input and signal to be set programmatically
+	// current limitation by InputSignal which are readonly
 	protected readonly _value = signal<string | undefined>(undefined);
 	@Input('brnTabs')
 	set value(value: string) {
@@ -40,13 +34,9 @@ export class BrnTabsDirective {
 	/** internal **/
 	$value = this._value.asReadonly();
 
-	protected readonly _activationMode = signal<BrnActivationMode>('automatic');
-	@Input()
-	set activationMode(value: BrnActivationMode) {
-		this._activationMode.set(value);
-	}
+	public readonly activationMode = input<BrnActivationMode>('automatic');
 	/** internal **/
-	$activationMode = this._activationMode.asReadonly();
+	$activationMode = this.activationMode;
 
 	private _tabs: { [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } } = {};
 	public readonly $tabs = this._tabs;
