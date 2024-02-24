@@ -18,20 +18,8 @@ import { TabsComponent } from './tabs.component';
 			[value]="tabValue()"
 			(tabActivated)="onTabChanged($event)"
 		>
-			<spartan-code
-				firstTab
-				language="sh"
-				[code]="firstCode()"
-				activationMode="manual"
-				(activated)="onTabChanged($event)"
-			/>
-			<spartan-code
-				secondTab
-				language="sh"
-				[code]="secondCode()"
-				activationMode="manual"
-				(activated)="onTabChanged($event)"
-			/>
+			<spartan-code firstTab language="sh" [code]="firstCode()" />
+			<spartan-code secondTab language="sh" [code]="secondCode()" />
 		</spartan-tabs>
 	`,
 })
