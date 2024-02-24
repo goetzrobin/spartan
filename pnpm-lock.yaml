@@ -50,9 +50,6 @@ dependencies:
   '@ng-icons/core':
     specifier: ~25.2.0
     version: 25.2.0
-  '@ng-icons/lucide':
-    specifier: ^26.3.0
-    version: 26.3.0
   '@ngneat/cmdk':
     specifier: ^2.0.0
     version: 2.0.0(@angular/common@17.1.1)(@angular/core@17.1.1)(rxjs@7.8.1)
