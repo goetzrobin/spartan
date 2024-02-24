@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, Input, signal } from '@angular/core';
-import { radixCheck } from '@ng-icons/radix-icons';
+import { lucideCheck } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { BrnSelectOptionDirective } from '@spartan-ng/ui-select-brain';
@@ -10,7 +10,7 @@ import { ClassValue } from 'clsx';
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [BrnSelectOptionDirective],
-	providers: [provideIcons({ radixCheck })],
+	providers: [provideIcons({ lucideCheck })],
 	host: {
 		'[class]': '_computedClass()',
 	},
@@ -22,7 +22,7 @@ import { ClassValue } from 'clsx';
 			[attr.data-state]="this._brnSelectOption.checkedState()"
 		>
 			@if (this._brnSelectOption.selected()) {
-				<hlm-icon aria-hidden="true" name="radixCheck" />
+				<hlm-icon aria-hidden="true" name="lucideCheck" />
 			}
 		</span>
 	`,
