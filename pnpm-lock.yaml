@@ -211,9 +211,6 @@ devDependencies:
   '@ng-icons/lucide':
     specifier: ^26.3.0
     version: 26.3.0
-  '@ng-icons/radix-icons':
-    specifier: ^25.1.0
-    version: 25.6.1
   '@ngtools/webpack':
     specifier: 16.1.4
     version: 16.1.4(@angular/compiler-cli@17.1.1)(typescript@5.2.2)(webpack@5.90.3)
@@ -4999,12 +4996,6 @@ packages:
 
   /@ng-icons/lucide@26.3.0:
     resolution: {integrity: sha512-y9jxV28hWLYf74cC4EBOh8qMTBh+oczo47/nGU8iC/dZc9CXSUckbe8AMosqTDBY1gaBAZ/jLnwpg6EscHLapg==}
-    dependencies:
-      tslib: 2.6.2
-    dev: true
-
-  /@ng-icons/radix-icons@25.6.1:
-    resolution: {integrity: sha512-B7ZZpDF+h2SBI+9XZOWRthUvMRAPHTUR5/yCVYe56LYPLBTrVmK+Sjz8WsjECzNDEhaObRVtZXegmJ5g3cOQCQ==}
     dependencies:
       tslib: 2.6.2
     dev: true
@@ -16792,6 +16783,8 @@ packages:
     peerDependenciesMeta:
       webpack:
         optional: true
+      webpack-sources:
+        optional: true
     dependencies:
       webpack: 5.89.0(@swc/core@1.3.96)(esbuild@0.19.5)
       webpack-sources: 3.2.3
@@ -16802,6 +16795,8 @@ packages:
       webpack: '*'
     peerDependenciesMeta:
       webpack:
+        optional: true
+      webpack-sources:
         optional: true
     dependencies:
       webpack: 5.90.0(@swc/core@1.3.96)(esbuild@0.15.18)
