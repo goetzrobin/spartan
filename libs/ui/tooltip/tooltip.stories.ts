@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixPlus } from '@ng-icons/radix-icons';
+import { lucidePlus } from '@ng-icons/lucide';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
@@ -21,7 +21,7 @@ const meta: Meta<HlmTooltipComponent> = {
 				HlmTooltipTriggerDirective,
 				HlmIconComponent,
 			],
-			providers: [provideIcons({ radixPlus })],
+			providers: [provideIcons({ lucidePlus })],
 		}),
 	],
 };
@@ -45,7 +45,7 @@ export const Default: Story = {
 			args,
 		)} aria-describedby='Hello world' hlmBtn variant='outline'>Test</button>
     <span *brnTooltipContent class='flex items-center'>
-      Add to library <hlm-icon class='ml-2' size='sm' name='radixPlus'/>
+      Add to library <hlm-icon class='ml-2' size='sm' name='lucidePlus'/>
      </span>
   </hlm-tooltip>
 </div>
@@ -63,7 +63,7 @@ export const Default: Story = {
 		HlmTooltipTriggerDirective,
 		HlmIconComponent,
 	],
-	providers: [provideIcons({ radixPlus })],
+	providers: [provideIcons({ lucidePlus })],
 	template: `
 		<div class="p-40">
 			<hlm-tooltip>
@@ -79,7 +79,7 @@ export const Default: Story = {
 				</button>
 				<span *brnTooltipContent class="flex items-center">
 					Add to library
-					<hlm-icon class="ml-2" size="sm" name="radixPlus" />
+					<hlm-icon class="ml-2" size="sm" name="lucidePlus" />
 				</span>
 			</hlm-tooltip>
 			<p>{{ disabled() ? 'disabled' : 'enabled' }}</p>

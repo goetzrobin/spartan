@@ -1,6 +1,6 @@
 import { Component, computed, ContentChild, ElementRef, Input, signal, ViewChild } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixCaretSort } from '@ng-icons/radix-icons';
+import { lucideChevronsUpDown } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnSelectTriggerDirective } from '@spartan-ng/ui-select-brain';
@@ -10,14 +10,14 @@ import { ClassValue } from 'clsx';
 	selector: 'hlm-select-trigger',
 	standalone: true,
 	imports: [BrnSelectTriggerDirective, HlmIconComponent],
-	providers: [provideIcons({ radixCaretSort })],
+	providers: [provideIcons({ lucideChevronsUpDown })],
 	template: `
 		<button [class]="_computedClass()" #button brnSelectTrigger type="button">
 			<ng-content />
 			@if (icon) {
 				<ng-content select="hlm-icon" />
 			} @else {
-				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="radixCaretSort" />
+				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="lucideChevronsUpDown" />
 			}
 		</button>
 	`,

@@ -50,9 +50,6 @@ dependencies:
   '@ng-icons/core':
     specifier: ~25.2.0
     version: 25.2.0
-  '@ng-icons/lucide':
-    specifier: ^26.3.0
-    version: 26.3.0
   '@ngneat/cmdk':
     specifier: ^2.0.0
     version: 2.0.0(@angular/common@17.1.1)(@angular/core@17.1.1)(rxjs@7.8.1)
@@ -211,6 +208,9 @@ devDependencies:
   '@faker-js/faker':
     specifier: ^8.0.2
     version: 8.4.0
+  '@ng-icons/lucide':
+    specifier: ^26.3.0
+    version: 26.3.0
   '@ng-icons/radix-icons':
     specifier: ^25.1.0
     version: 25.6.1
@@ -5001,7 +5001,7 @@ packages:
     resolution: {integrity: sha512-y9jxV28hWLYf74cC4EBOh8qMTBh+oczo47/nGU8iC/dZc9CXSUckbe8AMosqTDBY1gaBAZ/jLnwpg6EscHLapg==}
     dependencies:
       tslib: 2.6.2
-    dev: false
+    dev: true
 
   /@ng-icons/radix-icons@25.6.1:
     resolution: {integrity: sha512-B7ZZpDF+h2SBI+9XZOWRthUvMRAPHTUR5/yCVYe56LYPLBTrVmK+Sjz8WsjECzNDEhaObRVtZXegmJ5g3cOQCQ==}

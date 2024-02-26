@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { radixChevronRight } from '@ng-icons/radix-icons';
+import { lucideChevronRight } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
@@ -8,7 +8,7 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 	selector: 'hlm-pagination-next',
 	standalone: true,
 	imports: [HlmPaginationLinkDirective, HlmIconComponent],
-	providers: [provideIcons({ radixChevronRight })],
+	providers: [provideIcons({ lucideChevronRight })],
 	template: `
 		<a
 			[class]="_computedClass()"
@@ -18,7 +18,7 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 			[attr.aria-label]="'Go to next page'"
 		>
 			<span>Next</span>
-			<hlm-icon size="sm" name="radixChevronRight" />
+			<hlm-icon size="sm" name="lucideChevronRight" />
 		</a>
 	`,
 })

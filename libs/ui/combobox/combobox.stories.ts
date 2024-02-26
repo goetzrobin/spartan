@@ -1,7 +1,7 @@
 import { NgForOf } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import * as radixIcons from '@ng-icons/radix-icons';
+import * as lucide from '@ng-icons/lucide';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
@@ -15,7 +15,7 @@ const meta: Meta<{}> = {
 	title: 'Combobox',
 	decorators: [
 		moduleMetadata({
-			providers: [provideIcons(radixIcons)],
+			providers: [provideIcons(lucide)],
 			imports: [BrnCommandImports, HlmCommandImports, HlmIconComponent, HlmButtonDirective],
 		}),
 	],
@@ -48,11 +48,11 @@ type Framework = { label: string; value: string };
 				hlmBtn
 			>
 				{{ currentFramework() ? currentFramework().label : 'Select framework...' }}
-				<hlm-icon size="sm" name="radixCaretSort" />
+				<hlm-icon size="sm" name="lucideChevronsUpDown" />
 			</button>
 			<brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="w-[200px] p-0">
 				<hlm-cmd-input-wrapper>
-					<hlm-icon name="radixMagnifyingGlass" />
+					<hlm-icon name="lucideSearch" />
 					<input placeholder="Search framework..." brnCmdInput hlm />
 				</hlm-cmd-input-wrapper>
 				<div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
@@ -62,7 +62,7 @@ type Framework = { label: string; value: string };
 							<button brnCmdItem [value]="framework.value" (selected)="commandSelected(framework)" hlm>
 								<hlm-icon
 									[class.opacity-0]="currentFramework()?.value !== framework.value"
-									name="radixCheck"
+									name="lucideCheck"
 									hlmCmdIcon
 								/>
 								{{ framework.label }}
@@ -121,7 +121,6 @@ class ComboboxComponent {
 export const Default: Story = {
 	decorators: [
 		moduleMetadata({
-			providers: [provideIcons(radixIcons)],
 			imports: [ComboboxComponent],
 		}),
 	],

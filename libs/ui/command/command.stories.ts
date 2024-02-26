@@ -1,5 +1,5 @@
 import { Component, HostListener, signal } from '@angular/core';
-import * as radixIcons from '@ng-icons/radix-icons';
+import * as lucide from '@ng-icons/lucide';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
@@ -16,7 +16,7 @@ const meta: Meta<BrnCommandComponent> = {
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			providers: [provideIcons(radixIcons)],
+			providers: [provideIcons(lucide)],
 			imports: [BrnCommandImports, HlmCommandImports, HlmIconComponent, HlmButtonDirective],
 		}),
 	],
@@ -30,39 +30,39 @@ export const Default: Story = {
 		template: `
        <brn-cmd class='max-w-sm mx-auto mt-[10%]' hlm>
       <hlm-cmd-input-wrapper>
-        <hlm-icon name='radixMagnifyingGlass' />
+        <hlm-icon name='lucideSearch' />
         <input placeholder='Type a command or search...' brnCmdInput hlm />
       </hlm-cmd-input-wrapper>
       <div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
       <brn-cmd-list hlm>
         <brn-cmd-group hlm label='Suggestions'>
           <button brnCmdItem hlm>
-            <hlm-icon name='radixCalendar' hlmCmdIcon />
+            <hlm-icon name='lucideCalendar' hlmCmdIcon />
             Calendar
           </button>
           <button brnCmdItem hlm>
-            <hlm-icon name='radixFace' hlmCmdIcon />
+            <hlm-icon name='lucideSmile' hlmCmdIcon />
             Search Emoji
           </button>
           <button brnCmdItem hlm>
-            <hlm-icon name='radixPlus' hlmCmdIcon />
+            <hlm-icon name='lucideCalculator' hlmCmdIcon />
             Calculator
           </button>
         </brn-cmd-group>
         <brn-cmd-separator hlm></brn-cmd-separator>
         <brn-cmd-group hlm label='Settings'>
           <button brnCmdItem hlm>
-            <hlm-icon name='radixPerson' hlmCmdIcon />
+            <hlm-icon name='lucideUser' hlmCmdIcon />
             Profile
             <hlm-cmd-shortcut>⌘P</hlm-cmd-shortcut>
           </button>
           <button brnCmdItem hlm>
-            <hlm-icon name='radixCardStack' hlmCmdIcon />
+            <hlm-icon name='lucideCreditCard' hlmCmdIcon />
             Billing
             <hlm-cmd-shortcut>⌘B</hlm-cmd-shortcut>
           </button>
           <button brnCmdItem hlm>
-            <hlm-icon name='radixGear' hlmCmdIcon />
+            <hlm-icon name='lucideSettings' hlmCmdIcon />
             Settings
             <hlm-cmd-shortcut>⌘S</hlm-cmd-shortcut>
           </button>
@@ -101,42 +101,43 @@ export const Default: Story = {
 			<brn-dialog-overlay hlm />
 			<brn-cmd *brnDialogContent="let ctx" hlmCmdDialog class="mx-auto sm:w-[400px]">
 				<hlm-cmd-input-wrapper>
-					<hlm-icon name="radixMagnifyingGlass" />
+					<hlm-icon name="lucideSearch" />
 					<input placeholder="Type a command or search..." brnCmdInput hlm />
 					<button brnDialogClose hlmCmdDialogCloseBtn>
-						<hlm-icon name="radixCross1" />
+						<!-- Using 1rem for size to mimick h-4 w-4 -->
+						<hlm-icon name="lucideX" size="1rem" class="items-center justify-center" />
 					</button>
 				</hlm-cmd-input-wrapper>
 				<div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
 				<brn-cmd-list hlm>
 					<brn-cmd-group hlm label="Suggestions">
 						<button brnCmdItem value="calendar" (selected)="commandSelected('calendar')" hlm>
-							<hlm-icon name="radixCalendar" hlmCmdIcon />
+							<hlm-icon name="lucideCalendar" hlmCmdIcon />
 							Calendar
 						</button>
 						<button brnCmdItem value="emojy" (selected)="commandSelected('emojy')" hlm>
-							<hlm-icon name="radixFace" hlmCmdIcon />
+							<hlm-icon name="lucideSmile" hlmCmdIcon />
 							Search Emoji
 						</button>
 						<button brnCmdItem value="calculator" (selected)="commandSelected('calculator')" hlm>
-							<hlm-icon name="radixPlus" hlmCmdIcon />
+							<hlm-icon name="lucideCalculator" hlmCmdIcon />
 							Calculator
 						</button>
 					</brn-cmd-group>
 					<brn-cmd-separator hlm></brn-cmd-separator>
 					<brn-cmd-group hlm label="Settings">
 						<button brnCmdItem value="profile" (selected)="commandSelected('profile')" hlm>
-							<hlm-icon name="radixPerson" hlmCmdIcon />
+							<hlm-icon name="lucideUser" hlmCmdIcon />
 							Profile
 							<hlm-cmd-shortcut>⌘P</hlm-cmd-shortcut>
 						</button>
 						<button brnCmdItem value="billing" (selected)="commandSelected('billing')" hlm>
-							<hlm-icon name="radixCardStack" hlmCmdIcon />
+							<hlm-icon name="lucideCreditCard" hlmCmdIcon />
 							Billing
 							<hlm-cmd-shortcut>⌘B</hlm-cmd-shortcut>
 						</button>
 						<button brnCmdItem value="settings" (selected)="commandSelected('settings')" hlm>
-							<hlm-icon name="radixGear" hlmCmdIcon />
+							<hlm-icon name="lucideSettings" hlmCmdIcon />
 							Settings
 							<hlm-cmd-shortcut>⌘S</hlm-cmd-shortcut>
 						</button>
@@ -170,7 +171,6 @@ class CommandDialogComponent {
 export const Dialog: Story = {
 	decorators: [
 		moduleMetadata({
-			providers: [provideIcons(radixIcons)],
 			imports: [CommandDialogComponent],
 		}),
 	],
