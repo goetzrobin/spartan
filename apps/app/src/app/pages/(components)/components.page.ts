@@ -1,7 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixRocket } from '@ng-icons/radix-icons';
+import { lucideRocket } from '@ng-icons/lucide';
 import {
 	HlmAlertDescriptionDirective,
 	HlmAlertDirective,
@@ -9,8 +9,8 @@ import {
 	HlmAlertTitleDirective,
 } from '@spartan-ng/ui-alert-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { PageComponent } from '~/app/shared/layout/page.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
+import { PageComponent } from '../../shared/layout/page.component';
+import { metaWith } from '../../shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	meta: metaWith(
@@ -34,13 +34,13 @@ export const routeMeta: RouteMeta = {
 		HlmIconComponent,
 		HlmAlertIconDirective,
 	],
-	providers: [provideIcons({ radixRocket })],
+	providers: [provideIcons({ lucideRocket })],
 	template: `
 		<div
 			hlmAlert
 			class="text-primary-foreground border-border bg-primary mx-auto my-2 max-w-[95vw] rounded-lg border p-4"
 		>
-			<hlm-icon hlmAlertIcon name="radixRocket" class="!text-primary-foreground" />
+			<hlm-icon hlmAlertIcon name="lucideRocket" class="!text-primary-foreground" />
 			<h2 hlmAlertTitle>Components are in alpha</h2>
 			<p hlmAlertDesc>
 				Try them out! We'd love to hear your feedback! Expect breaking changes!

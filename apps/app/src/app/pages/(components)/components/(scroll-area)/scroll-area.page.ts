@@ -1,6 +1,6 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { radixExclamationTriangle } from '@ng-icons/radix-icons';
+import { lucideAlertTriangle } from '@ng-icons/lucide';
 import { provideIcons } from '@spartan-ng/ui-icon-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
@@ -34,7 +34,7 @@ export const routeMeta: RouteMeta = {
 		PageBottomNavLinkComponent,
 		ScrollAreaPreviewComponent,
 	],
-	providers: [provideIcons({ radixExclamationTriangle })],
+	providers: [provideIcons({ lucideAlertTriangle })],
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro

@@ -3,7 +3,7 @@ import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { radixCaretSort, radixChevronDown, radixDotsHorizontal } from '@ng-icons/radix-icons';
+import { lucideArrowUpDown, lucideChevronDown, lucideMoreHorizontal } from '@ng-icons/lucide';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -167,7 +167,7 @@ const PAYMENT_DATA: Payment[] = [
 		HlmCheckboxCheckIconComponent,
 		HlmCheckboxComponent,
 	],
-	providers: [provideIcons({ radixChevronDown, radixDotsHorizontal, radixCaretSort })],
+	providers: [provideIcons({ lucideChevronDown, lucideMoreHorizontal, lucideArrowUpDown })],
 	host: {
 		class: 'w-full',
 	},
@@ -183,7 +183,7 @@ const PAYMENT_DATA: Payment[] = [
 
 			<button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
 				Columns
-				<hlm-icon name="radixChevronDown" class="ml-2" size="sm" />
+				<hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
 			</button>
 			<ng-template #menu>
 				<hlm-menu class="w-32">
@@ -228,7 +228,7 @@ const PAYMENT_DATA: Payment[] = [
 				<hlm-th *brnHeaderDef>
 					<button hlmBtn size="sm" variant="ghost" (click)="handleEmailSortChange()">
 						Email
-						<hlm-icon class="ml-3" size="sm" name="radixCaretSort" />
+						<hlm-icon class="ml-3" size="sm" name="lucideArrowUpDown" />
 					</button>
 				</hlm-th>
 				<hlm-td truncate *brnCellDef="let element">
@@ -245,7 +245,7 @@ const PAYMENT_DATA: Payment[] = [
 				<hlm-th *brnHeaderDef></hlm-th>
 				<hlm-td *brnCellDef="let element">
 					<button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-						<hlm-icon class="h-4 w-4" name="radixDotsHorizontal" />
+						<hlm-icon class="h-4 w-4" name="lucideMoreHorizontal" />
 					</button>
 
 					<ng-template #menu>
@@ -394,7 +394,7 @@ import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { radixCaretSort, radixChevronDown, radixDotsHorizontal } from '@ng-icons/radix-icons';
+import { lucideArrowUpDown, lucideChevronDown, lucideMoreHorizontal } from '@ng-icons/lucide';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -558,7 +558,7 @@ const PAYMENT_DATA: Payment[] = [
     HlmCheckboxCheckIconComponent,
     HlmCheckboxComponent,
   ],
-  providers: [provideIcons({ radixChevronDown, radixDotsHorizontal, radixCaretSort })],
+  providers: [provideIcons({ lucideChevronDown, lucideMoreHorizontal, lucideArrowUpDown })],
   host: {
     class: 'w-full',
   },
@@ -574,7 +574,7 @@ const PAYMENT_DATA: Payment[] = [
 
       <button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
         Columns
-        <hlm-icon name="radixChevronDown" class="ml-2" size="sm" />
+        <hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
       </button>
       <ng-template #menu>
         <hlm-menu class="w-32">
@@ -619,7 +619,7 @@ const PAYMENT_DATA: Payment[] = [
         <hlm-th *brnHeaderDef>
           <button hlmBtn size="sm" variant="ghost" (click)="handleEmailSortChange()">
             Email
-            <hlm-icon class="ml-3" size="sm" name="radixCaretSort" />
+            <hlm-icon class="ml-3" size="sm" name="lucideArrowUpDown" />
           </button>
         </hlm-th>
         <hlm-td truncate *brnCellDef="let element">
@@ -636,7 +636,7 @@ const PAYMENT_DATA: Payment[] = [
         <hlm-th *brnHeaderDef></hlm-th>
         <hlm-td *brnCellDef="let element">
           <button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-            <hlm-icon class="h-4 w-4" name="radixDotsHorizontal" />
+            <hlm-icon class="h-4 w-4" name="lucideMoreHorizontal" />
           </button>
 
           <ng-template #menu>

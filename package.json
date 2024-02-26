@@ -95,7 +95,6 @@
 		"@commitlint/config-conventional": "^17.4.2",
 		"@faker-js/faker": "^8.0.2",
 		"@ng-icons/lucide": "^26.3.0",
-		"@ng-icons/radix-icons": "^25.1.0",
 		"@ngtools/webpack": "16.1.4",
 		"@nx/cypress": "17.1.2",
 		"@nx/eslint": "17.1.2",

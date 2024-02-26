@@ -1,7 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixExclamationTriangle } from '@ng-icons/radix-icons';
+import { lucideAlertTriangle } from '@ng-icons/lucide';
 import {
 	HlmAlertDescriptionDirective,
 	HlmAlertDirective,
@@ -53,7 +53,7 @@ export const routeMeta: RouteMeta = {
 		HlmAlertIconDirective,
 		HlmAlertTitleDirective,
 	],
-	providers: [provideIcons({ radixExclamationTriangle })],
+	providers: [provideIcons({ lucideAlertTriangle })],
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro
@@ -91,9 +91,9 @@ export const routeMeta: RouteMeta = {
 				alternative, which takes in a reference to the brn-dialog. That way you can avoid nesting the template.
 			</p>
 			<div hlmAlert class="mb-6" variant="destructive">
-				<hlm-icon name="radixExclamationTriangle" hlmAlertIcon />
+				<hlm-icon name="lucideAlertTriangle" hlmAlertIcon />
 				<p hlmAlertTitle>Note</p>
-				<p hlmAlertDescription>
+				<p hlmAlertDescription class="leading-loose">
 					Do not use the
 					<code class="${hlmCode}">HlmMenuItem</code>
 					or
