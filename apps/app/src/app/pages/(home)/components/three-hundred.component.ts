@@ -54,6 +54,7 @@ export class ThreeHundredComponent {
 		'benjaminforras',
 		'jstnjs',
 		'r3ps4J',
+		'Celtian',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
 }
