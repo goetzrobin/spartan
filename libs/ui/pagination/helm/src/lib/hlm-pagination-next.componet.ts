@@ -24,6 +24,7 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 })
 export class HlmPaginationNextComponent {
 	public readonly class = input('');
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public readonly link = input<string | any[] | null | undefined>();
 
 	protected _computedClass = computed(() => hlm('gap-1 pr-2.5', this.class()));

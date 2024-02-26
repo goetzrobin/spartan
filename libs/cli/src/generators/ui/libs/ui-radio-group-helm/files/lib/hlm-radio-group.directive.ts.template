@@ -1,4 +1,4 @@
-import { Directive, Input, computed, signal } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -10,14 +10,6 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmRadioGroupDirective {
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm('block', this._userCls());
-	}
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm('block', this._userClass()));
 }

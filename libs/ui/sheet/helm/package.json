@@ -3,12 +3,12 @@
 	"version": "0.0.1-alpha.10",
 	"peerDependencies": {
 		"@angular/core": "^17.1.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.335",
+		"@spartan-ng/ui-core": "0.0.1-alpha.336",
 		"clsx": "^1.2.1",
 		"class-variance-authority": "^0.6.0",
 		"@ng-icons/lucide": "^26.3.0",
-		"@spartan-ng/ui-sheet-brain": "0.0.1-alpha.335",
-		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.335"
+		"@spartan-ng/ui-sheet-brain": "0.0.1-alpha.336",
+		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.336"
 	},
 	"dependencies": {},
 	"sideEffects": false,
