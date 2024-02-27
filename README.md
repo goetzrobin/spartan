@@ -51,6 +51,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 32. [benjaminforras](https://github.com/benjaminforras)
 33. [jstnjs](https://github.com/jstnjs)
 34. [r3ps4J](https://github.com/r3ps4J)
+35. [Celtian](https://github.com/Celtian)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 

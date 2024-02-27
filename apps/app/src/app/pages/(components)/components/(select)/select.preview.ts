@@ -31,7 +31,6 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
   selector: 'spartan-select-preview',
   standalone: true,
   imports: [BrnSelectImports, HlmSelectImports],
-  providers: [provideIcons({ radixChevronUp, radixChevronDown })],
   template: \`
     <brn-select class="inline-block" placeholder="Select an option">
       <hlm-select-trigger class="w-56">

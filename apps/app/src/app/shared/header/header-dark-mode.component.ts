@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixMoon } from '@ng-icons/radix-icons';
+import { lucideMoon } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
@@ -12,10 +12,10 @@ import { DarkMode, ThemeService } from '../theme.service';
 	selector: 'spartan-dark-mode',
 	standalone: true,
 	imports: [BrnMenuTriggerDirective, HlmMenuImports, HlmButtonDirective, HlmIconComponent, AsyncPipe, HlmMenuComponent],
-	providers: [provideIcons({ radixMoon })],
+	providers: [provideIcons({ lucideMoon })],
 	template: `
 		<button size="sm" variant="ghost" align="end" [brnMenuTriggerFor]="theme" hlmBtn>
-			<hlm-icon name="radixMoon" size="sm" />
+			<hlm-icon name="lucideMoon" size="sm" />
 			<span class="sr-only">Open menu to change theme</span>
 		</button>
 		<ng-template #theme>

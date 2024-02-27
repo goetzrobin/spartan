@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/cli",
-	"version": "0.0.1-alpha.336",
+	"version": "0.0.1-alpha.337",
 	"type": "commonjs",
 	"dependencies": {
 		"@nx/js": "^17.1.0",

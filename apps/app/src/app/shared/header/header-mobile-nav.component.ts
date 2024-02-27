@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { radixCross1, radixViewVertical } from '@ng-icons/radix-icons';
+import { lucideMoreVertical, lucideX } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
@@ -41,18 +41,18 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 		SideNavLinkDirective,
 		SpartanLogoComponent,
 	],
-	providers: [provideIcons({ radixViewVertical, radixCross1 })],
+	providers: [provideIcons({ lucideMoreVertical, lucideX })],
 	template: `
 		<brn-sheet side="left" closeDelay="100">
 			<button size="sm" id="menu-trigger" variant="ghost" brnSheetTrigger hlmBtn>
-				<hlm-icon name="radixViewVertical" size="sm" />
+				<hlm-icon name="lucideMoreVertical" size="sm" />
 				<span class="sr-only">Open menu</span>
 			</button>
 			<brn-sheet-overlay hlm />
 			<div hlmSheetContent class="pb-0 pr-0" *brnSheetContent="let ctx">
 				<button brnSheetClose hlm>
 					<span class="sr-only">Close</span>
-					<hlm-icon class="flex h-4 w-4" name="radixCross1" />
+					<hlm-icon class="flex h-4 w-4" name="lucideX" />
 				</button>
 				<div class="flex items-center pb-2">
 					<a (click)="ctx.close()" hlmBtn variant="ghost" class="mr-4 p-1.5" routerLink="/">

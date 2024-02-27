@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixReset } from '@ng-icons/radix-icons';
+import { lucideUndo2 } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
@@ -43,7 +43,7 @@ import {
 		HlmButtonDirective,
 		HlmIconComponent,
 	],
-	providers: [provideIcons({ radixReset })],
+	providers: [provideIcons({ lucideUndo2 })],
 	template: `
 		<div class="flex w-full items-center justify-center pt-[20%]">
 			<button hlmBtn variant="outline" align="center" [brnMenuTriggerFor]="menu">Open</button>
@@ -85,7 +85,7 @@ import {
 				<hlm-menu-separator />
 
 				<button hlmMenuItem (triggered)="reset()">
-					<hlm-icon name="radixReset" hlmMenuIcon />
+					<hlm-icon name="lucideUndo2" hlmMenuIcon />
 					Reset
 				</button>
 			</hlm-menu>
@@ -111,7 +111,7 @@ export class DropdownWithStatePreviewComponent {
 export const dropdownWithStateCode = `
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixReset } from '@ng-icons/radix-icons';
+import { lucideUndo2 } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
@@ -154,7 +154,7 @@ import {
     HlmButtonDirective,
     HlmIconComponent,
   ],
-  providers: [provideIcons({ radixReset })],
+  providers: [provideIcons({ lucideUndo2 })],
   template: \`
     <div class="flex w-full items-center justify-center pt-[20%]">
       <button hlmBtn variant="outline" align="center" [brnMenuTriggerFor]="menu">Open</button>
@@ -196,7 +196,7 @@ import {
         <hlm-menu-separator />
 
         <button hlmMenuItem (triggered)="reset()">
-          <hlm-icon name="radixReset" hlmMenuIcon />
+          <hlm-icon name="lucideUndo2" hlmMenuIcon />
           Reset
         </button>
       </hlm-menu>

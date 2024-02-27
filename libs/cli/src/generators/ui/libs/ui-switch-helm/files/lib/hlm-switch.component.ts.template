@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, Output, booleanAttribute, computed, forwardRef, signal } from '@angular/core';
+import {
+	Component,
+	EventEmitter,
+	Input,
+	Output,
+	booleanAttribute,
+	computed,
+	forwardRef,
+	input,
+	signal,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui-switch-brain';
@@ -40,11 +50,14 @@ export const HLM_SWITCH_VALUE_ACCESSOR = {
 	providers: [HLM_SWITCH_VALUE_ACCESSOR],
 })
 export class HlmSwitchComponent {
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() =>
+		hlm(
+			'group inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
+			this._disabled() ? 'cursor-not-allowed opacity-50' : '',
+			this._userClass(),
+		),
+	);
 
 	@Output()
 	public changed = new EventEmitter<boolean>();
@@ -82,14 +95,6 @@ export class HlmSwitchComponent {
 	/** Used to set the aria-describedby attribute on the underlying brn element. */
 	@Input('aria-describedby')
 	ariaDescribedby: string | null = null;
-
-	protected _computedClass = computed(() =>
-		hlm(
-			'group inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
-			this._disabled() ? 'cursor-not-allowed opacity-50' : '',
-			this._userCls(),
-		),
-	);
 
 	/** CONROL VALUE ACCESSOR */
 

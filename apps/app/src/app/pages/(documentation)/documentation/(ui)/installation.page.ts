@@ -1,7 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { radixChevronRight } from '@ng-icons/radix-icons';
+import { lucideChevronRight } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
@@ -39,7 +39,7 @@ export const routeMeta: RouteMeta = {
 		TabsComponent,
 		TabsCliComponent,
 	],
-	providers: [provideIcons({ radixChevronRight })],
+	providers: [provideIcons({ lucideChevronRight })],
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro name="Installation" lead="Getting up and running with spartan." />
@@ -131,7 +131,7 @@ module.exports = {
 			<div class="my-2 flex items-center justify-end">
 				<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
 					CLI documentation
-					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 			<p class="${hlmP}">
@@ -210,7 +210,7 @@ module.exports = {
 			<div class="my-2 flex items-center justify-end">
 				<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
 					CLI documentation
-					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 

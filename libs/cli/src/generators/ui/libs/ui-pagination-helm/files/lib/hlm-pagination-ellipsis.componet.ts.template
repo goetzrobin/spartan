@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { radixDotsHorizontal } from '@ng-icons/radix-icons';
+import { lucideMoreHorizontal } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
@@ -8,10 +8,10 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 	selector: 'hlm-pagination-ellipsis',
 	standalone: true,
 	imports: [HlmPaginationLinkDirective, HlmIconComponent],
-	providers: [provideIcons({ radixDotsHorizontal })],
+	providers: [provideIcons({ lucideMoreHorizontal })],
 	template: `
 		<span [class]="_computedClass()">
-			<hlm-icon size="sm" name="radixDotsHorizontal" />
+			<hlm-icon size="sm" name="lucideMoreHorizontal" />
 			<span class="sr-only">More pages</span>
 		</span>
 	`,

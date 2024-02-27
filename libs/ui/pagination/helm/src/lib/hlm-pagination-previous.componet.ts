@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { radixChevronLeft } from '@ng-icons/radix-icons';
+import { lucideChevronLeft } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
@@ -8,7 +8,7 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 	selector: 'hlm-pagination-previous',
 	standalone: true,
 	imports: [HlmPaginationLinkDirective, HlmIconComponent],
-	providers: [provideIcons({ radixChevronLeft })],
+	providers: [provideIcons({ lucideChevronLeft })],
 	template: `
 		<a
 			[class]="_computedClass()"
@@ -17,13 +17,14 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 			size="default"
 			[attr.aria-label]="'Go to previous page'"
 		>
-			<hlm-icon size="sm" name="radixChevronLeft" />
+			<hlm-icon size="sm" name="lucideChevronLeft" />
 			<span>Previous</span>
 		</a>
 	`,
 })
 export class HlmPaginationPreviousComponent {
 	public readonly class = input('');
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public readonly link = input<string | any[] | null | undefined>();
 
 	protected _computedClass = computed(() => hlm('gap-1 pr-2.5', this.class()));
