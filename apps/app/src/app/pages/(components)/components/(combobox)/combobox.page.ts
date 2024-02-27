@@ -1,17 +1,18 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
-import { CodePreviewDirective } from '~/app/shared/code/code-preview.directive';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { TabsComponent } from '~/app/shared/layout/tabs.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
+import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
+import { CodeComponent } from '../../../../shared/code/code.component';
+import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
+import { PageBottomNavPlaceholderComponent } from '../../../../shared/layout/page-bottom-nav-placeholder.component';
+import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
+import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
+import { TabsComponent } from '../../../../shared/layout/tabs.component';
+import { metaWith } from '../../../../shared/meta/meta.util';
 import { ComboboxPreviewComponent, defaultCode } from './combobox.preview';
 
 export const routeMeta: RouteMeta = {
@@ -29,6 +30,7 @@ export const routeMeta: RouteMeta = {
 		SectionIntroComponent,
 		SectionSubHeadingComponent,
 		TabsComponent,
+		TabsCliComponent,
 		CodePreviewDirective,
 		PageNavComponent,
 		PageBottomNavComponent,

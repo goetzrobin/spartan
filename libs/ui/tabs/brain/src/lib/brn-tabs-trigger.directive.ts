@@ -50,6 +50,7 @@ export class BrnTabsTriggerDirective {
 	public activate() {
 		if (!this.triggerFor()) return;
 		this._root.setValue(this.triggerFor());
+		this._root.emitTabActivated(this.triggerFor());
 	}
 
 	get key(): string | undefined {

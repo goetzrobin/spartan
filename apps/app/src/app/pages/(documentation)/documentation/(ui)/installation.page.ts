@@ -12,6 +12,7 @@ import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-na
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
+import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 
@@ -36,6 +37,7 @@ export const routeMeta: RouteMeta = {
 		HlmIconComponent,
 		RouterLink,
 		TabsComponent,
+		TabsCliComponent,
 	],
 	providers: [provideIcons({ lucideChevronRight })],
 	template: `
@@ -73,10 +75,9 @@ export const routeMeta: RouteMeta = {
 				package comes with it own preset.
 			</p>
 			<p class="${hlmP}">Simply add it to the presets array of your config file:</p>
-			<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
-				<spartan-code
-					firstTab
-					code="
+			<spartan-cli-tabs
+				class="mb-6 mt-4"
+				nxCode="
 const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');
 const { join } = require('path');
 
@@ -93,10 +94,7 @@ module.exports = {
   plugins: [],
 };
 "
-				/>
-				<spartan-code
-					secondTab
-					code="
+				ngCode="
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   presets: [require('@spartan-ng/ui-core/hlm-tailwind-preset')],
@@ -110,8 +108,7 @@ module.exports = {
   plugins: [],
 };
 "
-				/>
-			</spartan-tabs>
+			/>
 
 			<spartan-section-sub-heading id="adding-css-vars">Adding CSS variables</spartan-section-sub-heading>
 			<p class="${hlmP}">
@@ -125,10 +122,11 @@ module.exports = {
 			<p class="${hlmP}">
 				Again, if you are using Nx, we have written a plugin that will take care of the heavy lifting:
 			</p>
-			<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
-				<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui-theme" />
-				<spartan-code secondTab code="ng g @spartan-ng/cli:ui-theme" />
-			</spartan-tabs>
+			<spartan-cli-tabs
+				class="mb-6 mt-4"
+				nxCode="npx nx g @spartan-ng/cli:ui-theme"
+				ngCode="ng g @spartan-ng/cli:ui-theme"
+			/>
 			<p class="${hlmP}">To learn more about the Nx plugin check out the CLI docs below.</p>
 			<div class="my-2 flex items-center justify-end">
 				<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
@@ -203,10 +201,7 @@ module.exports = {
 				choose which primitives to add to your project. It will add all brain dependencies and copy helm code into its
 				own library:
 			</p>
-			<spartan-tabs class="mb-6 mt-4" firstTab="Nx" secondTab="Angular CLI">
-				<spartan-code firstTab code="npx nx g @spartan-ng/cli:ui" />
-				<spartan-code secondTab code="ng g @spartan-ng/cli:ui" />
-			</spartan-tabs>
+			<spartan-cli-tabs class="mb-6 mt-4" nxCode="npx nx g @spartan-ng/cli:ui" ngCode="ng g @spartan-ng/cli:ui" />
 			<p class="${hlmP}">To learn more about the command line interface check out the docs below.</p>
 			<div class="my-2 flex items-center justify-end">
 				<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
