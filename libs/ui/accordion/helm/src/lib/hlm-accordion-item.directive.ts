@@ -9,7 +9,12 @@ import { ClassValue } from 'clsx';
 	host: {
 		'[class]': '_computedClass()',
 	},
-	hostDirectives: [BrnAccordionItemDirective],
+	hostDirectives: [
+		{
+			directive: BrnAccordionItemDirective,
+			inputs: ['isOpened'],
+		},
+	],
 })
 export class HlmAccordionItemDirective {
 	private readonly _userClass = input<ClassValue>('', { alias: 'class' });

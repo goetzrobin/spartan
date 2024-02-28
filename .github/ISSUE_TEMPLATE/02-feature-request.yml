@@ -45,6 +45,7 @@ body:
         - sheet
         - skeleton
         - slider
+        - spinner
         - switch
         - table
         - tabs

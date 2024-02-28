@@ -9,11 +9,10 @@ import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-na
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
+import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { PaginationPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './pagination.preview';
-// import { cardNotificationsCode, CardNotificationsComponent } from './card--notifications.example';
-// import { CardPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './card.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Pagination' },
@@ -30,13 +29,13 @@ export const routeMeta: RouteMeta = {
 		SectionIntroComponent,
 		SectionSubHeadingComponent,
 		TabsComponent,
+		TabsCliComponent,
 		CodePreviewDirective,
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
 		PageBottomNavPlaceholderComponent,
 		PaginationPreviewComponent,
-		// CardNotificationsComponent,
 	],
 	template: `
 		<section spartanMainSection>
@@ -50,24 +49,17 @@ export const routeMeta: RouteMeta = {
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
-				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/cli:ui pagination" />
-				<spartan-code secondTab language="sh" code="ng g @spartan-ng/cli:ui pagination" />
-			</spartan-tabs>
+			<spartan-cli-tabs
+				class="mt-4"
+				nxCode="npx nx g @spartan-ng/cli:ui pagination"
+				ngCode="ng g @spartan-ng/cli:ui pagination"
+			/>
 
 			<spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
 			<div class="space-y-4">
 				<spartan-code [code]="defaultImports" />
 				<spartan-code [code]="defaultSkeleton" />
 			</div>
-
-			<!-- <spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
-			<spartan-tabs firstTab="Preview" secondTab="Code">
-				<div spartanCodePreview firstTab>
-
-				</div>
-				<spartan-code secondTab [code]="..." />
-			</spartan-tabs> -->
 
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="popover" label="Popover" />
@@ -81,5 +73,4 @@ export default class PaginationPageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
-	// protected readonly cardNotificationsCode = cardNotificationsCode;
 }

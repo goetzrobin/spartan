@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
-	radixAvatar,
-	radixCardStack,
-	radixChatBubble,
-	radixCode,
-	radixEnvelopeClosed,
-	radixExit,
-	radixFace,
-	radixGear,
-	radixGithubLogo,
-	radixKeyboard,
-	radixPerson,
-	radixPlus,
-	radixPlusCircled,
-	radixQuestionMarkCircled,
-} from '@ng-icons/radix-icons';
+	lucideCode,
+	lucideCog,
+	lucideGithub,
+	lucideHelpCircle,
+	lucideKeyboard,
+	lucideLayers,
+	lucideLogOut,
+	lucideMail,
+	lucideMessageSquare,
+	lucidePlus,
+	lucidePlusCircle,
+	lucideSmile,
+	lucideUser,
+	lucideUserCircle,
+} from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
@@ -52,20 +52,20 @@ import {
 	],
 	providers: [
 		provideIcons({
-			radixPerson,
-			radixCardStack,
-			radixGear,
-			radixKeyboard,
-			radixAvatar,
-			radixFace,
-			radixPlus,
-			radixGithubLogo,
-			radixQuestionMarkCircled,
-			radixCode,
-			radixExit,
-			radixEnvelopeClosed,
-			radixChatBubble,
-			radixPlusCircled,
+			lucideUser,
+			lucideLayers,
+			lucideCog,
+			lucideKeyboard,
+			lucideUserCircle,
+			lucideSmile,
+			lucidePlus,
+			lucideGithub,
+			lucideHelpCircle,
+			lucideCode,
+			lucideLogOut,
+			lucideMail,
+			lucideMessageSquare,
+			lucidePlusCircle,
 		}),
 	],
 	template: `
@@ -78,25 +78,25 @@ import {
 				<hlm-menu-separator />
 				<hlm-menu-group>
 					<button hlmMenuItem>
-						<hlm-icon name="radixPerson" hlmMenuIcon />
+						<hlm-icon name="lucideUser" hlmMenuIcon />
 						<span>Profile</span>
 						<hlm-menu-shortcut>⇧⌘P</hlm-menu-shortcut>
 					</button>
 
 					<button hlmMenuItem>
-						<hlm-icon name="radixCardStack" hlmMenuIcon />
+						<hlm-icon name="lucideLayers" hlmMenuIcon />
 						<span>Billing</span>
 						<hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
 					</button>
 
 					<button hlmMenuItem>
-						<hlm-icon name="radixGear" hlmMenuIcon />
+						<hlm-icon name="lucideCog" hlmMenuIcon />
 						<span>Settings</span>
 						<hlm-menu-shortcut>⌘S</hlm-menu-shortcut>
 					</button>
 
 					<button hlmMenuItem>
-						<hlm-icon name="radixKeyboard" hlmMenuIcon />
+						<hlm-icon name="lucideKeyboard" hlmMenuIcon />
 						<span>Keyboard Shortcuts</span>
 						<hlm-menu-shortcut>⌘K</hlm-menu-shortcut>
 					</button>
@@ -106,19 +106,19 @@ import {
 
 				<hlm-menu-group>
 					<button hlmMenuItem>
-						<hlm-icon name="radixAvatar" hlmMenuIcon />
+						<hlm-icon name="lucideUserCircle" hlmMenuIcon />
 						<span>Team</span>
 						<hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
 					</button>
 
 					<button hlmMenuItem [brnMenuTriggerFor]="invite">
-						<hlm-icon name="radixFace" hlmMenuIcon />
+						<hlm-icon name="lucideSmile" hlmMenuIcon />
 						<span>Invite Users</span>
 						<hlm-menu-item-sub-indicator />
 					</button>
 
 					<button hlmMenuItem>
-						<hlm-icon name="radixPlus" hlmMenuIcon />
+						<hlm-icon name="lucidePlus" hlmMenuIcon />
 						<span>New Team</span>
 						<hlm-menu-shortcut>⌘+T</hlm-menu-shortcut>
 					</button>
@@ -128,17 +128,17 @@ import {
 
 				<hlm-menu-group>
 					<button hlmMenuItem>
-						<hlm-icon name="radixGithubLogo" hlmMenuIcon />
+						<hlm-icon name="lucideGithub" hlmMenuIcon />
 						<span>Github</span>
 					</button>
 
 					<button hlmMenuItem>
-						<hlm-icon name="radixQuestionMarkCircled" hlmMenuIcon />
+						<hlm-icon name="lucideHelpCircle" hlmMenuIcon />
 						<span>Support</span>
 					</button>
 
 					<button hlmMenuItem disabled>
-						<hlm-icon name="radixCode" hlmMenuIcon />
+						<hlm-icon name="lucideCode" hlmMenuIcon />
 						<span>API</span>
 					</button>
 				</hlm-menu-group>
@@ -146,7 +146,7 @@ import {
 				<hlm-menu-separator />
 
 				<button hlmMenuItem>
-					<hlm-icon name="radixExit" hlmMenuIcon />
+					<hlm-icon name="lucideLogOut" hlmMenuIcon />
 					<span>Logout</span>
 					<hlm-menu-shortcut>⇧⌘Q</hlm-menu-shortcut>
 				</button>
@@ -156,17 +156,17 @@ import {
 		<ng-template #invite>
 			<hlm-sub-menu>
 				<button hlmMenuItem>
-					<hlm-icon name="radixEnvelopeClosed" hlmMenuIcon />
+					<hlm-icon name="lucideMail" hlmMenuIcon />
 					Email
 				</button>
 
 				<button hlmMenuItem>
-					<hlm-icon name="radixChatBubble" hlmMenuIcon />
+					<hlm-icon name="lucideMessageSquare" hlmMenuIcon />
 					Message
 				</button>
 				<hlm-menu-separator />
 				<button hlmMenuItem>
-					<hlm-icon name="radixPlusCircled" hlmMenuIcon />
+					<hlm-icon name="lucidePlusCircle" hlmMenuIcon />
 					<span>More</span>
 				</button>
 			</hlm-sub-menu>
@@ -179,21 +179,21 @@ export const defaultCode = `
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
-  radixAvatar,
-  radixCardStack,
-  radixChatBubble,
-  radixCode,
-  radixEnvelopeClosed,
-  radixExit,
-  radixFace,
-  radixGear,
-  radixGithubLogo,
-  radixKeyboard,
-  radixPerson,
-  radixPlus,
-  radixPlusCircled,
-  radixQuestionMarkCircled,
-} from '@ng-icons/radix-icons';
+  lucideUserCircle,
+  lucideLayers,
+  lucideMessageSquare,
+  lucideCode,
+  lucideMail,
+  lucideLogOut,
+  lucideSmile,
+  lucideCog,
+  lucideGithub,
+  lucideKeyboard,
+  lucideUser,
+  lucidePlus,
+  lucidePlusCircle,
+  lucideHelpCircle,
+} from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
@@ -230,20 +230,20 @@ import {
   ],
   providers: [
     provideIcons({
-      radixPerson,
-      radixCardStack,
-      radixGear,
-      radixKeyboard,
-      radixAvatar,
-      radixFace,
-      radixPlus,
-      radixGithubLogo,
-      radixQuestionMarkCircled,
-      radixCode,
-      radixExit,
-      radixEnvelopeClosed,
-      radixChatBubble,
-      radixPlusCircled,
+      lucideUser,
+      lucideLayers,
+      lucideCog,
+      lucideKeyboard,
+      lucideUserCircle,
+      lucideSmile,
+      lucidePlus,
+      lucideGithub,
+      lucideHelpCircle,
+      lucideCode,
+      lucideLogOut,
+      lucideMail,
+      lucideMessageSquare,
+      lucidePlusCircle,
     }),
   ],
   template: \`
@@ -256,25 +256,25 @@ import {
         <hlm-menu-separator />
         <hlm-menu-group>
           <button hlmMenuItem>
-            <hlm-icon name="radixPerson" hlmMenuIcon />
+            <hlm-icon name="lucideUser" hlmMenuIcon />
             <span>Profile</span>
             <hlm-menu-shortcut>⇧⌘P</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name="radixCardStack" hlmMenuIcon />
+            <hlm-icon name="lucideLayers" hlmMenuIcon />
             <span>Billing</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name="radixGear" hlmMenuIcon />
+            <hlm-icon name="lucideCog" hlmMenuIcon />
             <span>Settings</span>
             <hlm-menu-shortcut>⌘S</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name="radixKeyboard" hlmMenuIcon />
+            <hlm-icon name="lucideKeyboard" hlmMenuIcon />
             <span>Keyboard Shortcuts</span>
             <hlm-menu-shortcut>⌘K</hlm-menu-shortcut>
           </button>
@@ -284,19 +284,19 @@ import {
 
         <hlm-menu-group>
           <button hlmMenuItem>
-            <hlm-icon name="radixAvatar" hlmMenuIcon />
+            <hlm-icon name="lucideUserCircle" hlmMenuIcon />
             <span>Team</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem [brnMenuTriggerFor]="invite">
-            <hlm-icon name="radixFace" hlmMenuIcon />
+            <hlm-icon name="lucideSmile" hlmMenuIcon />
             <span>Invite Users</span>
             <hlm-menu-item-sub-indicator />
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name="radixPlus" hlmMenuIcon />
+            <hlm-icon name="lucidePlus" hlmMenuIcon />
             <span>New Team</span>
             <hlm-menu-shortcut>⌘+T</hlm-menu-shortcut>
           </button>
@@ -306,17 +306,17 @@ import {
 
         <hlm-menu-group>
           <button hlmMenuItem>
-            <hlm-icon name="radixGithubLogo" hlmMenuIcon />
+            <hlm-icon name="lucideGithub" hlmMenuIcon />
             <span>Github</span>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name="radixQuestionMarkCircled" hlmMenuIcon />
+            <hlm-icon name="lucideHelpCircle" hlmMenuIcon />
             <span>Support</span>
           </button>
 
           <button hlmMenuItem disabled>
-            <hlm-icon name="radixCode" hlmMenuIcon />
+            <hlm-icon name="lucideCode" hlmMenuIcon />
             <span>API</span>
           </button>
         </hlm-menu-group>
@@ -324,7 +324,7 @@ import {
         <hlm-menu-separator />
 
         <button hlmMenuItem>
-          <hlm-icon name="radixExit" hlmMenuIcon />
+          <hlm-icon name="lucideLogOut" hlmMenuIcon />
           <span>Logout</span>
           <hlm-menu-shortcut>⇧⌘Q</hlm-menu-shortcut>
         </button>
@@ -334,17 +334,17 @@ import {
     <ng-template #invite>
       <hlm-sub-menu>
         <button hlmMenuItem>
-          <hlm-icon name="radixEnvelopeClosed" hlmMenuIcon />
+          <hlm-icon name="lucideMail" hlmMenuIcon />
           Email
         </button>
 
         <button hlmMenuItem>
-          <hlm-icon name="radixChatBubble" hlmMenuIcon />
+          <hlm-icon name="lucideMessageSquare" hlmMenuIcon />
           Message
         </button>
         <hlm-menu-separator />
         <button hlmMenuItem>
-          <hlm-icon name="radixPlusCircled" hlmMenuIcon />
+          <hlm-icon name="lucidePlusCircle" hlmMenuIcon />
           <span>More</span>
         </button>
       </hlm-sub-menu>

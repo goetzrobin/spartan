@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, input, signal } from '@angular/core';
-import { radixCross1 } from '@ng-icons/radix-icons';
+import { lucideX } from '@ng-icons/lucide';
 import { hlm, injectExposesStateProvider } from '@spartan-ng/ui-core';
 import { BrnDialogCloseDirective } from '@spartan-ng/ui-dialog-brain';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -10,7 +10,7 @@ import { HlmDialogCloseDirective } from './hlm-dialog-close.directive';
 	selector: 'hlm-dialog-content',
 	standalone: true,
 	imports: [BrnDialogCloseDirective, HlmDialogCloseDirective, HlmIconComponent],
-	providers: [provideIcons({ radixCross1 })],
+	providers: [provideIcons({ lucideX })],
 	host: {
 		'[class]': '_computedClass()',
 		'[attr.data-state]': 'state()',
@@ -19,7 +19,7 @@ import { HlmDialogCloseDirective } from './hlm-dialog-close.directive';
 		<ng-content />
 		<button brnDialogClose hlm>
 			<span class="sr-only">Close</span>
-			<hlm-icon class="flex h-4 w-4" size="100%" name="radixCross1" />
+			<hlm-icon class="flex h-4 w-4" size="100%" name="lucideX" />
 		</button>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,

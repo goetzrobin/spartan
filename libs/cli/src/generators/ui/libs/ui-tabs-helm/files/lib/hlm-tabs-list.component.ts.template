@@ -1,7 +1,7 @@
-import { Component, computed, Input, signal } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnTabsListDirective } from '@spartan-ng/ui-tabs-brain';
-import { cva, VariantProps } from 'class-variance-authority';
+import { VariantProps, cva } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
 export const listVariants = cva(
@@ -30,20 +30,8 @@ type ListVariants = VariantProps<typeof listVariants>;
 	},
 })
 export class HlmTabsListComponent {
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
+	public readonly orientation = input<ListVariants['orientation']>('horizontal');
 
-	private readonly _orientation = signal<ListVariants['orientation']>('horizontal');
-	@Input()
-	set orientation(value: ListVariants['orientation']) {
-		this._orientation.set(value);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(listVariants({ orientation: this._orientation() }), this._userCls());
-	}
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(listVariants({ orientation: this.orientation() }), this._userClass()));
 }

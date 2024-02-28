@@ -15,7 +15,7 @@ import { ClassValue } from 'clsx';
 export class HlmMenuLabelComponent {
 	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('block px-2 py-1.5 text-sm font-semibold', this._inset() && 'pl-10', this._userClass()),
+		hlm('block px-2 py-1.5 text-sm font-semibold', this._inset() && 'pl-8', this._userClass()),
 	);
 
 	private readonly _inset = signal<ClassValue>(false);

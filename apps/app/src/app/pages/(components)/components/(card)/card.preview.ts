@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { radixCheck, radixChevronDown } from '@ng-icons/radix-icons';
+import { lucideCheck, lucideChevronDown } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
 	HlmCardContentDirective,
@@ -44,7 +44,7 @@ type Framework = { label: string; value: string };
 		HlmCardFooterDirective,
 		HlmButtonDirective,
 	],
-	providers: [provideIcons({ radixCheck, radixChevronDown })],
+	providers: [provideIcons({ lucideCheck, lucideChevronDown })],
 	template: `
 		<section class="w-80" hlmCard>
 			<div hlmCardHeader>
@@ -70,7 +70,7 @@ type Framework = { label: string; value: string };
 							hlmBtn
 						>
 							{{ currentFramework() ? currentFramework()?.label : 'Select' }}
-							<hlm-icon size="sm" name="radixChevronDown" />
+							<hlm-icon size="sm" name="lucideChevronDown" />
 						</button>
 						<brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="w-[270px] p-0">
 							<div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
@@ -80,7 +80,7 @@ type Framework = { label: string; value: string };
 										<button brnCmdItem [value]="framework.value" (selected)="commandSelected(framework)" hlm>
 											<hlm-icon
 												[class.opacity-0]="currentFramework()?.value !== framework.value"
-												name="radixCheck"
+												name="lucideCheck"
 												hlmCmdIcon
 											/>
 											{{ framework.label }}
@@ -146,7 +146,7 @@ export class CardPreviewComponent {
 
 export const defaultCode = `
 import { Component, signal } from '@angular/core';
-import { radixCheck, radixChevronDown } from '@ng-icons/radix-icons';
+import { lucideCheck, lucideChevronDown } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmCardContentDirective,
@@ -191,7 +191,7 @@ type Framework = { label: string; value: string };
     HlmCardFooterDirective,
     HlmButtonDirective,
   ],
-  providers: [provideIcons({ radixCheck, radixChevronDown })],
+  providers: [provideIcons({ lucideCheck, lucideChevronDown })],
   template: \`
       <section class="w-80" hlmCard>
           <div hlmCardHeader>
@@ -217,7 +217,7 @@ type Framework = { label: string; value: string };
                               hlmBtn
                       >
                           {{ currentFramework() ? currentFramework()?.label : 'Select' }}
-                          <hlm-icon size="sm" name="radixChevronDown" />
+                          <hlm-icon size="sm" name="lucideChevronDown" />
                       </button>
                       <brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="w-[270px] p-0">
                           <div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
@@ -228,7 +228,7 @@ type Framework = { label: string; value: string };
                                               (selected)="commandSelected(framework)" hlm>
                                           <hlm-icon
                                                   [class.opacity-0]="currentFramework()?.value !== framework.value"
-                                                  name="radixCheck"
+                                                  name="lucideCheck"
                                                   hlmCmdIcon
                                           />
                                           {{ framework.label }}

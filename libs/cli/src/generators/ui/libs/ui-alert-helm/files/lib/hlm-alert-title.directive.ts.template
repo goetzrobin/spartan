@@ -1,4 +1,4 @@
-import { computed, Directive, Input, signal } from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -16,14 +16,6 @@ export type AlertTitleVariants = VariantProps<typeof alertTitleVariants>;
 	},
 })
 export class HlmAlertTitleDirective {
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(alertTitleVariants(), this._userCls());
-	}
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(alertTitleVariants(), this._userClass()));
 }

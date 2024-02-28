@@ -11,15 +11,18 @@ import {
 } from '@spartan-ng/ui-card-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { BrnTabsDirective } from '@spartan-ng/ui-tabs-brain';
-import { HlmTabsContentDirective, HlmTabsListComponent, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
+import {
+	HlmTabsComponent,
+	HlmTabsContentDirective,
+	HlmTabsListComponent,
+	HlmTabsTriggerDirective,
+} from '@spartan-ng/ui-tabs-helm';
 
 @Component({
 	selector: 'spartan-tabs-vertical',
 	standalone: true,
 	imports: [
-		BrnTabsDirective,
-
+		HlmTabsComponent,
 		HlmTabsListComponent,
 		HlmTabsTriggerDirective,
 		HlmTabsContentDirective,
@@ -40,7 +43,7 @@ import { HlmTabsContentDirective, HlmTabsListComponent, HlmTabsTriggerDirective 
 		class: 'block w-full max-w-lg min-h-[400px]',
 	},
 	template: `
-		<div brnTabs="account" class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical">
+		<hlm-tabs tab="account" class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical">
 			<hlm-tabs-list orientation="vertical" aria-label="tabs example">
 				<button class="w-full" hlmTabsTrigger="account">Account</button>
 				<button class="w-full" hlmTabsTrigger="password">Password</button>
@@ -99,7 +102,7 @@ import { HlmTabsContentDirective, HlmTabsListComponent, HlmTabsTriggerDirective 
 					</div>
 				</section>
 			</div>
-		</div>
+		</hlm-tabs>
 	`,
 })
 export class TabsVerticalPreviewComponent {}
@@ -117,15 +120,18 @@ import {
 } from '@spartan-ng/ui-card-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { BrnTabsDirective } from '@spartan-ng/ui-tabs-brain';
-import { HlmTabsContentDirective, HlmTabsListComponent, HlmTabsTriggerDirective } from '@spartan-ng/ui-tabs-helm';
+import {
+	HlmTabsComponent,
+	HlmTabsContentDirective,
+	HlmTabsListComponent,
+	HlmTabsTriggerDirective,
+} from '@spartan-ng/ui-tabs-helm';
 
 @Component({
 	selector: 'spartan-tabs-vertical',
 	standalone: true,
 	imports: [
-		BrnTabsDirective,
-
+		HlmTabsComponent,
 		HlmTabsListComponent,
 		HlmTabsTriggerDirective,
 		HlmTabsContentDirective,
@@ -146,7 +152,7 @@ import { HlmTabsContentDirective, HlmTabsListComponent, HlmTabsTriggerDirective 
 		class: 'block w-full max-w-lg min-h-[400px]',
 	},
 	template: \`
-		<div brnTabs="account" class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical">
+		<hlm-tabs tab="account" class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical">
 			<hlm-tabs-list orientation="vertical" aria-label="tabs example">
 				<button class="w-full" hlmTabsTrigger="account">Account</button>
 				<button class="w-full" hlmTabsTrigger="password">Password</button>
@@ -205,7 +211,7 @@ import { HlmTabsContentDirective, HlmTabsListComponent, HlmTabsTriggerDirective 
 					</div>
 				</section>
 			</div>
-		</div>
+		</hlm-tabs>
 	\`,
 })
 export class TabsVerticalPreviewComponent {}

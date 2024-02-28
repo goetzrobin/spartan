@@ -1,6 +1,7 @@
-import { computed, Directive, input } from '@angular/core';
+import { computed, Directive, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
+import { ClassValue } from 'clsx';
 
 export const cardHeaderVariants = cva('flex p-6', {
 	variants: {
@@ -23,10 +24,11 @@ export type CardHeaderVariants = VariantProps<typeof cardHeaderVariants>;
 	},
 })
 export class HlmCardHeaderDirective {
-	public readonly class = input('');
-	public readonly direction = input<CardHeaderVariants['direction']>('column');
-
-	protected readonly _computedClass = computed(() =>
-		hlm(cardHeaderVariants({ direction: this.direction() }), this.class()),
+	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() =>
+		hlm(cardHeaderVariants({ direction: this._direction() }), this._userClass()),
 	);
+
+	private readonly _direction = signal<CardHeaderVariants['direction']>('column');
+	public readonly direction = input<CardHeaderVariants['direction']>('column');
 }

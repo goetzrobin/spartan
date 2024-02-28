@@ -3,7 +3,7 @@ import { Component, TrackByFunction, computed, effect, signal } from '@angular/c
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { faker } from '@faker-js/faker';
-import { radixChevronDown } from '@ng-icons/radix-icons';
+import { lucideChevronDown } from '@ng-icons/lucide';
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { debounceTime } from 'rxjs';
 import { HlmButtonDirective, HlmButtonModule } from '../button/helm/src';
@@ -40,7 +40,7 @@ const createUsers = (numUsers = 5) => {
 		HlmIconComponent,
 		TitleCasePipe,
 	],
-	providers: [provideIcons({ radixChevronDown })],
+	providers: [provideIcons({ lucideChevronDown })],
 	template: `
 		<div class="flex justify-between">
 			<input
@@ -52,7 +52,7 @@ const createUsers = (numUsers = 5) => {
 
 			<button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
 				Columns
-				<hlm-icon name="radixChevronDown" class="ml-2" size="sm" />
+				<hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
 			</button>
 			<ng-template #menu>
 				<hlm-menu class="w-40">

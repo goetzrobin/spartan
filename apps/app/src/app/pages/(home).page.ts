@@ -2,7 +2,7 @@ import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { radixLayers, radixMix, radixStar } from '@ng-icons/radix-icons';
+import { lucideLayers, lucidePuzzle, lucideStar } from '@ng-icons/lucide';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
@@ -13,7 +13,7 @@ import {
 	HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { metaWith } from '~/app/shared/meta/meta.util';
+import { metaWith } from '../shared/meta/meta.util';
 import { ThreeHundredComponent } from './(home)/components/three-hundred.component';
 
 export const routeMeta: RouteMeta = {
@@ -46,7 +46,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 	host: {
 		class: 'block p-4 pb-12 pt-6 sm:pb-24 sm:pt-12',
 	},
-	providers: [provideIcons({ radixLayers, radixMix, radixStar })],
+	providers: [provideIcons({ lucideLayers, lucidePuzzle, lucideStar })],
 	template: `
 		<section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
 			<div class="${container} max-w-[64rem]">
@@ -76,7 +76,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 						href="https://github.com/goetzrobin/spartan"
 					>
 						Star on GitHub
-						<hlm-icon class="ml-2 h-4 w-4" name="radixStar" />
+						<hlm-icon class="ml-2 h-4 w-4" name="lucideStar" />
 					</a>
 				</div>
 			</div>
@@ -93,7 +93,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 			<div class="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem]">
 				<a routerLink="/stack" hlmCard class="group">
 					<div hlmCardHeader>
-						<hlm-icon class="group-hover:text-primary transition-colors" name="radixLayers" size="xl" />
+						<hlm-icon class="group-hover:text-primary transition-colors" name="lucideLayers" size="xl" />
 						<h3 hlmCardTitle>spartan/stack</h3>
 						<p hlmCardDescription>
 							Opinionated full-stack based on Supabase, Angular, tRPC, Tailwind, AnalogJs, Nx and Drizzle.
@@ -103,7 +103,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 
 				<a routerLink="/documentation/installation" hlmCard class="group">
 					<div hlmCardHeader>
-						<hlm-icon class="group-hover:text-primary transition-colors" name="radixMix" size="xl" />
+						<hlm-icon class="group-hover:text-primary transition-colors" name="lucidePuzzle" size="xl" />
 						<h3 hlmCardTitle>spartan/ui</h3>
 						<p hlmCardDescription>Accessible, composable UI primitives that come styled or unstyled.</p>
 					</div>

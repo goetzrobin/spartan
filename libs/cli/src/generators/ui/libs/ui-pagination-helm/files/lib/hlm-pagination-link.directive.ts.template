@@ -40,6 +40,7 @@ export class HlmPaginationLinkDirective {
 	public readonly class = input('');
 	public readonly isActive = input(false, { transform: booleanAttribute });
 	public readonly size = input<ButtonVariants['size']>('icon');
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public readonly link = input<string | any[] | null | undefined>();
 
 	protected _computedClass = computed(() =>

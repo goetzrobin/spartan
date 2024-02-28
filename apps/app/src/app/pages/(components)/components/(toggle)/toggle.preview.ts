@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixFontItalic } from '@ng-icons/radix-icons';
+import { lucideItalic } from '@ng-icons/lucide';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnToggleDirective } from '@spartan-ng/ui-toggle-brain';
 import { HlmToggleDirective } from '@spartan-ng/ui-toggle-helm';
@@ -9,10 +9,10 @@ import { HlmToggleDirective } from '@spartan-ng/ui-toggle-helm';
 	selector: 'spartan-toggle-preview',
 	standalone: true,
 	imports: [BrnToggleDirective, HlmToggleDirective, HlmIconComponent],
-	providers: [provideIcons({ radixFontItalic })],
+	providers: [provideIcons({ lucideItalic })],
 	template: `
 		<button brnToggle hlm>
-			<hlm-icon size="sm" name="radixFontItalic" />
+			<hlm-icon size="sm" name="lucideItalic" />
 		</button>
 	`,
 })
@@ -23,17 +23,17 @@ import { Component } from '@angular/core';
 import { HlmToggleDirective } from '@spartan-ng/ui-toggle-helm';
 import { BrnToggleDirective } from '@spartan-ng/ui-toggle-brain';
 import { provideIcons } from '@ng-icons/core';
-import { radixFontItalic } from '@ng-icons/radix-icons';
+import { lucideItalic } from '@ng-icons/lucide';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
 @Component({
   selector: 'spartan-toggle-preview',
   standalone: true,
   imports: [BrnToggleDirective, HlmToggleDirective, HlmIconComponent],
-  providers: [provideIcons({ radixFontItalic })],
+  providers: [provideIcons({ lucideItalic })],
   template: \`
     <button brnToggle hlm>
-      <hlm-icon size="sm" name="radixFontItalic" />
+      <hlm-icon size="sm" name="lucideItalic" />
     </button>
   \`,
 })
@@ -46,6 +46,6 @@ import { BrnToggleDirective } from '@spartan-ng/ui-toggle-brain';
 `;
 export const defaultSkeleton = `
 <button brnToggle hlm>
-  <hlm-icon size="sm" name="radixFontItalic" />
+  <hlm-icon size="sm" name="lucideItalic" />
 </button>
 `;

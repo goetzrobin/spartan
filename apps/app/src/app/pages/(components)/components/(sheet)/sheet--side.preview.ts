@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixCross1 } from '@ng-icons/radix-icons';
+import { lucideCross } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
@@ -32,7 +32,7 @@ import {
 		HlmIconComponent,
 		HlmLabelDirective,
 	],
-	providers: [provideIcons({ radixCross1 })],
+	providers: [provideIcons({ lucideCross })],
 	template: `
 		<hlm-sheet>
 			<div class="grid grid-cols-2 gap-2">
@@ -68,7 +68,7 @@ export class SheetSidePreviewComponent {}
 export const sideCode = `
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixCross1 } from '@ng-icons/radix-icons';
+import { lucideCross } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
@@ -100,7 +100,7 @@ import {
     HlmIconComponent,
     HlmLabelDirective,
   ],
-  providers: [provideIcons({ radixCross1 })],
+  providers: [provideIcons({ lucideCross })],
   template: \`
     <hlm-sheet>
       <div class="grid grid-cols-2 gap-2">

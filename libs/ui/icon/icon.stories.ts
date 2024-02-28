@@ -1,4 +1,4 @@
-import * as radixIcons from '@ng-icons/radix-icons';
+import * as lucide from '@ng-icons/lucide';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmIconComponent, provideIcons } from './helm/src';
 
@@ -9,7 +9,7 @@ const meta: Meta<HlmIconComponent> = {
 	decorators: [
 		moduleMetadata({
 			imports: [HlmIconComponent],
-			providers: [provideIcons(radixIcons)],
+			providers: [provideIcons(lucide)],
 		}),
 	],
 };
@@ -19,7 +19,7 @@ type Story = StoryObj<HlmIconComponent>;
 
 export const Default: Story = {
 	args: {
-		name: 'radixCheck',
+		name: 'lucideCheck',
 		size: 'sm',
 		color: 'red',
 		class: '',
@@ -27,7 +27,7 @@ export const Default: Story = {
 	},
 	argTypes: {
 		size: { control: 'select', options: ['xs', 'sm', 'base', 'lg', 'xl', 'none', '2rem', '25px', '10'] },
-		name: { control: 'select', options: Object.keys(radixIcons) },
+		name: { control: 'select', options: Object.keys(lucide) },
 		color: { control: 'color' },
 	},
 	render: ({ ...args }) => ({
@@ -39,10 +39,10 @@ export const Default: Story = {
 export const Tailwind: Story = {
 	args: {
 		class: 'text-red-600 text-5xl',
-		name: 'radixCheck',
+		name: 'lucideCheck',
 	},
 	argTypes: {
-		name: { control: 'select', options: Object.keys(radixIcons) },
+		name: { control: 'select', options: Object.keys(lucide) },
 	},
 	render: ({ ...args }) => ({
 		props: args,

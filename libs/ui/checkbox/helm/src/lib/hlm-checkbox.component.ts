@@ -57,7 +57,7 @@ export class HlmCheckboxComponent {
 		),
 	);
 
-	protected readonly _checkIconName = signal<string>('radixCheck');
+	protected readonly _checkIconName = signal<string>('lucideCheck');
 	@Input()
 	set checkIconName(checkIconName: string) {
 		this._checkIconName.set(checkIconName);
