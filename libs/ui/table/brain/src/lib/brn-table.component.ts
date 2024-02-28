@@ -23,7 +23,7 @@ export const applyTableProviders: (cmp: Type<unknown>) => Provider[] = (cmp) => 
 	{ provide: STICKY_POSITIONING_LISTENER, useValue: null },
 ];
 
-export const BRN_TABLE_TEMPLATE: string = `
+export const BRN_TABLE_TEMPLATE = `
 <ng-content select="caption" />
 <ng-content select="colgroup, col" />
 

@@ -36,8 +36,4 @@ export class HlmCellDirective extends BrnCellDirective {
 
 	private readonly class = input<ClassValue>('');
 	protected readonly _computedClass = computed(() => hlm(cellVariants({ variant: this.tableVariant() }), this.class()));
-
-	ngAfterViewInit() {
-		console.log(this.tableVariant());
-	}
 }
