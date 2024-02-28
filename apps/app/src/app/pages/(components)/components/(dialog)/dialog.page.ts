@@ -22,6 +22,7 @@ import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { DialogContextMenuPreviewComponent, contextMenuCode } from './dialog-context-menu.preview';
+import { DialogDynamicComponentPreviewComponent, dynamicComponentCode } from './dialog-dynamic-component.preview';
 import { DialogPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './dialog.preview';
 
 export const routeMeta: RouteMeta = {
@@ -49,6 +50,7 @@ export const routeMeta: RouteMeta = {
 		DialogPreviewComponent,
 		DialogPreviewComponent,
 		DialogContextMenuPreviewComponent,
+		DialogDynamicComponentPreviewComponent,
 		HlmAlertDirective,
 		HlmAlertDescriptionDirective,
 		HlmIconComponent,
@@ -116,6 +118,20 @@ export const routeMeta: RouteMeta = {
 				<spartan-code secondTab [code]="contextMenuCode" />
 			</spartan-tabs>
 
+			<spartan-section-sub-heading id="dynamic-component">Dynamic Component</spartan-section-sub-heading>
+			<p class="${hlmP} mb-6">
+				You can dynamically open a dialog with a component rendered as the content. The dialog context can be injected
+				into the dynamic component using the provided
+				<code class="${hlmCode}">injectBrnDialogContext</code>
+				function.
+			</p>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-dialog-dynamic-component-preview />
+				</div>
+				<spartan-code secondTab [code]="dynamicComponentCode" />
+			</spartan-tabs>
+
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="dropdown-menu" label="Dropdown Menu" />
 				<spartan-page-bottom-nav-link direction="previous" href="data-table" label="Data Table" />
@@ -129,4 +145,5 @@ export default class DialogPageComponent {
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
 	protected readonly contextMenuCode = contextMenuCode;
+	protected readonly dynamicComponentCode = dynamicComponentCode;
 }

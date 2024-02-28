@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
-import { BrnDialogComponent, provideBrnDialog } from '@spartan-ng/ui-dialog-brain';
+import { BrnDialogComponent } from '@spartan-ng/ui-dialog-brain';
 import { BrnSheetComponent, BrnSheetOverlayComponent } from '@spartan-ng/ui-sheet-brain';
 import { HlmSheetOverlayDirective } from './hlm-sheet-overlay.directive';
 
@@ -8,7 +8,6 @@ import { HlmSheetOverlayDirective } from './hlm-sheet-overlay.directive';
 	standalone: true,
 	imports: [BrnSheetOverlayComponent, HlmSheetOverlayDirective],
 	providers: [
-		provideBrnDialog(),
 		{
 			provide: BrnDialogComponent,
 			useExisting: forwardRef(() => BrnSheetComponent),
