@@ -17,8 +17,8 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmMenuItemCheckComponent {
-	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('group-[.checked]:opacity-100 opacity-0 inline-block mr-2 h-5 w-5', this._userClass()),
+		hlm('group-[.checked]:opacity-100 opacity-0 inline-block mr-2 h-5 w-5', this.userClass()),
 	);
 }

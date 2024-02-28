@@ -15,9 +15,9 @@ import { ClassValue } from 'clsx';
 export class HlmAccordionIconDirective {
 	private readonly _hlmIcon = inject(HlmIconComponent);
 
-	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('inline-block h-4 w-4 transition-transform duration-200', this._userClass()),
+		hlm('inline-block h-4 w-4 transition-transform duration-200', this.userClass()),
 	);
 
 	constructor() {

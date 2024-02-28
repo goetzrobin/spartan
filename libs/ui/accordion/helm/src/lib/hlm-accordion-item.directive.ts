@@ -12,8 +12,8 @@ import { ClassValue } from 'clsx';
 	hostDirectives: [BrnAccordionItemDirective],
 })
 export class HlmAccordionItemDirective {
-	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
-		hlm('flex flex-1 flex-col border-b border-border', this._userClass()),
+		hlm('flex flex-1 flex-col border-b border-border', this.userClass()),
 	);
 }
