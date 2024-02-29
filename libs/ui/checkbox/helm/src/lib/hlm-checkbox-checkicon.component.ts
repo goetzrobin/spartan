@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, Input, signal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { lucideCheck } from '@ng-icons/lucide';
 import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
 import { hlm } from '@spartan-ng/ui-core';
@@ -14,7 +14,7 @@ import { ClassValue } from 'clsx';
 		'[class]': '_computedClass()',
 	},
 	template: `
-		<hlm-icon size="sm" [name]="_iconName()" />
+		<hlm-icon size="sm" [name]="iconName()" />
 	`,
 })
 export class HlmCheckboxCheckIconComponent {
@@ -26,11 +26,7 @@ export class HlmCheckboxCheckIconComponent {
 	// it should work as private but it doesn't
 	readonly _userClass = input<ClassValue>('', { alias: 'class' });
 
-	protected readonly _iconName = signal<string>('lucideCheck');
-	@Input()
-	set iconName(iconName: string) {
-		this._iconName.set(iconName);
-	}
+	public readonly iconName = input<string>('lucideCheck');
 
 	protected _computedClass = computed(() =>
 		hlm(
