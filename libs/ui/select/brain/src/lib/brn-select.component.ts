@@ -19,6 +19,7 @@ import {
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
+import { asapScheduler } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -232,7 +233,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public writeValue(value: any): void {
-		this.value.set(value);
+		asapScheduler.schedule(() => this.value.set(value));
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
