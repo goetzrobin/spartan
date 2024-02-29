@@ -104,7 +104,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	public readonly isExpanded = this._selectService.isExpanded;
 	public readonly backupLabelId = computed(() => this._selectService.labelId());
 	public readonly labelProvided = signal(false);
-	public readonly value = signal('');
+	public readonly value = signal<string | string[]>('');
 
 	public readonly ngControl = inject(NgControl, { optional: true, self: true });
 
@@ -158,8 +158,12 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			if (!this._multiple()) {
 				this.close();
 			}
-			this.writeValue(listboxEvent.value);
-			this._onChange(listboxEvent.value);
+
+			// Value is a string when single select, string[] when multiple select
+			const value = this._multiple() ? listboxEvent.value : listboxEvent.value[0];
+
+			this.writeValue(value);
+			this._onChange(value);
 		});
 
 		toObservable(this.dir)
