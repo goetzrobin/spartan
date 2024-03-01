@@ -12,6 +12,7 @@ import {
 	QueryList,
 	ViewChild,
 	computed,
+	effect,
 	inject,
 	input,
 	signal,
@@ -154,17 +155,23 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		}
 
 		// Watch for Listbox Selection Changes to trigger Collapse
-		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe((listboxEvent) => {
+		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe(() => {
 			if (!this._multiple()) {
 				this.close();
 			}
-
-			// Value is a string when single select, string[] when multiple select
-			const value = this._multiple() ? listboxEvent.value : listboxEvent.value[0];
-
-			this.writeValue(value);
-			this._onChange(value);
 		});
+
+		effect(
+			() => {
+				const value = this._selectService.value();
+
+				this.value.set(value);
+				this._onChange(value || null);
+			},
+			{
+				allowSignalWrites: true,
+			},
+		);
 
 		toObservable(this.dir)
 			.pipe(takeUntilDestroyed())
@@ -237,7 +244,8 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public writeValue(value: any): void {
-		asapScheduler.schedule(() => this.value.set(value));
+		asapScheduler.schedule(() => this.value.set(value || this._multiple() ? [] : ''));
+		this._selectService.selectOptionByValue(value);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
