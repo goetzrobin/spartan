@@ -257,4 +257,8 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	public registerOnTouched(fn: any): void {
 		this._onTouched = fn;
 	}
+
+	public setDisabledState(isDisabled: boolean) {
+		this.disabled = isDisabled;
+	}
 }
