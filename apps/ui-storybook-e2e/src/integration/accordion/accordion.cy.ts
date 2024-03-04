@@ -160,7 +160,7 @@ describe('accordion', () => {
 			verifyAccordionSecondItemStateClosed();
 		});
 	});
-	describe('Two accordions', () => {
+	describe('two accordions', () => {
 		beforeEach(() => {
 			cy.visit('/iframe.html?id=accordion--two-accordions');
 			cy.injectAxe();
@@ -189,7 +189,6 @@ describe('accordion', () => {
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-3');
 		});
 	});
-
 	describe('multiple and isOpened', () => {
 		beforeEach(() => {
 			cy.visit('/iframe.html?id=accordion--set-open-state');
@@ -229,6 +228,29 @@ describe('accordion', () => {
 				.should('have.attr', 'role', 'region')
 				.should('have.id', 'brn-accordion-content-2')
 				.should('have.attr', 'data-state', 'open');
+		});
+	});
+	describe('', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=accordion--with-tapable');
+			cy.injectAxe();
+		});
+
+		it('button should not be tapable when closed', () => {
+			cy.get('hlm-accordion-item').first().as('firstItem');
+			cy.get('@firstItem').next().as('secondItem');
+			// click trigger first item to open it content
+			cy.realPress('Tab');
+			cy.realPress('Tab');
+			cy.findByTestId('not-tapable-when-closed').should('not.be.focused', 0);
+			cy.get('@firstItem').find('[hlmAccordionTrigger]').click();
+			cy.realPress('Tab');
+			cy.findByTestId('not-tapable-when-closed').should('be.focused', 0);
+
+			// click trigger first item to close it content
+			cy.get('@secondItem').find('[hlmAccordionTrigger]').click();
+			cy.realPress('Tab');
+			cy.findByTestId('tapable-when-open').should('be.focused', 0);
 		});
 	});
 });
