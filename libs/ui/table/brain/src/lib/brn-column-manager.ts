@@ -17,7 +17,7 @@ export class BrnColumnManager<T extends BrnColumnVisibility> {
 		this._initialColumnVisibility = initialColumnVisibility;
 		const initialEntries = Object.entries(this._initialColumnVisibility);
 		this.allColumns =
-			typeof initialEntries[0] === 'boolean'
+			typeof initialEntries[0][1] === 'boolean'
 				? Object.keys(this._initialColumnVisibility)
 				: initialEntries.map((e) => ({ name: e[0], ...(e[1] as { visible: boolean }) }));
 		this._columnVisibility = signal(this._initialColumnVisibility);
