@@ -63,7 +63,7 @@ export class BrnSelectService {
 				value: value as string | string[],
 			}));
 		});
-		this.multiple$.pipe(takeUntilDestroyed(), pairwise()).subscribe(([, multiple]) => {
+		this.multiple$.pipe(pairwise(), takeUntilDestroyed()).subscribe(([, multiple]) => {
 			if (!multiple && this.value().length > 1) {
 				this.deselectAllOptions();
 			}
