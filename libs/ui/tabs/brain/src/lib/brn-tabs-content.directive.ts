@@ -1,4 +1,4 @@
-import { computed, Directive, ElementRef, inject, Input } from '@angular/core';
+import { computed, Directive, effect, ElementRef, inject, input } from '@angular/core';
 import { BrnTabsDirective } from './brn-tabs.directive';
 
 @Directive({
@@ -7,8 +7,8 @@ import { BrnTabsDirective } from './brn-tabs.directive';
 	host: {
 		role: 'tabpanel',
 		tabindex: '0',
-		'[id]': 'contentId',
-		'[attr.aria-labelledby]': 'labelId',
+		'[id]': 'contentId()',
+		'[attr.aria-labelledby]': 'labelId()',
 		'[hidden]': '_isSelected() === false',
 	},
 	exportAs: 'brnTabsContent',
@@ -17,17 +17,15 @@ export class BrnTabsContentDirective {
 	private _root = inject(BrnTabsDirective);
 	private _elementRef = inject(ElementRef);
 
-	private _key: string | undefined;
-	protected contentId: string | undefined;
-	protected labelId: string | undefined;
-	protected readonly _isSelected = computed(() => this._root.$value() === this._key);
+	public readonly contentFor = input.required<string>({ alias: 'brnTabsContent' });
+	protected readonly _isSelected = computed(() => this._root.$value() === this.contentFor());
+	protected contentId = computed(() => 'brn-tabs-content-' + this.contentFor());
+	protected labelId = computed(() => 'brn-tabs-label-' + this.contentFor());
 
-	@Input('brnTabsContent')
-	set contentFor(key: string) {
-		this._key = key;
-		this.contentId = 'brn-tabs-content-' + this._key;
-		this.labelId = 'brn-tabs-label-' + this._key;
-		this._root.registerContent(key, this);
+	constructor() {
+		effect(() => {
+			this._root.registerContent(this.contentFor(), this);
+		});
 	}
 
 	public focus() {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixChevronDown, radixChevronUp } from '@ng-icons/radix-icons';
+import { lucideChevronDown, lucideChevronUp } from '@ng-icons/lucide';
 import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
@@ -8,7 +8,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 	selector: 'spartan-select-multiple-preview',
 	standalone: true,
 	imports: [BrnSelectImports, HlmSelectImports],
-	providers: [provideIcons({ radixChevronUp, radixChevronDown })],
+	providers: [provideIcons({ lucideChevronUp, lucideChevronDown })],
 	template: `
 		<brn-select class="inline-block" placeholder="Select some fruit" [multiple]="true">
 			<hlm-select-trigger class="w-56">
@@ -28,7 +28,7 @@ export class SelectMultiplePreviewComponent {}
 export const multipleCode = `
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixChevronDown, radixChevronUp } from '@ng-icons/radix-icons';
+import { lucideChevronDown, lucideChevronUp } from '@ng-icons/lucide';
 import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
@@ -36,7 +36,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
   selector: 'spartan-select-multiple-preview',
   standalone: true,
   imports: [BrnSelectImports, HlmSelectImports],
-  providers: [provideIcons({ radixChevronUp, radixChevronDown })],
+  providers: [provideIcons({ lucideChevronUp, lucideChevronDown })],
   template: \`
     <brn-select class="inline-block" placeholder="Select some fruit" [multiple]="true">
       <hlm-select-trigger class="w-56">

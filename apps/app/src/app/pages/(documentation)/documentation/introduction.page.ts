@@ -2,7 +2,7 @@ import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { radixChevronRight } from '@ng-icons/radix-icons';
+import { lucideChevronRight } from '@ng-icons/lucide';
 import {
 	BrnAccordionContentComponent,
 	BrnAccordionDirective,
@@ -62,7 +62,7 @@ export const routeMeta: RouteMeta = {
 		HlmButtonDirective,
 		HlmIconComponent,
 	],
-	providers: [provideIcons({ radixChevronRight })],
+	providers: [provideIcons({ lucideChevronRight })],
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro name="Introduction" lead="Cutting-edge tools powering Angular full-stack development." />
@@ -99,7 +99,7 @@ export const routeMeta: RouteMeta = {
 			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/stack" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/stack
-					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 			<spartan-section-sub-heading id="spartan-ui">spartan/ui</spartan-section-sub-heading>
@@ -120,7 +120,7 @@ export const routeMeta: RouteMeta = {
 			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/documentation/installation" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/ui
-					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 			<spartan-section-sub-heading id="faq">FAQ</spartan-section-sub-heading>

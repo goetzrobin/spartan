@@ -2,8 +2,11 @@
 	"name": "@spartan-ng/ui-select-helm",
 	"version": "0.0.1",
 	"peerDependencies": {
-		"@angular/common": "^17.0.0",
-		"@angular/core": "^17.0.0"
+		"@angular/core": "^17.1.0",
+		"@spartan-ng/ui-core": "0.0.1-alpha.336",
+		"@spartan-ng/ui-select-brain": "0.0.1-alpha.336",
+		"class-variance-authority": "^0.6.0",
+		"clsx": "^1.2.1"
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"

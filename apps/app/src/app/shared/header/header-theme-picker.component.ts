@@ -1,7 +1,7 @@
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixColorWheel } from '@ng-icons/radix-icons';
+import { lucidePalette } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
@@ -12,10 +12,10 @@ import { AppThemes, Theme, ThemeService } from '../theme.service';
 	selector: 'spartan-theme-picker',
 	standalone: true,
 	imports: [BrnMenuTriggerDirective, HlmMenuImports, HlmButtonDirective, HlmIconComponent, AsyncPipe, TitleCasePipe],
-	providers: [provideIcons({ radixColorWheel })],
+	providers: [provideIcons({ lucidePalette })],
 	template: `
 		<button size="sm" variant="ghost" align="end" [brnMenuTriggerFor]="themes" hlmBtn>
-			<hlm-icon name="radixColorWheel" size="sm" />
+			<hlm-icon name="lucidePalette" size="sm" />
 			<span class="sr-only">Open menu to change theme</span>
 		</button>
 		<ng-template #themes>

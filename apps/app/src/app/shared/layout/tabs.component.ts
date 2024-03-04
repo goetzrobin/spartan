@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, computed, input } from '@angular/core';
 import {
 	BrnTabsContentDirective,
 	BrnTabsDirective,
@@ -18,7 +18,7 @@ const tabContent =
 		class: 'block',
 	},
 	template: `
-		<div [brnTabs]="firstTab" class="block">
+		<div [brnTabs]="_tabValue()" class="block" (tabActivated)="onTabActivated($event)">
 			<div
 				brnTabsList
 				class="border-border text-muted-foreground mb-4 inline-flex h-9 w-full items-center justify-start rounded-none border-b bg-transparent p-0"
@@ -41,4 +41,11 @@ export class TabsComponent {
 	firstTab = '';
 	@Input()
 	secondTab = '';
+	protected value = input('');
+	protected _tabValue = computed(() => (this.value() === '' ? this.firstTab : this.value()));
+	@Output()
+	tabActivated = new EventEmitter<string>();
+	protected onTabActivated(value: string) {
+		this.tabActivated.emit(value);
+	}
 }

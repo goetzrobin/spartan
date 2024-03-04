@@ -1,4 +1,4 @@
-import { Directive, Input, computed, inject, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnTabsContentDirective } from '@spartan-ng/ui-tabs-brain';
 import { ClassValue } from 'clsx';
@@ -6,20 +6,13 @@ import { ClassValue } from 'clsx';
 @Directive({
 	selector: '[hlmTabsContent]',
 	standalone: true,
-	hostDirectives: [BrnTabsContentDirective],
+	hostDirectives: [{ directive: BrnTabsContentDirective, inputs: ['brnTabsContent: hlmTabsContent'] }],
 	host: {
 		'[class]': '_computedClass()',
 	},
 })
 export class HlmTabsContentDirective {
-	private readonly _brn = inject(BrnTabsContentDirective);
-
-	@Input('hlmTabsContent')
-	set contentFor(key: string) {
-		if (this._brn) {
-			this._brn.contentFor = key;
-		}
-	}
+	public readonly contentFor = input.required<string>({ alias: 'hlmTabsContent' });
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>

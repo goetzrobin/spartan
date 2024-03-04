@@ -16,6 +16,7 @@ module.exports = {
 				'button',
 				'calendar',
 				'card',
+				'carousel',
 				'checkbox',
 				'collapsible',
 				'combobox',

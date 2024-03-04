@@ -1,5 +1,3 @@
-import { provideIcons } from '@ng-icons/core';
-import * as radixIcons from '@ng-icons/radix-icons';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
@@ -23,7 +21,6 @@ const meta: Meta<HlmMenuComponent> = {
 	},
 	decorators: [
 		moduleMetadata({
-			providers: [provideIcons(radixIcons)],
 			imports: [BrnMenuTriggerDirective, HlmMenuImports, HlmMenuBarImports, HlmButtonDirective, HlmIconComponent],
 		}),
 	],

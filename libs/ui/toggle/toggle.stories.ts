@@ -1,7 +1,7 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { radixFontItalic } from '@ng-icons/radix-icons';
+import { lucideItalic } from '@ng-icons/lucide';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
@@ -16,7 +16,7 @@ const meta: Meta<HlmToggleDirective> = {
 	decorators: [
 		moduleMetadata({
 			imports: [HlmToggleDirective, BrnToggleDirective, HlmIconComponent],
-			providers: [provideIcons({ radixFontItalic })],
+			providers: [provideIcons({ lucideItalic })],
 		}),
 	],
 };
@@ -28,11 +28,11 @@ export const Default: Story = {
 	render: () => ({
 		template: `
     <div class='space-x-3'>
-    <button aria-label='Italic Toggle' size='sm' hlmToggle><hlm-icon name='radixFontItalic'/></button>
-    <button aria-label='Italic Toggle' hlmToggle><hlm-icon name='radixFontItalic'/></button>
-    <button aria-label='Italic Toggle' size='lg' hlmToggle><hlm-icon name='radixFontItalic'/></button>
-    <button aria-label='Italic Toggle' variant='outline' hlmToggle><hlm-icon name='radixFontItalic'/></button>
-    <button aria-label='Italic Toggle' disabled hlmToggle><hlm-icon name='radixFontItalic'/></button>
+    <button aria-label='Italic Toggle' size='sm' hlmToggle><hlm-icon name='lucideItalic'/></button>
+    <button aria-label='Italic Toggle' hlmToggle><hlm-icon name='lucideItalic'/></button>
+    <button aria-label='Italic Toggle' size='lg' hlmToggle><hlm-icon name='lucideItalic'/></button>
+    <button aria-label='Italic Toggle' variant='outline' hlmToggle><hlm-icon name='lucideItalic'/></button>
+    <button aria-label='Italic Toggle' disabled hlmToggle><hlm-icon name='lucideItalic'/></button>
     </div>
     `,
 	}),
@@ -43,11 +43,11 @@ export const WithText: Story = {
 	render: () => ({
 		template: `
     <div class='space-x-3'>
-    <button size='sm' hlmToggle><hlm-icon name='radixFontItalic'/> <span class='ml-2'>Italic</span></button>
-    <button hlmToggle><hlm-icon name='radixFontItalic'/> <span class='ml-2'>Italic</span></button>
-    <button size='lg' hlmToggle><hlm-icon name='radixFontItalic'/> <span class='ml-2'>Italic</span></button>
-    <button variant='outline' hlmToggle><hlm-icon name='radixFontItalic'/> <span class='ml-2'>Italic</span></button>
-    <button disabled hlmToggle><hlm-icon name='radixFontItalic'/> <span class='ml-2'>Italic</span></button>
+    <button size='sm' hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
+    <button hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
+    <button size='lg' hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
+    <button variant='outline' hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
+    <button disabled hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
     </div>
 `,
 	}),

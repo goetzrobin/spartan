@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixCalendar } from '@ng-icons/radix-icons';
+import { lucideCalendarDays } from '@ng-icons/lucide';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmAvatarModule } from '../avatar/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
@@ -13,7 +13,7 @@ import { HlmHoverCardModule } from './helm/src';
 	selector: 'hover-card-example',
 	standalone: true,
 	imports: [BrnHoverCardModule, HlmHoverCardModule, HlmButtonDirective, HlmIconComponent, HlmAvatarModule],
-	providers: [provideIcons({ radixCalendar })],
+	providers: [provideIcons({ lucideCalendarDays })],
 	host: {
 		class: 'flex w-full h-full justify-center py-80',
 	},
@@ -30,7 +30,7 @@ import { HlmHoverCardModule } from './helm/src';
 						<h4 class="text-sm font-semibold">&#64;analogjs</h4>
 						<p class="text-sm">The Angular meta-framework – build Angular applications faster.</p>
 						<div class="flex items-center pt-2">
-							<hlm-icon name="radixCalendar" class="mr-2 h-4 w-4 opacity-70" />
+							<hlm-icon name="lucideCalendarDays" class="mr-2 h-4 w-4 opacity-70" />
 							<span class="text-muted-foreground text-xs">Joined December 2021</span>
 						</div>
 					</div>

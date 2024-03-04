@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixBell, radixCheck } from '@ng-icons/radix-icons';
+import { lucideBell, lucideCheck } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
 	HlmCardContentDirective,
@@ -27,7 +27,7 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 		HlmIconComponent,
 		HlmSwitchComponent,
 	],
-	providers: [provideIcons({ radixCheck, radixBell })],
+	providers: [provideIcons({ lucideCheck, lucideBell })],
 	template: `
 		<section hlmCard>
 			<div hlmCardHeader>
@@ -36,7 +36,7 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 			</div>
 			<div hlmCardContent class="grid gap-4">
 				<div class="border-border flex items-center space-x-4 rounded-md border p-4">
-					<hlm-icon size="lg" name="radixBell" />
+					<hlm-icon size="lg" name="lucideBell" />
 					<div class="flex-1 space-y-1">
 						<p class="text-sm font-medium leading-none">Push Notifications</p>
 						<p class="text-muted-foreground text-sm">Send notifications to device.</p>
@@ -57,7 +57,7 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 			</div>
 			<div hlmCardFooter class="justify-between">
 				<button class="w-full" hlmBtn>
-					<hlm-icon size="sm" class="mr-2" name="radixCheck" />
+					<hlm-icon size="sm" class="mr-2" name="lucideCheck" />
 					Mark all as read
 				</button>
 			</div>
@@ -86,7 +86,7 @@ export class CardNotificationsComponent {
 
 export const cardNotificationsCode = `import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixBell, radixCheck } from '@ng-icons/radix-icons';
+import { lucideBell, lucideCheck } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
 	HlmCardContentDirective,
@@ -113,7 +113,7 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 		HlmIconComponent,
 		HlmSwitchComponent,
 	],
-	providers: [provideIcons({ radixCheck, radixBell })],
+	providers: [provideIcons({ lucideCheck, lucideBell })],
 	template: \`
 		<section hlmCard>
 			<div hlmCardHeader>
@@ -122,7 +122,7 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 			</div>
 			<div hlmCardContent class="grid gap-4">
 				<div class="border-border flex items-center space-x-4 rounded-md border p-4">
-					<hlm-icon size="lg" name="radixBell" />
+					<hlm-icon size="lg" name="lucideBell" />
 					<div class="flex-1 space-y-1">
 						<p class="text-sm font-medium leading-none">Push Notifications</p>
 						<p class="text-muted-foreground text-sm">Send notifications to device.</p>
@@ -143,7 +143,7 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 			</div>
 			<div hlmCardFooter class="justify-between">
 				<button class="w-full" hlmBtn>
-					<hlm-icon size="sm" class="mr-2" name="radixCheck" />
+					<hlm-icon size="sm" class="mr-2" name="lucideCheck" />
 					Mark all as read
 				</button>
 			</div>

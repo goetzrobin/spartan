@@ -2,22 +2,22 @@ import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { radixChevronRight, radixExclamationTriangle } from '@ng-icons/radix-icons';
+import { lucideAlertTriangle, lucideChevronRight } from '@ng-icons/lucide';
 import { HlmAlertModule } from '@spartan-ng/ui-alert-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
-import { AccordionPreviewComponent } from '~/app/pages/(components)/components/(accordion)/accordion.preview';
-import { CodePreviewDirective } from '~/app/shared/code/code-preview.directive';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { TabsComponent } from '~/app/shared/layout/tabs.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
+import { AccordionPreviewComponent } from '../../(components)/components/(accordion)/accordion.preview';
+import { CodePreviewDirective } from '../../../shared/code/code-preview.directive';
+import { CodeComponent } from '../../../shared/code/code.component';
+import { MainSectionDirective } from '../../../shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavComponent } from '../../../shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '../../../shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '../../../shared/layout/section-sub-heading.component';
+import { TabsComponent } from '../../../shared/layout/tabs.component';
+import { metaWith } from '../../../shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Installation' },
@@ -44,7 +44,7 @@ export const routeMeta: RouteMeta = {
 		CodePreviewDirective,
 		RouterLink,
 	],
-	providers: [provideIcons({ radixExclamationTriangle, radixChevronRight })],
+	providers: [provideIcons({ lucideAlertTriangle, lucideChevronRight })],
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro name="Installation" lead="Get up and running with the spartan/stack." />
@@ -112,7 +112,7 @@ export const routeMeta: RouteMeta = {
 			<spartan-code class="mt-3" language="sh" code="npm install drizzle-orm postgres" />
 
 			<div class="mb-6 mt-4" hlmAlert>
-				<hlm-icon hlmAlertIcon name="radixExclamationTriangle" />
+				<hlm-icon hlmAlertIcon name="lucideAlertTriangle" />
 				<h4 hlmAlertTitle>Dealing with postgres & CommonJs</h4>
 				<p hlmAlertDesc>
 					<code class="${hlmCode}">postgres</code>
@@ -255,7 +255,7 @@ export const noteRouter = router({
 					/>
 
 					<div class="mt-4" hlmAlert>
-						<hlm-icon name="radixExclamationTriangle" hlmAlertIcon />
+						<hlm-icon name="lucideAlertTriangle" hlmAlertIcon />
 						<p hlmAlertTitle>Make sure to add .env to your .gitignore file.</p>
 						<p hlmAlertDescription>
 							You do not want to accidentally commit your secrets to GitHub. To exclude the file from git add a new line
@@ -308,7 +308,7 @@ git init"
 					<spartan-code class="mt-3" code="supabase start" />
 
 					<div class="mt-8" hlmAlert variant="destructive">
-						<hlm-icon hlmAlertIcon name="radixExclamationTriangle" />
+						<hlm-icon hlmAlertIcon name="lucideAlertTriangle" />
 						<h4 hlmAlertTitle>Important: Make sure Docker is running</h4>
 						<p hlmAlertDesc>
 							Make sure Docker is running and configured correctly! I had Docker already installed and running. However,
@@ -399,7 +399,7 @@ create table note (
 					hlmBtn
 				>
 					Check out the AnalogJs docs for more info
-					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 

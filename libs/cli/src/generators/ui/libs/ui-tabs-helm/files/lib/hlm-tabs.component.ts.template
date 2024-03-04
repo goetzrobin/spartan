@@ -13,5 +13,5 @@ import { BrnTabsDirective } from '@spartan-ng/ui-tabs-brain';
 	template: '<ng-content/>',
 })
 export class HlmTabsComponent {
-	tab = input.required<string>();
+	public readonly tab = input.required<string>();
 }
