@@ -1,14 +1,15 @@
 import { CdkColumnDef } from '@angular/cdk/table';
 import { Directive, Input } from '@angular/core';
+import { BrnColumnDefDirective } from '@spartan-ng/ui-table-brain';
 
 @Directive({
-	selector: '[brnColumnDef]',
+	selector: '[hlmColumnDef]',
 	standalone: true,
-	providers: [{ provide: CdkColumnDef, useExisting: BrnColumnDefDirective }],
+	providers: [{ provide: CdkColumnDef, useExisting: HlmColumnDefDirective }],
 })
-export class BrnColumnDefDirective extends CdkColumnDef {
+export class HlmColumnDefDirective extends BrnColumnDefDirective {
 	/** Unique name for this column. */
-	@Input('brnColumnDef')
+	@Input('hlmColumnDef')
 	override get name(): string {
 		return this._name;
 	}
