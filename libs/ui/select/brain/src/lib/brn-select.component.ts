@@ -20,7 +20,6 @@ import {
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { asapScheduler } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -105,7 +104,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	public readonly isExpanded = this._selectService.isExpanded;
 	public readonly backupLabelId = computed(() => this._selectService.labelId());
 	public readonly labelProvided = signal(false);
-	public readonly value = signal<string | string[]>('');
 
 	public readonly ngControl = inject(NgControl, { optional: true, self: true });
 
@@ -161,17 +159,11 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			}
 		});
 
-		effect(
-			() => {
-				const value = this._selectService.value();
+		effect(() => {
+			const value = this._selectService.value();
 
-				this.value.set(value);
-				this._onChange(value || null);
-			},
-			{
-				allowSignalWrites: true,
-			},
-		);
+			this._onChange(value || null);
+		});
 
 		toObservable(this.dir)
 			.pipe(takeUntilDestroyed())
@@ -244,7 +236,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public writeValue(value: any): void {
-		asapScheduler.schedule(() => this.value.set(value || this._multiple() ? [] : ''));
 		this._selectService.selectOptionByValue(value);
 	}
 
