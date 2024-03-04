@@ -125,11 +125,11 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	/** Used to set the id on the underlying input element. */
 	public readonly id = input<string | null>(null);
-	protected readonly hostId = computed(() => this.id() + CONTAINER_POST_FIX);
+	protected readonly hostId = computed(() => (this.id() ? this.id() + CONTAINER_POST_FIX : null));
 
 	/** Used to set the name attribute on the underlying input element. */
 	public readonly name = input<string | null>(null);
-	protected readonly hostName = computed(() => this.name() + CONTAINER_POST_FIX);
+	protected readonly hostName = computed(() => (this.name() ? this.name() + CONTAINER_POST_FIX : null));
 
 	/** Used to set the aria-label attribute on the underlying input element. */
 	public readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });

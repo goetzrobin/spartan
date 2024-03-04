@@ -150,7 +150,7 @@
 		"jest-axe": "^7.0.1",
 		"jest-environment-jsdom": "^29.4.1",
 		"jest-environment-node": "^29.4.1",
-		"jest-preset-angular": "13.1.4",
+		"jest-preset-angular": "14.0.3",
 		"jsdom": "22.1.0",
 		"jsonc-eslint-parser": "^2.3.0",
 		"lint-staged": "^13.1.0",
