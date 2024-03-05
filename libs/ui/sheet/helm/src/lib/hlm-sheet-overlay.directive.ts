@@ -11,11 +11,11 @@ import { ClassValue } from 'clsx';
 })
 export class HlmSheetOverlayDirective {
 	private _classSettable = injectCustomClassSettable({ optional: true, host: true });
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(
 			'bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-			this._userClass(),
+			this.userClass(),
 		),
 	);
 

@@ -17,12 +17,12 @@ export class HlmSeparatorDirective {
 		this._orientation.set(value);
 	}
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(
 			'inline-flex shrink-0 border-0 bg-border',
 			this._orientation() === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
-			this._userClass(),
+			this.userClass(),
 		),
 	);
 }
