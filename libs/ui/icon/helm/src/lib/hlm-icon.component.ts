@@ -84,7 +84,7 @@ export class HlmIconComponent implements OnDestroy {
 		const hostClasses = this._hostClasses();
 		const userCls = this.userCls();
 		const variant = isDefinedSize(size) ? size : 'none';
-		const classes = variant === 'none' ? hostClasses : hostClasses.replace(TAILWIND_H_W_PATTERN, '');
+		const classes = variant === 'none' && size === 'none' ? hostClasses : hostClasses.replace(TAILWIND_H_W_PATTERN, '');
 		return hlm(iconVariants({ variant }), userCls, classes);
 	});
 
