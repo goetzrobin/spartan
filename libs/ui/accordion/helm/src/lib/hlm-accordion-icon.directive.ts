@@ -21,6 +21,7 @@ export class HlmAccordionIconDirective {
 	);
 
 	constructor() {
+		this._hlmIcon.size = 'none';
 		this._hlmIcon.name = 'lucideChevronDown';
 	}
 }
