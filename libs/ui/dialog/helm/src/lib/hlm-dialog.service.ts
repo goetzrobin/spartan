@@ -9,6 +9,7 @@ import {
 import { HlmDialogContentComponent } from './hlm-dialog-content.component';
 import { hlmDialogOverlayClass } from './hlm-dialog-overlay.directive';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type HlmDialogOptions<DialogContext = any> = BrnDialogOptions & {
 	contentClass?: string;
 	context?: DialogContext;

@@ -5,6 +5,7 @@ import { BrnDialogOptions } from './brn-dialog-options';
 import { BrnDialogState } from './brn-dialog-state';
 import { cssClassesToArray } from './brn-dialog.service';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class BrnDialogRef<DialogResult = any> {
 	private readonly _closing$ = new Subject<void>();
 	public readonly closing$ = this._closing$.asObservable();
@@ -14,7 +15,7 @@ export class BrnDialogRef<DialogResult = any> {
 	private _previousTimeout: ReturnType<typeof setTimeout> | undefined;
 
 	public get open() {
-		return this.state() === 'open' ? true : false;
+		return this.state() === 'open';
 	}
 
 	constructor(

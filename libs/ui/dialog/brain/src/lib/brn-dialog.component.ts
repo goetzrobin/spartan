@@ -62,6 +62,7 @@ export class BrnDialogComponent {
 	public readonly state = computed(() => this._dialogRef()?.state() ?? 'closed');
 
 	@Output()
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public readonly closed = new EventEmitter<any>();
 
 	@Output()
@@ -195,6 +196,7 @@ export class BrnDialogComponent {
 		});
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public close(result: any, delay?: number) {
 		this._dialogRef()?.close(result, delay ?? this._options.closeDelay);
 	}

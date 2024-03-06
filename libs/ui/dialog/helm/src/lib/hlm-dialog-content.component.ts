@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { lucideX } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnDialogCloseDirective, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/ui-dialog-brain';
@@ -18,14 +18,14 @@ import { HlmDialogCloseDirective } from './hlm-dialog-close.directive';
 	},
 	template: `
 		@if (component) {
-			<ng-container [ngComponentOutlet]="component"></ng-container>
+			<ng-container [ngComponentOutlet]="component" />
 		} @else {
 			<ng-content />
 		}
 
 		<button brnDialogClose hlm>
 			<span class="sr-only">Close</span>
-			<hlm-icon class="flex h-4 w-4" size="100%" name="lucideX" />
+			<hlm-icon class="flex h-4 w-4" size="none" name="lucideX" />
 		</button>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -33,6 +33,7 @@ export const cssClassesToArray = (classes: string | string[] | undefined | null,
 	return classes ?? [];
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type BrnDialogContext<T> = T & { close: (result?: any) => void };
 
 /** @deprecated `injectBrnDialogCtx` will no longer be supported once components are stable. Use `injectBrnDialogContext` instead.  */
@@ -40,6 +41,7 @@ export const injectBrnDialogCtx = <T>(): BrnDialogContext<T> => {
 	return inject(DIALOG_DATA);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const injectBrnDialogContext = <DialogContext = any>(options: InjectOptions = {}) => {
 	return inject(DIALOG_DATA, options) as DialogContext;
 };
@@ -72,8 +74,10 @@ export class BrnDialogService {
 		let brnDialogRef!: BrnDialogRef;
 		let effectRef!: EffectRef;
 
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const contextOrData: BrnDialogContext<any> = {
 			...context,
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			close: (result: any = undefined) => brnDialogRef.close(result, options?.closeDelay),
 		};
 
@@ -118,7 +122,7 @@ export class BrnDialogService {
 					});
 				});
 
-				let providers: StaticProvider[] = [
+				const providers: StaticProvider[] = [
 					{
 						provide: BrnDialogRef,
 						useValue: brnDialogRef,
@@ -149,7 +153,7 @@ export class BrnDialogService {
 		}
 
 		if (options?.closeOnBackdropClick) {
-			cdkDialogRef.backdropClick.pipe(takeUntil(destroyed$)).subscribe((e) => {
+			cdkDialogRef.backdropClick.pipe(takeUntil(destroyed$)).subscribe(() => {
 				brnDialogRef.close(undefined, options?.closeDelay);
 			});
 		}
