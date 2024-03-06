@@ -11,6 +11,7 @@ import { defineConfig, Plugin, splitVendorChunkPlugin } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
 	return {
+		root: __dirname,
 		publicDir: 'src/public',
 		optimizeDeps: {
 			include: ['@angular/common', '@angular/forms', 'isomorphic-fetch'],
@@ -19,6 +20,9 @@ export default defineConfig(({ mode }) => {
 			noExternal: ['@spartan-ng/**', '@angular/cdk/**', '@ng-icons/**', 'ngx-scrollbar/**', 'ng-signal-forms/**'],
 		},
 		build: {
+			outDir: '../../dist/apps/app/client',
+			reportCompressedSize: true,
+			commonjsOptions: { transformMixedEsModules: true },
 			target: ['es2020'],
 		},
 		resolve: {
@@ -97,6 +101,11 @@ export default defineConfig(({ mode }) => {
 			splitVendorChunkPlugin(),
 		],
 		test: {
+			reporters: ['default'],
+			coverage: {
+				reportsDirectory: '../../coverage/apps/app',
+				provider: 'v8',
+			},
 			globals: true,
 			environment: 'jsdom',
 			setupFiles: ['src/test-setup.ts'],
