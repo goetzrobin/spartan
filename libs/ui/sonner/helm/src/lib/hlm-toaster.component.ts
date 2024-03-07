@@ -7,6 +7,7 @@ import { NgxSonnerToaster, ToasterProps } from 'ngx-sonner';
 	imports: [NgxSonnerToaster],
 	template: `
 		<ngx-sonner-toaster
+			class="toaster group"
 			[invert]="invert()"
 			[theme]="theme()"
 			[position]="position()"
