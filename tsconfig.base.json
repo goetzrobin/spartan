@@ -62,6 +62,7 @@
 			"@spartan-ng/ui-sheet-brain": ["libs/ui/sheet/brain/src/index.ts"],
 			"@spartan-ng/ui-sheet-helm": ["libs/ui/sheet/helm/src/index.ts"],
 			"@spartan-ng/ui-skeleton-helm": ["libs/ui/skeleton/helm/src/index.ts"],
+			"@spartan-ng/ui-sonner-helm": ["libs/ui/sonner/helm/src/index.ts"],
 			"@spartan-ng/ui-spinner-helm": ["libs/ui/spinner/helm/src/index.ts"],
 			"@spartan-ng/ui-storybook": ["libs/ui/storybook/src/index.ts"],
 			"@spartan-ng/ui-switch-brain": ["libs/ui/switch/brain/src/index.ts"],
