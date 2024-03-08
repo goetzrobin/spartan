@@ -20,10 +20,6 @@ import { ClassValue } from 'clsx';
 export class HlmCheckboxCheckIconComponent {
 	private _brnCheckbox = inject(BrnCheckboxComponent);
 	protected _checked = this._brnCheckbox?.isChecked;
-	// TODO - this cannot be private for some reason
-	// build fails because hlm-checkbox.component.ts is giving the following error:
-	// Property 'userClass' is private and only accessible within class 'HlmCheckboxCheckIconComponent'.
-	// it should work as private but it doesn't
 	readonly userClass = input<ClassValue>('', { alias: 'class' });
 
 	public readonly iconName = input<string>('lucideCheck');
