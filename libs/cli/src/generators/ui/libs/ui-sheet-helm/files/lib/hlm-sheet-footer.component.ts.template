@@ -13,7 +13,7 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmSheetFooterComponent {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', this._userClass()),
 	);

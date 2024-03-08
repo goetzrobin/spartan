@@ -13,7 +13,7 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmCommandShortcutComponent {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm('ml-auto font-light text-xs tracking-widest opacity-60', this._userClass()),
 	);

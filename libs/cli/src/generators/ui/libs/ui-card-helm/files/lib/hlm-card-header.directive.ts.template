@@ -24,7 +24,7 @@ export type CardHeaderVariants = VariantProps<typeof cardHeaderVariants>;
 	},
 })
 export class HlmCardHeaderDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(cardHeaderVariants({ direction: this._direction() }), this._userClass()),
 	);

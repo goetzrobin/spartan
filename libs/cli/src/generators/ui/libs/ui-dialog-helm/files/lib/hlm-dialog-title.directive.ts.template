@@ -12,7 +12,7 @@ import { ClassValue } from 'clsx';
 	hostDirectives: [BrnDialogTitleDirective],
 })
 export class HlmDialogTitleDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm('text-lg font-semibold leading-none tracking-tight', this._userClass()),
 	);

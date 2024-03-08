@@ -33,7 +33,7 @@ export class HlmCaptionComponent {
 	protected readonly id = input<string | null | undefined>(`${captionIdSequence++}`);
 
 	private readonly hidden = input(false, { transform: booleanAttribute });
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
 		hlm(
 			'text-center block mt-4 text-sm text-muted-foreground',

@@ -13,7 +13,7 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmDialogHeaderComponent {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm('flex flex-col space-y-1.5 text-center sm:text-left', this._userClass()),
 	);
