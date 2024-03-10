@@ -1,7 +1,7 @@
 import { CdkOption, ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { Subject, pairwise } from 'rxjs';
+import { Subject, skip } from 'rxjs';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 
 type BrnReadDirection = 'ltr' | 'rtl';
@@ -63,7 +63,9 @@ export class BrnSelectService {
 				value: value as string | string[],
 			}));
 		});
-		this.multiple$.pipe(pairwise(), takeUntilDestroyed()).subscribe(([, multiple]) => {
+
+		// We need to skip the first value because we don't want to deselect all options when the component is initialized with a preselected value e.g. by the form control
+		this.multiple$.pipe(skip(1), takeUntilDestroyed()).subscribe((multiple) => {
 			if (!multiple && this.value().length > 1) {
 				this.deselectAllOptions();
 			}
