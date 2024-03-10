@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { BrnSelectComponent, BrnSelectImports } from './brain/src';
 import { HlmSelectImports } from './helm/src';
@@ -67,6 +67,39 @@ export const ReactiveFormControl: Story = {
 					<hlm-option value="pineapple">Pineapple</hlm-option>
 				</hlm-select-content>
 			</brn-select>
+		<form>`,
+	}),
+};
+
+export const ReactiveFormControlWithValidation: Story = {
+	render: (args) => ({
+		props: {
+			...args,
+			fruitGroup: new FormGroup({
+				fruit: new FormControl(null, { validators: Validators.required }),
+			}),
+		},
+		template: `
+		<div class="mb-3">
+		<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
+		</div>
+    	<form [formGroup]="fruitGroup">
+			<brn-select class='w-56' ${argsToTemplate(args)} formControlName="fruit" placeholder="Select a Fruit">
+				<hlm-select-trigger>
+					<brn-select-value hlm />
+				</hlm-select-trigger>
+				<hlm-select-content class="w-56">
+					<hlm-select-label>Fruits</hlm-select-label>
+					<hlm-option value="apple">Apple</hlm-option>
+					<hlm-option value="banana">Banana</hlm-option>
+					<hlm-option value="blueberry">Blueberry</hlm-option>
+					<hlm-option value="grapes">Grapes</hlm-option>
+					<hlm-option value="pineapple">Pineapple</hlm-option>
+				</hlm-select-content>
+			</brn-select>
+			@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
+			  <span class="text-destructive">Required</span>
+      }
 		<form>`,
 	}),
 };
