@@ -309,5 +309,16 @@
 			"class-variance-authority": "^0.6.0",
 			"clsx": "^1.2.1"
 		}
+	},
+	"sonner": {
+		"internalName": "ui-sonner-helm",
+		"peerDependencies": {
+			"@angular/core": "^17.1.0",
+			"@angular/forms": "^17.1.0",
+			"@ng-icons/lucide": "^26.3.0",
+			"@spartan-ng/ui-core": "0.0.1-alpha.336",
+			"clsx": "^1.2.1",
+			"ngx-sonner": "^0.3.4"
+		}
 	}
 }
