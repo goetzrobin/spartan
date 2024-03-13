@@ -41,7 +41,7 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 export class SonnerPreviewComponent {
   showToast() {
     toast('Event has been created', {
-      description: 'Sunday, December 03, 2023 at 9:00 AM',
+      description: 'Sunday, December 03, 2024 at 9:00 AM',
       action: {
         label: 'Undo',
         onClick: () => console.log('Undo'),
@@ -51,8 +51,10 @@ export class SonnerPreviewComponent {
 }`;
 
 export const defaultImports = `
+import { toast } from 'ngx-sonner';
 import { HlmSwitchComponent } from '@spartan-ng/ui-sonner-helm';
 `;
 export const defaultSkeleton = `
 <hlm-toaster />
+<button (click)="toast('Hello world')">Show Toast</button>
 `;
