@@ -1,4 +1,10 @@
 /**
+ * We are building on shoulders of giants here and adapt the implementation provided by the incredible Angular
+ * team: https://github.com/angular/components/blob/main/src/material/tabs/paginated-tab-header.ts
+ * Check them out! Give them a try! Leave a star! Their work is incredible!
+ */
+
+/**
  * @license
  * Copyright Google LLC All Rights Reserved.
  *
