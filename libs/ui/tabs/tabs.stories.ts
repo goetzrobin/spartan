@@ -164,7 +164,7 @@ export const BrnOnly: Story = {
 		props: { activationMode: 'automatic' },
 		template: /* HTML */ `
 			<div brnTabs="account" [activationMode]="activationMode" class="mx-auto block max-w-3xl">
-				<div brnTabsList class="grid w-full grid-cols-2" aria-label="tabs example">
+				<div brnTabsList class="grid w-full grid-cols-2" [attr.aria-label]="'tabs example'">
 					<button brnTabsTrigger="account">Account</button>
 					<button brnTabsTrigger="password">Password</button>
 				</div>

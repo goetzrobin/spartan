@@ -23,7 +23,7 @@ export class HlmTableComponent {
 	);
 
 	// we aria-labelledby to be settable from outside but use the input by default.
-	private readonly _labeledByInput = input<string | null | undefined>(undefined, { alias: 'aria-labelledby' });
+	public readonly _labeledByInput = input<string | null | undefined>(undefined, { alias: 'aria-labelledby' });
 	public readonly labeledBy = signal<string | null | undefined>(undefined);
 
 	constructor() {
