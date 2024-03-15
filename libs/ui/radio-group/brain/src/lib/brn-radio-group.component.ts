@@ -45,9 +45,9 @@ export class BrnRadioGroupComponent implements AfterContentInit {
 	@ContentChildren(BrnRadioComponent, { descendants: true })
 	private _radios?: QueryList<BrnRadioComponent>;
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
 	_controlValueAccessorChangeFn: (value: any) => void = () => {};
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
 	onTouched: () => any = () => {};
 
 	private _name = `brn-radio-group-${nextUniqueId++}`;

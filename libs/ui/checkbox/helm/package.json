@@ -4,8 +4,8 @@
 	"peerDependencies": {
 		"@angular/core": "^17.1.0",
 		"@angular/forms": "^17.1.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.336",
-		"@spartan-ng/ui-checkbox-brain": "0.0.1-alpha.336",
+		"@spartan-ng/ui-core": "0.0.1-alpha.337",
+		"@spartan-ng/ui-checkbox-brain": "0.0.1-alpha.337",
 		"clsx": "^1.2.1",
 		"@ng-icons/lucide": "^26.3.0"
 	},

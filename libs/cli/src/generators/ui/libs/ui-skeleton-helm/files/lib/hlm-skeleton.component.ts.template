@@ -11,6 +11,6 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmSkeletonComponent {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() => hlm('block animate-pulse rounded-md bg-muted', this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm('block animate-pulse rounded-md bg-muted', this.userClass()));
 }

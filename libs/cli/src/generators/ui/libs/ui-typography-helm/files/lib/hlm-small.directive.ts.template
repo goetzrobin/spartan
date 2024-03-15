@@ -12,6 +12,6 @@ export const hlmSmall = 'text-sm font-medium leading-none';
 	},
 })
 export class HlmSmallDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() => hlm(hlmSmall, this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(hlmSmall, this.userClass()));
 }

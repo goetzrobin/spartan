@@ -14,7 +14,7 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmCommandItemDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
 	protected _computedClass = computed(() =>
 		hlm(
@@ -22,7 +22,7 @@ export class HlmCommandItemDirective {
 				'aria-selected:bg-accent aria-selected:text-accent-foreground\n' +
 				'hover:bg-accent/50\n' +
 				'disabled:pointer-events-none disabled:opacity-50',
-			this._userClass(),
+			this.userClass(),
 		),
 	);
 }

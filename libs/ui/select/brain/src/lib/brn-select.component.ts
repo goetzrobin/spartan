@@ -107,7 +107,9 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	public readonly ngControl = inject(NgControl, { optional: true, self: true });
 
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private _onChange: (value: unknown) => void = () => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private _onTouched = () => {};
 
 	/*

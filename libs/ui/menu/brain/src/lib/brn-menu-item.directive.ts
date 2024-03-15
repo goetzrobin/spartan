@@ -12,15 +12,15 @@ import { booleanAttribute, Directive, inject, Input, Output, signal } from '@ang
 export class BrnMenuItemDirective {
 	private readonly _cdkMenuItem = inject(CdkMenuItem, { host: true });
 
-	get disabled() {
-		return this._disabled();
-	}
-
 	protected readonly _disabled = signal(this._cdkMenuItem.disabled);
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
 		this._cdkMenuItem.disabled = value;
 		this._disabled.set(value);
+	}
+
+	get disabled() {
+		return this._disabled();
 	}
 
 	@Output()
