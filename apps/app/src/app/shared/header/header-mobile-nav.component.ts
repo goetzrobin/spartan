@@ -1,18 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { lucideMoreVertical, lucideX } from '@ng-icons/lucide';
+import { lucideMenu, lucideX } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
-import {
-	BrnSheetCloseDirective,
-	BrnSheetComponent,
-	BrnSheetContentDirective,
-	BrnSheetOverlayComponent,
-	BrnSheetTriggerDirective,
-} from '@spartan-ng/ui-sheet-brain';
-import { HlmSheetCloseDirective, HlmSheetContentComponent, HlmSheetOverlayDirective } from '@spartan-ng/ui-sheet-helm';
+import { BrnSheetContentDirective, BrnSheetTriggerDirective } from '@spartan-ng/ui-sheet-brain';
+import { HlmSheetImports } from '@spartan-ng/ui-sheet-helm';
 import { SideNavContentComponent } from '../layout/side-nav/side-nav-content.component';
 import { SideNavLinkDirective } from '../layout/side-nav/side-nav-link.directive';
 import { SpartanLogoComponent } from '../spartan-logo.component';
@@ -22,15 +16,9 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 	selector: 'spartan-mobile-nav',
 	standalone: true,
 	imports: [
-		BrnSheetComponent,
-		BrnSheetOverlayComponent,
 		BrnSheetTriggerDirective,
 		BrnSheetContentDirective,
-		BrnSheetCloseDirective,
-
-		HlmSheetCloseDirective,
-		HlmSheetOverlayDirective,
-		HlmSheetContentComponent,
+		HlmSheetImports,
 
 		HlmButtonDirective,
 		HlmIconComponent,
@@ -41,16 +29,15 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 		SideNavLinkDirective,
 		SpartanLogoComponent,
 	],
-	providers: [provideIcons({ lucideMoreVertical, lucideX })],
+	providers: [provideIcons({ lucideMenu, lucideX })],
 	template: `
-		<brn-sheet side="left" closeDelay="100">
+		<hlm-sheet side="left" closeDelay="100">
 			<button size="sm" id="menu-trigger" variant="ghost" brnSheetTrigger hlmBtn>
-				<hlm-icon name="lucideMoreVertical" size="sm" />
+				<hlm-icon name="lucideMenu" size="sm" />
 				<span class="sr-only">Open menu</span>
 			</button>
-			<brn-sheet-overlay hlm />
-			<div hlmSheetContent class="pb-0 pr-0" *brnSheetContent="let ctx">
-				<button brnSheetClose hlm>
+			<hlm-sheet-content class="pb-0 pr-0" *brnSheetContent="let ctx">
+				<button hlmSheetClose>
 					<span class="sr-only">Close</span>
 					<hlm-icon class="flex h-4 w-4" name="lucideX" />
 				</button>
@@ -75,8 +62,8 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 					</div>
 					<spartan-side-nav-content (linkClicked)="ctx.close()" />
 				</hlm-scroll-area>
-			</div>
-		</brn-sheet>
+			</hlm-sheet-content>
+		</hlm-sheet>
 	`,
 })
 export class HeaderMobileNavComponent {}
