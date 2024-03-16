@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { BrnSelectComponent, BrnSelectImports } from './brain/src';
 import { HlmSelectImports } from './helm/src';
@@ -19,7 +20,7 @@ const meta: Meta<BrnSelectComponent> = {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports, HlmSelectImports],
+			imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports, HlmSelectImports, HlmLabelDirective],
 		}),
 	],
 };
@@ -112,6 +113,43 @@ export const ReactiveFormControlWithValidation: Story = {
 	}),
 };
 
+export const ReactiveFormControlWithValidationWithLabel: Story = {
+	render: (args) => ({
+		props: {
+			...args,
+			fruitGroup: new FormGroup({
+				// @ts-ignore
+				fruit: new FormControl(args.initalValue || null, { validators: Validators.required }),
+			}),
+		},
+		template: /* HTML */ `
+			<div class="mb-3">
+				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
+			</div>
+			<form [formGroup]="fruitGroup">
+				<hlm-select class="w-56" ${argsToTemplate(args)} formControlName="fruit" placeholder="Select a Fruit">
+					<label hlmLabel>Select a Fruit</label>
+					<hlm-select-trigger>
+						<brn-select-value hlm />
+					</hlm-select-trigger>
+					<hlm-select-content class="w-56">
+						<hlm-select-label>Fruits</hlm-select-label>
+						<hlm-option value="apple">Apple</hlm-option>
+						<hlm-option value="banana">Banana</hlm-option>
+						<hlm-option value="blueberry">Blueberry</hlm-option>
+						<hlm-option value="grapes">Grapes</hlm-option>
+						<hlm-option value="pineapple">Pineapple</hlm-option>
+						<hlm-option>Clear</hlm-option>
+					</hlm-select-content>
+				</hlm-select>
+				@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
+				<span class="text-destructive">Required</span>
+				}
+			</form>
+		`,
+	}),
+};
+
 export const NgModelFormControl: Story = {
 	render: (args) => ({
 		props: args,
@@ -121,6 +159,7 @@ export const NgModelFormControl: Story = {
 					<pre>Form Control Value: {{ model.fruit | json }}</pre>
 				</div>
 				<hlm-select class="w-56" ${argsToTemplate(args)} [(ngModel)]="model.fruit" name="fruit">
+					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>

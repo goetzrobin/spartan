@@ -203,6 +203,41 @@ describe('select', () => {
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
 		});
 
+		it.only('should have form validation classes and reflect control status with label', () => {
+			cy.visit('/iframe.html?id=select--reactive-form-control-with-validation-with-label');
+
+			// initial
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-untouched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+
+			// on open
+			cy.get('[brnselecttrigger]').click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-untouched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+			cy.get('body').click();
+
+			// no selection
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+
+			// force error
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').last().click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+
+			// on real selection
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').eq(0).click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
+		});
+
 		it('should have form validation classes and reflect control status when assigned with initial value', () => {
 			cy.visit('/iframe.html?id=select--reactive-form-control-with-validation&args=initalValue:apple');
 
