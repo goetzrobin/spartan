@@ -176,7 +176,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	public ngAfterContentInit(): void {
 		// Check if Label Directive Provided and pass to service
-		console.log(this.selectLabel);
 		if (this.selectLabel) {
 			this.labelProvided.set(true);
 			this._selectService.state.update((state) => ({
