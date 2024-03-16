@@ -203,7 +203,7 @@ describe('select', () => {
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
 		});
 
-		it.only('should have form validation classes and reflect control status with label', () => {
+		it('should have form validation classes and reflect control status with label', () => {
 			cy.visit('/iframe.html?id=select--reactive-form-control-with-validation-with-label');
 
 			// initial

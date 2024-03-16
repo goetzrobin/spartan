@@ -87,7 +87,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	dir = input<BrnReadDirection>('ltr');
 
-	@ContentChild(BrnLabelDirective, { descendants: true })
+	@ContentChild(BrnLabelDirective, { descendants: false })
 	protected selectLabel!: BrnLabelDirective;
 	/** Overlay pane containing the options. */
 	@ContentChild(BrnSelectContentComponent)
