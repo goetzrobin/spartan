@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
-import { BrnSelectImports } from '../index';
-import { SelectMultiValueTestComponent, SelectSingleValueTestComponent } from './tests/select-reactive-form';
+import { BrnSelectImports } from '../../index';
+import { SelectMultiValueTestComponent, SelectSingleValueTestComponent } from './select-reactive-form';
 
 describe('BrnSelectComponent', () => {
 	const setup = async () => {
