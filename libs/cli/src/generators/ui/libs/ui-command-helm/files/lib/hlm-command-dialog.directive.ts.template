@@ -17,11 +17,11 @@ export class HlmCommandDialogDirective {
 	private _renderer = inject(Renderer2);
 	private _element = inject(ElementRef);
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(
 			'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[2%]  data-[state=open]:slide-in-from-top-[2%]',
-			this._userClass(),
+			this.userClass(),
 		),
 	);
 

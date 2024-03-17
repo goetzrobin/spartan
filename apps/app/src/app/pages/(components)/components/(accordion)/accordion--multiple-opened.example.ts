@@ -24,7 +24,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 		HlmIconComponent,
 	],
 	template: `
-		<div hlmAccordion [type]="multiple" class="pb-4">
+		<div hlmAccordion type="multiple" class="pb-4">
 			<div hlmAccordionItem isOpened>
 				<button hlmAccordionTrigger>
 					Is it accessible?
@@ -89,7 +89,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 		HlmIconComponent,
 	],
 	template: \`
-		<div hlmAccordion [type]="multiple" class="pb-4">
+		<div hlmAccordion type="multiple" class="pb-4">
 			<div hlmAccordionItem isOpened>
 				<button hlmAccordionTrigger>
 					Is it accessible?

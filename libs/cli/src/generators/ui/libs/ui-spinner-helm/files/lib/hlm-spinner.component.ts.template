@@ -51,6 +51,6 @@ export class HlmSpinnerComponent {
 		this._size.set(value);
 	}
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() => hlm(spinnerVariants({ size: this._size() }), this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(spinnerVariants({ size: this._size() }), this.userClass()));
 }

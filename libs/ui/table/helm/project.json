@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/table/helm/**/*.ts",
-					"libs/ui/table/helm/**/*.html",
-					"libs/ui/table/helm/package.json",
-					"libs/ui/table/helm/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		}
 	}
 }

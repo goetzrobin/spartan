@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
 	displayName: 'ui-scroll-area-helm',
-	preset: '../../../../jest.preset.js',
+	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	coverageDirectory: '../../../../coverage/libs/ui/scroll-area/helm',
 	transform: {

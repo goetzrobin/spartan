@@ -1,11 +1,11 @@
 {
 	"name": "@spartan-ng/cli",
-	"version": "0.0.1-alpha.337",
+	"version": "0.0.1-alpha.339",
 	"type": "commonjs",
 	"dependencies": {
-		"@nx/js": "^17.1.0",
-		"@nx/devkit": "^17.1.0",
-		"@nx/angular": "^17.1.0",
+		"@nx/js": "^18.0.7",
+		"@nx/devkit": "^18.0.7",
+		"@nx/angular": "^18.0.7",
 		"enquirer": "2.3.6",
 		"semver": "7.5.4"
 	},

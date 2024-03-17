@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
 	displayName: 'ui-table-helm',
-	preset: '../../../../jest.preset.js',
+	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	coverageDirectory: '../../../../coverage/libs/ui/table/helm',
 	transform: {

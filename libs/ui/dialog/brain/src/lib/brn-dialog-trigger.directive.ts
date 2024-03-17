@@ -1,12 +1,15 @@
-import { Directive, inject, Input, signal } from '@angular/core';
+import { Directive, inject, input, Input, Signal, signal } from '@angular/core';
+import { BrnDialogRef } from './brn-dialog-ref';
+import { BrnDialogState } from './brn-dialog-state';
 import { BrnDialogComponent } from './brn-dialog.component';
 
 let idSequence = 0;
+
 @Directive({
 	selector: 'button[brnDialogTrigger],button[brnDialogTriggerFor]',
 	standalone: true,
 	host: {
-		'[id]': '_id()',
+		'[id]': 'id()',
 		'(click)': 'open()',
 		'aria-haspopup': 'dialog',
 		'[attr.aria-expanded]': "state() === 'open' ? 'true': 'false'",
@@ -17,19 +20,18 @@ let idSequence = 0;
 })
 export class BrnDialogTriggerDirective {
 	protected _brnDialog = inject(BrnDialogComponent, { optional: true });
-	protected _id = signal('brn-dialog-trigger-' + idSequence++);
-	state = this._brnDialog?.state ?? signal('closed');
-	dialogId = 'brn-dialog-' + (this._brnDialog?.dialogId ?? idSequence++);
+	protected readonly _brnDialogRef = inject(BrnDialogRef, { optional: true });
 
-	@Input()
-	set id(newId: string) {
-		this._id.set(newId);
-	}
+	public readonly id = input(`brn-dialog-trigger-${idSequence++}`);
+
+	public readonly state: Signal<BrnDialogState> = this._brnDialogRef?.state ?? signal('closed');
+	public readonly dialogId = `brn-dialog-${this._brnDialogRef?.dialogId ?? idSequence++}`;
 
 	@Input()
 	set brnDialogTriggerFor(brnDialog: BrnDialogComponent) {
 		this._brnDialog = brnDialog;
 	}
+
 	open() {
 		this._brnDialog?.open();
 	}

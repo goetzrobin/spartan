@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/hover-card/helm/**/*.ts",
-					"libs/ui/hover-card/helm/**/*.html",
-					"libs/ui/hover-card/helm/package.json",
-					"libs/ui/hover-card/helm/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

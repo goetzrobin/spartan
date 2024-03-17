@@ -12,11 +12,11 @@ import { ClassValue } from 'clsx';
 	hostDirectives: [BrnMenuItemDirective],
 })
 export class HlmMenuBarItemDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(
 			'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground',
-			this._userClass(),
+			this.userClass(),
 		),
 	);
 }
