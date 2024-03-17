@@ -12,7 +12,6 @@ import {
 	QueryList,
 	ViewChild,
 	computed,
-	effect,
 	inject,
 	input,
 	signal,
@@ -20,6 +19,7 @@ import {
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
+import { skip } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -159,11 +159,10 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			}
 		});
 
-		effect(() => {
-			const value = this._selectService.value();
-
-			this._onChange(value || null);
-		});
+		toObservable(this._selectService.value)
+			// skipping first else ngcontrol always starts off as dirty and triggering value change on init value
+			.pipe(takeUntilDestroyed(), skip(1))
+			.subscribe((value) => this._onChange(value || null));
 
 		toObservable(this.dir)
 			.pipe(takeUntilDestroyed())

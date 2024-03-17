@@ -18,6 +18,8 @@ import { BrnSelectService } from './brn-select.service';
 		'[class.ng-dirty]': 'this._ngControl?.dirty || null',
 		'[class.ng-valid]': 'this._ngControl?.valid || null',
 		'[class.ng-touched]': 'this._ngControl?.touched || null',
+		'[class.ng-untouched]': 'this._ngControl?.untouched || null',
+		'[class.ng-pristine]': 'this._ngControl?.pristine || null',
 		type: 'button',
 	},
 })
@@ -31,7 +33,7 @@ export class BrnSelectTriggerDirective {
 	public readonly selectContentId = computed(() => `${this._selectService.id()}--content`);
 	public readonly selectDisable = computed(() => this._selectService.disabled());
 	public readonly selectTriggerLabelledBy = computed(() => {
-		if (this._selectService.value().length > 0) {
+		if (this._selectService.value() && this._selectService.value().length > 0) {
 			return `${this._selectService.labelId()} ${this._selectService.id()}--value`;
 		}
 		return this._selectService.labelId();
