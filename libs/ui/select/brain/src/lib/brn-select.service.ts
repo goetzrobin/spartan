@@ -1,7 +1,7 @@
 import { CdkOption, ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { Subject } from 'rxjs';
+import { Subject, skip } from 'rxjs';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 
 type BrnReadDirection = 'ltr' | 'rtl';
@@ -42,6 +42,7 @@ export class BrnSelectService {
 	public readonly dir = computed(() => this.state().dir);
 	public readonly selectedOptions = computed(() => this.state().selectedOptions);
 	public readonly value = computed(() => this.state().value);
+	private readonly possibleOptions = signal<Array<CdkOption | null>>([]);
 
 	private readonly multiple$ = toObservable(this.multiple);
 
@@ -55,14 +56,16 @@ export class BrnSelectService {
 	constructor() {
 		this.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe((listBoxChange) => {
 			const updatedSelections = this.multiple() ? this.getUpdatedOptions(listBoxChange) : [listBoxChange.option];
+			const value = this.multiple() ? listBoxChange.value : listBoxChange.value[0];
 			this.state.update((state) => ({
 				...state,
 				selectedOptions: [...updatedSelections],
-				value: listBoxChange.value as string[],
+				value: value as string | string[],
 			}));
 		});
 
-		this.multiple$.pipe(takeUntilDestroyed()).subscribe((multiple) => {
+		// We need to skip the first value because we don't want to deselect all options when the component is initialized with a preselected value e.g. by the form control
+		this.multiple$.pipe(skip(1), takeUntilDestroyed()).subscribe((multiple) => {
 			if (!multiple && this.value().length > 1) {
 				this.deselectAllOptions();
 			}
@@ -91,5 +94,52 @@ export class BrnSelectService {
 	// Needed due to https://github.com/angular/angular/issues/20810
 	public _setSelectTrigger(trigger: BrnSelectTriggerDirective) {
 		this._selectTrigger = trigger;
+	}
+
+	public registerOption(option: CdkOption | null) {
+		this.possibleOptions.update((options) => [...options, option]);
+	}
+
+	public deregisterOption(option: CdkOption | null) {
+		this.possibleOptions.update((options) => options.filter((o) => o !== option));
+	}
+
+	public selectOptionByValue(value: unknown) {
+		if (value === null || value === undefined) {
+			this.state.update((state) => ({
+				...state,
+				selectedOptions: [],
+				value: this.multiple() ? [] : '',
+			}));
+			return;
+		}
+
+		const options = this.possibleOptions();
+
+		if (typeof value === 'string' || Array.isArray(value)) {
+			if (this.multiple()) {
+				const selectedOptions = options.filter((option) => {
+					if (Array.isArray(value)) {
+						return value.includes(option?.value as string);
+					}
+					return value === option?.value;
+				});
+				this.state.update((state) => ({
+					...state,
+					selectedOptions,
+					value,
+				}));
+			} else {
+				const selectedOption = options.find((option) => option?.value === value);
+				if (!selectedOption) {
+					return;
+				}
+				this.state.update((state) => ({
+					...state,
+					selectedOptions: [selectedOption as CdkOption | null],
+					value: selectedOption.value as string,
+				}));
+			}
+		}
 	}
 }

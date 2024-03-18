@@ -19,6 +19,7 @@ import {
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
+import { skip } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -103,7 +104,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	public readonly isExpanded = this._selectService.isExpanded;
 	public readonly backupLabelId = computed(() => this._selectService.labelId());
 	public readonly labelProvided = signal(false);
-	public readonly value = signal('');
 
 	public readonly ngControl = inject(NgControl, { optional: true, self: true });
 
@@ -155,13 +155,16 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		}
 
 		// Watch for Listbox Selection Changes to trigger Collapse
-		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe((listboxEvent) => {
+		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe(() => {
 			if (!this._multiple()) {
 				this.close();
 			}
-			this.writeValue(listboxEvent.value);
-			this._onChange(listboxEvent.value);
 		});
+
+		toObservable(this._selectService.value)
+			// skipping first else ngcontrol always starts off as dirty and triggering value change on init value
+			.pipe(takeUntilDestroyed(), skip(1))
+			.subscribe((value) => this._onChange(value || null));
 
 		toObservable(this.dir)
 			.pipe(takeUntilDestroyed())
@@ -234,7 +237,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public writeValue(value: any): void {
-		this.value.set(value);
+		this._selectService.selectOptionByValue(value);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -245,5 +248,9 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public registerOnTouched(fn: any): void {
 		this._onTouched = fn;
+	}
+
+	public setDisabledState(isDisabled: boolean) {
+		this.disabled = isDisabled;
 	}
 }
