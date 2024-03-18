@@ -27,7 +27,7 @@ export class TabsCliComponent {
 	private readonly _cliService = inject(CLIModeService);
 	readonly nxCode = input('');
 	readonly ngCode = input('');
-	readonly language = input('sh');
+	readonly language = input<'ts' | 'sh' | 'js'>('sh');
 	protected tabValue = computed(() => {
 		return this._cliService.cliMode() === 'nx' ? 'Nx Plugin' : 'Angular CLI';
 	});
