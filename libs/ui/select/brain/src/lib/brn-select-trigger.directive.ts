@@ -1,4 +1,4 @@
-import { computed, Directive, ElementRef, inject } from '@angular/core';
+import { AfterViewInit, computed, Directive, ElementRef, inject } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { BrnSelectService } from './brn-select.service';
 
@@ -23,7 +23,7 @@ import { BrnSelectService } from './brn-select.service';
 		type: 'button',
 	},
 })
-export class BrnSelectTriggerDirective {
+export class BrnSelectTriggerDirective implements AfterViewInit {
 	private readonly el = inject(ElementRef);
 	protected readonly _selectService = inject(BrnSelectService);
 	protected readonly _ngControl = inject(NgControl, { optional: true });
@@ -42,6 +42,10 @@ export class BrnSelectTriggerDirective {
 	constructor() {
 		if (!this._selectService) return;
 		this._selectService._setSelectTrigger(this);
+	}
+
+	ngAfterViewInit() {
+		this._selectService.setTriggerWidth(this.el.nativeElement.offsetWidth);
 	}
 
 	public focus() {

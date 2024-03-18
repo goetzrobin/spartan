@@ -1,5 +1,11 @@
 import { CdkListbox, CdkListboxModule } from '@angular/cdk/listbox';
-import { CdkConnectedOverlay, ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import {
+	CdkConnectedOverlay,
+	ConnectedOverlayPositionChange,
+	ConnectedPosition,
+	OverlayModule,
+} from '@angular/cdk/overlay';
+import { JsonPipe } from '@angular/common';
 import {
 	AfterContentInit,
 	ChangeDetectionStrategy,
@@ -10,16 +16,23 @@ import {
 	Input,
 	Output,
 	QueryList,
+	Signal,
 	ViewChild,
 	computed,
 	inject,
 	input,
 	signal,
 } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
+import {
+	ExposesSide,
+	ExposesState,
+	provideExposedSideProviderExisting,
+	provideExposesStateProviderExisting,
+} from '@spartan-ng/ui-core';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { skip } from 'rxjs';
+import { Subject, delay, map, of, skip, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -32,9 +45,14 @@ let nextId = 0;
 @Component({
 	selector: 'brn-select, hlm-select',
 	standalone: true,
-	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule],
+	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule, JsonPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	providers: [BrnSelectService, CdkListbox],
+	providers: [
+		BrnSelectService,
+		CdkListbox,
+		provideExposedSideProviderExisting(() => BrnSelectComponent),
+		provideExposesStateProviderExisting(() => BrnSelectComponent),
+	],
 	template: `
 		@if (!labelProvided() && _placeholder()) {
 			<label class="hidden" [attr.id]="backupLabelId()">{{ _placeholder() }}</label>
@@ -51,18 +69,21 @@ let nextId = 0;
 			cdkConnectedOverlayHasBackdrop
 			cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
 			[cdkConnectedOverlayOrigin]="trigger"
-			[cdkConnectedOverlayOpen]="isExpanded()"
+			[cdkConnectedOverlayOpen]="_delayedExpanded()"
 			[cdkConnectedOverlayPositions]="_positions"
-			[cdkConnectedOverlayWidth]="'auto'"
+			[cdkConnectedOverlayWidth]="triggerWidth() > 0 ? triggerWidth() : 'auto'"
 			(backdropClick)="close()"
 			(detach)="close()"
+			(positionChange)="_positionChanges$.next($event)"
 		>
 			<ng-content />
 		</ng-template>
 	`,
 })
-export class BrnSelectComponent implements ControlValueAccessor, AfterContentInit {
+export class BrnSelectComponent implements ControlValueAccessor, AfterContentInit, ExposesSide, ExposesState {
 	private readonly _selectService = inject(BrnSelectService);
+
+	public readonly triggerWidth = this._selectService.triggerWidth;
 
 	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'multiple' })
@@ -85,7 +106,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	}
 	protected readonly _disabled = this._selectService.disabled;
 
-	dir = input<BrnReadDirection>('ltr');
+	public readonly dir = input<BrnReadDirection>('ltr');
 
 	@ContentChild(BrnLabelDirective, { descendants: false })
 	protected selectLabel!: BrnLabelDirective;
@@ -101,7 +122,32 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	@Output()
 	openedChange = new EventEmitter<boolean>();
 
+	public readonly closeDelay = input<number>(100);
 	public readonly isExpanded = this._selectService.isExpanded;
+	protected readonly _delayedExpanded = toSignal(
+		toObservable(this.isExpanded).pipe(
+			switchMap((expanded) => (!expanded ? of(expanded).pipe(delay(this.closeDelay())) : of(expanded))),
+			takeUntilDestroyed(),
+		),
+		{ initialValue: false },
+	);
+	public readonly state = computed(() => (this.isExpanded() ? 'open' : 'closed'));
+
+	protected readonly _positionChanges$ = new Subject<ConnectedOverlayPositionChange>();
+	public readonly side: Signal<'top' | 'bottom' | 'left' | 'right'> = toSignal(
+		this._positionChanges$.pipe(
+			map<ConnectedOverlayPositionChange, 'top' | 'bottom' | 'left' | 'right'>((change) =>
+				// todo: better translation or adjusting hlm to take that into account
+				change.connectionPair.originY === 'center'
+					? change.connectionPair.originX === 'start'
+						? 'left'
+						: 'right'
+					: change.connectionPair.originY,
+			),
+		),
+		{ initialValue: 'bottom' },
+	);
+
 	public readonly backupLabelId = computed(() => this._selectService.labelId());
 	public readonly labelProvided = signal(false);
 
