@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, forwardRef } from '@angular/core';
-import { GroupComponent } from '@ngneat/cmdk';
 import { DynamicViewModule } from '@ngneat/overview';
+import { GroupComponent } from '@ngxpert/cmdk';
 
 @Component({
 	selector: 'brn-cmd-group',
