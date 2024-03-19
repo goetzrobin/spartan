@@ -40,21 +40,15 @@ export class BrnTabsDirective {
 	/** internal **/
 	$activationMode = this.activationMode;
 
-	private _tabs: { [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } } = {};
-	public readonly $tabs = this._tabs;
+	private _tabs = signal<{ [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } }>({});
+	public readonly $tabs = this._tabs.asReadonly();
 
 	public registerTrigger(key: string, trigger: BrnTabsTriggerDirective) {
-		this._tabs[key] = {
-			...(this._tabs[key] ?? {}),
-			trigger,
-		};
+		this._tabs.update((tabs) => ({ ...tabs, [key]: { trigger, content: tabs[key]?.content } }));
 	}
 
 	public registerContent(key: string, content: BrnTabsContentDirective) {
-		this._tabs[key] = {
-			...(this._tabs[key] ?? {}),
-			content,
-		};
+		this._tabs.update((tabs) => ({ ...tabs, [key]: { trigger: tabs[key]?.trigger, content } }));
 	}
 	emitTabActivated(key: string) {
 		this.tabActivated.emit(key);

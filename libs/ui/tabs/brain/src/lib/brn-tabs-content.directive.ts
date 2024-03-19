@@ -23,9 +23,12 @@ export class BrnTabsContentDirective {
 	protected labelId = computed(() => 'brn-tabs-label-' + this.contentFor());
 
 	constructor() {
-		effect(() => {
-			this._root.registerContent(this.contentFor(), this);
-		});
+		effect(
+			() => {
+				this._root.registerContent(this.contentFor(), this);
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	public focus() {

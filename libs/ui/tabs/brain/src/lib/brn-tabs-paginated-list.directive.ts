@@ -136,31 +136,13 @@ export abstract class BrnTabsPaginatedListDirective
 	disablePagination: boolean = false;
 
 	/** The index of the active tab. */
-	// @Input({ transform: numberAttribute })
-	// get selectedIndex(): number {
-	//   return this._selectedIndex;
-	// }
-	// set selectedIndex(v: number) {
-	//   const value = isNaN(v) ? 0 : v;
-
-	//   console.log("selectedIndex", value);
-
-	//   if (this._selectedIndex != value) {
-	//     this._selectedIndexChanged = true;
-	//     this._selectedIndex = value;
-
-	//     if (this._keyManager) {
-	//       this._keyManager.updateActiveItem(value);
-	//     }
-	//   }
-	// }
 	private _selectedIndex = computed(() => {
-		const currentKey = this._value();
+		const currentTabKey = this._value();
+		const tabs = this._tabs();
 
 		let activeIndex = 0;
-		if (currentKey && this._items) {
-			// TODO currentTab is undefined for initial load
-			const currentTab = this._tabs[currentKey];
+		if (currentTabKey && this._items) {
+			const currentTab = tabs[currentTabKey];
 			if (currentTab) {
 				activeIndex = this._items.toArray().indexOf(currentTab.trigger);
 			}

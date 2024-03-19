@@ -35,9 +35,12 @@ export class BrnTabsTriggerDirective {
 	public disabled = false;
 
 	constructor() {
-		effect(() => {
-			this._root.registerTrigger(this.triggerFor(), this);
-		});
+		effect(
+			() => {
+				this._root.registerTrigger(this.triggerFor(), this);
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	public focus() {
