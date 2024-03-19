@@ -95,7 +95,7 @@ export abstract class BrnTabsPaginatedListDirective
 	private _selectedIndexChanged = false;
 
 	private _root = inject(BrnTabsDirective);
-	private readonly _value = this._root.$value;
+	private readonly _activeTab = this._root.$activeTab;
 	private readonly _tabs = this._root.$tabs;
 
 	/** Emits when the component is destroyed. */
@@ -137,7 +137,7 @@ export abstract class BrnTabsPaginatedListDirective
 
 	/** The index of the active tab. */
 	private _selectedIndex = computed(() => {
-		const currentTabKey = this._value();
+		const currentTabKey = this._activeTab();
 		const tabs = this._tabs();
 
 		let activeIndex = 0;

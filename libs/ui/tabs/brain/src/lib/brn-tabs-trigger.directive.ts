@@ -26,7 +26,7 @@ export class BrnTabsTriggerDirective {
 	protected readonly _orientation = this._root.$orientation;
 
 	public readonly triggerFor = input.required<string>({ alias: 'brnTabsTrigger' });
-	public readonly selected = computed(() => this._root.$value() === this.triggerFor());
+	public readonly selected = computed(() => this._root.$activeTab() === this.triggerFor());
 	protected readonly contentId = computed(() => 'brn-tabs-content-' + this.triggerFor());
 	protected readonly labelId = computed(() => 'brn-tabs-label-' + this.triggerFor());
 
@@ -52,7 +52,7 @@ export class BrnTabsTriggerDirective {
 
 	public activate() {
 		if (!this.triggerFor()) return;
-		this._root.setValue(this.triggerFor());
+		this._root.setActiveTab(this.triggerFor());
 		this._root.emitTabActivated(this.triggerFor());
 	}
 
