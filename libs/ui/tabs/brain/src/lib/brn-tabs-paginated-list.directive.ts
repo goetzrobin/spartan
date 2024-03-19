@@ -28,7 +28,6 @@ import {
 	EventEmitter,
 	Inject,
 	Injector,
-	Input,
 	NgZone,
 	OnDestroy,
 	Optional,
@@ -39,6 +38,7 @@ import {
 	computed,
 	effect,
 	inject,
+	input,
 } from '@angular/core';
 import { EMPTY, Observable, Observer, Subject, fromEvent, merge, of as observableOf, timer } from 'rxjs';
 import { filter, skip, startWith, switchMap, takeUntil } from 'rxjs/operators';
@@ -132,8 +132,7 @@ export abstract class BrnTabsPaginatedListDirective
 	 * Whether pagination should be disabled. This can be used to avoid unnecessary
 	 * layout recalculations if it's known that pagination won't be required.
 	 */
-	@Input({ transform: booleanAttribute })
-	disablePagination: boolean = false;
+	disablePagination = input(false, { transform: booleanAttribute });
 
 	/** The index of the active tab. */
 	private _selectedIndex = computed(() => {
@@ -431,7 +430,7 @@ export abstract class BrnTabsPaginatedListDirective
 
 	/** Performs the CSS transformation on the tab list that will cause the list to scroll. */
 	_updateTabScrollPosition() {
-		if (this.disablePagination) {
+		if (this.disablePagination()) {
 			return;
 		}
 
@@ -493,7 +492,7 @@ export abstract class BrnTabsPaginatedListDirective
 	 * should be called sparingly.
 	 */
 	_scrollToLabel(labelIndex: number) {
-		if (this.disablePagination) {
+		if (this.disablePagination()) {
 			return;
 		}
 
@@ -537,7 +536,7 @@ export abstract class BrnTabsPaginatedListDirective
 	 * should be called sparingly.
 	 */
 	_checkPaginationEnabled() {
-		if (this.disablePagination) {
+		if (this.disablePagination()) {
 			this._showPaginationControls = false;
 		} else {
 			const isEnabled = this._tabListInner.nativeElement.scrollWidth > this._elementRef.nativeElement.offsetWidth;
@@ -564,7 +563,7 @@ export abstract class BrnTabsPaginatedListDirective
 	 * should be called sparingly.
 	 */
 	_checkScrollingControls() {
-		if (this.disablePagination) {
+		if (this.disablePagination()) {
 			this._disableScrollAfter = this._disableScrollBefore = true;
 		} else {
 			// Check if the pagination arrows should be activated.
@@ -627,7 +626,7 @@ export abstract class BrnTabsPaginatedListDirective
 	 * @returns Information on the current scroll distance and the maximum.
 	 */
 	private _scrollTo(position: number) {
-		if (this.disablePagination) {
+		if (this.disablePagination()) {
 			return { maxScrollDistance: 0, distance: 0 };
 		}
 
