@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
 	displayName: 'ui-table-brain',
-	preset: '../../../../jest.preset.js',
+	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	coverageDirectory: '../../../../coverage/libs/ui/table/brain',
 	transform: {

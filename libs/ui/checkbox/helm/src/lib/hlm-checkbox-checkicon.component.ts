@@ -20,7 +20,7 @@ import { ClassValue } from 'clsx';
 export class HlmCheckboxCheckIconComponent {
 	private _brnCheckbox = inject(BrnCheckboxComponent);
 	protected _checked = this._brnCheckbox?.isChecked;
-	readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
 	public readonly iconName = input<string>('lucideCheck');
 

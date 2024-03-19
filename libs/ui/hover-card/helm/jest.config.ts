@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
 	displayName: 'ui-hover-card-helm',
-	preset: '../../../../jest.preset.js',
+	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	transform: {
 		'^.+\\.(ts|mjs|js|html)$': [

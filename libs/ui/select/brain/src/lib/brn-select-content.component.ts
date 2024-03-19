@@ -1,10 +1,12 @@
 import { CdkListbox, ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { NgTemplateOutlet } from '@angular/common';
 import {
+	AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
 	ContentChildren,
+	DestroyRef,
 	ElementRef,
 	QueryList,
 	ViewChild,
@@ -12,7 +14,8 @@ import {
 	inject,
 	signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectScrollDownDirective } from './brn-select-scroll-down.directive';
 import { BrnSelectScrollUpDirective } from './brn-select-scroll-up.directive';
@@ -78,15 +81,18 @@ import { BrnSelectService } from './brn-select.service';
 		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn ? scrollDown : null" />
 	`,
 })
-export class BrnSelectContentComponent {
+export class BrnSelectContentComponent implements AfterViewInit {
 	private readonly _el: ElementRef<HTMLElement> = inject(ElementRef);
 	private readonly _cdkListbox = inject(CdkListbox, { host: true });
+	private readonly destroyRef = inject(DestroyRef);
 	protected readonly _selectService = inject(BrnSelectService);
 
 	protected readonly labelledBy = this._selectService.labelId;
 	protected readonly id = this._selectService.id;
 	protected readonly canScrollUp = signal(false);
 	protected readonly canScrollDown = signal(false);
+
+	protected selectedOptions$ = toObservable(this._selectService.selectedOptions);
 
 	@ViewChild('viewport')
 	protected viewport!: ElementRef<HTMLElement>;
@@ -109,6 +115,21 @@ export class BrnSelectContentComponent {
 		effect(() => {
 			this._cdkListbox.multiple = this._selectService.multiple();
 			this._selectService.isExpanded() && setTimeout(() => this.updateArrowDisplay());
+		});
+	}
+
+	ngAfterViewInit(): void {
+		this.setInitiallySelectedOptions();
+	}
+
+	private setInitiallySelectedOptions() {
+		this.selectedOptions$.pipe(take(1), takeUntilDestroyed(this.destroyRef)).subscribe((selectedOptions) => {
+			// Reapplying cdkLibstbox multiple because seems this is running before effect that
+			// updates cdklistbox, reapplying multiple true so we can set the multiple initial options
+			if (this._selectService.multiple()) {
+				this._cdkListbox.multiple = true;
+			}
+			selectedOptions.forEach((cdkOption) => cdkOption?.select());
 		});
 	}
 

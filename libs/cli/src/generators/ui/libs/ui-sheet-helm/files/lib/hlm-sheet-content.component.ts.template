@@ -56,6 +56,6 @@ export class HlmSheetContentComponent {
 		});
 	}
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() => hlm(sheetVariants({ side: this._sideProvider.side() }), this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(sheetVariants({ side: this._sideProvider.side() }), this.userClass()));
 }

@@ -3,9 +3,11 @@
 	"version": "0.0.1-alpha.10",
 	"peerDependencies": {
 		"@angular/core": "^17.1.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.336",
+		"@angular/common": "^17.1.0",
+		"@angular/cdk": "^17.1.0",
+		"@spartan-ng/ui-core": "0.0.1-alpha.337",
 		"clsx": "^1.2.1",
-		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.336",
+		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.337",
 		"@ng-icons/lucide": "^26.3.0"
 	},
 	"dependencies": {},

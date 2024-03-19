@@ -32,7 +32,7 @@ export class HlmCaptionComponent {
 
 	protected readonly id = input<string | null | undefined>(`${captionIdSequence++}`);
 
-	private readonly hidden = input(false, { transform: booleanAttribute });
+	public readonly hidden = input(false, { transform: booleanAttribute });
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
 		hlm(

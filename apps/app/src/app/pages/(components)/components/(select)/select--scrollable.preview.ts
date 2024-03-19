@@ -11,7 +11,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 			<hlm-select-trigger class="w-[280px]">
 				<hlm-select-value />
 			</hlm-select-trigger>
-			<hlm-select-content class="min-w-content max-h-96">
+			<hlm-select-content class="max-h-96 min-w-[325px]">
 				<hlm-select-scroll-up />
 
 				<hlm-select-group>
@@ -81,7 +81,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 			<hlm-select-trigger class="w-[280px]">
 				<hlm-select-value />
 			</hlm-select-trigger>
-			<hlm-select-content class="min-w-content max-h-96">
+			<hlm-select-content class="max-h-96 min-w-[325px]">
 				<hlm-select-scroll-up/>
 
 				<hlm-select-group>
