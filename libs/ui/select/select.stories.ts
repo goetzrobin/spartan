@@ -36,7 +36,7 @@ export const Default: Story = {
 				<hlm-select-trigger class="w-56">
 					<hlm-select-value />
 				</hlm-select-trigger>
-				<hlm-select-content class="w-56">
+				<hlm-select-content>
 					<hlm-select-label>Fruits</hlm-select-label>
 					<hlm-option value="apple">Apple</hlm-option>
 					<hlm-option value="banana">Banana</hlm-option>
@@ -61,7 +61,7 @@ export const ReactiveFormControl: Story = {
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
-					<hlm-select-content class="w-56">
+					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
 						<hlm-option value="apple">Apple</hlm-option>
 						<hlm-option value="banana">Banana</hlm-option>
@@ -95,7 +95,7 @@ export const ReactiveFormControlWithValidation: Story = {
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
-					<hlm-select-content class="w-56">
+					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
 						<hlm-option value="apple">Apple</hlm-option>
 						<hlm-option value="banana">Banana</hlm-option>
@@ -132,7 +132,7 @@ export const ReactiveFormControlWithValidationWithLabel: Story = {
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
-					<hlm-select-content class="w-56">
+					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
 						<hlm-option value="apple">Apple</hlm-option>
 						<hlm-option value="banana">Banana</hlm-option>
@@ -163,7 +163,7 @@ export const NgModelFormControl: Story = {
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
-					<hlm-select-content class="w-56">
+					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
 						<hlm-option value="apple">Apple</hlm-option>
 						<hlm-option value="banana">Banana</hlm-option>

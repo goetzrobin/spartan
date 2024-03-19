@@ -19,6 +19,7 @@ export class BrnSelectService {
 		dir: BrnReadDirection;
 		selectedOptions: Array<CdkOption | null>;
 		value: string | string[];
+		triggerWidth: number;
 	}>({
 		id: '',
 		labelId: '',
@@ -30,6 +31,7 @@ export class BrnSelectService {
 		dir: 'ltr',
 		selectedOptions: [],
 		value: '',
+		triggerWidth: 0,
 	});
 
 	public readonly id = computed(() => this.state().id);
@@ -42,6 +44,7 @@ export class BrnSelectService {
 	public readonly dir = computed(() => this.state().dir);
 	public readonly selectedOptions = computed(() => this.state().selectedOptions);
 	public readonly value = computed(() => this.state().value);
+	public readonly triggerWidth = computed(() => this.state().triggerWidth);
 	private readonly possibleOptions = signal<Array<CdkOption | null>>([]);
 
 	private readonly multiple$ = toObservable(this.multiple);
@@ -70,6 +73,10 @@ export class BrnSelectService {
 				this.deselectAllOptions();
 			}
 		});
+	}
+
+	public setTriggerWidth(triggerWidth: number) {
+		this.state.update((s) => ({ ...s, triggerWidth }));
 	}
 
 	public getUpdatedOptions(latestListboxChange: ListboxValueChangeEvent<unknown>): Array<CdkOption | null> {
