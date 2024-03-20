@@ -13,19 +13,14 @@ import { booleanAttribute, Directive, inject, Input, Output, signal } from '@ang
 export class BrnMenuItemRadioDirective {
 	private readonly _cdkMenuItem = inject(CdkMenuItemRadio, { host: true });
 
-	get checked() {
-		return this._checked();
-	}
-
-	get disabled() {
-		return this._disabled();
-	}
-
 	protected readonly _checked = signal(this._cdkMenuItem.checked);
 	@Input({ transform: booleanAttribute })
 	set checked(value: boolean) {
 		this._cdkMenuItem.checked = value;
 		this._checked.set(value);
+	}
+	get checked() {
+		return this._checked();
 	}
 
 	protected readonly _disabled = signal(this._cdkMenuItem.disabled);
@@ -33,6 +28,9 @@ export class BrnMenuItemRadioDirective {
 	set disabled(value: boolean) {
 		this._cdkMenuItem.disabled = value;
 		this._disabled.set(value);
+	}
+	get disabled() {
+		return this._disabled();
 	}
 
 	@Output()

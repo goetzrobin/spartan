@@ -36,7 +36,7 @@ import { ClassValue } from 'clsx';
 })
 export class HlmThComponent {
 	private readonly _columnDef? = inject(BrnColumnDefComponent, { optional: true });
-	protected readonly truncate = input(false, { transform: booleanAttribute });
+	public readonly truncate = input(false, { transform: booleanAttribute });
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>

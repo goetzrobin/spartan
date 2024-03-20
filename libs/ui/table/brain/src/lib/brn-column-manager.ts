@@ -1,11 +1,19 @@
 import { computed, Signal, signal } from '@angular/core';
 
-export type BrnColumnVisibility = Record<string, boolean | { visible: boolean }>;
+type BrnColumnVisibility = Record<string, boolean> | Record<string, { visible: boolean }>;
+
+type AllColumnsPropertyType<T> =
+	T extends Record<string, boolean>
+		? keyof T[]
+		: T extends Record<string, infer R>
+			? (R extends { visible: boolean } ? { name: keyof T } & R : never)[]
+			: never;
+
 export class BrnColumnManager<T extends BrnColumnVisibility> {
 	private readonly _initialColumnVisibility: T;
 	private readonly _columnVisibility;
 
-	public readonly allColumns: (keyof T)[] | { name: string; visible: boolean }[];
+	public readonly allColumns: AllColumnsPropertyType<T>;
 	public readonly columnVisibility;
 	public readonly displayedColumns: Signal<(keyof T)[]> = computed(() => {
 		return Object.entries(this._columnVisibility())
@@ -15,14 +23,10 @@ export class BrnColumnManager<T extends BrnColumnVisibility> {
 
 	constructor(initialColumnVisibility: T) {
 		this._initialColumnVisibility = initialColumnVisibility;
-		const initialEntries = Object.entries(this._initialColumnVisibility);
-		this.allColumns =
-			typeof initialEntries[0][1] === 'boolean'
-				? Object.keys(this._initialColumnVisibility)
-				: initialEntries.map((e) => ({ name: e[0], ...(e[1] as { visible: boolean }) }));
 		this._columnVisibility = signal(this._initialColumnVisibility);
 		this._columnVisibility.set(this._initialColumnVisibility);
 		this.columnVisibility = this._columnVisibility.asReadonly();
+		this.allColumns = this.createAllColumns(this._initialColumnVisibility);
 	}
 
 	public readonly isColumnVisible = (columnName: string) => {
@@ -51,6 +55,25 @@ export class BrnColumnManager<T extends BrnColumnVisibility> {
 		const columnEntry = visibilityMap[columnName];
 		const newVisibilityState = typeof columnEntry === 'boolean' ? false : { visible: false };
 		this._columnVisibility.set({ ...visibilityMap, [columnName]: newVisibilityState });
+	}
+
+	private createAllColumns(initialColumnVisibility: T): AllColumnsPropertyType<T> {
+		const keys = Object.keys(initialColumnVisibility) as (keyof T)[];
+		if (this.isBooleanConfig(initialColumnVisibility)) {
+			return keys as unknown as AllColumnsPropertyType<T>;
+		} else {
+			return keys.map((key) => {
+				const values = initialColumnVisibility[key] as { visible: boolean };
+				return {
+					name: key,
+					...values,
+				};
+			}) as AllColumnsPropertyType<T>;
+		}
+	}
+
+	private isBooleanConfig(config: any): config is Record<string, boolean> {
+		return typeof Object.values(config)[0] === 'boolean';
 	}
 }
 

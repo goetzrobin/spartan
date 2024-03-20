@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Directive, ElementRef, inject, Input, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { NgControl } from '@angular/forms';
 
 let nextId = 0;
 
@@ -8,10 +9,15 @@ let nextId = 0;
 	standalone: true,
 	host: {
 		'[id]': '_id()',
+		'[class.ng-invalid]': 'this._ngControl?.invalid || null',
+		'[class.ng-dirty]': 'this._ngControl?.dirty || null',
+		'[class.ng-valid]': 'this._ngControl?.valid || null',
+		'[class.ng-touched]': 'this._ngControl?.touched || null',
 	},
 })
 export class BrnLabelDirective implements OnInit {
 	protected readonly _id = signal(`brn-label-${nextId++}`);
+	protected readonly _ngControl = inject(NgControl, { optional: true });
 
 	@Input()
 	set id(id: string) {

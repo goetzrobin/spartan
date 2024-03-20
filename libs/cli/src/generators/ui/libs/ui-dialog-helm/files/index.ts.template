@@ -17,6 +17,7 @@ export * from './lib/hlm-dialog-header.component';
 export * from './lib/hlm-dialog-overlay.directive';
 export * from './lib/hlm-dialog-title.directive';
 export * from './lib/hlm-dialog.component';
+export * from './lib/hlm-dialog.service';
 
 export const HlmDialogImports = [
 	HlmDialogComponent,

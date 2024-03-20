@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
 	displayName: 'ui-icon-helm',
-	preset: '../../../../jest.preset.js',
+	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	coverageDirectory: '../../../../coverage/libs/ui/icon/helm',
 	transform: {

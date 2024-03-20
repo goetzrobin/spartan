@@ -13,6 +13,6 @@ export const hlmH2 =
 	},
 })
 export class HlmH2Directive {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() => hlm(hlmH2, this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(hlmH2, this.userClass()));
 }

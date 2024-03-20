@@ -12,6 +12,6 @@ export const hlmCode = 'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-m
 	},
 })
 export class HlmCodeDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() => hlm(hlmCode, this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(hlmCode, this.userClass()));
 }

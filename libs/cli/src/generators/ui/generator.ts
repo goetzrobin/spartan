@@ -42,6 +42,7 @@ async function createPrimitiveLibraries(
 
 	if (!response.primitives.includes('all')) {
 		await addIconForDependentPrimitive(primitivesToCreate, [
+			'accordion',
 			'alert',
 			'command',
 			'menu',

@@ -14,9 +14,9 @@ export class HlmProgressIndicatorDirective implements DoCheck {
 	private _renderer = inject(Renderer2);
 	private readonly _value = signal(0);
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('inline-flex transform-gpu h-full w-full flex-1 bg-primary transition-all', this._userClass()),
+		hlm('inline-flex transform-gpu h-full w-full flex-1 bg-primary transition-all', this.userClass()),
 	);
 
 	constructor() {
