@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
-	displayName: 'helm',
-	preset: '../../../../jest.preset.js',
+	displayName: 'ui-sonner-helm',
+	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	coverageDirectory: '../../../../coverage/libs/ui/sonner/helm',
 	transform: {
