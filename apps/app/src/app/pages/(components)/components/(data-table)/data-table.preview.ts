@@ -668,7 +668,7 @@ const PAYMENT_DATA: Payment[] = [
           (ngModelChange)="_pageSize.set($event)"
           hlmInput
           size="sm"
-          class="mr-1 inline-flex pr-8"
+          class="mr-1 inline-flex pr-8 dark:bg-black"
         >
           @for (size of _availablePageSizes; track size) {
             <option [value]="size">{{ size === 10000 ? 'All' : size }}</option>
