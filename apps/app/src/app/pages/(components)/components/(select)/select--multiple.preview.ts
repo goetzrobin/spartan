@@ -14,7 +14,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 			<hlm-select-trigger class="w-56">
 				<hlm-select-value />
 			</hlm-select-trigger>
-			<hlm-select-content class="w-56">
+			<hlm-select-content>
 				<hlm-option value="Apples">Apples</hlm-option>
 				<hlm-option value="Bananas">Bananas</hlm-option>
 				<hlm-option value="Pears">Pears</hlm-option>
@@ -42,7 +42,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
       <hlm-select-trigger class="w-56">
         <hlm-select-value />
       </hlm-select-trigger>
-      <hlm-select-content class="w-56">
+      <hlm-select-content>
         <hlm-option value="Apples">Apples</hlm-option>
         <hlm-option value="Bananas">Bananas</hlm-option>
         <hlm-option value="Pears">Pears</hlm-option>

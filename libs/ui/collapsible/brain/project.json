@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/collapsible/brain/**/*.ts",
-					"libs/ui/collapsible/brain/**/*.html",
-					"libs/ui/collapsible/brain/package.json",
-					"libs/ui/collapsible/brain/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

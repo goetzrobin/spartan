@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/accordion/helm/**/*.ts",
-					"libs/ui/accordion/helm/**/*.html",
-					"libs/ui/accordion/helm/package.json",
-					"libs/ui/accordion/helm/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

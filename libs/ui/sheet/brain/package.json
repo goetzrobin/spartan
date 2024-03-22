@@ -1,10 +1,10 @@
 {
 	"name": "@spartan-ng/ui-sheet-brain",
-	"version": "0.0.1-alpha.336",
+	"version": "0.0.1-alpha.337",
 	"peerDependencies": {
 		"@angular/core": "^17.1.0",
-		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.336",
-		"@spartan-ng/ui-core": "0.0.1-alpha.336"
+		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.337",
+		"@spartan-ng/ui-core": "0.0.1-alpha.337"
 	},
 	"dependencies": {},
 	"sideEffects": false,

@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/sheet/helm/**/*.ts",
-					"libs/ui/sheet/helm/**/*.html",
-					"libs/ui/sheet/helm/package.json",
-					"libs/ui/sheet/helm/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

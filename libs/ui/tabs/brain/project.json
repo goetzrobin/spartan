@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/tabs/brain/**/*.ts",
-					"libs/ui/tabs/brain/**/*.html",
-					"libs/ui/tabs/brain/package.json",
-					"libs/ui/tabs/brain/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/checkbox/brain/**/*.ts",
-					"libs/ui/checkbox/brain/**/*.html",
-					"libs/ui/checkbox/brain/package.json",
-					"libs/ui/checkbox/brain/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

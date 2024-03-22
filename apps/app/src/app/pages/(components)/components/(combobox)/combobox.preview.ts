@@ -40,7 +40,7 @@ type Framework = { label: string; value: string };
 				(click)="state.set('open')"
 				hlmBtn
 			>
-				{{ currentFramework() ? currentFramework().label : 'Select framework...' }}
+				{{ currentFramework() ? currentFramework()?.label : 'Select framework...' }}
 				<hlm-icon size="sm" name="lucideChevronsUpDown" />
 			</button>
 			<brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="w-[200px] p-0">

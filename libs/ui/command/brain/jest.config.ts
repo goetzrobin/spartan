@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
 	displayName: 'ui-command-brain',
-	preset: '../../../../jest.preset.js',
+	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	coverageDirectory: '../../../../coverage/libs/ui/command/brain',
 	transform: {
