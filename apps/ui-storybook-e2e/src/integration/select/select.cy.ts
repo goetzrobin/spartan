@@ -239,7 +239,7 @@ describe('select', () => {
 		});
 
 		it('should have form validation classes and reflect control status when assigned with initial value', () => {
-			cy.visit('/iframe.html?id=select--reactive-form-control-with-validation&args=initalValue:apple');
+			cy.visit('/iframe.html?id=select--reactive-form-control-with-validation&args=initialValue:apple');
 
 			// initial
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-untouched');
