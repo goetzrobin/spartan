@@ -42,6 +42,7 @@ module.exports = {
 				'sheet',
 				'skeleton',
 				'slider',
+				'sonner',
 				'spinner',
 				'switch',
 				'table',
