@@ -2,8 +2,8 @@
 	"name": "@spartan-ng/ui-command-brain",
 	"version": "0.0.1-alpha.337",
 	"peerDependencies": {
-		"@angular/common": "^17.1.0",
-		"@angular/core": "^17.1.0",
+		"@angular/common": "^17.3.0",
+		"@angular/core": "^17.3.0",
 		"@ngxpert/cmdk": "^1.0.0",
 		"@ngneat/overview": "^5.0.0",
 		"@ngneat/until-destroy": "^10.0.0"

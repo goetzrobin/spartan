@@ -1,5 +1,5 @@
 // angular dependency
-export const FALLBACK_ANGULAR_VERSION = '^17.1.0';
+export const FALLBACK_ANGULAR_VERSION = '^17.3.0';
 // ng-icon dependency
 export const NG_ICONS_VERSION = '^25.1.0';
 // spartan dependencies
