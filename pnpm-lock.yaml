@@ -50,15 +50,15 @@ dependencies:
   '@ng-icons/core':
     specifier: ~25.2.0
     version: 25.2.0
-  '@ngneat/cmdk':
-    specifier: ^2.0.0
-    version: 2.0.0(@angular/common@17.3.0)(@angular/core@17.3.0)(rxjs@7.8.1)
   '@ngneat/overview':
     specifier: ^5.0.0
     version: 5.1.1(@angular/core@17.3.0)
   '@ngneat/until-destroy':
     specifier: ^10.0.0
     version: 10.0.0(@angular/core@17.3.0)(rxjs@7.8.1)
+  '@ngxpert/cmdk':
+    specifier: ^1.0.0
+    version: 1.0.0(@angular/common@17.3.0)(@angular/core@17.3.0)(rxjs@7.8.1)
   '@nx/angular':
     specifier: 18.0.8
     version: 18.0.8(@angular-devkit/build-angular@17.3.0)(@angular-devkit/core@17.3.0)(@angular-devkit/schematics@17.3.0)(@schematics/angular@17.0.0)(@swc-node/register@1.8.0)(@swc/core@1.3.96)(@types/node@18.19.21)(cypress@13.6.3)(esbuild@0.15.18)(eslint@8.48.0)(nx@18.0.8)(rxjs@7.8.1)(ts-node@10.9.1)(typescript@5.3.3)(verdaccio@5.29.0)
@@ -4918,22 +4918,6 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@ngneat/cmdk@2.0.0(@angular/common@17.3.0)(@angular/core@17.3.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-drGM1/iPlZx19i5x8lyPA/Thp0Znt+P5iOTHdL9ZEHLxkj+IKiPwmSMXuUIF2DuA0AOPGUIEhR6wGdicN9Fcyg==}
-    peerDependencies:
-      '@angular/common': '>=16.0.0'
-      '@angular/core': '>16.0.0'
-    dependencies:
-      '@angular/cdk': 17.1.1(@angular/common@17.3.0)(@angular/core@17.3.0)(rxjs@7.8.1)
-      '@angular/common': 17.3.0(@angular/core@17.3.0)(rxjs@7.8.1)
-      '@angular/core': 17.3.0(rxjs@7.8.1)(zone.js@0.14.2)
-      '@ngneat/overview': 5.1.1(@angular/core@17.3.0)
-      '@ngneat/until-destroy': 10.0.0(@angular/core@17.3.0)(rxjs@7.8.1)
-      tslib: 2.6.2
-    transitivePeerDependencies:
-      - rxjs
-    dev: false
-
   /@ngneat/overview@5.1.1(@angular/core@17.3.0):
     resolution: {integrity: sha512-Dz7yylhS08Mo+A8SXo7KyJBJMxD18Oq/G5v/ndvd5C8Gi3uOrAiXUjxvqRCPMxrg03FlkvEsD5/4TvMKtrUfAQ==}
     peerDependencies:
@@ -4978,6 +4962,22 @@ packages:
       '@angular/compiler-cli': 17.3.0(@angular/compiler@17.3.0)(typescript@5.3.3)
       typescript: 5.3.3
       webpack: 5.90.3(@swc/core@1.3.96)(esbuild@0.20.1)
+
+  /@ngxpert/cmdk@1.0.0(@angular/common@17.3.0)(@angular/core@17.3.0)(rxjs@7.8.1):
+    resolution: {integrity: sha512-PmZEKINJxWbGEE4GJ+iyB881z2YWETL1s8l2snqnmmVKCzTZjQruCY0JA8rLIAmLz6m9jlXUVj3Ox05i216tCQ==}
+    peerDependencies:
+      '@angular/common': '>=16.0.0'
+      '@angular/core': '>16.0.0'
+    dependencies:
+      '@angular/cdk': 17.1.1(@angular/common@17.3.0)(@angular/core@17.3.0)(rxjs@7.8.1)
+      '@angular/common': 17.3.0(@angular/core@17.3.0)(rxjs@7.8.1)
+      '@angular/core': 17.3.0(rxjs@7.8.1)(zone.js@0.14.2)
+      '@ngneat/overview': 5.1.1(@angular/core@17.3.0)
+      '@ngneat/until-destroy': 10.0.0(@angular/core@17.3.0)(rxjs@7.8.1)
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - rxjs
+    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

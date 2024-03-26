@@ -1,5 +1,5 @@
 import { Component, forwardRef } from '@angular/core';
-import { SeparatorComponent } from '@ngneat/cmdk';
+import { SeparatorComponent } from '@ngxpert/cmdk';
 
 @Component({
 	selector: 'brn-cmd-separator',

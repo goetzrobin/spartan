@@ -1,5 +1,5 @@
 import { Directive, forwardRef } from '@angular/core';
-import { EmptyDirective } from '@ngneat/cmdk';
+import { EmptyDirective } from '@ngxpert/cmdk';
 
 @Directive({
 	selector: '[brnCmdEmpty]',
