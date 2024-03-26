@@ -58,6 +58,7 @@ What kind of change does this PR introduce?
 - [ ] sheet
 - [ ] skeleton
 - [ ] slider
+- [ ] sonner
 - [ ] spinner
 - [ ] switch
 - [ ] table
