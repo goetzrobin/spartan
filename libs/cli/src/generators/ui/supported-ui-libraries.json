@@ -318,5 +318,12 @@
 			"clsx": "^1.2.1",
 			"ngx-sonner": "^0.3.4"
 		}
+	},
+	"helm": {
+		"internalName": "helm",
+		"peerDependencies": {
+			"@angular/common": "^17.1.0",
+			"@angular/core": "^17.1.0"
+		}
 	}
 }
