@@ -1,5 +1,5 @@
 import { Directive, effect, inject, signal } from '@angular/core';
-import { BrnDialogComponent } from './brn-dialog.component';
+import { BrnDialogRef } from './brn-dialog-ref';
 
 @Directive({
 	selector: '[brnDialogDescription]',
@@ -9,11 +9,13 @@ import { BrnDialogComponent } from './brn-dialog.component';
 	},
 })
 export class BrnDialogDescriptionDirective {
-	private _dialog = inject(BrnDialogComponent);
-	protected _id = signal('brn-dialog-description-' + this._dialog.dialogId);
+	private readonly _brnDialogRef = inject(BrnDialogRef);
+
+	protected _id = signal(`brn-dialog-description-${this._brnDialogRef?.dialogId}`);
+
 	constructor() {
 		effect(() => {
-			this._dialog.setAriaDescribedBy(this._id());
+			this._brnDialogRef.setAriaDescribedBy(this._id());
 		});
 	}
 }

@@ -20,7 +20,7 @@ jobs:
       # Required by wagoid/commitlint-github-action
       pull-requests: read
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           # Required by wagoid/commitlint-github-action
           fetch-depth: 0
@@ -33,16 +33,16 @@ jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
       - run: corepack enable
       - run: pnpm --version
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           cache: 'pnpm'
           cache-dependency-path: '**/pnpm-lock.yaml'
@@ -55,13 +55,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
       - run: corepack enable
       - run: pnpm --version
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           cache: 'pnpm'
           cache-dependency-path: '**/pnpm-lock.yaml'
@@ -75,13 +75,13 @@ jobs:
     needs:
       - build
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
       - run: corepack enable
       - run: pnpm --version
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           cache: 'pnpm'
           cache-dependency-path: '**/pnpm-lock.yaml'
@@ -95,13 +95,13 @@ jobs:
     needs:
       - build
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
       - run: corepack enable
       - run: pnpm --version
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           cache: 'pnpm'
           cache-dependency-path: '**/pnpm-lock.yaml'

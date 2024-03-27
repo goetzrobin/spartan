@@ -94,9 +94,9 @@ export class CodeComponent {
 		this._disableCopy = value;
 	}
 
-	private _language: 'ts' | 'sh' = 'ts';
+	private _language: 'ts' | 'sh' | 'js' = 'ts';
 	@Input()
-	set language(value: 'ts' | 'sh') {
+	set language(value: 'ts' | 'sh' | 'js') {
 		this._language = value;
 	}
 

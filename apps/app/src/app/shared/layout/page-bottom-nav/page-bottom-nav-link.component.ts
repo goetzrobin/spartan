@@ -28,10 +28,10 @@ export class PageBottomNavLinkComponent {
 	@Input()
 	label = '';
 
-	protected isAbsolute() {
+	protected get isAbsolute() {
 		return this.href.startsWith('/');
 	}
 	protected get routerLink() {
-		return this.isAbsolute() ? this.href : ['..', this.href];
+		return this.isAbsolute ? this.href : ['..', this.href];
 	}
 }

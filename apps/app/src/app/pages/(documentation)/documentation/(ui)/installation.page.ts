@@ -76,6 +76,7 @@ export const routeMeta: RouteMeta = {
 			</p>
 			<p class="${hlmP}">Simply add it to the presets array of your config file:</p>
 			<spartan-cli-tabs
+				language="js"
 				class="mb-6 mt-4"
 				nxCode="
 const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');

@@ -12,6 +12,6 @@ import { ClassValue } from 'clsx';
 	hostDirectives: [BrnAlertDialogTitleDirective],
 })
 export class HlmAlertDialogTitleDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly _computedClass = computed(() => hlm('text-lg font-semibold', this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() => hlm('text-lg font-semibold', this.userClass()));
 }

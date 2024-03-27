@@ -13,8 +13,8 @@ import { ClassValue } from 'clsx';
 	template: '<ng-content/>',
 })
 export class HlmMenuBarComponent {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('border-border flex h-10 items-center space-x-1 rounded-md border bg-background p-1', this._userClass()),
+		hlm('border-border flex h-10 items-center space-x-1 rounded-md border bg-background p-1', this.userClass()),
 	);
 }

@@ -43,6 +43,7 @@ What kind of change does this PR introduce?
 - [ ] dialog
 - [ ] dropdown-menu
 - [ ] hover-card
+- [ ] icon
 - [ ] input
 - [ ] label
 - [ ] menubar
@@ -57,6 +58,7 @@ What kind of change does this PR introduce?
 - [ ] sheet
 - [ ] skeleton
 - [ ] slider
+- [ ] sonner
 - [ ] spinner
 - [ ] switch
 - [ ] table

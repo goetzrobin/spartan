@@ -17,5 +17,5 @@ export class HlmSelectDirective {
 	set _class(classNames: ClassValue) {
 		this._classNames.set(classNames);
 	}
-	protected readonly _computedClass = computed(() => hlm('', this._classNames()));
+	protected readonly _computedClass = computed(() => hlm('space-y-2', this._classNames()));
 }

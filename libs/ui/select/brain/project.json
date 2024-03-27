@@ -3,7 +3,7 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/select/brain/src",
 	"prefix": "brn",
-	"tags": [],
+	"tags": ["scope:brain"],
 	"projectType": "library",
 	"targets": {
 		"build": {
@@ -31,13 +31,12 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
+			"outputs": ["{options.outputFile}"]
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
 			"options": {
-				"lintFilePatterns": [
-					"libs/ui/select/brain/**/*.ts",
-					"libs/ui/select/brain/**/*.html",
-					"libs/ui/select/brain/package.json"
-				]
+				"libName": "ui-select-brain"
 			}
 		}
 	}

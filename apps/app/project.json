@@ -15,7 +15,7 @@
 			],
 			"options": {
 				"configFile": "apps/app/vite.config.ts",
-				"outputPath": "dist/apps/app/client"
+				"outputPath": "dist/apps/app"
 			},
 			"defaultConfiguration": "production",
 			"configurations": {
@@ -61,10 +61,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": ["apps/app/**/*.ts", "apps/app/**/*.html"]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"test": {
 			"executor": "@nx/vite:test",
