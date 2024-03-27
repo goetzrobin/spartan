@@ -19,6 +19,7 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
+import { TypeOfStringPipe } from '@spartan-ng/ui-core';
 import { Subject } from 'rxjs';
 
 /**
@@ -36,7 +37,11 @@ import { Subject } from 'rxjs';
 			[style.visibility]="'hidden'"
 			#tooltip
 		>
-			<ng-container [ngTemplateOutlet]="template" />
+			@if (message | typeofString) {
+				{{ message }}
+			} @else {
+				<ng-container [ngTemplateOutlet]="message" />
+			}
 		</div>
 	`,
 	encapsulation: ViewEncapsulation.None,
@@ -48,7 +53,7 @@ import { Subject } from 'rxjs';
 		'(mouseleave)': '_handleMouseLeave($event)',
 		'aria-hidden': 'true',
 	},
-	imports: [NgTemplateOutlet],
+	imports: [NgTemplateOutlet, TypeOfStringPipe],
 })
 export class BrnTooltipContentComponent implements OnDestroy {
 	private readonly _cdr = inject(ChangeDetectorRef);
@@ -60,8 +65,7 @@ export class BrnTooltipContentComponent implements OnDestroy {
 	public readonly _tooltipClasses = signal('');
 	public readonly side = signal('above');
 	/** Message to display in the tooltip */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public template: TemplateRef<any> | null = null;
+	public message: string | TemplateRef<unknown> | null = null;
 
 	/** The timeout ID of any current timer set to show the tooltip */
 	private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
