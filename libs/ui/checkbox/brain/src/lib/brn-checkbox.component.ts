@@ -6,6 +6,7 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	computed,
+	DestroyRef,
 	effect,
 	ElementRef,
 	forwardRef,
@@ -20,6 +21,7 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
 
@@ -160,9 +162,12 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	public checkbox?: ElementRef<HTMLInputElement>;
 
 	public readonly changed = output<boolean | 'indeterminate'>();
+	private readonly destroyRef = inject(DestroyRef);
 
 	constructor() {
-		rxHostPressedListener().subscribe(() => this.handleChange());
+		rxHostPressedListener()
+			.pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe(() => this.handleChange());
 		effect(() => {
 			const parent = this._renderer.parentNode(this._elementRef.nativeElement);
 			if (!parent) return;

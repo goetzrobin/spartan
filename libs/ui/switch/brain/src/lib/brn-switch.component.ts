@@ -183,7 +183,7 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 		});
 	}
 
-	private handleChange() {
+	handleChange() {
 		if (this._disabled()) return;
 		const previousChecked = this._checked();
 		if (!this.checkbox) return;
