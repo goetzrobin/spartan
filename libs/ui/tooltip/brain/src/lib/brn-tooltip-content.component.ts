@@ -19,7 +19,6 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { TypeOfStringPipe } from '@spartan-ng/ui-core';
 import { Subject } from 'rxjs';
 
 /**
@@ -37,10 +36,10 @@ import { Subject } from 'rxjs';
 			[style.visibility]="'hidden'"
 			#tooltip
 		>
-			@if (message | typeofString) {
-				{{ message }}
+			@if (_isContentTypeofString(content)) {
+				{{ content }}
 			} @else {
-				<ng-container [ngTemplateOutlet]="message" />
+				<ng-container [ngTemplateOutlet]="content" />
 			}
 		</div>
 	`,
@@ -53,7 +52,7 @@ import { Subject } from 'rxjs';
 		'(mouseleave)': '_handleMouseLeave($event)',
 		'aria-hidden': 'true',
 	},
-	imports: [NgTemplateOutlet, TypeOfStringPipe],
+	imports: [NgTemplateOutlet],
 })
 export class BrnTooltipContentComponent implements OnDestroy {
 	private readonly _cdr = inject(ChangeDetectorRef);
@@ -65,7 +64,7 @@ export class BrnTooltipContentComponent implements OnDestroy {
 	public readonly _tooltipClasses = signal('');
 	public readonly side = signal('above');
 	/** Message to display in the tooltip */
-	public message: string | TemplateRef<unknown> | null = null;
+	public content: string | TemplateRef<unknown> | null = null;
 
 	/** The timeout ID of any current timer set to show the tooltip */
 	private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
@@ -154,6 +153,10 @@ export class BrnTooltipContentComponent implements OnDestroy {
 		this._cancelPendingAnimations();
 		this._onHide.complete();
 		this._triggerElement = undefined;
+	}
+
+	_isContentTypeofString(content: unknown): content is string {
+		return typeof content === 'string';
 	}
 
 	/**

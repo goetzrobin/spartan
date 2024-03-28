@@ -626,7 +626,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		// Must wait for the template to be painted to the tooltip so that the overlay can properly
 		// calculate the correct positioning based on the size of the tek-pate.
 		if (this._tooltipInstance) {
-			this._tooltipInstance.message = this.content;
+			this._tooltipInstance.content = this.content;
 			this._tooltipInstance._markForCheck();
 
 			this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._destroyed)).subscribe(() => {

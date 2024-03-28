@@ -59,7 +59,6 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 40. [badsgahhl](https://github.com/badsgahhl)
 41. [monacodelisa](https://github.com/monacodelisa)
 42. [tomdev9](https://github.com/tomdev9)
-43. [alexciesielski](https://github.com/alexciesielski)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
