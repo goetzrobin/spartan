@@ -13,6 +13,7 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
+import { TabsPaginatedPreviewComponent } from './tabs--paginated.preview';
 import { TabsVerticalPreviewComponent, verticalCode } from './tabs--vertical.preview';
 import { TabsPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './tabs.preview';
 
@@ -41,6 +42,7 @@ export const routeMeta: RouteMeta = {
 		TabsPreviewComponent,
 		InputPreviewComponent,
 		TabsVerticalPreviewComponent,
+		TabsPaginatedPreviewComponent,
 	],
 	template: `
 		<section spartanMainSection>
@@ -50,8 +52,10 @@ export const routeMeta: RouteMeta = {
 			/>
 
 			<spartan-tabs firstTab="Preview" secondTab="Code">
-				<div spartanCodePreview firstTab>
-					<spartan-tabs-preview />
+				<div spartanCodePreview firstTab class="flex-col">
+					<spartan-tabs-paginated />
+					<!-- FIXME does not scroll to tab 20 -->
+					<spartan-tabs-paginated activeTab="Tab 20" />
 				</div>
 				<spartan-code secondTab [code]="defaultCode" />
 			</spartan-tabs>
