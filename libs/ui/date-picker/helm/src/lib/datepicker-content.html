@@ -1,0 +1,46 @@
+<div
+	cdkTrapFocus
+	role="dialog"
+	[attr.aria-modal]="true"
+	[attr.aria-labelledby]="_dialogLabelId ?? undefined"
+	class="mat-datepicker-content-container flex flex-col justify-between"
+>
+	<hlm-calendar
+		[id]="datepicker.id"
+		[class.h-auto]="datepicker.calendarHeaderComponent"
+		[ngClass]="datepicker.panelClass"
+		[startAt]="datepicker.startAt"
+		[startView]="datepicker.startView"
+		[minDate]="datepicker._getMinDate()"
+		[maxDate]="datepicker._getMaxDate()"
+		[dateFilter]="datepicker._getDateFilter()"
+		[headerComponent]="datepicker.calendarHeaderComponent"
+		[selected]="_getSelected()"
+		[dateClass]="datepicker.dateClass"
+		[comparisonStart]="comparisonStart"
+		[comparisonEnd]="comparisonEnd"
+		[@fadeInCalendar]="'enter'"
+		[startDateAccessibleName]="startDateAccessibleName"
+		[endDateAccessibleName]="endDateAccessibleName"
+		(yearSelected)="datepicker._selectYear($event)"
+		(monthSelected)="datepicker._selectMonth($event)"
+		(viewChanged)="datepicker._viewChanged($event)"
+		(_userSelection)="_handleUserSelection($event)"
+		(_userDragDrop)="_handleUserDragDrop($event)"
+	/>
+
+	<ng-template [cdkPortalOutlet]="_actionsPortal" />
+
+	<!-- Invisible close button for screen reader users. -->
+	<button
+		type="button"
+		mat-raised-button
+		class="mat-datepicker-close-button sr-only absolute left-0 top-full mt-2"
+		[class.cdk-visually-hidden]="!_closeButtonFocused"
+		(focus)="_closeButtonFocused = true"
+		(blur)="_closeButtonFocused = false"
+		(click)="datepicker.close()"
+	>
+		{{ _closeButtonText }}
+	</button>
+</div>

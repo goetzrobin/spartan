@@ -1,0 +1,44 @@
+<ng-template [cdkPortalOutlet]="_calendarHeaderPortal"></ng-template>
+
+<div class="mat-calendar-content p-2 pb-0 outline-none" cdkMonitorSubtreeFocus tabindex="-1">
+	@switch (currentView) { @case ('month') {
+	<hlm-month-view
+		[(activeDate)]="activeDate"
+		[selected]="selected"
+		[dateFilter]="dateFilter"
+		[maxDate]="maxDate"
+		[minDate]="minDate"
+		[dateClass]="dateClass"
+		[comparisonStart]="comparisonStart"
+		[comparisonEnd]="comparisonEnd"
+		[startDateAccessibleName]="startDateAccessibleName"
+		[endDateAccessibleName]="endDateAccessibleName"
+		(_userSelection)="_dateSelected($event)"
+		(dragStarted)="_dragStarted($event)"
+		(dragEnded)="_dragEnded($event)"
+		[activeDrag]="_activeDrag"
+	/>
+	} @case ('year') {
+	<hlm-year-view
+		[(activeDate)]="activeDate"
+		[selected]="selected"
+		[dateFilter]="dateFilter"
+		[maxDate]="maxDate"
+		[minDate]="minDate"
+		[dateClass]="dateClass"
+		(monthSelected)="_monthSelectedInYearView($event)"
+		(selectedChange)="_goToDateInView($event, 'month')"
+	/>
+	} @case ('multi-year') {
+	<hlm-multi-year-view
+		[(activeDate)]="activeDate"
+		[selected]="selected"
+		[dateFilter]="dateFilter"
+		[maxDate]="maxDate"
+		[minDate]="minDate"
+		[dateClass]="dateClass"
+		(yearSelected)="_yearSelectedInMultiYearView($event)"
+		(selectedChange)="_goToDateInView($event, 'year')"
+	/>
+	} }
+</div>

@@ -1,0 +1,51 @@
+<div class="mat-calendar-header p-2 pb-0">
+	<div class="mat-calendar-controls mx-[calc(33% / 7 - 16px)] my-[5%] flex items-center">
+		<button
+			hlmBtn
+			type="button"
+			[variant]="'ghost'"
+			(click)="currentPeriodClicked()"
+			[attr.aria-label]="periodButtonLabel"
+			[attr.aria-describedby]="_periodButtonLabelId"
+			aria-live="polite"
+		>
+			<span aria-hidden="true">{{periodButtonText}}</span>
+			<svg
+				class="mat-calendar-arrow ml-[5px] inline-block h-[5px] w-[10px]"
+				[class.mat-calendar-invert]="calendar.currentView !== 'month'"
+				viewBox="0 0 10 5"
+				focusable="false"
+				aria-hidden="true"
+			>
+				<polygon points="0,0 5,5 10,0" />
+			</svg>
+		</button>
+
+		<div class="mat-calendar-spacer flex-auto"></div>
+
+		<ng-content></ng-content>
+
+		<button
+			hlmBtn
+			type="button"
+			[variant]="'ghost'"
+			[disabled]="!previousEnabled()"
+			(click)="previousClicked()"
+			[attr.aria-label]="prevButtonLabel"
+		>
+			<hlm-icon [name]="'radixChevronLeft'" />
+		</button>
+
+		<button
+			hlmBtn
+			type="button"
+			[variant]="'ghost'"
+			[disabled]="!nextEnabled()"
+			(click)="nextClicked()"
+			[attr.aria-label]="nextButtonLabel"
+		>
+			<hlm-icon [name]="'radixChevronRight'" />
+		</button>
+	</div>
+</div>
+<label [id]="_periodButtonLabelId" class="mat-calendar-hidden-label">{{periodButtonDescription}}</label>
