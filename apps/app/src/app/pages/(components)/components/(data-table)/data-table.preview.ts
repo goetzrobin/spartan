@@ -14,6 +14,8 @@ import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
 import { debounceTime, map } from 'rxjs';
+import { BrnSelectModule } from '@spartan-ng/ui-select-brain';
+import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
 
 export type Payment = {
 	id: string;
@@ -165,7 +167,10 @@ const PAYMENT_DATA: Payment[] = [
 		HlmInputDirective,
 
 		HlmCheckboxCheckIconComponent,
-		HlmCheckboxComponent,
+    HlmCheckboxComponent,
+    
+    BrnSelectModule,
+    HlmSelectModule
 	],
 	providers: [provideIcons({ lucideChevronDown, lucideMoreHorizontal, lucideArrowUpDown })],
 	host: {
@@ -272,17 +277,20 @@ const PAYMENT_DATA: Payment[] = [
 		>
 			<span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
 			<div class="mt-2 flex sm:mt-0">
-				<select
-					[ngModel]="_pageSize()"
-					(ngModelChange)="_pageSize.set($event)"
-					hlmInput
-					size="sm"
-					class="mr-1 inline-flex pr-8 dark:bg-black"
-				>
-					@for (size of _availablePageSizes; track size) {
-						<option [value]="size">{{ size === 10000 ? 'All' : size }}</option>
-					}
-				</select>
+
+        <brn-select class="inline-block" placeholder={{_availablePageSizes[0]}} 
+          [ngModel]="_pageSize()"(ngModelChange)="_pageSize.set($event)">
+          <hlm-select-trigger class="w-15 h-9 mr-1 inline-flex">
+            <hlm-select-value />
+          </hlm-select-trigger>
+          <hlm-select-content>
+            @for (size of _availablePageSizes; track size) {
+						  <hlm-option [value]="size">
+                {{ size === 10000 ? 'All' : size }}
+              </hlm-option>
+					  }
+			    </hlm-select-content>
+        </brn-select>
 
 				<div class="flex space-x-1">
 					<button size="sm" variant="outline" hlmBtn [disabled]="!ctx.decrementable()" (click)="ctx.decrement()">
@@ -405,6 +413,8 @@ import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
 import { debounceTime, map } from 'rxjs';
+import { BrnSelectModule } from '@spartan-ng/ui-select-brain';
+import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
 
 export type Payment = {
   id: string;
@@ -663,17 +673,20 @@ const PAYMENT_DATA: Payment[] = [
     >
       <span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
       <div class="mt-2 flex sm:mt-0">
-        <select
-          [ngModel]="_pageSize()"
-          (ngModelChange)="_pageSize.set($event)"
-          hlmInput
-          size="sm"
-          class="mr-1 inline-flex pr-8 dark:bg-black"
-        >
-          @for (size of _availablePageSizes; track size) {
-            <option [value]="size">{{ size === 10000 ? 'All' : size }}</option>
-          }
-        </select>
+
+        <brn-select class="inline-block" placeholder={{_availablePageSizes[0]}} 
+          [ngModel]="_pageSize()"(ngModelChange)="_pageSize.set($event)">
+          <hlm-select-trigger class="w-15 h-9 mr-1 inline-flex">
+            <hlm-select-value />
+          </hlm-select-trigger>
+          <hlm-select-content>
+            @for (size of _availablePageSizes; track size) {
+              <hlm-option [value]="size">
+                {{ size === 10000 ? 'All' : size }}
+              </hlm-option>
+            }
+          </hlm-select-content>
+        </brn-select>
 
         <div class="flex space-x-1">
           <button size="sm" variant="outline" hlmBtn [disabled]="!ctx.decrementable()" (click)="ctx.decrement()">
