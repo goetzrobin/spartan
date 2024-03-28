@@ -52,6 +52,13 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 33. [jstnjs](https://github.com/jstnjs)
 34. [r3ps4J](https://github.com/r3ps4J)
 35. [Celtian](https://github.com/Celtian)
+36. [miljan-code](https://github.com/miljan-code)
+37. [alexciesielski](https://github.com/alexciesielski)
+38. [ty-ler](https://github.com/ty-ler)
+39. [MatznRisto](https://github.com/MatznRisto)
+40. [badsgahhl](https://github.com/badsgahhl)
+41. [monacodelisa](https://github.com/monacodelisa)
+42. [tomdev9](https://github.com/tomdev9)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 

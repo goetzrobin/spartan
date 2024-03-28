@@ -1,9 +1,10 @@
 {
 	"name": "@spartan-ng/ui-label-brain",
-	"version": "0.0.1-alpha.337",
+	"version": "0.0.1-alpha.342",
 	"peerDependencies": {
-		"@angular/common": "^17.1.0",
-		"@angular/core": "^17.1.0"
+		"@angular/common": "^17.3.0",
+		"@angular/core": "^17.3.0",
+		"@angular/forms": "^17.3.0"
 	},
 	"dependencies": {},
 	"sideEffects": false,

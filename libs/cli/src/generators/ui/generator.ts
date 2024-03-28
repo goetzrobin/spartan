@@ -49,6 +49,7 @@ async function createPrimitiveLibraries(
 			'checkbox',
 			'pagination',
 			'select',
+			'sonner',
 		]);
 		await addButtonForDependentPrimitive(primitivesToCreate, ['alertdialog', 'command', 'pagination']);
 	}
@@ -101,7 +102,6 @@ const addIconForDependentPrimitive = async (primitivesToCreate: string[], primit
 	}
 
 	if (primitivesDependingOnIcon.some((primitive) => primitivesToCreate.includes(primitive))) {
-		//TODO: Need to check if icon is already installed and skip if it already is
 		const installIcon = (
 			await prompt({
 				type: 'confirm',
@@ -122,7 +122,6 @@ const addButtonForDependentPrimitive = async (primitivesToCreate: string[], prim
 	}
 
 	if (primitivesDependingOnBtn.some((primitive) => primitivesToCreate.includes(primitive))) {
-		//TODO: Need to check if icon is already installed and skip if it already is
 		const installBtn = (
 			await prompt({
 				type: 'confirm',

@@ -53,6 +53,7 @@ export class HlmLabelDirective {
 				error: this._error(),
 				disabled: this._brn?.dataDisabled() ?? 'auto',
 			}),
+			'[&.ng-invalid.ng-touched]:text-destructive',
 			this.userClass(),
 		),
 	);
