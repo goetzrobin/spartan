@@ -6,6 +6,7 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	DestroyRef,
 	effect,
 	ElementRef,
 	forwardRef,
@@ -20,6 +21,7 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
 
@@ -153,9 +155,12 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 
 	public readonly changed = output<boolean>();
 	public readonly touched = output<void>();
+	private readonly destroyRef = inject(DestroyRef);
 
 	constructor() {
-		rxHostPressedListener().subscribe(() => this.handleChange());
+		rxHostPressedListener()
+			.pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe(() => this.handleChange());
 		effect(() => {
 			/** search for the label and set the disabled state */
 			let parent = this._renderer.parentNode(this._elementRef.nativeElement);
@@ -178,7 +183,7 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 		});
 	}
 
-	handleChange() {
+	private handleChange() {
 		if (this._disabled()) return;
 		const previousChecked = this._checked();
 		if (!this.checkbox) return;
