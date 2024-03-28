@@ -10,6 +10,8 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
+import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
+import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng/ui-table-brain';
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
@@ -166,6 +168,9 @@ const PAYMENT_DATA: Payment[] = [
 
 		HlmCheckboxCheckIconComponent,
 		HlmCheckboxComponent,
+
+		BrnSelectImports,
+		HlmSelectImports,
 	],
 	providers: [provideIcons({ lucideChevronDown, lucideMoreHorizontal, lucideArrowUpDown })],
 	host: {
@@ -272,18 +277,20 @@ const PAYMENT_DATA: Payment[] = [
 		>
 			<span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
 			<div class="mt-2 flex sm:mt-0">
-				<select
-					[ngModel]="_pageSize()"
-					(ngModelChange)="_pageSize.set($event)"
-					hlmInput
-					size="sm"
-					class="mr-1 inline-flex pr-8"
-				>
-					@for (size of _availablePageSizes; track size) {
-						<option [value]="size">{{ size === 10000 ? 'All' : size }}</option>
-					}
-				</select>
-
+				<form ngForm>
+					<hlm-select class="mr-1 inline-block" [(ngModel)]="_pageSize" name="page-size">
+						<hlm-select-trigger class="h-9 w-20 py-0">
+							<brn-select-value hlm />
+						</hlm-select-trigger>
+						<hlm-select-content class="w-20 min-w-0 space-y-1">
+							<hlm-option value="5">5</hlm-option>
+							<hlm-option value="10">10</hlm-option>
+							<hlm-option value="20">20</hlm-option>
+							<hlm-option value="200">200</hlm-option>
+							<hlm-option value="1000">All</hlm-option>
+						</hlm-select-content>
+					</hlm-select>
+				</form>
 				<div class="flex space-x-1">
 					<button size="sm" variant="outline" hlmBtn [disabled]="!ctx.decrementable()" (click)="ctx.decrement()">
 						Previous
@@ -302,8 +309,10 @@ export class DataTablePreviewComponent {
 	private readonly _debouncedFilter = toSignal(toObservable(this._rawFilterInput).pipe(debounceTime(300)));
 
 	private readonly _displayedIndices = signal({ start: 0, end: 0 });
-	protected readonly _availablePageSizes = [5, 10, 20, 10000];
-	protected readonly _pageSize = signal(this._availablePageSizes[0]);
+	protected readonly _availablePageSizes = [5, 10, 20, 200, 10000];
+
+	protected readonly _defaultValue = this._availablePageSizes[0];
+	protected readonly _pageSize = signal(this._availablePageSizes[0].toString());
 
 	private readonly _selectionModel = new SelectionModel<Payment>(true);
 	protected readonly _isPaymentSelected = (payment: Payment) => this._selectionModel.isSelected(payment);
@@ -663,17 +672,21 @@ const PAYMENT_DATA: Payment[] = [
     >
       <span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
       <div class="mt-2 flex sm:mt-0">
-        <select
-          [ngModel]="_pageSize()"
-          (ngModelChange)="_pageSize.set($event)"
-          hlmInput
-          size="sm"
-          class="mr-1 inline-flex pr-8"
-        >
-          @for (size of _availablePageSizes; track size) {
-            <option [value]="size">{{ size === 10000 ? 'All' : size }}</option>
-          }
-        </select>
+        <form [formGroup]="_pageSize">  
+        <hlm-select
+          formControlName="fruit"
+          class="mr-1 inline-block">
+          <hlm-select-trigger class="w-20 py-0 h-9">
+            <brn-select-value hlm/>
+          </hlm-select-trigger>
+          <hlm-select-content class="space-y-1 min-w-0 w-20">
+            @for (size of _availablePageSizes; track size) {
+              <hlm-option [value]="size">{{ size === 10000 ? 'All' : size }}</hlm-option>
+            }
+          </hlm-select-content>
+        </hlm-select>
+      </form>
+
 
         <div class="flex space-x-1">
           <button size="sm" variant="outline" hlmBtn [disabled]="!ctx.decrementable()" (click)="ctx.decrement()">
@@ -694,7 +707,8 @@ export class DataTablePreviewComponent {
 
   private readonly _displayedIndices = signal({ start: 0, end: 0 });
   protected readonly _availablePageSizes = [5, 10, 20, 10000];
-  protected readonly _pageSize = signal(this._availablePageSizes[0]);
+  // protected readonly _pageSize = signal(this._availablePageSizes[0]);
+  _pageSize = new FormGroup({ fruit: new FormControl("apple") });
 
   private readonly _selectionModel = new SelectionModel<Payment>(true);
   protected readonly _isPaymentSelected = (payment: Payment) => this._selectionModel.isSelected(payment);
