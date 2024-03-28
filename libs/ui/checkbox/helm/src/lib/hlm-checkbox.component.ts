@@ -1,14 +1,4 @@
-import {
-	Component,
-	EventEmitter,
-	Input,
-	Output,
-	booleanAttribute,
-	computed,
-	forwardRef,
-	input,
-	signal,
-} from '@angular/core';
+import { Component, Input, booleanAttribute, computed, forwardRef, input, output, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BrnCheckboxComponent, indeterminateBooleanAttribute } from '@spartan-ng/ui-checkbox-brain';
 import { hlm } from '@spartan-ng/ui-core';
@@ -82,8 +72,7 @@ export class HlmCheckboxComponent {
 	public readonly checkIconName = input<string>('lucideCheck');
 	public readonly checkIconClass = input<string>('');
 
-	@Output()
-	public changed = new EventEmitter<boolean>();
+	public readonly changed = output<boolean>();
 
 	protected _handleChange(): void {
 		if (this.disabled()) return;

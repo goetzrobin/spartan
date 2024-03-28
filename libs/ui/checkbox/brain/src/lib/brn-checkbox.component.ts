@@ -8,13 +8,12 @@ import {
 	computed,
 	effect,
 	ElementRef,
-	EventEmitter,
 	forwardRef,
 	inject,
 	input,
 	Input,
 	OnDestroy,
-	Output,
+	output,
 	PLATFORM_ID,
 	Renderer2,
 	signal,
@@ -160,8 +159,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	@ViewChild('checkBox', { static: true })
 	public checkbox?: ElementRef<HTMLInputElement>;
 
-	@Output()
-	public readonly changed = new EventEmitter<boolean | 'indeterminate'>();
+	public readonly changed = output<boolean | 'indeterminate'>();
 
 	constructor() {
 		rxHostPressedListener().subscribe(() => this.handleChange());
