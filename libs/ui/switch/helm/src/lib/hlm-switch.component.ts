@@ -1,14 +1,4 @@
-import {
-	Component,
-	EventEmitter,
-	Input,
-	Output,
-	booleanAttribute,
-	computed,
-	forwardRef,
-	input,
-	signal,
-} from '@angular/core';
+import { Component, Input, booleanAttribute, computed, forwardRef, input, output, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui-switch-brain';
@@ -59,8 +49,7 @@ export class HlmSwitchComponent {
 		),
 	);
 
-	@Output()
-	public changed = new EventEmitter<boolean>();
+	public readonly changed = output<boolean>();
 
 	protected _handleChange(value: boolean): void {
 		this._checked.set(value);
