@@ -4,9 +4,9 @@
 	"peerDependencies": {
 		"@angular/core": "^17.3.0",
 		"@angular/forms": "^17.3.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.337",
+		"@spartan-ng/ui-core": "0.0.1-alpha.343",
 		"clsx": "^1.2.1",
-		"@spartan-ng/ui-switch-brain": "0.0.1-alpha.337"
+		"@spartan-ng/ui-switch-brain": "0.0.1-alpha.343"
 	},
 	"dependencies": {},
 	"sideEffects": false,
