@@ -277,12 +277,7 @@ const PAYMENT_DATA: Payment[] = [
 		>
 			<span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
 			<div class="mt-2 flex sm:mt-0">
-				<brn-select
-					class="inline-block"
-					placeholder="{{ _availablePageSizes[0] }}"
-					[ngModel]="_pageSize()"
-					(ngModelChange)="_pageSize.set($event)"
-				>
+				<brn-select class="inline-block" placeholder="{{ _availablePageSizes[0] }}" [(ngModel)]="_pageSize">
 					<hlm-select-trigger class="w-15 mr-1 inline-flex h-9">
 						<hlm-select-value />
 					</hlm-select-trigger>
@@ -414,10 +409,10 @@ import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
 import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng/ui-table-brain';
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
-import { hlmMuted } from '@spartan-ng/ui-typography-helm';
-import { debounceTime, map } from 'rxjs';
 import { BrnSelectModule } from '@spartan-ng/ui-select-brain';
 import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
+import { hlmMuted } from '@spartan-ng/ui-typography-helm';
+import { debounceTime, map } from 'rxjs';
 
 export type Payment = {
   id: string;
@@ -570,6 +565,9 @@ const PAYMENT_DATA: Payment[] = [
 
     HlmCheckboxCheckIconComponent,
     HlmCheckboxComponent,
+
+    BrnSelectModule,
+	  HlmSelectModule,
   ],
   providers: [provideIcons({ lucideChevronDown, lucideMoreHorizontal, lucideArrowUpDown })],
   host: {
@@ -676,10 +674,8 @@ const PAYMENT_DATA: Payment[] = [
     >
       <span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
       <div class="mt-2 flex sm:mt-0">
-
-        <brn-select class="inline-block" placeholder={{_availablePageSizes[0]}} 
-          [ngModel]="_pageSize()"(ngModelChange)="_pageSize.set($event)">
-          <hlm-select-trigger class="w-15 h-9 mr-1 inline-flex">
+        <brn-select class="inline-block" placeholder="{{ _availablePageSizes[0] }}" [(ngModel)]="_pageSize">
+          <hlm-select-trigger class="w-15 mr-1 inline-flex h-9">
             <hlm-select-value />
           </hlm-select-trigger>
           <hlm-select-content>
