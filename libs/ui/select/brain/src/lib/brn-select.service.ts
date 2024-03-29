@@ -18,6 +18,7 @@ export class BrnSelectService {
 		disabled: boolean;
 		dir: BrnReadDirection;
 		selectedOptions: Array<CdkOption | null>;
+		initialSelectedOptions: Array<CdkOption | null>;
 		value: string | string[];
 		triggerWidth: number;
 	}>({
@@ -30,6 +31,7 @@ export class BrnSelectService {
 		disabled: false,
 		dir: 'ltr',
 		selectedOptions: [],
+		initialSelectedOptions: [],
 		value: '',
 		triggerWidth: 0,
 	});
@@ -43,10 +45,12 @@ export class BrnSelectService {
 	public readonly multiple = computed(() => this.state().multiple);
 	public readonly dir = computed(() => this.state().dir);
 	public readonly selectedOptions = computed(() => this.state().selectedOptions);
+	public readonly initialSelectedOptions = computed(() => this.state().initialSelectedOptions);
 	public readonly value = computed(() => this.state().value);
 	public readonly triggerWidth = computed(() => this.state().triggerWidth);
-	private readonly possibleOptions = signal<Array<CdkOption | null>>([]);
+	public readonly possibleOptions = computed(() => this._possibleOptions());
 
+	private readonly _possibleOptions = signal<Array<CdkOption | null>>([]);
 	private readonly multiple$ = toObservable(this.multiple);
 
 	public readonly listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
@@ -104,14 +108,22 @@ export class BrnSelectService {
 	}
 
 	public registerOption(option: CdkOption | null) {
-		this.possibleOptions.update((options) => [...options, option]);
+		this._possibleOptions.update((options) => [...options, option]);
 	}
 
 	public deregisterOption(option: CdkOption | null) {
-		this.possibleOptions.update((options) => options.filter((o) => o !== option));
+		this._possibleOptions.update((options) => options.filter((o) => o !== option));
 	}
 
-	public selectOptionByValue(value: unknown) {
+	public setInitialSelectedOptions(value: unknown) {
+		this.selectOptionByValue(value);
+		this.state.update((state) => ({
+			...state,
+			initialSelectedOptions: this.selectedOptions(),
+		}));
+	}
+
+	private selectOptionByValue(value: unknown) {
 		if (value === null || value === undefined) {
 			this.state.update((state) => ({
 				...state,
@@ -121,32 +133,30 @@ export class BrnSelectService {
 			return;
 		}
 
-		const options = this.possibleOptions();
+		const options = this._possibleOptions();
 
-		if (typeof value === 'string' || Array.isArray(value)) {
-			if (this.multiple()) {
-				const selectedOptions = options.filter((option) => {
-					if (Array.isArray(value)) {
-						return value.includes(option?.value as string);
-					}
-					return value === option?.value;
-				});
-				this.state.update((state) => ({
-					...state,
-					selectedOptions,
-					value,
-				}));
-			} else {
-				const selectedOption = options.find((option) => option?.value === value);
-				if (!selectedOption) {
-					return;
+		if (this.multiple()) {
+			const selectedOptions = options.filter((option) => {
+				if (Array.isArray(value)) {
+					return value.includes(option?.value as string);
 				}
-				this.state.update((state) => ({
-					...state,
-					selectedOptions: [selectedOption as CdkOption | null],
-					value: selectedOption.value as string,
-				}));
+				return value === option?.value;
+			});
+			this.state.update((state) => ({
+				...state,
+				selectedOptions,
+				value: value as string[],
+			}));
+		} else {
+			const selectedOption = options.find((option) => option?.value === value);
+			if (!selectedOption) {
+				return;
 			}
+			this.state.update((state) => ({
+				...state,
+				selectedOptions: [selectedOption as CdkOption | null],
+				value: selectedOption.value as string,
+			}));
 		}
 	}
 }
