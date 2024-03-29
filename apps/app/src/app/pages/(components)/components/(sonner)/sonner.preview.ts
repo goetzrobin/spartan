@@ -35,7 +35,7 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 	imports: [HlmToasterComponent, HlmButtonDirective],
 	template: \`
 	  <hlm-toaster />
-		<button hlmBtn (click)="showToast()">Show Toast</button>
+	  <button hlmBtn (click)="showToast()">Show Toast</button>
 	\`,
 })
 export class SonnerPreviewComponent {
@@ -52,7 +52,7 @@ export class SonnerPreviewComponent {
 
 export const defaultImports = `
 import { toast } from 'ngx-sonner';
-import { HlmSwitchComponent } from '@spartan-ng/ui-sonner-helm';
+import { HlmToasterComponent } from '@spartan-ng/ui-sonner-helm';
 `;
 export const defaultSkeleton = `
 <hlm-toaster />
