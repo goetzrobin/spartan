@@ -277,7 +277,7 @@ const PAYMENT_DATA: Payment[] = [
 		>
 			<span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
 			<div class="mt-2 flex sm:mt-0">
-				<brn-select class="inline-block" placeholder="{{ _availablePageSizes[0] }}" [(ngModel)]="_pageSize">
+				<brn-select class="inline-block" [(ngModel)]="_pageSize">
 					<hlm-select-trigger class="w-15 mr-1 inline-flex h-9">
 						<hlm-select-value />
 					</hlm-select-trigger>
