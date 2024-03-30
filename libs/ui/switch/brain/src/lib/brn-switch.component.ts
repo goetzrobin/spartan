@@ -6,7 +6,6 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	DestroyRef,
 	effect,
 	ElementRef,
 	forwardRef,
@@ -155,11 +154,10 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 
 	public readonly changed = output<boolean>();
 	public readonly touched = output<void>();
-	private readonly destroyRef = inject(DestroyRef);
 
 	constructor() {
 		rxHostPressedListener()
-			.pipe(takeUntilDestroyed(this.destroyRef))
+			.pipe(takeUntilDestroyed())
 			.subscribe(() => this.handleChange());
 		effect(() => {
 			/** search for the label and set the disabled state */

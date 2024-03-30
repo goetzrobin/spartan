@@ -6,7 +6,6 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	computed,
-	DestroyRef,
 	effect,
 	ElementRef,
 	forwardRef,
@@ -162,11 +161,10 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	public checkbox?: ElementRef<HTMLInputElement>;
 
 	public readonly changed = output<boolean | 'indeterminate'>();
-	private readonly destroyRef = inject(DestroyRef);
 
 	constructor() {
 		rxHostPressedListener()
-			.pipe(takeUntilDestroyed(this.destroyRef))
+			.pipe(takeUntilDestroyed())
 			.subscribe(() => this.handleChange());
 		effect(() => {
 			const parent = this._renderer.parentNode(this._elementRef.nativeElement);
