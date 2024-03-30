@@ -68,6 +68,7 @@ export const Default: Story = {
 		<div class="p-40">
 			<button
 				(click)="disabled.set(!disabled())"
+				aria-describedby="Add to library"
 				[hlmTooltipTrigger]="'Add to library'"
 				[hlmTooltipDisabled]="disabled()"
 				hlmBtn
