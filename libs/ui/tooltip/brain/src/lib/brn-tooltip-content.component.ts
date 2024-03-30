@@ -36,7 +36,7 @@ import { Subject } from 'rxjs';
 			[style.visibility]="'hidden'"
 			#tooltip
 		>
-			@if (_isContentTypeofString(content)) {
+			@if (_isTypeOfString(content)) {
 				{{ content }}
 			} @else {
 				<ng-container [ngTemplateOutlet]="content" />
@@ -155,7 +155,7 @@ export class BrnTooltipContentComponent implements OnDestroy {
 		this._triggerElement = undefined;
 	}
 
-	_isContentTypeofString(content: unknown): content is string {
+	_isTypeOfString(content: unknown): content is string {
 		return typeof content === 'string';
 	}
 

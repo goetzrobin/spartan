@@ -47,6 +47,7 @@ import {
 	numberAttribute,
 	signal,
 } from '@angular/core';
+import { brnDevMode } from '@spartan-ng/ui-core';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { BrnTooltipContentComponent } from './brn-tooltip-content.component';
@@ -54,6 +55,8 @@ import { BrnTooltipDirective } from './brn-tooltip.directive';
 
 export type TooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before' | 'after';
 export type TooltipTouchGestures = 'auto' | 'on' | 'off';
+
+declare const ngDevMode: boolean;
 
 /** Time in ms to throttle repositioning after scroll events. */
 export const SCROLL_THROTTLE_MS = 20;
@@ -390,6 +393,10 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 					this._ngZone.run(() => this.show());
 				}
 			});
+
+		if (brnDevMode && !this._ariaDescribedBy) {
+			console.warn('BrnTooltip: "aria-describedby" attribute is required for accessibility');
+		}
 	}
 
 	/**
