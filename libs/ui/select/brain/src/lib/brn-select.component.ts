@@ -283,7 +283,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public writeValue(value: any): void {
-		this._selectService.selectOptionByValue(value);
+		this._selectService.setInitialSelectedOptions(value);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
