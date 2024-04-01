@@ -1,8 +1,12 @@
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import * as lucide from '@ng-icons/lucide';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
+import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
-import { HlmInputDirective } from './helm/src';
+import { HlmInputDirective, HlmInputModule } from './helm/src';
 
 const meta: Meta<HlmInputDirective> = {
 	title: 'Input',
@@ -28,7 +32,8 @@ const meta: Meta<HlmInputDirective> = {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [HlmInputDirective, HlmLabelDirective, HlmButtonDirective, FormsModule],
+			imports: [HlmInputModule, HlmLabelDirective, HlmButtonDirective, FormsModule, HlmIconComponent],
+			providers: [provideIcons(lucide)],
 		}),
 	],
 };
@@ -95,5 +100,47 @@ export const WithButton: Story = {
     <button hlmBtn>Subscribe</button>
     </div>
     `,
+	}),
+};
+
+@Component({
+	selector: 'form-field-story',
+	standalone: true,
+	imports: [HlmInputModule, HlmLabelDirective, HlmButtonDirective, HlmIconComponent, NgIf],
+	providers: [provideIcons(lucide)],
+	template: /* html */ `
+		<hlm-input-form-field class="w-80">
+			<hlm-icon size="sm" name="lucideKey" hlmInputPrefix />
+			<label hlmLabel for="password">Password</label>
+			<input
+				class="w-full pl-11"
+				maxlength="24"
+				hlmInput
+				placeholder="password"
+				value="mystrongpassword"
+				name="password"
+				[type]="showPassword ? 'text' : 'password'"
+			/>
+			<button class="p-0" variant="link" size="sm" hlmBtn hlmInputSuffix (click)="toggleShowPassword()">
+				<ng-container *ngIf="showPassword; else hidePassword">Hide</ng-container>
+				<ng-template #hidePassword>Show</ng-template>
+			</button>
+		</hlm-input-form-field>
+	`,
+})
+class FormFieldStory {
+	showPassword = false;
+	toggleShowPassword() {
+		this.showPassword = !this.showPassword;
+	}
+}
+
+export const FormField: Story = {
+	render: ({ ...args }) => ({
+		moduleMetadata: {
+			imports: [FormFieldStory],
+		},
+		props: args,
+		template: `<form-field-story></form-field-story>`,
 	}),
 };
