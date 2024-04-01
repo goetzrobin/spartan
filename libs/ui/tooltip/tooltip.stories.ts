@@ -54,6 +54,45 @@ export const Default: Story = {
 };
 
 @Component({
+	selector: 'simple-tooltip-story',
+	standalone: true,
+	imports: [
+		HlmButtonDirective,
+		HlmTooltipComponent,
+		BrnTooltipContentDirective,
+		HlmTooltipTriggerDirective,
+		HlmIconComponent,
+	],
+	providers: [provideIcons({ lucidePlus })],
+	template: `
+		<div class="p-40">
+			<button
+				(click)="disabled.set(!disabled())"
+				aria-describedby="Add to library"
+				[hlmTooltipTrigger]="'Add to library'"
+				[hlmTooltipDisabled]="disabled()"
+				hlmBtn
+				variant="icon"
+			>
+				<hlm-icon name="lucidePlus" size="sm" />
+			</button>
+		</div>
+	`,
+})
+class SimpleTooltip {
+	protected readonly disabled = signal(false);
+}
+
+export const Simple: Story = {
+	render: () => ({
+		moduleMetadata: {
+			imports: [SimpleTooltip],
+		},
+		template: `<simple-tooltip-story/>`,
+	}),
+};
+
+@Component({
 	selector: 'disabled-tooltip-story',
 	standalone: true,
 	imports: [
