@@ -56,8 +56,6 @@ import { BrnTooltipDirective } from './brn-tooltip.directive';
 export type TooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before' | 'after';
 export type TooltipTouchGestures = 'auto' | 'on' | 'off';
 
-declare const ngDevMode: boolean;
-
 /** Time in ms to throttle repositioning after scroll events. */
 export const SCROLL_THROTTLE_MS = 20;
 
