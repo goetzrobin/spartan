@@ -13,6 +13,7 @@ import {
 	inject,
 	input,
 	Input,
+	model,
 	OnDestroy,
 	Output,
 	PLATFORM_ID,
@@ -98,30 +99,24 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	private readonly _focused = signal(false);
 	public readonly focused = this._focused.asReadonly();
 
-	private readonly _checked = signal<boolean | 'indeterminate'>(false);
-	public readonly isChecked = this._checked.asReadonly();
+	public readonly checked = model<boolean | 'indeterminate'>(false);
+	public readonly isChecked = this.checked.asReadonly();
 
 	protected readonly _dataState = computed(() => {
-		const checked = this._checked();
+		const checked = this.checked();
 		if (checked === 'indeterminate') return 'indeterminate';
 		return checked ? 'checked' : 'unchecked';
 	});
 	protected readonly _ariaChecked = computed(() => {
-		const checked = this._checked();
+		const checked = this.checked();
 		if (checked === 'indeterminate') return 'mixed';
 		return checked ? 'true' : 'false';
 	});
 	protected readonly _value = computed(() => {
-		const checked = this._checked();
+		const checked = this.checked();
 		if (checked === 'indeterminate') return '';
 		return checked ? 'on' : 'off';
 	});
-
-	// TODO should be changed to new model input when updated to Angular 17.2
-	@Input({ transform: indeterminateBooleanAttribute })
-	set checked(value: boolean | 'indeterminate') {
-		this._checked.set(value);
-	}
 
 	/** Used to set the id on the underlying input element. */
 	public readonly id = input<string | null>(null);
@@ -184,8 +179,8 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	handleChange() {
 		if (this._disabled()) return;
 		if (!this.checkbox) return;
-		const previousChecked = this._checked();
-		this._checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
+		const previousChecked = this.checked();
+		this.checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
 		this._onChange(!previousChecked);
 		this.changed.emit(!previousChecked);
 	}
@@ -212,11 +207,11 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 		if (!this.checkbox) return;
 
-		this.checkbox.nativeElement.indeterminate = this._checked() === 'indeterminate';
+		this.checkbox.nativeElement.indeterminate = this.checked() === 'indeterminate';
 		if (this.checkbox.nativeElement.indeterminate) {
 			this.checkbox.nativeElement.value = 'indeterminate';
 		} else {
-			this.checkbox.nativeElement.value = this._checked() ? 'on' : 'off';
+			this.checkbox.nativeElement.value = this.checked() ? 'on' : 'off';
 		}
 		this.checkbox.nativeElement.dispatchEvent(new Event('change'));
 	}
@@ -228,9 +223,9 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	writeValue(value: any): void {
 		if (value === 'indeterminate') {
-			this.checked = 'indeterminate';
+			this.checked.set('indeterminate');
 		} else {
-			this.checked = !!value;
+			this.checked.set(!!value);
 		}
 	}
 
