@@ -46,7 +46,7 @@ describe('BrnCheckboxComponent', () => {
 			`
      <label data-testid='label'>
      Checkbox Inside Label
-     <brn-checkbox disabled id='checkboxId' data-testid='checkbox' name='checkboxName'>
+     <brn-checkbox disabled='true' id='checkboxId' data-testid='checkbox' name='checkboxName'>
       </brn-checkbox>
       </label>
     `,
@@ -110,7 +110,7 @@ describe('BrnCheckboxComponent', () => {
      <label for='checkboxId' data-testid='label'>
      Checkbox Outside Label with id
      </label>
-     <brn-checkbox disabled id='checkboxId' name='checkboxName' data-testid='checkbox'>
+     <brn-checkbox disabled='true' id='checkboxId' name='checkboxName' data-testid='checkbox'>
       </brn-checkbox>
     `,
 			{
