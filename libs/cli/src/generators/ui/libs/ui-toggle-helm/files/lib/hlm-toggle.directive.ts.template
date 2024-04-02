@@ -45,8 +45,8 @@ export class HlmToggleDirective {
 		this._size.set(value);
 	}
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm(toggleVariants({ variant: this._variant(), size: this._size() }), this._userClass()),
+		hlm(toggleVariants({ variant: this._variant(), size: this._size() }), this.userClass()),
 	);
 }

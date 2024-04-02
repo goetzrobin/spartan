@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, ViewEncapsulation } from '@angular/core';
 import { CustomElementClassSettable } from '@spartan-ng/ui-core';
 import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 
@@ -12,7 +12,7 @@ import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
 		'[id]': 'id',
 	},
 	template: `
-		<div style="overflow: hidden">
+		<div [attr.inert]="_addInert()" style="overflow: hidden">
 			<p [class]="_contentClass()">
 				<ng-content />
 			</p>
@@ -28,6 +28,7 @@ export class BrnAccordionContentComponent implements CustomElementClassSettable 
 	public readonly id = 'brn-accordion-content-' + this._item.id;
 	public readonly ariaLabeledBy = 'brn-accordion-trigger-' + this._item.id;
 
+	protected readonly _addInert = computed(() => (this.state() === 'closed' ? true : undefined));
 	protected readonly _contentClass = signal('');
 
 	constructor() {

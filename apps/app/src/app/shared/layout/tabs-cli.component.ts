@@ -18,8 +18,8 @@ import { TabsComponent } from './tabs.component';
 			[value]="tabValue()"
 			(tabActivated)="onTabChanged($event)"
 		>
-			<spartan-code firstTab language="sh" [code]="nxCode()" />
-			<spartan-code secondTab language="sh" [code]="ngCode()" />
+			<spartan-code firstTab [language]="language()" [code]="nxCode()" />
+			<spartan-code secondTab [language]="language()" [code]="ngCode()" />
 		</spartan-tabs>
 	`,
 })
@@ -27,6 +27,7 @@ export class TabsCliComponent {
 	private readonly _cliService = inject(CLIModeService);
 	readonly nxCode = input('');
 	readonly ngCode = input('');
+	readonly language = input<'ts' | 'sh' | 'js'>('sh');
 	protected tabValue = computed(() => {
 		return this._cliService.cliMode() === 'nx' ? 'Nx Plugin' : 'Angular CLI';
 	});

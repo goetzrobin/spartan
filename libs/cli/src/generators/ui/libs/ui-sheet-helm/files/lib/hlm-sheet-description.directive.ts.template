@@ -12,6 +12,6 @@ import { ClassValue } from 'clsx';
 	hostDirectives: [BrnSheetDescriptionDirective],
 })
 export class HlmSheetDescriptionDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() => hlm('text-sm text-muted-foreground', this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm('text-sm text-muted-foreground', this.userClass()));
 }

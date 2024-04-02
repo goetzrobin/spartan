@@ -27,8 +27,8 @@ export class HlmAspectRatioDirective implements AfterViewInit {
 		return `${100 / this._ratio()}%`;
 	});
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly _computedClass = computed(() => hlm(`relative w-full`, this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() => hlm(`relative w-full`, this.userClass()));
 
 	@Input()
 	set hlmAspectRatio(value: NumberInput) {

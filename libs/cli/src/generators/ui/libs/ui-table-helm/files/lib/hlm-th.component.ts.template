@@ -36,14 +36,14 @@ import { ClassValue } from 'clsx';
 })
 export class HlmThComponent {
 	private readonly _columnDef? = inject(BrnColumnDefComponent, { optional: true });
-	protected readonly truncate = input(false, { transform: booleanAttribute });
+	public readonly truncate = input(false, { transform: booleanAttribute });
 
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
 		hlm(
 			'flex flex-none h-12 px-4 text-sm items-center font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
 			this._columnDef?.class(),
-			this._userClass(),
+			this.userClass(),
 		),
 	);
 }

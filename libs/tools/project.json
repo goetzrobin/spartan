@@ -38,15 +38,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/tools/**/*.ts",
-					"libs/tools/package.json",
-					"libs/tools/generators.json",
-					"libs/tools/executors.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"test": {
 			"executor": "@nx/jest:jest",

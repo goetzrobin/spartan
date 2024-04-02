@@ -1,5 +1,5 @@
 import { Directive, forwardRef } from '@angular/core';
-import { InputDirective } from '@ngneat/cmdk';
+import { InputDirective } from '@ngxpert/cmdk';
 
 @Directive({
 	selector: 'input[brnCmdInput]',

@@ -179,6 +179,7 @@ The following is the list of supported scopes:
 - **dialog**
 - **dropdown-menu**
 - **hover-card**
+- **icon**
 - **input**
 - **label**
 - **menubar**

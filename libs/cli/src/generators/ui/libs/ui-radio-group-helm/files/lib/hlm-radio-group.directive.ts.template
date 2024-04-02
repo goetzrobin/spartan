@@ -10,6 +10,6 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmRadioGroupDirective {
-	private readonly _userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() => hlm('block', this._userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm('block', this.userClass()));
 }
