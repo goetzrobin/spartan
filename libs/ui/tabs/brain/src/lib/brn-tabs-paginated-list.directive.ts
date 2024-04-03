@@ -70,7 +70,7 @@ const HEADER_SCROLL_DELAY = 650;
 const HEADER_SCROLL_INTERVAL = 100;
 
 /** Item inside a paginated tab header. */
-export type MatPaginatedTabHeaderItem = FocusableOption & { elementRef: ElementRef };
+export type BrnPaginatedTabHeaderItem = FocusableOption & { elementRef: ElementRef };
 
 /**
  * Base class for a tab header that supported pagination.
@@ -80,7 +80,7 @@ export type MatPaginatedTabHeaderItem = FocusableOption & { elementRef: ElementR
 export abstract class BrnTabsPaginatedListDirective
 	implements AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy
 {
-	abstract _items: QueryList<MatPaginatedTabHeaderItem>;
+	abstract _items: QueryList<BrnPaginatedTabHeaderItem>;
 	abstract _tabListContainer: ElementRef<HTMLElement>;
 	abstract _tabList: ElementRef<HTMLElement>;
 	abstract _tabListInner: ElementRef<HTMLElement>;
@@ -119,7 +119,7 @@ export abstract class BrnTabsPaginatedListDirective
 	private _scrollDistanceChanged!: boolean;
 
 	/** Used to manage focus between the tabs. */
-	private _keyManager!: FocusKeyManager<MatPaginatedTabHeaderItem>;
+	private _keyManager!: FocusKeyManager<BrnPaginatedTabHeaderItem>;
 
 	/** Cached text content of the header. */
 	private _currentTextContent!: string;
@@ -225,7 +225,7 @@ export abstract class BrnTabsPaginatedListDirective
 			this.updatePagination();
 		};
 
-		this._keyManager = new FocusKeyManager<MatPaginatedTabHeaderItem>(this._items)
+		this._keyManager = new FocusKeyManager<BrnPaginatedTabHeaderItem>(this._items)
 			.withHorizontalOrientation(this._getLayoutDirection())
 			.withHomeAndEnd()
 			.withWrap()
@@ -275,7 +275,7 @@ export abstract class BrnTabsPaginatedListDirective
 		return this._items.changes.pipe(
 			startWith(this._items),
 			switchMap(
-				(tabItems: QueryList<MatPaginatedTabHeaderItem>) =>
+				(tabItems: QueryList<BrnPaginatedTabHeaderItem>) =>
 					new Observable((observer: Observer<ResizeObserverEntry[]>) =>
 						this._ngZone.runOutsideAngular(() => {
 							const resizeObserver = new ResizeObserver((entries) => observer.next(entries));
