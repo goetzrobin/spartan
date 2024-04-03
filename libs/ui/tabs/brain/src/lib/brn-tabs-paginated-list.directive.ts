@@ -15,6 +15,7 @@
 import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { ENTER, SPACE, hasModifierKey } from '@angular/cdk/keycodes';
+import { SharedResizeObserver } from '@angular/cdk/observers/private';
 import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
@@ -41,7 +42,7 @@ import {
 	input,
 } from '@angular/core';
 import { EMPTY, Observable, Observer, Subject, fromEvent, merge, of as observableOf, timer } from 'rxjs';
-import { filter, skip, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, skip, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { BrnTabsDirective } from './brn-tabs.directive';
 
 /** Config used to bind passive event listeners */
@@ -69,9 +70,7 @@ const HEADER_SCROLL_DELAY = 650;
 const HEADER_SCROLL_INTERVAL = 100;
 
 /** Item inside a paginated tab header. */
-export type MatPaginatedTabHeaderItem = FocusableOption & {
-	elementRef: ElementRef;
-};
+export type MatPaginatedTabHeaderItem = FocusableOption & { elementRef: ElementRef };
 
 /**
  * Base class for a tab header that supported pagination.
@@ -156,6 +155,8 @@ export abstract class BrnTabsPaginatedListDirective
 	/** Event emitted when a label is focused. */
 	@Output() readonly indexFocused: EventEmitter<number> = new EventEmitter<number>();
 
+	private _sharedResizeObserver = inject(SharedResizeObserver);
+
 	private _injector = inject(Injector);
 
 	constructor(
@@ -208,7 +209,18 @@ export abstract class BrnTabsPaginatedListDirective
 
 	ngAfterContentInit() {
 		const dirChange = this._dir ? this._dir.change : observableOf('ltr');
-		const resize = this._viewportRuler.change(150);
+		// We need to debounce resize events because the alignment logic is expensive.
+		// If someone animates the width of tabs, we don't want to realign on every animation frame.
+		// Once we haven't seen any more resize events in the last 32ms (~2 animaion frames) we can
+		// re-align.
+		const resize = this._sharedResizeObserver
+			.observe(this._elementRef.nativeElement)
+			.pipe(debounceTime(32), takeUntil(this._destroyed));
+		// Note: We do not actually need to watch these events for proper functioning of the tabs,
+		// the resize events above should capture any viewport resize that we care about. However,
+		// removing this is fairly breaking for screenshot tests, so we're leaving it here for now.
+		const viewportResize = this._viewportRuler.change(150).pipe(takeUntil(this._destroyed));
+
 		const realign = () => {
 			this.updatePagination();
 		};
@@ -222,15 +234,14 @@ export abstract class BrnTabsPaginatedListDirective
 
 		this._keyManager.updateActiveItem(this._selectedIndex());
 
-		// Defer the first call in order to allow for slower browsers to lay out the elements.
-		// This helps in cases where the user lands directly on a page with paginated tabs.
-		// TODO(mmalerba): Consider breaking this into multiple `afterNextRender` calls with explicit
-		//  phase.
+		// Note: We do not need to realign after the first render for proper functioning of the tabs
+		// the resize events above should fire when we first start observing the element. However,
+		// removing this is fairly breaking for screenshot tests, so we're leaving it here for now.
 		afterNextRender(realign, { injector: this._injector });
 
-		// On dir change or window resize, realign the ink bar and update the orientation of
+		// On dir change or resize, realign the ink bar and update the orientation of
 		// the key manager if the direction has changed.
-		merge(dirChange, resize, this._items.changes, this._itemsResized())
+		merge(dirChange, viewportResize, resize, this._items.changes, this._itemsResized())
 			.pipe(takeUntil(this._destroyed))
 			.subscribe(() => {
 				// We need to defer this to give the browser some time to recalculate
