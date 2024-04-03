@@ -13,7 +13,7 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { TabsPaginatedPreviewComponent } from './tabs--paginated.preview';
+import { TabsPaginatedPreviewComponent, paginatedCode } from './tabs--paginated.preview';
 import { TabsVerticalPreviewComponent, verticalCode } from './tabs--vertical.preview';
 import { TabsPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './tabs.preview';
 
@@ -52,10 +52,8 @@ export const routeMeta: RouteMeta = {
 			/>
 
 			<spartan-tabs firstTab="Preview" secondTab="Code">
-				<div spartanCodePreview firstTab class="flex-col">
-					<spartan-tabs-paginated />
-					<!-- FIXME does not scroll to tab 20 -->
-					<spartan-tabs-paginated activeTab="Tab 20" />
+				<div spartanCodePreview firstTab>
+					<spartan-tabs-preview />
 				</div>
 				<spartan-code secondTab [code]="defaultCode" />
 			</spartan-tabs>
@@ -85,6 +83,16 @@ export const routeMeta: RouteMeta = {
 				<spartan-code secondTab [code]="verticalCode" />
 			</spartan-tabs>
 
+			<h3 id="examples__vertical" class="${hlmH4} mb-2 mt-6">Paginated Tabs</h3>
+			<!-- TODO add a note about padding issue -->
+			<!-- TODO note about to replace hlm-tabs-list with hlm-paginated-tab-list -->
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-tabs-paginated />
+				</div>
+				<spartan-code secondTab [code]="paginatedCode" />
+			</spartan-tabs>
+
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="textarea" label="Textarea" />
 				<spartan-page-bottom-nav-link direction="previous" href="table" label="Table" />
@@ -99,4 +107,6 @@ export default class TabsPageComponent {
 	protected readonly defaultImports = defaultImports;
 
 	protected readonly verticalCode = verticalCode;
+
+	protected readonly paginatedCode = paginatedCode;
 }
