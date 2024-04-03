@@ -53,7 +53,7 @@ import { listVariants } from './hlm-tabs-list.component';
 			hlmBtn
 			variant="ghost"
 			size="icon"
-			[ngClass]="{
+			[class]="{
 				flex: _showPaginationControls,
 				hidden: !_showPaginationControls
 			}"
