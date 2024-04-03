@@ -23,7 +23,7 @@ import { listVariants } from './hlm-tabs-list.component';
 			variant="ghost"
 			size="icon"
 			tabindex="-1"
-			[ngClass]="{
+			[class]="{
 				flex: _showPaginationControls,
 				hidden: !_showPaginationControls
 			}"
