@@ -2,6 +2,7 @@ import { provideFileRouter } from '@analogjs/router';
 import { ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PreloadAllModules, withInMemoryScrolling, withNavigationErrorHandler, withPreloading } from '@angular/router';
+import { QueryClient, provideAngularQuery } from '@tanstack/angular-query-experimental';
 import { provideTrpcClient } from './trpc-client';
 
 export const appConfig: ApplicationConfig = {
@@ -13,5 +14,6 @@ export const appConfig: ApplicationConfig = {
 		),
 		provideClientHydration(),
 		provideTrpcClient(),
+		provideAngularQuery(new QueryClient()),
 	],
 };
