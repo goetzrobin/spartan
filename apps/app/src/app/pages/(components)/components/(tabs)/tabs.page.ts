@@ -1,6 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { hlmH4 } from '@spartan-ng/ui-typography-helm';
+import { HlmAlertDescriptionDirective, HlmAlertDirective } from '@spartan-ng/ui-alert-helm';
+import { hlmCode, hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { InputPreviewComponent } from '../(input)/input.preview';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
@@ -43,6 +44,9 @@ export const routeMeta: RouteMeta = {
 		InputPreviewComponent,
 		TabsVerticalPreviewComponent,
 		TabsPaginatedPreviewComponent,
+
+		HlmAlertDescriptionDirective,
+		HlmAlertDirective,
 	],
 	template: `
 		<section spartanMainSection>
@@ -84,8 +88,34 @@ export const routeMeta: RouteMeta = {
 			</spartan-tabs>
 
 			<h3 id="examples__vertical" class="${hlmH4} mb-2 mt-6">Paginated Tabs</h3>
-			<!-- TODO add a note about padding issue -->
-			<!-- TODO note about to replace hlm-tabs-list with hlm-paginated-tab-list -->
+
+			<p class="pt-2">
+				Use
+				<code class="${hlmCode}">hlm-paginated-tabs-list</code>
+				instead of
+				<code class="${hlmCode}">hlm-tabs-list</code>
+				for paginated tabs list with next and previous buttons.
+			</p>
+			<p class="py-2">
+				Disable pagination with
+				<code class="${hlmCode}">[disablePagination]="true"</code>
+				. Hides the pagination buttons and active tab is not scrolled into view.
+			</p>
+
+			<div hlmAlert class="my-2">
+				<p hlmAlertDesc>
+					<strong>Padding</strong>
+					styles, applied to the tab list (
+					<code class="${hlmCode}">listVariants</code>
+					), are
+					<strong>not</strong>
+					taken into account during
+					<strong>keyboard scrolling</strong>
+					. This affects the active tab's scrolling position and next/previous button remain enabled even when the
+					active tab is at the start or end of the tab list.
+				</p>
+			</div>
+
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-tabs-paginated />
