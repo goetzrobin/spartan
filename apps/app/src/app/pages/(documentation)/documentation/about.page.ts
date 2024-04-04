@@ -125,8 +125,8 @@ const aboutLink = 'h-6 underline text-base px-0.5';
 						- An incredible CDK, patterns & inspiration for accessible unstyled ui primitives.
 					</li>
 					<li>
-						<a class="${aboutLink}" hlmBtn href="https://ngneat.github.io/cmdk/" target="_blank" variant="link">
-							ng-neat/cmdk
+						<a class="${aboutLink}" hlmBtn href="https://ngxpert.github.io/cmdk/" target="_blank" variant="link">
+							ngxpert/cmdk
 						</a>
 						- The backbone of
 						<code class="${hlmCode}">brn-command</code>
