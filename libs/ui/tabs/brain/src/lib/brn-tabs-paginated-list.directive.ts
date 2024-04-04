@@ -40,6 +40,7 @@ import {
 	effect,
 	inject,
 	input,
+	signal,
 } from '@angular/core';
 import { EMPTY, Observable, Observer, Subject, fromEvent, merge, of as observableOf, timer } from 'rxjs';
 import { debounceTime, filter, skip, startWith, switchMap, takeUntil } from 'rxjs/operators';
@@ -101,7 +102,7 @@ export abstract class BrnTabsPaginatedListDirective
 	protected readonly _destroyed = new Subject<void>();
 
 	/** Whether the controls for pagination should be displayed */
-	_showPaginationControls = false;
+	_showPaginationControls = signal(false);
 
 	/** Whether the tab list can be scrolled more towards the end of the tab label list. */
 	_disableScrollAfter = true;
@@ -413,7 +414,7 @@ export abstract class BrnTabsPaginatedListDirective
 	 * scrolling is enabled.
 	 */
 	_setTabFocus(tabIndex: number) {
-		if (this._showPaginationControls) {
+		if (this._showPaginationControls()) {
 			this._scrollToLabel(tabIndex);
 		}
 
@@ -548,7 +549,7 @@ export abstract class BrnTabsPaginatedListDirective
 	 */
 	_checkPaginationEnabled() {
 		if (this.disablePagination()) {
-			this._showPaginationControls = false;
+			this._showPaginationControls.set(false);
 		} else {
 			const isEnabled = this._tabListInner.nativeElement.scrollWidth > this._elementRef.nativeElement.offsetWidth;
 
@@ -556,11 +557,11 @@ export abstract class BrnTabsPaginatedListDirective
 				this.scrollDistance = 0;
 			}
 
-			if (isEnabled !== this._showPaginationControls) {
+			if (isEnabled !== this._showPaginationControls()) {
 				this._changeDetectorRef.markForCheck();
 			}
 
-			this._showPaginationControls = isEnabled;
+			this._showPaginationControls.set(isEnabled);
 		}
 	}
 
