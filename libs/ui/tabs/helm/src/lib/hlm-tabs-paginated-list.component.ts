@@ -1,5 +1,4 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { NgClass } from '@angular/common';
 import { Component, ContentChildren, ElementRef, QueryList, ViewChild, computed, input } from '@angular/core';
 import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -12,7 +11,7 @@ import { listVariants } from './hlm-tabs-list.component';
 @Component({
 	selector: 'hlm-paginated-tabs-list',
 	standalone: true,
-	imports: [HlmButtonDirective, CdkObserveContent, NgClass, HlmIconComponent],
+	imports: [HlmButtonDirective, CdkObserveContent, HlmIconComponent],
 	providers: [provideIcons({ lucideChevronRight, lucideChevronLeft })],
 	template: `
 		<button
@@ -23,10 +22,8 @@ import { listVariants } from './hlm-tabs-list.component';
 			variant="ghost"
 			size="icon"
 			tabindex="-1"
-			[class]="{
-				flex: _showPaginationControls,
-				hidden: !_showPaginationControls
-			}"
+			[class.flex]="_showPaginationControls"
+			[class.hidden]="!_showPaginationControls"
 			class="relative z-[2] select-none items-center justify-center pl-1 disabled:pointer-events-none disabled:cursor-default disabled:opacity-50"
 			[class.flex]="_showPaginationControls"
 			[disabled]="_disableScrollBefore || null"
@@ -53,10 +50,8 @@ import { listVariants } from './hlm-tabs-list.component';
 			hlmBtn
 			variant="ghost"
 			size="icon"
-			[class]="{
-				flex: _showPaginationControls,
-				hidden: !_showPaginationControls
-			}"
+			[class.flex]="_showPaginationControls"
+			[class.hidden]="!_showPaginationControls"
 			class="relative z-[2] select-none items-center justify-center pr-1 disabled:pointer-events-none disabled:cursor-default disabled:opacity-50"
 			[disabled]="_disableScrollAfter || null"
 			(click)="_handlePaginatorClick('after')"
