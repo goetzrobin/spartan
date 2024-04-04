@@ -1,7 +1,7 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
 import { Component, ContentChildren, ElementRef, QueryList, ViewChild, computed, input } from '@angular/core';
 import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { buttonVariants } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { BrnTabsPaginatedListDirective, BrnTabsTriggerDirective } from '@spartan-ng/ui-tabs-brain';
@@ -11,20 +11,18 @@ import { listVariants } from './hlm-tabs-list.component';
 @Component({
 	selector: 'hlm-paginated-tabs-list',
 	standalone: true,
-	imports: [HlmButtonDirective, CdkObserveContent, HlmIconComponent],
+	imports: [CdkObserveContent, HlmIconComponent],
 	providers: [provideIcons({ lucideChevronRight, lucideChevronLeft })],
 	template: `
 		<button
 			#previousPaginator
+			data-pagination="previous"
 			type="button"
 			aria-hidden="true"
-			hlmBtn
-			variant="ghost"
-			size="icon"
 			tabindex="-1"
 			[class.flex]="_showPaginationControls()"
 			[class.hidden]="!_showPaginationControls()"
-			class="relative z-[2] select-none items-center justify-center pl-1 disabled:pointer-events-none disabled:cursor-default disabled:opacity-50"
+			[class]="_paginationButtonClass()"
 			[disabled]="_disableScrollBefore || null"
 			(click)="_handlePaginatorClick('before')"
 			(mousedown)="_handlePaginatorPress('before', $event)"
@@ -43,15 +41,13 @@ import { listVariants } from './hlm-tabs-list.component';
 
 		<button
 			#nextPaginator
+			data-pagination="next"
 			type="button"
 			aria-hidden="true"
 			tabindex="-1"
-			hlmBtn
-			variant="ghost"
-			size="icon"
 			[class.flex]="_showPaginationControls()"
 			[class.hidden]="!_showPaginationControls()"
-			class="relative z-[2] select-none items-center justify-center pr-1 disabled:pointer-events-none disabled:cursor-default disabled:opacity-50"
+			[class]="_paginationButtonClass()"
 			[disabled]="_disableScrollAfter || null"
 			(click)="_handlePaginatorClick('after')"
 			(mousedown)="_handlePaginatorPress('after', $event)"
@@ -79,6 +75,15 @@ export class HlmTabsPaginatedListComponent extends BrnTabsPaginatedListDirective
 
 	public readonly tabLisClass = input<ClassValue>('', { alias: 'class' });
 	protected _tabListClass = computed(() => hlm(listVariants(), this.tabLisClass()));
+
+	public readonly paginationButtonClass = input<ClassValue>('', { alias: 'class' });
+	protected _paginationButtonClass = computed(() =>
+		hlm(
+			'relative z-[2] select-none data-[pagination=previous]:pr-1 data-[pagination=next]:pl-1 disabled:cursor-default',
+			buttonVariants({ variant: 'ghost', size: 'icon' }),
+			this.paginationButtonClass(),
+		),
+	);
 
 	protected _itemSelected(event: KeyboardEvent) {
 		event.preventDefault();

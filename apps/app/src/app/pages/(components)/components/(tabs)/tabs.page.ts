@@ -87,7 +87,7 @@ export const routeMeta: RouteMeta = {
 				<spartan-code secondTab [code]="verticalCode" />
 			</spartan-tabs>
 
-			<h3 id="examples__vertical" class="${hlmH4} mb-2 mt-6">Paginated Tabs</h3>
+			<h3 id="examples__paginated_tabs" class="${hlmH4} mb-2 mt-6">Paginated Tabs</h3>
 
 			<p class="pt-2">
 				Use
