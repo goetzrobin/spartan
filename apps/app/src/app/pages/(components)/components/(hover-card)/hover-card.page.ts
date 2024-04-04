@@ -61,8 +61,10 @@ export const routeMeta: RouteMeta = {
 				<spartan-code [code]="defaultSkeleton" />
 			</div>
 
+			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
+
 			<spartan-page-bottom-nav>
-				<spartan-page-bottom-nav-link href="input" label="Input" />
+				<spartan-page-bottom-nav-link href="icon" label="Icon" />
 				<spartan-page-bottom-nav-link direction="previous" href="dropdown-menu" label="Dropdown" />
 			</spartan-page-bottom-nav>
 		</section>
