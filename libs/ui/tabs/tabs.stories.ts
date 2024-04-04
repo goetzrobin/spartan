@@ -163,7 +163,7 @@ export const Paginated: Story = {
 	render: () => ({
 		template: /* HTML */ `
 			<hlm-tabs tab="1" class="mx-auto block max-w-3xl">
-				<hlm-paginated-tab-list>
+				<hlm-paginated-tabs-list>
 					<button hlmTabsTrigger="1">Tab 1</button>
 					<button hlmTabsTrigger="2">Tab 2</button>
 					<button hlmTabsTrigger="3">Tab 3</button>
@@ -184,7 +184,7 @@ export const Paginated: Story = {
 					<button hlmTabsTrigger="18">Tab 18</button>
 					<button hlmTabsTrigger="19">Tab 19</button>
 					<button hlmTabsTrigger="20">Tab 20</button>
-				</hlm-paginated-tab-list>
+				</hlm-paginated-tabs-list>
 				<div hlmTabsContent="1">Tab 1</div>
 				<div hlmTabsContent="2">Tab 2</div>
 				<div hlmTabsContent="3">Tab 3</div>

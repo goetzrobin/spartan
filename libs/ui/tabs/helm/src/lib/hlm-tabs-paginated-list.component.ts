@@ -10,7 +10,7 @@ import { ClassValue } from 'clsx';
 import { listVariants } from './hlm-tabs-list.component';
 
 @Component({
-	selector: 'hlm-paginated-tab-list',
+	selector: 'hlm-paginated-tabs-list',
 	standalone: true,
 	imports: [HlmButtonDirective, CdkObserveContent, NgClass, HlmIconComponent],
 	providers: [provideIcons({ lucideChevronRight, lucideChevronLeft })],

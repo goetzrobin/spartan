@@ -15,11 +15,11 @@ import {
 	},
 	template: `
 		<hlm-tabs [tab]="activeTab()" class="w-full">
-			<hlm-paginated-tab-list>
+			<hlm-paginated-tabs-list>
 				@for (tab of lotsOfTabs; track tab) {
 					<button [hlmTabsTrigger]="tab">{{ tab }}</button>
 				}
-			</hlm-paginated-tab-list>
+			</hlm-paginated-tabs-list>
 			@for (tab of lotsOfTabs; track tab) {
 				<div [hlmTabsContent]="tab">{{ tab }}</div>
 			}
@@ -50,11 +50,11 @@ import {
 	},
 	template: \`
 		<hlm-tabs [tab]="activeTab()" class="w-full">
-			<hlm-paginated-tab-list>
+			<hlm-paginated-tabs-list>
 				@for (tab of lotsOfTabs; track tab) {
 					<button [hlmTabsTrigger]="tab">{{ tab }}</button>
 				}
-			</hlm-paginated-tab-list>
+			</hlm-paginated-tabs-list>
 			@for (tab of lotsOfTabs; track tab) {
 				<div [hlmTabsContent]="tab">{{ tab }}</div>
 			}
