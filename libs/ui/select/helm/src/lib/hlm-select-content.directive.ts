@@ -1,4 +1,4 @@
-import { computed, Directive, Input, signal } from '@angular/core';
+import { computed, Directive, input, Input, signal } from '@angular/core';
 import { hlm, injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
@@ -12,19 +12,14 @@ import { ClassValue } from 'clsx';
 	},
 })
 export class HlmSelectContentDirective {
-	private readonly _classNames = signal<ClassValue>('');
-	// eslint-disable-next-line @angular-eslint/no-input-rename
-	@Input({ alias: 'class' })
-	set _class(classNames: ClassValue) {
-		this._classNames.set(classNames);
-	}
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _stateProvider = injectExposesStateProvider({ optional: true });
 	protected readonly _sideProvider = injectExposedSideProvider({ optional: true });
 
 	protected readonly _computedClass = computed(() =>
 		hlm(
 			'w-full relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-md p-1 data-[side=bottom]:top-[2px] data-[side=top]:bottom-[2px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-			this._classNames(),
+			this.userClass(),
 		),
 	);
 

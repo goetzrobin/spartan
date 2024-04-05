@@ -36,7 +36,11 @@ import { Subject } from 'rxjs';
 			[style.visibility]="'hidden'"
 			#tooltip
 		>
-			<ng-container [ngTemplateOutlet]="template" />
+			@if (_isTypeOfString(content)) {
+				{{ content }}
+			} @else {
+				<ng-container [ngTemplateOutlet]="content" />
+			}
 		</div>
 	`,
 	encapsulation: ViewEncapsulation.None,
@@ -60,8 +64,7 @@ export class BrnTooltipContentComponent implements OnDestroy {
 	public readonly _tooltipClasses = signal('');
 	public readonly side = signal('above');
 	/** Message to display in the tooltip */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public template: TemplateRef<any> | null = null;
+	public content: string | TemplateRef<unknown> | null = null;
 
 	/** The timeout ID of any current timer set to show the tooltip */
 	private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
@@ -150,6 +153,10 @@ export class BrnTooltipContentComponent implements OnDestroy {
 		this._cancelPendingAnimations();
 		this._onHide.complete();
 		this._triggerElement = undefined;
+	}
+
+	_isTypeOfString(content: unknown): content is string {
+		return typeof content === 'string';
 	}
 
 	/**

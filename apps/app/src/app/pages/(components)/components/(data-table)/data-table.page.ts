@@ -23,7 +23,7 @@ export const routeMeta: RouteMeta = {
 };
 
 @Component({
-	selector: 'spartan-command',
+	selector: 'spartan-data-table',
 	standalone: true,
 	imports: [
 		MainSectionDirective,
@@ -67,7 +67,7 @@ export const routeMeta: RouteMeta = {
 		<spartan-page-nav />
 	`,
 })
-export default class ComboboxPageComponent {
+export default class DataTablePageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
