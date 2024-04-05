@@ -32,7 +32,6 @@ export class BrnColumnManager<T extends BrnColumnVisibility> {
 	public readonly isColumnVisible = (columnName: string) => {
 		const visibilityMap = this.columnVisibility();
 		const columnEntry = visibilityMap[columnName];
-		console.log(visibilityMap, columnEntry, columnName);
 		return typeof columnEntry === 'boolean' ? columnEntry : columnEntry.visible;
 	};
 	public readonly isColumnDisabled = (columnName: string) =>
