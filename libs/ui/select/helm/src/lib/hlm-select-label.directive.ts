@@ -2,7 +2,7 @@ import { computed, Directive, inject, input, OnInit, signal } from '@angular/cor
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnSelectLabelDirective } from '@spartan-ng/ui-select-brain';
 import { ClassValue } from 'clsx';
-import { HlmSelectContentDirective } from './hlm-select-content.directive';
+import { HlmSelectContentComponent } from './hlm-select-content.component';
 
 @Directive({
 	selector: '[hlmSelectLabel], hlm-select-label',
@@ -13,7 +13,7 @@ import { HlmSelectContentDirective } from './hlm-select-content.directive';
 	},
 })
 export class HlmSelectLabelDirective implements OnInit {
-	private readonly selectContent = inject(HlmSelectContentDirective);
+	private readonly selectContent = inject(HlmSelectContentComponent);
 	private readonly _stickyLabels = signal(false);
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>

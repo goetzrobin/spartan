@@ -65,9 +65,9 @@ export const ReactiveFormControl: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
+				<hlm-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
 					<hlm-select-trigger>
-						<brn-select-value hlm />
+						<hlm-select-value />
 					</hlm-select-trigger>
 					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
@@ -78,7 +78,7 @@ export const ReactiveFormControl: Story = {
 						<hlm-option value="pineapple">Pineapple</hlm-option>
 						<hlm-option>Clear</hlm-option>
 					</hlm-select-content>
-				</brn-select>
+				</hlm-select>
 				<form></form>
 			</form>
 		`,
@@ -98,9 +98,9 @@ export const ReactiveFormControlWithValidation: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
+				<hlm-select class="w-56" formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 					<hlm-select-trigger>
-						<brn-select-value hlm />
+						<hlm-select-value />
 					</hlm-select-trigger>
 					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
@@ -111,7 +111,7 @@ export const ReactiveFormControlWithValidation: Story = {
 						<hlm-option value="pineapple">Pineapple</hlm-option>
 						<hlm-option>Clear</hlm-option>
 					</hlm-select-content>
-				</brn-select>
+				</hlm-select>
 				@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
 				<span class="text-destructive">Required</span>
 				}
@@ -136,7 +136,7 @@ export const ReactiveFormControlWithValidationWithLabel: Story = {
 				<hlm-select class="w-56" formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger>
-						<brn-select-value hlm />
+						<hlm-select-value />
 					</hlm-select-trigger>
 					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
@@ -175,7 +175,7 @@ export const NgModelFormControl: Story = {
 				>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger>
-						<brn-select-value hlm />
+						<hlm-select-value />
 					</hlm-select-trigger>
 					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
@@ -199,7 +199,7 @@ export const SelectWithLabel: Story = {
 				<hlm-select formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger class="w-56">
-						<brn-select-value />
+						<hlm-select-value />
 					</hlm-select-trigger>
 					<hlm-select-content class="w-56">
 						<hlm-select-label>Fruits</hlm-select-label>
