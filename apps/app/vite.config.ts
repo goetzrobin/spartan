@@ -107,6 +107,7 @@ export default defineConfig(({ mode }) => {
 
 						'/examples/notes',
 						'/examples/typography',
+						'/examples/authentication',
 					],
 					sitemap: {
 						host: 'https://www.spartan.ng',
