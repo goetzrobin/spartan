@@ -73,11 +73,11 @@ const CONTAINER_POST_FIX = '-checkbox';
 		<ng-content />
 	`,
 	host: {
-		'[attr.tabindex]': 'disabled() ? "-1" : "0"',
+		'[attr.tabindex]': '_disabled() ? "-1" : "0"',
 		'[attr.data-state]': '_dataState()',
 		'[attr.data-focus-visible]': 'focusVisible()',
 		'[attr.data-focus]': 'focused()',
-		'[attr.data-disabled]': 'disabled()',
+		'[attr.data-disabled]': '_disabled()',
 		'[attr.aria-labelledby]': 'null',
 		'[attr.aria-label]': 'null',
 		'[attr.aria-describedby]': 'null',
@@ -136,7 +136,9 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	public readonly required = input(false, { transform: booleanAttribute });
 
-	public readonly disabled = model(false);
+	private readonly _disabled = signal(false);
+	/** Only used as input */
+	public readonly disabled = input(false, { transform: booleanAttribute });
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
 	protected _onChange = (_: any) => {};
@@ -158,19 +160,27 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 			if (!parent) return;
 			// check if parent is a label and assume it is for this checkbox
 			if (parent?.tagName === 'LABEL') {
-				this._renderer.setAttribute(parent, 'data-disabled', this.disabled() ? 'true' : 'false');
+				this._renderer.setAttribute(parent, 'data-disabled', this._disabled() ? 'true' : 'false');
 				return;
 			}
 			if (!this._isBrowser) return;
 
 			const label = parent?.querySelector(`label[for="${this.id()}"]`);
 			if (!label) return;
-			this._renderer.setAttribute(label, 'data-disabled', this.disabled() ? 'true' : 'false');
+			this._renderer.setAttribute(label, 'data-disabled', this._disabled() ? 'true' : 'false');
 		});
+
+		effect(
+			() => {
+				// sync disabled input
+				this._disabled.set(this.disabled());
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	handleChange() {
-		if (this.disabled()) return;
+		if (this._disabled()) return;
 		if (!this.checkbox) return;
 		const previousChecked = this.checked();
 		this.checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
@@ -234,6 +244,6 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	/** Implemented as a part of ControlValueAccessor. */
 	setDisabledState(isDisabled: boolean): void {
-		this.disabled.set(isDisabled);
+		this._disabled.set(isDisabled);
 	}
 }
