@@ -9,9 +9,9 @@ import { SpartanLogoComponent } from '~/app/shared/spartan-logo.component';
 		class: 'inline-flex flex-col justify-center items-center',
 	},
 	template: `
-		<spartan-logo class="bg-primary h-9 w-9 -rotate-90 rounded-full p-1" />
+		<spartan-logo [href]="href" class="bg-primary h-9 w-9 -rotate-90 rounded-full p-1" />
 		<a
-			class="mt-1 inline-block whitespace-nowrap text-[.55rem] font-medium hover:underline"
+			class="mt-1 inline-block whitespace-nowrap text-[.7rem] font-medium hover:underline"
 			[href]="href"
 			target="_blank"
 		>
