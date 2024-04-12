@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'spartan-logo',
 	standalone: true,
 	host: {
-		'(click)': 'openHref()',
-		class: 'flex items-center justify-center hover:cursor-pointer',
+		class: 'flex items-center justify-center',
 	},
 	template: `
 		<svg class="w-full" viewBox="0 0 630 268" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,13 +29,4 @@ import { Component, Input } from '@angular/core';
 		</svg>
 	`,
 })
-export class SpartanLogoComponent {
-	@Input()
-	href = '';
-
-	private openHref() {
-		if (this.href != '') {
-			window.open(this.href, '_blank');
-		}
-	}
-}
+export class SpartanLogoComponent {}
