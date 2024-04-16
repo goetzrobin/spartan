@@ -8,19 +8,19 @@ import {
 	Component,
 	effect,
 	ElementRef,
-	EventEmitter,
 	forwardRef,
 	HostBinding,
 	inject,
 	Input,
 	OnDestroy,
-	Output,
+	output,
 	PLATFORM_ID,
 	Renderer2,
 	signal,
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
 
@@ -152,13 +152,13 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	@ViewChild('checkBox', { static: true })
 	public checkbox?: ElementRef<HTMLInputElement>;
 
-	@Output()
-	public changed = new EventEmitter<boolean>();
-	@Output()
-	public touched = new EventEmitter<void>();
+	public readonly changed = output<boolean>();
+	public readonly touched = output<void>();
 
 	constructor() {
-		rxHostPressedListener().subscribe(() => this.handleChange());
+		rxHostPressedListener()
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => this.handleChange());
 		effect(() => {
 			/** search for the label and set the disabled state */
 			let parent = this._renderer.parentNode(this._elementRef.nativeElement);

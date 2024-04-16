@@ -8,19 +8,19 @@ import {
 	computed,
 	effect,
 	ElementRef,
-	EventEmitter,
 	forwardRef,
 	inject,
 	input,
 	Input,
 	OnDestroy,
-	Output,
+	output,
 	PLATFORM_ID,
 	Renderer2,
 	signal,
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
 
@@ -160,11 +160,12 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	@ViewChild('checkBox', { static: true })
 	public checkbox?: ElementRef<HTMLInputElement>;
 
-	@Output()
-	public readonly changed = new EventEmitter<boolean | 'indeterminate'>();
+	public readonly changed = output<boolean | 'indeterminate'>();
 
 	constructor() {
-		rxHostPressedListener().subscribe(() => this.handleChange());
+		rxHostPressedListener()
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => this.handleChange());
 		effect(() => {
 			const parent = this._renderer.parentNode(this._elementRef.nativeElement);
 			if (!parent) return;
