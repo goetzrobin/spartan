@@ -1,10 +1,10 @@
 import { DestroyRef, Directive, ElementRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, fromEvent, interval, takeUntil } from 'rxjs';
-import { BrnSelectContentComponent } from './brn-select-content.component';
+import { BrnSelectContentDirective } from './brn-select-content.directive';
 
 @Directive({
-	selector: '[brnSelectScrollDown], brn-select-scroll-down, hlm-select-scroll-down:not(noHlm)',
+	selector: '[brnSelectScrollDown], brn-select-scroll-down',
 	standalone: true,
 	host: {
 		'aria-hidden': 'true',
@@ -13,7 +13,7 @@ import { BrnSelectContentComponent } from './brn-select-content.component';
 })
 export class BrnSelectScrollDownDirective {
 	private readonly _el = inject(ElementRef);
-	private readonly _selectContent = inject(BrnSelectContentComponent);
+	private readonly _selectContent = inject(BrnSelectContentDirective);
 
 	private readonly endReached = new Subject<boolean>();
 	private readonly _destroyRef = inject(DestroyRef);

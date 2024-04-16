@@ -1,29 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject, Input } from '@angular/core';
+import { computed, Directive, inject, Input } from '@angular/core';
 import { BrnSelectService } from './brn-select.service';
 
-@Component({
-	selector: 'brn-select-value, hlm-select-value',
-	template: `
-		{{ value() || placeholder() }}
-	`,
-	host: {
-		'[id]': 'id()',
-	},
-	styles: [
-		`
-			:host {
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
-				-webkit-line-clamp: 1;
-				white-space: nowrap;
-				pointer-events: none;
-			}
-		`,
-	],
+@Directive({
+	selector: '[brnSelectValue]',
 	standalone: true,
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BrnSelectValueComponent {
+export class BrnSelectValueDirective {
 	private readonly _selectService = inject(BrnSelectService);
 
 	public readonly id = computed(() => `${this._selectService.id()}--value`);
@@ -43,6 +25,5 @@ export class BrnSelectValueComponent {
 	});
 
 	@Input()
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	transformFn: (values: (string | undefined)[]) => any = (values) => (values ?? []).join(', ');
+	transformFn: (values: (string | undefined)[]) => string = (values) => (values ?? []).join(', ');
 }

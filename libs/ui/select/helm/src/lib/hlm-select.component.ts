@@ -5,7 +5,6 @@ import {
 	ConnectedPosition,
 	OverlayModule,
 } from '@angular/cdk/overlay';
-import { JsonPipe } from '@angular/common';
 import {
 	AfterContentInit,
 	ChangeDetectionStrategy,
@@ -13,7 +12,6 @@ import {
 	ContentChild,
 	ContentChildren,
 	EventEmitter,
-	Input,
 	Output,
 	QueryList,
 	Signal,
@@ -24,7 +22,7 @@ import {
 	signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 import {
 	ExposesSide,
 	ExposesState,
@@ -32,26 +30,35 @@ import {
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
+import {
+	BrnReadDirection,
+	BrnSelectContentDirective,
+	BrnSelectDirective,
+	BrnSelectOptionDirective,
+	BrnSelectService,
+	BrnSelectTriggerDirective,
+} from '@spartan-ng/ui-select-brain';
 import { Subject, delay, map, of, skip, switchMap } from 'rxjs';
-import { BrnSelectContentComponent } from './brn-select-content.component';
-import { BrnSelectOptionDirective } from './brn-select-option.directive';
-import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
-import { BrnSelectService } from './brn-select.service';
-
-export type BrnReadDirection = 'ltr' | 'rtl';
 
 let nextId = 0;
 
 @Component({
-	selector: 'brn-select, hlm-select',
+	// eslint-disable-next-line @angular-eslint/directive-selector
+	selector: 'hlm-select, brn-select [hlm]',
 	standalone: true,
-	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule, JsonPipe],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule],
 	providers: [
 		BrnSelectService,
 		CdkListbox,
-		provideExposedSideProviderExisting(() => BrnSelectComponent),
-		provideExposesStateProviderExisting(() => BrnSelectComponent),
+		provideExposedSideProviderExisting(() => HlmSelectComponent),
+		provideExposesStateProviderExisting(() => HlmSelectComponent),
+	],
+	hostDirectives: [
+		{
+			directive: BrnSelectDirective,
+			inputs: ['multiple', 'placeholder', 'disabled'],
+			outputs: ['openedChange'],
+		},
 	],
 	template: `
 		@if (!labelProvided() && _placeholder()) {
@@ -79,31 +86,14 @@ let nextId = 0;
 			<ng-content />
 		</ng-template>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BrnSelectComponent implements ControlValueAccessor, AfterContentInit, ExposesSide, ExposesState {
+export class HlmSelectComponent implements AfterContentInit, ExposesSide, ExposesState {
 	private readonly _selectService = inject(BrnSelectService);
-
 	public readonly triggerWidth = this._selectService.triggerWidth;
 
-	// eslint-disable-next-line @angular-eslint/no-input-rename
-	@Input({ alias: 'multiple' })
-	set multiple(multiple: boolean) {
-		this._selectService.state.update((state) => ({ ...state, multiple }));
-	}
 	protected readonly _multiple = this._selectService.multiple;
-
-	// eslint-disable-next-line @angular-eslint/no-input-rename
-	@Input({ alias: 'placeholder' })
-	set placeholder(placeholder: string) {
-		this._selectService.state.update((state) => ({ ...state, placeholder }));
-	}
 	protected readonly _placeholder = this._selectService.placeholder;
-
-	// eslint-disable-next-line @angular-eslint/no-input-rename
-	@Input({ alias: 'disabled' })
-	set disabled(disabled: boolean) {
-		this._selectService.state.update((state) => ({ ...state, disabled }));
-	}
 	protected readonly _disabled = this._selectService.disabled;
 
 	public readonly dir = input<BrnReadDirection>('ltr');
@@ -111,8 +101,8 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	@ContentChild(BrnLabelDirective, { descendants: false })
 	protected selectLabel!: BrnLabelDirective;
 	/** Overlay pane containing the options. */
-	@ContentChild(BrnSelectContentComponent)
-	protected selectContent!: BrnSelectContentComponent;
+	@ContentChild(BrnSelectContentDirective)
+	protected selectContent!: BrnSelectContentDirective;
 	@ContentChildren(BrnSelectOptionDirective, { descendants: true })
 	protected options!: QueryList<BrnSelectOptionDirective>;
 	/** Overlay pane containing the options. */
@@ -196,9 +186,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			...state,
 			id: `brn-select-${nextId++}`,
 		}));
-		if (this.ngControl != null) {
-			this.ngControl.valueAccessor = this;
-		}
 
 		// Watch for Listbox Selection Changes to trigger Collapse
 		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe(() => {
@@ -279,24 +266,5 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	private _moveFocusToCDKList(): void {
 		setTimeout(() => this.selectContent.focusList());
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public writeValue(value: any): void {
-		this._selectService.setInitialSelectedOptions(value);
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public registerOnChange(fn: any): void {
-		this._onChange = fn;
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public registerOnTouched(fn: any): void {
-		this._onTouched = fn;
-	}
-
-	public setDisabledState(isDisabled: boolean) {
-		this.disabled = isDisabled;
 	}
 }
