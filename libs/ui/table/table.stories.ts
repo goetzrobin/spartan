@@ -70,33 +70,35 @@ const createUsers = (numUsers = 5) => {
 			</ng-template>
 		</div>
 
-		<brn-table
-			hlm
+		<hlm-table
 			stickyHeader
 			class="border-border mt-4 block h-[337px] overflow-scroll rounded-md border"
 			[dataSource]="_data()"
-			[displayedColumns]="_brnColumnManager.displayedColumns()"
 			[trackBy]="_trackBy"
 		>
-			<brn-column-def name="name" class="w-40">
-				<hlm-th truncate *brnHeaderDef>Name</hlm-th>
-				<hlm-td truncate *brnCellDef="let element">
+			<hlm-header-row *hlmHeaderRowDef="_brnColumnManager.displayedColumns()" />
+			<hlm-row *hlmRowDef="let row; columns: _brnColumnManager.displayedColumns()" />
+
+			<ng-container [hlmColumnDef]="'name'">
+				<hlm-th truncate class="w-40" *hlmHeaderCellDef>Name</hlm-th>
+				<hlm-td truncate class="w-40" *hlmCellDef="let element">
 					{{ element.name }}
 				</hlm-td>
-			</brn-column-def>
-			<brn-column-def name="age" class="w-40 justify-end">
-				<hlm-th *brnHeaderDef>Age</hlm-th>
-				<hlm-td class="tabular-nums" *brnCellDef="let element">
+			</ng-container>
+
+			<ng-container [hlmColumnDef]="'age'">
+				<hlm-th class="w-40 justify-end" *hlmHeaderCellDef>Age</hlm-th>
+				<hlm-td class="w-40 justify-end tabular-nums" *hlmCellDef="let element">
 					{{ element.age }}
 				</hlm-td>
-			</brn-column-def>
-			<brn-column-def name="height" class="w-40 justify-end tabular-nums">
-				<hlm-th *brnHeaderDef>Height</hlm-th>
-				<hlm-td *brnCellDef="let element">
+			</ng-container>
+			<ng-container [hlmColumnDef]="'height'">
+				<hlm-th class="w-40 justify-end tabular-nums" *hlmHeaderCellDef>Height</hlm-th>
+				<hlm-td class="w-40 justify-end tabular-nums" *hlmCellDef="let element">
 					{{ element.height }}
 				</hlm-td>
-			</brn-column-def>
-		</brn-table>
+			</ng-container>
+		</hlm-table>
 		<div
 			class="mt-2 flex items-center justify-between"
 			*brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
@@ -136,7 +138,7 @@ class TableStory {
 	protected readonly _brnColumnManager = useBrnColumnManager({
 		name: { visible: true, label: 'Name' },
 		age: { visible: false, label: 'Alter' },
-		height: { visible: false, label: 'Größe' },
+		height: { visible: true, label: 'Größe' },
 	});
 
 	protected readonly _rawFilterInput = signal('');
@@ -194,33 +196,34 @@ class TableStory {
 			<button class="w-full sm:w-40" variant="outline" [value]="false" hlm brnToggle>All</button>
 			<button class="w-full tabular-nums sm:w-40" variant="outline" [value]="true" hlm brnToggle>Above 150</button>
 		</brn-toggle-group>
-		<brn-table
-			hlm
+		<hlm-table
 			stickyHeader
 			class="border-border mt-4 block h-[337px] overflow-scroll rounded-md border"
 			[dataSource]="_data()"
-			[displayedColumns]="_brnColumnManager.displayedColumns()"
 			[trackBy]="_trackBy"
 		>
-			<brn-column-def name="name">
-				<hlm-th truncate class="w-40" *brnHeaderDef>Name</hlm-th>
-				<hlm-td truncate class="w-40" *brnCellDef="let element">
+			<hlm-header-row *hlmHeaderRowDef="_brnColumnManager.displayedColumns()" />
+			<hlm-row *hlmRowDef="let row; columns: _brnColumnManager.displayedColumns()" />
+
+			<ng-container hlmColumnDef="name">
+				<hlm-th truncate class="w-40" *hlmHeaderCellDef>Name</hlm-th>
+				<hlm-td truncate class="w-40" *hlmCellDef="let element">
 					{{ element.name }}
 				</hlm-td>
-			</brn-column-def>
-			<brn-column-def name="age">
-				<hlm-th class="w-40 justify-end" *brnHeaderDef>Age</hlm-th>
-				<hlm-td class="w-40 justify-end tabular-nums" *brnCellDef="let element">
+			</ng-container>
+			<ng-container hlmColumnDef="age">
+				<hlm-th class="w-40 justify-end" *hlmHeaderCellDef>Age</hlm-th>
+				<hlm-td class="w-40 justify-end tabular-nums" *hlmCellDef="let element">
 					{{ element.age }}
 				</hlm-td>
-			</brn-column-def>
-			<brn-column-def name="height">
-				<hlm-th class="w-40 justify-end" *brnHeaderDef>Height</hlm-th>
-				<hlm-td class="w-40 justify-end tabular-nums" *brnCellDef="let element">
+			</ng-container>
+			<ng-container hlmColumnDef="height">
+				<hlm-th class="w-40 justify-end" *hlmHeaderCellDef>Height</hlm-th>
+				<hlm-td class="w-40 justify-end tabular-nums" *hlmCellDef="let element">
 					{{ element.height }}
 				</hlm-td>
-			</brn-column-def>
-		</brn-table>
+			</ng-container>
+		</hlm-table>
 		<div
 			class="mt-2 flex items-center justify-between"
 			*brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
@@ -295,27 +298,34 @@ class TableToggleStory {
 @Component({
 	selector: 'table-presentation-only-story',
 	standalone: true,
-	imports: [HlmTableModule, NgForOf],
+	imports: [BrnTableModule, HlmTableModule, NgForOf],
 	template: `
-		<hlm-table>
-			<hlm-trow>
-				<hlm-th truncate class="w-40">Name</hlm-th>
-				<hlm-th class="w-24 justify-end">Age</hlm-th>
-				<hlm-th class="w-40 justify-center">Height</hlm-th>
-			</hlm-trow>
-			<hlm-trow *ngFor="let row of _data()">
-				<hlm-td truncate class="w-40">{{ row.name }}</hlm-td>
-				<hlm-td class="w-24 justify-end">{{ row.age }}</hlm-td>
-				<hlm-td class="w-40 justify-center">{{ row.height }}</hlm-td>
-			</hlm-trow>
-		</hlm-table>
+		<table hlmTable class="w-full" [dataSource]="_data()">
+			<ng-container hlmColumnDef="username">
+				<th hlmHeaderCell *hlmHeaderCellDef truncate>Name</th>
+				<td hlmCell *hlmCellDef="let row" truncate>{{ row.name }}</td>
+			</ng-container>
+
+			<ng-container hlmColumnDef="age">
+				<th hlmHeaderCell *hlmHeaderCellDef truncate>Age</th>
+				<td hlmCell *hlmCellDef="let row" truncate>{{ row.age }}</td>
+			</ng-container>
+
+			<ng-container hlmColumnDef="height">
+				<th hlmHeaderCell *hlmHeaderCellDef truncate>Height</th>
+				<td hlmCell *hlmCellDef="let row" truncate>{{ row.height }}</td>
+			</ng-container>
+
+			<tr hlmHeaderRow *hlmHeaderRowDef="['username', 'age', 'height']"></tr>
+			<tr hlmRow *hlmRowDef="let row; columns: ['username', 'age', 'height']"></tr>
+		</table>
 	`,
 })
 class TablePresentationOnlyStory {
 	protected readonly _data = signal(createUsers(20));
 }
 
-const meta: Meta<HlmTableComponent> = {
+const meta: Meta<HlmTableComponent<unknown>> = {
 	title: 'Table',
 	component: HlmTableComponent,
 	tags: ['autodocs'],
@@ -327,7 +337,7 @@ const meta: Meta<HlmTableComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<HlmTableComponent>;
+type Story = StoryObj<HlmTableComponent<unknown>>;
 
 export const Default: Story = {
 	render: () => ({
