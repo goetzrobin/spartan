@@ -16,6 +16,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@spartan-ng/app/*": ["apps/app/src/*"],
 			"@spartan-ng/cli": ["libs/cli/src/index.ts"],
 			"@spartan-ng/tools": ["libs/tools/src/index.ts"],
 			"@spartan-ng/trpc": ["libs/trpc/src/index.ts"],
@@ -76,8 +77,7 @@
 			"@spartan-ng/ui-toggle-helm": ["libs/ui/toggle/helm/src/index.ts"],
 			"@spartan-ng/ui-tooltip-brain": ["libs/ui/tooltip/brain/src/index.ts"],
 			"@spartan-ng/ui-tooltip-helm": ["libs/ui/tooltip/helm/src/index.ts"],
-			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"],
-			"~/*": ["apps/app/src/*"]
+			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
