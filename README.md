@@ -60,6 +60,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 41. [monacodelisa](https://github.com/monacodelisa)
 42. [tomdev9](https://github.com/tomdev9)
 43. [ragul1697](https://github.com/ragul1697)
+44. [snydertechnologies](https://github.com/snydertechnologies)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
