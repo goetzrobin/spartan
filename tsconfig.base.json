@@ -4,6 +4,7 @@
 		"rootDir": ".",
 		"sourceMap": true,
 		"declaration": false,
+		"allowSyntheticDefaultImports": true,
 		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
