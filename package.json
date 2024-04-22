@@ -11,6 +11,8 @@
 		"prepare-cli": "nx g @spartan-ng/tools:hlm-to-cli-generator",
 		"lint-publishable": "nx run-many --target=lint --projects=tag:scope:core,tag:scope:brain,tag:scope:helm,tag:scope:cli",
 		"lint-fix-publishable": "nx run-many --target=lint --projects=tag:scope:core,tag:scope:brain,tag:scope:helm,tag:scope:cli --fix",
+		"biome.format": "biome format --write {apps,libs}",
+		"biome.lint": "biome check --apply {apps,libs}",
 		"storybook": "nx storybook ui-storybook",
 		"build-storybook": "nx build-storybook ui-storybook",
 		"build": "nx run-many --target build --all --parallel=1",
@@ -83,6 +85,7 @@
 		"zone.js": "0.14.2"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "^1.7.0",
 		"@angular-devkit/build-angular": "17.3.0",
 		"@angular-devkit/core": "17.3.0",
 		"@angular-devkit/schematics": "17.3.0",
