@@ -1,3 +1,3 @@
 {
-	"*.{js,ts,css,scss,html,json,md,yml}": "biome format --write {apps,libs}"
+	"*.{js,ts,css,scss,html,json,md,yml}": ""
 }
