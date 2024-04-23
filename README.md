@@ -77,7 +77,7 @@ Each primitive is made up off an un-styled `brain` library, which provides all f
 
 There's also a `libs/cli` folder, which contains the Nx-plugin & Angular CLI code that allows users to add spartan/ui to their Nx or Angular workspace in a simple way.
 
-#### Install Dependencies
+### Install Dependencies
 
 Run `pnpm install` to install the dependencies of this project.
 
