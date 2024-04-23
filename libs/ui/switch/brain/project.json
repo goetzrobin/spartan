@@ -3,8 +3,8 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/switch/brain/src",
 	"prefix": "spartan",
-	"tags": ["scope:brain"],
 	"projectType": "library",
+	"tags": ["scope:brain"],
 	"targets": {
 		"build": {
 			"executor": "@nx/angular:package",
@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/switch/brain/**/*.ts",
-					"libs/ui/switch/brain/**/*.html",
-					"libs/ui/switch/brain/package.json",
-					"libs/ui/switch/brain/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

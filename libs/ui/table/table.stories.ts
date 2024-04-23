@@ -3,8 +3,8 @@ import { Component, TrackByFunction, computed, effect, signal } from '@angular/c
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { faker } from '@faker-js/faker';
-import { radixChevronDown } from '@ng-icons/radix-icons';
-import type { Meta, StoryObj } from '@storybook/angular';
+import { lucideChevronDown } from '@ng-icons/lucide';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { debounceTime } from 'rxjs';
 import { HlmButtonDirective, HlmButtonModule } from '../button/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
@@ -14,7 +14,7 @@ import { HlmMenuModule } from '../menu/helm/src';
 import { BrnToggleGroupModule } from '../toggle/brain/src';
 import { HlmToggleGroupModule } from '../toggle/helm/src';
 import { BrnTableModule, PaginatorState, useBrnColumnManager } from './brain/src';
-import { HlmTableModule } from './helm/src';
+import { HlmTableComponent, HlmTableModule } from './helm/src';
 
 const createUsers = (numUsers = 5) => {
 	return Array.from({ length: numUsers }, () => ({
@@ -40,7 +40,7 @@ const createUsers = (numUsers = 5) => {
 		HlmIconComponent,
 		TitleCasePipe,
 	],
-	providers: [provideIcons({ radixChevronDown })],
+	providers: [provideIcons({ lucideChevronDown })],
 	template: `
 		<div class="flex justify-between">
 			<input
@@ -52,22 +52,21 @@ const createUsers = (numUsers = 5) => {
 
 			<button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
 				Columns
-				<hlm-icon name="radixChevronDown" class="ml-2" size="sm" />
+				<hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
 			</button>
 			<ng-template #menu>
-				<div hlm brnMenu class="w-40">
+				<hlm-menu class="w-40">
 					<button
-						*ngFor="let columnName of _brnColumnManager.allColumns"
-						hlm
-						brnMenuItemCheckbox
-						[disabled]="_brnColumnManager.isColumnDisabled(columnName)"
-						[checked]="_brnColumnManager.isColumnVisible(columnName)"
-						(triggered)="_brnColumnManager.toggleVisibility(columnName)"
+						*ngFor="let column of _brnColumnManager.allColumns"
+						hlmMenuItemCheckbox
+						[disabled]="_brnColumnManager.isColumnDisabled(column.name)"
+						[checked]="_brnColumnManager.isColumnVisible(column.name)"
+						(triggered)="_brnColumnManager.toggleVisibility(column.name)"
 					>
 						<hlm-menu-item-check />
-						<span>{{ columnName | titlecase }}</span>
+						<span>{{ column.label }}</span>
 					</button>
-				</div>
+				</hlm-menu>
 			</ng-template>
 		</div>
 
@@ -79,21 +78,21 @@ const createUsers = (numUsers = 5) => {
 			[displayedColumns]="_brnColumnManager.displayedColumns()"
 			[trackBy]="_trackBy"
 		>
-			<brn-column-def name="name">
-				<hlm-th truncate class="w-40" *brnHeaderDef>Name</hlm-th>
-				<hlm-td truncate class="w-40" *brnCellDef="let element">
+			<brn-column-def name="name" class="w-40">
+				<hlm-th truncate *brnHeaderDef>Name</hlm-th>
+				<hlm-td truncate *brnCellDef="let element">
 					{{ element.name }}
 				</hlm-td>
 			</brn-column-def>
-			<brn-column-def name="age">
-				<hlm-th class="w-40 justify-end" *brnHeaderDef>Age</hlm-th>
-				<hlm-td class="w-40 justify-end tabular-nums" *brnCellDef="let element">
+			<brn-column-def name="age" class="w-40 justify-end">
+				<hlm-th *brnHeaderDef>Age</hlm-th>
+				<hlm-td class="tabular-nums" *brnCellDef="let element">
 					{{ element.age }}
 				</hlm-td>
 			</brn-column-def>
-			<brn-column-def name="height">
-				<hlm-th class="w-40 justify-end" *brnHeaderDef>Height</hlm-th>
-				<hlm-td class="w-40 justify-end tabular-nums" *brnCellDef="let element">
+			<brn-column-def name="height" class="w-40 justify-end tabular-nums">
+				<hlm-th *brnHeaderDef>Height</hlm-th>
+				<hlm-td *brnCellDef="let element">
 					{{ element.height }}
 				</hlm-td>
 			</brn-column-def>
@@ -135,9 +134,9 @@ class TableStory {
 	protected readonly _pageSize = signal(this._availablePageSizes[0]);
 
 	protected readonly _brnColumnManager = useBrnColumnManager({
-		name: true,
-		age: false,
-		height: true,
+		name: { visible: true, label: 'Name' },
+		age: { visible: false, label: 'Alter' },
+		height: { visible: false, label: 'Größe' },
 	});
 
 	protected readonly _rawFilterInput = signal('');
@@ -316,12 +315,19 @@ class TablePresentationOnlyStory {
 	protected readonly _data = signal(createUsers(20));
 }
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmTableComponent> = {
 	title: 'Table',
+	component: HlmTableComponent,
+	tags: ['autodocs'],
+	decorators: [
+		moduleMetadata({
+			imports: [TableStory, TableToggleStory],
+		}),
+	],
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmTableComponent>;
 
 export const Default: Story = {
 	render: () => ({
@@ -333,7 +339,6 @@ export const Default: Story = {
 };
 
 export const PresentationOnly: Story = {
-	name: 'Presentation Only',
 	render: () => ({
 		moduleMetadata: {
 			imports: [TablePresentationOnlyStory],
@@ -344,9 +349,6 @@ export const PresentationOnly: Story = {
 
 export const Toggle: Story = {
 	render: () => ({
-		moduleMetadata: {
-			imports: [TableToggleStory],
-		},
 		template: `<table-toggle-story/>`,
 	}),
 };

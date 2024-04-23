@@ -18,26 +18,49 @@ All of spartan is an MIT-licensed open source project with its ongoing developme
 Our initial 300 contributors and sponsors are featured here and on the front page of [spartan.ng](https://spartan.ng)
 
 1. [goetzrobin](https://github.com/goetzrobin)
-2. [mihajm](https://github.com/mihajm)
-3. [ajitzero](https://github.com/ajitzero)
-4. [arturgawlik](https://github.com/arturgawlik)
-5. [deepakrudrapaul](https://github.com/deepakrudrapaul)
-6. [evanfuture](https://github.com/evanfuture)
-7. [AdditionAddict](https://github.com/AdditionAddict)
-8. [Altamimi-Dev](https://github.com/Altamimi-Dev)
-9. [ferat](https://github.com/ferat)
-10. [jeremy-js-devweb](https://github.com/jeremy-js-devweb)
-11. [heddendorp](https://github.com/heddendorp)
-12. [tutkli](https://github.com/tutkli)
-13. [Pascalmh](https://github.com/Pascalmh)
-14. [okkindel](https://github.com/okkindel)
-15. [marcjulian](https://github.com/marcjulian)
-16. [elite-benni](https://github.com/elite-benni)
-17. [oidre](https://github.com/oidre)
-18. [nartc](https://github.com/nartc)
-19. [santoshyadavdev](https://github.com/santoshyadavdev)
-20. [markostanimirovic](https://github.com/markostanimirovic)
-21. [theo-matzavinos](https://github.com/theo-matzavinos)
+2. [elite-benni](https://github.com/elite-benni)
+3. [thatsamsonkid](https://github.com/thatsamsonkid)
+4. [mihajm](https://github.com/mihajm)
+5. [ajitzero](https://github.com/ajitzero)
+6. [arturgawlik](https://github.com/arturgawlik)
+7. [deepakrudrapaul](https://github.com/deepakrudrapaul)
+8. [evanfuture](https://github.com/evanfuture)
+9. [AdditionAddict](https://github.com/AdditionAddict)
+10. [Altamimi-Dev](https://github.com/Altamimi-Dev)
+11. [ferat](https://github.com/ferat)
+12. [jeremy-js-devweb](https://github.com/jeremy-js-devweb)
+13. [heddendorp](https://github.com/heddendorp)
+14. [tutkli](https://github.com/tutkli)
+15. [Pascalmh](https://github.com/Pascalmh)
+16. [okkindel](https://github.com/okkindel)
+17. [marcjulian](https://github.com/marcjulian)
+18. [oidre](https://github.com/oidre)
+19. [nartc](https://github.com/nartc)
+20. [santoshyadavdev](https://github.com/santoshyadavdev)
+21. [markostanimirovic](https://github.com/markostanimirovic)
+22. [theo-matzavinos](https://github.com/theo-matzavinos)
+23. [jkuri](https://github.com/jkuri)
+24. [dongphuong0905](https://github.com/dongphuong0905)
+25. [DominikPieper](https://github.com/DominikPieper)
+26. [brandonroberts](https://github.com/brandonroberts)
+27. [izikd-](https://github.com/izikd-)
+28. [ryancraigmartin](https://github.com/ryancraigmartin)
+29. [gaetanBloch](https://github.com/gaetanBloch)
+30. [gergobergo](https://github.com/gergobergo)
+31. [rpacheco124](https://github.com/rpacheco124)
+32. [benjaminforras](https://github.com/benjaminforras)
+33. [jstnjs](https://github.com/jstnjs)
+34. [r3ps4J](https://github.com/r3ps4J)
+35. [Celtian](https://github.com/Celtian)
+36. [miljan-code](https://github.com/miljan-code)
+37. [alexciesielski](https://github.com/alexciesielski)
+38. [ty-ler](https://github.com/ty-ler)
+39. [MatznRisto](https://github.com/MatznRisto)
+40. [badsgahhl](https://github.com/badsgahhl)
+41. [monacodelisa](https://github.com/monacodelisa)
+42. [tomdev9](https://github.com/tomdev9)
+43. [ragul1697](https://github.com/ragul1697)
+44. [snydertechnologies](https://github.com/snydertechnologies)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
@@ -50,35 +73,48 @@ And then add the beautiful shadcn styles with primitives (and components where n
 
 You can find all UI primitives in the `libs/ui` folder.
 
-Each primitive is made up off a un-styled `brain` library, which provides all functionality and a `helm` library, which adds the styles.
+Each primitive is made up off an un-styled `brain` library, which provides all functionality and a `helm` library, which adds the styles.
 
 There's also a `libs/cli` folder, which contains the Nx-plugin & Angular CLI code that allows users to add spartan/ui to their Nx or Angular workspace in a simple way.
+
+### Install Dependencies
+
+Run `pnpm install` to install the dependencies of this project.
 
 ### Development with storybook
 
 A storybook project is set up and is the primary way to develop UI components. You can run it with:
 
 ```
-yarn storybook
+pnpm storybook
 ```
 
 At the root of each primitive's folder, e.g. `libs/ui/accordion` you will find a stories file, e.g, `accordion.stories.ts`.
 
 Use these files to add stories and drive development of the primitives.
 
+### Testing
+
+spartan uses [Jest](https://jestjs.io) for tests. To test all projects locally, run the following command from the root
+folder:
+
+```shell
+pnpm test
+```
+
 ### e2e testing
 
 Cypress e2e testing is set up to run on the storybook. You can run it with:
 
 ```
-yarn e2e
+pnpm e2e
 ```
 
 To add your own `e2e` tests add them to the `apps/ui-storybook-e2e` application.
 
-### Progress (33/41)
+### Progress (37/43)
 
-We finished porting over 33/41 UI primitives. See a more detailed breakdown [here!](./libs/ui/README.md)
+We finished porting over 37/43 UI primitives. See a more detailed breakdown [here!](./libs/ui/README.md)
 
 ## spartan/stack
 
@@ -101,26 +137,22 @@ Follow the directions below to get it up and running:
 
 #### Prerequisites
 
-- You will need `yarn` (or a different package manager) installed.
+- You will need `pnpm` (or a different package manager) installed.
 - You will need to set up a [Supabase](https://supabase.com/) account (it's free)
 - You will need [NodeJs](https://nodejs.org/en) installed. The version I have working is `18.13.0`.
-
-#### Install Dependencies
-
-Run `yarn` or `yarn install` to install the dependencies of this project.
 
 #### Development server
 
 Then you can run the following command:
 
 ```shell
-yarn nx serve app
+pnpm nx serve app
 ```
 
 or
 
 ```shell
-yarn dev
+pnpm dev
 ```
 
 for a dev server. Navigate to http://localhost:4200/. The app will automatically reload
@@ -151,9 +183,11 @@ create table
   ) tablespace pg_default;
 ```
 
+> [!NOTE] > `.env` should be added to `.gitignore`
+
 ## Understand this workspace
 
-Run `yarn nx graph` to see a diagram of the dependencies of the projects.
+Run `pnpm nx graph` to see a diagram of the dependencies of the projects.
 
 ## Further help
 

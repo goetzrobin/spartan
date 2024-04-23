@@ -3,8 +3,8 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/command/brain/src",
 	"prefix": "hlm",
-	"tags": ["scope:brain"],
 	"projectType": "library",
+	"tags": ["scope:brain"],
 	"targets": {
 		"build": {
 			"executor": "@nx/angular:package",
@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/command/brain/**/*.ts",
-					"libs/ui/command/brain/**/*.html",
-					"libs/ui/command/brain/package.json",
-					"libs/ui/command/brain/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

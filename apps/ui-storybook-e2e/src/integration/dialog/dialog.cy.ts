@@ -98,4 +98,111 @@ describe('dialog--default', () => {
 			cy.findAllByText(/edit profile/i).should('have.focus');
 		});
 	});
+
+	describe('nested dialog', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=dialog--nested-dialog');
+			cy.injectAxe();
+		});
+
+		it('click on trigger should open the first dialog, click on button inside first dialog should open a nested dialog, click on button inside nested dialog closes nested dialog', () => {
+			cy.findByText(/open dialog/i).should('have.attr', 'aria-haspopup', 'dialog');
+			cy.findByText(/open dialog/i).click();
+
+			cy.get('#brn-dialog-0');
+			cy.get('#brn-dialog-0').should('have.attr', 'aria-labelledby', 'brn-dialog-title-0');
+			cy.get('#brn-dialog-0').should('have.attr', 'aria-labelledby', 'brn-dialog-title-0');
+			cy.get('#brn-dialog-0').should('have.attr', 'aria-modal', 'true');
+			cy.get('#brn-dialog-0').should('have.attr', 'tabindex', '-1');
+
+			cy.findByText(/first dialog/i);
+			cy.findByText(/open nested dialog/i).should('have.attr', 'aria-haspopup', 'dialog');
+			cy.findByText(/open nested dialog/i).click();
+
+			cy.get('#brn-dialog-1');
+			cy.get('#brn-dialog-1').should('have.attr', 'aria-labelledby', 'brn-dialog-title-1');
+			cy.get('#brn-dialog-1').should('have.attr', 'aria-labelledby', 'brn-dialog-title-1');
+			cy.get('#brn-dialog-1').should('have.attr', 'aria-modal', 'true');
+			cy.get('#brn-dialog-1').should('have.attr', 'tabindex', '-1');
+
+			cy.get('#brn-dialog-1')
+				.findByText(/close nested dialog/i)
+				.click();
+
+			cy.wait(100);
+
+			cy.get('.cdk-overlay-backdrop').click({ force: true });
+
+			cy.findAllByText(/open dialog/i).should('have.length', 1);
+			cy.findAllByText(/open dialog/i).should('have.focus');
+		});
+	});
+});
+
+describe('dialog--dynamic-component', () => {
+	describe('dynamic-component', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=dialog--dynamic-component');
+			cy.injectAxe();
+		});
+
+		it('click on button should open dyanmic component, click on close should close, click outside should close', () => {
+			cy.findAllByText(/select user/i).click();
+			cy.findByRole('dialog');
+			cy.findByRole('dialog').should('have.attr', 'aria-labelledby', 'brn-dialog-title-0');
+			cy.findByRole('dialog').should('have.attr', 'aria-labelledby', 'brn-dialog-title-0');
+			cy.findByRole('dialog').should('have.attr', 'aria-modal', 'true');
+			cy.findByRole('dialog').should('have.attr', 'tabindex', '-1');
+			cy.get('dynamic-content');
+
+			// close on click close button
+			cy.findByRole('dialog').get('hlm-icon').click();
+			cy.findAllByText(/select user/i).should('have.length', 1);
+			cy.findAllByText(/select user/i).should('have.focus');
+			cy.findByText(/select user/i).click();
+
+			// close on click backdrop
+			cy.get('dynamic-content');
+			cy.get('.cdk-overlay-backdrop').click({ force: true });
+			cy.findAllByText(/select user/i).should('have.length', 1);
+			cy.findAllByText(/select user/i).should('have.focus');
+		});
+	});
+
+	describe('nested dialog', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=dialog--nested-dynamic-component');
+			cy.injectAxe();
+		});
+
+		it('click on trigger should open the first dialog, click on button inside first dialog should open a nested dialog, click on button inside nested dialog closes nested dialog', () => {
+			cy.findByText(/open dialog/i).click();
+
+			cy.get('#brn-dialog-0');
+			cy.get('#brn-dialog-0').should('have.attr', 'aria-labelledby', 'brn-dialog-title-0');
+			cy.get('#brn-dialog-0').should('have.attr', 'aria-labelledby', 'brn-dialog-title-0');
+			cy.get('#brn-dialog-0').should('have.attr', 'aria-modal', 'true');
+			cy.get('#brn-dialog-0').should('have.attr', 'tabindex', '-1');
+
+			cy.findByText(/first dialog/i);
+			cy.findByText(/open nested dialog/i).click();
+
+			cy.get('#brn-dialog-1');
+			cy.get('#brn-dialog-1').should('have.attr', 'aria-labelledby', 'brn-dialog-title-1');
+			cy.get('#brn-dialog-1').should('have.attr', 'aria-labelledby', 'brn-dialog-title-1');
+			cy.get('#brn-dialog-1').should('have.attr', 'aria-modal', 'true');
+			cy.get('#brn-dialog-1').should('have.attr', 'tabindex', '-1');
+
+			cy.get('#brn-dialog-1')
+				.findByText(/close nested dialog/i)
+				.click();
+
+			cy.wait(100);
+
+			cy.get('.cdk-overlay-backdrop').click({ force: true });
+
+			cy.findAllByText(/open dialog/i).should('have.length', 1);
+			cy.findAllByText(/open dialog/i).should('have.focus');
+		});
+	});
 });

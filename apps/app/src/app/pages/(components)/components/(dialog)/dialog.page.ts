@@ -1,7 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixExclamationTriangle } from '@ng-icons/radix-icons';
+import { lucideAlertTriangle } from '@ng-icons/lucide';
 import {
 	HlmAlertDescriptionDirective,
 	HlmAlertDirective,
@@ -15,13 +15,14 @@ import { CodeComponent } from '../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
 import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
+import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { DialogContextMenuPreviewComponent, contextMenuCode } from './dialog-context-menu.preview';
+import { DialogDynamicComponentPreviewComponent, dynamicComponentCode } from './dialog-dynamic-component.preview';
 import { DialogPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './dialog.preview';
 
 export const routeMeta: RouteMeta = {
@@ -41,21 +42,22 @@ export const routeMeta: RouteMeta = {
 		SectionIntroComponent,
 		SectionSubHeadingComponent,
 		TabsComponent,
+		TabsCliComponent,
 		CodePreviewDirective,
-		PageNavLinkComponent,
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
 		DialogPreviewComponent,
 		DialogPreviewComponent,
 		DialogContextMenuPreviewComponent,
+		DialogDynamicComponentPreviewComponent,
 		HlmAlertDirective,
 		HlmAlertDescriptionDirective,
 		HlmIconComponent,
 		HlmAlertIconDirective,
 		HlmAlertTitleDirective,
 	],
-	providers: [provideIcons({ radixExclamationTriangle })],
+	providers: [provideIcons({ lucideAlertTriangle })],
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro
@@ -71,10 +73,11 @@ export const routeMeta: RouteMeta = {
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
-				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/cli:ui dialog" />
-				<spartan-code secondTab language="sh" code="ng g @spartan-ng/cli:ui dialog" />
-			</spartan-tabs>
+			<spartan-cli-tabs
+				class="mt-4"
+				nxCode="npx nx g @spartan-ng/cli:ui dialog"
+				ngCode="ng g @spartan-ng/cli:ui dialog"
+			/>
 
 			<spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
 			<div class="space-y-4">
@@ -93,9 +96,9 @@ export const routeMeta: RouteMeta = {
 				alternative, which takes in a reference to the brn-dialog. That way you can avoid nesting the template.
 			</p>
 			<div hlmAlert class="mb-6" variant="destructive">
-				<hlm-icon name="radixExclamationTriangle" hlmAlertIcon />
+				<hlm-icon name="lucideAlertTriangle" hlmAlertIcon />
 				<p hlmAlertTitle>Note</p>
-				<p hlmAlertDescription>
+				<p hlmAlertDescription class="leading-loose">
 					Do not use the
 					<code class="${hlmCode}">HlmMenuItem</code>
 					or
@@ -115,16 +118,26 @@ export const routeMeta: RouteMeta = {
 				<spartan-code secondTab [code]="contextMenuCode" />
 			</spartan-tabs>
 
+			<spartan-section-sub-heading id="dynamic-component">Dynamic Component</spartan-section-sub-heading>
+			<p class="${hlmP} mb-6">
+				You can dynamically open a dialog with a component rendered as the content. The dialog context can be injected
+				into the dynamic component using the provided
+				<code class="${hlmCode}">injectBrnDialogContext</code>
+				function.
+			</p>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-dialog-dynamic-component-preview />
+				</div>
+				<spartan-code secondTab [code]="dynamicComponentCode" />
+			</spartan-tabs>
+
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="dropdown-menu" label="Dropdown Menu" />
 				<spartan-page-bottom-nav-link direction="previous" href="data-table" label="Data Table" />
 			</spartan-page-bottom-nav>
 		</section>
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="installation" label="Installation" />
-			<spartan-page-nav-link fragment="usage" label="Usage" />
-			<spartan-page-nav-link fragment="inside-menu" label="Inside Menu" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class DialogPageComponent {
@@ -132,4 +145,5 @@ export default class DialogPageComponent {
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
 	protected readonly contextMenuCode = contextMenuCode;
+	protected readonly dynamicComponentCode = dynamicComponentCode;
 }

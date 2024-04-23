@@ -11,21 +11,22 @@ locate the relevant code in one of the `libs/ui` sub-folder.
 
 ### Setup
 
-spartan uses [Yarn Classic](https://classic.yarnpkg.com/) to manage its dependencies.
+spartan uses [pnpm](https://pnpm.io/) to manage its dependencies.
 
 Before opening a pull request, run the following command from the root
 folder to make sure your development dependencies are up-to-date:
 
 ```shell
-yarn
+pnpm install
 ```
 
 ### Running locally
 
-To serve the example application locally, run the following command from the root folder:
+When working on UI primitives you most likely want to work with our storybook. To start storybook
+you can simply run and go to http://localhost:4400:
 
 ```shell
-yarn dev
+pnpm storybook
 ```
 
 ### Build
@@ -34,7 +35,7 @@ spartan uses [Nx](https://nx.dev) for builds. To build all projects locally, run
 folder:
 
 ```shell
-yarn build
+pnpm build
 ```
 
 ### Testing
@@ -43,12 +44,24 @@ spartan uses [Jest](https://jestjs.io) for tests. To test all projects locally, 
 folder:
 
 ```shell
-yarn test
+pnpm test
+```
+
+We also have e2e tests set up with Cypress that run against our storybook. Run them with:
+
+```shell
+pnpm e2e
 ```
 
 ## Contributing to the docs and spartan website
 
-Coming soon...
+To serve the documentation and example application locally, run the following command from the root folder:
+
+```shell
+pnpm dev
+```
+
+The code is inside `apps/app` and runs on AnalogJs.
 
 ## Submitting pull requests
 
@@ -155,6 +168,7 @@ The following is the list of supported scopes:
 - **button**
 - **calendar**
 - **card**
+- **carousel**
 - **checkbox**
 - **collapsible**
 - **combobox**
@@ -165,6 +179,7 @@ The following is the list of supported scopes:
 - **dialog**
 - **dropdown-menu**
 - **hover-card**
+- **icon**
 - **input**
 - **label**
 - **menubar**

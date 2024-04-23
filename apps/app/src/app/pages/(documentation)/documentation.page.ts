@@ -1,6 +1,6 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { PageComponent } from '~/app/shared/layout/page.component';
+import { PageComponent } from '@spartan-ng/app/app/shared/layout/page.component';
 
 export const routeMeta: RouteMeta = {
 	data: {

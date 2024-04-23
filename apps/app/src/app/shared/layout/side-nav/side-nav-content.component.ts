@@ -64,6 +64,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					<spartan-side-nav-cs />
 				</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/card">Card</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/carousel">Carousel</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/checkbox">Checkbox</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/collapsible">Collapsible</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/combobox">Combobox</a>
@@ -88,14 +89,12 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					Navigation Menu
 					<spartan-side-nav-cs />
 				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/pagination">Pagination</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/popover">Popover</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/progress">Progress</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/radio-group">Radio Group</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/scroll-area">Scroll Area</a>
-				<a disabled spartanSideNavLink="/components/select">
-					Select
-					<spartan-side-nav-cs />
-				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/select">Select</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/separator">Separator</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/sheet">Sheet</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/skeleton">Skeleton</a>
@@ -103,6 +102,8 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					Slider
 					<spartan-side-nav-cs />
 				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/sonner">Sonner</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/spinner">Spinner</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/switch">Switch</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/table">Table</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/tabs">Tabs</a>

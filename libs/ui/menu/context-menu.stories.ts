@@ -1,11 +1,24 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from './brain/src';
-import { HlmMenuImports } from './helm/src';
+import { HlmMenuComponent, HlmMenuImports } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmMenuComponent> = {
 	title: 'Context Menu',
+	component: HlmMenuComponent,
+	tags: ['autodocs'],
+	args: {
+		variant: 'default',
+	},
+	argTypes: {
+		variant: {
+			options: ['default', 'menubar'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -20,10 +33,11 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmMenuComponent>;
 
 export const Default: Story = {
-	render: () => ({
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
         <div [brnCtxMenuTriggerFor]='menu'
          class='border-border flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm'>
@@ -31,7 +45,7 @@ export const Default: Story = {
     </div>
 
     <ng-template #menu>
-      <hlm-menu class='w-64'>
+      <hlm-menu ${argsToTemplate(args)} class='w-64'>
         <hlm-menu-group>
           <button inset hlmMenuItem>
             Back

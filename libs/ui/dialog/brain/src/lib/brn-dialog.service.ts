@@ -1,58 +1,28 @@
-import { AutoFocusTarget, Dialog, DIALOG_DATA, DIALOG_SCROLL_STRATEGY_PROVIDER, DialogRef } from '@angular/cdk/dialog';
-import {
-	ComponentType,
-	ConnectedPosition,
-	FlexibleConnectedPositionStrategyOrigin,
-	OverlayPositionBuilder,
-	PositionStrategy,
-	ScrollStrategy,
-	ScrollStrategyOptions,
-} from '@angular/cdk/overlay';
+import { Dialog, DIALOG_DATA } from '@angular/cdk/dialog';
+import { ComponentType, OverlayPositionBuilder, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import {
 	computed,
 	effect,
-	ElementRef,
-	EventEmitter,
+	EffectRef,
 	inject,
 	Injectable,
-	OnDestroy,
-	Renderer2,
+	InjectOptions,
+	Injector,
+	RendererFactory2,
+	runInInjectionContext,
 	signal,
+	StaticProvider,
 	TemplateRef,
 	ViewContainerRef,
 } from '@angular/core';
 import { filter, Subject, takeUntil } from 'rxjs';
+import { BrnDialogOptions } from './brn-dialog-options';
+import { BrnDialogRef } from './brn-dialog-ref';
+import { BrnDialogState } from './brn-dialog-state';
 
-export const provideBrnDialog = () => [Dialog, BrnDialogService, DIALOG_SCROLL_STRATEGY_PROVIDER];
+let dialogSequence = 0;
 
-export type BrnDialogOptions = {
-	id: string;
-	role: 'dialog' | 'alertdialog';
-	hasBackdrop: boolean;
-	panelClass: string | string[];
-	backdropClass: string | string[];
-	positionStrategy: PositionStrategy | null | undefined;
-	scrollStrategy: ScrollStrategy | null | undefined;
-	restoreFocus: boolean | string | ElementRef;
-	closeDelay: number;
-	closeOnOutsidePointerEvents: boolean;
-	attachTo: FlexibleConnectedPositionStrategyOrigin | null | undefined;
-	attachPositions: ConnectedPosition[];
-	autoFocus: AutoFocusTarget | string;
-	disableClose: boolean;
-	ariaDescribedBy: string | null | undefined;
-	ariaLabelledBy: string | null | undefined;
-	ariaLabel: string | null | undefined;
-	ariaModal: boolean;
-};
-
-export type BrnDialogContext<T> = T & { close: () => void };
-
-export const injectBrnDialogCtx = <T>(): BrnDialogContext<T> => {
-	return inject(DIALOG_DATA);
-};
-
-const cssClassesToArray = (classes: string | string[] | undefined | null, defaultClass = ''): string[] => {
+export const cssClassesToArray = (classes: string | string[] | undefined | null, defaultClass = ''): string[] => {
 	if (typeof classes === 'string') {
 		const splitClasses = classes.trim().split(' ');
 		if (splitClasses.length === 0) {
@@ -63,57 +33,68 @@ const cssClassesToArray = (classes: string | string[] | undefined | null, defaul
 	return classes ?? [];
 };
 
-@Injectable()
-export class BrnDialogService implements OnDestroy {
-	private _destroyed$ = new Subject<void>();
-	private _previousTimeout: ReturnType<typeof setTimeout> | undefined;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type BrnDialogContext<T> = T & { close: (result?: any) => void };
 
-	private _cdkDialog = inject(Dialog);
-	private _renderer = inject(Renderer2);
-	private _positionBuilder = inject(OverlayPositionBuilder);
-	private _sso = inject(ScrollStrategyOptions);
-	private _dialogRef?: DialogRef;
+/** @deprecated `injectBrnDialogCtx` will no longer be supported once components are stable. Use `injectBrnDialogContext` instead.  */
+export const injectBrnDialogCtx = <T>(): BrnDialogContext<T> => {
+	return inject(DIALOG_DATA);
+};
 
-	private readonly _open = signal(false);
-	public state = computed(() => (this._open() ? 'open' : 'closed'));
-	private _overlay: HTMLElement | null = null;
-	private _backdrop: HTMLElement | null = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const injectBrnDialogContext = <DialogContext = any>(options: InjectOptions = {}) => {
+	return inject(DIALOG_DATA, options) as DialogContext;
+};
 
-	public closed = new EventEmitter<void>();
-
-	constructor() {
-		effect(() => {
-			if (this._overlay) {
-				this._renderer.setAttribute(this._overlay, 'data-state', this.state());
-			}
-			if (this._backdrop) {
-				this._renderer.setAttribute(this._backdrop, 'data-state', this.state());
-			}
-		});
-	}
+@Injectable({ providedIn: 'root' })
+export class BrnDialogService {
+	private readonly _cdkDialog = inject(Dialog);
+	private readonly _rendererFactory = inject(RendererFactory2);
+	private readonly _renderer = this._rendererFactory.createRenderer(null, null);
+	private readonly _positionBuilder = inject(OverlayPositionBuilder);
+	private readonly _sso = inject(ScrollStrategyOptions);
+	private readonly _injector = inject(Injector);
 
 	public open<DialogContext>(
-		vcr: ViewContainerRef,
 		content: ComponentType<unknown> | TemplateRef<unknown>,
+		vcr?: ViewContainerRef,
 		context?: DialogContext,
 		options?: Partial<BrnDialogOptions>,
-	): void {
-		if (this._open() || (options?.id && this._cdkDialog.getDialogById(options.id))) {
-			return;
+	) {
+		if (options?.id && this._cdkDialog.getDialogById(options.id)) {
+			throw new Error(`Dialog with ID: ${options.id} already exists`);
 		}
+
 		const positionStrategy =
 			options?.positionStrategy ??
 			(options?.attachTo && options?.attachPositions && options?.attachPositions?.length > 0
 				? this._positionBuilder?.flexibleConnectedTo(options.attachTo).withPositions(options.attachPositions ?? [])
 				: this._positionBuilder.global().centerHorizontally().centerVertically());
-		const contextOrData = { ...context, close: () => this.close(options?.closeDelay) };
+
+		let brnDialogRef!: BrnDialogRef;
+		let effectRef!: EffectRef;
+
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const contextOrData: BrnDialogContext<any> = {
+			...context,
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			close: (result: any = undefined) => brnDialogRef.close(result, options?.closeDelay),
+		};
+
+		const destroyed$ = new Subject<void>();
+		const open = signal<boolean>(true);
+		const state = computed<BrnDialogState>(() => (open() ? 'open' : 'closed'));
+		const dialogId = dialogSequence++;
+
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		this._dialogRef = this._cdkDialog.open(content, {
-			id: options?.id,
+		const cdkDialogRef = this._cdkDialog.open(content, {
+			id: options?.id ?? `brn-dialog-${dialogId}`,
 			role: options?.role,
 			viewContainerRef: vcr,
-			templateContext: contextOrData,
+			templateContext: () => ({
+				$implicit: contextOrData,
+			}),
 			data: contextOrData,
 			hasBackdrop: options?.hasBackdrop,
 			panelClass: cssClassesToArray(options?.panelClass),
@@ -123,71 +104,76 @@ export class BrnDialogService implements OnDestroy {
 			restoreFocus: options?.restoreFocus,
 			disableClose: true,
 			autoFocus: options?.autoFocus ?? 'first-tabbable',
-			ariaDescribedBy: options?.ariaDescribedBy,
-			ariaLabelledBy: options?.ariaLabelledBy,
+			ariaDescribedBy: options?.ariaDescribedBy ?? `brn-dialog-description-${dialogId}`,
+			ariaLabelledBy: options?.ariaLabelledBy ?? `brn-dialog-title-${dialogId}`,
 			ariaLabel: options?.ariaLabel,
 			ariaModal: options?.ariaModal,
+			providers: (cdkDialogRef) => {
+				brnDialogRef = new BrnDialogRef(cdkDialogRef, open, state, dialogId, options as BrnDialogOptions);
+
+				runInInjectionContext(this._injector, () => {
+					effectRef = effect(() => {
+						if (overlay) {
+							this._renderer.setAttribute(overlay, 'data-state', state());
+						}
+						if (backdrop) {
+							this._renderer.setAttribute(backdrop, 'data-state', state());
+						}
+					});
+				});
+
+				const providers: StaticProvider[] = [
+					{
+						provide: BrnDialogRef,
+						useValue: brnDialogRef,
+					},
+				];
+
+				if (options?.providers) {
+					if (typeof options.providers === 'function') {
+						providers.push(...options.providers());
+					}
+
+					if (Array.isArray(options.providers)) {
+						providers.push(...options.providers);
+					}
+				}
+
+				return providers;
+			},
 		});
 
-		if (!this._dialogRef) return;
-		this._overlay = this._dialogRef.overlayRef.overlayElement;
-		this._backdrop = this._dialogRef.overlayRef.backdropElement;
+		const overlay = cdkDialogRef.overlayRef.overlayElement;
+		const backdrop = cdkDialogRef.overlayRef.backdropElement;
 
 		if (options?.closeOnOutsidePointerEvents) {
-			this._dialogRef.outsidePointerEvents.pipe(takeUntil(this._destroyed$)).subscribe(() => {
-				this.close(options?.closeDelay);
+			cdkDialogRef.outsidePointerEvents.pipe(takeUntil(destroyed$)).subscribe(() => {
+				brnDialogRef.close(undefined, options?.closeDelay);
 			});
 		}
+
+		if (options?.closeOnBackdropClick) {
+			cdkDialogRef.backdropClick.pipe(takeUntil(destroyed$)).subscribe(() => {
+				brnDialogRef.close(undefined, options?.closeDelay);
+			});
+		}
+
 		if (!options?.disableClose) {
-			this._dialogRef.keydownEvents
+			cdkDialogRef.keydownEvents
 				.pipe(
 					filter((e) => e.key === 'Escape'),
-					takeUntil(this._destroyed$),
+					takeUntil(destroyed$),
 				)
 				.subscribe(() => {
-					this.close(options?.closeDelay);
+					brnDialogRef.close(undefined, options?.closeDelay);
 				});
 		}
 
-		this._dialogRef.closed.pipe(takeUntil(this._destroyed$)).subscribe(() => {
-			this._open.set(false);
-			this.closed.emit();
+		cdkDialogRef.closed.pipe(takeUntil(destroyed$)).subscribe(() => {
+			effectRef?.destroy();
+			destroyed$.next();
 		});
 
-		this._open.set(true);
-	}
-
-	public close(delay = 0): void {
-		if (!this._open()) return;
-
-		this._open.set(false);
-
-		if (this._previousTimeout) {
-			clearTimeout(this._previousTimeout);
-		}
-
-		this._previousTimeout = setTimeout(() => {
-			this._dialogRef?.close();
-		}, delay);
-	}
-
-	public setAriaDescribedBy(ariaDescribedBy: string | null | undefined) {
-		if (!this._dialogRef) return;
-		this._dialogRef.config.ariaDescribedBy = ariaDescribedBy;
-	}
-
-	public setAriaLabelledBy(ariaLabelledBy: string | null | undefined) {
-		if (!this._dialogRef) return;
-		this._dialogRef.config.ariaLabelledBy = ariaLabelledBy;
-	}
-
-	public setAriaLabel(ariaLabel: string | null | undefined) {
-		if (!this._dialogRef) return;
-		this._dialogRef.config.ariaLabel = ariaLabel;
-	}
-
-	public ngOnDestroy(): void {
-		this._destroyed$.next();
-		this._destroyed$.complete();
+		return brnDialogRef;
 	}
 }

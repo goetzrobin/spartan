@@ -1,16 +1,15 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { ComingSoonComponent } from '@spartan-ng/app/app/shared/layout/coming-soon.component';
+import { MainSectionDirective } from '@spartan-ng/app/app/shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavComponent } from '@spartan-ng/app/app/shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '@spartan-ng/app/app/shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '@spartan-ng/app/app/shared/layout/section-sub-heading.component';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { hlmCode, hlmP, hlmUl } from '@spartan-ng/ui-typography-helm';
-import { ComingSoonComponent } from '~/app/shared/layout/coming-soon.component';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'About' },
@@ -31,7 +30,6 @@ const aboutLink = 'h-6 underline text-base px-0.5';
 		PageNavComponent,
 		ComingSoonComponent,
 		SectionSubHeadingComponent,
-		PageNavLinkComponent,
 		HlmButtonDirective,
 	],
 	template: `
@@ -127,8 +125,8 @@ const aboutLink = 'h-6 underline text-base px-0.5';
 						- An incredible CDK, patterns & inspiration for accessible unstyled ui primitives.
 					</li>
 					<li>
-						<a class="${aboutLink}" hlmBtn href="https://ngneat.github.io/cmdk/" target="_blank" variant="link">
-							ng-neat/cmdk
+						<a class="${aboutLink}" hlmBtn href="https://ngxpert.github.io/cmdk/" target="_blank" variant="link">
+							ngxpert/cmdk
 						</a>
 						- The backbone of
 						<code class="${hlmCode}">brn-command</code>
@@ -183,12 +181,7 @@ const aboutLink = 'h-6 underline text-base px-0.5';
 			</spartan-page-bottom-nav>
 		</section>
 
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="About" label="About" />
-			<spartan-page-nav-link fragment="spartans" label="spartans" />
-			<spartan-page-nav-link fragment="credits" label="Credits" />
-			<spartan-page-nav-link fragment="license" label="License" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class ChangelogPageComponent {

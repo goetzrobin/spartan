@@ -3,14 +3,15 @@ import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { radixCaretSort, radixChevronDown, radixDotsHorizontal } from '@ng-icons/radix-icons';
+import { lucideArrowUpDown, lucideChevronDown, lucideMoreHorizontal } from '@ng-icons/lucide';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
-import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
-import { HlmCheckboxCheckIconComponent, HlmCheckboxDirective } from '@spartan-ng/ui-checkbox-helm';
+import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
+import { BrnSelectModule } from '@spartan-ng/ui-select-brain';
+import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
 import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng/ui-table-brain';
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
@@ -165,11 +166,13 @@ const PAYMENT_DATA: Payment[] = [
 		HlmIconComponent,
 		HlmInputDirective,
 
-		BrnCheckboxComponent,
 		HlmCheckboxCheckIconComponent,
-		HlmCheckboxDirective,
+		HlmCheckboxComponent,
+
+		BrnSelectModule,
+		HlmSelectModule,
 	],
-	providers: [provideIcons({ radixChevronDown, radixDotsHorizontal, radixCaretSort })],
+	providers: [provideIcons({ lucideChevronDown, lucideMoreHorizontal, lucideArrowUpDown })],
 	host: {
 		class: 'w-full',
 	},
@@ -185,19 +188,19 @@ const PAYMENT_DATA: Payment[] = [
 
 			<button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
 				Columns
-				<hlm-icon name="radixChevronDown" class="ml-2" size="sm" />
+				<hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
 			</button>
 			<ng-template #menu>
 				<hlm-menu class="w-32">
-					@for (columnName of _brnColumnManager.allColumns; track columnName) {
+					@for (column of _brnColumnManager.allColumns; track column.name) {
 						<button
 							hlmMenuItemCheckbox
-							[disabled]="_brnColumnManager.isColumnDisabled(columnName)"
-							[checked]="_brnColumnManager.isColumnVisible(columnName)"
-							(triggered)="_brnColumnManager.toggleVisibility(columnName)"
+							[disabled]="_brnColumnManager.isColumnDisabled(column.name)"
+							[checked]="_brnColumnManager.isColumnVisible(column.name)"
+							(triggered)="_brnColumnManager.toggleVisibility(column.name)"
 						>
 							<hlm-menu-item-check />
-							<span>{{ columnName | titlecase }}</span>
+							<span>{{ column.label }}</span>
 						</button>
 					}
 				</hlm-menu>
@@ -212,46 +215,42 @@ const PAYMENT_DATA: Payment[] = [
 			[displayedColumns]="_allDisplayedColumns()"
 			[trackBy]="_trackBy"
 		>
-			<brn-column-def name="select">
-				<hlm-th class="w-12" *brnHeaderDef>
-					<brn-checkbox hlm [checked]="_checkboxState()" (changed)="handleHeaderCheckboxChange()">
-						<hlm-checkbox-checkicon />
-					</brn-checkbox>
+			<brn-column-def name="select" class="w-12">
+				<hlm-th *brnHeaderDef>
+					<hlm-checkbox [checked]="_checkboxState()" (changed)="handleHeaderCheckboxChange()" />
 				</hlm-th>
-				<hlm-td class="w-12" *brnCellDef="let element">
-					<brn-checkbox hlm [checked]="_isPaymentSelected(element)" (changed)="togglePayment(element)">
-						<hlm-checkbox-checkicon />
-					</brn-checkbox>
+				<hlm-td *brnCellDef="let element">
+					<hlm-checkbox [checked]="_isPaymentSelected(element)" (changed)="togglePayment(element)" />
 				</hlm-td>
 			</brn-column-def>
-			<brn-column-def name="status">
-				<hlm-th truncate class="w-32 sm:w-40" *brnHeaderDef>Status</hlm-th>
-				<hlm-td truncate class="w-32 sm:w-40" *brnCellDef="let element">
+			<brn-column-def name="status" class="w-32 sm:w-40">
+				<hlm-th truncate *brnHeaderDef>Status</hlm-th>
+				<hlm-td truncate *brnCellDef="let element">
 					{{ element.status | titlecase }}
 				</hlm-td>
 			</brn-column-def>
-			<brn-column-def name="email">
-				<hlm-th class="w-60 lg:flex-1" *brnHeaderDef>
+			<brn-column-def name="email" class="w-60 lg:flex-1">
+				<hlm-th *brnHeaderDef>
 					<button hlmBtn size="sm" variant="ghost" (click)="handleEmailSortChange()">
 						Email
-						<hlm-icon class="ml-3" size="sm" name="radixCaretSort" />
+						<hlm-icon class="ml-3" size="sm" name="lucideArrowUpDown" />
 					</button>
 				</hlm-th>
-				<hlm-td truncate class="w-60 lg:flex-1" *brnCellDef="let element">
+				<hlm-td truncate *brnCellDef="let element">
 					{{ element.email }}
 				</hlm-td>
 			</brn-column-def>
-			<brn-column-def name="amount">
-				<hlm-th class="w-20 justify-end" *brnHeaderDef>Amount</hlm-th>
-				<hlm-td class="w-20 justify-end font-medium tabular-nums" *brnCellDef="let element">
+			<brn-column-def name="amount" class="w-20 justify-end">
+				<hlm-th *brnHeaderDef>Amount</hlm-th>
+				<hlm-td class="font-medium tabular-nums" *brnCellDef="let element">
 					\${{ element.amount | number: '1.2-2' }}
 				</hlm-td>
 			</brn-column-def>
-			<brn-column-def name="actions">
-				<hlm-th class="w-16" *brnHeaderDef></hlm-th>
-				<hlm-td class="w-16" *brnCellDef="let element">
+			<brn-column-def name="actions" class="w-16">
+				<hlm-th *brnHeaderDef></hlm-th>
+				<hlm-td *brnCellDef="let element">
 					<button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-						<hlm-icon class="h-4 w-4" name="radixDotsHorizontal" />
+						<hlm-icon class="h-4 w-4" name="lucideMoreHorizontal" />
 					</button>
 
 					<ng-template #menu>
@@ -278,17 +277,18 @@ const PAYMENT_DATA: Payment[] = [
 		>
 			<span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
 			<div class="mt-2 flex sm:mt-0">
-				<select
-					[ngModel]="_pageSize()"
-					(ngModelChange)="_pageSize.set($event)"
-					hlmInput
-					size="sm"
-					class="mr-1 inline-flex pr-8"
-				>
-					@for (size of _availablePageSizes; track size) {
-						<option [value]="size">{{ size === 10000 ? 'All' : size }}</option>
-					}
-				</select>
+				<brn-select class="inline-block" [(ngModel)]="_pageSize">
+					<hlm-select-trigger class="w-15 mr-1 inline-flex h-9">
+						<hlm-select-value />
+					</hlm-select-trigger>
+					<hlm-select-content>
+						@for (size of _availablePageSizes; track size) {
+							<hlm-option [value]="size">
+								{{ size === 10000 ? 'All' : size }}
+							</hlm-option>
+						}
+					</hlm-select-content>
+				</brn-select>
 
 				<div class="flex space-x-1">
 					<button size="sm" variant="outline" hlmBtn [disabled]="!ctx.decrementable()" (click)="ctx.decrement()">
@@ -318,9 +318,9 @@ export class DataTablePreviewComponent {
 	});
 
 	protected readonly _brnColumnManager = useBrnColumnManager({
-		status: true,
-		email: true,
-		amount: true,
+		status: { visible: true, label: 'Status' },
+		email: { visible: true, label: 'Email' },
+		amount: { visible: true, label: 'Amount ($)' },
 	});
 	protected readonly _allDisplayedColumns = computed(() => [
 		'select',
@@ -400,16 +400,17 @@ import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { radixCaretSort, radixChevronDown, radixDotsHorizontal } from '@ng-icons/radix-icons';
+import { lucideArrowUpDown, lucideChevronDown, lucideMoreHorizontal } from '@ng-icons/lucide';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
-import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
-import { HlmCheckboxCheckIconComponent, HlmCheckboxDirective } from '@spartan-ng/ui-checkbox-helm';
+import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
 import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng/ui-table-brain';
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
+import { BrnSelectModule } from '@spartan-ng/ui-select-brain';
+import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
 import { debounceTime, map } from 'rxjs';
 
@@ -562,11 +563,13 @@ const PAYMENT_DATA: Payment[] = [
     HlmIconComponent,
     HlmInputDirective,
 
-    BrnCheckboxComponent,
     HlmCheckboxCheckIconComponent,
-    HlmCheckboxDirective,
+    HlmCheckboxComponent,
+
+    BrnSelectModule,
+	  HlmSelectModule,
   ],
-  providers: [provideIcons({ radixChevronDown, radixDotsHorizontal, radixCaretSort })],
+  providers: [provideIcons({ lucideChevronDown, lucideMoreHorizontal, lucideArrowUpDown })],
   host: {
     class: 'w-full',
   },
@@ -582,19 +585,19 @@ const PAYMENT_DATA: Payment[] = [
 
       <button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
         Columns
-        <hlm-icon name="radixChevronDown" class="ml-2" size="sm" />
+        <hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
       </button>
       <ng-template #menu>
         <hlm-menu class="w-32">
-          @for (columnName of _brnColumnManager.allColumns; track columnName) {
+          @for (column of _brnColumnManager.allColumns; track column.name) {
             <button
               hlmMenuItemCheckbox
-              [disabled]="_brnColumnManager.isColumnDisabled(columnName)"
-              [checked]="_brnColumnManager.isColumnVisible(columnName)"
-              (triggered)="_brnColumnManager.toggleVisibility(columnName)"
+              [disabled]="_brnColumnManager.isColumnDisabled(column.name)"
+              [checked]="_brnColumnManager.isColumnVisible(column.name)"
+              (triggered)="_brnColumnManager.toggleVisibility(column.name)"
             >
               <hlm-menu-item-check />
-              <span>{{ columnName | titlecase }}</span>
+              <span>{{ column.label }}</span>
             </button>
           }
         </hlm-menu>
@@ -609,46 +612,42 @@ const PAYMENT_DATA: Payment[] = [
       [displayedColumns]="_allDisplayedColumns()"
       [trackBy]="_trackBy"
     >
-      <brn-column-def name="select">
-        <hlm-th class="w-12" *brnHeaderDef>
-          <brn-checkbox hlm [checked]="_checkboxState()" (changed)="handleHeaderCheckboxChange()">
-            <hlm-checkbox-checkicon />
-          </brn-checkbox>
+      <brn-column-def name="select" class="w-12">
+        <hlm-th *brnHeaderDef>
+          <hlm-checkbox [checked]="_checkboxState()" (changed)="handleHeaderCheckboxChange()" />
         </hlm-th>
-        <hlm-td class="w-12" *brnCellDef="let element">
-          <brn-checkbox hlm [checked]="_isPaymentSelected(element)" (changed)="togglePayment(element)">
-            <hlm-checkbox-checkicon />
-          </brn-checkbox>
+        <hlm-td *brnCellDef="let element">
+          <hlm-checkbox [checked]="_isPaymentSelected(element)" (changed)="togglePayment(element)" />
         </hlm-td>
       </brn-column-def>
-      <brn-column-def name="status">
-        <hlm-th truncate class="w-32 sm:w-40" *brnHeaderDef>Status</hlm-th>
-        <hlm-td truncate class="w-32 sm:w-40" *brnCellDef="let element">
+      <brn-column-def name="status" class="w-32 sm:w-40">
+        <hlm-th truncate *brnHeaderDef>Status</hlm-th>
+        <hlm-td truncate *brnCellDef="let element">
           {{ element.status | titlecase }}
         </hlm-td>
       </brn-column-def>
-      <brn-column-def name="email">
-        <hlm-th class="w-60 lg:flex-1" *brnHeaderDef>
+      <brn-column-def name="email" class="w-60 lg:flex-1">
+        <hlm-th *brnHeaderDef>
           <button hlmBtn size="sm" variant="ghost" (click)="handleEmailSortChange()">
             Email
-            <hlm-icon class="ml-3" size="sm" name="radixCaretSort" />
+            <hlm-icon class="ml-3" size="sm" name="lucideArrowUpDown" />
           </button>
         </hlm-th>
-        <hlm-td truncate class="w-60 lg:flex-1" *brnCellDef="let element">
+        <hlm-td truncate *brnCellDef="let element">
           {{ element.email }}
         </hlm-td>
       </brn-column-def>
-      <brn-column-def name="amount">
-        <hlm-th class="w-20 justify-end" *brnHeaderDef>Amount</hlm-th>
-        <hlm-td class="w-20 justify-end font-medium tabular-nums" *brnCellDef="let element">
-          \$ {{ element.amount | number: '1.2-2'}}
+      <brn-column-def name="amount" class="w-20 justify-end">
+        <hlm-th *brnHeaderDef>Amount</hlm-th>
+        <hlm-td class="font-medium tabular-nums" *brnCellDef="let element">
+          $ {{ element.amount | number: '1.2-2'}}
         </hlm-td>
       </brn-column-def>
-      <brn-column-def name="actions">
-        <hlm-th class="w-16" *brnHeaderDef></hlm-th>
-        <hlm-td class="w-16" *brnCellDef="let element">
+      <brn-column-def name="actions" class="w-16">
+        <hlm-th *brnHeaderDef></hlm-th>
+        <hlm-td *brnCellDef="let element">
           <button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-            <hlm-icon class="h-4 w-4" name="radixDotsHorizontal" />
+            <hlm-icon class="h-4 w-4" name="lucideMoreHorizontal" />
           </button>
 
           <ng-template #menu>
@@ -673,19 +672,20 @@ const PAYMENT_DATA: Payment[] = [
       class="mt-4 flex flex-col justify-between sm:flex-row sm:items-center"
       *brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
     >
-      <span class="\${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
+      <span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
       <div class="mt-2 flex sm:mt-0">
-        <select
-          [ngModel]="_pageSize()"
-          (ngModelChange)="_pageSize.set($event)"
-          hlmInput
-          size="sm"
-          class="mr-1 inline-flex pr-8"
-        >
-          @for (size of _availablePageSizes; track size) {
-            <option [value]="size">{{ size === 10000 ? 'All' : size }}</option>
-          }
-        </select>
+        <brn-select class="inline-block" placeholder="{{ _availablePageSizes[0] }}" [(ngModel)]="_pageSize">
+          <hlm-select-trigger class="w-15 mr-1 inline-flex h-9">
+            <hlm-select-value />
+          </hlm-select-trigger>
+          <hlm-select-content>
+            @for (size of _availablePageSizes; track size) {
+              <hlm-option [value]="size">
+                {{ size === 10000 ? 'All' : size }}
+              </hlm-option>
+            }
+          </hlm-select-content>
+        </brn-select>
 
         <div class="flex space-x-1">
           <button size="sm" variant="outline" hlmBtn [disabled]="!ctx.decrementable()" (click)="ctx.decrement()">
@@ -715,9 +715,9 @@ export class DataTablePreviewComponent {
   });
 
   protected readonly _brnColumnManager = useBrnColumnManager({
-    status: true,
-    email: true,
-    amount: true,
+    status: { visible: true, label: 'Status' },
+    email: { visible: true, label: 'Email' },
+    amount: { visible: true, label: 'Amount ($)' },
   });
   protected readonly _allDisplayedColumns = computed(() => [
     'select',

@@ -31,10 +31,12 @@ body:
         - dialog
         - dropdown-menu
         - hover-card
+        - icon
         - input
         - label
         - menubar
         - navigation-menu
+        - pagination
         - popover
         - progress
         - radio-group
@@ -44,6 +46,8 @@ body:
         - sheet
         - skeleton
         - slider
+        - sonner
+        - spinner
         - switch
         - table
         - tabs
@@ -51,6 +55,7 @@ body:
         - toast
         - toggle
         - tooltip
+        - trpc
         - typography
         - Docs
         - Don't know / other

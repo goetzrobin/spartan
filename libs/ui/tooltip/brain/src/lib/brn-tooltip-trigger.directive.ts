@@ -47,6 +47,7 @@ import {
 	numberAttribute,
 	signal,
 } from '@angular/core';
+import { brnDevMode } from '@spartan-ng/ui-core';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { BrnTooltipContentComponent } from './brn-tooltip-content.component';
@@ -322,13 +323,13 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	}
 
 	/** The content to be displayed in the tooltip */
-	private _content: TemplateRef<unknown> | null = null;
+	private _content: string | TemplateRef<unknown> | null = null;
 	@Input('brnTooltipTrigger')
 	get content() {
 		return this._content;
 	}
 
-	set content(value: TemplateRef<unknown> | null) {
+	set content(value: string | TemplateRef<unknown> | null) {
 		this._content = value;
 
 		if (!this._content && this._isTooltipVisible()) {
@@ -390,6 +391,10 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 					this._ngZone.run(() => this.show());
 				}
 			});
+
+		if (brnDevMode && !this._ariaDescribedBy) {
+			console.warn('BrnTooltip: "aria-describedby" attribute is required for accessibility');
+		}
 	}
 
 	/**
@@ -420,7 +425,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	/** Shows the tooltip after the delay in ms, defaults to tooltip-delay-show or 0ms if no input */
 	show(delay: number = this.showDelay, origin?: { x: number; y: number }): void {
-		if (this.disabled || !this._ariaDescribedBy || this._isTooltipVisible()) {
+		if (this.disabled || this._isTooltipVisible()) {
 			this._tooltipInstance?._cancelPendingAnimations();
 			return;
 		}
@@ -626,7 +631,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		// Must wait for the template to be painted to the tooltip so that the overlay can properly
 		// calculate the correct positioning based on the size of the tek-pate.
 		if (this._tooltipInstance) {
-			this._tooltipInstance.template = this.content;
+			this._tooltipInstance.content = this.content;
 			this._tooltipInstance._markForCheck();
 
 			this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._destroyed)).subscribe(() => {

@@ -4,6 +4,7 @@ import { hlmBlockquote, hlmH1, hlmH2, hlmH3, hlmLead, hlmP, hlmUl } from './helm
 
 const meta: Meta<{}> = {
 	title: 'Typography',
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [],

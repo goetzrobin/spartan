@@ -3,8 +3,8 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/icon/helm/src",
 	"prefix": "hlm",
-	"tags": ["scope:helm"],
 	"projectType": "library",
+	"tags": ["scope:helm"],
 	"targets": {
 		"build": {
 			"executor": "@nx/angular:package",
@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/icon/helm/**/*.ts",
-					"libs/ui/icon/helm/**/*.html",
-					"libs/ui/icon/helm/package.json",
-					"libs/ui/icon/helm/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

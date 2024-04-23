@@ -1,4 +1,4 @@
-import { computed, Directive, Input, signal } from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -33,26 +33,10 @@ type ToggleVariants = VariantProps<typeof toggleVariants>;
 	},
 })
 export class HlmToggleDirective {
-	private readonly _variant = signal<ToggleVariants['variant']>('default');
-	@Input()
-	set variant(value: ToggleVariants['variant']) {
-		this._variant.set(value);
-	}
-
-	private readonly _size = signal<ToggleVariants['size']>('default');
-	@Input()
-	set size(value: ToggleVariants['size']) {
-		this._size.set(value);
-	}
-
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
-
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(toggleVariants({ variant: this._variant(), size: this._size() }), this._userCls());
-	}
+	public readonly variant = input<ToggleVariants['variant']>('default');
+	public readonly size = input<ToggleVariants['size']>('default');
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() =>
+		hlm(toggleVariants({ variant: this.variant(), size: this.size() }), this.userClass()),
+	);
 }

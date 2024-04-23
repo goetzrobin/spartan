@@ -3,10 +3,12 @@
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"projectType": "application",
 	"sourceRoot": "apps/app/src",
+	"tags": [],
+	"implicitDependencies": [],
 	"targets": {
 		"build": {
 			"dependsOn": ["^build"],
-			"executor": "@nx/vite:build",
+			"executor": "@analogjs/platform:vite",
 			"outputs": [
 				"{options.outputPath}",
 				"{workspaceRoot}/dist/apps/app/.nitro",
@@ -14,8 +16,10 @@
 				"{workspaceRoot}/dist/apps/app/analog"
 			],
 			"options": {
+				"main": "apps/app/src/main.ts",
 				"configFile": "apps/app/vite.config.ts",
-				"outputPath": "dist/apps/app/client"
+				"outputPath": "dist/apps/app/client",
+				"tsConfig": "apps/app/tsconfig.app.json"
 			},
 			"defaultConfiguration": "production",
 			"configurations": {
@@ -32,12 +36,12 @@
 			"executor": "nx:run-commands",
 			"options": {
 				"cwd": "",
-				"command": "yarn prisma generate"
+				"command": "pnpm prisma generate"
 			},
 			"dependsOn": ["build"]
 		},
 		"serve": {
-			"executor": "@nx/vite:dev-server",
+			"executor": "@analogjs/platform:vite-dev-server",
 			"defaultConfiguration": "development",
 			"options": {
 				"buildTarget": "app:build",
@@ -56,21 +60,24 @@
 		"extract-i18n": {
 			"executor": "@angular-devkit/build-angular:extract-i18n",
 			"options": {
-				"buildTarget": "app:build"
+				"browserTarget": "app:build"
 			}
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": ["apps/app/**/*.ts", "apps/app/**/*.html"]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"test": {
-			"executor": "@nx/vite:test",
+			"executor": "@analogjs/platform:vitest",
 			"outputs": ["{projectRoot}/coverage"]
+		},
+		"serve-nitro": {
+			"executor": "nx:run-commands",
+			"options": {
+				"cwd": "",
+				"command": "PORT=4205 node dist/apps/app/analog/server/index.mjs"
+			},
+			"dependsOn": ["build"]
 		}
-	},
-	"tags": [],
-	"implicitDependencies": []
+	}
 }

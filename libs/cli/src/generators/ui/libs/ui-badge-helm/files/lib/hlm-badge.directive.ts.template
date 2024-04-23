@@ -1,10 +1,10 @@
-import { booleanAttribute, computed, Directive, Input, signal } from '@angular/core';
+import { booleanAttribute, computed, Directive, Input, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
 
 export const badgeVariants = cva(
-	'inline-flex items-center border rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+	'inline-flex items-center border rounded-full px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
 	{
 		variants: {
 			variant: {
@@ -12,6 +12,10 @@ export const badgeVariants = cva(
 				secondary: 'bg-secondary border-transparent text-secondary-foreground',
 				destructive: 'bg-destructive border-transparent text-destructive-foreground',
 				outline: 'text-foreground border-border',
+			},
+			size: {
+				default: 'text-xs',
+				lg: 'text-sm',
 			},
 			static: { true: '', false: '' },
 		},
@@ -34,6 +38,7 @@ export const badgeVariants = cva(
 		],
 		defaultVariants: {
 			variant: 'default',
+			size: 'default',
 			static: false,
 		},
 	},
@@ -48,11 +53,10 @@ type badgeVariants = VariantProps<typeof badgeVariants>;
 	},
 })
 export class HlmBadgeDirective {
-	private readonly _userCls = signal<ClassValue>('');
-	@Input()
-	set class(userCls: ClassValue) {
-		this._userCls.set(userCls);
-	}
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() =>
+		hlm(badgeVariants({ variant: this._variant(), size: this._size(), static: this._static() }), this.userClass()),
+	);
 
 	private readonly _variant = signal<badgeVariants['variant']>('default');
 	@Input()
@@ -66,8 +70,9 @@ export class HlmBadgeDirective {
 		this._static.set(value);
 	}
 
-	protected _computedClass = computed(() => this._generateClass());
-	private _generateClass() {
-		return hlm(badgeVariants({ variant: this._variant(), static: this._static() }), this._userCls());
+	private readonly _size = signal<badgeVariants['size']>('default');
+	@Input()
+	set size(size: badgeVariants['size']) {
+		this._size.set(size);
 	}
 }

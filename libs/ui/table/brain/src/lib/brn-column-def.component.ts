@@ -7,6 +7,7 @@ import {
 	Input,
 	ViewChild,
 	ViewEncapsulation,
+	input,
 } from '@angular/core';
 import { BrnCellDefDirective } from './brn-cell-def.directive';
 import { BrnFooterDefDirective } from './brn-footer-def.directive';
@@ -46,6 +47,8 @@ export class BrnColumnDefComponent implements AfterContentChecked {
 		if (!this._columnDef) return;
 		this._columnDef.name = value;
 	}
+
+	public readonly class = input('');
 
 	@ViewChild(CdkColumnDef, { static: true })
 	private _columnDef!: CdkColumnDef;

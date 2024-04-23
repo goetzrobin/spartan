@@ -11,6 +11,7 @@ import {
 	EventEmitter,
 	forwardRef,
 	inject,
+	input,
 	Input,
 	OnDestroy,
 	Output,
@@ -29,7 +30,7 @@ export const BRN_CHECKBOX_VALUE_ACCESSOR = {
 	multi: true,
 };
 
-function indeterminateBooleanAttribute(value: unknown): boolean | 'indeterminate' {
+export function indeterminateBooleanAttribute(value: unknown): boolean | 'indeterminate' {
 	if (value === 'indeterminate') return 'indeterminate';
 	return booleanAttribute(value);
 }
@@ -51,20 +52,21 @@ const CONTAINER_POST_FIX = '-checkbox';
 				width: '1px',
 				height: '1px',
 				padding: '0',
-				margin: -'1px',
+				margin: '-1px',
 				overflow: 'hidden',
 				clip: 'rect(0, 0, 0, 0)',
 				whiteSpace: 'nowrap',
 				borderWidth: '0'
 			}"
-			[id]="forChild(_id()) ?? ''"
-			[name]="forChild(_name()) ?? ''"
+			[id]="id() ?? ''"
+			[name]="name() ?? ''"
 			[value]="_value()"
 			[checked]="isChecked()"
-			[attr.aria-label]="ariaLabel"
-			[attr.aria-labelledby]="ariaLabelledby"
-			[attr.aria-describedby]="ariaDescribedby"
-			[attr.aria-required]="isRequired() || null"
+			[required]="required()"
+			[attr.aria-label]="ariaLabel()"
+			[attr.aria-labelledby]="ariaLabelledby()"
+			[attr.aria-describedby]="ariaDescribedby()"
+			[attr.aria-required]="required() || null"
 			[attr.aria-checked]="_ariaChecked()"
 		/>
 		<ng-content />
@@ -78,8 +80,8 @@ const CONTAINER_POST_FIX = '-checkbox';
 		'[attr.aria-labelledby]': 'null',
 		'[attr.aria-label]': 'null',
 		'[attr.aria-describedby]': 'null',
-		'[attr.id]': '_id()',
-		'[attr.name]': '_name()',
+		'[attr.id]': 'hostId()',
+		'[attr.name]': 'hostName()',
 	},
 	providers: [BRN_CHECKBOX_VALUE_ACCESSOR],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -115,46 +117,31 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		return checked ? 'on' : 'off';
 	});
 
+	// TODO should be changed to new model input when updated to Angular 17.2
 	@Input({ transform: indeterminateBooleanAttribute })
 	set checked(value: boolean | 'indeterminate') {
 		this._checked.set(value);
 	}
 
 	/** Used to set the id on the underlying input element. */
-	protected readonly _id = signal<string | null>(null);
-	@Input()
-	set id(value: string | null) {
-		if (!value) return;
-		this._id.set(value + CONTAINER_POST_FIX);
-	}
+	public readonly id = input<string | null>(null);
+	protected readonly hostId = computed(() => (this.id() ? this.id() + CONTAINER_POST_FIX : null));
 
 	/** Used to set the name attribute on the underlying input element. */
-	protected readonly _name = signal<string | null>(null);
-	@Input()
-	set name(value: string | null) {
-		if (!value) return;
-		this._name.set(value + CONTAINER_POST_FIX);
-	}
+	public readonly name = input<string | null>(null);
+	protected readonly hostName = computed(() => (this.name() ? this.name() + CONTAINER_POST_FIX : null));
 
 	/** Used to set the aria-label attribute on the underlying input element. */
-	@Input('aria-label')
-	ariaLabel: string | null = null;
+	public readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
 	/** Used to set the aria-labelledby attribute on the underlying input element. */
-	@Input('aria-labelledby')
-	ariaLabelledby: string | null = null;
+	public readonly ariaLabelledby = input<string | null>(null, { alias: 'aria-labelledby' });
 
-	@Input('aria-describedby')
-	ariaDescribedby: string | null = null;
+	public readonly ariaDescribedby = input<string | null>(null, { alias: 'aria-describedby' });
 
-	private readonly _required = signal(false);
-	public readonly isRequired = this._required.asReadonly();
+	public readonly required = input(false, { transform: booleanAttribute });
 
-	@Input({ transform: booleanAttribute })
-	set required(value: boolean) {
-		this._required.set(value);
-	}
-
+	// TODO should be changed to new model input when updated to Angular 17.2
 	protected readonly _disabled = signal(false);
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
@@ -188,7 +175,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 			}
 			if (!this._isBrowser) return;
 
-			const label = parent?.querySelector(`label[for="${this.forChild(this._id())}"]`);
+			const label = parent?.querySelector(`label[for="${this.id()}"]`);
 			if (!label) return;
 			this._renderer.setAttribute(label, 'data-disabled', this._disabled() ? 'true' : 'false');
 		});
@@ -236,10 +223,6 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	ngOnDestroy() {
 		this._focusMonitor.stopMonitoring(this._elementRef);
-	}
-
-	forChild(parentValue: string | null | undefined): string | null {
-		return parentValue ? parentValue.replace(CONTAINER_POST_FIX, '') : null;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

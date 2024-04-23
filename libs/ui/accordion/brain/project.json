@@ -3,8 +3,8 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/accordion/brain/src",
 	"prefix": "spartan",
-	"tags": ["scope:brain"],
 	"projectType": "library",
+	"tags": ["scope:brain"],
 	"targets": {
 		"build": {
 			"executor": "@nx/angular:package",
@@ -31,15 +31,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ui/accordion/brain/**/*.ts",
-					"libs/ui/accordion/brain/**/*.html",
-					"libs/ui/accordion/brain/package.json",
-					"libs/ui/accordion/brain/project.json"
-				]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",

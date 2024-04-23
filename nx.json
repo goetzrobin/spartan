@@ -14,7 +14,12 @@
 			"cache": true
 		},
 		"lint": {
-			"inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"],
+			"inputs": [
+				"default",
+				"{workspaceRoot}/.eslintrc.json",
+				"{workspaceRoot}/.eslintignore",
+				"{workspaceRoot}/eslint.config.js"
+			],
 			"cache": true
 		},
 		"build-storybook": {
@@ -37,6 +42,15 @@
 		"@nx/vite:test": {
 			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
 			"cache": true
+		},
+		"@nx/eslint:lint": {
+			"inputs": [
+				"default",
+				"{workspaceRoot}/.eslintrc.json",
+				"{workspaceRoot}/.eslintignore",
+				"{workspaceRoot}/eslint.config.js"
+			],
+			"cache": true
 		}
 	},
 	"namedInputs": {
@@ -49,7 +63,8 @@
 			"!{projectRoot}/.eslintrc.json",
 			"!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
 			"!{projectRoot}/.storybook/**/*",
-			"!{projectRoot}/tsconfig.storybook.json"
+			"!{projectRoot}/tsconfig.storybook.json",
+			"!{projectRoot}/eslint.config.js"
 		],
 		"sharedGlobals": []
 	},

@@ -2,8 +2,10 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmSkeletonComponent } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmSkeletonComponent> = {
 	title: 'Skeleton',
+	component: HlmSkeletonComponent,
+	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
 			imports: [HlmSkeletonComponent],
@@ -12,7 +14,7 @@ const meta: Meta<{}> = {
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmSkeletonComponent>;
 
 export const Default: Story = {
 	render: () => ({

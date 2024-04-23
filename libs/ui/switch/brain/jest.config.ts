@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
 	displayName: 'ui-switch-brain',
-	preset: '../../../../jest.preset.js',
+	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	transform: {
 		'^.+\\.(ts|mjs|js|html)$': [
@@ -13,7 +13,7 @@ export default {
 		],
 	},
 	transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
-	testPathIgnorePatterns: ['<rootDir>/src/lib/brn-switch-ng-model.component.spec.ts'],
+	testPathIgnorePatterns: ['<rootDir>/src/lib/brn-switch-ng-model.component.ignore.spec.ts'],
 	snapshotSerializers: [
 		'jest-preset-angular/build/serializers/no-ng-attributes',
 		'jest-preset-angular/build/serializers/ng-snapshot',

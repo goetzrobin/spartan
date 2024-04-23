@@ -1,12 +1,12 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { TabsCliComponent } from '@spartan-ng/app/app/shared/layout/tabs-cli.component';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
 import { PageBottomNavPlaceholderComponent } from '../../../../shared/layout/page-bottom-nav-placeholder.component';
 import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
@@ -29,8 +29,8 @@ export const routeMeta: RouteMeta = {
 		SectionIntroComponent,
 		SectionSubHeadingComponent,
 		TabsComponent,
+		TabsCliComponent,
 		CodePreviewDirective,
-		PageNavLinkComponent,
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
@@ -49,10 +49,11 @@ export const routeMeta: RouteMeta = {
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
-				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/cli:ui avatar" />
-				<spartan-code secondTab language="sh" code="ng g @spartan-ng/cli:ui avatar" />
-			</spartan-tabs>
+			<spartan-cli-tabs
+				class="mt-4"
+				nxCode="npx nx g @spartan-ng/cli:ui avatar"
+				ngCode="ng g @spartan-ng/cli:ui avatar"
+			/>
 
 			<spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
 			<div class="space-y-4">
@@ -65,10 +66,7 @@ export const routeMeta: RouteMeta = {
 				<spartan-page-bottom-nav-link direction="previous" href="aspect-ratio" label="Aspect Ratio" />
 			</spartan-page-bottom-nav>
 		</section>
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="installation" label="Installation" />
-			<spartan-page-nav-link fragment="usage" label="Usage" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class AvatarPageComponent {

@@ -1,17 +1,22 @@
-import { radixCross1 } from '@ng-icons/radix-icons';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent, provideIcons } from '../icon/helm/src';
+import { HlmIconComponent } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
-import { BrnPopoverImports } from './brain/src';
+import { BrnPopoverComponent, BrnPopoverImports } from './brain/src';
 import { HlmPopoverImports } from './helm/src';
 
-export type PopoverProps = { offset: number; align: 'start' | 'center' | 'end' };
-const meta: Meta<PopoverProps> = {
+const meta: Meta<BrnPopoverComponent> = {
 	title: 'Popover',
+	component: BrnPopoverComponent,
+	tags: ['autodocs'],
+	args: {
+		align: 'center',
+		sideOffset: 4,
+	},
 	argTypes: {
 		align: { control: 'select', options: ['start', 'center', 'end'] },
+		sideOffset: { control: 'number' },
 	},
 	decorators: [
 		moduleMetadata({
@@ -23,20 +28,18 @@ const meta: Meta<PopoverProps> = {
 				HlmInputDirective,
 				HlmIconComponent,
 			],
-			providers: [provideIcons({ radixCross1 })],
 		}),
 	],
 };
 
 export default meta;
-type Story = StoryObj<PopoverProps>;
+type Story = StoryObj<BrnPopoverComponent>;
 
 export const Default: Story = {
-	args: { offset: 4, align: 'center' },
-	render: ({ align, offset }) => ({
-		props: { align, offset },
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
-    <brn-popover [align]='align' [sideOffset]='offset' closeDelay='100'>
+    <brn-popover ${argsToTemplate(args)} closeDelay='100'>
     <div class='py-80 flex flex-col items-center justify-center'>
         <button id='edit-profile' variant='outline' brnPopoverTrigger hlmBtn>Open Popover</button>
     </div>

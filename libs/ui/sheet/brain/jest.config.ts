@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
 	displayName: 'ui-sheet-brain',
-	preset: '../../../../jest.preset.js',
+	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	transform: {
 		'^.+\\.(ts|mjs|js|html)$': [

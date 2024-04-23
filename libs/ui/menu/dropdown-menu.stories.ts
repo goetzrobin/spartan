@@ -1,57 +1,70 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import * as radixIcons from '@ng-icons/radix-icons';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import * as lucide from '@ng-icons/lucide';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { BrnMenuTriggerDirective } from './brain/src';
-import { HlmMenuImports, HlmMenuItemCheckComponent, HlmMenuItemRadioComponent } from './helm/src';
+import { HlmMenuComponent, HlmMenuImports, HlmMenuItemCheckComponent, HlmMenuItemRadioComponent } from './helm/src';
 
-const meta: Meta<{}> = {
+const meta: Meta<HlmMenuComponent> = {
 	title: 'Dropdown Menu',
+	component: HlmMenuComponent,
+	tags: ['autodocs'],
+	args: {
+		variant: 'default',
+	},
+	argTypes: {
+		variant: {
+			options: ['default', 'menubar'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
-			providers: [provideIcons(radixIcons)],
+			providers: [provideIcons(lucide)],
 			imports: [BrnMenuTriggerDirective, HlmMenuImports, HlmButtonDirective, HlmIconComponent],
 		}),
 	],
 };
 
 export default meta;
-type Story = StoryObj<{}>;
+type Story = StoryObj<HlmMenuComponent>;
 
 export const Default: Story = {
-	render: () => ({
+	render: ({ ...args }) => ({
+		props: args,
 		template: `
-
     <div class='w-full flex justify-center items-center pt-[20%]'>
       <button hlmBtn variant='outline' align='end' [brnMenuTriggerFor]='menu'>Open</button>
     </div>
     <ng-template #menu>
-      <hlm-menu class='w-56'>
+      <hlm-menu ${argsToTemplate(args)} class='w-56'>
         <hlm-menu-label>My Account</hlm-menu-label>
         <hlm-menu-separator />
         <hlm-menu-group>
           <button hlmMenuItem>
-            <hlm-icon name='radixPerson' hlmMenuIcon />
+            <hlm-icon name='lucideUser' hlmMenuIcon />
             <span>Profile</span>
             <hlm-menu-shortcut>⇧⌘P</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name='radixCardStack' hlmMenuIcon />
+            <hlm-icon name='lucideCreditCard' hlmMenuIcon />
             <span>Billing</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name='radixGear' hlmMenuIcon />
+            <hlm-icon name='lucideSettings' hlmMenuIcon />
             <span>Settings</span>
             <hlm-menu-shortcut>⌘S</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name='radixKeyboard' hlmMenuIcon />
+            <hlm-icon name='lucideKeyboard' hlmMenuIcon />
             <span>Keyboard Shortcuts</span>
             <hlm-menu-shortcut>⌘K</hlm-menu-shortcut>
           </button>
@@ -61,19 +74,19 @@ export const Default: Story = {
 
         <hlm-menu-group>
           <button hlmMenuItem>
-            <hlm-icon name='radixAvatar' hlmMenuIcon />
+            <hlm-icon name='lucideUsers' hlmMenuIcon />
             <span>Team</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem [brnMenuTriggerFor]='invite'>
-            <hlm-icon name='radixFace' hlmMenuIcon />
+            <hlm-icon name='lucideUserPlus' hlmMenuIcon />
             <span>Invite Users</span>
             <hlm-menu-item-sub-indicator />
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name='radixPlus' hlmMenuIcon />
+            <hlm-icon name='lucidePlus' hlmMenuIcon />
             <span>New Team</span>
             <hlm-menu-shortcut>⌘+T</hlm-menu-shortcut>
           </button>
@@ -83,17 +96,17 @@ export const Default: Story = {
 
         <hlm-menu-group>
           <button hlmMenuItem [disabled]='false'>
-            <hlm-icon name='radixGithubLogo' hlmMenuIcon />
+            <hlm-icon name='lucideGithub' hlmMenuIcon />
             <span>Github</span>
           </button>
 
           <button hlmMenuItem [disabled]='true'>
-            <hlm-icon name='radixQuestionMarkCircled' hlmMenuIcon />
+            <hlm-icon name='lucideLifeBuoy' hlmMenuIcon />
             <span>Support</span>
           </button>
 
           <button hlmMenuItem disabled>
-            <hlm-icon name='radixCode' hlmMenuIcon />
+            <hlm-icon name='lucideCloud' hlmMenuIcon />
             <span>API</span>
           </button>
         </hlm-menu-group>
@@ -101,7 +114,7 @@ export const Default: Story = {
         <hlm-menu-separator />
 
         <button hlmMenuItem>
-          <hlm-icon name='radixExit' hlmMenuIcon />
+          <hlm-icon name='lucideLogOut' hlmMenuIcon />
           <span>Logout</span>
           <hlm-menu-shortcut>⇧⌘Q</hlm-menu-shortcut>
         </button>
@@ -112,17 +125,17 @@ export const Default: Story = {
     <ng-template #invite>
       <hlm-sub-menu>
         <button hlmMenuItem>
-          <hlm-icon name='radixEnvelopeClosed' hlmMenuIcon />
+          <hlm-icon name='lucideMail' hlmMenuIcon />
           Email
         </button>
 
         <button hlmMenuItem>
-          <hlm-icon name='radixChatBubble' hlmMenuIcon />
+          <hlm-icon name='lucideMessageSquare' hlmMenuIcon />
           Message
         </button>
         <hlm-menu-separator />
         <button hlmMenuItem>
-          <hlm-icon name='radixPlusCircled' hlmMenuIcon />
+          <hlm-icon name='lucidePlusCircle' hlmMenuIcon />
           <span>More</span>
         </button>
       </hlm-sub-menu>
@@ -186,7 +199,7 @@ export const Default: Story = {
 				<hlm-menu-separator />
 
 				<button hlmMenuItem (triggered)="reset()">
-					<hlm-icon name="radixReset" hlmMenuIcon />
+					<hlm-icon name="lucideUndo2" hlmMenuIcon />
 					Reset
 				</button>
 			</hlm-menu>

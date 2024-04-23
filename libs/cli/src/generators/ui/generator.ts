@@ -41,8 +41,17 @@ async function createPrimitiveLibraries(
 	const tasks: GeneratorCallback[] = [];
 
 	if (!response.primitives.includes('all')) {
-		await addIconForDependentPrimitive(primitivesToCreate, ['alert', 'command', 'menu', 'checkbox']);
-		await addButtonForDependentPrimitive(primitivesToCreate, ['alertdialog', 'command']);
+		await addIconForDependentPrimitive(primitivesToCreate, [
+			'accordion',
+			'alert',
+			'command',
+			'menu',
+			'checkbox',
+			'pagination',
+			'select',
+			'sonner',
+		]);
+		await addButtonForDependentPrimitive(primitivesToCreate, ['alertdialog', 'command', 'pagination']);
 	}
 	await replaceContextAndMenuBar(primitivesToCreate, allPrimitivesSelected);
 
@@ -88,8 +97,11 @@ async function createPrimitiveLibraries(
 }
 
 const addIconForDependentPrimitive = async (primitivesToCreate: string[], primitivesDependingOnIcon: string[]) => {
+	if (primitivesToCreate.includes('icon')) {
+		return;
+	}
+
 	if (primitivesDependingOnIcon.some((primitive) => primitivesToCreate.includes(primitive))) {
-		//TODO: Need to check if icon is already installed and skip if it already is
 		const installIcon = (
 			await prompt({
 				type: 'confirm',
@@ -105,8 +117,11 @@ const addIconForDependentPrimitive = async (primitivesToCreate: string[], primit
 	}
 };
 const addButtonForDependentPrimitive = async (primitivesToCreate: string[], primitivesDependingOnBtn: string[]) => {
+	if (primitivesToCreate.includes('button')) {
+		return;
+	}
+
 	if (primitivesDependingOnBtn.some((primitive) => primitivesToCreate.includes(primitive))) {
-		//TODO: Need to check if icon is already installed and skip if it already is
 		const installBtn = (
 			await prompt({
 				type: 'confirm',

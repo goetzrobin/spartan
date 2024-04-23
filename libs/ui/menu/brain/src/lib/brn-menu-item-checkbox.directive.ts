@@ -13,14 +13,6 @@ import { booleanAttribute, Directive, inject, Input, Output, signal } from '@ang
 export class BrnMenuItemCheckboxDirective {
 	private readonly _cdkMenuItem = inject(CdkMenuItemCheckbox, { host: true });
 
-	get checked() {
-		return this._checked();
-	}
-
-	get disabled() {
-		return this._disabled();
-	}
-
 	protected readonly _checked = signal(this._cdkMenuItem.checked);
 	@Input({ transform: booleanAttribute })
 	set checked(value: boolean) {
@@ -28,11 +20,18 @@ export class BrnMenuItemCheckboxDirective {
 		this._checked.set(value);
 	}
 
+	get checked() {
+		return this._checked();
+	}
+
 	protected readonly _disabled = signal(this._cdkMenuItem.disabled);
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
 		this._cdkMenuItem.disabled = value;
 		this._disabled.set(value);
+	}
+	get disabled() {
+		return this._disabled();
 	}
 
 	@Output()

@@ -3,6 +3,7 @@
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/cli/src",
 	"projectType": "library",
+	"tags": ["scope:cli"],
 	"targets": {
 		"build": {
 			"executor": "@nx/js:tsc",
@@ -38,10 +39,7 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": ["libs/cli/**/*.ts", "libs/cli/package.json", "libs/cli/executors.json"]
-			}
+			"outputs": ["{options.outputFile}"]
 		},
 		"test": {
 			"executor": "@nx/jest:jest",
@@ -56,6 +54,5 @@
 				"libName": "cli"
 			}
 		}
-	},
-	"tags": ["scope:cli"]
+	}
 }

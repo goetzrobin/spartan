@@ -1,5 +1,5 @@
 import { Component, forwardRef } from '@angular/core';
-import { ListComponent } from '@ngneat/cmdk';
+import { ListComponent } from '@ngxpert/cmdk';
 
 @Component({
 	selector: 'brn-cmd-list',

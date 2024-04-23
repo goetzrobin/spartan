@@ -1,11 +1,12 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { NgStyle } from '@angular/common';
+import { isPlatformBrowser, NgStyle } from '@angular/common';
 import {
 	AfterContentInit,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	effect,
 	ElementRef,
 	EventEmitter,
 	forwardRef,
@@ -14,6 +15,8 @@ import {
 	Input,
 	OnDestroy,
 	Output,
+	PLATFORM_ID,
+	Renderer2,
 	signal,
 	ViewChild,
 	ViewEncapsulation,
@@ -66,7 +69,7 @@ const CONTAINER_POST_FIX = '-switch';
 		'[attr.data-state]': '_checked() ? "checked" : "unchecked"',
 		'[attr.data-focus-visible]': 'focusVisible()',
 		'[attr.data-focus]': 'focused()',
-		'[attr.data-disabled]': 'disabled',
+		'[attr.data-disabled]': '_disabled()',
 		'[attr.aria-labelledby]': 'null',
 		'[attr.aria-label]': 'null',
 		'[attr.aria-describedby]': 'null',
@@ -78,6 +81,8 @@ const CONTAINER_POST_FIX = '-switch';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
+	private readonly _renderer = inject(Renderer2);
+	private readonly _isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 	private _elementRef = inject(ElementRef);
 	private _focusMonitor = inject(FocusMonitor);
 	private _cdr = inject(ChangeDetectorRef);
@@ -133,14 +138,10 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 		this._required = value;
 	}
 
-	private _disabled = false;
+	protected readonly _disabled = signal(false);
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
-		this._disabled = value;
-	}
-
-	get disabled() {
-		return this._disabled;
+		this._disabled.set(value);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
@@ -153,12 +154,35 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 
 	@Output()
 	public changed = new EventEmitter<boolean>();
+	@Output()
+	public touched = new EventEmitter<void>();
 
 	constructor() {
 		rxHostPressedListener().subscribe(() => this.handleChange());
+		effect(() => {
+			/** search for the label and set the disabled state */
+			let parent = this._renderer.parentNode(this._elementRef.nativeElement);
+			if (!parent) return;
+			// if parent is a HLM-SWITCH, then we need to go up one more level to get the label
+			if (parent?.tagName === 'HLM-SWITCH') {
+				parent = this._renderer.parentNode(parent);
+			}
+			if (!parent) return;
+			// check if parent is a label and assume it is for this checkbox
+			if (parent?.tagName === 'LABEL') {
+				this._renderer.setAttribute(parent, 'data-disabled', this._disabled() ? 'true' : 'false');
+				return;
+			}
+			if (!this._isBrowser) return;
+
+			const label = parent?.querySelector(`label[for="${this.forChild(this._id())}"]`);
+			if (!label) return;
+			this._renderer.setAttribute(label, 'data-disabled', this._disabled() ? 'true' : 'false');
+		});
 	}
 
 	handleChange() {
+		if (this._disabled()) return;
 		const previousChecked = this._checked();
 		if (!this.checkbox) return;
 		this._checked.set(!previousChecked);
@@ -183,6 +207,7 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 					this.focusVisible.set(false);
 					this.focused.set(false);
 					this._onTouched();
+					this.touched.emit();
 					this._cdr.markForCheck();
 				});
 			}

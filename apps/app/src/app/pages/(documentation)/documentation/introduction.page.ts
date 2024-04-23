@@ -2,7 +2,7 @@ import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { radixChevronRight } from '@ng-icons/radix-icons';
+import { lucideChevronRight } from '@ng-icons/lucide';
 import {
 	BrnAccordionContentComponent,
 	BrnAccordionDirective,
@@ -23,7 +23,6 @@ import { MainSectionDirective } from '../../../shared/layout/main-section.direct
 import { PageBottomNavPlaceholderComponent } from '../../../shared/layout/page-bottom-nav-placeholder.component';
 import { PageBottomNavLinkComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../shared/layout/section-sub-heading.component';
@@ -57,14 +56,13 @@ export const routeMeta: RouteMeta = {
 		HlmAccordionTriggerDirective,
 		RouterLink,
 		PageNavComponent,
-		PageNavLinkComponent,
 		PageBottomNavLinkComponent,
 		PageBottomNavComponent,
 		PageBottomNavPlaceholderComponent,
 		HlmButtonDirective,
 		HlmIconComponent,
 	],
-	providers: [provideIcons({ radixChevronRight })],
+	providers: [provideIcons({ lucideChevronRight })],
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro name="Introduction" lead="Cutting-edge tools powering Angular full-stack development." />
@@ -101,7 +99,7 @@ export const routeMeta: RouteMeta = {
 			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/stack" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/stack
-					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 			<spartan-section-sub-heading id="spartan-ui">spartan/ui</spartan-section-sub-heading>
@@ -122,7 +120,7 @@ export const routeMeta: RouteMeta = {
 			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/documentation/installation" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/ui
-					<hlm-icon name="radixChevronRight" class="ml-2" size="sm" />
+					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 			<spartan-section-sub-heading id="faq">FAQ</spartan-section-sub-heading>
@@ -172,11 +170,7 @@ export const routeMeta: RouteMeta = {
 			</spartan-page-bottom-nav>
 		</section>
 
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="spartan-stack" label="spartan/stack" />
-			<spartan-page-nav-link fragment="spartan-ui" label="spartan/ui" />
-			<spartan-page-nav-link fragment="faq" label="FAQ" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class DocsIntroPageComponent {}

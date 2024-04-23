@@ -7,10 +7,10 @@ import { CodeComponent } from '../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
 import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
+import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { TablePreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './table.preview';
@@ -29,8 +29,8 @@ export const routeMeta: RouteMeta = {
 		SectionIntroComponent,
 		SectionSubHeadingComponent,
 		TabsComponent,
+		TabsCliComponent,
 		CodePreviewDirective,
-		PageNavLinkComponent,
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
@@ -49,10 +49,11 @@ export const routeMeta: RouteMeta = {
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
-				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/cli:ui table" />
-				<spartan-code secondTab language="sh" code="ng g @spartan-ng/cli:ui table" />
-			</spartan-tabs>
+			<spartan-cli-tabs
+				class="mt-4"
+				nxCode="npx nx g @spartan-ng/cli:ui table"
+				ngCode="ng g @spartan-ng/cli:ui table"
+			/>
 
 			<spartan-section-sub-heading id="usage">Usage</spartan-section-sub-heading>
 			<div class="space-y-4">
@@ -78,11 +79,7 @@ export const routeMeta: RouteMeta = {
 				<spartan-page-bottom-nav-link direction="previous" href="switch" label="Switch" />
 			</spartan-page-bottom-nav>
 		</section>
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="installation" label="Installation" />
-			<spartan-page-nav-link fragment="usage" label="Usage" />
-			<spartan-page-nav-link fragment="data-table" label="Data Table" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class SkeletonPageComponent {

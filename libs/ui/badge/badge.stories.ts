@@ -1,59 +1,66 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HlmBadgeDirective } from './helm/src';
 
-type BadgeStory = { isStatic: boolean };
-const meta: Meta<BadgeStory> = {
+const meta: Meta<HlmBadgeDirective> = {
 	title: 'Badge',
+	component: HlmBadgeDirective,
+	tags: ['autodocs'],
+	argTypes: {
+		variant: {
+			options: ['default', 'secondary', 'destructive', 'outline'],
+			control: {
+				type: 'select',
+			},
+		},
+		size: {
+			options: ['default', 'lg'],
+			control: {
+				type: 'select',
+			},
+		},
+		static: {
+			control: { type: 'boolean' },
+		},
+	},
+	args: {
+		static: false,
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [HlmBadgeDirective],
 		}),
 	],
+	render: ({ ...args }) => ({
+		props: args,
+		template: `
+    <span hlmBadge ${argsToTemplate(args)}>I am a badge</span>
+    `,
+	}),
 };
 
 export default meta;
-type Story = StoryObj<BadgeStory>;
+type Story = StoryObj<HlmBadgeDirective>;
 
 export const Default: Story = {
 	args: {
-		isStatic: false,
+		variant: 'default',
 	},
-	render: ({ isStatic }) => ({
-		props: { isStatic },
-		template: `
-    <span hlmBadge [static]='isStatic'>I am a badge</span>
-    `,
-	}),
 };
 
 export const Destructive: Story = {
 	args: {
-		isStatic: false,
+		variant: 'destructive',
 	},
-	render: ({ isStatic }) => ({
-		props: { isStatic },
-		template: `
-    <span hlmBadge [static]='isStatic' variant='destructive'>I am a destructive badge</span>
-    `,
-	}),
 };
 
 export const Outline: Story = {
-	render: () => ({
-		template: `
-        <span hlmBadge variant='outline'>I am an outlined badge</span>
-    `,
-	}),
+	args: {
+		variant: 'outline',
+	},
 };
 
 export const Secondary: Story = {
 	args: {
-		isStatic: false,
+		variant: 'secondary',
 	},
-	render: ({ isStatic }) => ({
-		props: { isStatic },
-		template: `
-            <span hlmBadge [static]='isStatic' variant='secondary'>I am a secondary badge</span>
-    `,
-	}),
 };

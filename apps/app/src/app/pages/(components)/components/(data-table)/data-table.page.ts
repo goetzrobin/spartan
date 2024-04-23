@@ -8,10 +8,10 @@ import { MainSectionDirective } from '../../../../shared/layout/main-section.dir
 import { PageBottomNavPlaceholderComponent } from '../../../../shared/layout/page-bottom-nav-placeholder.component';
 import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '../../../../shared/layout/page-nav/page-nav-link.component';
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
+import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { DataTablePreviewComponent, defaultCode } from './data-table.preview';
@@ -23,7 +23,7 @@ export const routeMeta: RouteMeta = {
 };
 
 @Component({
-	selector: 'spartan-command',
+	selector: 'spartan-data-table',
 	standalone: true,
 	imports: [
 		MainSectionDirective,
@@ -31,8 +31,8 @@ export const routeMeta: RouteMeta = {
 		SectionIntroComponent,
 		SectionSubHeadingComponent,
 		TabsComponent,
+		TabsCliComponent,
 		CodePreviewDirective,
-		PageNavLinkComponent,
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
@@ -54,10 +54,7 @@ export const routeMeta: RouteMeta = {
 			</spartan-tabs>
 
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>
-			<spartan-tabs class="mt-4" firstTab="Nx Plugin" secondTab="Angular CLI">
-				<spartan-code firstTab language="sh" code="npx nx g @spartan-ng/cli:ui table" />
-				<spartan-code secondTab language="sh" code="ng @spartan-ng/cli:ui table" />
-			</spartan-tabs>
+			<spartan-cli-tabs class="mt-4" nxCode="npx nx g @spartan-ng/cli:ui table" ngCode="ng @spartan-ng/cli:ui table" />
 
 			<spartan-section-sub-heading id="tutorial">Tutorial</spartan-section-sub-heading>
 			<p class="${hlmP} mb-6">Coming soon...</p>
@@ -67,13 +64,10 @@ export const routeMeta: RouteMeta = {
 				<spartan-page-bottom-nav-link direction="previous" href="context-menu" label="Context Menu" />
 			</spartan-page-bottom-nav>
 		</section>
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="installation" label="Installation" />
-			<spartan-page-nav-link fragment="tutorial" label="Tutorial" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
-export default class ComboboxPageComponent {
+export default class DataTablePageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;

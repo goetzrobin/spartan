@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixCalendar } from '@ng-icons/radix-icons';
+import { lucideCalendar } from '@ng-icons/lucide';
 import { HlmAvatarModule } from '@spartan-ng/ui-avatar-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { BrnHoverCardModule } from '@spartan-ng/ui-hovercard-brain';
@@ -11,7 +11,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 	selector: 'spartan-hover-card-preview',
 	standalone: true,
 	imports: [BrnHoverCardModule, HlmHoverCardModule, HlmButtonDirective, HlmIconComponent, HlmAvatarModule],
-	providers: [provideIcons({ radixCalendar })],
+	providers: [provideIcons({ lucideCalendar })],
 	template: `
 		<brn-hover-card>
 			<button hlmBtn variant="link" brnHoverCardTrigger>&#64;analogjs</button>
@@ -25,7 +25,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 						<h4 class="text-sm font-semibold">&#64;analogjs</h4>
 						<p class="text-sm">The Angular meta-framework – build Angular applications faster.</p>
 						<div class="flex items-center pt-2">
-							<hlm-icon name="radixCalendar" class="mr-2 h-4 w-4 opacity-70" />
+							<hlm-icon name="lucideCalendar" class="mr-2 h-4 w-4 opacity-70" />
 							<span class="text-muted-foreground text-xs">Joined December 2021</span>
 						</div>
 					</div>
@@ -39,7 +39,7 @@ export class HoverCardPreviewComponent {}
 export const defaultCode = `
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { radixCalendar } from '@ng-icons/radix-icons';
+import { lucideCalendar } from '@ng-icons/lucide';
 import { HlmAvatarModule } from '@spartan-ng/ui-avatar-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { BrnHoverCardModule } from '@spartan-ng/ui-hovercard-brain';
@@ -50,7 +50,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
   selector: 'spartan-hover-card-preview',
   standalone: true,
   imports: [BrnHoverCardModule, HlmHoverCardModule, HlmButtonDirective, HlmIconComponent, HlmAvatarModule],
-  providers: [provideIcons({ radixCalendar })],
+  providers: [provideIcons({ lucideCalendar })],
   template: \`
     <brn-hover-card>
       <button hlmBtn variant="link" brnHoverCardTrigger>&#64;analogjs</button>
@@ -64,7 +64,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
             <h4 class="text-sm font-semibold">&#64;analogjs</h4>
             <p class="text-sm">The Angular meta-framework – build Angular applications faster.</p>
             <div class="flex items-center pt-2">
-              <hlm-icon name="radixCalendar" class="mr-2 h-4 w-4 opacity-70" />
+              <hlm-icon name="lucideCalendar" class="mr-2 h-4 w-4 opacity-70" />
               <span class="text-muted-foreground text-xs">Joined December 2021</span>
             </div>
           </div>

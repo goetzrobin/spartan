@@ -1,20 +1,19 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { ArchitectureDiagramComponent } from '@spartan-ng/app/app/pages/(stack)/stack/(overview)/components/architecture-diagram.component';
+import { CodePreviewDirective } from '@spartan-ng/app/app/shared/code/code-preview.directive';
+import { CodeComponent } from '@spartan-ng/app/app/shared/code/code.component';
+import { MainSectionDirective } from '@spartan-ng/app/app/shared/layout/main-section.directive';
+import { PageBottomNavPlaceholderComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav-placeholder.component';
+import { PageBottomNavLinkComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavComponent } from '@spartan-ng/app/app/shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '@spartan-ng/app/app/shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '@spartan-ng/app/app/shared/layout/section-sub-heading.component';
+import { TabsComponent } from '@spartan-ng/app/app/shared/layout/tabs.component';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { hlmCode, hlmP, hlmUl } from '@spartan-ng/ui-typography-helm';
-import { ArchitectureDiagramComponent } from '~/app/pages/(stack)/stack/(overview)/components/architecture-diagram.component';
-import { CodePreviewDirective } from '~/app/shared/code/code-preview.directive';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavPlaceholderComponent } from '~/app/shared/layout/page-bottom-nav-placeholder.component';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavLinkComponent } from '~/app/shared/layout/page-nav/page-nav-link.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { TabsComponent } from '~/app/shared/layout/tabs.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Overview' },
@@ -37,7 +36,6 @@ const stackLink = 'h-6 underline text-base px-0.5';
 		SectionSubHeadingComponent,
 		TabsComponent,
 		CodePreviewDirective,
-		PageNavLinkComponent,
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
@@ -109,10 +107,7 @@ const stackLink = 'h-6 underline text-base px-0.5';
 				<spartan-page-bottom-nav-placeholder />
 			</spartan-page-bottom-nav>
 		</section>
-		<spartan-page-nav>
-			<spartan-page-nav-link fragment="motivation" label="Motivation" />
-			<spartan-page-nav-link fragment="stack" label="The Stack" />
-		</spartan-page-nav>
+		<spartan-page-nav />
 	`,
 })
 export default class AccordionPageComponent {}

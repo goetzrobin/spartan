@@ -1,5 +1,5 @@
 import { Directive, forwardRef } from '@angular/core';
-import { LoaderDirective } from '@ngneat/cmdk';
+import { LoaderDirective } from '@ngxpert/cmdk';
 
 @Directive({
 	selector: '[brnCmdLoader]',
