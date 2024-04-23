@@ -1,9 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { signal } from '@angular/core';
+import { Component, computed, ContentChild, ElementRef, input, signal, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { provideIcons } from '@ng-icons/core';
+import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
-import { BrnSelectImports } from './brain/src';
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { ClassValue } from 'clsx';
+import { hlm } from '../core/src';
+import { HlmIconComponent } from '../icon/helm/src';
+import { BrnSelectImports, BrnSelectTriggerDirective } from './brain/src';
 import { HlmSelectImports } from './helm/src';
 
 interface BrnSelectStoryArgs {
@@ -351,3 +356,59 @@ export const ScrollableWithStickyLabels: Story = {
 		`,
 	}),
 };
+
+export const CustomTrigger: Story = {
+	render: (args) => ({
+		props: { ...args },
+		moduleMetadata: {
+			imports: [CustomSelectTriggerComponent],
+		},
+		template: /* HTML */ `
+			<hlm-select class="inline-block" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
+				<custom-select-trigger ngProjectAs="[brnSelectTrigger]" class="w-56">
+					<hlm-select-value />
+				</custom-select-trigger>
+				<hlm-select-content>
+					<hlm-select-label>Fruits</hlm-select-label>
+					<hlm-option value="apple">Apple</hlm-option>
+					<hlm-option value="banana">Banana</hlm-option>
+					<hlm-option value="blueberry">Blueberry</hlm-option>
+					<hlm-option value="grapes">Grapes</hlm-option>
+					<hlm-option value="pineapple">Pineapple</hlm-option>
+				</hlm-select-content>
+			</hlm-select>
+		`,
+	}),
+};
+
+@Component({
+	selector: 'custom-select-trigger',
+	standalone: true,
+	imports: [BrnSelectTriggerDirective, HlmIconComponent],
+	providers: [provideIcons({ lucideChevronDown })],
+	template: `
+		<button [class]="_computedClass()" #button brnSelectTrigger type="button">
+			<ng-content />
+			@if (icon) {
+				<ng-content select="hlm-icon" />
+			} @else {
+				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="lucideChevronDown" />
+			}
+		</button>
+	`,
+})
+export class CustomSelectTriggerComponent {
+	@ViewChild('button', { static: true })
+	public buttonEl!: ElementRef;
+
+	@ContentChild(HlmIconComponent, { static: false })
+	protected icon!: HlmIconComponent;
+
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() =>
+		hlm(
+			'!bg-sky-500 flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-[180px]',
+			this.userClass(),
+		),
+	);
+}
