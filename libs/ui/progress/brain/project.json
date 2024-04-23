@@ -3,8 +3,8 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/progress/brain/src",
 	"prefix": "brain",
-	"tags": ["scope:brain"],
 	"projectType": "library",
+	"tags": ["scope:brain"],
 	"targets": {
 		"build": {
 			"executor": "@nx/angular:package",
