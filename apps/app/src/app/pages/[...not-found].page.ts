@@ -1,10 +1,10 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
 import { hlmH3, hlmMuted } from '@spartan-ng/ui-typography-helm';
-import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Not Found' },

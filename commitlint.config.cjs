@@ -54,6 +54,7 @@ module.exports = {
 				'trpc',
 				'typography',
 				'nx',
+				'repo',
 			],
 		],
 	},

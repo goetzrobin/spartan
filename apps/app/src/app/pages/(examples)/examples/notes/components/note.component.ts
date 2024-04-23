@@ -1,6 +1,7 @@
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Note } from '@spartan-ng/app/db';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
@@ -12,7 +13,6 @@ import {
 	HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
-import { Note } from '~/db';
 
 @Component({
 	selector: 'analog-trpc-note',
