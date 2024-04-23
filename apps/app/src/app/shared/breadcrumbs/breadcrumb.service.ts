@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NavigationEnd, type ActivatedRoute, type Data, type Router } from '@angular/router';
+// biome-ignore lint/style/useImportType: Needed for Angular
+import { ActivatedRoute, NavigationEnd, Router, type Data } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import type { Breadcrumb } from './breadcrumbs.component';
@@ -7,6 +8,7 @@ import type { Breadcrumb } from './breadcrumbs.component';
 // The breadcrumb can be defined as a static string or as a function to construct the breadcrumb element out of the route data
 const getLabel = (data: Data | undefined): string => {
 	if (!data) return '';
+	// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 	return typeof data['breadcrumb'] === 'function' ? data['breadcrumb'](data) : data['breadcrumb'];
 };
 
@@ -52,6 +54,7 @@ export class BreadcrumbService {
 
 		// If the route is dynamic route such as ':id', remove it
 		const routeParts = path.split('/');
+		// biome-ignore lint/complexity/noForEach: <explanation>
 		routeParts.forEach((part) => {
 			const isDynamicRoute = part.startsWith(':');
 			if (isDynamicRoute && !!route.snapshot) {
@@ -70,7 +73,9 @@ export class BreadcrumbService {
 		const breadcrumb: Breadcrumb = {
 			label: label,
 			url: nextUrl,
+			// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 			loading: !!route.snapshot.data['loading'],
+			// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 			loadingLabel: route.snapshot.data['loadingLabel'] ?? 'Loading...',
 		};
 		// Only adding route with non-empty label
