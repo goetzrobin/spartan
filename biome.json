@@ -8,7 +8,17 @@
 	},
 	"formatter": {
 		"enabled": true,
-		"ignore": ["apps/**/*.min.js", "apps/**/*.min.css", "apps/**/*-lock.yaml", "**/*.lock.json"],
+		"include": [".github"],
+		"ignore": [
+			"apps/**/*.min.js",
+			"apps/**/*.min.css",
+			"apps/**/*-lock.yaml",
+			"**/*.lock.json",
+			"libs/**/*.min.js",
+			"libs/**/*.min.css",
+			"libs/**/*-lock.yaml",
+			"**/*.lock.json"
+		],
 		"indentStyle": "tab",
 		"indentWidth": 2,
 		"lineEnding": "lf"

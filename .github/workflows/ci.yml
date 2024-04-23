@@ -50,7 +50,7 @@ jobs:
         run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Validate
-        run: pnpm prettier --check .
+        run: pnpm biome.format
 
   build:
     runs-on: ubuntu-latest
