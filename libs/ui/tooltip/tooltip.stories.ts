@@ -41,9 +41,7 @@ export const Default: Story = {
 		template: `
 <div class='p-40'>
   <hlm-tooltip>
-    <button hlmTooltipTrigger ${argsToTemplate(
-			args,
-		)} aria-describedby='Hello world' hlmBtn variant='outline'>Test</button>
+    <button hlmTooltipTrigger ${argsToTemplate(args)} aria-describedby='Hello world' hlmBtn variant='outline'>Test</button>
     <span *brnTooltipContent class='flex items-center'>
       Add to library <hlm-icon class='ml-2' size='sm' name='lucidePlus'/>
      </span>

@@ -108,8 +108,7 @@ export class BrnToggleGroupComponent
 	}
 
 	/** Value of the toggle group. */
-	@Input()
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	@Input() // eslint-disable-next-line @typescript-eslint/no-explicit-any
 	get value(): any {
 		const selected = this._selectionModel ? this._selectionModel.selected : [];
 

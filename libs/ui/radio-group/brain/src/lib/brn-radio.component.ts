@@ -146,8 +146,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private _value: any = null;
-	@Input({ required: true })
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	@Input({ required: true }) // eslint-disable-next-line @typescript-eslint/no-explicit-any
 	get value(): any {
 		return this._value;
 	}

@@ -67,8 +67,7 @@ export class BrnRadioGroupComponent implements AfterContentInit {
 	 * radio button, this value persists to be applied in case a new radio button is added with a
 	 * matching value.
 	 */
-	@Input()
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	@Input() // eslint-disable-next-line @typescript-eslint/no-explicit-any
 	get value(): any {
 		return this._value;
 	}

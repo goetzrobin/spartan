@@ -69,9 +69,7 @@ export const Required: Story = {
 	render: ({ ...args }) => ({
 		props: { value: '', ...args },
 		template: `
-    <input aria-label='Email *' [(ngModel)]="value" class='w-80' hlmInput ${argsToTemplate(
-			args,
-		)} type='email' required placeholder='Email *'/>
+    <input aria-label='Email *' [(ngModel)]="value" class='w-80' hlmInput ${argsToTemplate(args)} type='email' required placeholder='Email *'/>
     `,
 	}),
 };
