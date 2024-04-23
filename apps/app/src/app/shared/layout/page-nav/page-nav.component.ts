@@ -12,8 +12,8 @@ import {
 	isDevMode,
 	signal,
 } from '@angular/core';
+import { pageNavTmpl } from '@spartan-ng/app/app/shared/layout/page-nav/page-nav-outlet.component';
 import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
-import { pageNavTmpl } from '~/app/shared/layout/page-nav/page-nav-outlet.component';
 import { PageNavLinkComponent } from './page-nav-link.component';
 
 type SamePageAnchorLink = {

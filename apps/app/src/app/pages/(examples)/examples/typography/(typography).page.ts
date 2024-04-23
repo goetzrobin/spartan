@@ -1,8 +1,8 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { hlmBlockquote, hlmH1, hlmH2, hlmH3, hlmLead, hlmP, hlmUl } from '@spartan-ng/ui-typography-helm';
-import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	meta: metaWith(

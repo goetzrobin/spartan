@@ -91,3 +91,5 @@ export const createTrpcClient = <AppRouter extends AnyRouter>({
 		tRPCHeaders: TrpcHeaders,
 	};
 };
+
+export default createTrpcClient;
