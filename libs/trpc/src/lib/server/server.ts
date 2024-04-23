@@ -129,3 +129,5 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
 		return body;
 	});
 }
+
+export default createTrpcNitroHandler;

@@ -1,15 +1,15 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { CodeComponent } from '@spartan-ng/app/app/shared/code/code.component';
+import { MainSectionDirective } from '@spartan-ng/app/app/shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavComponent } from '@spartan-ng/app/app/shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '@spartan-ng/app/app/shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '@spartan-ng/app/app/shared/layout/section-sub-heading.component';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { HlmAspectRatioDirective } from '@spartan-ng/ui-aspectratio-helm';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Figma' },
