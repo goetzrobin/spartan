@@ -23,7 +23,7 @@
 		"hook:pre-commit": "lint-staged",
 		"prettify": "prettier --write .",
 		"chromatic": "chromatic --project-token=chpt_845c7a47afdb884",
-		"pre-publish": "pnpm lint-publishable && pnpm prepare-cli && pnpm prettify",
+		"pre-publish": "pnpm prepare-cli && pnpm biome.format",
 		"preinstall": "npx only-allow pnpm"
 	},
 	"private": true,

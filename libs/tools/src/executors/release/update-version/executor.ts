@@ -4,7 +4,7 @@ import { replace } from 'replace-json-property';
 
 import { getRoot } from '../helpers/projects.helpers';
 
-import { ReplaceVersionExecutorSchema } from './schema';
+import type { ReplaceVersionExecutorSchema } from './schema';
 
 export default async function runExecutor(options: ReplaceVersionExecutorSchema, context: ExecutorContext) {
 	const sourceRoot = getRoot(context);

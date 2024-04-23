@@ -1,4 +1,4 @@
-import { Directive, effect, inject, Injector, OnInit } from '@angular/core';
+import { Directive, Injector, effect, inject, type OnInit } from '@angular/core';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { SignalInputDirective, SignalInputErrorDirective } from 'ng-signal-forms';
 

@@ -1,6 +1,11 @@
-import { CdkCellDef, CdkColumnDef, CdkFooterCellDef, CdkHeaderCellDef, CdkTableModule } from '@angular/cdk/table';
 import {
-	AfterContentChecked,
+	CdkColumnDef,
+	CdkTableModule,
+	type CdkCellDef,
+	type CdkFooterCellDef,
+	type CdkHeaderCellDef,
+} from '@angular/cdk/table';
+import {
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
@@ -8,6 +13,7 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 	input,
+	type AfterContentChecked,
 } from '@angular/core';
 import { BrnCellDefDirective } from './brn-cell-def.directive';
 import { BrnFooterDefDirective } from './brn-footer-def.directive';

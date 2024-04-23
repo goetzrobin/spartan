@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { VariantProps, cva } from 'class-variance-authority';
-import { ClassValue } from 'clsx';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ClassValue } from 'clsx';
 
 export const spinnerVariants = cva('inline-block', {
 	variants: {

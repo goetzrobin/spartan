@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, signal, TemplateRef } from '@angular/core';
+import { Component, signal, type TemplateRef } from '@angular/core';
 
 export const pageNavTmpl = signal<TemplateRef<unknown> | null>(null);
 

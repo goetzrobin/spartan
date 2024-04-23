@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
@@ -12,8 +12,8 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { indeterminateCode, ProgressIndeterminatePreviewComponent } from './progress--indeterminate.preview';
-import { defaultCode, defaultImports, defaultSkeleton, ProgressPreviewComponent } from './progress.preview';
+import { ProgressIndeterminatePreviewComponent, indeterminateCode } from './progress--indeterminate.preview';
+import { ProgressPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './progress.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Progress' },

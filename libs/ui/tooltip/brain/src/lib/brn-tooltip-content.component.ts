@@ -4,20 +4,20 @@
  * Check them out! Give them a try! Leave a star! Their work is incredible!
  */
 
-import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	ElementRef,
-	inject,
-	OnDestroy,
 	PLATFORM_ID,
 	Renderer2,
-	signal,
-	TemplateRef,
 	ViewChild,
 	ViewEncapsulation,
+	inject,
+	signal,
+	type ElementRef,
+	type OnDestroy,
+	type TemplateRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 

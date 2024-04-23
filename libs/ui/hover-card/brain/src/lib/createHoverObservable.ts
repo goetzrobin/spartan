@@ -1,6 +1,6 @@
-import { NgZone } from '@angular/core';
+import type { NgZone } from '@angular/core';
 import { brnZoneOptimized } from '@spartan-ng/ui-core';
-import { distinctUntilChanged, filter, fromEvent, map, merge, Observable, Subject, takeUntil } from 'rxjs';
+import { distinctUntilChanged, filter, fromEvent, map, merge, takeUntil, type Observable, type Subject } from 'rxjs';
 import { isElement } from './brn-hover-card-trigger.directive';
 
 function movedOut({ currentTarget, relatedTarget }: MouseEvent): boolean {

@@ -1,12 +1,12 @@
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	inject,
 	Input,
-	signal,
 	ViewEncapsulation,
+	booleanAttribute,
+	inject,
+	signal,
 } from '@angular/core';
 
 let collapsibleContentIdSequence = 0;

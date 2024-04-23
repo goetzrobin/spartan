@@ -1,16 +1,16 @@
 import { NgClass, isPlatformServer } from '@angular/common';
 import {
-	AfterViewInit,
 	Component,
 	ElementRef,
-	OnDestroy,
-	OnInit,
 	PLATFORM_ID,
-	TemplateRef,
 	ViewChild,
 	inject,
 	isDevMode,
 	signal,
+	type AfterViewInit,
+	type OnDestroy,
+	type OnInit,
+	type TemplateRef,
 } from '@angular/core';
 import { pageNavTmpl } from '@spartan-ng/app/app/shared/layout/page-nav/page-nav-outlet.component';
 import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';

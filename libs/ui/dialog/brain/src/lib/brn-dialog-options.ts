@@ -1,11 +1,11 @@
-import { AutoFocusTarget } from '@angular/cdk/dialog';
-import {
+import type { AutoFocusTarget } from '@angular/cdk/dialog';
+import type {
 	ConnectedPosition,
 	FlexibleConnectedPositionStrategyOrigin,
 	PositionStrategy,
 	ScrollStrategy,
 } from '@angular/cdk/overlay';
-import { ElementRef, StaticProvider } from '@angular/core';
+import type { ElementRef, StaticProvider } from '@angular/core';
 
 export type BrnDialogOptions = {
 	id: string;

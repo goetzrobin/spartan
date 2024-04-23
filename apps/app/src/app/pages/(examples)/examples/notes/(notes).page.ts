@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,8 +9,8 @@ import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 import { SignalFormBuilder, SignalInputDirective, V, withErrorComponent } from 'ng-signal-forms';
-import { Observable, Subject, catchError, of, switchMap, take, tap } from 'rxjs';
-import { Note } from '../../../../../db';
+import { Subject, catchError, of, switchMap, take, tap, type Observable } from 'rxjs';
+import type { Note } from '../../../../../db';
 import { injectTRPCClient } from '../../../../../trpc-client';
 import { InputErrorComponent } from '../../../../shared/input-error/input-error.component';
 import { SpartanInputErrorDirective } from '../../../../shared/input-error/input-error.directive';

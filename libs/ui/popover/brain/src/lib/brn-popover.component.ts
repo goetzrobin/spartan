@@ -1,13 +1,13 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	Input,
+	ViewEncapsulation,
 	effect,
 	forwardRef,
-	Input,
 	numberAttribute,
 	signal,
 	untracked,
-	ViewEncapsulation,
 } from '@angular/core';
 import { BrnDialogComponent } from '@spartan-ng/ui-dialog-brain';
 

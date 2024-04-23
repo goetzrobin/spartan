@@ -1,8 +1,8 @@
-import { addDependenciesToPackageJson, GeneratorCallback, runTasksInSerial, Tree } from '@nx/devkit';
+import { addDependenciesToPackageJson, runTasksInSerial, type GeneratorCallback, type Tree } from '@nx/devkit';
 import { prompt } from 'enquirer';
-import { HlmBaseGeneratorSchema } from '../base/schema';
+import type { HlmBaseGeneratorSchema } from '../base/schema';
 import { SPARTAN_COLLAPSIBLE_BRAIN_VERSION } from '../base/versions';
-import { HlmUIGeneratorSchema } from './schema';
+import type { HlmUIGeneratorSchema } from './schema';
 
 export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema & { angularCli?: boolean }) {
 	const tasks: GeneratorCallback[] = [];

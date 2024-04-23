@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, Input, Output, input, signal } from '@angular/core';
-import { BrnTabsContentDirective } from './brn-tabs-content.directive';
-import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
+import type { BrnTabsContentDirective } from './brn-tabs-content.directive';
+import type { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
 export type BrnTabsOrientation = 'horizontal' | 'vertical';
 export type BrnTabsDirection = 'ltr' | 'rtl';

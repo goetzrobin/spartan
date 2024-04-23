@@ -1,6 +1,6 @@
-import { Directive, inject, input, Input, Signal, signal } from '@angular/core';
+import { Directive, Input, inject, input, signal, type Signal } from '@angular/core';
 import { BrnDialogRef } from './brn-dialog-ref';
-import { BrnDialogState } from './brn-dialog-state';
+import type { BrnDialogState } from './brn-dialog-state';
 import { BrnDialogComponent } from './brn-dialog.component';
 
 let idSequence = 0;

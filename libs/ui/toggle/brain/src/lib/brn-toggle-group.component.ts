@@ -1,21 +1,21 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import {
-	AfterContentInit,
-	booleanAttribute,
 	ChangeDetectorRef,
 	Component,
 	ContentChildren,
 	DestroyRef,
 	EventEmitter,
+	Input,
+	Output,
+	booleanAttribute,
 	forwardRef,
 	inject,
-	Input,
-	OnInit,
-	Output,
-	QueryList,
+	type AfterContentInit,
+	type OnInit,
+	type QueryList,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
 import { map, merge, of, startWith, switchMap } from 'rxjs';
 import { BrnToggleDirective } from './brn-toggle.directive';
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';

@@ -1,4 +1,4 @@
-import { ApplicationConfig, mergeApplicationConfig } from '@angular/core';
+import { mergeApplicationConfig, type ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideServerRendering } from '@angular/platform-server';
 import { appConfig } from './app.config';

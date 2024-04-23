@@ -1,13 +1,12 @@
-import { computed, Signal, signal } from '@angular/core';
+import { computed, signal, type Signal } from '@angular/core';
 
 type BrnColumnVisibility = Record<string, boolean> | Record<string, { visible: boolean }>;
 
-type AllColumnsPropertyType<T> =
-	T extends Record<string, boolean>
-		? keyof T[]
-		: T extends Record<string, infer R>
-			? (R extends { visible: boolean } ? { name: keyof T } & R : never)[]
-			: never;
+type AllColumnsPropertyType<T> = T extends Record<string, boolean>
+	? keyof T[]
+	: T extends Record<string, infer R>
+		? (R extends { visible: boolean } ? { name: keyof T } & R : never)[]
+		: never;
 
 export class BrnColumnManager<T extends BrnColumnVisibility> {
 	private readonly _initialColumnVisibility: T;

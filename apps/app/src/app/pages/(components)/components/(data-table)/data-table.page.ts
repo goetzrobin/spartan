@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmP } from '@spartan-ng/ui-typography-helm';
 import { defaultImports, defaultSkeleton } from '../(context-menu)/context-menu.preview';

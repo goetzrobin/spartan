@@ -1,5 +1,5 @@
 import { CdkMenuItemCheckbox } from '@angular/cdk/menu';
-import { booleanAttribute, Directive, inject, Input, Output, signal } from '@angular/core';
+import { Directive, Input, Output, booleanAttribute, inject, signal } from '@angular/core';
 
 @Directive({
 	selector: '[brnMenuItemCheckbox]',

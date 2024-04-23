@@ -1,4 +1,4 @@
-import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { HlmAvatarComponent, HlmAvatarImports } from './helm/src';
 
 const meta: Meta<HlmAvatarComponent> = {

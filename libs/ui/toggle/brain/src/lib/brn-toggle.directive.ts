@@ -1,12 +1,12 @@
 import {
-	booleanAttribute,
 	ChangeDetectorRef,
-	computed,
 	Directive,
 	EventEmitter,
-	inject,
 	Input,
 	Output,
+	booleanAttribute,
+	computed,
+	inject,
 	signal,
 } from '@angular/core';
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';

@@ -1,22 +1,22 @@
-import { FocusableOption, FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
+import { FocusMonitor, type FocusOrigin, type FocusableOption } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import {
-	AfterViewInit,
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	DoCheck,
 	ElementRef,
 	EventEmitter,
-	inject,
 	Input,
-	numberAttribute,
-	OnDestroy,
-	OnInit,
 	Output,
 	ViewChild,
 	ViewEncapsulation,
+	booleanAttribute,
+	inject,
+	numberAttribute,
+	type AfterViewInit,
+	type DoCheck,
+	type OnDestroy,
+	type OnInit,
 } from '@angular/core';
 import { BrnRadioChange } from './brn-radio-change';
 import { BrnRadioGroupComponent } from './brn-radio-group.component';

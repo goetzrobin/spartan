@@ -1,4 +1,4 @@
-import { Browser, chromium, Page } from 'playwright';
+import { chromium, type Browser, type Page } from 'playwright';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test } from 'vitest';
 import { notes } from './fixtures/notes';
 import { NotesPage } from './fixtures/notes.po';

@@ -1,14 +1,14 @@
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
-	computed,
 	Input,
-	signal,
 	ViewEncapsulation,
+	booleanAttribute,
+	computed,
+	signal,
 } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @Component({

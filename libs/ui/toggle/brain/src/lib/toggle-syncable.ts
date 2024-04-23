@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { BrnToggleDirective } from './brn-toggle.directive';
+import type { BrnToggleDirective } from './brn-toggle.directive';
 
 export const ToggleSyncable = new InjectionToken<ToggleSyncable>('@spartan-ng/ui/brain toggle syncable token');
 

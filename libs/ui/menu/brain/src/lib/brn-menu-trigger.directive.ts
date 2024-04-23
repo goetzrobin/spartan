@@ -1,5 +1,5 @@
 import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { Directive, effect, inject, Input, signal } from '@angular/core';
+import { Directive, Input, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type BrnMenuAlign = 'start' | 'center' | 'end' | undefined;

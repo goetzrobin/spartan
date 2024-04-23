@@ -1,6 +1,6 @@
-import { computed, Directive, input, Input, signal } from '@angular/core';
+import { Directive, Input, computed, input, signal } from '@angular/core';
 import { hlm, injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlmSelectContent], hlm-select-content',

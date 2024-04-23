@@ -1,8 +1,8 @@
-import { readProjectConfiguration, Tree } from '@nx/devkit';
+import { readProjectConfiguration, type Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 
 import { hlmCliNxGeneratorGenerator } from './generator';
-import { HlmToCliGeneratorGeneratorSchema } from './schema';
+import type { HlmToCliGeneratorGeneratorSchema } from './schema';
 
 describe('hlm-to-nx-generator generator', () => {
 	let tree: Tree;

@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, inject, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, booleanAttribute, inject } from '@angular/core';
 import { marked } from 'marked';
 import { gfmHeadingId } from 'marked-gfm-heading-id';
 import { markedHighlight } from 'marked-highlight';

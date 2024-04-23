@@ -1,6 +1,6 @@
-import { StateKey, TransferState, inject, makeStateKey } from '@angular/core';
-import { Operation, TRPCLink } from '@trpc/client';
-import { AnyRouter } from '@trpc/server';
+import { TransferState, inject, makeStateKey, type StateKey } from '@angular/core';
+import type { Operation, TRPCLink } from '@trpc/client';
+import type { AnyRouter } from '@trpc/server';
 import { observable } from '@trpc/server/observable';
 import superjson from 'superjson';
 import { tRPC_CACHE_STATE } from '../cache-state';

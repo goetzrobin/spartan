@@ -1,8 +1,8 @@
-import { CdkOption, ListboxValueChangeEvent } from '@angular/cdk/listbox';
+import type { CdkOption, ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Subject, skip } from 'rxjs';
-import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
+import type { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 
 type BrnReadDirection = 'ltr' | 'rtl';
 

@@ -1,7 +1,7 @@
-import { InjectionToken, Provider, signal, TransferState } from '@angular/core';
-import { CreateTRPCClientOptions, httpBatchLink, HttpBatchLinkOptions, HTTPHeaders } from '@trpc/client';
-import { FetchEsque } from '@trpc/client/dist/internals/types';
-import { AnyRouter } from '@trpc/server';
+import { InjectionToken, TransferState, signal, type Provider } from '@angular/core';
+import { httpBatchLink, type CreateTRPCClientOptions, type HTTPHeaders, type HttpBatchLinkOptions } from '@trpc/client';
+import type { FetchEsque } from '@trpc/client/dist/internals/types';
+import type { AnyRouter } from '@trpc/server';
 import 'isomorphic-fetch';
 import { provideTrpcCacheState, provideTrpcCacheStateStatusManager, tRPC_CACHE_STATE } from './cache-state';
 import { transferStateLink } from './links/transfer-state-link';

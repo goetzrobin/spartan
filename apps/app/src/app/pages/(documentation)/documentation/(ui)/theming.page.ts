@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { CodeComponent } from '@spartan-ng/app/app/shared/code/code.component';
 import { MainSectionDirective } from '@spartan-ng/app/app/shared/layout/main-section.directive';

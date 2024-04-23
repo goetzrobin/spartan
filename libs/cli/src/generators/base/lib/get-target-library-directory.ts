@@ -1,6 +1,6 @@
-import { extractLayoutDirectory, getWorkspaceLayout, Tree } from '@nx/devkit';
+import { extractLayoutDirectory, getWorkspaceLayout, type Tree } from '@nx/devkit';
 import * as path from 'path';
-import { HlmBaseGeneratorSchema } from '../schema';
+import type { HlmBaseGeneratorSchema } from '../schema';
 
 export function getTargetLibraryDirectory(options: HlmBaseGeneratorSchema, tree: Tree) {
 	const { layoutDirectory, projectDirectory } = extractLayoutDirectory(options.directory);

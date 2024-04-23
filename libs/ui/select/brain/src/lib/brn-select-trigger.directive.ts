@@ -1,4 +1,4 @@
-import { AfterViewInit, computed, Directive, ElementRef, inject } from '@angular/core';
+import { Directive, ElementRef, computed, inject, type AfterViewInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { BrnSelectService } from './brn-select.service';
 

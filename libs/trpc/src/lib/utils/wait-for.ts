@@ -1,4 +1,4 @@
-import { firstValueFrom, isObservable, Observable } from 'rxjs';
+import { firstValueFrom, isObservable, type Observable } from 'rxjs';
 
 declare const Zone: any;
 

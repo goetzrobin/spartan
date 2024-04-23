@@ -1,9 +1,9 @@
-import { formatFiles, names, ProjectConfiguration, readJson, Tree, workspaceRoot } from '@nx/devkit';
+import { formatFiles, names, readJson, workspaceRoot, type ProjectConfiguration, type Tree } from '@nx/devkit';
 import * as path from 'path';
 import { addPrimitiveToSupportedUILibraries } from './lib/add-primitive-to-supported-ui-libraries';
 import { copyFilesFromHlmLibToGenerator, createSharedGeneratorFiles, recursivelyDelete } from './lib/file-management';
 import { getProjectsAndNames } from './lib/get-project-names';
-import { HlmToCliGeneratorGeneratorSchema } from './schema';
+import type { HlmToCliGeneratorGeneratorSchema } from './schema';
 
 const BASE_PATH = path.join('libs', 'cli', 'src', 'generators', 'ui');
 

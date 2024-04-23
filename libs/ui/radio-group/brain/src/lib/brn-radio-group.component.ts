@@ -1,15 +1,15 @@
 import {
-	AfterContentInit,
-	booleanAttribute,
 	ChangeDetectorRef,
 	Component,
 	ContentChildren,
 	EventEmitter,
-	forwardRef,
-	inject,
 	Input,
 	Output,
-	QueryList,
+	booleanAttribute,
+	forwardRef,
+	inject,
+	type AfterContentInit,
+	type QueryList,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BrnRadioChange } from './brn-radio-change';

@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { TabsCliComponent } from '@spartan-ng/app/app/shared/layout/tabs-cli.component';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';

@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component, computed, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import * as lucideIcons from '@ng-icons/lucide';

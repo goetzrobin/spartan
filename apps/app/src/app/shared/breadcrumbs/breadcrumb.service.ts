@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Data, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, type ActivatedRoute, type Data, type Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Breadcrumb } from './breadcrumbs.component';
+import type { Breadcrumb } from './breadcrumbs.component';
 
 // The breadcrumb can be defined as a static string or as a function to construct the breadcrumb element out of the route data
 const getLabel = (data: Data | undefined): string => {

@@ -2,19 +2,19 @@ import { isPlatformBrowser } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	Component,
-	computed,
 	ElementRef,
-	inject,
 	Input,
-	OnDestroy,
 	PLATFORM_ID,
-	signal,
 	ViewEncapsulation,
+	computed,
+	inject,
+	signal,
+	type OnDestroy,
 } from '@angular/core';
-import { IconName, NgIconComponent } from '@ng-icons/core';
+import { NgIconComponent, type IconName } from '@ng-icons/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva } from 'class-variance-authority';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 const DEFINED_SIZES = ['xs', 'sm', 'base', 'lg', 'xl', 'none'] as const;
 

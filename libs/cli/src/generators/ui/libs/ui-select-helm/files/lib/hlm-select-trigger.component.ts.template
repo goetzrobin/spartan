@@ -1,10 +1,10 @@
-import { Component, computed, ContentChild, ElementRef, input, ViewChild } from '@angular/core';
+import { Component, ContentChild, ViewChild, computed, input, type ElementRef } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnSelectTriggerDirective } from '@spartan-ng/ui-select-brain';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Component({
 	selector: 'hlm-select-trigger',

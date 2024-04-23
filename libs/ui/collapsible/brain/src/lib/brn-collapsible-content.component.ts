@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, computed, ElementRef, inject, Input, signal } from '@angular/core';
+import { Component, ElementRef, Input, computed, inject, signal, type AfterContentInit } from '@angular/core';
 import { BrnCollapsibleComponent } from './brn-collapsible.component';
 
 @Component({

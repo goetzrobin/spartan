@@ -1,5 +1,5 @@
 import { NgForOf, TitleCasePipe } from '@angular/common';
-import { Component, TrackByFunction, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal, type TrackByFunction } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { faker } from '@faker-js/faker';
@@ -13,7 +13,7 @@ import { BrnMenuModule } from '../menu/brain/src';
 import { HlmMenuModule } from '../menu/helm/src';
 import { BrnToggleGroupModule } from '../toggle/brain/src';
 import { HlmToggleGroupModule } from '../toggle/helm/src';
-import { BrnTableModule, PaginatorState, useBrnColumnManager } from './brain/src';
+import { BrnTableModule, useBrnColumnManager, type PaginatorState } from './brain/src';
 import { HlmTableComponent, HlmTableModule } from './helm/src';
 
 const createUsers = (numUsers = 5) => {

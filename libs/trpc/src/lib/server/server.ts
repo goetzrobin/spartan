@@ -4,7 +4,7 @@
  * simply reuse the hard work done by Robert Soriano and friends
  * **/
 
-import type { AnyRouter, inferRouterContext, inferRouterError, ProcedureType } from '@trpc/server';
+import type { AnyRouter, ProcedureType, inferRouterContext, inferRouterError } from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import type { ResponseMeta } from '@trpc/server/http';
 import { resolveHTTPResponse } from '@trpc/server/http';

@@ -1,4 +1,4 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { BrnAlertDialogImports } from './brain/src';
 import { HlmAlertDialogComponent, HlmAlertDialogImports } from './helm/src';

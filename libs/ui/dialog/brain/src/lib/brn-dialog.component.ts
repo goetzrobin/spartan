@@ -1,22 +1,19 @@
-import { AutoFocusTarget } from '@angular/cdk/dialog';
+import type { AutoFocusTarget } from '@angular/cdk/dialog';
 import {
-	ConnectedPosition,
-	FlexibleConnectedPositionStrategyOrigin,
 	OverlayPositionBuilder,
-	PositionStrategy,
-	ScrollStrategy,
 	ScrollStrategyOptions,
+	type ConnectedPosition,
+	type FlexibleConnectedPositionStrategyOrigin,
+	type PositionStrategy,
+	type ScrollStrategy,
 } from '@angular/cdk/overlay';
 import {
 	ChangeDetectionStrategy,
 	Component,
-	EffectRef,
-	ElementRef,
 	EventEmitter,
 	Injector,
 	Input,
 	Output,
-	TemplateRef,
 	ViewContainerRef,
 	ViewEncapsulation,
 	booleanAttribute,
@@ -26,11 +23,14 @@ import {
 	numberAttribute,
 	runInInjectionContext,
 	signal,
+	type EffectRef,
+	type ElementRef,
+	type TemplateRef,
 } from '@angular/core';
 import { take } from 'rxjs';
-import { BrnDialogOptions, DEFAULT_BRN_DIALOG_OPTIONS } from './brn-dialog-options';
-import { BrnDialogRef } from './brn-dialog-ref';
-import { BrnDialogState } from './brn-dialog-state';
+import { DEFAULT_BRN_DIALOG_OPTIONS, type BrnDialogOptions } from './brn-dialog-options';
+import type { BrnDialogRef } from './brn-dialog-ref';
+import type { BrnDialogState } from './brn-dialog-state';
 import { BrnDialogService } from './brn-dialog.service';
 
 @Component({

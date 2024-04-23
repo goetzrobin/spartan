@@ -1,13 +1,12 @@
 import { CdkListbox, CdkListboxModule } from '@angular/cdk/listbox';
 import {
 	CdkConnectedOverlay,
-	ConnectedOverlayPositionChange,
-	ConnectedPosition,
 	OverlayModule,
+	type ConnectedOverlayPositionChange,
+	type ConnectedPosition,
 } from '@angular/cdk/overlay';
 import { JsonPipe } from '@angular/common';
 import {
-	AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
@@ -15,21 +14,22 @@ import {
 	EventEmitter,
 	Input,
 	Output,
-	QueryList,
-	Signal,
 	ViewChild,
 	computed,
 	inject,
 	input,
 	signal,
+	type AfterContentInit,
+	type QueryList,
+	type Signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { NgControl, type ControlValueAccessor } from '@angular/forms';
 import {
-	ExposesSide,
-	ExposesState,
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
+	type ExposesSide,
+	type ExposesState,
 } from '@spartan-ng/ui-core';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { Subject, delay, map, of, skip, switchMap } from 'rxjs';

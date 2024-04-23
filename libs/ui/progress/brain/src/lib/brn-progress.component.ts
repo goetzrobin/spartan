@@ -1,5 +1,5 @@
-import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
-import { Component, computed, Input, signal } from '@angular/core';
+import { coerceNumberProperty, type NumberInput } from '@angular/cdk/coercion';
+import { Component, Input, computed, signal } from '@angular/core';
 
 @Component({
 	selector: 'brn-progress',

@@ -1,8 +1,8 @@
-import { ProjectConfiguration, Tree } from '@nx/devkit';
+import type { ProjectConfiguration, Tree } from '@nx/devkit';
 import { prompt } from 'enquirer';
 import { getProjectsAndNames } from '../../utils/get-project-names';
 import { addThemeToApplicationStyles } from './libs/add-theme-to-application-styles';
-import { SupportedRadii, SupportedTheme, SupportedThemes } from './libs/supported-theme-generator-map';
+import { SupportedRadii, SupportedThemes, type SupportedTheme } from './libs/supported-theme-generator-map';
 
 export default async function addThemeToApplicationGenerator(tree: Tree) {
 	const { projects, projectNames } = getProjectsAndNames(tree);
@@ -59,7 +59,7 @@ export default async function addThemeToApplicationGenerator(tree: Tree) {
 		tree,
 		{
 			project: project.name,
-			radius: parseFloat(themeOptions.radius),
+			radius: Number.parseFloat(themeOptions.radius),
 			theme: themeOptions.theme,
 			addCdkStyles: themeOptions.addCdkStyles,
 			stylesEntryPoint: themeOptions.stylesEntryPoint,

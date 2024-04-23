@@ -1,4 +1,4 @@
-import { getProjects, Tree } from '@nx/devkit';
+import { getProjects, type Tree } from '@nx/devkit';
 
 export const getProjectsAndNames = (tree: Tree) => {
 	const projectNames: string[] = [];

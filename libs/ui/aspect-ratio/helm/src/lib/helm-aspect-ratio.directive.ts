@@ -1,13 +1,13 @@
-import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
-import { AfterViewInit, computed, Directive, ElementRef, inject, input, Input, signal } from '@angular/core';
+import { coerceNumberProperty, type NumberInput } from '@angular/cdk/coercion';
+import { Directive, ElementRef, Input, computed, inject, input, signal, type AfterViewInit } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 const parseDividedString = (value: NumberInput): NumberInput => {
 	if (typeof value !== 'string' || !value.includes('/')) return value;
 	return value
 		.split('/')
-		.map((v) => parseInt(v, 10))
+		.map((v) => Number.parseInt(v, 10))
 		.reduce((a, b) => a / b);
 };
 

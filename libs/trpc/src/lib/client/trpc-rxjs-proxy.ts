@@ -56,12 +56,14 @@ const clientCallTypeMap: Record<keyof DecorateProcedure<any, any>, ProcedureType
 type UntypedClientProperties = 'links' | 'runtime' | 'requestId' | '$request' | 'query' | 'mutation';
 
 // Nothing changed, only using new types
-export type CreateTrpcProxyClient<TRouter extends AnyRouter> =
-	DecoratedProcedureRecord<TRouter['_def']['record'], TRouter> extends infer TProcedureRecord
-		? UntypedClientProperties & keyof TProcedureRecord extends never
-			? TProcedureRecord
-			: IntersectionError<UntypedClientProperties & keyof TProcedureRecord>
-		: never;
+export type CreateTrpcProxyClient<TRouter extends AnyRouter> = DecoratedProcedureRecord<
+	TRouter['_def']['record'],
+	TRouter
+> extends infer TProcedureRecord
+	? UntypedClientProperties & keyof TProcedureRecord extends never
+		? TProcedureRecord
+		: IntersectionError<UntypedClientProperties & keyof TProcedureRecord>
+	: never;
 
 // Nothing changed, only using new types
 function createTRPCRxJSClientProxy<TRouter extends AnyRouter>(client: TRPCClient<TRouter>) {

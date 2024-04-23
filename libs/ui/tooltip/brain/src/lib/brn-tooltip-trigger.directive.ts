@@ -15,30 +15,27 @@ import { AriaDescriber, FocusMonitor } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
-	ConnectedPosition,
-	ConnectionPositionPair,
-	FlexibleConnectedPositionStrategy,
-	HorizontalConnectionPos,
-	OriginConnectionPosition,
 	Overlay,
-	OverlayConnectionPosition,
-	OverlayRef,
 	ScrollDispatcher,
-	ScrollStrategy,
-	VerticalConnectionPos,
+	type ConnectedPosition,
+	type ConnectionPositionPair,
+	type FlexibleConnectedPositionStrategy,
+	type HorizontalConnectionPos,
+	type OriginConnectionPosition,
+	type OverlayConnectionPosition,
+	type OverlayRef,
+	type ScrollStrategy,
+	type VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import {
-	AfterViewInit,
 	Directive,
 	ElementRef,
 	InjectionToken,
 	Input,
 	NgZone,
-	OnDestroy,
-	TemplateRef,
 	ViewContainerRef,
 	booleanAttribute,
 	effect,
@@ -46,6 +43,9 @@ import {
 	isDevMode,
 	numberAttribute,
 	signal,
+	type AfterViewInit,
+	type OnDestroy,
+	type TemplateRef,
 } from '@angular/core';
 import { brnDevMode } from '@spartan-ng/ui-core';
 import { Subject } from 'rxjs';

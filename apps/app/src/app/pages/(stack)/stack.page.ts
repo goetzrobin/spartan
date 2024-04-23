@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { PageComponent } from '@spartan-ng/app/app/shared/layout/page.component';
 import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';

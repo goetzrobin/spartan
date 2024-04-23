@@ -1,4 +1,4 @@
-import { Page } from 'playwright';
+import type { Page } from 'playwright';
 
 export class NotesPage {
 	constructor(readonly page: Page) {}

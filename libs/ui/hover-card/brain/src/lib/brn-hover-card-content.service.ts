@@ -1,17 +1,26 @@
 import {
-	ConnectedOverlayPositionChange,
-	ConnectedPosition,
-	FlexibleConnectedPositionStrategy,
 	Overlay,
-	OverlayConfig,
 	OverlayPositionBuilder,
-	OverlayRef,
+	type ConnectedOverlayPositionChange,
+	type ConnectedPosition,
+	type FlexibleConnectedPositionStrategy,
+	type OverlayConfig,
+	type OverlayRef,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { ElementRef, Injectable, NgZone, Signal, TemplateRef, ViewContainerRef, inject, signal } from '@angular/core';
+import {
+	Injectable,
+	NgZone,
+	TemplateRef,
+	inject,
+	signal,
+	type ElementRef,
+	type Signal,
+	type ViewContainerRef,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, Observable, Subject, filter, map, of, switchMap } from 'rxjs';
-import { BrnHoverCardContentDirective } from './brn-hover-card-content.directive';
+import { BehaviorSubject, Subject, filter, map, of, switchMap, type Observable } from 'rxjs';
+import type { BrnHoverCardContentDirective } from './brn-hover-card-content.directive';
 import { createHoverObservable } from './createHoverObservable';
 
 export type BrnHoverCardOptions = Partial<

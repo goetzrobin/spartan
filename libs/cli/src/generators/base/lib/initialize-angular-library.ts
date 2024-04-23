@@ -1,5 +1,5 @@
-import { Tree } from '@nx/devkit';
-import { HlmBaseGeneratorSchema } from '../schema';
+import type { Tree } from '@nx/devkit';
+import type { HlmBaseGeneratorSchema } from '../schema';
 
 export async function initializeAngularLibrary(tree: Tree, options: HlmBaseGeneratorSchema) {
 	return await (

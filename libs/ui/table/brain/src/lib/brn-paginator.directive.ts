@@ -1,15 +1,15 @@
 import {
-	computed,
 	Directive,
-	effect,
-	inject,
 	Input,
-	numberAttribute,
-	OnInit,
-	Signal,
-	signal,
 	TemplateRef,
 	ViewContainerRef,
+	computed,
+	effect,
+	inject,
+	numberAttribute,
+	signal,
+	type OnInit,
+	type Signal,
 } from '@angular/core';
 
 export type PaginatorState = {

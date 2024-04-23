@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, ContentChild, ElementRef, input, signal, ViewChild } from '@angular/core';
+import { Component, ContentChild, ViewChild, computed, input, signal, type ElementRef } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ClassValue } from 'clsx';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import type { ClassValue } from 'clsx';
 import { hlm } from '../core/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { BrnSelectImports, BrnSelectTriggerDirective } from './brain/src';

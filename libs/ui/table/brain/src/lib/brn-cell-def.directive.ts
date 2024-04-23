@@ -1,4 +1,5 @@
 import { CdkCellDef } from '@angular/cdk/table';
+// biome-ignore lint/style/useImportType: <explanation>
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
