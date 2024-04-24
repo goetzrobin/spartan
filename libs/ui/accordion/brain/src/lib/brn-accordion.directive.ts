@@ -1,16 +1,16 @@
 import { FocusKeyManager, FocusMonitor } from '@angular/cdk/a11y';
 import {
+	type AfterContentInit,
 	ContentChildren,
 	Directive,
 	ElementRef,
 	Input,
 	NgZone,
+	type OnDestroy,
+	type QueryList,
 	computed,
 	inject,
 	signal,
-	type AfterContentInit,
-	type OnDestroy,
-	type QueryList,
 } from '@angular/core';
 import { BrnAccordionTriggerDirective } from './brn-accordion-trigger.directive';
 

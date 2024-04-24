@@ -58,12 +58,12 @@ export const routeMeta: RouteMeta = {
 				(input)="onSearchUpdated(searchQuery.value)"
 			/>
 			<div
-				class="border-border mt-2 grid grid-cols-2 place-items-center gap-4 rounded-md border sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+				class="mt-2 border border-border grid grid-cols-2 place-items-center gap-4 rounded-md sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
 			>
 				@for (icon of iconsList(); track $index) {
-					<div class="flex w-full flex-col items-center gap-2 p-4">
+					<div class="flex flex-col items-center w-full p-4 gap-2">
 						<hlm-icon size="lg" [name]="icon" />
-						<span class="whitespace-normal break-all text-center text-sm">{{ icon }}</span>
+						<span class="text-sm text-center break-all whitespace-normal">{{ icon }}</span>
 					</div>
 				}
 			</div>

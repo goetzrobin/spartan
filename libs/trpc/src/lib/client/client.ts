@@ -1,5 +1,5 @@
-import { InjectionToken, TransferState, signal, type Provider } from '@angular/core';
-import { httpBatchLink, type CreateTRPCClientOptions, type HTTPHeaders, type HttpBatchLinkOptions } from '@trpc/client';
+import { InjectionToken, type Provider, TransferState, signal } from '@angular/core';
+import { type CreateTRPCClientOptions, type HTTPHeaders, type HttpBatchLinkOptions, httpBatchLink } from '@trpc/client';
 import type { FetchEsque } from '@trpc/client/dist/internals/types';
 import type { AnyRouter } from '@trpc/server';
 import 'isomorphic-fetch';
@@ -32,7 +32,9 @@ function customFetch(input: RequestInfo | URL, init?: RequestInit & { method: 'G
 
 	// dev server trpc for analog & nitro
 	if (typeof window === 'undefined') {
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		const host = process.env['NITRO_HOST'] ?? process.env['ANALOG_HOST'] ?? 'localhost';
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		const port = process.env['NITRO_PORT'] ?? process.env['ANALOG_PORT'] ?? 4205;
 		const base = `http://${host}:${port}`;
 		if (input instanceof Request) {

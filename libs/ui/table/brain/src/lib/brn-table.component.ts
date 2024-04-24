@@ -1,19 +1,19 @@
-import { CdkRowDef, CdkTable, CdkTableModule, type CdkTableDataSourceInput } from '@angular/cdk/table';
+import { CdkRowDef, CdkTable, type CdkTableDataSourceInput, CdkTableModule } from '@angular/cdk/table';
 import {
+	type AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChildren,
 	EventEmitter,
 	Input,
 	Output,
+	type QueryList,
+	type TrackByFunction,
 	ViewChild,
 	ViewEncapsulation,
 	booleanAttribute,
-	type AfterContentInit,
-	type QueryList,
-	type TrackByFunction,
 } from '@angular/core';
-import { provideTableClassesSettableExisting, type TableClassesSettable } from '@spartan-ng/ui-core';
+import { type TableClassesSettable, provideTableClassesSettableExisting } from '@spartan-ng/ui-core';
 import { BrnColumnDefComponent } from './brn-column-def.component';
 
 export type BrnTableDataSourceInput<T> = CdkTableDataSourceInput<T>;

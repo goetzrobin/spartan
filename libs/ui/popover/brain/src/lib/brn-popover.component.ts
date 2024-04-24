@@ -73,7 +73,7 @@ export class BrnPopoverComponent extends BrnDialogComponent {
 	}
 
 	private applySideOffset(sideOffset: number) {
-		this.attachPositions = (this._options['attachPositions'] ?? []).map((position) => ({
+		this.attachPositions = (this._options.attachPositions ?? []).map((position) => ({
 			...position,
 			offsetY: position.originY === 'top' ? -sideOffset : sideOffset,
 		}));

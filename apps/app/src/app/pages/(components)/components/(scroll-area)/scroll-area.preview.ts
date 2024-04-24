@@ -8,7 +8,7 @@ import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
 	standalone: true,
 	imports: [NgFor, HlmSeparatorDirective, HlmScrollAreaComponent],
 	template: `
-		<hlm-scroll-area class="border-border h-72 w-48 rounded-md border">
+		<hlm-scroll-area class="w-48 border border-border h-72 rounded-md">
 			<div class="p-4">
 				<h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
 				<div class="text-sm" *ngFor="let tag of tags">
@@ -33,7 +33,7 @@ import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
   selector: 'spartan-scroll-area-preview',
   standalone: true,
   imports: [NgFor, HlmSeparatorDirective, HlmScrollAreaComponent],
-  template: \` <hlm-scroll-area class="h-72 w-48 rounded-md border border-border">
+  template: \` <hlm-scroll-area class="w-48 border h-72 rounded-md border-border">
     <div class="p-4">
       <h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
       <div class="text-sm" *ngFor="let tag of tags">
@@ -52,7 +52,7 @@ export const defaultImports = `
 import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
 `;
 export const defaultSkeleton = `
-<hlm-scroll-area class="w-72 rounded-md border border-border">
+<hlm-scroll-area class="border w-72 rounded-md border-border">
   <div class='p-6 whitespace-nowrap'>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium architecto,<br>
     asperiores beatae consequuntur dolor ducimus et exercitationem facilis fugiat magni<br>

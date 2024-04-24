@@ -39,24 +39,24 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 			<hlm-sheet-content class="pb-0 pr-0" *brnSheetContent="let ctx">
 				<button hlmSheetClose>
 					<span class="sr-only">Close</span>
-					<hlm-icon class="flex h-4 w-4" name="lucideX" />
+					<hlm-icon class="flex w-4 h-4" name="lucideX" />
 				</button>
 				<div class="flex items-center pb-2">
 					<a (click)="ctx.close()" hlmBtn variant="ghost" class="mr-4 p-1.5" routerLink="/">
-						<spartan-logo class="text-primary w-12" />
+						<spartan-logo class="w-12 text-primary" />
 					</a>
 					<span>spartan/ui</span>
 				</div>
 				<hlm-scroll-area class="h-[calc(100vh-8rem)]">
-					<div class="flex flex-col space-y-1 p-2 pb-4">
-						<a (click)="ctx.close()" class="text-foreground px-2 py-1 hover:underline" routerLink="/documentation">
+					<div class="flex flex-col p-2 pb-4 space-y-1">
+						<a (click)="ctx.close()" class="px-2 py-1 text-foreground hover:underline" routerLink="/documentation">
 							Documentation
 						</a>
-						<a (click)="ctx.close()" class="text-foreground px-2 py-1 hover:underline" routerLink="/stack">Stack</a>
-						<a (click)="ctx.close()" class="text-foreground px-2 py-1 hover:underline" routerLink="/components">
+						<a (click)="ctx.close()" class="px-2 py-1 text-foreground hover:underline" routerLink="/stack">Stack</a>
+						<a (click)="ctx.close()" class="px-2 py-1 text-foreground hover:underline" routerLink="/components">
 							Components
 						</a>
-						<a (click)="ctx.close()" class="text-foreground px-2 py-1 hover:underline" routerLink="/examples">
+						<a (click)="ctx.close()" class="px-2 py-1 text-foreground hover:underline" routerLink="/examples">
 							Examples
 						</a>
 					</div>

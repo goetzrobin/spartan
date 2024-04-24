@@ -72,7 +72,7 @@ export const routeMeta: RouteMeta = {
 			The size of the spinner. (default: w-8)
 			<!-- <code [innerHTML]="'<hlm-spinner size="xl" />'"></code> -->
 
-			<ul class="list-disc pl-8">
+			<ul class="pl-8 list-disc">
 				<li>
 					<code>xs: w-4</code>
 				</li>

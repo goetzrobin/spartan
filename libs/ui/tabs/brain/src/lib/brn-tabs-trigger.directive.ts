@@ -27,8 +27,8 @@ export class BrnTabsTriggerDirective {
 
 	public readonly triggerFor = input.required<string>({ alias: 'brnTabsTrigger' });
 	public readonly selected = computed(() => this._root.$value() === this.triggerFor());
-	protected readonly contentId = computed(() => 'brn-tabs-content-' + this.triggerFor());
-	protected readonly labelId = computed(() => 'brn-tabs-label-' + this.triggerFor());
+	protected readonly contentId = computed(() => `brn-tabs-content-${this.triggerFor()}`);
+	protected readonly labelId = computed(() => `brn-tabs-label-${this.triggerFor()}`);
 
 	// leaving this as an @input to be compatible with the `FocusKeyManager` used in the `BrnTabsListDirective`
 	@Input()

@@ -1,4 +1,4 @@
-import { InjectionToken, forwardRef, inject, type InjectOptions, type Provider, type Type } from '@angular/core';
+import { type InjectOptions, InjectionToken, type Provider, type Type, forwardRef, inject } from '@angular/core';
 
 type InjectFn<TTokenValue> = {
 	(): TTokenValue;

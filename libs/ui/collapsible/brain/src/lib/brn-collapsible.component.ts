@@ -28,7 +28,7 @@ export type BrnCollapsibleState = 'open' | 'closed';
 export class BrnCollapsibleComponent {
 	private _cdr = inject(ChangeDetectorRef);
 	state = signal<BrnCollapsibleState>('closed');
-	contentId = signal('brn-collapsible-content-' + collapsibleContentIdSequence++);
+	contentId = signal(`brn-collapsible-content-${collapsibleContentIdSequence++}`);
 
 	private readonly _disabled = signal<true | undefined>(undefined);
 	@Input({ transform: booleanAttribute })

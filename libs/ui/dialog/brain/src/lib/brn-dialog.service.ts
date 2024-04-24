@@ -1,19 +1,19 @@
 import { DIALOG_DATA, Dialog } from '@angular/cdk/dialog';
-import { OverlayPositionBuilder, ScrollStrategyOptions, type ComponentType } from '@angular/cdk/overlay';
+import { type ComponentType, OverlayPositionBuilder, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import {
+	type EffectRef,
+	type InjectOptions,
 	Injectable,
 	Injector,
 	RendererFactory2,
+	type StaticProvider,
+	type TemplateRef,
+	type ViewContainerRef,
 	computed,
 	effect,
 	inject,
 	runInInjectionContext,
 	signal,
-	type EffectRef,
-	type InjectOptions,
-	type StaticProvider,
-	type TemplateRef,
-	type ViewContainerRef,
 } from '@angular/core';
 import { Subject, filter, takeUntil } from 'rxjs';
 import type { BrnDialogOptions } from './brn-dialog-options';

@@ -19,6 +19,8 @@
 		"prepare-cli": "nx g @spartan-ng/tools:hlm-to-cli-generator",
 		"lint-publishable": "nx run-many --target=lint --projects=tag:scope:core,tag:scope:brain,tag:scope:helm,tag:scope:cli",
 		"lint-fix-publishable": "nx run-many --target=lint --projects=tag:scope:core,tag:scope:brain,tag:scope:helm,tag:scope:cli --fix",
+		"ci.format-sort": "biome ci --formatter-enabled=true --organize-imports-enabled=true --linter-enabled=false **/*",
+		"ci.lint": "biome ci --formatter-enabled=false --organize-imports-enabled=false --linter-enabled=true ./* **/*",
 		"biome.format": "biome format --write {apps,libs}",
 		"biome.lint": "biome check --apply {apps,libs}",
 		"storybook": "nx storybook ui-storybook",

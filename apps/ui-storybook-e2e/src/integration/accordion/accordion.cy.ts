@@ -169,23 +169,23 @@ describe('accordion', () => {
 		it('should focus the correct items when using arrow down', () => {
 			verifyTwoAccordionSetup();
 			cy.get('@item1.1').find('[hlmAccordionTrigger]').click();
-			cy.get('@item1.1').type(`{downArrow}`);
+			cy.get('@item1.1').type('{downArrow}');
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-1');
-			cy.get('@item1.2').type(`{downArrow}`);
+			cy.get('@item1.2').type('{downArrow}');
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-2');
-			cy.get('@item1.3').type(`{downArrow}`);
+			cy.get('@item1.3').type('{downArrow}');
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-0');
 
-			cy.get('@item1.2').type(`{downArrow}`);
+			cy.get('@item1.2').type('{downArrow}');
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-2');
 			cy.get('@item2.1').find('[hlmAccordionTrigger]').click();
-			cy.get('@item2.1').type(`{downArrow}`);
+			cy.get('@item2.1').type('{downArrow}');
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-4');
-			cy.get('@item2.2').type(`{downArrow}`);
+			cy.get('@item2.2').type('{downArrow}');
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-5');
-			cy.get('@item2.3').type(`{downArrow}`);
+			cy.get('@item2.3').type('{downArrow}');
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-6');
-			cy.get('@item2.4').type(`{downArrow}`);
+			cy.get('@item2.4').type('{downArrow}');
 			cy.focused().should('have.attr', 'id', 'brn-accordion-trigger-3');
 		});
 	});

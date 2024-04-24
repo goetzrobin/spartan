@@ -22,7 +22,7 @@ export const routeMeta: RouteMeta = {
 	template: `
 		<div class="-mt-[25%] mb-8 flex items-center">
 			<h1 class="${hlmH3}">404</h1>
-			<hr hlmSeparator class="mx-4 h-8" orientation="vertical" />
+			<hr hlmSeparator class="h-8 mx-4" orientation="vertical" />
 			<p class="${hlmMuted}">This page could not be found</p>
 		</div>
 		<a routerLink="/" size="sm" class="text-xs" hlmBtn variant="link">Back home</a>

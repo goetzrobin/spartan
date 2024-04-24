@@ -15,7 +15,7 @@ describe('BrnCollapsibleComponent', () => {
         <button brnCollapsibleTrigger data-testid='trigger'>Toggle</button>
       </div>
       <div>&#64;radix-ui/primitives</div>
-      <brn-collapsible-content ${id ? 'id=' + id : ''} data-testid='content'>
+      <brn-collapsible-content ${id ? `id=${id}` : ''} data-testid='content'>
         <div>&#64;radix-ui/colors</div>
         <div>&#64;stitches/react</div>
       </brn-collapsible-content>

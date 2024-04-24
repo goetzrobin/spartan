@@ -1,4 +1,4 @@
-import { readProjectConfiguration, type Tree } from '@nx/devkit';
+import { type Tree, readProjectConfiguration } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 
 import { hlmCliNxGeneratorGenerator } from './generator';

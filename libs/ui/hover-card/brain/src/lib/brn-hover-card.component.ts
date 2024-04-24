@@ -1,4 +1,4 @@
-import { Component, ContentChild, type AfterContentInit } from '@angular/core';
+import { type AfterContentInit, Component, ContentChild } from '@angular/core';
 import { BrnHoverCardContentDirective } from './brn-hover-card-content.directive';
 import { BrnHoverCardContentService } from './brn-hover-card-content.service';
 import { BrnHoverCardTriggerDirective } from './brn-hover-card-trigger.directive';

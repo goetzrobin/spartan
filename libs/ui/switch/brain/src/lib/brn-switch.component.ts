@@ -1,6 +1,7 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { NgStyle, isPlatformBrowser } from '@angular/common';
 import {
+	type AfterContentInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
@@ -8,6 +9,7 @@ import {
 	EventEmitter,
 	HostBinding,
 	Input,
+	type OnDestroy,
 	Output,
 	PLATFORM_ID,
 	Renderer2,
@@ -18,8 +20,6 @@ import {
 	forwardRef,
 	inject,
 	signal,
-	type AfterContentInit,
-	type OnDestroy,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';

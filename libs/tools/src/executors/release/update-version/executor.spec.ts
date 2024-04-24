@@ -1,4 +1,4 @@
-import * as process from 'process';
+import * as process from 'node:process';
 import * as replaceJsonProp from 'replace-json-property';
 
 import * as projectHelpers from '../helpers/projects.helpers';

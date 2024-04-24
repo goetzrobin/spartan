@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, computed, effect, inject, input, signal, type DoCheck } from '@angular/core';
+import { Directive, type DoCheck, ElementRef, Renderer2, computed, effect, inject, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
 

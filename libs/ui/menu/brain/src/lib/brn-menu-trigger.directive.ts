@@ -26,7 +26,7 @@ export class BrnMenuTriggerDirective {
 			setTimeout(
 				() =>
 					// eslint-disable-next-line
-					((this._cdkTrigger as any)['_spartanLastPosition'] = // eslint-disable-next-line
+					((this._cdkTrigger as any)._spartanLastPosition = // eslint-disable-next-line
 						(this._cdkTrigger as any).overlayRef._positionStrategy._lastPosition),
 			),
 		);

@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { HlmInputDirective } from './helm/src';
@@ -88,7 +88,7 @@ export const WithButton: Story = {
 	render: ({ ...args }) => ({
 		props: args,
 		template: `
-    <div class="flex w-full max-w-sm items-center space-x-2">
+    <div class="flex items-center w-full max-w-sm space-x-2">
     <input aria-label='Email' class='w-80' hlmInput ${argsToTemplate(args)} type='email' placeholder='Email'/>
     <button hlmBtn>Subscribe</button>
     </div>

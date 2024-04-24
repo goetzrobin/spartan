@@ -2,8 +2,8 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as lucide from '@ng-icons/lucide';
 import { lucideHome } from '@ng-icons/lucide';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { HlmIconComponent, provideIcons, type IconSize } from './helm/src';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
+import { HlmIconComponent, type IconSize, provideIcons } from './helm/src';
 
 const meta: Meta<HlmIconComponent> = {
 	title: 'Icon',
@@ -101,6 +101,6 @@ export const Dynamic: Story = {
 		}),
 	],
 	render: () => ({
-		template: `<icon-dynamic-story/>`,
+		template: '<icon-dynamic-story/>',
 	}),
 };

@@ -9,7 +9,7 @@ import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 import { SignalFormBuilder, SignalInputDirective, V, withErrorComponent } from 'ng-signal-forms';
-import { Subject, catchError, of, switchMap, take, tap, type Observable } from 'rxjs';
+import { type Observable, Subject, catchError, of, switchMap, take, tap } from 'rxjs';
 import type { Note } from '../../../../../db';
 import { injectTRPCClient } from '../../../../../trpc-client';
 import { InputErrorComponent } from '../../../../shared/input-error/input-error.component';
@@ -86,7 +86,7 @@ export const routeMeta: RouteMeta = {
 				<hlm-spinner *ngIf="createLoad()" class="ml-2" size="sm" />
 			</button>
 		</form>
-		<div class="flex flex-col space-y-4 pb-12 pt-4">
+		<div class="flex flex-col pt-4 pb-12 space-y-4">
 			<ng-container *ngIf="showNotesArray()">
 				<analog-trpc-note
 					*ngFor="let note of state().notes ?? []; trackBy: noteTrackBy"
@@ -175,7 +175,7 @@ export default class NotesExamplePageComponent {
 		this.updateNotes('initial');
 	}
 
-	public noteTrackBy = (index: number, note: Note) => {
+	public noteTrackBy = (_index: number, note: Note) => {
 		return note.id;
 	};
 

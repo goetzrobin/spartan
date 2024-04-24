@@ -1,4 +1,4 @@
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
@@ -40,7 +40,7 @@ export const Default: Story = {
 		props: args,
 		template: `
     <brn-popover ${argsToTemplate(args)} closeDelay='100'>
-    <div class='py-80 flex flex-col items-center justify-center'>
+    <div class='flex flex-col items-center justify-center py-80'>
         <button id='edit-profile' variant='outline' brnPopoverTrigger hlmBtn>Open Popover</button>
     </div>
     <div hlmPopoverContent class='w-80 grid gap-4' *brnPopoverContent='let ctx'>
@@ -51,36 +51,36 @@ export const Default: Story = {
             </p>
           </div>
           <div class='grid gap-2'>
-            <div class='grid grid-cols-3 items-center gap-4'>
+            <div class='items-center grid grid-cols-3 gap-4'>
               <label hlmLabel for='width'>Width</label>
               <input hlmInput
                 id='width'
                 [defaultValue]="'100%'"
-                class='col-span-2 h-8'
+                class='h-8 col-span-2'
               />
             </div>
-            <div class='grid grid-cols-3 items-center gap-4'>
+            <div class='items-center grid grid-cols-3 gap-4'>
               <label hlmLabel for='maxWidth'>Max. width</label>
               <input hlmInput
                 id='maxWidth'
                 [defaultValue]="'300px'"
-                class='col-span-2 h-8'
+                class='h-8 col-span-2'
               />
             </div>
-            <div class='grid grid-cols-3 items-center gap-4'>
+            <div class='items-center grid grid-cols-3 gap-4'>
               <label hlmLabel for='height'>Height</label>
               <input hlmInput
                 id='height'
                 [defaultValue]="'25px'"
-                class='col-span-2 h-8'
+                class='h-8 col-span-2'
               />
             </div>
-            <div class='grid grid-cols-3 items-center gap-4'>
+            <div class='items-center grid grid-cols-3 gap-4'>
               <label hlmLabel for='maxHeight'>Max. height</label>
               <input hlmInput
                 id='maxHeight'
                 [defaultValue]="'none'"
-                class='col-span-2 h-8'
+                class='h-8 col-span-2'
               />
             </div>
           </div>

@@ -7,7 +7,7 @@ import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 	standalone: true,
 	imports: [HlmInputDirective, HlmButtonDirective],
 	template: `
-		<div class="flex w-full max-w-sm items-center space-x-2">
+		<div class="flex items-center w-full max-w-sm space-x-2">
 			<input aria-label="Email" class="w-80" hlmInput type="email" placeholder="Email" />
 			<button hlmBtn>Subscribe</button>
 		</div>
@@ -26,7 +26,7 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
   standalone: true,
   imports: [HlmInputDirective, HlmButtonDirective],
   template: \`
-    <div class='flex w-full max-w-sm items-center space-x-2'>
+    <div class='flex items-center w-full max-w-sm space-x-2'>
       <input aria-label='Email' class='w-80' hlmInput type='email' placeholder='Email' />
       <button hlmBtn>Subscribe</button>
     </div>

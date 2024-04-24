@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, ElementRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, filter, fromEvent, merge, of, switchMap, tap, type Observable } from 'rxjs';
+import { type Observable, debounceTime, filter, fromEvent, merge, of, switchMap, tap } from 'rxjs';
 
 export function rxHostListener<T extends Event>(event: string): Observable<T> {
 	const cdr = inject(ChangeDetectorRef);

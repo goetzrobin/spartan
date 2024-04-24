@@ -28,7 +28,7 @@ import { HeaderThemePickerComponent } from './header-theme-picker.component';
 		class: 'block sticky w-full top-0 z-40 bg-background/95 bg-blur-lg p-2 sm:px-4 border-b border-border',
 	},
 	template: `
-		<div class="mx-auto flex w-full max-w-screen-xl items-center justify-between">
+		<div class="flex items-center justify-between w-full mx-auto max-w-screen-xl">
 			<nav class="flex items-center">
 				<a hlmBtn variant="ghost" class="mr-3 hidden p-1.5 sm:flex" routerLink="/">
 					<spartan-logo class="w-14" />

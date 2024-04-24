@@ -1,5 +1,5 @@
-import { formatFiles, names, readJson, workspaceRoot, type ProjectConfiguration, type Tree } from '@nx/devkit';
-import * as path from 'path';
+import * as path from 'node:path';
+import { type ProjectConfiguration, type Tree, formatFiles, names, readJson, workspaceRoot } from '@nx/devkit';
 import { addPrimitiveToSupportedUILibraries } from './lib/add-primitive-to-supported-ui-libraries';
 import { copyFilesFromHlmLibToGenerator, createSharedGeneratorFiles, recursivelyDelete } from './lib/file-management';
 import { getProjectsAndNames } from './lib/get-project-names';
@@ -18,9 +18,7 @@ async function createGeneratorFromHlmLibrary(
 	const projectRoot = path.join(BASE_PATH, 'libs', internalName);
 	const supportedUILibsJsonPath = path.join(BASE_PATH, 'supported-ui-libraries.json');
 	const filesPath = path.join(projectRoot, 'files');
-	const peerDependencies = readJson(tree, path.join(projects.get(internalName).root, 'package.json'))[
-		'peerDependencies'
-	];
+	const peerDependencies = readJson(tree, path.join(projects.get(internalName).root, 'package.json')).peerDependencies;
 	recursivelyDelete(tree, filesPath);
 	addPrimitiveToSupportedUILibraries(tree, supportedUILibsJsonPath, generatorName, internalName, peerDependencies);
 	copyFilesFromHlmLibToGenerator(tree, srcPath, filesPath, options);
@@ -31,16 +29,19 @@ export async function hlmCliNxGeneratorGenerator(tree: Tree, options: HlmToCliGe
 	const { projects, projectNames } = getProjectsAndNames(tree);
 	const projectNamesIgnoringCoreLibs = projectNames.filter((name) => !name.includes('core'));
 
-	projectNamesIgnoringCoreLibs.forEach((internalName) => {
+	for (const internalName of projectNamesIgnoringCoreLibs) {
 		const primitiveName = internalName.replace('ui-', '').replace('-helm', '').replace('-', '');
 		const cleanNames = names(primitiveName);
-		options = { ...options, ...cleanNames };
-		options['internalName'] = internalName;
-		options['publicName'] = 'ui-' + primitiveName + '-helm';
-		options['primitiveName'] = primitiveName;
+		const mergedOptions = { ...options, ...cleanNames };
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
+		mergedOptions['internalName'] = internalName;
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
+		mergedOptions['publicName'] = `ui-${primitiveName}-helm`;
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
+		mergedOptions['primitiveName'] = primitiveName;
 
-		createGeneratorFromHlmLibrary(projects, primitiveName, internalName, tree, options);
-	});
+		createGeneratorFromHlmLibrary(projects, primitiveName, internalName, tree, mergedOptions);
+	}
 
 	await formatFiles(tree);
 }

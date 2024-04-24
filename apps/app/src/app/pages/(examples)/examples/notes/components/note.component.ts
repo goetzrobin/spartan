@@ -60,7 +60,7 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 					viewBox="0 0 24 24"
 					stroke-width="1.5"
 					stroke="currentColor"
-					class="h-4 w-4"
+					class="w-4 h-4"
 				>
 					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 				</svg>

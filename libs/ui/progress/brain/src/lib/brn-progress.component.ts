@@ -1,4 +1,4 @@
-import { coerceNumberProperty, type NumberInput } from '@angular/cdk/coercion';
+import { type NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Component, Input, computed, signal } from '@angular/core';
 
 @Component({

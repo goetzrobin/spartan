@@ -1,4 +1,4 @@
-import * as childProcess from 'child_process';
+import * as childProcess from 'node:child_process';
 
 import * as projectHelper from '../helpers/projects.helpers';
 import * as npmPublish from '../npm-publish/executor';

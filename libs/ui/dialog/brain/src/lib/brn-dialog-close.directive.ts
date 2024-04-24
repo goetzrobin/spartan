@@ -1,4 +1,4 @@
-import { coerceNumberProperty, type NumberInput } from '@angular/cdk/coercion';
+import { type NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Directive, Input, inject } from '@angular/core';
 import { BrnDialogRef } from './brn-dialog-ref';
 
