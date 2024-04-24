@@ -10,6 +10,7 @@
 		"pnpm": ">=9",
 		"yarn": "please-use-pnpm"
 	},
+	"packageManager": "pnpm@9.0.5",
 	"engineStrict": true,
 	"scripts": {
 		"dev": "nx serve app",
