@@ -111,7 +111,7 @@ export const routeMeta: RouteMeta = {
 			</p>
 			<spartan-code class="mt-3" language="sh" code="npm install drizzle-orm postgres" />
 
-			<div class="mb-6 mt-4" hlmAlert>
+			<div class="mt-4 mb-6" hlmAlert>
 				<hlm-icon hlmAlertIcon name="lucideAlertTriangle" />
 				<h4 hlmAlertTitle>Dealing with postgres & CommonJs</h4>
 				<p hlmAlertDesc>
@@ -237,7 +237,7 @@ export const noteRouter = router({
 			</ol>
 
 			<spartan-tabs firstTab="supabase.com" secondTab="Local">
-				<div class="px-4 pb-8 pt-4" firstTab>
+				<div class="px-4 pt-4 pb-8" firstTab>
 					<h3 class="${hlmH4}">Option 1: Connecting to supabase.com instance</h3>
 					<p class="${hlmP}">
 						This way is super easy! Simply by creating your account, you will also have set up your first project. This
@@ -268,7 +268,7 @@ export const noteRouter = router({
 					</div>
 				</div>
 
-				<div class="px-4 pb-8 pt-4" secondTab>
+				<div class="px-4 pt-4 pb-8" secondTab>
 					<h3 class="${hlmH4}">Option 2: Connecting to local Supabase instance</h3>
 					<p class="${hlmP}">
 						Supabase also allows you to run a version of their system locally! To get up and running you can follow this
@@ -390,7 +390,7 @@ create table note (
 				AnalogJs also supports multiple build presets, which makes it easy to deploy your application to most of the
 				major cloud providers. This includes Vercel, Cloudflare, Azure, AWS, and more.
 			</p>
-			<div class="mt-4 flex items-center justify-end">
+			<div class="flex items-center justify-end mt-4">
 				<a
 					target="_blank"
 					href="https://analogjs.org/docs/features/deployment/providers"

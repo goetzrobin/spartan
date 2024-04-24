@@ -1,10 +1,10 @@
 /// <reference types="vitest" />
 
+import * as path from 'node:path';
 import analog from '@analogjs/platform';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-import * as path from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig, splitVendorChunkPlugin, type Plugin } from 'vite';
+import { type Plugin, defineConfig, splitVendorChunkPlugin } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -133,7 +133,7 @@ export default defineConfig(({ mode }) => {
 			setupFiles: ['src/test-setup.ts'],
 			include: ['**/*.spec.ts'],
 			cache: {
-				dir: `../../node_modules/.vitest`,
+				dir: '../../node_modules/.vitest',
 			},
 		},
 		define: {

@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucidePlus } from '@ng-icons/lucide';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { BrnTooltipContentDirective } from './brain/src';
@@ -86,7 +86,7 @@ export const Simple: Story = {
 		moduleMetadata: {
 			imports: [SimpleTooltip],
 		},
-		template: `<simple-tooltip-story/>`,
+		template: '<simple-tooltip-story/>',
 	}),
 };
 
@@ -132,6 +132,6 @@ export const Disabled: Story = {
 		moduleMetadata: {
 			imports: [DisabledTooltip],
 		},
-		template: `<disabled-tooltip-story/>`,
+		template: '<disabled-tooltip-story/>',
 	}),
 };

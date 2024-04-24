@@ -1,4 +1,4 @@
-import { computed, signal, type Signal } from '@angular/core';
+import { type Signal, computed, signal } from '@angular/core';
 
 type BrnColumnVisibility = Record<string, boolean> | Record<string, { visible: boolean }>;
 
@@ -59,7 +59,7 @@ export class BrnColumnManager<T extends BrnColumnVisibility> {
 		const keys = Object.keys(initialColumnVisibility) as (keyof T)[];
 		if (this.isBooleanConfig(initialColumnVisibility)) {
 			return keys as unknown as AllColumnsPropertyType<T>;
-		} else {
+		}
 			return keys.map((key) => {
 				const values = initialColumnVisibility[key] as { visible: boolean };
 				return {
@@ -67,7 +67,6 @@ export class BrnColumnManager<T extends BrnColumnVisibility> {
 					...values,
 				};
 			}) as AllColumnsPropertyType<T>;
-		}
 	}
 
 	private isBooleanConfig(config: any): config is Record<string, boolean> {

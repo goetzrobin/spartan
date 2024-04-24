@@ -27,4 +27,4 @@ export class InputPreviewComponent {}
 export const defaultImports = `
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 `;
-export const defaultSkeleton = `<input hlmInput/>`;
+export const defaultSkeleton = '<input hlmInput/>';

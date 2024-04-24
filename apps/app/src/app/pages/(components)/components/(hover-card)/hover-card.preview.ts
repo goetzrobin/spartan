@@ -19,14 +19,14 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 				<div class="flex justify-between space-x-4">
 					<hlm-avatar variant="small" id="avatar-small">
 						<img src="https://analogjs.org/img/logos/analog-logo.svg" alt="AnalogLogo" hlmAvatarImage />
-						<span class="bg-red-600 text-red-800" hlmAvatarFallback>AN</span>
+						<span class="text-red-800 bg-red-600" hlmAvatarFallback>AN</span>
 					</hlm-avatar>
 					<div class="space-y-1">
 						<h4 class="text-sm font-semibold">&#64;analogjs</h4>
 						<p class="text-sm">The Angular meta-framework – build Angular applications faster.</p>
 						<div class="flex items-center pt-2">
-							<hlm-icon name="lucideCalendar" class="mr-2 h-4 w-4 opacity-70" />
-							<span class="text-muted-foreground text-xs">Joined December 2021</span>
+							<hlm-icon name="lucideCalendar" class="w-4 h-4 mr-2 opacity-70" />
+							<span class="text-xs text-muted-foreground">Joined December 2021</span>
 						</div>
 					</div>
 				</div>
@@ -58,14 +58,14 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
         <div class="flex justify-between space-x-4">
           <hlm-avatar variant="small" id="avatar-small">
             <img src="https://analogjs.org/img/logos/analog-logo.svg" alt="AnalogLogo" hlmAvatarImage />
-            <span class="bg-red-600 text-red-800" hlmAvatarFallback>AN</span>
+            <span class="text-red-800 bg-red-600" hlmAvatarFallback>AN</span>
           </hlm-avatar>
           <div class="space-y-1">
             <h4 class="text-sm font-semibold">&#64;analogjs</h4>
             <p class="text-sm">The Angular meta-framework – build Angular applications faster.</p>
             <div class="flex items-center pt-2">
-              <hlm-icon name="lucideCalendar" class="mr-2 h-4 w-4 opacity-70" />
-              <span class="text-muted-foreground text-xs">Joined December 2021</span>
+              <hlm-icon name="lucideCalendar" class="w-4 h-4 mr-2 opacity-70" />
+              <span class="text-xs text-muted-foreground">Joined December 2021</span>
             </div>
           </div>
         </div>

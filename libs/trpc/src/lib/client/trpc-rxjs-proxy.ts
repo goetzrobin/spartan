@@ -1,4 +1,4 @@
-import { TRPCClientError, type OperationContext, type OperationLink, type TRPCClientRuntime } from '@trpc/client';
+import { type OperationContext, type OperationLink, TRPCClientError, type TRPCClientRuntime } from '@trpc/client';
 import type {
 	AnyMutationProcedure,
 	AnyProcedure,
@@ -13,10 +13,10 @@ import type {
 	inferProcedureInput,
 	inferProcedureOutput,
 } from '@trpc/server';
-import { share, type Observable as TrpcObservable, type inferObservableValue } from '@trpc/server/observable';
+import { type Observable as TrpcObservable, type inferObservableValue, share } from '@trpc/server/observable';
 import { createFlatProxy, createRecursiveProxy, type inferTransformedProcedureOutput } from '@trpc/server/shared';
 import { Observable as RxJSObservable } from 'rxjs';
-import { createChain, type CreateTRPCClientOptions, type TRPCRequestOptions, type TRPCType } from './shared-internal';
+import { type CreateTRPCClientOptions, type TRPCRequestOptions, type TRPCType, createChain } from './shared-internal';
 
 // Changed to rxjs observable
 type Resolver<TProcedure extends AnyProcedure> = (
@@ -26,7 +26,7 @@ type Resolver<TProcedure extends AnyProcedure> = (
 // Removed subscription and using new type
 type DecorateProcedure<
 	TProcedure extends AnyProcedure,
-	TRouter extends AnyRouter,
+	_TRouter extends AnyRouter,
 > = TProcedure extends AnyQueryProcedure
 	? {
 			query: Resolver<TProcedure>;

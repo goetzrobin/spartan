@@ -1,8 +1,8 @@
 // All credit goes to the incredible folks at Nx who use this code to update the app styles when adding tailwind
 // Check out the code here: https://github.com/nrwl/nx/blob/master/packages/angular/src/generators/setup-tailwind/lib/update-application-styles.ts
 
-import { joinPathFragments, stripIndents, type ProjectConfiguration, type Tree } from '@nx/devkit';
-import { SupportedThemeGeneratorMap, type SupportedTheme } from './supported-theme-generator-map';
+import { type ProjectConfiguration, type Tree, joinPathFragments, stripIndents } from '@nx/devkit';
+import { type SupportedTheme, SupportedThemeGeneratorMap } from './supported-theme-generator-map';
 
 export interface AddThemeToApplicationStylesOptions {
 	project: string;
@@ -74,7 +74,7 @@ function findStylesEntryPoint(tree: Tree, project: ProjectConfiguration): string
 	}
 
 	// then check for the specified styles in the build configuration if it exists
-	const styles: Array<string | { input: string; inject: boolean }> = project.targets?.['build'].options?.styles;
+	const styles: Array<string | { input: string; inject: boolean }> = project.targets?.build.options?.styles;
 
 	if (!styles) {
 		return undefined;

@@ -1,5 +1,5 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { ContentChildren, Directive, inject, type AfterContentInit, type QueryList } from '@angular/core';
+import { type AfterContentInit, ContentChildren, Directive, type QueryList, inject } from '@angular/core';
 import { rxHostListener } from '@spartan-ng/ui-core';
 import { take } from 'rxjs';
 import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';

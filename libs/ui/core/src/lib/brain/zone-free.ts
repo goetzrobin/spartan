@@ -4,7 +4,7 @@
  * Check them out! Give them a try! Leave a star! Their work is incredible!
  */
 import type { NgZone } from '@angular/core';
-import { Observable, pipe, type MonoTypeOperatorFunction } from 'rxjs';
+import { type MonoTypeOperatorFunction, Observable, pipe } from 'rxjs';
 
 export function brnZoneFull<T>(zone: NgZone): MonoTypeOperatorFunction<T> {
 	return (source) =>

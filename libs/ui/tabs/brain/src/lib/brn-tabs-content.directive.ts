@@ -19,8 +19,8 @@ export class BrnTabsContentDirective {
 
 	public readonly contentFor = input.required<string>({ alias: 'brnTabsContent' });
 	protected readonly _isSelected = computed(() => this._root.$value() === this.contentFor());
-	protected contentId = computed(() => 'brn-tabs-content-' + this.contentFor());
-	protected labelId = computed(() => 'brn-tabs-label-' + this.contentFor());
+	protected contentId = computed(() => `brn-tabs-content-${this.contentFor()}`);
+	protected labelId = computed(() => `brn-tabs-label-${this.contentFor()}`);
 
 	constructor() {
 		effect(() => {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 // biome-ignore lint/style/useImportType: Needed for Angular
-import { ActivatedRoute, NavigationEnd, Router, type Data } from '@angular/router';
+import { ActivatedRoute, type Data, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import type { Breadcrumb } from './breadcrumbs.component';

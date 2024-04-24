@@ -1,4 +1,4 @@
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { BrnSeparatorComponent } from './brain/src';
 import { HlmSeparatorDirective } from './helm/src';
 
@@ -45,7 +45,7 @@ export const Default: Story = {
         </p>
       </div>
       <brn-separator hlmSeparator ${argsToTemplate(args)} class='my-4' />
-      <div class='flex h-5 items-center space-x-4 text-sm'>
+      <div class='flex items-center h-5 text-sm space-x-4'>
         <div>Blog</div>
         <brn-separator decorative hlmSeparator orientation='vertical' />
         <div>Docs</div>

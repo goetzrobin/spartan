@@ -2,7 +2,7 @@ import { NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { lucideItalic } from '@ng-icons/lucide';
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { hlmP } from '../typography/helm/src';

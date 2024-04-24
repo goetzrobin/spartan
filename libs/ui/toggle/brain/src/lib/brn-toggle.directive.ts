@@ -37,7 +37,7 @@ export class BrnToggleDirective {
 	public readonly isOn = computed(() => this.state() === 'on');
 
 	@Input()
-	public id = 'brn-toggle-' + uniqueId++;
+	public id = `brn-toggle-${uniqueId++}`;
 
 	@Input()
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

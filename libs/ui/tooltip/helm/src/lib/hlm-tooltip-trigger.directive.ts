@@ -1,4 +1,4 @@
-import { Directive, Input, inject, type TemplateRef } from '@angular/core';
+import { Directive, Input, type TemplateRef, inject } from '@angular/core';
 import { BrnTooltipTriggerDirective } from '@spartan-ng/ui-tooltip-brain';
 
 @Directive({

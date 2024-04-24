@@ -1,4 +1,4 @@
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { BrnSheetComponent, BrnSheetContentDirective, BrnSheetTriggerDirective } from './brain/src';
@@ -42,14 +42,14 @@ export const Default: Story = {
           Make changes to your profile here. Click save when you're done.
           </p>
         </hlm-sheet-header>
-                <div class='grid gap-4 py-4'>
-          <div class='grid grid-cols-4 items-center gap-4'>
+                <div class='py-4 grid gap-4'>
+          <div class='items-center grid grid-cols-4 gap-4'>
             <label hlmLabel for='name' class='text-right'>
               Name
             </label>
             <input hlmInput id='name' value='Pedro Duarte' class='col-span-3' />
           </div>
-          <div class='grid grid-cols-4 items-center gap-4'>
+          <div class='items-center grid grid-cols-4 gap-4'>
             <label hlmLabel for='username' class='text-right'>
               Username
             </label>

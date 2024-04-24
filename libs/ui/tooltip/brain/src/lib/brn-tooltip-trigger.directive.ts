@@ -15,15 +15,15 @@ import { AriaDescriber, FocusMonitor } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
-	Overlay,
-	ScrollDispatcher,
 	type ConnectedPosition,
 	type ConnectionPositionPair,
 	type FlexibleConnectedPositionStrategy,
 	type HorizontalConnectionPos,
 	type OriginConnectionPosition,
+	Overlay,
 	type OverlayConnectionPosition,
 	type OverlayRef,
+	ScrollDispatcher,
 	type ScrollStrategy,
 	type VerticalConnectionPos,
 } from '@angular/cdk/overlay';
@@ -31,11 +31,14 @@ import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import {
+	type AfterViewInit,
 	Directive,
 	ElementRef,
 	InjectionToken,
 	Input,
 	NgZone,
+	type OnDestroy,
+	type TemplateRef,
 	ViewContainerRef,
 	booleanAttribute,
 	effect,
@@ -43,9 +46,6 @@ import {
 	isDevMode,
 	numberAttribute,
 	signal,
-	type AfterViewInit,
-	type OnDestroy,
-	type TemplateRef,
 } from '@angular/core';
 import { brnDevMode } from '@spartan-ng/ui-core';
 import { Subject } from 'rxjs';
@@ -537,7 +537,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	}
 
 	private _detach() {
-		if (this._overlayRef && this._overlayRef.hasAttached()) {
+		if (this._overlayRef?.hasAttached()) {
 			this._overlayRef.detach();
 		}
 
@@ -558,7 +558,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** Adds the configured offset to a position. Used as a hook for child classes. */
 	protected _addOffset(position: ConnectedPosition): ConnectedPosition {
 		const offset = UNBOUNDED_ANCHOR_GAP;
-		const isLtr = !this._dir || this._dir.value == 'ltr';
+		const isLtr = !this._dir || this._dir.value === 'ltr';
 
 		if (position.originY === 'top') {
 			position.offsetY = -offset;
@@ -578,20 +578,21 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	 * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
 	 */
 	_getOrigin(): { main: OriginConnectionPosition; fallback: OriginConnectionPosition } {
-		const isLtr = !this._dir || this._dir.value == 'ltr';
+		const isLtr = !this._dir || this._dir.value === 'ltr';
 		const position = this.position;
 		let originPosition: OriginConnectionPosition;
 
-		if (position == 'above' || position == 'below') {
-			originPosition = { originX: 'center', originY: position == 'above' ? 'top' : 'bottom' };
-		} else if (position == 'before' || (position == 'left' && isLtr) || (position == 'right' && !isLtr)) {
+		if (position === 'above' || position === 'below') {
+			originPosition = { originX: 'center', originY: position === 'above' ? 'top' : 'bottom' };
+		} else if (position === 'before' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
 			originPosition = { originX: 'start', originY: 'center' };
-		} else if (position == 'after' || (position == 'right' && isLtr) || (position == 'left' && !isLtr)) {
+		} else if (position === 'after' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
 			originPosition = { originX: 'end', originY: 'center' };
 		} else if (typeof isDevMode() === 'undefined' || isDevMode()) {
 			throw getBrnTooltipInvalidPositionError(position);
 		}
 
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		const { x, y } = this._invertPosition(originPosition!.originX, originPosition!.originY);
 
 		return {
@@ -602,22 +603,23 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	/** Returns the overlay position and a fallback position based on the user's preference */
 	_getOverlayPosition(): { main: OverlayConnectionPosition; fallback: OverlayConnectionPosition } {
-		const isLtr = !this._dir || this._dir.value == 'ltr';
+		const isLtr = !this._dir || this._dir.value === 'ltr';
 		const position = this.position;
 		let overlayPosition: OverlayConnectionPosition;
 
-		if (position == 'above') {
+		if (position === 'above') {
 			overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
-		} else if (position == 'below') {
+		} else if (position === 'below') {
 			overlayPosition = { overlayX: 'center', overlayY: 'top' };
-		} else if (position == 'before' || (position == 'left' && isLtr) || (position == 'right' && !isLtr)) {
+		} else if (position === 'before' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
 			overlayPosition = { overlayX: 'end', overlayY: 'center' };
-		} else if (position == 'after' || (position == 'right' && isLtr) || (position == 'left' && !isLtr)) {
+		} else if (position === 'after' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
 			overlayPosition = { overlayX: 'start', overlayY: 'center' };
 		} else if (typeof isDevMode() === 'undefined' || isDevMode()) {
 			throw getBrnTooltipInvalidPositionError(position);
 		}
 
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		const { x, y } = this._invertPosition(overlayPosition!.overlayX, overlayPosition!.overlayY);
 
 		return {

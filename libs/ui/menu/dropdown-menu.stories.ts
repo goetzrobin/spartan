@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import * as lucide from '@ng-icons/lucide';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { BrnMenuTriggerDirective } from './brain/src';
@@ -227,6 +227,6 @@ export const Stateful: Story = {
 		moduleMetadata: {
 			imports: [StatefulStory],
 		},
-		template: `<stateful-dropdown-story/>`,
+		template: '<stateful-dropdown-story/>',
 	}),
 };

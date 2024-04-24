@@ -1,8 +1,8 @@
-import * as child_process from 'child_process';
+import * as child_process from 'node:child_process';
 
 import * as projectHelpers from '../helpers/projects.helpers';
 
-import * as process from 'process';
+import * as process from 'node:process';
 import executor from './executor';
 
 describe('NpmPublish Executor', () => {

@@ -9,15 +9,15 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	type ElementRef,
+	type OnDestroy,
 	PLATFORM_ID,
 	Renderer2,
+	type TemplateRef,
 	ViewChild,
 	ViewEncapsulation,
 	inject,
 	signal,
-	type ElementRef,
-	type OnDestroy,
-	type TemplateRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 

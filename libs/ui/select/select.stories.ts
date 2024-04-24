@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChild, ViewChild, computed, input, signal, type ElementRef } from '@angular/core';
+import { Component, ContentChild, type ElementRef, ViewChild, computed, input, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import type { ClassValue } from 'clsx';
 import { hlm } from '../core/src';
 import { HlmIconComponent } from '../icon/helm/src';
@@ -392,7 +392,7 @@ export const CustomTrigger: Story = {
 			@if (icon) {
 				<ng-content select="hlm-icon" />
 			} @else {
-				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="lucideChevronDown" />
+				<hlm-icon class="flex-none w-4 h-4 ml-2" name="lucideChevronDown" />
 			}
 		</button>
 	`,

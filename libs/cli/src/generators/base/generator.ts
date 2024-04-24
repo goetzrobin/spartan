@@ -1,14 +1,14 @@
+import * as path from 'node:path';
 import {
+	type GeneratorCallback,
+	type Tree,
 	addDependenciesToPackageJson,
 	generateFiles,
 	joinPathFragments,
 	runTasksInSerial,
-	type GeneratorCallback,
-	type Tree,
 } from '@nx/devkit';
 import { addTsConfigPath } from '@nx/js';
 import { getRootTsConfigPathInTree, readTsConfigPaths } from '@nx/js/src/utils/typescript/ts-config';
-import * as path from 'path';
 import { getInstalledPackageVersion } from '../../utils/version-utils';
 import { buildDependencyArray, buildDevDependencyArray } from './lib/build-dependency-array';
 import { getTargetLibraryDirectory } from './lib/get-target-library-directory';
@@ -21,7 +21,7 @@ export async function hlmBaseGenerator(tree: Tree, options: HlmBaseGeneratorSche
 	const targetLibDir = getTargetLibraryDirectory(options, tree);
 
 	const existingPathsByAlias = readTsConfigPaths(getRootTsConfigPathInTree(tree)) ?? {};
-	const tsConfigAliasToUse = '@spartan-ng/' + options.publicName;
+	const tsConfigAliasToUse = `@spartan-ng/${options.publicName}`;
 
 	if (Object.keys(existingPathsByAlias).includes(tsConfigAliasToUse)) {
 		console.log(`Skipping ${tsConfigAliasToUse}. It's already installed!`);

@@ -1,25 +1,25 @@
 import {
-	Overlay,
-	OverlayPositionBuilder,
 	type ConnectedOverlayPositionChange,
 	type ConnectedPosition,
 	type FlexibleConnectedPositionStrategy,
+	Overlay,
 	type OverlayConfig,
+	OverlayPositionBuilder,
 	type OverlayRef,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
+	type ElementRef,
 	Injectable,
 	NgZone,
+	type Signal,
 	TemplateRef,
+	type ViewContainerRef,
 	inject,
 	signal,
-	type ElementRef,
-	type Signal,
-	type ViewContainerRef,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, Subject, filter, map, of, switchMap, type Observable } from 'rxjs';
+import { BehaviorSubject, type Observable, Subject, filter, map, of, switchMap } from 'rxjs';
 import type { BrnHoverCardContentDirective } from './brn-hover-card-content.directive';
 import { createHoverObservable } from './createHoverObservable';
 
@@ -105,13 +105,13 @@ export class BrnHoverCardContentService {
 
 	public setConfig(config: BrnHoverCardOptions) {
 		this._config = config;
-		if (config['attachTo']) {
+		if (config.attachTo) {
 			this._positionStrategy = this._psBuilder
-				.flexibleConnectedTo(config['attachTo'])
+				.flexibleConnectedTo(config.attachTo)
 				.withPositions(
-					config['attachPositions'] ?? config['align'] === 'top' ? topFirstPositions : bottomFirstPositions,
+					config.attachPositions ?? config.align === 'top' ? topFirstPositions : bottomFirstPositions,
 				)
-				.withDefaultOffsetY(config['sideOffset'] ?? 0);
+				.withDefaultOffsetY(config.sideOffset ?? 0);
 			this._config = {
 				...this._config,
 				positionStrategy: this._positionStrategy,

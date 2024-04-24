@@ -35,21 +35,21 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 				<p hlmCardDescription>You have 3 unread notifications</p>
 			</div>
 			<div hlmCardContent class="grid gap-4">
-				<div class="border-border flex items-center space-x-4 rounded-md border p-4">
+				<div class="flex items-center p-4 border border-border space-x-4 rounded-md">
 					<hlm-icon size="lg" name="lucideBell" />
 					<div class="flex-1 space-y-1">
 						<p class="text-sm font-medium leading-none">Push Notifications</p>
-						<p class="text-muted-foreground text-sm">Send notifications to device.</p>
+						<p class="text-sm text-muted-foreground">Send notifications to device.</p>
 					</div>
 					<hlm-switch class="ml-4" aria-label="Enable notifications" />
 				</div>
 				<div>
 					@for (notification of notifications; track notification.id) {
 						<div class="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-							<span class="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500"></span>
+							<span class="flex w-2 h-2 rounded-full translate-y-1 bg-sky-500"></span>
 							<div class="space-y-1">
 								<p class="text-sm font-medium leading-none">{{ notification.title }}</p>
-								<p class="text-muted-foreground text-sm">{{ notification.description }}</p>
+								<p class="text-sm text-muted-foreground">{{ notification.description }}</p>
 							</div>
 						</div>
 					}
@@ -121,21 +121,21 @@ import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 				<p hlmCardDescription>You have 3 unread notifications</p>
 			</div>
 			<div hlmCardContent class="grid gap-4">
-				<div class="border-border flex items-center space-x-4 rounded-md border p-4">
+				<div class="flex items-center p-4 border border-border space-x-4 rounded-md">
 					<hlm-icon size="lg" name="lucideBell" />
 					<div class="flex-1 space-y-1">
 						<p class="text-sm font-medium leading-none">Push Notifications</p>
-						<p class="text-muted-foreground text-sm">Send notifications to device.</p>
+						<p class="text-sm text-muted-foreground">Send notifications to device.</p>
 					</div>
 					<hlm-switch class="ml-4" aria-label="Enable notifications" />
 				</div>
 				<div>
 					@for (notification of notifications; track notification.id) {
 						<div class="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-							<span class="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500"></span>
+							<span class="flex w-2 h-2 rounded-full translate-y-1 bg-sky-500"></span>
 							<div class="space-y-1">
 								<p class="text-sm font-medium leading-none">{{ notification.title }}</p>
-								<p class="text-muted-foreground text-sm">{{ notification.description }}</p>
+								<p class="text-sm text-muted-foreground">{{ notification.description }}</p>
 							</div>
 						</div>
 					}

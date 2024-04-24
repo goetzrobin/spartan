@@ -87,7 +87,7 @@ export const Default: Story = {
 		HlmCodeDirective,
 	],
 	template: `
-		<div class="mx-auto flex max-w-screen-sm items-center justify-center space-x-4 py-20 text-sm">
+		<div class="flex items-center justify-center py-20 mx-auto text-sm max-w-screen-sm space-x-4">
 			<p>
 				Press
 				<code hlmCode>⌘ + K</code>

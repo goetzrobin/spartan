@@ -2,7 +2,7 @@ import type { ProjectConfiguration, Tree } from '@nx/devkit';
 import { prompt } from 'enquirer';
 import { getProjectsAndNames } from '../../utils/get-project-names';
 import { addThemeToApplicationStyles } from './libs/add-theme-to-application-styles';
-import { SupportedRadii, SupportedThemes, type SupportedTheme } from './libs/supported-theme-generator-map';
+import { SupportedRadii, type SupportedTheme, SupportedThemes } from './libs/supported-theme-generator-map';
 
 export default async function addThemeToApplicationGenerator(tree: Tree) {
 	const { projects, projectNames } = getProjectsAndNames(tree);

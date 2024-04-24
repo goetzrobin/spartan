@@ -1,4 +1,4 @@
-import { Component, ContentChild, ViewChild, computed, input, type ElementRef } from '@angular/core';
+import { Component, ContentChild, type ElementRef, ViewChild, computed, input } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
@@ -17,7 +17,7 @@ import type { ClassValue } from 'clsx';
 			@if (icon) {
 				<ng-content select="hlm-icon" />
 			} @else {
-				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="lucideChevronDown" />
+				<hlm-icon class="flex-none w-4 h-4 ml-2" name="lucideChevronDown" />
 			}
 		</button>
 	`,

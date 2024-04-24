@@ -48,7 +48,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 	},
 	providers: [provideIcons({ lucideLayers, lucidePuzzle, lucideStar })],
 	template: `
-		<section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
+		<section class="pt-6 pb-8 space-y-6 md:pb-12 md:pt-10 lg:py-32">
 			<div class="${container} max-w-[64rem]">
 				<a
 					target="_blank"
@@ -58,7 +58,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 				>
 					This is madness. This is spartan.
 				</a>
-				<h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
+				<h1 class="text-3xl font-heading sm:text-5xl md:text-6xl lg:text-7xl">
 					Cutting-edge tools powering Angular full-stack development.
 				</h1>
 				<p class="${lead} max-w-[42rem]">
@@ -76,13 +76,13 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 						href="https://github.com/goetzrobin/spartan"
 					>
 						Star on GitHub
-						<hlm-icon class="ml-2 h-4 w-4" name="lucideStar" />
+						<hlm-icon class="w-4 h-4 ml-2" name="lucideStar" />
 					</a>
 				</div>
 			</div>
 		</section>
 
-		<section id="tools" class="space-y-6 py-8 md:py-12 lg:py-24">
+		<section id="tools" class="py-8 space-y-6 md:py-12 lg:py-24">
 			<div class="${container} max-w-[58rem]">
 				<h2 class="${subHeading}">The Tools</h2>
 				<p class="${lead} max-w-[42rem]">
@@ -111,7 +111,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 			</div>
 		</section>
 
-		<section id="tools" class="space-y-6 py-8 md:py-12 lg:py-24">
+		<section id="tools" class="py-8 space-y-6 md:py-12 lg:py-24">
 			<div class="${container} max-w-[58rem]">
 				<h2 class="${subHeading}">The 300</h2>
 				<p class="${lead} max-w-[42rem]">

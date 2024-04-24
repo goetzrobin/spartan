@@ -10,7 +10,7 @@ import { SpartanLogoComponent } from '@spartan-ng/app/app/shared/spartan-logo.co
 	},
 	template: `
 		<a class="flex flex-col items-center" [href]="href" target="_blank">
-			<spartan-logo class="bg-primary h-9 w-9 -rotate-90 rounded-full p-1" />
+			<spartan-logo class="p-1 rounded-full bg-primary h-9 w-9 -rotate-90" />
 			<span class="mt-1 inline-block whitespace-nowrap text-[.7rem] font-medium hover:underline">
 				<ng-content />
 			</span>

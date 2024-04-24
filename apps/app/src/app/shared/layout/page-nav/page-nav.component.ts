@@ -1,20 +1,20 @@
 import { NgClass, isPlatformServer } from '@angular/common';
 import {
+	type AfterViewInit,
 	Component,
 	ElementRef,
+	type OnDestroy,
+	type OnInit,
 	PLATFORM_ID,
+	type TemplateRef,
 	ViewChild,
 	inject,
 	isDevMode,
 	signal,
-	type AfterViewInit,
-	type OnDestroy,
-	type OnInit,
-	type TemplateRef,
 } from '@angular/core';
-import { pageNavTmpl } from '@spartan-ng/app/app/shared/layout/page-nav/page-nav-outlet.component';
 import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
 import { PageNavLinkComponent } from './page-nav-link.component';
+import { pageNavTmpl } from './page-nav-outlet.component';
 
 type SamePageAnchorLink = {
 	id: string;
@@ -32,9 +32,9 @@ type SamePageAnchorLink = {
 	template: `
 		<ng-template #pageNav>
 			<hlm-scroll-area class="h-[calc(100vh-3.5rem)]">
-				<div class="space-y-2 px-1">
+				<div class="px-1 space-y-2">
 					<h3 class="font-medium">On this page</h3>
-					<ul class="m-0 flex list-none flex-col">
+					<ul class="flex flex-col m-0 list-none">
 						@for (link of links(); track link.id) {
 							<spartan-page-nav-link [ngClass]="{ 'pl-4': link.isNested }" [fragment]="link.id" [label]="link.label" />
 						} @empty {

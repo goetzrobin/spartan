@@ -42,7 +42,7 @@ import {
 	},
 	template: `
 		<hlm-tabs tab="account" class="w-full">
-			<hlm-tabs-list class="grid w-full grid-cols-2" aria-label="tabs example">
+			<hlm-tabs-list class="w-full grid grid-cols-2" aria-label="tabs example">
 				<button hlmTabsTrigger="account">Account</button>
 				<button hlmTabsTrigger="password">Password</button>
 			</hlm-tabs-list>
@@ -53,11 +53,11 @@ import {
 						<p hlmCardDescription>Make changes to your account here. Click save when you're done.</p>
 					</div>
 					<p hlmCardContent>
-						<label class="my-4 block" hlmLabel>
+						<label class="block my-4" hlmLabel>
 							Name
 							<input class="mt-1.5 w-full" value="Pedro Duarte" hlmInput />
 						</label>
-						<label class="my-4 block" hlmLabel>
+						<label class="block my-4" hlmLabel>
 							Username
 							<input class="mt-1.5 w-full" placeholder="@peduarte" hlmInput />
 						</label>
@@ -74,11 +74,11 @@ import {
 						<p hlmCardDescription>Change your password here. After saving, you'll be logged out.</p>
 					</div>
 					<p hlmCardContent>
-						<label class="my-4 block" hlmLabel>
+						<label class="block my-4" hlmLabel>
 							Old Password
 							<input class="mt-1.5 w-full" type="password" hlmInput />
 						</label>
-						<label class="my-4 block" hlmLabel>
+						<label class="block my-4" hlmLabel>
 							New Password
 							<input class="mt-1.5 w-full" type="password" hlmInput />
 						</label>
@@ -138,7 +138,7 @@ import {
 	},
 	template: \`
 		<hlm-tabs tab="account" class="w-full">
-			<hlm-tabs-list class="grid w-full grid-cols-2" aria-label="tabs example">
+			<hlm-tabs-list class="w-full grid grid-cols-2" aria-label="tabs example">
 				<button hlmTabsTrigger="account">Account</button>
 				<button hlmTabsTrigger="password">Password</button>
 			</hlm-tabs-list>
@@ -149,11 +149,11 @@ import {
 						<p hlmCardDescription>Make changes to your account here. Click save when you're done.</p>
 					</div>
 					<p hlmCardContent>
-						<label class="my-4 block" hlmLabel>
+						<label class="block my-4" hlmLabel>
 							Name
 							<input class="mt-1.5 w-full" value="Pedro Duarte" hlmInput />
 						</label>
-						<label class="my-4 block" hlmLabel>
+						<label class="block my-4" hlmLabel>
 							Username
 							<input class="mt-1.5 w-full" placeholder="@peduarte" hlmInput />
 						</label>
@@ -170,11 +170,11 @@ import {
 						<p hlmCardDescription>Change your password here. After saving, you'll be logged out.</p>
 					</div>
 					<p hlmCardContent>
-						<label class="my-4 block" hlmLabel>
+						<label class="block my-4" hlmLabel>
 							Old Password
 							<input class="mt-1.5 w-full" type="password" hlmInput />
 						</label>
-						<label class="my-4 block" hlmLabel>
+						<label class="block my-4" hlmLabel>
 							New Password
 							<input class="mt-1.5 w-full" type="password" hlmInput />
 						</label>
@@ -200,7 +200,7 @@ import {
 `;
 export const defaultSkeleton = `
 <hlm-tabs tab='account' class='block max-w-3xl mx-auto'>
-  <hlm-tabs-list class='grid w-full grid-cols-2' aria-label='tabs example'>
+  <hlm-tabs-list class='w-full grid grid-cols-2' aria-label='tabs example'>
     <button hlmTabsTrigger='account'>Account</button>
     <button hlmTabsTrigger='password'>Password</button>
   </hlm-tabs-list>

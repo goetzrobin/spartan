@@ -51,11 +51,15 @@ export interface ResolveHTTPRequestOptions<TRouter extends AnyRouter> {
 function getPath(event: H3Event): string | null {
 	const { params } = event.context;
 
+	// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 	if (typeof params?.['trpc'] === 'string') {
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		return params['trpc'];
 	}
 
+	// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 	if (params?.['trpc'] && Array.isArray(params['trpc'])) {
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		return (params['trpc'] as string[]).join('/');
 	}
 

@@ -41,16 +41,18 @@ jobs:
         with:
           node-version-file: .node-version
       - run: corepack enable
-      - run: pnpm --version
+      - run: corepack use pnpm@9
       - uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
+          cache: "pnpm"
+          cache-dependency-path: "**/pnpm-lock.yaml"
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: Validate
-        run: pnpm biome.format
+      - name: Formatting & Sorted Imports Check
+        run: pnpm ci.format-sort
+      # - name: Lint Check // too many failures; let's start with formatting and sorting then get to this
+      #   run: pnpm ci.lint
 
   build:
     runs-on: ubuntu-latest
@@ -63,8 +65,8 @@ jobs:
       - run: pnpm --version
       - uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
+          cache: "pnpm"
+          cache-dependency-path: "**/pnpm-lock.yaml"
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Build
@@ -83,8 +85,8 @@ jobs:
       - run: pnpm --version
       - uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
+          cache: "pnpm"
+          cache-dependency-path: "**/pnpm-lock.yaml"
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Test
@@ -103,8 +105,8 @@ jobs:
       - run: pnpm --version
       - uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
+          cache: "pnpm"
+          cache-dependency-path: "**/pnpm-lock.yaml"
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Install Cypress

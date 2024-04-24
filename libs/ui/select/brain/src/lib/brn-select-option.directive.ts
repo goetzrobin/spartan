@@ -1,6 +1,6 @@
 import type { FocusableOption } from '@angular/cdk/a11y';
 import { CdkOption } from '@angular/cdk/listbox';
-import { Directive, ElementRef, Input, computed, inject, signal, type OnDestroy } from '@angular/core';
+import { Directive, ElementRef, Input, type OnDestroy, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { BrnSelectService } from './brn-select.service';
 

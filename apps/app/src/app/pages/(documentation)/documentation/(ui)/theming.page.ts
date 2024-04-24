@@ -97,8 +97,8 @@ export const routeMeta: RouteMeta = {
 			<spartan-section-sub-heading id="list-of-variables">List of variables</spartan-section-sub-heading>
 			<section>
 				<p class="${hlmP}">Here's the list of variables available for customization:</p>
-				<div class="mt-4 flex">
-					<div class="border-border ml-4 mr-8 w-1 border-r"></div>
+				<div class="flex mt-4">
+					<div class="w-1 ml-4 mr-8 border-r border-border"></div>
 					<div class="flex-1">
 						<div class="${hlmSmall} mt-8">
 							Default background color of &#60;body&#62;,... etc.

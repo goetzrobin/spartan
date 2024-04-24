@@ -5,7 +5,7 @@ import type { ClassValue } from 'clsx';
 @Component({
 	selector: 'hlm-skeleton',
 	standalone: true,
-	template: ``,
+	template: '',
 	host: {
 		'[class]': '_computedClass()',
 	},

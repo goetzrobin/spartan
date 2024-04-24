@@ -1,9 +1,9 @@
 import { Directive, TemplateRef, inject } from '@angular/core';
 import {
-	provideExposedSideProviderExisting,
-	provideExposesStateProviderExisting,
 	type ExposesSide,
 	type ExposesState,
+	provideExposedSideProviderExisting,
+	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
 import { BrnHoverCardContentService } from './brn-hover-card-content.service';
 

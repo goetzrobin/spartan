@@ -27,13 +27,13 @@ export const routeMeta: RouteMeta = {
 			<a hlmBtn size="sm" variant="outline" routerLink="/components">Components</a>
 		</div>
 
-		<nav class="mb-2 mt-12">
+		<nav class="mt-12 mb-2">
 			<ul class="flex space-x-2">
 				<li><a class="!font-medium" spartanNavLink="/examples/notes">Notes</a></li>
 				<li><a class="!font-medium" spartanNavLink="/examples/typography">Typography</a></li>
 			</ul>
 		</nav>
-		<div class="border-border overflow-hidden rounded-lg border">
+		<div class="overflow-hidden border rounded-lg border-border">
 			<router-outlet />
 		</div>
 	`,

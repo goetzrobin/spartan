@@ -1,4 +1,4 @@
-import { readJson, type Tree } from '@nx/devkit';
+import { type Tree, readJson } from '@nx/devkit';
 import { clean, coerce } from 'semver';
 
 export function getInstalledPackageVersion(
@@ -9,8 +9,8 @@ export function getInstalledPackageVersion(
 ): string | null {
 	const pkgJson = readJson(tree, 'package.json');
 	const installedPackageVersion =
-		(pkgJson.dependencies && pkgJson.dependencies[packageName]) ||
-		(pkgJson.devDependencies && pkgJson.devDependencies[packageName]);
+		(pkgJson.dependencies?.[packageName]) ||
+		(pkgJson.devDependencies?.[packageName]);
 	if (!installedPackageVersion && !defaultVersion) {
 		return null;
 	}

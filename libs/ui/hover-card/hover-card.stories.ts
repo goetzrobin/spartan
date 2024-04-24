@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCalendarDays } from '@ng-icons/lucide';
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmAvatarModule } from '../avatar/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmCardDirective } from '../card/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import { BrnHoverCardModule, type BrnHoverCardComponent } from './brain/src';
+import { type BrnHoverCardComponent, BrnHoverCardModule } from './brain/src';
 import { HlmHoverCardModule } from './helm/src';
 
 @Component({
@@ -30,8 +30,8 @@ import { HlmHoverCardModule } from './helm/src';
 						<h4 class="text-sm font-semibold">&#64;analogjs</h4>
 						<p class="text-sm">The Angular meta-framework – build Angular applications faster.</p>
 						<div class="flex items-center pt-2">
-							<hlm-icon name="lucideCalendarDays" class="mr-2 h-4 w-4 opacity-70" />
-							<span class="text-muted-foreground text-xs">Joined December 2021</span>
+							<hlm-icon name="lucideCalendarDays" class="w-4 h-4 mr-2 opacity-70" />
+							<span class="text-xs text-muted-foreground">Joined December 2021</span>
 						</div>
 					</div>
 				</div>
@@ -57,6 +57,6 @@ type Story = StoryObj<BrnHoverCardComponent>;
 
 export const Default: Story = {
 	render: () => ({
-		template: `<hover-card-example/>`,
+		template: '<hover-card-example/>',
 	}),
 };
