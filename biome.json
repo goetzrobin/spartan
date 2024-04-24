@@ -16,8 +16,7 @@
 			"**/*.lock.json",
 			"libs/**/*.min.js",
 			"libs/**/*.min.css",
-			"libs/**/*-lock.yaml",
-			"**/*.lock.json"
+			"libs/**/*-lock.yaml"
 		],
 		"indentStyle": "tab",
 		"indentWidth": 2,
