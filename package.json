@@ -3,6 +3,14 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"type": "module",
+	"engines": {
+		"bun": ">= 1.1.0",
+		"node": "20.x || 21.x",
+		"npm": "please-use-pnpm",
+		"pnpm": ">=9",
+		"yarn": "please-use-pnpm"
+	},
+	"engineStrict": true,
 	"scripts": {
 		"dev": "nx serve app",
 		"ng": "nx",
