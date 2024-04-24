@@ -49,9 +49,11 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: Formatting & Sorted Imports Check
+      - name: oxlint performance, correctness and lint check
+        run: pnpm ci.lint-baby
+      - name: biome fFormatting & sorted iImports check
         run: pnpm ci.format-sort
-      # - name: Lint Check // too many failures; let's start with formatting and sorting then get to this
+      # - name: Biome Lint Check // too many failures; let's start with formatting and sorting then get to this
       #   run: pnpm ci.lint
 
   build:

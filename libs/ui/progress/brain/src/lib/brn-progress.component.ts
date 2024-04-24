@@ -51,7 +51,7 @@ export class BrnProgressComponent {
 	}
 
 	progressState = computed(() => {
-		return this._value() == null || this._value() === undefined
+		return this._value() === null || this._value() === undefined
 			? 'indeterminate'
 			: this._value() === this._max()
 				? 'complete'

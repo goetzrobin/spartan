@@ -45,6 +45,7 @@ export class BrnTabsDirective {
 
 	public registerTrigger(key: string, trigger: BrnTabsTriggerDirective) {
 		this._tabs[key] = {
+			// eslint-disable-next-line
 			...(this._tabs[key] ?? {}),
 			trigger,
 		};
@@ -52,6 +53,7 @@ export class BrnTabsDirective {
 
 	public registerContent(key: string, content: BrnTabsContentDirective) {
 		this._tabs[key] = {
+			// eslint-disable-next-line
 			...(this._tabs[key] ?? {}),
 			content,
 		};

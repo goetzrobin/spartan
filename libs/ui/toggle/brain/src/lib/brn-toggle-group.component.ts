@@ -275,7 +275,7 @@ export class BrnToggleGroupComponent
 	private _selectValue(value: any) {
 		if (!this._selectionModel) return;
 		const correspondingOption = (this._buttonToggles ?? []).find((toggle) => {
-			return toggle.value != null && toggle.value === value;
+			return toggle.value !== null && toggle.value === value;
 		});
 
 		if (correspondingOption) {

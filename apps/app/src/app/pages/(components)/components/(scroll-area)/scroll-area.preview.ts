@@ -44,7 +44,7 @@ import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
   </hlm-scroll-area>\`,
 })
 export class ScrollAreaPreviewComponent {
-  tags = Array.from({ length: 50 }).map((_, i, a) => \`v1.2.0-beta.\$\{a.length - i\}\`);
+  tags = Array.from({ length: 50 }).map((_, i, a) => \`v1.2.0-beta.\${a.length - i}\`);
 }
 `;
 

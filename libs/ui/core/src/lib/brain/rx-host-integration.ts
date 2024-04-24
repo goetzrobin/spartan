@@ -27,10 +27,10 @@ function process<T>(element: HTMLElement, prop: string): (value: T) => void {
 	const [key, unit = ''] = prop.replace('attr.', '').replace('style.', '').replace('class.', '').split('.');
 
 	return (value) => {
-		const parsed = unit && value != null ? `${value}${unit}` : value;
+		const parsed = unit && value !== null ? `${value}${unit}` : value;
 
 		if (isAttr) {
-			if (value == null) {
+			if (value === null) {
 				element.removeAttribute(key);
 			} else {
 				element.setAttribute(key, String(parsed));
