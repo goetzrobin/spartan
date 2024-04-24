@@ -112,11 +112,6 @@ export default defineConfig(({ mode }) => {
 						host: 'https://www.spartan.ng',
 					},
 				},
-				nitro: {
-					rollupConfig: {
-						plugins: [],
-					},
-				},
 			}),
 			nxViteTsPaths(),
 			visualizer() as Plugin,

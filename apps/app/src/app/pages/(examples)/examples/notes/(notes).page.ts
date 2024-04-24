@@ -11,7 +11,7 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 import { SignalFormBuilder, SignalInputDirective, V, withErrorComponent } from 'ng-signal-forms';
 import { type Observable, Subject, catchError, of, switchMap, take, tap } from 'rxjs';
 import type { Note } from '../../../../../db';
-import { injectTRPCClient } from '../../../../../trpc-client';
+import type { TrpcService } from '../../../../../services/trpc-client.service';
 import { InputErrorComponent } from '../../../../shared/input-error/input-error.component';
 import { SpartanInputErrorDirective } from '../../../../shared/input-error/input-error.directive';
 import { metaWith } from '../../../../shared/meta/meta.util';
@@ -102,7 +102,7 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class NotesExamplePageComponent {
-	private _trpc = injectTRPCClient();
+	private _trpc = this.trpcService.getClient();
 	private _sfb = inject(SignalFormBuilder);
 	private _refreshNotes$ = new Subject<void>();
 	private _notes$ = this._refreshNotes$.pipe(
@@ -169,7 +169,7 @@ export default class NotesExamplePageComponent {
 		}),
 	}));
 
-	constructor() {
+	constructor(private trpcService: TrpcService) {
 		this._notes$.subscribe();
 		void waitFor(this._notes$);
 		this.updateNotes('initial');

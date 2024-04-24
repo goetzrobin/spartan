@@ -2,7 +2,7 @@ import { provideFileRouter } from '@analogjs/router';
 import type { ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PreloadAllModules, withInMemoryScrolling, withNavigationErrorHandler, withPreloading } from '@angular/router';
-import { provideTrpcClient } from './trpc-client';
+import { provideTrpcClient } from './services/trpc-client.service';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
