@@ -102,7 +102,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 		return this.disabled ? -1 : this._tabIndex;
 	}
 	set tabIndex(value: number) {
-		this._tabIndex = value != null ? value : this._defaultTabIndex;
+		this._tabIndex = value !== null ? value : this._defaultTabIndex;
 	}
 
 	private _uniqueId = `brn-radio-${++nextUniqueId}`;

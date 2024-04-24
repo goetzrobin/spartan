@@ -193,7 +193,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			...state,
 			id: `brn-select-${nextId++}`,
 		}));
-		if (this.ngControl != null) {
+		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
 		}
 

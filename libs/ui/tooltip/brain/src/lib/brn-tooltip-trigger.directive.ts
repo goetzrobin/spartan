@@ -307,7 +307,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		// If the message is not a string (e.g. number), convert it to a string and trim it.
 		// Must convert with `String(value)`, not `${value}`, otherwise Closure Compiler optimises
 		// away the string-conversion: https://github.com/angular/components/issues/20684
-		this._ariaDescribedBy = value != null ? String(value).trim() : '';
+		this._ariaDescribedBy = value !== null ? String(value).trim() : '';
 
 		if (this._ariaDescribedBy && !this._isTooltipVisible()) {
 			this._ngZone.runOutsideAngular(() => {

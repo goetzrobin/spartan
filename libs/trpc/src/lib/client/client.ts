@@ -67,6 +67,7 @@ export const createTrpcClient = <AppRouter extends AnyRouter>({
 						...(options?.links ?? []),
 						transferStateLink(),
 						httpBatchLink({
+							// eslint-disable-next-line
 							...(batchLinkOptions ?? {}),
 							headers() {
 								return TrpcHeaders();
