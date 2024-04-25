@@ -2,7 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Component({
 	selector: 'hlm-menu-item-sub-indicator',
@@ -10,7 +10,7 @@ import { ClassValue } from 'clsx';
 	providers: [provideIcons({ lucideChevronRight })],
 	imports: [HlmIconComponent],
 	template: `
-		<hlm-icon size="none" class="h-full w-full" name="lucideChevronRight" />
+		<hlm-icon size="none" class="w-full h-full" name="lucideChevronRight" />
 	`,
 	host: {
 		'[class]': '_computedClass()',

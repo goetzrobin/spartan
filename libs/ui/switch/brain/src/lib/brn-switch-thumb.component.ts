@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
 	selector: 'brn-switch-thumb',
 	standalone: true,
 	imports: [CommonModule],
-	template: ``,
+	template: '',
 })
 export class BrnSwitchThumbComponent {}

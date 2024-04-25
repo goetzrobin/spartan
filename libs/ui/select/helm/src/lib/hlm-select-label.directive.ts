@@ -1,7 +1,7 @@
-import { computed, Directive, inject, input, OnInit, signal } from '@angular/core';
+import { Directive, type OnInit, computed, inject, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnSelectLabelDirective } from '@spartan-ng/ui-select-brain';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { HlmSelectContentDirective } from './hlm-select-content.directive';
 
 @Directive({

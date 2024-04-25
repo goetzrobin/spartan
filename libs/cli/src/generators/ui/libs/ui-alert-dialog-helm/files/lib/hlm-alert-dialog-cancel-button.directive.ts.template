@@ -1,7 +1,7 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Directive({
 	selector: 'button[hlmAlertDialogCancel]',

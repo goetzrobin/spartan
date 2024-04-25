@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,8 +9,8 @@ import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 import { SignalFormBuilder, SignalInputDirective, V, withErrorComponent } from 'ng-signal-forms';
-import { Observable, Subject, catchError, of, switchMap, take, tap } from 'rxjs';
-import { Note } from '../../../../../db';
+import { type Observable, Subject, catchError, of, switchMap, take, tap } from 'rxjs';
+import type { Note } from '../../../../../db';
 import { injectTRPCClient } from '../../../../../trpc-client';
 import { InputErrorComponent } from '../../../../shared/input-error/input-error.component';
 import { SpartanInputErrorDirective } from '../../../../shared/input-error/input-error.directive';
@@ -86,7 +86,7 @@ export const routeMeta: RouteMeta = {
 				<hlm-spinner *ngIf="createLoad()" class="ml-2" size="sm" />
 			</button>
 		</form>
-		<div class="flex flex-col space-y-4 pb-12 pt-4">
+		<div class="flex flex-col pt-4 pb-12 space-y-4">
 			<ng-container *ngIf="showNotesArray()">
 				<analog-trpc-note
 					*ngFor="let note of state().notes ?? []; trackBy: noteTrackBy"
@@ -175,7 +175,7 @@ export default class NotesExamplePageComponent {
 		this.updateNotes('initial');
 	}
 
-	public noteTrackBy = (index: number, note: Note) => {
+	public noteTrackBy = (_index: number, note: Note) => {
 		return note.id;
 	};
 

@@ -23,6 +23,7 @@ export class ThreeHundredComponent {
 		'goetzrobin',
 		'thatsamsonkid',
 		'elite-benni',
+		'snydertechnologies',
 		'mihajm',
 		'ajitzero',
 		'arturgawlik',
@@ -64,5 +65,5 @@ export class ThreeHundredComponent {
 		'tomdev9',
 		'ragul1697',
 	];
-	protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
+	protected readonly _rest = Array(300 - this._contributors.length).map((_, i) => i);
 }

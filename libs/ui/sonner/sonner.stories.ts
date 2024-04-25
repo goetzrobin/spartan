@@ -42,6 +42,6 @@ export class SonnerStory {
 
 export const Default: Story = {
 	render: () => ({
-		template: `<sonner-story />`,
+		template: '<sonner-story />',
 	}),
 };

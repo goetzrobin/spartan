@@ -37,4 +37,4 @@ export class LabelPreviewComponent {}
 export const defaultImports = `
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 `;
-export const defaultSkeleton = `<label hlmLabel>Label<input/></label>`;
+export const defaultSkeleton = '<label hlmLabel>Label<input/></label>';

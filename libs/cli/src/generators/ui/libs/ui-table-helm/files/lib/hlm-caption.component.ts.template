@@ -1,15 +1,15 @@
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
+	ViewEncapsulation,
+	booleanAttribute,
 	computed,
 	effect,
 	inject,
 	input,
-	ViewEncapsulation,
 } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { HlmTableComponent } from '../index';
 
 let captionIdSequence = 0;

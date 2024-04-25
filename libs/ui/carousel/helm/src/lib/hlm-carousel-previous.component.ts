@@ -12,7 +12,7 @@ import { lucideArrowLeft } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { HlmCarouselComponent } from './hlm-carousel.component';
 
 @Component({

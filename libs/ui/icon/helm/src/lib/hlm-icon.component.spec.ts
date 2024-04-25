@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideCheck } from '@ng-icons/lucide';
-import { RenderResult, render } from '@testing-library/angular';
+import { type RenderResult, render } from '@testing-library/angular';
 import { HlmIconComponent } from './hlm-icon.component';
 
 @Component({

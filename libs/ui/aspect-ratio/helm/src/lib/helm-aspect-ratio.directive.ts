@@ -1,13 +1,13 @@
-import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
-import { AfterViewInit, computed, Directive, ElementRef, inject, input, Input, signal } from '@angular/core';
+import { type NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
+import { type AfterViewInit, Directive, ElementRef, Input, computed, inject, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 const parseDividedString = (value: NumberInput): NumberInput => {
 	if (typeof value !== 'string' || !value.includes('/')) return value;
 	return value
 		.split('/')
-		.map((v) => parseInt(v, 10))
+		.map((v) => Number.parseInt(v, 10))
 		.reduce((a, b) => a / b);
 };
 
@@ -28,7 +28,7 @@ export class HlmAspectRatioDirective implements AfterViewInit {
 	});
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly _computedClass = computed(() => hlm(`relative w-full`, this.userClass()));
+	protected readonly _computedClass = computed(() => hlm('relative w-full', this.userClass()));
 
 	@Input()
 	set hlmAspectRatio(value: NumberInput) {

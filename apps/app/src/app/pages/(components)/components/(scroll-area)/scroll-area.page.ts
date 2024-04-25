@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { lucideAlertTriangle } from '@ng-icons/lucide';
 import { provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -13,7 +13,7 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { defaultCode, defaultImports, defaultSkeleton, ScrollAreaPreviewComponent } from './scroll-area.preview';
+import { ScrollAreaPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './scroll-area.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Scroll Area' },

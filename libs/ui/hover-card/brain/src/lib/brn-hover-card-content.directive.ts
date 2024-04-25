@@ -1,7 +1,7 @@
-import { Directive, inject, TemplateRef } from '@angular/core';
+import { Directive, TemplateRef, inject } from '@angular/core';
 import {
-	ExposesSide,
-	ExposesState,
+	type ExposesSide,
+	type ExposesState,
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';

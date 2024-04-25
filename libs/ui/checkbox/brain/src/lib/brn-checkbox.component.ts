@@ -1,25 +1,25 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { isPlatformBrowser, NgStyle } from '@angular/common';
+import { NgStyle, isPlatformBrowser } from '@angular/common';
 import {
-	AfterContentInit,
-	booleanAttribute,
+	type AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
-	computed,
-	effect,
 	ElementRef,
 	EventEmitter,
+	type OnDestroy,
+	Output,
+	PLATFORM_ID,
+	Renderer2,
+	ViewChild,
+	ViewEncapsulation,
+	booleanAttribute,
+	computed,
+	effect,
 	forwardRef,
 	inject,
 	input,
 	model,
-	OnDestroy,
-	Output,
-	PLATFORM_ID,
-	Renderer2,
 	signal,
-	ViewChild,
-	ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';

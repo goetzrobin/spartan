@@ -1,16 +1,16 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
+	ViewEncapsulation,
+	booleanAttribute,
 	computed,
 	inject,
 	input,
-	ViewEncapsulation,
 } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnColumnDefComponent } from '@spartan-ng/ui-table-brain';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Component({
 	selector: 'hlm-td',

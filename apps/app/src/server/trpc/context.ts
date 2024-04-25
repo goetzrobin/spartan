@@ -1,4 +1,4 @@
-import { inferAsyncReturnType } from '@trpc/server';
+import type { inferAsyncReturnType } from '@trpc/server';
 /**
  * Creates context for an incoming request
  * @link https://trpc.io/docs/context

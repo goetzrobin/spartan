@@ -1,5 +1,5 @@
-import { Tree } from '@nx/devkit';
-import { HlmBaseGeneratorSchema } from '../schema';
+import type { Tree } from '@nx/devkit';
+import type { HlmBaseGeneratorSchema } from '../schema';
 
 export async function initializeAngularLibrary(tree: Tree, options: HlmBaseGeneratorSchema) {
 	return await (
@@ -13,7 +13,7 @@ export async function initializeAngularLibrary(tree: Tree, options: HlmBaseGener
 		skipFormat: true,
 		simpleName: true,
 		buildable: true,
-		importPath: '@spartan-ng/' + options.publicName,
+		importPath: `@spartan-ng/${options.publicName}`,
 		prefix: 'hlm',
 		skipModule: true,
 		standalone: false,

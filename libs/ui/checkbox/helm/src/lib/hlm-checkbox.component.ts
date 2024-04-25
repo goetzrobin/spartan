@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, booleanAttribute, computed, forwardRef
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { HlmCheckboxCheckIconComponent } from './hlm-checkbox-checkicon.component';
 
 export const HLM_CHECKBOX_VALUE_ACCESSOR = {

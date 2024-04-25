@@ -1,5 +1,5 @@
-import { booleanAttribute, Directive, ElementRef, inject, Input, signal } from '@angular/core';
-import { ClassValue } from 'clsx';
+import { Directive, ElementRef, Input, booleanAttribute, inject, signal } from '@angular/core';
+import type { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[brnAvatarFallback]',

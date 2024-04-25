@@ -1,5 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { computed, Directive, effect, inject, input, untracked } from '@angular/core';
+import { Directive, computed, effect, inject, input, untracked } from '@angular/core';
 import { BrnAccordionDirective } from './brn-accordion.directive';
 
 let itemIdGenerator = 0;

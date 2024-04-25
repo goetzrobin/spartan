@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, Input } from '@angular/core';
+import { Component, Input, booleanAttribute } from '@angular/core';
 
 export type BrnSeparatorOrientation = 'horizontal' | 'vertical';
 @Component({

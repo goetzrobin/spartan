@@ -1,12 +1,12 @@
 import {
-	booleanAttribute,
 	ChangeDetectorRef,
-	computed,
 	Directive,
 	EventEmitter,
-	inject,
 	Input,
 	Output,
+	booleanAttribute,
+	computed,
+	inject,
 	signal,
 } from '@angular/core';
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
@@ -37,7 +37,7 @@ export class BrnToggleDirective {
 	public readonly isOn = computed(() => this.state() === 'on');
 
 	@Input()
-	public id = 'brn-toggle-' + uniqueId++;
+	public id = `brn-toggle-${uniqueId++}`;
 
 	@Input()
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

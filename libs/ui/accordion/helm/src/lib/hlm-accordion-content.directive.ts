@@ -1,7 +1,7 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlmAccordionContent],brn-accordion-content [hlm], hlm-accordion-content:not(notHlm)',

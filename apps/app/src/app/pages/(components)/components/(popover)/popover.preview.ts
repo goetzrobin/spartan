@@ -30,24 +30,24 @@ import { HlmPopoverCloseDirective, HlmPopoverContentDirective } from '@spartan-n
 			<div hlmPopoverContent class="grid w-80 gap-4" *brnPopoverContent="let ctx">
 				<div class="space-y-2">
 					<h4 class="font-medium leading-none">Dimensions</h4>
-					<p class="text-muted-foreground text-sm">Set the dimensions for the layer.</p>
+					<p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
 				</div>
 				<div class="grid gap-2">
-					<div class="grid grid-cols-3 items-center gap-4">
+					<div class="items-center grid grid-cols-3 gap-4">
 						<label hlmLabel for="width">Width</label>
-						<input hlmInput id="width" [defaultValue]="'100%'" class="col-span-2 h-8" />
+						<input hlmInput id="width" [defaultValue]="'100%'" class="h-8 col-span-2" />
 					</div>
-					<div class="grid grid-cols-3 items-center gap-4">
+					<div class="items-center grid grid-cols-3 gap-4">
 						<label hlmLabel for="maxWidth">Max. width</label>
-						<input hlmInput id="maxWidth" [defaultValue]="'300px'" class="col-span-2 h-8" />
+						<input hlmInput id="maxWidth" [defaultValue]="'300px'" class="h-8 col-span-2" />
 					</div>
-					<div class="grid grid-cols-3 items-center gap-4">
+					<div class="items-center grid grid-cols-3 gap-4">
 						<label hlmLabel for="height">Height</label>
-						<input hlmInput id="height" [defaultValue]="'25px'" class="col-span-2 h-8" />
+						<input hlmInput id="height" [defaultValue]="'25px'" class="h-8 col-span-2" />
 					</div>
-					<div class="grid grid-cols-3 items-center gap-4">
+					<div class="items-center grid grid-cols-3 gap-4">
 						<label hlmLabel for="maxHeight">Max. height</label>
-						<input hlmInput id="maxHeight" [defaultValue]="'none'" class="col-span-2 h-8" />
+						<input hlmInput id="maxHeight" [defaultValue]="'none'" class="h-8 col-span-2" />
 					</div>
 				</div>
 			</div>
@@ -94,21 +94,21 @@ import { provideIcons } from '@ng-icons/core';
           <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
         </div>
         <div class="grid gap-2">
-          <div class="grid grid-cols-3 items-center gap-4">
+          <div class="items-center grid grid-cols-3 gap-4">
             <label hlmLabel for="width">Width</label>
-            <input hlmInput id="width" [defaultValue]="'100%'" class="col-span-2 h-8" />
+            <input hlmInput id="width" [defaultValue]="'100%'" class="h-8 col-span-2" />
           </div>
-          <div class="grid grid-cols-3 items-center gap-4">
+          <div class="items-center grid grid-cols-3 gap-4">
             <label hlmLabel for="maxWidth">Max. width</label>
-            <input hlmInput id="maxWidth" [defaultValue]="'300px'" class="col-span-2 h-8" />
+            <input hlmInput id="maxWidth" [defaultValue]="'300px'" class="h-8 col-span-2" />
           </div>
-          <div class="grid grid-cols-3 items-center gap-4">
+          <div class="items-center grid grid-cols-3 gap-4">
             <label hlmLabel for="height">Height</label>
-            <input hlmInput id="height" [defaultValue]="'25px'" class="col-span-2 h-8" />
+            <input hlmInput id="height" [defaultValue]="'25px'" class="h-8 col-span-2" />
           </div>
-          <div class="grid grid-cols-3 items-center gap-4">
+          <div class="items-center grid grid-cols-3 gap-4">
             <label hlmLabel for="maxHeight">Max. height</label>
-            <input hlmInput id="maxHeight" [defaultValue]="'none'" class="col-span-2 h-8" />
+            <input hlmInput id="maxHeight" [defaultValue]="'none'" class="h-8 col-span-2" />
           </div>
         </div>
       </div>

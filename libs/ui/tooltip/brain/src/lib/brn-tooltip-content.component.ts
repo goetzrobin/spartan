@@ -4,20 +4,20 @@
  * Check them out! Give them a try! Leave a star! Their work is incredible!
  */
 
-import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	ElementRef,
-	inject,
-	OnDestroy,
+	type ElementRef,
+	type OnDestroy,
 	PLATFORM_ID,
 	Renderer2,
-	signal,
-	TemplateRef,
+	type TemplateRef,
 	ViewChild,
 	ViewEncapsulation,
+	inject,
+	signal,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -105,10 +105,10 @@ export class BrnTooltipContentComponent implements OnDestroy {
 	 */
 	show(delay: number): void {
 		// Cancel the delayed hide if it is scheduled
-		if (this._hideTimeoutId != null) {
+		if (this._hideTimeoutId !== null) {
 			clearTimeout(this._hideTimeoutId);
 		}
-		if (this._animateTimeoutId != null) {
+		if (this._animateTimeoutId !== null) {
 			clearTimeout(this._animateTimeoutId);
 		}
 		this._showTimeoutId = setTimeout(() => {
@@ -125,7 +125,7 @@ export class BrnTooltipContentComponent implements OnDestroy {
 	 * */
 	hide(delay: number, exitAnimationDuration: number): void {
 		// Cancel the delayed show if it is scheduled
-		if (this._showTimeoutId != null) {
+		if (this._showTimeoutId !== null) {
 			clearTimeout(this._showTimeoutId);
 		}
 		// start out animation at delay minus animation delay or immediately if possible
@@ -192,11 +192,11 @@ export class BrnTooltipContentComponent implements OnDestroy {
 
 	/** Cancels any pending animation sequences. */
 	_cancelPendingAnimations() {
-		if (this._showTimeoutId != null) {
+		if (this._showTimeoutId !== null) {
 			clearTimeout(this._showTimeoutId);
 		}
 
-		if (this._hideTimeoutId != null) {
+		if (this._hideTimeoutId !== null) {
 			clearTimeout(this._hideTimeoutId);
 		}
 

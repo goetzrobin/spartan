@@ -3,8 +3,8 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/progress/helm/src",
 	"prefix": "helm",
-	"tags": ["scope:helm"],
 	"projectType": "library",
+	"tags": ["scope:helm"],
 	"targets": {
 		"build": {
 			"executor": "@nx/angular:package",

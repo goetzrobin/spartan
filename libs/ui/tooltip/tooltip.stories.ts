@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucidePlus } from '@ng-icons/lucide';
-import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { BrnTooltipContentDirective } from './brain/src';
@@ -41,9 +41,7 @@ export const Default: Story = {
 		template: `
 <div class='p-40'>
   <hlm-tooltip>
-    <button hlmTooltipTrigger ${argsToTemplate(
-			args,
-		)} aria-describedby='Hello world' hlmBtn variant='outline'>Test</button>
+    <button hlmTooltipTrigger ${argsToTemplate(args)} aria-describedby='Hello world' hlmBtn variant='outline'>Test</button>
     <span *brnTooltipContent class='flex items-center'>
       Add to library <hlm-icon class='ml-2' size='sm' name='lucidePlus'/>
      </span>
@@ -88,7 +86,7 @@ export const Simple: Story = {
 		moduleMetadata: {
 			imports: [SimpleTooltip],
 		},
-		template: `<simple-tooltip-story/>`,
+		template: '<simple-tooltip-story/>',
 	}),
 };
 
@@ -134,6 +132,6 @@ export const Disabled: Story = {
 		moduleMetadata: {
 			imports: [DisabledTooltip],
 		},
-		template: `<disabled-tooltip-story/>`,
+		template: '<disabled-tooltip-story/>',
 	}),
 };

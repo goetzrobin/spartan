@@ -1,21 +1,21 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import {
-	AfterContentInit,
-	booleanAttribute,
+	type AfterContentInit,
 	ChangeDetectorRef,
 	Component,
 	ContentChildren,
 	DestroyRef,
 	EventEmitter,
+	Input,
+	type OnInit,
+	Output,
+	type QueryList,
+	booleanAttribute,
 	forwardRef,
 	inject,
-	Input,
-	OnInit,
-	Output,
-	QueryList,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { map, merge, of, startWith, switchMap } from 'rxjs';
 import { BrnToggleDirective } from './brn-toggle.directive';
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
@@ -108,8 +108,7 @@ export class BrnToggleGroupComponent
 	}
 
 	/** Value of the toggle group. */
-	@Input()
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	@Input() // eslint-disable-next-line @typescript-eslint/no-explicit-any
 	get value(): any {
 		const selected = this._selectionModel ? this._selectionModel.selected : [];
 
@@ -276,7 +275,7 @@ export class BrnToggleGroupComponent
 	private _selectValue(value: any) {
 		if (!this._selectionModel) return;
 		const correspondingOption = (this._buttonToggles ?? []).find((toggle) => {
-			return toggle.value != null && toggle.value === value;
+			return toggle.value !== null && toggle.value === value;
 		});
 
 		if (correspondingOption) {

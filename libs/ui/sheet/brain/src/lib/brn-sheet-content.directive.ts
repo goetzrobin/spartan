@@ -1,6 +1,6 @@
 import { Directive, inject } from '@angular/core';
 import {
-	ExposesSide,
+	type ExposesSide,
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';

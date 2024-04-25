@@ -1,4 +1,4 @@
-import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmLabelDirective } from '../label/helm/src';
 import { BrnProgressComponent, BrnProgressImports } from './brain/src';
 import { HlmProgressImports } from './helm/src';

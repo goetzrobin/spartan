@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { InputPreviewComponent } from '../(input)/input.preview';

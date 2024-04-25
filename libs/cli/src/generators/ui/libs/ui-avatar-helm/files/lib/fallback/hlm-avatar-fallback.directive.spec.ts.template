@@ -1,5 +1,5 @@
 import { Component, PLATFORM_ID } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { TestBed, fakeAsync, type ComponentFixture } from '@angular/core/testing';
 import { hexColorFor, isBright } from '@spartan-ng/ui-avatar-brain';
 import { HlmAvatarFallbackDirective } from './hlm-avatar-fallback.directive';
 

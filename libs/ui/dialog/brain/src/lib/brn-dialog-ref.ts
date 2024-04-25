@@ -1,8 +1,8 @@
-import { DialogRef } from '@angular/cdk/dialog';
-import { Signal, WritableSignal } from '@angular/core';
+import type { DialogRef } from '@angular/cdk/dialog';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Subject, take } from 'rxjs';
-import { BrnDialogOptions } from './brn-dialog-options';
-import { BrnDialogState } from './brn-dialog-state';
+import type { BrnDialogOptions } from './brn-dialog-options';
+import type { BrnDialogState } from './brn-dialog-state';
 import { cssClassesToArray } from './brn-dialog.service';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, Input, Output, input, signal } from '@angular/core';
-import { BrnTabsContentDirective } from './brn-tabs-content.directive';
-import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
+import type { BrnTabsContentDirective } from './brn-tabs-content.directive';
+import type { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
 export type BrnTabsOrientation = 'horizontal' | 'vertical';
 export type BrnTabsDirection = 'ltr' | 'rtl';
@@ -45,6 +45,7 @@ export class BrnTabsDirective {
 
 	public registerTrigger(key: string, trigger: BrnTabsTriggerDirective) {
 		this._tabs[key] = {
+			// eslint-disable-next-line
 			...(this._tabs[key] ?? {}),
 			trigger,
 		};
@@ -52,6 +53,7 @@ export class BrnTabsDirective {
 
 	public registerContent(key: string, content: BrnTabsContentDirective) {
 		this._tabs[key] = {
+			// eslint-disable-next-line
 			...(this._tabs[key] ?? {}),
 			content,
 		};

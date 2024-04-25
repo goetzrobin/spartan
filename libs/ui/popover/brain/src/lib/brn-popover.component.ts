@@ -1,13 +1,13 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	Input,
+	ViewEncapsulation,
 	effect,
 	forwardRef,
-	Input,
 	numberAttribute,
 	signal,
 	untracked,
-	ViewEncapsulation,
 } from '@angular/core';
 import { BrnDialogComponent } from '@spartan-ng/ui-dialog-brain';
 
@@ -73,7 +73,7 @@ export class BrnPopoverComponent extends BrnDialogComponent {
 	}
 
 	private applySideOffset(sideOffset: number) {
-		this.attachPositions = (this._options['attachPositions'] ?? []).map((position) => ({
+		this.attachPositions = (this._options.attachPositions ?? []).map((position) => ({
 			...position,
 			offsetY: position.originY === 'top' ? -sideOffset : sideOffset,
 		}));

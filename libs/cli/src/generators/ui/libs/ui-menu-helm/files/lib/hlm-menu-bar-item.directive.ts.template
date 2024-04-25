@@ -1,7 +1,7 @@
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnMenuItemDirective } from '@spartan-ng/ui-menu-brain';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlmMenuBarItem]',

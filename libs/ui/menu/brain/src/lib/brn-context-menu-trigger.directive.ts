@@ -1,5 +1,5 @@
 import { CdkContextMenuTrigger } from '@angular/cdk/menu';
-import { Directive, effect, inject, Input, signal, TemplateRef } from '@angular/core';
+import { Directive, Input, type TemplateRef, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type BrnCtxMenuAlign = 'start' | 'center' | 'end' | undefined;
@@ -30,7 +30,7 @@ export class BrnContextMenuTriggerDirective {
 			setTimeout(
 				() =>
 					// eslint-disable-next-line
-					((this._cdkTrigger as any)['_spartanLastPosition'] = // eslint-disable-next-line
+					((this._cdkTrigger as any)._spartanLastPosition = // eslint-disable-next-line
 						(this._cdkTrigger as any).overlayRef._positionStrategy._lastPosition),
 			),
 		);

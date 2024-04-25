@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { DecimalPipe, TitleCasePipe } from '@angular/common';
-import { Component, TrackByFunction, computed, effect, signal } from '@angular/core';
+import { Component, type TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { lucideArrowUpDown, lucideChevronDown, lucideMoreHorizontal } from '@ng-icons/lucide';
@@ -12,7 +12,7 @@ import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
 import { BrnSelectModule } from '@spartan-ng/ui-select-brain';
 import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
-import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng/ui-table-brain';
+import { BrnTableModule, type PaginatorState, useBrnColumnManager } from '@spartan-ng/ui-table-brain';
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
 import { debounceTime, map } from 'rxjs';
@@ -240,7 +240,7 @@ const PAYMENT_DATA: Payment[] = [
 					{{ element.email }}
 				</hlm-td>
 			</brn-column-def>
-			<brn-column-def name="amount" class="w-20 justify-end">
+			<brn-column-def name="amount" class="justify-end w-20">
 				<hlm-th *brnHeaderDef>Amount</hlm-th>
 				<hlm-td class="font-medium tabular-nums" *brnCellDef="let element">
 					\${{ element.amount | number: '1.2-2' }}
@@ -250,7 +250,7 @@ const PAYMENT_DATA: Payment[] = [
 				<hlm-th *brnHeaderDef></hlm-th>
 				<hlm-td *brnCellDef="let element">
 					<button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-						<hlm-icon class="h-4 w-4" name="lucideMoreHorizontal" />
+						<hlm-icon class="w-4 h-4" name="lucideMoreHorizontal" />
 					</button>
 
 					<ng-template #menu>
@@ -269,16 +269,16 @@ const PAYMENT_DATA: Payment[] = [
 					</ng-template>
 				</hlm-td>
 			</brn-column-def>
-			<div class="text-muted-foreground flex items-center justify-center p-20" brnNoDataRow>No data</div>
+			<div class="flex items-center justify-center p-20 text-muted-foreground" brnNoDataRow>No data</div>
 		</brn-table>
 		<div
-			class="mt-4 flex flex-col justify-between sm:flex-row sm:items-center"
+			class="flex flex-col justify-between mt-4 sm:flex-row sm:items-center"
 			*brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
 		>
 			<span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
-			<div class="mt-2 flex sm:mt-0">
+			<div class="flex mt-2 sm:mt-0">
 				<brn-select class="inline-block" [(ngModel)]="_pageSize">
-					<hlm-select-trigger class="w-15 mr-1 inline-flex h-9">
+					<hlm-select-trigger class="inline-flex mr-1 w-15 h-9">
 						<hlm-select-value />
 					</hlm-select-trigger>
 					<hlm-select-content>
@@ -637,7 +637,7 @@ const PAYMENT_DATA: Payment[] = [
           {{ element.email }}
         </hlm-td>
       </brn-column-def>
-      <brn-column-def name="amount" class="w-20 justify-end">
+      <brn-column-def name="amount" class="justify-end w-20">
         <hlm-th *brnHeaderDef>Amount</hlm-th>
         <hlm-td class="font-medium tabular-nums" *brnCellDef="let element">
           $ {{ element.amount | number: '1.2-2'}}
@@ -647,7 +647,7 @@ const PAYMENT_DATA: Payment[] = [
         <hlm-th *brnHeaderDef></hlm-th>
         <hlm-td *brnCellDef="let element">
           <button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-            <hlm-icon class="h-4 w-4" name="lucideMoreHorizontal" />
+            <hlm-icon class="w-4 h-4" name="lucideMoreHorizontal" />
           </button>
 
           <ng-template #menu>
@@ -666,16 +666,16 @@ const PAYMENT_DATA: Payment[] = [
           </ng-template>
         </hlm-td>
       </brn-column-def>
-      <div class="text-muted-foreground flex items-center justify-center p-20" brnNoDataRow>No data</div>
+      <div class="flex items-center justify-center p-20 text-muted-foreground" brnNoDataRow>No data</div>
     </brn-table>
     <div
-      class="mt-4 flex flex-col justify-between sm:flex-row sm:items-center"
+      class="flex flex-col justify-between mt-4 sm:flex-row sm:items-center"
       *brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
     >
       <span class="${hlmMuted} text-sm">{{ _selected().length }} of {{ _totalElements() }} row(s) selected</span>
-      <div class="mt-2 flex sm:mt-0">
+      <div class="flex mt-2 sm:mt-0">
         <brn-select class="inline-block" placeholder="{{ _availablePageSizes[0] }}" [(ngModel)]="_pageSize">
-          <hlm-select-trigger class="w-15 mr-1 inline-flex h-9">
+          <hlm-select-trigger class="inline-flex mr-1 w-15 h-9">
             <hlm-select-value />
           </hlm-select-trigger>
           <hlm-select-content>

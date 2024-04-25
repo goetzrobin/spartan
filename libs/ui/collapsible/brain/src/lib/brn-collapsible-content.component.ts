@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, computed, ElementRef, inject, Input, signal } from '@angular/core';
+import { type AfterContentInit, Component, ElementRef, Input, computed, inject, signal } from '@angular/core';
 import { BrnCollapsibleComponent } from './brn-collapsible.component';
 
 @Component({
@@ -26,8 +26,8 @@ export class BrnCollapsibleContentComponent implements AfterContentInit {
 		const height = this._height();
 		const width = this._width();
 		return {
-			[`--radix-collapsible-content-height`]: height ? `${height}px` : undefined,
-			[`--radix-collapsible-content-width`]: width ? `${width}px` : undefined,
+			'--radix-collapsible-content-height': height ? `${height}px` : undefined,
+			'--radix-collapsible-content-width': width ? `${width}px` : undefined,
 		};
 	});
 

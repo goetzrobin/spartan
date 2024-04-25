@@ -1,4 +1,4 @@
-import { Component, computed, EventEmitter, Input, input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, computed, input } from '@angular/core';
 import {
 	BrnTabsContentDirective,
 	BrnTabsDirective,
@@ -21,7 +21,7 @@ const tabContent =
 		<div [brnTabs]="_tabValue()" class="block" (tabActivated)="onTabActivated($event)">
 			<div
 				brnTabsList
-				class="border-border text-muted-foreground mb-4 inline-flex h-9 w-full items-center justify-start rounded-none border-b bg-transparent p-0"
+				class="inline-flex items-center justify-start w-full p-0 mb-4 bg-transparent border-b rounded-none border-border text-muted-foreground h-9"
 				[attr.aria-label]="'Tablist showing ' + firstTab + ' and ' + secondTab"
 			>
 				<button class="${tabBtn}" [brnTabsTrigger]="firstTab">{{ firstTab }}</button>

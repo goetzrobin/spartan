@@ -1,7 +1,7 @@
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { cva, VariantProps } from 'class-variance-authority';
-import { ClassValue } from 'clsx';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ClassValue } from 'clsx';
 
 export const cardDescriptionVariants = cva('text-sm text-muted-foreground', {
 	variants: {},

@@ -1,1 +1,1 @@
-export interface BuildUpdatePublishExecutorSchema {}
+export type BuildUpdatePublishExecutorSchema = {};

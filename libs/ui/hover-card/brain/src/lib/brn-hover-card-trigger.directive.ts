@@ -8,34 +8,34 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import {
 	Directive,
 	ElementRef,
-	inject,
 	Input,
 	NgZone,
-	OnDestroy,
-	OnInit,
-	TemplateRef,
+	type OnDestroy,
+	type OnInit,
+	type TemplateRef,
 	ViewContainerRef,
+	inject,
 } from '@angular/core';
 import {
+	type Observable,
+	Subject,
 	delay,
 	distinctUntilChanged,
 	fromEvent,
 	map,
 	merge,
-	Observable,
 	of,
 	share,
-	Subject,
 	switchMap,
 	takeUntil,
 	tap,
 } from 'rxjs';
-import { BrnHoverCardContentDirective } from './brn-hover-card-content.directive';
+import type { BrnHoverCardContentDirective } from './brn-hover-card-content.directive';
 import { BrnHoverCardContentService } from './brn-hover-card-content.service';
 import { createHoverObservable } from './createHoverObservable';
 
 export function isElement(node?: Element | EventTarget | Node | null): node is Element {
-	return !!node && `nodeType` in node && node.nodeType === Node.ELEMENT_NODE;
+	return !!node && 'nodeType' in node && node.nodeType === Node.ELEMENT_NODE;
 }
 
 @Directive({

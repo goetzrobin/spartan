@@ -1,4 +1,4 @@
-import { Page } from 'playwright';
+import type { Page } from 'playwright';
 
 export class NotesPage {
 	constructor(readonly page: Page) {}
@@ -17,7 +17,7 @@ export class NotesPage {
 	}
 
 	async removeNote(index: number) {
-		await this.waitForTrpcResponse(this.page.getByTestId('removeNoteAtIndexBtn' + index).click());
+		await this.waitForTrpcResponse(this.page.getByTestId(`removeNoteAtIndexBtn${index}`).click());
 	}
 
 	async getDeleteErrorCount() {

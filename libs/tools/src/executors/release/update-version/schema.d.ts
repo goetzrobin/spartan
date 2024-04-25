@@ -1,1 +1,1 @@
-export interface ReplaceVersionExecutorSchema {}
+export type ReplaceVersionExecutorSchema = {};

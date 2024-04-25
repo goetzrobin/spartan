@@ -3,8 +3,8 @@
  * team: https://github.com/taiga-family/taiga-ui/blob/main/projects/cdk/observables/zone-free.ts#L22
  * Check them out! Give them a try! Leave a star! Their work is incredible!
  */
-import { NgZone } from '@angular/core';
-import { MonoTypeOperatorFunction, Observable, pipe } from 'rxjs';
+import type { NgZone } from '@angular/core';
+import { type MonoTypeOperatorFunction, Observable, pipe } from 'rxjs';
 
 export function brnZoneFull<T>(zone: NgZone): MonoTypeOperatorFunction<T> {
 	return (source) =>

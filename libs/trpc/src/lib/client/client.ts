@@ -1,7 +1,7 @@
-import { InjectionToken, Provider, signal, TransferState } from '@angular/core';
-import { CreateTRPCClientOptions, httpBatchLink, HttpBatchLinkOptions, HTTPHeaders } from '@trpc/client';
-import { FetchEsque } from '@trpc/client/dist/internals/types';
-import { AnyRouter } from '@trpc/server';
+import { InjectionToken, type Provider, TransferState, signal } from '@angular/core';
+import { type CreateTRPCClientOptions, type HTTPHeaders, type HttpBatchLinkOptions, httpBatchLink } from '@trpc/client';
+import type { FetchEsque } from '@trpc/client/dist/internals/types';
+import type { AnyRouter } from '@trpc/server';
 import 'isomorphic-fetch';
 import { provideTrpcCacheState, provideTrpcCacheStateStatusManager, tRPC_CACHE_STATE } from './cache-state';
 import { transferStateLink } from './links/transfer-state-link';
@@ -32,7 +32,9 @@ function customFetch(input: RequestInfo | URL, init?: RequestInit & { method: 'G
 
 	// dev server trpc for analog & nitro
 	if (typeof window === 'undefined') {
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		const host = process.env['NITRO_HOST'] ?? process.env['ANALOG_HOST'] ?? 'localhost';
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		const port = process.env['NITRO_PORT'] ?? process.env['ANALOG_PORT'] ?? 4205;
 		const base = `http://${host}:${port}`;
 		if (input instanceof Request) {
@@ -65,6 +67,7 @@ export const createTrpcClient = <AppRouter extends AnyRouter>({
 						...(options?.links ?? []),
 						transferStateLink(),
 						httpBatchLink({
+							// eslint-disable-next-line
 							...(batchLinkOptions ?? {}),
 							headers() {
 								return TrpcHeaders();
@@ -91,3 +94,5 @@ export const createTrpcClient = <AppRouter extends AnyRouter>({
 		tRPCHeaders: TrpcHeaders,
 	};
 };
+
+export default createTrpcClient;

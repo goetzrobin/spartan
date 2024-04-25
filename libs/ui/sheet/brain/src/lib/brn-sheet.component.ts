@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, forwardRef, signal } from '@angular/core';
 import { BrnDialogComponent } from '@spartan-ng/ui-dialog-brain';
 
 @Component({

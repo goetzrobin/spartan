@@ -1,4 +1,4 @@
-import { OperationContext, OperationLink, TRPCClientError, TRPCClientRuntime } from '@trpc/client';
+import { type OperationContext, type OperationLink, TRPCClientError, type TRPCClientRuntime } from '@trpc/client';
 import type {
 	AnyMutationProcedure,
 	AnyProcedure,
@@ -13,10 +13,10 @@ import type {
 	inferProcedureInput,
 	inferProcedureOutput,
 } from '@trpc/server';
-import { Observable as TrpcObservable, inferObservableValue, share } from '@trpc/server/observable';
-import { createFlatProxy, createRecursiveProxy, inferTransformedProcedureOutput } from '@trpc/server/shared';
+import { type Observable as TrpcObservable, type inferObservableValue, share } from '@trpc/server/observable';
+import { createFlatProxy, createRecursiveProxy, type inferTransformedProcedureOutput } from '@trpc/server/shared';
 import { Observable as RxJSObservable } from 'rxjs';
-import { CreateTRPCClientOptions, TRPCRequestOptions, TRPCType, createChain } from './shared-internal';
+import { type CreateTRPCClientOptions, type TRPCRequestOptions, type TRPCType, createChain } from './shared-internal';
 
 // Changed to rxjs observable
 type Resolver<TProcedure extends AnyProcedure> = (
@@ -26,7 +26,7 @@ type Resolver<TProcedure extends AnyProcedure> = (
 // Removed subscription and using new type
 type DecorateProcedure<
 	TProcedure extends AnyProcedure,
-	TRouter extends AnyRouter,
+	_TRouter extends AnyRouter,
 > = TProcedure extends AnyQueryProcedure
 	? {
 			query: Resolver<TProcedure>;
@@ -56,12 +56,14 @@ const clientCallTypeMap: Record<keyof DecorateProcedure<any, any>, ProcedureType
 type UntypedClientProperties = 'links' | 'runtime' | 'requestId' | '$request' | 'query' | 'mutation';
 
 // Nothing changed, only using new types
-export type CreateTrpcProxyClient<TRouter extends AnyRouter> =
-	DecoratedProcedureRecord<TRouter['_def']['record'], TRouter> extends infer TProcedureRecord
-		? UntypedClientProperties & keyof TProcedureRecord extends never
-			? TProcedureRecord
-			: IntersectionError<UntypedClientProperties & keyof TProcedureRecord>
-		: never;
+export type CreateTrpcProxyClient<TRouter extends AnyRouter> = DecoratedProcedureRecord<
+	TRouter['_def']['record'],
+	TRouter
+> extends infer TProcedureRecord
+	? UntypedClientProperties & keyof TProcedureRecord extends never
+		? TProcedureRecord
+		: IntersectionError<UntypedClientProperties & keyof TProcedureRecord>
+	: never;
 
 // Nothing changed, only using new types
 function createTRPCRxJSClientProxy<TRouter extends AnyRouter>(client: TRPCClient<TRouter>) {

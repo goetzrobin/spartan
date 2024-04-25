@@ -35,7 +35,7 @@ export const Default: Story = {
 			ratio,
 		},
 		template: `
-      <div class='overflow-hidden rounded-xl drop-shadow max-w-xl'>
+      <div class='max-w-xl overflow-hidden rounded-xl drop-shadow'>
         <div [hlmAspectRatio]='ratio'>
           <img
             alt='Mountain views'

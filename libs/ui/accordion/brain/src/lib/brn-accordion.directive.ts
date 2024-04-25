@@ -1,13 +1,13 @@
 import { FocusKeyManager, FocusMonitor } from '@angular/cdk/a11y';
 import {
-	AfterContentInit,
+	type AfterContentInit,
 	ContentChildren,
 	Directive,
 	ElementRef,
 	Input,
 	NgZone,
-	OnDestroy,
-	QueryList,
+	type OnDestroy,
+	type QueryList,
 	computed,
 	inject,
 	signal,

@@ -1,14 +1,14 @@
-import { CdkListbox, ListboxValueChangeEvent } from '@angular/cdk/listbox';
+import { CdkListbox, type ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-	AfterViewInit,
+	type AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
 	ContentChildren,
 	DestroyRef,
 	ElementRef,
-	QueryList,
+	type QueryList,
 	ViewChild,
 	effect,
 	inject,
@@ -129,14 +129,17 @@ export class BrnSelectContentComponent implements AfterViewInit {
 				this._cdkListbox.multiple = true;
 			}
 
-			this._selectService.possibleOptions().forEach((cdkOption) => {
+			for (const cdkOption of this._selectService.possibleOptions()) {
 				if (selectedOptions.includes(cdkOption)) {
 					cdkOption?.select();
 				} else {
 					cdkOption?.deselect();
 				}
-			});
-			selectedOptions.forEach((cdkOption) => cdkOption?.select());
+			}
+
+			for (const cdkOption of selectedOptions) {
+				cdkOption?.select();
+			}
 		});
 	}
 

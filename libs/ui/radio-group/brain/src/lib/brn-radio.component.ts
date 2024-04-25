@@ -1,22 +1,22 @@
-import { FocusableOption, FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
+import { FocusMonitor, type FocusOrigin, type FocusableOption } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import {
-	AfterViewInit,
-	booleanAttribute,
+	type AfterViewInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	DoCheck,
+	type DoCheck,
 	ElementRef,
 	EventEmitter,
-	inject,
 	Input,
-	numberAttribute,
-	OnDestroy,
-	OnInit,
+	type OnDestroy,
+	type OnInit,
 	Output,
 	ViewChild,
 	ViewEncapsulation,
+	booleanAttribute,
+	inject,
+	numberAttribute,
 } from '@angular/core';
 import { BrnRadioChange } from './brn-radio-change';
 import { BrnRadioGroupComponent } from './brn-radio-group.component';
@@ -83,6 +83,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 	private _disabled = false;
 	@Input({ transform: booleanAttribute })
 	get disabled(): boolean {
+		// biome-ignore lint/complexity/useOptionalChain: <explanation>
 		return this._disabled || (this.radioGroup !== null && this.radioGroup.disabled);
 	}
 	set disabled(value: boolean) {
@@ -101,7 +102,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 		return this.disabled ? -1 : this._tabIndex;
 	}
 	set tabIndex(value: number) {
-		this._tabIndex = value != null ? value : this._defaultTabIndex;
+		this._tabIndex = value !== null ? value : this._defaultTabIndex;
 	}
 
 	private _uniqueId = `brn-radio-${++nextUniqueId}`;
@@ -146,8 +147,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private _value: any = null;
-	@Input({ required: true })
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	@Input({ required: true }) // eslint-disable-next-line @typescript-eslint/no-explicit-any
 	get value(): any {
 		return this._value;
 	}
@@ -171,6 +171,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 	private _required = false;
 	@Input({ transform: booleanAttribute })
 	get required(): boolean {
+		// biome-ignore lint/complexity/useOptionalChain: <explanation>
 		return this._required || (this.radioGroup !== null && this.radioGroup.required);
 	}
 
@@ -320,7 +321,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 			const input: HTMLInputElement | undefined = this._inputElement?.nativeElement;
 
 			if (input) {
-				input.setAttribute('tabindex', value + '');
+				input.setAttribute('tabindex', `${value}`);
 				this._previousTabIndex = value;
 			}
 		}
