@@ -267,12 +267,13 @@ export const defaultSkeleton = `
 <div [brnCtxMenuTriggerFor]="menu">Right click here</div>
 
 <ng-template #menu>
-<hlm-menu class="w-64">
-  <hlm-menu-group>
-    <button inset hlmMenuItem>
-      Save
-      <hlm-menu-shortcut>⌘S</hlm-menu-shortcut>
-    </button>
-  </hlm-menu-group>
-</hlm-menu>
+  <hlm-menu class="w-64">
+    <hlm-menu-group>
+      <button inset hlmMenuItem>
+        Save
+        <hlm-menu-shortcut>⌘S</hlm-menu-shortcut>
+      </button>
+    </hlm-menu-group>
+  </hlm-menu>
+</ng-template>
 `;
