@@ -19,40 +19,14 @@ export const routeMeta: RouteMeta = {
 	},
 	template: `
 		<div hmlcard class="bg-background overflow-hidden shadow-md md:shadow-xl">
-			<div class="md:hidden">
-				<img
-					alt="Authentication example page"
-					loading="lazy"
-					width="1280"
-					height="843"
-					decoding="async"
-					data-nimg="1"
-					class="block text-transparent dark:hidden"
-					src="/assets/auth_example_light_mobile.png"
-				/>
-				<img
-					alt="Authentication example page"
-					loading="lazy"
-					width="1280"
-					height="843"
-					decoding="async"
-					data-nimg="1"
-					class="hidden text-transparent dark:block"
-					src="/assets/auth_example_dark_mobile.png"
-				/>
-			</div>
-			<div
-				class="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
-			>
+			<div class="container relative h-[600px] md:h-[800px] flex flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
 				<a
 					hlmBtn
-					variant="link"
-					class="focus-visible:ring-ring hover:bg-accent absolute right-4 top-4 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium  transition-colors hover:no-underline focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 md:right-8 md:top-8"
-					href="/examples/authentication"
-				>
+					variant="ghost"
+					class="absolute right-4 top-4 md:top-8 md:right-8"
+					href="/examples/authentication">
 					Login
 				</a>
-
 				<div class="bg-muted relative hidden h-full flex-col border-r p-10 text-white lg:flex dark:border-r-zinc-800">
 					<div class="absolute inset-0 bg-zinc-900"></div>
 					<div class="relative z-20 flex items-center text-lg font-medium">
@@ -87,4 +61,4 @@ export const routeMeta: RouteMeta = {
 		</div>
 	`,
 })
-export default class TypographyPageComponent {}
+export default class TypographyPageComponent { }
