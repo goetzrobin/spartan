@@ -5,12 +5,11 @@
 	"type": "module",
 	"engines": {
 		"bun": ">= 1.1.0",
-		"node": "20.x || 21.x",
+		"node": "20.x || 22.x",
 		"npm": "please-use-pnpm",
 		"pnpm": ">=9",
 		"yarn": "please-use-pnpm"
 	},
-	"packageManager": "pnpm@9.0.5",
 	"engineStrict": true,
 	"scripts": {
 		"dev": "nx serve app",
