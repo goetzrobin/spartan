@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, Output, input, model, signal } from '@angular/core';
-import { BrnTabsContentDirective } from './brn-tabs-content.directive';
-import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
+import type { BrnTabsContentDirective } from './brn-tabs-content.directive';
+import type { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
 export type BrnTabsOrientation = 'horizontal' | 'vertical';
 export type BrnTabsDirection = 'ltr' | 'rtl';
@@ -45,9 +45,11 @@ export class BrnTabsDirective {
 	public registerContent(key: string, content: BrnTabsContentDirective) {
 		this._tabs.update((tabs) => ({ ...tabs, [key]: { trigger: tabs[key]?.trigger, content } }));
 	}
+
 	emitTabActivated(key: string) {
 		this.tabActivated.emit(key);
 	}
+	
 	setActiveTab(key: string) {
 		this._activeTab.set(key);
 	}

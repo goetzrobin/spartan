@@ -1,15 +1,15 @@
 import {
-	AfterContentInit,
-	booleanAttribute,
+	type AfterContentInit,
 	ChangeDetectorRef,
 	Component,
 	ContentChildren,
 	EventEmitter,
-	forwardRef,
-	inject,
 	Input,
 	Output,
-	QueryList,
+	type QueryList,
+	booleanAttribute,
+	forwardRef,
+	inject,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BrnRadioChange } from './brn-radio-change';
@@ -67,8 +67,7 @@ export class BrnRadioGroupComponent implements AfterContentInit {
 	 * radio button, this value persists to be applied in case a new radio button is added with a
 	 * matching value.
 	 */
-	@Input()
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	@Input() // eslint-disable-next-line @typescript-eslint/no-explicit-any
 	get value(): any {
 		return this._value;
 	}

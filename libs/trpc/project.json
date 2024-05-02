@@ -3,8 +3,8 @@
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/trpc/src",
 	"prefix": "spartan-ng",
-	"tags": ["trpc"],
 	"projectType": "library",
+	"tags": ["trpc"],
 	"targets": {
 		"build": {
 			"executor": "@angular-devkit/build-angular:ng-packagr",

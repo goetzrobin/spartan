@@ -6,7 +6,7 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuImports } from '@spartan-ng/ui-menu-helm';
-import { AppThemes, Theme, ThemeService } from '../theme.service';
+import { AppThemes, type Theme, ThemeService } from '../theme.service';
 
 @Component({
 	selector: 'spartan-theme-picker',

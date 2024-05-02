@@ -52,6 +52,15 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 33. [jstnjs](https://github.com/jstnjs)
 34. [r3ps4J](https://github.com/r3ps4J)
 35. [Celtian](https://github.com/Celtian)
+36. [miljan-code](https://github.com/miljan-code)
+37. [alexciesielski](https://github.com/alexciesielski)
+38. [ty-ler](https://github.com/ty-ler)
+39. [MatznRisto](https://github.com/MatznRisto)
+40. [badsgahhl](https://github.com/badsgahhl)
+41. [monacodelisa](https://github.com/monacodelisa)
+42. [tomdev9](https://github.com/tomdev9)
+43. [ragul1697](https://github.com/ragul1697)
+44. [snydertechnologies](https://github.com/snydertechnologies)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
@@ -68,7 +77,7 @@ Each primitive is made up off an un-styled `brain` library, which provides all f
 
 There's also a `libs/cli` folder, which contains the Nx-plugin & Angular CLI code that allows users to add spartan/ui to their Nx or Angular workspace in a simple way.
 
-#### Install Dependencies
+### Install Dependencies
 
 Run `pnpm install` to install the dependencies of this project.
 

@@ -1,4 +1,4 @@
-import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
+import type { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
@@ -13,5 +13,6 @@ export const notes = pgTable('note', {
 export type Note = InferSelectModel<typeof notes>;
 export type NewNote = InferInsertModel<typeof notes>;
 
+// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 const client = postgres(process.env['DATABASE_URL'] ?? '');
 export const db = drizzle(client);

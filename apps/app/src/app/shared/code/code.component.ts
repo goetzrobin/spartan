@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, inject, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, booleanAttribute, inject } from '@angular/core';
 import { marked } from 'marked';
 import { gfmHeadingId } from 'marked-gfm-heading-id';
 import { markedHighlight } from 'marked-highlight';
@@ -34,12 +34,12 @@ declare const Prism: typeof import('prismjs');
 			(click)="copyToClipBoard()"
 			hlmBtn
 			variant="ghost"
-			class="absolute right-2 top-2 h-6 w-6 p-1"
+			class="absolute w-6 h-6 p-1 right-2 top-2"
 		>
 			<hlm-icon size="xs" [name]="copied ? 'lucideCheck' : 'lucideClipboard'" />
 		</button>
 		<div class="max-h-[650px] w-full overflow-auto whitespace-nowrap p-4">
-			<div class="max-w-screen max-w-full" [innerHTML]="_content"></div>
+			<div class="max-w-full max-w-screen" [innerHTML]="_content"></div>
 		</div>
 	`,
 	styles: [
@@ -116,10 +116,10 @@ export class CodeComponent {
 		const renderer = new marked.Renderer();
 		renderer.code = (code, lang) => {
 			if (!lang) {
-				return '<pre><code>' + code + '</code></pre>';
+				return `<pre><code>${code}</code></pre>`;
 			}
-			const langClass = 'language-' + lang;
-			return '<pre class="' + langClass + '"><code class="' + langClass + '">' + code + '</code></pre>';
+			const langClass = `language-${lang}`;
+			return `<pre class="${langClass}"><code class="${langClass}">${code}</code></pre>`;
 		};
 
 		marked.use(

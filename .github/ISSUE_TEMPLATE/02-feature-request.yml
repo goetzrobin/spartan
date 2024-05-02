@@ -31,6 +31,7 @@ body:
         - dialog
         - dropdown-menu
         - hover-card
+        - icon
         - input
         - label
         - menubar
@@ -45,6 +46,7 @@ body:
         - sheet
         - skeleton
         - slider
+        - sonner
         - spinner
         - switch
         - table

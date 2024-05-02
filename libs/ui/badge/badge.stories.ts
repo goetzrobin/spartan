@@ -1,4 +1,4 @@
-import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmBadgeDirective } from './helm/src';
 
 const meta: Meta<HlmBadgeDirective> = {

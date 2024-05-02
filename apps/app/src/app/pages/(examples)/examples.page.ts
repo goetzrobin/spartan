@@ -1,10 +1,10 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
+import { NavLinkDirective } from '@spartan-ng/app/app/shared/spartan-nav-link.directive';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { hlmH1, hlmLead } from '@spartan-ng/ui-typography-helm';
-import { metaWith } from '~/app/shared/meta/meta.util';
-import { NavLinkDirective } from '~/app/shared/spartan-nav-link.directive';
 
 export const routeMeta: RouteMeta = {
 	meta: metaWith('Examples - SPARTAN', 'Examples built with the SPARTAN stack and its UI primitives'),
@@ -27,13 +27,13 @@ export const routeMeta: RouteMeta = {
 			<a hlmBtn size="sm" variant="outline" routerLink="/components">Components</a>
 		</div>
 
-		<nav class="mb-2 mt-12">
+		<nav class="mt-12 mb-2">
 			<ul class="flex space-x-2">
 				<li><a class="!font-medium" spartanNavLink="/examples/notes">Notes</a></li>
 				<li><a class="!font-medium" spartanNavLink="/examples/typography">Typography</a></li>
 			</ul>
 		</nav>
-		<div class="border-border overflow-hidden rounded-lg border">
+		<div class="overflow-hidden border rounded-lg border-border">
 			<router-outlet />
 		</div>
 	`,

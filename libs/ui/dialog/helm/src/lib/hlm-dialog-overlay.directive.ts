@@ -1,6 +1,6 @@
-import { computed, Directive, effect, input } from '@angular/core';
+import { Directive, computed, effect, input } from '@angular/core';
 import { hlm, injectCustomClassSettable } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 export const hlmDialogOverlayClass =
 	'bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0';

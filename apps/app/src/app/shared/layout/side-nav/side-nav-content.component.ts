@@ -82,6 +82,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					<spartan-side-nav-cs />
 				</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/hover-card">Hover Card</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/icon">Icon</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/input">Input</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/label">Label</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/menubar">Menubar</a>
@@ -102,6 +103,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					Slider
 					<spartan-side-nav-cs />
 				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/sonner">Sonner</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/spinner">Spinner</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/switch">Switch</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/table">Table</a>

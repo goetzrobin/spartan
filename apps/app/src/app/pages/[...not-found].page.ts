@@ -1,10 +1,10 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
 import { hlmH3, hlmMuted } from '@spartan-ng/ui-typography-helm';
-import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Not Found' },
@@ -22,7 +22,7 @@ export const routeMeta: RouteMeta = {
 	template: `
 		<div class="-mt-[25%] mb-8 flex items-center">
 			<h1 class="${hlmH3}">404</h1>
-			<hr hlmSeparator class="mx-4 h-8" orientation="vertical" />
+			<hr hlmSeparator class="h-8 mx-4" orientation="vertical" />
 			<p class="${hlmMuted}">This page could not be found</p>
 		</div>
 		<a routerLink="/" size="sm" class="text-xs" hlmBtn variant="link">Back home</a>

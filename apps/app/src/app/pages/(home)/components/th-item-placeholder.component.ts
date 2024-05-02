@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SpartanLogoComponent } from '~/app/shared/spartan-logo.component';
+import { SpartanLogoComponent } from '@spartan-ng/app/app/shared/spartan-logo.component';
 
 @Component({
 	selector: 'spartan-th-item-placeholder',

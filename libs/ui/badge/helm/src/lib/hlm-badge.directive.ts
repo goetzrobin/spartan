@@ -1,7 +1,7 @@
-import { booleanAttribute, computed, Directive, Input, input, signal } from '@angular/core';
+import { Directive, Input, booleanAttribute, computed, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { cva, VariantProps } from 'class-variance-authority';
-import { ClassValue } from 'clsx';
+import { type VariantProps, cva } from 'class-variance-authority';
+import type { ClassValue } from 'clsx';
 
 export const badgeVariants = cva(
 	'inline-flex items-center border rounded-full px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',

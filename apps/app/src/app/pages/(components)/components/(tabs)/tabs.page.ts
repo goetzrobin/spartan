@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { HlmAlertDescriptionDirective, HlmAlertDirective } from '@spartan-ng/ui-alert-helm';
 import { hlmCode, hlmH4 } from '@spartan-ng/ui-typography-helm';

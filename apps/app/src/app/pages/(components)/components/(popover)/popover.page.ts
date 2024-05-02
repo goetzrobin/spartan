@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
@@ -11,7 +11,7 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { defaultCode, defaultImports, defaultSkeleton, PopoverPreviewComponent } from './popover.preview';
+import { PopoverPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './popover.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Popover' },

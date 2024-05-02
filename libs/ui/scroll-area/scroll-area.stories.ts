@@ -6,11 +6,11 @@ import { HlmSeparatorDirective } from '../separator/helm/src';
 import { HlmScrollAreaComponent } from './helm/src';
 
 @Component({
-	selector: `scroll-area-stories`,
+	selector: 'scroll-area-stories',
 	standalone: true,
 	imports: [NgFor, HlmSeparatorDirective, HlmScrollAreaComponent],
 	template: `
-		<hlm-scroll-area class="border-border h-72 w-48 rounded-md border">
+		<hlm-scroll-area class="w-48 border border-border h-72 rounded-md">
 			<div class="p-4">
 				<h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
 				<div class="text-sm" *ngFor="let tag of tags">
@@ -81,7 +81,7 @@ export const Vertical: Story = {
 	render: ({ ...args }) => ({
 		props: args,
 		template: `
-        <hlm-scroll-area ${argsToTemplate(args)} class="w-72 rounded-md border border-border">
+        <hlm-scroll-area ${argsToTemplate(args)} class="border w-72 rounded-md border-border">
         <div class='p-6 whitespace-nowrap'>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium architecto,<br>
         asperiores beatae consequuntur dolor ducimus et exercitationem facilis fugiat magni<br>

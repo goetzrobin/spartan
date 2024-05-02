@@ -1,10 +1,10 @@
 import { NgForOf, TitleCasePipe } from '@angular/common';
-import { Component, TrackByFunction, computed, effect, signal } from '@angular/core';
+import { Component, type TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { faker } from '@faker-js/faker';
 import { lucideChevronDown } from '@ng-icons/lucide';
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { debounceTime } from 'rxjs';
 import { HlmButtonDirective, HlmButtonModule } from '../button/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
@@ -13,7 +13,7 @@ import { BrnMenuModule } from '../menu/brain/src';
 import { HlmMenuModule } from '../menu/helm/src';
 import { BrnToggleGroupModule } from '../toggle/brain/src';
 import { HlmToggleGroupModule } from '../toggle/helm/src';
-import { BrnTableModule, PaginatorState, useBrnColumnManager } from './brain/src';
+import { BrnTableModule, type PaginatorState, useBrnColumnManager } from './brain/src';
 import { HlmTableComponent, HlmTableModule } from './helm/src';
 
 const createUsers = (numUsers = 5) => {
@@ -84,13 +84,13 @@ const createUsers = (numUsers = 5) => {
 					{{ element.name }}
 				</hlm-td>
 			</brn-column-def>
-			<brn-column-def name="age" class="w-40 justify-end">
+			<brn-column-def name="age" class="justify-end w-40">
 				<hlm-th *brnHeaderDef>Age</hlm-th>
 				<hlm-td class="tabular-nums" *brnCellDef="let element">
 					{{ element.age }}
 				</hlm-td>
 			</brn-column-def>
-			<brn-column-def name="height" class="w-40 justify-end tabular-nums">
+			<brn-column-def name="height" class="justify-end w-40 tabular-nums">
 				<hlm-th *brnHeaderDef>Height</hlm-th>
 				<hlm-td *brnCellDef="let element">
 					{{ element.height }}
@@ -98,7 +98,7 @@ const createUsers = (numUsers = 5) => {
 			</brn-column-def>
 		</brn-table>
 		<div
-			class="mt-2 flex items-center justify-between"
+			class="flex items-center justify-between mt-2"
 			*brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
 		>
 			<span class="text-sm tabular-nums">
@@ -110,7 +110,7 @@ const createUsers = (numUsers = 5) => {
 					(ngModelChange)="_pageSize.set($event)"
 					hlmInput
 					size="sm"
-					class="mr-1 inline-flex pr-8"
+					class="inline-flex pr-8 mr-1"
 				>
 					<option [value]="size" *ngFor="let size of _availablePageSizes">{{ size === 10000 ? 'All' : size }}</option>
 				</select>
@@ -153,7 +153,7 @@ class TableStory {
 	protected readonly _data = computed(() =>
 		this._filteredUsers().slice(this._startEndIndex().start, this._startEndIndex().end + 1),
 	);
-	protected readonly _trackBy: TrackByFunction<{ name: string }> = (index: number, user: { name: string }) => user.name;
+	protected readonly _trackBy: TrackByFunction<{ name: string }> = (_index: number, user: { name: string }) => user.name;
 	protected readonly _totalElements = computed(() => this._filteredUsers().length);
 	protected readonly _onStateChange = (state: PaginatorState) => {
 		this._startEndIndex.set({ start: state.startIndex, end: state.endIndex });
@@ -209,20 +209,20 @@ class TableStory {
 				</hlm-td>
 			</brn-column-def>
 			<brn-column-def name="age">
-				<hlm-th class="w-40 justify-end" *brnHeaderDef>Age</hlm-th>
-				<hlm-td class="w-40 justify-end tabular-nums" *brnCellDef="let element">
+				<hlm-th class="justify-end w-40" *brnHeaderDef>Age</hlm-th>
+				<hlm-td class="justify-end w-40 tabular-nums" *brnCellDef="let element">
 					{{ element.age }}
 				</hlm-td>
 			</brn-column-def>
 			<brn-column-def name="height">
-				<hlm-th class="w-40 justify-end" *brnHeaderDef>Height</hlm-th>
-				<hlm-td class="w-40 justify-end tabular-nums" *brnCellDef="let element">
+				<hlm-th class="justify-end w-40" *brnHeaderDef>Height</hlm-th>
+				<hlm-td class="justify-end w-40 tabular-nums" *brnCellDef="let element">
 					{{ element.height }}
 				</hlm-td>
 			</brn-column-def>
 		</brn-table>
 		<div
-			class="mt-2 flex items-center justify-between"
+			class="flex items-center justify-between mt-2"
 			*brnPaginator="let ctx; totalElements: _totalElements(); pageSize: _pageSize(); onStateChange: _onStateChange"
 		>
 			<span class="text-sm tabular-nums">
@@ -234,7 +234,7 @@ class TableStory {
 					(ngModelChange)="_pageSize.set($event)"
 					hlmInput
 					size="sm"
-					class="mr-1 inline-flex pr-8"
+					class="inline-flex pr-8 mr-1"
 				>
 					<option [value]="size" *ngFor="let size of _availablePageSizes">{{ size === 10000 ? 'All' : size }}</option>
 				</select>
@@ -272,7 +272,7 @@ class TableToggleStory {
 	protected readonly _data = computed(() =>
 		this._filteredUsers().slice(this._startEndIndex().start, this._startEndIndex().end + 1),
 	);
-	protected readonly _trackBy: TrackByFunction<{ name: string }> = (index: number, user: { name: string }) => user.name;
+	protected readonly _trackBy: TrackByFunction<{ name: string }> = (_index: number, user: { name: string }) => user.name;
 	protected readonly _totalElements = computed(() => this._filteredUsers().length);
 	protected readonly _onStateChange = (state: PaginatorState) => {
 		this._startEndIndex.set({ start: state.startIndex, end: state.endIndex });
@@ -300,13 +300,13 @@ class TableToggleStory {
 		<hlm-table>
 			<hlm-trow>
 				<hlm-th truncate class="w-40">Name</hlm-th>
-				<hlm-th class="w-24 justify-end">Age</hlm-th>
-				<hlm-th class="w-40 justify-center">Height</hlm-th>
+				<hlm-th class="justify-end w-24">Age</hlm-th>
+				<hlm-th class="justify-center w-40">Height</hlm-th>
 			</hlm-trow>
 			<hlm-trow *ngFor="let row of _data()">
 				<hlm-td truncate class="w-40">{{ row.name }}</hlm-td>
-				<hlm-td class="w-24 justify-end">{{ row.age }}</hlm-td>
-				<hlm-td class="w-40 justify-center">{{ row.height }}</hlm-td>
+				<hlm-td class="justify-end w-24">{{ row.age }}</hlm-td>
+				<hlm-td class="justify-center w-40">{{ row.height }}</hlm-td>
 			</hlm-trow>
 		</hlm-table>
 	`,
@@ -334,7 +334,7 @@ export const Default: Story = {
 		moduleMetadata: {
 			imports: [TableStory],
 		},
-		template: `<table-story/>`,
+		template: '<table-story/>',
 	}),
 };
 
@@ -343,12 +343,12 @@ export const PresentationOnly: Story = {
 		moduleMetadata: {
 			imports: [TablePresentationOnlyStory],
 		},
-		template: `<table-presentation-only-story/>`,
+		template: '<table-presentation-only-story/>',
 	}),
 };
 
 export const Toggle: Story = {
 	render: () => ({
-		template: `<table-toggle-story/>`,
+		template: '<table-toggle-story/>',
 	}),
 };

@@ -21,7 +21,7 @@ type Story = StoryObj<HlmCarouselComponent>;
 export const Default: Story = {
 	render: () => ({
 		template: `
-    <div class="flex justify-center items-center w-full p-4">
+    <div class="flex items-center justify-center w-full p-4">
       <hlm-carousel class="w-full max-w-xs">
         <hlm-carousel-content>
         ${Array.from(
@@ -30,7 +30,7 @@ export const Default: Story = {
         <hlm-carousel-item>
           <div class="p-1">
             <section hlmCard>
-              <p hlmCardContent class="flex aspect-square items-center justify-center p-6">
+              <p hlmCardContent class="flex items-center justify-center p-6 aspect-square">
                 <span class="text-4xl font-semibold">${i + 1}</span>
               </p>
             </section>

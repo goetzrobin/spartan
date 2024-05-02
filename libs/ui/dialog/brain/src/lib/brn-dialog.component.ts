@@ -1,22 +1,22 @@
-import { AutoFocusTarget } from '@angular/cdk/dialog';
+import type { AutoFocusTarget } from '@angular/cdk/dialog';
 import {
-	ConnectedPosition,
-	FlexibleConnectedPositionStrategyOrigin,
+	type ConnectedPosition,
+	type FlexibleConnectedPositionStrategyOrigin,
 	OverlayPositionBuilder,
-	PositionStrategy,
-	ScrollStrategy,
+	type PositionStrategy,
+	type ScrollStrategy,
 	ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
 import {
 	ChangeDetectionStrategy,
 	Component,
-	EffectRef,
-	ElementRef,
+	type EffectRef,
+	type ElementRef,
 	EventEmitter,
 	Injector,
 	Input,
 	Output,
-	TemplateRef,
+	type TemplateRef,
 	ViewContainerRef,
 	ViewEncapsulation,
 	booleanAttribute,
@@ -28,9 +28,9 @@ import {
 	signal,
 } from '@angular/core';
 import { take } from 'rxjs';
-import { BrnDialogOptions, DEFAULT_BRN_DIALOG_OPTIONS } from './brn-dialog-options';
-import { BrnDialogRef } from './brn-dialog-ref';
-import { BrnDialogState } from './brn-dialog-state';
+import { type BrnDialogOptions, DEFAULT_BRN_DIALOG_OPTIONS } from './brn-dialog-options';
+import type { BrnDialogRef } from './brn-dialog-ref';
+import type { BrnDialogState } from './brn-dialog-state';
 import { BrnDialogService } from './brn-dialog.service';
 
 @Component({
@@ -75,74 +75,74 @@ export class BrnDialogComponent {
 			this.open();
 		}
 		if (state === 'closed') {
-			this.close(this._options['closeDelay']);
+			this.close(this._options.closeDelay);
 		}
 	}
 
 	@Input()
 	set role(role: 'dialog' | 'alertdialog') {
-		this._options['role'] = role;
+		this._options.role = role;
 	}
 
 	@Input({ transform: booleanAttribute })
 	set hasBackdrop(hasBackdrop: boolean) {
-		this._options['hasBackdrop'] = hasBackdrop;
+		this._options.hasBackdrop = hasBackdrop;
 	}
 
 	@Input()
 	set positionStrategy(positionStrategy: PositionStrategy) {
-		this._options['positionStrategy'] = positionStrategy;
+		this._options.positionStrategy = positionStrategy;
 	}
 
 	@Input()
 	set scrollStrategy(scrollStrategy: ScrollStrategy | 'close' | 'reposition') {
 		if (scrollStrategy === 'close') {
-			this._options['scrollStrategy'] = this.ssos.close();
+			this._options.scrollStrategy = this.ssos.close();
 		} else if (scrollStrategy === 'reposition') {
-			this._options['scrollStrategy'] = this.ssos.reposition();
+			this._options.scrollStrategy = this.ssos.reposition();
 		} else {
-			this._options['scrollStrategy'] = scrollStrategy;
+			this._options.scrollStrategy = scrollStrategy;
 		}
 	}
 
 	@Input()
 	set restoreFocus(restoreFocus: boolean | string | ElementRef) {
-		this._options['restoreFocus'] = restoreFocus;
+		this._options.restoreFocus = restoreFocus;
 	}
 
 	@Input({ transform: booleanAttribute })
 	set closeOnOutsidePointerEvents(closeOnOutsidePointerEvents: boolean) {
-		this._options['closeOnOutsidePointerEvents'] = closeOnOutsidePointerEvents;
+		this._options.closeOnOutsidePointerEvents = closeOnOutsidePointerEvents;
 	}
 
 	@Input({ transform: booleanAttribute })
 	set closeOnBackdropClick(closeOnBackdropClick: boolean) {
-		this._options['closeOnBackdropClick'] = closeOnBackdropClick;
+		this._options.closeOnBackdropClick = closeOnBackdropClick;
 	}
 
 	@Input()
 	set attachTo(attachTo: FlexibleConnectedPositionStrategyOrigin | null | undefined) {
-		this._options['attachTo'] = attachTo;
+		this._options.attachTo = attachTo;
 	}
 
 	@Input()
 	set attachPositions(attachPositions: ConnectedPosition[]) {
-		this._options['attachPositions'] = attachPositions;
+		this._options.attachPositions = attachPositions;
 	}
 
 	@Input()
 	set autoFocus(autoFocus: AutoFocusTarget | string) {
-		this._options['autoFocus'] = autoFocus;
+		this._options.autoFocus = autoFocus;
 	}
 
 	@Input({ transform: numberAttribute })
 	set closeDelay(closeDelay: number) {
-		this._options['closeDelay'] = closeDelay;
+		this._options.closeDelay = closeDelay;
 	}
 
 	@Input({ transform: booleanAttribute })
 	set disableClose(disableClose: boolean) {
-		this._options['disableClose'] = disableClose;
+		this._options.disableClose = disableClose;
 	}
 
 	/* eslint-disable-next-line @angular-eslint/no-input-rename */
@@ -206,12 +206,12 @@ export class BrnDialogComponent {
 	}
 
 	public setOverlayClass(overlayClass: string | null | undefined) {
-		this._options['backdropClass'] = overlayClass ?? '';
+		this._options.backdropClass = overlayClass ?? '';
 		this._dialogRef()?.setOverlayClass(overlayClass);
 	}
 
 	public setPanelClass(panelClass: string | null | undefined) {
-		this._options['panelClass'] = panelClass ?? '';
+		this._options.panelClass = panelClass ?? '';
 		this._dialogRef()?.setPanelClass(panelClass);
 	}
 

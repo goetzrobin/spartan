@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
@@ -43,7 +43,7 @@ export const routeMeta: RouteMeta = {
 
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
-					<spartan-aspect-ratio-preview class="h-full w-full" />
+					<spartan-aspect-ratio-preview class="w-full h-full" />
 				</div>
 				<spartan-code secondTab [code]="defaultCode" />
 			</spartan-tabs>

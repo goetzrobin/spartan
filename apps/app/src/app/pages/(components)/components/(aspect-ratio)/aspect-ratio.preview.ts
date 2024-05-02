@@ -24,7 +24,7 @@ import { HlmAspectRatioDirective } from '@spartan-ng/ui-aspectratio-helm';
   standalone: true,
   imports: [HlmAspectRatioDirective],
   template: \`
-    <div class="overflow-hidden rounded-xl drop-shadow max-w-xl">
+    <div class="max-w-xl overflow-hidden rounded-xl drop-shadow">
       <div [hlmAspectRatio]="16 / 9">
         <img alt="Mountain views" src="/mountains.jpg" />
       </div>
@@ -39,7 +39,7 @@ import { HlmAspectRatioDirective } from '@spartan-ng/ui-aspectratio-helm';
 `;
 
 export const defaultSkeleton = `
-<div class="overflow-hidden rounded-xl drop-shadow max-w-xl">
+<div class="max-w-xl overflow-hidden rounded-xl drop-shadow">
   <div [hlmAspectRatio]="ratio">
     <img alt="Mountain views" src="/mountains.jpg" />
   </div>

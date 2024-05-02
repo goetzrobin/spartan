@@ -1,26 +1,27 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { isPlatformBrowser, NgStyle } from '@angular/common';
+import { NgStyle, isPlatformBrowser } from '@angular/common';
 import {
-	AfterContentInit,
-	booleanAttribute,
+	type AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
-	computed,
-	effect,
 	ElementRef,
 	EventEmitter,
-	forwardRef,
-	inject,
-	input,
-	Input,
-	OnDestroy,
+	type OnDestroy,
 	Output,
 	PLATFORM_ID,
 	Renderer2,
-	signal,
 	ViewChild,
 	ViewEncapsulation,
+	booleanAttribute,
+	computed,
+	effect,
+	forwardRef,
+	inject,
+	input,
+	model,
+	signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
 
@@ -98,30 +99,24 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	private readonly _focused = signal(false);
 	public readonly focused = this._focused.asReadonly();
 
-	private readonly _checked = signal<boolean | 'indeterminate'>(false);
-	public readonly isChecked = this._checked.asReadonly();
+	public readonly checked = model<boolean | 'indeterminate'>(false);
+	public readonly isChecked = this.checked.asReadonly();
 
 	protected readonly _dataState = computed(() => {
-		const checked = this._checked();
+		const checked = this.checked();
 		if (checked === 'indeterminate') return 'indeterminate';
 		return checked ? 'checked' : 'unchecked';
 	});
 	protected readonly _ariaChecked = computed(() => {
-		const checked = this._checked();
+		const checked = this.checked();
 		if (checked === 'indeterminate') return 'mixed';
 		return checked ? 'true' : 'false';
 	});
 	protected readonly _value = computed(() => {
-		const checked = this._checked();
+		const checked = this.checked();
 		if (checked === 'indeterminate') return '';
 		return checked ? 'on' : 'off';
 	});
-
-	// TODO should be changed to new model input when updated to Angular 17.2
-	@Input({ transform: indeterminateBooleanAttribute })
-	set checked(value: boolean | 'indeterminate') {
-		this._checked.set(value);
-	}
 
 	/** Used to set the id on the underlying input element. */
 	public readonly id = input<string | null>(null);
@@ -141,16 +136,9 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	public readonly required = input(false, { transform: booleanAttribute });
 
-	// TODO should be changed to new model input when updated to Angular 17.2
-	protected readonly _disabled = signal(false);
-	@Input({ transform: booleanAttribute })
-	set disabled(value: boolean) {
-		this._disabled.set(value);
-	}
-
-	get disabled() {
-		return this._disabled();
-	}
+	private readonly _disabled = signal(false);
+	/** Only used as input */
+	public readonly disabled = input(false, { transform: booleanAttribute });
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
 	protected _onChange = (_: any) => {};
@@ -164,7 +152,9 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	public readonly changed = new EventEmitter<boolean | 'indeterminate'>();
 
 	constructor() {
-		rxHostPressedListener().subscribe(() => this.handleChange());
+		rxHostPressedListener()
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => this.handleChange());
 		effect(() => {
 			const parent = this._renderer.parentNode(this._elementRef.nativeElement);
 			if (!parent) return;
@@ -179,13 +169,21 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 			if (!label) return;
 			this._renderer.setAttribute(label, 'data-disabled', this._disabled() ? 'true' : 'false');
 		});
+
+		effect(
+			() => {
+				// sync disabled input
+				this._disabled.set(this.disabled());
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	handleChange() {
 		if (this._disabled()) return;
 		if (!this.checkbox) return;
-		const previousChecked = this._checked();
-		this._checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
+		const previousChecked = this.checked();
+		this.checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
 		this._onChange(!previousChecked);
 		this.changed.emit(!previousChecked);
 	}
@@ -212,11 +210,11 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 		if (!this.checkbox) return;
 
-		this.checkbox.nativeElement.indeterminate = this._checked() === 'indeterminate';
+		this.checkbox.nativeElement.indeterminate = this.checked() === 'indeterminate';
 		if (this.checkbox.nativeElement.indeterminate) {
 			this.checkbox.nativeElement.value = 'indeterminate';
 		} else {
-			this.checkbox.nativeElement.value = this._checked() ? 'on' : 'off';
+			this.checkbox.nativeElement.value = this.checked() ? 'on' : 'off';
 		}
 		this.checkbox.nativeElement.dispatchEvent(new Event('change'));
 	}
@@ -228,9 +226,9 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	writeValue(value: any): void {
 		if (value === 'indeterminate') {
-			this.checked = 'indeterminate';
+			this.checked.set('indeterminate');
 		} else {
-			this.checked = !!value;
+			this.checked.set(!!value);
 		}
 	}
 
@@ -246,6 +244,6 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	/** Implemented as a part of ControlValueAccessor. */
 	setDisabledState(isDisabled: boolean): void {
-		this.disabled = isDisabled;
+		this._disabled.set(isDisabled);
 	}
 }

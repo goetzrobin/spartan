@@ -39,6 +39,6 @@ import { HlmAvatarImageDirective, HlmAvatarComponent, HlmAvatarFallbackDirective
 export const defaultSkeleton = `
 <hlm-avatar>
    <img src='/assets/avatar.png' alt='spartan logo. Resembling a spartanic shield' hlmAvatarImage />
-   <span class='bg-destructive text-white' hlmAvatarFallback>RG</span>
+   <span class='text-white bg-destructive' hlmAvatarFallback>RG</span>
 </hlm-avatar>
 `;

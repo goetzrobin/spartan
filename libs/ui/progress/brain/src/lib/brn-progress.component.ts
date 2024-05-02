@@ -1,5 +1,5 @@
-import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
-import { Component, computed, Input, signal } from '@angular/core';
+import { type NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
+import { Component, Input, computed, signal } from '@angular/core';
 
 @Component({
 	selector: 'brn-progress',
@@ -51,7 +51,7 @@ export class BrnProgressComponent {
 	}
 
 	progressState = computed(() => {
-		return this._value() == null || this._value() === undefined
+		return this._value() === null || this._value() === undefined
 			? 'indeterminate'
 			: this._value() === this._max()
 				? 'complete'

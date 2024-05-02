@@ -1,21 +1,20 @@
-import { CdkListbox, ListboxValueChangeEvent } from '@angular/cdk/listbox';
+import { CdkListbox, type ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-	AfterViewInit,
+	type AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
 	ContentChildren,
 	DestroyRef,
 	ElementRef,
-	QueryList,
+	type QueryList,
 	ViewChild,
 	effect,
 	inject,
 	signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { take } from 'rxjs';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectScrollDownDirective } from './brn-select-scroll-down.directive';
 import { BrnSelectScrollUpDirective } from './brn-select-scroll-up.directive';
@@ -92,7 +91,7 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	protected readonly canScrollUp = signal(false);
 	protected readonly canScrollDown = signal(false);
 
-	protected selectedOptions$ = toObservable(this._selectService.selectedOptions);
+	protected initialSelectedOptions$ = toObservable(this._selectService.initialSelectedOptions);
 
 	@ViewChild('viewport')
 	protected viewport!: ElementRef<HTMLElement>;
@@ -123,13 +122,24 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	}
 
 	private setInitiallySelectedOptions() {
-		this.selectedOptions$.pipe(take(1), takeUntilDestroyed(this.destroyRef)).subscribe((selectedOptions) => {
+		this.initialSelectedOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((selectedOptions) => {
 			// Reapplying cdkLibstbox multiple because seems this is running before effect that
 			// updates cdklistbox, reapplying multiple true so we can set the multiple initial options
 			if (this._selectService.multiple()) {
 				this._cdkListbox.multiple = true;
 			}
-			selectedOptions.forEach((cdkOption) => cdkOption?.select());
+
+			for (const cdkOption of this._selectService.possibleOptions()) {
+				if (selectedOptions.includes(cdkOption)) {
+					cdkOption?.select();
+				} else {
+					cdkOption?.deselect();
+				}
+			}
+
+			for (const cdkOption of selectedOptions) {
+				cdkOption?.select();
+			}
 		});
 	}
 

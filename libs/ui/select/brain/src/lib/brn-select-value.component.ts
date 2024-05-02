@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, computed, inject } from '@angular/core';
 import { BrnSelectService } from './brn-select.service';
 
 @Component({

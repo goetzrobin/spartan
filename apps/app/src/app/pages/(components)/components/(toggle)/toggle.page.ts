@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
@@ -13,12 +13,12 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { disabledCode, ToggleDisabledPreviewComponent } from './toggle--disabled.preview';
-import { largeCode, ToggleLargePreviewComponent } from './toggle--large.preview';
-import { outlineCode, ToggleOutlinePreviewComponent } from './toggle--outline.preview';
-import { smallCode, ToggleSmallPreviewComponent } from './toggle--small.preview';
+import { ToggleDisabledPreviewComponent, disabledCode } from './toggle--disabled.preview';
+import { ToggleLargePreviewComponent, largeCode } from './toggle--large.preview';
+import { ToggleOutlinePreviewComponent, outlineCode } from './toggle--outline.preview';
+import { ToggleSmallPreviewComponent, smallCode } from './toggle--small.preview';
 import { ToggleWithTextPreviewComponent, withTextCode } from './toggle--with-text.preview';
-import { defaultCode, defaultImports, defaultSkeleton, TogglePreviewComponent } from './toggle.preview';
+import { TogglePreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './toggle.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Toggle' },

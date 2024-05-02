@@ -1,4 +1,4 @@
-import { computed, Directive, inject, Input, TemplateRef } from '@angular/core';
+import { Directive, Input, TemplateRef, computed, inject } from '@angular/core';
 import { provideExposesStateProviderExisting } from '@spartan-ng/ui-core';
 import { BrnDialogRef } from './brn-dialog-ref';
 import { BrnDialogComponent } from './brn-dialog.component';

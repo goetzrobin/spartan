@@ -1,18 +1,31 @@
 import { CommonModule } from '@angular/common';
+import { Component, ContentChild, type ElementRef, ViewChild, computed, input, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { provideIcons } from '@ng-icons/core';
+import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
-import { BrnSelectComponent, BrnSelectImports } from './brain/src';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
+import type { ClassValue } from 'clsx';
+import { hlm } from '../core/src';
+import { HlmIconComponent } from '../icon/helm/src';
+import { BrnSelectImports, BrnSelectTriggerDirective } from './brain/src';
 import { HlmSelectImports } from './helm/src';
 
-const meta: Meta<BrnSelectComponent> = {
+interface BrnSelectStoryArgs {
+	initialValue: string;
+	disabled: boolean;
+	placeholder: string;
+	multiple: boolean;
+	dir: 'ltr' | 'rtl';
+}
+
+const meta: Meta<BrnSelectStoryArgs> = {
 	title: 'Select',
 	args: {
 		disabled: false,
-		placeholder: 'Select a timezone',
+		placeholder: 'Select an option',
 		multiple: false,
-		initalValue: '',
-		// @ts-ignore
+		initialValue: '',
 		dir: 'ltr',
 	},
 	argTypes: {
@@ -26,13 +39,13 @@ const meta: Meta<BrnSelectComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<BrnSelectComponent>;
+type Story = StoryObj<BrnSelectStoryArgs>;
 
 export const Default: Story = {
 	render: (args) => ({
 		props: { ...args },
 		template: /* HTML */ `
-			<hlm-select class="inline-block" ${argsToTemplate(args)}>
+			<hlm-select class="inline-block" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 				<hlm-select-trigger class="w-56">
 					<hlm-select-value />
 				</hlm-select-trigger>
@@ -57,7 +70,7 @@ export const ReactiveFormControl: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" ${argsToTemplate(args)} formControlName="fruit" placeholder="Select a Fruit">
+				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
@@ -82,8 +95,7 @@ export const ReactiveFormControlWithValidation: Story = {
 		props: {
 			...args,
 			fruitGroup: new FormGroup({
-				// @ts-ignore
-				fruit: new FormControl(args.initalValue || null, { validators: Validators.required }),
+				fruit: new FormControl(args.initialValue || null, { validators: Validators.required }),
 			}),
 		},
 		template: /* HTML */ `
@@ -91,7 +103,7 @@ export const ReactiveFormControlWithValidation: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" ${argsToTemplate(args)} formControlName="fruit" placeholder="Select a Fruit">
+				<brn-select class="w-56" formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
@@ -118,8 +130,7 @@ export const ReactiveFormControlWithValidationWithLabel: Story = {
 		props: {
 			...args,
 			fruitGroup: new FormGroup({
-				// @ts-ignore
-				fruit: new FormControl(args.initalValue || null, { validators: Validators.required }),
+				fruit: new FormControl(args.initialValue || null, { validators: Validators.required }),
 			}),
 		},
 		template: /* HTML */ `
@@ -127,7 +138,7 @@ export const ReactiveFormControlWithValidationWithLabel: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<hlm-select class="w-56" ${argsToTemplate(args)} formControlName="fruit" placeholder="Select a Fruit">
+				<hlm-select class="w-56" formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
@@ -152,13 +163,21 @@ export const ReactiveFormControlWithValidationWithLabel: Story = {
 
 export const NgModelFormControl: Story = {
 	render: (args) => ({
-		props: args,
+		props: {
+			...args,
+			fruit: signal(args.initialValue),
+		},
 		template: /* HTML */ `
-			<form #model="ngForm">
+			<form ngForm>
 				<div class="mb-3">
-					<pre>Form Control Value: {{ model.fruit | json }}</pre>
+					<pre>Form Control Value: {{fruit() | json }}</pre>
 				</div>
-				<hlm-select class="w-56" ${argsToTemplate(args)} [(ngModel)]="model.fruit" name="fruit">
+				<hlm-select
+					class="w-56"
+					${argsToTemplate(args, { exclude: ['initialValue'] })}
+					[(ngModel)]="fruit"
+					name="fruit"
+				>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
@@ -182,7 +201,7 @@ export const SelectWithLabel: Story = {
 		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
 		template: /* HTML */ `
 			<form [formGroup]="fruitGroup">
-				<hlm-select formControlName="fruit" ${argsToTemplate(args)}>
+				<hlm-select formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger class="w-56">
 						<brn-select-value />
@@ -207,7 +226,7 @@ export const Scrollable: Story = {
 		props: { ...args, myform: new FormGroup({ timezone: new FormControl() }) },
 		template: /* HTML */ `
 			<form [formGroup]="myform">
-				<hlm-select formControlName="timezone" ${argsToTemplate(args)}>
+				<hlm-select formControlName="timezone" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 					<hlm-select-trigger class="w-[280px]">
 						<hlm-select-value />
 					</hlm-select-trigger>
@@ -275,7 +294,7 @@ export const ScrollableWithStickyLabels: Story = {
 		props: { ...args, myform: new FormGroup({ timezone: new FormControl() }) },
 		template: /* HTML */ `
 			<form [formGroup]="myform">
-				<hlm-select formControlName="timezone" ${argsToTemplate(args)}>
+				<hlm-select formControlName="timezone" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 					<hlm-select-trigger class="w-[280px]">
 						<hlm-select-value />
 					</hlm-select-trigger>
@@ -337,3 +356,59 @@ export const ScrollableWithStickyLabels: Story = {
 		`,
 	}),
 };
+
+export const CustomTrigger: Story = {
+	render: (args) => ({
+		props: { ...args },
+		moduleMetadata: {
+			imports: [CustomSelectTriggerComponent],
+		},
+		template: /* HTML */ `
+			<hlm-select class="inline-block" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
+				<custom-select-trigger ngProjectAs="[brnSelectTrigger]" class="w-56">
+					<hlm-select-value />
+				</custom-select-trigger>
+				<hlm-select-content>
+					<hlm-select-label>Fruits</hlm-select-label>
+					<hlm-option value="apple">Apple</hlm-option>
+					<hlm-option value="banana">Banana</hlm-option>
+					<hlm-option value="blueberry">Blueberry</hlm-option>
+					<hlm-option value="grapes">Grapes</hlm-option>
+					<hlm-option value="pineapple">Pineapple</hlm-option>
+				</hlm-select-content>
+			</hlm-select>
+		`,
+	}),
+};
+
+@Component({
+	selector: 'custom-select-trigger',
+	standalone: true,
+	imports: [BrnSelectTriggerDirective, HlmIconComponent],
+	providers: [provideIcons({ lucideChevronDown })],
+	template: `
+		<button [class]="_computedClass()" #button brnSelectTrigger type="button">
+			<ng-content />
+			@if (icon) {
+				<ng-content select="hlm-icon" />
+			} @else {
+				<hlm-icon class="flex-none w-4 h-4 ml-2" name="lucideChevronDown" />
+			}
+		</button>
+	`,
+})
+export class CustomSelectTriggerComponent {
+	@ViewChild('button', { static: true })
+	public buttonEl!: ElementRef;
+
+	@ContentChild(HlmIconComponent, { static: false })
+	protected icon!: HlmIconComponent;
+
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() =>
+		hlm(
+			'!bg-sky-500 flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-[180px]',
+			this.userClass(),
+		),
+	);
+}

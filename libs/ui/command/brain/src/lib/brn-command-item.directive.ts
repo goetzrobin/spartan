@@ -1,6 +1,6 @@
 import { Directive, forwardRef } from '@angular/core';
-import { ItemDirective } from '@ngneat/cmdk';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { ItemDirective } from '@ngxpert/cmdk';
 
 @UntilDestroy()
 @Directive({

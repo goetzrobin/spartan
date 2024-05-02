@@ -1,6 +1,6 @@
-import { generateFiles, Tree } from '@nx/devkit';
-import * as path from 'path';
-import { HlmToCliGeneratorGeneratorSchema } from '../schema';
+import * as path from 'node:path';
+import { type Tree, generateFiles } from '@nx/devkit';
+import type { HlmToCliGeneratorGeneratorSchema } from '../schema';
 
 export const copyFilesFromHlmLibToGenerator = (
 	tree: Tree,
@@ -25,7 +25,7 @@ export const recursivelyRenameToTemplate = (tree: Tree, filePath: string) => {
 	tree.children(filePath).forEach((child) => {
 		const childPath = path.join(filePath, child);
 		if (tree.isFile(childPath)) {
-			tree.rename(childPath, childPath + '.template');
+			tree.rename(childPath, `${childPath}.template`);
 		} else {
 			recursivelyRenameToTemplate(tree, childPath);
 		}

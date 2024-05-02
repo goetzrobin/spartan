@@ -4,7 +4,7 @@
  * simply reuse the hard work done by Robert Soriano and friends
  * **/
 
-import type { AnyRouter, inferRouterContext, inferRouterError, ProcedureType } from '@trpc/server';
+import type { AnyRouter, ProcedureType, inferRouterContext, inferRouterError } from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import type { ResponseMeta } from '@trpc/server/http';
 import { resolveHTTPResponse } from '@trpc/server/http';
@@ -51,11 +51,15 @@ export interface ResolveHTTPRequestOptions<TRouter extends AnyRouter> {
 function getPath(event: H3Event): string | null {
 	const { params } = event.context;
 
+	// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 	if (typeof params?.['trpc'] === 'string') {
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		return params['trpc'];
 	}
 
+	// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 	if (params?.['trpc'] && Array.isArray(params['trpc'])) {
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		return (params['trpc'] as string[]).join('/');
 	}
 
@@ -129,3 +133,5 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
 		return body;
 	});
 }
+
+export default createTrpcNitroHandler;

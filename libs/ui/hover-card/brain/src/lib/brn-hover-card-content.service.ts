@@ -1,17 +1,26 @@
 import {
-	ConnectedOverlayPositionChange,
-	ConnectedPosition,
-	FlexibleConnectedPositionStrategy,
+	type ConnectedOverlayPositionChange,
+	type ConnectedPosition,
+	type FlexibleConnectedPositionStrategy,
 	Overlay,
-	OverlayConfig,
+	type OverlayConfig,
 	OverlayPositionBuilder,
-	OverlayRef,
+	type OverlayRef,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { ElementRef, Injectable, NgZone, Signal, TemplateRef, ViewContainerRef, inject, signal } from '@angular/core';
+import {
+	type ElementRef,
+	Injectable,
+	NgZone,
+	type Signal,
+	TemplateRef,
+	type ViewContainerRef,
+	inject,
+	signal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, Observable, Subject, filter, map, of, switchMap } from 'rxjs';
-import { BrnHoverCardContentDirective } from './brn-hover-card-content.directive';
+import { BehaviorSubject, type Observable, Subject, filter, map, of, switchMap } from 'rxjs';
+import type { BrnHoverCardContentDirective } from './brn-hover-card-content.directive';
 import { createHoverObservable } from './createHoverObservable';
 
 export type BrnHoverCardOptions = Partial<
@@ -96,13 +105,13 @@ export class BrnHoverCardContentService {
 
 	public setConfig(config: BrnHoverCardOptions) {
 		this._config = config;
-		if (config['attachTo']) {
+		if (config.attachTo) {
 			this._positionStrategy = this._psBuilder
-				.flexibleConnectedTo(config['attachTo'])
+				.flexibleConnectedTo(config.attachTo)
 				.withPositions(
-					config['attachPositions'] ?? config['align'] === 'top' ? topFirstPositions : bottomFirstPositions,
+					config.attachPositions ?? config.align === 'top' ? topFirstPositions : bottomFirstPositions,
 				)
-				.withDefaultOffsetY(config['sideOffset'] ?? 0);
+				.withDefaultOffsetY(config.sideOffset ?? 0);
 			this._config = {
 				...this._config,
 				positionStrategy: this._positionStrategy,

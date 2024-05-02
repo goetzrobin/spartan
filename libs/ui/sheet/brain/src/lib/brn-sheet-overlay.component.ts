@@ -6,7 +6,7 @@ import { BrnDialogOverlayComponent } from '@spartan-ng/ui-dialog-brain';
 	selector: 'brn-sheet-overlay',
 	standalone: true,
 	providers: [provideCustomClassSettableExisting(() => BrnSheetOverlayComponent)],
-	template: ``,
+	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })

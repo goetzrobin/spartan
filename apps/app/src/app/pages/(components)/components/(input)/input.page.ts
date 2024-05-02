@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
@@ -12,11 +12,11 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { buttonCode, InputButtonPreviewComponent } from './input--button.preview';
-import { disabledCode, InputDisabledPreviewComponent } from './input--disabled.preview';
-import { fileCode, InputFilePreviewComponent } from './input--file.preview';
+import { InputButtonPreviewComponent, buttonCode } from './input--button.preview';
+import { InputDisabledPreviewComponent, disabledCode } from './input--disabled.preview';
+import { InputFilePreviewComponent, fileCode } from './input--file.preview';
 import { InputLabelPreviewComponent, labelCode } from './input--label.preview';
-import { defaultCode, defaultImports, defaultSkeleton, InputPreviewComponent } from './input.preview';
+import { InputPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './input.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Input' },
@@ -112,7 +112,7 @@ export const routeMeta: RouteMeta = {
 
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="label" label="Label" />
-				<spartan-page-bottom-nav-link direction="previous" href="hover-card" label="Hover Card" />
+				<spartan-page-bottom-nav-link direction="previous" href="icon" label="Icon" />
 			</spartan-page-bottom-nav>
 		</section>
 		<spartan-page-nav />

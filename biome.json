@@ -1,0 +1,57 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"vcs": {
+		"clientKind": "git",
+		"enabled": true,
+		"useIgnoreFile": true,
+		"defaultBranch": "main"
+	},
+	"formatter": {
+		"enabled": true,
+		"include": [".github"],
+		"ignore": [
+			"apps/**/*.min.js",
+			"apps/**/*.min.css",
+			"apps/**/*-lock.yaml",
+			"**/*.lock.json",
+			"libs/**/*.min.js",
+			"libs/**/*.min.css",
+			"libs/**/*-lock.yaml"
+		],
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineEnding": "lf"
+	},
+	"javascript": {
+		"formatter": {
+			"enabled": true,
+			"lineWidth": 120,
+			"quoteStyle": "single",
+			"semicolons": "always",
+			"trailingComma": "all"
+		}
+	},
+	"json": {
+		"formatter": {
+			"enabled": true,
+			"lineWidth": 120
+		},
+		"parser": {
+			"allowComments": true
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"correctness": {
+				"noUnusedImports": "error",
+				"noUnusedVariables": "error",
+				"useExhaustiveDependencies": "warn"
+			},
+			"recommended": true
+		}
+	},
+	"organizeImports": {
+		"enabled": true
+	}
+}

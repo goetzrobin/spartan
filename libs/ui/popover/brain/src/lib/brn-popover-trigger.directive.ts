@@ -1,6 +1,6 @@
-import { Directive, ElementRef, inject, Input } from '@angular/core';
+import { Directive, ElementRef, Input, inject } from '@angular/core';
 import { BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
-import { BrnPopoverComponent } from './brn-popover.component';
+import type { BrnPopoverComponent } from './brn-popover.component';
 
 @Directive({
 	selector: 'button[brnPopoverTrigger],button[brnPopoverTriggerFor]',

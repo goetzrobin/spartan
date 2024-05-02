@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CmdkService, CommandComponent } from '@ngneat/cmdk';
+import { CmdkService, CommandComponent } from '@ngxpert/cmdk';
 
 @Component({
 	selector: 'brn-cmd',

@@ -1,4 +1,4 @@
-import { computed, Directive, effect, ElementRef, inject, input, Input } from '@angular/core';
+import { Directive, ElementRef, Input, computed, effect, inject, input } from '@angular/core';
 import { BrnTabsDirective } from './brn-tabs.directive';
 
 @Directive({
@@ -27,8 +27,8 @@ export class BrnTabsTriggerDirective {
 
 	public readonly triggerFor = input.required<string>({ alias: 'brnTabsTrigger' });
 	public readonly selected = computed(() => this._root.$activeTab() === this.triggerFor());
-	protected readonly contentId = computed(() => 'brn-tabs-content-' + this.triggerFor());
-	protected readonly labelId = computed(() => 'brn-tabs-label-' + this.triggerFor());
+	protected readonly contentId = computed(() => `brn-tabs-content-${this.triggerFor()}`);
+	protected readonly labelId = computed(() => `brn-tabs-label-${this.triggerFor()}`);
 
 	// leaving this as an @input to be compatible with the `FocusKeyManager` used in the `BrnTabsListDirective`
 	@Input()

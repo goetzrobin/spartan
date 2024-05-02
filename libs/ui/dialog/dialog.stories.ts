@@ -1,7 +1,7 @@
 import { Component, HostBinding, inject } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCheck } from '@ng-icons/lucide';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
@@ -50,14 +50,14 @@ export const Default: Story = {
             Make changes to your profile here. Click save when you're done.
           </p>
         </hlm-dialog-header>
-        <div class='grid gap-4 py-4'>
-          <div class='grid grid-cols-4 items-center gap-4'>
+        <div class='py-4 grid gap-4'>
+          <div class='items-center grid grid-cols-4 gap-4'>
             <label hlmLabel for='name' class='text-right'>
               Name
             </label>
             <input hlmInput id='name' value='Pedro Duarte' class='col-span-3' />
           </div>
-          <div class='grid grid-cols-4 items-center gap-4'>
+          <div class='items-center grid grid-cols-4 gap-4'>
             <label hlmLabel for='username' class='text-right'>
               Username
             </label>
@@ -120,7 +120,7 @@ export const NestedDialog: Story = {
 		}),
 	],
 	render: () => ({
-		template: `<nested-dialog-story />`,
+		template: '<nested-dialog-story />',
 	}),
 };
 
@@ -210,7 +210,7 @@ class DialogDynamicComponentStory {
 			@for (user of users; track user.name) {
 				<button class="text-left" (click)="selectUser(user)">
 					<hlm-trow>
-						<hlm-td truncate class="w-44 font-medium">{{ user.name }}</hlm-td>
+						<hlm-td truncate class="font-medium w-44">{{ user.name }}</hlm-td>
 						<hlm-td class="w-60">{{ user.email }}</hlm-td>
 						<hlm-td class="w-48">{{ user.phone }}</hlm-td>
 					</hlm-trow>
@@ -242,7 +242,7 @@ export const DynamicComponent: Story = {
 		}),
 	],
 	render: () => ({
-		template: `<dialog-dynamic-component-story />`,
+		template: '<dialog-dynamic-component-story />',
 	}),
 };
 
@@ -324,6 +324,6 @@ export const NestedDynamicComponent: Story = {
 		}),
 	],
 	render: () => ({
-		template: `<nested-dialog-dynamic-content-story />`,
+		template: '<nested-dialog-dynamic-content-story />',
 	}),
 };

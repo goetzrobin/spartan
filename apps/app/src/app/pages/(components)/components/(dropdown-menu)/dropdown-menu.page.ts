@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
@@ -12,8 +12,8 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { defaultCode, defaultImports, defaultSkeleton, DropdownPreviewComponent } from './dropdown-menu.preview';
-import { dropdownWithStateCode, DropdownWithStatePreviewComponent } from './dropdown-with-state.preview';
+import { DropdownPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './dropdown-menu.preview';
+import { DropdownWithStatePreviewComponent, dropdownWithStateCode } from './dropdown-with-state.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Dropdown' },

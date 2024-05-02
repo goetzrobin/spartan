@@ -1,13 +1,13 @@
 import { CdkListbox, CdkListboxModule } from '@angular/cdk/listbox';
 import {
 	CdkConnectedOverlay,
-	ConnectedOverlayPositionChange,
-	ConnectedPosition,
+	type ConnectedOverlayPositionChange,
+	type ConnectedPosition,
 	OverlayModule,
 } from '@angular/cdk/overlay';
 import { JsonPipe } from '@angular/common';
 import {
-	AfterContentInit,
+	type AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
@@ -15,8 +15,8 @@ import {
 	EventEmitter,
 	Input,
 	Output,
-	QueryList,
-	Signal,
+	type QueryList,
+	type Signal,
 	ViewChild,
 	computed,
 	inject,
@@ -24,10 +24,10 @@ import {
 	signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { type ControlValueAccessor, NgControl } from '@angular/forms';
 import {
-	ExposesSide,
-	ExposesState,
+	type ExposesSide,
+	type ExposesState,
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
@@ -85,21 +85,18 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	public readonly triggerWidth = this._selectService.triggerWidth;
 
-	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'multiple' })
 	set multiple(multiple: boolean) {
 		this._selectService.state.update((state) => ({ ...state, multiple }));
 	}
 	protected readonly _multiple = this._selectService.multiple;
 
-	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'placeholder' })
 	set placeholder(placeholder: string) {
 		this._selectService.state.update((state) => ({ ...state, placeholder }));
 	}
 	protected readonly _placeholder = this._selectService.placeholder;
 
-	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'disabled' })
 	set disabled(disabled: boolean) {
 		this._selectService.state.update((state) => ({ ...state, disabled }));
@@ -196,7 +193,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			...state,
 			id: `brn-select-${nextId++}`,
 		}));
-		if (this.ngControl != null) {
+		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
 		}
 
@@ -281,17 +278,14 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		setTimeout(() => this.selectContent.focusList());
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public writeValue(value: any): void {
-		this._selectService.selectOptionByValue(value);
+		this._selectService.setInitialSelectedOptions(value);
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public registerOnChange(fn: any): void {
 		this._onChange = fn;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public registerOnTouched(fn: any): void {
 		this._onTouched = fn;
 	}

@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
 			environment: 'node',
 			include: ['**/*.spec.ts'],
 			cache: {
-				dir: `../../node_modules/.vitest`,
+				dir: '../../node_modules/.vitest',
 			},
 		},
 		define: {

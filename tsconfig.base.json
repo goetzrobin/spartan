@@ -4,6 +4,7 @@
 		"rootDir": ".",
 		"sourceMap": true,
 		"declaration": false,
+		"allowSyntheticDefaultImports": true,
 		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
@@ -15,6 +16,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@spartan-ng/app/*": ["apps/app/src/*"],
 			"@spartan-ng/cli": ["libs/cli/src/index.ts"],
 			"@spartan-ng/tools": ["libs/tools/src/index.ts"],
 			"@spartan-ng/trpc": ["libs/trpc/src/index.ts"],
@@ -62,6 +64,7 @@
 			"@spartan-ng/ui-sheet-brain": ["libs/ui/sheet/brain/src/index.ts"],
 			"@spartan-ng/ui-sheet-helm": ["libs/ui/sheet/helm/src/index.ts"],
 			"@spartan-ng/ui-skeleton-helm": ["libs/ui/skeleton/helm/src/index.ts"],
+			"@spartan-ng/ui-sonner-helm": ["libs/ui/sonner/helm/src/index.ts"],
 			"@spartan-ng/ui-spinner-helm": ["libs/ui/spinner/helm/src/index.ts"],
 			"@spartan-ng/ui-storybook": ["libs/ui/storybook/src/index.ts"],
 			"@spartan-ng/ui-switch-brain": ["libs/ui/switch/brain/src/index.ts"],
@@ -74,8 +77,7 @@
 			"@spartan-ng/ui-toggle-helm": ["libs/ui/toggle/helm/src/index.ts"],
 			"@spartan-ng/ui-tooltip-brain": ["libs/ui/tooltip/brain/src/index.ts"],
 			"@spartan-ng/ui-tooltip-helm": ["libs/ui/tooltip/helm/src/index.ts"],
-			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"],
-			"~/*": ["apps/app/src/*"]
+			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

@@ -1,4 +1,4 @@
-import { Directive, inject, Input } from '@angular/core';
+import { Directive, Input, inject } from '@angular/core';
 import { BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
 import { BrnSheetComponent } from './brn-sheet.component';
 

@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideAlertTriangle } from '@ng-icons/lucide';
@@ -22,6 +22,7 @@ import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { DialogContextMenuPreviewComponent, contextMenuCode } from './dialog-context-menu.preview';
+import { DialogDeclarativePreviewComponent, declarativeCode } from './dialog-declarative.preview';
 import { DialogDynamicComponentPreviewComponent, dynamicComponentCode } from './dialog-dynamic-component.preview';
 import { DialogPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './dialog.preview';
 
@@ -56,6 +57,7 @@ export const routeMeta: RouteMeta = {
 		HlmIconComponent,
 		HlmAlertIconDirective,
 		HlmAlertTitleDirective,
+		DialogDeclarativePreviewComponent,
 	],
 	providers: [provideIcons({ lucideAlertTriangle })],
 	template: `
@@ -84,6 +86,25 @@ export const routeMeta: RouteMeta = {
 				<spartan-code [code]="defaultImports" />
 				<spartan-code [code]="defaultSkeleton" />
 			</div>
+
+			<spartan-section-sub-heading id="dynamic-component">Declarative Usage</spartan-section-sub-heading>
+			<p class="${hlmP} mb-6">
+				Spartan's dialog supports declarative usage. Simply set it's state
+				<code class="${hlmCode}">input</code>
+				to
+				<code class="${hlmCode}">open</code>
+				or
+				<code class="${hlmCode}">closed</code>
+				and let spartan handle the rest. This allows you to leverage the power of declarative code, like listening to
+				changes in an input field, debouncing the value, and opening the dialog only if the user's enters the correct
+				passphrase.
+			</p>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-dialog-declarative-preview />
+				</div>
+				<spartan-code secondTab [code]="declarativeCode" />
+			</spartan-tabs>
 
 			<spartan-section-sub-heading id="inside-menu">Inside Menu</spartan-section-sub-heading>
 			<p class="${hlmP} mb-6">
@@ -146,4 +167,5 @@ export default class DialogPageComponent {
 	protected readonly defaultImports = defaultImports;
 	protected readonly contextMenuCode = contextMenuCode;
 	protected readonly dynamicComponentCode = dynamicComponentCode;
+	protected readonly declarativeCode = declarativeCode;
 }
