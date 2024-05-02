@@ -298,7 +298,7 @@ export abstract class BrnTabsPaginatedListDirective
 
 	ngAfterContentChecked(): void {
 		// If the number of tab labels have changed, check if scrolling should be enabled
-		if (this._tabLabelCount != this._items.length) {
+		if (this._tabLabelCount !== this._items.length) {
 			this.updatePagination();
 			this._tabLabelCount = this._items.length;
 			this._changeDetectorRef.markForCheck();
@@ -427,7 +427,7 @@ export abstract class BrnTabsPaginatedListDirective
 			const containerEl = this._tabListContainer.nativeElement;
 			const dir = this._getLayoutDirection();
 
-			if (dir == 'ltr') {
+			if (dir === 'ltr') {
 				containerEl.scrollLeft = 0;
 			} else {
 				containerEl.scrollLeft = containerEl.scrollWidth - containerEl.offsetWidth;
@@ -486,7 +486,7 @@ export abstract class BrnTabsPaginatedListDirective
 		const viewLength = this._tabListContainer.nativeElement.offsetWidth;
 
 		// Move the scroll distance one-third the length of the tab list's viewport.
-		const scrollAmount = ((direction == 'before' ? -1 : 1) * viewLength) / 3;
+		const scrollAmount = ((direction === 'before' ? -1 : 1) * viewLength) / 3;
 
 		return this._scrollTo(this._scrollDistance + scrollAmount);
 	}
@@ -519,7 +519,7 @@ export abstract class BrnTabsPaginatedListDirective
 		const { offsetLeft, offsetWidth } = selectedLabel.elementRef.nativeElement;
 
 		let labelBeforePos: number, labelAfterPos: number;
-		if (this._getLayoutDirection() == 'ltr') {
+		if (this._getLayoutDirection() === 'ltr') {
 			labelBeforePos = offsetLeft;
 			labelAfterPos = labelBeforePos + offsetWidth;
 		} else {
@@ -579,8 +579,8 @@ export abstract class BrnTabsPaginatedListDirective
 			this._disableScrollAfter = this._disableScrollBefore = true;
 		} else {
 			// Check if the pagination arrows should be activated.
-			this._disableScrollBefore = this.scrollDistance == 0;
-			this._disableScrollAfter = this.scrollDistance == this._getMaxScrollDistance();
+			this._disableScrollBefore = this.scrollDistance === 0;
+			this._disableScrollAfter = this.scrollDistance === this._getMaxScrollDistance();
 			this._changeDetectorRef.markForCheck();
 		}
 	}
@@ -611,7 +611,7 @@ export abstract class BrnTabsPaginatedListDirective
 	_handlePaginatorPress(direction: ScrollDirection, mouseEvent?: MouseEvent) {
 		// Don't start auto scrolling for right mouse button clicks. Note that we shouldn't have to
 		// null check the `button`, but we do it so we don't break tests that use fake events.
-		if (mouseEvent && mouseEvent.button != null && mouseEvent.button !== 0) {
+		if (mouseEvent && mouseEvent.button !== null && mouseEvent.button !== 0) {
 			return;
 		}
 
