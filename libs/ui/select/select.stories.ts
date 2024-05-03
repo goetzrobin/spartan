@@ -90,6 +90,46 @@ export const ReactiveFormControl: Story = {
 	}),
 };
 
+export const ReactiveFormControlWithForAndInitialValue: Story = {
+	render: (args) => ({
+		props: {
+			...args,
+			fruitGroup: new FormGroup({
+				fruit: new FormControl(args.initialValue || null, { validators: Validators.required }),
+			}),
+			options: [
+				{ value: 'apple', label: 'Apple' },
+				{ value: 'banana', label: 'Banana' },
+				{ value: 'blueberry', label: 'Blueberry' },
+				{ value: 'grapes', label: 'Grapes' },
+				{ value: 'pineapple', label: 'Pineapple' },
+			],
+		},
+		template: /* HTML */ `
+			<div class="mb-3">
+				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
+			</div>
+			<form [formGroup]="fruitGroup">
+				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
+					<hlm-select-trigger>
+						<brn-select-value hlm />
+					</hlm-select-trigger>
+					<hlm-select-content>
+						<hlm-select-label>Fruits</hlm-select-label>
+						@for(option of options; track option.value){
+							<hlm-option [value]="option.value">{{option.label}}</hlm-option>
+						}
+						<hlm-option>Clear</hlm-option>
+					</hlm-select-content>
+				</brn-select>
+					@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
+				<span class="text-destructive">Required</span>
+				}
+			</form>
+		`,
+	}),
+};
+
 export const ReactiveFormControlWithValidation: Story = {
 	render: (args) => ({
 		props: {
@@ -201,7 +241,7 @@ export const SelectWithLabel: Story = {
 		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
 		template: /* HTML */ `
 			<form [formGroup]="fruitGroup">
-				<hlm-select formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
+				<hlm-select formControlName="fruit" $argsToTemplate(args, { exclude: ['initialValue'] })>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger class="w-56">
 						<brn-select-value />

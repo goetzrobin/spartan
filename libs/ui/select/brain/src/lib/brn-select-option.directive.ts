@@ -49,6 +49,7 @@ export class BrnSelectOptionDirective implements FocusableOption, OnDestroy {
 	@Input()
 	set value(value: unknown | null) {
 		this._cdkSelectOption.value = value;
+		this._selectService.possibleOptionsValueChanged();
 	}
 
 	@Input()

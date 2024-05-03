@@ -119,8 +119,13 @@ export class BrnSelectService {
 		this.selectOptionByValue(value);
 		this.state.update((state) => ({
 			...state,
+			value: value as string | string[],
 			initialSelectedOptions: this.selectedOptions(),
 		}));
+	}
+
+	public possibleOptionsValueChanged() {
+		this.selectOptionByValue(this.value());
 	}
 
 	private selectOptionByValue(value: unknown) {
