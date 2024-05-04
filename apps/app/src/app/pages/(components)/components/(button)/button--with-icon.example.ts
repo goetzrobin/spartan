@@ -3,12 +3,11 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideMail } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 
 @Component({
 	selector: 'spartan-button-with-icon',
 	standalone: true,
-	imports: [HlmButtonDirective, HlmSpinnerComponent, HlmIconComponent],
+	imports: [HlmButtonDirective, HlmIconComponent],
 	providers: [provideIcons({ lucideMail })],
 	template: `
 		<button hlmBtn>
@@ -22,7 +21,6 @@ export class ButtonWithIconComponent {}
 export const withIconCode = `
 import { Component } from '@angular/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { lucideMail } from '@ng-icons/lucide';
@@ -30,7 +28,7 @@ import { lucideMail } from '@ng-icons/lucide';
 @Component({
   selector: 'spartan-button-with-icon',
   standalone: true,
-  imports: [HlmButtonDirective, HlmSpinnerComponent, HlmIconComponent],
+  imports: [HlmButtonDirective, HlmIconComponent],
   providers: [provideIcons({ lucideMail })],
   template: \`
     <button hlmBtn>
