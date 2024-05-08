@@ -373,7 +373,7 @@ export const defaultSkeleton = `
 <button [brnMenuTriggerFor]="menu">Open</button>
 
 <ng-template #menu>
-  <hlm-menu-group>
+  <hlm-menu>
     <hlm-menu-label>My Account</hlm-menu-label>
     <hlm-menu-separator />
     <hlm-menu-group>
@@ -389,6 +389,6 @@ export const defaultSkeleton = `
         <hlm-menu-item-sub-indicator />
       </button>
     </hlm-menu-group>
-  </hlm-menu-group>
+  </hlm-menu>
 </ng-template>
 `;
