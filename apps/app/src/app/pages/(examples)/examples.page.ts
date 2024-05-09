@@ -30,6 +30,7 @@ export const routeMeta: RouteMeta = {
 		<nav class="mt-12 mb-2">
 			<ul class="flex space-x-2">
 				<li><a class="!font-medium" spartanNavLink="/examples/notes">Notes</a></li>
+				<li><a class="!font-medium" spartanNavLink="/examples/tabs">Tabs</a></li>
 				<li><a class="!font-medium" spartanNavLink="/examples/typography">Typography</a></li>
 			</ul>
 		</nav>
