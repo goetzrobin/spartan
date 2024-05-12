@@ -2,8 +2,9 @@ import { Validators } from '@angular/forms';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { SelectSingleValueTestComponent, SelectSingleValueWithInitialValueTestComponent } from './select-reactive-form';
+import { getFormControlStatus, getFormValidationClasses } from './utils';
 
-describe('Brn Select Component in multi-mode', () => {
+describe('Brn Select Component in single-mode', () => {
 	const DEFAULT_LABEL = 'Select a Fruit';
 	const INITIAL_VALUE_TEXT = 'Apple';
 	const INITIAL_VALUE = 'apple';
@@ -28,20 +29,22 @@ describe('Brn Select Component in multi-mode', () => {
 		};
 	};
 
-	const validateFormControlStatus = (el: HTMLElement, statuses: string[]) => {
-		statuses.forEach((status) => {
-			// Tested this way so test error reveals which class is missing
-			const statusExist = el.classList.contains(status) ? status : '';
-			expect(statusExist).toBe(status);
-		});
-	};
-
 	describe('form validation - single mode', () => {
 		it('should reflect correct formcontrol status and value with no initial value', async () => {
 			const { fixture, trigger, value } = await setupWithFormValidation();
 			const cmpInstance = fixture.componentInstance as SelectSingleValueTestComponent;
 
-			validateFormControlStatus(trigger, ['ng-untouched', 'ng-valid', 'ng-pristine']);
+			const expected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(expected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
 
 			expect(value.textContent?.trim()).toBe(DEFAULT_LABEL);
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual(null);
@@ -51,7 +54,17 @@ describe('Brn Select Component in multi-mode', () => {
 			const { fixture, trigger, value } = await setupWithFormValidationAndInitialValue();
 			const cmpInstance = fixture.componentInstance;
 
-			validateFormControlStatus(trigger, ['ng-untouched', 'ng-valid', 'ng-pristine']);
+			const expected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(expected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
 
 			expect(value.textContent?.trim()).toBe(INITIAL_VALUE_TEXT);
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual(INITIAL_VALUE);
@@ -63,17 +76,50 @@ describe('Brn Select Component in multi-mode', () => {
 
 			expect(value.textContent?.trim()).toBe(DEFAULT_LABEL);
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual(null);
-			validateFormControlStatus(trigger, ['ng-untouched', 'ng-valid', 'ng-pristine']);
+
+			const expected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(expected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
 
 			// Open Select
 			await user.click(trigger);
-			validateFormControlStatus(trigger, ['ng-untouched', 'ng-valid', 'ng-pristine']);
+
+			const afterOpenExpected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterOpenExpected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(afterOpenExpected);
 
 			// Select option
 			const options = await screen.getAllByRole('option');
 			await user.click(options[1]);
 
-			validateFormControlStatus(trigger, ['ng-touched', 'ng-valid', 'ng-dirty']);
+			const afterSelectionExpected = {
+				untouched: false,
+				touched: true,
+				valid: true,
+				invalid: false,
+				pristine: false,
+				dirty: true,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterSelectionExpected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(afterSelectionExpected);
+
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual('banana');
 		});
 
@@ -83,17 +129,50 @@ describe('Brn Select Component in multi-mode', () => {
 
 			expect(value.textContent?.trim()).toBe(INITIAL_VALUE_TEXT);
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual(INITIAL_VALUE);
-			validateFormControlStatus(trigger, ['ng-untouched', 'ng-valid', 'ng-pristine']);
+
+			const expected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(expected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
 
 			// Open Select
 			await user.click(trigger);
-			validateFormControlStatus(trigger, ['ng-untouched', 'ng-valid', 'ng-pristine']);
+
+			const afterOpenExpected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterOpenExpected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(afterOpenExpected);
 
 			// Select option
 			const options = await screen.getAllByRole('option');
 			await user.click(options[1]);
 
-			validateFormControlStatus(trigger, ['ng-touched', 'ng-valid', 'ng-dirty']);
+			const afterSelectionExpected = {
+				untouched: false,
+				touched: true,
+				valid: true,
+				invalid: false,
+				pristine: false,
+				dirty: true,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterSelectionExpected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(afterSelectionExpected);
+
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual('banana');
 		});
 	});
@@ -107,8 +186,17 @@ describe('Brn Select Component in multi-mode', () => {
 			cmpInstance.form?.get('fruit')?.updateValueAndValidity();
 			fixture.detectChanges();
 
-			// Need to fix Sammy
-			validateFormControlStatus(trigger, ['ng-untouched', 'ng-invalid', 'ng-pristine']);
+			const expected = {
+				untouched: true,
+				touched: false,
+				valid: false,
+				invalid: true,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(expected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
 
 			expect(value.textContent?.trim()).toBe(DEFAULT_LABEL);
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual(null);
@@ -118,7 +206,17 @@ describe('Brn Select Component in multi-mode', () => {
 			const { fixture, trigger, value } = await setupWithFormValidationAndInitialValue();
 			const cmpInstance = fixture.componentInstance as SelectSingleValueTestComponent;
 
-			validateFormControlStatus(trigger, ['ng-untouched', 'ng-valid', 'ng-pristine']);
+			const expected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(expected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
 
 			expect(value.textContent?.trim()).toBe(INITIAL_VALUE_TEXT);
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual(INITIAL_VALUE);
