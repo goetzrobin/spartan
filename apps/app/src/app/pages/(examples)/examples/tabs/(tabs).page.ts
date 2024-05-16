@@ -18,9 +18,9 @@ export const routeMeta: RouteMeta = {
 		class: 'block p-2 sm:p-4 pb-16 grid grid-cols-2 grid-rows-1 gap-y-5',
 	},
 	template: `
-		<spartan-tabs-example-preview />
+		<spartan-tabs-default-example-preview />
         <spartan-tabs-example-vertical />
         <spartan-tabs-example-paginated />
 	`,
 })
-export default class TabsPageComponent {}
+export default class TabsWrapperExamplePageComponent {}

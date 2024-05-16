@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
@@ -11,12 +12,15 @@ import {
 } from '@spartan-ng/ui-card-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
+import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/ui-radiogroup-brain';
+import { HlmRadioDirective, HlmRadioGroupDirective, HlmRadioIndicatorComponent } from '@spartan-ng/ui-radiogroup-helm';
 import {
 	HlmTabsComponent,
 	HlmTabsContentDirective,
 	HlmTabsListComponent,
 	HlmTabsTriggerDirective,
 } from '@spartan-ng/ui-tabs-helm';
+import { HlmSmallDirective } from '@spartan-ng/ui-typography-helm';
 
 @Component({
 	selector: 'spartan-tabs-example-vertical',
@@ -38,65 +42,101 @@ import {
 		HlmInputDirective,
 		HlmButtonDirective,
 		HlmBadgeDirective,
+
+		FormsModule,
+		BrnRadioGroupComponent,
+		BrnRadioComponent,
+		HlmRadioIndicatorComponent,
+		HlmRadioDirective,
+		HlmRadioGroupDirective,
+		HlmSmallDirective,
 	],
 	host: {
 		class: 'block w-full max-w-lg min-h-[400px]',
 	},
 	template: `
-		<hlm-tabs tab="account" class="flex flex-row max-w-3xl mx-auto space-x-2" orientation="vertical">
+		<hlm-tabs tab="profile" class="mx-auto flex max-w-3xl flex-row space-x-2" orientation="vertical">
 			<hlm-tabs-list orientation="vertical" aria-label="tabs example">
-				<button class="w-full" hlmTabsTrigger="account">Account</button>
-				<button class="w-full" hlmTabsTrigger="password">Password</button>
-				<button class="w-full" hlmTabsTrigger="danger">Danger Zone</button>
+				<button class="w-full" hlmTabsTrigger="profile">Profile</button>
+				<button class="w-full" hlmTabsTrigger="notifications">Notifications</button>
+				<button class="w-full" hlmTabsTrigger="security">Security</button>
 			</hlm-tabs-list>
-			<div hlmTabsContent="account">
+			<div hlmTabsContent="profile">
 				<section hlmCard>
 					<div hlmCardHeader>
-						<h3 hlmCardTitle>Account</h3>
-						<p hlmCardDescription>Make changes to your account here. Click save when you're done.</p>
+						<h3 hlmCardTitle>Profile</h3>
+						<p hlmCardDescription>Update your profile information. Click save when you're done.</p>
 					</div>
 					<p hlmCardContent>
-						<label class="block my-4" hlmLabel>
-							Name
-							<input class="mt-1.5 w-full" value="Pedro Duarte" hlmInput />
+						<label class="my-4 block" hlmLabel>
+							Full Name
+							<input class="mt-1.5 w-full" value="Alex Johnson" hlmInput />
 						</label>
-						<label class="block my-4" hlmLabel>
-							Username
-							<input class="mt-1.5 w-full" placeholder="@peduarte" hlmInput />
+						<label class="my-4 block" hlmLabel>
+							Email
+							<input class="mt-1.5 w-full" placeholder="alex.johnson@example.com" hlmInput />
 						</label>
 					</p>
 					<div hlmCardFooter>
-						<button hlmBtn>Save Changes</button>
+						<button hlmBtn>Save Profile</button>
 					</div>
 				</section>
 			</div>
-			<div hlmTabsContent="password">
+			<div hlmTabsContent="notifications">
 				<section hlmCard>
 					<div hlmCardHeader>
-						<h3 hlmCardTitle>Password</h3>
-						<p hlmCardDescription>Change your password here. After saving, you'll be logged out.</p>
+						<h3 hlmCardTitle>Notifications</h3>
+						<p hlmCardDescription>Manage your notification preferences.</p>
 					</div>
 					<p hlmCardContent>
-						<label class="block my-4" hlmLabel>
+						<label class="my-4 block" hlmLabel>Email Notifications</label>
+						<brn-radio-group class="mb-4 space-y-1 font-mono text-sm font-medium" hlm [(ngModel)]="email">
+							<brn-radio hlm value="">
+								<hlm-radio-indicator indicator />
+								Enabled
+							</brn-radio>
+							<brn-radio hlm value="">
+								<hlm-radio-indicator indicator />
+								Disabled
+							</brn-radio>
+						</brn-radio-group>
+						<label class="my-4 block" hlmLabel>SMS Notifications</label>
+						<brn-radio-group class="mb-4 space-y-1 font-mono text-sm font-medium" hlm [(ngModel)]="sms">
+							<brn-radio hlm value="">
+								<hlm-radio-indicator indicator />
+								Enabled
+							</brn-radio>
+							<brn-radio hlm value="">
+								<hlm-radio-indicator indicator />
+								Disabled
+							</brn-radio>
+						</brn-radio-group>
+					</p>
+					<div hlmCardFooter>
+						<button hlmBtn>Save Notifications</button>
+					</div>
+				</section>
+			</div>
+			<div hlmTabsContent="security">
+				<section hlmCard>
+					<div hlmCardHeader>
+						<h3 hlmCardTitle>Security</h3>
+						<p hlmCardDescription>Manage your security settings.</p>
+					</div>
+					<p hlmCardContent>
+						<label class="my-4 block" hlmLabel>
 							Old Password
-							<input class="mt-1.5 w-full" type="password" hlmInput />
+							<input class="w-80" hlmInput placeholder="Password" type="password" />
 						</label>
-						<label class="block my-4" hlmLabel>
+						<label class="my-4 block" hlmLabel>
 							New Password
-							<input class="mt-1.5 w-full" type="password" hlmInput />
+							<input class="w-80" hlmInput placeholder="Password" type="password" />
 						</label>
 					</p>
 					<div hlmCardFooter>
 						<button hlmBtn>Save Password</button>
 					</div>
-				</section>
-			</div>
-			<div hlmTabsContent="danger">
-				<section hlmCard>
-					<div hlmCardHeader>
-						<h3 hlmCardTitle>Delete Account</h3>
-						<p hlmCardDescription>Are you sure you want to delete your account? You cannot undo this action.</p>
-					</div>
+					<hr class="my-4" />
 					<div hlmCardFooter>
 						<button variant="destructive" hlmBtn>Delete Account</button>
 					</div>
@@ -105,4 +145,7 @@ import {
 		</hlm-tabs>
 	`,
 })
-export class TabsVerticalExamplePageComponent {}
+export class TabsVerticalExamplePageComponent {
+	email: boolean = false;
+	sms: boolean = false;
+}
