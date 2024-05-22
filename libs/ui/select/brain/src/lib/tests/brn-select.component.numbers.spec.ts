@@ -15,6 +15,7 @@ describe('BrnSelectComponent NumberValues', () => {
 			   </button>
 			   <brn-select-content class="w-56" data-testid="brn-select-content">
 			     <label brnSelectLabel>Numbers</label>
+			     <div brnOption [value]="0">0</div>
 			     <div brnOption [value]="5">5</div>
 			     <div brnOption [value]="10">10</div>
 			     <div brnOption [value]="15">15</div>
@@ -49,10 +50,14 @@ describe('BrnSelectComponent NumberValues', () => {
 		const options = await screen.getAllByRole('option');
 
 		await user.click(options[0]);
+		expect(trigger.textContent?.trim()).toBe('0');
+		expect(selectedValue()).toBe(0);
+
+		await user.click(options[1])
 		expect(selectedValue()).toBe(5);
 		expect(trigger.textContent?.trim()).toBe('5');
 
-		await user.click(options[1]);
+		await user.click(options[2]);
 		expect(trigger.textContent?.trim()).toBe('10');
 		expect(selectedValue()).toBe(10);
 	});
@@ -73,11 +78,11 @@ describe('BrnSelectComponent NumberValues', () => {
 		await user.click(trigger);
 		const options = await screen.getAllByRole('option');
 
-		await user.click(options[0]);
+		await user.click(options[1]);
 		expect(selectedValue()).toEqual([5, 15]);
 		expect(trigger.textContent?.trim()).toBe('15, 5');
 
-		await user.click(options[1]);
+		await user.click(options[2]);
 		expect(trigger.textContent?.trim()).toBe('15, 5, 10');
 		expect(selectedValue()).toEqual([5, 10, 15]);
 	});

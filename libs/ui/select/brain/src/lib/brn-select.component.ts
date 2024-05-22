@@ -207,7 +207,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		toObservable(this._selectService.value)
 			// skipping first else ngcontrol always starts off as dirty and triggering value change on init value
 			.pipe(takeUntilDestroyed(), skip(1))
-			.subscribe((value) => this._onChange(value || null));
+		.subscribe((value) => this._onChange(value ?? null));
 
 		toObservable(this.dir)
 			.pipe(takeUntilDestroyed())
