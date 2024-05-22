@@ -1,16 +1,6 @@
-import {
-	Component,
-	EventEmitter,
-	Input,
-	Output,
-	booleanAttribute,
-	computed,
-	forwardRef,
-	input,
-	signal,
-} from '@angular/core';
+import { Component, EventEmitter, Output, booleanAttribute, computed, forwardRef, input, model } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BrnCheckboxComponent, indeterminateBooleanAttribute } from '@spartan-ng/ui-checkbox-brain';
+import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
 import { HlmCheckboxCheckIconComponent } from './hlm-checkbox-checkicon.component';
@@ -30,7 +20,7 @@ export const HLM_CHECKBOX_VALUE_ACCESSOR = {
 			[id]="id()"
 			[name]="name()"
 			[class]="_computedClass()"
-			[checked]="_checked()"
+			[checked]="checked()"
 			[disabled]="disabled()"
 			[required]="required()"
 			[aria-label]="ariaLabel()"
@@ -74,6 +64,8 @@ export class HlmCheckboxComponent {
 	/** Used to set the aria-describedby attribute on the underlying brn element. */
 	public readonly ariaDescribedby = input<string | null>(null, { alias: 'aria-describedby' });
 
+	public readonly checked = model<boolean | 'indeterminate'>(false);
+
 	public readonly name = input<string | null>(null);
 	public readonly disabled = input(false, { transform: booleanAttribute });
 	public readonly required = input(false, { transform: booleanAttribute });
@@ -88,24 +80,17 @@ export class HlmCheckboxComponent {
 	protected _handleChange(): void {
 		if (this.disabled()) return;
 
-		const previousChecked = this._checked();
-		this._checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
+		const previousChecked = this.checked();
+		this.checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
 		this._onChange(!previousChecked);
 		this.changed.emit(!previousChecked);
-	}
-
-	// TODO should be changed to new model input when updated to Angular 17.2
-	protected _checked = signal<boolean | 'indeterminate'>(false);
-	@Input({ transform: indeterminateBooleanAttribute })
-	set checked(value: boolean | 'indeterminate') {
-		this._checked.set(value);
 	}
 
 	/** CONROL VALUE ACCESSOR */
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	writeValue(value: any): void {
-		this.checked = !!value;
+		this.checked.set(!!value);
 	}
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
 	protected _onChange = (_: any) => {};

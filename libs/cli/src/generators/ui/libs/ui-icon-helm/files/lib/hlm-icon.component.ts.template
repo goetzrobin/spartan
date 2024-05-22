@@ -4,14 +4,14 @@ import {
 	Component,
 	ElementRef,
 	Input,
+	type OnDestroy,
 	PLATFORM_ID,
 	ViewEncapsulation,
 	computed,
 	inject,
 	signal,
-	type OnDestroy,
 } from '@angular/core';
-import { NgIconComponent, type IconName } from '@ng-icons/core';
+import { type IconName, NgIconComponent } from '@ng-icons/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
