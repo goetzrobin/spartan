@@ -1,14 +1,14 @@
 {
-	"name": "@spartan-ng/ui-avatar-brain",
-	"version": "0.0.1-alpha.347",
-	"peerDependencies": {
-		"@angular/common": "^17.3.0",
-		"@angular/core": "^17.3.0",
-		"clsx": "^1.2.1"
-	},
-	"dependencies": {},
-	"sideEffects": false,
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@spartan-ng/ui-avatar-brain",
+  "version": "0.0.1-alpha.348",
+  "peerDependencies": {
+    "@angular/common": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "clsx": "^1.2.1"
+  },
+  "dependencies": {},
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }
