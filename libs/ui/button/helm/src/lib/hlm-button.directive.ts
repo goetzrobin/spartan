@@ -35,11 +35,14 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
+		'[type]': 'type()',
 	},
 })
 export class HlmButtonDirective {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	private readonly _settableClass = signal<ClassValue>('');
+
+	public readonly type = input<'button' | 'submit' | 'reset'>('button');
 
 	protected _computedClass = computed(() =>
 		hlm(buttonVariants({ variant: this._variant(), size: this._size() }), this._settableClass(), this.userClass()),
