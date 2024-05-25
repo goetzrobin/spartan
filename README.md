@@ -146,13 +146,13 @@ Follow the directions below to get it up and running:
 Then you can run the following command:
 
 ```shell
-pnpm nx serve app
+bunx nx serve app
 ```
 
 or
 
 ```shell
-pnpm dev
+bun run dev
 ```
 
 for a dev server. Navigate to http://localhost:4200/. The app will automatically reload

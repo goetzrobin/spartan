@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 
 export const cardContentVariants = cva('p-6 pt-0', {

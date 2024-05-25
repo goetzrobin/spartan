@@ -1,4 +1,4 @@
-import { Component, ContentChild, ViewChild, computed, input, type ElementRef } from '@angular/core';
+import { Component, ContentChild, type ElementRef, ViewChild, computed, input } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';

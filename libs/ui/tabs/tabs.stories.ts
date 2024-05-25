@@ -159,6 +159,57 @@ export const Vertical: Story = {
 	}),
 };
 
+export const Paginated: Story = {
+	render: () => ({
+		template: /* HTML */ `
+			<hlm-tabs tab="1" class="mx-auto block max-w-3xl">
+				<hlm-paginated-tabs-list>
+					<button hlmTabsTrigger="1">Tab 1</button>
+					<button hlmTabsTrigger="2">Tab 2</button>
+					<button hlmTabsTrigger="3">Tab 3</button>
+					<button hlmTabsTrigger="4">Tab 4</button>
+					<button hlmTabsTrigger="5">Tab 5</button>
+					<button hlmTabsTrigger="6">Tab 6</button>
+					<button hlmTabsTrigger="7">Tab 7</button>
+					<button hlmTabsTrigger="8">Tab 8</button>
+					<button hlmTabsTrigger="9">Tab 9</button>
+					<button hlmTabsTrigger="10">Tab 10</button>
+					<button hlmTabsTrigger="11">Tab 11</button>
+					<button hlmTabsTrigger="12">Tab 12</button>
+					<button hlmTabsTrigger="13">Tab 13</button>
+					<button hlmTabsTrigger="14">Tab 14</button>
+					<button hlmTabsTrigger="15">Tab 15</button>
+					<button hlmTabsTrigger="16">Tab 16</button>
+					<button hlmTabsTrigger="17">Tab 17</button>
+					<button hlmTabsTrigger="18">Tab 18</button>
+					<button hlmTabsTrigger="19">Tab 19</button>
+					<button hlmTabsTrigger="20">Tab 20</button>
+				</hlm-paginated-tabs-list>
+				<div hlmTabsContent="1">Tab 1</div>
+				<div hlmTabsContent="2">Tab 2</div>
+				<div hlmTabsContent="3">Tab 3</div>
+				<div hlmTabsContent="4">Tab 4</div>
+				<div hlmTabsContent="5">Tab 5</div>
+				<div hlmTabsContent="6">Tab 6</div>
+				<div hlmTabsContent="7">Tab 7</div>
+				<div hlmTabsContent="8">Tab 8</div>
+				<div hlmTabsContent="9">Tab 9</div>
+				<div hlmTabsContent="10">Tab 10</div>
+				<div hlmTabsContent="11">Tab 11</div>
+				<div hlmTabsContent="12">Tab 12</div>
+				<div hlmTabsContent="13">Tab 13</div>
+				<div hlmTabsContent="14">Tab 14</div>
+				<div hlmTabsContent="15">Tab 15</div>
+				<div hlmTabsContent="16">Tab 16</div>
+				<div hlmTabsContent="17">Tab 17</div>
+				<div hlmTabsContent="18">Tab 18</div>
+				<div hlmTabsContent="19">Tab 19</div>
+				<div hlmTabsContent="20">Tab 20</div>
+			</hlm-tabs>
+		`,
+	}),
+};
+
 export const BrnOnly: Story = {
 	render: () => ({
 		props: { activationMode: 'automatic' },

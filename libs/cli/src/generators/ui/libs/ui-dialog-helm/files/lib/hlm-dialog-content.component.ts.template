@@ -37,8 +37,8 @@ export class HlmDialogContentComponent {
 
 	public readonly state = computed(() => this._dialogRef?.state() ?? 'closed');
 
-	public readonly component = this._dialogContext?.['$component'];
-	private readonly _dynamicComponentClass = this._dialogContext?.['$dynamicComponentClass'];
+	public readonly component = this._dialogContext?.$component;
+	private readonly _dynamicComponentClass = this._dialogContext?.$dynamicComponentClass;
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>

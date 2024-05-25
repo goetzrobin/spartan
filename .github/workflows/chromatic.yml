@@ -16,14 +16,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - run: corepack enable
-      - run: pnpm --version
-      - uses: actions/setup-node@v4
+      - run: npm install -g bun
+      - run: bun --version
+      - uses: actions/cache@v4
         with:
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.bun }}-bun-
       - name: Install
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: bun install --frozen-lockfile --prefer-offline
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:

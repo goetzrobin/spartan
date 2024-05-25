@@ -2,13 +2,13 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	HostListener,
+	type InputSignal,
+	type Signal,
 	ViewChild,
 	ViewEncapsulation,
 	computed,
 	input,
 	signal,
-	type InputSignal,
-	type Signal,
 } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';

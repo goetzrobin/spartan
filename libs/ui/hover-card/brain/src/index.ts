@@ -4,7 +4,7 @@ import { BrnHoverCardTriggerDirective } from './lib/brn-hover-card-trigger.direc
 import { BrnHoverCardComponent } from './lib/brn-hover-card.component';
 
 export { BrnHoverCardContentDirective } from './lib/brn-hover-card-content.directive';
-export { BrnHoverCardContentService, BrnHoverCardOptions } from './lib/brn-hover-card-content.service';
+export { BrnHoverCardContentService, type BrnHoverCardOptions } from './lib/brn-hover-card-content.service';
 export { BrnHoverCardTriggerDirective } from './lib/brn-hover-card-trigger.directive';
 export { BrnHoverCardComponent } from './lib/brn-hover-card.component';
 export { createHoverObservable } from './lib/createHoverObservable';

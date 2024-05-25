@@ -40,21 +40,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - run: corepack enable
-      - run: corepack use pnpm@9
-      - uses: actions/setup-node@v4
+      - run: npm install -g bun
+      - uses: actions/cache@v4
         with:
-          cache: "pnpm"
-          cache-dependency-path: "**/pnpm-lock.yaml"
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.bun }}-bun-
       - name: Install
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: bun install --frozen-lockfile --prefer-offline
 
       - name: oxlint performance, correctness and lint check
-        run: pnpm ci.lint-baby
+        run: bun run ci.lint-baby
       - name: biome fFormatting & sorted iImports check
-        run: pnpm ci.format-sort
+        run: bun run ci.format-sort
       # - name: Biome Lint Check // too many failures; let's start with formatting and sorting then get to this
-      #   run: pnpm ci.lint
+      #   run: bun run ci.lint
 
   build:
     runs-on: ubuntu-latest
@@ -63,16 +64,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - run: corepack enable
-      - run: pnpm --version
-      - uses: actions/setup-node@v4
+      - run: npm install -g bun
+      - run: bun --version
+      - uses: actions/cache@v4
         with:
-          cache: "pnpm"
-          cache-dependency-path: "**/pnpm-lock.yaml"
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.bun }}-bun-
       - name: Install
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: bun install --frozen-lockfile --prefer-offline
       - name: Build
-        run: pnpm build
+        run: bun run build
 
   unit:
     runs-on: ubuntu-latest
@@ -83,16 +86,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - run: corepack enable
-      - run: pnpm --version
-      - uses: actions/setup-node@v4
+      - run: npm install -g bun
+      - run: bun --version
+      - uses: actions/cache@v4
         with:
-          cache: "pnpm"
-          cache-dependency-path: "**/pnpm-lock.yaml"
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.bun }}-bun-
       - name: Install
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: bun install --frozen-lockfile --prefer-offline
       - name: Test
-        run: pnpm test
+        run: bun run test
 
   e2e:
     runs-on: ubuntu-latest
@@ -103,15 +108,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - run: corepack enable
-      - run: pnpm --version
-      - uses: actions/setup-node@v4
+      - run: npm install -g bun
+      - run: bun --version
+      - uses: actions/cache@v4
         with:
-          cache: "pnpm"
-          cache-dependency-path: "**/pnpm-lock.yaml"
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.bun }}-bun-
       - name: Install
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: bun install --frozen-lockfile --prefer-offline
       - name: Install Cypress
-        run: npx cypress install
+        run: bunx cypress install
       - name: End-to-end test
-        run: pnpm e2e
+        run: bun run e2e

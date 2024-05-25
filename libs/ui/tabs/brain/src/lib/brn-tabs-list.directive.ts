@@ -20,7 +20,7 @@ export class BrnTabsListDirective implements AfterContentInit {
 
 	protected readonly _orientation = this._root.$orientation;
 	private readonly _direction = this._root.$direction;
-	private readonly _value = this._root.$value;
+	private readonly _activeTab = this._root.$activeTab;
 	private readonly _tabs = this._root.$tabs;
 	private readonly _keyDownListener = rxHostListener('keydown');
 
@@ -41,10 +41,11 @@ export class BrnTabsListDirective implements AfterContentInit {
 
 		// needed because by default the index is set to -1, which means first interaction is skipped
 		this._keyDownListener.pipe(take(1)).subscribe(() => {
-			const currentKey = this._value();
+			const currentTabKey = this._activeTab();
+			const tabs = this._tabs();
 			let activeIndex = 0;
-			if (currentKey && this.triggers) {
-				const currentTab = this._tabs[currentKey];
+			if (currentTabKey && this.triggers) {
+				const currentTab = tabs[currentTabKey];
 				if (currentTab) {
 					activeIndex = this.triggers.toArray().indexOf(currentTab.trigger);
 				}
