@@ -5,7 +5,6 @@ import {
 	type ConnectedPosition,
 	OverlayModule,
 } from '@angular/cdk/overlay';
-import { JsonPipe } from '@angular/common';
 import {
 	type AfterContentInit,
 	ChangeDetectionStrategy,
@@ -32,7 +31,7 @@ import {
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { Subject, delay, map, of, skip, switchMap } from 'rxjs';
+import { Subject, delay, filter, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -45,7 +44,7 @@ let nextId = 0;
 @Component({
 	selector: 'brn-select, hlm-select',
 	standalone: true,
-	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule, JsonPipe],
+	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		BrnSelectService,
@@ -155,6 +154,8 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private _onTouched = () => {};
 
+	private _shouldEmitValueChange = signal(false);
+
 	/*
 	 * This position config ensures that the top "start" corner of the overlay
 	 * is aligned with with the top "start" of the origin by default (overlapping
@@ -204,10 +205,21 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			}
 		});
 
+		/**
+		 * Listening to value changes in order to trigger forms api on change
+		 * ShouldEmitValueChange simply ensures we only propagate value change when a user makes a selection
+		 * we dont propagate changes made from outside the component (ex. patch value or initial value from form control)
+		 */
 		toObservable(this._selectService.value)
-			// skipping first else ngcontrol always starts off as dirty and triggering value change on init value
-			.pipe(takeUntilDestroyed(), skip(1))
-		.subscribe((value) => this._onChange(value ?? null));
+			.pipe(
+				filter(() => {
+					const shouldEmitValueChange = this._shouldEmitValueChange();
+					this._shouldEmitValueChange.set(true);
+					return shouldEmitValueChange;
+				}),
+				takeUntilDestroyed(),
+			)
+			.subscribe((value) => this._onChange(value ?? null));
 
 		toObservable(this.dir)
 			.pipe(takeUntilDestroyed())
@@ -279,6 +291,9 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	}
 
 	public writeValue(value: any): void {
+		// 'shouldEmitValueChange' ensures we don't propagate changes when we recieve value from from form control
+		// set to false until next value change and then reset back to true
+		this._shouldEmitValueChange.set(false);
 		this._selectService.setInitialSelectedOptions(value);
 	}
 

@@ -28,6 +28,49 @@ describe('Brn Select Component in multi-mode', () => {
 	};
 
 	describe('form validation - multi mode', () => {
+		it('should become dirty only after an actual user option selection', async () => {
+			const { user, fixture, trigger } = await setupWithFormValidationMulti();
+			const cmpInstance = fixture.componentInstance;
+
+			const expected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(expected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
+
+			expect(cmpInstance.form?.get('fruit')?.value).toEqual(null);
+
+			// open
+			await user.click(trigger);
+			// close
+			await user.click(trigger);
+
+			// Patch Value
+			expect(cmpInstance.form?.get('fruit')?.patchValue(['apple', 'banana', 'blueberry']));
+
+			// validate patch value
+			expect(cmpInstance.form?.get('fruit')?.value).toEqual(['apple', 'banana', 'blueberry']);
+			fixture.detectChanges();
+
+			const afterValuePatchExpected = {
+				untouched: false,
+				touched: true,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterValuePatchExpected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(afterValuePatchExpected);
+		});
+
 		// should have correct status when initialized with no value and as optional
 		it('should reflect correct form control status with no initial value', async () => {
 			const { fixture, trigger, value } = await setupWithFormValidationMulti();
