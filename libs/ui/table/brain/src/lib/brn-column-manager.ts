@@ -1,7 +1,6 @@
 import type { Signal } from '@angular/core';
 import { computed, signal } from '@angular/core';
 
-
 type BrnColumnVisibility = Record<string, boolean> | Record<string, { visible: boolean }>;
 
 type AllColumnsPropertyType<T> =
