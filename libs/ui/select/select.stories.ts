@@ -241,7 +241,7 @@ export const SelectWithLabel: Story = {
 		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
 		template: /* HTML */ `
 			<form [formGroup]="fruitGroup">
-				<hlm-select formControlName="fruit" $argsToTemplate(args, { exclude: ['initialValue'] })>
+				<hlm-select formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger class="w-56">
 						<brn-select-value />
@@ -255,7 +255,6 @@ export const SelectWithLabel: Story = {
 						<hlm-option value="pineapple">Pineapple</hlm-option>
 					</hlm-select-content>
 				</hlm-select>
-				<form></form>
 			</form>
 		`,
 	}),
