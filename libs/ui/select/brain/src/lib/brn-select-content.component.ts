@@ -58,7 +58,7 @@ import { BrnSelectService } from './brn-select.service';
 			<ng-content select="hlm-select-scroll-up" />
 			<ng-content select="brnSelectScrollUp" />
 		</ng-template>
-		<ng-container *ngTemplateOutlet="canScrollUp() && scrollUpBtn ? scrollUp : null" />
+		<ng-container *ngTemplateOutlet="canScrollUp() && scrollUpBtn() ? scrollUp : null" />
 		<div
 			data-brn-select-viewport
 			#viewport
@@ -77,7 +77,7 @@ import { BrnSelectService } from './brn-select.service';
 			<ng-content select="brnSelectScrollDown" />
 			<ng-content select="hlm-select-scroll-down" />
 		</ng-template>
-		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn ? scrollDown : null" />
+		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn() ? scrollDown : null" />
 	`,
 })
 export class BrnSelectContentComponent implements AfterViewInit, AfterContentInit {
