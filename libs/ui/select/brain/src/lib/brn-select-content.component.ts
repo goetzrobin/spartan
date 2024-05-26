@@ -5,12 +5,10 @@ import {
 	type AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
-	ContentChild,
-	ContentChildren,
 	DestroyRef,
 	ElementRef,
-	type QueryList,
-	ViewChild,
+	contentChild,
+	contentChildren,
 	effect,
 	inject,
 	signal,
@@ -95,22 +93,10 @@ export class BrnSelectContentComponent implements AfterViewInit, AfterContentIni
 
 	protected initialSelectedOptions$ = toObservable(this._selectService.initialSelectedOptions);
 
-	// protected viewport = contentChild.required<ElementRef<HTMLElement>>('viewport');
-	// protected scrollUpBtn = contentChild(BrnSelectScrollUpDirective);
-	// protected scrollDownBtn = contentChild(BrnSelectScrollDownDirective);
-	// protected _options = contentChildren<BrnSelectOptionDirective>(BrnSelectOptionDirective, { descendants: true });
-
-	@ViewChild('viewport')
-	protected viewport!: ElementRef<HTMLElement>;
-
-	@ContentChild(BrnSelectScrollUpDirective, { static: false })
-	protected scrollUpBtn!: BrnSelectScrollUpDirective;
-
-	@ContentChild(BrnSelectScrollDownDirective, { static: false })
-	protected scrollDownBtn!: BrnSelectScrollDownDirective;
-
-	@ContentChildren(BrnSelectOptionDirective, { descendants: true })
-	protected _options!: QueryList<BrnSelectOptionDirective>;
+	protected viewport = contentChild<ElementRef<HTMLElement>>('viewport');
+	protected scrollUpBtn = contentChild(BrnSelectScrollUpDirective);
+	protected scrollDownBtn = contentChild(BrnSelectScrollDownDirective);
+	protected _options = contentChildren<BrnSelectOptionDirective>(BrnSelectOptionDirective, { descendants: true });
 
 	constructor() {
 		effect(() => {
@@ -148,9 +134,12 @@ export class BrnSelectContentComponent implements AfterViewInit, AfterContentIni
 	}
 
 	public updateArrowDisplay(): void {
-		this.canScrollUp.set(this.viewport.nativeElement.scrollTop > 0);
-		const maxScroll = this.viewport.nativeElement.scrollHeight - this.viewport.nativeElement.clientHeight;
-		this.canScrollDown.set(Math.ceil(this.viewport.nativeElement.scrollTop) < maxScroll);
+		const viewport = this.viewport();
+		if (viewport) {
+			this.canScrollUp.set(viewport.nativeElement.scrollTop > 0);
+			const maxScroll = viewport.nativeElement.scrollHeight - viewport.nativeElement.clientHeight;
+			this.canScrollDown.set(Math.ceil(viewport.nativeElement.scrollTop) < maxScroll);
+		}
 	}
 
 	public handleScroll() {
@@ -162,18 +151,24 @@ export class BrnSelectContentComponent implements AfterViewInit, AfterContentIni
 	}
 
 	public moveFocusUp() {
-		this.viewport.nativeElement.scrollBy({ top: -100, behavior: 'smooth' });
-		if (this.viewport.nativeElement.scrollTop === 0) {
-			this.scrollUpBtn?.stopEmittingEvents();
+		const viewport = this.viewport();
+		if (viewport) {
+			viewport.nativeElement.scrollBy({ top: -100, behavior: 'smooth' });
+			if (viewport.nativeElement.scrollTop === 0) {
+				this.scrollUpBtn()?.stopEmittingEvents();
+			}
 		}
 	}
 
 	public moveFocusDown() {
-		this.viewport.nativeElement.scrollBy({ top: 100, behavior: 'smooth' });
-		const viewportSize = this._el.nativeElement.scrollHeight;
-		const viewportScrollPosition = this.viewport.nativeElement.scrollTop;
-		if (viewportSize + viewportScrollPosition + 100 > this.viewport.nativeElement.scrollHeight + 50) {
-			this.scrollDownBtn?.stopEmittingEvents();
+		const viewport = this.viewport();
+		if (viewport) {
+			viewport.nativeElement.scrollBy({ top: 100, behavior: 'smooth' });
+			const viewportSize = this._el.nativeElement.scrollHeight;
+			const viewportScrollPosition = viewport.nativeElement.scrollTop;
+			if (viewportSize + viewportScrollPosition + 100 > viewport.nativeElement.scrollHeight + 50) {
+				this.scrollDownBtn()?.stopEmittingEvents();
+			}
 		}
 	}
 }
