@@ -5,7 +5,7 @@ import { SelectSingleValueTestComponent, SelectSingleValueWithInitialValueTestCo
 import { getFormControlStatus, getFormValidationClasses } from './utils';
 
 describe('Brn Select Component in single-mode', () => {
-	const DEFAULT_LABEL = 'Select a Fruit';
+	const DEFAULT_LABEL = 'Select an option';
 	const INITIAL_VALUE_TEXT = 'Apple';
 	const INITIAL_VALUE = 'apple';
 

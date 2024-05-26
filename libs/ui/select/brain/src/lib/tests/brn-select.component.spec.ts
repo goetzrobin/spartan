@@ -9,7 +9,7 @@ describe('BrnSelectComponent', () => {
 			`
             <brn-select class="inline-block" [multiple]="multiple" (openedChange)="openedChange($event)">
 			<button brnSelectTrigger class='w-56' data-testid="brn-select-trigger">
-				<brn-select-value />
+				<brn-select-value data-testid="brn-select-value"/>
 			</button>
 			<brn-select-content class="w-56" data-testid="brn-select-content">
 				<label brnSelectLabel>Fruits</label>

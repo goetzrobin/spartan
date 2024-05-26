@@ -9,17 +9,15 @@ import {
 	type AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
-	ContentChild,
-	ContentChildren,
-	EventEmitter,
-	Input,
-	Output,
-	type QueryList,
+	type OnInit,
 	type Signal,
-	ViewChild,
 	computed,
+	contentChild,
+	contentChildren,
 	inject,
 	input,
+	model,
+	output,
 	signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -53,8 +51,8 @@ let nextId = 0;
 		provideExposesStateProviderExisting(() => BrnSelectComponent),
 	],
 	template: `
-		@if (!labelProvided() && _placeholder()) {
-			<label class="hidden" [attr.id]="backupLabelId()">{{ _placeholder() }}</label>
+		@if (!labelProvided() && placeholder()) {
+			<label class="hidden" [attr.id]="backupLabelId()">{{ placeholder() }}</label>
 		} @else {
 			<ng-content select="label[hlmLabel],label[brnLabel]" />
 		}
@@ -79,44 +77,29 @@ let nextId = 0;
 		</ng-template>
 	`,
 })
-export class BrnSelectComponent implements ControlValueAccessor, AfterContentInit, ExposesSide, ExposesState {
+export class BrnSelectComponent implements OnInit, ControlValueAccessor, AfterContentInit, ExposesSide, ExposesState {
 	private readonly _selectService = inject(BrnSelectService);
 
 	public readonly triggerWidth = this._selectService.triggerWidth;
 
-	@Input({ alias: 'multiple' })
-	set multiple(multiple: boolean) {
-		this._selectService.state.update((state) => ({ ...state, multiple }));
-	}
-	protected readonly _multiple = this._selectService.multiple;
+	public placeholder = input<string>('');
 
-	@Input({ alias: 'placeholder' })
-	set placeholder(placeholder: string) {
-		this._selectService.state.update((state) => ({ ...state, placeholder }));
-	}
-	protected readonly _placeholder = this._selectService.placeholder;
+	public multiple = model<boolean>(false);
 
-	@Input({ alias: 'disabled' })
-	set disabled(disabled: boolean) {
-		this._selectService.state.update((state) => ({ ...state, disabled }));
-	}
-	protected readonly _disabled = this._selectService.disabled;
+	public disabled = model<boolean>(false);
 
 	public readonly dir = input<BrnReadDirection>('ltr');
 
-	@ContentChild(BrnLabelDirective, { descendants: false })
-	protected selectLabel!: BrnLabelDirective;
-	/** Overlay pane containing the options. */
-	@ContentChild(BrnSelectContentComponent)
-	protected selectContent!: BrnSelectContentComponent;
-	@ContentChildren(BrnSelectOptionDirective, { descendants: true })
-	protected options!: QueryList<BrnSelectOptionDirective>;
-	/** Overlay pane containing the options. */
-	@ViewChild(CdkConnectedOverlay)
-	protected _overlayDir!: CdkConnectedOverlay;
+	protected selectLabel = contentChild(BrnLabelDirective, { descendants: true });
 
-	@Output()
-	openedChange = new EventEmitter<boolean>();
+	/** Overlay pane containing the options. */
+	protected selectContent = contentChild(BrnSelectContentComponent);
+	protected options = contentChildren<BrnSelectOptionDirective>(BrnSelectOptionDirective, { descendants: true });
+
+	/** Overlay pane containing the options. */
+	protected _overlayDir = contentChild(CdkConnectedOverlay);
+
+	openedChange = output<boolean>();
 
 	public readonly closeDelay = input<number>(100);
 	public readonly isExpanded = this._selectService.isExpanded;
@@ -156,6 +139,8 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	private _shouldEmitValueChange = signal(false);
 
+	private id = computed(() => this._selectService.id());
+
 	/*
 	 * This position config ensures that the top "start" corner of the overlay
 	 * is aligned with with the top "start" of the origin by default (overlapping
@@ -190,17 +175,15 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	];
 
 	constructor() {
-		this._selectService.state.update((state) => ({
-			...state,
-			id: `brn-select-${nextId++}`,
-		}));
+		this._selectService.updateId(`brn-select-${nextId++}`);
+
 		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
 		}
 
 		// Watch for Listbox Selection Changes to trigger Collapse
 		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe(() => {
-			if (!this._multiple()) {
+			if (!this.multiple()) {
 				this.close();
 			}
 		});
@@ -223,29 +206,35 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 		toObservable(this.dir)
 			.pipe(takeUntilDestroyed())
-			.subscribe(() =>
-				this._selectService.state.update((state) => ({
-					...state,
-					dir: this.dir(),
-				})),
-			);
+			.subscribe(() => this._selectService.updateDir(this.dir()));
+
+		toObservable(this.placeholder)
+			.pipe(takeUntilDestroyed())
+			.subscribe((placeholder) => this._selectService.updatePlaceholder(placeholder));
+
+		toObservable(this.disabled)
+			.pipe(takeUntilDestroyed())
+			.subscribe((disabled) => this._selectService.updateDisable(disabled));
+
+		toObservable(this.multiple)
+			.pipe(takeUntilDestroyed())
+			.subscribe((multiple) => this._selectService.updateMultiple(multiple));
+	}
+
+	ngOnInit(): void {
+		// toObservable is too delayed, so setting these values here once to help initialize rest of the component
+		this._selectService.updatePlaceholder(this.placeholder());
+		this._selectService.updateMultiple(this.multiple());
+		this._selectService.updateDir(this.dir());
 	}
 
 	public ngAfterContentInit(): void {
 		// Check if Label Directive Provided and pass to service
-		if (this.selectLabel) {
+		if (this.selectLabel()) {
 			this.labelProvided.set(true);
-			this._selectService.state.update((state) => ({
-				...state,
-				labelId: this.selectLabel.id,
-				dir: this.dir(),
-			}));
-		} else if (this._placeholder()) {
-			this._selectService.state.update((state) => ({
-				...state,
-				labelId: `${state.id}--label`,
-				dir: this.dir(),
-			}));
+			this._selectService.updateLabelId(this.selectLabel()?.id || '');
+		} else if (this.placeholder()) {
+			this._selectService.updateLabelId(`${this.id()}--label`);
 		}
 	}
 
@@ -259,11 +248,8 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	public open(): void {
 		if (!this._canOpen()) return;
-		this._selectService.state.update((state) => ({
-			...state,
-			isExpanded: true,
-		}));
-		this.openedChange.next(true);
+		this._selectService.updateIsExpanded(true);
+		this.openedChange.emit(true);
 		this._moveFocusToCDKList();
 	}
 
@@ -274,27 +260,24 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			this._selectService.selectTrigger.focus();
 		}
 
-		this.openedChange.next(false);
-		this._selectService.state.update((state) => ({
-			...state,
-			isExpanded: false,
-		}));
+		this.openedChange.emit(false);
+		this._selectService.updateIsExpanded(false);
 		this._onTouched();
 	}
 
 	protected _canOpen(): boolean {
-		return !this.isExpanded() && !this._disabled() && this.options?.length > 0;
+		return !this.isExpanded() && !this.disabled() && this.options()?.length > 0;
 	}
 
 	private _moveFocusToCDKList(): void {
-		setTimeout(() => this.selectContent.focusList());
+		setTimeout(() => this.selectContent()?.focusList());
 	}
 
 	public writeValue(value: any): void {
 		// 'shouldEmitValueChange' ensures we don't propagate changes when we recieve value from from form control
 		// set to false until next value change and then reset back to true
 		this._shouldEmitValueChange.set(false);
-		this._selectService.setInitialSelectedOptions(value);
+		this._selectService.controlValue$.next(value);
 	}
 
 	public registerOnChange(fn: any): void {
@@ -306,6 +289,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	}
 
 	public setDisabledState(isDisabled: boolean) {
-		this.disabled = isDisabled;
+		this.disabled.set(isDisabled);
 	}
 }

@@ -1,7 +1,7 @@
 import type { CdkOption, ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { Subject, skip } from 'rxjs';
+import { BehaviorSubject, Subject, combineLatest, filter, skip } from 'rxjs';
 import type { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 
 type BrnReadDirection = 'ltr' | 'rtl';
@@ -54,6 +54,8 @@ export class BrnSelectService {
 	private readonly multiple$ = toObservable(this.multiple);
 
 	public readonly listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
+	public readonly selectContentLoaded$ = new BehaviorSubject<boolean>(false);
+	public readonly controlValue$ = new BehaviorSubject<string | string[] | null>(null);
 
 	private _selectTrigger?: BrnSelectTriggerDirective;
 	get selectTrigger() {
@@ -61,6 +63,13 @@ export class BrnSelectService {
 	}
 
 	constructor() {
+		combineLatest([this.selectContentLoaded$, this.controlValue$])
+			.pipe(
+				filter(([optionsLoaded]) => optionsLoaded),
+				takeUntilDestroyed(),
+			)
+			.subscribe(([, controlValue]) => this.setInitialSelectedOptions(controlValue));
+
 		this.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe((listBoxChange) => {
 			const updatedSelections = this.multiple() ? this.getUpdatedOptions(listBoxChange) : [listBoxChange.option];
 			const value = this.multiple() ? listBoxChange.value : listBoxChange.value[0];
@@ -171,5 +180,37 @@ export class BrnSelectService {
 				value: selectedOption.value as string,
 			}));
 		}
+	}
+
+	/**
+	 * Updaters
+	 */
+
+	public updatePlaceholder(placeholder: string) {
+		this.state.update((state) => ({ ...state, placeholder }));
+	}
+
+	public updateDisable(disabled: boolean) {
+		this.state.update((state) => ({ ...state, disabled }));
+	}
+
+	public updateMultiple(multiple: boolean) {
+		this.state.update((state) => ({ ...state, multiple }));
+	}
+
+	public updateIsExpanded(isExpanded: boolean) {
+		this.state.update((state) => ({ ...state, isExpanded }));
+	}
+
+	public updateDir(dir: BrnReadDirection) {
+		this.state.update((state) => ({ ...state, dir }));
+	}
+
+	public updateId(id: string) {
+		this.state.update((state) => ({ ...state, id }));
+	}
+
+	public updateLabelId(labelId: string) {
+		this.state.update((state) => ({ ...state, labelId }));
 	}
 }

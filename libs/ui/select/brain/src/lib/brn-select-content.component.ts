@@ -1,6 +1,7 @@
-import { CdkListbox, type ListboxValueChangeEvent } from '@angular/cdk/listbox';
+import { CdkListbox } from '@angular/cdk/listbox';
 import { NgTemplateOutlet } from '@angular/common';
 import {
+	type AfterContentInit,
 	type AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
@@ -23,10 +24,11 @@ import { BrnSelectService } from './brn-select.service';
 @Component({
 	selector: 'brn-select-content, hlm-select-content:not(noHlm)',
 	standalone: true,
-	imports: [BrnSelectScrollUpDirective, BrnSelectScrollDownDirective, NgTemplateOutlet],
-	hostDirectives: [CdkListbox],
+	imports: [CdkListbox, BrnSelectScrollUpDirective, BrnSelectScrollDownDirective, NgTemplateOutlet],
+	hostDirectives: [{ directive: CdkListbox, outputs: ['cdkListboxValueChange'] }],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
+		'(cdkListboxValueChange)': 'this._selectService.listBoxValueChangeEvent$.next($event)',
 		'[attr.aria-labelledBy]': 'labelledBy()',
 		'[attr.aria-controlledBy]': "id() +'--trigger'",
 		'[id]': "id() + '--content'",
@@ -80,7 +82,7 @@ import { BrnSelectService } from './brn-select.service';
 		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn ? scrollDown : null" />
 	`,
 })
-export class BrnSelectContentComponent implements AfterViewInit {
+export class BrnSelectContentComponent implements AfterViewInit, AfterContentInit {
 	private readonly _el: ElementRef<HTMLElement> = inject(ElementRef);
 	private readonly _cdkListbox = inject(CdkListbox, { host: true });
 	private readonly destroyRef = inject(DestroyRef);
@@ -92,6 +94,11 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	protected readonly canScrollDown = signal(false);
 
 	protected initialSelectedOptions$ = toObservable(this._selectService.initialSelectedOptions);
+
+	// protected viewport = contentChild.required<ElementRef<HTMLElement>>('viewport');
+	// protected scrollUpBtn = contentChild(BrnSelectScrollUpDirective);
+	// protected scrollDownBtn = contentChild(BrnSelectScrollDownDirective);
+	// protected _options = contentChildren<BrnSelectOptionDirective>(BrnSelectOptionDirective, { descendants: true });
 
 	@ViewChild('viewport')
 	protected viewport!: ElementRef<HTMLElement>;
@@ -106,11 +113,6 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	protected _options!: QueryList<BrnSelectOptionDirective>;
 
 	constructor() {
-		this._cdkListbox.valueChange
-			.asObservable()
-			.pipe(takeUntilDestroyed())
-			.subscribe((val: ListboxValueChangeEvent<unknown>) => this._selectService.listBoxValueChangeEvent$.next(val));
-
 		effect(() => {
 			this._cdkListbox.multiple = this._selectService.multiple();
 			this._selectService.isExpanded() && setTimeout(() => this.updateArrowDisplay());
@@ -121,6 +123,10 @@ export class BrnSelectContentComponent implements AfterViewInit {
 		this.setInitiallySelectedOptions();
 	}
 
+	ngAfterContentInit(): void {
+		this._selectService.selectContentLoaded$.next(true);
+	}
+
 	private setInitiallySelectedOptions() {
 		this.initialSelectedOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((selectedOptions) => {
 			// Reapplying cdkLibstbox multiple because seems this is running before effect that
@@ -128,7 +134,6 @@ export class BrnSelectContentComponent implements AfterViewInit {
 			if (this._selectService.multiple()) {
 				this._cdkListbox.multiple = true;
 			}
-
 			for (const cdkOption of this._selectService.possibleOptions()) {
 				if (selectedOptions.includes(cdkOption)) {
 					cdkOption?.select();
@@ -136,7 +141,6 @@ export class BrnSelectContentComponent implements AfterViewInit {
 					cdkOption?.deselect();
 				}
 			}
-
 			for (const cdkOption of selectedOptions) {
 				cdkOption?.select();
 			}
@@ -160,7 +164,7 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	public moveFocusUp() {
 		this.viewport.nativeElement.scrollBy({ top: -100, behavior: 'smooth' });
 		if (this.viewport.nativeElement.scrollTop === 0) {
-			this.scrollUpBtn.stopEmittingEvents();
+			this.scrollUpBtn?.stopEmittingEvents();
 		}
 	}
 
@@ -169,7 +173,7 @@ export class BrnSelectContentComponent implements AfterViewInit {
 		const viewportSize = this._el.nativeElement.scrollHeight;
 		const viewportScrollPosition = this.viewport.nativeElement.scrollTop;
 		if (viewportSize + viewportScrollPosition + 100 > this.viewport.nativeElement.scrollHeight + 50) {
-			this.scrollDownBtn.stopEmittingEvents();
+			this.scrollDownBtn?.stopEmittingEvents();
 		}
 	}
 }

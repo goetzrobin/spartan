@@ -10,9 +10,9 @@ import { BrnSelectImports } from '../../';
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="fruitGroup">
-			<brn-select class="w-56" formControlName="fruit" placeholder="Select a Fruit">
+			<brn-select class="w-56" formControlName="fruit" placeholder="Select an option">
 				<button brnSelectTrigger data-testid="brn-select-trigger">
-					<brn-select-value />
+					<brn-select-value data-testid="brn-select-value" />
 				</button>
 				<brn-select-content class="w-56" data-testid="brn-select-content">
 					<label brnSelectLabel>Fruits</label>
@@ -41,7 +41,7 @@ export class SelectReactiveFieldComponent {
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
-			<brn-select class="w-56" formControlName="fruit" placeholder="Select a Fruit">
+			<brn-select class="w-56" formControlName="fruit" placeholder="Select an option">
 				<button brnSelectTrigger data-testid="brn-select-trigger">
 					<brn-select-value data-testid="brn-select-value" />
 				</button>
@@ -72,7 +72,7 @@ export class SelectSingleValueTestComponent {
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
-			<brn-select class="w-56" formControlName="fruit" placeholder="Select a Fruit">
+			<brn-select class="w-56" formControlName="fruit" placeholder="Select an option">
 				<button brnSelectTrigger data-testid="brn-select-trigger">
 					<brn-select-value data-testid="brn-select-value" />
 				</button>
@@ -103,7 +103,7 @@ export class SelectSingleValueWithInitialValueTestComponent {
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
-			<brn-select class="w-56" formControlName="fruit" placeholder="Select a Fruit" [multiple]="true">
+			<brn-select class="w-56" formControlName="fruit" placeholder="Select an option" [multiple]="true">
 				<button brnSelectTrigger data-testid="brn-select-trigger">
 					<brn-select-value data-testid="brn-select-value" />
 				</button>
@@ -134,7 +134,7 @@ export class SelectMultiValueTestComponent {
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
-			<brn-select class="w-56" formControlName="fruit" placeholder="Select a Fruit" [multiple]="true">
+			<brn-select class="w-56" formControlName="fruit" placeholder="Select an option" [multiple]="true">
 				<button brnSelectTrigger data-testid="brn-select-trigger">
 					<brn-select-value data-testid="brn-select-value" />
 				</button>
