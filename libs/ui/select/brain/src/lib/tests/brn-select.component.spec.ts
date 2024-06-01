@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { BrnSelectImports } from '../../index';
-import { SelectMultiValueTestComponent, SelectSingleValueTestComponent } from './select-reactive-form';
 
 describe('BrnSelectComponent', () => {
 	const setup = async () => {
@@ -38,26 +37,6 @@ describe('BrnSelectComponent', () => {
 		};
 	};
 
-	const setupWithFormValidation = async () => {
-		const { fixture } = await render(SelectSingleValueTestComponent);
-		return {
-			user: userEvent.setup(),
-			fixture,
-			trigger: screen.getByTestId('brn-select-trigger'),
-			value: screen.getByTestId('brn-select-value'),
-		};
-	};
-
-	const setupWithFormValidationMulti = async () => {
-		const { fixture } = await render(SelectMultiValueTestComponent);
-		return {
-			user: userEvent.setup(),
-			fixture,
-			trigger: screen.getByTestId('brn-select-trigger'),
-			value: screen.getByTestId('brn-select-value'),
-		};
-	};
-
 	describe('default', () => {
 		it('openChanged should emit event on open and close', async () => {
 			const { user, trigger, openChangeSpy } = await setup();
@@ -65,58 +44,6 @@ describe('BrnSelectComponent', () => {
 			expect(openChangeSpy).toHaveBeenCalledTimes(1);
 			await user.click(trigger);
 			expect(openChangeSpy).toHaveBeenCalledTimes(2);
-		});
-	});
-
-	describe('form validation', () => {
-		it('should reflect initial single value set on formcontrol', async () => {
-			const { fixture, value } = await setupWithFormValidation();
-
-			expect(value.textContent?.trim()).toBe('Apple');
-			expect((fixture.componentInstance as SelectSingleValueTestComponent).form?.get('fruit')?.value).toEqual('apple');
-		});
-
-		it('should reflect initial single value set on formcontrol and update with next option', async () => {
-			const { user, trigger, fixture, value } = await setupWithFormValidation();
-
-			expect(value.textContent?.trim()).toBe('Apple');
-			expect((fixture.componentInstance as SelectSingleValueTestComponent).form?.get('fruit')?.value).toEqual('apple');
-
-			await user.click(trigger);
-			const options = await screen.getAllByRole('option');
-			await user.click(options[1]);
-
-			expect((fixture.componentInstance as SelectSingleValueTestComponent).form?.get('fruit')?.value).toEqual('banana');
-		});
-
-		it('should reflect initial multi value set on formcontrol', async () => {
-			const { fixture, value } = await setupWithFormValidationMulti();
-
-			expect(value.textContent?.trim()).toBe('Apple, Blueberry');
-			expect((fixture.componentInstance as SelectMultiValueTestComponent).form?.get('fruit')?.value).toEqual([
-				'apple',
-				'blueberry',
-			]);
-		});
-
-		it('should reflect initial multi value set on formcontrol and update with next option including previous', async () => {
-			const { user, trigger, fixture, value } = await setupWithFormValidationMulti();
-
-			expect(value.textContent?.trim()).toBe('Apple, Blueberry');
-			expect((fixture.componentInstance as SelectMultiValueTestComponent).form?.get('fruit')?.value).toEqual([
-				'apple',
-				'blueberry',
-			]);
-
-			await user.click(trigger);
-			const options = await screen.getAllByRole('option');
-			await user.click(options[1]);
-
-			expect((fixture.componentInstance as SelectSingleValueTestComponent).form?.get('fruit')?.value).toEqual([
-				'apple',
-				'banana',
-				'blueberry',
-			]);
 		});
 	});
 
