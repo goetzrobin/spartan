@@ -64,34 +64,30 @@ async function createPrimitiveLibraries(
 		return tasks;
 	}
 
-	for (const primitiveName of primitivesToCreate) {
-		if (primitiveName === 'collapsible') continue;
-
-		const internalName = availablePrimitives[primitiveName].internalName;
-		const peerDependencies = availablePrimitives[primitiveName].peerDependencies;
-		const installTask = await (
-			(await import(
-				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-ignore
-				`./libs/${internalName}/generator`
-			)) as {
+	const installTasks = primitivesToCreate
+		.filter((primitiveName) => primitiveName !== 'collapsible')
+		.map(async (primitiveName) => {
+			const internalName = availablePrimitives[primitiveName].internalName;
+			const peerDependencies = availablePrimitives[primitiveName].peerDependencies;
+			const generatorModule = (await import(`./libs/${internalName}/generator`)) as unknown as {
 				generator: (tree: Tree, options: HlmBaseGeneratorSchema) => Promise<GeneratorCallback>;
-			}
-		).generator(tree, {
-			// get overwritten by each specific generator
-			internalName: '',
-			publicName: '',
-			primitiveName: '',
-			peerDependencies,
-			skipBrainDependencies: options.skipBrainDependencies,
-			directory: options.directory,
-			tags: options.tags,
-			rootProject: options.rootProject,
-			angularCli: options.angularCli,
+			};
+
+			return generatorModule.generator(tree, {
+				internalName: '',
+				publicName: '',
+				primitiveName: '',
+				peerDependencies,
+				skipBrainDependencies: options.skipBrainDependencies,
+				directory: options.directory,
+				tags: options.tags,
+				rootProject: options.rootProject,
+				angularCli: options.angularCli,
+			});
 		});
 
-		tasks.push(installTask);
-	}
+	const results = await Promise.all(installTasks);
+	tasks.push(...results);
 
 	return tasks;
 }
@@ -111,7 +107,7 @@ const addIconForDependentPrimitive = async (primitivesToCreate: string[], primit
 					'Some of the primitives you are trying to install depend on the icon primitive. Do you want to add it to your project?',
 			})
 		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
-		)['installIcon'];;
+		)['installIcon'];
 		if (installIcon) {
 			primitivesToCreate.push('icon');
 		}
