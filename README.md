@@ -61,6 +61,14 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 42. [tomdev9](https://github.com/tomdev9)
 43. [ragul1697](https://github.com/ragul1697)
 44. [snydertechnologies](https://github.com/snydertechnologies)
+45. [kkamman](https://github.com/kkamman)
+46. [i-am-the-slime](https://github.com/i-am-the-slime)
+47. [DevWedeloper](https://github.com/DevWedeloper)
+48. [mrsofiane](https://github.com/mrsofiane)
+49. [mateoetchepare](https://github.com/mateoetchepare)
+50. [DonaldMurillo](https://github.com/DonaldMurillo)
+51. [toniskobic](https://github.com/toniskobic)
+
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
