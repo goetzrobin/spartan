@@ -144,5 +144,5 @@ export const defaultSkeleton = `
       <button hlmAlertDialogAction (click)='ctx.close()'>Delete account</button>
     </hlm-alert-dialog-footer>
   </hlm-alert-dialog-content>
-</brn-alert-dialog>
+</hlm-alert-dialog>
 `;
