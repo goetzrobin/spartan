@@ -64,6 +64,13 @@ export class ThreeHundredComponent {
 		'monacodelisa',
 		'tomdev9',
 		'ragul1697',
+		'kkamman',
+		'i-am-the-slime',
+		'DevWedeloper',
+		'mrsofiane',
+		'mateoetchepare',
+		'DonaldMurillo',
+		'toniskobic',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((_, i) => i);
 }
