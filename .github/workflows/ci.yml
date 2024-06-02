@@ -44,8 +44,8 @@ jobs:
       - run: corepack use pnpm@9
       - uses: actions/setup-node@v4
         with:
-          cache: "pnpm"
-          cache-dependency-path: "**/pnpm-lock.yaml"
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
 
@@ -67,8 +67,8 @@ jobs:
       - run: pnpm --version
       - uses: actions/setup-node@v4
         with:
-          cache: "pnpm"
-          cache-dependency-path: "**/pnpm-lock.yaml"
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Build
@@ -87,8 +87,8 @@ jobs:
       - run: pnpm --version
       - uses: actions/setup-node@v4
         with:
-          cache: "pnpm"
-          cache-dependency-path: "**/pnpm-lock.yaml"
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Test
@@ -107,8 +107,8 @@ jobs:
       - run: pnpm --version
       - uses: actions/setup-node@v4
         with:
-          cache: "pnpm"
-          cache-dependency-path: "**/pnpm-lock.yaml"
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - name: Install
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Install Cypress
