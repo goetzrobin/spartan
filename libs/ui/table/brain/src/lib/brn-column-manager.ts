@@ -1,4 +1,4 @@
-import { computed, signal, type Signal } from '@angular/core';
+import { type Signal, computed, signal } from '@angular/core';
 
 type BrnColumnVisibility = Record<string, boolean> | Record<string, { visible: boolean }>;
 
