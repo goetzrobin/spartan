@@ -7,10 +7,10 @@ import { Component, signal } from '@angular/core';
 			<div class="mb-3">
 				<pre>Form Control Value: {{ fruit() | json }}</pre>
 			</div>
-			<hlm-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} [(ngModel)]="fruit" name="fruit">
-				<label hlmLabel>Select a Fruit</label>
+			<hlm-select class="w-56" [(ngModel)]="fruit" name="fruit">
+				<label hlmLabel>Select an option</label>
 				<hlm-select-trigger>
-					<brn-select-value hlm />
+					<brn-select-value data-testid="brn-select-value" hlm />
 				</hlm-select-trigger>
 				<hlm-select-content>
 					<hlm-select-label>Fruits</hlm-select-label>

@@ -5,7 +5,7 @@ import { SelectMultiValueTestComponent, SelectMultiValueWithInitialValueTestComp
 import { getFormControlStatus, getFormValidationClasses } from './utils';
 
 describe('Brn Select Component in multi-mode', () => {
-	const DEFAULT_LABEL = 'Select a Fruit';
+	const DEFAULT_LABEL = 'Select an option';
 
 	const setupWithFormValidationMulti = async () => {
 		const { fixture } = await render(SelectMultiValueTestComponent);

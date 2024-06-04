@@ -1,15 +1,14 @@
-import { CdkListbox, type ListboxValueChangeEvent } from '@angular/cdk/listbox';
+import { CdkListbox } from '@angular/cdk/listbox';
 import { NgTemplateOutlet } from '@angular/common';
 import {
+	type AfterContentInit,
 	type AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
-	ContentChild,
-	ContentChildren,
 	DestroyRef,
 	ElementRef,
-	type QueryList,
-	ViewChild,
+	contentChild,
+	contentChildren,
 	effect,
 	inject,
 	signal,
@@ -23,10 +22,11 @@ import { BrnSelectService } from './brn-select.service';
 @Component({
 	selector: 'brn-select-content, hlm-select-content:not(noHlm)',
 	standalone: true,
-	imports: [BrnSelectScrollUpDirective, BrnSelectScrollDownDirective, NgTemplateOutlet],
-	hostDirectives: [CdkListbox],
+	imports: [CdkListbox, BrnSelectScrollUpDirective, BrnSelectScrollDownDirective, NgTemplateOutlet],
+	hostDirectives: [{ directive: CdkListbox, outputs: ['cdkListboxValueChange'] }],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
+		'(cdkListboxValueChange)': 'this._selectService.listBoxValueChangeEvent$.next($event)',
 		'[attr.aria-labelledBy]': 'labelledBy()',
 		'[attr.aria-controlledBy]': "id() +'--trigger'",
 		'[id]': "id() + '--content'",
@@ -58,7 +58,7 @@ import { BrnSelectService } from './brn-select.service';
 			<ng-content select="hlm-select-scroll-up" />
 			<ng-content select="brnSelectScrollUp" />
 		</ng-template>
-		<ng-container *ngTemplateOutlet="canScrollUp() && scrollUpBtn ? scrollUp : null" />
+		<ng-container *ngTemplateOutlet="canScrollUp() && scrollUpBtn() ? scrollUp : null" />
 		<div
 			data-brn-select-viewport
 			#viewport
@@ -77,10 +77,10 @@ import { BrnSelectService } from './brn-select.service';
 			<ng-content select="brnSelectScrollDown" />
 			<ng-content select="hlm-select-scroll-down" />
 		</ng-template>
-		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn ? scrollDown : null" />
+		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn() ? scrollDown : null" />
 	`,
 })
-export class BrnSelectContentComponent implements AfterViewInit {
+export class BrnSelectContentComponent implements AfterViewInit, AfterContentInit {
 	private readonly _el: ElementRef<HTMLElement> = inject(ElementRef);
 	private readonly _cdkListbox = inject(CdkListbox, { host: true });
 	private readonly destroyRef = inject(DestroyRef);
@@ -93,24 +93,12 @@ export class BrnSelectContentComponent implements AfterViewInit {
 
 	protected initialSelectedOptions$ = toObservable(this._selectService.initialSelectedOptions);
 
-	@ViewChild('viewport')
-	protected viewport!: ElementRef<HTMLElement>;
-
-	@ContentChild(BrnSelectScrollUpDirective, { static: false })
-	protected scrollUpBtn!: BrnSelectScrollUpDirective;
-
-	@ContentChild(BrnSelectScrollDownDirective, { static: false })
-	protected scrollDownBtn!: BrnSelectScrollDownDirective;
-
-	@ContentChildren(BrnSelectOptionDirective, { descendants: true })
-	protected _options!: QueryList<BrnSelectOptionDirective>;
+	protected viewport = contentChild<ElementRef<HTMLElement>>('viewport');
+	protected scrollUpBtn = contentChild(BrnSelectScrollUpDirective);
+	protected scrollDownBtn = contentChild(BrnSelectScrollDownDirective);
+	protected _options = contentChildren<BrnSelectOptionDirective>(BrnSelectOptionDirective, { descendants: true });
 
 	constructor() {
-		this._cdkListbox.valueChange
-			.asObservable()
-			.pipe(takeUntilDestroyed())
-			.subscribe((val: ListboxValueChangeEvent<unknown>) => this._selectService.listBoxValueChangeEvent$.next(val));
-
 		effect(() => {
 			this._cdkListbox.multiple = this._selectService.multiple();
 			this._selectService.isExpanded() && setTimeout(() => this.updateArrowDisplay());
@@ -121,6 +109,10 @@ export class BrnSelectContentComponent implements AfterViewInit {
 		this.setInitiallySelectedOptions();
 	}
 
+	ngAfterContentInit(): void {
+		this._selectService.selectContentLoaded$.next(true);
+	}
+
 	private setInitiallySelectedOptions() {
 		this.initialSelectedOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((selectedOptions) => {
 			// Reapplying cdkLibstbox multiple because seems this is running before effect that
@@ -128,7 +120,6 @@ export class BrnSelectContentComponent implements AfterViewInit {
 			if (this._selectService.multiple()) {
 				this._cdkListbox.multiple = true;
 			}
-
 			for (const cdkOption of this._selectService.possibleOptions()) {
 				if (selectedOptions.includes(cdkOption)) {
 					cdkOption?.select();
@@ -136,7 +127,6 @@ export class BrnSelectContentComponent implements AfterViewInit {
 					cdkOption?.deselect();
 				}
 			}
-
 			for (const cdkOption of selectedOptions) {
 				cdkOption?.select();
 			}
@@ -144,9 +134,12 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	}
 
 	public updateArrowDisplay(): void {
-		this.canScrollUp.set(this.viewport.nativeElement.scrollTop > 0);
-		const maxScroll = this.viewport.nativeElement.scrollHeight - this.viewport.nativeElement.clientHeight;
-		this.canScrollDown.set(Math.ceil(this.viewport.nativeElement.scrollTop) < maxScroll);
+		const viewport = this.viewport();
+		if (viewport) {
+			this.canScrollUp.set(viewport.nativeElement.scrollTop > 0);
+			const maxScroll = viewport.nativeElement.scrollHeight - viewport.nativeElement.clientHeight;
+			this.canScrollDown.set(Math.ceil(viewport.nativeElement.scrollTop) < maxScroll);
+		}
 	}
 
 	public handleScroll() {
@@ -158,18 +151,24 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	}
 
 	public moveFocusUp() {
-		this.viewport.nativeElement.scrollBy({ top: -100, behavior: 'smooth' });
-		if (this.viewport.nativeElement.scrollTop === 0) {
-			this.scrollUpBtn.stopEmittingEvents();
+		const viewport = this.viewport();
+		if (viewport) {
+			viewport.nativeElement.scrollBy({ top: -100, behavior: 'smooth' });
+			if (viewport.nativeElement.scrollTop === 0) {
+				this.scrollUpBtn()?.stopEmittingEvents();
+			}
 		}
 	}
 
 	public moveFocusDown() {
-		this.viewport.nativeElement.scrollBy({ top: 100, behavior: 'smooth' });
-		const viewportSize = this._el.nativeElement.scrollHeight;
-		const viewportScrollPosition = this.viewport.nativeElement.scrollTop;
-		if (viewportSize + viewportScrollPosition + 100 > this.viewport.nativeElement.scrollHeight + 50) {
-			this.scrollDownBtn.stopEmittingEvents();
+		const viewport = this.viewport();
+		if (viewport) {
+			viewport.nativeElement.scrollBy({ top: 100, behavior: 'smooth' });
+			const viewportSize = this._el.nativeElement.scrollHeight;
+			const viewportScrollPosition = viewport.nativeElement.scrollTop;
+			if (viewportSize + viewportScrollPosition + 100 > viewport.nativeElement.scrollHeight + 50) {
+				this.scrollDownBtn()?.stopEmittingEvents();
+			}
 		}
 	}
 }
