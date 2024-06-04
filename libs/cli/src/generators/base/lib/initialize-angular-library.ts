@@ -1,4 +1,4 @@
-import type { Tree } from '@nx/devkit';
+import { type Tree, joinPathFragments} from '@nx/devkit';
 import type { HlmBaseGeneratorSchema } from '../schema';
 
 export async function initializeAngularLibrary(tree: Tree, options: HlmBaseGeneratorSchema) {
@@ -18,7 +18,7 @@ export async function initializeAngularLibrary(tree: Tree, options: HlmBaseGener
 		prefix: 'hlm',
 		skipModule: true,
 		standalone: false,
-		directory: options.directory,
+		directory: joinPathFragments(options.directory, options.publicName),
 		tags: options.tags,
 	});
 }
