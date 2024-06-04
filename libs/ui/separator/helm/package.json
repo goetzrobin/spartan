@@ -2,8 +2,8 @@
 	"name": "@spartan-ng/ui-separator-helm",
 	"version": "0.0.1-alpha.10",
 	"peerDependencies": {
-		"@angular/core": "^17.3.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.349",
+		"@angular/core": "^18.0.0",
+		"@spartan-ng/ui-core": "0.0.1-alpha.350",
 		"clsx": "^1.2.1"
 	},
 	"dependencies": {},

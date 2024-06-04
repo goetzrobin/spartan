@@ -10591,8 +10591,8 @@ packages:
   ngx-sonner@1.0.0:
     resolution: {integrity: sha512-eymqTMVGrQAm0R9b+/koA+cymyTmE86q0giZI611apEwH3MDdIB6wEDwqc4DPSQ+AQJlgBz4vJxTFCOY+lXCzQ==}
     peerDependencies:
-      '@angular/common': '>=17.3.0'
-      '@angular/core': '>=17.3.0'
+      '@angular/common': '>=18.0.0'
+      '@angular/core': '>=18.0.0'
 
   nice-napi@1.0.2:
     resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}
