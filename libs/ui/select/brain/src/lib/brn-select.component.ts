@@ -198,11 +198,15 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			this.ngControl.valueAccessor = this;
 		}
 
-		// Watch for Listbox Selection Changes to trigger Collapse
+		// Watch for Listbox Selection Changes to trigger Collapse and Value Change
 		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe(() => {
 			if (!this._multiple()) {
 				this.close();
 			}
+
+			// we set shouldEmitValueChange to true because we want to propagate the value change
+			// as a result of user interaction
+			this._shouldEmitValueChange.set(true);
 		});
 
 		/**
@@ -211,24 +215,16 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		 * we dont propagate changes made from outside the component (ex. patch value or initial value from form control)
 		 */
 		toObservable(this._selectService.value)
-			.pipe(
-				filter(() => {
-					const shouldEmitValueChange = this._shouldEmitValueChange();
-					this._shouldEmitValueChange.set(true);
-					return shouldEmitValueChange;
-				}),
-				takeUntilDestroyed(),
-			)
-			.subscribe((value) => this._onChange(value ?? null));
+			.subscribe((value) => {
+				if (this._shouldEmitValueChange()) {
+					this._onChange(value ?? null)
+				}
+				this._shouldEmitValueChange.set(true);
+			});
 
-		toObservable(this.dir)
-			.pipe(takeUntilDestroyed())
-			.subscribe(() =>
-				this._selectService.state.update((state) => ({
-					...state,
-					dir: this.dir(),
-				})),
-			);
+		toObservable(this.dir).subscribe((dir) =>
+			this._selectService.state.update((state) => ({ ...state, dir })),
+		);
 	}
 
 	public ngAfterContentInit(): void {
@@ -290,15 +286,10 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		setTimeout(() => this.selectContent.focusList());
 	}
 
-	private _initialWriteValueRun = false;
 	public writeValue(value: any): void {
-		// we set shouldEmitValueChange to false only on the first write value
-		// this is to ensure we don't propagate changes made from outside the component
-		if (!this._initialWriteValueRun) {
-			this._shouldEmitValueChange.set(false);
-			this._initialWriteValueRun = true;
-		}
-
+		// 'shouldEmitValueChange' ensures we don't propagate changes when we receive value from form control
+		// set to false until next value change and then reset back to true
+		this._shouldEmitValueChange.set(false);
 		this._selectService.setInitialSelectedOptions(value);
 	}
 
