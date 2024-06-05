@@ -31,7 +31,6 @@ export class BrnSelectOptionDirective implements FocusableOption, OnDestroy {
 		this._selectService.registerOption(this._cdkSelectOption);
 
 		toObservable(this._selectService.value)
-			.pipe(takeUntilDestroyed())
 			.subscribe((selectedValues: string | string[]) => {
 				if (Array.isArray(selectedValues)) {
 					const itemFound = (selectedValues as Array<unknown>).find((val) => val === this._cdkSelectOption.value);

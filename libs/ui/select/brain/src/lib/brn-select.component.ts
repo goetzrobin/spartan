@@ -198,11 +198,15 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			this.ngControl.valueAccessor = this;
 		}
 
-		// Watch for Listbox Selection Changes to trigger Collapse
+		// Watch for Listbox Selection Changes to trigger Collapse and Value Change
 		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe(() => {
 			if (!this._multiple()) {
 				this.close();
 			}
+
+			// we set shouldEmitValueChange to true because we want to propagate the value change
+			// as a result of user interaction
+			this._shouldEmitValueChange.set(true);
 		});
 
 		/**
@@ -211,24 +215,16 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		 * we dont propagate changes made from outside the component (ex. patch value or initial value from form control)
 		 */
 		toObservable(this._selectService.value)
-			.pipe(
-				filter(() => {
-					const shouldEmitValueChange = this._shouldEmitValueChange();
-					this._shouldEmitValueChange.set(true);
-					return shouldEmitValueChange;
-				}),
-				takeUntilDestroyed(),
-			)
-			.subscribe((value) => this._onChange(value ?? null));
+			.subscribe((value) => {
+				if (this._shouldEmitValueChange()) {
+					this._onChange(value ?? null)
+				}
+				this._shouldEmitValueChange.set(true);
+			});
 
-		toObservable(this.dir)
-			.pipe(takeUntilDestroyed())
-			.subscribe(() =>
-				this._selectService.state.update((state) => ({
-					...state,
-					dir: this.dir(),
-				})),
-			);
+		toObservable(this.dir).subscribe((dir) =>
+			this._selectService.state.update((state) => ({ ...state, dir })),
+		);
 	}
 
 	public ngAfterContentInit(): void {
@@ -291,7 +287,7 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	}
 
 	public writeValue(value: any): void {
-		// 'shouldEmitValueChange' ensures we don't propagate changes when we recieve value from from form control
+		// 'shouldEmitValueChange' ensures we don't propagate changes when we receive value from form control
 		// set to false until next value change and then reset back to true
 		this._shouldEmitValueChange.set(false);
 		this._selectService.setInitialSelectedOptions(value);
