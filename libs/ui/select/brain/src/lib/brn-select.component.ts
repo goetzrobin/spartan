@@ -290,10 +290,15 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		setTimeout(() => this.selectContent.focusList());
 	}
 
+	private _initialWriteValueRun = false;
 	public writeValue(value: any): void {
-		// 'shouldEmitValueChange' ensures we don't propagate changes when we recieve value from from form control
-		// set to false until next value change and then reset back to true
-		this._shouldEmitValueChange.set(false);
+		// we set shouldEmitValueChange to false only on the first write value
+		// this is to ensure we don't propagate changes made from outside the component
+		if (!this._initialWriteValueRun) {
+			this._shouldEmitValueChange.set(false);
+			this._initialWriteValueRun = true;
+		}
+
 		this._selectService.setInitialSelectedOptions(value);
 	}
 

@@ -1,7 +1,7 @@
 import { Validators } from '@angular/forms';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
-import { SelectSingleValueTestComponent, SelectSingleValueWithInitialValueTestComponent } from './select-reactive-form';
+import { SelectSingleValueTestComponent, SelectSingleValueWithInitialValueTestComponent, SelectSingleValueWithInitialValueWithAsyncUpdateTestComponent } from './select-reactive-form';
 import { getFormControlStatus, getFormValidationClasses } from './utils';
 
 describe('Brn Select Component in single-mode', () => {
@@ -21,6 +21,17 @@ describe('Brn Select Component in single-mode', () => {
 
 	const setupWithFormValidationAndInitialValue = async () => {
 		const { fixture } = await render(SelectSingleValueWithInitialValueTestComponent);
+		return {
+			user: userEvent.setup(),
+			fixture,
+			trigger: screen.getByTestId('brn-select-trigger'),
+			value: screen.getByTestId('brn-select-value'),
+		};
+	};
+
+
+	const setupWithFormValidationAndInitialValueAndAsyncUpdate = async () => {
+		const { fixture } = await render(SelectSingleValueWithInitialValueWithAsyncUpdateTestComponent);
 		return {
 			user: userEvent.setup(),
 			fixture,
@@ -174,6 +185,61 @@ describe('Brn Select Component in single-mode', () => {
 			expect(getFormValidationClasses(trigger)).toStrictEqual(afterSelectionExpected);
 
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual('banana');
+			expect(screen.getByTestId('brn-select-value').textContent?.trim()).toBe('Banana');
+		});
+
+		it('should reflect correct formcontrol status after first user selection with initial value and async update', async () => {
+			const { user, trigger, fixture, value } = await setupWithFormValidationAndInitialValueAndAsyncUpdate();
+			const cmpInstance = fixture.componentInstance as SelectSingleValueWithInitialValueTestComponent;
+
+			expect(value.textContent?.trim()).toBe(INITIAL_VALUE_TEXT);
+			expect(cmpInstance.form?.get('fruit')?.value).toEqual(INITIAL_VALUE);
+
+			const expected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(expected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
+
+			// Open Select
+			await user.click(trigger);
+
+			const afterOpenExpected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterOpenExpected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(afterOpenExpected);
+
+			// Select option
+			const options = await screen.getAllByRole('option');
+			await user.click(options[1]);
+
+			const afterSelectionExpected = {
+				untouched: false,
+				touched: true,
+				valid: true,
+				invalid: false,
+				pristine: false,
+				dirty: true,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterSelectionExpected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(afterSelectionExpected);
+
+			expect(cmpInstance.form?.get('fruit')?.value).toEqual('banana');
+			expect(value.textContent?.trim()).toBe('Banana');
 		});
 	});
 
