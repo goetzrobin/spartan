@@ -71,6 +71,7 @@ export class ThreeHundredComponent {
 		'mateoetchepare',
 		'DonaldMurillo',
 		'toniskobic',
+		'eneajaho'
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((_, i) => i);
 }

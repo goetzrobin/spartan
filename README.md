@@ -68,6 +68,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 49. [mateoetchepare](https://github.com/mateoetchepare)
 50. [DonaldMurillo](https://github.com/DonaldMurillo)
 51. [toniskobic](https://github.com/toniskobic)
+52. [eneajaho](https://github.com/eneajaho)
 
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
