@@ -69,7 +69,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
 export const codeString =
 	`import { Component } from '@angular/core';${codeImports}
-	@Component({
+@Component({
 	selector: 'spartan-accordion-preview',
 	standalone: true,
 	imports: [
