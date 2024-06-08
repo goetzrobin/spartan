@@ -38,7 +38,7 @@ export const routeMeta: RouteMeta = {
 					<code class="${hlmCode}">spartan/ui</code>
 					is built on TailwindCSS with custom CSS variables:
 				</p>
-				<spartan-code class="mt-4" code='<div className="bg-background text-foreground">spartan</div>' />
+				<spartan-code class="mt-4" code='<div class="bg-background text-foreground">spartan</div>' />
 			</section>
 			<spartan-section-sub-heading id="convention">Convention</spartan-section-sub-heading>
 			<section>
@@ -77,7 +77,7 @@ export const routeMeta: RouteMeta = {
 					<code class="${hlmCode}">hsl(var(--primary-foreground))</code>
 					.
 				</p>
-				<spartan-code class="mt-4" code='<div className="bg-primary text-primary-foreground">Hello</div>' />
+				<spartan-code class="mt-4" code='<div class="bg-primary text-primary-foreground">Hello</div>' />
 				<div class="mt-4 text-sm" hlmAlert>
 					<p>
 						<span class="font-semibold">CSS variables must be defined without color space function.</span>
@@ -278,7 +278,7 @@ module.exports = {
 				<spartan-code
 					class="mt-4"
 					code='
-        <div className="bg-warning text-warning-foreground">Warning</div>
+        <div class="bg-warning text-warning-foreground">Warning</div>
         '
 				/>
 			</section>
