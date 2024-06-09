@@ -17,6 +17,15 @@ export const routeMeta: RouteMeta = {
 	host: {
 		class: 'block p-4 pt-6 sm:pb-16 sm:pt-12',
 	},
+	styles: `
+		.scrollbar-w-0 {
+			scrollbar-width: none;
+		}
+
+		.scrollbar-w-0::-webkit-scrollbar {
+			width: 0;
+		}
+	`,
 	template: `
 		<h1 class="${hlmH1}">Check out some examples.</h1>
 		<p class="${hlmLead} mt-4 max-w-xl">
@@ -27,14 +36,15 @@ export const routeMeta: RouteMeta = {
 			<a hlmBtn size="sm" variant="outline" routerLink="/components">Components</a>
 		</div>
 
-		<nav class="mt-12 mb-2">
+		<nav class="scrollbar-w-0 mb-2 mt-12 h-11 sm:h-auto overflow-x-auto">
 			<ul class="flex space-x-2">
 				<li><a class="!font-medium" spartanNavLink="/examples/notes">Notes</a></li>
 				<li><a class="!font-medium" spartanNavLink="/examples/typography">Typography</a></li>
 				<li><a class="!font-medium" spartanNavLink="/examples/authentication">Authentication</a></li>
+				<li><a class="!font-medium" spartanNavLink="/examples/music">Music</a></li>
 			</ul>
 		</nav>
-		<div class="overflow-hidden border rounded-lg border-border">
+		<div class="border-border overflow-hidden rounded-lg border">
 			<router-outlet />
 		</div>
 	`,
