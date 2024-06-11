@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChild, type ElementRef, ViewChild, computed, input, signal } from '@angular/core';
+import { ContentChild, type ElementRef, ViewChild, computed, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import type { ClassValue } from 'clsx';
@@ -451,3 +453,65 @@ export class CustomSelectTriggerComponent {
 		),
 	);
 }
+
+export const WithLabelAndForm: Story = {
+	render: () => ({
+		moduleMetadata: {
+			imports: [LabelAndFormComponent],
+		},
+		template: /* HTML */ '<label-and-form-component/>',
+	}),
+};
+@Component({
+	selector: 'label-and-form-component',
+	standalone: true,
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		BrnSelectImports,
+		HlmSelectImports,
+		HlmLabelDirective,
+		HlmButtonDirective,
+	],
+	providers: [],
+	host: {
+		class: '',
+	},
+	template: `
+		<form class='space-y-5' (ngSubmit)='handleSubmit()'>
+			<label hlmLabel>Select a Fruit*
+				<hlm-select
+					class='w-56'
+					[(ngModel)]='fruit'
+					name='fruit'
+					required
+				>
+					<hlm-select-trigger>
+						<brn-select-value hlm />
+					</hlm-select-trigger>
+					<hlm-select-content>
+						<hlm-select-label>Fruits</hlm-select-label>
+						<hlm-option [value]='undefined'>No fruit</hlm-option>
+						<hlm-option value='apple'>Apple</hlm-option>
+						<hlm-option value='banana'>Banana</hlm-option>
+						<hlm-option value='blueberry'>Blueberry</hlm-option>
+						<hlm-option value='grapes'>Grapes</hlm-option>
+						<hlm-option value='pineapple'>Pineapple</hlm-option>
+					</hlm-select-content>
+				</hlm-select>
+			</label>
+			<button hlmBtn>Submit</button>
+		</form>
+	`,
+})
+class LabelAndFormComponent {
+	public fruit = signal<string | undefined>(undefined)
+
+	public handleSubmit(): void {
+		console.log(this.fruit())
+	}
+}
+
