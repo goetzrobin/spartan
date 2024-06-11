@@ -1,17 +1,17 @@
-import { withThemeByDataAttribute } from '@storybook/addon-styling';
+import { withThemeByClassName } from '@storybook/addon-themes';
 
 export const decorators = [
-	withThemeByDataAttribute({
+	withThemeByClassName({
 		themes: {
 			light: 'light',
 			dark: 'dark',
 		},
 		defaultTheme: 'light',
-		attributeName: 'data-mode',
 	}),
 ];
 
 const preview = {
+	decorators,
 	parameters: {
 		options: {
 			storySort: {
