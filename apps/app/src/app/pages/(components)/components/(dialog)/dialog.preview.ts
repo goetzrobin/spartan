@@ -142,5 +142,5 @@ export const defaultSkeleton = `
       <button hlmBtn type="submit">Save changes</button>
     </hlm-dialog-footer>
   </hlm-dialog-content>
-</brn-dialog>
+</hlm-dialog>
 `;
