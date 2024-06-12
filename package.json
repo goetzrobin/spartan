@@ -80,7 +80,7 @@
 		"mermaid": "^10.2.4",
 		"ng-signal-forms": "^1.4.0",
 		"ngx-scrollbar": "^13.0.1",
-		"ngx-sonner": "1.0.0",
+		"ngx-sonner": "2.0.0",
 		"ofetch": "^1.3.4",
 		"ohash": "^1.1.3",
 		"postgres": "^3.4.4",
