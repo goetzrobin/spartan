@@ -316,7 +316,7 @@
 			"@ng-icons/lucide": "^26.3.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.351",
 			"clsx": "^1.2.1",
-			"ngx-sonner": "^0.3.4"
+			"ngx-sonner": "^2.0.0"
 		}
 	},
 	"helm": {
