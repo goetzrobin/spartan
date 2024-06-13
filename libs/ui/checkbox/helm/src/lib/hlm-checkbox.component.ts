@@ -67,7 +67,7 @@ export class HlmCheckboxComponent {
 	public readonly checked = model<boolean | 'indeterminate'>(false);
 
 	public readonly name = input<string | null>(null);
-	public readonly disabled = input(false, { transform: booleanAttribute });
+	public readonly disabled = model(false);
 	public readonly required = input(false, { transform: booleanAttribute });
 
 	// icon inputs
@@ -105,5 +105,9 @@ export class HlmCheckboxComponent {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	registerOnTouched(fn: any): void {
 		this._onTouched = fn;
+	}
+
+	setDisabledState(isDisabled: boolean): void {
+		this.disabled.set(isDisabled);
 	}
 }
