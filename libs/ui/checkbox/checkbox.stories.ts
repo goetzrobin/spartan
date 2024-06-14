@@ -49,6 +49,7 @@ type Story = StoryObj<HlmCheckboxComponent>;
 export const Default: Story = {
 	render: () => ({
 		template: `
+		/* HTML */
     <label id='checkbox-label' class='' hlmLabel> Test Checkbox
        <hlm-checkbox id='testCheckbox' aria-checked='mixed' aria-label='test checkbox'/>
     </label>
@@ -59,6 +60,7 @@ export const Default: Story = {
 export const InsideLabel: Story = {
 	render: () => ({
 		template: `
+			/* HTML */
       <label id='checkbox-label' class='flex items-center' hlmLabel> Test Checkbox
         <hlm-checkbox class='ml-2' id='testCheckbox'/>
       </label>
@@ -69,6 +71,7 @@ export const InsideLabel: Story = {
 export const LabeledWithAriaLabeledBy: Story = {
 	render: () => ({
 		template: `
+			/* HTML */
       <div id='checkbox-label' class='flex items-center'>
          <label id='testCheckbox' for='testCheckboxAria' hlmLabel> Test Checkbox </label>
          <hlm-checkbox class='ml-2' id='testCheckboxAria' aria-labelledby='testCheckbox'/>
@@ -80,6 +83,7 @@ export const LabeledWithAriaLabeledBy: Story = {
 export const disabled: Story = {
 	render: () => ({
 		template: `
+			/* HTML */
       <div class='flex items-center'>
         <label id='checkbox-label' for='testCheckboxDis1' hlmLabel> Test Checkbox </label>
        	<hlm-checkbox disabled class='ml-2' id='testCheckboxDis1' aria-labelledby='testCheckbox'/>
@@ -101,6 +105,7 @@ export const disabled: Story = {
 export const disabledWithForms: Story = {
 	render: () => ({
 		template: `
+			/* HTML */
 			<hlm-checkbox-component-tester />
     `,
 	}),
@@ -109,6 +114,7 @@ export const disabledWithForms: Story = {
 export const indeterminate: Story = {
 	render: () => ({
 		template: `
+			/* HTML */
       <div id='checkbox-label' class='flex items-center'>
         <label id='testCheckbox' for='testCheckboxIndeterminate' hlmLabel> Test Checkbox </label>
         <hlm-checkbox checked="indeterminate" class='ml-2' id='testCheckboxIndeterminate' aria-labelledby='testCheckbox'/>
