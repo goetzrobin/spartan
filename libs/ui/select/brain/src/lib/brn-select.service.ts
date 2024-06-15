@@ -140,7 +140,7 @@ export class BrnSelectService {
 		const options = this._possibleOptions();
 
 		if (value === null || value === undefined) {
-			const nullOrUndefinedOption = options.find((o) => o?.value === value);
+			const nullOrUndefinedOption = options.find((o) => o && o.value === value);
 			if (!nullOrUndefinedOption) {
 				this.state.update((state) => ({
 					...state,
