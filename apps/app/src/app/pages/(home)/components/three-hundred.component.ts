@@ -59,7 +59,7 @@ export class ThreeHundredComponent {
 		'miljan-code',
 		'alexciesielski',
 		'ty-ler',
-		'MatznRisto',
+		'm-risto',
 		'badsgahhl',
 		'monacodelisa',
 		'tomdev9',
@@ -71,7 +71,12 @@ export class ThreeHundredComponent {
 		'mateoetchepare',
 		'DonaldMurillo',
 		'toniskobic',
-		'eneajaho'
+		'eneajaho',
+		'Den-dp',
+		'0xfraso',
+		'Muneersahel',
+		'danilolmc',
+		'tomalaforge',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((_, i) => i);
 }

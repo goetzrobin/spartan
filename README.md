@@ -55,7 +55,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 36. [miljan-code](https://github.com/miljan-code)
 37. [alexciesielski](https://github.com/alexciesielski)
 38. [ty-ler](https://github.com/ty-ler)
-39. [MatznRisto](https://github.com/MatznRisto)
+39. [m-risto](https://github.com/m-risto)
 40. [badsgahhl](https://github.com/badsgahhl)
 41. [monacodelisa](https://github.com/monacodelisa)
 42. [tomdev9](https://github.com/tomdev9)
@@ -69,6 +69,11 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 50. [DonaldMurillo](https://github.com/DonaldMurillo)
 51. [toniskobic](https://github.com/toniskobic)
 52. [eneajaho](https://github.com/eneajaho)
+53. [Den-dp](https://github.com/Den-dp)
+54. [0xfraso](https://github.com/0xfraso)
+55. [Muneersahel](https://github.com/Muneersahel)
+53. [danilolmc](https://github.com/danilolmc)
+54. [tomalaforge](https://github.com/tomalaforge)
 
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
