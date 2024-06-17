@@ -336,6 +336,44 @@ describe('select', () => {
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
 		});
+
+		it('should allow to set an undefined value and show the associated option', () => {
+			cy.visit('/iframe.html?id=select--with-label-and-form');
+
+			// initial
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-untouched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+			cy.get('[brnselecttrigger]').should('contain.text', 'No fruit');
+
+			// on open
+			cy.get('[brnselecttrigger]').click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-untouched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+			cy.get('[brnselecttrigger]').should('contain.text', 'No fruit');
+			cy.get('body').click();
+
+			// no selection
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+
+			// on real selection
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').eq(1).click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
+
+			// on reset selection
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').eq(0).click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+			cy.get('[brnselecttrigger]').should('contain.text', 'No fruit');
+		})
 	});
 
 	describe('scrollable', () => {

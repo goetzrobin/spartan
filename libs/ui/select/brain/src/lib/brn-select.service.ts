@@ -137,16 +137,19 @@ export class BrnSelectService {
 	}
 
 	private selectOptionByValue(value: unknown) {
-		if (value === null || value === undefined) {
-			this.state.update((state) => ({
-				...state,
-				selectedOptions: [],
-				value: this.multiple() ? [] : '',
-			}));
-			return;
-		}
-
 		const options = this._possibleOptions();
+
+		if (value === null || value === undefined) {
+			const nullOrUndefinedOption = options.find((o) => o && o.value === value);
+			if (!nullOrUndefinedOption) {
+				this.state.update((state) => ({
+					...state,
+					selectedOptions: [],
+					value: this.multiple() ? [] : '',
+				}));
+				return;
+			}
+		}
 
 		if (this.multiple()) {
 			const selectedOptions = options.filter((option) => {
