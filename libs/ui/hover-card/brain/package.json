@@ -1,10 +1,10 @@
 {
   "name": "@spartan-ng/ui-hovercard-brain",
-  "version": "0.0.1-alpha.351",
+  "version": "0.0.1-alpha.352",
   "peerDependencies": {
     "@angular/core": "^18.0.0",
     "@angular/cdk": "^18.0.0",
-    "@spartan-ng/ui-core": "0.0.1-alpha.351"
+    "@spartan-ng/ui-core": "0.0.1-alpha.352"
   },
   "dependencies": {},
   "sideEffects": false,
