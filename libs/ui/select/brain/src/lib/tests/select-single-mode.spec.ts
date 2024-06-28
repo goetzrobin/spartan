@@ -1,7 +1,11 @@
 import { Validators } from '@angular/forms';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
-import { SelectSingleValueTestComponent, SelectSingleValueWithInitialValueTestComponent, SelectSingleValueWithInitialValueWithAsyncUpdateTestComponent } from './select-reactive-form';
+import {
+	SelectSingleValueTestComponent,
+	SelectSingleValueWithInitialValueTestComponent,
+	SelectSingleValueWithInitialValueWithAsyncUpdateTestComponent,
+} from './select-reactive-form';
 import { getFormControlStatus, getFormValidationClasses } from './utils';
 
 describe('Brn Select Component in single-mode', () => {
@@ -28,7 +32,6 @@ describe('Brn Select Component in single-mode', () => {
 			value: screen.getByTestId('brn-select-value'),
 		};
 	};
-
 
 	const setupWithFormValidationAndInitialValueAndAsyncUpdate = async () => {
 		const { fixture } = await render(SelectSingleValueWithInitialValueWithAsyncUpdateTestComponent);
@@ -265,6 +268,23 @@ describe('Brn Select Component in single-mode', () => {
 			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
 
 			expect(value.textContent?.trim()).toBe(DEFAULT_LABEL);
+			expect(cmpInstance.form?.get('fruit')?.value).toEqual(null);
+		});
+
+		it('should have the errorState in true when the select has been triggered and no option has been selected', async () => {
+			const { user, fixture, trigger } = await setupWithFormValidation();
+			const cmpInstance = fixture.componentInstance as SelectSingleValueTestComponent;
+
+			cmpInstance.form?.get('fruit')?.addValidators(Validators.required);
+			cmpInstance.form?.get('fruit')?.updateValueAndValidity();
+			fixture.detectChanges();
+
+			// open
+			await user.click(trigger);
+			// close
+			await user.click(trigger);
+
+			expect(cmpInstance.brnSelectComponent()?.errorState()).toBeTruthy();
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual(null);
 		});
 
