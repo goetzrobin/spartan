@@ -17,7 +17,7 @@ export class HlmAccordionIconDirective {
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('inline-block h-4 w-4 transition-transform duration-200', this.userClass()),
+		hlm('inline-block h-4 w-4 transition-transform [animation-duration:200]', this.userClass()),
 	);
 
 	constructor() {
