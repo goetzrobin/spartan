@@ -115,7 +115,7 @@ export const Hint: Story = {
 						}
 					</hlm-select-content>
 				</brn-select>
-				<hlm-error>Your name is required</hlm-error>
+				<hlm-error>The fruit is required</hlm-error>
 			</hlm-form-field>
 
 			<button type="submit" hlmBtn>Submit</button>
