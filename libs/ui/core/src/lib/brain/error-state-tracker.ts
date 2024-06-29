@@ -1,6 +1,6 @@
-import { AbstractControl, FormGroupDirective, NgControl, NgForm } from "@angular/forms";
-import { ErrorStateMatcher } from "./error-options";
 import { signal } from "@angular/core";
+import type { AbstractControl, FormGroupDirective, NgControl, NgForm } from "@angular/forms";
+import type { ErrorStateMatcher } from "./error-options";
 
 export class ErrorStateTracker {
 	/** Whether the tracker is currently in an error state. */

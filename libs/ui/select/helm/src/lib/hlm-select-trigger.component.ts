@@ -1,10 +1,10 @@
-import { Component, ContentChild, ViewChild, computed, inject, input, type ElementRef } from '@angular/core';
+import { Component, ContentChild, type ElementRef, ViewChild, computed, inject, input } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { BrnSelectComponent, BrnSelectTriggerDirective } from '@spartan-ng/ui-select-brain';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 
 export const selectTriggerVariants = cva(

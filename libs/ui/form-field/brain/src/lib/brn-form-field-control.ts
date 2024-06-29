@@ -1,5 +1,5 @@
-import { Directive, Signal, signal } from '@angular/core';
-import { AbstractControlDirective, NgControl } from '@angular/forms';
+import { Directive, type Signal, signal } from '@angular/core';
+import type { AbstractControlDirective, NgControl } from '@angular/forms';
 
 @Directive()
 export class BrnFormFieldControl {

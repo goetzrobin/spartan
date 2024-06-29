@@ -1,37 +1,37 @@
 import { CdkListbox, CdkListboxModule } from '@angular/cdk/listbox';
 import {
 	CdkConnectedOverlay,
-	OverlayModule,
 	type ConnectedOverlayPositionChange,
 	type ConnectedPosition,
+	OverlayModule,
 } from '@angular/cdk/overlay';
 import {
+	type AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
 	ContentChildren,
-	DoCheck,
+	type DoCheck,
 	EventEmitter,
 	Input,
 	Output,
+	type QueryList,
+	type Signal,
 	ViewChild,
 	computed,
 	inject,
 	input,
 	signal,
-	type AfterContentInit,
-	type QueryList,
-	type Signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { FormGroupDirective, NgControl, NgForm, type ControlValueAccessor } from '@angular/forms';
+import { type ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import {
-	provideExposedSideProviderExisting,
-	provideExposesStateProviderExisting,
-	type ExposesSide,
-	type ExposesState,
 	ErrorStateMatcher,
 	ErrorStateTracker,
+	type ExposesSide,
+	type ExposesState,
+	provideExposedSideProviderExisting,
+	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
 import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
