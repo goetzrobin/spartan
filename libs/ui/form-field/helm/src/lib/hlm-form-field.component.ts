@@ -1,4 +1,4 @@
-import { Component, Signal, computed, contentChild, contentChildren } from '@angular/core';
+import { Component, Signal, computed, contentChild, contentChildren, effect } from '@angular/core';
 
 import { HlmErrorDirective } from './directives/hlm-error.directive';
 import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
@@ -23,11 +23,19 @@ import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
 	},
 })
 export class HlmFormFieldComponent {
-	control = contentChild.required(BrnFormFieldControl);
+	control = contentChild(BrnFormFieldControl);
 
 	errorChildren = contentChildren(HlmErrorDirective);
 
 	hasDisplayedMessage: Signal<'error' | 'hint'> = computed(() => {
-		return this.errorChildren() && this.errorChildren().length > 0 && this.control().errorState() ? 'error' : 'hint';
+		return this.errorChildren() && this.errorChildren().length > 0 && this.control()?.errorState() ? 'error' : 'hint';
 	});
+
+	constructor() {
+		effect(() => {
+			if(!this.control()) {
+				throw new Error('hlm-form-field must contain a BrnFormFieldControl.');
+			}
+		})
+	}
 }
