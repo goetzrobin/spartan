@@ -6,9 +6,6 @@ import { HlmHintDirective } from './lib/directives/hlm-hint.directive';
 export * from './lib/hlm-form-field.component';
 export * from './lib/directives/hlm-error.directive';
 export * from './lib/directives/hlm-hint.directive';
-export * from './lib/hlm-form-field-control';
-export * from './lib/directives/error-state-tracker';
-export * from './lib/directives/error-options';
 
 @NgModule({
 	imports: [HlmFormFieldComponent, HlmErrorDirective, HlmHintDirective],

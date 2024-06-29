@@ -1,7 +1,7 @@
 import { Component, Signal, computed, contentChild, contentChildren } from '@angular/core';
 
 import { HlmErrorDirective } from './directives/hlm-error.directive';
-import { HlmFormFieldControl } from './hlm-form-field-control';
+import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
 
 @Component({
 	selector: 'hlm-form-field',
@@ -23,7 +23,7 @@ import { HlmFormFieldControl } from './hlm-form-field-control';
 	},
 })
 export class HlmFormFieldComponent {
-	control = contentChild.required(HlmFormFieldControl);
+	control = contentChild.required(BrnFormFieldControl);
 
 	errorChildren = contentChildren(HlmErrorDirective);
 

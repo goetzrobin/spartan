@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-	displayName: 'ui-form-field-helm',
+	displayName: 'ui-form-field-brain',
 	preset: '../../../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-	coverageDirectory: '../../../../coverage/libs/form-field/helm',
+	coverageDirectory: '../../../../coverage/libs/form-field/brain',
 	transform: {
 		'^.+\\.(ts|mjs|js|html)$': [
 			'jest-preset-angular',

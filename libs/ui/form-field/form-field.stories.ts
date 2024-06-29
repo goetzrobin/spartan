@@ -5,7 +5,8 @@ import { HlmButtonDirective, HlmButtonModule } from '../button/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { BrnSelectImports } from '../select/brain/src';
 import { HlmSelectImports, HlmSelectModule } from '../select/helm/src';
-import { ErrorStateMatcher, HlmFormFieldComponent, HlmFormFieldModule, ShowOnDirtyErrorStateMatcher } from './helm/src';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '../core/src';
+import { HlmFormFieldComponent, HlmFormFieldModule } from './helm/src';
 
 const meta: Meta<HlmFormFieldComponent> = {
 	title: 'Form Field',

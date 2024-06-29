@@ -30,8 +30,10 @@ import {
 	provideExposesStateProviderExisting,
 	type ExposesSide,
 	type ExposesState,
+	ErrorStateMatcher,
+	ErrorStateTracker,
 } from '@spartan-ng/ui-core';
-import { ErrorStateMatcher, ErrorStateTracker, HlmFormFieldControl } from '@spartan-ng/ui-form-field-helm';
+import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { Subject, delay, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
@@ -54,7 +56,7 @@ let nextId = 0;
 		provideExposedSideProviderExisting(() => BrnSelectComponent),
 		provideExposesStateProviderExisting(() => BrnSelectComponent),
 		{
-			provide: HlmFormFieldControl,
+			provide: BrnFormFieldControl,
 			useExisting: BrnSelectComponent,
 		},
 	],
@@ -86,7 +88,7 @@ let nextId = 0;
 	`,
 })
 export class BrnSelectComponent
-	implements ControlValueAccessor, AfterContentInit, DoCheck, ExposesSide, ExposesState, HlmFormFieldControl
+	implements ControlValueAccessor, AfterContentInit, DoCheck, ExposesSide, ExposesState, BrnFormFieldControl
 {
 	private readonly _selectService = inject(BrnSelectService);
 

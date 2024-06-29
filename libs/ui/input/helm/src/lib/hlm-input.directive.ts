@@ -1,7 +1,7 @@
 import { Directive, DoCheck, Inject, Injector, Input, computed, effect, inject, input, signal } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { hlm } from '@spartan-ng/ui-core';
-import { ErrorStateMatcher, ErrorStateTracker, HlmFormFieldControl } from '@spartan-ng/ui-form-field-helm';
+import { ErrorStateMatcher, ErrorStateTracker, hlm } from '@spartan-ng/ui-core';
+import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
@@ -36,12 +36,12 @@ type InputVariants = VariantProps<typeof inputVariants>;
 	},
 	providers: [
 		{
-			provide: HlmFormFieldControl,
+			provide: BrnFormFieldControl,
 			useExisting: HlmInputDirective,
 		},
 	],
 })
-export class HlmInputDirective implements HlmFormFieldControl, DoCheck {
+export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 	private readonly _size = signal<InputVariants['size']>('default');
 	@Input()
 	set size(value: InputVariants['size']) {

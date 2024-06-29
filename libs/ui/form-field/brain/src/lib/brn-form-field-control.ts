@@ -2,7 +2,7 @@ import { Directive, Signal, signal } from '@angular/core';
 import { AbstractControlDirective, NgControl } from '@angular/forms';
 
 @Directive()
-export class HlmFormFieldControl {
+export class BrnFormFieldControl {
 	/** Gets the AbstractControlDirective for this control. */
 	readonly ngControl: NgControl | AbstractControlDirective | null = null;
 
