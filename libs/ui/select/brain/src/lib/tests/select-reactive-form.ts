@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrnSelectImports } from '../../';
+import { BrnSelectComponent, BrnSelectImports } from '../../';
 
 @Component({
 	standalone: true,
@@ -63,6 +63,8 @@ export class SelectReactiveFieldComponent {
 })
 export class SelectSingleValueTestComponent {
 	form = new FormGroup({ fruit: new FormControl(null) });
+
+	brnSelectComponent = viewChild(BrnSelectComponent);
 }
 
 @Component({

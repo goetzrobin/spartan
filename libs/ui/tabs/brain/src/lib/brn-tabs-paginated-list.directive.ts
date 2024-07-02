@@ -12,28 +12,28 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
-import { Direction, Directionality } from '@angular/cdk/bidi';
+import { FocusKeyManager, type FocusableOption } from '@angular/cdk/a11y';
+import type { Direction, Directionality } from '@angular/cdk/bidi';
 import { ENTER, SPACE, hasModifierKey } from '@angular/cdk/keycodes';
 import { SharedResizeObserver } from '@angular/cdk/observers/private';
-import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { ViewportRuler } from '@angular/cdk/scrolling';
+import { type Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
+import type { ViewportRuler } from '@angular/cdk/scrolling';
 import {
 	ANIMATION_MODULE_TYPE,
-	AfterContentChecked,
-	AfterContentInit,
-	AfterViewInit,
-	ChangeDetectorRef,
+	type AfterContentChecked,
+	type AfterContentInit,
+	type AfterViewInit,
+	type ChangeDetectorRef,
 	Directive,
-	ElementRef,
+	type ElementRef,
 	EventEmitter,
 	Inject,
 	Injector,
-	NgZone,
-	OnDestroy,
+	type NgZone,
+	type OnDestroy,
 	Optional,
 	Output,
-	QueryList,
+	type QueryList,
 	afterNextRender,
 	booleanAttribute,
 	computed,
@@ -42,7 +42,7 @@ import {
 	input,
 	signal,
 } from '@angular/core';
-import { EMPTY, Observable, Observer, Subject, fromEvent, merge, of as observableOf, timer } from 'rxjs';
+import { EMPTY, Observable, type Observer, Subject, fromEvent, merge, of as observableOf, timer } from 'rxjs';
 import { debounceTime, filter, skip, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { BrnTabsDirective } from './brn-tabs.directive';
 

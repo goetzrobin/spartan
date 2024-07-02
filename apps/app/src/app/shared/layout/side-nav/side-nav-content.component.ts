@@ -81,6 +81,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 					Form
 					<spartan-side-nav-cs />
 				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/form-field">Form Field</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/hover-card">Hover Card</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/icon">Icon</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/input">Input</a>

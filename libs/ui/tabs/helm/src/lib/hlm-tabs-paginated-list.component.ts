@@ -1,11 +1,11 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { Component, ContentChildren, ElementRef, QueryList, ViewChild, computed, input } from '@angular/core';
+import { Component, ContentChildren, type ElementRef, type QueryList, ViewChild, computed, input } from '@angular/core';
 import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
 import { buttonVariants } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { BrnTabsPaginatedListDirective, BrnTabsTriggerDirective } from '@spartan-ng/ui-tabs-brain';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { listVariants } from './hlm-tabs-list.component';
 
 @Component({

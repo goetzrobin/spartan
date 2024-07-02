@@ -1,5 +1,8 @@
-import { Directive, Input, computed, input, signal } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
+import { Directive, type DoCheck, Inject, Injector, Input, computed, effect, inject, input, signal } from '@angular/core';
+import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { ErrorStateMatcher, ErrorStateTracker, hlm } from '@spartan-ng/ui-core';
+import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
+
 import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 
@@ -31,8 +34,14 @@ type InputVariants = VariantProps<typeof inputVariants>;
 	host: {
 		'[class]': '_computedClass()',
 	},
+	providers: [
+		{
+			provide: BrnFormFieldControl,
+			useExisting: HlmInputDirective,
+		},
+	],
 })
-export class HlmInputDirective {
+export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 	private readonly _size = signal<InputVariants['size']>('default');
 	@Input()
 	set size(value: InputVariants['size']) {
@@ -49,4 +58,36 @@ export class HlmInputDirective {
 	protected _computedClass = computed(() =>
 		hlm(inputVariants({ size: this._size(), error: this._error() }), this.userClass()),
 	);
+
+	ngControl: NgControl | null = this.injector.get(NgControl, null);
+
+	errorStateTracker: ErrorStateTracker;
+
+	private defaultErrorStateMatcher = inject(ErrorStateMatcher);
+	private parentForm = inject(NgForm, { optional: true });
+	private parentFormGroup = inject(FormGroupDirective, { optional: true });
+
+	errorState = computed(() => this.errorStateTracker.errorState());
+
+	constructor(@Inject(Injector) private injector: Injector) {
+		this.errorStateTracker = new ErrorStateTracker(
+			this.defaultErrorStateMatcher,
+			this.ngControl,
+			this.parentFormGroup,
+			this.parentForm,
+		);
+
+		effect(
+			() => {
+				if (this.ngControl) {
+					this.error = this.errorStateTracker.errorState();
+				}
+			},
+			{ allowSignalWrites: true },
+		);
+	}
+
+	ngDoCheck() {
+		this.errorStateTracker.updateErrorState();
+	}
 }

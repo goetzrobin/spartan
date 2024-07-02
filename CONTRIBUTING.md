@@ -178,6 +178,7 @@ The following is the list of supported scopes:
 - **date-picker**
 - **dialog**
 - **dropdown-menu**
+- **form-field**
 - **hover-card**
 - **icon**
 - **input**

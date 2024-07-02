@@ -26,6 +26,7 @@ module.exports = {
 				'date-picker',
 				'dialog',
 				'dropdown-menu',
+				'form-field',
 				'hover-card',
 				'icon',
 				'input',
