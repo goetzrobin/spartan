@@ -1,8 +1,18 @@
-import { Component, Input, booleanAttribute, computed, forwardRef, input, output, signal } from '@angular/core';
+import {
+	Component,
+	booleanAttribute,
+	computed,
+	effect,
+	forwardRef,
+	input,
+	model,
+  output,
+	signal,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BrnCheckboxComponent, indeterminateBooleanAttribute } from '@spartan-ng/ui-checkbox-brain';
+import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { HlmCheckboxCheckIconComponent } from './hlm-checkbox-checkicon.component';
 
 export const HLM_CHECKBOX_VALUE_ACCESSOR = {
@@ -20,8 +30,8 @@ export const HLM_CHECKBOX_VALUE_ACCESSOR = {
 			[id]="id()"
 			[name]="name()"
 			[class]="_computedClass()"
-			[checked]="_checked()"
-			[disabled]="disabled()"
+			[checked]="checked()"
+			[disabled]="_disabled()"
 			[required]="required()"
 			[aria-label]="ariaLabel()"
 			[aria-labelledby]="ariaLabelledby()"
@@ -48,7 +58,7 @@ export class HlmCheckboxComponent {
 			'group inline-flex border border-foreground shrink-0 cursor-pointer items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring' +
 				' focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=checked]:text-background data-[state=checked]:bg-primary data-[state=unchecked]:bg-background',
 			this.userClass(),
-			this.disabled() ? 'cursor-not-allowed opacity-50' : '',
+			this._disabled() ? 'cursor-not-allowed opacity-50' : '',
 		),
 	);
 
@@ -64,9 +74,20 @@ export class HlmCheckboxComponent {
 	/** Used to set the aria-describedby attribute on the underlying brn element. */
 	public readonly ariaDescribedby = input<string | null>(null, { alias: 'aria-describedby' });
 
+	public readonly checked = model<boolean | 'indeterminate'>(false);
+
 	public readonly name = input<string | null>(null);
-	public readonly disabled = input(false, { transform: booleanAttribute });
 	public readonly required = input(false, { transform: booleanAttribute });
+
+	protected readonly _disabled = signal(false);
+	public readonly disabled = input(false, { transform: booleanAttribute });
+
+	private disableInput = effect(
+		() => {
+			this._disabled.set(this.disabled());
+		},
+		{ allowSignalWrites: true },
+	);
 
 	// icon inputs
 	public readonly checkIconName = input<string>('lucideCheck');
@@ -75,26 +96,19 @@ export class HlmCheckboxComponent {
 	public readonly changed = output<boolean>();
 
 	protected _handleChange(): void {
-		if (this.disabled()) return;
+		if (this._disabled()) return;
 
-		const previousChecked = this._checked();
-		this._checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
+		const previousChecked = this.checked();
+		this.checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
 		this._onChange(!previousChecked);
 		this.changed.emit(!previousChecked);
-	}
-
-	// TODO should be changed to new model input when updated to Angular 17.2
-	protected _checked = signal<boolean | 'indeterminate'>(false);
-	@Input({ transform: indeterminateBooleanAttribute })
-	set checked(value: boolean | 'indeterminate') {
-		this._checked.set(value);
 	}
 
 	/** CONROL VALUE ACCESSOR */
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	writeValue(value: any): void {
-		this.checked = !!value;
+		this.checked.set(!!value);
 	}
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
 	protected _onChange = (_: any) => {};
@@ -109,5 +123,9 @@ export class HlmCheckboxComponent {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	registerOnTouched(fn: any): void {
 		this._onTouched = fn;
+	}
+
+	setDisabledState(isDisabled: boolean): void {
+		this._disabled.set(isDisabled);
 	}
 }

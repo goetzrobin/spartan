@@ -2,19 +2,19 @@ import { isPlatformBrowser } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	Component,
-	computed,
 	ElementRef,
-	inject,
 	Input,
-	OnDestroy,
+	type OnDestroy,
 	PLATFORM_ID,
-	signal,
 	ViewEncapsulation,
+	computed,
+	inject,
+	signal,
 } from '@angular/core';
-import { IconName, NgIconComponent } from '@ng-icons/core';
+import { type IconName, NgIconComponent } from '@ng-icons/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { cva } from 'class-variance-authority';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 const DEFINED_SIZES = ['xs', 'sm', 'base', 'lg', 'xl', 'none'] as const;
 
@@ -36,7 +36,8 @@ export const iconVariants = cva('inline-flex', {
 	},
 });
 
-export type IconSize = DefinedSizes | string;
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type IconSize = DefinedSizes | (Record<never, never> & string);
 
 const isDefinedSize = (size: IconSize): size is DefinedSizes => {
 	return DEFINED_SIZES.includes(size as DefinedSizes);

@@ -1,6 +1,12 @@
-import { CdkCellDef, CdkColumnDef, CdkFooterCellDef, CdkHeaderCellDef, CdkTableModule } from '@angular/cdk/table';
 import {
-	AfterContentChecked,
+	type CdkCellDef,
+	CdkColumnDef,
+	type CdkFooterCellDef,
+	type CdkHeaderCellDef,
+	CdkTableModule,
+} from '@angular/cdk/table';
+import {
+	type AfterContentChecked,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,

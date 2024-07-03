@@ -8,6 +8,7 @@ import { BrnTabsDirective } from '@spartan-ng/ui-tabs-brain';
 		{
 			directive: BrnTabsDirective,
 			inputs: ['orientation', 'direction', 'activationMode', 'brnTabs: tab'],
+			outputs: ['tabActivated'],
 		},
 	],
 	template: '<ng-content/>',

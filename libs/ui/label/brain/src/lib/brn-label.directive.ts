@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Directive, ElementRef, inject, Input, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { Directive, ElementRef, Input, type OnInit, PLATFORM_ID, inject, signal } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 let nextId = 0;

@@ -15,30 +15,30 @@ import { AriaDescriber, FocusMonitor } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
-	ConnectedPosition,
-	ConnectionPositionPair,
-	FlexibleConnectedPositionStrategy,
-	HorizontalConnectionPos,
-	OriginConnectionPosition,
+	type ConnectedPosition,
+	type ConnectionPositionPair,
+	type FlexibleConnectedPositionStrategy,
+	type HorizontalConnectionPos,
+	type OriginConnectionPosition,
 	Overlay,
-	OverlayConnectionPosition,
-	OverlayRef,
+	type OverlayConnectionPosition,
+	type OverlayRef,
 	ScrollDispatcher,
-	ScrollStrategy,
-	VerticalConnectionPos,
+	type ScrollStrategy,
+	type VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import {
-	AfterViewInit,
+	type AfterViewInit,
 	Directive,
 	ElementRef,
 	InjectionToken,
 	Input,
 	NgZone,
-	OnDestroy,
-	TemplateRef,
+	type OnDestroy,
+	type TemplateRef,
 	ViewContainerRef,
 	booleanAttribute,
 	effect,
@@ -47,6 +47,7 @@ import {
 	numberAttribute,
 	signal,
 } from '@angular/core';
+import { brnDevMode } from '@spartan-ng/ui-core';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { BrnTooltipContentComponent } from './brn-tooltip-content.component';
@@ -306,7 +307,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		// If the message is not a string (e.g. number), convert it to a string and trim it.
 		// Must convert with `String(value)`, not `${value}`, otherwise Closure Compiler optimises
 		// away the string-conversion: https://github.com/angular/components/issues/20684
-		this._ariaDescribedBy = value != null ? String(value).trim() : '';
+		this._ariaDescribedBy = value !== null ? String(value).trim() : '';
 
 		if (this._ariaDescribedBy && !this._isTooltipVisible()) {
 			this._ngZone.runOutsideAngular(() => {
@@ -322,13 +323,13 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	}
 
 	/** The content to be displayed in the tooltip */
-	private _content: TemplateRef<unknown> | null = null;
+	private _content: string | TemplateRef<unknown> | null = null;
 	@Input('brnTooltipTrigger')
 	get content() {
 		return this._content;
 	}
 
-	set content(value: TemplateRef<unknown> | null) {
+	set content(value: string | TemplateRef<unknown> | null) {
 		this._content = value;
 
 		if (!this._content && this._isTooltipVisible()) {
@@ -390,6 +391,10 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 					this._ngZone.run(() => this.show());
 				}
 			});
+
+		if (brnDevMode && !this._ariaDescribedBy) {
+			console.warn('BrnTooltip: "aria-describedby" attribute is required for accessibility');
+		}
 	}
 
 	/**
@@ -420,7 +425,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	/** Shows the tooltip after the delay in ms, defaults to tooltip-delay-show or 0ms if no input */
 	show(delay: number = this.showDelay, origin?: { x: number; y: number }): void {
-		if (this.disabled || !this._ariaDescribedBy || this._isTooltipVisible()) {
+		if (this.disabled || this._isTooltipVisible()) {
 			this._tooltipInstance?._cancelPendingAnimations();
 			return;
 		}
@@ -532,7 +537,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	}
 
 	private _detach() {
-		if (this._overlayRef && this._overlayRef.hasAttached()) {
+		if (this._overlayRef?.hasAttached()) {
 			this._overlayRef.detach();
 		}
 
@@ -553,7 +558,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** Adds the configured offset to a position. Used as a hook for child classes. */
 	protected _addOffset(position: ConnectedPosition): ConnectedPosition {
 		const offset = UNBOUNDED_ANCHOR_GAP;
-		const isLtr = !this._dir || this._dir.value == 'ltr';
+		const isLtr = !this._dir || this._dir.value === 'ltr';
 
 		if (position.originY === 'top') {
 			position.offsetY = -offset;
@@ -573,20 +578,21 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	 * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
 	 */
 	_getOrigin(): { main: OriginConnectionPosition; fallback: OriginConnectionPosition } {
-		const isLtr = !this._dir || this._dir.value == 'ltr';
+		const isLtr = !this._dir || this._dir.value === 'ltr';
 		const position = this.position;
 		let originPosition: OriginConnectionPosition;
 
-		if (position == 'above' || position == 'below') {
-			originPosition = { originX: 'center', originY: position == 'above' ? 'top' : 'bottom' };
-		} else if (position == 'before' || (position == 'left' && isLtr) || (position == 'right' && !isLtr)) {
+		if (position === 'above' || position === 'below') {
+			originPosition = { originX: 'center', originY: position === 'above' ? 'top' : 'bottom' };
+		} else if (position === 'before' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
 			originPosition = { originX: 'start', originY: 'center' };
-		} else if (position == 'after' || (position == 'right' && isLtr) || (position == 'left' && !isLtr)) {
+		} else if (position === 'after' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
 			originPosition = { originX: 'end', originY: 'center' };
 		} else if (typeof isDevMode() === 'undefined' || isDevMode()) {
 			throw getBrnTooltipInvalidPositionError(position);
 		}
 
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		const { x, y } = this._invertPosition(originPosition!.originX, originPosition!.originY);
 
 		return {
@@ -597,22 +603,23 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	/** Returns the overlay position and a fallback position based on the user's preference */
 	_getOverlayPosition(): { main: OverlayConnectionPosition; fallback: OverlayConnectionPosition } {
-		const isLtr = !this._dir || this._dir.value == 'ltr';
+		const isLtr = !this._dir || this._dir.value === 'ltr';
 		const position = this.position;
 		let overlayPosition: OverlayConnectionPosition;
 
-		if (position == 'above') {
+		if (position === 'above') {
 			overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
-		} else if (position == 'below') {
+		} else if (position === 'below') {
 			overlayPosition = { overlayX: 'center', overlayY: 'top' };
-		} else if (position == 'before' || (position == 'left' && isLtr) || (position == 'right' && !isLtr)) {
+		} else if (position === 'before' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
 			overlayPosition = { overlayX: 'end', overlayY: 'center' };
-		} else if (position == 'after' || (position == 'right' && isLtr) || (position == 'left' && !isLtr)) {
+		} else if (position === 'after' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
 			overlayPosition = { overlayX: 'start', overlayY: 'center' };
 		} else if (typeof isDevMode() === 'undefined' || isDevMode()) {
 			throw getBrnTooltipInvalidPositionError(position);
 		}
 
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		const { x, y } = this._invertPosition(overlayPosition!.overlayX, overlayPosition!.overlayY);
 
 		return {
@@ -626,7 +633,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		// Must wait for the template to be painted to the tooltip so that the overlay can properly
 		// calculate the correct positioning based on the size of the tek-pate.
 		if (this._tooltipInstance) {
-			this._tooltipInstance.template = this.content;
+			this._tooltipInstance.content = this.content;
 			this._tooltipInstance._markForCheck();
 
 			this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._destroyed)).subscribe(() => {

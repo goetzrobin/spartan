@@ -1,4 +1,4 @@
-import { HlmBaseGeneratorSchema } from '../schema';
+import type { HlmBaseGeneratorSchema } from '../schema';
 import {
 	NG_ICONS_VERSION,
 	SPARTAN_ACCORDION_BRAIN_VERSION,
@@ -20,9 +20,9 @@ import {
 	SPARTAN_TABLE_VERSION,
 	SPARTAN_TABS_VERSION,
 	SPARTAN_TOGGLE_VERSION,
+	TAILWINDCSS_VERSION,
 	TAILWIND_ANIMATE_VERSION,
 	TAILWIND_MERGE_VERSION,
-	TAILWINDCSS_VERSION,
 } from '../versions';
 
 const BRAIN_DEPENDENCY_MAP = {
@@ -63,10 +63,10 @@ export function buildDependencyArray(
 	}
 	const brainDependencyVersion = BRAIN_DEPENDENCY_MAP[options.primitiveName];
 	if (brainDependencyVersion) {
-		dependencies = { ...dependencies, ['@spartan-ng/ui-' + options.primitiveName + '-brain']: brainDependencyVersion };
+		dependencies = { ...dependencies, [`@spartan-ng/ui-${options.primitiveName}-brain`]: brainDependencyVersion };
 	}
 	if (brainDependencyVersion && DEPENDENT_ON_DIALOG.includes(options.primitiveName)) {
-		dependencies = { ...dependencies, ['@spartan-ng/ui-dialog-brain']: brainDependencyVersion };
+		dependencies = { ...dependencies, '@spartan-ng/ui-dialog-brain': brainDependencyVersion };
 	}
 	if (options.primitiveName === 'icon') {
 		dependencies = { ...dependencies, '@ng-icons/core': NG_ICONS_VERSION };

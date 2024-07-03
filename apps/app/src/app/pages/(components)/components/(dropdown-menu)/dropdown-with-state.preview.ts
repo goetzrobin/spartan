@@ -7,8 +7,8 @@ import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
 	HlmMenuComponent,
 	HlmMenuGroupComponent,
-	HlmMenuItemCheckboxDirective,
 	HlmMenuItemCheckComponent,
+	HlmMenuItemCheckboxDirective,
 	HlmMenuItemDirective,
 	HlmMenuItemIconDirective,
 	HlmMenuItemRadioComponent,

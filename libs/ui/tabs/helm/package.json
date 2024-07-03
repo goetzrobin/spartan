@@ -2,11 +2,11 @@
 	"name": "@spartan-ng/ui-tabs-helm",
 	"version": "0.0.1-alpha.10",
 	"peerDependencies": {
-		"@angular/core": "^17.3.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.343",
+		"@angular/core": "^18.0.0",
+		"@spartan-ng/ui-core": "0.0.1-alpha.352",
 		"clsx": "^1.2.1",
 		"class-variance-authority": "^0.6.0",
-		"@spartan-ng/ui-tabs-brain": "0.0.1-alpha.343"
+		"@spartan-ng/ui-tabs-brain": "0.0.1-alpha.352"
 	},
 	"dependencies": {},
 	"sideEffects": false,

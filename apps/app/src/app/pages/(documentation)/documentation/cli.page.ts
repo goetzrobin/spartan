@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { lucideAlertTriangle } from '@ng-icons/lucide';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';

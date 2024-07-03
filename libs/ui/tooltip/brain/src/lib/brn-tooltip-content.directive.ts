@@ -1,4 +1,4 @@
-import { Directive, inject, TemplateRef } from '@angular/core';
+import { Directive, TemplateRef, inject } from '@angular/core';
 import { BrnTooltipDirective } from './brn-tooltip.directive';
 
 @Directive({

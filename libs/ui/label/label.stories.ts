@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmInputDirective } from '../input/helm/src';
 import { BrnLabelDirective } from './brain/src';
 import { HlmLabelDirective } from './helm/src';

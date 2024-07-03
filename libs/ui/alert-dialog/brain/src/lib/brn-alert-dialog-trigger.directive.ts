@@ -1,6 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import { BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
-import { BrnAlertDialogComponent } from './brn-alert-dialog.component';
+import type { BrnAlertDialogComponent } from './brn-alert-dialog.component';
 
 @Directive({
 	selector: 'button[brnAlertDialogTrigger],button[brnAlertDialogTriggerFor]',

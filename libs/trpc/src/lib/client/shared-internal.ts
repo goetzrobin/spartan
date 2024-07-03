@@ -1,5 +1,5 @@
-import { Operation, OperationContext, OperationLink, OperationResultObservable, TRPCLink } from '@trpc/client';
-import {
+import type { Operation, OperationContext, OperationLink, OperationResultObservable, TRPCLink } from '@trpc/client';
+import type {
 	AnyRouter,
 	ClientDataTransformerOptions,
 	CombinedDataTransformer,

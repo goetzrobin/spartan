@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Renderer2, computed, effect, inject, input, signal } from '@angular/core';
 import { hlm, injectExposesStateProvider } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlmPopoverContent],[brnPopoverContent][hlm]',

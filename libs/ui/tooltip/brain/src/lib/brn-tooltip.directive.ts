@@ -1,4 +1,4 @@
-import { Directive, signal, TemplateRef } from '@angular/core';
+import { Directive, type TemplateRef, signal } from '@angular/core';
 
 @Directive({
 	selector: '[brnTooltip]',

@@ -2,16 +2,17 @@
 	"extends": "../../tsconfig.base.json",
 	"files": [],
 	"include": [],
+	"exclude": [],
 	"references": [
 		{
-			"path": "./tsconfig.app.json",
+			"path": "./tsconfig.app.json"
 		},
 		{
-			"path": "./tsconfig.spec.json",
+			"path": "./tsconfig.spec.json"
 		},
 		{
-			"path": "./tsconfig.editor.json",
-		},
+			"path": "./tsconfig.editor.json"
+		}
 	],
 	"compilerOptions": {
 		"target": "es2020",
@@ -20,13 +21,12 @@
 		"noImplicitOverride": true,
 		"noPropertyAccessFromIndexSignature": true,
 		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"allowSyntheticDefaultImports": true,
+		"noFallthroughCasesInSwitch": true
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
-		"strictTemplates": true,
-	},
+		"strictTemplates": true
+	}
 }

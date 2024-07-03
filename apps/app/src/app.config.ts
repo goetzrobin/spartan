@@ -1,5 +1,5 @@
 import { provideFileRouter } from '@analogjs/router';
-import { ApplicationConfig } from '@angular/core';
+import type { ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PreloadAllModules, withInMemoryScrolling, withNavigationErrorHandler, withPreloading } from '@angular/router';
 import { provideTrpcClient } from './trpc-client';

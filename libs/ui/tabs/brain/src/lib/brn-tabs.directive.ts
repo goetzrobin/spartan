@@ -1,6 +1,6 @@
-import { Directive, EventEmitter, Input, Output, input, signal } from '@angular/core';
-import { BrnTabsContentDirective } from './brn-tabs-content.directive';
-import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
+import { Directive, EventEmitter, Output, input, model, signal } from '@angular/core';
+import type { BrnTabsContentDirective } from './brn-tabs-content.directive';
+import type { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
 export type BrnTabsOrientation = 'horizontal' | 'vertical';
 export type BrnTabsDirection = 'ltr' | 'rtl';
@@ -23,43 +23,34 @@ export class BrnTabsDirective {
 	public readonly direction = input<BrnTabsDirection>('ltr');
 	/** internal **/
 	$direction = this.direction;
-	@Output()
-	readonly tabActivated = new EventEmitter<string>();
 
-	// leaving this as an @input and signal to be set programmatically
-	// current limitation by InputSignal which are readonly
-	protected readonly _value = signal<string | undefined>(undefined);
-	@Input('brnTabs')
-	set value(value: string) {
-		this._value.set(value);
-	}
+	public readonly _activeTab = model<string | undefined>(undefined, { alias: 'brnTabs' });
 	/** internal **/
-	$value = this._value.asReadonly();
+	$activeTab = this._activeTab.asReadonly();
 
 	public readonly activationMode = input<BrnActivationMode>('automatic');
 	/** internal **/
 	$activationMode = this.activationMode;
 
-	private _tabs: { [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } } = {};
-	public readonly $tabs = this._tabs;
+	@Output()
+	readonly tabActivated = new EventEmitter<string>();
+
+	private _tabs = signal<{ [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } }>({});
+	public readonly $tabs = this._tabs.asReadonly();
 
 	public registerTrigger(key: string, trigger: BrnTabsTriggerDirective) {
-		this._tabs[key] = {
-			...(this._tabs[key] ?? {}),
-			trigger,
-		};
+		this._tabs.update((tabs) => ({ ...tabs, [key]: { trigger, content: tabs[key]?.content } }));
 	}
 
 	public registerContent(key: string, content: BrnTabsContentDirective) {
-		this._tabs[key] = {
-			...(this._tabs[key] ?? {}),
-			content,
-		};
+		this._tabs.update((tabs) => ({ ...tabs, [key]: { trigger: tabs[key]?.trigger, content } }));
 	}
+
 	emitTabActivated(key: string) {
 		this.tabActivated.emit(key);
 	}
-	setValue(key: string) {
-		this._value.set(key);
+	
+	setActiveTab(key: string) {
+		this._activeTab.set(key);
 	}
 }

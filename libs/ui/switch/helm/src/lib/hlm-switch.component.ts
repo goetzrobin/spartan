@@ -2,7 +2,7 @@ import { Component, Input, booleanAttribute, computed, forwardRef, input, output
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnSwitchComponent, BrnSwitchThumbComponent } from '@spartan-ng/ui-switch-brain';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { HlmSwitchThumbDirective } from './hlm-switch-thumb.directive';
 
 export const HLM_SWITCH_VALUE_ACCESSOR = {

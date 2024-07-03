@@ -1,1 +1,1 @@
-export interface NpmPublishExecutorSchema {}
+export type NpmPublishExecutorSchema = {};

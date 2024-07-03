@@ -1,8 +1,8 @@
 import { Directive, Input, booleanAttribute, computed, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnMenuItemDirective } from '@spartan-ng/ui-menu-brain';
-import { VariantProps, cva } from 'class-variance-authority';
-import { ClassValue } from 'clsx';
+import { type VariantProps, cva } from 'class-variance-authority';
+import type { ClassValue } from 'clsx';
 
 export const hlmMenuItemVariants = cva(
 	'group w-full relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50',

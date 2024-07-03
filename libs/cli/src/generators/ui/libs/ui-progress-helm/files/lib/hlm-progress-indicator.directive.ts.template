@@ -1,6 +1,6 @@
-import { Directive, DoCheck, ElementRef, Renderer2, computed, effect, inject, input, signal } from '@angular/core';
+import { Directive, type DoCheck, ElementRef, Renderer2, computed, effect, inject, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlmProgressIndicator],brn-progress-indicator[hlm]',

@@ -1,10 +1,10 @@
 import { NgComponentOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, inject, input } from '@angular/core';
 import { lucideX } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnDialogCloseDirective, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/ui-dialog-brain';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { HlmDialogCloseDirective } from './hlm-dialog-close.directive';
 
 @Component({
@@ -25,7 +25,7 @@ import { HlmDialogCloseDirective } from './hlm-dialog-close.directive';
 
 		<button brnDialogClose hlm>
 			<span class="sr-only">Close</span>
-			<hlm-icon class="flex h-4 w-4" size="none" name="lucideX" />
+			<hlm-icon class="flex w-4 h-4" size="none" name="lucideX" />
 		</button>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,13 +37,13 @@ export class HlmDialogContentComponent {
 
 	public readonly state = computed(() => this._dialogRef?.state() ?? 'closed');
 
-	public readonly component = this._dialogContext?.['$component'];
-	private readonly _dynamicComponentClass = this._dialogContext?.['$dynamicComponentClass'];
+	public readonly component = this._dialogContext?.$component;
+	private readonly _dynamicComponentClass = this._dialogContext?.$dynamicComponentClass;
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
 		hlm(
-			'border-border grid w-full max-w-lg relative gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[2%]  data-[state=open]:slide-in-from-top-[2%] sm:rounded-lg md:w-full',
+			'border-border grid w-full max-w-lg relative gap-4 border bg-background p-6 shadow-lg [animation-duration:200] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[2%]  data-[state=open]:slide-in-from-top-[2%] sm:rounded-lg md:w-full',
 			this.userClass(),
 			this._dynamicComponentClass,
 		),

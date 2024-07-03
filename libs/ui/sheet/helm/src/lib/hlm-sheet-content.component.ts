@@ -4,7 +4,7 @@ import { hlm, injectExposedSideProvider, injectExposesStateProvider } from '@spa
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { BrnSheetCloseDirective } from '@spartan-ng/ui-sheet-brain';
 import { cva } from 'class-variance-authority';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { HlmSheetCloseDirective } from './hlm-sheet-close.directive';
 
 export const sheetVariants = cva(
@@ -39,7 +39,7 @@ export const sheetVariants = cva(
 		<ng-content />
 		<button brnSheetClose hlm>
 			<span class="sr-only">Close</span>
-			<hlm-icon class="flex h-4 w-4" size="100%" name="lucideX" />
+			<hlm-icon class="flex w-4 h-4" size="100%" name="lucideX" />
 		</button>
 	`,
 })

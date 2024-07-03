@@ -1,4 +1,4 @@
-import { InjectionToken, Type, forwardRef, inject, type InjectOptions, type Provider } from '@angular/core';
+import { type InjectOptions, InjectionToken, type Provider, type Type, forwardRef, inject } from '@angular/core';
 
 type InjectFn<TTokenValue> = {
 	(): TTokenValue;
@@ -6,13 +6,9 @@ type InjectFn<TTokenValue> = {
 	(injectOptions: InjectOptions & { optional: true }): TTokenValue | null;
 };
 
-type ProvideFn<TTokenValue> = {
-	(value: TTokenValue): Provider;
-};
+type ProvideFn<TTokenValue> = (value: TTokenValue) => Provider;
 
-type ProvideExistingFn<TTokenValue> = {
-	(valueFactory: () => Type<TTokenValue>): Provider;
-};
+type ProvideExistingFn<TTokenValue> = (valueFactory: () => Type<TTokenValue>) => Provider;
 
 export type CreateInjectionTokenReturn<TTokenValue> = [
 	InjectFn<TTokenValue>,

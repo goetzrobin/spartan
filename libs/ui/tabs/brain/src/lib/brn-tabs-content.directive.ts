@@ -1,4 +1,4 @@
-import { computed, Directive, effect, ElementRef, inject, input } from '@angular/core';
+import { Directive, ElementRef, computed, effect, inject, input } from '@angular/core';
 import { BrnTabsDirective } from './brn-tabs.directive';
 
 @Directive({
@@ -18,14 +18,17 @@ export class BrnTabsContentDirective {
 	private _elementRef = inject(ElementRef);
 
 	public readonly contentFor = input.required<string>({ alias: 'brnTabsContent' });
-	protected readonly _isSelected = computed(() => this._root.$value() === this.contentFor());
-	protected contentId = computed(() => 'brn-tabs-content-' + this.contentFor());
-	protected labelId = computed(() => 'brn-tabs-label-' + this.contentFor());
+	protected readonly _isSelected = computed(() => this._root.$activeTab() === this.contentFor());
+	protected contentId = computed(() => `brn-tabs-content-${this.contentFor()}`);
+	protected labelId = computed(() => `brn-tabs-label-${this.contentFor()}`);
 
 	constructor() {
-		effect(() => {
-			this._root.registerContent(this.contentFor(), this);
-		});
+		effect(
+			() => {
+				this._root.registerContent(this.contentFor(), this);
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	public focus() {

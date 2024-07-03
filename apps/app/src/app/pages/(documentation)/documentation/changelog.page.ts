@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -145,7 +145,7 @@ export const routeMeta: RouteMeta = {
 				Excited to try any of these? What are you waiting for? Head over to the installation page and start your spartan
 				journey!
 			</p>
-			<div class="m-10 flex items-center justify-center">
+			<div class="flex items-center justify-center m-10">
 				<a hlmBtn size="lg" routerLink="/documentation/installation">Get started with spartan/ui</a>
 			</div>
 			<spartan-page-bottom-nav>

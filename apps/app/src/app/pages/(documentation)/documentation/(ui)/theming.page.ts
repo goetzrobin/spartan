@@ -1,15 +1,15 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { CodeComponent } from '@spartan-ng/app/app/shared/code/code.component';
+import { MainSectionDirective } from '@spartan-ng/app/app/shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavComponent } from '@spartan-ng/app/app/shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '@spartan-ng/app/app/shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '@spartan-ng/app/app/shared/layout/section-sub-heading.component';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { HlmAlertDirective } from '@spartan-ng/ui-alert-helm';
 import { hlmCode, hlmH4, hlmP, hlmSmall } from '@spartan-ng/ui-typography-helm';
-import { CodeComponent } from '~/app/shared/code/code.component';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Theming' },
@@ -38,7 +38,7 @@ export const routeMeta: RouteMeta = {
 					<code class="${hlmCode}">spartan/ui</code>
 					is built on TailwindCSS with custom CSS variables:
 				</p>
-				<spartan-code class="mt-4" code='<div className="bg-background text-foreground">spartan</div>' />
+				<spartan-code class="mt-4" code='<div class="bg-background text-foreground">spartan</div>' />
 			</section>
 			<spartan-section-sub-heading id="convention">Convention</spartan-section-sub-heading>
 			<section>
@@ -77,7 +77,7 @@ export const routeMeta: RouteMeta = {
 					<code class="${hlmCode}">hsl(var(--primary-foreground))</code>
 					.
 				</p>
-				<spartan-code class="mt-4" code='<div className="bg-primary text-primary-foreground">Hello</div>' />
+				<spartan-code class="mt-4" code='<div class="bg-primary text-primary-foreground">Hello</div>' />
 				<div class="mt-4 text-sm" hlmAlert>
 					<p>
 						<span class="font-semibold">CSS variables must be defined without color space function.</span>
@@ -97,8 +97,8 @@ export const routeMeta: RouteMeta = {
 			<spartan-section-sub-heading id="list-of-variables">List of variables</spartan-section-sub-heading>
 			<section>
 				<p class="${hlmP}">Here's the list of variables available for customization:</p>
-				<div class="mt-4 flex">
-					<div class="border-border ml-4 mr-8 w-1 border-r"></div>
+				<div class="flex mt-4">
+					<div class="w-1 ml-4 mr-8 border-r border-border"></div>
 					<div class="flex-1">
 						<div class="${hlmSmall} mt-8">
 							Default background color of &#60;body&#62;,... etc.
@@ -278,7 +278,7 @@ module.exports = {
 				<spartan-code
 					class="mt-4"
 					code='
-        <div className="bg-warning text-warning-foreground">Warning</div>
+        <div class="bg-warning text-warning-foreground">Warning</div>
         '
 				/>
 			</section>

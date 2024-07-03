@@ -1,8 +1,8 @@
-import { addDependenciesToPackageJson, GeneratorCallback, runTasksInSerial, Tree } from '@nx/devkit';
+import { type GeneratorCallback, type Tree, addDependenciesToPackageJson, runTasksInSerial } from '@nx/devkit';
 import { prompt } from 'enquirer';
-import { HlmBaseGeneratorSchema } from '../base/schema';
+import type { HlmBaseGeneratorSchema } from '../base/schema';
 import { SPARTAN_COLLAPSIBLE_BRAIN_VERSION } from '../base/versions';
-import { HlmUIGeneratorSchema } from './schema';
+import type { HlmUIGeneratorSchema } from './schema';
 
 export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema & { angularCli?: boolean }) {
 	const tasks: GeneratorCallback[] = [];
@@ -67,8 +67,8 @@ async function createPrimitiveLibraries(
 	for (const primitiveName of primitivesToCreate) {
 		if (primitiveName === 'collapsible') continue;
 
-		const internalName = availablePrimitives[primitiveName]['internalName'];
-		const peerDependencies = availablePrimitives[primitiveName]['peerDependencies'];
+		const internalName = availablePrimitives[primitiveName].internalName;
+		const peerDependencies = availablePrimitives[primitiveName].peerDependencies;
 		const installTask = await (
 			(await import(
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -110,7 +110,8 @@ const addIconForDependentPrimitive = async (primitivesToCreate: string[], primit
 				message:
 					'Some of the primitives you are trying to install depend on the icon primitive. Do you want to add it to your project?',
 			})
-		)['installIcon'];
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
+		)['installIcon'];;
 		if (installIcon) {
 			primitivesToCreate.push('icon');
 		}
@@ -130,6 +131,7 @@ const addButtonForDependentPrimitive = async (primitivesToCreate: string[], prim
 				message:
 					'Some of the primitives you are trying to install depend on the button primitive. Do you want to add it to your project?',
 			})
+		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		)['installBtn'];
 		if (installBtn) {
 			primitivesToCreate.push('button');

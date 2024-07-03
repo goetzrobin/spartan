@@ -1,6 +1,6 @@
-import { FocusableOption } from '@angular/cdk/a11y';
+import type { FocusableOption } from '@angular/cdk/a11y';
 import { CdkOption } from '@angular/cdk/listbox';
-import { computed, Directive, ElementRef, inject, Input, OnDestroy, signal } from '@angular/core';
+import { Directive, ElementRef, Input, type OnDestroy, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { BrnSelectService } from './brn-select.service';
 
@@ -31,7 +31,6 @@ export class BrnSelectOptionDirective implements FocusableOption, OnDestroy {
 		this._selectService.registerOption(this._cdkSelectOption);
 
 		toObservable(this._selectService.value)
-			.pipe(takeUntilDestroyed())
 			.subscribe((selectedValues: string | string[]) => {
 				if (Array.isArray(selectedValues)) {
 					const itemFound = (selectedValues as Array<unknown>).find((val) => val === this._cdkSelectOption.value);
@@ -49,6 +48,7 @@ export class BrnSelectOptionDirective implements FocusableOption, OnDestroy {
 	@Input()
 	set value(value: unknown | null) {
 		this._cdkSelectOption.value = value;
+		this._selectService.possibleOptionsChanged();
 	}
 
 	@Input()

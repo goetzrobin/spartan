@@ -1,12 +1,12 @@
 {
-	"name": "@spartan-ng/ui-separator-brain",
-	"version": "0.0.1-alpha.343",
-	"peerDependencies": {
-		"@angular/core": "^17.3.0"
-	},
-	"dependencies": {},
-	"sideEffects": false,
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@spartan-ng/ui-separator-brain",
+  "version": "0.0.1-alpha.352",
+  "peerDependencies": {
+    "@angular/core": "^18.0.0"
+  },
+  "dependencies": {},
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }

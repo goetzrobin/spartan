@@ -1,13 +1,12 @@
 import { CdkListbox, CdkListboxModule } from '@angular/cdk/listbox';
 import {
 	CdkConnectedOverlay,
-	ConnectedOverlayPositionChange,
-	ConnectedPosition,
+	type ConnectedOverlayPositionChange,
+	type ConnectedPosition,
 	OverlayModule,
 } from '@angular/cdk/overlay';
-import { JsonPipe } from '@angular/common';
 import {
-	AfterContentInit,
+	type AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
@@ -15,8 +14,8 @@ import {
 	EventEmitter,
 	Input,
 	Output,
-	QueryList,
-	Signal,
+	type QueryList,
+	type Signal,
 	ViewChild,
 	computed,
 	inject,
@@ -24,15 +23,15 @@ import {
 	signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { type ControlValueAccessor, NgControl } from '@angular/forms';
 import {
-	ExposesSide,
-	ExposesState,
+	type ExposesSide,
+	type ExposesState,
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { Subject, delay, map, of, skip, switchMap } from 'rxjs';
+import { Subject, delay, filter, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -45,7 +44,7 @@ let nextId = 0;
 @Component({
 	selector: 'brn-select, hlm-select',
 	standalone: true,
-	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule, JsonPipe],
+	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		BrnSelectService,
@@ -85,21 +84,18 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	public readonly triggerWidth = this._selectService.triggerWidth;
 
-	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'multiple' })
 	set multiple(multiple: boolean) {
 		this._selectService.state.update((state) => ({ ...state, multiple }));
 	}
 	protected readonly _multiple = this._selectService.multiple;
 
-	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'placeholder' })
 	set placeholder(placeholder: string) {
 		this._selectService.state.update((state) => ({ ...state, placeholder }));
 	}
 	protected readonly _placeholder = this._selectService.placeholder;
 
-	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input({ alias: 'disabled' })
 	set disabled(disabled: boolean) {
 		this._selectService.state.update((state) => ({ ...state, disabled }));
@@ -158,6 +154,8 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private _onTouched = () => {};
 
+	private _shouldEmitValueChange = signal(false);
+
 	/*
 	 * This position config ensures that the top "start" corner of the overlay
 	 * is aligned with with the top "start" of the origin by default (overlapping
@@ -196,30 +194,37 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 			...state,
 			id: `brn-select-${nextId++}`,
 		}));
-		if (this.ngControl != null) {
+		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
 		}
 
-		// Watch for Listbox Selection Changes to trigger Collapse
+		// Watch for Listbox Selection Changes to trigger Collapse and Value Change
 		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe(() => {
 			if (!this._multiple()) {
 				this.close();
 			}
+
+			// we set shouldEmitValueChange to true because we want to propagate the value change
+			// as a result of user interaction
+			this._shouldEmitValueChange.set(true);
 		});
 
+		/**
+		 * Listening to value changes in order to trigger forms api on change
+		 * ShouldEmitValueChange simply ensures we only propagate value change when a user makes a selection
+		 * we dont propagate changes made from outside the component (ex. patch value or initial value from form control)
+		 */
 		toObservable(this._selectService.value)
-			// skipping first else ngcontrol always starts off as dirty and triggering value change on init value
-			.pipe(takeUntilDestroyed(), skip(1))
-			.subscribe((value) => this._onChange(value || null));
+			.subscribe((value) => {
+				if (this._shouldEmitValueChange()) {
+					this._onChange(value ?? null)
+				}
+				this._shouldEmitValueChange.set(true);
+			});
 
-		toObservable(this.dir)
-			.pipe(takeUntilDestroyed())
-			.subscribe(() =>
-				this._selectService.state.update((state) => ({
-					...state,
-					dir: this.dir(),
-				})),
-			);
+		toObservable(this.dir).subscribe((dir) =>
+			this._selectService.state.update((state) => ({ ...state, dir })),
+		);
 	}
 
 	public ngAfterContentInit(): void {
@@ -281,17 +286,17 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		setTimeout(() => this.selectContent.focusList());
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public writeValue(value: any): void {
-		this._selectService.selectOptionByValue(value);
+		// 'shouldEmitValueChange' ensures we don't propagate changes when we receive value from form control
+		// set to false until next value change and then reset back to true
+		this._shouldEmitValueChange.set(false);
+		this._selectService.setInitialSelectedOptions(value);
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public registerOnChange(fn: any): void {
 		this._onChange = fn;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public registerOnTouched(fn: any): void {
 		this._onTouched = fn;
 	}

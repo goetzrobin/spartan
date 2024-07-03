@@ -1,7 +1,7 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Directive({
 	selector: '[hlmMenuIcon]',

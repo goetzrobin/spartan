@@ -1,11 +1,11 @@
 import { Component, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Component({
 	selector: 'hlm-menu-separator',
 	standalone: true,
-	template: ``,
+	template: '',
 	host: {
 		'[class]': '_computedClass()',
 	},

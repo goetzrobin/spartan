@@ -1,7 +1,7 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { PageComponent } from '~/app/shared/layout/page.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
+import { PageComponent } from '@spartan-ng/app/app/shared/layout/page.component';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	meta: metaWith('spartan/stack - The stack', "spartan's opinionated full-stack..."),

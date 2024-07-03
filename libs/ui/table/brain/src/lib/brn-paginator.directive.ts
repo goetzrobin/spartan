@@ -1,15 +1,15 @@
 import {
-	computed,
 	Directive,
-	effect,
-	inject,
 	Input,
-	numberAttribute,
-	OnInit,
-	Signal,
-	signal,
+	type OnInit,
+	type Signal,
 	TemplateRef,
 	ViewContainerRef,
+	computed,
+	effect,
+	inject,
+	numberAttribute,
+	signal,
 } from '@angular/core';
 
 export type PaginatorState = {
@@ -37,7 +37,7 @@ export type PaginatorContext = {
 	exportAs: 'brnPaginator',
 })
 export class BrnPaginatorDirective implements OnInit {
-	static ngTemplateContextGuard(directive: BrnPaginatorDirective, context: unknown): context is PaginatorContext {
+	static ngTemplateContextGuard(_directive: BrnPaginatorDirective, context: unknown): context is PaginatorContext {
 		return true;
 	}
 

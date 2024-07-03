@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, Input } from '@angular/core';
+import { Component, Input, booleanAttribute } from '@angular/core';
 
 @Component({
 	selector: 'spartan-section-sub-heading',
@@ -8,7 +8,7 @@ import { booleanAttribute, Component, Input } from '@angular/core';
 		'[class.-mt-12]': '_first',
 	},
 	template: `
-		<h2 class="font-heading border-border border-b pt-12 text-2xl font-semibold tracking-tight">
+		<h2 class="pt-12 text-2xl font-semibold tracking-tight border-b font-heading border-border">
 			<ng-content />
 		</h2>
 	`,

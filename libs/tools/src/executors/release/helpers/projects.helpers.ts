@@ -1,4 +1,4 @@
-import { ExecutorContext } from '@nx/devkit';
+import type { ExecutorContext } from '@nx/devkit';
 
 export function getProjectName(context: ExecutorContext): string {
 	return context.projectName;

@@ -18,7 +18,7 @@ import { HlmSmallDirective } from '@spartan-ng/ui-typography-helm';
 	],
 	template: `
 		<small hlmSmall class="font-semibold">Choose a version</small>
-		<brn-radio-group class="mb-4 space-y-1 font-mono text-sm font-medium" hlm [(ngModel)]="version">
+		<brn-radio-group class="mb-4 font-mono text-sm font-medium space-y-1" hlm [(ngModel)]="version">
 			<brn-radio hlm value="16.1.4">
 				<hlm-radio-indicator indicator />
 				v16.1.4
@@ -63,7 +63,7 @@ import { HlmSmallDirective } from '@spartan-ng/ui-typography-helm';
   ],
   template: \`
     <small hlmSmall class="font-semibold">Choose a version</small>
-    <brn-radio-group class="mb-4 font-medium text-sm font-mono space-y-1" hlm [(ngModel)]="version">
+    <brn-radio-group class="mb-4 font-mono text-sm font-medium space-y-1" hlm [(ngModel)]="version">
       <brn-radio hlm value="16.1.4">
         <hlm-radio-indicator indicator />
         v16.1.4

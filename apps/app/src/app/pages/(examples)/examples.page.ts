@@ -1,10 +1,10 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
+import { NavLinkDirective } from '@spartan-ng/app/app/shared/spartan-nav-link.directive';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { hlmH1, hlmLead } from '@spartan-ng/ui-typography-helm';
-import { metaWith } from '~/app/shared/meta/meta.util';
-import { NavLinkDirective } from '~/app/shared/spartan-nav-link.directive';
 
 export const routeMeta: RouteMeta = {
 	meta: metaWith('Examples - SPARTAN', 'Examples built with the SPARTAN stack and its UI primitives'),
@@ -17,6 +17,15 @@ export const routeMeta: RouteMeta = {
 	host: {
 		class: 'block p-4 pt-6 sm:pb-16 sm:pt-12',
 	},
+	styles: `
+		.scrollbar-w-0 {
+			scrollbar-width: none;
+		}
+
+		.scrollbar-w-0::-webkit-scrollbar {
+			width: 0;
+		}
+	`,
 	template: `
 		<h1 class="${hlmH1}">Check out some examples.</h1>
 		<p class="${hlmLead} mt-4 max-w-xl">
@@ -27,10 +36,12 @@ export const routeMeta: RouteMeta = {
 			<a hlmBtn size="sm" variant="outline" routerLink="/components">Components</a>
 		</div>
 
-		<nav class="mb-2 mt-12">
+		<nav class="scrollbar-w-0 mb-2 mt-12 h-11 sm:h-auto overflow-x-auto">
 			<ul class="flex space-x-2">
 				<li><a class="!font-medium" spartanNavLink="/examples/notes">Notes</a></li>
 				<li><a class="!font-medium" spartanNavLink="/examples/typography">Typography</a></li>
+				<li><a class="!font-medium" spartanNavLink="/examples/authentication">Authentication</a></li>
+				<li><a class="!font-medium" spartanNavLink="/examples/music">Music</a></li>
 			</ul>
 		</nav>
 		<div class="border-border overflow-hidden rounded-lg border">

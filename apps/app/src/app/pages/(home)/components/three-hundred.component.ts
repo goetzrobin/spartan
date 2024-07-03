@@ -10,10 +10,10 @@ import { ThreeHundredItemComponent } from './th-item.component';
 		class: 'grid gap-2 grid-cols-5 md:grid-cols-10',
 	},
 	template: `
-		@for (contributor of _contributors; track contributor) {
-			<spartan-th-item class="mb-2" [href]="'https://github.com/' + contributor">{{ contributor }}</spartan-th-item>
+		@for (contributor of _contributors; track $index) {
+			<spartan-th-item class="mb-2" [contributor]="contributor"/>
 		}
-		@for (item of _rest; track item) {
+		@for (item of _rest; track $index) {
 			<spartan-th-item-placeholder class="mb-2" />
 		}
 	`,
@@ -23,6 +23,7 @@ export class ThreeHundredComponent {
 		'goetzrobin',
 		'thatsamsonkid',
 		'elite-benni',
+		'snydertechnologies',
 		'mihajm',
 		'ajitzero',
 		'arturgawlik',
@@ -58,10 +59,24 @@ export class ThreeHundredComponent {
 		'miljan-code',
 		'alexciesielski',
 		'ty-ler',
-		'MatznRisto',
+		'm-risto',
 		'badsgahhl',
 		'monacodelisa',
 		'tomdev9',
+		'ragul1697',
+		'kkamman',
+		'i-am-the-slime',
+		'DevWedeloper',
+		'mrsofiane',
+		'mateoetchepare',
+		'DonaldMurillo',
+		'toniskobic',
+		'eneajaho',
+		'Den-dp',
+		'0xfraso',
+		'Muneersahel',
+		'danilolmc',
+		'tomalaforge',
 	];
-	protected readonly _rest = Array(300 - this._contributors.length).map((x, i) => i);
+	protected readonly _rest = Array(300 - this._contributors.length).map((_, i) => i);
 }

@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -58,7 +58,8 @@ export const routeMeta: RouteMeta = {
 			<spartan-section-sub-heading id="about">About</spartan-section-sub-heading>
 			<p class="${hlmP}">
 				The command primitive is built upon the incredible work of
-				<a class="${hlmCode}" href="https://ngneat.github.io/cmdk/" target="_blank">ng-neat/cmdk.</a>
+				<a class="${hlmCode}" href="https://ngxpert.github.io/cmdk/" target="_blank">ngxpert/cmdk</a>
+				.
 			</p>
 
 			<spartan-section-sub-heading id="installation">Installation</spartan-section-sub-heading>

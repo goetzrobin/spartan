@@ -4,20 +4,20 @@
  * Check them out! Give them a try! Leave a star! Their work is incredible!
  */
 
-import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	ElementRef,
-	inject,
-	OnDestroy,
+	type ElementRef,
+	type OnDestroy,
 	PLATFORM_ID,
 	Renderer2,
-	signal,
-	TemplateRef,
+	type TemplateRef,
 	ViewChild,
 	ViewEncapsulation,
+	inject,
+	signal,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -36,7 +36,11 @@ import { Subject } from 'rxjs';
 			[style.visibility]="'hidden'"
 			#tooltip
 		>
-			<ng-container [ngTemplateOutlet]="template" />
+			@if (_isTypeOfString(content)) {
+				{{ content }}
+			} @else {
+				<ng-container [ngTemplateOutlet]="content" />
+			}
 		</div>
 	`,
 	encapsulation: ViewEncapsulation.None,
@@ -60,8 +64,7 @@ export class BrnTooltipContentComponent implements OnDestroy {
 	public readonly _tooltipClasses = signal('');
 	public readonly side = signal('above');
 	/** Message to display in the tooltip */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public template: TemplateRef<any> | null = null;
+	public content: string | TemplateRef<unknown> | null = null;
 
 	/** The timeout ID of any current timer set to show the tooltip */
 	private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
@@ -102,10 +105,10 @@ export class BrnTooltipContentComponent implements OnDestroy {
 	 */
 	show(delay: number): void {
 		// Cancel the delayed hide if it is scheduled
-		if (this._hideTimeoutId != null) {
+		if (this._hideTimeoutId !== null) {
 			clearTimeout(this._hideTimeoutId);
 		}
-		if (this._animateTimeoutId != null) {
+		if (this._animateTimeoutId !== null) {
 			clearTimeout(this._animateTimeoutId);
 		}
 		this._showTimeoutId = setTimeout(() => {
@@ -122,7 +125,7 @@ export class BrnTooltipContentComponent implements OnDestroy {
 	 * */
 	hide(delay: number, exitAnimationDuration: number): void {
 		// Cancel the delayed show if it is scheduled
-		if (this._showTimeoutId != null) {
+		if (this._showTimeoutId !== null) {
 			clearTimeout(this._showTimeoutId);
 		}
 		// start out animation at delay minus animation delay or immediately if possible
@@ -150,6 +153,10 @@ export class BrnTooltipContentComponent implements OnDestroy {
 		this._cancelPendingAnimations();
 		this._onHide.complete();
 		this._triggerElement = undefined;
+	}
+
+	_isTypeOfString(content: unknown): content is string {
+		return typeof content === 'string';
 	}
 
 	/**
@@ -185,11 +192,11 @@ export class BrnTooltipContentComponent implements OnDestroy {
 
 	/** Cancels any pending animation sequences. */
 	_cancelPendingAnimations() {
-		if (this._showTimeoutId != null) {
+		if (this._showTimeoutId !== null) {
 			clearTimeout(this._showTimeoutId);
 		}
 
-		if (this._hideTimeoutId != null) {
+		if (this._hideTimeoutId !== null) {
 			clearTimeout(this._hideTimeoutId);
 		}
 

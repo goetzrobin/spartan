@@ -1,4 +1,4 @@
-import { Signal } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { createInjectionToken } from './create-injection-token';
 
 export interface ExposesState {

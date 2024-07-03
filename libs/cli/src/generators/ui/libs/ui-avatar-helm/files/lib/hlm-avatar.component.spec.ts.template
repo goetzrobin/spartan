@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrnAvatarFallbackDirective, BrnAvatarImageDirective } from '@spartan-ng/ui-avatar-brain';
 import { HlmAvatarComponent } from './hlm-avatar.component';
 

@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, inject, Input } from '@angular/core';
+import { Directive, Input, booleanAttribute, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Directive({

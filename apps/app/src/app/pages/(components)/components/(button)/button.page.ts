@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
@@ -13,7 +13,7 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { anchorCode, ButtonAnchorComponent } from './button--anchor.example';
+import { ButtonAnchorComponent, anchorCode } from './button--anchor.example';
 import { ButtonDestructiveComponent, destructiveCode } from './button--destructive.example';
 import { ButtonGhostComponent, ghostCode } from './button--ghost.example';
 import { ButtonIconComponent, iconCode } from './button--icon.example';

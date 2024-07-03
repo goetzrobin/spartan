@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
@@ -66,10 +66,6 @@ export const routeMeta: RouteMeta = {
 				<spartan-code [code]="defaultSkeleton" />
 			</div>
 
-			<spartan-page-bottom-nav>
-				<spartan-page-bottom-nav-link href="collapsible" label="Collapsible" />
-				<spartan-page-bottom-nav-link direction="previous" href="carousel" label="Carousel" />
-			</spartan-page-bottom-nav>
 			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
 			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Own Icon</h3>
 			<p class="py-2">Make sure to provide the Icon.</p>
@@ -82,6 +78,11 @@ export const routeMeta: RouteMeta = {
 					<spartan-code [code]="checkboxOwnIconCode" />
 				</div>
 			</spartan-tabs>
+
+			<spartan-page-bottom-nav>
+				<spartan-page-bottom-nav-link href="collapsible" label="Collapsible" />
+				<spartan-page-bottom-nav-link direction="previous" href="carousel" label="Carousel" />
+			</spartan-page-bottom-nav>
 		</section>
 		<spartan-page-nav />
 	`,

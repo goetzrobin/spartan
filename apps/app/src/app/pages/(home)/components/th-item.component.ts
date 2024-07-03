@@ -1,25 +1,31 @@
-import { Component, Input } from '@angular/core';
-import { SpartanLogoComponent } from '~/app/shared/spartan-logo.component';
+import { NgOptimizedImage } from '@angular/common';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
 	selector: 'spartan-th-item',
 	standalone: true,
-	imports: [SpartanLogoComponent],
+	imports: [NgOptimizedImage],
 	host: {
 		class: 'inline-flex flex-col justify-center items-center',
 	},
 	template: `
-		<spartan-logo class="bg-primary h-9 w-9 -rotate-90 rounded-full p-1" />
-		<a
-			class="mt-1 inline-block whitespace-nowrap text-[.55rem] font-medium hover:underline"
-			[href]="href"
-			target="_blank"
-		>
-			<ng-content />
+		<a class="flex flex-col items-center" [href]="href()" target="_blank">
+			<img
+				loading="lazy"
+				[ngSrc]="src()"
+				width="40"
+				height="40"
+				[alt]=contributor()
+				class="rounded-full"
+			/>
+			<span class="mt-1 inline-block whitespace-nowrap text-[.7rem] font-medium hover:underline">
+				{{contributor()}}
+			</span>
 		</a>
 	`,
 })
 export class ThreeHundredItemComponent {
-	@Input()
-	href = '';
+	contributor = input.required<string>();
+	href = computed(() => `https://github.com/${this.contributor()}`)
+	src  = computed(() => `${this.href()}.png?size=80`)
 }

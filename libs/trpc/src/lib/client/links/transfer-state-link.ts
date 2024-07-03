@@ -1,6 +1,6 @@
-import { StateKey, TransferState, inject, makeStateKey } from '@angular/core';
-import { Operation, TRPCLink } from '@trpc/client';
-import { AnyRouter } from '@trpc/server';
+import { type StateKey, TransferState, inject, makeStateKey } from '@angular/core';
+import type { Operation, TRPCLink } from '@trpc/client';
+import type { AnyRouter } from '@trpc/server';
 import { observable } from '@trpc/server/observable';
 import superjson from 'superjson';
 import { tRPC_CACHE_STATE } from '../cache-state';
@@ -8,10 +8,10 @@ import { tRPC_CACHE_STATE } from '../cache-state';
 function makeCacheKey(request: Operation<unknown>): StateKey<string> {
 	const { type, path, input } = request;
 	const encodedParams = Object.entries(input ?? {}).reduce(
-		(prev, [key, value]) => prev + `${key}=${JSON.stringify(value)}`,
+		(prev, [key, value]) => `${prev}${key}=${JSON.stringify(value)}`,
 		'',
 	);
-	const key = type + '.' + path + '?' + encodedParams;
+	const key = `${type}.${path}?${encodedParams}`;
 	const hash = generateHash(key);
 	return makeStateKey(hash);
 }

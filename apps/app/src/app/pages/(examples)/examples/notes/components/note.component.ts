@@ -1,6 +1,7 @@
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import type { Note } from '@spartan-ng/app/db';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
@@ -12,7 +13,6 @@ import {
 	HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
-import { Note } from '~/db';
 
 @Component({
 	selector: 'analog-trpc-note',
@@ -60,7 +60,7 @@ import { Note } from '~/db';
 					viewBox="0 0 24 24"
 					stroke-width="1.5"
 					stroke="currentColor"
-					class="h-4 w-4"
+					class="w-4 h-4"
 				>
 					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 				</svg>

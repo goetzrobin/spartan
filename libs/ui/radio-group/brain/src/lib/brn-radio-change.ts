@@ -1,4 +1,4 @@
-import { BrnRadioComponent } from './brn-radio.component';
+import type { BrnRadioComponent } from './brn-radio.component';
 
 export class BrnRadioChange {
 	constructor(

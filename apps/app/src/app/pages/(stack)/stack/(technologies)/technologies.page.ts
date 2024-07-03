@@ -1,19 +1,19 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { ArchitectureDiagramAnalogComponent } from '@spartan-ng/app/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-analog.component';
+import { ArchitectureDiagramAngularComponent } from '@spartan-ng/app/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-angular.component';
+import { ArchitectureDiagramDrizzleComponent } from '@spartan-ng/app/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-drizzle.component';
+import { ArchitectureDiagramNxComponent } from '@spartan-ng/app/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-nx.component';
+import { ArchitectureDiagramSupabaseComponent } from '@spartan-ng/app/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-supabase.component';
+import { ArchitectureDiagramTrpcComponent } from '@spartan-ng/app/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-trpc.component';
+import { MainSectionDirective } from '@spartan-ng/app/app/shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '@spartan-ng/app/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
+import { PageNavComponent } from '@spartan-ng/app/app/shared/layout/page-nav/page-nav.component';
+import { SectionIntroComponent } from '@spartan-ng/app/app/shared/layout/section-intro.component';
+import { SectionSubHeadingComponent } from '@spartan-ng/app/app/shared/layout/section-sub-heading.component';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
-import { ArchitectureDiagramAnalogComponent } from '~/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-analog.component';
-import { ArchitectureDiagramAngularComponent } from '~/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-angular.component';
-import { ArchitectureDiagramDrizzleComponent } from '~/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-drizzle.component';
-import { ArchitectureDiagramNxComponent } from '~/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-nx.component';
-import { ArchitectureDiagramSupabaseComponent } from '~/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-supabase.component';
-import { ArchitectureDiagramTrpcComponent } from '~/app/pages/(stack)/stack/(technologies)/components/architecture-diagram-trpc.component';
-import { MainSectionDirective } from '~/app/shared/layout/main-section.directive';
-import { PageBottomNavLinkComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav-link.component';
-import { PageBottomNavComponent } from '~/app/shared/layout/page-bottom-nav/page-bottom-nav.component';
-import { PageNavComponent } from '~/app/shared/layout/page-nav/page-nav.component';
-import { SectionIntroComponent } from '~/app/shared/layout/section-intro.component';
-import { SectionSubHeadingComponent } from '~/app/shared/layout/section-sub-heading.component';
-import { metaWith } from '~/app/shared/meta/meta.util';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Technologies' },

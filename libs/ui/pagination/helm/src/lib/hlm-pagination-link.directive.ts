@@ -1,8 +1,8 @@
-import { booleanAttribute, computed, Directive, input } from '@angular/core';
+import { Directive, booleanAttribute, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { buttonVariants, ButtonVariants } from '@spartan-ng/ui-button-helm';
+import { type ButtonVariants, buttonVariants } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
-import { cva, VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 
 export const paginationLinkVariants = cva('', {
 	variants: {},

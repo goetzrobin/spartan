@@ -1,10 +1,10 @@
-import { ComponentType } from '@angular/cdk/portal';
-import { inject, Injectable, TemplateRef } from '@angular/core';
+import type { ComponentType } from '@angular/cdk/portal';
+import { Injectable, type TemplateRef, inject } from '@angular/core';
 import {
-	BrnDialogOptions,
+	type BrnDialogOptions,
 	BrnDialogService,
-	cssClassesToArray,
 	DEFAULT_BRN_DIALOG_OPTIONS,
+	cssClassesToArray,
 } from '@spartan-ng/ui-dialog-brain';
 import { HlmDialogContentComponent } from './hlm-dialog-content.component';
 import { hlmDialogOverlayClass } from './hlm-dialog-overlay.directive';
@@ -25,6 +25,7 @@ export class HlmDialogService {
 		options = {
 			...DEFAULT_BRN_DIALOG_OPTIONS,
 			closeDelay: 100,
+			// eslint-disable-next-line
 			...(options ?? {}),
 			backdropClass: cssClassesToArray(`${hlmDialogOverlayClass} ${options?.backdropClass ?? ''}`),
 			context: { ...options?.context, $component: component, $dynamicComponentClass: options?.contentClass },

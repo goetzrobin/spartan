@@ -203,6 +203,41 @@ describe('select', () => {
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
 		});
 
+		it('should have initial value set correctly when options are provided in a for loop', () => {
+			cy.visit('/iframe.html?id=select--reactive-form-control-with-for-and-initial-value&args=initialValue:banana');
+
+			// initial
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-untouched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
+
+			// on open
+			cy.get('[brnselecttrigger]').click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-untouched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
+			cy.get('body').click();
+
+			// no selection
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
+
+			// force error
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').last().click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+
+			// on real selection
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').eq(0).click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
+		});
+
 		it('should have form validation classes and reflect control status with label', () => {
 			cy.visit('/iframe.html?id=select--reactive-form-control-with-validation-with-label');
 
@@ -301,6 +336,44 @@ describe('select', () => {
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
 		});
+
+		it('should allow to set an undefined value and show the associated option', () => {
+			cy.visit('/iframe.html?id=select--with-label-and-form');
+
+			// initial
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-untouched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+			cy.get('[brnselecttrigger]').should('contain.text', 'No fruit');
+
+			// on open
+			cy.get('[brnselecttrigger]').click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-untouched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+			cy.get('[brnselecttrigger]').should('contain.text', 'No fruit');
+			cy.get('body').click();
+
+			// no selection
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-pristine');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+
+			// on real selection
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').eq(1).click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-valid');
+
+			// on reset selection
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').eq(0).click();
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-dirty');
+			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
+			cy.get('[brnselecttrigger]').should('contain.text', 'No fruit');
+		})
 	});
 
 	describe('scrollable', () => {
