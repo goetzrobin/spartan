@@ -49,9 +49,9 @@ const CONTAINER_POST_FIX = '-checkbox';
 			type="checkbox"
 			role="checkbox"
 			[ngStyle]="{
-				position: 'absolute',
-				width: '1px',
-				height: '1px',
+				position: 'fixed',
+				width: '0px',
+				height: '0px',
 				padding: '0',
 				margin: '-1px',
 				overflow: 'hidden',
