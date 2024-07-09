@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Directive, ElementRef, InjectionToken, PLATFORM_ID, Signal, WritableSignal, afterNextRender, contentChild, inject, model, signal } from "@angular/core";
+import { AfterViewInit, Directive, ElementRef, InjectionToken, PLATFORM_ID, Signal, WritableSignal, contentChild, inject, model, signal } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common";
 import { BRN_SLIDER_TRACK, BrnSliderTrack } from "./brn-slider-track.directive";
 
