@@ -77,7 +77,9 @@
 			"@spartan-ng/ui-toggle-helm": ["libs/ui/toggle/helm/src/index.ts"],
 			"@spartan-ng/ui-tooltip-brain": ["libs/ui/tooltip/brain/src/index.ts"],
 			"@spartan-ng/ui-tooltip-helm": ["libs/ui/tooltip/helm/src/index.ts"],
-			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"]
+			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"],
+			"@spartan-ng/ui-slider-brain": ["libs/ui/slider/brain/src/index.ts"],
+			"@spartan-ng/ui-slider-helm": ["libs/ui/slider/helm/src/index.ts"],
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
