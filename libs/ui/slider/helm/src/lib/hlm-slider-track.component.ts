@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, input } from "@angular/core";
-import { BrnSliderTrackDirective } from "@spartan-ng/ui-slider-brain";
-import { HlmSliderTrackInactiveDirective } from "./hlm-slider-track-inactive.directive";
-import { HlmSliderTrackActiveDirective } from "./hlm-slider-track-active.directive";
-import { HlmSliderTrackActiveFillDirective } from "./hlm-slider-track-active-fill.directive";
-import { ClassValue } from "clsx";
 import { hlm } from "@spartan-ng/ui-core";
+import { BrnSliderTrackDirective } from "@spartan-ng/ui-slider-brain";
+import type { ClassValue } from "clsx";
+import { HlmSliderTrackActiveFillDirective } from "./hlm-slider-track-active-fill.directive";
+import { HlmSliderTrackActiveDirective } from "./hlm-slider-track-active.directive";
+import { HlmSliderTrackInactiveDirective } from "./hlm-slider-track-inactive.directive";
 
 @Component({
     selector: 'hlm-slider-track, brn-slider-track [hlm]',    

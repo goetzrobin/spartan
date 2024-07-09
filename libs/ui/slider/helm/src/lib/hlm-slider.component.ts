@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from "@angular/core";
 import { hlm } from "@spartan-ng/ui-core";
 import { BrnSliderDirective } from "@spartan-ng/ui-slider-brain";
-import { ClassValue } from "clsx";
+import type { ClassValue } from "clsx";
 
 @Component({
 	selector: 'hlm-slider, brn-slider [hlm]',

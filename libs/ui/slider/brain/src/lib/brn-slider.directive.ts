@@ -1,6 +1,6 @@
-import { AfterViewInit, Directive, ElementRef, InjectionToken, PLATFORM_ID, Signal, WritableSignal, contentChild, inject, model, signal } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common";
-import { BRN_SLIDER_TRACK, BrnSliderTrack } from "./brn-slider-track.directive";
+import { type AfterViewInit, Directive, ElementRef, InjectionToken, PLATFORM_ID, type Signal, type WritableSignal, contentChild, inject, model, signal } from "@angular/core";
+import { BRN_SLIDER_TRACK, type BrnSliderTrack } from "./brn-slider-track.directive";
 
 export const BRN_SLIDER = new InjectionToken<BrnSlider>('BrnSlider');
 

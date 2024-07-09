@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from "@angular/core";
-import { BrnSliderThumbDirective } from "@spartan-ng/ui-slider-brain";
-import { ClassValue } from "clsx";
 import { hlm } from "@spartan-ng/ui-core";
+import { BrnSliderThumbDirective } from "@spartan-ng/ui-slider-brain";
+import type { ClassValue } from "clsx";
 
 @Component({
     selector: 'hlm-slider-thumb, brn-slider-thumb [hlm]',    

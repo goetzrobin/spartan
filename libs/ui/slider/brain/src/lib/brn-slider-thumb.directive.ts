@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Signal, computed, effect, inject } from "@angular/core";
+import { Directive, ElementRef, type Signal, computed, effect, inject } from "@angular/core";
 import { BRN_SLIDER } from "./brn-slider.directive";
 
 export interface BrnSliderThumb {

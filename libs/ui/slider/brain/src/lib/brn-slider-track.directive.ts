@@ -1,5 +1,5 @@
-import { Directive, InjectionToken, Signal, computed, contentChild, forwardRef, inject } from "@angular/core";
-import { BRN_SLIDER_INPUT, BrnSliderInputDirective } from "./brn-slider-input.directive";
+import { Directive, InjectionToken, type Signal, computed, contentChild, forwardRef, inject } from "@angular/core";
+import { BRN_SLIDER_INPUT } from "./brn-slider-input.directive";
 import { BRN_SLIDER } from "./brn-slider.directive";
 
 export const BRN_SLIDER_TRACK = new InjectionToken<BrnSliderTrack>('BrnSliderTrack');

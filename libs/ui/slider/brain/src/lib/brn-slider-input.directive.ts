@@ -1,5 +1,5 @@
-import { Directive, ElementRef, InjectionToken, Signal, computed, effect, inject, signal } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { Directive, ElementRef, InjectionToken, type Signal, computed, effect, inject, signal } from "@angular/core";
+import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { BRN_SLIDER } from "./brn-slider.directive";
 
 export const BRN_SLIDER_INPUT = new InjectionToken<BrnSliderInput>('BrnSliderInput');
