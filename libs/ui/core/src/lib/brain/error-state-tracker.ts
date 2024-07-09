@@ -22,7 +22,7 @@ export class ErrorStateTracker {
 		const parent = this._parentFormGroup || this._parentForm;
 		const matcher = this.matcher || this._defaultMatcher;
 		const control = this.ngControl ? (this.ngControl.control as AbstractControl) : null;
-		const newState = matcher?.isErrorState(control, parent) ?? false;
+		const newState = matcher?.isInvalid(control, parent) ?? false;
 
 		if (newState !== oldState) {
 			this.errorState.set(newState);

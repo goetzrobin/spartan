@@ -4,8 +4,8 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@spartan-ng/ui-core';
-import { HlmErrorDirective } from '../directives/hlm-error.directive';
-import { HlmHintDirective } from '../directives/hlm-hint.directive';
+import { HlmErrorDirective } from '../hlm-error.directive';
+import { HlmHintDirective } from '../hlm-hint.directive';
 import { HlmFormFieldComponent } from '../hlm-form-field.component';
 
 const DIRECTIVES = [HlmFormFieldComponent, HlmErrorDirective, HlmHintDirective, HlmInputDirective];

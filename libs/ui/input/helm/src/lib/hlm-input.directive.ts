@@ -59,6 +59,8 @@ export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 		hlm(inputVariants({ size: this._size(), error: this._error() }), this.userClass()),
 	);
 
+	private injector = inject(Injector)
+
 	ngControl: NgControl | null = this.injector.get(NgControl, null);
 
 	errorStateTracker: ErrorStateTracker;
@@ -68,8 +70,8 @@ export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 	private parentFormGroup = inject(FormGroupDirective, { optional: true });
 
 	errorState = computed(() => this.errorStateTracker.errorState());
-
-	constructor(@Inject(Injector) private injector: Injector) {
+	
+	constructor() {
 		this.errorStateTracker = new ErrorStateTracker(
 			this.defaultErrorStateMatcher,
 			this.ngControl,
