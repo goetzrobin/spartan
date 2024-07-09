@@ -1,8 +1,8 @@
-import { Meta, StoryObj, moduleMetadata } from "@storybook/angular";
+import { FormsModule } from "@angular/forms";
+import { type Meta, type StoryObj, moduleMetadata } from "@storybook/angular";
+import { argsToTemplate } from "@storybook/angular";
 import { BrnSliderImports } from "./brain/src";
 import { HlmSliderImports } from "./helm/src";
-import { FormsModule } from "@angular/forms";
-import { argsToTemplate } from "@storybook/angular";
 
 interface BrnSliderStoryArgs {	
 	disabled: boolean;	
