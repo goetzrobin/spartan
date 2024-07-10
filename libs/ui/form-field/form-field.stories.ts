@@ -2,7 +2,7 @@ import { Component, type OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective, HlmButtonModule } from '../button/helm/src';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '../core/src';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '../forms/brain/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { BrnSelectImports } from '../select/brain/src';
 import { HlmSelectImports, HlmSelectModule } from '../select/helm/src';

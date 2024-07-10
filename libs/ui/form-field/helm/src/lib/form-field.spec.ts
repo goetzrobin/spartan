@@ -1,14 +1,73 @@
+import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 
-import { SingleFormField, SingleFormFieldDirty } from './form-field-example';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@spartan-ng/ui-forms-brain';
+import { HlmErrorDirective } from './hlm-error.directive';
+import { HlmFormFieldComponent } from './hlm-form-field.component';
+import { HlmHintDirective } from './hlm-hint.directive';
+
+const DIRECTIVES = [HlmFormFieldComponent, HlmErrorDirective, HlmHintDirective, HlmInputDirective];
+
+@Component({
+	standalone: true,
+	selector: 'single-form-field-example',
+	imports: [ReactiveFormsModule, ...DIRECTIVES],
+	template: `
+		<hlm-form-field>
+			<input
+				data-testid="hlm-input"
+				aria-label="Your Name"
+				[formControl]="name"
+				class="w-80"
+				hlmInput
+				type="text"
+				placeholder="Your Name"
+			/>
+			<hlm-error data-testid="hlm-error">Your name is required</hlm-error>
+			<hlm-hint data-testid="hlm-hint">This is your public display name.</hlm-hint>
+		</hlm-form-field>
+	`,
+})
+class SingleFormFieldMock {
+	name = new FormControl('', Validators.required);
+}
+
+@Component({
+	standalone: true,
+	selector: 'single-form-field-dirty-example',
+	imports: [ReactiveFormsModule, ...DIRECTIVES],
+	template: `
+		<hlm-form-field>
+			<input
+				data-testid="hlm-input"
+				aria-label="Your Name"
+				[formControl]="name"
+				class="w-80"
+				hlmInput
+				type="text"
+				placeholder="Your Name"
+			/>
+			<hlm-error data-testid="hlm-error">Your name is required</hlm-error>
+			<hlm-hint data-testid="hlm-hint">This is your public display name.</hlm-hint>
+		</hlm-form-field>
+	`,
+	providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
+})
+class SingleFormFieldDirtyMock {
+	name = new FormControl('', Validators.required);
+}
+
 
 describe('Hlm Form Field Component', () => {
 	const TEXT_HINT = 'This is your public display name.';
 	const TEXT_ERROR = 'Your name is required';
 
 	const setupFormField = async () => {
-		const { fixture } = await render(SingleFormField);
+		const { fixture } = await render(SingleFormFieldMock);
 		return {
 			user: userEvent.setup(),
 			fixture,
@@ -19,7 +78,7 @@ describe('Hlm Form Field Component', () => {
 	};
 
 	const setupFormFieldWithErrorStateDirty = async () => {
-		const { fixture } = await render(SingleFormFieldDirty);
+		const { fixture } = await render(SingleFormFieldDirtyMock);
 		return {
 			user: userEvent.setup(),
 			fixture,

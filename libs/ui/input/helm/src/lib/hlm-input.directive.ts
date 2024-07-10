@@ -1,7 +1,8 @@
 import { Directive, type DoCheck, Inject, Injector, Input, computed, effect, inject, input, signal } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { ErrorStateMatcher, ErrorStateTracker, hlm } from '@spartan-ng/ui-core';
+import { hlm } from '@spartan-ng/ui-core';
 import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
+import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/ui-forms-brain';
 
 import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
