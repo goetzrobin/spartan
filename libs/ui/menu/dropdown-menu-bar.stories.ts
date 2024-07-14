@@ -5,7 +5,7 @@ import { BrnMenuTriggerDirective } from './brain/src';
 import { HlmMenuBarImports, HlmMenuComponent, HlmMenuImports } from './helm/src';
 
 const meta: Meta<HlmMenuComponent> = {
-	title: ' Menubar',
+	title: 'Menubar',
 	component: HlmMenuComponent,
 	tags: ['autodocs'],
 	args: {
