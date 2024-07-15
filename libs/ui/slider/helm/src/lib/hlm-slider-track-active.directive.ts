@@ -10,7 +10,6 @@ import type { ClassValue } from "clsx";
 	},
 })
 export class HlmSliderTrackActiveDirective {
-
     public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(

@@ -7,28 +7,23 @@ import { HlmSliderTrackActiveDirective } from "./hlm-slider-track-active.directi
 import { HlmSliderTrackInactiveDirective } from "./hlm-slider-track-inactive.directive";
 
 @Component({
-    selector: 'hlm-slider-track, brn-slider-track [hlm]',    
-    standalone: true,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
+	selector: 'hlm-slider-track, brn-slider-track [hlm]',
+	standalone: true,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
     <ng-content></ng-content>
     <div hlmSliderTrackInactive></div> 
     <div hlmSliderTrackActive>           
         <div hlmSliderTrackActiveFill></div>
-    </div>
-    `,        
-    host: {
-		'[class]': '_computedClass()',
+    </div>    
+    `,
+	host: {
+		'[class]': '_computedClass()',		
 	},
-    hostDirectives: [BrnSliderTrackDirective],
-    imports: [HlmSliderTrackInactiveDirective, HlmSliderTrackActiveDirective, HlmSliderTrackActiveFillDirective]
+	hostDirectives: [BrnSliderTrackDirective],
+	imports: [HlmSliderTrackInactiveDirective, HlmSliderTrackActiveDirective, HlmSliderTrackActiveFillDirective],
 })
-export class HlmSliderTrackComponent {    
-    public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() =>
-		hlm(
-			'block h-full transition-all',
-			this.userClass(),
-		),
-	);        
+export class HlmSliderTrackComponent {
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm('block h-full transition-all', this.userClass()));	
 }

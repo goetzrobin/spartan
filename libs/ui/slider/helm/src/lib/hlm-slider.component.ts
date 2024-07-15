@@ -1,6 +1,7 @@
+
 import { ChangeDetectionStrategy, Component, computed, inject, input } from "@angular/core";
 import { hlm } from "@spartan-ng/ui-core";
-import { BrnSliderDirective } from "@spartan-ng/ui-slider-brain";
+import { BRN_SLIDER, BrnSliderDirective } from "@spartan-ng/ui-slider-brain";
 import type { ClassValue } from "clsx";
 
 @Component({
@@ -10,7 +11,7 @@ import type { ClassValue } from "clsx";
 	hostDirectives: [
 		{
 			directive: BrnSliderDirective,
-			inputs: ['brnSliderDisabled: disabled', 'min', 'max'],			
+			inputs: ['brnSliderDisabled: disabled', 'min', 'max', 'dir'],
 		},
 	],
 	template: '<ng-content/>',
@@ -18,19 +19,11 @@ import type { ClassValue } from "clsx";
 		'[class]': '_computedClass()',
 	},	
 })
-export class HlmSliderComponent {	
-    public readonly disabled = input<boolean>();
-	public readonly min = input<number>();
-	public readonly max = input<number>();
-
-    public readonly userClass = input<ClassValue>('', { alias: 'class' });
+export class HlmSliderComponent {
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm(
-			'w-full h-4 block relative',
-			this.userClass(),
-			this._brnSlider.disabled() ? 'opacity-40' : ''
-		),
+		hlm('w-full h-4 block relative', this._brnSlider.disabled() ? 'opacity-40' : '', this.userClass()),
 	);
 
-	private readonly _brnSlider = inject(BrnSliderDirective, { host: true });	
+	private readonly _brnSlider = inject(BRN_SLIDER, { host: true });
 }

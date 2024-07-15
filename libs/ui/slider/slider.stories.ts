@@ -1,22 +1,28 @@
+import type { Direction } from "@angular/cdk/bidi";
 import { FormsModule } from "@angular/forms";
 import { type Meta, type StoryObj, moduleMetadata } from "@storybook/angular";
 import { argsToTemplate } from "@storybook/angular";
 import { BrnSliderImports } from "./brain/src";
 import { HlmSliderImports } from "./helm/src";
 
-interface BrnSliderStoryArgs {	
-	disabled: boolean;	
+interface BrnSliderStoryArgs {
+	disabled: boolean;
 	min: number;
 	max: number;
+	dir: Direction;
 };
 
 const meta: Meta<BrnSliderStoryArgs> = {
 	title: 'Slider',
 	tags: ['autodocs'],
 	args: {
-		disabled: false
+		disabled: false,
+		dir: 'ltr',
 	},
-    decorators: [
+	argTypes: {
+		dir: { control: 'radio', options: ['ltr', 'rtl'] },
+	},
+	decorators: [
 		moduleMetadata({
 			imports: [FormsModule, HlmSliderImports, BrnSliderImports],
 		}),
@@ -30,7 +36,7 @@ export const Default: Story = {
 	render: (args) => ({
 		props: { ...args },
 		template: /* HTML */ `			
-			<hlm-slider>                			
+			<hlm-slider ${argsToTemplate(args)}>
 				<hlm-slider-track>
 					<input hlmSliderInput [(ngModel)]="value1" />						
 				</hlm-slider-track>
@@ -58,8 +64,7 @@ export const Disabled: Story = {
 					<input hlmSliderInput />						
 				</hlm-slider-track>
 				<hlm-slider-thumb></hlm-slider-thumb>
-			</hlm-slider>
-			
+			</hlm-slider>			
 		`,
 	}),
 };
