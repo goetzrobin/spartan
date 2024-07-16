@@ -12,12 +12,8 @@ import type { ClassValue } from "clsx";
 	},
 })
 export class HlmSliderInputDirective {
-
-    public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() =>
-		hlm(
-			'w-full h-full opacity-0 absolute cursor-pointer transition-all',
-			this.userClass(),
-		),
-	);
-}
+		public readonly userClass = input<ClassValue>('', { alias: 'class' });
+		protected _computedClass = computed(() =>
+			hlm('w-[calc(100%+1.5rem)] h-6 -top-1 -left-3 opacity-0 absolute cursor-pointer transition-all', this.userClass()),
+		);
+	}

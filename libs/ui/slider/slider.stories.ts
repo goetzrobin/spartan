@@ -1,4 +1,5 @@
 import type { Direction } from "@angular/cdk/bidi";
+import { signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { type Meta, type StoryObj, moduleMetadata } from "@storybook/angular";
 import { argsToTemplate } from "@storybook/angular";
@@ -10,6 +11,7 @@ interface BrnSliderStoryArgs {
 	min: number;
 	max: number;
 	dir: Direction;
+	ariaLabel: string;
 };
 
 const meta: Meta<BrnSliderStoryArgs> = {
@@ -17,7 +19,8 @@ const meta: Meta<BrnSliderStoryArgs> = {
 	tags: ['autodocs'],
 	args: {
 		disabled: false,
-		dir: 'ltr',
+		dir: 'ltr',		
+		ariaLabel: 'fallback-label'
 	},
 	argTypes: {
 		dir: { control: 'radio', options: ['ltr', 'rtl'] },
@@ -35,19 +38,15 @@ type Story = StoryObj<BrnSliderStoryArgs>;
 export const Default: Story = {
 	render: (args) => ({
 		props: { ...args },
-		template: /* HTML */ `			
+		template: /* HTML */ `	
 			<hlm-slider ${argsToTemplate(args)}>
 				<hlm-slider-track>
-					<input hlmSliderInput [(ngModel)]="value1" />						
+					<input hlmSliderInput [(ngModel)]="value" />						
 				</hlm-slider-track>
 				<hlm-slider-thumb></hlm-slider-thumb>
 			</hlm-slider>
-			
 
-			<div>{{value1}}</div>
-
-            <div><input type="number" [(ngModel)]="value1" /></div>
-			<button (click)="value1 = 25">Change slider value</button>
+			<div>{{value}}</div>
 		`,
 	}),
 };
@@ -56,9 +55,9 @@ export const Disabled: Story = {
 	args: {
 		disabled: true,
 	},
-	render: ({ ...args }) => ({		
+	render: ({ ...args }) => ({
 		props: args,
-		template: /* HTML */ `			
+		template: /* HTML */ `						
 			<hlm-slider ${argsToTemplate(args)}>                			
 				<hlm-slider-track>
 					<input hlmSliderInput />						
@@ -73,9 +72,9 @@ export const Min: Story = {
 	args: {
 		min: 10,
 	},
-	render: ({ ...args }) => ({		
+	render: ({ ...args }) => ({
 		props: args,
-		template: /* HTML */ `			
+		template: /* HTML */ `						
 			<hlm-slider ${argsToTemplate(args)}>                			
 				<hlm-slider-track>
 					<input hlmSliderInput [(ngModel)]="value" />						
@@ -92,9 +91,9 @@ export const Max: Story = {
 	args: {
 		max: 75,
 	},
-	render: ({ ...args }) => ({		
+	render: ({ ...args }) => ({
 		props: args,
-		template: /* HTML */ `			
+		template: /* HTML */ `						
 			<hlm-slider ${argsToTemplate(args)}>                			
 				<hlm-slider-track>
 					<input hlmSliderInput [(ngModel)]="value" />						
@@ -112,9 +111,9 @@ export const MinMax: Story = {
 		min: 10,
 		max: 90,
 	},
-	render: ({ ...args }) => ({		
+	render: ({ ...args }) => ({
 		props: args,
-		template: /* HTML */ `			
+		template: /* HTML */ `						
 			<hlm-slider ${argsToTemplate(args)}>                			
 				<hlm-slider-track>
 					<input hlmSliderInput [(ngModel)]="value" />						
@@ -123,6 +122,65 @@ export const MinMax: Story = {
 			</hlm-slider>
 
 			<div>{{value}}</div>
+		`,
+	}),
+};
+
+export const AriaLabelledby: Story = {
+	render: (args) => ({
+		props: { ...args },
+		template: /* HTML */ `	
+			<label hlmLabel #sliderLabel id="slider-label">Slider with label</label>
+			<hlm-slider ${argsToTemplate(args, { exclude: ['ariaLabel'] })} [label]="sliderLabel">
+				<hlm-slider-track>
+					<input id="slider" hlmSliderInput [(ngModel)]="value" />						
+				</hlm-slider-track>
+				<hlm-slider-thumb></hlm-slider-thumb>
+			</hlm-slider>
+
+			<div>{{value}}</div>
+		`,
+	}),
+};
+
+export const TemplateDrivenForm: Story = {
+	render: (args) => ({
+		props: { ...args, temperature: signal('0') },
+		template: /* HTML */ `	
+			<form ngForm>		
+				<div>
+					<pre>{{temperature()}}</pre>
+				</div>				
+				<hlm-slider ${argsToTemplate(args)}>
+					<hlm-slider-track>
+						<input hlmSliderInput [(ngModel)]="temperature" name="temperature" />						
+					</hlm-slider-track>
+					<hlm-slider-thumb></hlm-slider-thumb>
+				</hlm-slider>				
+            	
+				<button (click)="temperature.set(25)">Change temperature value</button>
+			</form>
+		`,
+	}),
+};
+
+export const TemplateDrivenFormWithInitialValue: Story = {
+	render: (args) => ({
+		props: { ...args, temperature: signal(12) },
+		template: /* HTML */ `	
+			<form ngForm>		
+				<div>
+					<pre>{{temperature()}}</pre>
+				</div>				
+				<hlm-slider ${argsToTemplate(args)}>
+					<hlm-slider-track>
+						<input hlmSliderInput [(ngModel)]="temperature" name="temperature" />						
+					</hlm-slider-track>
+					<hlm-slider-thumb></hlm-slider-thumb>
+				</hlm-slider>				
+            	
+				<button (click)="temperature.set(25)">Change temperature value</button>
+			</form>
 		`,
 	}),
 };

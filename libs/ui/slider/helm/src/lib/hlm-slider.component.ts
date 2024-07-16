@@ -1,23 +1,22 @@
-
-import { ChangeDetectionStrategy, Component, computed, inject, input } from "@angular/core";
-import { hlm } from "@spartan-ng/ui-core";
-import { BRN_SLIDER, BrnSliderDirective } from "@spartan-ng/ui-slider-brain";
-import type { ClassValue } from "clsx";
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { hlm } from '@spartan-ng/ui-core';
+import { BRN_SLIDER, BrnSliderDirective } from '@spartan-ng/ui-slider-brain';
+import type { ClassValue } from 'clsx';
 
 @Component({
 	selector: 'hlm-slider, brn-slider [hlm]',
 	standalone: true,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [
 		{
 			directive: BrnSliderDirective,
-			inputs: ['brnSliderDisabled: disabled', 'min', 'max', 'dir'],
+			inputs: ['brnSliderDisabled: disabled', 'min', 'max', 'dir', 'label', 'ariaLabel'],
 		},
 	],
 	template: '<ng-content/>',
-    host: {
+	host: {
 		'[class]': '_computedClass()',
-	},	
+	},
 })
 export class HlmSliderComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });

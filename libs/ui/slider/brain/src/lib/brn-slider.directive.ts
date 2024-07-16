@@ -3,6 +3,7 @@ import { SharedResizeObserver } from "@angular/cdk/observers/private";
 import { isPlatformBrowser } from "@angular/common";
 import { type AfterViewInit, Directive, ElementRef, InjectionToken, Injector, type OnDestroy, PLATFORM_ID, type Signal, type WritableSignal, contentChild, inject, input, model, signal } from "@angular/core";
 import { toObservable } from "@angular/core/rxjs-interop";
+import type { BrnLabelDirective } from "@spartan-ng/ui-label-brain";
 import { Subject, debounceTime, merge, takeUntil, tap } from "rxjs";
 import { BRN_SLIDER_TRACK, type BrnSliderTrack } from "./brn-slider-track.directive";
 
@@ -29,6 +30,16 @@ export interface BrnSlider {
 
 	/** The underlying slider's track element */
 	brnSliderTrack: Signal<BrnSliderTrack | undefined>;
+
+	/** The aria-labelledby element */
+	label: Signal<BrnLabelDirective | null>;
+
+	/** The optional aria-label fallback value.
+	 * If no label is provided, this input must be provided by the user,
+	 * otherwise an error will be displayed prompting the user to either 
+	 * provide a spartan-ui label or a fallback aria label text.
+	 */
+	ariaLabel: Signal<string | null>;
 };
 
 @Directive({
@@ -41,6 +52,8 @@ export interface BrnSlider {
     exportAs: 'brnSlider',
 })
 export class BrnSliderDirective implements BrnSlider, AfterViewInit, OnDestroy {
+	public readonly label = input<BrnLabelDirective | null>(null);
+	public readonly ariaLabel = input<string | null>(null);
 	/** Used only as an input. */
 	public readonly dir = input<Direction>('ltr');
 	public readonly direction = signal<Direction>('ltr');
@@ -73,8 +86,8 @@ export class BrnSliderDirective implements BrnSlider, AfterViewInit, OnDestroy {
 
 	/**
 	 * The method is responsible of setting the current direction state
-	 * based on the latest 'dir' input or bidi state change. The only 
-	 * source of truth for slider direction state is the 'direction' signal 
+	 * based on the latest 'dir' input or bidi state change. The only
+	 * source of truth for slider direction state is the 'direction' signal
 	 * and all interested consumers of it, will consume this interface exposed signal.
 	 */
 	private _updateDirectionality() {

@@ -1,20 +1,18 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from "@angular/core";
-import { hlm } from "@spartan-ng/ui-core";
-import { BRN_SLIDER, BrnSliderThumbDirective } from "@spartan-ng/ui-slider-brain";
-import type { ClassValue } from "clsx";
+import { Directive, computed, inject, input } from '@angular/core';
+import { hlm } from '@spartan-ng/ui-core';
+import { BRN_SLIDER, BrnSliderThumbDirective } from '@spartan-ng/ui-slider-brain';
+import type { ClassValue } from 'clsx';
 
-@Component({
+@Directive({
 	selector: 'hlm-slider-thumb, brn-slider-thumb [hlm]',
 	standalone: true,
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	template: ``,
 	host: {
 		'[class]': '_computedClass()',
 		'[attr.dir]': '_direction()',
 	},
 	hostDirectives: [BrnSliderThumbDirective],
 })
-export class HlmSliderThumbComponent {
+export class HlmSliderThumbDirective {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(

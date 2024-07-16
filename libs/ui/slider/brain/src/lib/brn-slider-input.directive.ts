@@ -21,11 +21,18 @@ export interface BrnSliderInput {
 	selector: 'input[brnSliderInput]',
 	host: {
 		type: 'range',
+		role: 'slider',
 		'(change)': 'onChange()',
 		'(input)': 'onInput()',
 		'(focus)': 'onFocus()',
 		'(blur)': 'onBlur()',
-		'[attr.disabled]': 'isDisabled()',		
+		'[attr.disabled]': 'isDisabled()',
+		'[attr.aria-valuenow]': 'valueNow()',
+		'[attr.aria-valuemin]': 'valueMin()',
+		'[attr.aria-valuemax]': 'valueMax()',
+		'[attr.aria-labelledby]': 'ariaLabelledby()',
+		'[attr.aria-label]': 'ariaLabel()',
+		'aria-orientation': 'horizontal'
 	},
 	providers: [
 		{
@@ -42,7 +49,20 @@ export interface BrnSliderInput {
 })
 export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderInput {
 	private _onChangeFn: ((value: string | number) => void) | undefined;
+	private _onTouchedFn: () => void = () => {};
 	protected isDisabled = computed(() => (this._slider.disabled() === true ? true : undefined));
+	protected valueNow = computed(() => this.value() ?? 0);
+	protected valueMin = computed(() => this._slider.min());
+	protected valueMax = computed(() => this._slider.max());
+	protected ariaLabelledby = computed(() => this._slider.label()?.id);
+	protected ariaLabel = computed(() => {		
+		if (!this._slider.ariaLabel() && !this.ariaLabelledby()) {
+			throw new Error(
+				"'ariaLabel' input must be provided as fallback accessibility aria label when no aria-labelledby element is provided.",
+			);
+		}
+		return this._slider.ariaLabel();
+	});
 	public readonly value = signal(0);
 	public readonly isFocused = signal(false);
 
@@ -62,12 +82,13 @@ export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderI
 		});
 	}
 
-	onFocus(): void {		
+	onFocus(): void {
 		this.isFocused.set(true);
 	}
 
-	onBlur(): void {		
+	onBlur(): void {
 		this.isFocused.set(false);
+		this._onTouchedFn();
 	}
 
 	onInput(): void {
@@ -78,17 +99,17 @@ export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderI
 		this._updateValue();
 	}
 
-	writeValue(obj: number): void {        
+	writeValue(obj: number): void {
 		this.value.set(obj);
-        this._updateHostElementValue(obj);
+		this._updateHostElementValue(obj);
 	}
 
 	registerOnChange(fn: (value: string | number) => void): void {
 		this._onChangeFn = fn;
 	}
 
-	registerOnTouched(fn: any): void {
-		console.log('register on touch');
+	registerOnTouched(fn: () => void): void {
+		this._onTouchedFn = fn;
 	}
 
 	/**
@@ -105,10 +126,10 @@ export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderI
 	}
 
 	private _updateHostElementValue(value: number | null) {
-        if (!value && value !== 0) {
-            return;
-        }
-        
+		if (!value && value !== 0) {
+			return;
+		}
+
 		this._elementRef.nativeElement.value = value.toString();
 	}
 
