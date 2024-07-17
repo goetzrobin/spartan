@@ -55,7 +55,7 @@ export default class TypographyPreviewComponent {}
 
 export const themingCode = `
 import { Component } from '@angular/core';
-import { hlmBlockquote, hlmH1, hlmH2, hlmH3, hlmLead, hlmP, hlmUl } from '@spartan-ng/typography-helm';
+import { hlmBlockquote, hlmH1, hlmH2, hlmH3, hlmLead, hlmP, hlmUl } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-typography-preview',
@@ -112,7 +112,7 @@ export default class TypographyPreviewComponent {}
 
 export const h1Code = `
 import { Component } from '@angular/core';
-import { hlmH1 } from '@spartan-ng/typography-helm';
+import { hlmH1 } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-h1',
@@ -126,7 +126,7 @@ export default class H1Component {}
 
 export const h2Code = `
 import { Component } from '@angular/core';
-import { hlmH2 } from '@spartan-ng/typography-helm';
+import { hlmH2 } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-h2',
@@ -140,7 +140,7 @@ export default class H1Component {}
 
 export const h3Code = `
 import { Component } from '@angular/core';
-import { hlmH1 } from '@spartan-ng/typography-helm';
+import { hlmH1 } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-h3',
@@ -154,7 +154,7 @@ export default class H3Component {}
 
 export const h4Code = `
 import { Component } from '@angular/core';
-import { hlmH4 } from '@spartan-ng/typography-helm';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-h4',
@@ -168,7 +168,7 @@ export default class H4Component {}
 
 export const pCode = `
 import { Component } from '@angular/core';
-import { hlmP } from '@spartan-ng/typography-helm';
+import { hlmP } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-p',
@@ -185,7 +185,7 @@ export default class PComponent {}
 
 export const blockquoteCode = `
 import { Component } from '@angular/core';
-import { hlmBlockquote } from '@spartan-ng/typography-helm';
+import { hlmBlockquote } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-blockquote',
@@ -202,7 +202,7 @@ export default class BlockquoteComponent {}
 
 export const listCode = `
 import { Component } from '@angular/core';
-import { hlmUl } from '@spartan-ng/typography-helm';
+import { hlmUl } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-list',
@@ -220,7 +220,7 @@ export default class ListComponent {}
 
 export const codeCode = `
 import { Component } from '@angular/core';
-import { hlmCode } from '@spartan-ng/typography-helm';
+import { hlmCode } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-code',
@@ -234,7 +234,7 @@ export default class CodeComponent {}
 
 export const leadCode = `
 import { Component } from '@angular/core';
-import { hlmLead } from '@spartan-ng/typography-helm';
+import { hlmLead } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-lead',
@@ -248,7 +248,7 @@ export default class LeadComponent {}
 
 export const largeCode = `
 import { Component } from '@angular/core';
-import { hlmLarge } from '@spartan-ng/typography-helm';
+import { hlmLarge } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-large',
@@ -262,7 +262,7 @@ export default class LargeComponent {}
 
 export const smallCode = `
 import { Component } from '@angular/core';
-import { hlmSmall } from '@spartan-ng/typography-helm';
+import { hlmSmall } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-small',
@@ -276,7 +276,7 @@ export default class SmallComponent {}
 
 export const mutedCode = `
 import { Component } from '@angular/core';
-import { hlmMuted } from '@spartan-ng/typography-helm';
+import { hlmMuted } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'spartan-muted',
