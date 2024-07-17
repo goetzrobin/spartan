@@ -1,7 +1,6 @@
 import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { Directive, Input, Output, effect, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable } from 'rxjs'
+import { Directive, Input, effect, inject, signal } from '@angular/core';
+import { outputFromObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type BrnMenuAlign = 'start' | 'center' | 'end' | undefined;
 
@@ -15,30 +14,16 @@ export class BrnMenuTriggerDirective {
 	private readonly _align = signal<BrnMenuAlign>(undefined);
 
 	/**
-	 * Observable that emits when the trigger is closed.
-	 * @type {Observable<void>}
-	 * @readonly
+	 * OutputRef that emits when the trigger is closed.
+	 * @type {OutputRef<void>}
 	 */
-	readonly closed$: Observable<void> = this._cdkTrigger.closed.asObservable();
+	closed = outputFromObservable(this._cdkTrigger?.closed) ;
 
 	/**
-	 * Observable that emits when the trigger is opened.
-	 * @type {Observable<void>}
-	 * @readonly
+	 * OutputRef that emits when the trigger is opened.
+	 * @type {OutputRef<void>}
 	 */
-	readonly opened$: Observable<void> = this._cdkTrigger.opened.asObservable(); 
-
-	/**
-	 * Event emitter that emits when the trigger is closed.
-	 * @type {EventEmitter<void>}
-	 */
-	@Output() closed = this._cdkTrigger?.closed;
-
-	/**
-	 * Event emitter that emits when the trigger is opened.
-	 * @type {EventEmitter<void>}
-	 */
-	@Output() opened = this._cdkTrigger?.opened;
+	opened = outputFromObservable(this._cdkTrigger?.opened);
 
 	@Input()
 	set align(value: BrnMenuAlign) {
