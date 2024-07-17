@@ -38,8 +38,10 @@ export function addThemeToApplicationStyles(
 
 	const stylesEntryPointContent = tree.read(stylesEntryPoint, 'utf-8');
 
-	const CDK_IMPORT = `@import '@angular/cdk/overlay-prebuilt.css';`;
-	const ckdOverlayImport = stylesEntryPointContent.includes(CDK_IMPORT) ? '' : CDK_IMPORT;
+	const CDK_OVERLAY_IMPORT = `@import '@angular/cdk/overlay-prebuilt.css';`;
+  const CDK_A11Y_IMPORT = `@import '@angular/cdk/a11y-prebuilt.css';`;
+	const ckdOverlayImport = stylesEntryPointContent.includes(CDK_OVERLAY_IMPORT) ? '' : CDK_OVERLAY_IMPORT;
+  const ckdA11yImport = stylesEntryPointContent.includes(CDK_A11Y_IMPORT) ? '' : CDK_A11Y_IMPORT;
 
 	const rootFontSans = stylesEntryPointContent.includes('--font-sans')
 		? ''
@@ -51,6 +53,7 @@ export function addThemeToApplicationStyles(
 		stylesEntryPoint,
 		stripIndents`
     ${ckdOverlayImport}
+    ${ckdA11yImport}
 
     ${stylesEntryPointContent}
 
