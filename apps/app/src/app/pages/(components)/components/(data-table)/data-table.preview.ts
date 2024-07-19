@@ -210,7 +210,7 @@ const PAYMENT_DATA: Payment[] = [
 		<brn-table
 			hlm
 			stickyHeader
-			class="border-border mt-4 block min-h-[335px] overflow-auto rounded-md border"
+			class="border-border mt-4 block min-h-[335px] max-h-[500px] overflow-auto rounded-md border"
 			[dataSource]="_filteredSortedPaginatedPayments()"
 			[displayedColumns]="_allDisplayedColumns()"
 			[trackBy]="_trackBy"
@@ -607,7 +607,7 @@ const PAYMENT_DATA: Payment[] = [
     <brn-table
       hlm
       stickyHeader
-      class="border-border mt-4 block min-h-[335px] overflow-auto rounded-md border"
+      class="border-border mt-4 block min-h-[335px] max-h-[500px] overflow-auto rounded-md border"
       [dataSource]="_filteredSortedPaginatedPayments()"
       [displayedColumns]="_allDisplayedColumns()"
       [trackBy]="_trackBy"
