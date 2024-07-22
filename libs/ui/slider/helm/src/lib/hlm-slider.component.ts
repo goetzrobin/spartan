@@ -10,7 +10,7 @@ import type { ClassValue } from 'clsx';
 	hostDirectives: [
 		{
 			directive: BrnSliderDirective,
-			inputs: ['brnSliderDisabled: disabled', 'min', 'max', 'dir', 'label', 'ariaLabel'],
+			inputs: ['brnSliderDisabled: disabled', 'min', 'max', 'step', 'dir', 'label', 'ariaLabel', 'showTickMarks'],
 		},
 	],
 	template: '<ng-content/>',
@@ -21,7 +21,7 @@ import type { ClassValue } from 'clsx';
 export class HlmSliderComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('w-full h-4 block relative', this._brnSlider.disabled() ? 'opacity-40' : '', this.userClass()),
+		hlm('w-full h-5 flex relative', this._brnSlider.disabled() ? 'opacity-40' : '', this.userClass()),
 	);
 
 	private readonly _brnSlider = inject(BRN_SLIDER, { host: true });

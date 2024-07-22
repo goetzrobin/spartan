@@ -1,23 +1,25 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { BRN_SLIDER, BrnSliderThumbDirective } from '@spartan-ng/ui-slider-brain';
+import { BRN_SLIDER, BrnSliderTickMarkDirective } from '@spartan-ng/ui-slider-brain';
 import type { ClassValue } from 'clsx';
 
 @Directive({
-	selector: 'hlm-slider-thumb, brn-slider-thumb [hlm]',
+	selector: '[hlmSliderTickMark]',
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
 		'[attr.dir]': '_direction()',
 	},
-	hostDirectives: [BrnSliderThumbDirective],
+	hostDirectives: [{ directive: BrnSliderTickMarkDirective, inputs: ['data'] }],
 })
-export class HlmSliderThumbDirective {
+export class HlmSliderTickMarkDirective {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly active = input<boolean>();
+
 	protected _computedClass = computed(() =>
 		hlm(
-			'-translate-y-1/2 h-5 w-5 absolute rounded-full top-1/2 ltr:left-0 rtl:right-0 bg-secondary border-2 border-black cursor-pointer pointer-events-none transition-all',
-			this._brnSlider.brnSliderTrack()?.brnSliderInput()?.isFocused() ? 'ring-2 ring-gray-400' : '',
+			'absolute w-1 h-1 top-0.5 rounded-full rtl:right-0',
+			this.active() ? 'bg-secondary' : 'bg-primary',
 			this.userClass(),
 		),
 	);

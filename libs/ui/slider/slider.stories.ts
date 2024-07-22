@@ -1,26 +1,27 @@
-import type { Direction } from "@angular/cdk/bidi";
-import { signal } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { type Meta, type StoryObj, moduleMetadata } from "@storybook/angular";
-import { argsToTemplate } from "@storybook/angular";
-import { BrnSliderImports } from "./brain/src";
-import { HlmSliderImports } from "./helm/src";
+import type { Direction } from '@angular/cdk/bidi';
+import { signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { BrnSliderImports } from './brain/src';
+import { HlmSliderImports } from './helm/src';
 
 interface BrnSliderStoryArgs {
 	disabled: boolean;
 	min: number;
 	max: number;
+	step: number;
 	dir: Direction;
 	ariaLabel: string;
-};
+	showTickMarks: boolean;
+}
 
 const meta: Meta<BrnSliderStoryArgs> = {
 	title: 'Slider',
 	tags: ['autodocs'],
 	args: {
 		disabled: false,
-		dir: 'ltr',		
-		ariaLabel: 'fallback-label'
+		dir: 'ltr',
+		ariaLabel: 'fallback-label',
 	},
 	argTypes: {
 		dir: { control: 'radio', options: ['ltr', 'rtl'] },
@@ -38,10 +39,10 @@ type Story = StoryObj<BrnSliderStoryArgs>;
 export const Default: Story = {
 	render: (args) => ({
 		props: { ...args },
-		template: /* HTML */ `	
+		template: /* HTML */ `
 			<hlm-slider ${argsToTemplate(args)}>
 				<hlm-slider-track>
-					<input hlmSliderInput [(ngModel)]="value" />						
+					<input hlmSliderInput [(ngModel)]="value" />
 				</hlm-slider-track>
 				<hlm-slider-thumb></hlm-slider-thumb>
 			</hlm-slider>
@@ -57,13 +58,13 @@ export const Disabled: Story = {
 	},
 	render: ({ ...args }) => ({
 		props: args,
-		template: /* HTML */ `						
-			<hlm-slider ${argsToTemplate(args)}>                			
+		template: /* HTML */ `
+			<hlm-slider ${argsToTemplate(args)}>
 				<hlm-slider-track>
-					<input hlmSliderInput />						
+					<input hlmSliderInput />
 				</hlm-slider-track>
 				<hlm-slider-thumb></hlm-slider-thumb>
-			</hlm-slider>			
+			</hlm-slider>
 		`,
 	}),
 };
@@ -74,10 +75,10 @@ export const Min: Story = {
 	},
 	render: ({ ...args }) => ({
 		props: args,
-		template: /* HTML */ `						
-			<hlm-slider ${argsToTemplate(args)}>                			
+		template: /* HTML */ `
+			<hlm-slider ${argsToTemplate(args)}>
 				<hlm-slider-track>
-					<input hlmSliderInput [(ngModel)]="value" />						
+					<input hlmSliderInput [(ngModel)]="value" />
 				</hlm-slider-track>
 				<hlm-slider-thumb></hlm-slider-thumb>
 			</hlm-slider>
@@ -93,10 +94,10 @@ export const Max: Story = {
 	},
 	render: ({ ...args }) => ({
 		props: args,
-		template: /* HTML */ `						
-			<hlm-slider ${argsToTemplate(args)}>                			
+		template: /* HTML */ `
+			<hlm-slider ${argsToTemplate(args)}>
 				<hlm-slider-track>
-					<input hlmSliderInput [(ngModel)]="value" />						
+					<input hlmSliderInput [(ngModel)]="value" />
 				</hlm-slider-track>
 				<hlm-slider-thumb></hlm-slider-thumb>
 			</hlm-slider>
@@ -113,10 +114,49 @@ export const MinMax: Story = {
 	},
 	render: ({ ...args }) => ({
 		props: args,
-		template: /* HTML */ `						
-			<hlm-slider ${argsToTemplate(args)}>                			
+		template: /* HTML */ `
+			<hlm-slider ${argsToTemplate(args)}>
 				<hlm-slider-track>
-					<input hlmSliderInput [(ngModel)]="value" />						
+					<input hlmSliderInput [(ngModel)]="value" />
+				</hlm-slider-track>
+				<hlm-slider-thumb></hlm-slider-thumb>
+			</hlm-slider>
+
+			<div>{{value}}</div>
+		`,
+	}),
+};
+
+export const Step: Story = {
+	args: {
+		step: 5,
+	},
+	render: ({ ...args }) => ({
+		props: args,
+		template: /* HTML */ `
+			<hlm-slider ${argsToTemplate(args)}>
+				<hlm-slider-track>
+					<input hlmSliderInput [(ngModel)]="value" />
+				</hlm-slider-track>
+				<hlm-slider-thumb></hlm-slider-thumb>
+			</hlm-slider>
+
+			<div>{{value}}</div>
+		`,
+	}),
+};
+
+export const TickMarks: Story = {
+	args: {
+		step: 5,
+		showTickMarks: true,
+	},
+	render: ({ ...args }) => ({
+		props: args,
+		template: /* HTML */ `
+			<hlm-slider ${argsToTemplate(args)}>
+				<hlm-slider-track>
+					<input hlmSliderInput [(ngModel)]="value" />
 				</hlm-slider-track>
 				<hlm-slider-thumb></hlm-slider-thumb>
 			</hlm-slider>
@@ -129,11 +169,11 @@ export const MinMax: Story = {
 export const AriaLabelledby: Story = {
 	render: (args) => ({
 		props: { ...args },
-		template: /* HTML */ `	
+		template: /* HTML */ `
 			<label hlmLabel #sliderLabel id="slider-label">Slider with label</label>
 			<hlm-slider ${argsToTemplate(args, { exclude: ['ariaLabel'] })} [label]="sliderLabel">
 				<hlm-slider-track>
-					<input id="slider" hlmSliderInput [(ngModel)]="value" />						
+					<input id="slider" hlmSliderInput [(ngModel)]="value" />
 				</hlm-slider-track>
 				<hlm-slider-thumb></hlm-slider-thumb>
 			</hlm-slider>
@@ -146,18 +186,18 @@ export const AriaLabelledby: Story = {
 export const TemplateDrivenForm: Story = {
 	render: (args) => ({
 		props: { ...args, temperature: signal('0') },
-		template: /* HTML */ `	
-			<form ngForm>		
+		template: /* HTML */ `
+			<form ngForm>
 				<div>
 					<pre>{{temperature()}}</pre>
-				</div>				
+				</div>
 				<hlm-slider ${argsToTemplate(args)}>
 					<hlm-slider-track>
-						<input hlmSliderInput [(ngModel)]="temperature" name="temperature" />						
+						<input hlmSliderInput [(ngModel)]="temperature" name="temperature" />
 					</hlm-slider-track>
 					<hlm-slider-thumb></hlm-slider-thumb>
-				</hlm-slider>				
-            	
+				</hlm-slider>
+
 				<button (click)="temperature.set(25)">Change temperature value</button>
 			</form>
 		`,
@@ -167,22 +207,20 @@ export const TemplateDrivenForm: Story = {
 export const TemplateDrivenFormWithInitialValue: Story = {
 	render: (args) => ({
 		props: { ...args, temperature: signal(12) },
-		template: /* HTML */ `	
-			<form ngForm>		
+		template: /* HTML */ `
+			<form ngForm>
 				<div>
 					<pre>{{temperature()}}</pre>
-				</div>				
+				</div>
 				<hlm-slider ${argsToTemplate(args)}>
 					<hlm-slider-track>
-						<input hlmSliderInput [(ngModel)]="temperature" name="temperature" />						
+						<input hlmSliderInput [(ngModel)]="temperature" name="temperature" />
 					</hlm-slider-track>
 					<hlm-slider-thumb></hlm-slider-thumb>
-				</hlm-slider>				
-            	
+				</hlm-slider>
+
 				<button (click)="temperature.set(25)">Change temperature value</button>
 			</form>
 		`,
 	}),
 };
-
-

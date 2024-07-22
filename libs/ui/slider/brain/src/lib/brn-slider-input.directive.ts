@@ -1,17 +1,28 @@
-import type { Direction } from "@angular/cdk/bidi";
-import { isPlatformBrowser } from "@angular/common";
-import { Directive, ElementRef, InjectionToken, PLATFORM_ID, Renderer2, type Signal, computed, effect, inject, signal } from "@angular/core";
-import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { BRN_SLIDER } from "./brn-slider.directive";
+import type { Direction } from '@angular/cdk/bidi';
+import { isPlatformBrowser } from '@angular/common';
+import {
+	Directive,
+	ElementRef,
+	InjectionToken,
+	PLATFORM_ID,
+	Renderer2,
+	computed,
+	effect,
+	inject,
+	signal,
+	type Signal,
+} from '@angular/core';
+import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
+import { BRN_SLIDER } from './brn-slider.directive';
 
 export const BRN_SLIDER_INPUT = new InjectionToken<BrnSliderInput>('BrnSliderInput');
 
 export interface BrnSliderInput {
-    /** The slider's native input element wrapper value. */
-    value: Signal<number>;
+	/** The slider's native input element wrapper value. */
+	value: Signal<number>;
 
-    /** Flag indicating if native input element is currently focused. */
-    isFocused: Signal<boolean>;
+	/** Flag indicating if native input element is currently focused. */
+	isFocused: Signal<boolean>;
 }
 
 /**
@@ -32,7 +43,7 @@ export interface BrnSliderInput {
 		'[attr.aria-valuemax]': 'valueMax()',
 		'[attr.aria-labelledby]': 'ariaLabelledby()',
 		'[attr.aria-label]': 'ariaLabel()',
-		'aria-orientation': 'horizontal'
+		'aria-orientation': 'horizontal',
 	},
 	providers: [
 		{
@@ -55,7 +66,7 @@ export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderI
 	protected valueMin = computed(() => this._slider.min());
 	protected valueMax = computed(() => this._slider.max());
 	protected ariaLabelledby = computed(() => this._slider.label()?.id);
-	protected ariaLabel = computed(() => {		
+	protected ariaLabel = computed(() => {
 		if (!this._slider.ariaLabel() && !this.ariaLabelledby()) {
 			throw new Error(
 				"'ariaLabel' input must be provided as fallback accessibility aria label when no aria-labelledby element is provided.",
@@ -72,14 +83,17 @@ export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderI
 	private readonly _renderer2 = inject(Renderer2);
 
 	constructor() {
-		effect(() => {
-			if (isPlatformBrowser(this._platformId)) {
-				this._updateHostElementValue(this._slider.min());
-				this._updateMinValue(this._slider.min());
-				this._updateMaxValue(this._slider.max());
-				this._updateDirection(this._slider.direction());
-			}
-		});
+		effect(
+			() => {
+				if (isPlatformBrowser(this._platformId)) {
+					this._updateHostElementStep(this._slider.step());
+					this._updateMinValue(this._slider.min());
+					this._updateMaxValue(this._slider.max());
+					this._updateDirection(this._slider.direction());
+				}
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	onFocus(): void {
@@ -126,11 +140,7 @@ export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderI
 	}
 
 	private _updateHostElementValue(value: number | null) {
-		if (!value && value !== 0) {
-			return;
-		}
-
-		this._elementRef.nativeElement.value = value.toString();
+		this._elementRef.nativeElement.value = value?.toString() ?? '0';
 	}
 
 	private _updateValue() {
@@ -138,12 +148,19 @@ export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderI
 		this._onChangeFn?.(this.value());
 	}
 
+	private _updateHostElementStep(step: number) {
+		this._elementRef.nativeElement.step = step.toString();
+		this._updateValue();
+	}
+
 	private _updateMinValue(value: number) {
 		this._elementRef.nativeElement.min = value.toString();
+		this._updateValue();
 	}
 
 	private _updateMaxValue(value: number) {
 		this._elementRef.nativeElement.max = value.toString();
+		this._updateValue();
 	}
 
 	private _updateDirection(direction: Direction) {
