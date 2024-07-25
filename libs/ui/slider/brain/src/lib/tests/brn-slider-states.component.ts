@@ -1,10 +1,12 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HlmSliderInputDirective } from 'libs/ui/slider/helm/src/lib/hlm-slider-input.directive';
-import { HlmSliderThumbDirective } from 'libs/ui/slider/helm/src/lib/hlm-slider-thumb.directive';
-import { HlmSliderTrackComponent } from 'libs/ui/slider/helm/src/lib/hlm-slider-track.component';
-import { HlmSliderComponent } from 'libs/ui/slider/helm/src/lib/hlm-slider.component';
+import {
+	BrnSliderDirective,
+	BrnSliderInputDirective,
+	BrnSliderThumbDirective,
+	BrnSliderTrackDirective,
+} from '@spartan-ng/ui-slider-brain';
 
 @Component({
 	standalone: true,
@@ -14,16 +16,16 @@ import { HlmSliderComponent } from 'libs/ui/slider/helm/src/lib/hlm-slider.compo
 			<pre data-testid="value-indicator-pre">Temperature: {{ temperature() }}</pre>
 		</div>
 		<form ngForm>
-			<hlm-slider [ariaLabel]="'fallback-label'">
-				<hlm-slider-track>
-					<input data-testid="input" hlmSliderInput [(ngModel)]="temperature" name="temperature" />
-				</hlm-slider-track>
-				<hlm-slider-thumb></hlm-slider-thumb>
-			</hlm-slider>
+			<div brnSlider [ariaLabel]="'fallback-label'" [min]="0">
+				<div brnSliderTrack>
+					<input brnSliderInput data-testid="input" [(ngModel)]="temperature" name="temperature" />
+				</div>
+				<div brnSliderThumb></div>
+			</div>
 		</form>
 		<button data-testid="change-value-btn" (click)="changeValue(24)">Change temperature value</button>
 	`,
-	imports: [FormsModule, HlmSliderComponent, HlmSliderThumbDirective, HlmSliderTrackComponent, HlmSliderInputDirective],
+	imports: [FormsModule, BrnSliderDirective, BrnSliderThumbDirective, BrnSliderInputDirective, BrnSliderTrackDirective],
 })
 export class TemplateDrivenFormSliderComponent {
 	public readonly temperature = model<number | string>('0');
@@ -44,21 +46,21 @@ export class TemplateDrivenFormSliderComponent {
 			>
 		</div>
 		<form [formGroup]="temperatureGroup">
-			<hlm-slider [ariaLabel]="'fallback-label'">
-				<hlm-slider-track>
-					<input data-testid="input" hlmSliderInput formControlName="temperature" />
-				</hlm-slider-track>
-				<hlm-slider-thumb></hlm-slider-thumb>
-			</hlm-slider>
+			<div brnSlider [ariaLabel]="'fallback-label'" [min]="0">
+				<div brnSliderTrack>
+					<input brnSliderInput data-testid="input" formControlName="temperature" />
+				</div>
+				<div brnSliderThumb></div>
+			</div>
 		</form>
 		<button data-testid="change-value-btn" (click)="changeValue(24)">Change temperature value</button>
 	`,
 	imports: [
 		ReactiveFormsModule,
-		HlmSliderComponent,
-		HlmSliderThumbDirective,
-		HlmSliderTrackComponent,
-		HlmSliderInputDirective,
+		BrnSliderDirective,
+		BrnSliderThumbDirective,
+		BrnSliderTrackDirective,
+		BrnSliderInputDirective,
 		AsyncPipe,
 		JsonPipe,
 	],
