@@ -1,6 +1,6 @@
 import type { Direction } from '@angular/cdk/bidi';
 import { signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { BrnSliderImports } from './brain/src';
 import { HlmSliderImports } from './helm/src';
@@ -28,7 +28,7 @@ const meta: Meta<BrnSliderStoryArgs> = {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [FormsModule, HlmSliderImports, BrnSliderImports],
+			imports: [FormsModule, ReactiveFormsModule, HlmSliderImports, BrnSliderImports],
 		}),
 	],
 };
@@ -220,6 +220,44 @@ export const TemplateDrivenFormWithInitialValue: Story = {
 				</hlm-slider>
 
 				<button (click)="temperature.set(25)">Change temperature value</button>
+			</form>
+		`,
+	}),
+};
+
+export const ReactiveFormControl: Story = {
+	render: (args) => ({
+		props: { ...args, temperatureGroup: new FormGroup({ temperature: new FormControl() }) },
+		template: /* HTML */ `
+			<div class="mb-3">
+				<pre>Form Control Value: {{ temperatureGroup.controls.temperature.valueChanges | async | json }}</pre>
+			</div>
+			<form [formGroup]="temperatureGroup">
+				<hlm-slider ${argsToTemplate(args)}>
+					<hlm-slider-track>
+						<input hlmSliderInput formControlName="temperature" />
+					</hlm-slider-track>
+					<hlm-slider-thumb></hlm-slider-thumb>
+				</hlm-slider>
+			</form>
+		`,
+	}),
+};
+
+export const ReactiveFormControlWithInitialValue: Story = {
+	render: (args) => ({
+		props: { ...args, temperatureGroup: new FormGroup({ temperature: new FormControl(26) }) },
+		template: /* HTML */ `
+			<div class="mb-3">
+				<pre>Form Control Value: {{ temperatureGroup.controls.temperature.valueChanges | async | json }}</pre>
+			</div>
+			<form [formGroup]="temperatureGroup">
+				<hlm-slider ${argsToTemplate(args)}>
+					<hlm-slider-track>
+						<input hlmSliderInput formControlName="temperature" />
+					</hlm-slider-track>
+					<hlm-slider-thumb></hlm-slider-thumb>
+				</hlm-slider>
 			</form>
 		`,
 	}),

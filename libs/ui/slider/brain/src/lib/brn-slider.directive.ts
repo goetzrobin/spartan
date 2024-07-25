@@ -75,7 +75,7 @@ export class BrnSliderDirective implements BrnSlider, AfterViewInit, OnDestroy {
 	/** Used only as an input. */
 	public readonly dir = input<Direction>('ltr');
 	public readonly disabled = model<boolean>(false, { alias: 'brnSliderDisabled' });
-	public readonly min = model<number>(24);
+	public readonly min = model<number>(0);
 	public readonly max = model<number>(100);
 	public readonly step = input<number>(1);
 	public readonly showTickMarks = input<boolean>(false);
