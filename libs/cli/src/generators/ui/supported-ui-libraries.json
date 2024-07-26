@@ -325,5 +325,14 @@
 			"@angular/common": "^17.1.0",
 			"@angular/core": "^17.1.0"
 		}
+	},
+	"formfield": {
+		"internalName": "ui-form-field-helm",
+		"peerDependencies": {
+			"@angular/core": "^18.0.0",
+			"@spartan-ng/ui-core": "0.0.1-alpha.352",
+			"class-variance-authority": "^0.6.0",
+			"clsx": "^1.2.1"
+		}
 	}
 }
