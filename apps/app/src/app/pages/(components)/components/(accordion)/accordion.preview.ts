@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
 import {
-	HlmAccordionContentDirective,
+	HlmAccordionContentComponent,
 	HlmAccordionDirective,
 	HlmAccordionIconDirective,
 	HlmAccordionItemDirective,
@@ -13,12 +12,11 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 	selector: 'spartan-accordion-preview',
 	standalone: true,
 	imports: [
-		BrnAccordionContentComponent,
 		HlmAccordionDirective,
 		HlmAccordionItemDirective,
 		HlmAccordionTriggerDirective,
-		HlmAccordionContentDirective,
 		HlmAccordionIconDirective,
+		HlmAccordionContentComponent,
 		HlmIconComponent,
 	],
 	template: `
@@ -28,7 +26,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 					Is it accessible?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
+				<hlm-accordion-content> Yes. It adheres to the WAI-ARIA design pattern. </hlm-accordion-content>
 			</div>
 
 			<div hlmAccordionItem>
@@ -36,9 +34,9 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 					Is it styled?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>
+				<hlm-accordion-content>
 					Yes. It comes with default styles that match the other components' aesthetics.
-				</brn-accordion-content>
+				</hlm-accordion-content>
 			</div>
 
 			<div hlmAccordionItem>
@@ -46,9 +44,9 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 					Is it animated?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>
+				<hlm-accordion-content>
 					Yes. It's animated by default, but you can disable it if you prefer.
-				</brn-accordion-content>
+				</hlm-accordion-content>
 			</div>
 		</div>
 	`,
@@ -56,9 +54,8 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 export class AccordionPreviewComponent {}
 
 export const codeImports = `
-import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
 import {
-  HlmAccordionContentDirective,
+  HlmAccordionContentComponent,
   HlmAccordionDirective,
   HlmAccordionIconDirective,
   HlmAccordionItemDirective,
@@ -67,17 +64,15 @@ import {
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 `;
 
-export const codeString =
-	`import { Component } from '@angular/core';${codeImports}
+export const codeString = `import { Component } from '@angular/core';${codeImports}
 @Component({
 	selector: 'spartan-accordion-preview',
 	standalone: true,
 	imports: [
-		BrnAccordionContentComponent,
 		HlmAccordionDirective,
 		HlmAccordionItemDirective,
 		HlmAccordionTriggerDirective,
-		HlmAccordionContentDirective,
+		HlmAccordionContentComponent,
 		HlmAccordionIconDirective,
 		HlmIconComponent,
 	],
@@ -88,7 +83,7 @@ export const codeString =
 					Is it accessible?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
+				<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 			</div>
 
 			<div hlmAccordionItem>
@@ -96,9 +91,9 @@ export const codeString =
 					Is it styled?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>
+				<hlm-accordion-content>
 					Yes. It comes with default styles that match the other components' aesthetics.
-				</brn-accordion-content>
+				</hlm-accordion-content>
 			</div>
 
 			<div hlmAccordionItem>
@@ -106,9 +101,9 @@ export const codeString =
 					Is it animated?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>
+				<hlm-accordion-content>
 					Yes. It's animated by default, but you can disable it if you prefer.
-				</brn-accordion-content>
+				</hlm-accordion-content>
 			</div>
 		</div>
 	\`,
@@ -122,7 +117,7 @@ export const codeSkeleton = `
 			Is it accessible?
 			<hlm-icon hlmAccIcon />
 		</button>
-		<brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
+		<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 	</div>
 </div>
 `;

@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
 import {
-	HlmAccordionContentDirective,
+	HlmAccordionContentComponent,
 	HlmAccordionDirective,
 	HlmAccordionIconDirective,
 	HlmAccordionItemDirective,
@@ -15,11 +14,10 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 	standalone: true,
 	imports: [
 		HlmButtonDirective,
-		BrnAccordionContentComponent,
 		HlmAccordionDirective,
 		HlmAccordionItemDirective,
 		HlmAccordionTriggerDirective,
-		HlmAccordionContentDirective,
+		HlmAccordionContentComponent,
 		HlmAccordionIconDirective,
 		HlmIconComponent,
 	],
@@ -30,7 +28,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 					Is it accessible?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
+				<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 			</div>
 
 			<div hlmAccordionItem>
@@ -38,9 +36,9 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 					Is it styled?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>
+				<hlm-accordion-content>
 					Yes. It comes with default styles that match the other components' aesthetics.
-				</brn-accordion-content>
+				</hlm-accordion-content>
 			</div>
 
 			<div hlmAccordionItem [isOpened]="_thirdOpened()">
@@ -48,9 +46,9 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 					Is it animated?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>
+				<hlm-accordion-content>
 					Yes. It's animated by default, but you can disable it if you prefer.
-				</brn-accordion-content>
+				</hlm-accordion-content>
 			</div>
 		</div>
 		<button hlmBtn (click)="toggleThird()">Toggle Third Item</button>
@@ -64,9 +62,8 @@ export class AccordionMultipleOpenedComponent {
 }
 
 export const multipleOpenedCodeString = `import { Component, signal } from '@angular/core';
-import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
 import {
-	HlmAccordionContentDirective,
+	HlmAccordionContentComponent,
 	HlmAccordionDirective,
 	HlmAccordionIconDirective,
 	HlmAccordionItemDirective,
@@ -80,11 +77,10 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 	standalone: true,
 	imports: [
 		HlmButtonDirective,
-		BrnAccordionContentComponent,
 		HlmAccordionDirective,
 		HlmAccordionItemDirective,
 		HlmAccordionTriggerDirective,
-		HlmAccordionContentDirective,
+		HlmAccordionContentComponent,
 		HlmAccordionIconDirective,
 		HlmIconComponent,
 	],
@@ -95,7 +91,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 					Is it accessible?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
+				<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 			</div>
 
 			<div hlmAccordionItem>
@@ -103,9 +99,9 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 					Is it styled?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>
+				<hlm-accordion-content>
 					Yes. It comes with default styles that match the other components' aesthetics.
-				</brn-accordion-content>
+				</hlm-accordion-content>
 			</div>
 
 			<div hlmAccordionItem [isOpened]="_thirdOpened()">
@@ -113,9 +109,9 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 					Is it animated?
 					<hlm-icon hlmAccIcon />
 				</button>
-				<brn-accordion-content hlm>
+				<hlm-accordion-content>
 					Yes. It's animated by default, but you can disable it if you prefer.
-				</brn-accordion-content>
+				</hlm-accordion-content>
 			</div>
 		</div>
 		<button hlmBtn (click)="toggleThird()">Toggle Third Item</button>
