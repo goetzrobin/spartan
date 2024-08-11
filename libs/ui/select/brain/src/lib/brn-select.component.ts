@@ -1,43 +1,39 @@
 import { CdkListbox, CdkListboxModule } from '@angular/cdk/listbox';
 import {
 	CdkConnectedOverlay,
+	OverlayModule,
 	type ConnectedOverlayPositionChange,
 	type ConnectedPosition,
-	OverlayModule,
 } from '@angular/cdk/overlay';
 import {
-	type AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
-	ContentChildren,
-	type DoCheck,
 	EventEmitter,
 	Input,
 	Output,
-	type QueryList,
-	type Signal,
 	ViewChild,
 	computed,
+	contentChildren,
 	inject,
 	input,
 	signal,
+	type AfterContentInit,
+	type DoCheck,
+	type Signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { type ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { FormGroupDirective, NgControl, NgForm, type ControlValueAccessor } from '@angular/forms';
 import {
-	type ExposesSide,
-	type ExposesState,
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
+	type ExposesSide,
+	type ExposesState,
 } from '@spartan-ng/ui-core';
 import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
-import {
-	ErrorStateMatcher,
-	ErrorStateTracker,
-} from '@spartan-ng/ui-forms-brain';
+import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/ui-forms-brain';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { Subject, delay, map, of, switchMap } from 'rxjs';
+import { Subject, delay, map, of, switchMap, take } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -121,8 +117,10 @@ export class BrnSelectComponent
 	/** Overlay pane containing the options. */
 	@ContentChild(BrnSelectContentComponent)
 	protected selectContent!: BrnSelectContentComponent;
-	@ContentChildren(BrnSelectOptionDirective, { descendants: true })
-	protected options!: QueryList<BrnSelectOptionDirective>;
+
+	protected options = contentChildren(BrnSelectOptionDirective, { descendants: true });
+	protected options$ = toObservable(this.options);
+
 	/** Overlay pane containing the options. */
 	@ViewChild(CdkConnectedOverlay)
 	protected _overlayDir!: CdkConnectedOverlay;
@@ -307,7 +305,7 @@ export class BrnSelectComponent
 	}
 
 	protected _canOpen(): boolean {
-		return !this.isExpanded() && !this._disabled() && this.options?.length > 0;
+		return !this.isExpanded() && !this._disabled() && this.options()?.length > 0;
 	}
 
 	private _moveFocusToCDKList(): void {
@@ -318,7 +316,15 @@ export class BrnSelectComponent
 		// 'shouldEmitValueChange' ensures we don't propagate changes when we receive value from form control
 		// set to false until next value change and then reset back to true
 		this._shouldEmitValueChange.set(false);
+		// optimistically try to set initial selected options, this will work when the options are statically defined
 		this._selectService.setInitialSelectedOptions(value);
+
+		this.options$.pipe(take(1)).subscribe(() => {
+			// upon all initial options loading, try again
+			// if some options were added dynamically through a for-loop then we would have missed them in the last attempt
+			this._shouldEmitValueChange.set(false);
+			this._selectService.setInitialSelectedOptions(value);
+		});
 	}
 
 	public registerOnChange(fn: any): void {

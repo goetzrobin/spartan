@@ -1,18 +1,18 @@
 import { CdkListbox, type ListboxValueChangeEvent } from '@angular/cdk/listbox';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-	type AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
 	ContentChildren,
 	DestroyRef,
 	ElementRef,
-	type QueryList,
 	ViewChild,
 	effect,
 	inject,
 	signal,
+	type AfterViewInit,
+	type QueryList,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';

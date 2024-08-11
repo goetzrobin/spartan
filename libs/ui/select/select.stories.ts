@@ -14,7 +14,7 @@ import { BrnSelectImports, BrnSelectTriggerDirective } from './brain/src';
 import { HlmSelectImports } from './helm/src';
 
 interface BrnSelectStoryArgs {
-	initialValue: string;
+	initialValue: string | string[];
 	disabled: boolean;
 	placeholder: string;
 	multiple: boolean;
@@ -94,6 +94,9 @@ export const ReactiveFormControl: Story = {
 
 export const ReactiveFormControlWithForAndInitialValue: Story = {
 	render: (args) => ({
+		args: {
+			initialValue: 'apple'
+		},
 		props: {
 			...args,
 			fruitGroup: new FormGroup({
@@ -109,7 +112,7 @@ export const ReactiveFormControlWithForAndInitialValue: Story = {
 		},
 		template: /* HTML */ `
 			<div class="mb-3">
-				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
+				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
 				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
@@ -122,6 +125,50 @@ export const ReactiveFormControlWithForAndInitialValue: Story = {
 							<hlm-option [value]="option.value">{{option.label}}</hlm-option>
 						}
 						<hlm-option>Clear</hlm-option>
+					</hlm-select-content>
+				</brn-select>
+					@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
+				<span class="text-destructive">Required</span>
+				}
+			</form>
+		`,
+	}),
+};
+
+export const ReactiveFormControlWithForAndInitialValueAndMultiple: Story = {
+	args: {
+		placeholder: 'Select multiple options',
+		initialValue: ['apple', 'blueberry'],
+		multiple: true,
+	},
+	render: (args) => ({
+		props: {
+			...args,
+			fruitGroup: new FormGroup({
+				fruit: new FormControl(['apple', 'blueberry'], { validators: Validators.required }),
+			}),
+			options: [
+				{ value: 'apple', label: 'Apple' },
+				{ value: 'banana', label: 'Banana' },
+				{ value: 'blueberry', label: 'Blueberry' },
+				{ value: 'grapes', label: 'Grapes' },
+				{ value: 'pineapple', label: 'Pineapple' },
+			],
+		},
+		template: /* HTML */ `
+			<div class="mb-3">
+				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
+			</div>
+			<form [formGroup]="fruitGroup">
+				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
+					<hlm-select-trigger>
+						<brn-select-value hlm />
+					</hlm-select-trigger>
+					<hlm-select-content>
+						<hlm-select-label>Fruits</hlm-select-label>
+						@for(option of options; track option.value){
+							<hlm-option [value]="option.value">{{option.label}}</hlm-option>
+						}
 					</hlm-select-content>
 				</brn-select>
 					@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
