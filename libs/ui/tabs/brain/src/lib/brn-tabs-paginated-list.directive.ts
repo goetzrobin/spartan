@@ -13,25 +13,23 @@
  */
 
 import { FocusKeyManager, type FocusableOption } from '@angular/cdk/a11y';
-import type { Direction, Directionality } from '@angular/cdk/bidi';
+import { type Direction, Directionality } from '@angular/cdk/bidi';
 import { ENTER, SPACE, hasModifierKey } from '@angular/cdk/keycodes';
 import { SharedResizeObserver } from '@angular/cdk/observers/private';
-import { type Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import type { ViewportRuler } from '@angular/cdk/scrolling';
+import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
 	ANIMATION_MODULE_TYPE,
 	type AfterContentChecked,
 	type AfterContentInit,
 	type AfterViewInit,
-	type ChangeDetectorRef,
+	ChangeDetectorRef,
 	Directive,
-	type ElementRef,
+	ElementRef,
 	EventEmitter,
-	Inject,
 	Injector,
-	type NgZone,
+	NgZone,
 	type OnDestroy,
-	Optional,
 	Output,
 	type QueryList,
 	afterNextRender,
@@ -160,18 +158,18 @@ export abstract class BrnTabsPaginatedListDirective
 
 	private _injector = inject(Injector);
 
-	constructor(
-		protected _elementRef: ElementRef<HTMLElement>,
-		protected _changeDetectorRef: ChangeDetectorRef,
-		private _viewportRuler: ViewportRuler,
-		@Optional() private _dir: Directionality,
-		private _ngZone: NgZone,
-		private _platform: Platform,
-		@Optional() @Inject(ANIMATION_MODULE_TYPE) public _animationMode?: string,
-	) {
+	protected _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+	protected _changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+	private _viewportRuler: ViewportRuler = inject(ViewportRuler);
+	private _dir = inject(Directionality, { optional: true });
+	private _ngZone: NgZone = inject(NgZone);
+	private _platform: Platform = inject(Platform);
+	public _animationMode = inject(ANIMATION_MODULE_TYPE, { optional: true });
+
+	constructor() {
 		// Bind the `mouseleave` event on the outside since it doesn't change anything in the view.
-		_ngZone.runOutsideAngular(() => {
-			fromEvent(_elementRef.nativeElement, 'mouseleave')
+		this._ngZone.runOutsideAngular(() => {
+			fromEvent(this._elementRef.nativeElement, 'mouseleave')
 				.pipe(takeUntil(this._destroyed))
 				.subscribe(() => {
 					this._stopInterval();
@@ -280,7 +278,9 @@ export abstract class BrnTabsPaginatedListDirective
 					new Observable((observer: Observer<ResizeObserverEntry[]>) =>
 						this._ngZone.runOutsideAngular(() => {
 							const resizeObserver = new ResizeObserver((entries) => observer.next(entries));
-							tabItems.forEach((item) => resizeObserver.observe(item.elementRef.nativeElement));
+							for(const tabItem of tabItems) {
+								resizeObserver.observe(tabItem.elementRef.nativeElement);
+							}
 							return () => {
 								resizeObserver.disconnect();
 							};
@@ -389,7 +389,7 @@ export abstract class BrnTabsPaginatedListDirective
 
 	/** Tracks which element has focus; used for keyboard navigation */
 	get focusIndex(): number {
-		return this._keyManager ? this._keyManager.activeItemIndex! : 0;
+		return this._keyManager ? (this._keyManager.activeItemIndex ?? 0) : 0;
 	}
 
 	/** When the focus index is set, we must manually send focus to the correct label */
@@ -418,7 +418,7 @@ export abstract class BrnTabsPaginatedListDirective
 			this._scrollToLabel(tabIndex);
 		}
 
-		if (this._items && this._items.length) {
+		if (this._items?.length) {
 			this._items.toArray()[tabIndex].focus();
 
 			// Do not let the browser manage scrolling to focus the element, this will be handled
@@ -518,7 +518,8 @@ export abstract class BrnTabsPaginatedListDirective
 		const viewLength = this._tabListContainer.nativeElement.offsetWidth;
 		const { offsetLeft, offsetWidth } = selectedLabel.elementRef.nativeElement;
 
-		let labelBeforePos: number, labelAfterPos: number;
+		let labelBeforePos: number;
+		let labelAfterPos: number;
 		if (this._getLayoutDirection() === 'ltr') {
 			labelBeforePos = offsetLeft;
 			labelAfterPos = labelBeforePos + offsetWidth;
