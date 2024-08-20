@@ -6,9 +6,28 @@ import type { ClassValue } from 'clsx';
 @Component({
 	selector: 'hlm-radio',
 	template: `
-		<!-- TODO project correctly into BrnRadioComponent target and label content -->
-		<ng-content select="[target],[indicator]" />
-		<ng-content />
+		<div style="display: flex; height: fit-content; width: fit-content" (click)="_onTouchTargetClick($event)">
+			<ng-content select="[target],[indicator]" />
+		</div>
+		<input
+			#input
+			style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;"
+			type="radio"
+			[id]="inputId"
+			[checked]="checked"
+			[disabled]="disabled"
+			[attr.name]="name"
+			[attr.value]="value"
+			[required]="required"
+			[attr.aria-label]="ariaLabel"
+			[attr.aria-labelledby]="ariaLabelledby"
+			[attr.aria-describedby]="ariaDescribedby"
+			(change)="_onInputInteraction($event)"
+			(click)="_onInputClick($event)"
+		/>
+		<label style="display: flex; height: fit-content; width: fit-content" [for]="inputId">
+			<ng-content />
+		</label>
 	`,
 	providers: [
 		{
