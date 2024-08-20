@@ -1,12 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ViewEncapsulation,
-	computed,
-	effect,
-	input,
-	viewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, effect, input } from '@angular/core';
 import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
 import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
@@ -14,28 +6,31 @@ import type { ClassValue } from 'clsx';
 @Component({
 	selector: 'hlm-accordion-content',
 	template: `
-        <brn-accordion-content [class]="_computedClass()">
-            <ng-content />
-        </brn-accordion-content>
-    `,
-	imports: [BrnAccordionContentComponent],
+		<div [attr.inert]="_addInert()" style="overflow: hidden">
+			<p [class]="_contentClass()">
+				<ng-content />
+			</p>
+		</div>
+	`,
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
-export class HlmAccordionContentComponent {
-	private readonly _brn = viewChild.required(BrnAccordionContentComponent);
-
+export class HlmAccordionContentComponent extends BrnAccordionContentComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() => {
-		const gridRows = this._brn().state() === 'open' ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]';
+		const gridRows = this.state() === 'open' ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]';
 		return hlm('text-sm transition-all grid', gridRows, this.userClass());
 	});
 
 	constructor() {
+		super();
 		effect(
 			() => {
-				this._brn().setClassToCustomElement('pt-1 pb-4');
+				this.setClassToCustomElement('pt-1 pb-4');
 			},
 			{ allowSignalWrites: true },
 		);
