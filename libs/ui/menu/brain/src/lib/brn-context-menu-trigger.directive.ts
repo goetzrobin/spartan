@@ -22,6 +22,11 @@ export class BrnContextMenuTriggerDirective {
 		this._cdkTrigger.menuTemplateRef = value;
 	}
 
+	@Input()
+	set brnCtxMenuTriggerData(value: unknown) {
+		this._cdkTrigger.menuData = value;
+	}
+
 	constructor() {
 		// once the trigger opens we wait until the next tick and then grab the last position
 		// used to position the menu. we store this in our trigger which the brnMenu directive has
