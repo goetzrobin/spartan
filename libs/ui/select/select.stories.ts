@@ -1,12 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { ContentChild, type ElementRef, ViewChild, computed, input, signal } from '@angular/core';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ContentChild,
+	ViewChild,
+	ViewEncapsulation,
+	computed,
+	input,
+	signal,
+	type ElementRef,
+} from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import type { ClassValue } from 'clsx';
 import { hlm } from '../core/src';
 import { HlmIconComponent } from '../icon/helm/src';
@@ -95,7 +104,7 @@ export const ReactiveFormControl: Story = {
 export const ReactiveFormControlWithForAndInitialValue: Story = {
 	render: (args) => ({
 		args: {
-			initialValue: 'apple'
+			initialValue: 'apple',
 		},
 		props: {
 			...args,
@@ -122,12 +131,12 @@ export const ReactiveFormControlWithForAndInitialValue: Story = {
 					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
 						@for(option of options; track option.value){
-							<hlm-option [value]="option.value">{{option.label}}</hlm-option>
+						<hlm-option [value]="option.value">{{option.label}}</hlm-option>
 						}
 						<hlm-option>Clear</hlm-option>
 					</hlm-select-content>
 				</brn-select>
-					@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
+				@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
 				<span class="text-destructive">Required</span>
 				}
 			</form>
@@ -135,11 +144,33 @@ export const ReactiveFormControlWithForAndInitialValue: Story = {
 	}),
 };
 
-export const ReactiveFormControlWithForAndInitialValueAndMultiple: Story = {
+export const ReactiveFormControlWithForAndInitialValueAndMultiple: StoryObj<
+	BrnSelectStoryArgs & { options: { value: string; label: string }[] }
+> = {
 	args: {
 		placeholder: 'Select multiple options',
 		initialValue: ['apple', 'blueberry'],
+		options: [
+			{ value: 'apple', label: 'Apple' },
+			{ value: 'banana', label: 'Banana' },
+			{ value: 'blueberry', label: 'Blueberry' },
+			{ value: 'grapes', label: 'Grapes' },
+			{ value: 'pineapple', label: 'Pineapple' },
+		],
 		multiple: true,
+	},
+	argTypes: {
+		options: {
+			control: 'inline-check',
+			options: ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'],
+			mapping: {
+				Apple: { value: 'apple', label: 'Apple' },
+				Banana: { value: 'banana', label: 'Banana' },
+				Blueberry: { value: 'blueberry', label: 'Blueberry' },
+				Grapes: { value: 'grapes', label: 'Grapes' },
+				Pineapple: { value: 'pineapple', label: 'Pineapple' },
+			},
+		},
 	},
 	render: (args) => ({
 		props: {
@@ -147,31 +178,28 @@ export const ReactiveFormControlWithForAndInitialValueAndMultiple: Story = {
 			fruitGroup: new FormGroup({
 				fruit: new FormControl(['apple', 'blueberry'], { validators: Validators.required }),
 			}),
-			options: [
-				{ value: 'apple', label: 'Apple' },
-				{ value: 'banana', label: 'Banana' },
-				{ value: 'blueberry', label: 'Blueberry' },
-				{ value: 'grapes', label: 'Grapes' },
-				{ value: 'pineapple', label: 'Pineapple' },
-			],
 		},
 		template: /* HTML */ `
 			<div class="mb-3">
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
+				<brn-select
+					class="w-56"
+					${argsToTemplate(args, { exclude: ['initialValue', 'options'] })}
+					formControlName="fruit"
+				>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
 					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
 						@for(option of options; track option.value){
-							<hlm-option [value]="option.value">{{option.label}}</hlm-option>
+						<hlm-option [value]="option.value">{{option.label}}</hlm-option>
 						}
 					</hlm-select-content>
 				</brn-select>
-					@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
+				@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
 				<span class="text-destructive">Required</span>
 				}
 			</form>
@@ -480,7 +508,7 @@ export const CustomTrigger: Story = {
 			@if (icon) {
 				<ng-content select="hlm-icon" />
 			} @else {
-				<hlm-icon class="flex-none w-4 h-4 ml-2" name="lucideChevronDown" />
+				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="lucideChevronDown" />
 			}
 		</button>
 	`,
@@ -528,25 +556,21 @@ export const WithLabelAndForm: Story = {
 		class: '',
 	},
 	template: `
-		<form class='space-y-5' (ngSubmit)='handleSubmit()'>
-			<label hlmLabel>Select a Fruit*
-				<hlm-select
-					class='w-56'
-					[(ngModel)]='fruit'
-					name='fruit'
-					required
-				>
+		<form class="space-y-5" (ngSubmit)="handleSubmit()">
+			<label hlmLabel>
+				Select a Fruit*
+				<hlm-select class="w-56" [(ngModel)]="fruit" name="fruit" required>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
 					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
-						<hlm-option [value]='undefined'>No fruit</hlm-option>
-						<hlm-option value='apple'>Apple</hlm-option>
-						<hlm-option value='banana'>Banana</hlm-option>
-						<hlm-option value='blueberry'>Blueberry</hlm-option>
-						<hlm-option value='grapes'>Grapes</hlm-option>
-						<hlm-option value='pineapple'>Pineapple</hlm-option>
+						<hlm-option [value]="undefined">No fruit</hlm-option>
+						<hlm-option value="apple">Apple</hlm-option>
+						<hlm-option value="banana">Banana</hlm-option>
+						<hlm-option value="blueberry">Blueberry</hlm-option>
+						<hlm-option value="grapes">Grapes</hlm-option>
+						<hlm-option value="pineapple">Pineapple</hlm-option>
 					</hlm-select-content>
 				</hlm-select>
 			</label>
@@ -555,10 +579,9 @@ export const WithLabelAndForm: Story = {
 	`,
 })
 class LabelAndFormComponent {
-	public fruit = signal<string | undefined>(undefined)
+	public fruit = signal<string | undefined>(undefined);
 
 	public handleSubmit(): void {
-		console.log(this.fruit())
+		console.log(this.fruit());
 	}
 }
-
