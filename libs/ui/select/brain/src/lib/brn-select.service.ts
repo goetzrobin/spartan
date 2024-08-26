@@ -124,18 +124,6 @@ export class BrnSelectService {
 		}));
 	}
 
-	/*
-	 * We cannot react directly when the option is added, because at this time the value is not always set.
-	 * The option is registered on constructor of brn-select-option.directive.ts, at this time the value is not set, because it is an @Input.
-	 * When the value is set on Input we trigger this function to tell the service, that the values of the possibleOptions changed,
-	 * which causes the service to check if the new value of the possibleOptions matches the value of the select.
-	 * It is a tricky timing problem, which happens because setting the value with writevalue occurs before the options are registered,
-	 * and then it does not select the possibleOption because it cannot find it.
-	 */
-	public possibleOptionsChanged() {
-		this.selectOptionByValue(this.value());
-	}
-
 	private selectOptionByValue(value: unknown) {
 		const options = this._possibleOptions();
 
