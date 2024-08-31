@@ -4,7 +4,7 @@
 	"peerDependencies": {
 		"@angular/core": "^18.0.0",
 		"@angular/router": "^18.0.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.352",
+		"@spartan-ng/ui-core": "0.0.1-alpha.353",
 		"@ng-icons/lucide": "^26.3.0",
 		"class-variance-authority": "^0.6.0",
 		"clsx": "^1.2.1"

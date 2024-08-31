@@ -11,6 +11,7 @@ import {
 	Component,
 	ContentChild,
 	ContentChildren,
+	type DoCheck,
 	EventEmitter,
 	Input,
 	Output,
@@ -23,15 +24,20 @@ import {
 	signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { type ControlValueAccessor, NgControl } from '@angular/forms';
+import { type ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import {
 	type ExposesSide,
 	type ExposesState,
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
+import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
+import {
+	ErrorStateMatcher,
+	ErrorStateTracker,
+} from '@spartan-ng/ui-forms-brain';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { Subject, delay, filter, map, of, switchMap } from 'rxjs';
+import { Subject, delay, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
@@ -51,6 +57,10 @@ let nextId = 0;
 		CdkListbox,
 		provideExposedSideProviderExisting(() => BrnSelectComponent),
 		provideExposesStateProviderExisting(() => BrnSelectComponent),
+		{
+			provide: BrnFormFieldControl,
+			useExisting: BrnSelectComponent,
+		},
 	],
 	template: `
 		@if (!labelProvided() && _placeholder()) {
@@ -79,7 +89,9 @@ let nextId = 0;
 		</ng-template>
 	`,
 })
-export class BrnSelectComponent implements ControlValueAccessor, AfterContentInit, ExposesSide, ExposesState {
+export class BrnSelectComponent
+	implements ControlValueAccessor, AfterContentInit, DoCheck, ExposesSide, ExposesState, BrnFormFieldControl
+{
 	private readonly _selectService = inject(BrnSelectService);
 
 	public readonly triggerWidth = this._selectService.triggerWidth;
@@ -189,6 +201,14 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		},
 	];
 
+	errorStateTracker: ErrorStateTracker;
+
+	private defaultErrorStateMatcher = inject(ErrorStateMatcher);
+	private parentForm = inject(NgForm, { optional: true });
+	private parentFormGroup = inject(FormGroupDirective, { optional: true });
+
+	errorState = computed(() => this.errorStateTracker.errorState());
+
 	constructor() {
 		this._selectService.state.update((state) => ({
 			...state,
@@ -214,16 +234,20 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 		 * ShouldEmitValueChange simply ensures we only propagate value change when a user makes a selection
 		 * we dont propagate changes made from outside the component (ex. patch value or initial value from form control)
 		 */
-		toObservable(this._selectService.value)
-			.subscribe((value) => {
-				if (this._shouldEmitValueChange()) {
-					this._onChange(value ?? null)
-				}
-				this._shouldEmitValueChange.set(true);
-			});
+		toObservable(this._selectService.value).subscribe((value) => {
+			if (this._shouldEmitValueChange()) {
+				this._onChange(value ?? null);
+			}
+			this._shouldEmitValueChange.set(true);
+		});
 
-		toObservable(this.dir).subscribe((dir) =>
-			this._selectService.state.update((state) => ({ ...state, dir })),
+		toObservable(this.dir).subscribe((dir) => this._selectService.state.update((state) => ({ ...state, dir })));
+
+		this.errorStateTracker = new ErrorStateTracker(
+			this.defaultErrorStateMatcher,
+			this.ngControl,
+			this.parentFormGroup,
+			this.parentForm,
 		);
 	}
 
@@ -243,6 +267,10 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 				dir: this.dir(),
 			}));
 		}
+	}
+
+	ngDoCheck() {
+		this.errorStateTracker.updateErrorState();
 	}
 
 	public toggle(): void {

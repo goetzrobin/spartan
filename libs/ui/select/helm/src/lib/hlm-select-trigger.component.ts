@@ -1,9 +1,9 @@
-import { Component, ContentChild, type ElementRef, ViewChild, computed, input } from '@angular/core';
+import { Component, ContentChild, type ElementRef, ViewChild, computed, inject, input } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BrnSelectTriggerDirective } from '@spartan-ng/ui-select-brain';
+import { BrnSelectComponent, BrnSelectTriggerDirective } from '@spartan-ng/ui-select-brain';
 import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 
@@ -40,7 +40,7 @@ type SelectTriggerVariants = VariantProps<typeof selectTriggerVariants>;
 			@if (icon) {
 				<ng-content select="hlm-icon" />
 			} @else {
-				<hlm-icon class="flex-none w-4 h-4 ml-2" name="lucideChevronDown" />
+				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="lucideChevronDown" />
 			}
 		</button>
 	`,
@@ -52,11 +52,12 @@ export class HlmSelectTriggerComponent {
 	@ContentChild(HlmIconComponent, { static: false })
 	protected icon!: HlmIconComponent;
 
+	protected readonly brnSelect = inject(BrnSelectComponent, { optional: true });
+
 	public readonly _size = input<SelectTriggerVariants['size']>('default');
-	public readonly _error = input<SelectTriggerVariants['error']>('auto');
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
 	protected _computedClass = computed(() =>
-		hlm(selectTriggerVariants({ size: this._size(), error: this._error() }), this.userClass()),
+		hlm(selectTriggerVariants({ size: this._size(), error: this.brnSelect?.errorState() }), this.userClass()),
 	);
 }

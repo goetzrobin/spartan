@@ -41,6 +41,9 @@
 			"@spartan-ng/ui-core": ["libs/ui/core/src/index.ts"],
 			"@spartan-ng/ui-dialog-brain": ["libs/ui/dialog/brain/src/index.ts"],
 			"@spartan-ng/ui-dialog-helm": ["libs/ui/dialog/helm/src/index.ts"],
+			"@spartan-ng/ui-form-field-brain": ["libs/ui/form-field/brain/src/index.ts"],
+			"@spartan-ng/ui-form-field-helm": ["libs/ui/form-field/helm/src/index.ts"],
+			"@spartan-ng/ui-forms-brain": ["libs/ui/forms/brain/src/index.ts"],
 			"@spartan-ng/ui-hovercard-brain": ["libs/ui/hover-card/brain/src/index.ts"],
 			"@spartan-ng/ui-hovercard-helm": ["libs/ui/hover-card/helm/src/index.ts"],
 			"@spartan-ng/ui-icon-helm": ["libs/ui/icon/helm/src/index.ts"],
@@ -77,7 +80,9 @@
 			"@spartan-ng/ui-toggle-helm": ["libs/ui/toggle/helm/src/index.ts"],
 			"@spartan-ng/ui-tooltip-brain": ["libs/ui/tooltip/brain/src/index.ts"],
 			"@spartan-ng/ui-tooltip-helm": ["libs/ui/tooltip/helm/src/index.ts"],
-			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"]
+			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"],
+			"@spartan-ng/ui-slider-brain": ["libs/ui/slider/brain/src/index.ts"],
+			"@spartan-ng/ui-slider-helm": ["libs/ui/slider/helm/src/index.ts"],
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
