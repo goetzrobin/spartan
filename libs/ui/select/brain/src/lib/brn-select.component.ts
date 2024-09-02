@@ -7,7 +7,6 @@ import {
 } from '@angular/cdk/overlay';
 import {
 	ChangeDetectionStrategy,
-	ChangeDetectorRef,
 	Component,
 	ContentChild,
 	EventEmitter,
@@ -35,7 +34,7 @@ import {
 import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
 import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/ui-forms-brain';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { Subject, combineLatest, delay, map, of, skip, switchMap, take } from 'rxjs';
+import { Subject, combineLatest, delay, map, of, skip, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 import { BrnSelectService } from './brn-select.service';
@@ -121,7 +120,6 @@ export class BrnSelectComponent
 
 	protected options = contentChildren(CdkOption, { descendants: true });
 	protected options$ = toObservable(this.options);
-	protected initialOptions$ = this.options$.pipe(take(1));
 	protected optionsChanged$ = this.options$.pipe(skip(1));
 	/**
 	 * Whenever the CdkOption query is updated we should update the possibleOptions in the select service
@@ -226,26 +224,29 @@ export class BrnSelectComponent
 	writeValue$ = new Subject<any>();
 
 	constructor() {
-		const cdr = inject(ChangeDetectorRef);
+		// Write value cannot be handled until options are available, so we wait until both are available with a combineLatest
 		combineLatest([this.writeValue$, this.options$])
-			.pipe(takeUntilDestroyed())
-			.subscribe(([value, initialOptions]) => {
+			.pipe(
+				map((values, index) => [...values, index]),
+				takeUntilDestroyed(),
+			)
+			.subscribe(([value, initialOptions, index]) => {
 				this._selectService.state.update((state) => ({
 					...state,
 					possibleOptions: initialOptions as CdkOption[],
 				}));
 				this._shouldEmitValueChange.set(false);
 				this._selectService.setInitialSelectedOptions(value);
-				// this change should not count towards changing the state of the select, make sure dirty/pristine are cleared
-				this.ngControl?.control?.markAsPristine();
-				cdr.detectChanges();
+				// the first time this observable emits a value we are simply setting the initial state
+				// this change should not count as changing the state of the select, so we need to mark as pristine
+				if (index === 0) {
+					this.ngControl?.control?.markAsPristine();
+				}
 			});
 
+		// When options changes, our current selected options may become invalid
+		// Here we will automatically update our current selected options so that they are always inline with the possibleOptions
 		this.optionsChanged$.pipe(takeUntilDestroyed()).subscribe((options) => {
-			console.log(
-				'options changed',
-				options.map((option) => option.value),
-			);
 			const selectedOptions = this._selectService.selectedOptions();
 			const availableOptionSet = new Set<CdkOption | null>(options);
 			if (this._selectService.multiple()) {
@@ -254,14 +255,6 @@ export class BrnSelectComponent
 				if (selectedOptions.length !== filteredOptions.length) {
 					// update should result in a value change since we are deselecting a value
 					this._shouldEmitValueChange.set(true);
-					console.log(
-						'Set selected options to',
-						filteredOptions.map((o) => o?.value),
-					);
-					console.log(
-						'Set value to',
-						filteredOptions.map((o) => (o?.value as string) ?? ''),
-					);
 					this._selectService.state.update((state) => ({
 						...state,
 						selectedOptions: filteredOptions,
@@ -272,12 +265,6 @@ export class BrnSelectComponent
 				const selectedOption = selectedOptions[0] ?? null;
 				if (selectedOption !== null && !availableOptionSet.has(selectedOption)) {
 					this._shouldEmitValueChange.set(true);
-					console.log(
-						'avilableOptionsSet',
-						[...availableOptionSet].map((o) => o?.value),
-					);
-					console.log('selectedOptions', selectedOption);
-					console.log(`single-mode updating selected option to ''`);
 					this._selectService.state.update((state) => ({
 						...state,
 						selectedOptions: [],
@@ -392,21 +379,7 @@ export class BrnSelectComponent
 	}
 
 	public writeValue(value: any): void {
-		console.log('writeValue', value);
 		this.writeValue$.next(value);
-		// // 'shouldEmitValueChange' ensures we don't propagate changes when we receive value from form control
-		// // set to false until next value change and then reset back to true
-		// this._shouldEmitValueChange.set(false);
-		// // optimistically try to set initial selected options, this will work when the options are statically defined
-		// this._selectService.setInitialSelectedOptions(value);
-		//
-		// this.options$.pipe(take(1)).subscribe(() => {
-		// 	console.log('writeValue late', value);
-		// 	// upon all initial options loading, try again
-		// 	// if some options were added dynamically through a for-loop then we would have missed them in the last attempt
-		// 	this._shouldEmitValueChange.set(false);
-		// 	this._selectService.setInitialSelectedOptions(value);
-		// });
 	}
 
 	public registerOnChange(fn: any): void {
