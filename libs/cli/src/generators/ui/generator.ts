@@ -2,6 +2,7 @@ import { type GeneratorCallback, type Tree, addDependenciesToPackageJson, runTas
 import { prompt } from 'enquirer';
 import type { HlmBaseGeneratorSchema } from '../base/schema';
 import { SPARTAN_COLLAPSIBLE_BRAIN_VERSION } from '../base/versions';
+import { addDependentPrimitives } from './add-dependent-primitive';
 import type { HlmUIGeneratorSchema } from './schema';
 
 export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema & { angularCli?: boolean }) {
@@ -41,17 +42,7 @@ async function createPrimitiveLibraries(
 	const tasks: GeneratorCallback[] = [];
 
 	if (!response.primitives.includes('all')) {
-		await addIconForDependentPrimitive(primitivesToCreate, [
-			'accordion',
-			'alert',
-			'command',
-			'menu',
-			'checkbox',
-			'pagination',
-			'select',
-			'sonner',
-		]);
-		await addButtonForDependentPrimitive(primitivesToCreate, ['alertdialog', 'command', 'pagination']);
+		await addDependentPrimitives(primitivesToCreate);
 	}
 	await replaceContextAndMenuBar(primitivesToCreate, allPrimitivesSelected);
 
@@ -96,48 +87,6 @@ async function createPrimitiveLibraries(
 	return tasks;
 }
 
-const addIconForDependentPrimitive = async (primitivesToCreate: string[], primitivesDependingOnIcon: string[]) => {
-	if (primitivesToCreate.includes('icon')) {
-		return;
-	}
-
-	if (primitivesDependingOnIcon.some((primitive) => primitivesToCreate.includes(primitive))) {
-		const installIcon = (
-			await prompt({
-				type: 'confirm',
-				name: 'installIcon',
-				initial: true,
-				message:
-					'Some of the primitives you are trying to install depend on the icon primitive. Do you want to add it to your project?',
-			})
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
-		)['installIcon'];;
-		if (installIcon) {
-			primitivesToCreate.push('icon');
-		}
-	}
-};
-const addButtonForDependentPrimitive = async (primitivesToCreate: string[], primitivesDependingOnBtn: string[]) => {
-	if (primitivesToCreate.includes('button')) {
-		return;
-	}
-
-	if (primitivesDependingOnBtn.some((primitive) => primitivesToCreate.includes(primitive))) {
-		const installBtn = (
-			await prompt({
-				type: 'confirm',
-				name: 'installBtn',
-				initial: true,
-				message:
-					'Some of the primitives you are trying to install depend on the button primitive. Do you want to add it to your project?',
-			})
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
-		)['installBtn'];
-		if (installBtn) {
-			primitivesToCreate.push('button');
-		}
-	}
-};
 const replaceContextAndMenuBar = async (primtivesToCreate: string[], silent = false) => {
 	const contextIndex = primtivesToCreate.indexOf('contextmenu');
 	if (contextIndex >= 0) {
