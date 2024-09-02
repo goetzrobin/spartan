@@ -91,7 +91,7 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	protected readonly canScrollUp = signal(false);
 	protected readonly canScrollDown = signal(false);
 
-	protected initialSelectedOptions$ = toObservable(this._selectService.initialSelectedOptions);
+	protected initialSelectedOptions$ = toObservable(this._selectService.selectedOptions);
 
 	@ViewChild('viewport')
 	protected viewport!: ElementRef<HTMLElement>;

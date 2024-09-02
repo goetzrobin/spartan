@@ -18,7 +18,7 @@ export class BrnSelectService {
 		disabled: boolean;
 		dir: BrnReadDirection;
 		selectedOptions: Array<CdkOption | null>;
-		initialSelectedOptions: Array<CdkOption | null>;
+		possibleOptions: Array<CdkOption | null>;
 		value: string | string[];
 		triggerWidth: number;
 	}>({
@@ -31,7 +31,7 @@ export class BrnSelectService {
 		disabled: false,
 		dir: 'ltr',
 		selectedOptions: [],
-		initialSelectedOptions: [],
+		possibleOptions: [],
 		value: '',
 		triggerWidth: 0,
 	});
@@ -45,12 +45,11 @@ export class BrnSelectService {
 	public readonly multiple = computed(() => this.state().multiple);
 	public readonly dir = computed(() => this.state().dir);
 	public readonly selectedOptions = computed(() => this.state().selectedOptions);
-	public readonly initialSelectedOptions = computed(() => this.state().initialSelectedOptions);
 	public readonly value = computed(() => this.state().value);
 	public readonly triggerWidth = computed(() => this.state().triggerWidth);
-	public readonly possibleOptions = computed(() => this._possibleOptions());
+	public readonly possibleOptions = computed(() => this.state().possibleOptions);
 
-	private readonly _possibleOptions = signal<Array<CdkOption | null>>([]);
+	// private readonly _possibleOptions = signal<Array<CdkOption | null>>([]);
 	private readonly multiple$ = toObservable(this.multiple);
 
 	public readonly listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
@@ -107,29 +106,28 @@ export class BrnSelectService {
 		this._selectTrigger = trigger;
 	}
 
-	public registerOption(option: CdkOption | null) {
-		this._possibleOptions.update((options) => [...options, option]);
-	}
-
-	public deregisterOption(option: CdkOption | null) {
-		this._possibleOptions.update((options) => options.filter((o) => o !== option));
-	}
-
 	public setInitialSelectedOptions(value: unknown) {
+		console.log('setInitialSelectionOptions', value);
 		this.selectOptionByValue(value);
 		this.state.update((state) => ({
 			...state,
 			value: value as string | string[],
 			initialSelectedOptions: this.selectedOptions(),
+			selectedOptions: this.selectedOptions(),
 		}));
 	}
 
 	private selectOptionByValue(value: unknown) {
-		const options = this._possibleOptions();
-
+		const options = this.possibleOptions();
+		console.log(
+			'selectOptionByValue',
+			value,
+			options.map((o) => o?.value),
+		);
 		if (value === null || value === undefined) {
 			const nullOrUndefinedOption = options.find((o) => o && o.value === value);
 			if (!nullOrUndefinedOption) {
+				// IT'S NOT REACHING HERE SO SETTING initialSelectedOptions is not setting selectedOptions AHHH
 				this.state.update((state) => ({
 					...state,
 					selectedOptions: [],
@@ -156,6 +154,7 @@ export class BrnSelectService {
 			if (!selectedOption) {
 				return;
 			}
+			console.log('single-mode updating selectionOptions and value', selectedOption.value);
 			this.state.update((state) => ({
 				...state,
 				selectedOptions: [selectedOption as CdkOption | null],

@@ -75,10 +75,10 @@ export const Default: Story = {
 
 export const ReactiveFormControl: Story = {
 	render: (args) => ({
-		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
+		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl(args.initialValue) }) },
 		template: /* HTML */ `
 			<div class="mb-3">
-				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
+				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
 				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
@@ -144,12 +144,15 @@ export const ReactiveFormControlWithForAndInitialValue: Story = {
 	}),
 };
 
+const appleAndBlueberry = new FormGroup({
+	fruit: new FormControl(['apple', 'blueberry'], { validators: Validators.required }),
+});
 export const ReactiveFormControlWithForAndInitialValueAndMultiple: StoryObj<
-	BrnSelectStoryArgs & { options: { value: string; label: string }[] }
+	BrnSelectStoryArgs & { options: { value: string; label: string }[]; initialFormValue: FormGroup }
 > = {
 	args: {
 		placeholder: 'Select multiple options',
-		initialValue: ['apple', 'blueberry'],
+		initialFormValue: appleAndBlueberry,
 		options: [
 			{ value: 'apple', label: 'Apple' },
 			{ value: 'banana', label: 'Banana' },
@@ -160,6 +163,24 @@ export const ReactiveFormControlWithForAndInitialValueAndMultiple: StoryObj<
 		multiple: true,
 	},
 	argTypes: {
+		initialFormValue: {
+			options: ['Apple', 'Apple & Blueberry', 'All'],
+			mapping: {
+				Apple: new FormGroup({
+					fruit: new FormControl(['apple'], { validators: Validators.required }),
+				}),
+				'Apple & Blueberry': new FormGroup({
+					fruit: new FormControl(['apple', 'blueberry'], {
+						validators: Validators.required,
+					}),
+				}),
+				All: new FormGroup({
+					fruit: new FormControl(['apple', 'banana', 'blueberry', 'grapes', 'pineapple'], {
+						validators: Validators.required,
+					}),
+				}),
+			},
+		},
 		options: {
 			control: 'inline-check',
 			options: ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'],
@@ -175,15 +196,12 @@ export const ReactiveFormControlWithForAndInitialValueAndMultiple: StoryObj<
 	render: (args) => ({
 		props: {
 			...args,
-			fruitGroup: new FormGroup({
-				fruit: new FormControl(['apple', 'blueberry'], { validators: Validators.required }),
-			}),
 		},
 		template: /* HTML */ `
 			<div class="mb-3">
-				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
+				<pre>Form Control Value: {{ initialFormValue?.controls.fruit.value | json }}</pre>
 			</div>
-			<form [formGroup]="fruitGroup">
+			<form [formGroup]="initialFormValue">
 				<brn-select
 					class="w-56"
 					${argsToTemplate(args, { exclude: ['initialValue', 'options'] })}
@@ -199,7 +217,7 @@ export const ReactiveFormControlWithForAndInitialValueAndMultiple: StoryObj<
 						}
 					</hlm-select-content>
 				</brn-select>
-				@if (fruitGroup.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
+				@if (fruitGroup?.controls.fruit.invalid && fruitGroup.controls.fruit.touched){
 				<span class="text-destructive">Required</span>
 				}
 			</form>
