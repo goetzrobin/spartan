@@ -107,7 +107,6 @@ export class BrnSelectService {
 	}
 
 	public setInitialSelectedOptions(value: unknown) {
-		console.log('setInitialSelectionOptions', value);
 		this.selectOptionByValue(value);
 		this.state.update((state) => ({
 			...state,
@@ -119,15 +118,9 @@ export class BrnSelectService {
 
 	private selectOptionByValue(value: unknown) {
 		const options = this.possibleOptions();
-		console.log(
-			'selectOptionByValue',
-			value,
-			options.map((o) => o?.value),
-		);
 		if (value === null || value === undefined) {
 			const nullOrUndefinedOption = options.find((o) => o && o.value === value);
 			if (!nullOrUndefinedOption) {
-				// IT'S NOT REACHING HERE SO SETTING initialSelectedOptions is not setting selectedOptions AHHH
 				this.state.update((state) => ({
 					...state,
 					selectedOptions: [],
@@ -154,7 +147,6 @@ export class BrnSelectService {
 			if (!selectedOption) {
 				return;
 			}
-			console.log('single-mode updating selectionOptions and value', selectedOption.value);
 			this.state.update((state) => ({
 				...state,
 				selectedOptions: [selectedOption as CdkOption | null],
