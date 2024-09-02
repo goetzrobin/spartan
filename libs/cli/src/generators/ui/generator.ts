@@ -18,7 +18,7 @@ export default async function hlmUIGenerator(tree: Tree, options: HlmUIGenerator
 			required: true,
 			name: 'primitives',
 			message: 'Choose which primitives you want to copy',
-			choices: ['all', ...availablePrimitiveNames],
+			choices: ['all', ...availablePrimitiveNames.sort()],
 		});
 	}
 	tasks.push(
