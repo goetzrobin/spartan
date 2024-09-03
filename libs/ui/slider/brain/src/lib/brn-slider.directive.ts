@@ -1,19 +1,19 @@
-import { Directionality, type Direction } from '@angular/cdk/bidi';
+import { type Direction, Directionality } from '@angular/cdk/bidi';
 import { isPlatformBrowser } from '@angular/common';
 import {
+	type AfterViewInit,
 	Directive,
 	InjectionToken,
 	Injector,
+	type OnDestroy,
 	PLATFORM_ID,
+	type Signal,
+	type WritableSignal,
 	contentChild,
 	inject,
 	input,
 	model,
 	signal,
-	type AfterViewInit,
-	type OnDestroy,
-	type Signal,
-	type WritableSignal,
 } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import type { BrnLabelDirective } from '@spartan-ng/ui-label-brain';

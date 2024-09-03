@@ -6,13 +6,13 @@ import {
 	InjectionToken,
 	PLATFORM_ID,
 	Renderer2,
+	type Signal,
 	computed,
 	effect,
 	inject,
 	signal,
-	type Signal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
+import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BRN_SLIDER } from './brn-slider.directive';
 
 export const BRN_SLIDER_INPUT = new InjectionToken<BrnSliderInput>('BrnSliderInput');
