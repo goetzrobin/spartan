@@ -43,7 +43,7 @@ export class BrnSelectValueComponent {
 			.pipe(takeUntilDestroyed())
 			.subscribe((value) => {
 				if (value.length === 0) {
-					return null;
+					return;
 				}
 				const selectedLabels = value.map((selectedOption) => selectedOption?.getLabel());
 
@@ -53,7 +53,6 @@ export class BrnSelectValueComponent {
 				const result = this.transformFn(selectedLabels);
 				this.value = result;
 				cdr.detectChanges();
-				return result;
 			});
 	}
 }

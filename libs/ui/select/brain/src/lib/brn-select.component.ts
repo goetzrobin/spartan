@@ -15,7 +15,6 @@ import {
 	ViewChild,
 	computed,
 	contentChildren,
-	effect,
 	inject,
 	input,
 	signal,
@@ -34,7 +33,7 @@ import {
 import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
 import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/ui-forms-brain';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { Subject, combineLatest, delay, map, of, skip, switchMap } from 'rxjs';
+import { Subject, combineLatest, delay, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 import { BrnSelectService } from './brn-select.service';
@@ -120,20 +119,11 @@ export class BrnSelectComponent
 
 	protected options = contentChildren(CdkOption, { descendants: true });
 	protected options$ = toObservable(this.options);
-	protected optionsChanged$ = this.options$.pipe(skip(1));
 	/**
-	 * Whenever the CdkOption query is updated we should update the possibleOptions in the select service
+	 * Emits the current options and also the emission index
+	 * @protected
 	 */
-	private syncOptions$ = effect(
-		() => {
-			const options = this.options();
-			this._selectService.state.update((state) => ({
-				...state,
-				possibleOptions: options as CdkOption[],
-			}));
-		},
-		{ allowSignalWrites: true },
-	);
+	protected optionsAndIndex$ = this.options$.pipe(map((options, index) => [options, index] as const));
 
 	/** Overlay pane containing the options. */
 	@ViewChild(CdkConnectedOverlay)
@@ -224,55 +214,8 @@ export class BrnSelectComponent
 	writeValue$ = new Subject<any>();
 
 	constructor() {
-		// Write value cannot be handled until options are available, so we wait until both are available with a combineLatest
-		combineLatest([this.writeValue$, this.options$])
-			.pipe(
-				map((values, index) => [...values, index]),
-				takeUntilDestroyed(),
-			)
-			.subscribe(([value, initialOptions, index]) => {
-				this._selectService.state.update((state) => ({
-					...state,
-					possibleOptions: initialOptions as CdkOption[],
-				}));
-				this._shouldEmitValueChange.set(false);
-				this._selectService.setInitialSelectedOptions(value);
-				// the first time this observable emits a value we are simply setting the initial state
-				// this change should not count as changing the state of the select, so we need to mark as pristine
-				if (index === 0) {
-					this.ngControl?.control?.markAsPristine();
-				}
-			});
-
-		// When options changes, our current selected options may become invalid
-		// Here we will automatically update our current selected options so that they are always inline with the possibleOptions
-		this.optionsChanged$.pipe(takeUntilDestroyed()).subscribe((options) => {
-			const selectedOptions = this._selectService.selectedOptions();
-			const availableOptionSet = new Set<CdkOption | null>(options);
-			if (this._selectService.multiple()) {
-				const filteredOptions = selectedOptions.filter((o) => availableOptionSet.has(o));
-				// only update if there was an actual change
-				if (selectedOptions.length !== filteredOptions.length) {
-					// update should result in a value change since we are deselecting a value
-					this._shouldEmitValueChange.set(true);
-					this._selectService.state.update((state) => ({
-						...state,
-						selectedOptions: filteredOptions,
-						value: filteredOptions.map((o) => (o?.value as string) ?? ''),
-					}));
-				}
-			} else {
-				const selectedOption = selectedOptions[0] ?? null;
-				if (selectedOption !== null && !availableOptionSet.has(selectedOption)) {
-					this._shouldEmitValueChange.set(true);
-					this._selectService.state.update((state) => ({
-						...state,
-						selectedOptions: [],
-						value: '',
-					}));
-				}
-			}
-		});
+		this.handleOptionChanges();
+		this.handleInitialOptionSelect();
 
 		this._selectService.state.update((state) => ({
 			...state,
@@ -392,5 +335,85 @@ export class BrnSelectComponent
 
 	public setDisabledState(isDisabled: boolean) {
 		this.disabled = isDisabled;
+	}
+
+	/**
+	 * Once writeValue is called and options are available we can handle setting the initial options
+	 * @private
+	 */
+	private handleInitialOptionSelect() {
+		// Write value cannot be handled until options are available, so we wait until both are available with a combineLatest
+		combineLatest([this.writeValue$, this.options$])
+			.pipe(
+				map((values, index) => [...values, index]),
+				takeUntilDestroyed(),
+			)
+			.subscribe(([value, initialOptions, index]) => {
+				this._shouldEmitValueChange.set(false);
+				this._selectService.setInitialSelectedOptions(value);
+				// the first time this observable emits a value we are simply setting the initial state
+				// this change should not count as changing the state of the select, so we need to mark as pristine
+				if (index === 0) {
+					this.ngControl?.control?.markAsPristine();
+				}
+			});
+	}
+
+	/**
+	 * When options change, our current selected options may become invalid
+	 * Here we will automatically update our current selected options so that they are always inline with the possibleOptions
+	 * @private
+	 */
+	private handleOptionChanges() {
+		this.optionsAndIndex$.pipe(takeUntilDestroyed()).subscribe(([options, index]) => {
+			if (index > 0) {
+				this.handleInvalidOptions(options);
+			}
+			this.updatePossibleOptions(options);
+		});
+	}
+
+	/**
+	 * Check that our "selectedOptions" are still valid when "possibleOptions" is about to be updated
+	 */
+	private handleInvalidOptions(options: readonly CdkOption[]) {
+		const selectedOptions = this._selectService.selectedOptions();
+		const availableOptionSet = new Set<CdkOption | null>(options);
+		if (this._selectService.multiple()) {
+			const filteredOptions = selectedOptions.filter((o) => availableOptionSet.has(o));
+			// only update if there was an actual change
+			if (selectedOptions.length !== filteredOptions.length) {
+				// update should result in a value change since we are deselecting a value
+				this._shouldEmitValueChange.set(true);
+				const value = filteredOptions.map((o) => (o?.value as string) ?? '');
+				this._selectService.state.update((state) => ({
+					...state,
+					selectedOptions: filteredOptions,
+					value: value,
+				}));
+				this._onChange(value ?? null);
+			}
+		} else {
+			const selectedOption = selectedOptions[0] ?? null;
+			if (selectedOption !== null && !availableOptionSet.has(selectedOption)) {
+				this._shouldEmitValueChange.set(true);
+				this._selectService.state.update((state) => ({
+					...state,
+					selectedOptions: [],
+					value: '',
+				}));
+				this._onChange('');
+			}
+		}
+	}
+
+	/**
+	 * Sync the updated options with "possibleOptions" in the select service
+	 */
+	private updatePossibleOptions(options: readonly CdkOption[]) {
+		this._selectService.state.update((state) => ({
+			...state,
+			possibleOptions: options as CdkOption[],
+		}));
 	}
 }
