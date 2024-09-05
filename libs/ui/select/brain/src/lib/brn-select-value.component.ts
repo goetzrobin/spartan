@@ -43,6 +43,8 @@ export class BrnSelectValueComponent {
 			.pipe(takeUntilDestroyed())
 			.subscribe((value) => {
 				if (value.length === 0) {
+					this.value = '';
+					cdr.detectChanges();
 					return;
 				}
 				const selectedLabels = value.map((selectedOption) => selectedOption?.getLabel());
