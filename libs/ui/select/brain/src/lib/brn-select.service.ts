@@ -49,7 +49,6 @@ export class BrnSelectService {
 	public readonly triggerWidth = computed(() => this.state().triggerWidth);
 	public readonly possibleOptions = computed(() => this.state().possibleOptions);
 
-	// private readonly _possibleOptions = signal<Array<CdkOption | null>>([]);
 	private readonly multiple$ = toObservable(this.multiple);
 
 	public readonly listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
