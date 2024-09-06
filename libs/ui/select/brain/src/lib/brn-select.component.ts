@@ -119,10 +119,6 @@ export class BrnSelectComponent
 
 	protected options = contentChildren(CdkOption, { descendants: true });
 	protected options$ = toObservable(this.options);
-	/**
-	 * Emits the current options and also the emission index
-	 * @protected
-	 */
 	protected optionsAndIndex$ = this.options$.pipe(map((options, index) => [options, index] as const));
 
 	/** Overlay pane containing the options. */

@@ -29,7 +29,7 @@ export class BrnSelectValueComponent {
 
 	public readonly id = computed(() => `${this._selectService.id()}--value`);
 	public readonly placeholder = computed(() => this._selectService.placeholder());
-	value?: string = undefined;
+	value: string | null = null;
 
 	@Input()
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,7 +43,7 @@ export class BrnSelectValueComponent {
 			.pipe(takeUntilDestroyed())
 			.subscribe((value) => {
 				if (value.length === 0) {
-					this.value = '';
+					this.value = null;
 					cdr.detectChanges();
 					return;
 				}
