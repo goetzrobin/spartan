@@ -13,6 +13,8 @@ import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { ContextMenuPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './context-menu.preview';
+import { ContextMenuPreviewWithStateComponent, defaultCodeWithState } from './context-menu-with-state.preview';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Context Menu' },
@@ -39,6 +41,7 @@ export const routeMeta: RouteMeta = {
 		PageBottomNavLinkComponent,
 		PageBottomNavPlaceholderComponent,
 		ContextMenuPreviewComponent,
+		ContextMenuPreviewWithStateComponent,
 	],
 	template: `
 		<section spartanMainSection>
@@ -67,6 +70,14 @@ export const routeMeta: RouteMeta = {
 				<spartan-code [code]="defaultSkeleton" />
 			</div>
 
+			<h3 id="examples__stateful" class="${hlmH4} mb-2 mt-6">Stateful</h3>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-context-menu-with-state />
+				</div>
+				<spartan-code secondTab [code]="defaultCodeWithState" />
+			</spartan-tabs>
+
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="data-table" label="Data Table" />
 				<spartan-page-bottom-nav-link direction="previous" href="command" label="Command" />
@@ -78,5 +89,6 @@ export const routeMeta: RouteMeta = {
 export default class ComboboxPageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
+	protected readonly defaultCodeWithState = defaultCodeWithState;
 	protected readonly defaultImports = defaultImports;
 }
