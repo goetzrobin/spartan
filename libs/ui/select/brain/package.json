@@ -7,7 +7,9 @@
     "@angular/cdk": "^18.0.0",
     "@angular/forms": "^18.0.0",
     "@spartan-ng/ui-core": "0.0.1-alpha.353",
-    "@spartan-ng/ui-label-brain": "0.0.1-alpha.353"
+    "@spartan-ng/ui-label-brain": "0.0.1-alpha.353",
+    "@spartan-ng/ui-form-field-brain": "0.0.1-alpha.353",
+		"@spartan-ng/ui-forms-brain": "0.0.1-alpha.353"
   },
   "dependencies": {},
   "sideEffects": false,
