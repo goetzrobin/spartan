@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Directive, ElementRef, PLATFORM_ID, computed, effect, inject, type Signal } from '@angular/core';
+import { Directive, ElementRef, PLATFORM_ID, type Signal, computed, effect, inject } from '@angular/core';
 import { BRN_SLIDER } from './brn-slider.directive';
 
 export interface BrnSliderThumb {

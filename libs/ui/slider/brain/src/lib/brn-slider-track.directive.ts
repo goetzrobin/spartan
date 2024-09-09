@@ -1,17 +1,17 @@
 import { SharedResizeObserver } from '@angular/cdk/observers/private';
 import { isPlatformBrowser } from '@angular/common';
 import {
+	type AfterViewInit,
 	Directive,
 	ElementRef,
 	InjectionToken,
 	PLATFORM_ID,
+	type Signal,
 	computed,
 	contentChild,
 	forwardRef,
 	inject,
 	signal,
-	type AfterViewInit,
-	type Signal,
 } from '@angular/core';
 import { Subject, debounceTime, takeUntil, tap } from 'rxjs';
 import { BRN_SLIDER_INPUT, type BrnSliderInput } from './brn-slider-input.directive';

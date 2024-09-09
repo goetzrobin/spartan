@@ -1,7 +1,7 @@
 import type { Direction } from '@angular/cdk/bidi';
 import { signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { BrnSliderImports } from './brain/src';
 import { HlmSliderImports } from './helm/src';
 

@@ -110,7 +110,9 @@
 			"@angular/core": "^18.0.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.353",
 			"class-variance-authority": "^0.6.0",
-			"clsx": "^1.2.1"
+			"clsx": "^1.2.1",
+			"@spartan-ng/ui-form-field-brain": "0.0.1-alpha.353",
+			"@spartan-ng/ui-forms-brain": "0.0.1-alpha.353"
 		}
 	},
 	"label": {
@@ -304,6 +306,9 @@
 			"@angular/core": "^18.0.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.353",
 			"@spartan-ng/ui-select-brain": "0.0.1-alpha.353",
+			"@spartan-ng/ui-label-brain": "0.0.1-alpha.353",
+			"@spartan-ng/ui-form-field-brain": "0.0.1-alpha.353",
+			"@spartan-ng/ui-forms-brain": "0.0.1-alpha.353",
 			"class-variance-authority": "^0.6.0",
 			"clsx": "^1.2.1"
 		}
@@ -332,7 +337,8 @@
 			"@angular/core": "^18.0.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.353",
 			"class-variance-authority": "^0.6.0",
-			"clsx": "^1.2.1"
+			"clsx": "^1.2.1",
+			"@spartan-ng/ui-form-field-brain": "0.0.1-alpha.353"
 		}
 	}
 }
