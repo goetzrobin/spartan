@@ -1,7 +1,11 @@
 import { Validators } from '@angular/forms';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
-import { SelectMultiValueTestComponent, SelectMultiValueWithInitialValueTestComponent } from './select-reactive-form';
+import {
+	SelectMultiValueTestComponent,
+	SelectMultiValueWithInitialValueTestComponent,
+	SelectMultiValueWithInitialValueWithForLoopTestComponent
+} from './select-reactive-form';
 import { getFormControlStatus, getFormValidationClasses } from './utils';
 
 describe('Brn Select Component in multi-mode', () => {
@@ -19,6 +23,16 @@ describe('Brn Select Component in multi-mode', () => {
 
 	const setupWithFormValidationMultiWithInitialValue = async () => {
 		const { fixture } = await render(SelectMultiValueWithInitialValueTestComponent);
+		return {
+			user: userEvent.setup(),
+			fixture,
+			trigger: screen.getByTestId('brn-select-trigger'),
+			value: screen.getByTestId('brn-select-value'),
+		};
+	};
+
+	const setupWithFormValidationMultiWithInitialValueWithForLoop = async () => {
+		const { fixture } = await render(SelectMultiValueWithInitialValueWithForLoopTestComponent);
 		return {
 			user: userEvent.setup(),
 			fixture,
@@ -479,7 +493,69 @@ describe('Brn Select Component in multi-mode', () => {
 
 			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterCloseExpected);
 			expect(getFormValidationClasses(trigger)).toStrictEqual(afterCloseExpected);
+			expect(cmpInstance.form?.get('fruit')?.value).toEqual(['apple', 'banana', 'blueberry']);
+		});
 
+		/**
+		 * User Selection with initial value when options are dynamically added with a for-loop
+		 */
+		it('should reflect correct form control status and value after first user selection with initial value with dynamic options', async () => {
+			const { fixture, trigger, user } = await setupWithFormValidationMultiWithInitialValueWithForLoop();
+			const cmpInstance = fixture.componentInstance;
+
+			cmpInstance.form?.get('fruit')?.addValidators(Validators.required);
+			cmpInstance.form?.get('fruit')?.updateValueAndValidity();
+			fixture.detectChanges();
+
+			const expected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: true,
+				dirty: false,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(expected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(expected);
+
+			expect(cmpInstance.form?.get('fruit')?.value).toEqual(['apple', 'blueberry']);
+
+			// open select
+			await user.click(trigger);
+
+			// Make 1st selection
+			const options = await screen.getAllByRole('option');
+			await user.click(options[1]);
+
+			// status prior to closing select
+			const afterFirstSelectionExpected = {
+				untouched: true,
+				touched: false,
+				valid: true,
+				invalid: false,
+				pristine: false,
+				dirty: true,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterFirstSelectionExpected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(afterFirstSelectionExpected);
+
+			// close select
+			await user.click(trigger);
+
+			// validate status and value
+			const afterCloseExpected = {
+				untouched: false,
+				touched: true,
+				valid: true,
+				invalid: false,
+				pristine: false,
+				dirty: true,
+			};
+
+			expect(getFormControlStatus(cmpInstance.form?.get('fruit'))).toStrictEqual(afterCloseExpected);
+			expect(getFormValidationClasses(trigger)).toStrictEqual(afterCloseExpected);
 			expect(cmpInstance.form?.get('fruit')?.value).toEqual(['apple', 'banana', 'blueberry']);
 		});
 

@@ -1,45 +1,40 @@
-import { CdkListbox, CdkListboxModule } from '@angular/cdk/listbox';
+import { CdkListbox, CdkListboxModule, CdkOption } from '@angular/cdk/listbox';
 import {
 	CdkConnectedOverlay,
+	OverlayModule,
 	type ConnectedOverlayPositionChange,
 	type ConnectedPosition,
-	OverlayModule,
 } from '@angular/cdk/overlay';
 import {
-	type AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
-	ContentChildren,
-	type DoCheck,
 	EventEmitter,
 	Input,
 	Output,
-	type QueryList,
-	type Signal,
 	ViewChild,
 	computed,
+	contentChildren,
 	inject,
 	input,
 	signal,
+	type AfterContentInit,
+	type DoCheck,
+	type Signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { type ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { FormGroupDirective, NgControl, NgForm, type ControlValueAccessor } from '@angular/forms';
 import {
-	type ExposesSide,
-	type ExposesState,
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
+	type ExposesSide,
+	type ExposesState,
 } from '@spartan-ng/ui-core';
 import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
-import {
-	ErrorStateMatcher,
-	ErrorStateTracker,
-} from '@spartan-ng/ui-forms-brain';
+import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/ui-forms-brain';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { Subject, delay, map, of, switchMap } from 'rxjs';
+import { Subject, combineLatest, delay, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
-import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 import { BrnSelectService } from './brn-select.service';
 
@@ -121,8 +116,11 @@ export class BrnSelectComponent
 	/** Overlay pane containing the options. */
 	@ContentChild(BrnSelectContentComponent)
 	protected selectContent!: BrnSelectContentComponent;
-	@ContentChildren(BrnSelectOptionDirective, { descendants: true })
-	protected options!: QueryList<BrnSelectOptionDirective>;
+
+	protected options = contentChildren(CdkOption, { descendants: true });
+	protected options$ = toObservable(this.options);
+	protected optionsAndIndex$ = this.options$.pipe(map((options, index) => [options, index] as const));
+
 	/** Overlay pane containing the options. */
 	@ViewChild(CdkConnectedOverlay)
 	protected _overlayDir!: CdkConnectedOverlay;
@@ -209,7 +207,12 @@ export class BrnSelectComponent
 
 	errorState = computed(() => this.errorStateTracker.errorState());
 
+	writeValue$ = new Subject<any>();
+
 	constructor() {
+		this.handleOptionChanges();
+		this.handleInitialOptionSelect();
+
 		this._selectService.state.update((state) => ({
 			...state,
 			id: `brn-select-${nextId++}`,
@@ -232,7 +235,7 @@ export class BrnSelectComponent
 		/**
 		 * Listening to value changes in order to trigger forms api on change
 		 * ShouldEmitValueChange simply ensures we only propagate value change when a user makes a selection
-		 * we dont propagate changes made from outside the component (ex. patch value or initial value from form control)
+		 * we don't propagate changes made from outside the component (ex. patch value or initial value from form control)
 		 */
 		toObservable(this._selectService.value).subscribe((value) => {
 			if (this._shouldEmitValueChange()) {
@@ -307,7 +310,7 @@ export class BrnSelectComponent
 	}
 
 	protected _canOpen(): boolean {
-		return !this.isExpanded() && !this._disabled() && this.options?.length > 0;
+		return !this.isExpanded() && !this._disabled() && this.options()?.length > 0;
 	}
 
 	private _moveFocusToCDKList(): void {
@@ -315,10 +318,7 @@ export class BrnSelectComponent
 	}
 
 	public writeValue(value: any): void {
-		// 'shouldEmitValueChange' ensures we don't propagate changes when we receive value from form control
-		// set to false until next value change and then reset back to true
-		this._shouldEmitValueChange.set(false);
-		this._selectService.setInitialSelectedOptions(value);
+		this.writeValue$.next(value);
 	}
 
 	public registerOnChange(fn: any): void {
@@ -331,5 +331,85 @@ export class BrnSelectComponent
 
 	public setDisabledState(isDisabled: boolean) {
 		this.disabled = isDisabled;
+	}
+
+	/**
+	 * Once writeValue is called and options are available we can handle setting the initial options
+	 * @private
+	 */
+	private handleInitialOptionSelect() {
+		// Write value cannot be handled until options are available, so we wait until both are available with a combineLatest
+		combineLatest([this.writeValue$, this.options$])
+			.pipe(
+				map((values, index) => [...values, index]),
+				takeUntilDestroyed(),
+			)
+			.subscribe(([value, initialOptions, index]) => {
+				this._shouldEmitValueChange.set(false);
+				this._selectService.setInitialSelectedOptions(value);
+				// the first time this observable emits a value we are simply setting the initial state
+				// this change should not count as changing the state of the select, so we need to mark as pristine
+				if (index === 0) {
+					this.ngControl?.control?.markAsPristine();
+				}
+			});
+	}
+
+	/**
+	 * When options change, our current selected options may become invalid
+	 * Here we will automatically update our current selected options so that they are always inline with the possibleOptions
+	 * @private
+	 */
+	private handleOptionChanges() {
+		this.optionsAndIndex$.pipe(takeUntilDestroyed()).subscribe(([options, index]) => {
+			if (index > 0) {
+				this.handleInvalidOptions(options);
+			}
+			this.updatePossibleOptions(options);
+		});
+	}
+
+	/**
+	 * Check that our "selectedOptions" are still valid when "possibleOptions" is about to be updated
+	 */
+	private handleInvalidOptions(options: readonly CdkOption[]) {
+		const selectedOptions = this._selectService.selectedOptions();
+		const availableOptionSet = new Set<CdkOption | null>(options);
+		if (this._selectService.multiple()) {
+			const filteredOptions = selectedOptions.filter((o) => availableOptionSet.has(o));
+			// only update if there was an actual change
+			if (selectedOptions.length !== filteredOptions.length) {
+				// update should result in a value change since we are deselecting a value
+				this._shouldEmitValueChange.set(true);
+				const value = filteredOptions.map((o) => (o?.value as string) ?? '');
+				this._selectService.state.update((state) => ({
+					...state,
+					selectedOptions: filteredOptions,
+					value: value,
+				}));
+				this._onChange(value ?? null);
+			}
+		} else {
+			const selectedOption = selectedOptions[0] ?? null;
+			if (selectedOption !== null && !availableOptionSet.has(selectedOption)) {
+				this._shouldEmitValueChange.set(true);
+				this._selectService.state.update((state) => ({
+					...state,
+					selectedOptions: [],
+					value: '',
+				}));
+				this._onChange('');
+			}
+		}
+	}
+
+	/**
+	 * Sync the updated options with "possibleOptions" in the select service
+	 */
+	private updatePossibleOptions(options: readonly CdkOption[]) {
+		this._selectService.state.update((state) => ({
+			...state,
+			possibleOptions: options as CdkOption[],
+		}));
 	}
 }

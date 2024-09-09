@@ -18,7 +18,7 @@ export class BrnSelectService {
 		disabled: boolean;
 		dir: BrnReadDirection;
 		selectedOptions: Array<CdkOption | null>;
-		initialSelectedOptions: Array<CdkOption | null>;
+		possibleOptions: Array<CdkOption | null>;
 		value: string | string[];
 		triggerWidth: number;
 	}>({
@@ -31,7 +31,7 @@ export class BrnSelectService {
 		disabled: false,
 		dir: 'ltr',
 		selectedOptions: [],
-		initialSelectedOptions: [],
+		possibleOptions: [],
 		value: '',
 		triggerWidth: 0,
 	});
@@ -45,12 +45,10 @@ export class BrnSelectService {
 	public readonly multiple = computed(() => this.state().multiple);
 	public readonly dir = computed(() => this.state().dir);
 	public readonly selectedOptions = computed(() => this.state().selectedOptions);
-	public readonly initialSelectedOptions = computed(() => this.state().initialSelectedOptions);
 	public readonly value = computed(() => this.state().value);
 	public readonly triggerWidth = computed(() => this.state().triggerWidth);
-	public readonly possibleOptions = computed(() => this._possibleOptions());
+	public readonly possibleOptions = computed(() => this.state().possibleOptions);
 
-	private readonly _possibleOptions = signal<Array<CdkOption | null>>([]);
 	private readonly multiple$ = toObservable(this.multiple);
 
 	public readonly listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
@@ -107,38 +105,18 @@ export class BrnSelectService {
 		this._selectTrigger = trigger;
 	}
 
-	public registerOption(option: CdkOption | null) {
-		this._possibleOptions.update((options) => [...options, option]);
-	}
-
-	public deregisterOption(option: CdkOption | null) {
-		this._possibleOptions.update((options) => options.filter((o) => o !== option));
-	}
-
 	public setInitialSelectedOptions(value: unknown) {
 		this.selectOptionByValue(value);
 		this.state.update((state) => ({
 			...state,
 			value: value as string | string[],
 			initialSelectedOptions: this.selectedOptions(),
+			selectedOptions: this.selectedOptions(),
 		}));
 	}
 
-	/*
-	 * We cannot react directly when the option is added, because at this time the value is not always set.
-	 * The option is registered on constructor of brn-select-option.directive.ts, at this time the value is not set, because it is an @Input.
-	 * When the value is set on Input we trigger this function to tell the service, that the values of the possibleOptions changed,
-	 * which causes the service to check if the new value of the possibleOptions matches the value of the select.
-	 * It is a tricky timing problem, which happens because setting the value with writevalue occurs before the options are registered,
-	 * and then it does not select the possibleOption because it cannot find it.
-	 */
-	public possibleOptionsChanged() {
-		this.selectOptionByValue(this.value());
-	}
-
 	private selectOptionByValue(value: unknown) {
-		const options = this._possibleOptions();
-
+		const options = this.possibleOptions();
 		if (value === null || value === undefined) {
 			const nullOrUndefinedOption = options.find((o) => o && o.value === value);
 			if (!nullOrUndefinedOption) {

@@ -199,3 +199,38 @@ export class SelectMultiValueTestComponent {
 export class SelectMultiValueWithInitialValueTestComponent {
 	form = new FormGroup({ fruit: new FormControl(['apple', 'blueberry']) });
 }
+
+@Component({
+	standalone: true,
+	imports: [FormsModule, ReactiveFormsModule, BrnSelectImports],
+	// eslint-disable-next-line @angular-eslint/component-selector
+	selector: 'select-reactive-field-fixture',
+	template: `
+		<form [formGroup]="form">
+			<brn-select class="w-56" formControlName="fruit" placeholder="Select a Fruit" [multiple]="true">
+				<button brnSelectTrigger data-testid="brn-select-trigger">
+					<brn-select-value data-testid="brn-select-value" />
+				</button>
+				<brn-select-content class="w-56" data-testid="brn-select-content">
+					<label brnSelectLabel>Fruits</label>
+					@for (selectOption of selectOptions; track selectOption) {
+						<div brnOption [value]="selectOption.value">{{selectOption.label}}</div>
+					}
+				</brn-select-content>
+			</brn-select>
+			@if (form.controls.fruit.invalid && form.controls.fruit.touched) {
+				<span class="text-destructive">Required</span>
+			}
+		</form>
+	`,
+})
+export class SelectMultiValueWithInitialValueWithForLoopTestComponent {
+	selectOptions = [
+		{ label: 'Apple', value: 'apple' },
+		{ label: 'Banana', value: 'banana' },
+		{ label: 'Blueberry', value: 'blueberry' },
+		{ label: 'Grapes', value: 'grapes' },
+		{ label: 'Pineapple', value: 'pineapple' }
+	]
+	form = new FormGroup({ fruit: new FormControl(['apple', 'blueberry']) });
+}
