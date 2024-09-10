@@ -67,6 +67,8 @@
 			"@spartan-ng/ui-sheet-brain": ["libs/ui/sheet/brain/src/index.ts"],
 			"@spartan-ng/ui-sheet-helm": ["libs/ui/sheet/helm/src/index.ts"],
 			"@spartan-ng/ui-skeleton-helm": ["libs/ui/skeleton/helm/src/index.ts"],
+			"@spartan-ng/ui-slider-brain": ["libs/ui/slider/brain/src/index.ts"],
+			"@spartan-ng/ui-slider-helm": ["libs/ui/slider/helm/src/index.ts"],
 			"@spartan-ng/ui-sonner-helm": ["libs/ui/sonner/helm/src/index.ts"],
 			"@spartan-ng/ui-spinner-helm": ["libs/ui/spinner/helm/src/index.ts"],
 			"@spartan-ng/ui-storybook": ["libs/ui/storybook/src/index.ts"],
@@ -80,9 +82,7 @@
 			"@spartan-ng/ui-toggle-helm": ["libs/ui/toggle/helm/src/index.ts"],
 			"@spartan-ng/ui-tooltip-brain": ["libs/ui/tooltip/brain/src/index.ts"],
 			"@spartan-ng/ui-tooltip-helm": ["libs/ui/tooltip/helm/src/index.ts"],
-			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"],
-			"@spartan-ng/ui-slider-brain": ["libs/ui/slider/brain/src/index.ts"],
-			"@spartan-ng/ui-slider-helm": ["libs/ui/slider/helm/src/index.ts"],
+			"@spartan-ng/ui-typography-helm": ["libs/ui/typography/helm/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

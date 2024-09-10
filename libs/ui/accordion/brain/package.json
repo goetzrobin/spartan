@@ -1,10 +1,10 @@
 {
   "name": "@spartan-ng/ui-accordion-brain",
-  "version": "0.0.1-alpha.353",
+  "version": "0.0.1-alpha.354",
   "peerDependencies": {
     "@angular/core": "^18.0.0",
     "@angular/cdk": "^18.0.0",
-    "@spartan-ng/ui-core": "0.0.1-alpha.353"
+    "@spartan-ng/ui-core": "0.0.1-alpha.354"
   },
   "dependencies": {},
   "sideEffects": false,

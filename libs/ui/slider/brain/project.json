@@ -1,5 +1,5 @@
 {
-	"name": "@spartan-ng/ui-slider-brain",
+	"name": "ui-slider-brain",
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/slider/brain/src",
 	"prefix": "lib",

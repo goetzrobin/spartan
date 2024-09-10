@@ -1,5 +1,5 @@
 {
-	"name": "@spartan-ng/ui-slider-helm",
+	"name": "ui-slider-helm",
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/slider/helm/src",
 	"prefix": "lib",

@@ -1,15 +1,15 @@
 {
   "name": "@spartan-ng/ui-select-brain",
-  "version": "0.0.1-alpha.353",
+  "version": "0.0.1-alpha.354",
   "peerDependencies": {
     "@angular/common": "^18.0.0",
     "@angular/core": "^18.0.0",
     "@angular/cdk": "^18.0.0",
     "@angular/forms": "^18.0.0",
-    "@spartan-ng/ui-core": "0.0.1-alpha.353",
-    "@spartan-ng/ui-label-brain": "0.0.1-alpha.353",
-    "@spartan-ng/ui-form-field-brain": "0.0.1-alpha.353",
-		"@spartan-ng/ui-forms-brain": "0.0.1-alpha.353"
+    "@spartan-ng/ui-core": "0.0.1-alpha.354",
+    "@spartan-ng/ui-label-brain": "0.0.1-alpha.354",
+    "@spartan-ng/ui-form-field-brain": "0.0.1-alpha.354",
+    "@spartan-ng/ui-forms-brain": "0.0.1-alpha.354"
   },
   "dependencies": {},
   "sideEffects": false,
