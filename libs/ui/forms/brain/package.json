@@ -1,9 +1,9 @@
 {
   "name": "@spartan-ng/ui-forms-brain",
-  "version": "0.0.1-alpha.354",
+  "version": "0.0.1-alpha.355",
   "peerDependencies": {
     "@angular/core": "^18.0.0",
-    "@spartan-ng/ui-core": "0.0.1-alpha.354",
+    "@spartan-ng/ui-core": "0.0.1-alpha.355",
     "class-variance-authority": "^0.6.0",
     "clsx": "^2.1.1"
   },
