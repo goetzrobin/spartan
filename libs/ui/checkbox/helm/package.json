@@ -6,7 +6,7 @@
 		"@angular/forms": "^18.0.0",
 		"@spartan-ng/ui-core": "0.0.1-alpha.354",
 		"@spartan-ng/ui-checkbox-brain": "0.0.1-alpha.354",
-		"clsx": "^2.2.1",
+		"clsx": "^2.1.1",
 		"@ng-icons/lucide": "^26.3.0"
 	},
 	"dependencies": {},

@@ -4,7 +4,7 @@
 	"peerDependencies": {
 		"@angular/core": "^18.0.0",
 		"@spartan-ng/ui-core": "0.0.1-alpha.354",
-		"clsx": "^2.2.1",
+		"clsx": "^2.1.1",
 		"@spartan-ng/ui-alertdialog-brain": "0.0.1-alpha.354",
 		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.354"
 	},

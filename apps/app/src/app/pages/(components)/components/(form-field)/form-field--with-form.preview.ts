@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
-import { HlmFormFieldModule } from '@spartan-ng/ui-form-field-helm';
+import { HlmFormFieldModule } from '@spartan-ng/ui-formfield-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 import { HlmSelectImports, HlmSelectModule } from '@spartan-ng/ui-select-helm';
@@ -71,7 +71,7 @@ export const formFieldFormCode = `
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
-import { HlmFormFieldModule } from '@spartan-ng/ui-form-field-helm';
+import { HlmFormFieldModule } from '@spartan-ng/ui-formfield-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 import { HlmSelectImports, HlmSelectModule } from '@spartan-ng/ui-select-helm';

@@ -15,11 +15,10 @@ export const primitiveDependencies: Record<Primitive, Primitive[]> = {
 	command: ['button', 'icon'],
 	contextmenu: [],
 	dialog: [],
-	forms: [],
-	'form-field': [],
+	formfield: [],
 	hovercard: [],
 	icon: [],
-	input: ['forms', 'form-field'],
+	input: ['formfield'],
 	label: [],
 	menu: ['icon'],
 	menubar: [],
@@ -28,7 +27,7 @@ export const primitiveDependencies: Record<Primitive, Primitive[]> = {
 	progress: [],
 	radiogroup: [],
 	scrollarea: [],
-	select: ['icon', 'forms', 'form-field'],
+	select: ['icon', 'formfield'],
 	separator: [],
 	sheet: [],
 	skeleton: [],
@@ -45,7 +44,7 @@ export const getDependentPrimitives = (primitives: Primitive[]): Primitive[] => 
 	const dependentPrimitives = new Set<Primitive>();
 
 	for (const primitive of primitives) {
-		const deps = primitiveDependencies[primitive];
+		const deps = primitiveDependencies[primitive] ?? [];
 		for (const dep of deps) {
 			if (!primitives.includes(dep)) {
 				// only add the dependent primitive if it's not already in the list of primitives to create

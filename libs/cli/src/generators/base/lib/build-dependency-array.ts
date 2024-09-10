@@ -7,6 +7,7 @@ import {
 	SPARTAN_COMMAND_BRAIN_VERSION,
 	SPARTAN_CORE_VERSION,
 	SPARTAN_DIALOG_BRAIN_VERSION,
+	SPARTAN_FORMFIELD_VERSION,
 	SPARTAN_HOVERCARD_BRAIN_VERSION,
 	SPARTAN_LABEL_BRAIN_VERSION,
 	SPARTAN_MENU_BRAIN_VERSION,
@@ -44,9 +45,12 @@ const BRAIN_DEPENDENCY_MAP = {
 	tabs: SPARTAN_TABS_VERSION,
 	table: SPARTAN_TABLE_VERSION,
 	toggle: SPARTAN_TOGGLE_VERSION,
+	formfield: SPARTAN_FORMFIELD_VERSION,
 };
 
+// TODO: can we combine this with primitive-deps.ts
 const DEPENDENT_ON_DIALOG = ['alertdialog', 'sheet', 'popover'];
+const DEPENDENT_ON_FORMS = ['input', 'select'];
 
 export function buildDependencyArray(
 	options: HlmBaseGeneratorSchema,
@@ -67,6 +71,9 @@ export function buildDependencyArray(
 	}
 	if (brainDependencyVersion && DEPENDENT_ON_DIALOG.includes(options.primitiveName)) {
 		dependencies = { ...dependencies, '@spartan-ng/ui-dialog-brain': brainDependencyVersion };
+	}
+	if (brainDependencyVersion && DEPENDENT_ON_FORMS.includes(options.primitiveName)) {
+		dependencies = { ...dependencies, '@spartan-ng/ui-forms-brain': brainDependencyVersion };
 	}
 	if (options.primitiveName === 'icon') {
 		dependencies = { ...dependencies, '@ng-icons/core': NG_ICONS_VERSION };

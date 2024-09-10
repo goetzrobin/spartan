@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HlmFormFieldModule } from '@spartan-ng/ui-form-field-helm';
+import { HlmFormFieldModule } from '@spartan-ng/ui-formfield-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 
 @Component({
@@ -21,7 +21,7 @@ export class FormFieldPreviewComponent {
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { HlmFormFieldModule } from '@spartan-ng/ui-form-field-helm';
+import { HlmFormFieldModule } from '@spartan-ng/ui-formfield-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 
 @Component({
@@ -39,7 +39,7 @@ export class FormFieldPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { HlmFormFieldModule } from '@spartan-ng/ui-form-field-helm';
+import { HlmFormFieldModule } from '@spartan-ng/ui-formfield-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 `;
 export const defaultSkeleton = `

@@ -1,7 +1,7 @@
 import { Directive, type DoCheck, Injector, Input, computed, effect, inject, input, signal } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { hlm } from '@spartan-ng/ui-core';
-import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
+import { BrnFormFieldControl } from '@spartan-ng/ui-formfield-brain';
 import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/ui-forms-brain';
 
 import { type VariantProps, cva } from 'class-variance-authority';
@@ -71,7 +71,7 @@ export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 	private parentFormGroup = inject(FormGroupDirective, { optional: true });
 
 	errorState = computed(() => this.errorStateTracker.errorState());
-	
+
 	constructor() {
 		this.errorStateTracker = new ErrorStateTracker(
 			this.defaultErrorStateMatcher,

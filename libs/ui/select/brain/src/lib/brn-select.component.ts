@@ -31,7 +31,7 @@ import {
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
-import { BrnFormFieldControl } from '@spartan-ng/ui-form-field-brain';
+import { BrnFormFieldControl } from '@spartan-ng/ui-formfield-brain';
 import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/ui-forms-brain';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { Subject, combineLatest, delay, map, of, switchMap } from 'rxjs';
