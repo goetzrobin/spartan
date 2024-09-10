@@ -1,5 +1,5 @@
 {
-	"name": "helm",
+	"name": "ui-sonner-helm",
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/sonner/helm/src",
 	"prefix": "lib",
