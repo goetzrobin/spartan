@@ -3,19 +3,19 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
+	type ElementRef,
 	ViewChild,
 	ViewEncapsulation,
 	computed,
 	input,
 	signal,
-	type ElementRef,
 } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import type { ClassValue } from 'clsx';
 import { hlm } from '../core/src';
 import { HlmIconComponent } from '../icon/helm/src';
