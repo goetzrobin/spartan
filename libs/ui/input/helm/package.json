@@ -6,7 +6,7 @@
 		"@spartan-ng/ui-core": "0.0.1-alpha.355",
 		"class-variance-authority": "^0.6.0",
 		"@spartan-ng/ui-forms-brain": "0.0.1-alpha.355",
-		"@spartan-ng/ui-form-field-brain": "0.0.1-alpha.355",
+		"@spartan-ng/ui-formfield-brain": "0.0.1-alpha.355",
 		"clsx": "^2.1.1"
 	},
 	"dependencies": {},
