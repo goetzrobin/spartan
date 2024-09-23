@@ -35,7 +35,9 @@ export class BrnSelectValueComponent {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	transformFn: (values: (string | undefined)[]) => any = (values) => (values ?? []).join(', ');
 
-	constructor(cdr: ChangeDetectorRef) {
+	constructor() {
+		const cdr = inject(ChangeDetectorRef);
+
 		// In certain cases (when using a computed signal for value) where the value of the select and the options are
 		// changed dynamically, the template does not update until the next frame. To work around this we can use a simple
 		// string variable in the template and manually trigger change detection when we update it.

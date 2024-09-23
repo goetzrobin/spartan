@@ -1,6 +1,5 @@
 import { type GeneratorCallback, type Tree, addDependenciesToPackageJson, runTasksInSerial } from '@nx/devkit';
 import { prompt } from 'enquirer';
-import type { HlmBaseGeneratorSchema } from '../base/schema';
 import { SPARTAN_COLLAPSIBLE_BRAIN_VERSION } from '../base/versions';
 import { addDependentPrimitives } from './add-dependent-primitive';
 import type { HlmUIGeneratorSchema } from './schema';
@@ -55,34 +54,34 @@ async function createPrimitiveLibraries(
 		return tasks;
 	}
 
-	for (const primitiveName of primitivesToCreate) {
-		if (primitiveName === 'collapsible') continue;
+	const installTasksPromises = primitivesToCreate
+		.filter((primitiveName) => primitiveName !== 'collapsible')
+		.map(async (primitiveName) => {
+			const internalName = availablePrimitives[primitiveName].internalName;
+			const peerDependencies = availablePrimitives[primitiveName].peerDependencies;
 
-		const internalName = availablePrimitives[primitiveName].internalName;
-		const peerDependencies = availablePrimitives[primitiveName].peerDependencies;
-		const installTask = await (
-			(await import(
+			const { generator } = await import(
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				`./libs/${internalName}/generator`
-			)) as {
-				generator: (tree: Tree, options: HlmBaseGeneratorSchema) => Promise<GeneratorCallback>;
-			}
-		).generator(tree, {
-			// get overwritten by each specific generator
-			internalName: '',
-			publicName: '',
-			primitiveName: '',
-			peerDependencies,
-			skipBrainDependencies: options.skipBrainDependencies,
-			directory: options.directory,
-			tags: options.tags,
-			rootProject: options.rootProject,
-			angularCli: options.angularCli,
+			);
+
+			return generator(tree, {
+				// get overwritten by each specific generator
+				internalName: '',
+				publicName: '',
+				primitiveName: '',
+				peerDependencies,
+				skipBrainDependencies: options.skipBrainDependencies,
+				directory: options.directory,
+				tags: options.tags,
+				rootProject: options.rootProject,
+				angularCli: options.angularCli,
+			});
 		});
 
-		tasks.push(installTask);
-	}
+	const installTasks = await Promise.all(installTasksPromises);
+	tasks.push(...installTasks);
 
 	return tasks;
 }

@@ -16,14 +16,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - run: corepack enable
-      - run: pnpm --version
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
-      - name: Install
-        run: pnpm install --frozen-lockfile --prefer-offline
+      - name: Install Bun and PNPM globally
+        run: npm install -g bun pnpm
+      - name: Install Dependencies
+        run: bun install --no-cache
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:

@@ -1,4 +1,15 @@
 {
+	"angularCompilerOptions": {
+		"annotateForClosureCompiler": true,
+		"disableTypeScriptVersionCheck": true,
+		"enableResourceInlining": true,
+		"fullTemplateTypeCheck": true,
+		"strictDomEventTypes": true,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictMetadataEmit": true,
+		"strictTemplates": true
+	},
 	"compileOnSave": false,
 	"compilerOptions": {
 		"rootDir": ".",

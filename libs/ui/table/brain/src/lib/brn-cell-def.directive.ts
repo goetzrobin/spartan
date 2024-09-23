@@ -1,6 +1,6 @@
 import { CdkCellDef } from '@angular/cdk/table';
 // biome-ignore lint/style/useImportType: <explanation>
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive, TemplateRef, inject } from '@angular/core';
 
 @Directive({
 	standalone: true,
@@ -8,7 +8,12 @@ import { Directive, TemplateRef } from '@angular/core';
 	exportAs: 'brnCellDef',
 })
 export class BrnCellDefDirective extends CdkCellDef {
-	constructor(public override template: TemplateRef<unknown>) {
+	override template: TemplateRef<unknown>;
+
+	constructor() {
+		const template = inject<TemplateRef<unknown>>(TemplateRef);
+
 		super(template);
+		this.template = template;
 	}
 }
