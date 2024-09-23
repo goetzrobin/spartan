@@ -69,7 +69,7 @@ export class DialogDeclarativePreviewComponent {
 		debounceTime(500),
 		map((passphrase) => (passphrase === 'sparta' ? 'open' : 'closed')),
 	);
-	protected readonly state = toSignal(this._debouncedState$);
+	protected readonly state = toSignal(this._debouncedState$, { initialValue: 'closed' as 'open' | 'closed' });
 }
 
 export const declarativeCode = `

@@ -36,7 +36,7 @@
 			"executor": "nx:run-commands",
 			"options": {
 				"cwd": "",
-				"command": "pnpm prisma generate"
+				"command": "bunx prisma generate"
 			},
 			"dependsOn": ["build"]
 		},

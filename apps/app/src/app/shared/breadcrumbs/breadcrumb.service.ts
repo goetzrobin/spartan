@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 // biome-ignore lint/style/useImportType: Needed for Angular
 import { ActivatedRoute, type Data, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -16,15 +16,15 @@ const getLabel = (data: Data | undefined): string => {
 	providedIn: 'root',
 })
 export class BreadcrumbService {
+	private router = inject(Router);
+	private activatedRoute = inject(ActivatedRoute);
+
 	private readonly _breadcrumbs$ = new BehaviorSubject<Breadcrumb[]>([]);
 
 	// Observable exposing the breadcrumb hierarchy
 	readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
 
-	constructor(
-		private router: Router,
-		private activatedRoute: ActivatedRoute,
-	) {
+	constructor() {
 		this.router.events
 			.pipe(
 				// Filter the NavigationEnd events as the breadcrumb is updated only when the route reaches its end

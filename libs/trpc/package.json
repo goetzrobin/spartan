@@ -3,7 +3,12 @@
 	"version": "0.2.29",
 	"description": "Angular/Nitro-based tRPC integration",
 	"author": "Robin Goetz",
-	"keywords": ["angular", "trpc", "remote-procedure-call", "meta-framework"],
+	"keywords": [
+		"angular",
+		"trpc",
+		"remote-procedure-call",
+		"meta-framework"
+	],
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/goetzrobin/spartan/issues"
@@ -14,8 +19,8 @@
 		"url": "https://github.com/goetzrobin/spartan.git"
 	},
 	"peerDependencies": {
-		"@angular/common": ">=17.0.0",
-		"@angular/core": ">=17.0.0",
+		"@angular/common": ">=18.0.0",
+		"@angular/core": ">=18.0.0",
 		"@trpc/client": "^10.45.2",
 		"@trpc/server": "^10.45.2",
 		"isomorphic-fetch": "^3.0.0",

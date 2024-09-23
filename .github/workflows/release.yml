@@ -1,4 +1,5 @@
 name: release
+
 on:
   workflow_dispatch:
 
@@ -13,15 +14,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - run: corepack enable
-      - run: pnpm --version
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
-      - name: Install
-        run: pnpm install --frozen-lockfile --prefer-offline
+      - name: Install Bun globally
+        run: npm install -g bun
+      - name: Install Dependencies
+        run: bun install --no-cache
       - name: Release
-        run: npx semantic-release
+        run: bunx semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

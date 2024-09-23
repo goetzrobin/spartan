@@ -12,6 +12,7 @@ export const decorators = [
 
 const preview = {
 	decorators,
+
 	parameters: {
 		options: {
 			storySort: {
@@ -19,6 +20,8 @@ const preview = {
 			},
 		},
 	},
+
+	tags: ['autodocs'],
 };
 
 export default preview;
