@@ -321,13 +321,6 @@
 			"ngx-sonner": "^2.0.0"
 		}
 	},
-	"helm": {
-		"internalName": "helm",
-		"peerDependencies": {
-			"@angular/common": "^17.1.0",
-			"@angular/core": "^17.1.0"
-		}
-	},
 	"formfield": {
 		"internalName": "ui-form-field-helm",
 		"peerDependencies": {
