@@ -21,7 +21,7 @@
 		"lint-publishable": "nx run-many --target=lint --projects=tag:scope:core,tag:scope:brain,tag:scope:helm,tag:scope:cli",
 		"lint-fix-publishable": "nx run-many --target=lint --projects=tag:scope:core,tag:scope:brain,tag:scope:helm,tag:scope:cli --fix",
 		"ci.format-sort": "biome ci --formatter-enabled=true --organize-imports-enabled=true --linter-enabled=false **/*",
-		"ci.lint-baby": "oxlint -D correctness -D perf -D eqeqeq --deny-warnings",
+		"ci.lint-baby": "bunx --bun oxlint -c .oxlintrc.json --promise-plugin --import-plugin -D correctness -D perf -D eqeqeq --deny-warnings",
 		"ci.lint": "biome ci --formatter-enabled=false --organize-imports-enabled=false --linter-enabled=true ./* **/*",
 		"ox.lint": "oxlint --deny-warnings",
 		"biome.format": "biome format --write {apps,libs}",
