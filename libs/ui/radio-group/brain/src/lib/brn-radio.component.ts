@@ -69,7 +69,7 @@ let nextUniqueId = 0;
 			(click)="_onInputClick($event)"
 		/>
 		<label style="display: flex; height: fit-content; width: fit-content" [for]="inputId">
-			<ng-content></ng-content>
+			<ng-content />
 		</label>
 	`,
 })
