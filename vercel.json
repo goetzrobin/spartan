@@ -1,4 +1,6 @@
 {
 	"$schema": "https://openapi.vercel.sh/vercel.json",
-	"installCommand": "curl -fsSL https://bun.sh/install | bash && ~/.bun/bin/bun install --frozen-lockfile"
+	"installCommand": "pnpm install",
+	"buildCommand": "bun run build",
+	"devCommand": "bun nx serve"
 }

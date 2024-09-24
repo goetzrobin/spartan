@@ -5,6 +5,7 @@ import analog from '@analogjs/platform';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { type Plugin, defineConfig, splitVendorChunkPlugin } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -37,6 +38,7 @@ export default defineConfig(({ mode }) => {
 			},
 		},
 		plugins: [
+			tsconfigPaths(),
 			{
 				name: 'custom-url-and-date-replacer', // replaced @rollup/plugin-replace given compatability issues with latest vite
 				transform(code, id) {

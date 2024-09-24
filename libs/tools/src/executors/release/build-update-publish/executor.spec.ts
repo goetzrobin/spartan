@@ -1,9 +1,19 @@
-import * as childProcess from 'node:child_process';
+jest.mock('child_process', () => ({
+	execSync: jest.fn(),
+}));
 
+jest.mock('../update-version/executor', () => ({
+	default: jest.fn(),
+}));
+
+jest.mock('../npm-publish/executor', () => ({
+	default: jest.fn(),
+}));
+
+import * as childProcess from 'node:child_process';
 import * as projectHelper from '../helpers/projects.helpers';
 import * as npmPublish from '../npm-publish/executor';
 import * as updateVersion from '../update-version/executor';
-
 import executor from './executor';
 
 describe('BuildUpdatePublish Executor', () => {
@@ -11,14 +21,7 @@ describe('BuildUpdatePublish Executor', () => {
 		const libName = 'foo';
 		const mockContext = { bar: 'bar' } as any;
 
-		/* eslint-disable */
 		jest.spyOn(projectHelper, 'getProjectName').mockReturnValue(libName);
-		/* eslint-disable */
-		jest.spyOn(updateVersion, 'default').mockImplementation((() => {}) as any);
-		/* eslint-disable */
-		jest.spyOn(npmPublish, 'default').mockImplementation((() => {}) as any);
-		/* eslint-disable */
-		jest.spyOn(childProcess, 'execSync').mockImplementation((() => {}) as any);
 
 		const output = await executor({}, mockContext as any);
 
