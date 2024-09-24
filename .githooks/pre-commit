@@ -1,5 +1,5 @@
 #!/bin/sh
 
 bun run oxide.lint
-bunx biome format
-pnpm run hook:pre-commit
+bunx biome format {apps,libs}
+bun run hook:pre-commit
