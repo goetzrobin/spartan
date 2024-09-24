@@ -54,20 +54,19 @@ async function createPrimitiveLibraries(
 		return tasks;
 	}
 
-	const installTasksPromises = primitivesToCreate
-		.filter((primitiveName) => primitiveName !== 'collapsible')
-		.map(async (primitiveName) => {
+	// Use Promise.all() to handle parallel execution of primitive library creation tasks
+	const installTasks = await Promise.all(
+		primitivesToCreate.map(async (primitiveName) => {
+			if (primitiveName === 'collapsible') return;
+
 			const internalName = availablePrimitives[primitiveName].internalName;
 			const peerDependencies = availablePrimitives[primitiveName].peerDependencies;
-
 			const { generator } = await import(
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				`./libs/${internalName}/generator`
 			);
-
 			return generator(tree, {
-				// get overwritten by each specific generator
 				internalName: '',
 				publicName: '',
 				primitiveName: '',
@@ -78,10 +77,10 @@ async function createPrimitiveLibraries(
 				rootProject: options.rootProject,
 				angularCli: options.angularCli,
 			});
-		});
+		}),
+	);
 
-	const installTasks = await Promise.all(installTasksPromises);
-	tasks.push(...installTasks);
+	tasks.push(...installTasks.filter(Boolean));
 
 	return tasks;
 }

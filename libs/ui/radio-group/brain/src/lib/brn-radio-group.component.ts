@@ -15,8 +15,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BrnRadioChange } from './brn-radio-change';
 import { BrnRadioComponent } from './brn-radio.component';
 
-let nextUniqueId = 0;
-
 export const BRN_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
 	useExisting: forwardRef(() => BrnRadioGroupComponent),
@@ -36,6 +34,7 @@ export const BRN_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
 	`,
 })
 export class BrnRadioGroupComponent implements AfterContentInit {
+	private static nextUniqueId = 0;
 	private _changeDetector = inject(ChangeDetectorRef);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,7 +49,7 @@ export class BrnRadioGroupComponent implements AfterContentInit {
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
 	onTouched: () => any = () => {};
 
-	private _name = `brn-radio-group-${nextUniqueId++}`;
+	private _name = `brn-radio-group-${BrnRadioGroupComponent.nextUniqueId++}`;
 	@Input()
 	get name(): string {
 		return this._name;

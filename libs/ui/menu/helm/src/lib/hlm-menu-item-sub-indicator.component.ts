@@ -10,7 +10,7 @@ import type { ClassValue } from 'clsx';
 	providers: [provideIcons({ lucideChevronRight })],
 	imports: [HlmIconComponent],
 	template: `
-		<hlm-icon size="none" class="w-full h-full" name="lucideChevronRight" />
+		<hlm-icon size="none" class="h-full w-full" name="lucideChevronRight" />
 	`,
 	host: {
 		'[class]': '_computedClass()',

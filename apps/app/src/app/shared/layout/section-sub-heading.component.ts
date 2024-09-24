@@ -8,7 +8,7 @@ import { Component, Input, booleanAttribute } from '@angular/core';
 		'[class.-mt-12]': '_first',
 	},
 	template: `
-		<h2 class="pt-12 text-2xl font-semibold tracking-tight border-b font-heading border-border">
+		<h2 class="font-heading border-border border-b pt-12 text-2xl font-semibold tracking-tight">
 			<ng-content />
 		</h2>
 	`,

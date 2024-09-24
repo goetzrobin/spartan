@@ -8,7 +8,7 @@ import { hlmLead } from '@spartan-ng/ui-typography-helm';
 		class: 'mb-8 block space-y-2',
 	},
 	template: `
-		<h1 class="text-4xl font-bold tracking-tight scroll-m-20">{{ name }}</h1>
+		<h1 class="scroll-m-20 text-4xl font-bold tracking-tight">{{ name }}</h1>
 		<p class="${hlmLead}">{{ lead }}</p>
 	`,
 })

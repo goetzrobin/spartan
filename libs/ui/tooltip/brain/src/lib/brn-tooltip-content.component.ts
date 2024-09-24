@@ -219,9 +219,9 @@ export class BrnTooltipContentComponent implements OnDestroy {
 		const tooltip = this._tooltip?.nativeElement;
 		if (!tooltip || !this._isBrowser) return;
 		this._renderer2.setStyle(tooltip, 'visibility', isVisible ? 'visible' : 'hidden');
-		if (isVisible){
+		if (isVisible) {
 			this._renderer2.removeStyle(tooltip, 'display');
-		}else{
+		} else {
 			this._renderer2.setStyle(tooltip, 'display', 'none');
 		}
 		this._isVisible = isVisible;

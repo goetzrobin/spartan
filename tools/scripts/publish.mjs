@@ -9,9 +9,9 @@
 
 import { execSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
+import devkit from '@nx/devkit';
 import chalk from 'chalk';
 
-import devkit from '@nx/devkit';
 const { readCachedProjectGraph } = devkit;
 
 function invariant(condition, message) {
@@ -50,8 +50,9 @@ try {
 	const json = JSON.parse(readFileSync('package.json').toString());
 	json.version = version;
 	writeFileSync('package.json', JSON.stringify(json, null, 2));
-} catch (_e) {
+} catch (e) {
 	console.error(chalk.bold.red('Error reading package.json file from library build output.'));
+	console.error(e);
 }
 
 // Execute "npm publish" to publish

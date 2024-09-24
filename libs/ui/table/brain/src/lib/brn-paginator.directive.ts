@@ -37,7 +37,7 @@ export type PaginatorContext = {
 	exportAs: 'brnPaginator',
 })
 export class BrnPaginatorDirective implements OnInit {
-	static ngTemplateContextGuard(_directive: BrnPaginatorDirective, context: unknown): context is PaginatorContext {
+	static ngTemplateContextGuard(_directive: BrnPaginatorDirective, _context: unknown): _context is PaginatorContext {
 		return true;
 	}
 

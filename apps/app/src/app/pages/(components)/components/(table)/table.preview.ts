@@ -21,21 +21,21 @@ import {
 				<hlm-th class="w-52">Invoice</hlm-th>
 				<hlm-th class="w-60">Status</hlm-th>
 				<hlm-th class="flex-1 whitespace-nowrap">Method</hlm-th>
-				<hlm-th class="justify-end w-40">Amount</hlm-th>
+				<hlm-th class="w-40 justify-end">Amount</hlm-th>
 			</hlm-trow>
 			@for (invoice of _invoices; track invoice.invoice) {
 				<hlm-trow>
-					<hlm-td truncate class="font-medium w-52">{{ invoice.invoice }}</hlm-td>
+					<hlm-td truncate class="w-52 font-medium">{{ invoice.invoice }}</hlm-td>
 					<hlm-td class="w-60">{{ invoice.paymentStatus }}</hlm-td>
 					<hlm-td class="flex-1 whitespace-nowrap">{{ invoice.paymentMethod }}</hlm-td>
-					<hlm-td class="justify-end w-40">{{ invoice.totalAmount }}</hlm-td>
+					<hlm-td class="w-40 justify-end">{{ invoice.totalAmount }}</hlm-td>
 				</hlm-trow>
 			}
 			<hlm-trow class="bg-muted/50 hover:bg-muted">
 				<hlm-td truncate class="w-[100px] font-semibold">Total</hlm-td>
 				<hlm-td class="w-40"></hlm-td>
 				<hlm-td class="flex-1 whitespace-nowrap"></hlm-td>
-				<hlm-td class="justify-end w-40">$2,500.00</hlm-td>
+				<hlm-td class="w-40 justify-end">$2,500.00</hlm-td>
 			</hlm-trow>
 		</hlm-table>
 	`,

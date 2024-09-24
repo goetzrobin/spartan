@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import {
 	SelectMultiValueTestComponent,
 	SelectMultiValueWithInitialValueTestComponent,
-	SelectMultiValueWithInitialValueWithForLoopTestComponent
+	SelectMultiValueWithInitialValueWithForLoopTestComponent,
 } from './select-reactive-form';
 import { getFormControlStatus, getFormValidationClasses } from './utils';
 

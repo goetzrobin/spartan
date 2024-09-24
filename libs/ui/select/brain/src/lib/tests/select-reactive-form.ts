@@ -214,7 +214,7 @@ export class SelectMultiValueWithInitialValueTestComponent {
 				<brn-select-content class="w-56" data-testid="brn-select-content">
 					<label brnSelectLabel>Fruits</label>
 					@for (selectOption of selectOptions; track selectOption) {
-						<div brnOption [value]="selectOption.value">{{selectOption.label}}</div>
+						<div brnOption [value]="selectOption.value">{{ selectOption.label }}</div>
 					}
 				</brn-select-content>
 			</brn-select>
@@ -230,7 +230,7 @@ export class SelectMultiValueWithInitialValueWithForLoopTestComponent {
 		{ label: 'Banana', value: 'banana' },
 		{ label: 'Blueberry', value: 'blueberry' },
 		{ label: 'Grapes', value: 'grapes' },
-		{ label: 'Pineapple', value: 'pineapple' }
-	]
+		{ label: 'Pineapple', value: 'pineapple' },
+	];
 	form = new FormGroup({ fruit: new FormControl(['apple', 'blueberry']) });
 }

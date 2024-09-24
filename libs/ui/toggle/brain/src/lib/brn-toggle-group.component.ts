@@ -26,8 +26,6 @@ export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR = {
 	multi: true,
 };
 
-let uniqueIdCounter = 0;
-
 export class BrnButtonToggleChange {
 	constructor(
 		public source: BrnToggleDirective,
@@ -61,6 +59,7 @@ export class BrnButtonToggleChange {
 export class BrnToggleGroupComponent
 	implements ControlValueAccessor, OnInit, AfterContentInit, ToggleGroupCanBeNullableProvider
 {
+	private static uniqueIdCounter = 0;
 	private readonly _cdr = inject(ChangeDetectorRef);
 	private readonly _destroyRef = inject(DestroyRef);
 	private _vertical = false;
@@ -87,7 +86,7 @@ export class BrnToggleGroupComponent
 	})
 	_buttonToggles?: QueryList<BrnToggleDirective>;
 
-	private _name = `brn-button-toggle-group-${uniqueIdCounter++}`;
+	private _name = `brn-button-toggle-group-${BrnToggleGroupComponent.uniqueIdCounter++}`;
 	@Input()
 	get name(): string {
 		return this._name;

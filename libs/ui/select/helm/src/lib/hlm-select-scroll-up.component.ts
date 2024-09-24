@@ -11,7 +11,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 		class: 'flex cursor-default items-center justify-center py-1',
 	},
 	template: `
-		<hlm-icon class="w-4 h-4 ml-2" name="lucideChevronUp" />
+		<hlm-icon class="ml-2 h-4 w-4" name="lucideChevronUp" />
 	`,
 })
 export class HlmSelectScrollUpComponent {}

@@ -7,7 +7,6 @@ import {
 } from '@angular/cdk/overlay';
 import {
 	type AfterContentInit,
-
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
@@ -345,7 +344,7 @@ export class BrnSelectComponent
 				map((values, index) => [...values, index]),
 				takeUntilDestroyed(),
 			)
-			.subscribe(([value, initialOptions, index]) => {
+			.subscribe(([value, _, index]) => {
 				this._shouldEmitValueChange.set(false);
 				this._selectService.setInitialSelectedOptions(value);
 				// the first time this observable emits a value we are simply setting the initial state

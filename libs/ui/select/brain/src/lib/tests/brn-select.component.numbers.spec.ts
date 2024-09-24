@@ -53,7 +53,7 @@ describe('BrnSelectComponent NumberValues', () => {
 		expect(trigger.textContent?.trim()).toBe('0');
 		expect(selectedValue()).toBe(0);
 
-		await user.click(options[1])
+		await user.click(options[1]);
 		expect(selectedValue()).toBe(5);
 		expect(trigger.textContent?.trim()).toBe('5');
 

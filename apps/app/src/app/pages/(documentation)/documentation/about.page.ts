@@ -50,7 +50,7 @@ const aboutLink = 'h-6 underline text-base px-0.5';
 				<span class="flex items-center">
 					<span>spartans</span>
 					<svg
-						class="w-5 h-5 ml-2"
+						class="ml-2 h-5 w-5"
 						width="587"
 						height="587"
 						viewBox="0 0 587 587"

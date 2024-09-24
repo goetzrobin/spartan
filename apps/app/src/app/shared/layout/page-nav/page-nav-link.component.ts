@@ -14,7 +14,7 @@ import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 			[routerLink]="[]"
 			[relativeTo]="activatedRoute"
 			[fragment]="fragment"
-			class="inline-block no-underline rounded hover:text-foreground text-muted-foreground focus-visible:ring-ring transition-colors focus-visible:outline-none focus-visible:ring-2"
+			class="hover:text-foreground text-muted-foreground focus-visible:ring-ring inline-block rounded no-underline transition-colors focus-visible:outline-none focus-visible:ring-2"
 		>
 			{{ label }}
 		</a>

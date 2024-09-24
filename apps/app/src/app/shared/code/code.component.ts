@@ -34,12 +34,12 @@ declare const Prism: typeof import('prismjs');
 			(click)="copyToClipBoard()"
 			hlmBtn
 			variant="ghost"
-			class="absolute w-6 h-6 p-1 right-2 top-2"
+			class="absolute right-2 top-2 h-6 w-6 p-1"
 		>
 			<hlm-icon size="xs" [name]="copied ? 'lucideCheck' : 'lucideClipboard'" />
 		</button>
 		<div class="max-h-[650px] w-full overflow-auto whitespace-nowrap p-4">
-			<div class="max-w-full max-w-screen" [innerHTML]="_content"></div>
+			<div class="max-w-screen max-w-full" [innerHTML]="_content"></div>
 		</div>
 	`,
 	styles: [

@@ -8,9 +8,7 @@ export function getInstalledPackageVersion(
 	raw = false,
 ): string | null {
 	const pkgJson = readJson(tree, 'package.json');
-	const installedPackageVersion =
-		(pkgJson.dependencies?.[packageName]) ||
-		(pkgJson.devDependencies?.[packageName]);
+	const installedPackageVersion = pkgJson.dependencies?.[packageName] || pkgJson.devDependencies?.[packageName];
 	if (!installedPackageVersion && !defaultVersion) {
 		return null;
 	}

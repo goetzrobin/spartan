@@ -21,8 +21,6 @@ import {
 import { BrnRadioChange } from './brn-radio-change';
 import { BrnRadioGroupComponent } from './brn-radio-group.component';
 
-let nextUniqueId = 0;
-
 @Component({
 	selector: 'brn-radio',
 	standalone: true,
@@ -74,6 +72,7 @@ let nextUniqueId = 0;
 	`,
 })
 export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit, DoCheck, OnDestroy {
+	private static nextUniqueId = 0;
 	private _focusMonitor = inject(FocusMonitor);
 	private _elementRef = inject(ElementRef);
 	private _radioDispatcher = inject(UniqueSelectionDispatcher);
@@ -105,7 +104,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 		this._tabIndex = value !== null ? value : this._defaultTabIndex;
 	}
 
-	private _uniqueId = `brn-radio-${++nextUniqueId}`;
+	private _uniqueId = `brn-radio-${++BrnRadioComponent.nextUniqueId}`;
 
 	@Input()
 	id = this._uniqueId;

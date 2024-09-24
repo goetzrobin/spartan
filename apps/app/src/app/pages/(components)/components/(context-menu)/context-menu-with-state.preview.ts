@@ -43,8 +43,8 @@ import {
 		HlmMenuItemRadioDirective,
 	],
 	template: `
-		<div 
-			[brnCtxMenuTriggerData]="{ $implicit: { data: 'SomeValue' } }" 
+		<div
+			[brnCtxMenuTriggerData]="{ $implicit: { data: 'SomeValue' } }"
 			[brnCtxMenuTriggerFor]="menu"
 			class="border-border flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
 		>
@@ -77,7 +77,7 @@ import {
 		</ng-template>
 	`,
 })
-export class ContextMenuPreviewWithStateComponent { }
+export class ContextMenuPreviewWithStateComponent {}
 
 export const defaultCodeWithState = `
 <div 

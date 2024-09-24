@@ -11,3 +11,6 @@
 /.nx/cache
 
 /.nx/workspace-data
+
+# use biomejs, not prettier with `nx format`
+*.css

@@ -278,7 +278,7 @@ export abstract class BrnTabsPaginatedListDirective
 					new Observable((observer: Observer<ResizeObserverEntry[]>) =>
 						this._ngZone.runOutsideAngular(() => {
 							const resizeObserver = new ResizeObserver((entries) => observer.next(entries));
-							for(const tabItem of tabItems) {
+							for (const tabItem of tabItems) {
 								resizeObserver.observe(tabItem.elementRef.nativeElement);
 							}
 							return () => {

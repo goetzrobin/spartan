@@ -11,7 +11,14 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 @Component({
 	selector: 'auth-example-form',
 	standalone: true,
-	imports: [HlmButtonDirective, HlmIconComponent, HlmInputDirective, HlmSpinnerComponent, FormsModule, HlmLabelDirective],
+	imports: [
+		HlmButtonDirective,
+		HlmIconComponent,
+		HlmInputDirective,
+		HlmSpinnerComponent,
+		FormsModule,
+		HlmLabelDirective,
+	],
 	host: {
 		class: 'block',
 	},
@@ -24,9 +31,7 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 			</div>
 			<div class="grid gap-6">
 				<form (ngSubmit)="send()">
-					<label hlmLabel class="sr-only" for="email">
-						Email
-					</label>
+					<label hlmLabel class="sr-only" for="email">Email</label>
 					<input
 						hlmInput
 						class="w-full"
@@ -34,12 +39,9 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 						type="email"
 						id="email"
 						placeholder="name@example.com"
-						autocomplete="off" />
-					<button
-						hlmBtn
-						[disabled]="isLoading()"
-						class="w-full mt-2"
-						type="submit">
+						autocomplete="off"
+					/>
+					<button hlmBtn [disabled]="isLoading()" class="mt-2 w-full" type="submit">
 						@if (isLoading()) {
 							<hlm-icon name="lucideLoader2" size="sm" class="mr-2 animate-spin" />
 						}
@@ -61,7 +63,7 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 					GitHub
 				</button>
 			</div>
-			<p class="text-muted-foreground sm:px-8 text-center text-sm">
+			<p class="text-muted-foreground text-center text-sm sm:px-8">
 				By clicking continue, you agree to our
 				<a class="hover:text-primary cursor-pointer underline underline-offset-4">Terms of Service</a>
 				and

@@ -32,9 +32,9 @@ type SamePageAnchorLink = {
 	template: `
 		<ng-template #pageNav>
 			<hlm-scroll-area class="h-[calc(100vh-3.5rem)]">
-				<div class="px-1 space-y-2">
+				<div class="space-y-2 px-1">
 					<h3 class="font-medium">On this page</h3>
-					<ul class="flex flex-col m-0 list-none">
+					<ul class="m-0 flex list-none flex-col">
 						@for (link of links(); track link.id) {
 							<spartan-page-nav-link [ngClass]="{ 'pl-4': link.isNested }" [fragment]="link.id" [label]="link.label" />
 						} @empty {
