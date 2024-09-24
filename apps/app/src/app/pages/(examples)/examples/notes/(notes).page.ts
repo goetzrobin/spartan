@@ -86,7 +86,7 @@ export const routeMeta: RouteMeta = {
 				<hlm-spinner *ngIf="createLoad()" class="ml-2" size="sm" />
 			</button>
 		</form>
-		<div class="flex flex-col pt-4 pb-12 space-y-4">
+		<div class="flex flex-col space-y-4 pb-12 pt-4">
 			<ng-container *ngIf="showNotesArray()">
 				<analog-trpc-note
 					*ngFor="let note of state().notes ?? []; trackBy: noteTrackBy"

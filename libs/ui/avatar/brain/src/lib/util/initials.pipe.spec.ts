@@ -21,9 +21,7 @@ describe('InitialsPipe', () => {
 		expect(pipe.transform(name)).toBe('JD');
 		expect(pipe.transform(otherName)).toBe('MS');
 		expect(pipe.transform(randomName)).toBe(
-			`${randomName.charAt(0).toLocaleUpperCase()}${randomName
-				.charAt(randomName.indexOf(' ') + 1)
-				.toLocaleUpperCase()}`,
+			`${randomName.charAt(0).toLocaleUpperCase()}${randomName.charAt(randomName.indexOf(' ') + 1).toLocaleUpperCase()}`,
 		);
 	});
 

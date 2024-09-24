@@ -69,7 +69,7 @@ interface ListItem {
 
 				<div class="py-2">
 					<h2 class="mb-2 px-7 text-lg font-semibold tracking-tight">Playlists</h2>
-					<div class="space-y-1   ">
+					<div class="space-y-1">
 						<hlm-scroll-area class="h-[300px]" visibility="hover">
 							@for (item of playlists; track item) {
 								<music-side-button class="px-4">

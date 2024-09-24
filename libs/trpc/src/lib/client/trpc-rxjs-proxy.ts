@@ -56,6 +56,7 @@ const clientCallTypeMap: Record<keyof DecorateProcedure<any, any>, ProcedureType
 type UntypedClientProperties = 'links' | 'runtime' | 'requestId' | '$request' | 'query' | 'mutation';
 
 // Nothing changed, only using new types
+// prettier-ignore
 export type CreateTrpcProxyClient<TRouter extends AnyRouter> = DecoratedProcedureRecord<
 	TRouter['_def']['record'],
 	TRouter

@@ -61,7 +61,6 @@ class SingleFormFieldDirtyMock {
 	name = new FormControl('', Validators.required);
 }
 
-
 describe('Hlm Form Field Component', () => {
 	const TEXT_HINT = 'This is your public display name.';
 	const TEXT_ERROR = 'Your name is required';

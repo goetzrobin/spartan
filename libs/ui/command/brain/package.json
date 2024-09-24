@@ -1,16 +1,16 @@
 {
-  "name": "@spartan-ng/ui-command-brain",
-  "version": "0.0.1-alpha.355",
-  "peerDependencies": {
-    "@angular/common": "^18.0.0",
-    "@angular/core": "^18.0.0",
-    "@ngxpert/cmdk": "^1.0.0",
-    "@ngneat/overview": "^5.0.0",
-    "@ngneat/until-destroy": "^10.0.0"
-  },
-  "dependencies": {},
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@spartan-ng/ui-command-brain",
+	"version": "0.0.1-alpha.355",
+	"peerDependencies": {
+		"@angular/common": "^18.0.0",
+		"@angular/core": "^18.0.0",
+		"@ngxpert/cmdk": "^1.0.0",
+		"@ngneat/overview": "^5.0.0",
+		"@ngneat/until-destroy": "^10.0.0"
+	},
+	"dependencies": {},
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	}
 }

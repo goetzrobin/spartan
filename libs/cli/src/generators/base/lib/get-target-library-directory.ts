@@ -4,6 +4,8 @@ import type { HlmBaseGeneratorSchema } from '../schema';
 
 export function getTargetLibraryDirectory(options: HlmBaseGeneratorSchema, tree: Tree) {
 	const { layoutDirectory, projectDirectory } = extractLayoutDirectory(options.directory);
-	const libsDir = options.rootProject ? '.' : layoutDirectory ?? getWorkspaceLayout(tree).libsDir;
+	const workspaceLayout = getWorkspaceLayout(tree);
+	const baseLibsDir = layoutDirectory ?? workspaceLayout.libsDir;
+	const libsDir = options.rootProject ? '.' : baseLibsDir;
 	return path.join(libsDir, projectDirectory, options.publicName);
 }

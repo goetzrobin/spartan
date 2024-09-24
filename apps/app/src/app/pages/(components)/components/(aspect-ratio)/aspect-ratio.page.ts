@@ -43,7 +43,7 @@ export const routeMeta: RouteMeta = {
 
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
-					<spartan-aspect-ratio-preview class="w-full h-full" />
+					<spartan-aspect-ratio-preview class="h-full w-full" />
 				</div>
 				<spartan-code secondTab [code]="defaultCode" />
 			</spartan-tabs>

@@ -6,9 +6,21 @@
 		"useIgnoreFile": true,
 		"defaultBranch": "main"
 	},
+	"css": {
+		"formatter": {
+			"quoteStyle": "single"
+		},
+		"linter": {
+			"enabled": true
+		}
+	},
+	"files": {
+		"maxSize": 4000000,
+		"ignoreUnknown": true
+	},
 	"formatter": {
 		"enabled": true,
-		"include": [".github"],
+		"formatWithErrors": true,
 		"ignore": [
 			"apps/**/*.min.js",
 			"apps/**/*.min.css",
@@ -16,11 +28,13 @@
 			"**/*.lock.json",
 			"libs/**/*.min.js",
 			"libs/**/*.min.css",
-			"libs/**/*-lock.yaml"
+			"libs/**/*-lock.yaml",
+			"libs/trpc/package.json"
 		],
 		"indentStyle": "tab",
 		"indentWidth": 2,
-		"lineEnding": "lf"
+		"lineEnding": "lf",
+		"useEditorconfig": false
 	},
 	"javascript": {
 		"formatter": {
@@ -47,6 +61,9 @@
 				"noUnusedImports": "error",
 				"noUnusedVariables": "error",
 				"useExhaustiveDependencies": "warn"
+			},
+			"style": {
+				"useImportType": "off"
 			},
 			"recommended": true
 		}

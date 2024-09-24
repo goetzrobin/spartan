@@ -21,7 +21,7 @@ import {
 	],
 	imports: [HlmCardContentDirective, HlmCardDescriptionDirective, HlmCardHeaderDirective, HlmCardTitleDirective],
 	template: `
-		<div hlmCardContent class="flex flex-col items-center justify-center h-52">
+		<div hlmCardContent class="flex h-52 flex-col items-center justify-center">
 			<h3 hlmCardTitle>No notes yet!</h3>
 			<p hlmCardDescription>Add a new one and see them appear here...</p>
 		</div>

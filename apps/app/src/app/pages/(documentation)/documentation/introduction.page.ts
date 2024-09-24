@@ -86,7 +86,7 @@ export const routeMeta: RouteMeta = {
 				, and
 				<code class="${hlmCode}">Drizzle</code>
 			</p>
-			<div class="flex items-center justify-end mt-6">
+			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/stack" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/stack
 					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
@@ -107,7 +107,7 @@ export const routeMeta: RouteMeta = {
 				<span class="font-medium">shadcn</span>
 				look.
 			</p>
-			<div class="flex items-center justify-end mt-6">
+			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/documentation/installation" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/ui
 					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />

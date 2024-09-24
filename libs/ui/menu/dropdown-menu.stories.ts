@@ -149,12 +149,9 @@ export const Default: Story = {
 	standalone: true,
 	imports: [
 		BrnMenuTriggerDirective,
-
 		HlmMenuImports,
-
 		HlmButtonDirective,
 		HlmIconComponent,
-
 		HlmMenuItemCheckComponent,
 		HlmMenuItemRadioComponent,
 	],

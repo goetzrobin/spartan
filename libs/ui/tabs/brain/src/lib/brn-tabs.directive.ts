@@ -49,7 +49,7 @@ export class BrnTabsDirective {
 	emitTabActivated(key: string) {
 		this.tabActivated.emit(key);
 	}
-	
+
 	setActiveTab(key: string) {
 		this._activeTab.set(key);
 	}

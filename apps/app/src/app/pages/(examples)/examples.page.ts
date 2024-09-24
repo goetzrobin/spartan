@@ -36,7 +36,7 @@ export const routeMeta: RouteMeta = {
 			<a hlmBtn size="sm" variant="outline" routerLink="/components">Components</a>
 		</div>
 
-		<nav class="scrollbar-w-0 mb-2 mt-12 h-11 sm:h-auto overflow-x-auto">
+		<nav class="scrollbar-w-0 mb-2 mt-12 h-11 overflow-x-auto sm:h-auto">
 			<ul class="flex space-x-2">
 				<li><a class="!font-medium" spartanNavLink="/examples/notes">Notes</a></li>
 				<li><a class="!font-medium" spartanNavLink="/examples/typography">Typography</a></li>

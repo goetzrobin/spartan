@@ -57,7 +57,7 @@ export const routeMeta: RouteMeta = {
 				<div class="mt-4" hlmAspectRatio="16/9">
 					<iframe
 						src="https://embed.figma.com/file/1203061493325953101/hf_embed?community_viewer=true&amp;embed_host=shadcn&amp;hub_file_id=1203061493325953101&amp;kind=&amp;viewer=1"
-						class="w-full h-full overflow-hidden border rounded-lg bg-muted"
+						class="bg-muted h-full w-full overflow-hidden rounded-lg border"
 					></iframe>
 				</div>
 			</section>

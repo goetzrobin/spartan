@@ -2,8 +2,6 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, computed, effect, inject, input, untracked } from '@angular/core';
 import { BrnAccordionDirective } from './brn-accordion.directive';
 
-let itemIdGenerator = 0;
-
 @Directive({
 	selector: '[brnAccordionItem]',
 	standalone: true,
@@ -12,10 +10,11 @@ let itemIdGenerator = 0;
 	},
 })
 export class BrnAccordionItemDirective {
+	private static itemIdGenerator = 0;
 	private readonly _accordion = inject(BrnAccordionDirective);
 	public readonly isOpened = input(false, { transform: coerceBooleanProperty });
 
-	public readonly id = itemIdGenerator++;
+	public readonly id = BrnAccordionItemDirective.itemIdGenerator++;
 	public readonly state = computed(() => (this._accordion.openItemIds().includes(this.id) ? 'open' : 'closed'));
 
 	constructor() {

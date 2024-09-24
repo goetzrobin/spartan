@@ -11,8 +11,6 @@ import {
 } from '@angular/core';
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
 
-let uniqueId = 0;
-
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'button[hlmToggle], button[brnToggle]',
@@ -26,6 +24,7 @@ let uniqueId = 0;
 	},
 })
 export class BrnToggleDirective {
+	private static uniqueId = 0;
 	private readonly _cdr = inject(ChangeDetectorRef);
 	private readonly _tgCanBeNullableProvider = inject(ToggleGroupCanBeNullableProvider, { optional: true });
 
@@ -37,7 +36,7 @@ export class BrnToggleDirective {
 	public readonly isOn = computed(() => this.state() === 'on');
 
 	@Input()
-	public id = `brn-toggle-${uniqueId++}`;
+	public id = `brn-toggle-${BrnToggleDirective.uniqueId++}`;
 
 	@Input()
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

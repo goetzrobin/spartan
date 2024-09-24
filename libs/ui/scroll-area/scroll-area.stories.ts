@@ -10,7 +10,7 @@ import { HlmScrollAreaComponent } from './helm/src';
 	standalone: true,
 	imports: [NgFor, HlmSeparatorDirective, HlmScrollAreaComponent],
 	template: `
-		<hlm-scroll-area class="w-48 border border-border h-72 rounded-md">
+		<hlm-scroll-area class="border-border h-72 w-48 rounded-md border">
 			<div class="p-4">
 				<h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
 				<div class="text-sm" *ngFor="let tag of tags">

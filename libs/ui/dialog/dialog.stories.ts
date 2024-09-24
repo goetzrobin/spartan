@@ -210,7 +210,7 @@ class DialogDynamicComponentStory {
 			@for (user of users; track user.name) {
 				<button class="text-left" (click)="selectUser(user)">
 					<hlm-trow>
-						<hlm-td truncate class="font-medium w-44">{{ user.name }}</hlm-td>
+						<hlm-td truncate class="w-44 font-medium">{{ user.name }}</hlm-td>
 						<hlm-td class="w-60">{{ user.email }}</hlm-td>
 						<hlm-td class="w-48">{{ user.phone }}</hlm-td>
 					</hlm-trow>

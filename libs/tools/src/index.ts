@@ -1,1 +1,1 @@
-console.log("I should not be blank.")
+console.log('I should not be blank.');

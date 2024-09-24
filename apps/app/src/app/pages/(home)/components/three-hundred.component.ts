@@ -11,7 +11,7 @@ import { ThreeHundredItemComponent } from './th-item.component';
 	},
 	template: `
 		@for (contributor of _contributors; track $index) {
-			<spartan-th-item class="mb-2" [contributor]="contributor"/>
+			<spartan-th-item class="mb-2" [contributor]="contributor" />
 		}
 		@for (item of _rest; track $index) {
 			<spartan-th-item-placeholder class="mb-2" />

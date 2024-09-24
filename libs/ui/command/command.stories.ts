@@ -81,13 +81,12 @@ export const Default: Story = {
 		HlmCommandImports,
 		BrnDialogImports,
 		HlmDialogOverlayDirective,
-
 		HlmIconComponent,
 		HlmButtonDirective,
 		HlmCodeDirective,
 	],
 	template: `
-		<div class="flex items-center justify-center py-20 mx-auto text-sm max-w-screen-sm space-x-4">
+		<div class="mx-auto flex max-w-screen-sm items-center justify-center space-x-4 py-20 text-sm">
 			<p>
 				Press
 				<code hlmCode>⌘ + K</code>

@@ -14,7 +14,7 @@ import { HlmSliderTrackInactiveDirective } from './hlm-slider-track-inactive.dir
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<ng-content></ng-content>
-		<div class="flex w-full flex-wrap">
+		<div class="flex flex-wrap w-full">
 			<div hlmSliderTrackInactive></div>
 			<div hlmSliderTrackActive>
 				<div hlmSliderTrackActiveFill></div>
