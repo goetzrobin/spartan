@@ -77,6 +77,14 @@ export class ThreeHundredComponent {
 		'Muneersahel',
 		'danilolmc',
 		'tomalaforge',
+		'anserkanuren',
+		'cjosue15',
+		'hirenchauhan2',
+		'Roguyt',
+		'sironis13',
+		'0xfraso',
+		'guillermoecharri',
+		'ValentinFunk',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((_, i) => i);
 }
