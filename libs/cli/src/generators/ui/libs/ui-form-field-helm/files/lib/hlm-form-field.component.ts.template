@@ -33,9 +33,9 @@ export class HlmFormFieldComponent {
 
 	constructor() {
 		effect(() => {
-			if(!this.control()) {
+			if (!this.control()) {
 				throw new Error('hlm-form-field must contain a BrnFormFieldControl.');
 			}
-		})
+		});
 	}
 }
