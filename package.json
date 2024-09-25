@@ -36,7 +36,7 @@
 		"hook:pre-commit": "lint-staged",
 		"prettify": "prettier --write .",
 		"chromatic": "chromatic --project-token=chpt_845c7a47afdb884",
-		"pre-publish": "bun prepare-cli && bun biome.format",
+		"pre-publish": "bun run prepare-cli && bun run biome.format",
 		"preinstall": "npx only-allow bun"
 	},
 	"private": true,
@@ -207,15 +207,7 @@
 		"vitest": "2.1.1",
 		"xo": "^0.59.3"
 	},
-	"trustedDependencies": [
-		"core-js",
-		"@biomejs/biome",
-		"nx",
-		"esbuild",
-		"@swc/core",
-		"cypress",
-		"sharp"
-	],
+	"trustedDependencies": ["core-js", "@biomejs/biome", "nx", "esbuild", "@swc/core", "cypress", "sharp"],
 	"readme": "ERROR: No README data found!",
 	"_id": "spartan@0.0.0",
 	"nx": {
