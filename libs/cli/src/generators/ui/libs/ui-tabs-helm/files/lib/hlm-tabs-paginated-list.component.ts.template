@@ -31,7 +31,7 @@ import { listVariants } from './hlm-tabs-list.component';
 			<hlm-icon size="base" name="lucideChevronLeft" />
 		</button>
 
-		<div #tabListContainer class="z-[1] flex grow overflow-hidden " (keydown)="_handleKeydown($event)">
+		<div #tabListContainer class="z-[1] flex grow overflow-hidden" (keydown)="_handleKeydown($event)">
 			<div class="relative grow transition-transform" #tabList role="tablist" (cdkObserveContent)="_onContentChanges()">
 				<div #tabListInner [class]="_tabListClass()">
 					<ng-content></ng-content>

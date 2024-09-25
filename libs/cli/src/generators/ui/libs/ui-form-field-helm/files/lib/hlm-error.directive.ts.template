@@ -1,10 +1,10 @@
-import { Directive } from "@angular/core";
+import { Directive } from '@angular/core';
 
 @Directive({
-    standalone: true,
-    selector: 'hlm-error',
-    host: {
-        class: 'block text-destructive text-sm font-medium'
-    }
+	standalone: true,
+	selector: 'hlm-error',
+	host: {
+		class: 'block text-destructive text-sm font-medium',
+	},
 })
 export class HlmErrorDirective {}

@@ -60,7 +60,7 @@ export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 		hlm(inputVariants({ size: this._size(), error: this._error() }), this.userClass()),
 	);
 
-	private injector = inject(Injector)
+	private injector = inject(Injector);
 
 	ngControl: NgControl | null = this.injector.get(NgControl, null);
 
