@@ -74,6 +74,14 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 55. [Muneersahel](https://github.com/Muneersahel)
 53. [danilolmc](https://github.com/danilolmc)
 54. [tomalaforge](https://github.com/tomalaforge)
+55. [anserkanuren](https://github.com/anserkanuren)
+56. [cjosue15](https://github.com/cjosue15)
+57. [hirenchauhan2](https://github.com/hirenchauhan2)
+58. [Roguyt](https://github.com/Roguyt)
+59. [sironis13](https://github.com/sironis13)
+60. [0xfraso](https://github.com/0xfraso)
+61. [guillermoecharri](https://github.com/guillermoecharri)
+62. [ValentinFunk](https://github.com/ValentinFunk)
 
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
