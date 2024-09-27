@@ -141,7 +141,7 @@ export abstract class BrnTabsPaginatedListDirective
 		if (currentTabKey && this._items) {
 			const currentTab = tabs[currentTabKey];
 			if (currentTab) {
-				activeIndex = this._items.toArray().indexOf(currentTab.trigger);
+				activeIndex = currentTab.trigger ? this._items.toArray().indexOf(currentTab.trigger) : -1;
 			}
 		}
 
@@ -419,7 +419,10 @@ export abstract class BrnTabsPaginatedListDirective
 		}
 
 		if (this._items?.length) {
-			this._items.toArray()[tabIndex].focus();
+			const tabItem = this._items.toArray()[tabIndex];
+			if (tabItem) {
+				tabItem.focus();
+			}
 
 			// Do not let the browser manage scrolling to focus the element, this will be handled
 			// by using translation. In LTR, the scroll left should be 0. In RTL, the scroll width

@@ -131,9 +131,14 @@ export class BrnToggleGroupComponent
 	@Output() readonly valueChange = new EventEmitter<any>();
 
 	/** Selected button toggles in the group. */
-	get selected(): BrnToggleDirective | BrnToggleDirective[] {
-		const selected = this._selectionModel ? this._selectionModel.selected : [];
-		return this.multiple ? selected : selected[0] || null;
+	get selected(): BrnToggleDirective | BrnToggleDirective[] | null {
+		const selected = this._selectionModel?.selected ?? [];
+
+		// If multiple selection is enabled, return the entire selected array (or empty array), otherwise return the first item or null.
+		if (this.multiple) {
+			return selected;
+		}
+		return selected.length > 0 && selected[0] !== undefined ? selected[0] : null;
 	}
 
 	/** Whether no button toggles need to be selected. */

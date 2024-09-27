@@ -7,7 +7,6 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
-	HostBinding,
 	Input,
 	type OnDestroy,
 	Output,
@@ -122,8 +121,8 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	ariaLabelledby: string | null = null;
 
 	/** Used to set the aria-describedby attribute on the underlying input element. */
-	@HostBinding('attr.aria-describedby')
-	private _ariaDescribedby: string | null = null;
+	// @HostBinding('attr.aria-describedby')
+	// private _ariaDescribedby: string | null = null;
 
 	@Input('aria-describedby')
 	ariaDescribedby: string | null = null;

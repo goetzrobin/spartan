@@ -6,7 +6,6 @@ import {
 	Directive,
 	ElementRef,
 	Input,
-	NgZone,
 	type OnDestroy,
 	type QueryList,
 	computed,
@@ -120,7 +119,7 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	private readonly _el = inject(ElementRef);
 	private _keyManager?: FocusKeyManager<BrnAccordionTriggerDirective>;
 	private _focusMonitor = inject(FocusMonitor);
-	private _ngZone = inject(NgZone);
+	// private _ngZone = inject(NgZone);
 
 	private readonly _focused = signal<boolean>(false);
 	private readonly _openItemIds = signal<number[]>([]);

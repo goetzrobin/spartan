@@ -10,7 +10,7 @@ export function getRoot(context: ExecutorContext): string {
 	return projectsConfiguration[projectName].root;
 }
 
-export function sleep(ms) {
+export function sleep(ms: number): Promise<void> {
 	return new Promise((resolve) => {
 		setTimeout(resolve, ms);
 	});

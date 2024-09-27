@@ -6,7 +6,11 @@ import type { HlmUIGeneratorSchema } from './schema';
 
 export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema & { angularCli?: boolean }) {
 	const tasks: GeneratorCallback[] = [];
-	const availablePrimitives = await import('./supported-ui-libraries.json');
+
+	// Adjust the import to handle default exports
+	const availablePrimitivesModule = await import('./supported-ui-libraries.json');
+	const availablePrimitives = availablePrimitivesModule.default || availablePrimitivesModule;
+
 	const availablePrimitiveNames = [...Object.keys(availablePrimitives), 'collapsible', 'menubar', 'contextmenu'];
 	let response: { primitives: string[] } = { primitives: [] };
 	if (options.name && availablePrimitiveNames.includes(options.name)) {
@@ -27,12 +31,18 @@ export default async function hlmUIGenerator(tree: Tree, options: HlmUIGenerator
 	return runTasksInSerial(...tasks);
 }
 
+// Define an interface for the structure of availablePrimitives
+interface PrimitiveMetadata {
+	internalName: string;
+	peerDependencies: Record<string, string>;
+}
+
 async function createPrimitiveLibraries(
 	response: {
 		primitives: string[];
 	},
 	availablePrimitiveNames: string[],
-	availablePrimitives,
+	availablePrimitives: Record<string, PrimitiveMetadata>, // Define the type for availablePrimitives
 	tree: Tree,
 	options: HlmUIGeneratorSchema & { angularCli?: boolean },
 ) {

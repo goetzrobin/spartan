@@ -127,18 +127,21 @@ export class CodeComponent {
 			markedHighlight({
 				async: true,
 				highlight: (code, lang) => {
-					lang = lang || 'typescript';
-					if (!Prism.languages[lang]) {
+					const language = lang || 'typescript';
+					// Ensure grammar is always defined by using fallback to typescript if language is undefined
+					const grammar: Prism.Grammar = Prism.languages[language] || Prism.languages['typescript']!; // Using non-null assertion
+
+					if (!Prism.languages[language]) {
 						console.warn(`Notice:
-    ---------------------------------------------------------------------------------------
-    The requested language '${lang}' is not available with the provided setup.
-    To enable, import your main.ts as:
-      import  'prismjs/components/prism-${lang}';
-    ---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+The requested language '${language}' is not available with the provided setup.
+To enable, import in your main.ts as:
+  import  'prismjs/components/prism-${language}';
+---------------------------------------------------------------------------------------
         `);
-						return code;
 					}
-					return Prism.highlight(code, Prism.languages[lang], lang);
+
+					return Prism.highlight(code, grammar, language);
 				},
 			}),
 			{

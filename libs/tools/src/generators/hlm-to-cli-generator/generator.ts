@@ -7,12 +7,18 @@ import type { HlmToCliGeneratorGeneratorSchema } from './schema';
 
 const BASE_PATH = path.join('libs', 'cli', 'src', 'generators', 'ui');
 
+interface ExtendedOptions extends HlmToCliGeneratorGeneratorSchema, ReturnType<typeof names> {
+	internalName: string;
+	publicName: string;
+	primitiveName: string;
+}
+
 async function createGeneratorFromHlmLibrary(
 	projects: Map<string, ProjectConfiguration>,
 	generatorName: string,
 	internalName: string,
 	tree: Tree,
-	options: HlmToCliGeneratorGeneratorSchema,
+	options: ExtendedOptions,
 ) {
 	const srcPath = path.join(workspaceRoot, projects.get(internalName).sourceRoot);
 	const projectRoot = path.join(BASE_PATH, 'libs', internalName);
@@ -32,13 +38,13 @@ export async function hlmCliNxGeneratorGenerator(tree: Tree, options: HlmToCliGe
 	for (const internalName of projectNamesIgnoringCoreLibs) {
 		const primitiveName = internalName.replace('ui-', '').replace('-helm', '').replace('-', '');
 		const cleanNames = names(primitiveName);
-		const mergedOptions = { ...options, ...cleanNames };
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
-		mergedOptions['internalName'] = internalName;
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
-		mergedOptions['publicName'] = `ui-${primitiveName}-helm`;
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
-		mergedOptions['primitiveName'] = primitiveName;
+		const mergedOptions: ExtendedOptions = {
+			...options,
+			...cleanNames,
+			internalName,
+			publicName: `ui-${primitiveName}-helm`,
+			primitiveName,
+		};
 
 		createGeneratorFromHlmLibrary(projects, primitiveName, internalName, tree, mergedOptions);
 	}
