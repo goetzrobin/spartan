@@ -16,9 +16,66 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
-import { BrnSelectScrollDownDirective } from './brn-select-scroll-down.directive';
-import { BrnSelectScrollUpDirective } from './brn-select-scroll-up.directive';
 import { BrnSelectService } from './brn-select.service';
+
+import { Directive } from '@angular/core';
+import { Subject, fromEvent, interval, takeUntil } from 'rxjs';
+
+@Directive({
+	selector: '[brnSelectScrollUp], brn-select-scroll-up, hlm-select-scroll-up:not(noHlm)',
+	standalone: true,
+	host: {
+		'aria-hidden': 'true',
+		'(mouseenter)': 'startEmittingEvents()',
+	},
+})
+export class BrnSelectScrollUpDirective {
+	private readonly _el = inject(ElementRef);
+	private readonly _selectContent = inject(BrnSelectContentComponent);
+
+	private readonly endReached = new Subject<boolean>();
+	private readonly _destroyRef = inject(DestroyRef);
+
+	public startEmittingEvents(): void {
+		const mouseLeave$ = fromEvent(this._el.nativeElement, 'mouseleave');
+
+		interval(100)
+			.pipe(takeUntil(mouseLeave$), takeUntil(this.endReached), takeUntilDestroyed(this._destroyRef))
+			.subscribe(() => this._selectContent.moveFocusUp());
+	}
+
+	public stopEmittingEvents(): void {
+		this.endReached.next(true);
+	}
+}
+
+@Directive({
+	selector: '[brnSelectScrollDown], brn-select-scroll-down, hlm-select-scroll-down:not(noHlm)',
+	standalone: true,
+	host: {
+		'aria-hidden': 'true',
+		'(mouseenter)': 'startEmittingEvents()',
+	},
+})
+export class BrnSelectScrollDownDirective {
+	private readonly _el = inject(ElementRef);
+	private readonly _selectContent = inject(BrnSelectContentComponent);
+
+	private readonly endReached = new Subject<boolean>();
+	private readonly _destroyRef = inject(DestroyRef);
+
+	public startEmittingEvents(): void {
+		const mouseLeave$ = fromEvent(this._el.nativeElement, 'mouseleave');
+
+		interval(100)
+			.pipe(takeUntil(mouseLeave$), takeUntil(this.endReached), takeUntilDestroyed(this._destroyRef))
+			.subscribe(() => this._selectContent.moveFocusDown());
+	}
+
+	public stopEmittingEvents(): void {
+		this.endReached.next(true);
+	}
+}
 
 @Component({
 	selector: 'brn-select-content, hlm-select-content:not(noHlm)',

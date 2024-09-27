@@ -3,7 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { Subject, take } from 'rxjs';
 import type { BrnDialogOptions } from './brn-dialog-options';
 import type { BrnDialogState } from './brn-dialog-state';
-import { cssClassesToArray } from './brn-dialog.service';
+import { cssClassesToArray } from './brn-dialog-utils';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class BrnDialogRef<DialogResult = any> {

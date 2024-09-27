@@ -1,14 +1,14 @@
 {
 	"$schema": "node_modules/oxlint/configuration_schema.json",
-  "env": {
-    "browser": true
-  },
-  "globals": {
-    "foo": "readonly"
-  },
-  "rules": {
-    "eqeqeq": "error",
-    "import/no-cycle": "error",
+	"env": {
+		"browser": true
+	},
+	"globals": {
+		"foo": "readonly"
+	},
+	"rules": {
+		"eqeqeq": "error",
+		"import/no-cycle": "error",
 		"no-accumulating-spread": "error",
 		"no-await-in-loop": "error",
 		"for-direction": "error",
@@ -58,6 +58,6 @@
 		"require-yield": "error",
 		"use-isnan": "error",
 		"valid-typeof": "error"
-  },
-  "settings": {}
+	},
+	"settings": {}
 }

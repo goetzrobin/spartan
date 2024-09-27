@@ -19,19 +19,9 @@ import { Subject, filter, takeUntil } from 'rxjs';
 import type { BrnDialogOptions } from './brn-dialog-options';
 import { BrnDialogRef } from './brn-dialog-ref';
 import type { BrnDialogState } from './brn-dialog-state';
+import { cssClassesToArray } from './brn-dialog-utils';
 
 let dialogSequence = 0;
-
-export const cssClassesToArray = (classes: string | string[] | undefined | null, defaultClass = ''): string[] => {
-	if (typeof classes === 'string') {
-		const splitClasses = classes.trim().split(' ');
-		if (splitClasses.length === 0) {
-			return [defaultClass];
-		}
-		return splitClasses;
-	}
-	return classes ?? [];
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type BrnDialogContext<T> = T & { close: (result?: any) => void };

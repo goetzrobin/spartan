@@ -35,8 +35,7 @@ import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/ui-forms-brain
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { Subject, combineLatest, delay, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
-import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
-import { BrnSelectService } from './brn-select.service';
+import { BrnSelectService, BrnSelectTriggerDirective } from './brn-select.service';
 
 export type BrnReadDirection = 'ltr' | 'rtl';
 

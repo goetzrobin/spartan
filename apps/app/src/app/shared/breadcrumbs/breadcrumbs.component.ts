@@ -1,18 +1,12 @@
 import { NgForOf, NgIf } from '@angular/common';
+// breadcrumbs.component.ts
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BreadcrumbService } from './breadcrumb.service';
-
-export interface Breadcrumb {
-	label: string;
-	url: string;
-	loading: boolean;
-	loadingLabel?: string;
-}
+import { BreadcrumbSharedService } from './breadcrumb-shared.service';
 
 @Component({
 	selector: 'spartan-breadcrumbs',
@@ -48,10 +42,7 @@ export interface Breadcrumb {
 	`,
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: {
-		class: '',
-	},
 })
 export class BreadcrumbsComponent {
-	public breadcrumbs = toSignal(inject(BreadcrumbService).breadcrumbs$);
+	public breadcrumbs = toSignal(inject(BreadcrumbSharedService).breadcrumbs$);
 }

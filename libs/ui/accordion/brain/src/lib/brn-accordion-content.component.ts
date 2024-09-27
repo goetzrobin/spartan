@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import type { CustomElementClassSettable } from '@spartan-ng/ui-core';
-import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
+import { BrnAccordionItemDirective } from './brn-accordion.directive';
 
 @Component({
 	selector: 'brn-accordion-content',
