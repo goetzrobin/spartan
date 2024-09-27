@@ -23,7 +23,7 @@
 		"allowImportingTsExtensions": false,
 		"noFallthroughCasesInSwitch": false,
 		"noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false,
+		"noPropertyAccessFromIndexSignature": false,
 		"noUnusedLocals": false,
 		"importHelpers": true,
 		"target": "ESNext",

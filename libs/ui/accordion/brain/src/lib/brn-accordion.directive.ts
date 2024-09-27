@@ -1,4 +1,5 @@
 import { FocusKeyManager, FocusMonitor } from '@angular/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
 	type AfterContentInit,
 	ContentChildren,
@@ -12,7 +13,88 @@ import {
 	inject,
 	signal,
 } from '@angular/core';
-import { BrnAccordionTriggerDirective } from './brn-accordion-trigger.directive';
+import { effect, input, untracked } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { rxHostPressedListener } from '@spartan-ng/ui-core';
+import { fromEvent } from 'rxjs';
+
+@Directive({
+	selector: '[brnAccordionItem]',
+	standalone: true,
+	host: {
+		'[attr.data-state]': 'state()',
+	},
+})
+export class BrnAccordionItemDirective {
+	private static itemIdGenerator = 0;
+	private readonly _accordion = inject(BrnAccordionDirective);
+	public readonly isOpened = input(false, { transform: coerceBooleanProperty });
+
+	public readonly id = BrnAccordionItemDirective.itemIdGenerator++;
+	public readonly state = computed(() => (this._accordion.openItemIds().includes(this.id) ? 'open' : 'closed'));
+
+	constructor() {
+		if (!this._accordion) {
+			throw Error('Accordion trigger can only be used inside an Accordion. Add brnAccordion to ancestor.');
+		}
+		effect(() => {
+			const isOpened = this.isOpened();
+			untracked(() => {
+				if (isOpened) {
+					this._accordion.openItem(this.id);
+				} else {
+					this._accordion.closeItem(this.id);
+				}
+			});
+		});
+	}
+}
+
+@Directive({
+	selector: '[brnAccordionTrigger]',
+	standalone: true,
+	host: {
+		'[attr.data-state]': 'state()',
+		'[attr.aria-expanded]': 'state() === "open"',
+		'[attr.aria-controls]': 'ariaControls',
+		role: 'heading',
+		'aria-level': '3',
+		'[id]': 'id',
+	},
+})
+export class BrnAccordionTriggerDirective {
+	private readonly _accordion = inject(BrnAccordionDirective);
+	private readonly _item = inject(BrnAccordionItemDirective);
+	private readonly _elementRef = inject(ElementRef);
+	private readonly _hostPressedListener = rxHostPressedListener();
+
+	public readonly state = this._item.state;
+	public readonly id = `brn-accordion-trigger-${this._item.id}`;
+	public readonly ariaControls = `brn-accordion-content-${this._item.id}`;
+
+	constructor() {
+		if (!this._accordion) {
+			throw Error('Accordion trigger can only be used inside an Accordion. Add brnAccordion to ancestor.');
+		}
+
+		if (!this._item) {
+			throw Error('Accordion trigger can only be used inside an AccordionItem. Add brnAccordionItem to parent.');
+		}
+		this._hostPressedListener.subscribe(() => {
+			this._accordion.toggleItem(this._item.id);
+		});
+
+		fromEvent(this._elementRef.nativeElement, 'focus')
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => {
+				this._accordion.setActiveItem(this);
+			});
+	}
+
+	public focus() {
+		this._elementRef.nativeElement.focus();
+	}
+}
 
 const HORIZONTAL_KEYS_TO_PREVENT_DEFAULT = [
 	'ArrowLeft',

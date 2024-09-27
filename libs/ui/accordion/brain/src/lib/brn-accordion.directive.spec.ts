@@ -1,8 +1,10 @@
 import { createEvent, fireEvent, render, screen, waitFor } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
-import { BrnAccordionItemDirective } from './brn-accordion-item.directive';
-import { BrnAccordionTriggerDirective } from './brn-accordion-trigger.directive';
-import { BrnAccordionDirective } from './brn-accordion.directive';
+import {
+	BrnAccordionDirective,
+	BrnAccordionItemDirective,
+	BrnAccordionTriggerDirective,
+} from './brn-accordion.directive';
 
 describe('BrnAccordionDirective', () => {
 	const setup = async () => {

@@ -1,7 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Directive, ElementRef, PLATFORM_ID, effect, inject, input } from '@angular/core';
-import { BRN_SLIDER_TRACK } from './brn-slider-track.directive';
-import { BRN_SLIDER } from './brn-slider.directive';
+import { BRN_SLIDER, BRN_SLIDER_TRACK } from './brn-slider-track.directive';
 
 @Directive({
 	selector: '[brnSliderTickMark]',

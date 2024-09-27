@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
-import { BrnHoverCardContentDirective } from './lib/brn-hover-card-content.directive';
-import { BrnHoverCardTriggerDirective } from './lib/brn-hover-card-trigger.directive';
+import { BrnHoverCardContentDirective, BrnHoverCardTriggerDirective } from './lib/brn-hover-card-content.service';
 import { BrnHoverCardComponent } from './lib/brn-hover-card.component';
 
-export { BrnHoverCardContentDirective } from './lib/brn-hover-card-content.directive';
-export { BrnHoverCardContentService, BrnHoverCardOptions } from './lib/brn-hover-card-content.service';
-export { BrnHoverCardTriggerDirective } from './lib/brn-hover-card-trigger.directive';
-export { BrnHoverCardComponent } from './lib/brn-hover-card.component';
-export { createHoverObservable } from './lib/createHoverObservable';
+export * from './lib/brn-hover-card-content.service';
+export * from './lib/brn-hover-card.component';
+export * from './lib/createHoverObservable';
 
 export const BrnHoverCardImports = [
 	BrnHoverCardComponent,

@@ -1,23 +1,274 @@
+import type { Direction } from '@angular/cdk/bidi';
+import { Directionality } from '@angular/cdk/bidi';
 import { SharedResizeObserver } from '@angular/cdk/observers/private';
 import { isPlatformBrowser } from '@angular/common';
+import { ElementRef, InjectionToken, PLATFORM_ID, computed, forwardRef } from '@angular/core';
+import { Directive, Renderer2, type Signal, effect, inject, signal } from '@angular/core';
 import {
 	type AfterViewInit,
-	Directive,
-	ElementRef,
-	InjectionToken,
-	PLATFORM_ID,
-	type Signal,
-	computed,
+	Injector,
+	type OnDestroy,
+	type WritableSignal,
 	contentChild,
-	forwardRef,
-	inject,
-	signal,
+	input,
+	model,
 } from '@angular/core';
-import { Subject, debounceTime, takeUntil, tap } from 'rxjs';
-import { BRN_SLIDER_INPUT, type BrnSliderInput } from './brn-slider-input.directive';
-import { BRN_SLIDER } from './brn-slider.directive';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import type { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
+import { debounceTime } from 'rxjs';
+import { Subject, merge, takeUntil, tap } from 'rxjs';
+
+export const BRN_SLIDER_INPUT = new InjectionToken<BrnSliderInput>('BrnSliderInput');
+
+export interface BrnSliderInput {
+	/** The slider's native input element wrapper value. */
+	value: Signal<number>;
+
+	/** Flag indicating if native input element is currently focused. */
+	isFocused: Signal<boolean>;
+}
 
 export const BRN_SLIDER_TRACK = new InjectionToken<BrnSliderTrack>('BrnSliderTrack');
+
+export const BRN_SLIDER = new InjectionToken<BrnSlider>('BrnSlider');
+
+export interface BrnSlider {
+	/** The minimun value of the slider. */
+	min: WritableSignal<number>;
+
+	/** The maximun value of the slider. */
+	max: WritableSignal<number>;
+
+	/** The amount that slider values can increment or decrement by. */
+	step: Signal<number>;
+
+	/** Whether the slider is disabled. */
+	disabled: WritableSignal<boolean>;
+
+	/** Whether the slider displays tick marks along the slider track. */
+	showTickMarks: Signal<boolean>;
+
+	/** Whether the slider is ltr or rtl.
+	 * Any consumer of slider interested in getting the current
+	 * direction state, will consume this signal.
+	 */
+	direction: Signal<Direction>;
+
+	/** The underlying slider's track element */
+	brnSliderTrack: Signal<BrnSliderTrack | undefined>;
+
+	/** The aria-labelledby element */
+	label: Signal<BrnLabelDirective | null>;
+
+	/** The optional aria-label fallback value.
+	 * If no label is provided, this input must be provided by the user,
+	 * otherwise an error will be displayed prompting the user to either
+	 * provide a spartan-ui label or a fallback aria label text.
+	 */
+	ariaLabel: Signal<string | null>;
+}
+
+/**
+ * Directive that adds slider-specific behaviors to an input element inside `<brn-slider>`.
+ */
+@Directive({
+	selector: 'input[brnSliderInput]',
+	host: {
+		type: 'range',
+		role: 'slider',
+		'(change)': 'onChange()',
+		'(input)': 'onInput()',
+		'(focus)': 'onFocus()',
+		'(blur)': 'onBlur()',
+		'[attr.disabled]': 'isDisabled()',
+		'[attr.aria-valuenow]': 'valueNow()',
+		'[attr.aria-valuemin]': 'valueMin()',
+		'[attr.aria-valuemax]': 'valueMax()',
+		'[attr.aria-labelledby]': 'ariaLabelledby()',
+		'[attr.aria-label]': 'ariaLabel()',
+		'aria-orientation': 'horizontal',
+	},
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: BrnSliderInputDirective,
+			multi: true,
+		},
+		{
+			provide: BRN_SLIDER_INPUT,
+			useExisting: BrnSliderInputDirective,
+		},
+	],
+	standalone: true,
+})
+export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderInput {
+	private _onChangeFn: ((value: string | number) => void) | undefined;
+	private _onTouchedFn: () => void = () => {};
+	protected isDisabled = computed(() => (this._slider.disabled() === true ? true : undefined));
+	protected valueNow = computed(() => this.value() ?? 0);
+	protected valueMin = computed(() => this._slider.min());
+	protected valueMax = computed(() => this._slider.max());
+	protected ariaLabelledby = computed(() => this._slider.label()?.id);
+	protected ariaLabel = computed(() => {
+		if (!this._slider.ariaLabel() && !this.ariaLabelledby()) {
+			throw new Error(
+				"'ariaLabel' input must be provided as fallback accessibility aria label when no aria-labelledby element is provided.",
+			);
+		}
+		return this._slider.ariaLabel();
+	});
+	public readonly value = signal(0);
+	public readonly isFocused = signal(false);
+
+	private readonly _platformId = inject(PLATFORM_ID);
+	private readonly _elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef<HTMLInputElement>);
+	private readonly _slider = inject(BRN_SLIDER);
+	private readonly _renderer2 = inject(Renderer2);
+
+	constructor() {
+		effect(
+			() => {
+				if (isPlatformBrowser(this._platformId)) {
+					this._updateHostElementStep(this._slider.step());
+					this._updateMinValue(this._slider.min());
+					this._updateMaxValue(this._slider.max());
+					this._updateDirection(this._slider.direction());
+				}
+			},
+			{ allowSignalWrites: true },
+		);
+	}
+
+	onFocus(): void {
+		this.isFocused.set(true);
+	}
+
+	onBlur(): void {
+		this.isFocused.set(false);
+		this._onTouchedFn();
+	}
+
+	onInput(): void {
+		this._updateValue();
+	}
+
+	onChange(): void {
+		this._updateValue();
+	}
+
+	writeValue(obj: number): void {
+		this.value.set(obj);
+		this._updateHostElementValue(obj);
+	}
+
+	registerOnChange(fn: (value: string | number) => void): void {
+		this._onChangeFn = fn;
+	}
+
+	registerOnTouched(fn: () => void): void {
+		this._onTouchedFn = fn;
+	}
+
+	/**
+	 * Sets the disabled state of the slider.
+	 * @param isDisabled The new disabled state
+	 */
+	setDisabledState(isDisabled: boolean): void {
+		/** Disable slider only when slider component
+		 * is not disabled and isDisabled param is explicitly set to true
+		 */
+		if (isDisabled && !this._slider.disabled()) {
+			this._slider.disabled.set(isDisabled);
+		}
+	}
+
+	private _updateHostElementValue(value: number | null) {
+		this._elementRef.nativeElement.value = value?.toString() ?? '0';
+	}
+
+	private _updateValue() {
+		this.value.set(+this._elementRef.nativeElement.value);
+		this._onChangeFn?.(this.value());
+	}
+
+	private _updateHostElementStep(step: number) {
+		this._elementRef.nativeElement.step = step.toString();
+		this._updateValue();
+	}
+
+	private _updateMinValue(value: number) {
+		this._elementRef.nativeElement.min = value.toString();
+		this._updateValue();
+	}
+
+	private _updateMaxValue(value: number) {
+		this._elementRef.nativeElement.max = value.toString();
+		this._updateValue();
+	}
+
+	private _updateDirection(direction: Direction) {
+		this._renderer2.setStyle(this._elementRef.nativeElement, 'direction', direction);
+	}
+}
+
+@Directive({
+	selector: '[brnSlider]',
+	standalone: true,
+	providers: [
+		{
+			provide: BRN_SLIDER,
+			useExisting: BrnSliderDirective,
+		},
+	],
+	exportAs: 'brnSlider',
+})
+export class BrnSliderDirective implements BrnSlider, AfterViewInit, OnDestroy {
+	public readonly label = input<BrnLabelDirective | null>(null);
+	public readonly ariaLabel = input<string | null>(null);
+	/** Used only as an input. */
+	public readonly dir = input<Direction>('ltr');
+	public readonly disabled = model<boolean>(false, { alias: 'brnSliderDisabled' });
+	public readonly min = model<number>(0);
+	public readonly max = model<number>(100);
+	public readonly step = input<number>(1);
+	public readonly showTickMarks = input<boolean>(false);
+
+	public readonly direction = signal<Direction>('ltr');
+	private readonly _destroyed = new Subject<void>();
+
+	private readonly _injector = inject(Injector);
+	private readonly _dir = inject(Directionality);
+	private readonly _platformId = inject(PLATFORM_ID);
+
+	public readonly brnSliderTrack = contentChild(BRN_SLIDER_TRACK);
+
+	ngAfterViewInit(): void {
+		if (isPlatformBrowser(this._platformId)) {
+			this._updateDirectionality();
+		}
+	}
+
+	ngOnDestroy(): void {
+		this._destroyed.next();
+		this._destroyed.complete();
+	}
+
+	/**
+	 * The method is responsible of setting the current direction state
+	 * based on the latest 'dir' input or bidi state change. The only
+	 * source of truth for slider direction state is the 'direction' signal
+	 * and all interested consumers of it, will consume this interface exposed signal.
+	 */
+	private _updateDirectionality() {
+		merge(toObservable(this.dir, { injector: this._injector }), this._dir.change)
+			.pipe(
+				takeUntil(this._destroyed),
+				tap((dir) => this.direction.set(dir)),
+			)
+			.subscribe();
+	}
+}
 
 export interface BrnSliderTrack {
 	/** The track's active portion. */

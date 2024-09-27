@@ -1,5 +1,93 @@
 import { Directive, ElementRef, Input, computed, effect, inject, input } from '@angular/core';
-import { BrnTabsDirective } from './brn-tabs.directive';
+import { EventEmitter, Output, model, signal } from '@angular/core';
+
+@Directive({
+	selector: '[brnTabsContent]',
+	standalone: true,
+	host: {
+		role: 'tabpanel',
+		tabindex: '0',
+		'[id]': 'contentId()',
+		'[attr.aria-labelledby]': 'labelId()',
+		'[hidden]': '_isSelected() === false',
+	},
+	exportAs: 'brnTabsContent',
+})
+export class BrnTabsContentDirective {
+	private _root = inject(BrnTabsDirective);
+	private _elementRef = inject(ElementRef);
+
+	public readonly contentFor = input.required<string>({ alias: 'brnTabsContent' });
+	protected readonly _isSelected = computed(() => this._root.$activeTab() === this.contentFor());
+	protected contentId = computed(() => `brn-tabs-content-${this.contentFor()}`);
+	protected labelId = computed(() => `brn-tabs-label-${this.contentFor()}`);
+
+	constructor() {
+		effect(
+			() => {
+				this._root.registerContent(this.contentFor(), this);
+			},
+			{ allowSignalWrites: true },
+		);
+	}
+
+	public focus() {
+		this._elementRef.nativeElement.focus();
+	}
+}
+
+export type BrnTabsOrientation = 'horizontal' | 'vertical';
+export type BrnTabsDirection = 'ltr' | 'rtl';
+export type BrnActivationMode = 'automatic' | 'manual';
+
+@Directive({
+	selector: '[brnTabs]',
+	standalone: true,
+	host: {
+		'[attr.data-orientation]': 'orientation()',
+		'[attr.dir]': 'direction()',
+	},
+	exportAs: 'brnTabs',
+})
+export class BrnTabsDirective {
+	public readonly orientation = input<BrnTabsOrientation>('horizontal');
+	/** internal **/
+	$orientation = this.orientation;
+
+	public readonly direction = input<BrnTabsDirection>('ltr');
+	/** internal **/
+	$direction = this.direction;
+
+	public readonly _activeTab = model<string | undefined>(undefined, { alias: 'brnTabs' });
+	/** internal **/
+	$activeTab = this._activeTab.asReadonly();
+
+	public readonly activationMode = input<BrnActivationMode>('automatic');
+	/** internal **/
+	$activationMode = this.activationMode;
+
+	@Output()
+	readonly tabActivated = new EventEmitter<string>();
+
+	private _tabs = signal<{ [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } }>({});
+	public readonly $tabs = this._tabs.asReadonly();
+
+	public registerTrigger(key: string, trigger: BrnTabsTriggerDirective) {
+		this._tabs.update((tabs) => ({ ...tabs, [key]: { trigger, content: tabs[key]?.content } }));
+	}
+
+	public registerContent(key: string, content: BrnTabsContentDirective) {
+		this._tabs.update((tabs) => ({ ...tabs, [key]: { trigger: tabs[key]?.trigger, content } }));
+	}
+
+	emitTabActivated(key: string) {
+		this.tabActivated.emit(key);
+	}
+
+	setActiveTab(key: string) {
+		this._activeTab.set(key);
+	}
+}
 
 @Directive({
 	selector: 'button[brnTabsTrigger]',

@@ -2,8 +2,7 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
 import { type AfterContentInit, ContentChildren, Directive, type QueryList, inject } from '@angular/core';
 import { rxHostListener } from '@spartan-ng/ui-core';
 import { take } from 'rxjs';
-import { BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
-import { BrnTabsDirective } from './brn-tabs.directive';
+import { BrnTabsDirective, BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
 @Directive({
 	selector: '[brnTabsList]',

@@ -22,7 +22,7 @@ export class HlmDialogService {
 	private readonly _brnDialogService = inject(BrnDialogService);
 
 	public open(component: ComponentType<unknown> | TemplateRef<unknown>, options?: Partial<HlmDialogOptions>) {
-		options = {
+		const mergedOptions = {
 			...DEFAULT_BRN_DIALOG_OPTIONS,
 			closeDelay: 100,
 			// eslint-disable-next-line
@@ -31,6 +31,6 @@ export class HlmDialogService {
 			context: { ...options?.context, $component: component, $dynamicComponentClass: options?.contentClass },
 		};
 
-		return this._brnDialogService.open(HlmDialogContentComponent, undefined, options.context, options);
+		return this._brnDialogService.open(HlmDialogContentComponent, undefined, mergedOptions.context, mergedOptions);
 	}
 }
