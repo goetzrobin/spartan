@@ -82,6 +82,9 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 63. [0xfraso](https://github.com/0xfraso)
 64. [guillermoecharri](https://github.com/guillermoecharri)
 65. [ValentinFunk](https://github.com/ValentinFunk)
+66. [Femi236](https://github.com/Femi236)
+67. [dineshkp](https://github.com/dineshkp)
+68. [robingenz](https://github.com/robingenz)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 

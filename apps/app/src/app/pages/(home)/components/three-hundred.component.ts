@@ -85,6 +85,9 @@ export class ThreeHundredComponent {
 		'0xfraso',
 		'guillermoecharri',
 		'ValentinFunk',
+		'Femi236',
+		'dineshkp',
+		'robingenz',
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((_, i) => i);
 }
