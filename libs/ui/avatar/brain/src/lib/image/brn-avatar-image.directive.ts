@@ -1,4 +1,4 @@
-import { Directive, HostListener, computed, signal } from '@angular/core';
+import { Directive, computed, signal } from '@angular/core';
 
 @Directive({
 	selector: 'img[brnAvatarImage]',
@@ -8,15 +8,15 @@ import { Directive, HostListener, computed, signal } from '@angular/core';
 export class BrnAvatarImageDirective {
 	private readonly loaded = signal(false);
 
-	@HostListener('error')
-	private onError() {
-		this.loaded.set(false);
-	}
+	// @HostListener('error')
+	// private onError() {
+	// 	this.loaded.set(false);
+	// }
 
-	@HostListener('load')
-	private onLoad() {
-		this.loaded.set(true);
-	}
+	// @HostListener('load')
+	// private onLoad() {
+	// 	this.loaded.set(true);
+	// }
 
 	canShow = computed(() => this.loaded());
 }

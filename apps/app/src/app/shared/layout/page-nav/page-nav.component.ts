@@ -76,7 +76,8 @@ export class PageNavComponent implements OnInit, AfterViewInit, OnDestroy {
 		const links = headings.map((element) => {
 			const { id, children, localName, textContent } = element;
 			const isSubHeading = localName === 'spartan-section-sub-heading';
-			const label = (isSubHeading ? children[0].childNodes[0].textContent : textContent) ?? '[DEV] Empty heading!';
+			const label =
+				(isSubHeading ? children?.[0]?.childNodes?.[0]?.textContent : textContent) ?? '[DEV] Empty heading!';
 			if (isDevMode() && id === '') {
 				console.error(`[DEV] id missing for heading "${label}"`);
 			}

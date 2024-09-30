@@ -45,7 +45,8 @@ export class BrnTabsListDirective implements AfterContentInit {
 			let activeIndex = 0;
 			if (currentTabKey && this.triggers) {
 				const currentTab = tabs[currentTabKey];
-				if (currentTab) {
+				if (currentTab?.trigger) {
+					// Check for undefined trigger
 					activeIndex = this.triggers.toArray().indexOf(currentTab.trigger);
 				}
 			}

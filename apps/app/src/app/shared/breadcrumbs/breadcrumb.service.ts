@@ -28,7 +28,9 @@ export class BreadcrumbService {
 			const isDynamicRoute = part.startsWith(':');
 			if (isDynamicRoute && !!route.snapshot) {
 				const paramName = part.split(':')[1];
-				path = path.replace(part, route.snapshot.params[paramName]);
+				if (paramName && route.snapshot.params[paramName]) {
+					path = path.replace(part, route.snapshot.params[paramName]);
+				}
 			}
 		}
 

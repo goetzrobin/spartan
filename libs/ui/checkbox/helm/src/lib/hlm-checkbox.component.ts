@@ -4,7 +4,6 @@ import {
 	Output,
 	booleanAttribute,
 	computed,
-	effect,
 	forwardRef,
 	input,
 	model,
@@ -83,12 +82,12 @@ export class HlmCheckboxComponent {
 	protected readonly _disabled = signal(false);
 	public readonly disabled = input(false, { transform: booleanAttribute });
 
-	private disableInput = effect(
-		() => {
-			this._disabled.set(this.disabled());
-		},
-		{ allowSignalWrites: true },
-	);
+	// private disableInput = effect(
+	// 	() => {
+	// 		this._disabled.set(this.disabled());
+	// 	},
+	// 	{ allowSignalWrites: true },
+	// );
 
 	// icon inputs
 	public readonly checkIconName = input<string>('lucideCheck');

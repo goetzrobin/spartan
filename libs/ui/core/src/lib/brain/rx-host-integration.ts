@@ -27,6 +27,9 @@ function process<T>(element: HTMLElement, prop: string): (value: T) => void {
 	const [key, unit = ''] = prop.replace('attr.', '').replace('style.', '').replace('class.', '').split('.');
 
 	return (value) => {
+		// Ensure that the key is a valid string
+		if (!key) return;
+
 		const parsed = unit && value !== null ? `${value}${unit}` : value;
 
 		if (isAttr) {

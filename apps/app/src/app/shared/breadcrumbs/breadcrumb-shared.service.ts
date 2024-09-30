@@ -23,11 +23,23 @@ export class BreadcrumbSharedService {
 	}
 
 	updateCurrentBreadcrumbData(newData: Partial<Breadcrumb>) {
-		const newBreadcrumbs = [...this._breadcrumbs$.getValue()];
-		newBreadcrumbs[newBreadcrumbs.length - 1] = {
-			...newBreadcrumbs[newBreadcrumbs.length - 1],
+		const currentBreadcrumbs = [...this._breadcrumbs$.getValue()];
+		const lastBreadcrumb = currentBreadcrumbs[currentBreadcrumbs.length - 1];
+
+		if (!lastBreadcrumb) {
+			return;
+		}
+
+		// Ensure label and url are defined before updating
+		if (newData.label === undefined || newData.url === undefined) {
+			throw new Error('label and url are required fields.');
+		}
+
+		currentBreadcrumbs[currentBreadcrumbs.length - 1] = {
+			...lastBreadcrumb,
 			...newData,
 		};
-		this._breadcrumbs$.next(newBreadcrumbs);
+
+		this._breadcrumbs$.next(currentBreadcrumbs);
 	}
 }

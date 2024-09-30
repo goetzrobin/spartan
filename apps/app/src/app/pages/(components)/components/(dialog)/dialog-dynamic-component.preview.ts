@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { lucideCheck } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/ui-dialog-brain';
@@ -107,7 +107,7 @@ export class DialogDynamicComponentPreviewComponent {
 	`,
 })
 class SelectUserComponent {
-	@HostBinding('class') private readonly _class: string = 'flex flex-col gap-4';
+	// @HostBinding('class') private readonly _class: string = 'flex flex-col gap-4';
 
 	private readonly _dialogRef = inject<BrnDialogRef<ExampleUser>>(BrnDialogRef);
 	private readonly _dialogContext = injectBrnDialogContext<{ users: ExampleUser[] }>();

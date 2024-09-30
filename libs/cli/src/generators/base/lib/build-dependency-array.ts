@@ -65,7 +65,7 @@ export function buildDependencyArray(
 	if (options.peerDependencies) {
 		dependencies = { ...dependencies, ...options.peerDependencies };
 	}
-	const brainDependencyVersion = BRAIN_DEPENDENCY_MAP[options.primitiveName];
+	const brainDependencyVersion = BRAIN_DEPENDENCY_MAP[options.primitiveName as keyof typeof BRAIN_DEPENDENCY_MAP];
 	if (brainDependencyVersion) {
 		dependencies = { ...dependencies, [`@spartan-ng/ui-${options.primitiveName}-brain`]: brainDependencyVersion };
 	}

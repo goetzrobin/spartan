@@ -12,7 +12,6 @@ import {
 import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
 
 @Directive({
-	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'button[hlmToggle], button[brnToggle]',
 	standalone: true,
 	host: {
@@ -39,15 +38,13 @@ export class BrnToggleDirective {
 	public id = `brn-toggle-${BrnToggleDirective.uniqueId++}`;
 
 	@Input()
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public value: any;
+	public value: string | number | null = null;
 
 	@Input({ transform: booleanAttribute })
 	set disabled(value: boolean) {
 		this._disabled.set(value ? true : undefined);
 	}
 
-	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input('state')
 	set setState(value: 'on' | 'off') {
 		this._state.set(value);
@@ -64,11 +61,7 @@ export class BrnToggleDirective {
 
 	toggle() {
 		if (this._disableToggleClick) return;
-		if (this._state() === 'on') {
-			this.toggleOff();
-		} else {
-			this.toggleOn();
-		}
+		this._state() === 'on' ? this.toggleOff() : this.toggleOn();
 	}
 
 	toggleOff() {

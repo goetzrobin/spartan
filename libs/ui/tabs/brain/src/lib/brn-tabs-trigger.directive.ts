@@ -40,6 +40,11 @@ export type BrnTabsOrientation = 'horizontal' | 'vertical';
 export type BrnTabsDirection = 'ltr' | 'rtl';
 export type BrnActivationMode = 'automatic' | 'manual';
 
+type TabEntry = {
+	trigger?: BrnTabsTriggerDirective;
+	content?: BrnTabsContentDirective;
+};
+
 @Directive({
 	selector: '[brnTabs]',
 	standalone: true,
@@ -69,15 +74,33 @@ export class BrnTabsDirective {
 	@Output()
 	readonly tabActivated = new EventEmitter<string>();
 
-	private _tabs = signal<{ [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } }>({});
+	private _tabs = signal<{ [key: string]: TabEntry }>({}); // Updated type for better safety
 	public readonly $tabs = this._tabs.asReadonly();
 
 	public registerTrigger(key: string, trigger: BrnTabsTriggerDirective) {
-		this._tabs.update((tabs) => ({ ...tabs, [key]: { trigger, content: tabs[key]?.content } }));
+		this._tabs.update((tabs) => {
+			const existingEntry = tabs[key] || {}; // Ensure we have an entry
+			return {
+				...tabs,
+				[key]: {
+					...existingEntry,
+					trigger, // Safely set the trigger
+				},
+			};
+		});
 	}
 
 	public registerContent(key: string, content: BrnTabsContentDirective) {
-		this._tabs.update((tabs) => ({ ...tabs, [key]: { trigger: tabs[key]?.trigger, content } }));
+		this._tabs.update((tabs) => {
+			const existingEntry = tabs[key] || {}; // Ensure we have an entry
+			return {
+				...tabs,
+				[key]: {
+					...existingEntry,
+					content, // Safely set the content
+				},
+			};
+		});
 	}
 
 	emitTabActivated(key: string) {

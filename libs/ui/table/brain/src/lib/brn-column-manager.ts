@@ -32,7 +32,7 @@ export class BrnColumnManager<T extends BrnColumnVisibility> {
 	public readonly isColumnVisible = (columnName: string) => {
 		const visibilityMap = this.columnVisibility();
 		const columnEntry = visibilityMap[columnName];
-		return typeof columnEntry === 'boolean' ? columnEntry : columnEntry.visible;
+		return columnEntry && (typeof columnEntry === 'boolean' ? columnEntry : columnEntry.visible);
 	};
 	public readonly isColumnDisabled = (columnName: string) =>
 		this.isColumnVisible(columnName) && this.displayedColumns().length === 1;
@@ -40,6 +40,7 @@ export class BrnColumnManager<T extends BrnColumnVisibility> {
 	public toggleVisibility(columnName: keyof T) {
 		const visibilityMap = this._columnVisibility();
 		const columnEntry = visibilityMap[columnName];
+		if (!columnEntry) return;
 		const newVisibilityState = typeof columnEntry === 'boolean' ? !columnEntry : { visible: !columnEntry.visible };
 		this._columnVisibility.set({ ...visibilityMap, [columnName]: newVisibilityState });
 	}
