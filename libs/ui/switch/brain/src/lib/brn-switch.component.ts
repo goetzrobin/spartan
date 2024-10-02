@@ -7,7 +7,7 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
-	HostBinding,
+	HostListener,
 	Input,
 	type OnDestroy,
 	Output,
@@ -23,6 +23,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
+import { ChangeFn, TouchFn } from '@spartan-ng/ui-forms-brain';
 
 export const BRN_SWITCH_VALUE_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
@@ -83,14 +84,14 @@ const CONTAINER_POST_FIX = '-switch';
 export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	private readonly _renderer = inject(Renderer2);
 	private readonly _isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
-	private _elementRef = inject(ElementRef);
-	private _focusMonitor = inject(FocusMonitor);
-	private _cdr = inject(ChangeDetectorRef);
+	private readonly _elementRef = inject(ElementRef);
+	private readonly _focusMonitor = inject(FocusMonitor);
+	private readonly _cdr = inject(ChangeDetectorRef);
 
-	public focusVisible = signal(false);
-	public focused = signal(false);
+	public readonly focusVisible = signal(false);
+	public readonly focused = signal(false);
 
-	protected _checked = signal(false);
+	protected readonly _checked = signal(false);
 	@Input({ transform: booleanAttribute })
 	set checked(value: boolean) {
 		this._checked.set(value);
@@ -122,21 +123,11 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	ariaLabelledby: string | null = null;
 
 	/** Used to set the aria-describedby attribute on the underlying input element. */
-	@HostBinding('attr.aria-describedby')
-	private _ariaDescribedby: string | null = null;
-
 	@Input('aria-describedby')
 	ariaDescribedby: string | null = null;
 
-	private _required = false;
 	@Input({ transform: booleanAttribute })
-	get required(): boolean {
-		return this._required;
-	}
-
-	set required(value: boolean) {
-		this._required = value;
-	}
+	required = false;
 
 	protected readonly _disabled = signal(false);
 	@Input({ transform: booleanAttribute })
@@ -144,18 +135,18 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 		this._disabled.set(value);
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
-	protected _onChange = (_: any) => {};
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private _onTouched = () => {};
+	protected _onChange: ChangeFn<boolean> = () => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	private _onTouched: TouchFn = () => {};
 
 	@ViewChild('checkBox', { static: true })
 	public checkbox?: ElementRef<HTMLInputElement>;
 
 	@Output()
-	public changed = new EventEmitter<boolean>();
+	public readonly changed = new EventEmitter<boolean>();
 	@Output()
-	public touched = new EventEmitter<void>();
+	public readonly touched = new EventEmitter<void>();
 
 	constructor() {
 		rxHostPressedListener().subscribe(() => this.handleChange());
@@ -222,22 +213,19 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 		this._focusMonitor.stopMonitoring(this._elementRef);
 	}
 
-	forChild(parentValue: string | null | undefined): string | null {
+	protected forChild(parentValue: string | null | undefined): string | null {
 		return parentValue ? parentValue.replace(CONTAINER_POST_FIX, '') : null;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	writeValue(value: any): void {
+	writeValue(value: boolean): void {
 		this.checked = !!value;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnChange(fn: any): void {
+	registerOnChange(fn: ChangeFn<boolean>): void {
 		this._onChange = fn;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnTouched(fn: any): void {
+	registerOnTouched(fn: TouchFn): void {
 		this._onTouched = fn;
 	}
 
@@ -245,5 +233,13 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	setDisabledState(isDisabled: boolean): void {
 		this.disabled = isDisabled;
 		this._cdr.markForCheck();
+	}
+
+	/**
+	 * If the space key is pressed, prevent the default action to stop the page from scrolling.
+	 */
+	@HostListener('keydown.space', ['$event'])
+	protected preventScrolling(event: KeyboardEvent): void {
+		event.preventDefault();
 	}
 }
