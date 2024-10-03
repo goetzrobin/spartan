@@ -1,11 +1,13 @@
 import { type GeneratorCallback, type Tree, addDependenciesToPackageJson, runTasksInSerial } from '@nx/devkit';
 import { prompt } from 'enquirer';
+import { Config, getOrCreateConfig } from '../../utils/config';
 import { SPARTAN_COLLAPSIBLE_BRAIN_VERSION } from '../base/versions';
 import { addDependentPrimitives } from './add-dependent-primitive';
 import type { HlmUIGeneratorSchema } from './schema';
 
 export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema & { angularCli?: boolean }) {
 	const tasks: GeneratorCallback[] = [];
+	const config = await getOrCreateConfig(tree);
 	const availablePrimitives = await import('./supported-ui-libraries.json');
 	const availablePrimitiveNames = [...Object.keys(availablePrimitives), 'collapsible', 'menubar', 'contextmenu'];
 	let response: { primitives: string[] } = { primitives: [] };
@@ -21,7 +23,7 @@ export default async function hlmUIGenerator(tree: Tree, options: HlmUIGenerator
 		});
 	}
 	tasks.push(
-		...(await createPrimitiveLibraries(response, availablePrimitiveNames, availablePrimitives, tree, options)),
+		...(await createPrimitiveLibraries(response, availablePrimitiveNames, availablePrimitives, tree, options, config)),
 	);
 
 	return runTasksInSerial(...tasks);
@@ -35,6 +37,7 @@ async function createPrimitiveLibraries(
 	availablePrimitives,
 	tree: Tree,
 	options: HlmUIGeneratorSchema & { angularCli?: boolean },
+	config: Config,
 ) {
 	const allPrimitivesSelected = response.primitives.includes('all');
 	const primitivesToCreate = allPrimitivesSelected ? availablePrimitiveNames : response.primitives;
@@ -72,7 +75,7 @@ async function createPrimitiveLibraries(
 				primitiveName: '',
 				peerDependencies,
 				skipBrainDependencies: options.skipBrainDependencies,
-				directory: options.directory,
+				directory: config.componentsPath,
 				tags: options.tags,
 				rootProject: options.rootProject,
 				angularCli: options.angularCli,

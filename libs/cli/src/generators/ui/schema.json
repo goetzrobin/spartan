@@ -12,12 +12,6 @@
 				"index": 0
 			}
 		},
-		"directory": {
-			"type": "string",
-			"description": "A directory where the libraries are placed.",
-			"x-prompt": "Choose a directory to place your spartan libraries, e.g. libs/ui",
-			"x-priority": "important"
-		},
 		"tags": {
 			"type": "string",
 			"description": "Add tags to the library (used for linting)."
