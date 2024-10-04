@@ -11,13 +11,13 @@ locate the relevant code in one of the `libs/ui` sub-folder.
 
 ### Setup
 
-spartan uses [pnpm](https://pnpm.io/) to manage its dependencies.
+spartan uses [bun](https://bun.sh/) to manage its dependencies.
 
 Before opening a pull request, run the following command from the root
 folder to make sure your development dependencies are up-to-date:
 
 ```shell
-pnpm install
+bun install
 ```
 
 ### Running locally
@@ -26,7 +26,7 @@ When working on UI primitives you most likely want to work with our storybook. T
 you can simply run and go to http://localhost:4400:
 
 ```shell
-pnpm storybook
+bun run storybook
 ```
 
 ### Build
@@ -35,7 +35,7 @@ spartan uses [Nx](https://nx.dev) for builds. To build all projects locally, run
 folder:
 
 ```shell
-pnpm build
+bun run build
 ```
 
 ### Testing
@@ -44,13 +44,13 @@ spartan uses [Jest](https://jestjs.io) for tests. To test all projects locally, 
 folder:
 
 ```shell
-pnpm test
+bun run test
 ```
 
 We also have e2e tests set up with Cypress that run against our storybook. Run them with:
 
 ```shell
-pnpm e2e
+bun run e2e
 ```
 
 ## Contributing to the docs and spartan website
@@ -58,7 +58,7 @@ pnpm e2e
 To serve the documentation and example application locally, run the following command from the root folder:
 
 ```shell
-pnpm dev
+bun run dev
 ```
 
 The code is inside `apps/app` and runs on AnalogJs.
