@@ -5,9 +5,7 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
-	EventEmitter,
 	type OnDestroy,
-	Output,
 	PLATFORM_ID,
 	Renderer2,
 	ViewChild,
@@ -20,6 +18,7 @@ import {
 	input,
 	model,
 	signal,
+	output,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -148,8 +147,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	@ViewChild('checkBox', { static: true })
 	public checkbox?: ElementRef<HTMLInputElement>;
 
-	@Output()
-	public readonly changed = new EventEmitter<boolean | 'indeterminate'>();
+	public readonly changed = output<boolean | 'indeterminate'>();
 
 	constructor() {
 		rxHostPressedListener()
