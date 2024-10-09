@@ -75,7 +75,7 @@ async function createPrimitiveLibraries(
 				primitiveName: '',
 				peerDependencies,
 				skipBrainDependencies: options.skipBrainDependencies,
-				directory: config.componentsPath,
+				directory: options.directory ?? config.componentsPath,
 				tags: options.tags,
 				rootProject: options.rootProject,
 				angularCli: options.angularCli,
