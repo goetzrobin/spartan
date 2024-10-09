@@ -1,5 +1,4 @@
 import { Component, output } from '@angular/core';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
 import { SideNavComponent } from './side-nav-coming-soon.component';
 import { SideNavHeadingDirective } from './side-nav-heading.directive';
 import { SideNavLinkDirective } from './side-nav-link.directive';
@@ -8,13 +7,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 @Component({
 	selector: 'spartan-side-nav-content',
 	standalone: true,
-	imports: [
-		HlmScrollAreaComponent,
-		SideNavLinkDirective,
-		SideNavLinksComponent,
-		SideNavHeadingDirective,
-		SideNavComponent,
-	],
+	imports: [SideNavLinkDirective, SideNavLinksComponent, SideNavHeadingDirective, SideNavComponent],
 	host: {
 		class: 'block px-1',
 	},
@@ -85,7 +78,7 @@ export class SideNavContentComponent {
 				{ label: 'Avatar', url: '/avatar' },
 				{ label: 'Badge', url: '/badge' },
 				{ label: 'Button', url: '/button' },
-				{ label: 'Calendar', url: '/calendar', wip: true },
+				{ label: 'Calendar', url: '/calendar' },
 				{ label: 'Card', url: '/card' },
 				{ label: 'Carousel', url: '/carousel' },
 				{ label: 'Checkbox', url: '/checkbox' },
