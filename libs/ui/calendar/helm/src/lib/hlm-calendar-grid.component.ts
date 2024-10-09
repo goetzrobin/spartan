@@ -1,4 +1,5 @@
 import { Component, computed } from '@angular/core';
+import { injectCalendarI18n } from '@spartan-ng/ui-calendar-brain';
 import { injectDateAdapter } from '@spartan-ng/ui-core';
 import { HlmCalendarCellComponent } from './hlm-calendar-cell.component';
 import { injectCalendar } from './hlm-calendar.token';
@@ -11,13 +12,11 @@ import { injectCalendar } from './hlm-calendar.token';
 		<table class="w-full border-collapse space-y-1" role="grid" [attr.aria-labelledby]="calendar.header().id">
 			<thead>
 				<tr class="flex">
-					<th scope="col" class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]" aria-label="Sunday">Su</th>
-					<th scope="col" class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]" aria-label="Monday">Mo</th>
-					<th scope="col" class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]" aria-label="Tuesday">Tu</th>
-					<th scope="col" class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]" aria-label="Wednesday">We</th>
-					<th scope="col" class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]" aria-label="Thursday">Th</th>
-					<th scope="col" class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]" aria-label="Friday">Fr</th>
-					<th scope="col" class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]" aria-label="Saturday">Sa</th>
+					@for (day of weekdays(); track dateAdapter.getTime(day)) {
+						<th scope="col" class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]" [attr.aria-label]="i18n.labelWeekday(day, dateAdapter)">
+							{{ i18n.formatWeekdayName(day, dateAdapter) }}
+						</th>
+					}
 				</tr>
 			</thead>
 
@@ -40,11 +39,23 @@ export class HlmCalendarGridComponent<T> {
 	/** Access the calendar component */
 	protected readonly calendar = injectCalendar<T>();
 
+	/** Access the calendar i18n */
+	protected readonly i18n = injectCalendarI18n<T>();
+
+	/**
+	 * Get the days of the week to display in the header.
+	 */
+	protected readonly weekdays = computed(() => {
+		// get the first 7 days of the week.
+		return this.days().slice(0, 7);
+	});
+
 	/**
 	 * Get all the days to display, this is the days of the current month
 	 * and the days of the previous and next month to fill the grid.
 	 */
 	protected readonly days = computed(() => {
+		const weekStartsOn = this.calendar.weekStartsOn();
 		const month = this.calendar.state().focusedDate();
 		const days: T[] = [];
 
@@ -52,13 +63,17 @@ export class HlmCalendarGridComponent<T> {
 		let firstDay = this.dateAdapter.startOfMonth(month);
 		let lastDay = this.dateAdapter.endOfMonth(month);
 
-		// find the first and last day of visible in the grid.
-		firstDay = this.dateAdapter.subtract(firstDay, {
-			days: this.dateAdapter.getDay(firstDay),
-		});
-		lastDay = this.dateAdapter.add(lastDay, {
-			days: 6 - this.dateAdapter.getDay(lastDay),
-		});
+		// we need to subtract until we get the to starting day before or on the start of the month.
+		while (this.dateAdapter.getDay(firstDay) !== weekStartsOn) {
+			firstDay = this.dateAdapter.subtract(firstDay, { days: 1 });
+		}
+
+		const weekEndsOn = (weekStartsOn + 6) % 7;
+
+		// we need to add until we get to the ending day after or on the end of the month.
+		while (this.dateAdapter.getDay(lastDay) !== weekEndsOn) {
+			lastDay = this.dateAdapter.add(lastDay, { days: 1 });
+		}
 
 		// collect all the days to display.
 		while (firstDay <= lastDay) {

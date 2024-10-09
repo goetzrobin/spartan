@@ -1,4 +1,4 @@
-import { BooleanInput } from '@angular/cdk/coercion';
+import { BooleanInput, NumberInput } from '@angular/cdk/coercion';
 import { NgClass } from '@angular/common';
 import {
 	ChangeDetectorRef,
@@ -8,6 +8,7 @@ import {
 	inject,
 	input,
 	model,
+	numberAttribute,
 	signal,
 	viewChild,
 } from '@angular/core';
@@ -55,6 +56,11 @@ export class HlmCalendarComponent<T> {
 
 	/** Whether a specific date is disabled. */
 	readonly dateDisabled = input<(date: T) => boolean>(() => false);
+
+	/** The day the week starts on */
+	readonly weekStartsOn = input<Weekday, NumberInput>(0, {
+		transform: (v: unknown) => numberAttribute(v) as Weekday,
+	});
 
 	/** The default focused date. */
 	readonly defaultFocusedDate = input<T>();
@@ -202,3 +208,5 @@ export class HlmCalendarComponent<T> {
 		this.cells.update((cells) => cells.filter((c) => c !== cell));
 	}
 }
+
+type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6;

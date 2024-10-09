@@ -1,11 +1,12 @@
-import { inject, InjectionToken, ValueProvider } from '@angular/core';
+import { InjectionToken, ValueProvider, inject } from '@angular/core';
 import { BrnDateAdapter } from '@spartan-ng/ui-core';
 
 export interface BrnCalendarI18n<T> {
-	formatWeekdayName: (weekday: number) => string;
+	formatWeekdayName: (date: T, dateAdapter: BrnDateAdapter<T>) => string;
 	formatHeader: (date: T, dateAdapter: BrnDateAdapter<T>) => string;
 	labelPrevious: () => string;
 	labelNext: () => string;
+	labelWeekday: (date: T, dateAdapter: BrnDateAdapter<T>) => string;
 }
 
 export const BrnCalendarI18nToken = new InjectionToken<BrnCalendarI18n<unknown>>('BrnCalendarI18nToken');
@@ -18,16 +19,22 @@ export function provideCalendarI18n<T>(configuration: BrnCalendarI18n<T>): Value
 }
 
 const defaultCalendarI18n: BrnCalendarI18n<unknown> = {
-	formatWeekdayName: (weekday: number) => {
+	formatWeekdayName: (date: unknown, dateAdapter: BrnDateAdapter<unknown>) => {
 		const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-		return weekdays[weekday];
+		return weekdays[dateAdapter.getDay(date)];
 	},
 	formatHeader: (date: unknown, dateAdapter: BrnDateAdapter<unknown>) => {
-		return new Date(dateAdapter.getYear(date), dateAdapter.getMonth(date))
-			.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+		return new Date(dateAdapter.getYear(date), dateAdapter.getMonth(date)).toLocaleDateString(undefined, {
+			month: 'long',
+			year: 'numeric',
+		});
 	},
 	labelPrevious: () => 'Go to the previous month',
 	labelNext: () => 'Go to the next month',
+	labelWeekday: (date: unknown, dateAdapter: BrnDateAdapter<unknown>) => {
+		const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+		return weekdays[dateAdapter.getDay(date)];
+	},
 };
 
 /**
