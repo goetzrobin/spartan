@@ -7,7 +7,9 @@ import type { HlmUIGeneratorSchema } from './schema';
 
 export default async function hlmUIGenerator(tree: Tree, options: HlmUIGeneratorSchema & { angularCli?: boolean }) {
 	const tasks: GeneratorCallback[] = [];
-	const config = await getOrCreateConfig(tree);
+	const config = await getOrCreateConfig(tree, {
+		componentsPath: options.directory,
+	});
 	const availablePrimitives = await import('./supported-ui-libraries.json');
 	const availablePrimitiveNames = [...Object.keys(availablePrimitives), 'collapsible', 'menubar', 'contextmenu'];
 	let response: { primitives: string[] } = { primitives: [] };
