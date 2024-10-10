@@ -24,6 +24,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 			<spartan-side-nav-links>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/introduction">Introduction</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/cli">CLI</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/components-json">components.json</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/changelog">Changelog</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/documentation/about">About & Credits</a>
 			</spartan-side-nav-links>
