@@ -69,7 +69,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/collapsible">Collapsible</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/combobox">Combobox</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/command">Command</a>
-				<a spartanSideNavLink="/components/context-menu">Context Menu</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/context-menu">Context Menu</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/data-table">Data Table</a>
 				<a disabled spartanSideNavLink="/components/picker">
 					Date Picker
