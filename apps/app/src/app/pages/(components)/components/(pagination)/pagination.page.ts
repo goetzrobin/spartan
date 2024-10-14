@@ -1,5 +1,6 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
@@ -12,7 +13,8 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { PaginationPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './pagination.preview';
+import { advancedCode, PaginationAdvancedComponent } from './pagination--advanced.example';
+import { defaultCode, defaultImports, defaultSkeleton, PaginationPreviewComponent } from './pagination.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Pagination' },
@@ -36,6 +38,7 @@ export const routeMeta: RouteMeta = {
 		PageBottomNavLinkComponent,
 		PageBottomNavPlaceholderComponent,
 		PaginationPreviewComponent,
+		PaginationAdvancedComponent
 	],
 	template: `
 		<section spartanMainSection>
@@ -60,6 +63,15 @@ export const routeMeta: RouteMeta = {
 				<spartan-code [code]="defaultImports" />
 				<spartan-code [code]="defaultSkeleton" />
 			</div>
+			
+			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
+			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Advanced Pagination</h3>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-pagination-advanced />
+				</div>
+				<spartan-code secondTab [code]="advancedCode" />
+			</spartan-tabs>
 
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="popover" label="Popover" />
@@ -73,4 +85,6 @@ export default class PaginationPageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
+	
+	protected readonly advancedCode = advancedCode;
 }
