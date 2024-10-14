@@ -17,7 +17,7 @@ export const avatarVariants = cva('relative flex shrink-0 overflow-hidden rounde
 	},
 });
 
-type AvatarVariants = VariantProps<typeof avatarVariants>;
+export type AvatarVariants = VariantProps<typeof avatarVariants>;
 
 @Component({
 	selector: 'hlm-avatar',
