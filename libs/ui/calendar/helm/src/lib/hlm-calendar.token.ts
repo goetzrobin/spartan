@@ -1,4 +1,4 @@
-import { ExistingProvider, inject, InjectionToken, Type } from '@angular/core';
+import { ExistingProvider, InjectionToken, Type, inject } from '@angular/core';
 import type { HlmCalendarComponent } from './hlm-calendar.component';
 
 export const HlmCalendarToken = new InjectionToken<HlmCalendarComponent<unknown>>('HlmCalendarToken');
