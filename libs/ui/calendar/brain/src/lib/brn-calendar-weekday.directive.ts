@@ -1,5 +1,5 @@
 import { Directive, EmbeddedViewRef, OnDestroy, TemplateRef, ViewContainerRef, computed, inject } from '@angular/core';
-import { injectDateAdapter } from '@spartan-ng/ui-core';
+import { injectDateAdapter } from '@spartan-ng/ui-date-time';
 import { injectCalendar } from './brn-calendar.token';
 
 @Directive({

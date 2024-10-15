@@ -1,5 +1,5 @@
 import { Directive, HostListener } from '@angular/core';
-import { injectDateAdapter } from '@spartan-ng/ui-core';
+import { injectDateAdapter } from '@spartan-ng/ui-date-time';
 import { injectCalendar } from './brn-calendar.token';
 import { injectCalendarI18n } from './i18n/calendar-i18n';
 

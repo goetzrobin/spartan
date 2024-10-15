@@ -14,7 +14,7 @@ import {
 	numberAttribute,
 	signal,
 } from '@angular/core';
-import { injectDateAdapter } from '@spartan-ng/ui-core';
+import { injectDateAdapter } from '@spartan-ng/ui-date-time';
 import { BrnCalendarCellButtonDirective } from './brn-calendar-cell-button.directive';
 import { BrnCalendarHeaderDirective } from './brn-calendar-header.directive';
 import { provideCalendar } from './brn-calendar.token';
