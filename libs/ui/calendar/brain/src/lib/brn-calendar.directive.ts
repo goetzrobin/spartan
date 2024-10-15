@@ -2,6 +2,8 @@ import { BooleanInput, NumberInput } from '@angular/cdk/coercion';
 import {
 	ChangeDetectorRef,
 	Directive,
+	Injector,
+	afterNextRender,
 	booleanAttribute,
 	computed,
 	contentChild,
@@ -28,6 +30,9 @@ export class BrnCalendarDirective<T> {
 
 	/** Access the change detector */
 	private readonly changeDetector = inject(ChangeDetectorRef);
+
+	/** Access the injector */
+	private readonly injector = inject(Injector);
 
 	/** The minimum date that can be selected.*/
 	readonly min = input<T | undefined>(undefined);
@@ -58,7 +63,9 @@ export class BrnCalendarDirective<T> {
 	readonly header = contentChild(BrnCalendarHeaderDirective);
 
 	/** Store the cells */
-	protected readonly cells = contentChildren<BrnCalendarCellButtonDirective<T>>(BrnCalendarCellButtonDirective);
+	protected readonly cells = contentChildren<BrnCalendarCellButtonDirective<T>>(BrnCalendarCellButtonDirective, {
+		descendants: true,
+	});
 
 	/**
 	 * @internal
@@ -174,15 +181,25 @@ export class BrnCalendarDirective<T> {
 
 		this.state().focusedDate.set(date);
 
+		// wait until the cells have all updated
+		afterNextRender(
+			{
+				write: () => {
+					// focus the cell with the target date.
+					const cell = this.cells().find((c) => this.dateAdapter.isSameDay(c.date(), date));
+
+					if (cell) {
+						cell.focus();
+					}
+				},
+			},
+			{
+				injector: this.injector,
+			},
+		);
+
 		// we must update the view to ensure the focused cell is visible.
 		this.changeDetector.detectChanges();
-
-		// focus the cell with the target date.
-		const cell = this.cells().find((c) => this.dateAdapter.isSameDay(c.date(), date));
-
-		if (cell) {
-			cell.focus();
-		}
 	}
 }
 

@@ -1,4 +1,5 @@
 import {
+	ChangeDetectorRef,
 	Directive,
 	EmbeddedViewRef,
 	OnDestroy,
@@ -20,6 +21,9 @@ export class BrnCalendarWeekDirective<T> implements OnDestroy {
 
 	/** Access the view container ref */
 	private readonly viewContainerRef = inject(ViewContainerRef);
+
+	/** Access the change detector */
+	private readonly changeDetector = inject(ChangeDetectorRef);
 
 	/** Access the template ref */
 	private readonly templateRef = inject<TemplateRef<BrnWeekContext<T>>>(TemplateRef);
@@ -46,13 +50,11 @@ export class BrnCalendarWeekDirective<T> implements OnDestroy {
 	}
 
 	constructor() {
-		effect(() => {
-			const weeks = this.weeks();
-			requestAnimationFrame(() => this.renderWeek(weeks));
-		});
+		// this should use `afterRenderEffect` but it's not available in the current version
+		effect(() => this.renderWeek(), { allowSignalWrites: true });
 	}
 
-	private renderWeek(weeks: T[][]): void {
+	private renderWeek(): void {
 		// Destroy all the views when the directive is destroyed
 		for (const viewRef of this.viewRefs) {
 			viewRef.destroy();
@@ -61,12 +63,14 @@ export class BrnCalendarWeekDirective<T> implements OnDestroy {
 		this.viewRefs.length = 0;
 
 		// Create a new view for each week
-		for (const week of weeks) {
+		for (const week of this.weeks()) {
 			const viewRef = this.viewContainerRef.createEmbeddedView(this.templateRef, {
 				$implicit: week,
 			});
 			this.viewRefs.push(viewRef);
 		}
+
+		this.changeDetector.detectChanges();
 	}
 
 	ngOnDestroy(): void {
