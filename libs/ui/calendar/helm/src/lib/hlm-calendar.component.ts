@@ -43,7 +43,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 				 [weekStartsOn]="weekStartsOn()"
 				 [defaultFocusedDate]="defaultFocusedDate()"
 				 class="p-3 rounded-md border">
-			<div class="flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0">
+			<div class="inline-flex flex-col space-y-4">
 
 				<!-- Header -->
 				<div class="space-y-4">

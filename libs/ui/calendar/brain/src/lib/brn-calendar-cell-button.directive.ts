@@ -10,7 +10,7 @@ import { injectCalendar } from './brn-calendar.token';
 		'[tabindex]': 'focusable() ? 0 : -1',
 		type: 'button',
 		'[attr.data-outside]': "outside() ? '' : null",
-		'[attr.data-today]': "today() ? '' : null",
+		'[attr.data-today]': "today() && !selected() ? '' : null",
 		'[attr.data-selected]': "selected() ? '' : null",
 		'[attr.data-disabled]': "disabled() ? '' : null",
 		'[attr.aria-selected]': "selected() ? 'true' : null",

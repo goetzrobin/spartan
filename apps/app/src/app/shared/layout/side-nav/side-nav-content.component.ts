@@ -59,10 +59,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/avatar">Avatar</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/badge">Badge</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/button">Button</a>
-				<a disabled spartanSideNavLink="/components/calendar">
-					Calendar
-					<spartan-side-nav-cs />
-				</a>
+				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/calendar">Calendar</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/card">Card</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/carousel">Carousel</a>
 				<a (click)="linkClicked.emit()" spartanSideNavLink="/components/checkbox">Checkbox</a>
