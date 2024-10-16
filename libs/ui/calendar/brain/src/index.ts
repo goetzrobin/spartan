@@ -9,7 +9,6 @@ export * from './lib/brn-calendar.directive';
 export * from './lib/brn-calendar.token';
 export * from './lib/i18n/calendar-i18n';
 
-
 import { NgModule } from '@angular/core';
 import { BrnCalendarCellButtonDirective } from './lib/brn-calendar-cell-button.directive';
 import { BrnCalendarGridDirective } from './lib/brn-calendar-grid.directive';
