@@ -16,7 +16,7 @@ const meta: Meta<HlmCalendarComponent<Date>> = {
 		props: args,
 		template: `
 		<div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
-			<hlm-calendar [min]="min" />
+			<hlm-calendar [(date)]="date" [min]="min" [max]="max" />
 		</div>
 		`,
 	}),
@@ -28,7 +28,8 @@ type Story = StoryObj<HlmCalendarComponent<Date>>;
 
 export const Default: Story = {
 	args: {
-		date: new Date(),
-		min: new Date(new Date().setDate(new Date().getDate() - 1)),
+		date: new Date(2024, 5, 1),
+		min: new Date(2024, 4, 1),
+		max: new Date(2024, 6, 1),
 	},
 };
