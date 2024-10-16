@@ -1,4 +1,4 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, ElementRef, Renderer2, computed, inject, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
 
@@ -7,6 +7,7 @@ import type { ClassValue } from 'clsx';
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
+		'[attr.aria-selected]': 'selected()',
 		// This is needed after changes to the underlying CMDK library used for the BrnCommand primitive
 		// Ideally we would remove the dependency on this outside module. If you are open to that please
 		// reach out and if you are feeling super ambitious you can implement it yourself and open a PR!
@@ -14,7 +15,11 @@ import type { ClassValue } from 'clsx';
 	},
 })
 export class HlmCommandItemDirective {
+	private readonly el = inject(ElementRef);
+	private readonly renderer = inject(Renderer2);
+
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly selected = input<boolean>(false);
 
 	protected _computedClass = computed(() =>
 		hlm(
@@ -25,4 +30,11 @@ export class HlmCommandItemDirective {
 			this.userClass(),
 		),
 	);
+
+	ngAfterViewChecked() {
+		const ariaSelected = this.el.nativeElement.hasAttribute('aria-selected');
+		if (ariaSelected && !this.selected()) {
+			this.renderer.removeAttribute(this.el.nativeElement, 'aria-selected');
+		}
+	}
 }
