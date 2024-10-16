@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, computed, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
 
@@ -15,9 +15,6 @@ import type { ClassValue } from 'clsx';
 	},
 })
 export class HlmCommandItemDirective {
-	private readonly el = inject(ElementRef);
-	private readonly renderer = inject(Renderer2);
-
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	public readonly selected = input<boolean>(false);
 
@@ -30,11 +27,4 @@ export class HlmCommandItemDirective {
 			this.userClass(),
 		),
 	);
-
-	ngAfterViewChecked() {
-		const ariaSelected = this.el.nativeElement.hasAttribute('aria-selected');
-		if (ariaSelected && !this.selected()) {
-			this.renderer.removeAttribute(this.el.nativeElement, 'aria-selected');
-		}
-	}
 }
