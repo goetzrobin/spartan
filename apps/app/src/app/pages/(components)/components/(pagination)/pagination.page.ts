@@ -38,7 +38,7 @@ export const routeMeta: RouteMeta = {
 		PageBottomNavLinkComponent,
 		PageBottomNavPlaceholderComponent,
 		PaginationPreviewComponent,
-		PaginationAdvancedComponent
+		PaginationAdvancedComponent,
 	],
 	template: `
 		<section spartanMainSection>
@@ -85,6 +85,6 @@ export default class PaginationPageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
-	
+
 	protected readonly advancedCode = advancedCode;
 }
