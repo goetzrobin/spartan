@@ -6,6 +6,7 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
+	HostListener,
 	type OnDestroy,
 	Output,
 	PLATFORM_ID,
@@ -24,6 +25,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
+import { ChangeFn, TouchFn } from '@spartan-ng/ui-forms-brain';
 
 export const BRN_CHECKBOX_VALUE_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
@@ -99,7 +101,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	private readonly _focused = signal(false);
 	public readonly focused = this._focused.asReadonly();
 
-	public readonly checked = model<boolean | 'indeterminate'>(false);
+	public readonly checked = model<BrnCheckboxValue>(false);
 	public readonly isChecked = this.checked.asReadonly();
 
 	protected readonly _dataState = computed(() => {
@@ -140,16 +142,16 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	/** Only used as input */
 	public readonly disabled = input(false, { transform: booleanAttribute });
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
-	protected _onChange = (_: any) => {};
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private _onTouched = () => {};
+	protected _onChange: ChangeFn<BrnCheckboxValue> = () => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	private _onTouched: TouchFn = () => {};
 
 	@ViewChild('checkBox', { static: true })
 	public checkbox?: ElementRef<HTMLInputElement>;
 
 	@Output()
-	public readonly changed = new EventEmitter<boolean | 'indeterminate'>();
+	public readonly changed = new EventEmitter<BrnCheckboxValue>();
 
 	constructor() {
 		rxHostPressedListener()
@@ -223,8 +225,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		this._focusMonitor.stopMonitoring(this._elementRef);
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	writeValue(value: any): void {
+	writeValue(value: BrnCheckboxValue): void {
 		if (value === 'indeterminate') {
 			this.checked.set('indeterminate');
 		} else {
@@ -232,13 +233,11 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnChange(fn: any): void {
+	registerOnChange(fn: ChangeFn<BrnCheckboxValue>): void {
 		this._onChange = fn;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnTouched(fn: any): void {
+	registerOnTouched(fn: TouchFn): void {
 		this._onTouched = fn;
 	}
 
@@ -246,4 +245,14 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	setDisabledState(isDisabled: boolean): void {
 		this._disabled.set(isDisabled);
 	}
+
+	/**
+	 * If the space key is pressed, prevent the default action to stop the page from scrolling.
+	 */
+	@HostListener('keydown.space', ['$event'])
+	protected preventScrolling(event: KeyboardEvent): void {
+		event.preventDefault();
+	}
 }
+
+type BrnCheckboxValue = boolean | 'indeterminate';
