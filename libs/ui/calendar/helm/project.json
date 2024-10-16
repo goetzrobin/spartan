@@ -35,7 +35,7 @@
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",
 			"options": {
-				"libName": "ui-calendar-help"
+				"libName": "ui-calendar-helm"
 			}
 		}
 	}

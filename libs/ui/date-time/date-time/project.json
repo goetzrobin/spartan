@@ -1,5 +1,5 @@
 {
-	"name": "date-time",
+	"name": "ui-date-time-brain",
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ui/date-time/date-time/src",
 	"prefix": "brn",
@@ -31,6 +31,12 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint"
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
+			"options": {
+				"libName": "ui-date-time-brain"
+			}
 		}
 	}
 }
