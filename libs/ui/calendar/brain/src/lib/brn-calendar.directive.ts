@@ -1,5 +1,6 @@
 import { Directive, type OnInit, effect, inject, input, output } from '@angular/core';
 import { BrnCalendarService } from './brn-calendar.service';
+import { CalendarMode, CalendarView } from './brn-calendar.types';
 import { DateService } from './date.service';
 
 let uniqueId = 0;
@@ -12,12 +13,12 @@ let uniqueId = 0;
 export class BrnCalendarDirective implements OnInit {
 	private _brnCalendarService = inject(BrnCalendarService);
 
-	mode = input<'single' | 'multiple' | 'range'>('single');
+	mode = input<CalendarMode>('single');
 	selectedDate = input<Date | null>(null);
 	minDate = input<Date | null>(null);
 	maxDate = input<Date | null>(null);
 	startAt = input<Date | null>(null);
-	startView = input<'days' | 'months' | 'year'>('days');
+	startView = input<CalendarView>('days');
 	dateFilter = input<(d: Date) => boolean>();
 	locale = input<string>(this._brnCalendarService.getLocale());
 	weekStartsOn = input<1 | 2 | 3 | 4 | 5 | 6 | 7>();

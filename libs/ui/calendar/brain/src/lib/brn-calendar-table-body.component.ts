@@ -1,11 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, type TemplateRef, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, type TemplateRef, computed, inject, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BrnCalendarService } from './brn-calendar.service';
 
 @Component({
 	selector: 'brn-calendar-table-body',
 	standalone: true,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [NgTemplateOutlet],
 	styles: [
 		`:host: {
@@ -29,10 +30,7 @@ import { BrnCalendarService } from './brn-calendar.service';
 export class BrnCalendarTableBodyComponent {
 	protected _brnCalendarService = inject(BrnCalendarService);
 	protected calendarWeeks = computed(() => this._brnCalendarService.calendarWeeks());
-
 	protected previewDate = computed(() => this._brnCalendarService.previewDate());
-	protected view = computed(() => this._brnCalendarService.view());
-
 	protected daysOfTheWeek = computed(() => this._brnCalendarService.daysOfTheWeek());
 
 	readonly dayCellTemplate = input<TemplateRef<{ $implicit: Date; isToday: boolean }>>();
@@ -40,6 +38,6 @@ export class BrnCalendarTableBodyComponent {
 	constructor() {
 		this._brnCalendarService.previewDate$
 			.pipe(takeUntilDestroyed())
-			.subscribe(() => this.view() === 'days' && this._brnCalendarService.generateCalendar());
+			.subscribe(() => this._brnCalendarService.isView('days') && this._brnCalendarService.generateCalendar());
 	}
 }

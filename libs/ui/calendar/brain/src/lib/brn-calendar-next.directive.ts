@@ -14,6 +14,6 @@ export class BrnCalendarNextBtnDirective {
 	private readonly _brnCalendarService = inject(BrnCalendarService);
 
 	constructor() {
-		this._hostPressedListener.subscribe(() => this._brnCalendarService.onNext());
+		this._hostPressedListener.subscribe(() => this._brnCalendarService.navigate('next'));
 	}
 }

@@ -5,8 +5,8 @@ import { BrnCalendarService } from './brn-calendar.service';
 @Component({
 	selector: 'brn-calendar-month-year',
 	standalone: true,
-	imports: [DatePipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [DatePipe],
 	template: `
     @if(view() === 'days'){
 		{{previewDate() | date: 'MMMM yyyy'}}

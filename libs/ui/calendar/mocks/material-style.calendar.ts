@@ -34,7 +34,7 @@ import { HlmCalendarModule } from '../helm/src';
 					</div>
 				</brn-calendar-header>
 
-		 @if(view() === 'year'){
+		 @if(view() === 'years'){
 			<table brnCalendarDisplay class="w-full border-collapse space-y-1 flex flex-col">
 				<brn-calendar-year-display [yearTemplate]="yearCellTemplate" hlm/>
 		 	</table>

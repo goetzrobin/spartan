@@ -1,19 +1,21 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { CalendarMode, CalendarView, NavigationDirection } from './brn-calendar.types';
 import { DateService } from './date.service';
 
 @Injectable()
 export class BrnCalendarService {
 	private _dateService = inject(DateService);
+
 	public readonly state = signal<{
 		id: string;
-		mode: 'single' | 'multiple' | 'range';
+		mode: CalendarMode;
 		selectedDate: Date | null;
 		previewDate: Date;
 		minDate: Date | null;
 		maxDate: Date | null;
 		startAt: Date | null;
-		startView: 'days' | 'months' | 'year';
+		startView: CalendarView;
 		dateFilter?: (d: Date) => boolean | null;
 		daysOfTheWeek: string[];
 		calendarWeeks: Array<Array<{ disabled: boolean; date: Date | null; number: number | null } | null>> | null;
@@ -21,7 +23,7 @@ export class BrnCalendarService {
 		locale: string;
 		months: { name: string; index: number; disabled: boolean }[][] | null;
 		years: number[][] | null;
-		view: 'days' | 'months' | 'year';
+		view: CalendarView;
 	}>({
 		id: '',
 		mode: 'single',
@@ -103,22 +105,11 @@ export class BrnCalendarService {
 		return false;
 	}
 
-	public readonly currentMonth = computed(() => {
-		const currentMonthYear = this.previewDate();
-		return currentMonthYear ? this._dateService.getMonth(currentMonthYear) : null;
-	});
+	public readonly currentMonth = computed(() => this._dateService.getMonth(this.previewDate()));
 
-	public readonly currentMonthName = computed(() => {
-		const currentMonthYear = this.previewDate();
-		console.log(currentMonthYear);
-		return currentMonthYear ? this._dateService.getMonthName(currentMonthYear, this.locale()) : null;
-	});
+	public readonly currentMonthName = computed(() => this._dateService.getMonthName(this.previewDate(), this.locale()));
 
-	public readonly currentYear = computed(() => {
-		const currentMonthYear = this.previewDate();
-		console.log(currentMonthYear);
-		return currentMonthYear ? this._dateService.getYear(currentMonthYear) : null;
-	});
+	public readonly currentYear = computed(() => this._dateService.getYear(this.previewDate()));
 
 	/**
 	 * Updaters
@@ -131,8 +122,7 @@ export class BrnCalendarService {
 		}));
 	}
 
-	// Create a type
-	public updateView(view: 'days' | 'months' | 'year'): void {
+	public updateView(view: CalendarView): void {
 		this.state.update((state) => ({
 			...state,
 			view,
@@ -210,9 +200,8 @@ export class BrnCalendarService {
 		const firstDayOfMonth = new Date(this.previewDate().getFullYear(), this.previewDate().getMonth(), 1);
 		const firstDayWeekday = firstDayOfMonth.getDay();
 		const daysInMonth = this.days$().length;
-
-		// this.calendarWeeks = [];
 		const calendarWeeks = [];
+
 		let currentWeek: { number: number | null; date: Date | null; disabled: boolean }[] = [];
 
 		for (let i = 0; i < firstDayWeekday; i++) {
@@ -269,45 +258,36 @@ export class BrnCalendarService {
 
 	// TODO: Maybe move this to cell directive
 	public updateSelection(value: any) {
-		if (this.view() === 'months') {
+		if (this.isView('months')) {
 			this.updateSelectedMonth(value);
-		} else if (this.view() === 'year') {
+		} else if (this.isView('years')) {
 			this.updatePreviewDateYear(value);
 		} else {
 			this.updateSelectedDate(value);
 		}
 	}
 
-	public onNext(): void {
+	/**
+	 * Method to navigate the calendar apprpriately depending on the current view
+	 * @param direction - NavigationDirection either 'next' or 'previous'
+	 */
+	public navigate(direction: NavigationDirection) {
 		const currentMonthYear = this.previewDate();
-		if (this.view() === 'days' && currentMonthYear) {
-			const newMonthDate = this._dateService.adjustMonth(currentMonthYear, 1);
-			this.updatePreviewDate(newMonthDate);
-		} else if (this.view() === 'months' && currentMonthYear) {
-			const newYearDate = this._dateService.addCalendarMonths(currentMonthYear, 12);
-			this.updatePreviewDate(newYearDate);
-		} else if (this.view() === 'year' && currentMonthYear) {
-			const newYearDate = this._dateService.addCalendarYears(currentMonthYear, this.yearsPerPage);
-			this.updatePreviewDate(newYearDate);
-		}
-	}
+		const increment = direction === 'next' ? 1 : -1;
 
-	public onPrevious(): void {
-		const currentMonthYear = this.previewDate();
-		if (this.view() === 'days' && currentMonthYear) {
-			const newMonthDate = this._dateService.adjustMonth(currentMonthYear, -1);
+		if (this.isView('days') && currentMonthYear) {
+			const newMonthDate = this._dateService.adjustMonth(currentMonthYear, 1 * increment);
 			this.updatePreviewDate(newMonthDate);
-		} else if (this.view() === 'months' && currentMonthYear) {
-			const newYearDate = this._dateService.addCalendarMonths(currentMonthYear, -12);
+		} else if (this.isView('months') && currentMonthYear) {
+			const newYearDate = this._dateService.addCalendarMonths(currentMonthYear, 12 * increment);
 			this.updatePreviewDate(newYearDate);
-		} else if (this.view() === 'year' && currentMonthYear) {
-			const newYearDate = this._dateService.addCalendarYears(currentMonthYear, -this.yearsPerPage);
+		} else if (this.isView('years') && currentMonthYear) {
+			const newYearDate = this._dateService.addCalendarYears(currentMonthYear, this.yearsPerPage * increment);
 			this.updatePreviewDate(newYearDate);
 		}
 	}
 
 	public generateYears(): void {
-		console.log('gen years');
 		const monthYear = this.previewDate();
 		if (monthYear && this._dateService.isDate(monthYear)) {
 			// // We want a range years such that we maximize the number of
@@ -331,7 +311,7 @@ export class BrnCalendarService {
 	}
 
 	public switchView(): void {
-		this.updateView(this.view() === 'year' ? 'months' : 'year');
+		this.updateView(this.view() === 'years' ? 'months' : 'years');
 	}
 
 	public areDatesEqual(date1: Date | null, date2: Date | null): boolean {
@@ -343,6 +323,10 @@ export class BrnCalendarService {
 			date1.getMonth() === date2.getMonth() &&
 			date1.getDate() === date2.getDate()
 		);
+	}
+
+	public isView(view: CalendarView): boolean {
+		return this.view() === view;
 	}
 
 	/**

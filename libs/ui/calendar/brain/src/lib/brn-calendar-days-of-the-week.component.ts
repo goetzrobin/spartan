@@ -1,10 +1,11 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, type TemplateRef, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, type TemplateRef, computed, inject, input } from '@angular/core';
 import { BrnCalendarService } from './brn-calendar.service';
 
 @Component({
 	selector: 'brn-calendar-days-of-the-week',
 	standalone: true,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [NgTemplateOutlet],
 	styles: [
 		`:host: {
