@@ -196,7 +196,7 @@ export class BrnCalendarService {
 		this.updateDaysOfTheWeek(daysOfTheWeek);
 	}
 
-	generateCalendar(): void {
+	public generateCalendar(): void {
 		const firstDayOfMonth = new Date(this.previewDate().getFullYear(), this.previewDate().getMonth(), 1);
 		const firstDayWeekday = firstDayOfMonth.getDay();
 		const daysInMonth = this.days$().length;
@@ -228,7 +228,7 @@ export class BrnCalendarService {
 		this.updateCalendarWeeks(calendarWeeks);
 	}
 
-	isDateDisabled(date: Date): boolean {
+	public isDateDisabled(date: Date): boolean {
 		return this.disabledDates().some(
 			(disabledDate) =>
 				disabledDate.getFullYear() === date.getFullYear() &&
@@ -237,7 +237,7 @@ export class BrnCalendarService {
 		);
 	}
 
-	generateMonthsArray() {
+	public generateMonthsArray(): void {
 		const months = this.months$();
 		const monthRows = [];
 		let row: { name: string; index: number; disabled: boolean }[] = [];
@@ -257,7 +257,7 @@ export class BrnCalendarService {
 	}
 
 	// TODO: Maybe move this to cell directive
-	public updateSelection(value: any) {
+	public updateSelection(value: any): void {
 		if (this.isView('months')) {
 			this.updateSelectedMonth(value);
 		} else if (this.isView('years')) {
@@ -271,7 +271,7 @@ export class BrnCalendarService {
 	 * Method to navigate the calendar apprpriately depending on the current view
 	 * @param direction - NavigationDirection either 'next' or 'previous'
 	 */
-	public navigate(direction: NavigationDirection) {
+	public navigate(direction: NavigationDirection): void {
 		const currentMonthYear = this.previewDate();
 		const increment = direction === 'next' ? 1 : -1;
 
@@ -334,14 +334,11 @@ export class BrnCalendarService {
 	 * So we compute how many years are between the active year and the *slot* where our
 	 * "startingYear" will render when paged into view.
 	 */
-	private getActiveOffset<Date>(activeDate: Date, minDate: Date | null, maxDate: Date | null): number {
+	private getActiveOffset(activeDate: Date, minDate: Date | null, maxDate: Date | null): number {
 		if (activeDate && this._dateService.isDate(activeDate)) {
-			// FIXME: Some odd type mismatching
-			// @ts-ignore
-			const activeYear = this._dateService.getYear(activeDate as Date);
+			const activeYear = this._dateService.getYear(activeDate);
 			return this.euclideanModulo(activeYear - this.getStartingYear(minDate, maxDate), this.yearsPerPage);
 		}
-
 		return 0;
 	}
 
@@ -349,14 +346,12 @@ export class BrnCalendarService {
 	 * We pick a "starting" year such that either the maximum year would be at the end
 	 * or the minimum year would be at the beginning of a page.
 	 */
-	private getStartingYear<Date>(minDate: Date | null, maxDate: Date | null): number {
+	private getStartingYear(minDate: Date | null, maxDate: Date | null): number {
 		let startingYear = 0;
 		if (maxDate) {
-			// @ts-ignore
 			const maxYear = this._dateService.getYear(maxDate);
 			startingYear = maxYear - this.yearsPerPage + 1;
 		} else if (minDate) {
-			// @ts-ignore
 			startingYear = this._dateService.getYear(minDate);
 		}
 		return startingYear;
