@@ -56,6 +56,7 @@ export class BrnCalendarDirective implements OnInit {
 			locale: this.locale(),
 		}));
 
+		this._brnCalendarService.generateDaysOfWeek();
 		this._brnCalendarService.generateCalendar();
 	}
 }
