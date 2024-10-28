@@ -68,7 +68,7 @@ export class SideNavContentComponent {
 			links: [
 				{ label: 'Installation', url: '/installation' },
 				{ label: 'Theming', url: '/theming' },
-				{ label: 'mode', url: '/dark-mode' },
+				{ label: 'Dark Mode', url: '/dark-mode' },
 				{ label: 'Typography', url: '/typography' },
 				{ label: 'Figma', url: '/figma' },
 			],
