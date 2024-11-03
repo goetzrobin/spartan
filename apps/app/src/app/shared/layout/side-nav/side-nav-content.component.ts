@@ -49,6 +49,7 @@ export class SideNavContentComponent {
 			links: [
 				{ label: 'Introduction', url: '/introduction' },
 				{ label: 'CLI', url: '/cli' },
+				{ label: 'components.json', url: '/components-json' },
 				{ label: 'Changelog', url: '/changelog' },
 				{ label: 'About & Credits', url: '/about' },
 			],
