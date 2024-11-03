@@ -24,7 +24,7 @@
 		"ci.lint-baby": "bunx --bun oxlint -c .oxlintrc.json --promise-plugin --import-plugin -D correctness -D perf -D eqeqeq --deny-warnings",
 		"ci.lint": "biome ci --formatter-enabled=false --organize-imports-enabled=false --linter-enabled=true ./* **/*",
 		"ox.lint": "oxlint --deny-warnings",
-		"biome.format": "biome format --write {apps,libs}",
+		"biome.format": "biome check --formatter-enabled=true --organize-imports-enabled=true --linter-enabled=false --write {apps,libs}",
 		"biome.lint": "biome check --apply {apps,libs}",
 		"oxide.lint": "bunx --bun oxlint {apps,libs}",
 		"storybook": "nx storybook ui-storybook",
