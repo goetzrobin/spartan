@@ -9,12 +9,11 @@ import { BrnAvatarImageDirective } from './image';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	template: `
-		<ng-container *ngIf="image()?.canShow(); else fallback">
+		@if (image()?.canShow()) {
 			<ng-content select="[brnAvatarImage]" />
-		</ng-container>
-		<ng-template #fallback>
+		} @else {
 			<ng-content select="[brnAvatarFallback]" />
-		</ng-template>
+		}
 	`,
 })
 export class BrnAvatarComponent {
