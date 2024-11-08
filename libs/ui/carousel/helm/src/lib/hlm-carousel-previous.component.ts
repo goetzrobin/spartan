@@ -49,7 +49,7 @@ export class HlmCarouselPreviousComponent {
 			this.userClass(),
 		),
 	);
-	protected isDisabled = () => !this._carousel.canScrollPrev();
+	protected readonly isDisabled = () => !this._carousel.canScrollPrev();
 
 	constructor() {
 		effect(() => {

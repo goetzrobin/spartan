@@ -46,7 +46,7 @@ export class HlmCarouselNextComponent {
 			this.userClass(),
 		),
 	);
-	protected isDisabled = () => !this._carousel.canScrollNext();
+	protected readonly isDisabled = () => !this._carousel.canScrollNext();
 
 	constructor() {
 		effect(() => {
