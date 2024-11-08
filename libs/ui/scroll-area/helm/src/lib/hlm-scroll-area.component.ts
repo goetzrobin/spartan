@@ -1,3 +1,4 @@
+import { BooleanInput } from '@angular/cdk/coercion';
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -42,7 +43,7 @@ export class HlmScrollAreaComponent {
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	public readonly track = input<'vertical' | 'horizontal' | 'all'>('all');
-	public readonly autoHeightDisabled = input(true, { transform: booleanAttribute });
-	public readonly autoWidthDisabled = input(true, { transform: booleanAttribute });
+	public readonly autoHeightDisabled = input<boolean, BooleanInput>(true, { transform: booleanAttribute });
+	public readonly autoWidthDisabled = input<boolean, BooleanInput>(true, { transform: booleanAttribute });
 	public readonly visibility = input<'hover' | 'always' | 'native'>('native');
 }
