@@ -1,3 +1,4 @@
+import { BooleanInput } from '@angular/cdk/coercion';
 import { Directive, ElementRef, booleanAttribute, inject, input } from '@angular/core';
 import type { ClassValue } from 'clsx';
 
@@ -9,8 +10,8 @@ import type { ClassValue } from 'clsx';
 export class BrnAvatarFallbackDirective {
 	private readonly element = inject(ElementRef).nativeElement;
 
-	public readonly userCls = input<ClassValue>('', { alias: 'class' });
-	public readonly useAutoColor = input(false, { alias: 'autoColor', transform: booleanAttribute });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly autoColor = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
 	getTextContent(): string {
 		return this.element.textContent;
