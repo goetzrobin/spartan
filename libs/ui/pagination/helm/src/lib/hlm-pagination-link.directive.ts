@@ -44,7 +44,7 @@ export class HlmPaginationLinkDirective {
 	public readonly size = input<ButtonVariants['size']>('icon');
 	public readonly link = input<RouterLink['routerLink']>();
 
-	protected _computedClass = computed(() =>
+	protected readonly _computedClass = computed(() =>
 		hlm(
 			paginationLinkVariants(),
 			buttonVariants({

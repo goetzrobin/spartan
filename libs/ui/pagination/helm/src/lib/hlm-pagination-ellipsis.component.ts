@@ -19,5 +19,5 @@ import { ClassValue } from 'clsx';
 export class HlmPaginationEllipsisComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
-	protected _computedClass = computed(() => hlm('flex h-9 w-9 items-center justify-center', this.userClass()));
+	protected readonly _computedClass = computed(() => hlm('flex h-9 w-9 items-center justify-center', this.userClass()));
 }
