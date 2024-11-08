@@ -36,31 +36,24 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
 	standalone: true,
 	exportAs: 'hlmBtn',
 	host: {
-		'[class]': 'computedClass()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmButtonDirective {
-	/** Allow the default values to be overridden. */
 	private readonly _config = injectBrnButtonConfig();
 
-	/** Allow additional classes to be defined. */
 	private readonly _additionalClasses = signal<ClassValue>('');
 
-	/** The user class. */
-	readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
-	/** The merged class. */
-	protected readonly computedClass = computed(() =>
+	protected readonly _computedClass = computed(() =>
 		hlm(buttonVariants({ variant: this.variant(), size: this.size() }), this.userClass(), this._additionalClasses()),
 	);
 
-	/** The variant of the button. */
-	readonly variant = input<ButtonVariants['variant']>(this._config.variant);
+	public readonly variant = input<ButtonVariants['variant']>(this._config.variant);
 
-	/** The size of the button. */
-	readonly size = input<ButtonVariants['size']>(this._config.size);
+	public readonly size = input<ButtonVariants['size']>(this._config.size);
 
-	/** Set the class. */
 	setClass(classes: string): void {
 		this._additionalClasses.set(classes);
 	}

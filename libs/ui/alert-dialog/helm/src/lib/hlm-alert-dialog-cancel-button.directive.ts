@@ -9,10 +9,10 @@ import type { ClassValue } from 'clsx';
 	hostDirectives: [HlmButtonDirective],
 	providers: [provideBrnButtonConfig({ variant: 'outline' })],
 	host: {
-		'[class]': 'computedClass()',
+		'[class]': '_computedClass()',
 	},
 })
 export class HlmAlertDialogCancelButtonDirective {
-	readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly computedClass = computed(() => hlm('mt-2 sm:mt-0', this.userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() => hlm('mt-2 sm:mt-0', this.userClass()));
 }
