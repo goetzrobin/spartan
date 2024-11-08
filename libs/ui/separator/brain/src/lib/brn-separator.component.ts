@@ -1,3 +1,4 @@
+import { BooleanInput } from '@angular/cdk/coercion';
 import { Component, booleanAttribute, computed, input } from '@angular/core';
 
 export type BrnSeparatorOrientation = 'horizontal' | 'vertical';
@@ -9,15 +10,15 @@ export type BrnSeparatorOrientation = 'horizontal' | 'vertical';
 	host: {
 		'[role]': 'role()',
 		'[attr.aria-orientation]': 'ariaOrientation()',
-		'[attr.data-orientation]': 'dataOrientation()',
+		'[attr.data-orientation]': 'orientation()',
 	},
 })
 export class BrnSeparatorComponent {
-	public readonly dataOrientation = input<BrnSeparatorOrientation>('horizontal', { alias: 'orientation' });
-	public readonly decorative = input(false, { transform: booleanAttribute });
+	public readonly orientation = input<BrnSeparatorOrientation>('horizontal');
+	public readonly decorative = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
 	protected readonly role = computed(() => (this.decorative() ? 'none' : 'separator'));
 	protected readonly ariaOrientation = computed(() =>
-		this.decorative() ? undefined : this.dataOrientation() === 'vertical' ? 'vertical' : undefined,
+		this.decorative() ? undefined : this.orientation() === 'vertical' ? 'vertical' : undefined,
 	);
 }
