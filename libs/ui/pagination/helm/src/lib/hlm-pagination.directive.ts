@@ -13,15 +13,13 @@ export type PaginationVariants = VariantProps<typeof paginationVariants>;
 	selector: '[hlmPagination]',
 	standalone: true,
 	host: {
-		role: 'navigation',
 		'[class]': '_computedClass()',
-		'[attr.aria-label]': 'ariaLabel()',
+		'[attr.role]': '"navigation"',
+		'[attr.aria-label]': '"pagination"',
 	},
 })
 export class HlmPaginationDirective {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly class = input<ClassValue>('');
 
-	public readonly ariaLabel = input<string>('pagination', { alias: 'aria-label' });
-
-	protected readonly _computedClass = computed(() => hlm(paginationVariants(), this.userClass()));
+	protected _computedClass = computed(() => hlm(paginationVariants(), this.class()));
 }

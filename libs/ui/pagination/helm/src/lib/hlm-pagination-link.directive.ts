@@ -1,10 +1,8 @@
-import { BooleanInput } from '@angular/cdk/coercion';
 import { Directive, booleanAttribute, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { type ButtonVariants, buttonVariants } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
 import { type VariantProps, cva } from 'class-variance-authority';
-import { ClassValue } from 'clsx';
 
 export const paginationLinkVariants = cva('', {
 	variants: {},
@@ -39,10 +37,11 @@ export type PaginationLinkVariants = VariantProps<typeof paginationLinkVariants>
 	},
 })
 export class HlmPaginationLinkDirective {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	public readonly isActive = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+	public readonly class = input('');
+	public readonly isActive = input(false, { transform: booleanAttribute });
 	public readonly size = input<ButtonVariants['size']>('icon');
-	public readonly link = input<RouterLink['routerLink']>();
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public readonly link = input<string | any[] | null | undefined>();
 
 	protected _computedClass = computed(() =>
 		hlm(
@@ -51,7 +50,7 @@ export class HlmPaginationLinkDirective {
 				variant: this.isActive() ? 'outline' : 'ghost',
 				size: this.size(),
 			}),
-			this.userClass(),
+			this.class(),
 		),
 	);
 }
