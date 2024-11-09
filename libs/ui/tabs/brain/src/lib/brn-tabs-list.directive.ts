@@ -1,5 +1,5 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { type AfterContentInit, ContentChildren, Directive, type QueryList, inject } from '@angular/core';
+import { type AfterContentInit, Directive, contentChildren, inject } from '@angular/core';
 import { rxHostListener } from '@spartan-ng/ui-core';
 import { take } from 'rxjs';
 import { BrnTabsDirective, BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
@@ -25,14 +25,13 @@ export class BrnTabsListDirective implements AfterContentInit {
 
 	private _keyManager?: FocusKeyManager<BrnTabsTriggerDirective>;
 
-	@ContentChildren(BrnTabsTriggerDirective, { descendants: true })
-	public triggers?: QueryList<BrnTabsTriggerDirective>;
+	public triggers = contentChildren(BrnTabsTriggerDirective, { descendants: true });
 
 	public ngAfterContentInit() {
 		if (!this.triggers) {
 			return;
 		}
-		this._keyManager = new FocusKeyManager<BrnTabsTriggerDirective>(this.triggers)
+		this._keyManager = new FocusKeyManager<BrnTabsTriggerDirective>(this.triggers())
 			.withHorizontalOrientation(this._direction())
 			.withHomeAndEnd()
 			.withPageUpDown()
@@ -46,7 +45,7 @@ export class BrnTabsListDirective implements AfterContentInit {
 			if (currentTabKey && this.triggers) {
 				const currentTab = tabs[currentTabKey];
 				if (currentTab) {
-					activeIndex = this.triggers.toArray().indexOf(currentTab.trigger);
+					activeIndex = this.triggers().indexOf(currentTab.trigger);
 				}
 			}
 			this._keyManager?.setActiveItem(activeIndex);

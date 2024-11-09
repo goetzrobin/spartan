@@ -26,11 +26,9 @@ import {
 	ChangeDetectorRef,
 	Directive,
 	ElementRef,
-	EventEmitter,
 	Injector,
 	NgZone,
 	type OnDestroy,
-	Output,
 	type QueryList,
 	afterNextRender,
 	booleanAttribute,
@@ -38,6 +36,7 @@ import {
 	effect,
 	inject,
 	input,
+	output,
 	signal,
 } from '@angular/core';
 import { EMPTY, Observable, type Observer, Subject, fromEvent, merge, of as observableOf, timer } from 'rxjs';
@@ -149,10 +148,10 @@ export abstract class BrnTabsPaginatedListDirective
 	});
 
 	/** Event emitted when the option is selected. */
-	@Output() readonly selectFocusedIndex: EventEmitter<number> = new EventEmitter<number>();
+	public readonly selectFocusedIndex = output<number>();
 
 	/** Event emitted when a label is focused. */
-	@Output() readonly indexFocused: EventEmitter<number> = new EventEmitter<number>();
+	public readonly indexFocused = output<number>();
 
 	private _sharedResizeObserver = inject(SharedResizeObserver);
 
