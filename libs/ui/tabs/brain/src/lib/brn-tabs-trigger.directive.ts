@@ -1,15 +1,4 @@
-import {
-	Directive,
-	ElementRef,
-	Input,
-	computed,
-	effect,
-	inject,
-	input,
-	model,
-	output,
-	signal,
-} from '@angular/core';
+import { Directive, ElementRef, Input, computed, effect, inject, input, model, output, signal } from '@angular/core';
 
 @Directive({
 	selector: '[brnTabsContent]',
