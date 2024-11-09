@@ -46,6 +46,7 @@
 			"@spartan-ng/ui-avatar-brain": ["libs/ui/avatar/brain/src/index.ts"],
 			"@spartan-ng/ui-avatar-helm": ["libs/ui/avatar/helm/src/index.ts"],
 			"@spartan-ng/ui-badge-helm": ["libs/ui/badge/helm/src/index.ts"],
+			"@spartan-ng/ui-breadcrumb-helm": ["libs/ui/breadcrumb/helm/src/index.ts"],
 			"@spartan-ng/ui-button-helm": ["libs/ui/button/helm/src/index.ts"],
 			"@spartan-ng/ui-card-helm": ["libs/ui/card/helm/src/index.ts"],
 			"@spartan-ng/ui-carousel-helm": ["libs/ui/carousel/helm/src/index.ts"],

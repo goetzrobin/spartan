@@ -6,6 +6,7 @@ export type Primitive =
 	| 'avatar'
 	| 'badge'
 	| 'button'
+	| 'breadcrumb'
 	| 'card'
 	| 'carousel'
 	| 'checkbox'

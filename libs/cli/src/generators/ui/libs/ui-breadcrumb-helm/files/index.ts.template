@@ -1,0 +1,34 @@
+import { NgModule } from '@angular/core';
+import {
+	HlmBreadcrumbComponent,
+	HlmBreadcrumbEllipsisComponent,
+	HlmBreadcrumbSeparatorComponent,
+	HlmBreadcrumbItemDirective,
+	HlmBreadcrumbLinkDirective,
+	HlmBreadcrumbPageDirective,
+	HlmBreadcrumbListDirective,
+} from './lib';
+
+export * from './lib/breadcrumb.component';
+export * from './lib/breadcrumb-ellipsis.component';
+export * from './lib/breadcrumb-separator.component';
+export * from './lib/breadcrumb-item.directive';
+export * from './lib/breadcrumb-list.directive';
+export * from './lib/breadcrumb-page.directive';
+export * from './lib/breadcrumb-link.directive';
+
+export const HlmBreadCrumbImports = [
+	HlmBreadcrumbComponent,
+	HlmBreadcrumbEllipsisComponent,
+	HlmBreadcrumbSeparatorComponent,
+	HlmBreadcrumbItemDirective,
+	HlmBreadcrumbLinkDirective,
+	HlmBreadcrumbPageDirective,
+	HlmBreadcrumbListDirective,
+] as const;
+
+@NgModule({
+	imports: [...HlmBreadCrumbImports],
+	exports: [...HlmBreadCrumbImports],
+})
+export class HlmBreadCrumbModule {}

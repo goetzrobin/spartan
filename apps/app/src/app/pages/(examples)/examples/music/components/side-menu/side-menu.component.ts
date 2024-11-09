@@ -5,9 +5,9 @@ import {
 	lucideLayoutGrid,
 	lucideLibrary,
 	lucideListMusic,
-	lucideMic2,
+	lucideMicVocal,
 	lucideMusic2,
-	lucidePlayCircle,
+	lucideCirclePlay,
 	lucideRadio,
 	lucideUser,
 } from '@ng-icons/lucide';
@@ -30,13 +30,13 @@ interface ListItem {
 	imports: [SideMenuButtonComponent, HlmIconComponent, HlmScrollAreaComponent, NgClass],
 	providers: [
 		provideIcons({
-			lucidePlayCircle,
+			lucideCirclePlay,
 			lucideLayoutGrid,
 			lucideRadio,
 			lucideListMusic,
 			lucideMusic2,
 			lucideUser,
-			lucideMic2,
+			lucideMicVocal,
 			lucideLibrary,
 		}),
 	],
@@ -104,12 +104,12 @@ export class SideMusicMenuComponent {
 		{ text: 'Playlists', icon: 'lucideListMusic' },
 		{ text: 'Songs', icon: 'lucideMusic2' },
 		{ text: 'Made for You', icon: 'lucideUser' },
-		{ text: 'Artists', icon: 'lucideMic2' },
+		{ text: 'Artists', icon: 'lucideMicVocal' },
 		{ text: 'Albums', icon: 'lucideLibrary' },
 	];
 
 	discover: ListItem[] = [
-		{ text: 'Listen Now', icon: 'lucidePlayCircle', selected: true },
+		{ text: 'Listen Now', icon: 'lucideCirclePlay', selected: true },
 		{ text: 'Browse', icon: 'lucideLayoutGrid' },
 		{ text: 'Radio', icon: 'lucideRadio' },
 	];

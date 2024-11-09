@@ -76,6 +76,7 @@ export default defineConfig(({ mode }) => {
 						'/components/avatar',
 						'/components/badge',
 						'/components/button',
+						'/components/breadcrumb',
 						'/components/card',
 						'/components/checkbox',
 						'/components/collapsible',

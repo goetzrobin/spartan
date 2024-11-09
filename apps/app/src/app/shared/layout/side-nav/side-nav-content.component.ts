@@ -85,6 +85,7 @@ export class SideNavContentComponent {
 				{ label: 'Avatar', url: '/avatar' },
 				{ label: 'Badge', url: '/badge' },
 				{ label: 'Button', url: '/button' },
+				{ label: 'Breadcrumb', url: '/breadcrumb' },
 				{ label: 'Calendar', url: '/calendar', wip: true },
 				{ label: 'Card', url: '/card' },
 				{ label: 'Carousel', url: '/carousel' },
