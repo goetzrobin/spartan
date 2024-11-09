@@ -53,3 +53,6 @@ build-storybook.log
 
 
 vite.config.*.timestamp*
+
+### generated docs file
+apps/app/src/public/data/ui-api.json
