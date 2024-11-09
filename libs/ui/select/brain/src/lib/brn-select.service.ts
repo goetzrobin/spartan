@@ -1,6 +1,16 @@
 import type { CdkOption, ListboxValueChangeEvent } from '@angular/cdk/listbox';
-import { Injectable, signal } from '@angular/core';
-import { type AfterViewInit, Directive, ElementRef, computed, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+	type AfterViewInit,
+	Directive,
+	ElementRef,
+	Injectable,
+	OnDestroy,
+	PLATFORM_ID,
+	computed,
+	inject,
+	signal,
+} from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { NgControl } from '@angular/forms';
 import { Subject, skip } from 'rxjs';
@@ -26,11 +36,11 @@ import { Subject, skip } from 'rxjs';
 		type: 'button',
 	},
 })
-export class BrnSelectTriggerDirective implements AfterViewInit {
+export class BrnSelectTriggerDirective implements AfterViewInit, OnDestroy {
 	private readonly el = inject(ElementRef);
 	protected readonly _selectService = inject(BrnSelectService);
 	protected readonly _ngControl = inject(NgControl, { optional: true });
-
+	private readonly _platform = inject(PLATFORM_ID);
 	public readonly isExpanded = this._selectService.isExpanded;
 	public readonly selectTriggerId = computed(() => `${this._selectService.id()}--trigger`);
 	public readonly selectContentId = computed(() => `${this._selectService.id()}--content`);
@@ -42,6 +52,8 @@ export class BrnSelectTriggerDirective implements AfterViewInit {
 		return this._selectService.labelId();
 	});
 
+	private _resizeObserver?: ResizeObserver;
+
 	constructor() {
 		if (!this._selectService) return;
 		this._selectService._setSelectTrigger(this);
@@ -49,6 +61,19 @@ export class BrnSelectTriggerDirective implements AfterViewInit {
 
 	ngAfterViewInit() {
 		this._selectService.setTriggerWidth(this.el.nativeElement.offsetWidth);
+
+		// if we are on the client, listen for element resize events
+		if (isPlatformBrowser(this._platform)) {
+			this._resizeObserver = new ResizeObserver(() =>
+				this._selectService.setTriggerWidth(this.el.nativeElement.offsetWidth),
+			);
+
+			this._resizeObserver.observe(this.el.nativeElement);
+		}
+	}
+
+	ngOnDestroy(): void {
+		this._resizeObserver?.disconnect();
 	}
 
 	public focus() {
