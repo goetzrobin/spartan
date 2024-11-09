@@ -7,10 +7,12 @@ import {
 	type OnDestroy,
 	computed,
 	contentChildren,
+	effect,
 	inject,
+	input,
 	signal,
+	untracked,
 } from '@angular/core';
-import { effect, input, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { rxHostPressedListener } from '@spartan-ng/ui-core';
 import { fromEvent } from 'rxjs';
