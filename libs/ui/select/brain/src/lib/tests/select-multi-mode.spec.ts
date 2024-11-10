@@ -9,6 +9,14 @@ import {
 import { getFormControlStatus, getFormValidationClasses } from './utils';
 
 describe('Brn Select Component in multi-mode', () => {
+	beforeAll(() => {
+		global.ResizeObserver = jest.fn().mockImplementation(() => ({
+			observe: jest.fn(),
+			unobserve: jest.fn(),
+			disconnect: jest.fn(),
+		}));
+	});
+
 	const DEFAULT_LABEL = 'Select a Fruit';
 
 	const setupWithFormValidationMulti = async () => {
