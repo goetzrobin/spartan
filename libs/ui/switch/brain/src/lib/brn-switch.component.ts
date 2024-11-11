@@ -154,14 +154,14 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 			if (!parent) return;
 			// check if parent is a label and assume it is for this checkbox
 			if (parent?.tagName === 'LABEL') {
-				this._renderer.setAttribute(parent, 'data-disabled', this.disabled() ? 'true' : 'false');
+				this._renderer.setAttribute(parent, 'data-disabled', this.state().disabled() ? 'true' : 'false');
 				return;
 			}
 			if (!this._isBrowser) return;
 
 			const label = parent?.querySelector(`label[for="${this.forChild(this.state().id)}"]`);
 			if (!label) return;
-			this._renderer.setAttribute(label, 'data-disabled', this.disabled() ? 'true' : 'false');
+			this._renderer.setAttribute(label, 'data-disabled', this.state().disabled() ? 'true' : 'false');
 		});
 	}
 
