@@ -607,20 +607,25 @@ class LabelAndFormComponent {
 export const ContentHeaderAndFooter: Story = {
 	render: (args) => ({
 		props: { ...args },
+		moduleMetadata: {
+			imports: [HlmButtonDirective],
+		},
 		template: /* HTML */ `
-			<hlm-select class="inline-block" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
+			<hlm-select class="inline-block" ${argsToTemplate(args, {exclude: ['initialValue']})}>
 				<hlm-select-trigger class="w-56">
 					<hlm-select-value />
 				</hlm-select-trigger>
 				<hlm-select-content>
 					<hlm-select-content-header class="mx-auto font-semibold">Header...</hlm-select-content-header>
-						<hlm-option value="apple">Apple</hlm-option>
-						<hlm-option value="banana">Banana</hlm-option>
-						<hlm-option value="blueberry">Blueberry</hlm-option>
-						<hlm-option value="grapes">Grapes</hlm-option>
-						<hlm-option value="pineapple">Pineapple</hlm-option>
-					<hlm-select-content-footer class="mx-auto font-semibold">Footer...</hlm-select-content-footer>
-				</hlm-select-content>
+					<hlm-option value="apple">Apple</hlm-option>
+					<hlm-option value="banana">Banana</hlm-option>
+					<hlm-option value="blueberry">Blueberry</hlm-option>
+					<hlm-option value="grapes">Grapes</hlm-option>
+					<hlm-option value="pineapple">Pineapple</hlm-option>
+					<hlm-select-content-footer class="font-semibold">
+						<button hlmBtn variant="outline" class="w-full my-1" type="button">Footer Button</button>
+					</hlm-select-content-footer>
+					</hlm-select-content>
 			</hlm-select>
 		`,
 	}),

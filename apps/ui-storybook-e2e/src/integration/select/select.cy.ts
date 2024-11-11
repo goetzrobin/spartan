@@ -433,4 +433,19 @@ describe('select', () => {
 				});
 		});
 	});
+
+	describe('content header and footer', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=select--header-footer');
+			cy.injectAxe();
+		});
+
+		it('should display the select header and footer', () => {
+			verifySelectSetup();
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-select-content-header').should('exist');
+			cy.get('hlm-select-content-footer').should('exist');
+		});
+	});
+
 });
