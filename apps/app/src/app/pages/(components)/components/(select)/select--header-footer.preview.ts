@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
-import {HlmButtonDirective} from "@spartan-ng/ui-button-helm";
 
 @Component({
 	selector: 'spartan-select-header-footer-preview',
@@ -30,15 +30,16 @@ export class SelectHeaderFooterPreviewComponent {}
 
 export const headerFooterCode = `
 		import { Component } from '@angular/core';
+		import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 		import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 		import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 		@Component({
 			selector: 'spartan-select-header-footer-preview',
 			standalone: true,
-			imports: [BrnSelectImports, HlmSelectImports],
+			imports: [BrnSelectImports, HlmSelectImports, HlmButtonDirective],
 			template: \`
-				<hlm-select class="inline-block">
+				<hlm-select class="inline-block" placeholder="Select some fruit">
 					<hlm-select-trigger class="w-56">
 						<hlm-select-value/>
 					</hlm-select-trigger>
@@ -49,8 +50,8 @@ export const headerFooterCode = `
 						<hlm-option value="blueberry">Blueberry</hlm-option>
 						<hlm-option value="grapes">Grapes</hlm-option>
 						<hlm-option value="pineapple">Pineapple</hlm-option>
-						<hlm-select-content-footer class="font-semibold">
-							<button hlmBtn variant="outline" class="w-full my-1" type="button">Footer Button</button>
+						<hlm-select-content-footer class="mx-auto font-semibold">
+							<button hlmBtn variant="outline">Footer Button</button>
 						</hlm-select-content-footer>
 					</hlm-select-content>
 				</hlm-select>

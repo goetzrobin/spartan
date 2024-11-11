@@ -447,5 +447,4 @@ describe('select', () => {
 			cy.get('hlm-select-content-footer').should('exist');
 		});
 	});
-
 });

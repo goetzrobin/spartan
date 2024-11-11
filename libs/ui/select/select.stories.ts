@@ -611,7 +611,7 @@ export const ContentHeaderAndFooter: Story = {
 			imports: [HlmButtonDirective],
 		},
 		template: /* HTML */ `
-			<hlm-select class="inline-block" ${argsToTemplate(args, {exclude: ['initialValue']})}>
+			<hlm-select class="inline-block" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 				<hlm-select-trigger class="w-56">
 					<hlm-select-value />
 				</hlm-select-trigger>
