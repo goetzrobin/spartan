@@ -58,5 +58,5 @@ export function rxHostPressedListener() {
 			}),
 			filter(Boolean),
 		),
-	).pipe(debounceTime(0));
+	);
 }
