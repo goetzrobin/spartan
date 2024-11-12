@@ -5,17 +5,19 @@ import {
 	ContentChildren,
 	Directive,
 	ElementRef,
+	HostListener,
 	Input,
 	NgZone,
 	type OnDestroy,
 	type QueryList,
 	computed,
+	effect,
 	inject,
+	input,
 	signal,
+	untracked,
 } from '@angular/core';
-import { effect, input, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { rxHostPressedListener } from '@spartan-ng/ui-core';
 import { fromEvent } from 'rxjs';
 
 @Directive({
@@ -66,7 +68,6 @@ export class BrnAccordionTriggerDirective {
 	private readonly _accordion = inject(BrnAccordionDirective);
 	private readonly _item = inject(BrnAccordionItemDirective);
 	private readonly _elementRef = inject(ElementRef);
-	private readonly _hostPressedListener = rxHostPressedListener();
 
 	public readonly state = this._item.state;
 	public readonly id = `brn-accordion-trigger-${this._item.id}`;
@@ -80,15 +81,20 @@ export class BrnAccordionTriggerDirective {
 		if (!this._item) {
 			throw Error('Accordion trigger can only be used inside an AccordionItem. Add brnAccordionItem to parent.');
 		}
-		this._hostPressedListener.subscribe(() => {
-			this._accordion.toggleItem(this._item.id);
-		});
 
 		fromEvent(this._elementRef.nativeElement, 'focus')
 			.pipe(takeUntilDestroyed())
 			.subscribe(() => {
 				this._accordion.setActiveItem(this);
 			});
+	}
+
+	@HostListener('click', ['$event'])
+	@HostListener('keyup.space', ['$event'])
+	@HostListener('keyup.enter', ['$event'])
+	protected toggle(event: Event): void {
+		event.preventDefault();
+		this._accordion.toggleItem(this._item.id);
 	}
 
 	public focus() {

@@ -1,7 +1,6 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { type AfterContentInit, ContentChildren, Directive, type QueryList, inject } from '@angular/core';
-import { rxHostListener } from '@spartan-ng/ui-core';
-import { take } from 'rxjs';
+import { type AfterContentInit, ContentChildren, Directive, ElementRef, type QueryList, inject } from '@angular/core';
+import { fromEvent, take } from 'rxjs';
 import { BrnTabsDirective, BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
 @Directive({
@@ -21,7 +20,8 @@ export class BrnTabsListDirective implements AfterContentInit {
 	private readonly _direction = this._root.$direction;
 	private readonly _activeTab = this._root.$activeTab;
 	private readonly _tabs = this._root.$tabs;
-	private readonly _keyDownListener = rxHostListener('keydown');
+	private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	private readonly _keyDownListener = fromEvent(this._elementRef.nativeElement, 'keydown');
 
 	private _keyManager?: FocusKeyManager<BrnTabsTriggerDirective>;
 

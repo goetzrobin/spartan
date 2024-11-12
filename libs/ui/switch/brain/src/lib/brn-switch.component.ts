@@ -1,28 +1,31 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { BooleanInput } from '@angular/cdk/coercion';
 import { NgStyle, isPlatformBrowser } from '@angular/common';
 import {
 	type AfterContentInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	DestroyRef,
 	ElementRef,
-	EventEmitter,
 	HostListener,
-	Input,
 	type OnDestroy,
-	Output,
 	PLATFORM_ID,
 	Renderer2,
-	ViewChild,
 	ViewEncapsulation,
 	booleanAttribute,
+	computed,
 	effect,
 	forwardRef,
 	inject,
+	input,
+	model,
+	output,
 	signal,
+	viewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { rxHostPressedListener } from '@spartan-ng/ui-core';
 import { ChangeFn, TouchFn } from '@spartan-ng/ui-forms-brain';
 
 export const BRN_SWITCH_VALUE_ACCESSOR = {
@@ -43,9 +46,9 @@ const CONTAINER_POST_FIX = '-switch';
 			tabindex="-1"
 			type="checkbox"
 			role="switch"
-			[id]="forChild(_id()) ?? ''"
-			[name]="forChild(_name()) ?? ''"
-			[value]="_checked() ? 'on' : 'off'"
+			[id]="forChild(state().id) ?? ''"
+			[name]="forChild(state().name) ?? ''"
+			[value]="checked() ? 'on' : 'off'"
 			[ngStyle]="{
 				position: 'absolute',
 				width: '1px',
@@ -57,99 +60,87 @@ const CONTAINER_POST_FIX = '-switch';
 				whiteSpace: 'nowrap',
 				borderWidth: '0',
 			}"
-			[checked]="_checked()"
-			[attr.aria-label]="ariaLabel"
-			[attr.aria-labelledby]="ariaLabelledby"
-			[attr.aria-describedby]="ariaDescribedby"
-			[attr.aria-required]="required || null"
+			[checked]="checked()"
+			[attr.aria-label]="ariaLabel()"
+			[attr.aria-labelledby]="ariaLabelledby()"
+			[attr.aria-describedby]="ariaDescribedby()"
+			[attr.aria-required]="required() || null"
 		/>
 		<ng-content select="brn-switch-thumb" />
 	`,
 	host: {
 		tabindex: '0',
-		'[attr.data-state]': '_checked() ? "checked" : "unchecked"',
+		'[attr.data-state]': 'checked() ? "checked" : "unchecked"',
 		'[attr.data-focus-visible]': 'focusVisible()',
 		'[attr.data-focus]': 'focused()',
-		'[attr.data-disabled]': '_disabled()',
+		'[attr.data-disabled]': 'state().disabled()',
 		'[attr.aria-labelledby]': 'null',
 		'[attr.aria-label]': 'null',
 		'[attr.aria-describedby]': 'null',
-		'[attr.id]': '_id()',
-		'[attr.name]': '_name()',
+		'[attr.id]': 'state().id',
+		'[attr.name]': 'state().name',
 	},
 	providers: [BRN_SWITCH_VALUE_ACCESSOR],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
 export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
+	private readonly _destroyRef = inject(DestroyRef);
 	private readonly _renderer = inject(Renderer2);
 	private readonly _isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
-	private readonly _elementRef = inject(ElementRef);
+	private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 	private readonly _focusMonitor = inject(FocusMonitor);
 	private readonly _cdr = inject(ChangeDetectorRef);
 
-	public readonly focusVisible = signal(false);
-	public readonly focused = signal(false);
+	protected readonly focusVisible = signal(false);
+	protected readonly focused = signal(false);
 
-	protected readonly _checked = signal(false);
-	@Input({ transform: booleanAttribute })
-	set checked(value: boolean) {
-		this._checked.set(value);
-	}
+	public readonly checked = model<boolean>(false);
 
 	/** Used to set the id on the underlying input element. */
 
-	protected readonly _id = signal<string | null>(null);
-	@Input()
-	set id(value: string | null) {
-		if (!value) return;
-		this._id.set(value + CONTAINER_POST_FIX);
-	}
+	public readonly id = input<string | null>(null);
 
 	/** Used to set the name attribute on the underlying input element. */
-	protected readonly _name = signal<string | null>(null);
-	@Input()
-	set name(value: string | null) {
-		if (!value) return;
-		this._name.set(value + CONTAINER_POST_FIX);
-	}
+	readonly name = input<string | null>(null);
 
 	/** Used to set the aria-label attribute on the underlying input element. */
-	@Input('aria-label')
-	ariaLabel: string | null = null;
+	public readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
 	/** Used to set the aria-labelledby attribute on the underlying input element. */
-	@Input('aria-labelledby')
-	ariaLabelledby: string | null = null;
+	public readonly ariaLabelledby = input<string | null>(null, { alias: 'aria-labelledby' });
 
 	/** Used to set the aria-describedby attribute on the underlying input element. */
-	@Input('aria-describedby')
-	ariaDescribedby: string | null = null;
+	public readonly ariaDescribedby = input<string | null>(null, { alias: 'aria-describedby' });
 
-	@Input({ transform: booleanAttribute })
-	required = false;
+	public readonly required = input(false, { transform: booleanAttribute });
 
-	protected readonly _disabled = signal(false);
-	@Input({ transform: booleanAttribute })
-	set disabled(value: boolean) {
-		this._disabled.set(value);
-	}
+	public readonly disabled = input<boolean, BooleanInput>(false, {
+		transform: booleanAttribute,
+	});
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	protected _onChange: ChangeFn<boolean> = () => {};
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private _onTouched: TouchFn = () => {};
 
-	@ViewChild('checkBox', { static: true })
-	public checkbox?: ElementRef<HTMLInputElement>;
+	public readonly checkbox = viewChild.required<ElementRef<HTMLInputElement>>('checkBox');
 
-	@Output()
-	public readonly changed = new EventEmitter<boolean>();
-	@Output()
-	public readonly touched = new EventEmitter<void>();
+	public readonly changed = output<boolean>();
+
+	public readonly touched = output<void>();
+
+	protected readonly state = computed(() => {
+		const name = this.name();
+		const id = this.id();
+		return {
+			disabled: signal(this.disabled()),
+			name: name ? name + CONTAINER_POST_FIX : null,
+			id: id ? id + CONTAINER_POST_FIX : null,
+		};
+	});
 
 	constructor() {
-		rxHostPressedListener().subscribe(() => this.handleChange());
 		effect(() => {
 			/** search for the label and set the disabled state */
 			let parent = this._renderer.parentNode(this._elementRef.nativeElement);
@@ -161,52 +152,58 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 			if (!parent) return;
 			// check if parent is a label and assume it is for this checkbox
 			if (parent?.tagName === 'LABEL') {
-				this._renderer.setAttribute(parent, 'data-disabled', this._disabled() ? 'true' : 'false');
+				this._renderer.setAttribute(parent, 'data-disabled', this.state().disabled() ? 'true' : 'false');
 				return;
 			}
 			if (!this._isBrowser) return;
 
-			const label = parent?.querySelector(`label[for="${this.forChild(this._id())}"]`);
+			const label = parent?.querySelector(`label[for="${this.forChild(this.state().id)}"]`);
 			if (!label) return;
-			this._renderer.setAttribute(label, 'data-disabled', this._disabled() ? 'true' : 'false');
+			this._renderer.setAttribute(label, 'data-disabled', this.state().disabled() ? 'true' : 'false');
 		});
 	}
 
-	handleChange() {
-		if (this._disabled()) return;
-		const previousChecked = this._checked();
-		if (!this.checkbox) return;
-		this._checked.set(!previousChecked);
-		this._onChange(!previousChecked);
-		this.changed.emit(!previousChecked);
+	@HostListener('click', ['$event'])
+	@HostListener('keyup.enter', ['$event'])
+	@HostListener('keyup.space', ['$event'])
+	protected toggle(event: Event): void {
+		if (this.state().disabled()) return;
+		event.preventDefault();
+
+		this.checked.update((checked) => !checked);
+		this._onChange(this.checked());
+		this.changed.emit(this.checked());
 	}
 
 	ngAfterContentInit() {
-		this._focusMonitor.monitor(this._elementRef, true).subscribe((focusOrigin) => {
-			if (focusOrigin) this.focused.set(true);
-			if (focusOrigin === 'keyboard' || focusOrigin === 'program') {
-				this.focusVisible.set(true);
-				this._cdr.markForCheck();
-			}
-			if (!focusOrigin) {
-				// When a focused element becomes disabled, the browser *immediately* fires a blur event.
-				// Angular does not expect events to be raised during change detection, so any state
-				// change (such as a form control's ng-touched) will cause a changed-after-checked error.
-				// See https://github.com/angular/angular/issues/17793. To work around this, we defer
-				// telling the form control it has been touched until the next tick.
-				Promise.resolve().then(() => {
-					this.focusVisible.set(false);
-					this.focused.set(false);
-					this._onTouched();
-					this.touched.emit();
+		this._focusMonitor
+			.monitor(this._elementRef, true)
+			.pipe(takeUntilDestroyed(this._destroyRef))
+			.subscribe((focusOrigin) => {
+				if (focusOrigin) this.focused.set(true);
+				if (focusOrigin === 'keyboard' || focusOrigin === 'program') {
+					this.focusVisible.set(true);
 					this._cdr.markForCheck();
-				});
-			}
-		});
+				}
+				if (!focusOrigin) {
+					// When a focused element becomes disabled, the browser *immediately* fires a blur event.
+					// Angular does not expect events to be raised during change detection, so any state
+					// change (such as a form control's ng-touched) will cause a changed-after-checked error.
+					// See https://github.com/angular/angular/issues/17793. To work around this, we defer
+					// telling the form control it has been touched until the next tick.
+					Promise.resolve().then(() => {
+						this.focusVisible.set(false);
+						this.focused.set(false);
+						this._onTouched();
+						this.touched.emit();
+						this._cdr.markForCheck();
+					});
+				}
+			});
 
-		if (!this.checkbox) return;
-		this.checkbox.nativeElement.value = this._checked() ? 'on' : 'off';
-		this.checkbox.nativeElement.dispatchEvent(new Event('change'));
+		if (!this.checkbox()) return;
+		this.checkbox().nativeElement.value = this.checked() ? 'on' : 'off';
+		this.checkbox().nativeElement.dispatchEvent(new Event('change'));
 	}
 
 	ngOnDestroy() {
@@ -218,7 +215,7 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	}
 
 	writeValue(value: boolean): void {
-		this.checked = !!value;
+		this.checked.set(Boolean(value));
 	}
 
 	registerOnChange(fn: ChangeFn<boolean>): void {
@@ -231,7 +228,7 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 
 	/** Implemented as a part of ControlValueAccessor. */
 	setDisabledState(isDisabled: boolean): void {
-		this.disabled = isDisabled;
+		this.state().disabled.set(isDisabled);
 		this._cdr.markForCheck();
 	}
 
