@@ -46,6 +46,11 @@ export class HlmLabelDirective {
 	private readonly _brn = inject(BrnLabelDirective, { host: true });
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+
+	public readonly variant = input<LabelVariants['variant']>('default');
+
+	public readonly error = input<LabelVariants['error']>('auto');
+
 	protected readonly _computedClass = computed(() =>
 		hlm(
 			labelVariants({
@@ -57,8 +62,4 @@ export class HlmLabelDirective {
 			this.userClass(),
 		),
 	);
-
-	public readonly variant = input<LabelVariants['variant']>('default');
-
-	public readonly error = input<LabelVariants['error']>('auto');
 }
