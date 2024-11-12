@@ -17,12 +17,12 @@ import { injectBrnToggleGroup } from './brn-toggle-group.token';
 export class BrnToggleDirective<T> {
 	private static uniqueId = 0;
 
-	/** Access the change detector. */
 	private readonly changeDetector = inject(ChangeDetectorRef);
 
 	/** Access the toggle group if available. */
 	protected readonly group = injectBrnToggleGroup<T>();
 
+	/** The id of the toggle. */
 	readonly id = input(`brn-toggle-${BrnToggleDirective.uniqueId++}`);
 
 	/** The value this toggle represents. */
@@ -54,6 +54,9 @@ export class BrnToggleDirective<T> {
 		}
 	}
 
+	/**
+	 * @internal
+	 */
 	toggleOff(): void {
 		// if we are already off, do nothing
 		if (this.state() === 'off' || (this.group && !this.group.canDeselect(this.value()))) return;
@@ -71,6 +74,9 @@ export class BrnToggleDirective<T> {
 		this.changeDetector.detectChanges();
 	}
 
+	/**
+	 * @internal
+	 */
 	toggleOn(): void {
 		// if we are already on, do nothing
 		if (this.state() === 'on') return;
