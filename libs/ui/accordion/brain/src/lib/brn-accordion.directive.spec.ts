@@ -10,7 +10,7 @@ describe('BrnAccordionDirective', () => {
 	const setup = async () => {
 		const container = await render(
 			`
-      <div brnAccordion   aria-label="acco">
+      <div brnAccordion aria-label="acco">
         <div brnAccordionItem>
           <button brnAccordionTrigger aria-label="trigger">
             Is it accessible?
