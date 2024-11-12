@@ -16,6 +16,6 @@ export class HlmAccordionDirective {
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
-		hlm('flex', this._brn.orientation === 'horizontal' ? 'flex-row' : 'flex-col', this.userClass()),
+		hlm('flex', this._brn.orientation() === 'horizontal' ? 'flex-row' : 'flex-col', this.userClass()),
 	);
 }

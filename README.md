@@ -85,6 +85,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 66. [Femi236](https://github.com/Femi236)
 67. [dineshkp](https://github.com/dineshkp)
 68. [robingenz](https://github.com/robingenz)
+69. [Balastrong](https://github.com/Balastrong)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 

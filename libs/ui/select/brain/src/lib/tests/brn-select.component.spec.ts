@@ -3,6 +3,14 @@ import userEvent from '@testing-library/user-event';
 import { BrnSelectImports } from '../../index';
 
 describe('BrnSelectComponent', () => {
+	beforeAll(() => {
+		global.ResizeObserver = jest.fn().mockImplementation(() => ({
+			observe: jest.fn(),
+			unobserve: jest.fn(),
+			disconnect: jest.fn(),
+		}));
+	});
+
 	const setup = async () => {
 		const openChangeSpy = jest.fn();
 		const container = await render(

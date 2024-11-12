@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import type { CustomElementClassSettable } from '@spartan-ng/ui-core';
+import type { ClassValue } from 'clsx';
 import { BrnAccordionItemDirective } from './brn-accordion.directive';
 
 @Component({
@@ -29,7 +30,7 @@ export class BrnAccordionContentComponent implements CustomElementClassSettable 
 	public readonly ariaLabeledBy = `brn-accordion-trigger-${this._item.id}`;
 
 	protected readonly _addInert = computed(() => (this.state() === 'closed' ? true : undefined));
-	protected readonly _contentClass = signal('');
+	protected readonly _contentClass = signal<ClassValue>('');
 
 	constructor() {
 		if (!this._item) {
@@ -37,7 +38,7 @@ export class BrnAccordionContentComponent implements CustomElementClassSettable 
 		}
 	}
 
-	public setClassToCustomElement(classes: string) {
+	public setClassToCustomElement(classes: ClassValue) {
 		this._contentClass.set(classes);
 	}
 }
