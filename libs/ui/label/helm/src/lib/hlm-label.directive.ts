@@ -60,17 +60,5 @@ export class HlmLabelDirective {
 
 	public readonly variant = input<LabelVariants['variant']>('default');
 
-	// private readonly _variant = signal<LabelVariants['variant']>('default');
-	// @Input()
-	// set variant(value: LabelVariants['variant']) {
-	// 	this._variant.set(value);
-	// }
-
 	public readonly error = input<LabelVariants['error']>('auto');
-
-	// private readonly _error = signal<LabelVariants['error']>('auto');
-	// @Input()
-	// set error(value: LabelVariants['error']) {
-	// 	this._error.set(value);
-	// }
 }
