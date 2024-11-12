@@ -1,4 +1,4 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, computed, inject, input, model } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { type VariantProps, cva } from 'class-variance-authority';
@@ -49,7 +49,7 @@ export class HlmLabelDirective {
 
 	public readonly variant = input<LabelVariants['variant']>('default');
 
-	public readonly error = input<LabelVariants['error']>('auto');
+	public readonly error = model<LabelVariants['error']>('auto');
 
 	protected readonly _computedClass = computed(() =>
 		hlm(
