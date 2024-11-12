@@ -22,9 +22,7 @@ import {
 	model,
 	signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { rxHostPressedListener } from '@spartan-ng/ui-core';
 import { ChangeFn, TouchFn } from '@spartan-ng/ui-forms-brain';
 
 export const BRN_CHECKBOX_VALUE_ACCESSOR = {
@@ -154,9 +152,6 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 	public readonly changed = new EventEmitter<BrnCheckboxValue>();
 
 	constructor() {
-		rxHostPressedListener()
-			.pipe(takeUntilDestroyed())
-			.subscribe(() => this.handleChange());
 		effect(() => {
 			const parent = this._renderer.parentNode(this._elementRef.nativeElement);
 			if (!parent) return;
@@ -181,9 +176,12 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 		);
 	}
 
-	handleChange() {
+	@HostListener('click', ['$event'])
+	@HostListener('keyup.space', ['$event'])
+	@HostListener('keyup.enter', ['$event'])
+	toggle(event: Event) {
 		if (this._disabled()) return;
-		if (!this.checkbox) return;
+		event.preventDefault();
 		const previousChecked = this.checked();
 		this.checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
 		this._onChange(!previousChecked);

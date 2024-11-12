@@ -15,7 +15,7 @@ import { metaWith } from '../../../../shared/meta/meta.util';
 import { SelectHeaderFooterPreviewComponent, headerFooterCode } from './select--header-footer.preview';
 import { SelectMultiplePreviewComponent, multipleCode } from './select--multiple.preview';
 import { SelectScrollablePreviewComponent, scrollableCode } from './select--scrollable.preview';
-import { SelectPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './select.preview';
+import { SelectPreviewComponent, defaultCode, defaultImports, defaultSkeleton, defaultStyles } from './select.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Select' },
@@ -63,6 +63,7 @@ export const routeMeta: RouteMeta = {
 			<div class="space-y-4">
 				<spartan-code [code]="defaultImports" />
 				<spartan-code [code]="defaultSkeleton" />
+				<spartan-code [code]="defaultStyles" />
 			</div>
 
 			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
@@ -104,6 +105,7 @@ export default class SkeletonPageComponent {
 	protected readonly defaultCode = defaultCode;
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
+	protected readonly defaultStyles = defaultStyles;
 	protected readonly multipleCode = multipleCode;
 	protected readonly scrollableCode = scrollableCode;
 	protected readonly headerFooterCode = headerFooterCode;
