@@ -13,6 +13,14 @@ describe('Brn Select Component in single-mode', () => {
 	const INITIAL_VALUE_TEXT = 'Apple';
 	const INITIAL_VALUE = 'apple';
 
+	beforeAll(() => {
+		global.ResizeObserver = jest.fn().mockImplementation(() => ({
+			observe: jest.fn(),
+			unobserve: jest.fn(),
+			disconnect: jest.fn(),
+		}));
+	});
+
 	const setupWithFormValidation = async () => {
 		const { fixture } = await render(SelectSingleValueTestComponent);
 		return {
