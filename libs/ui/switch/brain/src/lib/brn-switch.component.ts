@@ -26,7 +26,6 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { rxHostPressedListener } from '@spartan-ng/ui-core';
 import { ChangeFn, TouchFn } from '@spartan-ng/ui-forms-brain';
 
 export const BRN_SWITCH_VALUE_ACCESSOR = {
@@ -142,7 +141,6 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	});
 
 	constructor() {
-		rxHostPressedListener().subscribe(() => this.handleChange());
 		effect(() => {
 			/** search for the label and set the disabled state */
 			let parent = this._renderer.parentNode(this._elementRef.nativeElement);
@@ -165,8 +163,12 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 		});
 	}
 
-	protected handleChange(): void {
+	@HostListener('click', ['$event'])
+	@HostListener('keyup.enter', ['$event'])
+	@HostListener('keyup.space', ['$event'])
+	protected toggle(event: Event): void {
 		if (this.state().disabled()) return;
+		event.preventDefault();
 
 		this.checked.update((checked) => !checked);
 		this._onChange(this.checked());
