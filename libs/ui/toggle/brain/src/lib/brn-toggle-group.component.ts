@@ -116,14 +116,14 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 	 * @internal
 	 * Determines whether a value can be set on the group.
 	 */
-	canBeNullable(value: ToggleValue<T>): boolean {
+	canDeselect(value: ToggleValue<T>): boolean {
 		// if null values are allowed, the group can always be nullable
 		if (this.nullable()) return true;
 
 		const currentValue = this.value();
 
 		if (this.multiple() && Array.isArray(currentValue)) {
-			return currentValue.length === 1 && currentValue[0] !== value;
+			return !(currentValue.length === 1 && currentValue[0] === value);
 		}
 
 		return currentValue !== value;
@@ -167,7 +167,7 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 				((currentValue ?? []) as T[]).filter((v) => v !== value),
 				source,
 			);
-		} else if (currentValue === value && this.canBeNullable(value)) {
+		} else if (currentValue === value && this.canDeselect(value)) {
 			this.emitSelectionChange(null, source);
 		}
 	}
@@ -184,9 +184,9 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 
 	/** Update the selection state in the toggle buttons. */
 	private updateSelectionState(): void {
-		this._toggleButtons().forEach((toggle) =>
-			this.isSelected(toggle.value() as T) ? toggle.toggleOn() : toggle.toggleOff(),
-		);
+		for (const toggle of this._toggleButtons()) {
+			this.isSelected(toggle.value() as T) ? toggle.toggleOn() : toggle.toggleOff();
+		}
 	}
 
 	/**

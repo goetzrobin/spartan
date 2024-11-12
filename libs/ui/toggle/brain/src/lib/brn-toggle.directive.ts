@@ -1,9 +1,8 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { ChangeDetectorRef, Directive, booleanAttribute, computed, inject, input, model, output } from '@angular/core';
+import { ChangeDetectorRef, Directive, booleanAttribute, computed, inject, input, model } from '@angular/core';
 import { injectBrnToggleGroup } from './brn-toggle-group.token';
 
 @Directive({
-	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'button[hlmToggle], button[brnToggle]',
 	standalone: true,
 	host: {
@@ -45,12 +44,6 @@ export class BrnToggleDirective<T> {
 	/** Whether the toggle is in the on state. */
 	protected readonly isOn = computed(() => this.state() === 'on');
 
-	/**
-	 * @deprecated Use stateChange instead.
-	 * Event emitted when the toggle is toggled on.
-	 */
-	readonly toggled = output<'on' | 'off'>();
-
 	toggle(): void {
 		if (this.disableToggleClick()) return;
 
@@ -63,10 +56,9 @@ export class BrnToggleDirective<T> {
 
 	toggleOff(): void {
 		// if we are already off, do nothing
-		if (this.state() === 'off' || !this.group?.canBeNullable(this.value())) return;
+		if (this.state() === 'off' || (this.group && !this.group.canDeselect(this.value()))) return;
 
 		this.state.set('off');
-		this.toggled.emit('off');
 
 		const value = this.value();
 
@@ -84,7 +76,6 @@ export class BrnToggleDirective<T> {
 		if (this.state() === 'on') return;
 
 		this.state.set('on');
-		this.toggled.emit('on');
 
 		const value = this.value();
 
