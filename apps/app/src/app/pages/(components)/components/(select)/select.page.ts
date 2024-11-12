@@ -81,6 +81,10 @@ export const routeMeta: RouteMeta = {
 				<spartan-code secondTab [code]="scrollableCode" />
 			</spartan-tabs>
 			<h3 id="examples__header_footer" class="${hlmH4} mb-2 mt-6">Header and Footer Content</h3>
+			<p class="mb-2">
+				The header and footer are slotted within the options list, it is not advised to add complex UI elements
+				within these and considerations should be made when adding content in regards to accessibility.
+			</p>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-select-header-footer-preview />
