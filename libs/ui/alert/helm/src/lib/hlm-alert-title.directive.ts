@@ -17,5 +17,5 @@ export type AlertTitleVariants = VariantProps<typeof alertTitleVariants>;
 })
 export class HlmAlertTitleDirective {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() => hlm(alertTitleVariants(), this.userClass()));
+	protected readonly _computedClass = computed(() => hlm(alertTitleVariants(), this.userClass()));
 }
