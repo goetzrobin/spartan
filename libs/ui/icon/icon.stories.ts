@@ -25,7 +25,7 @@ export const Default: Story = {
 		name: 'lucideCheck',
 		size: 'sm',
 		color: 'red',
-		class: '',
+		userClass: '',
 		strokeWidth: 1,
 	},
 	argTypes: {
@@ -41,7 +41,7 @@ export const Default: Story = {
 
 export const Tailwind: Story = {
 	args: {
-		class: 'text-red-600 text-5xl',
+		userClass: 'text-red-600 text-5xl',
 		name: 'lucideCheck',
 	},
 	argTypes: {
