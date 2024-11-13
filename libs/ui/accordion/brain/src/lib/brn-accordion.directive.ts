@@ -136,9 +136,6 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	public readonly orientation = input<'horizontal' | 'vertical'>('vertical');
 
 	public ngAfterContentInit() {
-		if (!this.triggers) {
-			return;
-		}
 		this._keyManager = new FocusKeyManager<BrnAccordionTriggerDirective>(this.triggers())
 			.withHomeAndEnd()
 			.withPageUpDown()
@@ -159,7 +156,6 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	}
 
 	public setActiveItem(item: BrnAccordionTriggerDirective) {
-		// public setActiveItem(item: number) {
 		this._keyManager?.setActiveItem(item);
 	}
 
