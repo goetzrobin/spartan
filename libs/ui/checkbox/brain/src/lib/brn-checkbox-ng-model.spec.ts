@@ -24,7 +24,7 @@ describe('BrnCheckboxComponentNgModelIntegration', () => {
 		expect(labelElement).toBeInTheDocument();
 		await user.click(labelElement);
 		await screen.findByDisplayValue('on');
-		expect(container.fixture.componentInstance.airplaneMode).toBe(true);
+		expect(container.fixture.componentInstance.airplaneMode()).toBe(true);
 	});
 
 	it('should set input as default correctly and click should toggle then', async () => {
@@ -32,21 +32,21 @@ describe('BrnCheckboxComponentNgModelIntegration', () => {
 
 		await user.click(labelElement);
 		await screen.findByDisplayValue('off');
-		expect(container.fixture.componentInstance.airplaneMode).toBe(false);
+		expect(container.fixture.componentInstance.airplaneMode()).toBe(false);
 
 		await user.click(labelElement);
 		await screen.findByDisplayValue('on');
-		expect(container.fixture.componentInstance.airplaneMode).toBe(true);
+		expect(container.fixture.componentInstance.airplaneMode()).toBe(true);
 	});
 
 	it('should set input as default correctly and enter should toggle then', async () => {
 		const { user, container } = await setup(true);
 
 		await user.keyboard('[Tab][Enter]');
-		expect(container.fixture.componentInstance.airplaneMode).toBe(false);
+		expect(container.fixture.componentInstance.airplaneMode()).toBe(false);
 
 		await user.keyboard('[Enter]');
-		expect(container.fixture.componentInstance.airplaneMode).toBe(true);
+		expect(container.fixture.componentInstance.airplaneMode()).toBe(true);
 	});
 
 	it('should do nothing when disabled', async () => {
@@ -54,10 +54,10 @@ describe('BrnCheckboxComponentNgModelIntegration', () => {
 
 		await user.click(labelElement);
 		await screen.findByDisplayValue('off');
-		expect(container.fixture.componentInstance.airplaneMode).toBe(false);
+		expect(container.fixture.componentInstance.airplaneMode()).toBe(false);
 
 		await user.click(labelElement);
 		await screen.findByDisplayValue('off');
-		expect(container.fixture.componentInstance.airplaneMode).toBe(false);
+		expect(container.fixture.componentInstance.airplaneMode()).toBe(false);
 	});
 });
