@@ -1,4 +1,5 @@
-import { Directive, ElementRef, Input, computed, effect, inject, input, model, output, signal } from '@angular/core';
+import { Directive, ElementRef, Input, computed, effect, inject, input } from '@angular/core';
+import { EventEmitter, Output, model, signal } from '@angular/core';
 
 @Directive({
 	selector: '[brnTabsContent]',
@@ -65,7 +66,8 @@ export class BrnTabsDirective {
 	/** internal **/
 	$activationMode = this.activationMode;
 
-	public readonly tabActivated = output<string>();
+	@Output()
+	readonly tabActivated = new EventEmitter<string>();
 
 	private _tabs = signal<{ [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } }>({});
 	public readonly $tabs = this._tabs.asReadonly();
