@@ -40,19 +40,17 @@ describe('BrnCheckboxComponentNgModelIntegration', () => {
 	});
 
 	it('should set input as default correctly and enter should toggle then', async () => {
-		const { labelElement, user, container } = await setup(true);
+		const { user, container } = await setup(true);
 
-		await user.click(labelElement);
 		await user.keyboard('[Tab][Enter]');
 		expect(container.fixture.componentInstance.airplaneMode).toBe(false);
 
-		await user.click(labelElement);
 		await user.keyboard('[Enter]');
 		expect(container.fixture.componentInstance.airplaneMode).toBe(true);
 	});
 
 	it('should do nothing when disabled', async () => {
-		const { labelElement, user, container } = await setup(false, false);
+		const { labelElement, user, container } = await setup(false, true);
 
 		await user.click(labelElement);
 		await screen.findByDisplayValue('off');
