@@ -157,13 +157,13 @@ export class BrnDialogComponent {
 		this.setAriaLabelledBy(ariaLabelledBy);
 	}
 
-	/* eslint-disable-next-line @angular-eslint/no-input-rename */
+	 
 	@Input('aria-label')
 	set ariaLabel(ariaLabel: string | null | undefined) {
 		this.setAriaLabel(ariaLabel);
 	}
 
-	/* eslint-disable-next-line @angular-eslint/no-input-rename */
+	 
 	@Input({
 		alias: 'aria-modal',
 		transform: booleanAttribute,

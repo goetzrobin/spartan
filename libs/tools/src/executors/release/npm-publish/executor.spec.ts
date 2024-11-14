@@ -1,3 +1,4 @@
+import { ExecutorContext } from '@nx/devkit';
 import * as child_process from 'node:child_process';
 import * as process from 'node:process';
 import * as projectHelpers from '../helpers/projects.helpers';
@@ -11,13 +12,13 @@ jest.mock('node:child_process', () => ({
 describe('NpmPublish Executor', () => {
 	it('should execSync with a default libPath if no libPath was provided', async () => {
 		const mockRoot = 'libs/my-domain/foo';
-		const context = {} as any;
+		const context = {} as unknown as ExecutorContext;
 
 		// Mock the getRoot helper
 		jest.spyOn(projectHelpers, 'getRoot').mockReturnValue(mockRoot);
 
 		// Set the environment variable for TAG
-		process.env['TAG'] = 'next';
+		process.env.TAG = 'next';
 
 		// Expected command that should be executed
 		const expectedCommand = `cd ./dist/${mockRoot} && npm publish --tag next`;

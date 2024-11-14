@@ -71,7 +71,7 @@ export class BrnPaginatorDirective implements OnInit {
 	}
 
 	@Input({ alias: 'brnPaginatorOnStateChange' })
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	 
 	public onStateChange?: (state: PaginatorState) => void;
 
 	constructor() {

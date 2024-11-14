@@ -39,7 +39,6 @@ export const iconVariants = cva('inline-flex', {
 
 export type IconVariants = VariantProps<typeof iconVariants>;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type IconSize = DefinedSizes | (Record<never, never> & string);
 
 const isDefinedSize = (size: IconSize): size is DefinedSizes => {

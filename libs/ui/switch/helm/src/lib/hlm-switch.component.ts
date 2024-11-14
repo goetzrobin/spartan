@@ -87,7 +87,7 @@ export class HlmSwitchComponent {
 		this.checked.set(Boolean(value));
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	 
 	registerOnChange(fn: ChangeFn<boolean>): void {
 		this._onChange = fn;
 	}

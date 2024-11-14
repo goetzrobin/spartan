@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-select-brain',
 	preset: '../../../../jest.preset.cjs',

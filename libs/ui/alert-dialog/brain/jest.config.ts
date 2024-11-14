@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-alert-dialog-brain',
 	preset: '../../../../jest.preset.cjs',

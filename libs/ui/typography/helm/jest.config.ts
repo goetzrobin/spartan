@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-typography-helm',
 	preset: '../../../../jest.preset.cjs',

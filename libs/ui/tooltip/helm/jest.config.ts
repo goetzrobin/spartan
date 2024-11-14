@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-tooltip-helm',
 	preset: '../../../../jest.preset.cjs',

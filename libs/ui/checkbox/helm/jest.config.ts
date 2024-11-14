@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-checkbox-helm',
 	preset: '../../../../jest.preset.cjs',

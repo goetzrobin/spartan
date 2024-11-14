@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-scroll-area-helm',
 	preset: '../../../../jest.preset.cjs',
