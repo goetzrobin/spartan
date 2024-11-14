@@ -3,6 +3,7 @@ import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { SignalInputDirective, SignalInputErrorDirective } from 'ng-signal-forms';
 
 @Directive({
+	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: '[ngModel][formField]',
 	hostDirectives: [SignalInputErrorDirective],
 	standalone: true,

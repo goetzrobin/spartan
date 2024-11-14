@@ -106,7 +106,8 @@ export class CodeComponent {
 		this._code = value;
 		(this._language === 'sh'
 			? this.marked.parse(value?.trim() ?? '')
-			: (this.marked.parse(`\`\`\`typescript\n${value?.trim() ?? ''}\n\`\`\``) as any)
+			: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+				(this.marked.parse(`\`\`\`typescript\n${value?.trim() ?? ''}\n\`\`\``) as any)
 		).then((content: string) => {
 			this._content = content;
 		});
