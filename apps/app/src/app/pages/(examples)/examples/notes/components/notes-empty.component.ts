@@ -8,6 +8,7 @@ import {
 } from '@spartan-ng/ui-card-helm';
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'analog-trpc-notes-empty',
 	standalone: true,
 	host: {

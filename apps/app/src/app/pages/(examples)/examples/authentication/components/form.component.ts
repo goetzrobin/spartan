@@ -9,6 +9,7 @@ import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'auth-example-form',
 	standalone: true,
 	imports: [

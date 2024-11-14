@@ -4,6 +4,7 @@ import { Injectable, PLATFORM_ID, RendererFactory2, inject, signal } from '@angu
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReplaySubject, combineLatest } from 'rxjs';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DarkModes = ['light', 'dark', 'system'] as const;
 export type DarkMode = (typeof DarkModes)[number];
 

@@ -23,6 +23,7 @@ import {
 } from '@spartan-ng/ui-menu-helm';
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'music-top-menu',
 	standalone: true,
 	host: {

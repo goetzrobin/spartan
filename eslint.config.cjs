@@ -1,14 +1,13 @@
-const { FlatCompat } = require('@eslint/eslintrc');
-const nxEslintPlugin = require('@nx/eslint-plugin');
-const js = require('@eslint/js');
-
-const compat = new FlatCompat({
-	baseDirectory: __dirname,
-	recommendedConfig: js.configs.recommended,
-});
+/* eslint-disable @typescript-eslint/no-require-imports */
+const nx = require('@nx/eslint-plugin');
 
 module.exports = [
-	{ plugins: { '@nx': nxEslintPlugin } },
+	...nx.configs['flat/base'],
+	...nx.configs['flat/typescript'],
+	...nx.configs['flat/javascript'],
+	{
+		ignores: ['**/dist'],
+	},
 	{
 		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
 		rules: {
@@ -16,7 +15,7 @@ module.exports = [
 				'error',
 				{
 					enforceBuildableLibDependency: true,
-					allow: [],
+					allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
 					depConstraints: [
 						{
 							sourceTag: '*',
@@ -27,43 +26,23 @@ module.exports = [
 			],
 		},
 	},
-	...compat.config({ extends: ['plugin:@nx/typescript'] }).map((config) => ({
-		...config,
-		files: ['**/*.ts', '**/*.tsx'],
+	{
+		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+		// Override or add rules here
 		rules: {},
-	})),
-	...compat.config({ extends: ['plugin:@nx/javascript'] }).map((config) => ({
-		...config,
-		files: ['**/*.js', '**/*.jsx'],
-		rules: {},
-	})),
-	...compat.config({ env: { jest: true } }).map((config) => ({
-		...config,
-		files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.spec.js', '**/*.spec.jsx'],
-		rules: {},
-	})),
-	...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
-		...config,
+	},
+	{
 		files: ['**/*.json'],
 		rules: {
 			'@nx/dependency-checks': [
 				'error',
 				{
-					buildTargets: ['build'],
-					checkMissingDependencies: true,
-					checkObsoleteDependencies: true,
-					checkVersionMismatches: true,
-					ignoredDependencies: [
-						'jest-preset-angular',
-						'jest-axe',
-						'@testing-library/jest-dom',
-						'rxjs',
-						'@spartan-ng/ui-icon-helm',
-						'@spartan-ng/ui-button-helm',
-						'@spartan-ng/ui-avatar-brain',
-					],
+					ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs}'],
 				},
 			],
 		},
-	})),
+		languageOptions: {
+			parser: require('jsonc-eslint-parser'),
+		},
+	},
 ];

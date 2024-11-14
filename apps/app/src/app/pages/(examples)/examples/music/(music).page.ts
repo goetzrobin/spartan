@@ -159,6 +159,7 @@ export const routeMeta: RouteMeta = {
 														[src]="item.img"
 														[fallback]="imageFallback"
 														class="bg-border aspect-square h-full w-full transform-gpu transition-transform group-hover:scale-110 md:aspect-[1/1.25]"
+														alt="Music Image"
 													/>
 												</picture>
 												<figcaption class="space-y-1 text-sm">
@@ -186,6 +187,7 @@ export const routeMeta: RouteMeta = {
 														[src]="item.img"
 														fallback="imageFallback"
 														class="bg-border aspect-square w-full object-cover transition-transform group-hover:scale-110"
+														alt="Music Image"
 													/>
 												</picture>
 												<figcaption class="space-y-1 text-sm">
