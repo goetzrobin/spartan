@@ -13,8 +13,8 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { TooltipPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './tooltip.preview';
 import { TooltipSimpleComponent, simpleCode } from './tooltip--simple.example';
+import { TooltipPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './tooltip.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Tooltip' },
