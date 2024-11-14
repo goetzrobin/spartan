@@ -22,9 +22,9 @@ import { HlmErrorDirective } from './hlm-error.directive';
 	},
 })
 export class HlmFormFieldComponent {
-	private readonly control = contentChild(BrnFormFieldControl);
+	public readonly control = contentChild(BrnFormFieldControl);
 
-	private readonly errorChildren = contentChildren(HlmErrorDirective);
+	public readonly errorChildren = contentChildren(HlmErrorDirective);
 
 	protected readonly hasDisplayedMessage = computed<'error' | 'hint'>(() =>
 		this.errorChildren() && this.errorChildren().length > 0 && this.control()?.errorState() ? 'error' : 'hint',
