@@ -7,7 +7,7 @@ let uniqueId = 0;
 	standalone: true,
 	host: {
 		'[id]': 'id()',
-		'[attr.aria-live]': 'polite',
+		'aria-live': 'polite',
 		role: 'presentation',
 	},
 })

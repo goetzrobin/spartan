@@ -4,6 +4,7 @@ import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
 import { buttonVariants } from '@spartan-ng/ui-button-helm';
 import {
 	BrnCalendarCellButtonDirective,
+	BrnCalendarCellDirective,
 	BrnCalendarDirective,
 	BrnCalendarGridDirective,
 	BrnCalendarHeaderDirective,
@@ -29,6 +30,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 		BrnCalendarWeekdayDirective,
 		BrnCalendarWeekDirective,
 		BrnCalendarCellButtonDirective,
+		BrnCalendarCellDirective,
 		BrnCalendarGridDirective,
 		HlmIconComponent,
 	],

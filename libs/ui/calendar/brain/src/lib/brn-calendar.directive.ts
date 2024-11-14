@@ -60,7 +60,7 @@ export class BrnCalendarDirective<T> {
 	public readonly defaultFocusedDate = input<T>();
 
 	/** @internal Access the header */
-	protected readonly header = contentChild(BrnCalendarHeaderDirective);
+	public readonly header = contentChild(BrnCalendarHeaderDirective);
 
 	/** Store the cells */
 	protected readonly cells = contentChildren<BrnCalendarCellButtonDirective<T>>(BrnCalendarCellButtonDirective, {
