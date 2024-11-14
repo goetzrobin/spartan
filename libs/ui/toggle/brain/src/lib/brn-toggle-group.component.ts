@@ -1,5 +1,6 @@
 import { BooleanInput } from '@angular/cdk/coercion';
 import {
+	AfterViewInit,
 	Component,
 	OnChanges,
 	SimpleChanges,
@@ -46,7 +47,7 @@ export class BrnButtonToggleChange<T = unknown> {
 		<ng-content />
 	`,
 })
-export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccessor, OnChanges {
+export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccessor, OnChanges, AfterViewInit {
 	/**
 	 * The method to be called in order to update ngModel.
 	 */
@@ -88,6 +89,12 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 
 	/** The toggles within the group. */
 	private readonly _toggleButtons = contentChildren(BrnToggleDirective, { descendants: true });
+
+	ngAfterViewInit() {
+		// This is needed because we need access to our toggles through
+		// contentChildren to sync initial values set in writeValue before they are available, e.g. default values in a form
+		this.updateSelectionState();
+	}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if ('value' in changes) {
