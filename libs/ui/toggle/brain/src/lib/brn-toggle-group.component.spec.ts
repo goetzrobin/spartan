@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrnToggleGroupComponent } from '@spartan-ng/ui-toggle-brain';
+import { BrnToggleGroupComponent } from './brn-toggle-group.component';
 import { fireEvent, render } from '@testing-library/angular';
 import { BrnToggleDirective } from './brn-toggle.directive';
 

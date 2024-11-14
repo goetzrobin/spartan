@@ -1,12 +1,7 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-	BrnSliderDirective,
-	BrnSliderInputDirective,
-	BrnSliderThumbDirective,
-	BrnSliderTrackDirective,
-} from '@spartan-ng/ui-slider-brain';
+import { BrnSliderDirective, BrnSliderInputDirective, BrnSliderThumbDirective, BrnSliderTrackDirective } from '../../index';
 
 @Component({
 	standalone: true,

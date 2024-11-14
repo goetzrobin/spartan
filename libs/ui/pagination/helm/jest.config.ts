@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-pagination-helm',
 	preset: '../../../../jest.preset.cjs',

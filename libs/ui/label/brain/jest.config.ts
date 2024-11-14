@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-label-brain',
 	preset: '../../../../jest.preset.cjs',

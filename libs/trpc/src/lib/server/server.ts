@@ -124,6 +124,7 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
 
 		res.statusCode = status;
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		headers &&
 			Object.keys(headers).forEach((key) => {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion

@@ -1,5 +1,5 @@
 const nx = require('@nx/eslint-plugin');
-const baseConfig = require('../../../../eslint.config.cjs');
+const baseConfig = require('../../eslint.config.cjs');
 
 module.exports = [
 	...baseConfig,
@@ -10,6 +10,14 @@ module.exports = [
 				'error',
 				{
 					ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs}'],
+					ignoredDependencies: [
+						'@angular/common',
+						'@angular/core',
+						'@trpc/client',
+						'@trpc/server',
+						'isomorphic-fetch',
+						'superjson',
+					],
 				},
 			],
 		},
@@ -26,7 +34,7 @@ module.exports = [
 				'error',
 				{
 					type: 'attribute',
-					prefix: 'hlm',
+					prefix: 'spartan-ng',
 					style: 'camelCase',
 				},
 			],
@@ -34,7 +42,7 @@ module.exports = [
 				'error',
 				{
 					type: 'element',
-					prefix: 'hlm',
+					prefix: 'spartan-ng',
 					style: 'kebab-case',
 				},
 			],

@@ -297,7 +297,7 @@ export interface BrnSliderTrack {
 		},
 	],
 })
-export class BrnSliderTrackDirective implements BrnSliderTrack, AfterViewInit {
+export class BrnSliderTrackDirective implements BrnSliderTrack, AfterViewInit, OnDestroy {
 	public readonly hostElementWidth = signal<number>(0);
 	private readonly _destroyed = new Subject<void>();
 

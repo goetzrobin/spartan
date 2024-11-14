@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-radio-group-helm',
 	preset: '../../../../jest.preset.cjs',

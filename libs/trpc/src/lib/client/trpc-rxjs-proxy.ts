@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type OperationContext, type OperationLink, TRPCClientError, type TRPCClientRuntime } from '@trpc/client';
 import type {
 	AnyMutationProcedure,
@@ -26,6 +27,7 @@ type Resolver<TProcedure extends AnyProcedure> = (
 // Removed subscription and using new type
 type DecorateProcedure<
 	TProcedure extends AnyProcedure,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	_TRouter extends AnyRouter,
 > = TProcedure extends AnyQueryProcedure
 	? {

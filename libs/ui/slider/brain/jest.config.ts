@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-slider-brain',
 	preset: '../../../../jest.preset.cjs',

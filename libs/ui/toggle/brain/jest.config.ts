@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
 	displayName: 'ui-toggle-brain',
 	preset: '../../../../jest.preset.cjs',

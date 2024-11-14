@@ -46,10 +46,10 @@ jobs:
         run: npm install -g bun
       - name: Install Dependencies
         run: bun install --no-cache
-      - name: oxlint performance, correctness and lint check
-        run: bun run ci.lint-baby
-      - name: biome Formatting & sorted Imports check
-        run: bun run ci.format-sort
+      - name: lint
+        run: bun run lint
+      - name: format
+        run: bun run nx format:check
 
   build:
     runs-on: ubuntu-latest

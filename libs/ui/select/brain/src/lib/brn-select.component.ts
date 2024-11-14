@@ -90,19 +90,19 @@ export class BrnSelectComponent
 
 	public readonly triggerWidth = this._selectService.triggerWidth;
 
-	@Input({ alias: 'multiple' })
+	@Input({  })
 	set multiple(multiple: boolean) {
 		this._selectService.state.update((state) => ({ ...state, multiple }));
 	}
 	protected readonly _multiple = this._selectService.multiple;
 
-	@Input({ alias: 'placeholder' })
+	@Input({  })
 	set placeholder(placeholder: string) {
 		this._selectService.state.update((state) => ({ ...state, placeholder }));
 	}
 	protected readonly _placeholder = this._selectService.placeholder;
 
-	@Input({ alias: 'disabled' })
+	@Input({  })
 	set disabled(disabled: boolean) {
 		this._selectService.state.update((state) => ({ ...state, disabled }));
 	}
