@@ -9,9 +9,7 @@
 		"enquirer": "2.3.6",
 		"semver": "7.5.4"
 	},
-	"peerDependencies": {
-		"tslib": "^2.3.0"
-	},
+	"peerDependencies": {},
 	"executors": "./executors.json",
 	"generators": "./generators.json",
 	"schematics": "./generators.json",
