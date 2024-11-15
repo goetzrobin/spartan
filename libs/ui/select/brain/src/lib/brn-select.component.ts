@@ -163,7 +163,7 @@ export class BrnSelectComponent<T = unknown>
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private _onTouched: TouchFn = () => {};
 
-	private _shouldEmitValueChange = signal(false);
+	private readonly _shouldEmitValueChange = signal(false);
 
 	/*
 	 * This position config ensures that the top "start" corner of the overlay
@@ -200,9 +200,9 @@ export class BrnSelectComponent<T = unknown>
 
 	public errorStateTracker: ErrorStateTracker;
 
-	private _defaultErrorStateMatcher = inject(ErrorStateMatcher);
-	private _parentForm = inject(NgForm, { optional: true });
-	private _parentFormGroup = inject(FormGroupDirective, { optional: true });
+	private readonly _defaultErrorStateMatcher = inject(ErrorStateMatcher);
+	private readonly _parentForm = inject(NgForm, { optional: true });
+	private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
 
 	public errorState = computed(() => this.errorStateTracker.errorState());
 

@@ -8,9 +8,9 @@ import { Breadcrumb, BreadcrumbSharedService } from './breadcrumb-shared.service
 	providedIn: 'root',
 })
 export class BreadcrumbService {
-	private _router = inject(Router);
-	private _activatedRoute = inject(ActivatedRoute);
-	private _breadcrumbSharedService = inject(BreadcrumbSharedService);
+	private readonly _router = inject(Router);
+	private readonly _activatedRoute = inject(ActivatedRoute);
+	private readonly _breadcrumbSharedService = inject(BreadcrumbSharedService);
 
 	constructor() {
 		this._router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {

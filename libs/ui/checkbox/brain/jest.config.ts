@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-checkbox-brain',
 	preset: '../../../../jest.preset.cjs',

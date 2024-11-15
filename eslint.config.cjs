@@ -84,4 +84,19 @@ module.exports = [
 			parser: require('jsonc-eslint-parser'),
 		},
 	},
+	{
+		files: ['**/*.ts'],
+		rules: {
+			'@typescript-eslint/prefer-readonly': 'error',
+		},
+		languageOptions: {
+			parserOptions: {
+				projectService: true,
+				tsconfigRootDir: process.cwd(),
+			},
+		},
+	},
+	{
+		ignores: ['**/vite.config.ts'],
+	},
 ];

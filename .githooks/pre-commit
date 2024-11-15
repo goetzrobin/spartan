@@ -2,4 +2,3 @@
 
 bun run lint
 bunx run nx format:check
-bun run hook:pre-commit

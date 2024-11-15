@@ -99,7 +99,7 @@ export default class IconPageComponent {
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
 
-	private _searchQuery = signal<string>('');
+	private readonly _searchQuery = signal<string>('');
 
 	protected lucideIconsList = computed(() => {
 		return Object.keys(lucideIcons).filter((iconName) => Object.prototype.hasOwnProperty.call(lucideIcons, iconName));

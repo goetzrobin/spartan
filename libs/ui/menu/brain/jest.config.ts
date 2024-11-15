@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-menu-brain',
 	preset: '../../../../jest.preset.cjs',

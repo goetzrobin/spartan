@@ -61,7 +61,7 @@ export class PageNavComponent implements OnInit, AfterViewInit, OnDestroy {
 	 * Reference to the tag with the main content of the page.
 	 * For this to work, the component should be added immediately after a tag with the [spartanMainSection] directive.
 	 */
-	private _page: HTMLElement = (inject(ElementRef).nativeElement as HTMLElement).previousSibling as HTMLElement;
+	private readonly _page: HTMLElement = (inject(ElementRef).nativeElement as HTMLElement).previousSibling as HTMLElement;
 
 	ngOnInit() {
 		if (isPlatformServer(this._platformId)) {

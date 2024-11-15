@@ -87,7 +87,6 @@ export class HlmSwitchComponent {
 		this.checked.set(Boolean(value));
 	}
 
-	 
 	registerOnChange(fn: ChangeFn<boolean>): void {
 		this._onChange = fn;
 	}

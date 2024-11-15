@@ -1,5 +1,5 @@
-import * as path from 'node:path';
 import { type ProjectConfiguration, type Tree, formatFiles, names, readJson, workspaceRoot } from '@nx/devkit';
+import * as path from 'node:path';
 import { addPrimitiveToSupportedUILibraries } from './lib/add-primitive-to-supported-ui-libraries';
 import { copyFilesFromHlmLibToGenerator, createSharedGeneratorFiles, recursivelyDelete } from './lib/file-management';
 import { getProjectsAndNames } from './lib/get-project-names';

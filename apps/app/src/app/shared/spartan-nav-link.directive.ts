@@ -16,8 +16,8 @@ import { HlmButtonDirective, provideBrnButtonConfig } from '@spartan-ng/ui-butto
 	],
 })
 export class NavLinkDirective {
-	private _hlmBtn = inject(HlmButtonDirective);
-	private _rlActive = inject(RouterLinkActive);
+	private readonly _hlmBtn = inject(HlmButtonDirective);
+	private readonly _rlActive = inject(RouterLinkActive);
 
 	constructor() {
 		this._hlmBtn.setClass('opacity-70 font-medium');

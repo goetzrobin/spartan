@@ -2,22 +2,30 @@ import type { Direction } from '@angular/cdk/bidi';
 import { Directionality } from '@angular/cdk/bidi';
 import { SharedResizeObserver } from '@angular/cdk/observers/private';
 import { isPlatformBrowser } from '@angular/common';
-import { ElementRef, InjectionToken, PLATFORM_ID, computed, forwardRef } from '@angular/core';
-import { Directive, Renderer2, type Signal, effect, inject, signal } from '@angular/core';
 import {
 	type AfterViewInit,
+	Directive,
+	ElementRef,
+	InjectionToken,
 	Injector,
 	type OnDestroy,
+	PLATFORM_ID,
+	Renderer2,
+	type Signal,
 	type WritableSignal,
+	computed,
 	contentChild,
+	effect,
+	forwardRef,
+	inject,
 	input,
 	model,
+	signal,
 } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
-import { debounceTime } from 'rxjs';
-import { Subject, merge, takeUntil, tap } from 'rxjs';
+import { Subject, debounceTime, merge, takeUntil, tap } from 'rxjs';
 
 export const BRN_SLIDER_INPUT = new InjectionToken<BrnSliderInput>('BrnSliderInput');
 

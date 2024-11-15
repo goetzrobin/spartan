@@ -19,7 +19,7 @@ import { HlmCarouselComponent } from './hlm-carousel.component';
 })
 export class HlmCarouselItemComponent {
 	public _userClass = input<ClassValue>('', { alias: 'class' });
-	private _orientation = inject(HlmCarouselComponent).orientation;
+	private readonly _orientation = inject(HlmCarouselComponent).orientation;
 	protected _computedClass = computed(() =>
 		hlm(
 			'min-w-0 shrink-0 grow-0 basis-full',

@@ -122,7 +122,7 @@ const VERTICAL_KEYS_TO_PREVENT_DEFAULT = ['ArrowUp', 'ArrowDown', 'PageDown', 'P
 export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	private readonly _el = inject(ElementRef);
 	private _keyManager?: FocusKeyManager<BrnAccordionTriggerDirective>;
-	private _focusMonitor = inject(FocusMonitor);
+	private readonly _focusMonitor = inject(FocusMonitor);
 
 	private readonly _focused = signal<boolean>(false);
 	private readonly _openItemIds = signal<number[]>([]);

@@ -1,10 +1,12 @@
 import { FocusMonitor, type FocusOrigin, type FocusableOption } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import {
+	type AfterContentInit,
 	type AfterViewInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	ContentChildren,
 	type DoCheck,
 	ElementRef,
 	EventEmitter,
@@ -12,13 +14,14 @@ import {
 	type OnDestroy,
 	type OnInit,
 	Output,
+	type QueryList,
 	ViewChild,
 	ViewEncapsulation,
 	booleanAttribute,
+	forwardRef,
 	inject,
 	numberAttribute,
 } from '@angular/core';
-import { type AfterContentInit, ContentChildren, type QueryList, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export const BRN_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
@@ -87,9 +90,9 @@ export class BrnRadioChange {
 })
 export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit, DoCheck, OnDestroy {
 	private static _nextUniqueId = 0;
-	private _focusMonitor = inject(FocusMonitor);
-	private _elementRef = inject(ElementRef);
-	private _radioDispatcher = inject(UniqueSelectionDispatcher);
+	private readonly _focusMonitor = inject(FocusMonitor);
+	private readonly _elementRef = inject(ElementRef);
+	private readonly _radioDispatcher = inject(UniqueSelectionDispatcher);
 	protected _changeDetector = inject(ChangeDetectorRef);
 	public radioGroup = inject(BrnRadioGroupComponent, { optional: true });
 
@@ -117,7 +120,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 		this._tabIndex = value !== null ? value : this._defaultTabIndex;
 	}
 
-	private _uniqueId = `brn-radio-${++BrnRadioComponent._nextUniqueId}`;
+	private readonly _uniqueId = `brn-radio-${++BrnRadioComponent._nextUniqueId}`;
 
 	@Input()
 	public id = this._uniqueId;
@@ -353,14 +356,14 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 })
 export class BrnRadioGroupComponent implements AfterContentInit {
 	private static _nextUniqueId = 0;
-	private _changeDetector = inject(ChangeDetectorRef);
+	private readonly _changeDetector = inject(ChangeDetectorRef);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private _value: any = null;
 	private _isInitialized = false;
 
 	@ContentChildren(BrnRadioComponent, { descendants: true })
-	private _radios?: QueryList<BrnRadioComponent>;
+	private readonly _radios?: QueryList<BrnRadioComponent>;
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
 	public _controlValueAccessorChangeFn: (value: any) => void = () => {};

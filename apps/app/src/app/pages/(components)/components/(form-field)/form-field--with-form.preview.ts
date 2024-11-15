@@ -51,7 +51,7 @@ import { HlmSelectImports, HlmSelectModule } from '@spartan-ng/ui-select-helm';
 	`,
 })
 export class FormFieldFormPreviewComponent {
-	private _formBuilder = inject(FormBuilder);
+	private readonly _formBuilder = inject(FormBuilder);
 
 	public form = this._formBuilder.group({
 		name: ['', Validators.required],

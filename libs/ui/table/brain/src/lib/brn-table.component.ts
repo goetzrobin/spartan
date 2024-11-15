@@ -57,7 +57,7 @@ export type BrnTableDataSourceInput<T> = CdkTableDataSourceInput<T>;
 })
 export class BrnTableComponent<T> implements TableClassesSettable, AfterContentInit {
 	@ViewChild('cdkTable', { read: CdkTable, static: true })
-	private _cdkTable?: CdkTable<T>;
+	private readonly _cdkTable?: CdkTable<T>;
 	// Cdk Table Inputs / Outputs
 	@Input()
 	public dataSource: BrnTableDataSourceInput<T> = [];

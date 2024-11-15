@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-collapsible-brain',
 	preset: '../../../../jest.preset.cjs',

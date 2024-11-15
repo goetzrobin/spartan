@@ -56,7 +56,7 @@ export class BrnDialogComponent {
 	};
 
 	private _contentTemplate: TemplateRef<unknown> | undefined;
-	private _dialogRef = signal<BrnDialogRef | undefined>(undefined);
+	private readonly _dialogRef = signal<BrnDialogRef | undefined>(undefined);
 	private _dialogStateEffectRef?: EffectRef;
 
 	public readonly state = computed(() => this._dialogRef()?.state() ?? 'closed');

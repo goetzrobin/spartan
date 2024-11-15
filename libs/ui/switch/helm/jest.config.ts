@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-switch-helm',
 	preset: '../../../../jest.preset.cjs',
