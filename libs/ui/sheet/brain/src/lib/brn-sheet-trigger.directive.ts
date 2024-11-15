@@ -9,7 +9,7 @@ import { BrnSheetComponent } from './brn-sheet.component';
 export class BrnSheetTriggerDirective extends BrnDialogTriggerDirective {
 	private _sheet = inject(BrnSheetComponent, { optional: true });
 	@Input()
-	side: 'top' | 'bottom' | 'left' | 'right' | undefined;
+	public side: 'top' | 'bottom' | 'left' | 'right' | undefined;
 
 	override open() {
 		if (this._sheet && this.side) {

@@ -13,7 +13,7 @@ import { HlmSelectContentDirective } from './hlm-select-content.directive';
 	},
 })
 export class HlmSelectLabelDirective implements OnInit {
-	private readonly selectContent = inject(HlmSelectContentDirective);
+	private readonly _selectContent = inject(HlmSelectContentDirective);
 	private readonly _stickyLabels = signal(false);
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
@@ -25,7 +25,7 @@ export class HlmSelectLabelDirective implements OnInit {
 	);
 
 	ngOnInit(): void {
-		if (this.selectContent.stickyLabels) {
+		if (this._selectContent.stickyLabels) {
 			this._stickyLabels.set(true);
 		}
 	}

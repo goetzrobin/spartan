@@ -239,7 +239,7 @@ export class BrnHoverCardTriggerDirective implements OnInit, OnDestroy {
 	public align: 'top' | 'bottom' = 'bottom';
 
 	@Input()
-	set brnHoverCardTriggerFor(value: TemplateRef<unknown> | BrnHoverCardContentDirective) {
+	public set brnHoverCardTriggerFor(value: TemplateRef<unknown> | BrnHoverCardContentDirective) {
 		this._contentService.setContent(value, this._vcr);
 	}
 

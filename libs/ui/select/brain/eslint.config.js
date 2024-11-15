@@ -43,6 +43,18 @@ module.exports = [
 	{
 		files: ['**/*.html'],
 		// Override or add rules here
-		rules: {},
+		rules: {
+			// ideally these should be enabled
+			'@angular-eslint/template/label-has-associated-control': 'off',
+			'@angular-eslint/template/click-events-have-key-events': 'off',
+			'@angular-eslint/template/interactive-supports-focus': 'off',
+		},
+	},
+	{
+		files: ['**/tests/**/*.ts'],
+		rules: {
+			'@angular-eslint/directive-selector': 'off',
+			'@angular-eslint/component-selector': 'off',
+		},
 	},
 ];

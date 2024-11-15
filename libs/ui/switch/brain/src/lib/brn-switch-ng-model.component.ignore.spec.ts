@@ -7,6 +7,7 @@ import { BrnSwitchComponent } from './brn-switch.component';
 	selector: 'brn-switch-ng-model',
 	standalone: true,
 	template: `
+		<!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
 		<label>
 			Airplane mode is: {{ airplaneMode ? 'on' : 'off' }}
 			<brn-switch [disabled]="disabled" [(ngModel)]="airplaneMode">

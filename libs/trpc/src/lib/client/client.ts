@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectionToken, type Provider, TransferState, signal } from '@angular/core';
 import { type CreateTRPCClientOptions, type HTTPHeaders, type HttpBatchLinkOptions, httpBatchLink } from '@trpc/client';
@@ -33,9 +34,7 @@ function customFetch(input: RequestInfo | URL, init?: RequestInit & { method: 'G
 
 	// dev server trpc for analog & nitro
 	if (typeof window === 'undefined') {
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		const host = process.env['NITRO_HOST'] ?? process.env['ANALOG_HOST'] ?? 'localhost';
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		const port = process.env['NITRO_PORT'] ?? process.env['ANALOG_PORT'] ?? 4205;
 		const base = `http://${host}:${port}`;
 		if (input instanceof Request) {

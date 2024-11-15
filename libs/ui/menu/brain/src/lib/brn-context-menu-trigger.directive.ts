@@ -13,17 +13,17 @@ export class BrnContextMenuTriggerDirective {
 	private readonly _cdkTrigger = inject(CdkContextMenuTrigger, { host: true });
 	private readonly _align = signal<BrnCtxMenuAlign>(undefined);
 	@Input()
-	set align(value: BrnCtxMenuAlign) {
+	public set align(value: BrnCtxMenuAlign) {
 		this._align.set(value);
 	}
 
 	@Input()
-	set brnCtxMenuTriggerFor(value: TemplateRef<unknown> | null) {
+	public set brnCtxMenuTriggerFor(value: TemplateRef<unknown> | null) {
 		this._cdkTrigger.menuTemplateRef = value;
 	}
 
 	@Input()
-	set brnCtxMenuTriggerData(value: unknown) {
+	public set brnCtxMenuTriggerData(value: unknown) {
 		this._cdkTrigger.menuData = value;
 	}
 

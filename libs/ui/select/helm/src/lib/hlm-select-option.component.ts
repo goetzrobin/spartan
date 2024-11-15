@@ -39,7 +39,7 @@ export class HlmSelectOptionComponent {
 	);
 
 	@Input()
-	set value(value: unknown | null) {
+	public set value(value: unknown | null) {
 		this._brnSelectOption.value = value;
 	}
 

@@ -11,7 +11,7 @@ import { HlmAvatarImageDirective } from './hlm-avatar-image.directive';
 	`,
 })
 class HlmMockComponent {
-	userCls = '';
+	public userCls = '';
 }
 
 describe('HlmAvatarImageDirective', () => {

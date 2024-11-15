@@ -13,6 +13,5 @@ export const notes = pgTable('note', {
 export type Note = InferSelectModel<typeof notes>;
 export type NewNote = InferInsertModel<typeof notes>;
 
-// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 const client = postgres(process.env['DATABASE_URL'] ?? '');
 export const db = drizzle(client);

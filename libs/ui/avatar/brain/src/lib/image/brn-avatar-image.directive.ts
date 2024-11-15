@@ -6,17 +6,17 @@ import { Directive, HostListener, computed, signal } from '@angular/core';
 	exportAs: 'avatarImage',
 })
 export class BrnAvatarImageDirective {
-	private readonly loaded = signal(false);
+	private readonly _loaded = signal(false);
 
 	@HostListener('error')
 	private onError() {
-		this.loaded.set(false);
+		this._loaded.set(false);
 	}
 
 	@HostListener('load')
 	private onLoad() {
-		this.loaded.set(true);
+		this._loaded.set(true);
 	}
 
-	canShow = computed(() => this.loaded());
+	public canShow = computed(() => this._loaded());
 }

@@ -4,10 +4,10 @@ import type { ErrorStateMatcher } from './error-options';
 
 export class ErrorStateTracker {
 	/** Whether the tracker is currently in an error state. */
-	errorState = signal(false);
+	public readonly errorState = signal(false);
 
 	/** User-defined matcher for the error state. */
-	matcher: ErrorStateMatcher | null = null;
+	public matcher: ErrorStateMatcher | null = null;
 
 	constructor(
 		private _defaultMatcher: ErrorStateMatcher | null,

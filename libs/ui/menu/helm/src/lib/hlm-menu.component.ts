@@ -37,7 +37,7 @@ export class HlmMenuComponent {
 
 	private readonly _variant = signal<MenuVariants['variant']>('default');
 	@Input()
-	set variant(value: MenuVariants['variant']) {
+	public set variant(value: MenuVariants['variant']) {
 		this._variant.set(value);
 	}
 }

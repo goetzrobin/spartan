@@ -39,7 +39,7 @@ import { HlmSmallDirective } from '@spartan-ng/ui-typography-helm';
 	`,
 })
 export class RadioGroupPreviewComponent {
-	version: string | null = '16.1.4';
+	public version: string | null = '16.1.4';
 }
 
 export const defaultCode = `

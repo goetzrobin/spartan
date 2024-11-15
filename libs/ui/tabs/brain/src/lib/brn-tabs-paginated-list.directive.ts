@@ -79,12 +79,12 @@ export type BrnPaginatedTabHeaderItem = FocusableOption & { elementRef: ElementR
 export abstract class BrnTabsPaginatedListDirective
 	implements AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy
 {
-	abstract _items: QueryList<BrnPaginatedTabHeaderItem>;
-	abstract _tabListContainer: Signal<ElementRef<HTMLElement>>;
-	abstract _tabList: Signal<ElementRef<HTMLElement>>;
-	abstract _tabListInner: Signal<ElementRef<HTMLElement>>;
-	abstract _nextPaginator: Signal<ElementRef<HTMLElement>>;
-	abstract _previousPaginator: Signal<ElementRef<HTMLElement>>;
+	public abstract _items: QueryList<BrnPaginatedTabHeaderItem>;
+	public abstract _tabListContainer: Signal<ElementRef<HTMLElement>>;
+	public abstract _tabList: Signal<ElementRef<HTMLElement>>;
+	public abstract _tabListInner: Signal<ElementRef<HTMLElement>>;
+	public abstract _nextPaginator: Signal<ElementRef<HTMLElement>>;
+	public abstract _previousPaginator: Signal<ElementRef<HTMLElement>>;
 
 	/** The distance in pixels that the tab labels should be translated to the left. */
 	private _scrollDistance = 0;
@@ -100,13 +100,13 @@ export abstract class BrnTabsPaginatedListDirective
 	protected readonly _destroyed = new Subject<void>();
 
 	/** Whether the controls for pagination should be displayed */
-	_showPaginationControls = signal(false);
+	public _showPaginationControls = signal(false);
 
 	/** Whether the tab list can be scrolled more towards the end of the tab label list. */
-	_disableScrollAfter = true;
+	public _disableScrollAfter = true;
 
 	/** Whether the tab list can be scrolled more towards the beginning of the tab label list. */
-	_disableScrollBefore = true;
+	public _disableScrollBefore = true;
 
 	/**
 	 * The number of tab labels that are displayed on the header. When this changes, the header
@@ -130,7 +130,7 @@ export abstract class BrnTabsPaginatedListDirective
 	 * Whether pagination should be disabled. This can be used to avoid unnecessary
 	 * layout recalculations if it's known that pagination won't be required.
 	 */
-	disablePagination = input(false, { transform: booleanAttribute });
+	public disablePagination = input(false, { transform: booleanAttribute });
 
 	/** The index of the active tab. */
 	private _selectedIndex = computed(() => {
@@ -388,12 +388,12 @@ export abstract class BrnTabsPaginatedListDirective
 	}
 
 	/** Tracks which element has focus; used for keyboard navigation */
-	get focusIndex(): number {
+	public get focusIndex(): number {
 		return this._keyManager ? (this._keyManager.activeItemIndex ?? 0) : 0;
 	}
 
 	/** When the focus index is set, we must manually send focus to the correct label */
-	set focusIndex(value: number) {
+	public set focusIndex(value: number) {
 		if (!this._isValidIndex(value) || this.focusIndex === value || !this._keyManager) {
 			return;
 		}
@@ -467,10 +467,10 @@ export abstract class BrnTabsPaginatedListDirective
 	}
 
 	/** Sets the distance in pixels that the tab header should be transformed in the X-axis. */
-	get scrollDistance(): number {
+	public get scrollDistance(): number {
 		return this._scrollDistance;
 	}
-	set scrollDistance(value: number) {
+	public set scrollDistance(value: number) {
 		this._scrollTo(value);
 	}
 

@@ -14,7 +14,7 @@ import { HlmAvatarComponent } from './hlm-avatar.component';
 	standalone: true,
 })
 class MockComponent {
-	@Input() class = '';
+	@Input() public class = '';
 }
 
 describe('HlmAvatarComponent', () => {

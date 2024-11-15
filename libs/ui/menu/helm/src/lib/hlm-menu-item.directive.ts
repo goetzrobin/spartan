@@ -34,7 +34,7 @@ export class HlmMenuItemDirective {
 	protected _computedClass = computed(() => hlm(hlmMenuItemVariants({ inset: this._inset() }), this.userClass()));
 
 	@Input({ transform: booleanAttribute })
-	set inset(value: boolean) {
+	public set inset(value: boolean) {
 		this._inset.set(value);
 	}
 }
