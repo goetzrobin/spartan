@@ -1,14 +1,5 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import {
-	Component,
-	booleanAttribute,
-	computed,
-	forwardRef,
-	input,
-	model,
-	output,
-	signal,
-} from '@angular/core';
+import { Component, booleanAttribute, computed, forwardRef, input, model, output, signal } from '@angular/core';
 import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { provideBrnToggleGroup } from './brn-toggle-group.token';
 import { BrnToggleDirective } from './brn-toggle.directive';
@@ -83,9 +74,6 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 	/** Emit event when the group value changes. */
 	readonly change = output<BrnButtonToggleChange<T>>();
 
-
-
-
 	writeValue(value: ToggleValue<T>): void {
 		this.value.set(value);
 	}
@@ -157,31 +145,31 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 				((currentValue ?? []) as T[]).filter((v) => v !== value),
 				source,
 			);
-		} else if (currentValue === value ) {
+		} else if (currentValue === value) {
 			this.emitSelectionChange(null, source);
 		}
 	}
 
-  /**
-   * @internal
-   * Determines whether a value is selected.
-   */
-  isSelected(value: T): boolean {
-    const currentValue = this.value();
+	/**
+	 * @internal
+	 * Determines whether a value is selected.
+	 */
+	isSelected(value: T): boolean {
+		const currentValue = this.value();
 
-    if (
-      currentValue == null ||
-      currentValue === undefined ||
-      (Array.isArray(currentValue) && currentValue.length === 0)
-    ) {
-      return false;
-    }
+		if (
+			currentValue == null ||
+			currentValue === undefined ||
+			(Array.isArray(currentValue) && currentValue.length === 0)
+		) {
+			return false;
+		}
 
-    if (this.multiple()) {
-      return (currentValue as T[])?.includes(value);
-    }
-    return currentValue === value;
-  }
+		if (this.multiple()) {
+			return (currentValue as T[])?.includes(value);
+		}
+		return currentValue === value;
+	}
 
 	/** Update the value of the group */
 	private emitSelectionChange(value: ToggleValue<T>, source: BrnToggleDirective<T>): void {
