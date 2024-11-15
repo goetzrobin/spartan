@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-slider-helm',
 	preset: '../../../../jest.preset.cjs',

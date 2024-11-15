@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-spinner-helm',
 	preset: '../../../../jest.preset.cjs',

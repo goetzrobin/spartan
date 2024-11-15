@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-command-helm',
 	preset: '../../../../jest.preset.cjs',

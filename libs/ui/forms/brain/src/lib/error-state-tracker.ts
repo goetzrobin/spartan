@@ -10,10 +10,10 @@ export class ErrorStateTracker {
 	public matcher: ErrorStateMatcher | null = null;
 
 	constructor(
-		private _defaultMatcher: ErrorStateMatcher | null,
+		private readonly _defaultMatcher: ErrorStateMatcher | null,
 		public ngControl: NgControl | null,
-		private _parentFormGroup: FormGroupDirective | null,
-		private _parentForm: NgForm | null,
+		private readonly _parentFormGroup: FormGroupDirective | null,
+		private readonly _parentForm: NgForm | null,
 	) {}
 
 	/** Updates the error state based on the provided error state matcher. */

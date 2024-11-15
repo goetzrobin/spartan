@@ -9,8 +9,8 @@ import { SignalInputDirective, SignalInputErrorDirective } from 'ng-signal-forms
 	standalone: true,
 })
 export class SpartanInputErrorDirective implements OnInit {
-	private _injector = inject(Injector);
-	private _label = inject(HlmLabelDirective, { skipSelf: true, optional: true });
+	private readonly _injector = inject(Injector);
+	private readonly _label = inject(HlmLabelDirective, { skipSelf: true, optional: true });
 	private readonly _signalInput = inject(SignalInputDirective, { optional: true });
 
 	ngOnInit() {

@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-skeleton-helm',
 	preset: '../../../../jest.preset.cjs',

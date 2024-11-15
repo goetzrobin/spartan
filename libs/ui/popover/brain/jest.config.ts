@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-popover-brain',
 	preset: '../../../../jest.preset.cjs',

@@ -17,7 +17,7 @@ import { injectErrorField } from 'ng-signal-forms';
 	`,
 })
 export class InputErrorComponent {
-	private _formField = injectErrorField();
+	private readonly _formField = injectErrorField();
 	public touchedState = this._formField.touchedState;
 	public errors = this._formField.errors;
 

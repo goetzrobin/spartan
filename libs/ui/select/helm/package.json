@@ -4,7 +4,7 @@
 	"peerDependencies": {
 		"@spartan-ng/ui-core": "0.0.1-alpha.356",
 		"@spartan-ng/ui-select-brain": "0.0.1-alpha.356",
-    "@spartan-ng/ui-icon-helm": "0.0.1-alpha.10"
+		"@spartan-ng/ui-icon-helm": "0.0.1-alpha.10"
 	},
 	"dependencies": {},
 	"sideEffects": false

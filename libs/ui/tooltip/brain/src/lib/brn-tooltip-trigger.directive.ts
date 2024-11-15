@@ -154,7 +154,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	private _portal?: ComponentPortal<BrnTooltipContentComponent>;
 	private _viewInitialized = false;
 	private _pointerExitEventsInitialized = false;
-	private _viewportMargin = 8;
+	private readonly _viewportMargin = 8;
 	private _currentPosition?: TooltipPosition;
 	private _touchstartTimeout?: ReturnType<typeof setTimeout>;
 

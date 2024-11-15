@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-separator-brain',
 	preset: '../../../../jest.preset.cjs',

@@ -92,7 +92,7 @@ export abstract class BrnTabsPaginatedListDirective
 	/** Whether the header should scroll to the selected index after the view has been checked. */
 	private _selectedIndexChanged = false;
 
-	private _root = inject(BrnTabsDirective);
+	private readonly _root = inject(BrnTabsDirective);
 	private readonly _activeTab = this._root.$activeTab;
 	private readonly _tabs = this._root.$tabs;
 
@@ -124,7 +124,7 @@ export abstract class BrnTabsPaginatedListDirective
 	private _currentTextContent!: string;
 
 	/** Stream that will stop the automated scrolling. */
-	private _stopScrolling = new Subject<void>();
+	private readonly _stopScrolling = new Subject<void>();
 
 	/**
 	 * Whether pagination should be disabled. This can be used to avoid unnecessary
@@ -133,7 +133,7 @@ export abstract class BrnTabsPaginatedListDirective
 	public disablePagination = input(false, { transform: booleanAttribute });
 
 	/** The index of the active tab. */
-	private _selectedIndex = computed(() => {
+	private readonly _selectedIndex = computed(() => {
 		const currentTabKey = this._activeTab();
 		const tabs = this._tabs();
 
@@ -154,16 +154,16 @@ export abstract class BrnTabsPaginatedListDirective
 	/** Event emitted when a label is focused. */
 	public readonly indexFocused = output<number>();
 
-	private _sharedResizeObserver = inject(SharedResizeObserver);
+	private readonly _sharedResizeObserver = inject(SharedResizeObserver);
 
-	private _injector = inject(Injector);
+	private readonly _injector = inject(Injector);
 
 	protected _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 	protected _changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
-	private _viewportRuler: ViewportRuler = inject(ViewportRuler);
-	private _dir = inject(Directionality, { optional: true });
-	private _ngZone: NgZone = inject(NgZone);
-	private _platform: Platform = inject(Platform);
+	private readonly _viewportRuler: ViewportRuler = inject(ViewportRuler);
+	private readonly _dir = inject(Directionality, { optional: true });
+	private readonly _ngZone: NgZone = inject(NgZone);
+	private readonly _platform: Platform = inject(Platform);
 	public _animationMode = inject(ANIMATION_MODULE_TYPE, { optional: true });
 
 	constructor() {

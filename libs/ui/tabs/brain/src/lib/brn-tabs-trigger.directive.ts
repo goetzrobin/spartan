@@ -13,8 +13,8 @@ import { Directive, ElementRef, Input, computed, effect, inject, input, model, o
 	exportAs: 'brnTabsContent',
 })
 export class BrnTabsContentDirective {
-	private _root = inject(BrnTabsDirective);
-	private _elementRef = inject(ElementRef);
+	private readonly _root = inject(BrnTabsDirective);
+	private readonly _elementRef = inject(ElementRef);
 
 	public readonly contentFor = input.required<string>({ alias: 'brnTabsContent' });
 	protected readonly _isSelected = computed(() => this._root.$activeTab() === this.contentFor());
@@ -67,7 +67,7 @@ export class BrnTabsDirective {
 
 	public readonly tabActivated = output<string>();
 
-	private _tabs = signal<{ [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } }>({});
+	private readonly _tabs = signal<{ [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } }>({});
 	public readonly $tabs = this._tabs.asReadonly();
 
 	public registerTrigger(key: string, trigger: BrnTabsTriggerDirective) {

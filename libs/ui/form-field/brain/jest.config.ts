@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-form-field-brain',
 	preset: '../../../../jest.preset.cjs',

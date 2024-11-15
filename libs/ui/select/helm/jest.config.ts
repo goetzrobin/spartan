@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-select-helm',
 	preset: '../../../../jest.preset.cjs',

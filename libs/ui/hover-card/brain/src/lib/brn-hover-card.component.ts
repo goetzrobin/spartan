@@ -15,9 +15,9 @@ import {
 })
 export class BrnHoverCardComponent implements AfterContentInit {
 	@ContentChild(BrnHoverCardTriggerDirective, { static: true })
-	private _trigger?: BrnHoverCardTriggerDirective;
+	private readonly _trigger?: BrnHoverCardTriggerDirective;
 	@ContentChild(BrnHoverCardContentDirective, { static: true })
-	private _content?: BrnHoverCardContentDirective;
+	private readonly _content?: BrnHoverCardContentDirective;
 
 	public ngAfterContentInit() {
 		if (!this._trigger || !this._content) return;

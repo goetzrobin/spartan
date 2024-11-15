@@ -16,7 +16,7 @@ import { HlmCarouselComponent } from './hlm-carousel.component';
 	`,
 })
 export class HlmCarouselContentComponent {
-	private _orientation = inject(HlmCarouselComponent).orientation;
+	private readonly _orientation = inject(HlmCarouselComponent).orientation;
 
 	public _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>

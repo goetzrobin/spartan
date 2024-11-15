@@ -3,7 +3,6 @@ import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
 
 @Directive({
-	 
 	selector: 'hlm-select, brn-select [hlm]',
 	standalone: true,
 	host: {

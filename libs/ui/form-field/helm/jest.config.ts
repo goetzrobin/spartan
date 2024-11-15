@@ -1,4 +1,3 @@
- 
 export default {
 	displayName: 'ui-form-field-helm',
 	preset: '../../../../jest.preset.cjs',

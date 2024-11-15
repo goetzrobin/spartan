@@ -7,7 +7,7 @@ import { BrnSheetComponent } from './brn-sheet.component';
 	standalone: true,
 })
 export class BrnSheetTriggerDirective extends BrnDialogTriggerDirective {
-	private _sheet = inject(BrnSheetComponent, { optional: true });
+	private readonly _sheet = inject(BrnSheetComponent, { optional: true });
 	@Input()
 	public side: 'top' | 'bottom' | 'left' | 'right' | undefined;
 

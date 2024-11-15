@@ -59,9 +59,9 @@ export class HlmCarouselComponent {
 		axis: this.orientation() === 'horizontal' ? 'x' : 'y',
 	}));
 
-	private _canScrollPrev = signal(false);
+	private readonly _canScrollPrev = signal(false);
 	public canScrollPrev = this._canScrollPrev.asReadonly();
-	private _canScrollNext = signal(false);
+	private readonly _canScrollNext = signal(false);
 	public canScrollNext = this._canScrollNext.asReadonly();
 
 	protected onEmblaEvent(event: EmblaEventType) {

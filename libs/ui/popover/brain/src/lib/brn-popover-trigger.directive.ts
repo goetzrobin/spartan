@@ -14,7 +14,7 @@ import type { BrnPopoverComponent } from './brn-popover.component';
 	},
 })
 export class BrnPopoverTriggerDirective extends BrnDialogTriggerDirective {
-	private _host = inject(ElementRef, { host: true });
+	private readonly _host = inject(ElementRef, { host: true });
 
 	constructor() {
 		super();
