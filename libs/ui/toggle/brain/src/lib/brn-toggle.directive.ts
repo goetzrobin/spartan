@@ -43,7 +43,9 @@ export class BrnToggleDirective<T> {
 
 	/** Whether the toggle is in the on state. */
 	protected readonly isOn = computed(() => this._state() === 'on');
-	_state = computed(() => {
+
+	/** The current state that reflects the group state or the model state. */
+	protected readonly _state = computed(() => {
 		if (this.group) {
 			return this.group.isSelected(this.value() as T) ? 'on' : 'off';
 		}
@@ -61,6 +63,6 @@ export class BrnToggleDirective<T> {
 			}
 		} else {
 			this.state.set(this.isOn() ? 'off' : 'on');
-    }
+		}
 	}
 }
