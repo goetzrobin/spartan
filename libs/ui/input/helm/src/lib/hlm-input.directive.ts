@@ -45,7 +45,7 @@ type InputVariants = VariantProps<typeof inputVariants>;
 export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 	public readonly size = input<InputVariants['size']>('default');
 
-	public readonly error = signal<InputVariants['error']>('auto');
+	public readonly error = input<InputVariants['error']>('auto');
 
 	protected readonly state = computed(() => ({
 		error: signal(this.error()),
