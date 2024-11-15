@@ -14,7 +14,7 @@ import { hlmLead } from '@spartan-ng/ui-typography-helm';
 })
 export class SectionIntroComponent {
 	@Input()
-	name = '';
+	public name = '';
 	@Input()
-	lead = '';
+	public lead = '';
 }

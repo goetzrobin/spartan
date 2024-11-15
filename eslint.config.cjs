@@ -24,6 +24,45 @@ module.exports = [
 					],
 				},
 			],
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					args: 'after-used',
+					argsIgnorePattern: '^_',
+					caughtErrors: 'none',
+					caughtErrorsIgnorePattern: '^_',
+					destructuredArrayIgnorePattern: '^_',
+					varsIgnorePattern: '^_',
+					ignoreRestSiblings: true,
+				},
+			],
+			'@typescript-eslint/no-non-null-assertion': 'off',
+			'@typescript-eslint/no-unused-expressions': 'off',
+			'@typescript-eslint/explicit-member-accessibility': [
+				'error',
+				{
+					overrides: {
+						accessors: 'explicit',
+						constructors: 'no-public',
+						methods: 'off',
+						properties: 'explicit',
+						parameterProperties: 'off',
+					},
+				},
+			],
+			'@typescript-eslint/naming-convention': [
+				'error',
+				{
+					selector: 'classProperty',
+					modifiers: ['private'],
+					format: ['camelCase'],
+					leadingUnderscore: 'require',
+				},
+				{
+					selector: 'variable',
+					format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+				},
+			],
 		},
 	},
 	{

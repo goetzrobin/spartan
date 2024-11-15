@@ -185,5 +185,5 @@ const aboutLink = 'h-6 underline text-base px-0.5';
 	`,
 })
 export default class ChangelogPageComponent {
-	currentYear = new Date().getFullYear();
+	public currentYear = new Date().getFullYear();
 }

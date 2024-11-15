@@ -38,7 +38,7 @@ import { type DarkMode, ThemeService } from '../theme.service';
 })
 export class HeaderDarkModeComponent {
 	private _themeService = inject(ThemeService);
-	theme$ = this._themeService.darkMode$;
+	public theme$ = this._themeService.darkMode$;
 	public setTheme(theme: DarkMode) {
 		this._themeService.setDarkMode(theme);
 	}

@@ -25,11 +25,11 @@ import { fromEvent } from 'rxjs';
 	},
 })
 export class BrnAccordionItemDirective {
-	private static itemIdGenerator = 0;
+	private static _itemIdGenerator = 0;
 	private readonly _accordion = inject(BrnAccordionDirective);
 	public readonly isOpened = input(false, { transform: coerceBooleanProperty });
 
-	public readonly id = BrnAccordionItemDirective.itemIdGenerator++;
+	public readonly id = BrnAccordionItemDirective._itemIdGenerator++;
 	public readonly state = computed(() => (this._accordion.openItemIds().includes(this.id) ? 'open' : 'closed'));
 
 	constructor() {

@@ -86,7 +86,7 @@ interface ListItem {
 	`,
 })
 export class SideMusicMenuComponent {
-	playlists: ListItem[] = [
+	public playlists: ListItem[] = [
 		{ text: 'Recently Added', icon: 'lucideListMusic' },
 		{ text: 'Recently Played', icon: 'lucideListMusic' },
 		{ text: 'Top Songs', icon: 'lucideListMusic' },
@@ -101,7 +101,7 @@ export class SideMusicMenuComponent {
 		{ text: 'Eminem Essentials', icon: 'lucideListMusic' },
 	];
 
-	library: ListItem[] = [
+	public library: ListItem[] = [
 		{ text: 'Playlists', icon: 'lucideListMusic' },
 		{ text: 'Songs', icon: 'lucideMusic2' },
 		{ text: 'Made for You', icon: 'lucideUser' },
@@ -109,7 +109,7 @@ export class SideMusicMenuComponent {
 		{ text: 'Albums', icon: 'lucideLibrary' },
 	];
 
-	discover: ListItem[] = [
+	public discover: ListItem[] = [
 		{ text: 'Listen Now', icon: 'lucidePlayCircle', selected: true },
 		{ text: 'Browse', icon: 'lucideLayoutGrid' },
 		{ text: 'Radio', icon: 'lucideRadio' },

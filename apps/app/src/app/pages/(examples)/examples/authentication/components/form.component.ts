@@ -75,7 +75,7 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 	`,
 })
 export class AuthenticationFormComponent {
-	isLoading = signal(false);
+	public isLoading = signal(false);
 
 	send() {
 		this.isLoading.set(true);

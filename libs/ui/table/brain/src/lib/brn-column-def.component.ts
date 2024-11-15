@@ -34,21 +34,21 @@ import { BrnHeaderDefDirective } from './brn-header-def.directive';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BrnColumnDefComponent implements AfterContentChecked {
-	get columnDef() {
+	public get columnDef() {
 		return this._columnDef;
 	}
 
-	get cell() {
+	public get cell() {
 		return this._columnDef.cell;
 	}
 
 	private _name = '';
 	@Input()
-	get name(): string {
+	public get name(): string {
 		return this._name;
 	}
 
-	set name(value: string) {
+	public set name(value: string) {
 		this._name = value;
 		if (!this._columnDef) return;
 		this._columnDef.name = value;

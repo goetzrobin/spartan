@@ -226,9 +226,9 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class MusicPageComponent {
-	imageFallback = img;
+	public imageFallback = img;
 
-	sectionData = {
+	public sectionData = {
 		listenNow: [
 			{
 				img: 'https://images.pexels.com/photos/16580466/pexels-photo-16580466/free-photo-of-festa-comemoracao-musica-diversao.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -285,7 +285,7 @@ export default class MusicPageComponent {
 		],
 	};
 
-	contextMenuPlaylist = [
+	public contextMenuPlaylist = [
 		'Recently Added',
 		'Recently Played',
 		'Top Songs',

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { APP_BOOTSTRAP_LISTENER, ApplicationRef, InjectionToken, inject } from '@angular/core';
 import { BehaviorSubject, first } from 'rxjs';
 

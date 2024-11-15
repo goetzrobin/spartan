@@ -16,7 +16,7 @@ import { Component, Input, booleanAttribute } from '@angular/core';
 export class SectionSubHeadingComponent {
 	protected _first = false;
 	@Input({ transform: booleanAttribute })
-	set first(value: boolean) {
+	public set first(value: boolean) {
 		this._first = value;
 	}
 }

@@ -24,7 +24,7 @@ export class BrnPopoverTriggerDirective extends BrnDialogTriggerDirective {
 	}
 
 	@Input()
-	set brnPopoverTriggerFor(brnDialog: BrnPopoverComponent) {
+	public set brnPopoverTriggerFor(brnDialog: BrnPopoverComponent) {
 		brnDialog.attachTo = this._host.nativeElement;
 		brnDialog.closeOnOutsidePointerEvents = true;
 		super.brnDialogTriggerFor = brnDialog;

@@ -27,9 +27,9 @@ import {
 	`,
 })
 export class TabsPaginatedPreviewComponent {
-	activeTab = input('Tab 0');
+	public activeTab = input('Tab 0');
 
-	lotsOfTabs = Array.from({ length: 30 })
+	public lotsOfTabs = Array.from({ length: 30 })
 		.fill(0)
 		.map((_, index) => `Tab ${index}`);
 }

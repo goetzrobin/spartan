@@ -29,11 +29,11 @@ export class BrnSelectValueComponent {
 
 	public readonly id = computed(() => `${this._selectService.id()}--value`);
 	public readonly placeholder = computed(() => this._selectService.placeholder());
-	value: string | null = null;
+	public value: string | null = null;
 
 	@Input()
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	transformFn: (values: (string | undefined)[]) => any = (values) => (values ?? []).join(', ');
+	public transformFn: (values: (string | undefined)[]) => any = (values) => (values ?? []).join(', ');
 
 	constructor() {
 		const cdr = inject(ChangeDetectorRef);

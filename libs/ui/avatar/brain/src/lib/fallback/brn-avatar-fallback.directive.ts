@@ -8,12 +8,12 @@ import type { ClassValue } from 'clsx';
 	exportAs: 'avatarFallback',
 })
 export class BrnAvatarFallbackDirective {
-	private readonly element = inject(ElementRef).nativeElement;
+	private readonly _element = inject(ElementRef).nativeElement;
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	public readonly autoColor = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
 	getTextContent(): string {
-		return this.element.textContent;
+		return this._element.textContent;
 	}
 }

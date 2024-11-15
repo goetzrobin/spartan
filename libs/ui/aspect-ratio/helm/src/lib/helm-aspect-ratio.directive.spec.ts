@@ -16,7 +16,7 @@ import { HlmAspectRatioDirective } from './helm-aspect-ratio.directive';
 	`,
 })
 class MockComponent {
-	ratio: number | undefined = 16 / 9;
+	public ratio: number | undefined = 16 / 9;
 }
 
 describe('HelmAspectRatioDirective', () => {

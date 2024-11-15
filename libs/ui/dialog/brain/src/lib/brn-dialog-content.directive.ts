@@ -20,13 +20,13 @@ export class BrnDialogContentDirective<T> {
 	}
 
 	@Input()
-	set class(newClass: string | null | undefined) {
+	public set class(newClass: string | null | undefined) {
 		if (!this._brnDialog) return;
 		this._brnDialog.setPanelClass(newClass);
 	}
 
 	@Input()
-	set context(context: T) {
+	public set context(context: T) {
 		if (!this._brnDialog) return;
 		this._brnDialog.setContext(context);
 	}

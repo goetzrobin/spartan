@@ -51,19 +51,19 @@ export type BrnActivationMode = 'automatic' | 'manual';
 export class BrnTabsDirective {
 	public readonly orientation = input<BrnTabsOrientation>('horizontal');
 	/** internal **/
-	$orientation = this.orientation;
+	public $orientation = this.orientation;
 
 	public readonly direction = input<BrnTabsDirection>('ltr');
 	/** internal **/
-	$direction = this.direction;
+	public $direction = this.direction;
 
 	public readonly _activeTab = model<string | undefined>(undefined, { alias: 'brnTabs' });
 	/** internal **/
-	$activeTab = this._activeTab.asReadonly();
+	public $activeTab = this._activeTab.asReadonly();
 
 	public readonly activationMode = input<BrnActivationMode>('automatic');
 	/** internal **/
-	$activationMode = this.activationMode;
+	public $activationMode = this.activationMode;
 
 	public readonly tabActivated = output<string>();
 
@@ -142,7 +142,7 @@ export class BrnTabsTriggerDirective {
 		this._root.emitTabActivated(this.triggerFor());
 	}
 
-	get key(): string | undefined {
+	public get key(): string | undefined {
 		return this.triggerFor();
 	}
 }

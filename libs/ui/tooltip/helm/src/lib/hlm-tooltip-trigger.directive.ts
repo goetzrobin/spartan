@@ -38,7 +38,7 @@ export class HlmTooltipTriggerDirective {
 	}
 
 	@Input()
-	set hlmTooltipTrigger(value: string | TemplateRef<unknown> | null) {
+	public set hlmTooltipTrigger(value: string | TemplateRef<unknown> | null) {
 		this._brnTooltipTrigger.content = value;
 	}
 }

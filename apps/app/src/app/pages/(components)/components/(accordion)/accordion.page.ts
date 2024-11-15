@@ -98,9 +98,9 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class AccordionPageComponent {
-	code = codeString;
-	imports = codeImports;
-	skeleton = codeSkeleton;
-	multipleOpenedCode = multipleOpenedCodeString;
+	public code = codeString;
+	public imports = codeImports;
+	public skeleton = codeSkeleton;
+	public multipleOpenedCode = multipleOpenedCodeString;
 	protected readonly codeSkeleton = codeSkeleton;
 }

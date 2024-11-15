@@ -104,6 +104,7 @@ export interface BrnSlider {
 })
 export class BrnSliderInputDirective implements ControlValueAccessor, BrnSliderInput {
 	private _onChangeFn: ((value: string | number) => void) | undefined;
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private _onTouchedFn: () => void = () => {};
 	protected isDisabled = computed(() => (this._slider.disabled() === true ? true : undefined));
 	protected valueNow = computed(() => this.value() ?? 0);
