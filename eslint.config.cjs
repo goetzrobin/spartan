@@ -9,7 +9,13 @@ module.exports = [
 		ignores: ['**/dist'],
 	},
 	{
-		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+		files: ['**/*.ts', '**/*.tsx'],
+		languageOptions: {
+			parserOptions: {
+				projectService: true,
+				tsconfigRootDir: process.cwd(),
+			},
+		},
 		rules: {
 			'@nx/enforce-module-boundaries': [
 				'error',
@@ -38,6 +44,7 @@ module.exports = [
 			],
 			'@typescript-eslint/no-non-null-assertion': 'off',
 			'@typescript-eslint/no-unused-expressions': 'off',
+			'@typescript-eslint/prefer-readonly': 'error',
 			'@typescript-eslint/explicit-member-accessibility': [
 				'error',
 				{
@@ -82,18 +89,6 @@ module.exports = [
 		},
 		languageOptions: {
 			parser: require('jsonc-eslint-parser'),
-		},
-	},
-	{
-		files: ['**/*.ts'],
-		rules: {
-			'@typescript-eslint/prefer-readonly': 'error',
-		},
-		languageOptions: {
-			parserOptions: {
-				projectService: true,
-				tsconfigRootDir: process.cwd(),
-			},
 		},
 	},
 	{

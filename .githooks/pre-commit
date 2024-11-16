@@ -1,4 +1,5 @@
 #!/bin/sh
 
-bun run lint
+# Run linting only on the files that have changed since the last commit
+bun nx affected -t lint --parallel --base=main~1 --head=main
 bunx run nx format:check

@@ -67,7 +67,9 @@ export class BrnTabsDirective {
 
 	public readonly tabActivated = output<string>();
 
-	private readonly _tabs = signal<{ [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } }>({});
+	private readonly _tabs = signal<{
+		[key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective };
+	}>({});
 	public readonly $tabs = this._tabs.asReadonly();
 
 	public registerTrigger(key: string, trigger: BrnTabsTriggerDirective) {
