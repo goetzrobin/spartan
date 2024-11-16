@@ -106,9 +106,9 @@ export class BrnHoverCardContentService {
 	private _positionStrategy?: FlexibleConnectedPositionStrategy;
 	private _destroyed$ = new Subject<void>();
 
-	private readonly _positionChangesObservables$ = new BehaviorSubject<Observable<ConnectedOverlayPositionChange> | undefined>(
-		undefined,
-	);
+	private readonly _positionChangesObservables$ = new BehaviorSubject<
+		Observable<ConnectedOverlayPositionChange> | undefined
+	>(undefined);
 	private readonly _overlayHoveredObservables$ = new BehaviorSubject<Observable<boolean> | undefined>(undefined);
 
 	public readonly positionChanges$: Observable<ConnectedOverlayPositionChange> = this._positionChangesObservables$.pipe(
