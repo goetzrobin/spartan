@@ -78,5 +78,5 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 export class NoteComponent {
 	@Input() public deletionInProgress = false;
 	@Input({ required: true }) public note!: Note;
-	@Output() public deleteClicked = new EventEmitter<void>();
+	@Output() public readonly deleteClicked = new EventEmitter<void>();
 }

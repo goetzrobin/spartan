@@ -125,7 +125,7 @@ export class BrnSelectComponent<T = unknown>
 	protected _overlayDir!: CdkConnectedOverlay;
 
 	@Output()
-	public openedChange = new EventEmitter<boolean>();
+	public readonly openedChange = new EventEmitter<boolean>();
 
 	public readonly closeDelay = input<number>(100);
 	public readonly isExpanded = this._selectService.isExpanded;

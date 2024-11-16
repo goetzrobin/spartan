@@ -24,5 +24,5 @@ export class BrnMenuItemDirective {
 	}
 
 	@Output()
-	public triggered = this._cdkMenuItem.triggered;
+	public readonly triggered = this._cdkMenuItem.triggered;
 }
