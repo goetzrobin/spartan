@@ -70,12 +70,17 @@ module.exports = [
 					format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
 				},
 			],
+			'@angular-eslint/prefer-output-readonly': ['error'],
+			// this should be enabled when we move to signals
+			'@nx/workspace-prefer-signals': 'off',
 		},
 	},
 	{
-		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+		files: ['**/*.spec.ts', '**/tests/**/*.ts'],
 		// Override or add rules here
-		rules: {},
+		rules: {
+			'@nx/workspace-prefer-signals': 'off',
+		},
 	},
 	{
 		files: ['**/*.json'],

@@ -7,6 +7,9 @@ module.exports = [
 	...baseConfig,
 	{
 		// Override or add rules here
-		rules: {},
+		files: ['**/*.ts'],
+		rules: {
+			'@angular-eslint/prefer-output-readonly': 'off',
+		},
 	},
 ];

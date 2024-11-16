@@ -8,7 +8,9 @@ module.exports = [
 	},
 	{
 		files: ['**/*.ts', '**/*.tsx'],
-		rules: {},
+		rules: {
+			'@angular-eslint/prefer-output-readonly': 'off',
+		},
 	},
 	{
 		files: ['**/*.js', '**/*.jsx'],
