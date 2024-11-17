@@ -45,7 +45,7 @@ jobs:
       - name: Install Bun globally
         run: npm install -g bun
       - name: Install Dependencies
-        run: bun install --no-cache
+        run: bun install --frozen-lockfile --no-cache
       - name: lint
         run: bun run lint
       - name: format
