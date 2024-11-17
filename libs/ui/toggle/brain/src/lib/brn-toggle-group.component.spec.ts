@@ -121,11 +121,12 @@ describe('BrnToggleGroupDirective', () => {
 	});
 
 	it('should initially select the button with the provided value (multiple = false) using ngModel', async () => {
-		const { getAllByRole } = await render(BrnToggleGroupDirectiveFormSpec, {
+		const { getAllByRole, detectChanges } = await render(BrnToggleGroupDirectiveFormSpec, {
 			inputs: {
 				value: 'option-2',
 			},
 		});
+		detectChanges();
 		const buttons = getAllByRole('button');
 
 		expect(buttons[0]).toHaveAttribute('data-state', 'off');
@@ -134,12 +135,13 @@ describe('BrnToggleGroupDirective', () => {
 	});
 
 	it('should initially select the buttons with the provided values (multiple = true) using ngModel', async () => {
-		const { getAllByRole } = await render(BrnToggleGroupDirectiveFormSpec, {
+		const { getAllByRole, detectChanges } = await render(BrnToggleGroupDirectiveFormSpec, {
 			inputs: {
 				value: ['option-1', 'option-3'],
 				multiple: true,
 			},
 		});
+		detectChanges();
 		const buttons = getAllByRole('button');
 
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
