@@ -34,6 +34,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@spartan-ng/app/*": ["apps/app/src/*"],
+			"@spartan-ng/brain": ["libs/brain/src/index.ts"],
 			"@spartan-ng/cli": ["libs/cli/src/index.ts"],
 			"@spartan-ng/tools": ["libs/tools/src/index.ts"],
 			"@spartan-ng/trpc": ["libs/trpc/src/index.ts"],

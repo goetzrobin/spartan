@@ -52,6 +52,11 @@
 				"{workspaceRoot}/eslint.config.js"
 			],
 			"cache": true
+		},
+		"@nx/angular:package": {
+			"cache": true,
+			"dependsOn": ["^build"],
+			"inputs": ["production", "^production"]
 		}
 	},
 	"namedInputs": {
