@@ -52,34 +52,34 @@ export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 	}));
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() =>
+	protected readonly _computedClass = computed(() =>
 		hlm(inputVariants({ size: this.size(), error: this.state().error() }), this.userClass()),
 	);
 
-	private injector = inject(Injector);
+	private readonly _injector = inject(Injector);
 
-	ngControl: NgControl | null = this.injector.get(NgControl, null);
+	public readonly ngControl: NgControl | null = this._injector.get(NgControl, null);
 
-	private errorStateTracker: ErrorStateTracker;
+	private readonly _errorStateTracker: ErrorStateTracker;
 
-	private defaultErrorStateMatcher = inject(ErrorStateMatcher);
-	private parentForm = inject(NgForm, { optional: true });
-	private parentFormGroup = inject(FormGroupDirective, { optional: true });
+	private readonly _defaultErrorStateMatcher = inject(ErrorStateMatcher);
+	private readonly _parentForm = inject(NgForm, { optional: true });
+	private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
 
-	errorState = computed(() => this.errorStateTracker.errorState());
+	public readonly errorState = computed(() => this._errorStateTracker.errorState());
 
 	constructor() {
-		this.errorStateTracker = new ErrorStateTracker(
-			this.defaultErrorStateMatcher,
+		this._errorStateTracker = new ErrorStateTracker(
+			this._defaultErrorStateMatcher,
 			this.ngControl,
-			this.parentFormGroup,
-			this.parentForm,
+			this._parentFormGroup,
+			this._parentForm,
 		);
 
 		effect(
 			() => {
 				if (this.ngControl) {
-					this.setError(this.errorStateTracker.errorState());
+					this.setError(this._errorStateTracker.errorState());
 				}
 			},
 			{ allowSignalWrites: true },
@@ -87,7 +87,7 @@ export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 	}
 
 	ngDoCheck() {
-		this.errorStateTracker.updateErrorState();
+		this._errorStateTracker.updateErrorState();
 	}
 
 	setError(error: InputVariants['error']) {

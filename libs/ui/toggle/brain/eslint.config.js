@@ -10,6 +10,7 @@ module.exports = [
 				'error',
 				{
 					ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs}'],
+					ignoredDependencies: ['@testing-library/jest-dom', 'jest-preset-angular', 'jest-axe'],
 				},
 			],
 		},

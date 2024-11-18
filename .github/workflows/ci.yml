@@ -37,8 +37,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
@@ -61,7 +59,7 @@ jobs:
       - name: Install Bun globally
         run: npm install -g bun
       - name: Install Dependencies
-        run: bun install --no-cache
+        run: bun install --frozen-lockfile --no-cache
       - name: Build
         run: bun run build
 
@@ -77,7 +75,7 @@ jobs:
       - name: Install Bun globally
         run: npm install -g bun
       - name: Install Dependencies
-        run: bun install --no-cache
+        run: bun install --frozen-lockfile --no-cache
       - name: Test
         run: bun run test
 
@@ -93,7 +91,7 @@ jobs:
       - name: Install Bun globally
         run: npm install -g bun
       - name: Install Dependencies
-        run: bun install --no-cache
+        run: bun install --frozen-lockfile --no-cache
       - name: Install Cypress
         run: npx cypress install
       - name: End-to-end test
