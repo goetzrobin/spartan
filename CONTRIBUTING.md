@@ -53,6 +53,15 @@ We also have e2e tests set up with Cypress that run against our storybook. Run t
 bun run e2e
 ```
 
+## Creating a new Brain feature
+
+Brain features should be added as a secondary entrypoint to the `brain` library. This can be done by running the following
+command:
+
+```shell
+nx g @spartan-ng/tools:brain-secondary-entrypoint feature-name
+```
+
 ## Contributing to the docs and spartan website
 
 To serve the documentation and example application locally, run the following command from the root folder:

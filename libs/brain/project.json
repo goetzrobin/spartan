@@ -4,7 +4,7 @@
 	"sourceRoot": "libs/brain/src",
 	"prefix": "brn",
 	"projectType": "library",
-	"tags": [],
+	"tags": ["scope:brain"],
 	"targets": {
 		"build": {
 			"executor": "@nx/angular:package",
@@ -31,6 +31,12 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint"
+		},
+		"release": {
+			"executor": "@spartan-ng/tools:build-update-publish",
+			"options": {
+				"libName": "brain"
+			}
 		}
 	}
 }
