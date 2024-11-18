@@ -1,15 +1,4 @@
-import {
-	Component,
-	EventEmitter,
-	Output,
-	booleanAttribute,
-	computed,
-	effect,
-	forwardRef,
-	input,
-	model,
-	signal,
-} from '@angular/core';
+import { Component, booleanAttribute, computed, forwardRef, input, model, output, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BrnCheckboxComponent } from '@spartan-ng/ui-checkbox-brain';
 import { hlm } from '@spartan-ng/ui-core';
@@ -32,7 +21,7 @@ export const HLM_CHECKBOX_VALUE_ACCESSOR = {
 			[name]="name()"
 			[class]="_computedClass()"
 			[checked]="checked()"
-			[disabled]="_disabled()"
+			[disabled]="state().disabled()"
 			[required]="required()"
 			[aria-label]="ariaLabel()"
 			[aria-labelledby]="ariaLabelledby()"
@@ -59,7 +48,7 @@ export class HlmCheckboxComponent {
 			'group inline-flex border border-foreground shrink-0 cursor-pointer items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring' +
 				' focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=checked]:text-background data-[state=checked]:bg-primary data-[state=unchecked]:bg-background',
 			this.userClass(),
-			this._disabled() ? 'cursor-not-allowed opacity-50' : '',
+			this.state().disabled() ? 'cursor-not-allowed opacity-50' : '',
 		),
 	);
 
@@ -80,25 +69,20 @@ export class HlmCheckboxComponent {
 	public readonly name = input<string | null>(null);
 	public readonly required = input(false, { transform: booleanAttribute });
 
-	protected readonly _disabled = signal(false);
 	public readonly disabled = input(false, { transform: booleanAttribute });
 
-	private disableInput = effect(
-		() => {
-			this._disabled.set(this.disabled());
-		},
-		{ allowSignalWrites: true },
-	);
+	protected readonly state = computed(() => ({
+		disabled: signal(this.disabled()),
+	}));
 
 	// icon inputs
 	public readonly checkIconName = input<string>('lucideCheck');
-	public readonly checkIconClass = input<string>('');
+	public readonly checkIconClass = input<ClassValue>('');
 
-	@Output()
-	public changed = new EventEmitter<boolean>();
+	public readonly changed = output<boolean>();
 
 	protected _handleChange(): void {
-		if (this._disabled()) return;
+		if (this.state().disabled()) return;
 
 		const previousChecked = this.checked();
 		this.checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
@@ -128,6 +112,6 @@ export class HlmCheckboxComponent {
 	}
 
 	setDisabledState(isDisabled: boolean): void {
-		this._disabled.set(isDisabled);
+		this.state().disabled.set(isDisabled);
 	}
 }

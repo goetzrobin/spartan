@@ -1,24 +1,20 @@
-import { SelectionModel } from '@angular/cdk/collections';
+import { BooleanInput } from '@angular/cdk/coercion';
 import {
-	type AfterContentInit,
-	ChangeDetectorRef,
 	Component,
-	ContentChildren,
-	DestroyRef,
-	EventEmitter,
-	Input,
-	type OnInit,
-	Output,
-	type QueryList,
+	OnChanges,
+	SimpleChanges,
 	booleanAttribute,
+	computed,
+	contentChildren,
 	forwardRef,
-	inject,
+	input,
+	model,
+	output,
+	signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { map, merge, of, startWith, switchMap } from 'rxjs';
+import { provideBrnToggleGroup } from './brn-toggle-group.token';
 import { BrnToggleDirective } from './brn-toggle.directive';
-import { ToggleGroupCanBeNullableProvider } from './toggle-group-can-be-nullable-provider';
 
 export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
@@ -26,272 +22,193 @@ export const BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR = {
 	multi: true,
 };
 
-export class BrnButtonToggleChange {
+export class BrnButtonToggleChange<T = unknown> {
 	constructor(
-		public source: BrnToggleDirective,
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		public value: any,
+		public source: BrnToggleDirective<T>,
+		public value: ToggleValue<T>,
 	) {}
 }
 
 @Component({
 	selector: 'brn-toggle-group',
 	standalone: true,
-	providers: [
-		BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR,
-		{
-			provide: ToggleGroupCanBeNullableProvider,
-			useExisting: forwardRef(() => BrnToggleGroupComponent),
-		},
-	],
+	providers: [provideBrnToggleGroup(BrnToggleGroupComponent), BRN_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR],
 	host: {
 		role: 'group',
 		class: 'brn-button-toggle-group',
-		'[attr.aria-disabled]': 'disabled',
-		'[attr.data-disabled]': 'disabled',
-		'[attr.data-vertical]': 'vertical',
+		'[attr.aria-disabled]': 'state().disabled()',
+		'[attr.data-disabled]': 'state().disabled()',
+		'[attr.data-vertical]': 'vertical()',
+		'(focusout)': 'onTouched()',
 	},
 	exportAs: 'brnToggleGroup',
 	template: `
 		<ng-content />
 	`,
 })
-export class BrnToggleGroupComponent
-	implements ControlValueAccessor, OnInit, AfterContentInit, ToggleGroupCanBeNullableProvider
-{
-	private static uniqueIdCounter = 0;
-	private readonly _cdr = inject(ChangeDetectorRef);
-	private readonly _destroyRef = inject(DestroyRef);
-	private _vertical = false;
-	private _multiple = false;
-	private _nullable = false;
-	private _skipNullableCheck = false;
-	private _disabled = false;
-	private _selectionModel?: SelectionModel<BrnToggleDirective>;
-
+export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccessor, OnChanges {
 	/**
 	 * The method to be called in order to update ngModel.
 	 */
-	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
-	private _controlValueAccessorChangeFn: (value: any) => void = () => {};
+	private _onChange: (value: ToggleValue<T>) => void = () => {};
 
 	/** onTouch function registered via registerOnTouch (ControlValueAccessor). */
-	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
-	private _onTouched: () => any = () => {};
+	protected onTouched: () => void = () => {};
 
-	@ContentChildren(BrnToggleDirective, {
-		// Note that this would technically pick up toggles
-		// from nested groups, but that's not a case that we support.
-		descendants: true,
-	})
-	_buttonToggles?: QueryList<BrnToggleDirective>;
-
-	private _name = `brn-button-toggle-group-${BrnToggleGroupComponent.uniqueIdCounter++}`;
-	@Input()
-	get name(): string {
-		return this._name;
-	}
-
-	set name(value: string) {
-		this._name = value;
-		this._markTogglesForCheck();
-	}
-
-	@Input({ transform: booleanAttribute })
-	get vertical(): boolean {
-		return this._vertical;
-	}
-
-	set vertical(value: boolean) {
-		this._vertical = value;
-	}
+	/** Whether the button toggle group has a vertical orientation */
+	readonly vertical = input<boolean, BooleanInput>(false, {
+		transform: booleanAttribute,
+	});
 
 	/** Value of the toggle group. */
-	@Input() // eslint-disable-next-line @typescript-eslint/no-explicit-any
-	get value(): any {
-		const selected = this._selectionModel ? this._selectionModel.selected : [];
-
-		if (this.multiple) {
-			return selected.map((toggle) => toggle.value);
-		}
-
-		return selected[0] ? selected[0].value : undefined;
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	set value(newValue: any) {
-		if (this._disabled) {
-			return;
-		}
-		this._setSelectionByValue(newValue);
-		this.valueChange.emit(this.value);
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	@Output() readonly valueChange = new EventEmitter<any>();
-
-	/** Selected button toggles in the group. */
-	get selected(): BrnToggleDirective | BrnToggleDirective[] {
-		const selected = this._selectionModel ? this._selectionModel.selected : [];
-		return this.multiple ? selected : selected[0] || null;
-	}
+	readonly value = model<ToggleValue<T>>(undefined);
 
 	/** Whether no button toggles need to be selected. */
-	@Input({ transform: booleanAttribute })
-	get nullable(): boolean {
-		return this._nullable;
-	}
-
-	set nullable(value: boolean) {
-		this._nullable = value;
-		this._markTogglesForCheck();
-	}
+	readonly nullable = input<boolean, BooleanInput>(false, {
+		transform: booleanAttribute,
+	});
 
 	/** Whether multiple button toggles can be selected. */
-	@Input({ transform: booleanAttribute })
-	get multiple(): boolean {
-		return this._multiple;
+	readonly multiple = input<boolean, BooleanInput>(false, {
+		transform: booleanAttribute,
+	});
+
+	/** Whether the button toggle group is disabled. */
+	readonly disabled = input<boolean, BooleanInput>(false, {
+		transform: booleanAttribute,
+	});
+
+	/** The internal state of the component. This can be replaced with linkedSignal in the future. */
+	readonly state = computed(() => ({
+		disabled: signal(this.disabled()),
+	}));
+
+	/** Emit event when the group value changes. */
+	readonly change = output<BrnButtonToggleChange<T>>();
+
+	/** The toggles within the group. */
+	private readonly _toggleButtons = contentChildren(BrnToggleDirective, { descendants: true });
+
+	ngOnChanges(changes: SimpleChanges): void {
+		if ('value' in changes) {
+			this.updateSelectionState();
+		}
 	}
 
-	set multiple(value: boolean) {
-		this._multiple = value;
-		this._markTogglesForCheck();
+	writeValue(value: ToggleValue<T>): void {
+		this.value.set(value);
+		this.updateSelectionState();
 	}
 
-	@Input({ transform: booleanAttribute })
-	get disabled(): boolean {
-		return this._disabled;
+	registerOnChange(fn: (value: ToggleValue<T>) => void) {
+		this._onChange = fn;
 	}
 
-	set disabled(value: boolean) {
-		this._disabled = value;
-		this._buttonToggles?.forEach((toggle) => (toggle.disabled = this._disabled));
-		this._markTogglesForCheck();
-	}
-
-	@Output()
-	// eslint-disable-next-line @angular-eslint/no-output-native
-	readonly change = new EventEmitter<BrnButtonToggleChange>();
-
-	ngOnInit() {
-		this._selectionModel = new SelectionModel<BrnToggleDirective>(this.multiple, undefined, false);
-	}
-
-	ngAfterContentInit() {
-		if (!this._selectionModel || !this._buttonToggles) return;
-		this._selectionModel.select(...this._buttonToggles.filter((toggle) => toggle.isOn()));
-
-		this._buttonToggles.changes
-			.pipe(
-				startWith(this._buttonToggles),
-				switchMap(() => {
-					if (!this._buttonToggles) return of();
-					return merge(
-						...this._buttonToggles
-							.toArray()
-							.map((toggle) => toggle.toggled.asObservable().pipe(map((state) => ({ toggle: toggle, state })))),
-					);
-				}),
-				takeUntilDestroyed(this._destroyRef),
-			)
-			.subscribe(({ state, toggle }) => {
-				if (!this._selectionModel) {
-					return;
-				}
-				this._onTouched();
-				if (state === 'on') {
-					if (!this.multiple) {
-						this._skipNullableCheck = true;
-						this._selectionModel.selected.forEach((s) => s.toggleOff());
-						this._skipNullableCheck = false;
-					}
-					this._selectionModel.select(toggle);
-				} else {
-					this._selectionModel.deselect(toggle);
-				}
-				this._updateModelValue(toggle);
-			});
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	writeValue(value: any) {
-		this.value = value;
-		this._cdr.markForCheck();
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnChange(fn: (value: any) => void) {
-		this._controlValueAccessorChangeFn = fn;
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	registerOnTouched(fn: any) {
-		this._onTouched = fn;
+	registerOnTouched(fn: () => void) {
+		this.onTouched = fn;
 	}
 
 	setDisabledState(isDisabled: boolean): void {
-		this.disabled = isDisabled;
+		this.state().disabled.set(isDisabled);
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	_canBeNullable(value: any) {
-		if (this._nullable || this._skipNullableCheck) return true;
-		if (this._multiple) {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			return !((this.value as any[]).length === 1 && this.value[0] === value);
+	/**
+	 * @internal
+	 * Determines whether a value can be set on the group.
+	 */
+	canDeselect(value: ToggleValue<T>): boolean {
+		// if null values are allowed, the group can always be nullable
+		if (this.nullable()) return true;
+
+		const currentValue = this.value();
+
+		if (this.multiple() && Array.isArray(currentValue)) {
+			return !(currentValue.length === 1 && currentValue[0] === value);
 		}
-		return this.value !== value;
+
+		return currentValue !== value;
 	}
 
-	/** Updates the selection state of the toggles in the group based on a value. */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private _setSelectionByValue(value: any | any[]) {
-		if (!this._buttonToggles) {
+	/**
+	 * @internal
+	 * Selects a value.
+	 */
+	select(value: T, source: BrnToggleDirective<T>): void {
+		if (this.state().disabled() || this.isSelected(value)) {
 			return;
 		}
 
-		if (this.multiple && value) {
-			if (!Array.isArray(value)) {
-				throw Error('Value must be an array in multiple-selection mode.');
-			}
-			this._clearSelection();
-			value.forEach((currentValue) => this._selectValue(currentValue));
+		const currentValue = this.value();
+
+		// emit the valueChange event here as we should only emit based on user interaction
+		if (this.multiple()) {
+			this.emitSelectionChange([...((currentValue ?? []) as T[]), value], source);
 		} else {
-			this._clearSelection();
-			this._selectValue(value);
+			this.emitSelectionChange(value, source);
+		}
+
+		this._onChange(this.value());
+		this.change.emit(new BrnButtonToggleChange<T>(source, this.value()));
+	}
+
+	/**
+	 * @internal
+	 * Deselects a value.
+	 */
+	deselect(value: T, source: BrnToggleDirective<T>): void {
+		if (this.state().disabled() || !this.isSelected(value)) {
+			return;
+		}
+
+		const currentValue = this.value();
+
+		if (this.multiple()) {
+			this.emitSelectionChange(
+				((currentValue ?? []) as T[]).filter((v) => v !== value),
+				source,
+			);
+		} else if (currentValue === value && this.canDeselect(value)) {
+			this.emitSelectionChange(null, source);
 		}
 	}
 
-	/** Clears the selected toggles. */
-	private _clearSelection() {
-		if (!this._selectionModel) return;
-		this._selectionModel.clear();
-		(this._buttonToggles ?? []).forEach((toggle) => toggle.toggleOff());
+	/** Update the value of the group */
+	private emitSelectionChange(value: ToggleValue<T>, source: BrnToggleDirective<T>): void {
+		this.value.set(value);
+		this._onChange(value);
+		this.change.emit(new BrnButtonToggleChange<T>(source, this.value()));
+
+		// propagate the change to the other toggles in the group
+		this.updateSelectionState();
 	}
 
-	/** Selects a value if there's a toggle that corresponds to it. */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private _selectValue(value: any) {
-		if (!this._selectionModel) return;
-		const correspondingOption = (this._buttonToggles ?? []).find((toggle) => {
-			return toggle.value !== null && toggle.value === value;
-		});
-
-		if (correspondingOption) {
-			correspondingOption.toggleOn();
+	/** Update the selection state in the toggle buttons. */
+	private updateSelectionState(): void {
+		for (const toggle of this._toggleButtons()) {
+			this.isSelected(toggle.value() as T) ? toggle.toggleOn() : toggle.toggleOff();
 		}
 	}
 
-	private _updateModelValue(toggle: BrnToggleDirective) {
-		const value = this.value;
-		const event = new BrnButtonToggleChange(toggle, value);
-		this._controlValueAccessorChangeFn(value);
-		this.change.emit(event);
-		this.valueChange.emit(value);
-	}
+	/**
+	 * @internal
+	 * Determines whether a value is selected.
+	 */
+	private isSelected(value: T): boolean {
+		const currentValue = this.value();
 
-	/** Marks all the child button toggles to be checked. */
-	private _markTogglesForCheck() {
-		this._buttonToggles?.forEach((toggle) => toggle._markForCheck());
+		if (
+			currentValue == null ||
+			currentValue === undefined ||
+			(Array.isArray(currentValue) && currentValue.length === 0)
+		) {
+			return false;
+		}
+
+		if (this.multiple()) {
+			return (currentValue as T[])?.includes(value);
+		}
+		return currentValue === value;
 	}
 }
+
+type ToggleValue<T> = T | T[] | null | undefined;

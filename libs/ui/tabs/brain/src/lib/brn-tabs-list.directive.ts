@@ -1,7 +1,6 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { type AfterContentInit, ContentChildren, Directive, type QueryList, inject } from '@angular/core';
-import { rxHostListener } from '@spartan-ng/ui-core';
-import { take } from 'rxjs';
+import { type AfterContentInit, Directive, ElementRef, contentChildren, inject } from '@angular/core';
+import { fromEvent, take } from 'rxjs';
 import { BrnTabsDirective, BrnTabsTriggerDirective } from './brn-tabs-trigger.directive';
 
 @Directive({
@@ -21,18 +20,15 @@ export class BrnTabsListDirective implements AfterContentInit {
 	private readonly _direction = this._root.$direction;
 	private readonly _activeTab = this._root.$activeTab;
 	private readonly _tabs = this._root.$tabs;
-	private readonly _keyDownListener = rxHostListener('keydown');
+	private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	private readonly _keyDownListener = fromEvent(this._elementRef.nativeElement, 'keydown');
 
 	private _keyManager?: FocusKeyManager<BrnTabsTriggerDirective>;
 
-	@ContentChildren(BrnTabsTriggerDirective, { descendants: true })
-	public triggers?: QueryList<BrnTabsTriggerDirective>;
+	public triggers = contentChildren(BrnTabsTriggerDirective, { descendants: true });
 
 	public ngAfterContentInit() {
-		if (!this.triggers) {
-			return;
-		}
-		this._keyManager = new FocusKeyManager<BrnTabsTriggerDirective>(this.triggers)
+		this._keyManager = new FocusKeyManager<BrnTabsTriggerDirective>(this.triggers())
 			.withHorizontalOrientation(this._direction())
 			.withHomeAndEnd()
 			.withPageUpDown()
@@ -43,10 +39,10 @@ export class BrnTabsListDirective implements AfterContentInit {
 			const currentTabKey = this._activeTab();
 			const tabs = this._tabs();
 			let activeIndex = 0;
-			if (currentTabKey && this.triggers) {
+			if (currentTabKey) {
 				const currentTab = tabs[currentTabKey];
 				if (currentTab) {
-					activeIndex = this.triggers.toArray().indexOf(currentTab.trigger);
+					activeIndex = this.triggers().indexOf(currentTab.trigger);
 				}
 			}
 			this._keyManager?.setActiveItem(activeIndex);

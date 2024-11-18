@@ -12,6 +12,6 @@ export class BrnSelectLabelDirective {
 	private readonly label = inject(BrnLabelDirective, { host: true });
 
 	constructor() {
-		this.group?.labelledBy.set(this.label.id);
+		this.group?.labelledBy.set(this.label.id());
 	}
 }

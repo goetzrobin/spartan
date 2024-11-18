@@ -36,7 +36,7 @@ export class HlmToggleDirective {
 	public readonly variant = input<ToggleVariants['variant']>('default');
 	public readonly size = input<ToggleVariants['size']>('default');
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() =>
+	protected readonly _computedClass = computed(() =>
 		hlm(toggleVariants({ variant: this.variant(), size: this.size() }), this.userClass()),
 	);
 }

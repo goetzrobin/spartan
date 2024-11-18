@@ -103,7 +103,9 @@ class HlmToggleGroupStoryComponent {
 	public selected?: City | City[];
 
 	get selectedCities() {
-		if (!this.selected) return 'No city selected';
+		if (!this.selected) {
+			return this.multiple ? 'No cities selected' : 'No city selected';
+		}
 
 		if (Array.isArray(this.selected)) {
 			if (this.selected.length === 0) return 'No cities selected';

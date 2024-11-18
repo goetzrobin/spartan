@@ -259,7 +259,7 @@ export class BrnSelectComponent
 			this.labelProvided.set(true);
 			this._selectService.state.update((state) => ({
 				...state,
-				labelId: this.selectLabel.id,
+				labelId: this.selectLabel.id(),
 				dir: this.dir(),
 			}));
 		} else if (this._placeholder()) {

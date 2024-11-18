@@ -5,13 +5,10 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
-	EventEmitter,
 	HostListener,
 	type OnDestroy,
-	Output,
 	PLATFORM_ID,
 	Renderer2,
-	ViewChild,
 	ViewEncapsulation,
 	booleanAttribute,
 	computed,
@@ -20,11 +17,11 @@ import {
 	inject,
 	input,
 	model,
+	output,
 	signal,
+	viewChild,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { rxHostPressedListener } from '@spartan-ng/ui-core';
 import { ChangeFn, TouchFn } from '@spartan-ng/ui-forms-brain';
 
 export const BRN_CHECKBOX_VALUE_ACCESSOR = {
@@ -75,11 +72,11 @@ const CONTAINER_POST_FIX = '-checkbox';
 		<ng-content />
 	`,
 	host: {
-		'[attr.tabindex]': '_disabled() ? "-1" : "0"',
+		'[attr.tabindex]': 'state().disabled() ? "-1" : "0"',
 		'[attr.data-state]': '_dataState()',
 		'[attr.data-focus-visible]': 'focusVisible()',
 		'[attr.data-focus]': 'focused()',
-		'[attr.data-disabled]': '_disabled()',
+		'[attr.data-disabled]': 'state().disabled()',
 		'[attr.aria-labelledby]': 'null',
 		'[attr.aria-label]': 'null',
 		'[attr.aria-describedby]': 'null',
@@ -138,52 +135,44 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	public readonly required = input(false, { transform: booleanAttribute });
 
-	private readonly _disabled = signal(false);
-	/** Only used as input */
 	public readonly disabled = input(false, { transform: booleanAttribute });
+
+	protected readonly state = computed(() => ({
+		disabled: signal(this.disabled()),
+	}));
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	protected _onChange: ChangeFn<BrnCheckboxValue> = () => {};
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private _onTouched: TouchFn = () => {};
 
-	@ViewChild('checkBox', { static: true })
-	public checkbox?: ElementRef<HTMLInputElement>;
+	public readonly checkbox = viewChild.required<ElementRef<HTMLInputElement>>('checkBox');
 
-	@Output()
-	public readonly changed = new EventEmitter<BrnCheckboxValue>();
+	public readonly changed = output<BrnCheckboxValue>();
 
 	constructor() {
-		rxHostPressedListener()
-			.pipe(takeUntilDestroyed())
-			.subscribe(() => this.handleChange());
 		effect(() => {
 			const parent = this._renderer.parentNode(this._elementRef.nativeElement);
 			if (!parent) return;
 			// check if parent is a label and assume it is for this checkbox
 			if (parent?.tagName === 'LABEL') {
-				this._renderer.setAttribute(parent, 'data-disabled', this._disabled() ? 'true' : 'false');
+				this._renderer.setAttribute(parent, 'data-disabled', this.state().disabled() ? 'true' : 'false');
 				return;
 			}
 			if (!this._isBrowser) return;
 
 			const label = parent?.querySelector(`label[for="${this.id()}"]`);
 			if (!label) return;
-			this._renderer.setAttribute(label, 'data-disabled', this._disabled() ? 'true' : 'false');
+			this._renderer.setAttribute(label, 'data-disabled', this.state().disabled() ? 'true' : 'false');
 		});
-
-		effect(
-			() => {
-				// sync disabled input
-				this._disabled.set(this.disabled());
-			},
-			{ allowSignalWrites: true },
-		);
 	}
 
-	handleChange() {
-		if (this._disabled()) return;
-		if (!this.checkbox) return;
+	@HostListener('click', ['$event'])
+	@HostListener('keyup.space', ['$event'])
+	@HostListener('keyup.enter', ['$event'])
+	toggle(event: Event) {
+		if (this.state().disabled()) return;
+		event.preventDefault();
 		const previousChecked = this.checked();
 		this.checked.set(previousChecked === 'indeterminate' ? true : !previousChecked);
 		this._onChange(!previousChecked);
@@ -210,15 +199,13 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 			}
 		});
 
-		if (!this.checkbox) return;
-
-		this.checkbox.nativeElement.indeterminate = this.checked() === 'indeterminate';
-		if (this.checkbox.nativeElement.indeterminate) {
-			this.checkbox.nativeElement.value = 'indeterminate';
+		this.checkbox().nativeElement.indeterminate = this.checked() === 'indeterminate';
+		if (this.checkbox().nativeElement.indeterminate) {
+			this.checkbox().nativeElement.value = 'indeterminate';
 		} else {
-			this.checkbox.nativeElement.value = this.checked() ? 'on' : 'off';
+			this.checkbox().nativeElement.value = this.checked() ? 'on' : 'off';
 		}
-		this.checkbox.nativeElement.dispatchEvent(new Event('change'));
+		this.checkbox().nativeElement.dispatchEvent(new Event('change'));
 	}
 
 	ngOnDestroy() {
@@ -243,7 +230,7 @@ export class BrnCheckboxComponent implements AfterContentInit, OnDestroy {
 
 	/** Implemented as a part of ControlValueAccessor. */
 	setDisabledState(isDisabled: boolean): void {
-		this._disabled.set(isDisabled);
+		this.state().disabled.set(isDisabled);
 	}
 
 	/**
