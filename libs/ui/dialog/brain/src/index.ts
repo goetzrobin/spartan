@@ -17,8 +17,8 @@ export * from './lib/brn-dialog-ref';
 export * from './lib/brn-dialog-state';
 export * from './lib/brn-dialog-title.directive';
 export * from './lib/brn-dialog-trigger.directive';
-export * from './lib/brn-dialog.component';
 export * from './lib/brn-dialog-utils';
+export * from './lib/brn-dialog.component';
 export * from './lib/brn-dialog.service';
 
 export const BrnDialogImports = [

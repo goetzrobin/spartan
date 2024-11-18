@@ -47,7 +47,7 @@ jobs:
       - name: lint
         run: bun run lint
       - name: format
-        run: npx nx format:check --verbose
+        run: bun run nx format:check --base=origin/main
 
   build:
     runs-on: ubuntu-latest

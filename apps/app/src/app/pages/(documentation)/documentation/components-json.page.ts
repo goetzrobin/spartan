@@ -41,7 +41,9 @@ export const routeMeta: RouteMeta = {
 			</p>
 
 			<p class="${hlmP}">
-				<strong>Note</strong>: this file is only required by the spartan CLI. If you're manually copy & pasting components, you can ignore this file.
+				<strong>Note</strong>
+				: this file is only required by the spartan CLI. If you're manually copy & pasting components, you can ignore
+				this file.
 			</p>
 
 			<spartan-section-sub-heading id="generation">File Generation</spartan-section-sub-heading>
@@ -57,13 +59,15 @@ export const routeMeta: RouteMeta = {
 
 			<h3 id="componentsPath" class="${hlmH4} mt-12">componentsPath</h3>
 
-			<p class="${hlmP}">
-				The base path where your components will be generated.
-			</p>
-			<spartan-code class="mt-3" language="js" code='
+			<p class="${hlmP}">The base path where your components will be generated.</p>
+			<spartan-code
+				class="mt-3"
+				language="js"
+				code='
 {
 	"componentsPath": "libs/ui"
-}' />
+}'
+			/>
 
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="changelog" label="Changelog" />
