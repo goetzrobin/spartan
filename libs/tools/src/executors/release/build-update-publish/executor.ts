@@ -1,5 +1,5 @@
-import { execSync } from 'node:child_process';
 import type { ExecutorContext } from '@nx/devkit';
+import { execSync } from 'node:child_process';
 
 import { getProjectName } from '../helpers/projects.helpers';
 import npmPublish from '../npm-publish/executor';

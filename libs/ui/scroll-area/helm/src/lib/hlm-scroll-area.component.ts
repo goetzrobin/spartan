@@ -26,7 +26,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 				'--scrollbar-padding': '1px',
 				'--scrollbar-thumb-color': 'hsl(var(--border))',
 				'--scrollbar-thumb-hover-color': 'hsl(var(--border))',
-				'--scrollbar-size': '7px'
+				'--scrollbar-size': '7px',
 			}"
 		>
 			<ng-content />

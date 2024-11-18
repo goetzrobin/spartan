@@ -1,4 +1,3 @@
-import * as path from 'node:path';
 import {
 	type GeneratorCallback,
 	type Tree,
@@ -9,6 +8,7 @@ import {
 } from '@nx/devkit';
 import { addTsConfigPath } from '@nx/js';
 import { getRootTsConfigPathInTree, readTsConfigPaths } from '@nx/js/src/utils/typescript/ts-config';
+import * as path from 'node:path';
 import { getInstalledPackageVersion } from '../../utils/version-utils';
 import { buildDependencyArray, buildDevDependencyArray } from './lib/build-dependency-array';
 import { getTargetLibraryDirectory } from './lib/get-target-library-directory';
