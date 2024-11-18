@@ -1,26 +1,28 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { metaWith } from '../../../../shared/meta/meta.util';
-import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
+import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
+import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
+import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
+import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
+import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { SectionIntroComponent } from '../../../../shared/layout/section-intro.component';
 import { SectionSubHeadingComponent } from '../../../../shared/layout/section-sub-heading.component';
-import { TabsComponent } from '../../../../shared/layout/tabs.component';
-import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
-import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
-import { BreadcrumbPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './breadcrumb.preview';
-import {
-	breadcrumbCustomSeparatorCode,
-	BreadcrumbCustomSeparatorComponent,
-	breadcrumbCustomSeparatorSkeleton,
-} from './breadcrumb--custom-separator.example';
-import { breadcrumbDropdownCode, BreadcrumbDropdownComponent } from './breadcrumb--dropdown.example';
+import { TabsComponent } from '../../../../shared/layout/tabs.component';
+import { metaWith } from '../../../../shared/meta/meta.util';
 import {
 	BreadcrumbCollapsedComponent,
-	breadcrumbCollapsedSkeleton,
 	breadcrumbCollapsedCode,
+	breadcrumbCollapsedSkeleton,
 } from './breadcrumb--collapsed.example';
+import {
+	BreadcrumbCustomSeparatorComponent,
+	breadcrumbCustomSeparatorCode,
+	breadcrumbCustomSeparatorSkeleton,
+} from './breadcrumb--custom-separator.example';
+import { BreadcrumbDropdownComponent, breadcrumbDropdownCode } from './breadcrumb--dropdown.example';
+import { BreadcrumbPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './breadcrumb.preview';
 
 export const routeMeta: RouteMeta = {
 	data: { breadcrumb: 'Breadcrumb' },
@@ -38,6 +40,8 @@ export const routeMeta: RouteMeta = {
 		TabsComponent,
 		CodePreviewDirective,
 		TabsCliComponent,
+		PageBottomNavComponent,
+		PageBottomNavLinkComponent,
 
 		BreadcrumbPreviewComponent,
 		BreadcrumbCustomSeparatorComponent,
@@ -126,6 +130,10 @@ export const routeMeta: RouteMeta = {
 			<div class="mt-6">
 				<spartan-code [code]="collapsedSkeleton" />
 			</div>
+			<spartan-page-bottom-nav>
+				<spartan-page-bottom-nav-link href="card" label="Card" />
+				<spartan-page-bottom-nav-link direction="previous" href="button" label="Button" />
+			</spartan-page-bottom-nav>
 		</section>
 	`,
 })

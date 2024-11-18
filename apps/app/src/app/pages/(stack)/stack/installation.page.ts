@@ -2,7 +2,7 @@ import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { lucideTriangleAlert, lucideChevronRight } from '@ng-icons/lucide';
+import { lucideChevronRight, lucideTriangleAlert } from '@ng-icons/lucide';
 import { HlmAlertModule } from '@spartan-ng/ui-alert-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';

@@ -3,16 +3,17 @@ import { hlm } from '@spartan-ng/ui-core';
 import { ClassValue } from 'clsx';
 
 @Directive({
-	selector: '[hlmBreadcrumbList]',
+	selector: '[hlmBreadcrumb]',
 	standalone: true,
 	host: {
+		role: 'navigation',
 		'[class]': '_computedClass()',
+		'[attr.aria-label]': 'ariaLabel()',
 	},
 })
-export class HlmBreadcrumbListDirective {
+export class HlmBreadcrumbDirective {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly ariaLabel = input<string>('pagination', { alias: 'aria-label' });
 
-	protected _computedClass = computed(() =>
-		hlm('flex items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5 h-5', this.userClass()),
-	);
+	protected _computedClass = computed(() => hlm(this.userClass()));
 }

@@ -1,7 +1,7 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { lucideListMusic, lucideCirclePlus, lucidePodcast } from '@ng-icons/lucide';
+import { lucideCirclePlus, lucideListMusic, lucidePodcast } from '@ng-icons/lucide';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { TopMusicMenuComponent } from './components/top-menu.component';
 

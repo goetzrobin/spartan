@@ -1,12 +1,12 @@
+import { lucideSlash } from '@ng-icons/lucide';
+import { HlmBreadCrumbImports, HlmBreadcrumbDirective } from '@spartan-ng/ui-breadcrumb-helm';
+import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { lucideSlash } from '@ng-icons/lucide';
-import { HlmIconComponent, provideIcons } from '../icon/helm/src';
-import { HlmBreadcrumbComponent, HlmBreadCrumbImports } from './helm/src';
 
-const meta: Meta<HlmBreadcrumbComponent> = {
+const meta: Meta<HlmBreadcrumbDirective> = {
 	title: 'Breadcrumb',
-	component: HlmBreadcrumbComponent,
+	component: HlmBreadcrumbDirective,
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
@@ -17,12 +17,12 @@ const meta: Meta<HlmBreadcrumbComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<HlmBreadcrumbComponent>;
+type Story = StoryObj<HlmBreadcrumbDirective>;
 
 export const Default: Story = {
 	render: () => ({
 		template: /* HTML */ `
-			<hlm-breadcrumb>
+			<nav hlmBreadcrumb>
 				<ol hlmBreadcrumbList>
 					<li hlmBreadcrumbItem>
 						<a hlmBreadcrumbLink href="/home">Home</a>
@@ -46,7 +46,7 @@ export const Default: Story = {
 						<span hlmBreadcrumbPage>Breadcrumb</span>
 					</li>
 				</ol>
-			</hlm-breadcrumb>
+			</nav>
 		`,
 	}),
 };
@@ -54,7 +54,7 @@ export const Default: Story = {
 export const Custom: Story = {
 	render: () => ({
 		template: /* HTML */ `
-			<hlm-breadcrumb>
+			<nav hlmBreadcrumb>
 				<ol hlmBreadcrumbList>
 					<li hlmBreadcrumbItem>
 						<a hlmBreadcrumbLink href="/home">Home</a>
@@ -76,7 +76,7 @@ export const Custom: Story = {
 						<span hlmBreadcrumbPage>Breadcrumb</span>
 					</li>
 				</ol>
-			</hlm-breadcrumb>
+			</nav>
 		`,
 	}),
 };

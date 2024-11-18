@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-	HlmBreadcrumbComponent,
+	HlmBreadcrumbDirective,
 	HlmBreadcrumbEllipsisComponent,
 	HlmBreadcrumbItemDirective,
 	HlmBreadcrumbLinkDirective,
@@ -15,7 +15,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 	selector: 'spartan-breadcrumb-preview',
 	standalone: true,
 	imports: [
-		HlmBreadcrumbComponent,
+		HlmBreadcrumbDirective,
 		HlmBreadcrumbSeparatorComponent,
 		HlmBreadcrumbEllipsisComponent,
 		HlmBreadcrumbListDirective,
@@ -28,10 +28,10 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 		HlmMenuItemDirective,
 	],
 	template: `
-		<hlm-breadcrumb>
+		<nav hlmBreadcrumb>
 			<ol hlmBreadcrumbList>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink href="/home">Home</a>
+					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator />
@@ -56,7 +56,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					<hlm-breadcrumb-separator />
 				</li>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink hlmL href="/components">Components</a>
+					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator />
@@ -65,7 +65,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>
 			</ol>
-		</hlm-breadcrumb>
+		</nav>
 	`,
 })
 export class BreadcrumbPreviewComponent {}
@@ -73,7 +73,7 @@ export class BreadcrumbPreviewComponent {}
 export const defaultCode = `
 import { Component } from '@angular/core';
 import {
-	HlmBreadcrumbComponent,
+	HlmBreadcrumbDirective,
 	HlmBreadcrumbEllipsisComponent,
 	HlmBreadcrumbItemDirective,
 	HlmBreadcrumbLinkDirective,
@@ -88,7 +88,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 	selector: 'spartan-breadcrumb-preview',
 	standalone: true,
 	imports: [
-		HlmBreadcrumbComponent,
+		HlmBreadcrumbDirective,
 		HlmBreadcrumbSeparatorComponent,
 		HlmBreadcrumbEllipsisComponent,
 		HlmBreadcrumbListDirective,
@@ -101,10 +101,10 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 		HlmMenuItemDirective,
 	],
 	template: \`
-		<hlm-breadcrumb>
+		<nav hlmBreadcrumb>
 			<ol hlmBreadcrumbList>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink href="/home">Home</a>
+					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator />
@@ -129,7 +129,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					<hlm-breadcrumb-separator />
 				</li>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink hlmL href="/components">Components</a>
+					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator />
@@ -138,7 +138,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>
 			</ol>
-		</hlm-breadcrumb>
+		</nav>
 	\`,
 })
 export class BreadcrumbPreviewComponent {}
@@ -146,18 +146,18 @@ export class BreadcrumbPreviewComponent {}
 
 export const defaultImports = `
 import {
-	HlmBreadcrumbComponent,
+	HlmBreadcrumbDirective,
 	HlmBreadcrumbEllipsisComponent,
 	HlmBreadcrumbItemDirective,
+	HlmBreadcrumbLinkDirective,
 	HlmBreadcrumbListDirective,
 	HlmBreadcrumbPageDirective,
 	HlmBreadcrumbSeparatorComponent,
-	HlmBreadcrumbLinkDirective,
 } from '@spartan-ng/ui-breadcrumb-helm';
 `;
 
 export const defaultSkeleton = `
-<hlm-breadcrumb>
+<nav hlmBreadcrumb>
 	<ol hlmBreadcrumbList>
 		<li hlmBreadcrumbItem>
 			<a hlmBreadcrumbLink href="/home">Home</a>
@@ -181,5 +181,5 @@ export const defaultSkeleton = `
 			<span hlmBreadcrumbPage>Breadcrumb</span>
 		</li>
 	</ol>
-</hlm-breadcrumb>
+</nav>
 `;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-	HlmBreadcrumbComponent,
+	HlmBreadcrumbDirective,
 	HlmBreadcrumbEllipsisComponent,
 	HlmBreadcrumbItemDirective,
 	HlmBreadcrumbLinkDirective,
@@ -13,7 +13,7 @@ import {
 	selector: 'spartan-breadcrumb-collapsed',
 	standalone: true,
 	imports: [
-		HlmBreadcrumbComponent,
+		HlmBreadcrumbDirective,
 		HlmBreadcrumbSeparatorComponent,
 		HlmBreadcrumbEllipsisComponent,
 		HlmBreadcrumbListDirective,
@@ -22,10 +22,10 @@ import {
 		HlmBreadcrumbLinkDirective,
 	],
 	template: `
-		<hlm-breadcrumb>
+		<nav hlmBreadcrumb>
 			<ol hlmBreadcrumbList>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink href="/home">Home</a>
+					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator />
@@ -37,7 +37,7 @@ import {
 					<hlm-breadcrumb-separator />
 				</li>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink hlmL href="/components">Components</a>
+					<a hlmBreadcrumbLink link="/components">Components</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator />
@@ -46,7 +46,7 @@ import {
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>
 			</ol>
-		</hlm-breadcrumb>
+		</nav>
 	`,
 })
 export class BreadcrumbCollapsedComponent {}
@@ -54,7 +54,7 @@ export class BreadcrumbCollapsedComponent {}
 export const breadcrumbCollapsedCode = `
 import { Component } from '@angular/core';
 import {
-	HlmBreadcrumbComponent,
+	HlmBreadcrumbDirective,
 	HlmBreadcrumbEllipsisComponent,
 	HlmBreadcrumbItemDirective,
 	HlmBreadcrumbLinkDirective,
@@ -67,7 +67,7 @@ import {
 	selector: 'spartan-breadcrumb-collapsed',
 	standalone: true,
 	imports: [
-		HlmBreadcrumbComponent,
+		HlmBreadcrumbDirective,
 		HlmBreadcrumbSeparatorComponent,
 		HlmBreadcrumbEllipsisComponent,
 		HlmBreadcrumbListDirective,
@@ -76,10 +76,10 @@ import {
 		HlmBreadcrumbLinkDirective,
 	],
 	template: \`
-		<hlm-breadcrumb>
+		<nav hlmBreadcrumb>
 			<ol hlmBreadcrumbList>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink href="/home">Home</a>
+					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator />
@@ -91,7 +91,7 @@ import {
 					<hlm-breadcrumb-separator />
 				</li>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink hlmL href="/components">Components</a>
+					<a hlmBreadcrumbLink link="/components">Components</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator />
@@ -100,7 +100,7 @@ import {
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>
 			</ol>
-		</hlm-breadcrumb>
+		</nav>
 	\`,
 })
 export class BreadcrumbCollapsedComponent {}
@@ -111,7 +111,7 @@ import { lmBreadcrumbEllipsisComponent } from '@spartan-ng/ui-breadcrumb-helm';
 
 ...
 
-<hlm-breadcrumb>
+<nav hlmBreadcrumb>
     <ol hlmBreadcrumbList>
         {/*  ...  */}
         <li hlmBreadcrumbItem>
@@ -119,5 +119,5 @@ import { lmBreadcrumbEllipsisComponent } from '@spartan-ng/ui-breadcrumb-helm';
         </li>
         {/*  ...  */}
     </ol>
-</hlm-breadcrumb>
+</nav>
 `;

@@ -3,6 +3,7 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideEllipsis } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { ClassValue } from 'clsx';
 
 @Component({
 	selector: 'hlm-breadcrumb-ellipsis',
@@ -17,7 +18,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 	`,
 })
 export class HlmBreadcrumbEllipsisComponent {
-	public readonly class = input<string>('');
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
-	protected _computedClass = computed(() => hlm('flex h-9 w-9 items-center justify-center', this.class()));
+	protected _computedClass = computed(() => hlm('flex h-9 w-9 items-center justify-center', this.userClass()));
 }

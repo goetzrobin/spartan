@@ -1,17 +1,16 @@
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
+import { ClassValue } from 'clsx';
 
 @Directive({
-  selector: '[hlmBreadcrumbItem]',
-  standalone: true,
-  host: {
-    '[class]': '_computedClass()',
-  },
+	selector: '[hlmBreadcrumbItem]',
+	standalone: true,
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmBreadcrumbItemDirective {
-  public readonly class = input('');
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
-  protected _computedClass = computed(() =>
-    hlm('inline-flex items-center gap-1.5', this.class())
-  );
+	protected _computedClass = computed(() => hlm('inline-flex items-center gap-1.5', this.userClass()));
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { lucideSlash } from '@ng-icons/lucide';
 import {
-	HlmBreadcrumbComponent,
+	HlmBreadcrumbDirective,
 	HlmBreadcrumbItemDirective,
 	HlmBreadcrumbLinkDirective,
 	HlmBreadcrumbListDirective,
@@ -15,7 +15,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 	standalone: true,
 	providers: [provideIcons({ lucideSlash })],
 	imports: [
-		HlmBreadcrumbComponent,
+		HlmBreadcrumbDirective,
 		HlmBreadcrumbSeparatorComponent,
 		HlmBreadcrumbListDirective,
 		HlmBreadcrumbItemDirective,
@@ -25,10 +25,10 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 		HlmIconComponent,
 	],
 	template: `
-		<hlm-breadcrumb>
+		<nav hlmBreadcrumb>
 			<ol hlmBreadcrumbList>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink href="/home">Home</a>
+					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator>
@@ -36,7 +36,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 					</hlm-breadcrumb-separator>
 				</li>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink hlmL href="/components">Components</a>
+					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator>
@@ -47,7 +47,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>
 			</ol>
-		</hlm-breadcrumb>
+		</nav>
 	`,
 })
 export class BreadcrumbCustomSeparatorComponent {}
@@ -56,7 +56,7 @@ export const breadcrumbCustomSeparatorCode = `
 import { Component } from '@angular/core';
 import { lucideSlash } from '@ng-icons/lucide';
 import {
-	HlmBreadcrumbComponent,
+	HlmBreadcrumbDirective,
 	HlmBreadcrumbItemDirective,
 	HlmBreadcrumbLinkDirective,
 	HlmBreadcrumbListDirective,
@@ -70,7 +70,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 	standalone: true,
 	providers: [provideIcons({ lucideSlash })],
 	imports: [
-		HlmBreadcrumbComponent,
+		HlmBreadcrumbDirective,
 		HlmBreadcrumbSeparatorComponent,
 		HlmBreadcrumbListDirective,
 		HlmBreadcrumbItemDirective,
@@ -80,10 +80,10 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 		HlmIconComponent,
 	],
 	template: \`
-		<hlm-breadcrumb>
+		<nav hlmBreadcrumb>
 			<ol hlmBreadcrumbList>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink href="/home">Home</a>
+					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator>
@@ -91,7 +91,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 					</hlm-breadcrumb-separator>
 				</li>
 				<li hlmBreadcrumbItem>
-					<a hlmBreadcrumbLink hlmL href="/components">Components</a>
+					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-separator>
@@ -102,7 +102,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>
 			</ol>
-		</hlm-breadcrumb>
+		</nav>
 	\`,
 })
 export class BreadcrumbCustomSeparatorComponent {}
@@ -114,10 +114,10 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 
 ...
 
-<hlm-breadcrumb>
+<nav hlmBreadcrumb>
 	<ol hlmBreadcrumbList>
 		<li hlmBreadcrumbItem>
-			<a hlmBreadcrumbLink href="/home">Home</a>
+			<a hlmBreadcrumbLink link="/home">Home</a>
 		</li>
 		<li hlmBreadcrumbItem>
 			<hlm-breadcrumb-separator>
@@ -125,7 +125,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 			</hlm-breadcrumb-separator>
 		</li>
 		<li hlmBreadcrumbItem>
-			<a hlmBreadcrumbLink hlmL href="/components">Components</a>
+			<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 		</li>
 		<li hlmBreadcrumbItem>
 			<hlm-breadcrumb-separator>
@@ -136,5 +136,5 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 			<span hlmBreadcrumbPage>Breadcrumb</span>
 		</li>
 	</ol>
-</hlm-breadcrumb>
+</nav>
 `;

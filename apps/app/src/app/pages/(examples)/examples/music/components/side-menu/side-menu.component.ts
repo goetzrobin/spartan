@@ -2,12 +2,12 @@ import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
+	lucideCirclePlay,
 	lucideLayoutGrid,
 	lucideLibrary,
 	lucideListMusic,
 	lucideMicVocal,
 	lucideMusic2,
-	lucideCirclePlay,
 	lucideRadio,
 	lucideUser,
 } from '@ng-icons/lucide';
