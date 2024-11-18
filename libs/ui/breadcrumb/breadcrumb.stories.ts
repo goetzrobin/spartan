@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { lucideSlash } from '@ng-icons/lucide';
 import { HlmBreadCrumbImports, HlmBreadcrumbDirective } from '@spartan-ng/ui-breadcrumb-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -10,7 +11,7 @@ const meta: Meta<HlmBreadcrumbDirective> = {
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [HlmBreadCrumbImports, HlmIconComponent],
+			imports: [HlmBreadCrumbImports, HlmIconComponent, RouterTestingModule],
 			providers: [provideIcons({ lucideSlash })],
 		}),
 	],
