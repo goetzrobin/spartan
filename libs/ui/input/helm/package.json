@@ -4,11 +4,7 @@
 	"peerDependencies": {
 		"@spartan-ng/ui-core": "0.0.1-alpha.356",
 		"@spartan-ng/ui-forms-brain": "0.0.1-alpha.356",
-		"@spartan-ng/ui-formfield-brain": "0.0.1-alpha.356",
-		"@angular/core": ">=18.0.0",
-		"@angular/forms": ">=18.0.0",
-		"class-variance-authority": ">=0.7.0",
-		"clsx": ">=2.0.0"
+		"@spartan-ng/ui-formfield-brain": "0.0.1-alpha.356"
 	},
 	"dependencies": {},
 	"sideEffects": false,
