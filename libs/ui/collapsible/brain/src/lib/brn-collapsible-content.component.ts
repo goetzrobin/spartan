@@ -1,4 +1,4 @@
-import { type AfterContentInit, Component, ElementRef, Input, computed, inject, signal } from '@angular/core';
+import { type AfterContentInit, Component, ElementRef, computed, effect, inject, input, signal } from '@angular/core';
 import { BrnCollapsibleComponent } from './brn-collapsible.component';
 
 @Component({
@@ -15,14 +15,19 @@ import { BrnCollapsibleComponent } from './brn-collapsible.component';
 	`,
 })
 export class BrnCollapsibleContentComponent implements AfterContentInit {
-	private _collapsible = inject(BrnCollapsibleComponent, { optional: true });
-	private _elementRef = inject(ElementRef);
-	private readonly _height = signal(0);
-	private readonly _width = signal(0);
-	public contentId = this._collapsible?.contentId ?? signal(undefined).asReadonly;
+	private readonly _collapsible = inject(BrnCollapsibleComponent, { optional: true });
 
-	state = this._collapsible?.state ?? signal('closed').asReadonly();
-	computedStyles = computed(() => {
+	private readonly _elementRef = inject(ElementRef);
+
+	private readonly _height = signal(0);
+
+	private readonly _width = signal(0);
+
+	public readonly contentId = computed(() => this._collapsible?.contentId());
+
+	public readonly state = computed(() => this._collapsible?.state?.() ?? 'closed');
+
+	public readonly computedStyles = computed(() => {
 		const height = this._height();
 		const width = this._width();
 		return {
@@ -31,15 +36,21 @@ export class BrnCollapsibleContentComponent implements AfterContentInit {
 		};
 	});
 
-	@Input()
-	set id(value: string | null | undefined) {
-		if (!value || !this._collapsible) return;
-		this._collapsible.contentId.set(value);
-	}
+	public readonly id = input<string | null | undefined>();
+
 	constructor() {
 		if (!this._collapsible) {
 			throw Error('Collapsible trigger directive can only be used inside a brn-collapsible element.');
 		}
+
+		effect(
+			() => {
+				const id = this.id();
+				if (!id || !this._collapsible) return;
+				this._collapsible.contentId.set(id);
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	ngAfterContentInit() {

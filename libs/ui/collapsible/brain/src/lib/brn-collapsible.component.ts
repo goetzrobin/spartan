@@ -1,11 +1,10 @@
 import {
 	ChangeDetectionStrategy,
-	ChangeDetectorRef,
 	Component,
-	Input,
 	ViewEncapsulation,
 	booleanAttribute,
-	inject,
+	computed,
+	input,
 	signal,
 } from '@angular/core';
 
@@ -17,7 +16,7 @@ export type BrnCollapsibleState = 'open' | 'closed';
 	standalone: true,
 	host: {
 		'[attr.data-state]': 'state()',
-		'[attr.disabled]': 'collapsibleDisabled()',
+		'[attr.disabled]': 'attrDisabled()',
 	},
 	template: `
 		<ng-content />
@@ -26,19 +25,15 @@ export type BrnCollapsibleState = 'open' | 'closed';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BrnCollapsibleComponent {
-	private _cdr = inject(ChangeDetectorRef);
-	state = signal<BrnCollapsibleState>('closed');
-	contentId = signal(`brn-collapsible-content-${collapsibleContentIdSequence++}`);
+	public readonly state = signal<BrnCollapsibleState>('closed');
 
-	private readonly _disabled = signal<true | undefined>(undefined);
-	@Input({ transform: booleanAttribute })
-	set disabled(value: boolean) {
-		this._disabled.set(value ? true : undefined);
-	}
-	collapsibleDisabled = this._disabled.asReadonly();
+	public readonly contentId = signal(`brn-collapsible-content-${collapsibleContentIdSequence++}`);
+
+	public readonly disabled = input(false, { transform: booleanAttribute });
+
+	public readonly attrDisabled = computed(() => (this.disabled() ? true : undefined));
 
 	public toggle() {
 		this.state.set(this.state() === 'closed' ? 'open' : 'closed');
-		this._cdr.detectChanges();
 	}
 }
