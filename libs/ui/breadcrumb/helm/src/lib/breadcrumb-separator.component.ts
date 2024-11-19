@@ -13,13 +13,10 @@ import { ClassValue } from 'clsx';
 		'[class]': '_computedClass()',
 	},
 	template: `
-    	<div #ref>
-      		<ng-content />
-		</div>
-		@if (!ref.hasChildNodes()) {
+      	<ng-content>	
 			<hlm-icon name="lucideChevronRight" class="h-3.5 w-3.5" />
-		}
-  `,
+		</ng-content>
+  	`,
 })
 export class HlmBreadcrumbSeparatorComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
