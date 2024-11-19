@@ -47,7 +47,7 @@ jobs:
       - name: lint
         run: pnpm run lint
       - name: format
-        run: pnpm run nx format:check --base=origin/main
+        run: pnpm nx format:check --base=origin/main
 
   build:
     runs-on: ubuntu-latest
