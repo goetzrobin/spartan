@@ -12,6 +12,7 @@ import { BrnSelectService } from './brn-select.service';
 		'(mouseenter)': 'hover()',
 		'(blur)': 'blur()',
 		'[attr.dir]': '_selectService.dir()',
+		'[attr.data-disabled]': "_disabled ? '' : undefined",
 	},
 })
 export class BrnSelectOptionDirective implements FocusableOption {
@@ -45,6 +46,7 @@ export class BrnSelectOptionDirective implements FocusableOption {
 
 	@Input()
 	set disabled(value: boolean) {
+    this._cdkSelectOption.disabled = value;
 		this._disabled = value;
 	}
 	get disabled() {

@@ -9,7 +9,7 @@ import type { ClassValue } from 'clsx';
 	selector: 'hlm-option',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	hostDirectives: [BrnSelectOptionDirective],
+	hostDirectives: [{ directive: BrnSelectOptionDirective, inputs: ['disabled'] }],
 	providers: [provideIcons({ lucideCheck })],
 	host: {
 		'[class]': '_computedClass()',
