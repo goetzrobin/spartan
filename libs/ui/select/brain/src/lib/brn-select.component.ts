@@ -6,21 +6,21 @@ import {
 	OverlayModule,
 } from '@angular/cdk/overlay';
 import {
-	type AfterContentInit,
+  AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
-	ContentChild,
 	type DoCheck,
 	EventEmitter,
 	Input,
 	Output,
 	type Signal,
-	ViewChild,
 	computed,
+	contentChild,
 	contentChildren,
 	inject,
 	input,
 	signal,
+	viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { type ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
@@ -110,19 +110,16 @@ export class BrnSelectComponent
 
 	public readonly dir = input<BrnReadDirection>('ltr');
 
-	@ContentChild(BrnLabelDirective, { descendants: false })
-	protected selectLabel!: BrnLabelDirective;
+	protected selectLabel = contentChild(BrnLabelDirective, { descendants: false });
 	/** Overlay pane containing the options. */
-	@ContentChild(BrnSelectContentComponent)
-	protected selectContent!: BrnSelectContentComponent;
+	protected selectContent = contentChild.required(BrnSelectContentComponent);
 
 	protected options = contentChildren(CdkOption, { descendants: true });
 	protected options$ = toObservable(this.options);
 	protected optionsAndIndex$ = this.options$.pipe(map((options, index) => [options, index] as const));
 
 	/** Overlay pane containing the options. */
-	@ViewChild(CdkConnectedOverlay)
-	protected _overlayDir!: CdkConnectedOverlay;
+	protected _overlayDir = viewChild(CdkConnectedOverlay);
 
 	@Output()
 	openedChange = new EventEmitter<boolean>();
@@ -137,6 +134,7 @@ export class BrnSelectComponent
 		{ initialValue: false },
 	);
 	public readonly state = computed(() => (this.isExpanded() ? 'open' : 'closed'));
+  
 
 	protected readonly _positionChanges$ = new Subject<ConnectedOverlayPositionChange>();
 	public readonly side: Signal<'top' | 'bottom' | 'left' | 'right'> = toSignal(
@@ -255,11 +253,12 @@ export class BrnSelectComponent
 
 	public ngAfterContentInit(): void {
 		// Check if Label Directive Provided and pass to service
-		if (this.selectLabel) {
+    const label = this.selectLabel();
+		if (label) {
 			this.labelProvided.set(true);
 			this._selectService.state.update((state) => ({
 				...state,
-				labelId: this.selectLabel.id(),
+				labelId: label.id(),
 				dir: this.dir(),
 			}));
 		} else if (this._placeholder()) {
@@ -313,7 +312,12 @@ export class BrnSelectComponent
 	}
 
 	private _moveFocusToCDKList(): void {
-		setTimeout(() => this.selectContent.focusList());
+		setTimeout(() => {
+      const content = this.selectContent();
+      if (content) {
+        content.focusList();
+      }
+    });
 	}
 
 	public writeValue(value: any): void {
