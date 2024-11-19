@@ -13,7 +13,7 @@ import { ClassValue } from 'clsx';
 })
 export class HlmBreadcrumbDirective {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	public readonly ariaLabel = input<string>('pagination', { alias: 'aria-label' });
+	public readonly ariaLabel = input<string>('breadcrumb', { alias: 'aria-label' });
 
-	protected _computedClass = computed(() => hlm(this.userClass()));
+	protected readonly _computedClass = computed(() => hlm(this.userClass()));
 }

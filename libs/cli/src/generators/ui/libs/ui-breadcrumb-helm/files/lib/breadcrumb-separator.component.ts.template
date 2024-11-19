@@ -24,5 +24,5 @@ import { ClassValue } from 'clsx';
 export class HlmBreadcrumbSeparatorComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
-	protected _computedClass = computed(() => hlm('h-3.5', this.userClass()));
+	protected readonly _computedClass = computed(() => hlm('h-3.5', this.userClass()));
 }

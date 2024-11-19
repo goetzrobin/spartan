@@ -133,8 +133,8 @@ export const routeMeta: RouteMeta = {
 				<spartan-code [code]="collapsedSkeleton" />
 			</div>
 			<spartan-page-bottom-nav>
-				<spartan-page-bottom-nav-link href="card" label="Card" />
-				<spartan-page-bottom-nav-link direction="previous" href="button" label="Button" />
+				<spartan-page-bottom-nav-link href="button" label="Button" />
+				<spartan-page-bottom-nav-link direction="previous" href="badge" label="Badge" />
 			</spartan-page-bottom-nav>
 		</section>
 		<spartan-page-nav />

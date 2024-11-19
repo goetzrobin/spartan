@@ -12,5 +12,5 @@ import { ClassValue } from 'clsx';
 export class HlmBreadcrumbItemDirective {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
-	protected _computedClass = computed(() => hlm('inline-flex items-center gap-1.5', this.userClass()));
+	protected readonly _computedClass = computed(() => hlm('inline-flex items-center gap-1.5', this.userClass()));
 }
