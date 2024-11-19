@@ -117,6 +117,7 @@ export class BrnSelectComponent<T = unknown>
 		{ initialValue: false },
 	);
 	public readonly state = computed(() => (this.isExpanded() ? 'open' : 'closed'));
+  
 
 	protected readonly _positionChanges$ = new Subject<ConnectedOverlayPositionChange>();
 	public readonly side: Signal<'top' | 'bottom' | 'left' | 'right'> = toSignal(
