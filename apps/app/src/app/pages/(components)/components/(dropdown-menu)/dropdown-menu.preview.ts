@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
+	lucideCircleHelp,
+	lucideCirclePlus,
+	lucideCircleUser,
 	lucideCode,
 	lucideCog,
 	lucideGithub,
-	lucideHelpCircle,
 	lucideKeyboard,
 	lucideLayers,
 	lucideLogOut,
 	lucideMail,
 	lucideMessageSquare,
 	lucidePlus,
-	lucidePlusCircle,
 	lucideSmile,
 	lucideUser,
-	lucideUserCircle,
 } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
@@ -56,16 +56,16 @@ import {
 			lucideLayers,
 			lucideCog,
 			lucideKeyboard,
-			lucideUserCircle,
+			lucideCircleUser,
 			lucideSmile,
 			lucidePlus,
 			lucideGithub,
-			lucideHelpCircle,
+			lucideCircleHelp,
 			lucideCode,
 			lucideLogOut,
 			lucideMail,
 			lucideMessageSquare,
-			lucidePlusCircle,
+			lucideCirclePlus,
 		}),
 	],
 	template: `
@@ -106,7 +106,7 @@ import {
 
 				<hlm-menu-group>
 					<button hlmMenuItem>
-						<hlm-icon name="lucideUserCircle" hlmMenuIcon />
+						<hlm-icon name="lucideCircleUser" hlmMenuIcon />
 						<span>Team</span>
 						<hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
 					</button>
@@ -133,7 +133,7 @@ import {
 					</button>
 
 					<button hlmMenuItem>
-						<hlm-icon name="lucideHelpCircle" hlmMenuIcon />
+						<hlm-icon name="lucideCircleHelp" hlmMenuIcon />
 						<span>Support</span>
 					</button>
 
@@ -166,7 +166,7 @@ import {
 				</button>
 				<hlm-menu-separator />
 				<button hlmMenuItem>
-					<hlm-icon name="lucidePlusCircle" hlmMenuIcon />
+					<hlm-icon name="lucideCirclePlus" hlmMenuIcon />
 					<span>More</span>
 				</button>
 			</hlm-sub-menu>
@@ -179,7 +179,7 @@ export const defaultCode = `
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
-  lucideUserCircle,
+  lucideCircleUser,
   lucideLayers,
   lucideMessageSquare,
   lucideCode,
@@ -191,8 +191,8 @@ import {
   lucideKeyboard,
   lucideUser,
   lucidePlus,
-  lucidePlusCircle,
-  lucideHelpCircle,
+  lucideCirclePlus,
+  lucideCircleHelp,
 } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
@@ -234,16 +234,16 @@ import {
       lucideLayers,
       lucideCog,
       lucideKeyboard,
-      lucideUserCircle,
+      lucideCircleUser,
       lucideSmile,
       lucidePlus,
       lucideGithub,
-      lucideHelpCircle,
+      lucideCircleHelp,
       lucideCode,
       lucideLogOut,
       lucideMail,
       lucideMessageSquare,
-      lucidePlusCircle,
+      lucideCirclePlus,
     }),
   ],
   template: \`
@@ -284,7 +284,7 @@ import {
 
         <hlm-menu-group>
           <button hlmMenuItem>
-            <hlm-icon name="lucideUserCircle" hlmMenuIcon />
+            <hlm-icon name="lucideCircleUser" hlmMenuIcon />
             <span>Team</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
@@ -311,7 +311,7 @@ import {
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name="lucideHelpCircle" hlmMenuIcon />
+            <hlm-icon name="lucideCircleHelp" hlmMenuIcon />
             <span>Support</span>
           </button>
 
@@ -344,7 +344,7 @@ import {
         </button>
         <hlm-menu-separator />
         <button hlmMenuItem>
-          <hlm-icon name="lucidePlusCircle" hlmMenuIcon />
+          <hlm-icon name="lucideCirclePlus" hlmMenuIcon />
           <span>More</span>
         </button>
       </hlm-sub-menu>

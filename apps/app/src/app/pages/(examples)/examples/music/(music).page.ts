@@ -1,7 +1,7 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { lucideListMusic, lucidePlusCircle, lucidePodcast } from '@ng-icons/lucide';
+import { lucideCirclePlus, lucideListMusic, lucidePodcast } from '@ng-icons/lucide';
 import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { TopMusicMenuComponent } from './components/top-menu.component';
 
@@ -72,7 +72,7 @@ export const routeMeta: RouteMeta = {
 		NgOptimizedImage,
 		CommonModule,
 	],
-	providers: [provideIcons({ lucidePlusCircle, lucideListMusic, lucidePodcast })],
+	providers: [provideIcons({ lucideCirclePlus, lucideListMusic, lucidePodcast })],
 	styles: `
 		.fallback-img {
 			filter: opacity(0.3);
@@ -90,7 +90,7 @@ export const routeMeta: RouteMeta = {
 						<ng-template #playlist_submenu>
 							<hlm-sub-menu>
 								<button hlmMenuItem class="h-9">
-									<hlm-icon size="sm" name="lucidePlusCircle" class="mr-2 h-4 w-4" />
+									<hlm-icon size="sm" name="lucideCirclePlus" class="mr-2 h-4 w-4" />
 									Add to Library
 								</button>
 
@@ -138,7 +138,7 @@ export const routeMeta: RouteMeta = {
 									</button>
 								</hlm-tabs-list>
 								<button hlmBtn class="h-10 w-full sm:w-auto">
-									<hlm-icon size="sm" class="mr-2" name="lucidePlusCircle" />
+									<hlm-icon size="sm" class="mr-2" name="lucideCirclePlus" />
 									Add Music
 								</button>
 							</header>

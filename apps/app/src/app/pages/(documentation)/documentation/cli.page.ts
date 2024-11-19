@@ -1,6 +1,6 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { lucideAlertTriangle } from '@ng-icons/lucide';
+import { lucideTriangleAlert } from '@ng-icons/lucide';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
 import { CodeComponent } from '../../../shared/code/code.component';
@@ -37,7 +37,7 @@ export const routeMeta: RouteMeta = {
 		TabsComponent,
 		TabsCliComponent,
 	],
-	providers: [provideIcons({ lucideAlertTriangle })],
+	providers: [provideIcons({ lucideTriangleAlert })],
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro name="CLI" lead="Supercharge your spartan experience with our CLI." />
