@@ -45,7 +45,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - name: lint
-        run: pnpm run lint
+        run: pnpm run lint --skip-nx-cache
       - name: format
         run: pnpm run nx format:check --base=origin/main
 
