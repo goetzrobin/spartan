@@ -3,7 +3,8 @@
 	"version": "0.0.1-alpha.356",
 	"peerDependencies": {
 		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.356",
-		"@spartan-ng/ui-core": "0.0.1-alpha.356"
+		"@spartan-ng/ui-core": "0.0.1-alpha.356",
+		"@angular/core": ">=18.0.0"
 	},
 	"dependencies": {},
 	"sideEffects": false,

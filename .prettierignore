@@ -7,7 +7,7 @@
 /tmp
 /node_modules
 /stats.html
-bun.lockb
+pnpm-lock.yaml
 
 /.nx/cache
 

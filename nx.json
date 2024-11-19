@@ -72,7 +72,7 @@
 			"!{projectRoot}/tsconfig.storybook.json",
 			"!{projectRoot}/eslint.config.js"
 		],
-		"sharedGlobals": ["{workspaceRoot}/package.json", "{workspaceRoot}/bun.lockb"]
+		"sharedGlobals": ["{workspaceRoot}/package.json", "{workspaceRoot}/pnpm-lock.yaml"]
 	},
 	"generators": {
 		"@nx/angular:application": {

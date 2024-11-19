@@ -110,14 +110,14 @@ There's also a `libs/cli` folder, which contains the Nx-plugin & Angular CLI cod
 
 ### Install Dependencies
 
-Run `bun install` to install the dependencies of this project.
+Run `pnpm install` to install the dependencies of this project.
 
 ### Development with storybook
 
 A storybook project is set up and is the primary way to develop UI components. You can run it with:
 
 ```
-bun run storybook
+pnpm run storybook
 ```
 
 At the root of each primitive's folder, e.g. `libs/ui/accordion` you will find a stories file, e.g, `accordion.stories.ts`.
@@ -130,7 +130,7 @@ spartan uses [Jest](https://jestjs.io) for tests. To test all projects locally, 
 folder:
 
 ```shell
-bun run test
+pnpm run test
 ```
 
 ### e2e testing
@@ -138,7 +138,7 @@ bun run test
 Cypress e2e testing is set up to run on the storybook. You can run it with:
 
 ```
-bun run e2e
+pnpm run e2e
 ```
 
 To add your own `e2e` tests add them to the `apps/ui-storybook-e2e` application.
@@ -168,7 +168,7 @@ Follow the directions below to get it up and running:
 
 #### Prerequisites
 
-- You will need `bun` as your package manager.
+- You will need `pnpm` as your package manager.
 - You will need to set up a [Supabase](https://supabase.com/) account (it's free)
 - You will need [NodeJs](https://nodejs.org/en) installed. The version I have working is `20.17.0`.
 
@@ -177,13 +177,13 @@ Follow the directions below to get it up and running:
 Then you can run the following command:
 
 ```shell
-bun nx serve app
+pnpm nx serve app
 ```
 
 or
 
 ```shell
-bun run dev
+pnpm run dev
 ```
 
 for a dev server. Navigate to http://localhost:4200/. The app will automatically reload
@@ -218,7 +218,7 @@ create table
 
 ## Understand this workspace
 
-Run `bun nx graph` to see a diagram of the dependencies of the projects.
+Run `pnpm nx graph` to see a diagram of the dependencies of the projects.
 
 ## Further help
 

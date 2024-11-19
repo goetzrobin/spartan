@@ -1,3 +1,3 @@
 #!/bin/sh
 
-bun run commitlint -e
+pnpx commitlint -e

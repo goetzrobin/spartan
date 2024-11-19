@@ -24,7 +24,14 @@
 		"@trpc/client": "^10.45.2",
 		"@trpc/server": "^10.45.2",
 		"isomorphic-fetch": "^3.0.0",
-		"superjson": "^2.2.1"
+		"superjson": "^2.2.1",
+		"rxjs": "~7.8.1",
+		"h3": "^1.12.0",
+		"ufo": "1.5.4",
+		"@analogjs/vite-plugin-angular": "1.9.4",
+		"@angular/compiler": "18.2.5",
+		"@angular/platform-browser-dynamic": "18.2.5",
+		"vite": "5.4.8"
 	},
 	"dependencies": {},
 	"ng-update": {

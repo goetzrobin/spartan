@@ -3,7 +3,9 @@
 	"version": "0.0.1-alpha.10",
 	"peerDependencies": {
 		"@spartan-ng/ui-core": "0.0.1-alpha.356",
-		"@spartan-ng/ui-slider-brain": "0.0.1-alpha.10"
+		"@spartan-ng/ui-slider-brain": "0.0.1-alpha.10",
+		"@angular/core": ">=18.0.0",
+		"clsx": "^2.1.1"
 	},
 	"sideEffects": false
 }
