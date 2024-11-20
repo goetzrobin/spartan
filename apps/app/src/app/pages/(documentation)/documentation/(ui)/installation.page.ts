@@ -191,6 +191,12 @@ module.exports = {
   --ring: 240 4.9% 83.9%;
   color-scheme: dark;
 }
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
 "
 			/>
 			<p class="${hlmP}">

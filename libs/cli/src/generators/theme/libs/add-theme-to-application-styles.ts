@@ -55,7 +55,13 @@ export function addThemeToApplicationStyles(
     ${stylesEntryPointContent}
 
     ${rootFontSans}
-    ${SupportedThemeGeneratorMap[options.theme](options.radius, prefix)}`,
+    ${SupportedThemeGeneratorMap[options.theme](options.radius, prefix)}
+
+    @layer base {
+      * {
+        @apply border-border;
+      }
+    }`,
 	);
 }
 
