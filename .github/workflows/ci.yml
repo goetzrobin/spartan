@@ -31,10 +31,13 @@ jobs:
           failOnWarnings: true
           helpURL: https://github.com/goetzrobin/spartan/blob/main/CONTRIBUTING.md#-commit-message-guidelines
 
-  prettier:
+  format-and-lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Required by wagoid/commitlint-github-action
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
@@ -51,6 +54,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Required by wagoid/commitlint-github-action
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
@@ -67,6 +73,9 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Required by wagoid/commitlint-github-action
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
@@ -83,6 +92,9 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Required by wagoid/commitlint-github-action
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
