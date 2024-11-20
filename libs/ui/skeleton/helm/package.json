@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/ui-skeleton-helm",
-	"version": "0.0.1-alpha.10",
+	"version": "0.0.1-alpha.356",
 	"peerDependencies": {
 		"@spartan-ng/ui-core": "0.0.1-alpha.356",
 		"@angular/core": ">=18.0.0",

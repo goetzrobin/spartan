@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/ui-progress-helm",
-	"version": "0.0.1-alpha.10",
+	"version": "0.0.1-alpha.356",
 	"peerDependencies": {
 		"@spartan-ng/ui-core": "0.0.1-alpha.356",
 		"@spartan-ng/ui-progress-brain": "0.0.1-alpha.356",

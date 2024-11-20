@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/ui-slider-brain",
-	"version": "0.0.1-alpha.10",
+	"version": "0.0.1-alpha.356",
 	"peerDependencies": {
 		"@spartan-ng/ui-label-brain": "0.0.1-alpha.356",
 		"@angular/common": ">=18.0.0",
