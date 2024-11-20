@@ -5,21 +5,25 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { ClassValue } from 'clsx';
 
 @Component({
-	selector: 'hlm-breadcrumb-separator',
+	selector: '[hlmBreadcrumbSeparator]',
 	standalone: true,
 	imports: [HlmIconComponent],
 	providers: [provideIcons({ lucideChevronRight })],
 	host: {
+		role: 'presentation',
 		'[class]': '_computedClass()',
+		'[attr.aria-hidden]': 'true',
 	},
 	template: `
       	<ng-content>	
-			<hlm-icon name="lucideChevronRight" class="h-3.5 w-3.5" />
+			<hlm-icon name="lucideChevronRight" />
 		</ng-content>
   	`,
 })
 export class HlmBreadcrumbSeparatorComponent {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+		public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
-	protected readonly _computedClass = computed(() => hlm('h-3.5', this.userClass()));
-}
+		protected readonly _computedClass = computed(() =>
+			hlm('[&>hlm-icon]:w-3.5 [&>hlm-icon]:h-3.5 [&>hlm-icon]:flex', this.userClass()),
+		);
+	}

@@ -28,21 +28,15 @@ export const Default: Story = {
 					<li hlmBreadcrumbItem>
 						<a hlmBreadcrumbLink href="/home">Home</a>
 					</li>
-					<li hlmBreadcrumbItem>
-						<hlm-breadcrumb-separator />
-					</li>
+					<li hlmBreadcrumbSeparator></li>
 					<li hlmBreadcrumbItem>
 						<hlm-breadcrumb-ellipsis />
 					</li>
-					<li hlmBreadcrumbItem>
-						<hlm-breadcrumb-separator />
-					</li>
+					<li hlmBreadcrumbSeparator></li>
 					<li hlmBreadcrumbItem>
 						<a hlmBreadcrumbLink hlmL href="/components">Components</a>
 					</li>
-					<li hlmBreadcrumbItem>
-						<hlm-breadcrumb-separator />
-					</li>
+					<li hlmBreadcrumbSeparator></li>
 					<li hlmBreadcrumbItem>
 						<span hlmBreadcrumbPage>Breadcrumb</span>
 					</li>
@@ -60,18 +54,14 @@ export const Custom: Story = {
 					<li hlmBreadcrumbItem>
 						<a hlmBreadcrumbLink href="/home">Home</a>
 					</li>
-					<li hlmBreadcrumbItem>
-						<hlm-breadcrumb-separator>
-							<hlm-icon name="lucideSlash" class="h-4 w-4" />
-						</hlm-breadcrumb-separator>
+					<li hlmBreadcrumbSeparator>
+						<hlm-icon name="lucideSlash" class="h-4 w-4" />
 					</li>
 					<li hlmBreadcrumbItem>
 						<a hlmBreadcrumbLink href="/components">Components</a>
 					</li>
-					<li hlmBreadcrumbItem>
-						<hlm-breadcrumb-separator>
-							<hlm-icon name="lucideSlash" class="h-4 w-4" />
-						</hlm-breadcrumb-separator>
+					<li hlmBreadcrumbSeparator>
+						<hlm-icon name="lucideSlash" class="h-4 w-4" />
 					</li>
 					<li hlmBreadcrumbItem>
 						<span hlmBreadcrumbPage>Breadcrumb</span>

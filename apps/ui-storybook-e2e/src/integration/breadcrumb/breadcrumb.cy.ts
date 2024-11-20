@@ -15,7 +15,7 @@ describe('Breadcrumb Directive', () => {
 	});
 
 	it('should contain breadcrumb separators', () => {
-		cy.get('hlm-breadcrumb-separator').should('have.length', 3);
+		cy.get('[hlmBreadcrumbSeparator]').should('have.length', 3);
 	});
 
 	it('should contain breadcrumb ellipsis', () => {

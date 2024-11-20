@@ -27,21 +27,15 @@ import {
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-ellipsis />
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink link="/components">Components</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>
@@ -81,21 +75,15 @@ import {
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-ellipsis />
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink link="/components">Components</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>

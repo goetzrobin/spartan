@@ -30,18 +30,14 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator>
-						<hlm-icon name="lucideSlash" class="h-4 w-4" />
-					</hlm-breadcrumb-separator>
+				<li hlmBreadcrumbSeparator>
+					<hlm-icon name="lucideSlash" class="h-4 w-4" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator>
+				<li hlmBreadcrumbSeparator>
 						<hlm-icon name="lucideSlash" class="h-4 w-4" />
-					</hlm-breadcrumb-separator>
 				</li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
@@ -85,18 +81,14 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator>
-						<hlm-icon name="lucideSlash" class="h-4 w-4" />
-					</hlm-breadcrumb-separator>
+				<li hlmBreadcrumbSeparator>
+					<hlm-icon name="lucideSlash" class="h-4 w-4" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator>
+				<li hlmBreadcrumbSeparator>
 						<hlm-icon name="lucideSlash" class="h-4 w-4" />
-					</hlm-breadcrumb-separator>
 				</li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
@@ -119,18 +111,14 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 		<li hlmBreadcrumbItem>
 			<a hlmBreadcrumbLink link="/home">Home</a>
 		</li>
-		<li hlmBreadcrumbItem>
-			<hlm-breadcrumb-separator>
-				<hlm-icon name="lucideSlash" class="h-4 w-4" />
-			</hlm-breadcrumb-separator>
+		<li hlmBreadcrumbSeparator>
+			<hlm-icon name="lucideSlash" class="h-4 w-4" />
 		</li>
 		<li hlmBreadcrumbItem>
 			<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 		</li>
-		<li hlmBreadcrumbItem>
-			<hlm-breadcrumb-separator>
+		<li hlmBreadcrumbSeparator>
 				<hlm-icon name="lucideSlash" class="h-4 w-4" />
-			</hlm-breadcrumb-separator>
 		</li>
 		<li hlmBreadcrumbItem>
 			<span hlmBreadcrumbPage>Breadcrumb</span>

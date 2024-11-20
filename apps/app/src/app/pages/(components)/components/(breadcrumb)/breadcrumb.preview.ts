@@ -33,9 +33,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-ellipsis class="h-4 w-4" [brnMenuTriggerFor]="breadcrumbDropdown" />
 					<ng-template #breadcrumbDropdown>
@@ -52,15 +50,13 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 						</hlm-menu>
 					</ng-template>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				
+				<li hlmBreadcrumbSeparator></li>
+
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>
@@ -106,9 +102,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<hlm-breadcrumb-ellipsis class="h-4 w-4" [brnMenuTriggerFor]="breadcrumbDropdown" />
 					<ng-template #breadcrumbDropdown>
@@ -125,15 +119,11 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 						</hlm-menu>
 					</ng-template>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
-				<li hlmBreadcrumbItem>
-					<hlm-breadcrumb-separator />
-				</li>
+				<li hlmBreadcrumbSeparator></li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
 				</li>
@@ -162,21 +152,15 @@ export const defaultSkeleton = `
 		<li hlmBreadcrumbItem>
 			<a hlmBreadcrumbLink href="/home">Home</a>
 		</li>
-		<li hlmBreadcrumbItem>
-			<hlm-breadcrumb-separator />
-		</li>
+		<li hlmBreadcrumbSeparator></li>
 		<li hlmBreadcrumbItem>
 			<hlm-breadcrumb-ellipsis />
 		</li>
-		<li hlmBreadcrumbItem>
-			<hlm-breadcrumb-separator />
-		</li>
+		<li hlmBreadcrumbSeparator></li>
 		<li hlmBreadcrumbItem>
 			<a hlmBreadcrumbLink hlmL href="/components">Components</a>
 		</li>
-		<li hlmBreadcrumbItem>
-			<hlm-breadcrumb-separator />
-		</li>
+		<li hlmBreadcrumbSeparator></li>
 		<li hlmBreadcrumbItem>
 			<span hlmBreadcrumbPage>Breadcrumb</span>
 		</li>
