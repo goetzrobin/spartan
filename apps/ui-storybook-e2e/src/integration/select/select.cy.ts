@@ -173,6 +173,16 @@ describe('select', () => {
 			cy.get('pre').should('have.text', 'Form Control Value: "apple"');
 		});
 	});
+	describe('Custom Value Transform function', () => {
+		it('should be able to use a custom value transform function', () => {
+			cy.visit('/iframe.html?id=select--select-value-transform-fn');
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').eq(0).click();
+			cy.get('hlm-option').eq(2).click();
+			cy.get('body').click();
+			cy.get('#brn-select-0--value').should('contain.text', 'Apple | Blueberry');
+		});
+	});
 
 	describe('form validation', () => {
 		beforeEach(() => {
