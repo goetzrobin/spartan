@@ -7,14 +7,14 @@ import { ThreeHundredItemComponent } from './th-item.component';
 	standalone: true,
 	imports: [ThreeHundredItemComponent, ThreeHundredItemPlaceholderComponent],
 	host: {
-		class: 'grid gap-2 grid-cols-5 md:grid-cols-10',
+		class: 'grid gap-2 grid-cols-3 sm:grid-cols-5 lg:grid-cols-10',
 	},
 	template: `
 		@for (contributor of _contributors; track $index) {
 			<spartan-th-item class="mb-2" [contributor]="contributor" />
 		}
 		@for (item of _rest; track $index) {
-			<spartan-th-item-placeholder class="mb-2" />
+			<spartan-th-item-placeholder class="hidden md:inline-flex mb-2" />
 		}
 	`,
 })
@@ -23,6 +23,7 @@ export class ThreeHundredComponent {
 		'goetzrobin',
 		'thatsamsonkid',
 		'elite-benni',
+		'ashley-hunter',
 		'snydertechnologies',
 		'mihajm',
 		'ajitzero',
@@ -89,6 +90,11 @@ export class ThreeHundredComponent {
 		'dineshkp',
 		'robingenz',
 		'Balastrong',
+		'OlegSuncrown',
+		'stewones',
+		'shinkhouse',
+		'donaldxdonald',
+		'BenoitPE'
 	];
 	protected readonly _rest = Array(300 - this._contributors.length).map((_, i) => i);
 }
