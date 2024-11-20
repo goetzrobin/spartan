@@ -1,7 +1,7 @@
 import type { FocusableOption } from '@angular/cdk/a11y';
+import { BooleanInput } from '@angular/cdk/coercion';
 import { CdkOption } from '@angular/cdk/listbox';
-import { Directive, ElementRef, Input, computed, inject, signal } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { Directive, ElementRef, booleanAttribute, computed, effect, inject, input, signal } from '@angular/core';
 import { BrnSelectService } from './brn-select.service';
 
 @Directive({
@@ -12,47 +12,45 @@ import { BrnSelectService } from './brn-select.service';
 		'(mouseenter)': 'hover()',
 		'(blur)': 'blur()',
 		'[attr.dir]': '_selectService.dir()',
-		'[attr.data-disabled]': "_disabled ? '' : undefined",
+		'[attr.data-disabled]': "disabledSignal() ? '' : undefined",
 	},
 })
 export class BrnSelectOptionDirective implements FocusableOption {
 	private readonly _cdkSelectOption = inject(CdkOption, { host: true });
 	protected readonly _selectService = inject(BrnSelectService);
 
-	private readonly _selected = signal<boolean>(false);
 	private readonly _focused = signal<boolean>(false);
 	public readonly elementRef = inject(ElementRef);
 
-	public readonly selected = computed(() => this._selected());
+	public readonly selected = computed(() => {
+		if (Array.isArray(this._selectService.value())) {
+			const itemFound = (this._selectService.value() as Array<unknown>).find(
+				(val) => val === this._cdkSelectOption.value,
+			);
+			return !!itemFound;
+		}
+		return this._cdkSelectOption.value === this._selectService.value();
+	});
 	public readonly focused = computed(() => this._focused());
-	public readonly checkedState = computed(() => (this._selected() ? 'checked' : 'unchecked'));
+	public readonly checkedState = computed(() => (this.selected() ? 'checked' : 'unchecked'));
 	public readonly dir = computed(() => this._selectService.dir());
 
 	constructor() {
-		toObservable(this._selectService.value).subscribe((selectedValues: string | string[]) => {
-			if (Array.isArray(selectedValues)) {
-				const itemFound = (selectedValues as Array<unknown>).find((val) => val === this._cdkSelectOption.value);
-				this._selected.set(!!itemFound);
-			} else {
-				this._selected.set(this._cdkSelectOption.value === selectedValues);
-			}
+		effect(() => {
+			this._cdkSelectOption.value = this.value();
+		});
+		effect(() => {
+			this._cdkSelectOption.disabled = this.disabledSignal();
 		});
 	}
 
-	@Input()
-	set value(value: unknown | null) {
-		this._cdkSelectOption.value = value;
-	}
+	public value = input<unknown | null>(null);
 
-	@Input()
-	set disabled(value: boolean) {
-    this._cdkSelectOption.disabled = value;
-		this._disabled = value;
-	}
-	get disabled() {
-		return this._disabled;
-	}
-	private _disabled = false;
+	// we use "disabledSignal" here because disabled is already defined in the FocusableOption interface
+	public readonly disabledSignal = input<boolean, BooleanInput>(false, {
+		alias: 'disabled',
+		transform: booleanAttribute,
+	});
 
 	protected hover(): void {
 		this.focus();

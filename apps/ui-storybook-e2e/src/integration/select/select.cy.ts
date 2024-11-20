@@ -31,14 +31,10 @@ describe('select', () => {
 			cy.get('hlm-select-content').should('have.attr', 'aria-labelledby', labelId);
 			cy.get('hlm-select-content').should('have.attr', 'aria-controlledby', triggerId);
 
-			// Select Label
-			// cy.get('hlm-select-content').find('hlm-select-label')[0].should('have.id', 'brn-label-0');
-
 			// Option
 			cy.get('hlm-option').should('have.attr', 'role', 'option');
 			cy.get('hlm-option').should('have.attr', 'aria-selected', 'false');
 			cy.get('hlm-option').should('have.attr', 'aria-disabled', 'false');
-			// cy.get('hlm-option').should('not.have.value', '');
 			cy.get('hlm-option').should(($el) => {
 				expect($el[0].id).to.match(/cdk-option/);
 			});
@@ -67,7 +63,6 @@ describe('select', () => {
 			cy.injectAxe();
 		});
 
-		/* TODO: @goetzrobin - fix this test
 		it('click on trigger should open and close it content', () => {
 			verifySelectSetup();
 			cy.get('[brnselecttrigger]').click();
@@ -75,7 +70,6 @@ describe('select', () => {
 			cy.get('body').click();
 			cy.get('[brnselecttrigger]').should('have.attr', 'aria-expanded', 'false');
 		});
-		*/
 
 		it('should close after selecting an option in single mode', () => {
 			verifySelectSetup();
@@ -165,6 +159,21 @@ describe('select', () => {
 		});
 	});
 
+	describe('disabled option', () => {
+		it('should not be able to select a disabled option', () => {
+			cy.visit('/iframe.html?id=select--disabled-option');
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').eq(0).should('not.have.attr', 'data-disabled');
+			const banana = cy.get('[data-testid="banana-option"]');
+			banana.should('have.attr', 'aria-disabled', 'true');
+			banana.should('have.attr', 'data-disabled', '');
+			banana.click({ force: true });
+			cy.get('pre').should('have.text', 'Form Control Value: ""');
+			cy.get('hlm-option').eq(0).click();
+			cy.get('pre').should('have.text', 'Form Control Value: "apple"');
+		});
+	});
+
 	describe('form validation', () => {
 		beforeEach(() => {
 			cy.injectAxe();
@@ -191,6 +200,8 @@ describe('select', () => {
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
 
 			// force error
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').first().click();
 			cy.get('[brnselecttrigger]').click();
 			cy.get('hlm-option').last().click();
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');
@@ -261,6 +272,8 @@ describe('select', () => {
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-invalid');
 
 			// force error
+			cy.get('[brnselecttrigger]').click();
+			cy.get('hlm-option').first().click();
 			cy.get('[brnselecttrigger]').click();
 			cy.get('hlm-option').last().click();
 			cy.get('[brnselecttrigger]').should('have.class', 'ng-touched');

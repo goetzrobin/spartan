@@ -2,11 +2,9 @@ import { CommonModule } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	Component,
-	ContentChild,
-	type ElementRef,
-	ViewChild,
 	ViewEncapsulation,
 	computed,
+	contentChild,
 	input,
 	signal,
 } from '@angular/core';
@@ -89,6 +87,34 @@ export const ReactiveFormControl: Story = {
 						<hlm-select-label>Fruits</hlm-select-label>
 						<hlm-option value="apple">Apple</hlm-option>
 						<hlm-option value="banana">Banana</hlm-option>
+						<hlm-option value="blueberry">Blueberry</hlm-option>
+						<hlm-option value="grapes">Grapes</hlm-option>
+						<hlm-option value="pineapple">Pineapple</hlm-option>
+						<hlm-option>Clear</hlm-option>
+					</hlm-select-content>
+				</brn-select>
+				<form></form>
+			</form>
+		`,
+	}),
+};
+
+export const DisabledOption: Story = {
+	render: (args) => ({
+		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl(args.initialValue) }) },
+		template: /* HTML */ `
+			<div class="mb-3">
+				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
+			</div>
+			<form [formGroup]="fruitGroup">
+				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
+					<hlm-select-trigger>
+						<brn-select-value hlm />
+					</hlm-select-trigger>
+					<hlm-select-content>
+						<hlm-select-label>Fruits</hlm-select-label>
+						<hlm-option value="apple">Apple</hlm-option>
+						<hlm-option data-testid="banana-option" value="banana" disabled>Banana</hlm-option>
 						<hlm-option value="blueberry">Blueberry</hlm-option>
 						<hlm-option value="grapes">Grapes</hlm-option>
 						<hlm-option value="pineapple">Pineapple</hlm-option>
@@ -523,7 +549,7 @@ export const CustomTrigger: Story = {
 	template: `
 		<button [class]="_computedClass()" #button brnSelectTrigger type="button">
 			<ng-content />
-			@if (icon) {
+			@if (icon()) {
 				<ng-content select="hlm-icon" />
 			} @else {
 				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="lucideChevronDown" />
@@ -532,11 +558,7 @@ export const CustomTrigger: Story = {
 	`,
 })
 export class CustomSelectTriggerComponent {
-	@ViewChild('button', { static: true })
-	public buttonEl!: ElementRef;
-
-	@ContentChild(HlmIconComponent, { static: false })
-	protected icon!: HlmIconComponent;
+	protected icon = contentChild(HlmIconComponent);
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>
