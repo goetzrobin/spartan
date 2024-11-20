@@ -1,7 +1,7 @@
 import type { FocusableOption } from '@angular/cdk/a11y';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { CdkOption } from '@angular/cdk/listbox';
-import { Directive, ElementRef, booleanAttribute, computed, effect, inject, input, signal } from '@angular/core';
+import { AfterContentChecked, Directive, ElementRef, booleanAttribute, computed, effect, inject, input, signal } from '@angular/core';
 import { BrnSelectService } from './brn-select.service';
 
 @Directive({
@@ -15,7 +15,7 @@ import { BrnSelectService } from './brn-select.service';
 		'[attr.data-disabled]': "disabledSignal() ? '' : undefined",
 	},
 })
-export class BrnSelectOptionDirective implements FocusableOption {
+export class BrnSelectOptionDirective implements FocusableOption, AfterContentChecked {
 	private readonly _cdkSelectOption = inject(CdkOption, { host: true });
 	protected readonly _selectService = inject(BrnSelectService);
 
@@ -42,6 +42,9 @@ export class BrnSelectOptionDirective implements FocusableOption {
 		effect(() => {
 			this._cdkSelectOption.disabled = this.disabledSignal();
 		});
+	}
+  ngAfterContentChecked(): void {
+		this._cdkSelectOption.value = this.value();
 	}
 
 	public value = input<unknown | null>(null);
