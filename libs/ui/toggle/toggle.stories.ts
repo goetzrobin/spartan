@@ -1,6 +1,6 @@
-import { NgForOf, NgIf } from '@angular/common';
+import { JsonPipe, NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { lucideItalic } from '@ng-icons/lucide';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
@@ -169,6 +169,7 @@ export const ToggleGroupSingle: StoryObj<{ city: City }> = {
 		template: '<hlm-toggle-group-story [selected]="city"/>',
 	}),
 };
+
 export const ToggleGroupDisabled: StoryObj<{ city: City }> = {
 	name: 'Toggle Group - Disabled',
 	decorators: [
@@ -198,5 +199,40 @@ export const ToggleGroupMultiple: StoryObj<{ cities: City[] }> = {
 	render: ({ cities }) => ({
 		props: { cities },
 		template: '<hlm-toggle-group-story [selected]="cities" multiple="true"/>',
+	}),
+};
+
+@Component({
+	selector: 'hlm-toggle-group-form-story',
+	standalone: true,
+	imports: [BrnToggleGroupModule, HlmToggleGroupModule, FormsModule, NgForOf, ReactiveFormsModule, JsonPipe],
+	template: `
+		<form class="flex space-x-4" [formGroup]="citiesForm">
+			<brn-toggle-group hlm formControlName="selectedCity">
+				<button variant="outline" *ngFor="let city of cities; let last = last" [value]="city" hlm brnToggle>
+					{{ city.name }}
+				</button>
+			</brn-toggle-group>
+		</form>
+
+		<pre class="${hlmP}" data-testid='selectedCity'>{{ citiesForm.controls.selectedCity?.getRawValue()?.name }}</pre>
+	`,
+})
+class HlmToggleGroupFormStoryComponent {
+	protected readonly cities: City[] = CITIES;
+	protected readonly citiesForm = new FormGroup({
+		selectedCity: new FormControl(CITIES[0]),
+	});
+}
+
+export const ToggleGroupForm: StoryObj<{}> = {
+	name: 'Toggle Group - Form',
+	decorators: [
+		moduleMetadata({
+			imports: [HlmToggleGroupFormStoryComponent],
+		}),
+	],
+	render: () => ({
+		template: '<hlm-toggle-group-form-story/>',
 	}),
 };

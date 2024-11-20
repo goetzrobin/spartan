@@ -1,4 +1,4 @@
-import { Directive, type DoCheck, Injector, Input, computed, effect, inject, input, signal } from '@angular/core';
+import { Directive, type DoCheck, Injector, computed, effect, inject, input, signal } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnFormFieldControl } from '@spartan-ng/ui-formfield-brain';
@@ -43,28 +43,24 @@ type InputVariants = VariantProps<typeof inputVariants>;
 	],
 })
 export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
-	private readonly _size = signal<InputVariants['size']>('default');
-	@Input()
-	set size(value: InputVariants['size']) {
-		this._size.set(value);
-	}
+	public readonly size = input<InputVariants['size']>('default');
 
-	private readonly _error = signal<InputVariants['error']>('auto');
-	@Input()
-	set error(value: InputVariants['error']) {
-		this._error.set(value);
-	}
+	public readonly error = input<InputVariants['error']>('auto');
+
+	protected readonly state = computed(() => ({
+		error: signal(this.error()),
+	}));
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm(inputVariants({ size: this._size(), error: this._error() }), this.userClass()),
+		hlm(inputVariants({ size: this.size(), error: this.state().error() }), this.userClass()),
 	);
 
 	private injector = inject(Injector);
 
 	ngControl: NgControl | null = this.injector.get(NgControl, null);
 
-	errorStateTracker: ErrorStateTracker;
+	private errorStateTracker: ErrorStateTracker;
 
 	private defaultErrorStateMatcher = inject(ErrorStateMatcher);
 	private parentForm = inject(NgForm, { optional: true });
@@ -83,7 +79,7 @@ export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 		effect(
 			() => {
 				if (this.ngControl) {
-					this.error = this.errorStateTracker.errorState();
+					this.setError(this.errorStateTracker.errorState());
 				}
 			},
 			{ allowSignalWrites: true },
@@ -92,5 +88,9 @@ export class HlmInputDirective implements BrnFormFieldControl, DoCheck {
 
 	ngDoCheck() {
 		this.errorStateTracker.updateErrorState();
+	}
+
+	setError(error: InputVariants['error']) {
+		this.state().error.set(error);
 	}
 }

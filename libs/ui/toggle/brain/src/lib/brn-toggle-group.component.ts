@@ -1,17 +1,5 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import {
-	Component,
-	OnChanges,
-	SimpleChanges,
-	booleanAttribute,
-	computed,
-	contentChildren,
-	forwardRef,
-	input,
-	model,
-	output,
-	signal,
-} from '@angular/core';
+import { Component, booleanAttribute, computed, forwardRef, input, model, output, signal } from '@angular/core';
 import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { provideBrnToggleGroup } from './brn-toggle-group.token';
 import { BrnToggleDirective } from './brn-toggle.directive';
@@ -46,7 +34,7 @@ export class BrnButtonToggleChange<T = unknown> {
 		<ng-content />
 	`,
 })
-export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccessor, OnChanges {
+export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccessor {
 	/**
 	 * The method to be called in order to update ngModel.
 	 */
@@ -86,18 +74,8 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 	/** Emit event when the group value changes. */
 	readonly change = output<BrnButtonToggleChange<T>>();
 
-	/** The toggles within the group. */
-	private readonly _toggleButtons = contentChildren(BrnToggleDirective, { descendants: true });
-
-	ngOnChanges(changes: SimpleChanges): void {
-		if ('value' in changes) {
-			this.updateSelectionState();
-		}
-	}
-
 	writeValue(value: ToggleValue<T>): void {
 		this.value.set(value);
-		this.updateSelectionState();
 	}
 
 	registerOnChange(fn: (value: ToggleValue<T>) => void) {
@@ -156,7 +134,7 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 	 * Deselects a value.
 	 */
 	deselect(value: T, source: BrnToggleDirective<T>): void {
-		if (this.state().disabled() || !this.isSelected(value)) {
+		if (this.state().disabled() || !this.isSelected(value) || !this.canDeselect(value)) {
 			return;
 		}
 
@@ -167,25 +145,8 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 				((currentValue ?? []) as T[]).filter((v) => v !== value),
 				source,
 			);
-		} else if (currentValue === value && this.canDeselect(value)) {
+		} else if (currentValue === value) {
 			this.emitSelectionChange(null, source);
-		}
-	}
-
-	/** Update the value of the group */
-	private emitSelectionChange(value: ToggleValue<T>, source: BrnToggleDirective<T>): void {
-		this.value.set(value);
-		this._onChange(value);
-		this.change.emit(new BrnButtonToggleChange<T>(source, this.value()));
-
-		// propagate the change to the other toggles in the group
-		this.updateSelectionState();
-	}
-
-	/** Update the selection state in the toggle buttons. */
-	private updateSelectionState(): void {
-		for (const toggle of this._toggleButtons()) {
-			this.isSelected(toggle.value() as T) ? toggle.toggleOn() : toggle.toggleOff();
 		}
 	}
 
@@ -193,7 +154,7 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 	 * @internal
 	 * Determines whether a value is selected.
 	 */
-	private isSelected(value: T): boolean {
+	isSelected(value: T): boolean {
 		const currentValue = this.value();
 
 		if (
@@ -208,6 +169,13 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 			return (currentValue as T[])?.includes(value);
 		}
 		return currentValue === value;
+	}
+
+	/** Update the value of the group */
+	private emitSelectionChange(value: ToggleValue<T>, source: BrnToggleDirective<T>): void {
+		this.value.set(value);
+		this._onChange(value);
+		this.change.emit(new BrnButtonToggleChange<T>(source, this.value()));
 	}
 }
 

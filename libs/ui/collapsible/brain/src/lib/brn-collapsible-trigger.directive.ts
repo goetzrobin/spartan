@@ -1,4 +1,4 @@
-import { Directive, inject, signal } from '@angular/core';
+import { Directive, computed, inject } from '@angular/core';
 import { BrnCollapsibleComponent } from './brn-collapsible.component';
 
 @Directive({
@@ -6,17 +6,23 @@ import { BrnCollapsibleComponent } from './brn-collapsible.component';
 	standalone: true,
 	host: {
 		'[attr.data-state]': 'state()',
-		'[attr.disabled]': 'disabled()',
+		'[attr.disabled]': 'attrDisabled()',
 		'[attr.aria-expanded]': 'state() === "open"',
 		'[attr.aria-controls]': 'ariaControls()',
 		'(click)': 'toggleCollapsible()',
 	},
 })
 export class BrnCollapsibleTriggerDirective {
-	private _collapsible = inject(BrnCollapsibleComponent, { optional: true });
-	state = this._collapsible?.state ?? signal(false).asReadonly();
-	disabled = this._collapsible?.collapsibleDisabled ?? signal(undefined).asReadonly();
-	ariaControls = this._collapsible?.contentId;
+	private readonly _collapsible = inject(BrnCollapsibleComponent, { optional: true });
+
+	public readonly state = computed(() => this._collapsible?.state());
+
+	public readonly disabled = computed(() => this._collapsible?.disabled?.());
+
+	public readonly attrDisabled = computed(() => this._collapsible?.attrDisabled?.());
+
+	public readonly ariaControls = computed(() => this._collapsible?.contentId());
+
 	constructor() {
 		if (!this._collapsible) {
 			throw Error('Collapsible trigger directive can only be used inside a brn-collapsible element.');
