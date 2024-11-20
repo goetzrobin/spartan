@@ -21,9 +21,9 @@ import { ClassValue } from 'clsx';
   	`,
 })
 export class HlmBreadcrumbSeparatorComponent {
-		public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
-		protected readonly _computedClass = computed(() =>
-			hlm('[&>hlm-icon]:w-3.5 [&>hlm-icon]:h-3.5 [&>hlm-icon]:flex', this.userClass()),
-		);
-	}
+	protected readonly _computedClass = computed(() =>
+		hlm('[&>hlm-icon]:w-3.5 [&>hlm-icon]:h-3.5 [&>hlm-icon]:flex', this.userClass()),
+	);
+}
