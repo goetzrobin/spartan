@@ -8,22 +8,22 @@ import { injectBrnCalendar } from './brn-calendar.token';
 })
 export class BrnCalendarWeekdayDirective<T> implements OnDestroy {
 	/** Access the calendar */
-	private readonly calendar = injectBrnCalendar<T>();
+	private readonly _calendar = injectBrnCalendar<T>();
 
 	/** Access the date time adapter */
-	private readonly dateAdapter = injectDateAdapter<T>();
+	private readonly _dateAdapter = injectDateAdapter<T>();
 
 	/** Access the view container ref */
-	private readonly viewContainerRef = inject(ViewContainerRef);
+	private readonly _viewContainerRef = inject(ViewContainerRef);
 
 	/** Access the template ref */
-	private readonly templateRef = inject<TemplateRef<BrnWeekdayContext>>(TemplateRef);
+	private readonly _templateRef = inject<TemplateRef<BrnWeekdayContext>>(TemplateRef);
 
 	/** Get the days of the week to display in the header. */
-	protected readonly weekdays = computed(() => this.calendar.days().slice(0, 7));
+	protected readonly weekdays = computed(() => this._calendar.days().slice(0, 7));
 
 	/** Store the view refs */
-	private readonly viewRefs: EmbeddedViewRef<BrnWeekdayContext>[] = [];
+	private readonly _viewRefs: EmbeddedViewRef<BrnWeekdayContext>[] = [];
 
 	// Make sure the template checker knows the type of the context with which the
 	// template of this directive will be rendered
@@ -34,16 +34,16 @@ export class BrnCalendarWeekdayDirective<T> implements OnDestroy {
 	constructor() {
 		// Create a new view for each day
 		for (const day of this.weekdays()) {
-			const viewRef = this.viewContainerRef.createEmbeddedView(this.templateRef, {
-				$implicit: this.dateAdapter.getDay(day),
+			const viewRef = this._viewContainerRef.createEmbeddedView(this._templateRef, {
+				$implicit: this._dateAdapter.getDay(day),
 			});
-			this.viewRefs.push(viewRef);
+			this._viewRefs.push(viewRef);
 		}
 	}
 
 	ngOnDestroy(): void {
 		// Destroy all the views when the directive is destroyed
-		for (const viewRef of this.viewRefs) {
+		for (const viewRef of this._viewRefs) {
 			viewRef.destroy();
 		}
 	}

@@ -29,10 +29,10 @@ export class BrnCalendarDirective<T> {
 	protected readonly dateAdapter = injectDateAdapter<T>();
 
 	/** Access the change detector */
-	private readonly changeDetector = inject(ChangeDetectorRef);
+	private readonly _changeDetector = inject(ChangeDetectorRef);
 
 	/** Access the injector */
-	private readonly injector = inject(Injector);
+	private readonly _injector = inject(Injector);
 
 	/** The minimum date that can be selected.*/
 	public readonly min = input<T>();
@@ -194,12 +194,12 @@ export class BrnCalendarDirective<T> {
 				},
 			},
 			{
-				injector: this.injector,
+				injector: this._injector,
 			},
 		);
 
 		// we must update the view to ensure the focused cell is visible.
-		this.changeDetector.detectChanges();
+		this._changeDetector.detectChanges();
 	}
 }
 

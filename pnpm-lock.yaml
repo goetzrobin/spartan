@@ -110,6 +110,9 @@ importers:
       isomorphic-fetch:
         specifier: ^3.0.0
         version: 3.0.0(encoding@0.1.13)
+      luxon:
+        specifier: ^3.5.0
+        version: 3.5.0
       marked:
         specifier: ^5.1.2
         version: 5.1.2
@@ -211,7 +214,7 @@ importers:
         specifier: ^19.5.0
         version: 19.6.0
       '@eslint/js':
-        specifier: ^9.8.0
+        specifier: ^9.15.0
         version: 9.15.0
       '@faker-js/faker':
         specifier: ^9.0.3
@@ -312,6 +315,9 @@ importers:
       '@types/jest-axe':
         specifier: ^3.5.9
         version: 3.5.9
+      '@types/luxon':
+        specifier: ^3.4.2
+        version: 3.4.2
       '@types/marked':
         specifier: ^5.0.2
         version: 5.0.2
@@ -325,7 +331,7 @@ importers:
         specifier: ^5.14.9
         version: 5.14.9
       '@typescript-eslint/utils':
-        specifier: ^8.0.0
+        specifier: ^8.15.0
         version: 8.15.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.5.4)
       '@vitest/coverage-v8':
         specifier: 2.1.1
@@ -334,7 +340,7 @@ importers:
         specifier: 2.1.1
         version: 2.1.1(vitest@2.1.1)
       angular-eslint:
-        specifier: ^18.3.0
+        specifier: ^18.4.1
         version: 18.4.1(@angular-devkit/core@18.2.5(chokidar@3.6.0))(@angular-devkit/schematics@18.2.5(chokidar@3.6.0))(@typescript-eslint/types@8.15.0)(@typescript-eslint/utils@8.15.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.5.4))(eslint@9.15.0(jiti@2.4.0))(typescript-eslint@8.15.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.5.4))(typescript@5.5.4)
       autoprefixer:
         specifier: ^10.4.20
@@ -367,10 +373,10 @@ importers:
         specifier: ^0.24.0
         version: 0.24.0
       eslint:
-        specifier: ^9.8.0
+        specifier: ^9.15.0
         version: 9.15.0(jiti@2.4.0)
       eslint-config-prettier:
-        specifier: ^9.0.0
+        specifier: ^9.1.0
         version: 9.1.0(eslint@9.15.0(jiti@2.4.0))
       eslint-plugin-cypress:
         specifier: ^3.5.0
@@ -463,7 +469,7 @@ importers:
         specifier: ~5.5.0
         version: 5.5.4
       typescript-eslint:
-        specifier: ^8.0.0
+        specifier: ^8.15.0
         version: 8.15.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.5.4)
       verdaccio:
         specifier: ^5.0.4
@@ -4793,6 +4799,9 @@ packages:
 
   '@types/keyv@3.1.4':
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
+
+  '@types/luxon@3.4.2':
+    resolution: {integrity: sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==}
 
   '@types/marked@5.0.2':
     resolution: {integrity: sha512-OucS4KMHhFzhz27KxmWg7J+kIYqyqoW5kdIEI319hqARQQUTqhao3M/F+uFnDXD0Rg72iDDZxZNxq5gvctmLlg==}
@@ -18317,6 +18326,8 @@ snapshots:
   '@types/keyv@3.1.4':
     dependencies:
       '@types/node': 22.6.2
+
+  '@types/luxon@3.4.2': {}
 
   '@types/marked@5.0.2': {}
 

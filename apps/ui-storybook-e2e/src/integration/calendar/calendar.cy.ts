@@ -51,7 +51,8 @@ describe('calendar', () => {
 				})
 				.as('dateButton');
 
-			cy.get('@dateButton').focus().type('{enter}');
+			cy.get('@dateButton').focus();
+			cy.get('@dateButton').type('{enter}');
 			cy.get('@dateButton').should('have.attr', 'aria-selected', 'true');
 		});
 
@@ -62,7 +63,8 @@ describe('calendar', () => {
 				})
 				.as('dateButton');
 
-			cy.get('@dateButton').focus().trigger('keydown', { key: 'ArrowRight' });
+			cy.get('@dateButton').focus();
+			cy.get('@dateButton').trigger('keydown', { key: 'ArrowRight' });
 			cy.get('[brnCalendarCellButton]')
 				.filter((_, element) => {
 					return element.textContent.trim() === '2' && !element.hasAttribute('data-outside');
@@ -77,7 +79,8 @@ describe('calendar', () => {
 				})
 				.as('dateButton');
 
-			cy.get('@dateButton').focus().trigger('keydown', { key: 'ArrowLeft' });
+			cy.get('@dateButton').focus();
+			cy.get('@dateButton').trigger('keydown', { key: 'ArrowLeft' });
 			cy.get('[brnCalendarCellButton]')
 				.filter((_, element) => {
 					return element.textContent.trim() === '31' && !element.hasAttribute('data-outside');
@@ -92,7 +95,8 @@ describe('calendar', () => {
 				})
 				.as('dateButton');
 
-			cy.get('@dateButton').focus().trigger('keydown', { key: 'ArrowUp' });
+			cy.get('@dateButton').focus();
+			cy.get('@dateButton').trigger('keydown', { key: 'ArrowUp' });
 			cy.get('[brnCalendarCellButton]')
 				.filter((_, element) => {
 					return element.textContent.trim() === '25' && !element.hasAttribute('data-outside');
@@ -107,7 +111,8 @@ describe('calendar', () => {
 				})
 				.as('dateButton');
 
-			cy.get('@dateButton').focus().trigger('keydown', { key: 'ArrowDown' });
+			cy.get('@dateButton').focus();
+			cy.get('@dateButton').trigger('keydown', { key: 'ArrowDown' });
 			cy.get('[brnCalendarCellButton]')
 				.filter((_, element) => {
 					return element.textContent.trim() === '8' && !element.hasAttribute('data-outside');
@@ -122,14 +127,16 @@ describe('calendar', () => {
 				})
 				.as('dateButton');
 
-			cy.get('@dateButton').focus().trigger('keydown', { key: 'End' });
+			cy.get('@dateButton').focus();
+			cy.get('@dateButton').trigger('keydown', { key: 'End' });
 			cy.get('[brnCalendarCellButton]')
 				.filter((_, element) => {
 					return element.textContent.trim() === '30' && !element.hasAttribute('data-outside');
 				})
 				.should('have.focus');
 
-			cy.get('@dateButton').focus().trigger('keydown', { key: 'Home' });
+			cy.get('@dateButton').focus();
+			cy.get('@dateButton').trigger('keydown', { key: 'Home' });
 			cy.get('[brnCalendarCellButton]')
 				.filter((_, element) => {
 					return element.textContent.trim() === '1' && !element.hasAttribute('data-outside');
