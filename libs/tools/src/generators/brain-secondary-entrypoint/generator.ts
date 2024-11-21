@@ -64,7 +64,7 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 	await removeGenerator(tree, { projectName: options.project, skipFormat: true, forceRemove: true, importPath });
 
 	// migrate the imports - nicely we use our public migration generator here, so we can test it within our own project.
-	await migrateBrainImportsGenerator(tree, { skipFormat: true });
+	await migrateBrainImportsGenerator(tree, { skipFormat: true, skipInstall: true });
 }
 
 /**

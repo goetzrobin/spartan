@@ -7,10 +7,12 @@ import { MigrateBrainImportsGeneratorSchema } from './schema';
 import { isBinaryPath } from './utils/binary-extensions';
 
 export async function migrateBrainImportsGenerator(tree: Tree, options: MigrateBrainImportsGeneratorSchema) {
-	ensureBrainPackageIsInstalled(tree);
+	if (!options.skipInstall) {
+		ensureBrainPackageIsInstalled(tree);
+	}
 
 	for (const [from, to] of Object.entries(imports)) {
-		replaceBrainPackageWithSecondaryEntrypoint(tree, from, to);
+		replaceBrainPackageWithSecondaryEntrypoint(tree, from, to as string);
 	}
 
 	if (!options.skipFormat) {

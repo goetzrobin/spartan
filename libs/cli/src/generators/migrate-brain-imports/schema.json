@@ -6,7 +6,11 @@
 	"properties": {
 		"skipFormat": {
 			"type": "boolean",
-			"description": "Skip formatting the code after migration"
+			"description": "Skip formatting the code after migration."
+		},
+		"skipInstall": {
+			"type": "boolean",
+			"description": "Whether to verify the brain package is installed."
 		}
 	},
 	"required": []
