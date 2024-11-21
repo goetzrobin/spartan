@@ -1,6 +1,7 @@
 import { librarySecondaryEntryPointGenerator } from '@nx/angular/generators';
 import {
 	formatFiles,
+	getProjects,
 	joinPathFragments,
 	readJson,
 	readProjectConfiguration,
@@ -72,8 +73,38 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 	// remove the original library
 	await removeGenerator(tree, { projectName: options.project, skipFormat: true, forceRemove: true, importPath });
 
+	// migrate library peer dependencies
+	migratePeerDependencies(tree, options.name, importPath);
+
 	// migrate the imports - nicely we use our public migration generator here, so we can test it within our own project.
 	await migrateBrainImportsGenerator(tree, { skipFormat: true, skipInstall: true });
+}
+
+function migratePeerDependencies(tree: Tree, name: string, oldPackage: string): void {
+	const projects = getProjects(tree);
+
+	for (const [, project] of Object.entries(projects)) {
+		const packageJsonPath = joinPathFragments(project.root, 'package.json');
+
+		if (!tree.exists(packageJsonPath)) {
+			return;
+		}
+
+		updateJson(tree, packageJsonPath, (json) => {
+			// check if the peer dependency is present
+			if (!json.peerDependencies || !json.peerDependencies[oldPackage]) {
+				return json;
+			}
+
+			// add a peer dependency to the unified brain package
+			json.peerDependencies[`@spartan-ng/brain`] = json.peerDependencies[oldPackage];
+
+			// remove the old peer dependency
+			delete json.peerDependencies[oldPackage];
+
+			return json;
+		});
+	}
 }
 
 export default brainSecondaryEntrypointGenerator;
