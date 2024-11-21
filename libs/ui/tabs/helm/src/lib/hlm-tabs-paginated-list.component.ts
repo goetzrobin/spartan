@@ -1,5 +1,6 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { Component, ContentChildren, type ElementRef, type QueryList, computed, input, viewChild } from '@angular/core';
+import { Component, type ElementRef, computed, contentChildren, input, viewChild } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
 import { buttonVariants } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
@@ -61,8 +62,8 @@ import { listVariants } from './hlm-tabs-list.component';
 	},
 })
 export class HlmTabsPaginatedListComponent extends BrnTabsPaginatedListDirective {
-	@ContentChildren(BrnTabsTriggerDirective, { descendants: false })
-	public _items!: QueryList<BrnTabsTriggerDirective>;
+	public _items = contentChildren(BrnTabsTriggerDirective, { descendants: false });
+	public _itemsChanges = toObservable(this._items);
 
 	public _tabListContainer = viewChild.required<ElementRef<HTMLElement>>('tabListContainer');
 	public _tabList = viewChild.required<ElementRef<HTMLElement>>('tabList');

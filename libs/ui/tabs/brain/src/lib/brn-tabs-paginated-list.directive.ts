@@ -29,7 +29,6 @@ import {
 	Injector,
 	NgZone,
 	type OnDestroy,
-	type QueryList,
 	Signal,
 	afterNextRender,
 	booleanAttribute,
@@ -79,7 +78,8 @@ export type BrnPaginatedTabHeaderItem = FocusableOption & { elementRef: ElementR
 export abstract class BrnTabsPaginatedListDirective
 	implements AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy
 {
-	public abstract _items: QueryList<BrnPaginatedTabHeaderItem>;
+	public abstract _items: Signal<ReadonlyArray<BrnPaginatedTabHeaderItem>>;
+	public abstract _itemsChanges: Observable<ReadonlyArray<BrnPaginatedTabHeaderItem>>;
 	public abstract _tabListContainer: Signal<ElementRef<HTMLElement>>;
 	public abstract _tabList: Signal<ElementRef<HTMLElement>>;
 	public abstract _tabListInner: Signal<ElementRef<HTMLElement>>;
@@ -138,10 +138,10 @@ export abstract class BrnTabsPaginatedListDirective
 		const tabs = this._tabs();
 
 		let activeIndex = 0;
-		if (currentTabKey && this._items) {
+		if (currentTabKey && this._items()) {
 			const currentTab = tabs[currentTabKey];
 			if (currentTab) {
-				activeIndex = this._items.toArray().indexOf(currentTab.trigger);
+				activeIndex = this._items().indexOf(currentTab.trigger);
 			}
 		}
 
@@ -224,7 +224,7 @@ export abstract class BrnTabsPaginatedListDirective
 			this.updatePagination();
 		};
 
-		this._keyManager = new FocusKeyManager<BrnPaginatedTabHeaderItem>(this._items)
+		this._keyManager = new FocusKeyManager<BrnPaginatedTabHeaderItem>(this._items())
 			.withHorizontalOrientation(this._getLayoutDirection())
 			.withHomeAndEnd()
 			.withWrap()
@@ -240,7 +240,7 @@ export abstract class BrnTabsPaginatedListDirective
 
 		// On dir change or resize, realign the ink bar and update the orientation of
 		// the key manager if the direction has changed.
-		merge(dirChange, viewportResize, resize, this._items.changes, this._itemsResized())
+		merge(dirChange, viewportResize, resize, this._itemsChanges, this._itemsResized())
 			.pipe(takeUntil(this._destroyed))
 			.subscribe(() => {
 				// We need to defer this to give the browser some time to recalculate
@@ -271,10 +271,10 @@ export abstract class BrnTabsPaginatedListDirective
 			return EMPTY;
 		}
 
-		return this._items.changes.pipe(
-			startWith(this._items),
+		return this._itemsChanges.pipe(
+			startWith(this._items()),
 			switchMap(
-				(tabItems: QueryList<BrnPaginatedTabHeaderItem>) =>
+				(tabItems: ReadonlyArray<BrnPaginatedTabHeaderItem>) =>
 					new Observable((observer: Observer<ResizeObserverEntry[]>) =>
 						this._ngZone.runOutsideAngular(() => {
 							const resizeObserver = new ResizeObserver((entries) => observer.next(entries));
@@ -298,9 +298,9 @@ export abstract class BrnTabsPaginatedListDirective
 
 	ngAfterContentChecked(): void {
 		// If the number of tab labels have changed, check if scrolling should be enabled
-		if (this._tabLabelCount !== this._items.length) {
+		if (this._tabLabelCount !== this._items().length) {
 			this.updatePagination();
-			this._tabLabelCount = this._items.length;
+			this._tabLabelCount = this._items().length;
 			this._changeDetectorRef.markForCheck();
 		}
 
@@ -340,7 +340,7 @@ export abstract class BrnTabsPaginatedListDirective
 			case ENTER:
 			case SPACE:
 				if (this.focusIndex !== this._selectedIndex()) {
-					const item = this._items.get(this.focusIndex);
+					const item = this._items()[this.focusIndex];
 
 					if (item && !item.disabled) {
 						this.selectFocusedIndex.emit(this.focusIndex);
@@ -406,7 +406,7 @@ export abstract class BrnTabsPaginatedListDirective
 	 * providing a valid index and return true.
 	 */
 	_isValidIndex(index: number): boolean {
-		return this._items ? !!this._items.toArray()[index] : true;
+		return this._items() ? !!this._items()[index] : true;
 	}
 
 	/**
@@ -418,8 +418,8 @@ export abstract class BrnTabsPaginatedListDirective
 			this._scrollToLabel(tabIndex);
 		}
 
-		if (this._items?.length) {
-			this._items.toArray()[tabIndex].focus();
+		if (this._items()?.length) {
+			this._items()[tabIndex].focus();
 
 			// Do not let the browser manage scrolling to focus the element, this will be handled
 			// by using translation. In LTR, the scroll left should be 0. In RTL, the scroll width
@@ -508,7 +508,7 @@ export abstract class BrnTabsPaginatedListDirective
 			return;
 		}
 
-		const selectedLabel = this._items ? this._items.toArray()[labelIndex] : null;
+		const selectedLabel = this._items() ? this._items()[labelIndex] : null;
 
 		if (!selectedLabel) {
 			return;
