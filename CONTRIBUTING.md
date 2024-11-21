@@ -63,6 +63,15 @@ pnpm run dev
 
 The code is inside `apps/app` and runs on AnalogJs.
 
+## Creating a new Brain feature
+
+Brain features should be added as a secondary entrypoint to the `brain` library. This can be done by running the following
+command:
+
+```shell
+nx g @spartan-ng/tools:brain-secondary-entrypoint feature-name
+```
+
 ## Submitting pull requests
 
 **Please follow these basic steps to simplify pull request reviews. If you don't you'll probably just be asked to
