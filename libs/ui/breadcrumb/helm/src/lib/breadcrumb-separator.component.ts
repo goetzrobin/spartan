@@ -15,10 +15,10 @@ import { ClassValue } from 'clsx';
 		'[attr.aria-hidden]': 'true',
 	},
 	template: `
-      	<ng-content>	
+		<ng-content>
 			<hlm-icon name="lucideChevronRight" />
 		</ng-content>
-  	`,
+	`,
 })
 export class HlmBreadcrumbSeparatorComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });

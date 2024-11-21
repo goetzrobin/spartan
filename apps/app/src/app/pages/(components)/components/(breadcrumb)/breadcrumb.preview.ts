@@ -54,7 +54,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
-				
+
 				<li hlmBreadcrumbSeparator></li>
 
 				<li hlmBreadcrumbItem>

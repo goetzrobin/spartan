@@ -37,7 +37,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
 				<li hlmBreadcrumbSeparator>
-						<hlm-icon name="lucideSlash" class="h-4 w-4" />
+					<hlm-icon name="lucideSlash" class="h-4 w-4" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
