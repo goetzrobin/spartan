@@ -1,38 +1,25 @@
 import { CdkMenuItemRadio } from '@angular/cdk/menu';
-import { Directive, Input, Output, booleanAttribute, inject, signal } from '@angular/core';
+import { booleanAttribute, Directive, effect, inject, input } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 
 @Directive({
 	selector: '[brnMenuItemRadio]',
 	standalone: true,
 	hostDirectives: [CdkMenuItemRadio],
 	host: {
-		'[class.checked]': '_checked()',
-		'[disabled]': '_disabled()',
+		'[class.checked]': 'checked()',
+		'[disabled]': 'disabled()',
 	},
 })
 export class BrnMenuItemRadioDirective {
-	private readonly _cdkMenuItem = inject(CdkMenuItemRadio, { host: true });
+	readonly #cdkMenuItem = inject(CdkMenuItemRadio);
+	readonly checked = input(this.#cdkMenuItem.checked, { transform: booleanAttribute });
+	readonly disabled = input(this.#cdkMenuItem.disabled, { transform: booleanAttribute });
+	public readonly triggered = outputFromObservable(this.#cdkMenuItem.triggered);
 
-	protected readonly _checked = signal(this._cdkMenuItem.checked);
-	@Input({ transform: booleanAttribute })
-	public set checked(value: boolean) {
-		this._cdkMenuItem.checked = value;
-		this._checked.set(value);
-	}
-	public get checked() {
-		return this._checked();
-	}
+	constructor() {
+		effect(() => (this.#cdkMenuItem.disabled = this.disabled()));
 
-	protected readonly _disabled = signal(this._cdkMenuItem.disabled);
-	@Input({ transform: booleanAttribute })
-	public set disabled(value: boolean) {
-		this._cdkMenuItem.disabled = value;
-		this._disabled.set(value);
+		effect(() => (this.#cdkMenuItem.checked = this.checked()));
 	}
-	public get disabled() {
-		return this._disabled();
-	}
-
-	@Output()
-	public readonly triggered = this._cdkMenuItem.triggered;
 }
