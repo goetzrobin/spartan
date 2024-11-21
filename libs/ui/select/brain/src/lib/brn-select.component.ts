@@ -10,14 +10,13 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	type DoCheck,
-	EventEmitter,
-	Output,
 	type Signal,
 	computed,
 	contentChild,
 	contentChildren,
 	inject,
 	input,
+	output,
 	signal,
 	viewChild,
 } from '@angular/core';
@@ -106,8 +105,7 @@ export class BrnSelectComponent
 	/** Overlay pane containing the options. */
 	protected _overlayDir = viewChild(CdkConnectedOverlay);
 
-	@Output()
-	openedChange = new EventEmitter<boolean>();
+	public readonly openedChange = output<boolean>();
 
 	public readonly closeDelay = input<number>(100);
 	public readonly isExpanded = this._selectService.isExpanded;
@@ -276,7 +274,7 @@ export class BrnSelectComponent
 			...state,
 			isExpanded: true,
 		}));
-		this.openedChange.next(true);
+		this.openedChange.emit(true);
 		this._moveFocusToCDKList();
 	}
 
@@ -287,7 +285,7 @@ export class BrnSelectComponent
 			this._selectService.selectTrigger.focus();
 		}
 
-		this.openedChange.next(false);
+		this.openedChange.emit(false);
 		this._selectService.state.update((state) => ({
 			...state,
 			isExpanded: false,
