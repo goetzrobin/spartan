@@ -7,6 +7,7 @@ import {
 	Injectable,
 	OnDestroy,
 	PLATFORM_ID,
+	Signal,
 	computed,
 	inject,
 	signal,
@@ -89,11 +90,12 @@ export class BrnSelectService {
 		id: string;
 		labelId: string;
 		panelId: string;
-		placeholder: string;
+		placeholder: Signal<string>;
 		isExpanded: boolean;
-		multiple: boolean;
-		disabled: boolean;
-		dir: BrnReadDirection;
+		multiple: Signal<boolean>;
+		disabled: Signal<boolean>;
+		disabledBySetDisabled: Signal<boolean>;
+		dir: Signal<BrnReadDirection>;
 		selectedOptions: Array<CdkOption | null>;
 		possibleOptions: Array<CdkOption | null>;
 		value: string | string[];
@@ -102,11 +104,12 @@ export class BrnSelectService {
 		id: '',
 		labelId: '',
 		panelId: '',
-		placeholder: '',
 		isExpanded: false,
-		multiple: false,
-		disabled: false,
-		dir: 'ltr',
+		placeholder: signal(''),
+		multiple: signal(false),
+		disabled: signal(false),
+		disabledBySetDisabled: signal(false),
+		dir: signal('ltr' as BrnReadDirection),
 		selectedOptions: [],
 		possibleOptions: [],
 		value: '',
@@ -116,11 +119,11 @@ export class BrnSelectService {
 	public readonly id = computed(() => this.state().id);
 	public readonly labelId = computed(() => this.state().labelId);
 	public readonly panelId = computed(() => this.state().panelId);
-	public readonly placeholder = computed(() => this.state().placeholder);
-	public readonly disabled = computed(() => this.state().disabled);
+	public readonly placeholder = computed(() => this.state().placeholder());
+	public readonly disabled = computed(() => this.state().disabled() || this.state().disabledBySetDisabled());
 	public readonly isExpanded = computed(() => this.state().isExpanded);
-	public readonly multiple = computed(() => this.state().multiple);
-	public readonly dir = computed(() => this.state().dir);
+	public readonly multiple = computed(() => this.state().multiple());
+	public readonly dir = computed(() => this.state().dir());
 	public readonly selectedOptions = computed(() => this.state().selectedOptions);
 	public readonly value = computed(() => this.state().value);
 	public readonly triggerWidth = computed(() => this.state().triggerWidth);

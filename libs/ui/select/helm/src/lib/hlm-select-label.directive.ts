@@ -1,4 +1,4 @@
-import { Directive, computed, inject, input, } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnSelectLabelDirective } from '@spartan-ng/ui-select-brain';
 import type { ClassValue } from 'clsx';
@@ -23,5 +23,4 @@ export class HlmSelectLabelDirective {
 			this.userClass(),
 		),
 	);
-
 }

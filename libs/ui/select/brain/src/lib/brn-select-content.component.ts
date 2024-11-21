@@ -196,7 +196,7 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	}
 
 	public updateArrowDisplay(): void {
-    const nativeElement = this.viewport().nativeElement;
+		const nativeElement = this.viewport().nativeElement;
 		this.canScrollUp.set(nativeElement.scrollTop > 0);
 		const maxScroll = nativeElement.scrollHeight - nativeElement.clientHeight;
 		this.canScrollDown.set(Math.ceil(nativeElement.scrollTop) < maxScroll);
