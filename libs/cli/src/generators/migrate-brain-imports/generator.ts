@@ -2,14 +2,19 @@ import { formatFiles, Tree, visitNotIgnoredFiles } from '@nx/devkit';
 import { getPackageManagerCommand, logger, readJson, updateJson } from 'nx/src/devkit-exports';
 import type { PackageJson } from 'nx/src/utils/package-json';
 import { basename } from 'path';
-import { imports } from './import-map.json';
 import { MigrateBrainImportsGeneratorSchema } from './schema';
 import { isBinaryPath } from './utils/binary-extensions';
+
+interface ImportMap {
+	imports: Record<string, string>;
+}
 
 export async function migrateBrainImportsGenerator(tree: Tree, options: MigrateBrainImportsGeneratorSchema) {
 	if (!options.skipInstall) {
 		ensureBrainPackageIsInstalled(tree);
 	}
+
+	const { imports } = readJson<ImportMap>(tree, 'libs/cli/src/generators/migrate-brain-imports/import-map.json');
 
 	for (const [from, to] of Object.entries(imports)) {
 		replaceBrainPackageWithSecondaryEntrypoint(tree, from, to as string);
