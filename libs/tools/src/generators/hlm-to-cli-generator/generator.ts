@@ -1,5 +1,5 @@
-import * as path from 'node:path';
 import { type ProjectConfiguration, type Tree, formatFiles, names, readJson, workspaceRoot } from '@nx/devkit';
+import * as path from 'node:path';
 import { addPrimitiveToSupportedUILibraries } from './lib/add-primitive-to-supported-ui-libraries';
 import { copyFilesFromHlmLibToGenerator, createSharedGeneratorFiles, recursivelyDelete } from './lib/file-management';
 import { getProjectsAndNames } from './lib/get-project-names';
@@ -33,11 +33,8 @@ export async function hlmCliNxGeneratorGenerator(tree: Tree, options: HlmToCliGe
 		const primitiveName = internalName.replace('ui-', '').replace('-helm', '').replace('-', '');
 		const cleanNames = names(primitiveName);
 		const mergedOptions = { ...options, ...cleanNames };
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		mergedOptions['internalName'] = internalName;
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		mergedOptions['publicName'] = `ui-${primitiveName}-helm`;
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		mergedOptions['primitiveName'] = primitiveName;
 
 		createGeneratorFromHlmLibrary(projects, primitiveName, internalName, tree, mergedOptions);

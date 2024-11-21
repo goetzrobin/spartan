@@ -1,12 +1,12 @@
 {
 	"name": "@spartan-ng/ui-label-helm",
-	"version": "0.0.1-alpha.10",
+	"version": "0.0.1-alpha.356",
 	"peerDependencies": {
-		"@angular/core": "^18.0.0",
 		"@spartan-ng/ui-core": "0.0.1-alpha.356",
-		"class-variance-authority": "^0.6.0",
-		"clsx": "^2.1.1",
-		"@spartan-ng/ui-label-brain": "0.0.1-alpha.356"
+		"@spartan-ng/ui-label-brain": "0.0.1-alpha.356",
+		"@angular/core": ">=18.0.0",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.1"
 	},
 	"dependencies": {},
 	"sideEffects": false,

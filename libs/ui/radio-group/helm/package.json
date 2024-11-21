@@ -1,9 +1,9 @@
 {
 	"name": "@spartan-ng/ui-radiogroup-helm",
-	"version": "0.0.1-alpha.10",
+	"version": "0.0.1-alpha.356",
 	"peerDependencies": {
-		"@angular/core": "^18.0.0",
 		"@spartan-ng/ui-core": "0.0.1-alpha.356",
+		"@angular/core": ">=18.0.0",
 		"clsx": "^2.1.1"
 	},
 	"dependencies": {},

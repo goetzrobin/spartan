@@ -2,8 +2,8 @@
 	"name": "@spartan-ng/ui-avatar-brain",
 	"version": "0.0.1-alpha.356",
 	"peerDependencies": {
-		"@angular/common": "^18.0.0",
-		"@angular/core": "^18.0.0",
+		"@angular/core": ">=18.0.0",
+		"@angular/cdk": ">=18.0.0",
 		"clsx": "^2.1.1"
 	},
 	"dependencies": {},

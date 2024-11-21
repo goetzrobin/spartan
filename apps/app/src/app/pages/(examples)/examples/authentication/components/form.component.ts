@@ -9,6 +9,7 @@ import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'auth-example-form',
 	standalone: true,
 	imports: [
@@ -74,7 +75,7 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 	`,
 })
 export class AuthenticationFormComponent {
-	isLoading = signal(false);
+	public isLoading = signal(false);
 
 	send() {
 		this.isLoading.set(true);

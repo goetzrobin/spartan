@@ -2,7 +2,7 @@ import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCirclePlus, lucideListMusic, lucidePodcast } from '@ng-icons/lucide';
-import { metaWith } from '../../../../shared/meta/meta.util';
+import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { TopMusicMenuComponent } from './components/top-menu.component';
 
 import { CommonModule, NgOptimizedImage } from '@angular/common';
@@ -159,6 +159,7 @@ export const routeMeta: RouteMeta = {
 														[src]="item.img"
 														[fallback]="imageFallback"
 														class="bg-border aspect-square h-full w-full transform-gpu transition-transform group-hover:scale-110 md:aspect-[1/1.25]"
+														alt="Music Image"
 													/>
 												</picture>
 												<figcaption class="space-y-1 text-sm">
@@ -186,6 +187,7 @@ export const routeMeta: RouteMeta = {
 														[src]="item.img"
 														fallback="imageFallback"
 														class="bg-border aspect-square w-full object-cover transition-transform group-hover:scale-110"
+														alt="Music Image"
 													/>
 												</picture>
 												<figcaption class="space-y-1 text-sm">
@@ -224,9 +226,9 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class MusicPageComponent {
-	imageFallback = img;
+	public imageFallback = img;
 
-	sectionData = {
+	public sectionData = {
 		listenNow: [
 			{
 				img: 'https://images.pexels.com/photos/16580466/pexels-photo-16580466/free-photo-of-festa-comemoracao-musica-diversao.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -283,7 +285,7 @@ export default class MusicPageComponent {
 		],
 	};
 
-	contextMenuPlaylist = [
+	public contextMenuPlaylist = [
 		'Recently Added',
 		'Recently Played',
 		'Top Songs',

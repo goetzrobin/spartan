@@ -7,10 +7,10 @@
 /tmp
 /node_modules
 /stats.html
+pnpm-lock.yaml
 
 /.nx/cache
 
 /.nx/workspace-data
 
-# use biomejs, not prettier with `nx format`
 *.css

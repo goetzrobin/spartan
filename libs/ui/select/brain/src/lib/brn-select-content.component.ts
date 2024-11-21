@@ -33,19 +33,19 @@ export class BrnSelectScrollUpDirective {
 	private readonly _el = inject(ElementRef);
 	private readonly _selectContent = inject(BrnSelectContentComponent);
 
-	private readonly endReached = new Subject<boolean>();
+	private readonly _endReached = new Subject<boolean>();
 	private readonly _destroyRef = inject(DestroyRef);
 
 	public startEmittingEvents(): void {
 		const mouseLeave$ = fromEvent(this._el.nativeElement, 'mouseleave');
 
 		interval(100)
-			.pipe(takeUntil(mouseLeave$), takeUntil(this.endReached), takeUntilDestroyed(this._destroyRef))
+			.pipe(takeUntil(mouseLeave$), takeUntil(this._endReached), takeUntilDestroyed(this._destroyRef))
 			.subscribe(() => this._selectContent.moveFocusUp());
 	}
 
 	public stopEmittingEvents(): void {
-		this.endReached.next(true);
+		this._endReached.next(true);
 	}
 }
 
@@ -61,19 +61,19 @@ export class BrnSelectScrollDownDirective {
 	private readonly _el = inject(ElementRef);
 	private readonly _selectContent = inject(BrnSelectContentComponent);
 
-	private readonly endReached = new Subject<boolean>();
+	private readonly _endReached = new Subject<boolean>();
 	private readonly _destroyRef = inject(DestroyRef);
 
 	public startEmittingEvents(): void {
 		const mouseLeave$ = fromEvent(this._el.nativeElement, 'mouseleave');
 
 		interval(100)
-			.pipe(takeUntil(mouseLeave$), takeUntil(this.endReached), takeUntilDestroyed(this._destroyRef))
+			.pipe(takeUntil(mouseLeave$), takeUntil(this._endReached), takeUntilDestroyed(this._destroyRef))
 			.subscribe(() => this._selectContent.moveFocusDown());
 	}
 
 	public stopEmittingEvents(): void {
-		this.endReached.next(true);
+		this._endReached.next(true);
 	}
 }
 
@@ -140,7 +140,7 @@ export class BrnSelectScrollDownDirective {
 export class BrnSelectContentComponent implements AfterViewInit {
 	private readonly _el: ElementRef<HTMLElement> = inject(ElementRef);
 	private readonly _cdkListbox = inject(CdkListbox, { host: true });
-	private readonly destroyRef = inject(DestroyRef);
+	private readonly _destroyRef = inject(DestroyRef);
 	protected readonly _selectService = inject(BrnSelectService);
 
 	protected readonly labelledBy = this._selectService.labelId;
@@ -179,7 +179,7 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	}
 
 	private setInitiallySelectedOptions() {
-		this.initialSelectedOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((selectedOptions) => {
+		this.initialSelectedOptions$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((selectedOptions) => {
 			// Reapplying cdkLibstbox multiple because seems this is running before effect that
 			// updates cdklistbox, reapplying multiple true so we can set the multiple initial options
 			if (this._selectService.multiple()) {

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-tooltip-brain',
 	preset: '../../../../jest.preset.cjs',

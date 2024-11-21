@@ -16,7 +16,7 @@ import { HlmIconComponent } from './hlm-icon.component';
 	`,
 })
 class HlmMockComponent {
-	@Input() size = 'base';
+	@Input() public size = 'base';
 }
 
 describe('HlmIconComponent', () => {

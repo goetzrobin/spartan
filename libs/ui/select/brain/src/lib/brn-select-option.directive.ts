@@ -39,15 +39,15 @@ export class BrnSelectOptionDirective implements FocusableOption {
 	}
 
 	@Input()
-	set value(value: unknown | null) {
+	public set value(value: unknown | null) {
 		this._cdkSelectOption.value = value;
 	}
 
 	@Input()
-	set disabled(value: boolean) {
+	public set disabled(value: boolean) {
 		this._disabled = value;
 	}
-	get disabled() {
+	public get disabled() {
 		return this._disabled;
 	}
 	private _disabled = false;

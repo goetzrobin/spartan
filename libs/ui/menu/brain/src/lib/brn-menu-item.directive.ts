@@ -14,15 +14,15 @@ export class BrnMenuItemDirective {
 
 	protected readonly _disabled = signal(this._cdkMenuItem.disabled);
 	@Input({ transform: booleanAttribute })
-	set disabled(value: boolean) {
+	public set disabled(value: boolean) {
 		this._cdkMenuItem.disabled = value;
 		this._disabled.set(value);
 	}
 
-	get disabled() {
+	public get disabled() {
 		return this._disabled();
 	}
 
 	@Output()
-	triggered = this._cdkMenuItem.triggered;
+	public readonly triggered = this._cdkMenuItem.triggered;
 }

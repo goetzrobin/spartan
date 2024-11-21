@@ -20,72 +20,78 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 1. [goetzrobin](https://github.com/goetzrobin)
 2. [elite-benni](https://github.com/elite-benni)
 3. [thatsamsonkid](https://github.com/thatsamsonkid)
-4. [mihajm](https://github.com/mihajm)
-5. [ajitzero](https://github.com/ajitzero)
-6. [arturgawlik](https://github.com/arturgawlik)
-7. [deepakrudrapaul](https://github.com/deepakrudrapaul)
-8. [evanfuture](https://github.com/evanfuture)
-9. [AdditionAddict](https://github.com/AdditionAddict)
-10. [Altamimi-Dev](https://github.com/Altamimi-Dev)
-11. [ferat](https://github.com/ferat)
-12. [jeremy-js-devweb](https://github.com/jeremy-js-devweb)
-13. [heddendorp](https://github.com/heddendorp)
-14. [tutkli](https://github.com/tutkli)
-15. [Pascalmh](https://github.com/Pascalmh)
-16. [okkindel](https://github.com/okkindel)
-17. [marcjulian](https://github.com/marcjulian)
-18. [oidre](https://github.com/oidre)
-19. [nartc](https://github.com/nartc)
-20. [santoshyadavdev](https://github.com/santoshyadavdev)
-21. [markostanimirovic](https://github.com/markostanimirovic)
-22. [theo-matzavinos](https://github.com/theo-matzavinos)
-23. [jkuri](https://github.com/jkuri)
-24. [dongphuong0905](https://github.com/dongphuong0905)
-25. [DominikPieper](https://github.com/DominikPieper)
-26. [brandonroberts](https://github.com/brandonroberts)
-27. [izikd-](https://github.com/izikd-)
-28. [ryancraigmartin](https://github.com/ryancraigmartin)
-29. [gaetanBloch](https://github.com/gaetanBloch)
-30. [gergobergo](https://github.com/gergobergo)
-31. [rpacheco124](https://github.com/rpacheco124)
-32. [benjaminforras](https://github.com/benjaminforras)
-33. [jstnjs](https://github.com/jstnjs)
-34. [r3ps4J](https://github.com/r3ps4J)
-35. [Celtian](https://github.com/Celtian)
-36. [miljan-code](https://github.com/miljan-code)
-37. [alexciesielski](https://github.com/alexciesielski)
-38. [ty-ler](https://github.com/ty-ler)
-39. [m-risto](https://github.com/m-risto)
-40. [badsgahhl](https://github.com/badsgahhl)
-41. [monacodelisa](https://github.com/monacodelisa)
-42. [tomdev9](https://github.com/tomdev9)
-43. [ragul1697](https://github.com/ragul1697)
-44. [snydertechnologies](https://github.com/snydertechnologies)
-45. [kkamman](https://github.com/kkamman)
-46. [i-am-the-slime](https://github.com/i-am-the-slime)
-47. [DevWedeloper](https://github.com/DevWedeloper)
-48. [mrsofiane](https://github.com/mrsofiane)
-49. [mateoetchepare](https://github.com/mateoetchepare)
-50. [DonaldMurillo](https://github.com/DonaldMurillo)
-51. [toniskobic](https://github.com/toniskobic)
-52. [eneajaho](https://github.com/eneajaho)
-53. [Den-dp](https://github.com/Den-dp)
-54. [0xfraso](https://github.com/0xfraso)
-55. [Muneersahel](https://github.com/Muneersahel)
-56. [danilolmc](https://github.com/danilolmc)
-57. [tomalaforge](https://github.com/tomalaforge)
-58. [canserkanuren](https://github.com/canserkanuren)
-59. [cjosue15](https://github.com/cjosue15)
-60. [hirenchauhan2](https://github.com/hirenchauhan2)
-61. [Roguyt](https://github.com/Roguyt)
-62. [tsironis13](https://github.com/tsironis13)
-63. [0xfraso](https://github.com/0xfraso)
-64. [guillermoecharri](https://github.com/guillermoecharri)
-65. [ValentinFunk](https://github.com/ValentinFunk)
-66. [Femi236](https://github.com/Femi236)
-67. [dineshkp](https://github.com/dineshkp)
-68. [robingenz](https://github.com/robingenz)
-69. [Balastrong](https://github.com/Balastrong)
+4. [ashley-hunter](https://github.com/ashley-hunter)
+5. [mihajm](https://github.com/mihajm)
+6. [ajitzero](https://github.com/ajitzero)
+7. [arturgawlik](https://github.com/arturgawlik)
+8. [deepakrudrapaul](https://github.com/deepakrudrapaul)
+9. [evanfuture](https://github.com/evanfuture)
+10. [AdditionAddict](https://github.com/AdditionAddict)
+11. [Altamimi-Dev](https://github.com/Altamimi-Dev)
+12. [ferat](https://github.com/ferat)
+13. [jeremy-js-devweb](https://github.com/jeremy-js-devweb)
+14. [heddendorp](https://github.com/heddendorp)
+15. [tutkli](https://github.com/tutkli)
+16. [Pascalmh](https://github.com/Pascalmh)
+17. [okkindel](https://github.com/okkindel)
+18. [marcjulian](https://github.com/marcjulian)
+19. [oidre](https://github.com/oidre)
+20. [nartc](https://github.com/nartc)
+21. [santoshyadavdev](https://github.com/santoshyadavdev)
+22. [markostanimirovic](https://github.com/markostanimirovic)
+23. [theo-matzavinos](https://github.com/theo-matzavinos)
+24. [jkuri](https://github.com/jkuri)
+25. [dongphuong0905](https://github.com/dongphuong0905)
+26. [DominikPieper](https://github.com/DominikPieper)
+27. [brandonroberts](https://github.com/brandonroberts)
+28. [izikd-](https://github.com/izikd-)
+29. [ryancraigmartin](https://github.com/ryancraigmartin)
+30. [gaetanBloch](https://github.com/gaetanBloch)
+31. [gergobergo](https://github.com/gergobergo)
+32. [rpacheco124](https://github.com/rpacheco124)
+33. [benjaminforras](https://github.com/benjaminforras)
+34. [jstnjs](https://github.com/jstnjs)
+35. [r3ps4J](https://github.com/r3ps4J)
+36. [Celtian](https://github.com/Celtian)
+37. [miljan-code](https://github.com/miljan-code)
+38. [alexciesielski](https://github.com/alexciesielski)
+39. [ty-ler](https://github.com/ty-ler)
+40. [m-risto](https://github.com/m-risto)
+41. [badsgahhl](https://github.com/badsgahhl)
+42. [monacodelisa](https://github.com/monacodelisa)
+43. [tomdev9](https://github.com/tomdev9)
+44. [ragul1697](https://github.com/ragul1697)
+45. [snydertechnologies](https://github.com/snydertechnologies)
+46. [kkamman](https://github.com/kkamman)
+47. [i-am-the-slime](https://github.com/i-am-the-slime)
+48. [DevWedeloper](https://github.com/DevWedeloper)
+49. [mrsofiane](https://github.com/mrsofiane)
+50. [mateoetchepare](https://github.com/mateoetchepare)
+51. [DonaldMurillo](https://github.com/DonaldMurillo)
+52. [toniskobic](https://github.com/toniskobic)
+53. [eneajaho](https://github.com/eneajaho)
+54. [Den-dp](https://github.com/Den-dp)
+55. [0xfraso](https://github.com/0xfraso)
+56. [Muneersahel](https://github.com/Muneersahel)
+57. [danilolmc](https://github.com/danilolmc)
+58. [tomalaforge](https://github.com/tomalaforge)
+59. [canserkanuren](https://github.com/canserkanuren)
+60. [cjosue15](https://github.com/cjosue15)
+61. [hirenchauhan2](https://github.com/hirenchauhan2)
+62. [Roguyt](https://github.com/Roguyt)
+63. [tsironis13](https://github.com/tsironis13)
+64. [0xfraso](https://github.com/0xfraso)
+65. [guillermoecharri](https://github.com/guillermoecharri)
+66. [ValentinFunk](https://github.com/ValentinFunk)
+67. [Femi236](https://github.com/Femi236)
+68. [dineshkp](https://github.com/dineshkp)
+69. [robingenz](https://github.com/robingenz)
+70. [Balastrong](https://github.com/Balastrong)
+71. [OlegSuncrown](https://github.com/OlegSuncrown)
+72. [stewones](https://github.com/stewones)
+73. [shinkhouse](https://github.com/shinkhouse)
+74. [donaldxdonald](https://github.com/donaldxdonald)
+75. [BenoitPE](https://github.com/BenoitPE)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
@@ -104,14 +110,14 @@ There's also a `libs/cli` folder, which contains the Nx-plugin & Angular CLI cod
 
 ### Install Dependencies
 
-Run `bun install` to install the dependencies of this project.
+Run `pnpm install` to install the dependencies of this project.
 
 ### Development with storybook
 
 A storybook project is set up and is the primary way to develop UI components. You can run it with:
 
 ```
-bun run storybook
+pnpm run storybook
 ```
 
 At the root of each primitive's folder, e.g. `libs/ui/accordion` you will find a stories file, e.g, `accordion.stories.ts`.
@@ -124,7 +130,7 @@ spartan uses [Jest](https://jestjs.io) for tests. To test all projects locally, 
 folder:
 
 ```shell
-bun run test
+pnpm run test
 ```
 
 ### e2e testing
@@ -132,7 +138,7 @@ bun run test
 Cypress e2e testing is set up to run on the storybook. You can run it with:
 
 ```
-bun run e2e
+pnpm run e2e
 ```
 
 To add your own `e2e` tests add them to the `apps/ui-storybook-e2e` application.
@@ -162,7 +168,7 @@ Follow the directions below to get it up and running:
 
 #### Prerequisites
 
-- You will need `bun` as your package manager.
+- You will need `pnpm` as your package manager.
 - You will need to set up a [Supabase](https://supabase.com/) account (it's free)
 - You will need [NodeJs](https://nodejs.org/en) installed. The version I have working is `20.17.0`.
 
@@ -171,13 +177,13 @@ Follow the directions below to get it up and running:
 Then you can run the following command:
 
 ```shell
-bun nx serve app
+pnpm nx serve app
 ```
 
 or
 
 ```shell
-bun run dev
+pnpm run dev
 ```
 
 for a dev server. Navigate to http://localhost:4200/. The app will automatically reload
@@ -212,7 +218,7 @@ create table
 
 ## Understand this workspace
 
-Run `bun nx graph` to see a diagram of the dependencies of the projects.
+Run `pnpm nx graph` to see a diagram of the dependencies of the projects.
 
 ## Further help
 

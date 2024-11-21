@@ -1,5 +1,4 @@
 import { Component, output } from '@angular/core';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
 import { SideNavComponent } from './side-nav-coming-soon.component';
 import { SideNavHeadingDirective } from './side-nav-heading.directive';
 import { SideNavLinkDirective } from './side-nav-link.directive';
@@ -8,13 +7,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 @Component({
 	selector: 'spartan-side-nav-content',
 	standalone: true,
-	imports: [
-		HlmScrollAreaComponent,
-		SideNavLinkDirective,
-		SideNavLinksComponent,
-		SideNavHeadingDirective,
-		SideNavComponent,
-	],
+	imports: [SideNavLinkDirective, SideNavLinksComponent, SideNavHeadingDirective, SideNavComponent],
 	host: {
 		class: 'block px-1',
 	},
@@ -40,7 +33,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 	`,
 })
 export class SideNavContentComponent {
-	linkClicked = output();
+	public readonly linkClicked = output();
 
 	protected readonly sections = [
 		{
@@ -86,7 +79,7 @@ export class SideNavContentComponent {
 				{ label: 'Badge', url: '/badge' },
 				{ label: 'Breadcrumb', url: '/breadcrumb' },
 				{ label: 'Button', url: '/button' },
-				{ label: 'Calendar', url: '/calendar', wip: true },
+				{ label: 'Calendar', url: '/calendar' },
 				{ label: 'Card', url: '/card' },
 				{ label: 'Carousel', url: '/carousel' },
 				{ label: 'Checkbox', url: '/checkbox' },

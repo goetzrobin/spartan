@@ -53,14 +53,14 @@ import { HlmSelectImports, HlmSelectModule } from '@spartan-ng/ui-select-helm';
 	providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
 })
 export class FormFieldFormWithDirtyPreviewComponent {
-	private _formBuilder = inject(FormBuilder);
+	private readonly _formBuilder = inject(FormBuilder);
 
-	form = this._formBuilder.group({
+	public form = this._formBuilder.group({
 		name: ['', Validators.required],
 		fruit: ['', Validators.required],
 	});
 
-	options = [
+	public options = [
 		{ value: 'apple', label: 'Apple' },
 		{ value: 'banana', label: 'Banana' },
 		{ value: 'blueberry', label: 'Blueberry' },

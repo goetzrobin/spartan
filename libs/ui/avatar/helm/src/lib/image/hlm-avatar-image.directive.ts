@@ -13,7 +13,7 @@ import type { ClassValue } from 'clsx';
 	},
 })
 export class HlmAvatarImageDirective {
-	canShow = inject(BrnAvatarImageDirective).canShow;
+	public canShow = inject(BrnAvatarImageDirective).canShow;
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() => hlm('aspect-square object-cover h-full w-full', this.userClass()));

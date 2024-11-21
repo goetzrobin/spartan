@@ -38,41 +38,43 @@ export class BrnToggleGroupComponent<T = unknown> implements ControlValueAccesso
 	/**
 	 * The method to be called in order to update ngModel.
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private _onChange: (value: ToggleValue<T>) => void = () => {};
 
 	/** onTouch function registered via registerOnTouch (ControlValueAccessor). */
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	protected onTouched: () => void = () => {};
 
 	/** Whether the button toggle group has a vertical orientation */
-	readonly vertical = input<boolean, BooleanInput>(false, {
+	public readonly vertical = input<boolean, BooleanInput>(false, {
 		transform: booleanAttribute,
 	});
 
 	/** Value of the toggle group. */
-	readonly value = model<ToggleValue<T>>(undefined);
+	public readonly value = model<ToggleValue<T>>(undefined);
 
 	/** Whether no button toggles need to be selected. */
-	readonly nullable = input<boolean, BooleanInput>(false, {
+	public readonly nullable = input<boolean, BooleanInput>(false, {
 		transform: booleanAttribute,
 	});
 
 	/** Whether multiple button toggles can be selected. */
-	readonly multiple = input<boolean, BooleanInput>(false, {
+	public readonly multiple = input<boolean, BooleanInput>(false, {
 		transform: booleanAttribute,
 	});
 
 	/** Whether the button toggle group is disabled. */
-	readonly disabled = input<boolean, BooleanInput>(false, {
+	public readonly disabled = input<boolean, BooleanInput>(false, {
 		transform: booleanAttribute,
 	});
 
 	/** The internal state of the component. This can be replaced with linkedSignal in the future. */
-	readonly state = computed(() => ({
+	public readonly state = computed(() => ({
 		disabled: signal(this.disabled()),
 	}));
 
 	/** Emit event when the group value changes. */
-	readonly change = output<BrnButtonToggleChange<T>>();
+	public readonly change = output<BrnButtonToggleChange<T>>();
 
 	writeValue(value: ToggleValue<T>): void {
 		this.value.set(value);

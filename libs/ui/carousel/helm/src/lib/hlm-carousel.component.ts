@@ -47,22 +47,22 @@ import {
 export class HlmCarouselComponent {
 	@ViewChild(EmblaCarouselDirective) protected emblaCarousel?: EmblaCarouselDirective;
 
-	_userClass = input<ClassValue>('', { alias: 'class' });
+	public _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() => hlm('relative', this._userClass()));
 
-	orientation = input<'horizontal' | 'vertical'>('horizontal');
-	options: InputSignal<Omit<EmblaOptionsType, 'axis'> | undefined> = input();
-	plugins: InputSignal<EmblaPluginType[]> = input([] as EmblaPluginType[]);
+	public orientation = input<'horizontal' | 'vertical'>('horizontal');
+	public options: InputSignal<Omit<EmblaOptionsType, 'axis'> | undefined> = input();
+	public plugins: InputSignal<EmblaPluginType[]> = input([] as EmblaPluginType[]);
 
 	protected emblaOptions: Signal<EmblaOptionsType> = computed(() => ({
 		...this.options(),
 		axis: this.orientation() === 'horizontal' ? 'x' : 'y',
 	}));
 
-	private _canScrollPrev = signal(false);
-	canScrollPrev = this._canScrollPrev.asReadonly();
-	private _canScrollNext = signal(false);
-	canScrollNext = this._canScrollNext.asReadonly();
+	private readonly _canScrollPrev = signal(false);
+	public canScrollPrev = this._canScrollPrev.asReadonly();
+	private readonly _canScrollNext = signal(false);
+	public canScrollNext = this._canScrollNext.asReadonly();
 
 	protected onEmblaEvent(event: EmblaEventType) {
 		const emblaApi = this.emblaCarousel?.emblaApi;

@@ -87,7 +87,7 @@ export class BrnTooltipContentComponent implements OnDestroy {
 		// the DOM which can happen before `ngAfterViewInit`.
 		static: true,
 	})
-	_tooltip?: ElementRef<HTMLElement>;
+	public _tooltip?: ElementRef<HTMLElement>;
 
 	/** Whether interactions on the page should close the tooltip */
 	private _closeOnInteraction = false;

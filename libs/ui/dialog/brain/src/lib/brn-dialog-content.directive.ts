@@ -14,20 +14,20 @@ export class BrnDialogContentDirective<T> {
 	private readonly _template = inject(TemplateRef);
 	public readonly state = computed(() => this._brnDialog?.state() ?? this._brnDialogRef?.state() ?? 'closed');
 
-	constructor() {
-		if (!this._brnDialog) return;
-		this._brnDialog.registerTemplate(this._template);
-	}
-
 	@Input()
-	set class(newClass: string | null | undefined) {
+	public set class(newClass: string | null | undefined) {
 		if (!this._brnDialog) return;
 		this._brnDialog.setPanelClass(newClass);
 	}
 
 	@Input()
-	set context(context: T) {
+	public set context(context: T) {
 		if (!this._brnDialog) return;
 		this._brnDialog.setContext(context);
+	}
+
+	constructor() {
+		if (!this._brnDialog) return;
+		this._brnDialog.registerTemplate(this._template);
 	}
 }

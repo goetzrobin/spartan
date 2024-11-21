@@ -12,8 +12,8 @@ import { HlmAvatarFallbackDirective } from './hlm-avatar-fallback.directive';
 	`,
 })
 class HlmMockComponent {
-	userCls = '';
-	autoColor = false;
+	public userCls = '';
+	public autoColor = false;
 }
 
 describe('HlmAvatarFallbackDirective', () => {

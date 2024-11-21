@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-table-helm',
 	preset: '../../../../jest.preset.cjs',

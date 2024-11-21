@@ -22,7 +22,7 @@ export class BrnSheetComponent extends BrnDialogComponent {
 	public readonly side = this._side.asReadonly();
 	/* eslint-disable-next-line @angular-eslint/no-input-rename */
 	@Input('side')
-	set setSide(side: 'top' | 'bottom' | 'left' | 'right') {
+	public set setSide(side: 'top' | 'bottom' | 'left' | 'right') {
 		this._side.set(side);
 		if (side === 'top') {
 			this.positionStrategy = this.positionBuilder.global().top();

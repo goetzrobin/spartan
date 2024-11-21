@@ -20,7 +20,7 @@ export class HlmMenuLabelComponent {
 
 	private readonly _inset = signal<ClassValue>(false);
 	@Input({ transform: booleanAttribute })
-	set inset(value: boolean) {
+	public set inset(value: boolean) {
 		this._inset.set(value);
 	}
 }

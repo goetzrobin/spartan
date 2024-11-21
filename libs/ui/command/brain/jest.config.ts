@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-command-brain',
 	preset: '../../../../jest.preset.cjs',

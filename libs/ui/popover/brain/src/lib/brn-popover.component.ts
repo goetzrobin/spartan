@@ -31,13 +31,13 @@ export type BrnPopoverAlign = 'start' | 'center' | 'end';
 export class BrnPopoverComponent extends BrnDialogComponent {
 	private readonly _sideOffset = signal(0);
 	@Input({ transform: numberAttribute })
-	set sideOffset(value: number) {
+	public set sideOffset(value: number) {
 		this._sideOffset.set(value);
 	}
 
 	private readonly _align = signal<BrnPopoverAlign>('center');
 	@Input()
-	set align(value: BrnPopoverAlign) {
+	public set align(value: BrnPopoverAlign) {
 		this._align.set(value);
 	}
 

@@ -99,20 +99,20 @@ export default class IconPageComponent {
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
 
-	private searchQuery = signal<string>('');
+	private readonly _searchQuery = signal<string>('');
 
 	protected lucideIconsList = computed(() => {
 		return Object.keys(lucideIcons).filter((iconName) => Object.prototype.hasOwnProperty.call(lucideIcons, iconName));
 	});
 
 	protected iconsList = computed(() => {
-		const query = this.searchQuery();
+		const query = this._searchQuery();
 		return this.lucideIconsList().filter((iconName) =>
 			iconName.toLocaleLowerCase().includes(query.toLocaleLowerCase()),
 		);
 	});
 
 	protected onSearchUpdated(query: string) {
-		this.searchQuery.set(query);
+		this._searchQuery.set(query);
 	}
 }

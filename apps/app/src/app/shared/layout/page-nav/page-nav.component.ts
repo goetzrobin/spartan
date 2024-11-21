@@ -50,21 +50,22 @@ type SamePageAnchorLink = {
 })
 export class PageNavComponent implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild('pageNav', { static: true })
-	pageNavTpl?: TemplateRef<unknown>;
+	public pageNavTpl?: TemplateRef<unknown>;
 
 	protected readonly isDevMode = signal(isDevMode());
 	protected readonly links = signal<SamePageAnchorLink[]>([]);
 
-	private readonly platformId = inject(PLATFORM_ID);
+	private readonly _platformId = inject(PLATFORM_ID);
 
 	/**
 	 * Reference to the tag with the main content of the page.
 	 * For this to work, the component should be added immediately after a tag with the [spartanMainSection] directive.
 	 */
-	private page: HTMLElement = (inject(ElementRef).nativeElement as HTMLElement).previousSibling as HTMLElement;
+	private readonly _page: HTMLElement = (inject(ElementRef).nativeElement as HTMLElement)
+		.previousSibling as HTMLElement;
 
 	ngOnInit() {
-		if (isPlatformServer(this.platformId)) {
+		if (isPlatformServer(this._platformId)) {
 			if (isDevMode()) {
 				console.error('This component should not be used for non-SSG/SPA pages.');
 			}
@@ -72,7 +73,7 @@ export class PageNavComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 
 		const selectors = ['[spartanMainSection] spartan-section-sub-heading', '[spartanMainSection] > h3'];
-		const headings = Array.from(this.page.querySelectorAll(selectors.join(',')));
+		const headings = Array.from(this._page.querySelectorAll(selectors.join(',')));
 		const links = headings.map((element) => {
 			const { id, children, localName, textContent } = element;
 			const isSubHeading = localName === 'spartan-section-sub-heading';

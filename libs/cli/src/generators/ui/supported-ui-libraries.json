@@ -6,7 +6,7 @@
 			"@spartan-ng/ui-core": "0.0.1-alpha.356",
 			"clsx": "^2.1.1",
 			"@spartan-ng/ui-accordion-brain": "0.0.1-alpha.356",
-			"@ng-icons/lucide": "^26.3.0"
+			"@ng-icons/lucide": "^29.10.0"
 		}
 	},
 	"alert": {
@@ -73,6 +73,20 @@
 			"clsx": "^2.1.1"
 		}
 	},
+	"calendar": {
+		"internalName": "ui-calendar-helm",
+		"peerDependencies": {
+			"@angular/core": "^18.0.0",
+			"@spartan-ng/ui-button-helm": "0.0.1-alpha.10",
+			"@spartan-ng/ui-calendar-brain": "0.0.1-alpha.356",
+			"@spartan-ng/ui-core": "0.0.1-alpha.356",
+			"@spartan-ng/ui-date-time": "0.0.1-alpha.356",
+			"@spartan-ng/ui-icon-helm": "0.0.1-alpha.10",
+			"@ng-icons/lucide": "^26.3.0",
+			"class-variance-authority": "^0.6.0",
+			"clsx": "^2.1.1"
+		}
+	},
 	"card": {
 		"internalName": "ui-card-helm",
 		"peerDependencies": {
@@ -99,7 +113,7 @@
 			"@spartan-ng/ui-core": "0.0.1-alpha.356",
 			"clsx": "^2.1.1",
 			"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.356",
-			"@ng-icons/lucide": "^26.3.0"
+			"@ng-icons/lucide": "^29.10.0"
 		}
 	},
 	"icon": {
@@ -108,7 +122,7 @@
 			"@angular/core": "^18.0.0",
 			"@angular/common": "^18.0.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.356",
-			"@ng-icons/core": "^25.1.0",
+			"@ng-icons/core": "^29.10.0",
 			"class-variance-authority": "^0.6.0",
 			"clsx": "^2.1.1"
 		}
@@ -139,7 +153,7 @@
 		"peerDependencies": {
 			"@angular/core": "^18.0.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.356",
-			"@ng-icons/lucide": "^26.3.0",
+			"@ng-icons/lucide": "^29.10.0",
 			"clsx": "^2.1.1",
 			"class-variance-authority": "^0.6.0",
 			"@spartan-ng/ui-menu-brain": "0.0.1-alpha.356"
@@ -193,7 +207,7 @@
 			"@spartan-ng/ui-core": "0.0.1-alpha.356",
 			"clsx": "^2.1.1",
 			"class-variance-authority": "^0.6.0",
-			"@ng-icons/lucide": "^26.3.0",
+			"@ng-icons/lucide": "^29.10.0",
 			"@spartan-ng/ui-sheet-brain": "0.0.1-alpha.356",
 			"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.356"
 		}
@@ -278,7 +292,7 @@
 			"@spartan-ng/ui-core": "0.0.1-alpha.356",
 			"@spartan-ng/ui-checkbox-brain": "0.0.1-alpha.356",
 			"clsx": "^2.1.1",
-			"@ng-icons/lucide": "^26.3.0"
+			"@ng-icons/lucide": "^29.10.0"
 		}
 	},
 	"tooltip": {
@@ -294,7 +308,7 @@
 			"@angular/core": "^18.0.0",
 			"@angular/router": "^18.0.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.356",
-			"@ng-icons/lucide": "^26.3.0",
+			"@ng-icons/lucide": "^29.10.0",
 			"class-variance-authority": "^0.6.0",
 			"clsx": "^2.1.1"
 		}
@@ -303,7 +317,7 @@
 		"internalName": "ui-carousel-helm",
 		"peerDependencies": {
 			"@angular/core": "^18.0.0",
-			"@ng-icons/lucide": "^26.3.0",
+			"@ng-icons/lucide": "^29.10.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.356",
 			"clsx": "^2.1.1",
 			"embla-carousel-angular": "^18.0.0"
@@ -324,7 +338,7 @@
 		"peerDependencies": {
 			"@angular/common": "^18.1.0",
 			"@angular/core": "^18.1.0",
-			"@ng-icons/lucide": "^26.3.0",
+			"@ng-icons/lucide": "^29.10.0",
 			"@spartan-ng/ui-core": "0.0.1-alpha.356",
 			"clsx": "^2.1.1",
 			"ngx-sonner": "^2.0.0"

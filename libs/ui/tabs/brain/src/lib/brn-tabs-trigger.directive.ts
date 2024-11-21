@@ -13,8 +13,8 @@ import { Directive, ElementRef, Input, computed, effect, inject, input, model, o
 	exportAs: 'brnTabsContent',
 })
 export class BrnTabsContentDirective {
-	private _root = inject(BrnTabsDirective);
-	private _elementRef = inject(ElementRef);
+	private readonly _root = inject(BrnTabsDirective);
+	private readonly _elementRef = inject(ElementRef);
 
 	public readonly contentFor = input.required<string>({ alias: 'brnTabsContent' });
 	protected readonly _isSelected = computed(() => this._root.$activeTab() === this.contentFor());
@@ -51,23 +51,25 @@ export type BrnActivationMode = 'automatic' | 'manual';
 export class BrnTabsDirective {
 	public readonly orientation = input<BrnTabsOrientation>('horizontal');
 	/** internal **/
-	$orientation = this.orientation;
+	public $orientation = this.orientation;
 
 	public readonly direction = input<BrnTabsDirection>('ltr');
 	/** internal **/
-	$direction = this.direction;
+	public $direction = this.direction;
 
 	public readonly _activeTab = model<string | undefined>(undefined, { alias: 'brnTabs' });
 	/** internal **/
-	$activeTab = this._activeTab.asReadonly();
+	public $activeTab = this._activeTab.asReadonly();
 
 	public readonly activationMode = input<BrnActivationMode>('automatic');
 	/** internal **/
-	$activationMode = this.activationMode;
+	public $activationMode = this.activationMode;
 
 	public readonly tabActivated = output<string>();
 
-	private _tabs = signal<{ [key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective } }>({});
+	private readonly _tabs = signal<{
+		[key: string]: { trigger: BrnTabsTriggerDirective; content: BrnTabsContentDirective };
+	}>({});
 	public readonly $tabs = this._tabs.asReadonly();
 
 	public registerTrigger(key: string, trigger: BrnTabsTriggerDirective) {
@@ -142,7 +144,7 @@ export class BrnTabsTriggerDirective {
 		this._root.emitTabActivated(this.triggerFor());
 	}
 
-	get key(): string | undefined {
+	public get key(): string | undefined {
 		return this.triggerFor();
 	}
 }

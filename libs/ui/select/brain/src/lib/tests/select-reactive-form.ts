@@ -6,7 +6,6 @@ import { BrnSelectComponent, BrnSelectImports } from '../../';
 @Component({
 	standalone: true,
 	imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports],
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="fruitGroup">
@@ -31,13 +30,12 @@ import { BrnSelectComponent, BrnSelectImports } from '../../';
 	`,
 })
 export class SelectReactiveFieldComponent {
-	fruitGroup = new FormGroup({ fruit: new FormControl() });
+	public fruitGroup = new FormGroup({ fruit: new FormControl() });
 }
 
 @Component({
 	standalone: true,
 	imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports],
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
@@ -62,15 +60,14 @@ export class SelectReactiveFieldComponent {
 	`,
 })
 export class SelectSingleValueTestComponent {
-	form = new FormGroup({ fruit: new FormControl(null) });
+	public form = new FormGroup({ fruit: new FormControl(null) });
 
-	brnSelectComponent = viewChild(BrnSelectComponent);
+	public brnSelectComponent = viewChild(BrnSelectComponent);
 }
 
 @Component({
 	standalone: true,
 	imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports],
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
@@ -95,13 +92,12 @@ export class SelectSingleValueTestComponent {
 	`,
 })
 export class SelectSingleValueWithInitialValueTestComponent {
-	form = new FormGroup({ fruit: new FormControl('apple') });
+	public form = new FormGroup({ fruit: new FormControl('apple') });
 }
 
 @Component({
 	standalone: true,
 	imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports],
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
@@ -126,7 +122,7 @@ export class SelectSingleValueWithInitialValueTestComponent {
 	`,
 })
 export class SelectSingleValueWithInitialValueWithAsyncUpdateTestComponent {
-	form = new FormGroup({ fruit: new FormControl('apple') });
+	public form = new FormGroup({ fruit: new FormControl('apple') });
 
 	constructor() {
 		// queueMicrotask(() => {
@@ -141,7 +137,6 @@ export class SelectSingleValueWithInitialValueWithAsyncUpdateTestComponent {
 @Component({
 	standalone: true,
 	imports: [CommonModule, FormsModule, ReactiveFormsModule, BrnSelectImports],
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
@@ -166,13 +161,12 @@ export class SelectSingleValueWithInitialValueWithAsyncUpdateTestComponent {
 	`,
 })
 export class SelectMultiValueTestComponent {
-	form = new FormGroup({ fruit: new FormControl<string | Array<string> | null>(null) });
+	public form = new FormGroup({ fruit: new FormControl<string | Array<string> | null>(null) });
 }
 
 @Component({
 	standalone: true,
 	imports: [FormsModule, ReactiveFormsModule, BrnSelectImports],
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
@@ -197,13 +191,12 @@ export class SelectMultiValueTestComponent {
 	`,
 })
 export class SelectMultiValueWithInitialValueTestComponent {
-	form = new FormGroup({ fruit: new FormControl(['apple', 'blueberry']) });
+	public form = new FormGroup({ fruit: new FormControl(['apple', 'blueberry']) });
 }
 
 @Component({
 	standalone: true,
 	imports: [FormsModule, ReactiveFormsModule, BrnSelectImports],
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'select-reactive-field-fixture',
 	template: `
 		<form [formGroup]="form">
@@ -225,12 +218,12 @@ export class SelectMultiValueWithInitialValueTestComponent {
 	`,
 })
 export class SelectMultiValueWithInitialValueWithForLoopTestComponent {
-	selectOptions = [
+	public selectOptions = [
 		{ label: 'Apple', value: 'apple' },
 		{ label: 'Banana', value: 'banana' },
 		{ label: 'Blueberry', value: 'blueberry' },
 		{ label: 'Grapes', value: 'grapes' },
 		{ label: 'Pineapple', value: 'pineapple' },
 	];
-	form = new FormGroup({ fruit: new FormControl(['apple', 'blueberry']) });
+	public form = new FormGroup({ fruit: new FormControl(['apple', 'blueberry']) });
 }

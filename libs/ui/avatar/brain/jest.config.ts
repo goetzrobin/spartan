@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-avatar-brain',
 	preset: '../../../../jest.preset.cjs',

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type OperationContext, type OperationLink, TRPCClientError, type TRPCClientRuntime } from '@trpc/client';
 import type {
 	AnyMutationProcedure,
@@ -75,7 +76,7 @@ function createTRPCRxJSClientProxy<TRouter extends AnyRouter>(client: TRPCClient
 		}
 		return createRecursiveProxy(({ path, args }) => {
 			const pathCopy = [key, ...path];
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
 			const clientCallType = pathCopy.pop()! as keyof DecorateProcedure<any, any>;
 
 			const procedureType = clientCallTypeMap[clientCallType];
@@ -99,12 +100,12 @@ export function createTRPCRxJSProxyClient<TRouter extends AnyRouter>(opts: Creat
  * Add converting to rxjs observable
  */
 class TRPCClient<TRouter extends AnyRouter> {
-	private readonly links: OperationLink<TRouter>[];
+	private readonly _links: OperationLink<TRouter>[];
 	public readonly runtime: TRPCClientRuntime;
-	private requestId: number;
+	private _requestId: number;
 
 	constructor(opts: CreateTRPCClientOptions<TRouter>) {
-		this.requestId = 0;
+		this._requestId = 0;
 
 		const combinedTransformer: CombinedDataTransformer = (() => {
 			const transformer = opts.transformer as DataTransformerOptions | undefined;
@@ -139,7 +140,7 @@ class TRPCClient<TRouter extends AnyRouter> {
 		};
 
 		// Initialize the links
-		this.links = opts.links.map((link) => link(this.runtime));
+		this._links = opts.links.map((link) => link(this.runtime));
 	}
 
 	private $request<TInput = unknown, TOutput = unknown>({
@@ -154,9 +155,9 @@ class TRPCClient<TRouter extends AnyRouter> {
 		context?: OperationContext;
 	}) {
 		const chain$ = createChain<AnyRouter, TInput, TOutput>({
-			links: this.links as OperationLink<any, any, any>[],
+			links: this._links as OperationLink<any, any, any>[],
 			op: {
-				id: ++this.requestId,
+				id: ++this._requestId,
 				type,
 				path,
 				input,

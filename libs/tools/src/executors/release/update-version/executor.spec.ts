@@ -1,3 +1,4 @@
+import { ExecutorContext } from '@nx/devkit';
 import * as process from 'node:process';
 import * as replaceJsonProp from 'replace-json-property';
 import * as projectHelpers from '../helpers/projects.helpers';
@@ -12,9 +13,9 @@ describe('ReplaceVersion Executor', () => {
 	it('should replace the version within the default path if no path was provided', async () => {
 		const version = '2.0.0';
 		const libName = 'foo';
-		const mockContext = {} as any;
+		const mockContext = {} as unknown as ExecutorContext;
 
-		process.env['VERSION'] = version;
+		process.env.VERSION = version;
 
 		const root = `libs/${libName}`;
 
