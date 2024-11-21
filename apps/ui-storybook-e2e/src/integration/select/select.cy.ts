@@ -164,10 +164,9 @@ describe('select', () => {
 			cy.visit('/iframe.html?id=select--disabled-option');
 			cy.get('[brnselecttrigger]').click();
 			cy.get('hlm-option').eq(0).should('not.have.attr', 'data-disabled');
-			const banana = cy.get('[data-testid="banana-option"]');
-			banana.should('have.attr', 'aria-disabled', 'true');
-			banana.should('have.attr', 'data-disabled', '');
-			banana.click({ force: true });
+			cy.get('[data-testid="banana-option"]').should('have.attr', 'aria-disabled', 'true');
+			cy.get('[data-testid="banana-option"]').should('have.attr', 'data-disabled', '');
+			cy.get('[data-testid="banana-option"]').click({ force: true });
 			cy.get('pre').should('have.text', 'Form Control Value: ""');
 			cy.get('hlm-option').eq(0).click();
 			cy.get('pre').should('have.text', 'Form Control Value: "apple"');

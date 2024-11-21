@@ -81,7 +81,11 @@ export const ReactiveFormControl: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })} formControlName="fruit">
+				<brn-select
+					class="w-56"
+					${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}
+					formControlName="fruit"
+				>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
@@ -109,7 +113,11 @@ export const DisabledOption: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })} formControlName="fruit">
+				<brn-select
+					class="w-56"
+					${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}
+					formControlName="fruit"
+				>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
@@ -143,9 +151,13 @@ export const SelectValueTransformFn: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })} formControlName="fruit">
+				<brn-select
+					class="w-56"
+					${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}
+					formControlName="fruit"
+				>
 					<hlm-select-trigger>
-						<brn-select-value hlm [transformFn]="selectValueTransformFn"/>
+						<brn-select-value hlm [transformFn]="selectValueTransformFn" />
 					</hlm-select-trigger>
 					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
@@ -186,7 +198,11 @@ export const ReactiveFormControlWithForAndInitialValue: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })} formControlName="fruit">
+				<brn-select
+					class="w-56"
+					${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}
+					formControlName="fruit"
+				>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
@@ -300,7 +316,11 @@ export const ReactiveFormControlWithValidation: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<brn-select class="w-56" formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}>
+				<brn-select
+					class="w-56"
+					formControlName="fruit"
+					${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}
+				>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
 					</hlm-select-trigger>
@@ -335,7 +355,11 @@ export const ReactiveFormControlWithValidationWithLabel: Story = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.valueChanges | async | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
-				<hlm-select class="w-56" formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}>
+				<hlm-select
+					class="w-56"
+					formControlName="fruit"
+					${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}
+				>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger>
 						<brn-select-value hlm />
@@ -398,7 +422,10 @@ export const SelectWithLabel: Story = {
 		props: { ...args, fruitGroup: new FormGroup({ fruit: new FormControl() }) },
 		template: /* HTML */ `
 			<form [formGroup]="fruitGroup">
-				<hlm-select formControlName="fruit" ${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}>
+				<hlm-select
+					formControlName="fruit"
+					${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}
+				>
 					<label hlmLabel>Select a Fruit</label>
 					<hlm-select-trigger class="w-56">
 						<brn-select-value />
@@ -422,7 +449,10 @@ export const Scrollable: Story = {
 		props: { ...args, myform: new FormGroup({ timezone: new FormControl() }) },
 		template: /* HTML */ `
 			<form [formGroup]="myform">
-				<hlm-select formControlName="timezone" ${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}>
+				<hlm-select
+					formControlName="timezone"
+					${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}
+				>
 					<hlm-select-trigger class="w-[280px]">
 						<hlm-select-value />
 					</hlm-select-trigger>
@@ -490,7 +520,10 @@ export const ScrollableWithStickyLabels: Story = {
 		props: { ...args, myform: new FormGroup({ timezone: new FormControl() }) },
 		template: /* HTML */ `
 			<form [formGroup]="myform">
-				<hlm-select formControlName="timezone" ${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}>
+				<hlm-select
+					formControlName="timezone"
+					${argsToTemplate(args, { exclude: ['initialValue', 'selectValueTransformFn'] })}
+				>
 					<hlm-select-trigger class="w-[280px]">
 						<hlm-select-value />
 					</hlm-select-trigger>
