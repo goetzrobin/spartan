@@ -9,6 +9,11 @@
 			"factory": "./src/generators/theme/generator",
 			"schema": "./src/generators/theme/schema.json",
 			"description": "spartan-ng theme generator"
+		},
+		"migrate-brain-imports": {
+			"factory": "./src/generators/migrate-brain-imports/generator",
+			"schema": "./src/generators/migrate-brain-imports/schema.json",
+			"description": "Migrate Brain imports to use secondary entrypoints."
 		}
 	},
 	"schematics": {

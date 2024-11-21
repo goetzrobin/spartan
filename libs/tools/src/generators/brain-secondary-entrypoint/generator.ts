@@ -1,6 +1,7 @@
 import { librarySecondaryEntryPointGenerator } from '@nx/angular/generators';
-import { formatFiles, joinPathFragments, readJson, readProjectConfiguration, Tree } from '@nx/devkit';
+import { formatFiles, joinPathFragments, readJson, readProjectConfiguration, Tree, updateJson } from '@nx/devkit';
 import { removeGenerator } from '@nx/workspace/generators';
+import { migrateBrainImportsGenerator } from '@spartan-ng/cli';
 import { PackageJson } from 'nx/src/utils/package-json';
 import { BrainSecondaryEntrypointGeneratorSchema } from './schema';
 
@@ -36,6 +37,12 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 	// read the package.json file to determine the import path
 	const { name: importPath } = readJson<PackageJson>(tree, joinPathFragments(root, 'package.json'));
 
+	// add this as an automated migration to our CLI generator
+	updateJson(tree, 'libs/cli/src/generators/migrate-brain-imports/import-map.json', (json) => {
+		json.imports[importPath] = `@spartan-ng/brain/${options.name}`;
+		return json;
+	});
+
 	// determine the path to move the project to
 	const entrypointSourceRoot = `libs/brain/${options.name}/src`;
 
@@ -55,6 +62,9 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 
 	// remove the original library
 	await removeGenerator(tree, { projectName: options.project, skipFormat: true, forceRemove: true, importPath });
+
+	// migrate the imports - nicely we use our public migration generator here, so we can test it within our own project.
+	await migrateBrainImportsGenerator(tree, { skipFormat: true });
 }
 
 /**
