@@ -3,9 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - '*'
-      - '*/*'
-      - '**'
+      - main
   pull_request: {}
 
 jobs:
@@ -25,45 +23,49 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - name: Install Bun globally
-        run: npm install -g bun
+      - name: Install pnpm globally
+        run: npm install -g pnpm
       - name: Lint commit messages
         uses: wagoid/commitlint-github-action@v5
         with:
           failOnWarnings: true
           helpURL: https://github.com/goetzrobin/spartan/blob/main/CONTRIBUTING.md#-commit-message-guidelines
 
-  prettier:
+  format-and-lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          # Required by wagoid/commitlint-github-action
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - name: Install Bun globally
-        run: npm install -g bun
+      - name: Install PNPM globally
+        run: npm install -g pnpm
       - name: Install Dependencies
-        run: bun install --no-cache
-      - name: oxlint performance, correctness and lint check
-        run: bun run ci.lint-baby
-      - name: biome Formatting & sorted Imports check
-        run: bun run ci.format-sort
+        run: pnpm install --frozen-lockfile
+      - name: lint
+        run: pnpm run lint
+      - name: format
+        run: pnpm nx format:check --base=origin/main
 
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Required by wagoid/commitlint-github-action
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - name: Install Bun globally
-        run: npm install -g bun
+      - name: Install PNPM globally
+        run: npm install -g pnpm
       - name: Install Dependencies
-        run: bun install --no-cache
+        run: pnpm install --frozen-lockfile
       - name: Build
-        run: bun run build
+        run: pnpm run build
 
   unit:
     runs-on: ubuntu-latest
@@ -71,15 +73,18 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Required by wagoid/commitlint-github-action
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - name: Install Bun globally
-        run: npm install -g bun
+      - name: Install PNPM globally
+        run: npm install -g pnpm
       - name: Install Dependencies
-        run: bun install --no-cache
+        run: pnpm install --frozen-lockfile
       - name: Test
-        run: bun run test
+        run: pnpm run test
 
   e2e:
     runs-on: ubuntu-latest
@@ -87,14 +92,17 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Required by wagoid/commitlint-github-action
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - name: Install Bun globally
-        run: npm install -g bun
+      - name: Install PNPM globally
+        run: npm install -g pnpm
       - name: Install Dependencies
-        run: bun install --no-cache
+        run: pnpm install --frozen-lockfile
       - name: Install Cypress
         run: npx cypress install
       - name: End-to-end test
-        run: bun run e2e
+        run: pnpm run e2e

@@ -16,10 +16,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - name: Install Bun and PNPM globally
-        run: npm install -g bun pnpm
+      - name: Install PNPM globally
+        run: npm install -g pnpm
       - name: Install Dependencies
-        run: bun install --no-cache
+        run: pnpm install --frozen-lockfile
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:

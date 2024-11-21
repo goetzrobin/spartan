@@ -9,6 +9,7 @@ import {
 import { HlmSkeletonComponent } from '@spartan-ng/ui-skeleton-helm';
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'analog-trpc-note-skeleton',
 	standalone: true,
 	host: {

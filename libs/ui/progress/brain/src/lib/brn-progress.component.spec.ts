@@ -5,15 +5,15 @@ import { BrnProgressComponent, BrnProgressLabelFn } from './brn-progress.compone
 
 @Component({
 	template: `
-    <brn-progress [value]="value" [max]="max" [getValueLabel]="getValueLabel">
-      <brn-progress-indicator />
-    </brn-progress>
-  `,
+		<brn-progress [value]="value" [max]="max" [getValueLabel]="getValueLabel">
+			<brn-progress-indicator />
+		</brn-progress>
+	`,
 })
 class TestHostComponent {
-	value: number | null | undefined = 0;
-	max = 100;
-	getValueLabel: BrnProgressLabelFn = (value, max) => `${Math.round((value / max) * 100)}%`;
+	public value: number | null | undefined = 0;
+	public max = 100;
+	public getValueLabel: BrnProgressLabelFn = (value, max) => `${Math.round((value / max) * 100)}%`;
 }
 
 describe('BrnProgressComponent', () => {

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-accordion-brain',
 	preset: '../../../../jest.preset.cjs',

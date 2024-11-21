@@ -1,6 +1,6 @@
 {
 	"$schema": "https://openapi.vercel.sh/vercel.json",
 	"installCommand": "pnpm install",
-	"buildCommand": "bun run build",
-	"devCommand": "bun nx serve"
+	"buildCommand": "pnpm run build",
+	"devCommand": "pnpm nx serve"
 }

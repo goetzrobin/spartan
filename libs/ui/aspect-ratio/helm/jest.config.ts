@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-aspect-ratio-helm',
 	preset: '../../../../jest.preset.cjs',

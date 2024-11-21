@@ -22,11 +22,11 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 export class PageBottomNavLinkComponent {
 	protected activatedRoute = inject(ActivatedRoute);
 	@Input()
-	direction: 'previous' | 'next' = 'next';
+	public direction: 'previous' | 'next' = 'next';
 	@Input()
-	href = '';
+	public href = '';
 	@Input()
-	label = '';
+	public label = '';
 
 	protected get isAbsolute() {
 		return this.href.startsWith('/');

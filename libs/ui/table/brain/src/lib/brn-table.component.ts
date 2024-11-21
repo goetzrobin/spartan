@@ -57,7 +57,7 @@ export type BrnTableDataSourceInput<T> = CdkTableDataSourceInput<T>;
 })
 export class BrnTableComponent<T> implements TableClassesSettable, AfterContentInit {
 	@ViewChild('cdkTable', { read: CdkTable, static: true })
-	private _cdkTable?: CdkTable<T>;
+	private readonly _cdkTable?: CdkTable<T>;
 	// Cdk Table Inputs / Outputs
 	@Input()
 	public dataSource: BrnTableDataSourceInput<T> = [];
@@ -69,12 +69,12 @@ export class BrnTableComponent<T> implements TableClassesSettable, AfterContentI
 	public displayedColumns: string[] = [];
 
 	private _trackBy?: TrackByFunction<T>;
-	get trackBy(): TrackByFunction<T> | undefined {
+	public get trackBy(): TrackByFunction<T> | undefined {
 		return this._trackBy;
 	}
 
 	@Input()
-	set trackBy(value: TrackByFunction<T>) {
+	public set trackBy(value: TrackByFunction<T>) {
 		this._trackBy = value;
 		if (this._cdkTable) {
 			this._cdkTable.trackBy = this._trackBy;
@@ -99,8 +99,8 @@ export class BrnTableComponent<T> implements TableClassesSettable, AfterContentI
 	@Input()
 	public bodyRowClasses = '';
 
-	@ContentChildren(BrnColumnDefComponent) columnDefComponents!: QueryList<BrnColumnDefComponent>;
-	@ContentChildren(CdkRowDef) rowDefs!: QueryList<CdkRowDef<T>>;
+	@ContentChildren(BrnColumnDefComponent) public columnDefComponents!: QueryList<BrnColumnDefComponent>;
+	@ContentChildren(CdkRowDef) public rowDefs!: QueryList<CdkRowDef<T>>;
 
 	// after the <ng-content> has been initialized, the column definitions are available.
 	// All that's left is to add them to the table ourselves:

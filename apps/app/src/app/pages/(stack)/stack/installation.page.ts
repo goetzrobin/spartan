@@ -2,7 +2,7 @@ import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { lucideAlertTriangle, lucideChevronRight } from '@ng-icons/lucide';
+import { lucideChevronRight, lucideTriangleAlert } from '@ng-icons/lucide';
 import { HlmAlertModule } from '@spartan-ng/ui-alert-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
@@ -44,7 +44,7 @@ export const routeMeta: RouteMeta = {
 		CodePreviewDirective,
 		RouterLink,
 	],
-	providers: [provideIcons({ lucideAlertTriangle, lucideChevronRight })],
+	providers: [provideIcons({ lucideTriangleAlert, lucideChevronRight })],
 	template: `
 		<section spartanMainSection>
 			<spartan-section-intro name="Installation" lead="Get up and running with the spartan/stack." />
@@ -112,7 +112,7 @@ export const routeMeta: RouteMeta = {
 			<spartan-code class="mt-3" language="sh" code="npm install drizzle-orm postgres" />
 
 			<div class="mb-6 mt-4" hlmAlert>
-				<hlm-icon hlmAlertIcon name="lucideAlertTriangle" />
+				<hlm-icon hlmAlertIcon name="lucideTriangleAlert" />
 				<h4 hlmAlertTitle>Dealing with postgres & CommonJs</h4>
 				<p hlmAlertDesc>
 					<code class="${hlmCode}">postgres</code>
@@ -255,7 +255,7 @@ export const noteRouter = router({
 					/>
 
 					<div class="mt-4" hlmAlert>
-						<hlm-icon name="lucideAlertTriangle" hlmAlertIcon />
+						<hlm-icon name="lucideTriangleAlert" hlmAlertIcon />
 						<p hlmAlertTitle>Make sure to add .env to your .gitignore file.</p>
 						<p hlmAlertDescription>
 							You do not want to accidentally commit your secrets to GitHub. To exclude the file from git add a new line
@@ -308,7 +308,7 @@ git init"
 					<spartan-code class="mt-3" code="supabase start" />
 
 					<div class="mt-8" hlmAlert variant="destructive">
-						<hlm-icon hlmAlertIcon name="lucideAlertTriangle" />
+						<hlm-icon hlmAlertIcon name="lucideTriangleAlert" />
 						<h4 hlmAlertTitle>Important: Make sure Docker is running</h4>
 						<p hlmAlertDesc>
 							Make sure Docker is running and configured correctly! I had Docker already installed and running. However,

@@ -56,7 +56,7 @@ export class BrnDialogComponent {
 	};
 
 	private _contentTemplate: TemplateRef<unknown> | undefined;
-	private _dialogRef = signal<BrnDialogRef | undefined>(undefined);
+	private readonly _dialogRef = signal<BrnDialogRef | undefined>(undefined);
 	private _dialogStateEffectRef?: EffectRef;
 
 	public readonly state = computed(() => this._dialogRef()?.state() ?? 'closed');
@@ -70,7 +70,7 @@ export class BrnDialogComponent {
 
 	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input('state')
-	set newState(state: BrnDialogState) {
+	public set newState(state: BrnDialogState) {
 		if (state === 'open') {
 			this.open();
 		}
@@ -80,22 +80,22 @@ export class BrnDialogComponent {
 	}
 
 	@Input()
-	set role(role: 'dialog' | 'alertdialog') {
+	public set role(role: 'dialog' | 'alertdialog') {
 		this._options.role = role;
 	}
 
 	@Input({ transform: booleanAttribute })
-	set hasBackdrop(hasBackdrop: boolean) {
+	public set hasBackdrop(hasBackdrop: boolean) {
 		this._options.hasBackdrop = hasBackdrop;
 	}
 
 	@Input()
-	set positionStrategy(positionStrategy: PositionStrategy) {
+	public set positionStrategy(positionStrategy: PositionStrategy) {
 		this._options.positionStrategy = positionStrategy;
 	}
 
 	@Input()
-	set scrollStrategy(scrollStrategy: ScrollStrategy | 'close' | 'reposition') {
+	public set scrollStrategy(scrollStrategy: ScrollStrategy | 'close' | 'reposition') {
 		if (scrollStrategy === 'close') {
 			this._options.scrollStrategy = this.ssos.close();
 		} else if (scrollStrategy === 'reposition') {
@@ -106,69 +106,67 @@ export class BrnDialogComponent {
 	}
 
 	@Input()
-	set restoreFocus(restoreFocus: boolean | string | ElementRef) {
+	public set restoreFocus(restoreFocus: boolean | string | ElementRef) {
 		this._options.restoreFocus = restoreFocus;
 	}
 
 	@Input({ transform: booleanAttribute })
-	set closeOnOutsidePointerEvents(closeOnOutsidePointerEvents: boolean) {
+	public set closeOnOutsidePointerEvents(closeOnOutsidePointerEvents: boolean) {
 		this._options.closeOnOutsidePointerEvents = closeOnOutsidePointerEvents;
 	}
 
 	@Input({ transform: booleanAttribute })
-	set closeOnBackdropClick(closeOnBackdropClick: boolean) {
+	public set closeOnBackdropClick(closeOnBackdropClick: boolean) {
 		this._options.closeOnBackdropClick = closeOnBackdropClick;
 	}
 
 	@Input()
-	set attachTo(attachTo: FlexibleConnectedPositionStrategyOrigin | null | undefined) {
+	public set attachTo(attachTo: FlexibleConnectedPositionStrategyOrigin | null | undefined) {
 		this._options.attachTo = attachTo;
 	}
 
 	@Input()
-	set attachPositions(attachPositions: ConnectedPosition[]) {
+	public set attachPositions(attachPositions: ConnectedPosition[]) {
 		this._options.attachPositions = attachPositions;
 	}
 
 	@Input()
-	set autoFocus(autoFocus: AutoFocusTarget | string) {
+	public set autoFocus(autoFocus: AutoFocusTarget | string) {
 		this._options.autoFocus = autoFocus;
 	}
 
 	@Input({ transform: numberAttribute })
-	set closeDelay(closeDelay: number) {
+	public set closeDelay(closeDelay: number) {
 		this._options.closeDelay = closeDelay;
 	}
 
 	@Input({ transform: booleanAttribute })
-	set disableClose(disableClose: boolean) {
+	public set disableClose(disableClose: boolean) {
 		this._options.disableClose = disableClose;
 	}
 
 	/* eslint-disable-next-line @angular-eslint/no-input-rename */
 	@Input('aria-describedby')
-	set ariaDescribedBy(ariaDescribedBy: string | null | undefined) {
+	public set ariaDescribedBy(ariaDescribedBy: string | null | undefined) {
 		this.setAriaDescribedBy(ariaDescribedBy);
 	}
 
 	/* eslint-disable-next-line @angular-eslint/no-input-rename */
 	@Input('aria-labelledby')
-	set ariaLabelledBy(ariaLabelledBy: string | null | undefined) {
+	public set ariaLabelledBy(ariaLabelledBy: string | null | undefined) {
 		this.setAriaLabelledBy(ariaLabelledBy);
 	}
 
-	/* eslint-disable-next-line @angular-eslint/no-input-rename */
 	@Input('aria-label')
-	set ariaLabel(ariaLabel: string | null | undefined) {
+	public set ariaLabel(ariaLabel: string | null | undefined) {
 		this.setAriaLabel(ariaLabel);
 	}
 
-	/* eslint-disable-next-line @angular-eslint/no-input-rename */
 	@Input({
 		alias: 'aria-modal',
 		transform: booleanAttribute,
 	})
-	set ariaModal(isModal: boolean) {
+	public set ariaModal(isModal: boolean) {
 		this.setAriaModal(isModal);
 	}
 

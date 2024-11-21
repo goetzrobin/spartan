@@ -8,14 +8,14 @@ import { Breadcrumb, BreadcrumbSharedService } from './breadcrumb-shared.service
 	providedIn: 'root',
 })
 export class BreadcrumbService {
-	private router = inject(Router);
-	private activatedRoute = inject(ActivatedRoute);
-	private breadcrumbSharedService = inject(BreadcrumbSharedService);
+	private readonly _router = inject(Router);
+	private readonly _activatedRoute = inject(ActivatedRoute);
+	private readonly _breadcrumbSharedService = inject(BreadcrumbSharedService);
 
 	constructor() {
-		this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-			const breadcrumbs = this.buildBreadcrumbs(this.activatedRoute.root);
-			this.breadcrumbSharedService.updateBreadcrumbs(breadcrumbs);
+		this._router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+			const breadcrumbs = this.buildBreadcrumbs(this._activatedRoute.root);
+			this._breadcrumbSharedService.updateBreadcrumbs(breadcrumbs);
 		});
 	}
 

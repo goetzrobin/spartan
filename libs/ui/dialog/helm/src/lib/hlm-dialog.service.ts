@@ -25,7 +25,7 @@ export class HlmDialogService {
 		const mergedOptions = {
 			...DEFAULT_BRN_DIALOG_OPTIONS,
 			closeDelay: 100,
-			// eslint-disable-next-line
+
 			...(options ?? {}),
 			backdropClass: cssClassesToArray(`${hlmDialogOverlayClass} ${options?.backdropClass ?? ''}`),
 			context: { ...options?.context, $component: component, $dynamicComponentClass: options?.contentClass },

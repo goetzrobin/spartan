@@ -16,7 +16,7 @@ import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 	`,
 })
 export class FormFieldPreviewComponent {
-	control = new FormControl('', Validators.required);
+	public control = new FormControl('', Validators.required);
 }
 
 export const defaultCode = `

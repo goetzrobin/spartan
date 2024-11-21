@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-avatar-helm',
 	preset: '../../../../jest.preset.cjs',

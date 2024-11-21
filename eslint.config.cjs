@@ -1,22 +1,27 @@
-const { FlatCompat } = require('@eslint/eslintrc');
-const nxEslintPlugin = require('@nx/eslint-plugin');
-const js = require('@eslint/js');
-
-const compat = new FlatCompat({
-	baseDirectory: __dirname,
-	recommendedConfig: js.configs.recommended,
-});
+/* eslint-disable @typescript-eslint/no-require-imports */
+const nx = require('@nx/eslint-plugin');
 
 module.exports = [
-	{ plugins: { '@nx': nxEslintPlugin } },
+	...nx.configs['flat/base'],
+	...nx.configs['flat/typescript'],
+	...nx.configs['flat/javascript'],
 	{
-		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+		ignores: ['**/dist', '**/vite.config.ts'],
+	},
+	{
+		files: ['**/*.ts', '**/*.tsx'],
+		languageOptions: {
+			parserOptions: {
+				projectService: true,
+				tsconfigRootDir: process.cwd(),
+			},
+		},
 		rules: {
 			'@nx/enforce-module-boundaries': [
 				'error',
 				{
 					enforceBuildableLibDependency: true,
-					allow: [],
+					allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
 					depConstraints: [
 						{
 							sourceTag: '*',
@@ -25,45 +30,75 @@ module.exports = [
 					],
 				},
 			],
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					args: 'after-used',
+					argsIgnorePattern: '^_',
+					caughtErrors: 'none',
+					caughtErrorsIgnorePattern: '^_',
+					destructuredArrayIgnorePattern: '^_',
+					varsIgnorePattern: '^_',
+					ignoreRestSiblings: true,
+				},
+			],
+			'@typescript-eslint/no-non-null-assertion': 'off',
+			'@typescript-eslint/no-unused-expressions': 'off',
+			'@typescript-eslint/prefer-readonly': 'error',
+			'@typescript-eslint/explicit-member-accessibility': [
+				'error',
+				{
+					overrides: {
+						accessors: 'explicit',
+						constructors: 'no-public',
+						methods: 'off',
+						properties: 'explicit',
+						parameterProperties: 'off',
+					},
+				},
+			],
+			'@typescript-eslint/naming-convention': [
+				'error',
+				{
+					selector: 'classProperty',
+					modifiers: ['private'],
+					format: ['camelCase'],
+					leadingUnderscore: 'require',
+				},
+				{
+					selector: 'variable',
+					format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+				},
+			],
+			'@angular-eslint/prefer-output-readonly': ['error'],
+			// this should be enabled when we move to signals
+			'@nx/workspace-prefer-signals': 'off',
 		},
 	},
-	...compat.config({ extends: ['plugin:@nx/typescript'] }).map((config) => ({
-		...config,
-		files: ['**/*.ts', '**/*.tsx'],
-		rules: {},
-	})),
-	...compat.config({ extends: ['plugin:@nx/javascript'] }).map((config) => ({
-		...config,
-		files: ['**/*.js', '**/*.jsx'],
-		rules: {},
-	})),
-	...compat.config({ env: { jest: true } }).map((config) => ({
-		...config,
-		files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.spec.js', '**/*.spec.jsx'],
-		rules: {},
-	})),
-	...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
-		...config,
+	{
+		files: ['**/*.spec.ts', '**/tests/**/*.ts'],
+		// Override or add rules here
+		rules: {
+			'@nx/workspace-prefer-signals': 'off',
+		},
+	},
+	{
 		files: ['**/*.json'],
 		rules: {
 			'@nx/dependency-checks': [
 				'error',
 				{
-					buildTargets: ['build'],
-					checkMissingDependencies: true,
-					checkObsoleteDependencies: true,
-					checkVersionMismatches: true,
-					ignoredDependencies: [
-						'jest-preset-angular',
-						'jest-axe',
-						'@testing-library/jest-dom',
-						'rxjs',
-						'@spartan-ng/ui-icon-helm',
-						'@spartan-ng/ui-button-helm',
-						'@spartan-ng/ui-avatar-brain',
+					ignoredFiles: [
+						'{projectRoot}/eslint.config.{js,cjs,mjs}',
+						'{projectRoot}/**/test-setup.ts',
+						'{projectRoot}/**/*.spec.ts',
+						'{projectRoot}/**/*.stories.ts',
 					],
 				},
 			],
 		},
-	})),
+		languageOptions: {
+			parser: require('jsonc-eslint-parser'),
+		},
+	},
 ];

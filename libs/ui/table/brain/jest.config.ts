@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-table-brain',
 	preset: '../../../../jest.preset.cjs',

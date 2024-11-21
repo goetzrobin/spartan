@@ -7,7 +7,8 @@
 		"@nx/devkit": "^19.1.0",
 		"@nx/angular": "^19.1.0",
 		"enquirer": "2.3.6",
-		"semver": "7.5.4"
+		"semver": "7.5.4",
+		"jsonc-eslint-parser": "^2.1.0"
 	},
 	"peerDependencies": {
 		"tslib": "^2.3.0"

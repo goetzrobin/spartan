@@ -14,7 +14,7 @@ import { BrnTabsDirective, BrnTabsTriggerDirective } from './brn-tabs-trigger.di
 	exportAs: 'brnTabsList',
 })
 export class BrnTabsListDirective implements AfterContentInit {
-	private _root = inject(BrnTabsDirective);
+	private readonly _root = inject(BrnTabsDirective);
 
 	protected readonly _orientation = this._root.$orientation;
 	private readonly _direction = this._root.$direction;

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-card-helm',
 	preset: '../../../../jest.preset.cjs',

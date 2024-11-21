@@ -14,7 +14,7 @@ export class BrnDialogOverlayComponent {
 	private readonly _brnDialog = inject(BrnDialogComponent);
 
 	@Input()
-	set class(newClass: string | null | undefined) {
+	public set class(newClass: string | null | undefined) {
 		this._brnDialog.setOverlayClass(newClass);
 	}
 

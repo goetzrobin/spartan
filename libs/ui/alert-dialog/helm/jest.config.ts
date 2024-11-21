@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-alert-dialog-helm',
 	preset: '../../../../jest.preset.cjs',

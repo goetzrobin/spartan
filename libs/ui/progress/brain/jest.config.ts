@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-progress-brain',
 	preset: '../../../../jest.preset.cjs',

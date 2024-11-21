@@ -28,7 +28,7 @@ export class BrnDialogTriggerDirective {
 	public readonly dialogId = `brn-dialog-${this._brnDialogRef?.dialogId ?? idSequence++}`;
 
 	@Input()
-	set brnDialogTriggerFor(brnDialog: BrnDialogComponent) {
+	public set brnDialogTriggerFor(brnDialog: BrnDialogComponent) {
 		this._brnDialog = brnDialog;
 	}
 

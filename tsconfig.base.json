@@ -35,8 +35,6 @@
 		"paths": {
 			"@spartan-ng/app/*": ["apps/app/src/*"],
 			"@spartan-ng/cli": ["libs/cli/src/index.ts"],
-			"@spartan-ng/ui-date-time": ["libs/ui/date-time/date-time/src/index.ts"],
-			"@spartan-ng/ui-date-time-luxon": ["libs/ui/date-time/date-time-luxon/src/index.ts"],
 			"@spartan-ng/tools": ["libs/tools/src/index.ts"],
 			"@spartan-ng/trpc": ["libs/trpc/src/index.ts"],
 			"@spartan-ng/ui-accordion-brain": ["libs/ui/accordion/brain/src/index.ts"],
@@ -60,6 +58,8 @@
 			"@spartan-ng/ui-command-brain": ["libs/ui/command/brain/src/index.ts"],
 			"@spartan-ng/ui-command-helm": ["libs/ui/command/helm/src/index.ts"],
 			"@spartan-ng/ui-core": ["libs/ui/core/src/index.ts"],
+			"@spartan-ng/ui-date-time": ["libs/ui/date-time/date-time/src/index.ts"],
+			"@spartan-ng/ui-date-time-luxon": ["libs/ui/date-time/date-time-luxon/src/index.ts"],
 			"@spartan-ng/ui-dialog-brain": ["libs/ui/dialog/brain/src/index.ts"],
 			"@spartan-ng/ui-dialog-helm": ["libs/ui/dialog/helm/src/index.ts"],
 			"@spartan-ng/ui-formfield-brain": ["libs/ui/form-field/brain/src/index.ts"],

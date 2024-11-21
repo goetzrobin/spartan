@@ -1,7 +1,7 @@
 // angular dependency
 export const FALLBACK_ANGULAR_VERSION = '^18.0.0';
 // ng-icon dependency
-export const NG_ICONS_VERSION = '^25.1.0';
+export const NG_ICONS_VERSION = '^29.10.0';
 // spartan dependencies
 export const SPARTAN_ACCORDION_BRAIN_VERSION = '0.0.1-alpha.356';
 export const SPARTAN_ALERT_DIALOG_BRAIN_VERSION = '0.0.1-alpha.356';

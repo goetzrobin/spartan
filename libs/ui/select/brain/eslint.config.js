@@ -1,47 +1,46 @@
-const { FlatCompat } = require('@eslint/eslintrc');
-const baseConfig = require('../../../../eslint.config.js');
-const js = require('@eslint/js');
-
-const compat = new FlatCompat({
-	baseDirectory: __dirname,
-	recommendedConfig: js.configs.recommended,
-});
+const nx = require('@nx/eslint-plugin');
+const baseConfig = require('../../../../eslint.config.cjs');
 
 module.exports = [
 	...baseConfig,
-	...compat
-		.config({ extends: ['plugin:@nx/angular', 'plugin:@angular-eslint/template/process-inline-templates'] })
-		.map((config) => ({
-			...config,
-			files: ['**/*.ts'],
-			rules: {
-				'@angular-eslint/no-host-metadata-property': 0,
-				'@angular-eslint/directive-selector': [
-					'error',
-					{
-						type: 'attribute',
-						prefix: 'brn',
-						style: 'camelCase',
-					},
-				],
-				'@angular-eslint/component-selector': [
-					'error',
-					{
-						type: 'element',
-						prefix: 'brn',
-						style: 'kebab-case',
-					},
-				],
-			},
-		})),
-	...compat.config({ extends: ['plugin:@nx/angular-template'] }).map((config) => ({
-		...config,
+	...nx.configs['flat/angular'],
+	...nx.configs['flat/angular-template'],
+	{
+		files: ['**/*.ts'],
+		rules: {
+			'@angular-eslint/directive-selector': [
+				'error',
+				{
+					type: 'attribute',
+					prefix: 'brn',
+					style: 'camelCase',
+				},
+			],
+			'@angular-eslint/component-selector': [
+				'error',
+				{
+					type: 'element',
+					prefix: 'brn',
+					style: 'kebab-case',
+				},
+			],
+		},
+	},
+	{
 		files: ['**/*.html'],
-		rules: {},
-	})),
-	...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
-		...config,
-		files: ['**/*.json'],
-		rules: { '@nx/dependency-checks': 'error' },
-	})),
+		// Override or add rules here
+		rules: {
+			// ideally these should be enabled
+			'@angular-eslint/template/label-has-associated-control': 'off',
+			'@angular-eslint/template/click-events-have-key-events': 'off',
+			'@angular-eslint/template/interactive-supports-focus': 'off',
+		},
+	},
+	{
+		files: ['**/tests/**/*.ts'],
+		rules: {
+			'@angular-eslint/directive-selector': 'off',
+			'@angular-eslint/component-selector': 'off',
+		},
+	},
 ];

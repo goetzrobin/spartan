@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { lucideAlertTriangle } from '@ng-icons/lucide';
+import { lucideTriangleAlert } from '@ng-icons/lucide';
 import {
 	HlmAlertDescriptionDirective,
 	HlmAlertDirective,
@@ -19,10 +19,10 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 		HlmAlertTitleDirective,
 		HlmIconComponent,
 	],
-	providers: [provideIcons({ lucideAlertTriangle })],
+	providers: [provideIcons({ lucideTriangleAlert })],
 	template: `
 		<div hlmAlert variant="destructive">
-			<hlm-icon hlmAlertIcon name="lucideAlertTriangle" />
+			<hlm-icon hlmAlertIcon name="lucideTriangleAlert" />
 			<h4 hlmAlertTitle>Unexpected Error</h4>
 			<p hlmAlertDesc>Your session has expired. Please log in again.</p>
 		</div>
@@ -40,7 +40,7 @@ import {
 } from '@spartan-ng/ui-alert-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
-import { lucideAlertTriangle } from '@ng-icons/lucide';
+import { lucideTriangleAlert } from '@ng-icons/lucide';
 
 @Component({
   selector: 'spartan-alert-destructive',
@@ -52,10 +52,10 @@ import { lucideAlertTriangle } from '@ng-icons/lucide';
     HlmAlertTitleDirective,
     HlmIconComponent,
   ],
-  providers: [provideIcons({ lucideAlertTriangle })],
+  providers: [provideIcons({ lucideTriangleAlert })],
   template: \`
     <div hlmAlert variant="destructive">
-      <hlm-icon hlmAlertIcon name="lucideAlertTriangle" />
+      <hlm-icon hlmAlertIcon name="lucideTriangleAlert" />
       <h4 hlmAlertTitle>Unexpected Error</h4>
       <p hlmAlertDesc>Your session has expired. Please log in again.</p>
     </div>

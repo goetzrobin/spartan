@@ -14,13 +14,13 @@ import { HlmCalendarComponent } from '@spartan-ng/ui-calendar-helm';
 })
 export class CalendarPreviewComponent {
 	/** The selected date */
-	selectedDate = new Date();
+	public selectedDate = new Date();
 
 	/** The minimum date */
-	minDate = new Date(2023, 0, 1);
+	public minDate = new Date(2023, 0, 1);
 
 	/** The maximum date */
-	maxDate = new Date(2030, 11, 31);
+	public maxDate = new Date(2030, 11, 31);
 }
 
 export const defaultCode = `

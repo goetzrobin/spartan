@@ -31,7 +31,7 @@ import {
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
 import { BrnFormFieldControl } from '@spartan-ng/ui-formfield-brain';
-import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/ui-forms-brain';
+import { ChangeFn, ErrorStateMatcher, ErrorStateTracker, TouchFn } from '@spartan-ng/ui-forms-brain';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { Subject, combineLatest, delay, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
@@ -83,27 +83,27 @@ let nextId = 0;
 		</ng-template>
 	`,
 })
-export class BrnSelectComponent
+export class BrnSelectComponent<T = unknown>
 	implements ControlValueAccessor, AfterContentInit, DoCheck, ExposesSide, ExposesState, BrnFormFieldControl
 {
 	private readonly _selectService = inject(BrnSelectService);
 
 	public readonly triggerWidth = this._selectService.triggerWidth;
 
-	@Input({ alias: 'multiple' })
-	set multiple(multiple: boolean) {
+	@Input({})
+	public set multiple(multiple: boolean) {
 		this._selectService.state.update((state) => ({ ...state, multiple }));
 	}
 	protected readonly _multiple = this._selectService.multiple;
 
-	@Input({ alias: 'placeholder' })
-	set placeholder(placeholder: string) {
+	@Input({})
+	public set placeholder(placeholder: string) {
 		this._selectService.state.update((state) => ({ ...state, placeholder }));
 	}
 	protected readonly _placeholder = this._selectService.placeholder;
 
-	@Input({ alias: 'disabled' })
-	set disabled(disabled: boolean) {
+	@Input({})
+	public set disabled(disabled: boolean) {
 		this._selectService.state.update((state) => ({ ...state, disabled }));
 	}
 	protected readonly _disabled = this._selectService.disabled;
@@ -125,7 +125,7 @@ export class BrnSelectComponent
 	protected _overlayDir!: CdkConnectedOverlay;
 
 	@Output()
-	openedChange = new EventEmitter<boolean>();
+	public readonly openedChange = new EventEmitter<boolean>();
 
 	public readonly closeDelay = input<number>(100);
 	public readonly isExpanded = this._selectService.isExpanded;
@@ -159,11 +159,11 @@ export class BrnSelectComponent
 	public readonly ngControl = inject(NgControl, { optional: true, self: true });
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private _onChange: (value: unknown) => void = () => {};
+	private _onChange: ChangeFn<T> = () => {};
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private _onTouched = () => {};
+	private _onTouched: TouchFn = () => {};
 
-	private _shouldEmitValueChange = signal(false);
+	private readonly _shouldEmitValueChange = signal(false);
 
 	/*
 	 * This position config ensures that the top "start" corner of the overlay
@@ -198,15 +198,15 @@ export class BrnSelectComponent
 		},
 	];
 
-	errorStateTracker: ErrorStateTracker;
+	public errorStateTracker: ErrorStateTracker;
 
-	private defaultErrorStateMatcher = inject(ErrorStateMatcher);
-	private parentForm = inject(NgForm, { optional: true });
-	private parentFormGroup = inject(FormGroupDirective, { optional: true });
+	private readonly _defaultErrorStateMatcher = inject(ErrorStateMatcher);
+	private readonly _parentForm = inject(NgForm, { optional: true });
+	private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
 
-	errorState = computed(() => this.errorStateTracker.errorState());
+	public errorState = computed(() => this.errorStateTracker.errorState());
 
-	writeValue$ = new Subject<any>();
+	public writeValue$ = new Subject<T>();
 
 	constructor() {
 		this.handleOptionChanges();
@@ -238,7 +238,7 @@ export class BrnSelectComponent
 		 */
 		toObservable(this._selectService.value).subscribe((value) => {
 			if (this._shouldEmitValueChange()) {
-				this._onChange(value ?? null);
+				this._onChange((value ?? null) as T);
 			}
 			this._shouldEmitValueChange.set(true);
 		});
@@ -246,10 +246,10 @@ export class BrnSelectComponent
 		toObservable(this.dir).subscribe((dir) => this._selectService.state.update((state) => ({ ...state, dir })));
 
 		this.errorStateTracker = new ErrorStateTracker(
-			this.defaultErrorStateMatcher,
+			this._defaultErrorStateMatcher,
 			this.ngControl,
-			this.parentFormGroup,
-			this.parentForm,
+			this._parentFormGroup,
+			this._parentForm,
 		);
 	}
 
@@ -316,15 +316,15 @@ export class BrnSelectComponent
 		setTimeout(() => this.selectContent.focusList());
 	}
 
-	public writeValue(value: any): void {
+	public writeValue(value: T): void {
 		this.writeValue$.next(value);
 	}
 
-	public registerOnChange(fn: any): void {
+	public registerOnChange(fn: ChangeFn<T>): void {
 		this._onChange = fn;
 	}
 
-	public registerOnTouched(fn: any): void {
+	public registerOnTouched(fn: TouchFn): void {
 		this._onTouched = fn;
 	}
 
@@ -386,7 +386,7 @@ export class BrnSelectComponent
 					selectedOptions: filteredOptions,
 					value: value,
 				}));
-				this._onChange(value ?? null);
+				this._onChange((value ?? null) as T);
 			}
 		} else {
 			const selectedOption = selectedOptions[0] ?? null;
@@ -397,7 +397,7 @@ export class BrnSelectComponent
 					selectedOptions: [],
 					value: '',
 				}));
-				this._onChange('');
+				this._onChange('' as T);
 			}
 		}
 	}

@@ -129,6 +129,7 @@ describe('dialog--default', () => {
 				.findByText(/close nested dialog/i)
 				.click();
 
+			// eslint-disable-next-line cypress/no-unnecessary-waiting
 			cy.wait(100);
 
 			cy.get('.cdk-overlay-backdrop').click({ force: true });
@@ -197,6 +198,7 @@ describe('dialog--dynamic-component', () => {
 				.findByText(/close nested dialog/i)
 				.click();
 
+			// eslint-disable-next-line cypress/no-unnecessary-waiting
 			cy.wait(100);
 
 			cy.get('.cdk-overlay-backdrop').click({ force: true });

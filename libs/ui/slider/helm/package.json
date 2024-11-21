@@ -1,9 +1,11 @@
 {
 	"name": "@spartan-ng/ui-slider-helm",
-	"version": "0.0.1-alpha.10",
+	"version": "0.0.1-alpha.356",
 	"peerDependencies": {
-		"@angular/common": "^18.0.0",
-		"@angular/core": "^18.0.0"
+		"@spartan-ng/ui-core": "0.0.1-alpha.356",
+		"@spartan-ng/ui-slider-brain": "0.0.1-alpha.356",
+		"@angular/core": ">=18.0.0",
+		"clsx": "^2.1.1"
 	},
 	"sideEffects": false
 }

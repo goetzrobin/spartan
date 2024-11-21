@@ -6,7 +6,7 @@ import {
 	BrnSliderInputDirective,
 	BrnSliderThumbDirective,
 	BrnSliderTrackDirective,
-} from '@spartan-ng/ui-slider-brain';
+} from '../../index';
 
 @Component({
 	standalone: true,

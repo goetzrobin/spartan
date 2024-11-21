@@ -16,7 +16,7 @@ import { HlmIconComponent } from './hlm-icon.component';
 	`,
 })
 class HlmMockComponent {
-	@Input() size = 'base';
+	@Input() public size = 'base';
 }
 
 describe('HlmIconComponent', () => {
@@ -37,9 +37,9 @@ describe('HlmIconComponent', () => {
 	it('should pass the size, color and strokeWidth props and the classes to the ng-icon component', () => {
 		const debugEl = r.fixture.debugElement.query(By.directive(NgIconComponent));
 		const component = debugEl.componentInstance as NgIconComponent;
-		expect(component.color).toBe('red');
-		expect(component.strokeWidth).toBe('2');
-		expect(component.size).toBe('100%');
+		expect(component.color()).toBe('red');
+		expect(component.strokeWidth()).toBe('2');
+		expect(component.size()).toBe('100%');
 		expect(debugEl.nativeElement.classList).toContain('test2');
 	});
 
@@ -57,7 +57,7 @@ describe('HlmIconComponent', () => {
 		await r.rerender({ componentInputs: { size: '2rem' } });
 		r.fixture.detectChanges();
 		const debugEl = r.fixture.debugElement.query(By.directive(NgIconComponent));
-		expect(debugEl.componentInstance.size).toBe('2rem');
+		expect(debugEl.componentInstance.size()).toBe('2rem');
 		expect(r.container.querySelector('hlm-icon')?.classList).not.toContain('h-6');
 		expect(r.container.querySelector('hlm-icon')?.classList).not.toContain('w-6');
 	});

@@ -13,10 +13,10 @@ import { injectBrnCalendarI18n } from './i18n/calendar-i18n';
 })
 export class BrnCalendarPreviousButtonDirective {
 	/** Access the calendar */
-	private readonly calendar = injectBrnCalendar();
+	private readonly _calendar = injectBrnCalendar();
 
 	/** Access the date adapter */
-	private readonly dateAdapter = injectDateAdapter();
+	private readonly _dateAdapter = injectDateAdapter();
 
 	/** Access the calendar i18n */
 	protected readonly i18n = injectBrnCalendarI18n();
@@ -24,17 +24,17 @@ export class BrnCalendarPreviousButtonDirective {
 	/** Focus the previous month */
 	@HostListener('click')
 	protected focusPreviousMonth(): void {
-		const targetDate = this.dateAdapter.subtract(this.calendar.state().focusedDate(), { months: 1 });
+		const targetDate = this._dateAdapter.subtract(this._calendar.state().focusedDate(), { months: 1 });
 
 		// if the date is disabled, but there are available dates in the month, focus the last day of the month.
-		const possibleDate = this.calendar.constrainDate(targetDate);
+		const possibleDate = this._calendar.constrainDate(targetDate);
 
-		if (this.dateAdapter.isSameMonth(possibleDate, targetDate)) {
+		if (this._dateAdapter.isSameMonth(possibleDate, targetDate)) {
 			// if this date is within the same month, then focus it
-			this.calendar.state().focusedDate.set(possibleDate);
+			this._calendar.state().focusedDate.set(possibleDate);
 			return;
 		}
 
-		this.calendar.state().focusedDate.set(targetDate);
+		this._calendar.state().focusedDate.set(targetDate);
 	}
 }

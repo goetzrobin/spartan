@@ -1,5 +1,5 @@
-import * as process from 'node:process';
 import type { ExecutorContext } from '@nx/devkit';
+import * as process from 'node:process';
 import { replace } from 'replace-json-property';
 
 import { getRoot } from '../helpers/projects.helpers';

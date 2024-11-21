@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-accordion-helm',
 	preset: '../../../../jest.preset.cjs',

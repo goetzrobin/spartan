@@ -62,13 +62,13 @@ import { listVariants } from './hlm-tabs-list.component';
 })
 export class HlmTabsPaginatedListComponent extends BrnTabsPaginatedListDirective {
 	@ContentChildren(BrnTabsTriggerDirective, { descendants: false })
-	_items!: QueryList<BrnTabsTriggerDirective>;
+	public _items!: QueryList<BrnTabsTriggerDirective>;
 
-	_tabListContainer = viewChild.required<ElementRef<HTMLElement>>('tabListContainer');
-	_tabList = viewChild.required<ElementRef<HTMLElement>>('tabList');
-	_tabListInner = viewChild.required<ElementRef<HTMLElement>>('tabListInner');
-	_nextPaginator = viewChild.required<ElementRef<HTMLElement>>('nextPaginator');
-	_previousPaginator = viewChild.required<ElementRef<HTMLElement>>('previousPaginator');
+	public _tabListContainer = viewChild.required<ElementRef<HTMLElement>>('tabListContainer');
+	public _tabList = viewChild.required<ElementRef<HTMLElement>>('tabList');
+	public _tabListInner = viewChild.required<ElementRef<HTMLElement>>('tabListInner');
+	public _nextPaginator = viewChild.required<ElementRef<HTMLElement>>('nextPaginator');
+	public _previousPaginator = viewChild.required<ElementRef<HTMLElement>>('previousPaginator');
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() => hlm('flex overflow-hidden relative flex-shrink-0', this.userClass()));

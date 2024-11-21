@@ -102,7 +102,7 @@ export class BrnSwitchComponent implements AfterContentInit, OnDestroy {
 	public readonly id = input<string | null>(null);
 
 	/** Used to set the name attribute on the underlying input element. */
-	readonly name = input<string | null>(null);
+	public readonly name = input<string | null>(null);
 
 	/** Used to set the aria-label attribute on the underlying input element. */
 	public readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });

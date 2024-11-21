@@ -37,7 +37,7 @@ import { Subject, skip } from 'rxjs';
 	},
 })
 export class BrnSelectTriggerDirective implements AfterViewInit, OnDestroy {
-	private readonly el = inject(ElementRef);
+	private readonly _el = inject(ElementRef);
 	protected readonly _selectService = inject(BrnSelectService);
 	protected readonly _ngControl = inject(NgControl, { optional: true });
 	private readonly _platform = inject(PLATFORM_ID);
@@ -60,15 +60,15 @@ export class BrnSelectTriggerDirective implements AfterViewInit, OnDestroy {
 	}
 
 	ngAfterViewInit() {
-		this._selectService.setTriggerWidth(this.el.nativeElement.offsetWidth);
+		this._selectService.setTriggerWidth(this._el.nativeElement.offsetWidth);
 
 		// if we are on the client, listen for element resize events
 		if (isPlatformBrowser(this._platform)) {
 			this._resizeObserver = new ResizeObserver(() =>
-				this._selectService.setTriggerWidth(this.el.nativeElement.offsetWidth),
+				this._selectService.setTriggerWidth(this._el.nativeElement.offsetWidth),
 			);
 
-			this._resizeObserver.observe(this.el.nativeElement);
+			this._resizeObserver.observe(this._el.nativeElement);
 		}
 	}
 
@@ -77,7 +77,7 @@ export class BrnSelectTriggerDirective implements AfterViewInit, OnDestroy {
 	}
 
 	public focus() {
-		this.el.nativeElement.focus();
+		this._el.nativeElement.focus();
 	}
 }
 
@@ -126,12 +126,12 @@ export class BrnSelectService {
 	public readonly triggerWidth = computed(() => this.state().triggerWidth);
 	public readonly possibleOptions = computed(() => this.state().possibleOptions);
 
-	private readonly multiple$ = toObservable(this.multiple);
+	private readonly _multiple$ = toObservable(this.multiple);
 
 	public readonly listBoxValueChangeEvent$ = new Subject<ListboxValueChangeEvent<unknown>>();
 
 	private _selectTrigger?: BrnSelectTriggerDirective;
-	get selectTrigger() {
+	public get selectTrigger() {
 		return this._selectTrigger;
 	}
 
@@ -147,7 +147,7 @@ export class BrnSelectService {
 		});
 
 		// We need to skip the first value because we don't want to deselect all options when the component is initialized with a preselected value e.g. by the form control
-		this.multiple$.pipe(skip(1), takeUntilDestroyed()).subscribe((multiple) => {
+		this._multiple$.pipe(skip(1), takeUntilDestroyed()).subscribe((multiple) => {
 			if (!multiple && this.value().length > 1) {
 				this.deselectAllOptions();
 			}

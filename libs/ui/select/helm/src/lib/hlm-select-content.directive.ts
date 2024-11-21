@@ -25,10 +25,10 @@ export class HlmSelectContentDirective {
 
 	private readonly _stickyLabels = signal(false);
 	@Input()
-	set stickyLabels(value: boolean) {
+	public set stickyLabels(value: boolean) {
 		this._stickyLabels.set(value);
 	}
-	get stickyLabels() {
+	public get stickyLabels() {
 		return this._stickyLabels();
 	}
 }

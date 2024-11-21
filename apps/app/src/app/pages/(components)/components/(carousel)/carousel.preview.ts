@@ -43,7 +43,7 @@ import {
 	`,
 })
 export class CarouselPreviewComponent {
-	items = Array.from({ length: 5 }, (_, i) => i + 1);
+	public items = Array.from({ length: 5 }, (_, i) => i + 1);
 }
 
 export const defaultCode = `

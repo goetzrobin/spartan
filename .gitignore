@@ -51,4 +51,5 @@ build-storybook.log
 .nx/cache
 .nx/workspace-data
 
-bun.lockb
+
+vite.config.*.timestamp*

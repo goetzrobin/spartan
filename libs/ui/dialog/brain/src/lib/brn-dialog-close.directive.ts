@@ -15,7 +15,7 @@ export class BrnDialogCloseDirective {
 	private _delay: number | undefined;
 
 	@Input()
-	set delay(value: NumberInput) {
+	public set delay(value: NumberInput) {
 		this._delay = coerceNumberProperty(value);
 	}
 

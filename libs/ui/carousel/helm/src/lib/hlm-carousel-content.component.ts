@@ -16,10 +16,10 @@ import { HlmCarouselComponent } from './hlm-carousel.component';
 	`,
 })
 export class HlmCarouselContentComponent {
-	private orientation = inject(HlmCarouselComponent).orientation;
+	private readonly _orientation = inject(HlmCarouselComponent).orientation;
 
-	_userClass = input<ClassValue>('', { alias: 'class' });
+	public _userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('flex', this.orientation() === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', this._userClass()),
+		hlm('flex', this._orientation() === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', this._userClass()),
 	);
 }

@@ -1,5 +1,3 @@
 #!/bin/sh
 
-bun run oxide.lint
-bunx biome format {apps,libs}
-bun run hook:pre-commit
+pnpm nx format:write

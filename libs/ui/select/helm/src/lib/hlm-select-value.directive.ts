@@ -3,7 +3,6 @@ import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
 
 @Directive({
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'hlm-select-value,[hlmSelectValue], brn-select-value[hlm]',
 	standalone: true,
 	host: {

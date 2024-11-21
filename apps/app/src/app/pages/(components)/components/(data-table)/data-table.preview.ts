@@ -3,7 +3,7 @@ import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, type TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { lucideArrowUpDown, lucideChevronDown, lucideMoreHorizontal } from '@ng-icons/lucide';
+import { lucideArrowUpDown, lucideChevronDown, lucideEllipsis } from '@ng-icons/lucide';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -172,7 +172,7 @@ const PAYMENT_DATA: Payment[] = [
 		BrnSelectModule,
 		HlmSelectModule,
 	],
-	providers: [provideIcons({ lucideChevronDown, lucideMoreHorizontal, lucideArrowUpDown })],
+	providers: [provideIcons({ lucideChevronDown, lucideEllipsis, lucideArrowUpDown })],
 	host: {
 		class: 'w-full',
 	},
@@ -250,7 +250,7 @@ const PAYMENT_DATA: Payment[] = [
 				<hlm-th *brnHeaderDef></hlm-th>
 				<hlm-td *brnCellDef="let element">
 					<button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-						<hlm-icon class="h-4 w-4" name="lucideMoreHorizontal" />
+						<hlm-icon class="h-4 w-4" name="lucideEllipsis" />
 					</button>
 
 					<ng-template #menu>
@@ -400,7 +400,7 @@ import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { lucideArrowUpDown, lucideChevronDown, lucideMoreHorizontal } from '@ng-icons/lucide';
+import { lucideArrowUpDown, lucideChevronDown, lucideEllipsis } from '@ng-icons/lucide';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -569,7 +569,7 @@ const PAYMENT_DATA: Payment[] = [
     BrnSelectModule,
 	  HlmSelectModule,
   ],
-  providers: [provideIcons({ lucideChevronDown, lucideMoreHorizontal, lucideArrowUpDown })],
+  providers: [provideIcons({ lucideChevronDown, lucideEllipsis, lucideArrowUpDown })],
   host: {
     class: 'w-full',
   },
@@ -647,7 +647,7 @@ const PAYMENT_DATA: Payment[] = [
         <hlm-th *brnHeaderDef></hlm-th>
         <hlm-td *brnCellDef="let element">
           <button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-            <hlm-icon class="w-4 h-4" name="lucideMoreHorizontal" />
+            <hlm-icon class="w-4 h-4" name="lucideEllipsis" />
           </button>
 
           <ng-template #menu>

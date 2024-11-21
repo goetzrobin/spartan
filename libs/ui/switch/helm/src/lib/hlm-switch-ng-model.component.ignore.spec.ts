@@ -5,6 +5,7 @@ import { HlmSwitchComponent } from './hlm-switch.component';
 	selector: 'hlm-switch-ng-model',
 	standalone: true,
 	template: `
+		<!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
 		<label class="flex items-center" hlmLabel>
 			<hlm-switch
 				[(ngModel)]="switchValue"

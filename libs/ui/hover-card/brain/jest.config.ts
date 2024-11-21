@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-hover-card-brain',
 	preset: '../../../../jest.preset.cjs',

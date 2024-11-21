@@ -14,11 +14,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - name: Install Bun globally
-        run: npm install -g bun
+      - name: Install PNPM globally
+        run: npm install -g pnpm
       - name: Install Dependencies
-        run: bun install --no-cache
+        run: pnpm install --frozen-lockfile
       - name: Release
-        run: bunx semantic-release
+        run: pnpx semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

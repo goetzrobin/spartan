@@ -18,7 +18,8 @@
 				"default",
 				"{workspaceRoot}/.eslintrc.json",
 				"{workspaceRoot}/.eslintignore",
-				"{workspaceRoot}/eslint.config.js"
+				"{workspaceRoot}/eslint.config.js",
+				"{workspaceRoot}/tools/eslint-rules/**/*"
 			],
 			"cache": true
 		},
@@ -71,7 +72,7 @@
 			"!{projectRoot}/tsconfig.storybook.json",
 			"!{projectRoot}/eslint.config.js"
 		],
-		"sharedGlobals": ["{workspaceRoot}/package.json", "{workspaceRoot}/bun.lockb"]
+		"sharedGlobals": ["{workspaceRoot}/package.json", "{workspaceRoot}/pnpm-lock.yaml"]
 	},
 	"generators": {
 		"@nx/angular:application": {
@@ -87,5 +88,6 @@
 		"@nx/angular:component": {
 			"style": "css"
 		}
-	}
+	},
+	"useLegacyCache": true
 }

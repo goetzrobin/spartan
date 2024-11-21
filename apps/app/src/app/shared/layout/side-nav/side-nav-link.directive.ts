@@ -21,10 +21,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 	},
 })
 export class SideNavLinkDirective {
-	private _rlActive = inject(RouterLinkActive);
+	private readonly _rlActive = inject(RouterLinkActive);
 	protected _disabled = false;
 	@Input({ transform: booleanAttribute })
-	set disabled(value: boolean) {
+	public set disabled(value: boolean) {
 		this._disabled = value;
 	}
 
