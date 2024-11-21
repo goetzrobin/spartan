@@ -12,7 +12,7 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
 })
 export class BrnMenuItemDirective {
 	readonly #cdkMenuItem = inject(CdkMenuItem);
-	readonly disabled = input(this.#cdkMenuItem.disabled, { transform: booleanAttribute });
+	public readonly disabled = input(this.#cdkMenuItem.disabled, { transform: booleanAttribute });
 	public readonly triggered = outputFromObservable(this.#cdkMenuItem.triggered);
 
 	constructor() {

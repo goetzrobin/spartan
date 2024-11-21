@@ -7,7 +7,7 @@ export type BrnMenuAlign = 'start' | 'center' | 'end' | undefined;
 @Directive()
 export class BrnTriggerBase {
 	protected readonly _cdkTrigger = inject(CdkMenuTrigger, { host: true });
-	align = input<BrnMenuAlign>(undefined);
+	public readonly align = input<BrnMenuAlign>(undefined);
 
 	constructor() {
 		// once the trigger opens we wait until the next tick and then grab the last position

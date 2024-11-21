@@ -8,8 +8,8 @@ import { BrnTriggerBase } from './brn-trigger-base';
 	hostDirectives: [CdkContextMenuTrigger],
 })
 export class BrnContextMenuTriggerDirective extends BrnTriggerBase {
-	brnCtxMenuTriggerFor = input<TemplateRef<unknown> | null>(null);
-	brnCtxMenuTriggerData = input<unknown>(undefined);
+	public brnCtxMenuTriggerFor = input<TemplateRef<unknown> | null>(null);
+	public brnCtxMenuTriggerData = input<unknown>(undefined);
 
 	constructor() {
 		super();

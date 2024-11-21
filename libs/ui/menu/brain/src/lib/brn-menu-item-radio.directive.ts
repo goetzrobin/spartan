@@ -13,8 +13,8 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
 })
 export class BrnMenuItemRadioDirective {
 	readonly #cdkMenuItem = inject(CdkMenuItemRadio);
-	readonly checked = input(this.#cdkMenuItem.checked, { transform: booleanAttribute });
-	readonly disabled = input(this.#cdkMenuItem.disabled, { transform: booleanAttribute });
+	public readonly checked = input(this.#cdkMenuItem.checked, { transform: booleanAttribute });
+	public readonly disabled = input(this.#cdkMenuItem.disabled, { transform: booleanAttribute });
 	public readonly triggered = outputFromObservable(this.#cdkMenuItem.triggered);
 
 	constructor() {
