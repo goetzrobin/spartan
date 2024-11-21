@@ -74,13 +74,13 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 	await removeGenerator(tree, { projectName: options.project, skipFormat: true, forceRemove: true, importPath });
 
 	// migrate library peer dependencies
-	migratePeerDependencies(tree, options.name, importPath);
+	migratePeerDependencies(tree, importPath);
 
 	// migrate the imports - nicely we use our public migration generator here, so we can test it within our own project.
 	await migrateBrainImportsGenerator(tree, { skipFormat: true, skipInstall: true });
 }
 
-function migratePeerDependencies(tree: Tree, name: string, oldPackage: string): void {
+function migratePeerDependencies(tree: Tree, oldPackage: string): void {
 	const projects = getProjects(tree);
 
 	for (const [, project] of Object.entries(projects)) {
@@ -97,7 +97,9 @@ function migratePeerDependencies(tree: Tree, name: string, oldPackage: string): 
 			}
 
 			// add a peer dependency to the unified brain package
-			json.peerDependencies[`@spartan-ng/brain`] = json.peerDependencies[oldPackage];
+			if (!json.peerDependencies[`@spartan-ng/brain`]) {
+				json.peerDependencies[`@spartan-ng/brain`] = json.peerDependencies[oldPackage];
+			}
 
 			// remove the old peer dependency
 			delete json.peerDependencies[oldPackage];
