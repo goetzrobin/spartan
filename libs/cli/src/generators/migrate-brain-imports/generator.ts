@@ -17,7 +17,7 @@ export async function migrateBrainImportsGenerator(tree: Tree, options: MigrateB
 	const { imports } = readJson<ImportMap>(tree, 'libs/cli/src/generators/migrate-brain-imports/import-map.json');
 
 	for (const [from, to] of Object.entries(imports)) {
-		replaceBrainPackageWithSecondaryEntrypoint(tree, from, to as string);
+		replaceBrainPackageWithSecondaryEntrypoint(tree, options, from, to as string);
 	}
 
 	if (!options.skipFormat) {
@@ -50,8 +50,16 @@ function ensureBrainPackageIsInstalled(tree: Tree) {
 	);
 }
 
-export function replaceBrainPackageWithSecondaryEntrypoint(tree: Tree, oldImport: string, newImport: string): void {
-	removePackageInDependencies(tree, oldImport);
+export function replaceBrainPackageWithSecondaryEntrypoint(
+	tree: Tree,
+	options: MigrateBrainImportsGeneratorSchema,
+	oldImport: string,
+	newImport: string,
+): void {
+	if (!options.skipInstall) {
+		removePackageInDependencies(tree, oldImport);
+	}
+
 	replaceUsages(tree, oldImport, newImport);
 }
 
@@ -88,7 +96,17 @@ function replaceUsages(tree: Tree, oldPackageName: string, newPackageName: strin
 			return;
 		}
 
-		const ignoredFiles = ['yarn.lock', 'package-lock.json', 'pnpm-lock.yaml', 'bun.lockb', 'CHANGELOG.md'];
+		const ignoredFiles = [
+			'yarn.lock',
+			'package-lock.json',
+			'pnpm-lock.yaml',
+			'bun.lockb',
+			'CHANGELOG.md',
+			// this is relevant for this repo only - and this file is auto-generated
+			'supported-ui-libraries.json',
+			// we don't want to replace usages in the import map as these are used to detect the usages
+			'import-map.json',
+		];
 		if (ignoredFiles.includes(basename(path))) {
 			return;
 		}
