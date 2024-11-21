@@ -1,7 +1,16 @@
 import { librarySecondaryEntryPointGenerator } from '@nx/angular/generators';
-import { formatFiles, joinPathFragments, readJson, readProjectConfiguration, Tree, updateJson } from '@nx/devkit';
+import {
+	formatFiles,
+	joinPathFragments,
+	readJson,
+	readProjectConfiguration,
+	Tree,
+	updateJson,
+	visitNotIgnoredFiles,
+} from '@nx/devkit';
 import { removeGenerator } from '@nx/workspace/generators';
 import { migrateBrainImportsGenerator } from '@spartan-ng/cli';
+import { basename } from 'node:path';
 import { PackageJson } from 'nx/src/utils/package-json';
 import { BrainSecondaryEntrypointGeneratorSchema } from './schema';
 
@@ -48,8 +57,8 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 
 	// iterate over the files in the sourceRoot and move them to the entrypointSourceRoot
 	// we do however want to skip test-setup.ts as this has been defined in the brain library already
-	iterateFiles(tree, sourceRoot, (path, filename) => {
-		if (filename === 'test-setup.ts') {
+	visitNotIgnoredFiles(tree, sourceRoot, (path) => {
+		if (basename(path) === 'test-setup.ts') {
 			return;
 		}
 
@@ -65,21 +74,6 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 
 	// migrate the imports - nicely we use our public migration generator here, so we can test it within our own project.
 	await migrateBrainImportsGenerator(tree, { skipFormat: true, skipInstall: true });
-}
-
-/**
- * Recursively iterate over the files in a given directory
- */
-function iterateFiles(tree: Tree, path: string, callback: (path: string, filename: string) => void) {
-	const files = tree.children(path);
-	for (const file of files) {
-		const filePath = joinPathFragments(path, file);
-		if (!tree.isFile(file)) {
-			iterateFiles(tree, filePath, callback);
-		} else {
-			callback(filePath, file);
-		}
-	}
 }
 
 export default brainSecondaryEntrypointGenerator;
