@@ -22,7 +22,7 @@ export async function brainSecondaryEntrypointGenerator(tree: Tree, options: Bra
 }
 
 async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypointGeneratorSchema) {
-	const { tags, sourceRoot, root } = readProjectConfiguration(tree, options.name);
+	const { tags, sourceRoot, root } = readProjectConfiguration(tree, options.project);
 
 	// if the tag is not scope:brain then it is not eligible for migration
 	if (!tags.includes('scope:brain')) {
