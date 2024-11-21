@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Renderer2, inject, input } from '@angular/core';
 
 @Directive({
+	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'img[fallback]',
 	standalone: true,
 	host: {
@@ -8,10 +9,10 @@ import { Directive, ElementRef, Renderer2, inject, input } from '@angular/core';
 	},
 })
 export class FallbackImageDirective {
-	fallback = input('');
+	public fallback = input('');
 
-	imgComponent = inject(ElementRef) as ElementRef<HTMLImageElement>;
-	renderer = inject(Renderer2);
+	public imgComponent = inject(ElementRef) as ElementRef<HTMLImageElement>;
+	public renderer = inject(Renderer2);
 
 	updateUrl() {
 		this.renderer.setAttribute(this.imgComponent.nativeElement, 'src', this.fallback());

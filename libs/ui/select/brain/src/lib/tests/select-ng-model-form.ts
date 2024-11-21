@@ -25,5 +25,5 @@ import { Component, signal } from '@angular/core';
 	`,
 })
 export class SelectNgModelComponent {
-	fruit = signal('');
+	public fruit = signal('');
 }

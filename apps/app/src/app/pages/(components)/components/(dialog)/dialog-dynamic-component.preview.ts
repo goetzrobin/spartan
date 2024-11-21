@@ -68,6 +68,7 @@ export class DialogDynamicComponentPreviewComponent {
 }
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'dynamic-content',
 	standalone: true,
 	imports: [

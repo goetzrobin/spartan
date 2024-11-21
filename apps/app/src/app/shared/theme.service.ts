@@ -4,6 +4,7 @@ import { Injectable, PLATFORM_ID, RendererFactory2, inject, signal } from '@angu
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReplaySubject, combineLatest } from 'rxjs';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DarkModes = ['light', 'dark', 'system'] as const;
 export type DarkMode = (typeof DarkModes)[number];
 
@@ -14,12 +15,12 @@ export type Theme = (typeof AppThemes)[number];
 	providedIn: 'root',
 })
 export class ThemeService {
-	private _platformId = inject(PLATFORM_ID);
-	private _renderer = inject(RendererFactory2).createRenderer(null, null);
-	private _document = inject(DOCUMENT);
-	private _query = inject(MediaMatcher).matchMedia('(prefers-color-scheme: dark)');
-	private _darkMode$ = new ReplaySubject<'light' | 'dark' | 'system'>(1);
-	private _systemDarkMode$ = new ReplaySubject<'light' | 'dark' | 'system'>(1);
+	private readonly _platformId = inject(PLATFORM_ID);
+	private readonly _renderer = inject(RendererFactory2).createRenderer(null, null);
+	private readonly _document = inject(DOCUMENT);
+	private readonly _query = inject(MediaMatcher).matchMedia('(prefers-color-scheme: dark)');
+	private readonly _darkMode$ = new ReplaySubject<'light' | 'dark' | 'system'>(1);
+	private readonly _systemDarkMode$ = new ReplaySubject<'light' | 'dark' | 'system'>(1);
 	public darkMode$ = this._darkMode$.asObservable();
 
 	private readonly _theme = signal<Theme | undefined>(undefined);

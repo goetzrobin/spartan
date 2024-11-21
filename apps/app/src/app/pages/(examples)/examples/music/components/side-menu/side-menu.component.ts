@@ -2,12 +2,12 @@ import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
+	lucideCirclePlay,
 	lucideLayoutGrid,
 	lucideLibrary,
 	lucideListMusic,
-	lucideMic2,
+	lucideMicVocal,
 	lucideMusic2,
-	lucidePlayCircle,
 	lucideRadio,
 	lucideUser,
 } from '@ng-icons/lucide';
@@ -22,6 +22,7 @@ interface ListItem {
 }
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'music-side-menu',
 	standalone: true,
 	host: {
@@ -30,13 +31,13 @@ interface ListItem {
 	imports: [SideMenuButtonComponent, HlmIconComponent, HlmScrollAreaComponent, NgClass],
 	providers: [
 		provideIcons({
-			lucidePlayCircle,
+			lucideCirclePlay,
 			lucideLayoutGrid,
 			lucideRadio,
 			lucideListMusic,
 			lucideMusic2,
 			lucideUser,
-			lucideMic2,
+			lucideMicVocal,
 			lucideLibrary,
 		}),
 	],
@@ -85,7 +86,7 @@ interface ListItem {
 	`,
 })
 export class SideMusicMenuComponent {
-	playlists: ListItem[] = [
+	public playlists: ListItem[] = [
 		{ text: 'Recently Added', icon: 'lucideListMusic' },
 		{ text: 'Recently Played', icon: 'lucideListMusic' },
 		{ text: 'Top Songs', icon: 'lucideListMusic' },
@@ -100,16 +101,16 @@ export class SideMusicMenuComponent {
 		{ text: 'Eminem Essentials', icon: 'lucideListMusic' },
 	];
 
-	library: ListItem[] = [
+	public library: ListItem[] = [
 		{ text: 'Playlists', icon: 'lucideListMusic' },
 		{ text: 'Songs', icon: 'lucideMusic2' },
 		{ text: 'Made for You', icon: 'lucideUser' },
-		{ text: 'Artists', icon: 'lucideMic2' },
+		{ text: 'Artists', icon: 'lucideMicVocal' },
 		{ text: 'Albums', icon: 'lucideLibrary' },
 	];
 
-	discover: ListItem[] = [
-		{ text: 'Listen Now', icon: 'lucidePlayCircle', selected: true },
+	public discover: ListItem[] = [
+		{ text: 'Listen Now', icon: 'lucideCirclePlay', selected: true },
 		{ text: 'Browse', icon: 'lucideLayoutGrid' },
 		{ text: 'Radio', icon: 'lucideRadio' },
 	];

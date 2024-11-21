@@ -25,11 +25,11 @@ import { fromEvent } from 'rxjs';
 	},
 })
 export class BrnAccordionItemDirective {
-	private static itemIdGenerator = 0;
+	private static _itemIdGenerator = 0;
 	private readonly _accordion = inject(BrnAccordionDirective);
 	public readonly isOpened = input(false, { transform: coerceBooleanProperty });
 
-	public readonly id = BrnAccordionItemDirective.itemIdGenerator++;
+	public readonly id = BrnAccordionItemDirective._itemIdGenerator++;
 	public readonly state = computed(() => (this._accordion.openItemIds().includes(this.id) ? 'open' : 'closed'));
 
 	constructor() {
@@ -122,7 +122,7 @@ const VERTICAL_KEYS_TO_PREVENT_DEFAULT = ['ArrowUp', 'ArrowDown', 'PageDown', 'P
 export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 	private readonly _el = inject(ElementRef);
 	private _keyManager?: FocusKeyManager<BrnAccordionTriggerDirective>;
-	private _focusMonitor = inject(FocusMonitor);
+	private readonly _focusMonitor = inject(FocusMonitor);
 
 	private readonly _focused = signal<boolean>(false);
 	private readonly _openItemIds = signal<number[]>([]);

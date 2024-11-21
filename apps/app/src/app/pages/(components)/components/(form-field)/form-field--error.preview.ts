@@ -15,7 +15,7 @@ import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 	`,
 })
 export class FormFieldErrorPreviewComponent implements OnInit {
-	name = new FormControl('', Validators.required);
+	public name = new FormControl('', Validators.required);
 
 	ngOnInit(): void {
 		this.name.markAsTouched();

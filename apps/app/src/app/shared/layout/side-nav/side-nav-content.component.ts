@@ -33,7 +33,7 @@ import { SideNavLinksComponent } from './side-nav-links.directive';
 	`,
 })
 export class SideNavContentComponent {
-	linkClicked = output();
+	public readonly linkClicked = output();
 
 	protected readonly sections = [
 		{

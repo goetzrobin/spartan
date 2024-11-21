@@ -14,7 +14,7 @@ export class BrnMenuTriggerDirective {
 	private readonly _align = signal<BrnMenuAlign>(undefined);
 
 	@Input()
-	set align(value: BrnMenuAlign) {
+	public set align(value: BrnMenuAlign) {
 		this._align.set(value);
 	}
 

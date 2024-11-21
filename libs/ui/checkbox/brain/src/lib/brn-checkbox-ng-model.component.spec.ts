@@ -6,6 +6,7 @@ import { BrnCheckboxComponent } from './brn-checkbox.component';
 	selector: 'brn-checkbox-ng-model',
 	standalone: true,
 	template: `
+		<!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
 		<label>
 			Airplane mode is: {{ airplaneMode() ? 'on' : 'off' }}
 			<brn-checkbox [disabled]="disabled()" [(ngModel)]="airplaneMode"></brn-checkbox>

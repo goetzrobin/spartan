@@ -135,7 +135,7 @@ export const Default: Story = {
         </button>
         <hlm-menu-separator />
         <button hlmMenuItem>
-          <hlm-icon name='lucidePlusCircle' hlmMenuIcon />
+          <hlm-icon name='lucideCirclePlus' hlmMenuIcon />
           <span>More</span>
         </button>
       </hlm-sub-menu>

@@ -106,10 +106,10 @@ export class BrnHoverCardContentService {
 	private _positionStrategy?: FlexibleConnectedPositionStrategy;
 	private _destroyed$ = new Subject<void>();
 
-	private _positionChangesObservables$ = new BehaviorSubject<Observable<ConnectedOverlayPositionChange> | undefined>(
-		undefined,
-	);
-	private _overlayHoveredObservables$ = new BehaviorSubject<Observable<boolean> | undefined>(undefined);
+	private readonly _positionChangesObservables$ = new BehaviorSubject<
+		Observable<ConnectedOverlayPositionChange> | undefined
+	>(undefined);
+	private readonly _overlayHoveredObservables$ = new BehaviorSubject<Observable<boolean> | undefined>(undefined);
 
 	public readonly positionChanges$: Observable<ConnectedOverlayPositionChange> = this._positionChangesObservables$.pipe(
 		switchMap((positionChangeObservable) => (positionChangeObservable ? positionChangeObservable : of(undefined))),
@@ -239,7 +239,7 @@ export class BrnHoverCardTriggerDirective implements OnInit, OnDestroy {
 	public align: 'top' | 'bottom' = 'bottom';
 
 	@Input()
-	set brnHoverCardTriggerFor(value: TemplateRef<unknown> | BrnHoverCardContentDirective) {
+	public set brnHoverCardTriggerFor(value: TemplateRef<unknown> | BrnHoverCardContentDirective) {
 		this._contentService.setContent(value, this._vcr);
 	}
 

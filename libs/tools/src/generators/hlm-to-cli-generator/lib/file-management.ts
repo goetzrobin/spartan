@@ -1,5 +1,5 @@
-import * as path from 'node:path';
 import { type Tree, generateFiles } from '@nx/devkit';
+import * as path from 'node:path';
 import type { HlmToCliGeneratorGeneratorSchema } from '../schema';
 
 export const copyFilesFromHlmLibToGenerator = (

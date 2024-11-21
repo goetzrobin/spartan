@@ -12,6 +12,7 @@ jest.mock('node:child_process', () => ({
 describe('BuildUpdatePublish Executor', () => {
 	it('should call update-version executor and npm publish executor with the options and context', async () => {
 		const libName = 'foo';
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const mockContext = { bar: 'bar' } as any;
 
 		// Mock the project helper, updateVersion, npmPublish, and execSync

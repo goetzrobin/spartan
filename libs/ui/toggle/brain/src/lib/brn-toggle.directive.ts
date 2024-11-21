@@ -15,29 +15,29 @@ import { injectBrnToggleGroup } from './brn-toggle-group.token';
 	},
 })
 export class BrnToggleDirective<T> {
-	private static uniqueId = 0;
+	private static _uniqueId = 0;
 
-	private readonly changeDetector = inject(ChangeDetectorRef);
+	private readonly _changeDetector = inject(ChangeDetectorRef);
 
 	/** Access the toggle group if available. */
 	protected readonly group = injectBrnToggleGroup<T>();
 
 	/** The id of the toggle. */
-	readonly id = input(`brn-toggle-${BrnToggleDirective.uniqueId++}`);
+	public readonly id = input(`brn-toggle-${BrnToggleDirective._uniqueId++}`);
 
 	/** The value this toggle represents. */
-	readonly value = input<T>();
+	public readonly value = input<T>();
 
 	/** Whether the toggle is disabled. */
-	readonly disabled = input<boolean, BooleanInput>(false, {
+	public readonly disabled = input<boolean, BooleanInput>(false, {
 		transform: booleanAttribute,
 	});
 
 	/** The current state of the toggle when not used in a group. */
-	readonly state = model<'on' | 'off'>('off');
+	public readonly state = model<'on' | 'off'>('off');
 
 	/** Whether the toggle is responds to click events. */
-	readonly disableToggleClick = input<boolean, BooleanInput>(false, {
+	public readonly disableToggleClick = input<boolean, BooleanInput>(false, {
 		transform: booleanAttribute,
 	});
 

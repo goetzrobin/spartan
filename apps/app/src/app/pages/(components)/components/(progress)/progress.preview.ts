@@ -13,7 +13,7 @@ import { HlmProgressDirective, HlmProgressIndicatorDirective } from '@spartan-ng
 	`,
 })
 export class ProgressPreviewComponent implements OnInit {
-	value = 0;
+	public value = 0;
 
 	ngOnInit() {
 		setTimeout(() => (this.value = 33), 2000);

@@ -4,5 +4,5 @@ export default {
 	useTabs: true,
 	bracketSpacing: true,
 	htmlWhitespaceSensitivity: 'ignore',
-	plugins: ['prettier-plugin-tailwindcss'],
+	plugins: ['prettier-plugin-organize-imports', 'prettier-plugin-tailwindcss'],
 };

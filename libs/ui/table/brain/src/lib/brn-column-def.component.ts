@@ -34,21 +34,21 @@ import { BrnHeaderDefDirective } from './brn-header-def.directive';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BrnColumnDefComponent implements AfterContentChecked {
-	get columnDef() {
+	public get columnDef() {
 		return this._columnDef;
 	}
 
-	get cell() {
+	public get cell() {
 		return this._columnDef.cell;
 	}
 
 	private _name = '';
 	@Input()
-	get name(): string {
+	public get name(): string {
 		return this._name;
 	}
 
-	set name(value: string) {
+	public set name(value: string) {
 		this._name = value;
 		if (!this._columnDef) return;
 		this._columnDef.name = value;
@@ -57,14 +57,14 @@ export class BrnColumnDefComponent implements AfterContentChecked {
 	public readonly class = input('');
 
 	@ViewChild(CdkColumnDef, { static: true })
-	private _columnDef!: CdkColumnDef;
+	private readonly _columnDef!: CdkColumnDef;
 
 	@ContentChild(BrnCellDefDirective, { static: true })
-	private _cellDef?: CdkCellDef;
+	private readonly _cellDef?: CdkCellDef;
 	@ContentChild(BrnFooterDefDirective, { static: true })
-	private _footerCellDef?: CdkFooterCellDef;
+	private readonly _footerCellDef?: CdkFooterCellDef;
 	@ContentChild(BrnHeaderDefDirective, { static: true })
-	private _headerCellDef?: CdkHeaderCellDef;
+	private readonly _headerCellDef?: CdkHeaderCellDef;
 
 	public ngAfterContentChecked(): void {
 		this._columnDef.name = this.name;

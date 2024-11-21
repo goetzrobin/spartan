@@ -1,3 +1,0 @@
-{
-	"**/*.{js,ts,css,scss,html,json,md,yml}": "oxlint"
-}

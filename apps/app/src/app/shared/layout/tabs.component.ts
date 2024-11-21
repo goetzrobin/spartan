@@ -38,13 +38,13 @@ const tabContent =
 })
 export class TabsComponent {
 	@Input()
-	firstTab = '';
+	public firstTab = '';
 	@Input()
-	secondTab = '';
+	public secondTab = '';
 	public readonly value = input('');
-	protected _tabValue = computed(() => (this.value() === '' ? this.firstTab : this.value()));
+	protected readonly _tabValue = computed(() => (this.value() === '' ? this.firstTab : this.value()));
 	@Output()
-	tabActivated = new EventEmitter<string>();
+	public readonly tabActivated = new EventEmitter<string>();
 	protected onTabActivated(value: string) {
 		this.tabActivated.emit(value);
 	}

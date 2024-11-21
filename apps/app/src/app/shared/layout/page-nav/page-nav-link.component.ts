@@ -23,7 +23,7 @@ import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 export class PageNavLinkComponent {
 	protected activatedRoute = inject(ActivatedRoute);
 	@Input()
-	fragment = '';
+	public fragment = '';
 	@Input()
-	label = '';
+	public label = '';
 }

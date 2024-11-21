@@ -1,10 +1,12 @@
 import { FocusMonitor, type FocusOrigin, type FocusableOption } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import {
+	type AfterContentInit,
 	type AfterViewInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	ContentChildren,
 	type DoCheck,
 	ElementRef,
 	EventEmitter,
@@ -12,13 +14,14 @@ import {
 	type OnDestroy,
 	type OnInit,
 	Output,
+	type QueryList,
 	ViewChild,
 	ViewEncapsulation,
 	booleanAttribute,
+	forwardRef,
 	inject,
 	numberAttribute,
 } from '@angular/core';
-import { type AfterContentInit, ContentChildren, type QueryList, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export const BRN_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
@@ -86,59 +89,58 @@ export class BrnRadioChange {
 	`,
 })
 export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit, DoCheck, OnDestroy {
-	private static nextUniqueId = 0;
-	private _focusMonitor = inject(FocusMonitor);
-	private _elementRef = inject(ElementRef);
-	private _radioDispatcher = inject(UniqueSelectionDispatcher);
+	private static _nextUniqueId = 0;
+	private readonly _focusMonitor = inject(FocusMonitor);
+	private readonly _elementRef = inject(ElementRef);
+	private readonly _radioDispatcher = inject(UniqueSelectionDispatcher);
 	protected _changeDetector = inject(ChangeDetectorRef);
 	public radioGroup = inject(BrnRadioGroupComponent, { optional: true });
 
 	private _disabled = false;
 	@Input({ transform: booleanAttribute })
-	get disabled(): boolean {
-		// biome-ignore lint/complexity/useOptionalChain: <explanation>
+	public get disabled(): boolean {
 		return this._disabled || (this.radioGroup !== null && this.radioGroup.disabled);
 	}
-	set disabled(value: boolean) {
+	public set disabled(value: boolean) {
 		this._setDisabled(value);
 	}
 
 	private _defaultTabIndex = 0;
 	@Input({ transform: numberAttribute })
-	set defaultTabIndex(value: number) {
+	public set defaultTabIndex(value: number) {
 		this._defaultTabIndex = value;
 	}
 
 	private _tabIndex = 0;
 	@Input({ transform: numberAttribute })
-	get tabIndex(): number {
+	public get tabIndex(): number {
 		return this.disabled ? -1 : this._tabIndex;
 	}
-	set tabIndex(value: number) {
+	public set tabIndex(value: number) {
 		this._tabIndex = value !== null ? value : this._defaultTabIndex;
 	}
 
-	private _uniqueId = `brn-radio-${++BrnRadioComponent.nextUniqueId}`;
+	private readonly _uniqueId = `brn-radio-${++BrnRadioComponent._nextUniqueId}`;
 
 	@Input()
-	id = this._uniqueId;
+	public id = this._uniqueId;
 	// will be overwritten with radio group name if group exists
 	@Input()
-	name = this._uniqueId;
+	public name = this._uniqueId;
 	@Input('aria-label')
-	ariaLabel?: string;
+	public ariaLabel?: string;
 	@Input('aria-labelledby')
-	ariaLabelledby?: string;
+	public ariaLabelledby?: string;
 	@Input('aria-describedby')
-	ariaDescribedby?: string;
+	public ariaDescribedby?: string;
 
 	private _checked = false;
 	@Input({ transform: booleanAttribute })
-	get checked(): boolean {
+	public get checked(): boolean {
 		return this._checked;
 	}
 
-	set checked(value: boolean) {
+	public set checked(value: boolean) {
 		const newCheckedState = value;
 		if (this._checked !== newCheckedState) {
 			this._checked = newCheckedState;
@@ -161,12 +163,12 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private _value: any = null;
 	@Input({ required: true }) // eslint-disable-next-line @typescript-eslint/no-explicit-any
-	get value(): any {
+	public get value(): any {
 		return this._value;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	set value(value: any) {
+	public set value(value: any) {
 		if (this._value !== value) {
 			this._value = value;
 			if (this.radioGroup !== null) {
@@ -183,20 +185,19 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 
 	private _required = false;
 	@Input({ transform: booleanAttribute })
-	get required(): boolean {
-		// biome-ignore lint/complexity/useOptionalChain: <explanation>
+	public get required(): boolean {
 		return this._required || (this.radioGroup !== null && this.radioGroup.required);
 	}
 
-	set required(value: boolean) {
+	public set required(value: boolean) {
 		this._required = value;
 	}
 
 	@Output()
 	// eslint-disable-next-line @angular-eslint/no-output-native
-	readonly change = new EventEmitter<BrnRadioChange>();
+	public readonly change = new EventEmitter<BrnRadioChange>();
 
-	get inputId(): string {
+	public get inputId(): string {
 		return `${this.id || this._uniqueId}-input`;
 	}
 
@@ -206,7 +207,7 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 	private _previousTabIndex: number | undefined;
 
 	@ViewChild('input')
-	_inputElement?: ElementRef<HTMLInputElement>;
+	public _inputElement?: ElementRef<HTMLInputElement>;
 
 	/** Focuses the radio button. */
 	focus(origin?: FocusOrigin): void {
@@ -354,28 +355,28 @@ export class BrnRadioComponent implements FocusableOption, OnInit, AfterViewInit
 	`,
 })
 export class BrnRadioGroupComponent implements AfterContentInit {
-	private static nextUniqueId = 0;
-	private _changeDetector = inject(ChangeDetectorRef);
+	private static _nextUniqueId = 0;
+	private readonly _changeDetector = inject(ChangeDetectorRef);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private _value: any = null;
 	private _isInitialized = false;
 
 	@ContentChildren(BrnRadioComponent, { descendants: true })
-	private _radios?: QueryList<BrnRadioComponent>;
+	private readonly _radios?: QueryList<BrnRadioComponent>;
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
-	_controlValueAccessorChangeFn: (value: any) => void = () => {};
+	public _controlValueAccessorChangeFn: (value: any) => void = () => {};
 	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-explicit-any
-	onTouched: () => any = () => {};
+	public onTouched: () => any = () => {};
 
-	private _name = `brn-radio-group-${BrnRadioGroupComponent.nextUniqueId++}`;
+	private _name = `brn-radio-group-${BrnRadioGroupComponent._nextUniqueId++}`;
 	@Input()
-	get name(): string {
+	public get name(): string {
 		return this._name;
 	}
 
-	set name(value: string) {
+	public set name(value: string) {
 		this._name = value;
 		this._updateRadioButtonNames();
 	}
@@ -387,12 +388,12 @@ export class BrnRadioGroupComponent implements AfterContentInit {
 	 * matching value.
 	 */
 	@Input() // eslint-disable-next-line @typescript-eslint/no-explicit-any
-	get value(): any {
+	public get value(): any {
 		return this._value;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	set value(newValue: any) {
+	public set value(newValue: any) {
 		if (this._value !== newValue) {
 			// Set this before proceeding to ensure no circular loop occurs with selection.
 			this._value = newValue;
@@ -413,11 +414,11 @@ export class BrnRadioGroupComponent implements AfterContentInit {
 	 */
 	private _selected: BrnRadioComponent | null = null;
 	@Input()
-	get selected() {
+	public get selected() {
 		return this._selected;
 	}
 
-	set selected(selected: BrnRadioComponent | null) {
+	public set selected(selected: BrnRadioComponent | null) {
 		this._selected = selected;
 		this.value = selected ? selected.value : null;
 		this._checkSelectedRadioButton();
@@ -425,32 +426,32 @@ export class BrnRadioGroupComponent implements AfterContentInit {
 
 	private _disabled = false;
 	@Input({ transform: booleanAttribute })
-	get disabled(): boolean {
+	public get disabled(): boolean {
 		return this._disabled;
 	}
 
-	set disabled(value: boolean) {
+	public set disabled(value: boolean) {
 		this._disabled = value;
 		this._markRadiosForCheck();
 	}
 
 	private _required = false;
 	@Input({ transform: booleanAttribute })
-	get required(): boolean {
+	public get required(): boolean {
 		return this._required;
 	}
 
-	set required(value: boolean) {
+	public set required(value: boolean) {
 		this._required = value;
 		this._markRadiosForCheck();
 	}
 
 	@Input()
-	direction: 'ltr' | 'rtl' | null = 'ltr';
+	public direction: 'ltr' | 'rtl' | null = 'ltr';
 
 	@Output()
 	// eslint-disable-next-line @angular-eslint/no-output-native
-	readonly change: EventEmitter<BrnRadioChange> = new EventEmitter<BrnRadioChange>();
+	public readonly change: EventEmitter<BrnRadioChange> = new EventEmitter<BrnRadioChange>();
 
 	/**
 	 * Initialize properties once content children are available.
@@ -500,7 +501,6 @@ export class BrnRadioGroupComponent implements AfterContentInit {
 
 	_emitChangeEvent(): void {
 		if (this._isInitialized) {
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			this.change.emit(new BrnRadioChange(this._selected!, this._value));
 		}
 	}

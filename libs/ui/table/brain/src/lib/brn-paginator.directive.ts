@@ -56,22 +56,21 @@ export class BrnPaginatorDirective implements OnInit {
 	private readonly _incrementable = computed(() => this._state().endIndex < (this._state().totalElements ?? 0) - 1);
 
 	@Input({ alias: 'brnPaginatorTotalElements' })
-	set totalElements(value: number | null | undefined) {
+	public set totalElements(value: number | null | undefined) {
 		this.calculateNewState({ newTotalElements: value, newPage: 0 });
 	}
 
 	@Input({ alias: 'brnPaginatorCurrentPage', transform: numberAttribute })
-	set currentPage(value: number) {
+	public set currentPage(value: number) {
 		this.calculateNewState({ newPage: value });
 	}
 
 	@Input({ alias: 'brnPaginatorPageSize', transform: numberAttribute })
-	set pageSize(value: number) {
+	public set pageSize(value: number) {
 		this.calculateNewState({ newPageSize: value, newPage: 0 });
 	}
 
 	@Input({ alias: 'brnPaginatorOnStateChange' })
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	public onStateChange?: (state: PaginatorState) => void;
 
 	constructor() {

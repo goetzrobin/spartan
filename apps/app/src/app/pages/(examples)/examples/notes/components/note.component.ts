@@ -15,6 +15,7 @@ import {
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'analog-trpc-note',
 	standalone: true,
 	hostDirectives: [HlmCardDirective],
@@ -75,7 +76,7 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 	`,
 })
 export class NoteComponent {
-	@Input() deletionInProgress = false;
-	@Input({ required: true }) note!: Note;
-	@Output() deleteClicked = new EventEmitter<void>();
+	@Input() public deletionInProgress = false;
+	@Input({ required: true }) public note!: Note;
+	@Output() public readonly deleteClicked = new EventEmitter<void>();
 }

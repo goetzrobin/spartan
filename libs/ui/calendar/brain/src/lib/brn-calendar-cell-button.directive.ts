@@ -35,7 +35,7 @@ export class BrnCalendarCellButtonDirective<T> {
 	protected readonly calendar = injectBrnCalendar<T>();
 
 	/** Access the element ref */
-	private readonly elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
+	private readonly _elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
 	/** The date this cell represents */
 	public readonly date = input.required<T>();
@@ -173,10 +173,10 @@ export class BrnCalendarCellButtonDirective<T> {
 	 * Get the direction of the element.
 	 */
 	private getDirection(): 'ltr' | 'rtl' {
-		return getComputedStyle(this.elementRef.nativeElement).direction === 'rtl' ? 'rtl' : 'ltr';
+		return getComputedStyle(this._elementRef.nativeElement).direction === 'rtl' ? 'rtl' : 'ltr';
 	}
 
 	focus(): void {
-		this.elementRef.nativeElement.focus();
+		this._elementRef.nativeElement.focus();
 	}
 }

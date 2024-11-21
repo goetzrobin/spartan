@@ -84,29 +84,30 @@ declare const Prism: typeof import('prismjs');
 })
 export class CodeComponent {
 	private readonly _clipboard = inject(Clipboard);
-	private readonly marked: typeof marked;
+	private readonly _marked: typeof marked;
 	protected _content = '';
 	protected copied = false;
 
 	protected _disableCopy = false;
 	@Input({ transform: booleanAttribute })
-	set disableCopy(value: boolean) {
+	public set disableCopy(value: boolean) {
 		this._disableCopy = value;
 	}
 
 	private _language: 'ts' | 'sh' | 'js' = 'ts';
 	@Input()
-	set language(value: 'ts' | 'sh' | 'js') {
+	public set language(value: 'ts' | 'sh' | 'js') {
 		this._language = value;
 	}
 
 	private _code: string | null | undefined;
 	@Input()
-	set code(value: string | null | undefined) {
+	public set code(value: string | null | undefined) {
 		this._code = value;
 		(this._language === 'sh'
-			? this.marked.parse(value?.trim() ?? '')
-			: (this.marked.parse(`\`\`\`typescript\n${value?.trim() ?? ''}\n\`\`\``) as any)
+			? this._marked.parse(value?.trim() ?? '')
+			: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+				(this._marked.parse(`\`\`\`typescript\n${value?.trim() ?? ''}\n\`\`\``) as any)
 		).then((content: string) => {
 			this._content = content;
 		});
@@ -150,7 +151,7 @@ export class CodeComponent {
 			},
 		);
 
-		this.marked = marked;
+		this._marked = marked;
 	}
 
 	copyToClipBoard() {

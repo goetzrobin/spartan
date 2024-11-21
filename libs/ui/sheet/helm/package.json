@@ -1,14 +1,15 @@
 {
 	"name": "@spartan-ng/ui-sheet-helm",
-	"version": "0.0.1-alpha.10",
+	"version": "0.0.1-alpha.356",
 	"peerDependencies": {
-		"@angular/core": "^18.0.0",
 		"@spartan-ng/ui-core": "0.0.1-alpha.356",
-		"clsx": "^2.1.1",
-		"class-variance-authority": "^0.6.0",
-		"@ng-icons/lucide": "^26.3.0",
 		"@spartan-ng/ui-sheet-brain": "0.0.1-alpha.356",
-		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.356"
+		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.356",
+		"@spartan-ng/ui-icon-helm": "0.0.1-alpha.356",
+		"@angular/core": ">=18.0.0",
+		"clsx": "^2.1.1",
+		"@ng-icons/lucide": ">=29.0.0",
+		"class-variance-authority": "^0.7.0"
 	},
 	"dependencies": {},
 	"sideEffects": false,

@@ -102,10 +102,10 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class NotesExamplePageComponent {
-	private _trpc = injectTRPCClient();
-	private _sfb = inject(SignalFormBuilder);
-	private _refreshNotes$ = new Subject<void>();
-	private _notes$ = this._refreshNotes$.pipe(
+	private readonly _trpc = injectTRPCClient();
+	private readonly _sfb = inject(SignalFormBuilder);
+	private readonly _refreshNotes$ = new Subject<void>();
+	private readonly _notes$ = this._refreshNotes$.pipe(
 		switchMap(() => this._trpc.note.list.query()),
 		tap((result) =>
 			this.state.update((state) => ({

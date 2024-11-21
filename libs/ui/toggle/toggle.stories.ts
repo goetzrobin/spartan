@@ -215,7 +215,7 @@ export const ToggleGroupMultiple: StoryObj<{ cities: City[] }> = {
 			</brn-toggle-group>
 		</form>
 
-		<pre class="${hlmP}" data-testid='selectedCity'>{{ citiesForm.controls.selectedCity?.getRawValue()?.name }}</pre>
+		<pre class="${hlmP}" data-testid="selectedCity">{{ citiesForm.controls.selectedCity?.getRawValue()?.name }}</pre>
 	`,
 })
 class HlmToggleGroupFormStoryComponent {

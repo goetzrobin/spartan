@@ -18,7 +18,7 @@ import { Component, computed, input } from '@angular/core';
 	`,
 })
 export class ThreeHundredItemComponent {
-	contributor = input.required<string>();
-	href = computed(() => `https://github.com/${this.contributor()}`);
-	src = computed(() => `${this.href()}.png?size=80`);
+	public contributor = input.required<string>();
+	public href = computed(() => `https://github.com/${this.contributor()}`);
+	public src = computed(() => `${this.href()}.png?size=80`);
 }

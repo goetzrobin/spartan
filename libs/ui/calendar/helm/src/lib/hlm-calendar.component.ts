@@ -36,64 +36,74 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 	],
 	viewProviders: [provideIcons({ lucideChevronLeft, lucideChevronRight })],
 	template: `
-		<div brnCalendar
-				 [min]="min()"
-				 [max]="max()"
-				 [disabled]="disabled()"
-				 [(date)]="date"
-				 [dateDisabled]="dateDisabled()"
-				 [weekStartsOn]="weekStartsOn()"
-				 [defaultFocusedDate]="defaultFocusedDate()"
-				 class="p-3 rounded-md border">
+		<div
+			brnCalendar
+			[min]="min()"
+			[max]="max()"
+			[disabled]="disabled()"
+			[(date)]="date"
+			[dateDisabled]="dateDisabled()"
+			[weekStartsOn]="weekStartsOn()"
+			[defaultFocusedDate]="defaultFocusedDate()"
+			class="rounded-md border p-3"
+		>
 			<div class="inline-flex flex-col space-y-4">
-
 				<!-- Header -->
 				<div class="space-y-4">
-				<div class="flex justify-center pt-1 relative items-center">
+					<div class="relative flex items-center justify-center pt-1">
+						<div brnCalendarHeader class="text-sm font-medium">
+							{{ heading() }}
+						</div>
 
-					<div brnCalendarHeader class="text-sm font-medium">
-						{{ heading() }}
+						<div class="flex items-center space-x-1">
+							<button
+								brnCalendarPreviousButton
+								class="ring-offset-background focus-visible:ring-ring border-input hover:bg-accent hover:text-accent-foreground absolute left-1 inline-flex h-7 w-7 items-center justify-center whitespace-nowrap rounded-md border bg-transparent p-0 text-sm font-medium opacity-50 transition-colors hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+							>
+								<hlm-icon name="lucideChevronLeft" size="sm" />
+							</button>
+
+							<button
+								brnCalendarNextButton
+								class="ring-offset-background focus-visible:ring-ring border-input hover:bg-accent hover:text-accent-foreground absolute right-1 inline-flex h-7 w-7 items-center justify-center whitespace-nowrap rounded-md border bg-transparent p-0 text-sm font-medium opacity-50 transition-colors hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+							>
+								<hlm-icon name="lucideChevronRight" size="sm" />
+							</button>
+						</div>
 					</div>
-
-					<div class="space-x-1 flex items-center">
-						<button brnCalendarPreviousButton class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute left-1">
-							<hlm-icon name="lucideChevronLeft" size="sm" />
-						</button>
-
-						<button brnCalendarNextButton class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute right-1">
-							<hlm-icon name="lucideChevronRight" size="sm" />
-						</button>
-					</div>
-
 				</div>
+
+				<table class="w-full border-collapse space-y-1" brnCalendarGrid>
+					<thead>
+						<tr class="flex">
+							<th
+								*brnCalendarWeekday="let weekday"
+								scope="col"
+								class="text-muted-foreground w-9 rounded-md text-[0.8rem] font-normal"
+								[attr.aria-label]="i18n.labelWeekday(weekday)"
+							>
+								{{ i18n.formatWeekdayName(weekday) }}
+							</th>
+						</tr>
+					</thead>
+
+					<tbody role="rowgroup">
+						<tr *brnCalendarWeek="let week" class="mt-2 flex w-full">
+							@for (date of week; track dateAdapter.getTime(date)) {
+								<td
+									brnCalendarCell
+									class="data-[selected]:data-[outside]:bg-accent/50 data-[selected]:bg-accent relative h-9 w-9 p-0 text-center text-sm focus-within:relative focus-within:z-20 first:data-[selected]:rounded-l-md last:data-[selected]:rounded-r-md [&:has([aria-selected].day-range-end)]:rounded-r-md"
+								>
+									<button brnCalendarCellButton [date]="date" [class]="btnClass">
+										{{ dateAdapter.getDate(date) }}
+									</button>
+								</td>
+							}
+						</tr>
+					</tbody>
+				</table>
 			</div>
-
-		<table class="w-full border-collapse space-y-1" brnCalendarGrid>
-			<thead>
-				<tr class="flex">
-					<th *brnCalendarWeekday="let weekday"
-							scope="col"
-							class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
-							[attr.aria-label]="i18n.labelWeekday(weekday)">
-						{{ i18n.formatWeekdayName(weekday) }}
-					</th>
-				</tr>
-			</thead>
-
-			<tbody role="rowgroup">
-				<tr *brnCalendarWeek="let week" class="flex w-full mt-2">
-					@for (date of week; track dateAdapter.getTime(date)) {
-					<td brnCalendarCell class='h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md data-[selected]:data-[outside]:bg-accent/50 data-[selected]:bg-accent first:data-[selected]:rounded-l-md last:data-[selected]:rounded-r-md focus-within:relative focus-within:z-20'>
-						<button brnCalendarCellButton [date]="date" [class]="btnClass">
-							{{ dateAdapter.getDate(date) }}
-						</button>
-					</td>
-					}
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
+		</div>
 	`,
 })
 export class HlmCalendarComponent<T> {
@@ -129,13 +139,13 @@ export class HlmCalendarComponent<T> {
 	public readonly defaultFocusedDate = input<T>();
 
 	/** Access the calendar directive */
-	private readonly calendar = viewChild.required(BrnCalendarDirective);
+	private readonly _calendar = viewChild.required(BrnCalendarDirective);
 
 	/** Get the heading for the current month and year */
 	protected heading = computed(() =>
 		this.i18n.formatHeader(
-			this.dateAdapter.getMonth(this.calendar().focusedDate()),
-			this.dateAdapter.getYear(this.calendar().focusedDate()),
+			this.dateAdapter.getMonth(this._calendar().focusedDate()),
+			this.dateAdapter.getYear(this._calendar().focusedDate()),
 		),
 	);
 

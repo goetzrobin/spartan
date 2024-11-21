@@ -29,7 +29,7 @@ export class BrnSelectValueComponent {
 
 	public readonly id = computed(() => `${this._selectService.id()}--value`);
 	public readonly placeholder = computed(() => this._selectService.placeholder());
-	value: string | null = null;
+	public value: string | null = null;
 
 	public readonly transformFn = input<(values: (string | undefined)[]) => any>((values) => (values ?? []).join(', '));
 

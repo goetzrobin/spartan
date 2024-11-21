@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-label-helm',
 	preset: '../../../../jest.preset.cjs',

@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { type Observable, firstValueFrom, isObservable } from 'rxjs';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const Zone: any;
 
 export async function waitFor<T>(prom: Promise<T> | Observable<T>): Promise<T> {

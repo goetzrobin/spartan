@@ -10,7 +10,6 @@ import { injectErrorField } from 'ng-signal-forms';
 	hostDirectives: [HlmInputErrorDirective],
 	host: {
 		class: 'block mt-1 min-h-[20px] mb-4',
-		// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 		'[class.invisible]': "touchedState() === 'UNTOUCHED'",
 	},
 	template: `
@@ -18,7 +17,7 @@ import { injectErrorField } from 'ng-signal-forms';
 	`,
 })
 export class InputErrorComponent {
-	private _formField = injectErrorField();
+	private readonly _formField = injectErrorField();
 	public touchedState = this._formField.touchedState;
 	public errors = this._formField.errors;
 

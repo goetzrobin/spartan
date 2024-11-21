@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-radio-group-brain',
 	preset: '../../../../jest.preset.cjs',

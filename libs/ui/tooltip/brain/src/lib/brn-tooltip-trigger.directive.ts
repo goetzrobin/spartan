@@ -154,7 +154,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	private _portal?: ComponentPortal<BrnTooltipContentComponent>;
 	private _viewInitialized = false;
 	private _pointerExitEventsInitialized = false;
-	private _viewportMargin = 8;
+	private readonly _viewportMargin = 8;
 	private _currentPosition?: TooltipPosition;
 	private _touchstartTimeout?: ReturnType<typeof setTimeout>;
 
@@ -164,11 +164,11 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** Allows the user to define the position of the tooltip relative to the parent element */
 	private readonly _position = signal<TooltipPosition>('above');
 	@Input()
-	get position(): TooltipPosition {
+	public get position(): TooltipPosition {
 		return this._position();
 	}
 
-	set position(value: TooltipPosition) {
+	public set position(value: TooltipPosition) {
 		if (value !== this._position()) {
 			this._position.set(value);
 
@@ -186,11 +186,11 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	 */
 	private readonly _positionAtOrigin = signal(false);
 	@Input({ transform: booleanAttribute })
-	get positionAtOrigin(): boolean {
+	public get positionAtOrigin(): boolean {
 		return this._positionAtOrigin();
 	}
 
-	set positionAtOrigin(value: boolean) {
+	public set positionAtOrigin(value: boolean) {
 		this._positionAtOrigin.set(value);
 		this._detach();
 		this._overlayRef = null;
@@ -199,11 +199,11 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** Disables the display of the tooltip. */
 	private readonly _disabled = signal(false);
 	@Input({ transform: booleanAttribute, alias: 'brnTooltipDisabled' })
-	get disabled(): boolean {
+	public get disabled(): boolean {
 		return this._disabled();
 	}
 
-	set disabled(value: boolean) {
+	public set disabled(value: boolean) {
 		this._disabled.set(value);
 
 		// If tooltip is disabled, hide immediately.
@@ -217,22 +217,22 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** The default delay in ms before showing the tooltip after show is called */
 	private readonly _showDelay = signal(0);
 	@Input({ transform: numberAttribute })
-	get showDelay(): number {
+	public get showDelay(): number {
 		return this._showDelay();
 	}
 
-	set showDelay(value: number) {
+	public set showDelay(value: number) {
 		this._showDelay.set(value);
 	}
 
 	/** The default delay in ms before hiding the tooltip after hide is called */
 	private readonly _hideDelay = signal(0);
 	@Input({ transform: numberAttribute })
-	get hideDelay(): number {
+	public get hideDelay(): number {
 		return this._hideDelay();
 	}
 
-	set hideDelay(value: number) {
+	public set hideDelay(value: number) {
 		this._hideDelay.set(value);
 
 		if (this._tooltipInstance) {
@@ -243,11 +243,11 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** The default duration in ms that exit animation takes before hiding */
 	private readonly _exitAnimationDuration = signal(0);
 	@Input({ transform: numberAttribute })
-	get exitAnimationDuration(): number {
+	public get exitAnimationDuration(): number {
 		return this._exitAnimationDuration();
 	}
 
-	set exitAnimationDuration(value: number) {
+	public set exitAnimationDuration(value: number) {
 		this._exitAnimationDuration.set(value);
 
 		if (this._tooltipInstance) {
@@ -258,11 +258,11 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** The default delay in ms before hiding the tooltip after hide is called */
 	private readonly _tooltipContentClasses = signal('');
 	@Input()
-	get tooltipContentClasses(): string {
+	public get tooltipContentClasses(): string {
 		return this._tooltipContentClasses();
 	}
 
-	set tooltipContentClasses(value: string | null | undefined) {
+	public set tooltipContentClasses(value: string | null | undefined) {
 		this._tooltipContentClasses.set(value ?? '');
 
 		if (this._tooltipInstance) {
@@ -286,22 +286,22 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	 */
 	private readonly _touchGestures = signal<TooltipTouchGestures>('auto');
 	@Input()
-	set touchGestures(value: TooltipTouchGestures) {
+	public set touchGestures(value: TooltipTouchGestures) {
 		this._touchGestures.set(value);
 	}
 
-	get touchGestures() {
+	public get touchGestures() {
 		return this._touchGestures();
 	}
 
 	/** The message to be used to describe the aria in the tooltip */
 	private _ariaDescribedBy = '';
 	@Input('aria-describedby')
-	get ariaDescribedBy() {
+	public get ariaDescribedBy() {
 		return this._ariaDescribedBy;
 	}
 
-	set ariaDescribedBy(value: string) {
+	public set ariaDescribedBy(value: string) {
 		this._ariaDescriber.removeDescription(this._elementRef.nativeElement, this._ariaDescribedBy, 'tooltip');
 
 		// If the message is not a string (e.g. number), convert it to a string and trim it.
@@ -325,11 +325,11 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** The content to be displayed in the tooltip */
 	private _content: string | TemplateRef<unknown> | null = null;
 	@Input('brnTooltipTrigger')
-	get content() {
+	public get content() {
 		return this._content;
 	}
 
-	set content(value: string | TemplateRef<unknown> | null) {
+	public set content(value: string | TemplateRef<unknown> | null) {
 		this._content = value;
 
 		if (!this._content && this._isTooltipVisible()) {
@@ -592,7 +592,6 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 			throw getBrnTooltipInvalidPositionError(position);
 		}
 
-		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		const { x, y } = this._invertPosition(originPosition!.originX, originPosition!.originY);
 
 		return {
@@ -619,7 +618,6 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 			throw getBrnTooltipInvalidPositionError(position);
 		}
 
-		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		const { x, y } = this._invertPosition(overlayPosition!.overlayX, overlayPosition!.overlayY);
 
 		return {

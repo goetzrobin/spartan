@@ -51,15 +51,11 @@ export interface ResolveHTTPRequestOptions<TRouter extends AnyRouter> {
 function getPath(event: H3Event): string | null {
 	const { params } = event.context;
 
-	// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 	if (typeof params?.['trpc'] === 'string') {
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		return params['trpc'];
 	}
 
-	// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 	if (params?.['trpc'] && Array.isArray(params['trpc'])) {
-		// biome-ignore lint/complexity/useLiteralKeys: <explanation>
 		return (params['trpc'] as string[]).join('/');
 	}
 
@@ -76,7 +72,6 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
 	return defineEventHandler(async (event) => {
 		const { req, res } = event.node;
 
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const $url = createURL(req.url!);
 
 		const path = getPath(event);
@@ -103,7 +98,6 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
 			batching,
 			router,
 			req: {
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				method: req.method!,
 				headers: req.headers,
 				body: isMethod(event, 'GET') ? null : await readBody(event),
@@ -126,7 +120,6 @@ export function createTrpcNitroHandler<TRouter extends AnyRouter>({
 
 		headers &&
 			Object.keys(headers).forEach((key) => {
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				res.setHeader(key, headers[key]!);
 			});
 

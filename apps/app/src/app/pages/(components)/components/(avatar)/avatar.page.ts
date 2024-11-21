@@ -70,7 +70,7 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class AvatarPageComponent {
-	readonly defaultCode = defaultCode;
-	readonly defaultSkeleton = defaultSkeleton;
-	readonly defaultImports = defaultImports;
+	public readonly defaultCode = defaultCode;
+	public readonly defaultSkeleton = defaultSkeleton;
+	public readonly defaultImports = defaultImports;
 }

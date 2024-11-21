@@ -16,7 +16,7 @@ export class BreadcrumbSharedService {
 	private readonly _breadcrumbs$ = new BehaviorSubject<Breadcrumb[]>([]);
 
 	// Observable exposing the breadcrumb hierarchy
-	readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
+	public readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
 
 	updateBreadcrumbs(breadcrumbs: Breadcrumb[]) {
 		this._breadcrumbs$.next(breadcrumbs);
