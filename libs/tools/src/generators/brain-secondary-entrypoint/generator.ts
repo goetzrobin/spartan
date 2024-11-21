@@ -83,11 +83,11 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 function migratePeerDependencies(tree: Tree, oldPackage: string): void {
 	const projects = getProjects(tree);
 
-	for (const [, project] of Object.entries(projects)) {
+	for (const [, project] of projects) {
 		const packageJsonPath = joinPathFragments(project.root, 'package.json');
 
 		if (!tree.exists(packageJsonPath)) {
-			return;
+			continue;
 		}
 
 		updateJson(tree, packageJsonPath, (json) => {
