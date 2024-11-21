@@ -35,6 +35,7 @@
 		"paths": {
 			"@spartan-ng/app/*": ["apps/app/src/*"],
 			"@spartan-ng/brain": ["libs/brain/src/index.ts"],
+			"@spartan-ng/brain/checkbox": ["libs/brain/checkbox/src/index.ts"],
 			"@spartan-ng/cli": ["libs/cli/src/index.ts"],
 			"@spartan-ng/tools": ["libs/tools/src/index.ts"],
 			"@spartan-ng/trpc": ["libs/trpc/src/index.ts"],
@@ -53,7 +54,6 @@
 			"@spartan-ng/ui-calendar-helm": ["libs/ui/calendar/helm/src/index.ts"],
 			"@spartan-ng/ui-card-helm": ["libs/ui/card/helm/src/index.ts"],
 			"@spartan-ng/ui-carousel-helm": ["libs/ui/carousel/helm/src/index.ts"],
-			"@spartan-ng/ui-checkbox-brain": ["libs/ui/checkbox/brain/src/index.ts"],
 			"@spartan-ng/ui-checkbox-helm": ["libs/ui/checkbox/helm/src/index.ts"],
 			"@spartan-ng/ui-collapsible-brain": ["libs/ui/collapsible/brain/src/index.ts"],
 			"@spartan-ng/ui-collapsible-helm": ["libs/ui/collapsible/helm/src/index.ts"],

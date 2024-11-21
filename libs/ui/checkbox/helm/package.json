@@ -3,12 +3,12 @@
 	"version": "0.0.1-alpha.357",
 	"peerDependencies": {
 		"@spartan-ng/ui-core": "0.0.1-alpha.357",
-		"@spartan-ng/ui-checkbox-brain": "0.0.1-alpha.357",
 		"@spartan-ng/ui-icon-helm": "0.0.1-alpha.357",
 		"@angular/core": ">=18.0.0",
 		"@ng-icons/lucide": ">=29.0.0",
 		"clsx": "^2.1.1",
-		"@angular/forms": ">=18.0.0"
+		"@angular/forms": ">=18.0.0",
+		"@spartan-ng/brain": "0.0.1-alpha.357"
 	},
 	"dependencies": {},
 	"sideEffects": false,
