@@ -146,6 +146,17 @@ export const routeMeta: RouteMeta = {
 				<code class="${hlmCode}">injectBrnDialogContext</code>
 				function.
 			</p>
+			<div hlmAlert class="mb-6" variant="destructive">
+				<hlm-icon name="lucideTriangleAlert" hlmAlertIcon />
+				<p hlmAlertTitle>Note</p>
+				<p hlmAlertDescription class="leading-loose">
+					Avoid using the
+					<code class="${hlmCode}">&lt;hlm-dialog-content&gt;</code>
+					tag when your dialog relies on dynamic content. Using it in this case can cause the dialog to repeatedly
+					render itself in a loop. The tag is meant to wrap static content for the dialog, but with a dynamic component,
+					the component automatically acts as the wrapper.
+				</p>
+			</div>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
 					<spartan-dialog-dynamic-component-preview />
