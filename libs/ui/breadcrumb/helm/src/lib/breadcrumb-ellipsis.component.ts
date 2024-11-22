@@ -1,9 +1,9 @@
 import { Component, computed, input } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { provideIcons } from '@spartan-ng/ui-icon-helm';
 import { lucideEllipsis } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Component({
 	selector: 'hlm-breadcrumb-ellipsis',

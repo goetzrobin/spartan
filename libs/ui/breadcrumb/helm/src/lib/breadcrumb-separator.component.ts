@@ -2,9 +2,10 @@ import { Component, computed, input } from '@angular/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx';
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: '[hlmBreadcrumbSeparator]',
 	standalone: true,
 	imports: [HlmIconComponent],
