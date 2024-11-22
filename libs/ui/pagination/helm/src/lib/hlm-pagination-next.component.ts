@@ -12,14 +12,8 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 	imports: [HlmPaginationLinkDirective, HlmIconComponent],
 	providers: [provideIcons({ lucideChevronRight })],
 	template: `
-		<a
-			[class]="_computedClass()"
-			hlmPaginationLink
-			[link]="link()"
-			size="default"
-			[attr.aria-label]="'Go to next page'"
-		>
-			<span>Next</span>
+		<a [class]="_computedClass()" hlmPaginationLink [link]="link()" size="default" [attr.aria-label]="ariaLabel()">
+			<span>{{ text() }}</span>
 			<hlm-icon size="sm" name="lucideChevronRight" />
 		</a>
 	`,
@@ -27,5 +21,9 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 export class HlmPaginationNextComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	public readonly link = input<RouterLink['routerLink']>();
+
+	public readonly ariaLabel = input<string>('Go to next page', { alias: 'aria-label' });
+	public readonly text = input<string>('Next');
+
 	protected readonly _computedClass = computed(() => hlm('gap-1 pr-2.5', this.userClass()));
 }
