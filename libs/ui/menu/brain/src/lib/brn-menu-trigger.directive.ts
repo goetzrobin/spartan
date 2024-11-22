@@ -9,26 +9,26 @@ import { BrnMenuAlign, getBrnMenuAlign } from './brn-menu-align';
 	hostDirectives: [{ directive: CdkMenuTrigger, inputs: ['cdkMenuTriggerFor: brnMenuTriggerFor'] }],
 })
 export class BrnMenuTriggerDirective {
-	readonly #cdkTrigger = inject(CdkMenuTrigger, { host: true });
+	private readonly _cdkTrigger = inject(CdkMenuTrigger, { host: true });
 	public readonly align = input<BrnMenuAlign>(undefined);
 
 	constructor() {
 		// once the trigger opens we wait until the next tick and then grab the last position
 		// used to position the menu. we store this in our trigger which the brnMenu directive has
 		// access to through DI
-		this.#cdkTrigger.opened.pipe(takeUntilDestroyed()).subscribe(() =>
+		this._cdkTrigger.opened.pipe(takeUntilDestroyed()).subscribe(() =>
 			setTimeout(
 				() =>
 					// eslint-disable-next-line
-					((this.#cdkTrigger as any)._spartanLastPosition = // eslint-disable-next-line
-						(this.#cdkTrigger as any).overlayRef._positionStrategy._lastPosition),
+					((this._cdkTrigger as any)._spartanLastPosition = // eslint-disable-next-line
+						(this._cdkTrigger as any).overlayRef._positionStrategy._lastPosition),
 			),
 		);
 
 		effect(() => {
 			const align = this.align();
 			if (!align) return;
-			this.#cdkTrigger.menuPosition = getBrnMenuAlign(align);
+			this._cdkTrigger.menuPosition = getBrnMenuAlign(align);
 		});
 	}
 }

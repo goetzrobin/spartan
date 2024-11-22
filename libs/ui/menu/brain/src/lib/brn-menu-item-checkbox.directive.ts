@@ -12,14 +12,13 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
 	},
 })
 export class BrnMenuItemCheckboxDirective {
-	readonly #cdkMenuItem = inject(CdkMenuItemCheckbox);
-	public readonly checked = input(this.#cdkMenuItem.checked, { transform: booleanAttribute });
-	public readonly disabled = input(this.#cdkMenuItem.disabled, { transform: booleanAttribute });
-	public readonly triggered = outputFromObservable(this.#cdkMenuItem.triggered);
+	private readonly _cdkMenuItem = inject(CdkMenuItemCheckbox);
+	public readonly checked = input(this._cdkMenuItem.checked, { transform: booleanAttribute });
+	public readonly disabled = input(this._cdkMenuItem.disabled, { transform: booleanAttribute });
+	public readonly triggered = outputFromObservable(this._cdkMenuItem.triggered);
 
 	constructor() {
-		effect(() => (this.#cdkMenuItem.disabled = this.disabled()));
-
-		effect(() => (this.#cdkMenuItem.checked = this.checked()));
+		effect(() => (this._cdkMenuItem.disabled = this.disabled()));
+		effect(() => (this._cdkMenuItem.checked = this.checked()));
 	}
 }

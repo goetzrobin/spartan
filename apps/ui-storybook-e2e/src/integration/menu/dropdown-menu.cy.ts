@@ -13,8 +13,8 @@ describe('dropdown-menu', () => {
 			'Support that has [disabled]="true" should be disabled', () => {
 			cy.checkA11y('#storybook-root', {
 				rules: {
-					'page-has-heading-one': { enabled: false },
-					'landmark-one-main': { enabled: false },
+					'page-has-heading-one': {enabled: false},
+					'landmark-one-main': {enabled: false},
 				},
 			});
 
@@ -53,7 +53,6 @@ describe('dropdown-menu', () => {
 			cy.findByText(/open/i).realClick().should('have.attr', 'aria-expanded', 'false');
 		});
 
-		/* TODO: @benpsnyder to fix
 		it('down on open button should open, up and down should navigate, right over sub menu should open submenu, and left on sub should close it, and escape open should close dropdown completely', () => {
 			cy.checkA11y('#storybook-root', {
 				rules: {
@@ -66,7 +65,9 @@ describe('dropdown-menu', () => {
 
 			cy.realPress('Tab');
 
-			cy.findByText(/open/i).should('have.focus').realPress('ArrowDown').should('have.attr', 'aria-expanded', 'true');
+			cy.findByText(/open/i).should('have.focus').realPress('ArrowDown');
+
+			cy.findByText(/open/i).should('have.attr', 'aria-expanded', 'true');
 
 			cy.findByRole('menu');
 
@@ -84,6 +85,5 @@ describe('dropdown-menu', () => {
 
 			cy.findByText(/open/i).should('have.focus').should('have.attr', 'aria-expanded', 'false');
 		});
-		*/
 	});
 });
