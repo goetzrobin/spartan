@@ -1,4 +1,4 @@
-import { RouteMeta } from '@analogjs/router';
+import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
@@ -141,14 +141,14 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class BreadcrumbPageComponent {
-	readonly defaultCode = defaultCode;
-	readonly defaultImports = defaultImports;
-	readonly defaultSkeleton = defaultSkeleton;
+	protected readonly defaultCode = defaultCode;
+	protected readonly defaultImports = defaultImports;
+	protected readonly defaultSkeleton = defaultSkeleton;
 
-	readonly customSeparatorCode = breadcrumbCustomSeparatorCode;
-	readonly customSeparatorSkeleton = breadcrumbCustomSeparatorSkeleton;
-	readonly dropdownCode = breadcrumbDropdownCode;
-	readonly dropdownSkeleton = breadcrumbCollapsedSkeleton;
-	readonly collapsedCode = breadcrumbCollapsedCode;
-	readonly collapsedSkeleton = breadcrumbCollapsedSkeleton;
+	protected readonly customSeparatorCode = breadcrumbCustomSeparatorCode;
+	protected readonly customSeparatorSkeleton = breadcrumbCustomSeparatorSkeleton;
+	protected readonly dropdownCode = breadcrumbDropdownCode;
+	protected readonly dropdownSkeleton = breadcrumbCollapsedSkeleton;
+	protected readonly collapsedCode = breadcrumbCollapsedCode;
+	protected readonly collapsedSkeleton = breadcrumbCollapsedSkeleton;
 }
