@@ -1,8 +1,7 @@
 import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { Directive, Input, effect, inject, signal } from '@angular/core';
+import { Directive, effect, inject, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
-export type BrnMenuAlign = 'start' | 'center' | 'end' | undefined;
+import { BrnMenuAlign, getBrnMenuAlign } from './brn-menu-align';
 
 @Directive({
 	selector: '[brnMenuTriggerFor]',
@@ -11,12 +10,7 @@ export type BrnMenuAlign = 'start' | 'center' | 'end' | undefined;
 })
 export class BrnMenuTriggerDirective {
 	private readonly _cdkTrigger = inject(CdkMenuTrigger, { host: true });
-	private readonly _align = signal<BrnMenuAlign>(undefined);
-
-	@Input()
-	public set align(value: BrnMenuAlign) {
-		this._align.set(value);
-	}
+	public readonly align = input<BrnMenuAlign>(undefined);
 
 	constructor() {
 		// once the trigger opens we wait until the next tick and then grab the last position
@@ -32,22 +26,9 @@ export class BrnMenuTriggerDirective {
 		);
 
 		effect(() => {
-			const align = this._align();
+			const align = this.align();
 			if (!align) return;
-			this._cdkTrigger.menuPosition = [
-				{
-					originX: align,
-					originY: 'bottom',
-					overlayX: align,
-					overlayY: 'top',
-				},
-				{
-					originX: align,
-					originY: 'top',
-					overlayX: align,
-					overlayY: 'bottom',
-				},
-			];
+			this._cdkTrigger.menuPosition = getBrnMenuAlign(align);
 		});
 	}
 }
