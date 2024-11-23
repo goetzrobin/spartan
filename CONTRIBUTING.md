@@ -165,6 +165,7 @@ The following is the list of supported scopes:
 - **aspect-ratio**
 - **avatar**
 - **badge**
+- **breadcrumb**
 - **button**
 - **calendar**
 - **card**

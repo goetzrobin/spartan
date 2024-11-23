@@ -5,6 +5,7 @@ export type Primitive =
 	| 'aspectratio'
 	| 'avatar'
 	| 'badge'
+	| 'breadcrumb'
 	| 'button'
 	| 'card'
 	| 'carousel'
