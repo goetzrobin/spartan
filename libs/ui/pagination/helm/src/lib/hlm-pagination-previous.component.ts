@@ -12,20 +12,18 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 	imports: [HlmPaginationLinkDirective, HlmIconComponent],
 	providers: [provideIcons({ lucideChevronLeft })],
 	template: `
-		<a
-			[class]="_computedClass()"
-			hlmPaginationLink
-			[link]="link()"
-			size="default"
-			[attr.aria-label]="'Go to previous page'"
-		>
+		<a [class]="_computedClass()" hlmPaginationLink [link]="link()" size="default" [attr.aria-label]="ariaLabel()">
 			<hlm-icon size="sm" name="lucideChevronLeft" />
-			<span>Previous</span>
+			<span>{{ text() }}</span>
 		</a>
 	`,
 })
 export class HlmPaginationPreviousComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	public readonly link = input<RouterLink['routerLink']>();
+
+	public readonly ariaLabel = input<string>('Go to previous page', { alias: 'aria-label' });
+	public readonly text = input<string>('Previous');
+
 	protected readonly _computedClass = computed(() => hlm('gap-1 pr-2.5', this.userClass()));
 }

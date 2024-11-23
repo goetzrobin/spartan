@@ -1,8 +1,7 @@
 import { CdkContextMenuTrigger } from '@angular/cdk/menu';
-import { Directive, Input, type TemplateRef, effect, inject, signal } from '@angular/core';
+import { Directive, effect, inject, input, type TemplateRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
-export type BrnCtxMenuAlign = 'start' | 'center' | 'end' | undefined;
+import { BrnMenuAlign, getBrnMenuAlign } from './brn-menu-align';
 
 @Directive({
 	selector: '[brnCtxMenuTriggerFor]',
@@ -11,21 +10,9 @@ export type BrnCtxMenuAlign = 'start' | 'center' | 'end' | undefined;
 })
 export class BrnContextMenuTriggerDirective {
 	private readonly _cdkTrigger = inject(CdkContextMenuTrigger, { host: true });
-	private readonly _align = signal<BrnCtxMenuAlign>(undefined);
-	@Input()
-	public set align(value: BrnCtxMenuAlign) {
-		this._align.set(value);
-	}
-
-	@Input()
-	public set brnCtxMenuTriggerFor(value: TemplateRef<unknown> | null) {
-		this._cdkTrigger.menuTemplateRef = value;
-	}
-
-	@Input()
-	public set brnCtxMenuTriggerData(value: unknown) {
-		this._cdkTrigger.menuData = value;
-	}
+	public brnCtxMenuTriggerFor = input<TemplateRef<unknown> | null>(null);
+	public brnCtxMenuTriggerData = input<unknown>(undefined);
+	public readonly align = input<BrnMenuAlign>(undefined);
 
 	constructor() {
 		// once the trigger opens we wait until the next tick and then grab the last position
@@ -40,23 +27,12 @@ export class BrnContextMenuTriggerDirective {
 			),
 		);
 
+		effect(() => (this._cdkTrigger.menuTemplateRef = this.brnCtxMenuTriggerFor()));
+		effect(() => (this._cdkTrigger.menuData = this.brnCtxMenuTriggerData()));
 		effect(() => {
-			const align = this._align();
+			const align = this.align();
 			if (!align) return;
-			this._cdkTrigger.menuPosition = [
-				{
-					originX: align,
-					originY: 'bottom',
-					overlayX: align,
-					overlayY: 'top',
-				},
-				{
-					originX: align,
-					originY: 'top',
-					overlayX: align,
-					overlayY: 'bottom',
-				},
-			];
+			this._cdkTrigger.menuPosition = getBrnMenuAlign(align);
 		});
 	}
 }

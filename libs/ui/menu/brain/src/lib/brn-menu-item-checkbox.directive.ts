@@ -1,39 +1,24 @@
 import { CdkMenuItemCheckbox } from '@angular/cdk/menu';
-import { Directive, Input, Output, booleanAttribute, inject, signal } from '@angular/core';
+import { booleanAttribute, Directive, effect, inject, input } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
 
 @Directive({
 	selector: '[brnMenuItemCheckbox]',
 	standalone: true,
 	hostDirectives: [CdkMenuItemCheckbox],
 	host: {
-		'[class.checked]': '_checked()',
-		'[disabled]': '_disabled()',
+		'[class.checked]': 'checked()',
+		'[disabled]': 'disabled()',
 	},
 })
 export class BrnMenuItemCheckboxDirective {
-	private readonly _cdkMenuItem = inject(CdkMenuItemCheckbox, { host: true });
+	private readonly _cdkMenuItem = inject(CdkMenuItemCheckbox);
+	public readonly checked = input(this._cdkMenuItem.checked, { transform: booleanAttribute });
+	public readonly disabled = input(this._cdkMenuItem.disabled, { transform: booleanAttribute });
+	public readonly triggered = outputFromObservable(this._cdkMenuItem.triggered);
 
-	protected readonly _checked = signal(this._cdkMenuItem.checked);
-	@Input({ transform: booleanAttribute })
-	public set checked(value: boolean) {
-		this._cdkMenuItem.checked = value;
-		this._checked.set(value);
+	constructor() {
+		effect(() => (this._cdkMenuItem.disabled = this.disabled()));
+		effect(() => (this._cdkMenuItem.checked = this.checked()));
 	}
-
-	public get checked() {
-		return this._checked();
-	}
-
-	protected readonly _disabled = signal(this._cdkMenuItem.disabled);
-	@Input({ transform: booleanAttribute })
-	public set disabled(value: boolean) {
-		this._cdkMenuItem.disabled = value;
-		this._disabled.set(value);
-	}
-	public get disabled() {
-		return this._disabled();
-	}
-
-	@Output()
-	public readonly triggered = this._cdkMenuItem.triggered;
 }
