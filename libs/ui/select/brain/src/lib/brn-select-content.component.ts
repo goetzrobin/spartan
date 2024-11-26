@@ -111,6 +111,7 @@ export class BrnSelectScrollDownDirective {
 		`,
 	],
 	template: `
+		<ng-content select="hlm-select-content-header,[hlmSelectContentHeader]" />
 		<ng-template #scrollUp>
 			<ng-content select="hlm-select-scroll-up" />
 			<ng-content select="brnSelectScrollUp" />
@@ -135,6 +136,7 @@ export class BrnSelectScrollDownDirective {
 			<ng-content select="hlm-select-scroll-down" />
 		</ng-template>
 		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn ? scrollDown : null" />
+		<ng-content select="hlm-select-content-footer,[hlmSelectContentFooter]" />
 	`,
 })
 export class BrnSelectContentComponent implements AfterViewInit {
@@ -222,10 +224,10 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	}
 
 	public moveFocusDown() {
-		this.viewport.nativeElement.scrollBy({ top: 100, behavior: 'smooth' });
-		const viewportSize = this._el.nativeElement.scrollHeight;
-		const viewportScrollPosition = this.viewport.nativeElement.scrollTop;
-		if (viewportSize + viewportScrollPosition + 100 > this.viewport.nativeElement.scrollHeight + 50) {
+		const nativeElement = this.viewport.nativeElement;
+		nativeElement.scrollBy({ top: 100, behavior: 'smooth' });
+		const { clientHeight, scrollHeight, scrollTop } = nativeElement;
+		if (clientHeight + scrollTop >= scrollHeight) {
 			this.scrollDownBtn.stopEmittingEvents();
 		}
 	}
