@@ -13,6 +13,7 @@ module.exports = {
 				'aspect-ratio',
 				'avatar',
 				'badge',
+				'breadcrumb',
 				'button',
 				'calendar',
 				'card',

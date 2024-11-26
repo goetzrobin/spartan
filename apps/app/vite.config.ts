@@ -75,6 +75,7 @@ export default defineConfig(({ mode }) => {
 						'/components/aspect-ratio',
 						'/components/avatar',
 						'/components/badge',
+						'/components/breadcrumb',
 						'/components/button',
 						'/components/card',
 						'/components/checkbox',

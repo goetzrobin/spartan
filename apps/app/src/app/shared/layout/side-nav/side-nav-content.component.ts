@@ -77,6 +77,7 @@ export class SideNavContentComponent {
 				{ label: 'Aspect Ratio', url: '/aspect-ratio' },
 				{ label: 'Avatar', url: '/avatar' },
 				{ label: 'Badge', url: '/badge' },
+				{ label: 'Breadcrumb', url: '/breadcrumb' },
 				{ label: 'Button', url: '/button' },
 				{ label: 'Calendar', url: '/calendar' },
 				{ label: 'Card', url: '/card' },

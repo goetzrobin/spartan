@@ -154,7 +154,7 @@ export const routeMeta: RouteMeta = {
 
 			<spartan-page-bottom-nav>
 				<spartan-page-bottom-nav-link href="card" label="Card" />
-				<spartan-page-bottom-nav-link direction="previous" href="avatar" label="Badge" />
+				<spartan-page-bottom-nav-link direction="previous" href="breadcrumb" label="Breadcrumb" />
 			</spartan-page-bottom-nav>
 		</section>
 		<spartan-page-nav />

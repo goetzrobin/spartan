@@ -7,6 +7,7 @@ export const primitiveDependencies: Record<Primitive, Primitive[]> = {
 	aspectratio: [],
 	avatar: [],
 	badge: [],
+	breadcrumb: ['icon'],
 	button: [],
 	card: [],
 	carousel: [],
