@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { BrnSelectService } from './brn-select.service';
 
@@ -31,9 +31,7 @@ export class BrnSelectValueComponent {
 	public readonly placeholder = computed(() => this._selectService.placeholder());
 	public value: string | null = null;
 
-	@Input()
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public transformFn: (values: (string | undefined)[]) => any = (values) => (values ?? []).join(', ');
+	public readonly transformFn = input<(values: (string | undefined)[]) => any>((values) => (values ?? []).join(', '));
 
 	constructor() {
 		const cdr = inject(ChangeDetectorRef);
@@ -54,7 +52,7 @@ export class BrnSelectValueComponent {
 				if (this._selectService.dir() === 'rtl') {
 					selectedLabels.reverse();
 				}
-				const result = this.transformFn(selectedLabels);
+				const result = this.transformFn()(selectedLabels);
 				this.value = result;
 				cdr.detectChanges();
 			});

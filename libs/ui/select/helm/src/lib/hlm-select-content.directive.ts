@@ -1,4 +1,4 @@
-import { Directive, Input, computed, input, signal } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { hlm, injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
 
@@ -13,6 +13,7 @@ import type { ClassValue } from 'clsx';
 })
 export class HlmSelectContentDirective {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly stickyLabels = input<boolean>(false);
 	protected readonly _stateProvider = injectExposesStateProvider({ optional: true });
 	protected readonly _sideProvider = injectExposedSideProvider({ optional: true });
 
@@ -22,13 +23,4 @@ export class HlmSelectContentDirective {
 			this.userClass(),
 		),
 	);
-
-	private readonly _stickyLabels = signal(false);
-	@Input()
-	public set stickyLabels(value: boolean) {
-		this._stickyLabels.set(value);
-	}
-	public get stickyLabels() {
-		return this._stickyLabels();
-	}
 }

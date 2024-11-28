@@ -4,15 +4,14 @@ import {
 	type AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
-	ContentChild,
-	ContentChildren,
 	DestroyRef,
 	ElementRef,
-	type QueryList,
-	ViewChild,
+	contentChild,
+	contentChildren,
 	effect,
 	inject,
 	signal,
+	viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
@@ -20,6 +19,8 @@ import { BrnSelectService } from './brn-select.service';
 
 import { Directive } from '@angular/core';
 import { Subject, fromEvent, interval, takeUntil } from 'rxjs';
+
+const SCROLLBY_PIXELS = 100;
 
 @Directive({
 	selector: '[brnSelectScrollUp], brn-select-scroll-up, hlm-select-scroll-up:not(noHlm)',
@@ -115,7 +116,7 @@ export class BrnSelectScrollDownDirective {
 			<ng-content select="hlm-select-scroll-up" />
 			<ng-content select="brnSelectScrollUp" />
 		</ng-template>
-		<ng-container *ngTemplateOutlet="canScrollUp() && scrollUpBtn ? scrollUp : null" />
+		<ng-container *ngTemplateOutlet="canScrollUp() && scrollUpBtn() ? scrollUp : null" />
 		<div
 			data-brn-select-viewport
 			#viewport
@@ -134,7 +135,7 @@ export class BrnSelectScrollDownDirective {
 			<ng-content select="brnSelectScrollDown" />
 			<ng-content select="hlm-select-scroll-down" />
 		</ng-template>
-		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn ? scrollDown : null" />
+		<ng-container *ngTemplateOutlet="canScrollDown() && scrollDownBtn() ? scrollDown : null" />
 	`,
 })
 export class BrnSelectContentComponent implements AfterViewInit {
@@ -150,17 +151,13 @@ export class BrnSelectContentComponent implements AfterViewInit {
 
 	protected initialSelectedOptions$ = toObservable(this._selectService.selectedOptions);
 
-	@ViewChild('viewport')
-	protected viewport!: ElementRef<HTMLElement>;
+	protected viewport = viewChild.required<ElementRef<HTMLElement>>('viewport');
 
-	@ContentChild(BrnSelectScrollUpDirective, { static: false })
-	protected scrollUpBtn!: BrnSelectScrollUpDirective;
+	protected scrollUpBtn = contentChild.required(BrnSelectScrollUpDirective);
 
-	@ContentChild(BrnSelectScrollDownDirective, { static: false })
-	protected scrollDownBtn!: BrnSelectScrollDownDirective;
+	protected scrollDownBtn = contentChild.required(BrnSelectScrollDownDirective);
 
-	@ContentChildren(BrnSelectOptionDirective, { descendants: true })
-	protected _options!: QueryList<BrnSelectOptionDirective>;
+	protected _options = contentChildren(BrnSelectOptionDirective, { descendants: true });
 
 	constructor() {
 		this._cdkListbox.valueChange
@@ -201,9 +198,10 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	}
 
 	public updateArrowDisplay(): void {
-		this.canScrollUp.set(this.viewport.nativeElement.scrollTop > 0);
-		const maxScroll = this.viewport.nativeElement.scrollHeight - this.viewport.nativeElement.clientHeight;
-		this.canScrollDown.set(Math.ceil(this.viewport.nativeElement.scrollTop) < maxScroll);
+		const { scrollTop, scrollHeight, clientHeight } = this.viewport().nativeElement;
+		this.canScrollUp.set(scrollTop > 0);
+		const maxScroll = scrollHeight - clientHeight;
+		this.canScrollDown.set(Math.ceil(scrollTop) < maxScroll);
 	}
 
 	public handleScroll() {
@@ -215,18 +213,21 @@ export class BrnSelectContentComponent implements AfterViewInit {
 	}
 
 	public moveFocusUp() {
-		this.viewport.nativeElement.scrollBy({ top: -100, behavior: 'smooth' });
-		if (this.viewport.nativeElement.scrollTop === 0) {
-			this.scrollUpBtn.stopEmittingEvents();
+		this.viewport().nativeElement.scrollBy({ top: -SCROLLBY_PIXELS, behavior: 'smooth' });
+		if (this.viewport().nativeElement.scrollTop === 0) {
+			this.scrollUpBtn().stopEmittingEvents();
 		}
 	}
 
 	public moveFocusDown() {
-		this.viewport.nativeElement.scrollBy({ top: 100, behavior: 'smooth' });
+		this.viewport().nativeElement.scrollBy({ top: SCROLLBY_PIXELS, behavior: 'smooth' });
 		const viewportSize = this._el.nativeElement.scrollHeight;
-		const viewportScrollPosition = this.viewport.nativeElement.scrollTop;
-		if (viewportSize + viewportScrollPosition + 100 > this.viewport.nativeElement.scrollHeight + 50) {
-			this.scrollDownBtn.stopEmittingEvents();
+		const viewportScrollPosition = this.viewport().nativeElement.scrollTop;
+		if (
+			viewportSize + viewportScrollPosition + SCROLLBY_PIXELS >
+			this.viewport().nativeElement.scrollHeight + SCROLLBY_PIXELS / 2
+		) {
+			this.scrollDownBtn().stopEmittingEvents();
 		}
 	}
 }

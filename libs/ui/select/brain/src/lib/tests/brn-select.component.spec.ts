@@ -26,6 +26,7 @@ describe('BrnSelectComponent', () => {
 				<div brnOption value="blueberry">Blueberry</div>
 				<div brnOption value="grapes">Grapes</div>
 				<div brnOption value="pineapple">Pineapple</div>
+				<div brnOption value="disabled" [disabled]="true">Disabled Option</div>
 		  </brn-select-content>
 		</brn-select>
     `,
@@ -52,6 +53,15 @@ describe('BrnSelectComponent', () => {
 			expect(openChangeSpy).toHaveBeenCalledTimes(1);
 			await user.click(trigger);
 			expect(openChangeSpy).toHaveBeenCalledTimes(2);
+		});
+		it('shoud add data-disabled to a disabled option', async () => {
+			const { user, trigger } = await setup();
+			await user.click(trigger);
+			const disabledOption = await screen.getByText('Disabled Option');
+
+			expect(disabledOption).toHaveAttribute('data-disabled');
+			await user.click(disabledOption);
+			expect(trigger.textContent).not.toContain('Disabled Option');
 		});
 	});
 

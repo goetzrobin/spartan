@@ -6,21 +6,19 @@ import {
 	OverlayModule,
 } from '@angular/cdk/overlay';
 import {
-	type AfterContentInit,
+	AfterContentInit,
 	ChangeDetectionStrategy,
 	Component,
-	ContentChild,
 	type DoCheck,
-	EventEmitter,
-	Input,
-	Output,
 	type Signal,
-	ViewChild,
 	computed,
+	contentChild,
 	contentChildren,
 	inject,
 	input,
+	output,
 	signal,
+	viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { type ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
@@ -35,7 +33,7 @@ import { ChangeFn, ErrorStateMatcher, ErrorStateTracker, TouchFn } from '@sparta
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { Subject, combineLatest, delay, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
-import { BrnSelectService, BrnSelectTriggerDirective } from './brn-select.service';
+import { BrnSelectService } from './brn-select.service';
 
 export type BrnReadDirection = 'ltr' | 'rtl';
 
@@ -44,7 +42,7 @@ let nextId = 0;
 @Component({
 	selector: 'brn-select, hlm-select',
 	standalone: true,
-	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule],
+	imports: [OverlayModule, CdkListboxModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		BrnSelectService,
@@ -57,8 +55,8 @@ let nextId = 0;
 		},
 	],
 	template: `
-		@if (!labelProvided() && _placeholder()) {
-			<label class="hidden" [attr.id]="backupLabelId()">{{ _placeholder() }}</label>
+		@if (!labelProvided() && placeholder()) {
+			<label class="hidden" [attr.id]="backupLabelId()">{{ placeholder() }}</label>
 		} @else {
 			<ng-content select="label[hlmLabel],label[brnLabel]" />
 		}
@@ -90,42 +88,24 @@ export class BrnSelectComponent<T = unknown>
 
 	public readonly triggerWidth = this._selectService.triggerWidth;
 
-	@Input({})
-	public set multiple(multiple: boolean) {
-		this._selectService.state.update((state) => ({ ...state, multiple }));
-	}
-	protected readonly _multiple = this._selectService.multiple;
-
-	@Input({})
-	public set placeholder(placeholder: string) {
-		this._selectService.state.update((state) => ({ ...state, placeholder }));
-	}
-	protected readonly _placeholder = this._selectService.placeholder;
-
-	@Input({})
-	public set disabled(disabled: boolean) {
-		this._selectService.state.update((state) => ({ ...state, disabled }));
-	}
-	protected readonly _disabled = this._selectService.disabled;
-
+	public readonly multiple = input<boolean>(false);
+	public readonly placeholder = input<string>('');
+	public readonly disabled = input<boolean>(false);
 	public readonly dir = input<BrnReadDirection>('ltr');
+	private readonly _disabledFromSetDisabledState = signal(false);
 
-	@ContentChild(BrnLabelDirective, { descendants: false })
-	protected selectLabel!: BrnLabelDirective;
+	protected selectLabel = contentChild(BrnLabelDirective, { descendants: false });
 	/** Overlay pane containing the options. */
-	@ContentChild(BrnSelectContentComponent)
-	protected selectContent!: BrnSelectContentComponent;
+	protected selectContent = contentChild.required(BrnSelectContentComponent);
 
 	protected options = contentChildren(CdkOption, { descendants: true });
 	protected options$ = toObservable(this.options);
 	protected optionsAndIndex$ = this.options$.pipe(map((options, index) => [options, index] as const));
 
 	/** Overlay pane containing the options. */
-	@ViewChild(CdkConnectedOverlay)
-	protected _overlayDir!: CdkConnectedOverlay;
+	protected _overlayDir = viewChild(CdkConnectedOverlay);
 
-	@Output()
-	public readonly openedChange = new EventEmitter<boolean>();
+	public readonly openedChange = output<boolean>();
 
 	public readonly closeDelay = input<number>(100);
 	public readonly isExpanded = this._selectService.isExpanded;
@@ -209,6 +189,14 @@ export class BrnSelectComponent<T = unknown>
 	public writeValue$ = new Subject<T>();
 
 	constructor() {
+		this._selectService.state.update((state) => ({
+			...state,
+			multiple: this.multiple,
+			placeholder: this.placeholder,
+			disabled: this.disabled,
+			disabledBySetDisabled: this._disabledFromSetDisabledState,
+			dir: this.dir,
+		}));
 		this.handleOptionChanges();
 		this.handleInitialOptionSelect();
 
@@ -222,7 +210,7 @@ export class BrnSelectComponent<T = unknown>
 
 		// Watch for Listbox Selection Changes to trigger Collapse and Value Change
 		this._selectService.listBoxValueChangeEvent$.pipe(takeUntilDestroyed()).subscribe(() => {
-			if (!this._multiple()) {
+			if (!this.multiple()) {
 				this.close();
 			}
 
@@ -243,8 +231,6 @@ export class BrnSelectComponent<T = unknown>
 			this._shouldEmitValueChange.set(true);
 		});
 
-		toObservable(this.dir).subscribe((dir) => this._selectService.state.update((state) => ({ ...state, dir })));
-
 		this.errorStateTracker = new ErrorStateTracker(
 			this._defaultErrorStateMatcher,
 			this.ngControl,
@@ -255,18 +241,17 @@ export class BrnSelectComponent<T = unknown>
 
 	public ngAfterContentInit(): void {
 		// Check if Label Directive Provided and pass to service
-		if (this.selectLabel) {
+		const label = this.selectLabel();
+		if (label) {
 			this.labelProvided.set(true);
 			this._selectService.state.update((state) => ({
 				...state,
-				labelId: this.selectLabel.id(),
-				dir: this.dir(),
+				labelId: label.id(),
 			}));
-		} else if (this._placeholder()) {
+		} else if (this.placeholder()) {
 			this._selectService.state.update((state) => ({
 				...state,
 				labelId: `${state.id}--label`,
-				dir: this.dir(),
 			}));
 		}
 	}
@@ -289,7 +274,7 @@ export class BrnSelectComponent<T = unknown>
 			...state,
 			isExpanded: true,
 		}));
-		this.openedChange.next(true);
+		this.openedChange.emit(true);
 		this._moveFocusToCDKList();
 	}
 
@@ -300,7 +285,7 @@ export class BrnSelectComponent<T = unknown>
 			this._selectService.selectTrigger.focus();
 		}
 
-		this.openedChange.next(false);
+		this.openedChange.emit(false);
 		this._selectService.state.update((state) => ({
 			...state,
 			isExpanded: false,
@@ -309,11 +294,13 @@ export class BrnSelectComponent<T = unknown>
 	}
 
 	protected _canOpen(): boolean {
-		return !this.isExpanded() && !this._disabled() && this.options()?.length > 0;
+		return !this.isExpanded() && !this.disabled() && this.options()?.length > 0;
 	}
 
 	private _moveFocusToCDKList(): void {
-		setTimeout(() => this.selectContent.focusList());
+		setTimeout(() => {
+			this.selectContent()?.focusList();
+		});
 	}
 
 	public writeValue(value: T): void {
@@ -329,7 +316,7 @@ export class BrnSelectComponent<T = unknown>
 	}
 
 	public setDisabledState(isDisabled: boolean) {
-		this.disabled = isDisabled;
+		this._disabledFromSetDisabledState.set(isDisabled);
 	}
 
 	/**

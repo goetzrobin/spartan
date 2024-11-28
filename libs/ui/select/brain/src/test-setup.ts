@@ -5,4 +5,5 @@ globalThis.ngJest = {
 		errorOnUnknownProperties: true,
 	},
 };
+import '@testing-library/jest-dom';
 import 'jest-preset-angular/setup-jest';

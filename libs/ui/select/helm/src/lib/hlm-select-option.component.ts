@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { lucideCheck } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
@@ -9,7 +9,7 @@ import type { ClassValue } from 'clsx';
 	selector: 'hlm-option',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	hostDirectives: [BrnSelectOptionDirective],
+	hostDirectives: [{ directive: BrnSelectOptionDirective, inputs: ['disabled', 'value'] }],
 	providers: [provideIcons({ lucideCheck })],
 	host: {
 		'[class]': '_computedClass()',
@@ -37,12 +37,4 @@ export class HlmSelectOptionComponent {
 			this.userClass(),
 		),
 	);
-
-	@Input()
-	public set value(value: unknown | null) {
-		this._brnSelectOption.value = value;
-	}
-
-	@Input()
-	public disabled = false;
 }
