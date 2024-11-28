@@ -35,7 +35,7 @@ import { HlmPaginationDirective } from './hlm-pagination.directive';
 				<ul hlmPaginationContent>
 					@if (showEdges() && !isFirstPageActive()) {
 						<li hlmPaginationItem (click)="goToPrevious()">
-							<hlm-pagination-previous />
+							<hlm-pagination-previous class="cursor-pointer" />
 						</li>
 					}
 
@@ -44,7 +44,12 @@ import { HlmPaginationDirective } from './hlm-pagination.directive';
 							@if (page === '...') {
 								<hlm-pagination-ellipsis />
 							} @else {
-								<a hlmPaginationLink [isActive]="currentPage() === page" (click)="currentPage.set(page)">
+								<a
+									hlmPaginationLink
+									class="cursor-pointer"
+									[isActive]="currentPage() === page"
+									(click)="currentPage.set(page)"
+								>
 									{{ page }}
 								</a>
 							}
@@ -53,7 +58,7 @@ import { HlmPaginationDirective } from './hlm-pagination.directive';
 
 					@if (showEdges() && !isLastPageActive()) {
 						<li hlmPaginationItem (click)="goToNext()">
-							<hlm-pagination-next />
+							<hlm-pagination-next class="cursor-pointer" />
 						</li>
 					}
 				</ul>
