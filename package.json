@@ -50,7 +50,6 @@
 		"@nx/angular": "20.1.1",
 		"@nx/devkit": "20.1.1",
 		"@nx/plugin": "20.1.1",
-		"@storybook/addon-interactions": "^8.3.4",
 		"@swc/helpers": "0.5.13",
 		"@testing-library/cypress": "^10.0.2",
 		"@trpc/client": "10.45.2",
