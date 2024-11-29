@@ -41,7 +41,7 @@ export class BrnRadioChange<T> {
 		// Note: under normal conditions focus shouldn't land on this element, however it may be
 		// programmatically set, for example inside of a focus trap, in this case we want to forward
 		// the focus to the native element.
-		'(focus)': '_inputElement().nativeElement.focus()',
+		'(focus)': 'inputElement().nativeElement.focus()',
 	},
 	exportAs: 'brnRadio',
 	encapsulation: ViewEncapsulation.None,
@@ -138,7 +138,7 @@ export class BrnRadioComponent<T = unknown> implements OnDestroy {
 
 	protected readonly inputId = computed(() => `${this.id()}-input`);
 
-	private readonly _inputElement = viewChild.required<ElementRef<HTMLInputElement>>('input');
+	protected readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('input');
 
 	constructor() {
 		this._focusMonitor.monitor(this._elementRef, true);
@@ -153,7 +153,7 @@ export class BrnRadioComponent<T = unknown> implements OnDestroy {
 		this.change.emit(new BrnRadioChange(this, this.value()));
 	}
 
-	protected onInputClick(event: Event) {
+	protected onInputClick(event: Event): void {
 		// We have to stop propagation for click events on the visual hidden input element.
 		// By default, when a user clicks on a label element, a generated click event will be
 		// dispatched on the associated input element. Since we are using a label element as our
@@ -164,7 +164,7 @@ export class BrnRadioComponent<T = unknown> implements OnDestroy {
 		event.stopPropagation();
 	}
 
-	protected onInputInteraction(event: Event) {
+	protected onInputInteraction(event: Event): void {
 		// We always have to stop propagation on the change event.
 		// Otherwise the change event, from the input element, will bubble up and
 		// emit its event object to the `change` output.
@@ -177,13 +177,13 @@ export class BrnRadioComponent<T = unknown> implements OnDestroy {
 	}
 
 	/** Triggered when the user clicks on the touch target. */
-	protected onTouchTargetClick(event: Event) {
+	protected onTouchTargetClick(event: Event): void {
 		this.onInputInteraction(event);
 
 		if (!this.disabledState()) {
 			// Normally the input should be focused already, but if the click
 			// comes from the touch target, then we might have to focus it ourselves.
-			this._inputElement().nativeElement.focus();
+			this.inputElement().nativeElement.focus();
 		}
 	}
 }

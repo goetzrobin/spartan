@@ -82,19 +82,19 @@ export class BrnRadioGroupComponent<T = unknown> implements ControlValueAccessor
 	 */
 	public readonly radioButtons = contentChildren(BrnRadioComponent, { descendants: true });
 
-	writeValue(value: T) {
+	writeValue(value: T): void {
 		this.value.set(value);
 	}
 
-	registerOnChange(fn: ChangeFn<T>) {
+	registerOnChange(fn: ChangeFn<T>): void {
 		this.onChange = fn;
 	}
 
-	registerOnTouched(fn: TouchFn) {
+	registerOnTouched(fn: TouchFn): void {
 		this.onTouched = fn;
 	}
 
-	setDisabledState(isDisabled: boolean) {
+	setDisabledState(isDisabled: boolean): void {
 		this.disabledState().set(isDisabled);
 	}
 
@@ -102,7 +102,7 @@ export class BrnRadioGroupComponent<T = unknown> implements ControlValueAccessor
 	 * Select a radio button.
 	 * @internal
 	 */
-	select(radioButton: BrnRadioComponent<T>, value: T) {
+	select(radioButton: BrnRadioComponent<T>, value: T): void {
 		if (this.value() === value) {
 			return;
 		}
