@@ -25,5 +25,5 @@ export class HlmPaginationPreviousComponent {
 	public readonly ariaLabel = input<string>('Go to previous page', { alias: 'aria-label' });
 	public readonly text = input<string>('Previous');
 
-	protected readonly _computedClass = computed(() => hlm('gap-1 pr-2.5', this.userClass()));
+	protected readonly _computedClass = computed(() => hlm('gap-1 pl-2.5', this.userClass()));
 }

@@ -47,6 +47,7 @@ export class HlmPaginationLinkDirective {
 	protected readonly _computedClass = computed(() =>
 		hlm(
 			paginationLinkVariants(),
+			this.link() === undefined ? 'cursor-pointer' : '',
 			buttonVariants({
 				variant: this.isActive() ? 'outline' : 'ghost',
 				size: this.size(),
