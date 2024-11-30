@@ -69,13 +69,13 @@ Brain features should be added as a secondary entrypoint to the `brain` library.
 command:
 
 ```shell
-nx g @spartan-ng/tools:brain-secondary-entrypoint feature-name
+nx g @spartan-ng/tools:brain-secondary-entrypoint --name=feature-name
 ```
 
 If you are migrating an existing feature to a Brain feature, you can use something like the following command:
 
 ```shell
-nx g @spartan-ng/tools:brain-migrate checkbox --project=ui-checkbox-helm
+nx g @spartan-ng/tools:brain-secondary-entrypoint --name=checkbox --project=ui-checkbox-helm
 ```
 
 ## Submitting pull requests
