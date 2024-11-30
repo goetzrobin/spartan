@@ -73,6 +73,10 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 	};
 
 	const result = ts.transpileModule(importMap, {
+		compilerOptions: {
+			module: ts.ModuleKind.EsNext,
+			target: ts.ScriptTarget.ESNext,
+		},
 		transformers: { before: [transformer] },
 	});
 
