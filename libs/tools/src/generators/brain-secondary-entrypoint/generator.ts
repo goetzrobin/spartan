@@ -13,6 +13,7 @@ import { removeGenerator } from '@nx/workspace/generators';
 import { migrateBrainImportsGenerator } from '@spartan-ng/cli';
 import { basename } from 'node:path';
 import { PackageJson } from 'nx/src/utils/package-json';
+import ts from 'typescript';
 import { BrainSecondaryEntrypointGeneratorSchema } from './schema';
 
 export async function brainSecondaryEntrypointGenerator(tree: Tree, options: BrainSecondaryEntrypointGeneratorSchema) {
@@ -48,10 +49,34 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 	const { name: importPath } = readJson<PackageJson>(tree, joinPathFragments(root, 'package.json'));
 
 	// add this as an automated migration to our CLI generator
-	updateJson(tree, 'libs/cli/src/generators/migrate-brain-imports/import-map.json', (json) => {
-		json.imports[importPath] = `@spartan-ng/brain/${options.name}`;
-		return json;
+	const importMap = tree.read('libs/cli/src/generators/migrate-brain-imports/import-map.ts', 'utf8');
+
+	// update the import map using a typescript transformer
+	const transformer: ts.TransformerFactory<ts.SourceFile> = (context) => {
+		return (sourceFile) => {
+			const visitor = (node: ts.Node): ts.Node => {
+				if (ts.isObjectLiteralExpression(node)) {
+					return ts.factory.createObjectLiteralExpression([
+						...node.properties,
+						ts.factory.createPropertyAssignment(
+							ts.factory.createStringLiteral(importPath),
+							ts.factory.createStringLiteral(`@spartan-ng/brain/${options.name}`),
+						),
+					]);
+				}
+
+				return ts.visitEachChild(node, visitor, context);
+			};
+
+			return ts.visitNode(sourceFile, visitor) as ts.SourceFile;
+		};
+	};
+
+	const result = ts.transpileModule(importMap, {
+		transformers: { before: [transformer] },
 	});
+
+	tree.write('libs/cli/src/generators/migrate-brain-imports/import-map.ts', result.outputText);
 
 	// determine the path to move the project to
 	const entrypointSourceRoot = `libs/brain/${options.name}/src`;
