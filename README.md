@@ -92,6 +92,7 @@ Our initial 300 contributors and sponsors are featured here and on the front pag
 73. [shinkhouse](https://github.com/shinkhouse)
 74. [donaldxdonald](https://github.com/donaldxdonald)
 75. [BenoitPE](https://github.com/BenoitPE)
+76. [MerlinMoos](https://github.com/MerlinMoos)
 
 [Become a spartan today!](https://github.com/sponsors/goetzrobin)
 
