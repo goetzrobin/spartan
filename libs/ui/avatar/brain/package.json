@@ -1,10 +1,9 @@
 {
-	"name": "@spartan-ng/ui-progress-helm",
+	"name": "@spartan-ng/ui-avatar-brain",
 	"version": "0.0.1-alpha.358",
 	"peerDependencies": {
-		"@spartan-ng/ui-core": "0.0.1-alpha.358",
-		"@spartan-ng/ui-progress-brain": "0.0.1-alpha.358",
 		"@angular/core": ">=18.0.0",
+		"@angular/cdk": ">=18.0.0",
 		"clsx": "^2.1.1"
 	},
 	"dependencies": {},

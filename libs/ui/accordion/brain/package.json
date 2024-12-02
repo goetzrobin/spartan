@@ -1,11 +1,12 @@
 {
-	"name": "@spartan-ng/ui-progress-helm",
+	"name": "@spartan-ng/ui-accordion-brain",
 	"version": "0.0.1-alpha.358",
 	"peerDependencies": {
 		"@spartan-ng/ui-core": "0.0.1-alpha.358",
-		"@spartan-ng/ui-progress-brain": "0.0.1-alpha.358",
 		"@angular/core": ">=18.0.0",
-		"clsx": "^2.1.1"
+		"clsx": "^2.1.1",
+		"@angular/cdk": ">=18.0.0",
+		"rxjs": ">=6.6.0"
 	},
 	"dependencies": {},
 	"sideEffects": false,
