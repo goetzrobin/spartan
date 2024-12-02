@@ -1,22 +1,22 @@
 {
-  "name": "@spartan-ng/ui-core",
-  "version": "0.0.1-alpha.357",
-  "peerDependencies": {
-    "tailwindcss": "^3.4.13",
-    "tailwindcss-animate": "^1.0.7",
-    "@angular/core": ">=18.0.0",
-    "rxjs": ">=6.6.0",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^2.5.2"
-  },
-  "exports": {
-    "./hlm-tailwind-preset": {
-      "default": "./hlm-tailwind-preset.js"
-    }
-  },
-  "dependencies": {},
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@spartan-ng/ui-core",
+	"version": "0.0.1-alpha.357",
+	"peerDependencies": {
+		"tailwindcss": "^3.4.13",
+		"tailwindcss-animate": "^1.0.7",
+		"@angular/core": ">=18.0.0",
+		"rxjs": ">=6.6.0",
+		"clsx": "^2.1.1",
+		"tailwind-merge": "^2.5.2"
+	},
+	"exports": {
+		"./hlm-tailwind-preset": {
+			"default": "./hlm-tailwind-preset.js"
+		}
+	},
+	"dependencies": {},
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	}
 }
