@@ -1,22 +1,6 @@
 import { type Tree, formatFiles, readJsonFile, updateJson } from '@nx/devkit';
-import { readdir, stat } from 'node:fs/promises';
-import { join } from 'node:path';
 import process from 'node:process';
-
-async function recursivelyFindRelativePackageJsonFilePaths(startingDir: string): Promise<string[]> {
-	let results = [];
-	const list = await readdir(startingDir);
-	for (const file of list) {
-		const filePath = join(startingDir, file);
-		const fileStat = await stat(filePath);
-		if (fileStat.isDirectory()) {
-			results = results.concat(await recursivelyFindRelativePackageJsonFilePaths(filePath));
-		} else if (file === 'package.json') {
-			results.push(filePath);
-		}
-	}
-	return results;
-}
+import { recursivelyFindRelativePackageJsonFilePaths } from '../../utils/recursively-find-relative-package-json-file-paths';
 
 const getSpartanDependencyKeys = (dependencies?: Record<string, string>): string[] =>
 	Object.keys(dependencies ?? {}).filter((key) => key.startsWith('@spartan-ng'));
@@ -28,13 +12,13 @@ const replaceUiVersionInCliVersionsFile = (tree: Tree, oldVersion: string, newVe
 	tree.write(filePath, contents);
 };
 
-export default async function replaceUiVersionGenerator(tree: Tree) {
+export default async function replaceUiVersionGenerator(tree: Tree, options: { newVersion: string }): Promise<void> {
 	const relativePackageJsonFilePaths = await recursivelyFindRelativePackageJsonFilePaths('libs/ui');
 
 	// this goes into the accordion's package.json, which should always be defined
 	// if there is no version there we should definitely not move forward
 	const oldVersion = readJsonFile(relativePackageJsonFilePaths[0]).version;
-	const newVersion = process.env.VERSION;
+	const newVersion = options?.newVersion ?? process.env.VERSION;
 
 	if (!oldVersion) {
 		console.error(
