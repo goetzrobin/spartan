@@ -1,3 +1,4 @@
+export * from './lib/brain/computed-previous';
 export * from './lib/brain/custom-element-class-settable';
 export * from './lib/brain/dev-mode';
 export * from './lib/brain/exposes-side';
