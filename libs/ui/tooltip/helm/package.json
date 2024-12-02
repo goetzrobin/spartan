@@ -1,8 +1,8 @@
 {
 	"name": "@spartan-ng/ui-tooltip-helm",
-	"version": "0.0.1-alpha.358",
+	"version": "0.0.1-alpha.370",
 	"peerDependencies": {
-		"@spartan-ng/ui-tooltip-brain": "0.0.1-alpha.358",
+		"@spartan-ng/ui-tooltip-brain": "0.0.1-alpha.370",
 		"@angular/core": ">=18.0.0"
 	},
 	"dependencies": {},
