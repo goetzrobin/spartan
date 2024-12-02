@@ -1,12 +1,11 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	computed,
 	effect,
 	forwardRef,
-	Input,
+	input,
 	numberAttribute,
-	signal,
-	untracked,
 	ViewEncapsulation,
 } from '@angular/core';
 import { BrnDialogComponent } from '@spartan-ng/ui-dialog-brain';
@@ -30,17 +29,13 @@ export type BrnPopoverAlign = 'start' | 'center' | 'end';
 	exportAs: 'brnPopover',
 })
 export class BrnPopoverComponent extends BrnDialogComponent {
-	private readonly _sideOffset = signal(0);
-	@Input({ transform: numberAttribute })
-	public set sideOffset(value: number) {
-		this._sideOffset.set(value);
-	}
+	public readonly align = input<BrnPopoverAlign>('center');
+	public readonly sideOffset = input(0, { transform: numberAttribute });
 
-	private readonly _align = signal<BrnPopoverAlign>('center');
-	@Input()
-	public set align(value: BrnPopoverAlign) {
-		this._align.set(value);
-	}
+	private readonly _state = computed(() => ({
+		align: this.align(),
+		sideOffset: this.sideOffset(),
+	}));
 
 	constructor() {
 		super();
@@ -51,40 +46,25 @@ export class BrnPopoverComponent extends BrnDialogComponent {
 
 		effect(
 			() => {
-				const align = this._align();
+				const { align, sideOffset } = this._state();
 				this.attachPositionsState().set([
 					{
 						originX: align,
 						originY: 'bottom',
 						overlayX: align,
 						overlayY: 'top',
+						offsetY: sideOffset,
 					},
 					{
 						originX: align,
 						originY: 'top',
 						overlayX: align,
 						overlayY: 'bottom',
+						offsetY: -sideOffset,
 					},
 				]);
-				this.applySideOffset(untracked(this._sideOffset));
 			},
 			{ allowSignalWrites: true },
-		);
-
-		effect(
-			() => {
-				this.applySideOffset(this._sideOffset());
-			},
-			{ allowSignalWrites: true },
-		);
-	}
-
-	private applySideOffset(sideOffset: number) {
-		this.attachPositionsState().set(
-			(this._options.attachPositions ?? []).map((position) => ({
-				...position,
-				offsetY: position.originY === 'top' ? -sideOffset : sideOffset,
-			})),
 		);
 	}
 }

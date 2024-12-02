@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, Input } from '@angular/core';
+import { Directive, effect, ElementRef, inject, input } from '@angular/core';
 import { BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
 import type { BrnPopoverComponent } from './brn-popover.component';
 
@@ -23,10 +23,17 @@ export class BrnPopoverTriggerDirective extends BrnDialogTriggerDirective {
 		this._brnDialog.closeOnOutsidePointerEventsState().set(true);
 	}
 
-	@Input()
-	public set brnPopoverTriggerFor(brnDialog: BrnPopoverComponent) {
-		brnDialog.attachToState().set(this._host.nativeElement);
-		brnDialog.closeOnOutsidePointerEventsState().set(true);
-		this.brnDialogTriggerForState().set(brnDialog);
-	}
+	public readonly brnPopoverTriggerFor = input<BrnPopoverComponent | undefined>(undefined, {
+		alias: 'brnPopoverTriggerFor',
+	});
+	private readonly _brnPopoverTriggerForEffect = effect(
+		() => {
+			const brnDialog = this.brnPopoverTriggerFor();
+			if (!brnDialog) return;
+			brnDialog.attachToState().set(this._host.nativeElement);
+			brnDialog.closeOnOutsidePointerEventsState().set(true);
+			this.brnDialogTriggerForState().set(brnDialog);
+		},
+		{ allowSignalWrites: true },
+	);
 }

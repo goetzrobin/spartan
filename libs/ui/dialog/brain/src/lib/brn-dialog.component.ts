@@ -67,7 +67,9 @@ export class BrnDialogComponent {
 		}
 	});
 
-	public readonly role = input<BrnDialogOptions['role']>('dialog');
+	public readonly roleInput = input<BrnDialogOptions['role']>('dialog', { alias: 'role' });
+	public readonly roleState = computed(() => signal(this.roleInput()));
+	public readonly role = computed(() => this.roleState()());
 	private readonly _roleEffect = effect(() => {
 		this._options.role = this.role();
 	});
@@ -123,8 +125,10 @@ export class BrnDialogComponent {
 		transform: booleanAttribute,
 		alias: 'closeOnBackdropClick',
 	});
+	public readonly closeOnBackdropClickState = computed(() => signal(this.closeOnBackdropClickInput()));
+	public readonly closeOnBackdropClick = computed(() => this.closeOnBackdropClickState()());
 	private readonly _closeOnBackdropClickEffect = effect(() => {
-		this._options.closeOnBackdropClick = this.closeOnBackdropClickInput();
+		this._options.closeOnBackdropClick = this.closeOnBackdropClick();
 	});
 
 	public readonly attachToInput = input<BrnDialogOptions['attachTo']>(null, { alias: 'attachTo' });
@@ -138,6 +142,8 @@ export class BrnDialogComponent {
 	public readonly attachPositionsState = computed(() => signal(this.attachPositionsInput()));
 	public readonly attachPositions = computed(() => this.attachPositionsState()());
 	private readonly _attachPositionsEffect = effect(() => {
+		console.log(this.attachPositions());
+		console.log(2);
 		this._options.attachPositions = this.attachPositions();
 	});
 
