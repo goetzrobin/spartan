@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/ui-formfield-brain",
-	"version": "0.0.1-alpha.357",
+	"version": "0.0.1-alpha.358",
 	"peerDependencies": {
 		"@angular/core": ">=18.0.0",
 		"@angular/forms": ">=18.0.0"

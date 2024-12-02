@@ -1,10 +1,10 @@
 {
 	"name": "@spartan-ng/ui-input-helm",
-	"version": "0.0.1-alpha.357",
+	"version": "0.0.1-alpha.358",
 	"peerDependencies": {
-		"@spartan-ng/ui-core": "0.0.1-alpha.357",
-		"@spartan-ng/ui-forms-brain": "0.0.1-alpha.357",
-		"@spartan-ng/ui-formfield-brain": "0.0.1-alpha.357",
+		"@spartan-ng/ui-core": "0.0.1-alpha.358",
+		"@spartan-ng/ui-forms-brain": "0.0.1-alpha.358",
+		"@spartan-ng/ui-formfield-brain": "0.0.1-alpha.358",
 		"@angular/core": ">=18.0.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
