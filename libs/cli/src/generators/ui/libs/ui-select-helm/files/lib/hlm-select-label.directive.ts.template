@@ -1,4 +1,4 @@
-import { Directive, type OnInit, computed, inject, input, signal } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnSelectLabelDirective } from '@spartan-ng/ui-select-brain';
 import type { ClassValue } from 'clsx';
@@ -12,9 +12,9 @@ import { HlmSelectContentDirective } from './hlm-select-content.directive';
 		'[class]': '_computedClass()',
 	},
 })
-export class HlmSelectLabelDirective implements OnInit {
-	private readonly selectContent = inject(HlmSelectContentDirective);
-	private readonly _stickyLabels = signal(false);
+export class HlmSelectLabelDirective {
+	private readonly _selectContent = inject(HlmSelectContentDirective);
+	private readonly _stickyLabels = computed(() => this._selectContent.stickyLabels());
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(
@@ -23,10 +23,4 @@ export class HlmSelectLabelDirective implements OnInit {
 			this.userClass(),
 		),
 	);
-
-	ngOnInit(): void {
-		if (this.selectContent.stickyLabels) {
-			this._stickyLabels.set(true);
-		}
-	}
 }

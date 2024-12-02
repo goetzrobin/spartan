@@ -18,7 +18,7 @@ import type { ClassValue } from 'clsx';
 	`,
 })
 export class HlmCheckboxCheckIconComponent {
-	private _brnCheckbox = inject(BrnCheckboxComponent);
+	private readonly _brnCheckbox = inject(BrnCheckboxComponent);
 	protected _checked = this._brnCheckbox?.isChecked;
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 

@@ -44,11 +44,11 @@ export const sheetVariants = cva(
 	`,
 })
 export class HlmSheetContentComponent {
-	private _stateProvider = injectExposesStateProvider({ host: true });
-	private _sideProvider = injectExposedSideProvider({ host: true });
+	private readonly _stateProvider = injectExposesStateProvider({ host: true });
+	private readonly _sideProvider = injectExposedSideProvider({ host: true });
 	public state = this._stateProvider.state ?? signal('closed');
-	private _renderer = inject(Renderer2);
-	private _element = inject(ElementRef);
+	private readonly _renderer = inject(Renderer2);
+	private readonly _element = inject(ElementRef);
 
 	constructor() {
 		effect(() => {

@@ -1,5 +1,4 @@
-import { Component, type Signal, computed, contentChild, contentChildren, effect } from '@angular/core';
-
+import { Component, computed, contentChild, contentChildren, effect } from '@angular/core';
 import { BrnFormFieldControl } from '@spartan-ng/ui-formfield-brain';
 import { HlmErrorDirective } from './hlm-error.directive';
 
@@ -23,13 +22,13 @@ import { HlmErrorDirective } from './hlm-error.directive';
 	},
 })
 export class HlmFormFieldComponent {
-	control = contentChild(BrnFormFieldControl);
+	public readonly control = contentChild(BrnFormFieldControl);
 
-	errorChildren = contentChildren(HlmErrorDirective);
+	public readonly errorChildren = contentChildren(HlmErrorDirective);
 
-	hasDisplayedMessage: Signal<'error' | 'hint'> = computed(() => {
-		return this.errorChildren() && this.errorChildren().length > 0 && this.control()?.errorState() ? 'error' : 'hint';
-	});
+	protected readonly hasDisplayedMessage = computed<'error' | 'hint'>(() =>
+		this.errorChildren() && this.errorChildren().length > 0 && this.control()?.errorState() ? 'error' : 'hint',
+	);
 
 	constructor() {
 		effect(() => {

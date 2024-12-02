@@ -1,7 +1,9 @@
 import { Component, computed, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { lucideChevronRight } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { ClassValue } from 'clsx';
 import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 
 @Component({
@@ -10,22 +12,18 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 	imports: [HlmPaginationLinkDirective, HlmIconComponent],
 	providers: [provideIcons({ lucideChevronRight })],
 	template: `
-		<a
-			[class]="_computedClass()"
-			hlmPaginationLink
-			[link]="link()"
-			size="default"
-			[attr.aria-label]="'Go to next page'"
-		>
-			<span>Next</span>
+		<a [class]="_computedClass()" hlmPaginationLink [link]="link()" size="default" [attr.aria-label]="ariaLabel()">
+			<span>{{ text() }}</span>
 			<hlm-icon size="sm" name="lucideChevronRight" />
 		</a>
 	`,
 })
 export class HlmPaginationNextComponent {
-	public readonly class = input('');
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public readonly link = input<string | any[] | null | undefined>();
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly link = input<RouterLink['routerLink']>();
 
-	protected _computedClass = computed(() => hlm('gap-1 pr-2.5', this.class()));
+	public readonly ariaLabel = input<string>('Go to next page', { alias: 'aria-label' });
+	public readonly text = input<string>('Next');
+
+	protected readonly _computedClass = computed(() => hlm('gap-1 pr-2.5', this.userClass()));
 }

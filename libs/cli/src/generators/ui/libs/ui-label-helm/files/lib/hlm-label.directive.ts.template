@@ -1,4 +1,4 @@
-import { Directive, Input, computed, inject, input, signal } from '@angular/core';
+import { Directive, computed, inject, input, signal } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { type VariantProps, cva } from 'class-variance-authority';
@@ -46,11 +46,20 @@ export class HlmLabelDirective {
 	private readonly _brn = inject(BrnLabelDirective, { host: true });
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+
+	public readonly variant = input<LabelVariants['variant']>('default');
+
+	public readonly error = input<LabelVariants['error']>('auto');
+
+	protected readonly state = computed(() => ({
+		error: signal(this.error()),
+	}));
+
 	protected readonly _computedClass = computed(() =>
 		hlm(
 			labelVariants({
-				variant: this._variant(),
-				error: this._error(),
+				variant: this.variant(),
+				error: this.state().error(),
 				disabled: this._brn?.dataDisabled() ?? 'auto',
 			}),
 			'[&.ng-invalid.ng-touched]:text-destructive',
@@ -58,15 +67,7 @@ export class HlmLabelDirective {
 		),
 	);
 
-	private readonly _variant = signal<LabelVariants['variant']>('default');
-	@Input()
-	set variant(value: LabelVariants['variant']) {
-		this._variant.set(value);
-	}
-
-	private readonly _error = signal<LabelVariants['error']>('auto');
-	@Input()
-	set error(value: LabelVariants['error']) {
-		this._error.set(value);
+	setError(error: LabelVariants['error']): void {
+		this.state().error.set(error);
 	}
 }

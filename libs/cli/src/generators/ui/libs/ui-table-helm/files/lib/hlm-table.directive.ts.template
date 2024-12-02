@@ -3,7 +3,7 @@ import { injectTableClassesSettable } from '@spartan-ng/ui-core';
 
 @Directive({ standalone: true, selector: '[hlmTable],brn-table[hlm]' })
 export class HlmTableDirective {
-	private _tableClassesSettable = injectTableClassesSettable({ host: true, optional: true });
+	private readonly _tableClassesSettable = injectTableClassesSettable({ host: true, optional: true });
 
 	constructor() {
 		this._tableClassesSettable?.setTableClasses({

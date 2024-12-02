@@ -10,7 +10,7 @@ import type { ClassValue } from 'clsx';
 	},
 })
 export class HlmSheetOverlayDirective {
-	private _classSettable = injectCustomClassSettable({ optional: true, host: true });
+	private readonly _classSettable = injectCustomClassSettable({ optional: true, host: true });
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(

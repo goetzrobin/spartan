@@ -1,8 +1,8 @@
 {
 	"name": "@spartan-ng/ui-card-helm",
-	"version": "0.0.1-alpha.356",
+	"version": "0.0.1-alpha.357",
 	"peerDependencies": {
-		"@spartan-ng/ui-core": "0.0.1-alpha.356",
+		"@spartan-ng/ui-core": "0.0.1-alpha.357",
 		"@angular/core": ">=18.0.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1"

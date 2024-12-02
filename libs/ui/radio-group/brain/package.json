@@ -1,15 +1,15 @@
 {
-	"name": "@spartan-ng/ui-radiogroup-brain",
-	"version": "0.0.1-alpha.356",
-	"peerDependencies": {
-		"@angular/core": ">=18.0.0",
-		"@angular/cdk": ">=18.0.0",
-		"@angular/forms": ">=18.0.0",
-		"@spartan-ng/ui-forms-brain": "0.0.1-alpha.356"
-	},
-	"dependencies": {},
-	"sideEffects": false,
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@spartan-ng/ui-radiogroup-brain",
+  "version": "0.0.1-alpha.357",
+  "peerDependencies": {
+    "@angular/core": ">=18.0.0",
+    "@angular/cdk": ">=18.0.0",
+    "@angular/forms": ">=18.0.0",
+    "@spartan-ng/ui-forms-brain": "0.0.1-alpha.357"
+  },
+  "dependencies": {},
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }
