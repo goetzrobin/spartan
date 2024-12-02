@@ -1,11 +1,11 @@
 {
 	"name": "@spartan-ng/ui-alertdialog-helm",
-	"version": "0.0.1-alpha.357",
+	"version": "0.0.1-alpha.358",
 	"peerDependencies": {
-		"@spartan-ng/ui-core": "0.0.1-alpha.357",
-		"@spartan-ng/ui-alertdialog-brain": "0.0.1-alpha.357",
-		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.357",
-		"@spartan-ng/ui-button-helm": "0.0.1-alpha.357",
+		"@spartan-ng/ui-core": "0.0.1-alpha.358",
+		"@spartan-ng/ui-alertdialog-brain": "0.0.1-alpha.358",
+		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.358",
+		"@spartan-ng/ui-button-helm": "0.0.1-alpha.358",
 		"@angular/core": ">=18.0.0",
 		"clsx": "^2.1.1"
 	},
