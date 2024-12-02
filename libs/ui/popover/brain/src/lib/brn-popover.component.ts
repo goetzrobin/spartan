@@ -1,17 +1,18 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	Input,
-	ViewEncapsulation,
 	effect,
 	forwardRef,
+	Input,
 	numberAttribute,
 	signal,
 	untracked,
+	ViewEncapsulation,
 } from '@angular/core';
 import { BrnDialogComponent } from '@spartan-ng/ui-dialog-brain';
 
 export type BrnPopoverAlign = 'start' | 'center' | 'end';
+
 @Component({
 	selector: 'brn-popover',
 	standalone: true,
@@ -43,39 +44,47 @@ export class BrnPopoverComponent extends BrnDialogComponent {
 
 	constructor() {
 		super();
-		this.hasBackdrop = false;
-		this.ariaDescribedBy = '';
-		this.ariaLabelledBy = '';
-		this.scrollStrategy = this.ssos.reposition();
+		this.hasBackdropState().set(false);
+		this.ariaDescribedByState().set('');
+		this.ariaLabelledByState().set('');
+		this.scrollStrategyState().set(this.ssos.reposition());
 
-		effect(() => {
-			const align = this._align();
-			this.attachPositions = [
-				{
-					originX: align,
-					originY: 'bottom',
-					overlayX: align,
-					overlayY: 'top',
-				},
-				{
-					originX: align,
-					originY: 'top',
-					overlayX: align,
-					overlayY: 'bottom',
-				},
-			];
-			this.applySideOffset(untracked(this._sideOffset));
-		});
+		effect(
+			() => {
+				const align = this._align();
+				this.attachPositionsState().set([
+					{
+						originX: align,
+						originY: 'bottom',
+						overlayX: align,
+						overlayY: 'top',
+					},
+					{
+						originX: align,
+						originY: 'top',
+						overlayX: align,
+						overlayY: 'bottom',
+					},
+				]);
+				this.applySideOffset(untracked(this._sideOffset));
+			},
+			{ allowSignalWrites: true },
+		);
 
-		effect(() => {
-			this.applySideOffset(this._sideOffset());
-		});
+		effect(
+			() => {
+				this.applySideOffset(this._sideOffset());
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	private applySideOffset(sideOffset: number) {
-		this.attachPositions = (this._options.attachPositions ?? []).map((position) => ({
-			...position,
-			offsetY: position.originY === 'top' ? -sideOffset : sideOffset,
-		}));
+		this.attachPositionsState().set(
+			(this._options.attachPositions ?? []).map((position) => ({
+				...position,
+				offsetY: position.originY === 'top' ? -sideOffset : sideOffset,
+			})),
+		);
 	}
 }
