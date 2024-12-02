@@ -1,8 +1,7 @@
 {
 	"$schema": "http://json-schema.org/schema",
-	"version": 2,
-	"title": "Update version executor",
-	"description": "",
+	"$id": "ReplaceCliVersionGenerator",
+	"title": "",
 	"type": "object",
 	"properties": {}
 }
