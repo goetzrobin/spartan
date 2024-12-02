@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/ui-sonner-helm",
-	"version": "0.0.1",
+	"version": "0.0.1-alpha.357",
 	"peerDependencies": {
 		"@angular/common": "^18.1.0",
 		"@angular/core": "^18.1.0",
