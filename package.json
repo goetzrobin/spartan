@@ -23,9 +23,12 @@
 		"build-storybook": "nx build-storybook ui-storybook",
 		"chromatic": "chromatic --project-token=chpt_845c7a47afdb884",
 		"prepare": "git config core.hookspath .githooks",
-		"prepare-release": "nx g @spartan-ng/tools:hlm-to-cli-generator && nx g @spartan-ng/tools:replace-ui-version",
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-		"pre-publish": "pnpm run prepare-release && pnpm run format"
+		"prepare-release": "nx g @spartan-ng/tools:replace-ui-version && nx g @spartan-ng/tools:hlm-to-cli-generator && nx g @spartan-ng/tools:replace-cli-version",
+		"pre-publish": "pnpm run prepare-release && pnpm run format",
+		"publish-ui": "nx run-many --target=release --projects=tag:scope:core,tag:scope:brain --parallel=1",
+		"publish-cli": "nx run-many --target=release --projects=tag:scope:cli --parallel=1",
+		"publish": "pnpm run pre-publish && pnpm run publish-ui && pnpm run publish-cli"
 	},
 	"private": true,
 	"dependencies": {
