@@ -6,15 +6,15 @@
 	"generators": "./generators.json",
 	"dependencies": {
 		"@nx/devkit": "20.1.1",
-		"process": "0.11.10",
-		"enquirer": "2.3.6",
-		"jsonc-eslint-parser": "^2.1.0",
-		"replace-json-property": "^1.9.0",
-		"nx": "20.1.1",
-		"tslib": "~2.7.0",
 		"@nx/angular": "20.1.1",
 		"@nx/workspace": "20.1.1",
 		"@spartan-ng/cli": "0.0.1-alpha.367",
+		"process": "0.11.10",
+		"enquirer": "2.3.6",
+		"jsonc-eslint-parser": "^2.1.0",
+		"@nx/devkit": "20.1.1",
+		"nx": "20.1.1",
+		"tslib": "~2.7.0",
 		"typescript": "~5.5.0"
 	}
 }
