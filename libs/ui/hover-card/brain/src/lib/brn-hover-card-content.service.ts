@@ -258,9 +258,9 @@ export class BrnHoverCardTriggerDirective implements OnInit, OnDestroy {
 	private readonly _brnHoverCardTriggerFor = computed(() => this.brnHoverCardTriggerForState()());
 	private readonly _brnHoverCardTriggerForEffect = effect(
 		() => {
-			const val = this._brnHoverCardTriggerFor();
-			if (val) {
-				this._contentService.setContent(val, this._vcr);
+			const value = this._brnHoverCardTriggerFor();
+			if (value) {
+				this._contentService.setContent(value, this._vcr);
 			}
 		},
 		{ allowSignalWrites: true },
