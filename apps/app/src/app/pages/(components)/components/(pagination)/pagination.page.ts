@@ -4,7 +4,6 @@ import { hlmH4 } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
-import { PageBottomNavPlaceholderComponent } from '../../../../shared/layout/page-bottom-nav-placeholder.component';
 import { PageBottomNavLinkComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav-link.component';
 import { PageBottomNavComponent } from '../../../../shared/layout/page-bottom-nav/page-bottom-nav.component';
 import { PageNavComponent } from '../../../../shared/layout/page-nav/page-nav.component';
@@ -14,6 +13,7 @@ import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { PaginationAdvancedComponent, advancedCode } from './pagination--advanced.example';
+import { PaginationIconOnlyComponent, iconOnlyCode } from './pagination--icon-only.example';
 import { PaginationPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './pagination.preview';
 
 export const routeMeta: RouteMeta = {
@@ -36,8 +36,8 @@ export const routeMeta: RouteMeta = {
 		PageNavComponent,
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
-		PageBottomNavPlaceholderComponent,
 		PaginationPreviewComponent,
+		PaginationIconOnlyComponent,
 		PaginationAdvancedComponent,
 	],
 	template: `
@@ -65,6 +65,13 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
+			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Icon Only (Previous/Next)</h3>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-pagination-icon-only />
+				</div>
+				<spartan-code secondTab [code]="iconOnlyCode" />
+			</spartan-tabs>
 			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Advanced Pagination</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
@@ -86,5 +93,6 @@ export default class PaginationPageComponent {
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
 
+	protected readonly iconOnlyCode = iconOnlyCode;
 	protected readonly advancedCode = advancedCode;
 }

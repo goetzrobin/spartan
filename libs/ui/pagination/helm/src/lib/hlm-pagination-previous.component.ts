@@ -1,6 +1,8 @@
-import { Component, computed, input } from '@angular/core';
+import { BooleanInput } from '@angular/cdk/coercion';
+import { booleanAttribute, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { lucideChevronLeft } from '@ng-icons/lucide';
+import { ButtonVariants } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { ClassValue } from 'clsx';
@@ -12,9 +14,9 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 	imports: [HlmPaginationLinkDirective, HlmIconComponent],
 	providers: [provideIcons({ lucideChevronLeft })],
 	template: `
-		<a [class]="_computedClass()" hlmPaginationLink [link]="link()" size="default" [attr.aria-label]="ariaLabel()">
+		<a [class]="_computedClass()" hlmPaginationLink [link]="link()" [size]="size()" [attr.aria-label]="ariaLabel()">
 			<hlm-icon size="sm" name="lucideChevronLeft" />
-			<span>{{ text() }}</span>
+			<span [class.sr-only]="iconOnly()">{{ text() }}</span>
 		</a>
 	`,
 })
@@ -24,6 +26,11 @@ export class HlmPaginationPreviousComponent {
 
 	public readonly ariaLabel = input<string>('Go to previous page', { alias: 'aria-label' });
 	public readonly text = input<string>('Previous');
+	public readonly iconOnly = input<boolean, BooleanInput>(false, {
+		transform: booleanAttribute,
+	});
 
-	protected readonly _computedClass = computed(() => hlm('gap-1 pl-2.5', this.userClass()));
+	protected readonly size = computed<ButtonVariants['size']>(() => (this.iconOnly() ? 'icon' : 'default'));
+
+	protected readonly _computedClass = computed(() => hlm('gap-1', !this.iconOnly() ? 'pl-2.5' : '', this.userClass()));
 }
