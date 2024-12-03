@@ -3,7 +3,17 @@
 		"hlm-to-cli-generator": {
 			"factory": "./src/generators/hlm-to-cli-generator/generator",
 			"schema": "./src/generators/hlm-to-cli-generator/schema.json",
-			"description": "hlm-to-cli-generator generator"
+			"description": "copies hlm files to the cli as templates"
+		},
+		"replace-ui-version": {
+			"factory": "./src/generators/replace-ui-version/generator",
+			"schema": "./src/generators/replace-ui-version/schema.json",
+			"description": "replaces the current version in all relevant files for ui libraries"
+		},
+		"replace-cli-version": {
+			"factory": "./src/generators/replace-cli-version/generator",
+			"schema": "./src/generators/replace-cli-version/schema.json",
+			"description": "replaces the current version in all relevant files for cli"
 		}
 	}
 }
