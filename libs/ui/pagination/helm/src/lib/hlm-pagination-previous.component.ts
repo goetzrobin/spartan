@@ -14,7 +14,15 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 	imports: [HlmPaginationLinkDirective, HlmIconComponent],
 	providers: [provideIcons({ lucideChevronLeft })],
 	template: `
-		<a [class]="_computedClass()" hlmPaginationLink [link]="link()" [size]="size()" [attr.aria-label]="ariaLabel()">
+		<a
+			[class]="_computedClass()"
+			hlmPaginationLink
+			[link]="link()"
+			[queryParams]="queryParams()"
+			[queryParamsHandling]="queryParamsHandling()"
+			[size]="size()"
+			[attr.aria-label]="ariaLabel()"
+		>
 			<hlm-icon size="sm" name="lucideChevronLeft" />
 			<span [class.sr-only]="iconOnly()">{{ text() }}</span>
 		</a>
@@ -23,6 +31,8 @@ import { HlmPaginationLinkDirective } from './hlm-pagination-link.directive';
 export class HlmPaginationPreviousComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	public readonly link = input<RouterLink['routerLink']>();
+	public readonly queryParams = input<RouterLink['queryParams']>();
+	public readonly queryParamsHandling = input<RouterLink['queryParamsHandling']>();
 
 	public readonly ariaLabel = input<string>('Go to previous page', { alias: 'aria-label' });
 	public readonly text = input<string>('Previous');

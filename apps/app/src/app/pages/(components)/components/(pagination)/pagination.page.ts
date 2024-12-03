@@ -14,6 +14,7 @@ import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
 import { PaginationAdvancedComponent, advancedCode } from './pagination--advanced.example';
 import { PaginationIconOnlyComponent, iconOnlyCode } from './pagination--icon-only.example';
+import { PaginationQueryParamsComponent, queryParamsCode } from './pagination--query-params.example';
 import { PaginationPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './pagination.preview';
 
 export const routeMeta: RouteMeta = {
@@ -37,6 +38,7 @@ export const routeMeta: RouteMeta = {
 		PageBottomNavComponent,
 		PageBottomNavLinkComponent,
 		PaginationPreviewComponent,
+		PaginationQueryParamsComponent,
 		PaginationIconOnlyComponent,
 		PaginationAdvancedComponent,
 	],
@@ -65,6 +67,13 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<spartan-section-sub-heading id="examples">Examples</spartan-section-sub-heading>
+			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Query Params</h3>
+			<spartan-tabs firstTab="Preview" secondTab="Code">
+				<div spartanCodePreview firstTab>
+					<spartan-pagination-query-params />
+				</div>
+				<spartan-code secondTab [code]="iconOnlyCode" />
+			</spartan-tabs>
 			<h3 id="examples__default" class="${hlmH4} mb-2 mt-6">Icon Only (Previous/Next)</h3>
 			<spartan-tabs firstTab="Preview" secondTab="Code">
 				<div spartanCodePreview firstTab>
@@ -93,6 +102,7 @@ export default class PaginationPageComponent {
 	protected readonly defaultSkeleton = defaultSkeleton;
 	protected readonly defaultImports = defaultImports;
 
+	protected readonly queryParamsCode = queryParamsCode;
 	protected readonly iconOnlyCode = iconOnlyCode;
 	protected readonly advancedCode = advancedCode;
 }
