@@ -250,21 +250,23 @@ export class BrnHoverCardTriggerDirective implements OnInit, OnDestroy {
 	public sideOffset = input(5);
 	public align = input<'top' | 'bottom'>('bottom');
 
-	public readonly brnHoverCardTriggerForInput = input<TemplateRef<unknown> | BrnHoverCardContentDirective | undefined>(
+	public readonly brnHoverCardTriggerFor = input<TemplateRef<unknown> | BrnHoverCardContentDirective | undefined>(
 		undefined,
-		{ alias: 'brnHoverCardTriggerFor' },
 	);
-	public readonly brnHoverCardTriggerForState = computed(() => signal(this.brnHoverCardTriggerForInput()));
+	public readonly brnHoverCardTriggerForState = computed(() => signal(this.brnHoverCardTriggerFor()));
 	private readonly _brnHoverCardTriggerFor = computed(() => this.brnHoverCardTriggerForState()());
-	private readonly _brnHoverCardTriggerForEffect = effect(
-		() => {
-			const value = this._brnHoverCardTriggerFor();
-			if (value) {
-				this._contentService.setContent(value, this._vcr);
-			}
-		},
-		{ allowSignalWrites: true },
-	);
+
+	constructor() {
+		effect(
+			() => {
+				const value = this._brnHoverCardTriggerFor();
+				if (value) {
+					this._contentService.setContent(value, this._vcr);
+				}
+			},
+			{ allowSignalWrites: true },
+		);
+	}
 
 	public ngOnInit() {
 		this._contentService.setConfig({ attachTo: this._el, align: this.align(), sideOffset: this.sideOffset() });
