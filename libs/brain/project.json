@@ -1,8 +1,8 @@
 {
-	"name": "ui-checkbox-brain",
-	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "libs/ui/checkbox/brain/src",
-	"prefix": "spartan",
+	"name": "brain",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/brain/src",
+	"prefix": "brn",
 	"projectType": "library",
 	"tags": ["scope:brain"],
 	"targets": {
@@ -10,14 +10,14 @@
 			"executor": "@nx/angular:package",
 			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
 			"options": {
-				"project": "libs/ui/checkbox/brain/ng-package.json"
+				"project": "libs/brain/ng-package.json"
 			},
 			"configurations": {
 				"production": {
-					"tsConfig": "libs/ui/checkbox/brain/tsconfig.lib.prod.json"
+					"tsConfig": "libs/brain/tsconfig.lib.prod.json"
 				},
 				"development": {
-					"tsConfig": "libs/ui/checkbox/brain/tsconfig.lib.json"
+					"tsConfig": "libs/brain/tsconfig.lib.json"
 				}
 			},
 			"defaultConfiguration": "production"
@@ -26,17 +26,16 @@
 			"executor": "@nx/jest:jest",
 			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
 			"options": {
-				"jestConfig": "libs/ui/checkbox/brain/jest.config.ts"
+				"jestConfig": "libs/brain/jest.config.ts"
 			}
 		},
 		"lint": {
-			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"]
+			"executor": "@nx/eslint:lint"
 		},
 		"release": {
 			"executor": "@spartan-ng/tools:build-update-publish",
 			"options": {
-				"libName": "ui-checkbox-brain"
+				"libName": "brain"
 			}
 		}
 	}
