@@ -1,7 +1,8 @@
 export default {
-	displayName: 'ui-checkbox-brain',
-	preset: '../../../../jest.preset.cjs',
+	displayName: 'brain',
+	preset: '../../jest.preset.cjs',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+	coverageDirectory: '../../coverage/libs/brain',
 	transform: {
 		'^.+\\.(ts|mjs|js|html)$': [
 			'jest-preset-angular',
@@ -12,7 +13,6 @@ export default {
 		],
 	},
 	transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
-	testPathIgnorePatterns: ['<rootDir>/src/lib/brn-checkbox-ng-model.component.spec.ts'],
 	snapshotSerializers: [
 		'jest-preset-angular/build/serializers/no-ng-attributes',
 		'jest-preset-angular/build/serializers/ng-snapshot',

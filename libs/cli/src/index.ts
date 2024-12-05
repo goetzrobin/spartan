@@ -1,1 +1,1 @@
-console.log('I should not be blank.');
+export * from './generators/migrate-brain-imports/generator';

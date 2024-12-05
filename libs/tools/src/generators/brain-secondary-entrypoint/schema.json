@@ -1,0 +1,23 @@
+{
+	"$schema": "https://json-schema.org/schema",
+	"$id": "BrainSecondaryEntrypoint",
+	"title": "",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "The name of the secondary entrypoint to create.",
+			"$default": {
+				"$source": "argv",
+				"index": 0
+			},
+			"x-prompt": "What name would you like to use?"
+		},
+		"project": {
+			"type": "string",
+			"description": "Optionally choose an existing Brain library to migrate.",
+			"x-dropdown": "projects"
+		}
+	},
+	"required": ["name"]
+}
