@@ -12,9 +12,9 @@ export const inputVariants = cva(
 	{
 		variants: {
 			size: {
-				default: 'h-10 py-2 px-4',
-				sm: 'h-9 px-3',
-				lg: 'h-11 px-8',
+				default: 'h-10 py-2 px-4 file:max-md:py-0',
+				sm: 'h-9 px-3 file:md:py-2 file:max-md:py-1.5',
+				lg: 'h-11 px-8 file:md:py-3 file:max-md:py-2.5',
 			},
 			error: {
 				auto: '[&.ng-invalid.ng-touched]:text-destructive [&.ng-invalid.ng-touched]:border-destructive [&.ng-invalid.ng-touched]:focus-visible:ring-destructive',
