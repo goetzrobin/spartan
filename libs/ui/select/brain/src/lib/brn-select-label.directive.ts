@@ -1,5 +1,5 @@
 import { Directive, inject } from '@angular/core';
-import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
+import { BrnLabelDirective } from '@spartan-ng/brain/label';
 import { BrnSelectGroupDirective } from './brn-select-group.directive';
 
 @Directive({
