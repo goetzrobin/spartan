@@ -5,7 +5,7 @@ function hashString(str: string) {
 	return h || 0;
 }
 
-function hashManyTimes(times: any, str: string) {
+function hashManyTimes(times: number, str: string) {
 	let h = hashString(str);
 
 	for (let i = 0; i < times; i++) h = hashString(String(h));
