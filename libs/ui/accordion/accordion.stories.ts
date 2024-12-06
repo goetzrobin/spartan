@@ -1,7 +1,7 @@
+import { BrnAccordionDirective, BrnAccordionImports } from '@spartan-ng/brain/accordion';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmIconComponent } from '../icon/helm/src';
-import { BrnAccordionDirective, BrnAccordionImports } from './brain/src';
 import { HlmAccordionImports } from './helm/src';
 
 const meta: Meta<BrnAccordionDirective> = {
