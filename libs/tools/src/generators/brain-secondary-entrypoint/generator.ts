@@ -10,10 +10,10 @@ import {
 	visitNotIgnoredFiles,
 } from '@nx/devkit';
 import { removeGenerator } from '@nx/workspace/generators';
-import { migrateBrainImportsGenerator } from '@spartan-ng/cli';
+import { replaceBrainPackageWithSecondaryEntrypoint } from '@spartan-ng/cli';
 import { basename } from 'node:path';
 import { PackageJson } from 'nx/src/utils/package-json';
-import ts from 'typescript';
+import * as ts from 'typescript';
 import { BrainSecondaryEntrypointGeneratorSchema } from './schema';
 
 export async function brainSecondaryEntrypointGenerator(tree: Tree, options: BrainSecondaryEntrypointGeneratorSchema) {
@@ -46,7 +46,7 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 	}
 
 	// read the package.json file to determine the import path
-	const { name: importPath } = readJson<PackageJson>(tree, joinPathFragments(root, 'package.json'));
+	const { name: importPath, peerDependencies } = readJson<PackageJson>(tree, joinPathFragments(root, 'package.json'));
 
 	// add this as an automated migration to our CLI generator
 	const importMap = tree.read('libs/cli/src/generators/migrate-brain-imports/import-map.ts', 'utf8');
@@ -59,7 +59,7 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 					return ts.factory.createObjectLiteralExpression([
 						...node.properties,
 						ts.factory.createPropertyAssignment(
-							ts.factory.createStringLiteral(importPath),
+							ts.factory.createStringLiteral(`@spartan-ng/${options.project}`),
 							ts.factory.createStringLiteral(`@spartan-ng/brain/${options.name}`),
 						),
 					]);
@@ -102,11 +102,27 @@ async function migrateExistingProject(tree: Tree, options: BrainSecondaryEntrypo
 	// remove the original library
 	await removeGenerator(tree, { projectName: options.project, skipFormat: true, forceRemove: true, importPath });
 
+	// copy over any peer dependencies from the original package.json
+	updateJson<PackageJson>(tree, 'libs/brain/package.json', (json) => {
+		for (const [key, value] of Object.entries(peerDependencies)) {
+			if (!json.peerDependencies[key]) {
+				json.peerDependencies[key] = value;
+			}
+		}
+
+		return json;
+	});
+
 	// migrate library peer dependencies
 	migratePeerDependencies(tree, importPath);
 
 	// migrate the imports - nicely we use our public migration generator here, so we can test it within our own project.
-	await migrateBrainImportsGenerator(tree, { skipFormat: true, skipInstall: true });
+	replaceBrainPackageWithSecondaryEntrypoint(
+		tree,
+		{ skipFormat: true, skipInstall: true },
+		importPath,
+		`@spartan-ng/brain/${options.name}`,
+	);
 }
 
 function migratePeerDependencies(tree: Tree, oldPackage: string): void {

@@ -100,7 +100,7 @@ function replaceUsages(tree: Tree, oldPackageName: string, newPackageName: strin
 			// this is relevant for this repo only - and this file is auto-generated
 			'supported-ui-libraries.json',
 			// we don't want to replace usages in the import map as these are used to detect the usages
-			'import-map.json',
+			'import-map.ts',
 		];
 		if (ignoredFiles.includes(basename(path))) {
 			return;

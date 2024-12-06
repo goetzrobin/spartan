@@ -22,6 +22,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { type ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { BrnLabelDirective } from '@spartan-ng/brain/label';
 import {
 	type ExposesSide,
 	type ExposesState,
@@ -30,7 +31,6 @@ import {
 } from '@spartan-ng/ui-core';
 import { BrnFormFieldControl } from '@spartan-ng/ui-formfield-brain';
 import { ChangeFn, ErrorStateMatcher, ErrorStateTracker, TouchFn } from '@spartan-ng/ui-forms-brain';
-import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { Subject, combineLatest, delay, map, of, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectService } from './brn-select.service';
