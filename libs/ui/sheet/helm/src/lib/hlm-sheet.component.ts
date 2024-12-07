@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
 import { BrnDialogComponent } from '@spartan-ng/ui-dialog-brain';
 import { BrnSheetComponent, BrnSheetOverlayComponent } from '@spartan-ng/ui-sheet-brain';
 import { HlmSheetOverlayDirective } from './hlm-sheet-overlay.directive';
@@ -28,6 +28,6 @@ import { HlmSheetOverlayDirective } from './hlm-sheet-overlay.directive';
 export class HlmSheetComponent extends BrnSheetComponent {
 	constructor() {
 		super();
-		this.closeDelay = 100;
+		this.closeDelayState().set(100);
 	}
 }
