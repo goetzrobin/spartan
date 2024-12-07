@@ -10,7 +10,7 @@ export default async function hlmUIGenerator(tree: Tree, options: HlmUIGenerator
 	const config = await getOrCreateConfig(tree, {
 		componentsPath: options.directory,
 	});
-	const availablePrimitives = await import('./supported-ui-libraries.json');
+	const availablePrimitives: ComponentDefintions = await import('./supported-ui-libraries.json').then((m) => m.default);
 	const availablePrimitiveNames = [...Object.keys(availablePrimitives), 'collapsible', 'menubar', 'contextmenu'];
 	let response: { primitives: string[] } = { primitives: [] };
 	if (options.name && availablePrimitiveNames.includes(options.name)) {
@@ -36,7 +36,7 @@ async function createPrimitiveLibraries(
 		primitives: string[];
 	},
 	availablePrimitiveNames: string[],
-	availablePrimitives,
+	availablePrimitives: ComponentDefintions,
 	tree: Tree,
 	options: HlmUIGeneratorSchema & { angularCli?: boolean },
 	config: Config,
@@ -114,3 +114,10 @@ const replaceContextAndMenuBar = async (primtivesToCreate: string[], silent = fa
 		primtivesToCreate.splice(menubarIndex, 1);
 	}
 };
+
+interface ComponentDefintions {
+	[componentName: string]: {
+		internalName: string;
+		peerDependencies: Record<string, string>;
+	};
+}
