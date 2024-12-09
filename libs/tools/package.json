@@ -8,7 +8,7 @@
 		"@nx/devkit": "20.1.1",
 		"@nx/angular": "20.1.1",
 		"@nx/workspace": "20.1.1",
-		"@spartan-ng/cli": "0.0.1-alpha.373",
+		"@spartan-ng/cli": "0.0.1-alpha.374",
 		"process": "0.11.10",
 		"enquirer": "2.3.6",
 		"jsonc-eslint-parser": "^2.1.0",

@@ -1,6 +1,6 @@
 {
 	"name": "@spartan-ng/ui-core",
-	"version": "0.0.1-alpha.373",
+	"version": "0.0.1-alpha.374",
 	"peerDependencies": {
 		"tailwindcss": "^3.4.13",
 		"tailwindcss-animate": "^1.0.7",
