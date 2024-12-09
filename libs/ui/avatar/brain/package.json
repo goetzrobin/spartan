@@ -1,0 +1,14 @@
+{
+	"name": "@spartan-ng/ui-avatar-brain",
+	"version": "0.0.1-alpha.373",
+	"sideEffects": false,
+	"dependencies": {},
+	"peerDependencies": {
+		"@angular/cdk": ">=18.0.0",
+		"@angular/core": ">=18.0.0",
+		"clsx": "^2.1.1"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

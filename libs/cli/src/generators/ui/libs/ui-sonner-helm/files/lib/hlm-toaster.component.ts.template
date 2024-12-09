@@ -9,7 +9,7 @@ import { NgxSonnerToaster, type ToasterProps } from 'ngx-sonner';
 	imports: [NgxSonnerToaster],
 	template: `
 		<ngx-sonner-toaster
-			class="toaster group"
+			[class]="_computedClass()"
 			[invert]="invert()"
 			[theme]="theme()"
 			[position]="position()"
@@ -22,7 +22,6 @@ import { NgxSonnerToaster, type ToasterProps } from 'ngx-sonner';
 			[toastOptions]="toastOptions()"
 			[offset]="offset()"
 			[dir]="dir()"
-			[class]="_computedClass()"
 			[style]="userStyle()"
 		/>
 	`,
@@ -64,5 +63,5 @@ export class HlmToasterComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	public readonly userStyle = input<Record<string, string>>({}, { alias: 'style' });
 
-	protected readonly _computedClass = computed(() => hlm(this.userClass()));
+	protected readonly _computedClass = computed(() => hlm('toaster group', this.userClass()));
 }

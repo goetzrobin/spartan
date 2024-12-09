@@ -1,11 +1,11 @@
 {
 	"name": "@spartan-ng/ui-calendar-brain",
-	"version": "0.0.1-alpha.357",
+	"version": "0.0.1-alpha.373",
 	"sideEffects": false,
 	"peerDependencies": {
 		"@angular/cdk": ">=18.0.0",
 		"@angular/core": ">=18.0.0",
-		"@spartan-ng/ui-date-time": "0.0.1-alpha.357"
+		"@spartan-ng/ui-date-time": "0.0.1-alpha.373"
 	},
 	"publishConfig": {
 		"access": "public"

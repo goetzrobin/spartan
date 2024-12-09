@@ -9,6 +9,16 @@
 			"factory": "./src/generators/brain-secondary-entrypoint/generator",
 			"schema": "./src/generators/brain-secondary-entrypoint/schema.json",
 			"description": "Add a secondary entrypoint to the Brain library"
+		},
+		"replace-ui-version": {
+			"factory": "./src/generators/replace-ui-version/generator",
+			"schema": "./src/generators/replace-ui-version/schema.json",
+			"description": "Replace version in all UI libs"
+		},
+		"replace-cli-version": {
+			"factory": "./src/generators/replace-cli-version/generator",
+			"schema": "./src/generators/replace-cli-version/schema.json",
+			"description": "Replace version in cli files"
 		}
 	}
 }

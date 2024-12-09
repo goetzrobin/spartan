@@ -14,11 +14,12 @@
 		"format": "nx format --write",
 		"lint": "nx run-many --target=lint --parallel",
 		"pre-publish": "pnpm run prepare-cli && pnpm run format",
+		"pre-release": "pnpm run prepare-release && pnpm run format",
 		"prepare": "git config core.hookspath .githooks",
-		"prepare-cli": "nx g @spartan-ng/tools:hlm-to-cli-generator",
-		"start": "nx serve app",
-		"storybook": "nx storybook ui-storybook",
-		"test": "nx run-many --target test --all"
+		"prepare-release": "nx g @spartan-ng/tools:replace-ui-version && nx g @spartan-ng/tools:hlm-to-cli-generator && nx g @spartan-ng/tools:replace-cli-version",
+		"release": "pnpm run release-ui && pnpm run release-cli",
+		"release-cli": "nx run-many --target=release --projects=tag:scope:cli --parallel=1",
+		"release-ui": "nx run-many --target=release --projects=tag:scope:core,tag:scope:brain --parallel=1"
 	},
 	"dependencies": {
 		"@analogjs/content": "1.9.4",
@@ -165,7 +166,6 @@
 		"prettier-plugin-organize-imports": "^4.1.0",
 		"prettier-plugin-packagejson": "^2.5.6",
 		"prettier-plugin-tailwindcss": "^0.6.8",
-		"replace-json-property": "^1.9.0",
 		"rollup": "^4.22.5",
 		"rollup-plugin-typescript-paths": "^1.5.0",
 		"rollup-plugin-visualizer": "^5.12.0",
