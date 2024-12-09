@@ -32,14 +32,6 @@
 				}
 			}
 		},
-		"vercel-build": {
-			"executor": "nx:run-commands",
-			"options": {
-				"cwd": "",
-				"command": "pnpx prisma generate"
-			},
-			"dependsOn": ["build"]
-		},
 		"serve": {
 			"executor": "@analogjs/platform:vite-dev-server",
 			"defaultConfiguration": "development",
