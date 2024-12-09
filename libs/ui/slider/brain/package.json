@@ -9,5 +9,9 @@
 		"@angular/forms": ">=18.0.0",
 		"rxjs": ">=6.6.0"
 	},
-	"sideEffects": false
+	"dependencies": {},
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	}
 }

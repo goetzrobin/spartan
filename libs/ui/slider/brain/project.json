@@ -4,7 +4,7 @@
 	"sourceRoot": "libs/ui/slider/brain/src",
 	"prefix": "lib",
 	"projectType": "library",
-	"tags": [],
+	"tags": ["scope:brain"],
 	"targets": {
 		"build": {
 			"executor": "@nx/angular:ng-packagr-lite",
