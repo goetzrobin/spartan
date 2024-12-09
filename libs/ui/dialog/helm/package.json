@@ -1,18 +1,18 @@
 {
 	"name": "@spartan-ng/ui-dialog-helm",
 	"version": "0.0.1-alpha.373",
+	"sideEffects": false,
+	"dependencies": {},
 	"peerDependencies": {
+		"@angular/cdk": ">=18.0.0",
+		"@angular/common": ">=18.0.0",
+		"@angular/core": ">=18.0.0",
+		"@ng-icons/lucide": ">=29.0.0",
 		"@spartan-ng/ui-core": "0.0.1-alpha.373",
 		"@spartan-ng/ui-dialog-brain": "0.0.1-alpha.373",
 		"@spartan-ng/ui-icon-helm": "0.0.1-alpha.373",
-		"@angular/core": ">=18.0.0",
-		"clsx": "^2.1.1",
-		"@angular/common": ">=18.0.0",
-		"@ng-icons/lucide": ">=29.0.0",
-		"@angular/cdk": ">=18.0.0"
+		"clsx": "^2.1.1"
 	},
-	"dependencies": {},
-	"sideEffects": false,
 	"publishConfig": {
 		"access": "public"
 	}

@@ -1,15 +1,15 @@
 {
 	"name": "@spartan-ng/ui-calendar-helm",
 	"version": "0.0.1-alpha.373",
+	"sideEffects": false,
 	"peerDependencies": {
+		"@angular/cdk": ">=18.0.0",
+		"@angular/core": ">=18.0.0",
+		"@ng-icons/lucide": ">=29.0.0",
 		"@spartan-ng/ui-button-helm": "0.0.1-alpha.373",
 		"@spartan-ng/ui-calendar-brain": "0.0.1-alpha.373",
 		"@spartan-ng/ui-core": "0.0.1-alpha.373",
 		"@spartan-ng/ui-date-time": "0.0.1-alpha.373",
-		"@spartan-ng/ui-icon-helm": "0.0.1-alpha.373",
-		"@angular/core": ">=18.0.0",
-		"@angular/cdk": ">=18.0.0",
-		"@ng-icons/lucide": ">=29.0.0"
-	},
-	"sideEffects": false
+		"@spartan-ng/ui-icon-helm": "0.0.1-alpha.373"
+	}
 }

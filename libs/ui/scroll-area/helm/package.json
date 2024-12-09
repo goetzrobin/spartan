@@ -1,15 +1,15 @@
 {
 	"name": "@spartan-ng/ui-scrollarea-helm",
 	"version": "0.0.1-alpha.373",
+	"sideEffects": false,
+	"dependencies": {},
 	"peerDependencies": {
-		"@spartan-ng/ui-core": "0.0.1-alpha.373",
-		"@angular/core": ">=18.0.0",
 		"@angular/cdk": ">=18.0.0",
+		"@angular/core": ">=18.0.0",
+		"@spartan-ng/ui-core": "0.0.1-alpha.373",
 		"clsx": "^2.1.1",
 		"ngx-scrollbar": "^13.0.3"
 	},
-	"dependencies": {},
-	"sideEffects": false,
 	"publishConfig": {
 		"access": "public"
 	}
