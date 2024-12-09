@@ -388,7 +388,7 @@ create table note (
 			<spartan-code class="mt-3" language="sh" code="node dist/[YOUR_APP_NAME]/analog/server/index.mjs" />
 			<p class="${hlmP}">
 				AnalogJs also supports multiple build presets, which makes it easy to deploy your application to most of the
-				major cloud providers. This includes Vercel, Cloudflare, Azure, AWS, and more.
+				major cloud providers. This includes Zerops, Vercel, Cloudflare, Azure, AWS, and more.
 			</p>
 			<div class="mt-4 flex items-center justify-end">
 				<a
