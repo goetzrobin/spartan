@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'ui-breadcrumb-helm',
 	preset: '../../../../jest.preset.cjs',
