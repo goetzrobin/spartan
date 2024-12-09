@@ -1,4 +1,4 @@
-import { Directive, Input, TemplateRef, computed, inject } from '@angular/core';
+import { computed, Directive, effect, inject, input, TemplateRef } from '@angular/core';
 import { provideExposesStateProviderExisting } from '@spartan-ng/ui-core';
 import { BrnDialogRef } from './brn-dialog-ref';
 import { BrnDialogComponent } from './brn-dialog.component';
@@ -14,17 +14,19 @@ export class BrnDialogContentDirective<T> {
 	private readonly _template = inject(TemplateRef);
 	public readonly state = computed(() => this._brnDialog?.state() ?? this._brnDialogRef?.state() ?? 'closed');
 
-	@Input()
-	public set class(newClass: string | null | undefined) {
+	public readonly className = input<string | null | undefined>(undefined, { alias: 'class' });
+	private readonly _classEffect = effect(() => {
 		if (!this._brnDialog) return;
+		const newClass = this.className();
 		this._brnDialog.setPanelClass(newClass);
-	}
+	});
 
-	@Input()
-	public set context(context: T) {
-		if (!this._brnDialog) return;
+	public readonly context = input<T | undefined>(undefined);
+	private readonly _contextEffect = effect(() => {
+		const context = this.context();
+		if (!this._brnDialog || !context) return;
 		this._brnDialog.setContext(context);
-	}
+	});
 
 	constructor() {
 		if (!this._brnDialog) return;
