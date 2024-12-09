@@ -1,11 +1,11 @@
 {
 	"name": "@spartan-ng/ui-sonner-helm",
-	"version": "0.0.1-alpha.370",
+	"version": "0.0.1-alpha.371",
 	"peerDependencies": {
 		"@angular/common": "^18.1.0",
 		"@angular/core": "^18.1.0",
 		"@ng-icons/lucide": "^26.3.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.370",
+		"@spartan-ng/ui-core": "0.0.1-alpha.371",
 		"clsx": "^2.1.1",
 		"ngx-sonner": "^2.0.0"
 	},
