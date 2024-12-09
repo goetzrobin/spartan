@@ -1,9 +1,9 @@
 {
 	"name": "@spartan-ng/ui-table-helm",
-	"version": "0.0.1-alpha.371",
+	"version": "0.0.1-alpha.372",
 	"peerDependencies": {
-		"@spartan-ng/ui-core": "0.0.1-alpha.371",
-		"@spartan-ng/ui-table-brain": "0.0.1-alpha.371",
+		"@spartan-ng/ui-core": "0.0.1-alpha.372",
+		"@spartan-ng/ui-table-brain": "0.0.1-alpha.372",
 		"@angular/core": ">=18.0.0",
 		"clsx": "^2.1.1",
 		"@angular/common": ">=18.0.0"
