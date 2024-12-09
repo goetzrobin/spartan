@@ -47,7 +47,11 @@ const replaceUiVersionInCliVersionsFile = (tree: Tree, oldVersion: string, newVe
 };
 
 export default async function replaceUiVersionGenerator(tree: Tree) {
-	const relativePackageJsonFilePaths = await recursivelyFindRelativePackageJsonFilePaths('libs/ui');
+	const relativePackageJsonFilePaths = [
+		...(await recursivelyFindRelativePackageJsonFilePaths('libs/ui')),
+		// this is going to be our main package going forward which contains all primitives as secondary entry points
+		'libs/brain/package.json',
+	];
 
 	// this goes into the accordion's package.json, which should always be defined
 	// if there is no version there we should definitely not move forward
