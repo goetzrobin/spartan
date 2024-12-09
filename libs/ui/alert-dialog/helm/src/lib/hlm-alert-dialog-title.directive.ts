@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { BrnAlertDialogTitleDirective } from '@spartan-ng/ui-alertdialog-brain';
+import { BrnAlertDialogTitleDirective } from '@spartan-ng/brain/alert-dialog';
 import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
 

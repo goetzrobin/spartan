@@ -5,7 +5,7 @@ import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
 import { buttonVariants } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { BrnTabsPaginatedListDirective, BrnTabsTriggerDirective } from '@spartan-ng/ui-tabs-brain';
+import { BrnTabsPaginatedListDirective, BrnTabsTriggerDirective } from '@spartan-ng/brain/tabs';
 import type { ClassValue } from 'clsx';
 import { listVariants } from './hlm-tabs-list.component';
 

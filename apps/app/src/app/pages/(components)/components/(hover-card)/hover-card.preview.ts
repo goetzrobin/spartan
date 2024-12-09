@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCalendar } from '@ng-icons/lucide';
+import { BrnHoverCardModule } from '@spartan-ng/brain/hover-card';
 import { HlmAvatarModule } from '@spartan-ng/ui-avatar-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnHoverCardModule } from '@spartan-ng/ui-hovercard-brain';
 import { HlmHoverCardModule } from '@spartan-ng/ui-hovercard-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
@@ -42,7 +42,7 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideCalendar } from '@ng-icons/lucide';
 import { HlmAvatarModule } from '@spartan-ng/ui-avatar-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnHoverCardModule } from '@spartan-ng/ui-hovercard-brain';
+import { BrnHoverCardModule } from '@spartan-ng/brain/hover-card';
 import { HlmHoverCardModule } from '@spartan-ng/ui-hovercard-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
@@ -81,7 +81,7 @@ import {
   BrnHoverCardComponent,
   BrnHoverCardContentDirective,
   BrnHoverCardTriggerDirective,
-} from '@spartan-ng/ui-hovercard-brain';
+} from '@spartan-ng/brain/hover-card';
 
 import {
   HlmHoverCardContentComponent

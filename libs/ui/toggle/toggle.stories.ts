@@ -2,11 +2,11 @@ import { JsonPipe, NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { lucideItalic } from '@ng-icons/lucide';
+import { BrnToggleDirective, BrnToggleGroupModule } from '@spartan-ng/brain/toggle';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { hlmP } from '../typography/helm/src';
-import { BrnToggleDirective, BrnToggleGroupModule } from './brain/src';
 import { HlmToggleDirective, HlmToggleGroupModule } from './helm/src';
 
 const meta: Meta<HlmToggleDirective> = {

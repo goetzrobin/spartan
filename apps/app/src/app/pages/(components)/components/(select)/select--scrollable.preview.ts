@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 @Component({
@@ -69,7 +69,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 export class SelectScrollablePreviewComponent {}
 
 export const scrollableCode = `import { Component } from '@angular/core';
-import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 @Component({

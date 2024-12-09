@@ -14,9 +14,9 @@ import {
 	BrnCalendarWeekdayDirective,
 	Weekday,
 	injectBrnCalendarI18n,
-} from '@spartan-ng/ui-calendar-brain';
+} from '@spartan-ng/brain/calendar';
 import { hlm } from '@spartan-ng/ui-core';
-import { injectDateAdapter } from '@spartan-ng/ui-date-time';
+import { injectDateAdapter } from '@spartan-ng/brain/date-time';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 
 @Component({

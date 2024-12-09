@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, forwardRef } from '@angular/core';
-import { BrnAlertDialogComponent, BrnAlertDialogOverlayComponent } from '@spartan-ng/ui-alertdialog-brain';
-import { BrnDialogComponent } from '@spartan-ng/ui-dialog-brain';
+import { BrnAlertDialogComponent, BrnAlertDialogOverlayComponent } from '@spartan-ng/brain/alert-dialog';
+import { BrnDialogComponent } from '@spartan-ng/brain/dialog';
 import { HlmAlertDialogOverlayDirective } from './hlm-alert-dialog-overlay.directive';
 
 @Component({

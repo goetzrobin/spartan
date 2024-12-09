@@ -2,9 +2,9 @@ import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucidePalette } from '@ng-icons/lucide';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuImports } from '@spartan-ng/ui-menu-helm';
 import { AppThemes, type Theme, ThemeService } from '../theme.service';
 

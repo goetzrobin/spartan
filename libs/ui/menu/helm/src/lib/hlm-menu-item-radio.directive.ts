@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { BrnMenuItemRadioDirective } from '@spartan-ng/brain/menu';
 import { hlm } from '@spartan-ng/ui-core';
-import { BrnMenuItemRadioDirective } from '@spartan-ng/ui-menu-brain';
 import type { ClassValue } from 'clsx';
 
 @Directive({

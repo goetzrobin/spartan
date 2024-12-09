@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 @Component({
@@ -24,7 +24,7 @@ export class SelectPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 @Component({
@@ -50,7 +50,7 @@ export class SelectPreviewComponent {}
 
 export const defaultImports = `
 import { Component } from '@angular/core';
-import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 `;
 

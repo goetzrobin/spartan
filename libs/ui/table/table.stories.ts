@@ -4,16 +4,16 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { faker } from '@faker-js/faker';
 import { lucideChevronDown } from '@ng-icons/lucide';
+import { BrnMenuModule } from '@spartan-ng/brain/menu';
+import { BrnTableModule, type PaginatorState, useBrnColumnManager } from '@spartan-ng/brain/table';
+import { BrnToggleGroupModule } from '@spartan-ng/brain/toggle';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { debounceTime } from 'rxjs';
 import { HlmButtonDirective, HlmButtonModule } from '../button/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
-import { BrnMenuModule } from '../menu/brain/src';
 import { HlmMenuModule } from '../menu/helm/src';
-import { BrnToggleGroupModule } from '../toggle/brain/src';
 import { HlmToggleGroupModule } from '../toggle/helm/src';
-import { BrnTableModule, type PaginatorState, useBrnColumnManager } from './brain/src';
 import { HlmTableComponent, HlmTableModule } from './helm/src';
 
 const createUsers = (numUsers = 5) => {

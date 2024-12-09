@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { BrnSliderInputDirective } from '@spartan-ng/brain/slider';
 import { hlm } from '@spartan-ng/ui-core';
-import { BrnSliderInputDirective } from '@spartan-ng/ui-slider-brain';
 import type { ClassValue } from 'clsx';
 
 @Directive({

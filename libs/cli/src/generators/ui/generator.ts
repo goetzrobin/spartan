@@ -52,7 +52,7 @@ async function createPrimitiveLibraries(
 
 	if (primitivesToCreate.includes('collapsible')) {
 		tasks.push(
-			addDependenciesToPackageJson(tree, { '@spartan-ng/ui-collapsible-brain': SPARTAN_COLLAPSIBLE_BRAIN_VERSION }, {}),
+			addDependenciesToPackageJson(tree, { '@spartan-ng/brain/collapsible': SPARTAN_COLLAPSIBLE_BRAIN_VERSION }, {}),
 		);
 	}
 	if (primitivesToCreate.length === 1 && primitivesToCreate[0] === 'collapsible') {

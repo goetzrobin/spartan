@@ -1,7 +1,7 @@
 import { Component, HostBinding, inject } from '@angular/core';
 import { lucideCheck } from '@ng-icons/lucide';
+import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/ui-dialog-brain';
 import {
 	HlmDialogDescriptionDirective,
 	HlmDialogHeaderComponent,

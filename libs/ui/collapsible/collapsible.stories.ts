@@ -1,7 +1,7 @@
+import { BrnCollapsibleComponent, BrnCollapsibleImports } from '@spartan-ng/brain/collapsible';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { BrnCollapsibleComponent, BrnCollapsibleImports } from './brain/src';
 
 const meta: Meta<BrnCollapsibleComponent> = {
 	title: 'Collapsible',

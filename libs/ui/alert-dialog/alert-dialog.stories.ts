@@ -1,6 +1,6 @@
+import { BrnAlertDialogImports } from '@spartan-ng/brain/alert-dialog';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { BrnAlertDialogImports } from './brain/src';
 import { HlmAlertDialogComponent, HlmAlertDialogImports } from './helm/src';
 
 const meta: Meta<HlmAlertDialogComponent> = {

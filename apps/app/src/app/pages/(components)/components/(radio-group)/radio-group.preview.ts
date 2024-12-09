@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/ui-radiogroup-brain';
+import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/brain/radio-group';
 import { HlmRadioDirective, HlmRadioGroupDirective, HlmRadioIndicatorComponent } from '@spartan-ng/ui-radiogroup-helm';
 import { HlmSmallDirective } from '@spartan-ng/ui-typography-helm';
 
@@ -45,7 +45,7 @@ export class RadioGroupPreviewComponent {
 export const defaultCode = `
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/ui-radiogroup-brain';
+import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/brain/radio-group';
 import { HlmRadioDirective, HlmRadioGroupDirective, HlmRadioIndicatorComponent } from '@spartan-ng/ui-radiogroup-helm';
 import { HlmSmallDirective } from '@spartan-ng/ui-typography-helm';
 
@@ -89,7 +89,7 @@ export class RadioGroupPreviewComponent {
 `;
 
 export const defaultImports = `
-import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/ui-radiogroup-brain';
+import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/brain/radio-group';
 import {
   HlmRadioDirective,
   HlmRadioGroupDirective,

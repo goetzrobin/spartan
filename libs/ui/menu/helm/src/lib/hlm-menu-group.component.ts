@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BrnMenuGroupDirective } from '@spartan-ng/ui-menu-brain';
+import { BrnMenuGroupDirective } from '@spartan-ng/brain/menu';
 
 @Component({
 	selector: 'hlm-menu-group',

@@ -1,7 +1,6 @@
 import { BooleanInput, NumberInput } from '@angular/cdk/coercion';
 import { Component, booleanAttribute, computed, input, model, numberAttribute, viewChild } from '@angular/core';
 import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
-import { buttonVariants } from '@spartan-ng/ui-button-helm';
 import {
 	BrnCalendarCellButtonDirective,
 	BrnCalendarCellDirective,
@@ -14,9 +13,10 @@ import {
 	BrnCalendarWeekdayDirective,
 	Weekday,
 	injectBrnCalendarI18n,
-} from '@spartan-ng/ui-calendar-brain';
+} from '@spartan-ng/brain/calendar';
+import { injectDateAdapter } from '@spartan-ng/brain/date-time';
+import { buttonVariants } from '@spartan-ng/ui-button-helm';
 import { hlm } from '@spartan-ng/ui-core';
-import { injectDateAdapter } from '@spartan-ng/ui-date-time';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 
 @Component({

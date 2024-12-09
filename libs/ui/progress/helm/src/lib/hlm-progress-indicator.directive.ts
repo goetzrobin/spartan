@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectBrnProgress } from '@spartan-ng/brain/progress';
 import { hlm } from '@spartan-ng/ui-core';
-import { injectBrnProgress } from '@spartan-ng/ui-progress-brain';
 import type { ClassValue } from 'clsx';
 
 @Directive({

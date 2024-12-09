@@ -1,7 +1,7 @@
+import { BrnSheetComponent, BrnSheetContentDirective, BrnSheetTriggerDirective } from '@spartan-ng/brain/sheet';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
-import { BrnSheetComponent, BrnSheetContentDirective, BrnSheetTriggerDirective } from './brain/src';
 import { HlmSheetImports } from './helm/src';
 
 export type SheetProps = { side: 'top' | 'bottom' | 'left' | 'right' };

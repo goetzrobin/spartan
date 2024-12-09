@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { BrnSelectLabelDirective } from '@spartan-ng/brain/select';
 import { hlm } from '@spartan-ng/ui-core';
-import { BrnSelectLabelDirective } from '@spartan-ng/ui-select-brain';
 import type { ClassValue } from 'clsx';
 import { HlmSelectContentDirective } from './hlm-select-content.directive';
 

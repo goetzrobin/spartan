@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideChevronUp } from '@ng-icons/lucide';
-import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 @Component({
@@ -29,7 +29,7 @@ export const multipleCode = `
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideChevronUp } from '@ng-icons/lucide';
-import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 @Component({

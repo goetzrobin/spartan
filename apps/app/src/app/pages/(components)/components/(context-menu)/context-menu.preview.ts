@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
 	HlmMenuComponent,
 	HlmMenuGroupComponent,
@@ -124,7 +124,7 @@ export const defaultCode = `
 import { Component } from '@angular/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import {
   HlmMenuComponent,
   HlmMenuGroupComponent,
@@ -245,7 +245,7 @@ export class ContextMenuPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import {
   HlmMenuComponent,
   HlmMenuGroupComponent,

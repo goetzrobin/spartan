@@ -2,15 +2,11 @@ import { NgForOf } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideChevronsUpDown, lucideSearch } from '@ng-icons/lucide';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
+import { BrnPopoverComponent, BrnPopoverContentDirective, BrnPopoverTriggerDirective } from '@spartan-ng/brain/popover';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import {
-	BrnPopoverComponent,
-	BrnPopoverContentDirective,
-	BrnPopoverTriggerDirective,
-} from '@spartan-ng/ui-popover-brain';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 
 type Framework = { label: string; value: string };
@@ -113,7 +109,7 @@ export class ComboboxPreviewComponent {
 
 export const defaultCode = `
 import { Component, signal } from '@angular/core';
-import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -121,7 +117,7 @@ import {
   BrnPopoverComponent,
   BrnPopoverContentDirective,
   BrnPopoverTriggerDirective,
-} from '@spartan-ng/ui-popover-brain';
+} from '@spartan-ng/brain/popover';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 import { NgForOf } from '@angular/common';
 import { provideIcons } from '@ng-icons/core';

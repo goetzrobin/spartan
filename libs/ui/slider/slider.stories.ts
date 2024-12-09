@@ -1,8 +1,8 @@
 import type { Direction } from '@angular/cdk/bidi';
 import { signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrnSliderImports } from '@spartan-ng/brain/slider';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
-import { BrnSliderImports } from './brain/src';
 import { HlmSliderImports } from './helm/src';
 
 interface BrnSliderStoryArgs {

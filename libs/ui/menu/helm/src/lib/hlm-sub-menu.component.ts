@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
+import { BrnMenuDirective } from '@spartan-ng/brain/menu';
 import { hlm } from '@spartan-ng/ui-core';
-import { BrnMenuDirective } from '@spartan-ng/ui-menu-brain';
 import type { ClassValue } from 'clsx';
 
 @Component({

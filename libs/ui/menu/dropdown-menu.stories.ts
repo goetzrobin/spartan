@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import * as lucide from '@ng-icons/lucide';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import { BrnMenuTriggerDirective } from './brain/src';
 import { HlmMenuComponent, HlmMenuImports, HlmMenuItemCheckComponent, HlmMenuItemRadioComponent } from './helm/src';
 
 const meta: Meta<HlmMenuComponent> = {

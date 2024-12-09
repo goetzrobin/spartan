@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { BrnSheetDescriptionDirective } from '@spartan-ng/brain/sheet';
 import { hlm } from '@spartan-ng/ui-core';
-import { BrnSheetDescriptionDirective } from '@spartan-ng/ui-sheet-brain';
 import type { ClassValue } from 'clsx';
 
 @Directive({

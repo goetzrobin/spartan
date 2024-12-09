@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@spartan-ng/ui-forms-brain';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@spartan-ng/brain/forms';
 import { HlmErrorDirective } from './hlm-error.directive';
 import { HlmFormFieldComponent } from './hlm-form-field.component';
 import { HlmHintDirective } from './hlm-hint.directive';

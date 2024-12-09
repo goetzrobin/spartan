@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
 	HlmMenuBarComponent,
 	HlmMenuBarItemDirective,
@@ -178,7 +178,7 @@ export class MenubarPreviewComponent {}
 export const defaultCode = `
 import { Component } from '@angular/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import {
   HlmMenuBarComponent,
   HlmMenuBarItemDirective,
@@ -355,7 +355,7 @@ export class MenubarPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import {
   HlmMenuBarComponent,
   HlmMenuBarItemDirective,
