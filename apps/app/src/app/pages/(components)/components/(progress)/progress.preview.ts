@@ -1,5 +1,5 @@
 import { Component, type OnInit } from '@angular/core';
-import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng/ui-progress-brain';
+import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng/brain/progress';
 import { HlmProgressDirective, HlmProgressIndicatorDirective } from '@spartan-ng/ui-progress-helm';
 
 @Component({
@@ -25,7 +25,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   BrnProgressComponent,
   BrnProgressIndicatorComponent,
-} from '@spartan-ng/ui-progress-brain';
+} from '@spartan-ng/brain/progress';
 import { HlmProgressIndicatorDirective } from '@spartan-ng/ui-progress-helm';
 
 @Component({
@@ -51,7 +51,7 @@ export const defaultImports = `
 import {
   BrnProgressComponent,
   BrnProgressIndicatorComponent,
-} from '@spartan-ng/ui-progress-brain';
+} from '@spartan-ng/brain/progress';
 import { HlmProgressIndicatorDirective } from '@spartan-ng/ui-progress-helm';
 `;
 export const defaultSkeleton = `

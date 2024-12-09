@@ -1,5 +1,5 @@
+import { BrnSeparatorComponent } from '@spartan-ng/brain/separator';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
-import { BrnSeparatorComponent } from './brain/src';
 import { HlmSeparatorDirective } from './helm/src';
 
 const meta: Meta<BrnSeparatorComponent> = {

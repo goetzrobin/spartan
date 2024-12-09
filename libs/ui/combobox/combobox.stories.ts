@@ -2,13 +2,13 @@ import { NgForOf } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import * as lucide from '@ng-icons/lucide';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
+import { BrnPopoverImports } from '@spartan-ng/brain/popover';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { BrnCommandImports } from '../command/brain/src';
 import { HlmCommandImports } from '../command/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import { BrnPopoverImports } from '../popover/brain/src';
 import { HlmPopoverContentDirective } from '../popover/helm/src';
 
 const meta: Meta<{}> = {

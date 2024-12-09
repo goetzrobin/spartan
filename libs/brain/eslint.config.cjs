@@ -24,11 +24,27 @@ module.exports = [
 					style: 'kebab-case',
 				},
 			],
+			// we may want to enable these at some point
+			'@angular-eslint/template/click-events-have-key-events': 'off',
+			'@angular-eslint/template/interactive-supports-focus': 'off',
+			'@angular-eslint/template/label-has-associated-control': 'off',
+		},
+	},
+	{
+		files: ['**/tests/*.ts'],
+		rules: {
+			'@angular-eslint/directive-selector': 'off',
+			'@angular-eslint/component-selector': 'off',
 		},
 	},
 	{
 		files: ['**/*.html'],
 		// Override or add rules here
-		rules: {},
+		rules: {
+			// we may want to enable these at some point
+			'@angular-eslint/template/click-events-have-key-events': 'off',
+			'@angular-eslint/template/interactive-supports-focus': 'off',
+			'@angular-eslint/template/label-has-associated-control': 'off',
+		},
 	},
 ];

@@ -1,5 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { lucideCheck, lucideChevronDown } from '@ng-icons/lucide';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
+import { BrnPopoverComponent, BrnPopoverContentDirective, BrnPopoverTriggerDirective } from '@spartan-ng/brain/popover';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
 	HlmCardContentDirective,
@@ -9,16 +11,10 @@ import {
 	HlmCardHeaderDirective,
 	HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
-import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import {
-	BrnPopoverComponent,
-	BrnPopoverContentDirective,
-	BrnPopoverTriggerDirective,
-} from '@spartan-ng/ui-popover-brain';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 
 type Framework = { label: string; value: string };
@@ -156,7 +152,7 @@ import {
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
-import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
@@ -166,7 +162,7 @@ import {
   BrnPopoverComponent,
   BrnPopoverContentDirective,
   BrnPopoverTriggerDirective,
-} from '@spartan-ng/ui-popover-brain';
+} from '@spartan-ng/brain/popover';
 
 type Framework = { label: string; value: string };
 
