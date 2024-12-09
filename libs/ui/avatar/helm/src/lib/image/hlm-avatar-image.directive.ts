@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { BrnAvatarImageDirective } from '@spartan-ng/ui-avatar-brain';
+import { BrnAvatarImageDirective } from '@spartan-ng/brain/avatar';
 import { hlm } from '@spartan-ng/ui-core';
 import type { ClassValue } from 'clsx';
 

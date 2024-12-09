@@ -1,33 +1,25 @@
 {
 	"name": "spartan",
 	"version": "0.0.0",
+	"private": true,
 	"license": "MIT",
 	"type": "module",
-	"engines": {
-		"node": "20.x || 21.x || 22.x",
-		"npm": "please-use-pnpm",
-		"pnpm": ">=9",
-		"yarn": "please-use-pnpm"
-	},
-	"packageManager": "pnpm@9.11.0",
-	"engineStrict": true,
 	"scripts": {
-		"start": "nx serve app",
-		"dev": "nx serve app",
-		"lint": "nx run-many --target=lint --parallel",
 		"build": "nx run-many --target build --all --parallel",
-		"test": "nx run-many --target test --all",
+		"build-storybook": "nx build-storybook ui-storybook",
+		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+		"chromatic": "chromatic --project-token=chpt_845c7a47afdb884",
+		"dev": "nx serve app",
 		"e2e": "nx run-many --target e2e --projects=tag:scope:e2e --all --parallel=1",
 		"format": "nx format --write",
-		"storybook": "nx storybook ui-storybook",
-		"build-storybook": "nx build-storybook ui-storybook",
-		"chromatic": "chromatic --project-token=chpt_845c7a47afdb884",
+		"lint": "nx run-many --target=lint --parallel",
+		"pre-publish": "pnpm run prepare-cli && pnpm run format",
 		"prepare": "git config core.hookspath .githooks",
 		"prepare-cli": "nx g @spartan-ng/tools:hlm-to-cli-generator",
-		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-		"pre-publish": "pnpm run prepare-cli && pnpm run format"
+		"start": "nx serve app",
+		"storybook": "nx storybook ui-storybook",
+		"test": "nx run-many --target test --all"
 	},
-	"private": true,
 	"dependencies": {
 		"@analogjs/content": "1.9.4",
 		"@analogjs/router": "1.9.4",
@@ -171,6 +163,7 @@
 		"postcss-url": "~10.1.3",
 		"prettier": "^3.3.3",
 		"prettier-plugin-organize-imports": "^4.1.0",
+		"prettier-plugin-packagejson": "^2.5.6",
 		"prettier-plugin-tailwindcss": "^0.6.8",
 		"replace-json-property": "^1.9.0",
 		"rollup": "^4.22.5",
@@ -189,6 +182,18 @@
 		"vite-tsconfig-paths": "5.0.1",
 		"vitest": "2.1.1"
 	},
+	"packageManager": "pnpm@9.11.0",
+	"engines": {
+		"node": "20.x || 21.x || 22.x",
+		"npm": "please-use-pnpm",
+		"pnpm": ">=9",
+		"yarn": "please-use-pnpm"
+	},
+	"engineStrict": true,
+	"nx": {
+		"includedScripts": []
+	},
+	"readme": "ERROR: No README data found!",
 	"trustedDependencies": [
 		"core-js",
 		"nx",
@@ -197,9 +202,5 @@
 		"cypress",
 		"sharp"
 	],
-	"readme": "ERROR: No README data found!",
-	"_id": "spartan@0.0.0",
-	"nx": {
-		"includedScripts": []
-	}
+	"_id": "spartan@0.0.0"
 }

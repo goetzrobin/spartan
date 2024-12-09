@@ -1,12 +1,15 @@
 {
 	"name": "@spartan-ng/brain",
 	"version": "0.0.1-alpha.357",
+	"sideEffects": false,
 	"peerDependencies": {
+		"@angular/cdk": ">=18.0.0",
 		"@angular/common": ">=18.0.0",
 		"@angular/core": ">=18.0.0",
-		"@angular/cdk": ">=18.0.0",
 		"@angular/forms": ">=18.0.0",
-		"@spartan-ng/ui-forms-brain": "0.0.1-alpha.357"
-	},
-	"sideEffects": false
+		"@spartan-ng/ui-core": "0.0.1-alpha.357",
+		"@spartan-ng/ui-forms-brain": "0.0.1-alpha.357",
+		"clsx": ">=2.0.0",
+		"rxjs": ">=6.6.0"
+	}
 }

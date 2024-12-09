@@ -75,7 +75,7 @@ nx g @spartan-ng/tools:brain-secondary-entrypoint --name=feature-name
 If you are migrating an existing feature to a Brain feature, you can use something like the following command:
 
 ```shell
-nx g @spartan-ng/tools:brain-secondary-entrypoint --name=checkbox --project=ui-checkbox-helm
+nx g @spartan-ng/tools:brain-secondary-entrypoint --name=checkbox --project=ui-checkbox-brain
 ```
 
 ## Submitting pull requests
