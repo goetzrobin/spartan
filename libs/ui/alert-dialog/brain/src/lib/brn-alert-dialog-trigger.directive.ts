@@ -16,6 +16,6 @@ import type { BrnAlertDialogComponent } from './brn-alert-dialog.component';
 export class BrnAlertDialogTriggerDirective extends BrnDialogTriggerDirective {
 	@Input()
 	public set brnAlertDialogTriggerFor(brnDialog: BrnAlertDialogComponent) {
-		super.brnDialogTriggerFor = brnDialog;
+		this.brnDialogTriggerForState().set(brnDialog);
 	}
 }
