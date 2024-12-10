@@ -1,4 +1,4 @@
-import { type AfterContentInit, Component, ContentChild } from '@angular/core';
+import { type AfterContentInit, Component, contentChild } from '@angular/core';
 import {
 	BrnHoverCardContentDirective,
 	BrnHoverCardContentService,
@@ -14,13 +14,11 @@ import {
 	`,
 })
 export class BrnHoverCardComponent implements AfterContentInit {
-	@ContentChild(BrnHoverCardTriggerDirective, { static: true })
-	private readonly _trigger?: BrnHoverCardTriggerDirective;
-	@ContentChild(BrnHoverCardContentDirective, { static: true })
-	private readonly _content?: BrnHoverCardContentDirective;
+	private readonly _trigger = contentChild(BrnHoverCardTriggerDirective);
+	private readonly _content = contentChild(BrnHoverCardContentDirective);
 
 	public ngAfterContentInit() {
-		if (!this._trigger || !this._content) return;
-		this._trigger.brnHoverCardTriggerFor = this._content;
+		if (!this._trigger() || !this._content()) return;
+		this._trigger()?.brnHoverCardTriggerForState().set(this._content());
 	}
 }
