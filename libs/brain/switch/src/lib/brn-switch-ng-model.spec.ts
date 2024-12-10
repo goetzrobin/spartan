@@ -10,7 +10,6 @@ import { BrnSwitchComponent } from './brn-switch.component';
 	selector: 'brn-switch-ng-model',
 	standalone: true,
 	template: `
-		 
 		<label>
 			Airplane mode is: {{ airplaneMode ? 'on' : 'off' }}
 			<brn-switch [disabled]="disabled" [(ngModel)]="airplaneMode">
