@@ -6,8 +6,8 @@
 	"peerDependencies": {
 		"@angular/common": ">=18.0.0",
 		"@angular/core": ">=18.0.0",
+		"@spartan-ng/brain": "0.0.1-alpha.357",
 		"@spartan-ng/ui-core": "0.0.1-alpha.357",
-		"@spartan-ng/ui-table-brain": "0.0.1-alpha.357",
 		"clsx": "^2.1.1"
 	}
 }

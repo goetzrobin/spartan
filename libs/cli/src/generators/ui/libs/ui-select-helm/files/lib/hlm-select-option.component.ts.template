@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input } from '@an
 import { lucideCheck } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { BrnSelectOptionDirective } from '@spartan-ng/ui-select-brain';
+import { BrnSelectOptionDirective } from '@spartan-ng/brain/select';
 import type { ClassValue } from 'clsx';
 
 @Component({

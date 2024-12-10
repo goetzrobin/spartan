@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import {
 	HlmBreadcrumbDirective,
 	HlmBreadcrumbEllipsisComponent,
@@ -8,7 +9,6 @@ import {
 	HlmBreadcrumbPageDirective,
 	HlmBreadcrumbSeparatorComponent,
 } from '@spartan-ng/ui-breadcrumb-helm';
-import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm';
 
 @Component({
@@ -77,7 +77,7 @@ import {
 	HlmBreadcrumbPageDirective,
 	HlmBreadcrumbSeparatorComponent,
 } from '@spartan-ng/ui-breadcrumb-helm';
-import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm';
 
 @Component({

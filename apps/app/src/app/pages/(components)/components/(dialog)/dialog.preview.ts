@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/brain/dialog';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
 import {
 	HlmDialogComponent,
 	HlmDialogContentComponent,
@@ -60,7 +60,7 @@ export class DialogPreviewComponent {}
 export const defaultCode = `
 import { Component } from '@angular/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
+import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/brain/dialog';
 import {
   HlmDialogComponent,
   HlmDialogContentComponent,
@@ -119,7 +119,7 @@ export class DialogPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
+import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/brain/dialog';
 import {
   HlmDialogComponent,
   HlmDialogContentComponent,

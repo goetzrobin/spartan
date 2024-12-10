@@ -22,7 +22,7 @@ import {
 	viewChild,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ChangeFn, TouchFn } from '@spartan-ng/ui-forms-brain';
+import { ChangeFn, TouchFn } from '@spartan-ng/brain/forms';
 
 export const BRN_CHECKBOX_VALUE_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,

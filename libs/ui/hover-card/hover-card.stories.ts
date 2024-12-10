@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCalendarDays } from '@ng-icons/lucide';
+import { type BrnHoverCardComponent, BrnHoverCardModule } from '@spartan-ng/brain/hover-card';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmAvatarModule } from '../avatar/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmCardDirective } from '../card/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import { type BrnHoverCardComponent, BrnHoverCardModule } from './brain/src';
 import { HlmHoverCardModule } from './helm/src';
 
 @Component({

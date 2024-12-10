@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideGlobe, lucideMicVocal } from '@ng-icons/lucide';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
 	HlmMenuBarComponent,
 	HlmMenuBarItemDirective,

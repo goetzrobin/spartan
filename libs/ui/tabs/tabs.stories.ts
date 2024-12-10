@@ -1,9 +1,9 @@
+import { BrnTabsDirective, BrnTabsImports } from '@spartan-ng/brain/tabs';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmCardImports } from '../card/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
-import { BrnTabsDirective, BrnTabsImports } from './brain/src';
 import { HlmTabsImports } from './helm/src';
 
 const meta: Meta<BrnTabsDirective> = {

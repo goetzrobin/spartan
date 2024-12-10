@@ -1,13 +1,13 @@
 import { Component, HostListener, signal } from '@angular/core';
 import * as lucide from '@ng-icons/lucide';
+import { BrnCommandComponent, BrnCommandImports } from '@spartan-ng/brain/command';
+import { BrnDialogImports } from '@spartan-ng/brain/dialog';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { BrnDialogImports } from '../dialog/brain/src';
 import { HlmDialogOverlayDirective } from '../dialog/helm/src';
 import { HlmIconComponent, provideIcons } from '../icon/helm/src';
 import { HlmCodeDirective } from '../typography/helm/src';
-import { BrnCommandComponent, BrnCommandImports } from './brain/src';
 import { HlmCommandImports } from './helm/src';
 
 const meta: Meta<BrnCommandComponent> = {

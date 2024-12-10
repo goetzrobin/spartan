@@ -10,7 +10,7 @@ import {
 	untracked,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 import { HlmPaginationContentDirective } from './hlm-pagination-content.directive';
 import { HlmPaginationEllipsisComponent } from './hlm-pagination-ellipsis.component';
