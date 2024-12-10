@@ -1,14 +1,14 @@
 {
 	"name": "@spartan-ng/ui-breadcrumb-helm",
-	"version": "0.0.1-alpha.357",
+	"version": "0.0.1-alpha.381",
 	"sideEffects": false,
 	"dependencies": {},
 	"peerDependencies": {
 		"@angular/core": "18.2.5",
 		"@angular/router": "18.2.5",
 		"@ng-icons/lucide": ">=29.0.0",
-		"@spartan-ng/ui-core": "0.0.1-alpha.357",
-		"@spartan-ng/ui-icon-helm": "0.0.1-alpha.357",
+		"@spartan-ng/ui-core": "0.0.1-alpha.381",
+		"@spartan-ng/ui-icon-helm": "0.0.1-alpha.381",
 		"clsx": "^2.1.1"
 	},
 	"publishConfig": {
