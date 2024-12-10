@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { APP_BOOTSTRAP_LISTENER, ApplicationRef, InjectionToken, inject } from '@angular/core';
-import { BehaviorSubject, first } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 export const tRPC_CACHE_STATE = new InjectionToken<{
 	isCacheActive: BehaviorSubject<boolean>;

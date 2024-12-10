@@ -25,7 +25,8 @@ import {
 import { toObservable } from '@angular/core/rxjs-interop';
 import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { BrnLabelDirective } from '@spartan-ng/brain/label';
-import { Subject, debounceTime, merge, takeUntil, tap } from 'rxjs';
+import { Subject, merge } from 'rxjs';
+import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 
 export const BRN_SLIDER_INPUT = new InjectionToken<BrnSliderInput>('BrnSliderInput');
 

@@ -9,7 +9,7 @@ import {
 	HlmPaginationNextComponent,
 	HlmPaginationPreviousComponent,
 } from '@spartan-ng/ui-pagination-helm';
-import { map } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'spartan-pagination-query-params',

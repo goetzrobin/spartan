@@ -1,3 +1,7 @@
+import {
+	rule as preferRxjsOperatorCompat,
+	RULE_NAME as preferRxjsOperatorCompatName,
+} from './rules/prefer-rxjs-operator-compat';
 import { rule as preferSignals, RULE_NAME as preferSignalsName } from './rules/prefer-signals';
 /**
  * Import your custom workspace rules at the top of this file.
@@ -24,5 +28,5 @@ module.exports = {
 	 *  [myCustomRuleName]: myCustomRule
 	 * }
 	 */
-	rules: { [preferSignalsName]: preferSignals },
+	rules: { [preferSignalsName]: preferSignals, [preferRxjsOperatorCompatName]: preferRxjsOperatorCompat },
 };

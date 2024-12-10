@@ -15,7 +15,7 @@ import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
 import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
-import { debounceTime, map } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 export type Payment = {
 	id: string;

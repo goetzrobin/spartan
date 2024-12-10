@@ -1,6 +1,7 @@
 import type { NgZone } from '@angular/core';
 import { brnZoneOptimized } from '@spartan-ng/ui-core';
-import { type Observable, type Subject, distinctUntilChanged, filter, fromEvent, map, merge, takeUntil } from 'rxjs';
+import { Observable, Subject, fromEvent, merge } from 'rxjs';
+import { distinctUntilChanged, filter, map, takeUntil } from 'rxjs/operators';
 
 function movedOut({ currentTarget, relatedTarget }: MouseEvent): boolean {
 	return !isElement(relatedTarget) || !isElement(currentTarget) || !currentTarget.contains(relatedTarget);

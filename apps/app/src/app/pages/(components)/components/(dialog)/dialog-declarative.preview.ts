@@ -15,7 +15,7 @@ import {
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmH4Directive, HlmMutedDirective } from '@spartan-ng/ui-typography-helm';
-import { debounceTime, map } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
 	selector: 'spartan-dialog-declarative-preview',
