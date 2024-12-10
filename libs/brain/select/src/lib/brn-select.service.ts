@@ -14,7 +14,8 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { NgControl } from '@angular/forms';
-import { Subject, skip } from 'rxjs';
+import { Subject } from 'rxjs';
+import { skip } from 'rxjs/operators';
 
 @Directive({
 	selector: '[brnSelectTrigger]',

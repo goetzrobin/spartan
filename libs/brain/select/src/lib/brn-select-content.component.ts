@@ -18,7 +18,8 @@ import { BrnSelectOptionDirective } from './brn-select-option.directive';
 import { BrnSelectService } from './brn-select.service';
 
 import { Directive } from '@angular/core';
-import { Subject, fromEvent, interval, takeUntil } from 'rxjs';
+import { Subject, fromEvent, interval } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 const SCROLLBY_PIXELS = 100;
 

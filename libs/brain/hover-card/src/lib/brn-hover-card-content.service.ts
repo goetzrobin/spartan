@@ -25,7 +25,8 @@ import {
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
-import { BehaviorSubject, type Observable, Subject, filter, map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { createHoverObservable } from './createHoverObservable';
 
 @Directive({
@@ -52,7 +53,8 @@ export class BrnHoverCardContentDirective implements ExposesState, ExposesSide {
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { Directive, Input, type OnDestroy, type OnInit } from '@angular/core';
-import { delay, distinctUntilChanged, fromEvent, merge, share, takeUntil, tap } from 'rxjs';
+import { fromEvent, merge } from 'rxjs';
+import { delay, distinctUntilChanged, share, takeUntil, tap } from 'rxjs/operators';
 
 export type BrnHoverCardOptions = Partial<
 	{
