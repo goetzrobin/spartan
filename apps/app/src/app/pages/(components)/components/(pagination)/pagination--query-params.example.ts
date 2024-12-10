@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, numberAttribute } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -73,7 +73,7 @@ export class PaginationQueryParamsComponent {
 		this._route.queryParamMap.pipe(
 			map((params) => {
 				const pageQuery = params.get('page');
-				return pageQuery ? +pageQuery : undefined;
+				return pageQuery ? numberAttribute(pageQuery, 1) : undefined;
 			}),
 		),
 	);
