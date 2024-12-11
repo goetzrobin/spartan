@@ -6,7 +6,7 @@ import { injectBrnToggleGroup } from './brn-toggle-group.token';
 	selector: 'button[hlmToggle], button[brnToggle]',
 	standalone: true,
 	host: {
-		id: 'id()',
+		'[id]': 'id()',
 		'[attr.disabled]': 'disabled() || group?.disabled() ? true : null',
 		'[attr.data-disabled]': 'disabled() || group?.disabled() ? true : null',
 		'[attr.data-state]': '_state()',

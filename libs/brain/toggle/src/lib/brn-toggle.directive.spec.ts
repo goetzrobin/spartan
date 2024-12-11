@@ -70,9 +70,10 @@ describe('BrnToggleDirective', () => {
 		expect(toggle).toHaveAttribute('data-state', 'off');
 	});
 
-	it('should add correct aria and disabled toggling when disabled', async () => {
+	it('should add correct id, aria and disabled toggling when disabled', async () => {
 		const { toggle, container, user } = await setup(true);
 		expect(toggle).toHaveAttribute('data-state', 'off');
+		expect(toggle).toHaveAttribute('id', expect.stringMatching(/brn-toggle-\d+/));
 		expect(toggle).toHaveAttribute('data-disabled');
 		expect(toggle).toHaveAttribute('disabled');
 
