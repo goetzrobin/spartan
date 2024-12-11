@@ -66,14 +66,11 @@ export function buildDependencyArray(
 		dependencies = { ...dependencies, ...options.peerDependencies };
 	}
 	const brainDependencyVersion = BRAIN_DEPENDENCY_MAP[options.primitiveName];
-	if (brainDependencyVersion) {
-		dependencies = { ...dependencies, [`@spartan-ng/ui-${options.primitiveName}-brain`]: brainDependencyVersion };
-	}
 	if (brainDependencyVersion && DEPENDENT_ON_DIALOG.includes(options.primitiveName)) {
-		dependencies = { ...dependencies, '@spartan-ng/ui-dialog-brain': brainDependencyVersion };
+		dependencies = { ...dependencies, '@spartan-ng/brain/dialog': brainDependencyVersion };
 	}
 	if (brainDependencyVersion && DEPENDENT_ON_FORMS.includes(options.primitiveName)) {
-		dependencies = { ...dependencies, '@spartan-ng/ui-forms-brain': brainDependencyVersion };
+		dependencies = { ...dependencies, '@spartan-ng/brain/forms': brainDependencyVersion };
 	}
 	if (options.primitiveName === 'icon') {
 		dependencies = { ...dependencies, '@ng-icons/core': NG_ICONS_VERSION };

@@ -1,19 +1,19 @@
 import { Component, HostBinding, inject } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCheck } from '@ng-icons/lucide';
-import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
-import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
-import { HlmInputDirective } from '../input/helm/src';
-import { HlmLabelDirective } from '../label/helm/src';
-import { HlmTableComponent, HlmTdComponent, HlmThComponent, HlmTrowComponent } from '../table/helm/src';
 import {
 	BrnDialogContentDirective,
 	BrnDialogImports,
 	BrnDialogRef,
 	BrnDialogTriggerDirective,
 	injectBrnDialogContext,
-} from './brain/src';
+} from '@spartan-ng/brain/dialog';
+import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
+import { HlmButtonDirective } from '../button/helm/src';
+import { HlmIconComponent } from '../icon/helm/src';
+import { HlmInputDirective } from '../input/helm/src';
+import { HlmLabelDirective } from '../label/helm/src';
+import { HlmTableComponent, HlmTdComponent, HlmThComponent, HlmTrowComponent } from '../table/helm/src';
 import {
 	HlmDialogComponent,
 	HlmDialogContentComponent,

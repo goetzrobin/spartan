@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/brain/dialog';
+import { BrnContextMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
 import {
 	HlmDialogComponent,
 	HlmDialogContentComponent,
@@ -11,7 +12,6 @@ import {
 } from '@spartan-ng/ui-dialog-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { BrnContextMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import {
 	HlmMenuComponent,
 	HlmMenuGroupComponent,
@@ -97,7 +97,7 @@ export class DialogContextMenuPreviewComponent {
 export const contextMenuCode = `
 import { Component } from '@angular/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
+import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/brain/dialog';
 import {
   HlmDialogComponent,
   HlmDialogContentComponent,
@@ -108,7 +108,7 @@ import {
 } from '@spartan-ng/ui-dialog-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { BrnContextMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import { BrnContextMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import {
   HlmMenuComponent,
   HlmMenuGroupComponent,

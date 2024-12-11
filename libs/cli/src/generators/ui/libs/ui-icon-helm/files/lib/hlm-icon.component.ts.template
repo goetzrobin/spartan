@@ -3,18 +3,19 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
-	Input,
 	type OnDestroy,
 	PLATFORM_ID,
 	ViewEncapsulation,
 	computed,
 	inject,
+	input,
 	signal,
 } from '@angular/core';
-import { type IconName, NgIconComponent } from '@ng-icons/core';
+import { type IconType, NgIconComponent } from '@ng-icons/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { cva } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
+import { injectHlmIconConfig } from './hlm-icon.token';
 
 const DEFINED_SIZES = ['xs', 'sm', 'base', 'lg', 'xl', 'none'] as const;
 
@@ -36,7 +37,8 @@ export const iconVariants = cva('inline-flex', {
 	},
 });
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+export type IconVariants = VariantProps<typeof iconVariants>;
+
 export type IconSize = DefinedSizes | (Record<never, never> & string);
 
 const isDefinedSize = (size: IconSize): size is DefinedSizes => {
@@ -53,11 +55,11 @@ const TAILWIND_H_W_PATTERN = /\b(h-\d+|w-\d+)\b/g;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<ng-icon
-			[class]="ngIconCls()"
+			[class]="ngIconClass()"
 			[size]="ngIconSize()"
-			[name]="_name()"
-			[color]="_color()"
-			[strokeWidth]="_strokeWidth()"
+			[name]="name()"
+			[color]="color()"
+			[strokeWidth]="strokeWidth()"
 		/>
 	`,
 	host: {
@@ -67,26 +69,32 @@ const TAILWIND_H_W_PATTERN = /\b(h-\d+|w-\d+)\b/g;
 export class HlmIconComponent implements OnDestroy {
 	private readonly _host = inject(ElementRef);
 	private readonly _platformId = inject(PLATFORM_ID);
+	private readonly _config = injectHlmIconConfig();
 
 	private _mutObs?: MutationObserver;
 
 	private readonly _hostClasses = signal<string>('');
 
-	protected readonly _name = signal<IconName | string>('');
-	protected readonly _size = signal<IconSize>('base');
-	protected readonly _color = signal<string | undefined>(undefined);
-	protected readonly _strokeWidth = signal<string | number | undefined>(undefined);
-	protected readonly userCls = signal<ClassValue>('');
-	protected readonly ngIconSize = computed(() => (isDefinedSize(this._size()) ? '100%' : (this._size() as string)));
-	protected readonly ngIconCls = signal<ClassValue>('');
+	public readonly name = input<IconType>(this._config.name);
+
+	public readonly size = input<IconSize>(this._config.size);
+
+	protected readonly ngIconSize = computed(() => (isDefinedSize(this.size()) ? '100%' : (this.size() as string)));
+
+	public readonly color = input<string | undefined>(undefined);
+
+	public readonly strokeWidth = input<string | number | undefined>(undefined);
+
+	public readonly ngIconClass = input<ClassValue>('');
+
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 
 	protected readonly _computedClass = computed(() => {
-		const size: IconSize = this._size();
+		const size: IconSize = this.size();
 		const hostClasses = this._hostClasses();
-		const userCls = this.userCls();
 		const variant = isDefinedSize(size) ? size : 'none';
 		const classes = variant === 'none' && size === 'none' ? hostClasses : hostClasses.replace(TAILWIND_H_W_PATTERN, '');
-		return hlm(iconVariants({ variant }), userCls, classes);
+		return hlm(iconVariants({ variant }), this.userClass(), classes);
 	});
 
 	constructor() {
@@ -106,35 +114,5 @@ export class HlmIconComponent implements OnDestroy {
 	ngOnDestroy() {
 		this._mutObs?.disconnect();
 		this._mutObs = undefined;
-	}
-
-	@Input()
-	set name(value: IconName | string) {
-		this._name.set(value);
-	}
-
-	@Input()
-	set size(value: IconSize) {
-		this._size.set(value);
-	}
-
-	@Input()
-	set color(value: string | undefined) {
-		this._color.set(value);
-	}
-
-	@Input()
-	set strokeWidth(value: string | number | undefined) {
-		this._strokeWidth.set(value);
-	}
-
-	@Input()
-	set ngIconClass(cls: ClassValue) {
-		this.ngIconCls.set(cls);
-	}
-
-	@Input()
-	set class(cls: ClassValue) {
-		this.userCls.set(cls);
 	}
 }

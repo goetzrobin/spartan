@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate, moduleMetadata } from '@storybook/angular';
 
 import { FormsModule } from '@angular/forms';
+import { BrnSwitchComponent, BrnSwitchImports } from '@spartan-ng/brain/switch';
 import { HlmLabelDirective } from '../label/helm/src';
-import { BrnSwitchComponent, BrnSwitchImports } from './brain/src';
 import { HlmSwitchImports } from './helm/src';
 import { SwitchFormComponent } from './helm/src/lib/hlm-switch-ng-model.component.ignore.spec';
 

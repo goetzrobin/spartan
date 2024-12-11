@@ -3,6 +3,7 @@ import { provideIcons as provideIconsImport } from '@ng-icons/core';
 import { HlmIconComponent } from './lib/hlm-icon.component';
 
 export * from './lib/hlm-icon.component';
+export * from './lib/hlm-icon.token';
 
 export const provideIcons = provideIconsImport;
 

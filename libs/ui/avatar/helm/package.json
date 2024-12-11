@@ -1,15 +1,15 @@
 {
 	"name": "@spartan-ng/ui-avatar-helm",
-	"version": "0.0.1-alpha.356",
+	"version": "0.0.1-alpha.357",
+	"sideEffects": false,
+	"dependencies": {},
 	"peerDependencies": {
-		"@spartan-ng/ui-core": "0.0.1-alpha.356",
-		"@spartan-ng/ui-avatar-brain": "0.0.1-alpha.356",
 		"@angular/core": ">=18.0.0",
+		"@spartan-ng/brain": "0.0.1-alpha.357",
+		"@spartan-ng/ui-core": "0.0.1-alpha.357",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1"
 	},
-	"dependencies": {},
-	"sideEffects": false,
 	"publishConfig": {
 		"access": "public"
 	}

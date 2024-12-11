@@ -10,16 +10,16 @@ import {
 	lucideUser,
 	lucideX,
 } from '@ng-icons/lucide';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
-import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
 import {
 	BrnDialogCloseDirective,
 	BrnDialogComponent,
 	BrnDialogContentDirective,
 	BrnDialogOverlayComponent,
 	BrnDialogTriggerDirective,
-} from '@spartan-ng/ui-dialog-brain';
+} from '@spartan-ng/brain/dialog';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmDialogOverlayDirective } from '@spartan-ng/ui-dialog-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { HlmCodeDirective } from '@spartan-ng/ui-typography-helm';

@@ -9,8 +9,8 @@ import {
 	lucideUser,
 	lucideWallet,
 } from '@ng-icons/lucide';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
@@ -77,7 +77,7 @@ export class CommandPreviewComponent {}
 
 export const defaultCode = `
 import { Component } from '@angular/core';
-import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -147,7 +147,7 @@ export class CommandPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { BrnCommandImports } from '@spartan-ng/ui-command-brain';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 `;
 

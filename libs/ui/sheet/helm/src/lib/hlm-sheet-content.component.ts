@@ -1,8 +1,8 @@
 import { Component, ElementRef, Renderer2, computed, effect, inject, input, signal } from '@angular/core';
 import { lucideX } from '@ng-icons/lucide';
+import { BrnSheetCloseDirective } from '@spartan-ng/brain/sheet';
 import { hlm, injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { BrnSheetCloseDirective } from '@spartan-ng/ui-sheet-brain';
 import { cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 import { HlmSheetCloseDirective } from './hlm-sheet-close.directive';

@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
+import { BrnTabsListDirective } from '@spartan-ng/brain/tabs';
 import { hlm } from '@spartan-ng/ui-core';
-import { BrnTabsListDirective } from '@spartan-ng/ui-tabs-brain';
 import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 

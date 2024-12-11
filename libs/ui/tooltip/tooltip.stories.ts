@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucidePlus } from '@ng-icons/lucide';
+import { BrnTooltipContentDirective } from '@spartan-ng/brain/tooltip';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmIconComponent } from '../icon/helm/src';
-import { BrnTooltipContentDirective } from './brain/src';
 import { HlmTooltipComponent, HlmTooltipTriggerDirective } from './helm/src';
 
 const meta: Meta<HlmTooltipComponent> = {

@@ -1,22 +1,23 @@
 {
 	"name": "@spartan-ng/cli",
-	"version": "0.0.1-alpha.366",
+	"version": "0.0.1-alpha.367",
 	"type": "commonjs",
 	"dependencies": {
-		"@nx/js": "^19.1.0",
-		"@nx/devkit": "^19.1.0",
-		"@nx/angular": "^19.1.0",
+		"@nx/angular": ">=20.0.0",
+		"@nx/devkit": ">=20.0.0",
+		"@nx/js": ">=20.0.0",
 		"enquirer": "2.3.6",
-		"semver": "7.5.4",
-		"jsonc-eslint-parser": "^2.1.0"
+		"jsonc-eslint-parser": "^2.1.0",
+		"nx": ">=20.0.0",
+		"semver": "7.5.4"
 	},
 	"peerDependencies": {
 		"tslib": "^2.3.0"
 	},
-	"executors": "./executors.json",
-	"generators": "./generators.json",
-	"schematics": "./generators.json",
 	"publishConfig": {
 		"access": "public"
-	}
+	},
+	"executors": "./executors.json",
+	"generators": "./generators.json",
+	"schematics": "./generators.json"
 }
