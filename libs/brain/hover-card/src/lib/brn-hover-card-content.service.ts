@@ -32,22 +32,8 @@ import {
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
-import {
-	BehaviorSubject,
-	delay,
-	distinctUntilChanged,
-	filter,
-	fromEvent,
-	map,
-	merge,
-	type Observable,
-	of,
-	share,
-	Subject,
-	switchMap,
-	takeUntil,
-	tap,
-} from 'rxjs';
+import { BehaviorSubject, fromEvent, merge, Observable, of, Subject } from 'rxjs';
+import { delay, distinctUntilChanged, filter, map, share, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { createHoverObservable } from './createHoverObservable';
 
 @Directive({
