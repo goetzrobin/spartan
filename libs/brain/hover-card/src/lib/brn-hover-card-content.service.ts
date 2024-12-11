@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
 	type ConnectedOverlayPositionChange,
 	type ConnectedPosition,
@@ -47,8 +48,6 @@ import {
 	takeUntil,
 	tap,
 } from 'rxjs';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
 import { createHoverObservable } from './createHoverObservable';
 
 @Directive({
@@ -72,11 +71,6 @@ export class BrnHoverCardContentDirective implements ExposesState, ExposesSide {
  * team: https://github.com/taiga-family/taiga-ui/blob/main/projects/core/directives/dropdown/dropdown-hover.directive.ts
  * Check them out! Give them a try! Leave a star! Their work is incredible!
  */
-
-import { FocusMonitor } from '@angular/cdk/a11y';
-import { Directive, Input, type OnDestroy, type OnInit } from '@angular/core';
-import { fromEvent, merge } from 'rxjs';
-import { delay, distinctUntilChanged, share, takeUntil, tap } from 'rxjs/operators';
 
 export type BrnHoverCardOptions = Partial<
 	{
