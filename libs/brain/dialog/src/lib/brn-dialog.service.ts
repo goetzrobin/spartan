@@ -15,7 +15,8 @@ import {
 	runInInjectionContext,
 	signal,
 } from '@angular/core';
-import { Subject, filter, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import type { BrnDialogOptions } from './brn-dialog-options';
 import { BrnDialogRef } from './brn-dialog-ref';
 import type { BrnDialogState } from './brn-dialog-state';

@@ -27,7 +27,7 @@ import {
 	runInInjectionContext,
 	signal,
 } from '@angular/core';
-import { take } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { type BrnDialogOptions, DEFAULT_BRN_DIALOG_OPTIONS } from './brn-dialog-options';
 import type { BrnDialogRef } from './brn-dialog-ref';
 import type { BrnDialogState } from './brn-dialog-state';

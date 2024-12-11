@@ -31,7 +31,8 @@ import {
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
-import { Subject, combineLatest, delay, map, of, switchMap } from 'rxjs';
+import { Subject, combineLatest, of } from 'rxjs';
+import { delay, map, switchMap } from 'rxjs/operators';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectService } from './brn-select.service';
 
