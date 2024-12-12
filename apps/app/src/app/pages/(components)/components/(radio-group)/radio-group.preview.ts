@@ -87,18 +87,18 @@ export class RadioGroupPreviewComponent {
 `;
 
 export const defaultImports = `
-import { BrnRadioComponent, BrnRadioGroupComponent } from '@spartan-ng/brain/radio-group';
+import { BrnRadioComponent } from '@spartan-ng/brain/radio-group';
 import {
   HlmRadioDirective,
-  HlmRadioGroupDirective,
+  HlmRadioGroupComponent,
   HlmRadioIndicatorComponent,
 } from '@spartan-ng/ui-radiogroup-helm';
 `;
 export const defaultSkeleton = `
-<brn-radio-group hlm>
+<hlm-radio-group>
   <brn-radio hlm value="16.1.4">
     <hlm-radio-indicator indicator />
     v16.1.4
   </brn-radio>
-</brn-radio-group>
+</hlm-radio-group>
 `;
