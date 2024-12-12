@@ -1,4 +1,5 @@
 import { BrnAccordionDirective, BrnAccordionImports } from '@spartan-ng/brain/accordion';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmIconComponent } from '../icon/helm/src';
@@ -10,7 +11,7 @@ const meta: Meta<BrnAccordionDirective> = {
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [BrnAccordionImports, HlmAccordionImports, HlmIconComponent],
+			imports: [BrnAccordionImports, HlmAccordionImports, HlmIconComponent, HlmInputDirective],
 		}),
 	],
 };
@@ -185,6 +186,26 @@ export const WithTapable: Story = {
 					</button>
 					<hlm-accordion-content>
 						<button data-testid="tapable-when-open">It should be when open</button>
+					</hlm-accordion-content>
+				</hlm-accordion-item>
+			</hlm-accordion>
+		`,
+	}),
+};
+
+export const AccordionWithInput: Story = {
+	render: () => ({
+		template: /* HTML */ `
+			<hlm-accordion>
+				<hlm-accordion-item>
+					<button hlmAccordionTrigger>
+						Enter your name
+						<hlm-icon hlmAccIcon />
+					</button>
+					<hlm-accordion-content>
+						<div class="px-1">
+							<input type="text" placeholder="Type your name here" hlmInput />
+						</div>
 					</hlm-accordion-content>
 				</hlm-accordion-item>
 			</hlm-accordion>

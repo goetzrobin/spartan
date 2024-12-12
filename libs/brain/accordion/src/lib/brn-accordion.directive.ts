@@ -144,9 +144,14 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 		if (this.orientation() === 'horizontal') {
 			this._keyManager.withHorizontalOrientation(this.dir() ?? 'ltr').withVerticalOrientation(false);
 		}
+
 		this._el.nativeElement.addEventListener('keydown', (event: KeyboardEvent) => {
-			this._keyManager?.onKeydown(event as KeyboardEvent);
-			this.preventDefaultEvents(event as KeyboardEvent);
+			const target = event.target as HTMLElement;
+
+			if (target.tagName === 'INPUT') return;
+
+			this._keyManager?.onKeydown(event);
+			this.preventDefaultEvents(event);
 		});
 		this._focusMonitor.monitor(this._el, true).subscribe((origin) => this._focused.set(origin !== null));
 	}
@@ -184,7 +189,7 @@ export class BrnAccordionDirective implements AfterContentInit, OnDestroy {
 
 		const keys =
 			this.orientation() === 'horizontal' ? HORIZONTAL_KEYS_TO_PREVENT_DEFAULT : VERTICAL_KEYS_TO_PREVENT_DEFAULT;
-		if (keys.includes(event.key as string) && event.code !== 'NumpadEnter') {
+		if (keys.includes(event.key) && event.code !== 'NumpadEnter') {
 			event.preventDefault();
 		}
 	}
