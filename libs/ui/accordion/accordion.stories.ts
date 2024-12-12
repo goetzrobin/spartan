@@ -1,9 +1,9 @@
 import { BrnAccordionDirective, BrnAccordionImports } from '@spartan-ng/brain/accordion';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmIconComponent } from '../icon/helm/src';
 import { HlmAccordionImports } from './helm/src';
-import {HlmInputDirective} from "@spartan-ng/ui-input-helm";
 
 const meta: Meta<BrnAccordionDirective> = {
 	title: 'Accordion',

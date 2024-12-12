@@ -194,7 +194,7 @@ describe('BrnAccordionDirective', () => {
 			expect(input).toHaveValue('John Doe');
 
 			// Go back to the trigger and hit space
-			await user.tab({shift: true})
+			await user.tab({ shift: true });
 			await user.keyboard('[Space]');
 
 			// Trigger should be closed
