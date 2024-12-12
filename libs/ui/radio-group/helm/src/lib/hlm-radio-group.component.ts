@@ -10,7 +10,6 @@ import type { ClassValue } from 'clsx';
 		{
 			directive: BrnRadioGroupDirective,
 			inputs: ['name', 'value', 'disabled', 'required', 'direction'],
-			outputs: ['change'],
 		},
 	],
 	host: {

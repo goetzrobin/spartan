@@ -52,7 +52,7 @@ import { HlmRadioDirective, HlmRadioGroupComponent } from '@spartan-ng/ui-radiog
 	`,
 })
 export class RadioGroupCardComponent {
-	public payment: string = 'card';
+	public payment = 'card';
 }
 
 export const cardCode = `
@@ -109,6 +109,6 @@ import { HlmRadioDirective, HlmRadioGroupComponent } from '@spartan-ng/ui-radiog
 	\`,
 })
 export class RadioGroupCardComponent {
-	public payment: string = 'card';
+	public payment = 'card';
 }
 `;
