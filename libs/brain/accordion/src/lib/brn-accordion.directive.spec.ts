@@ -45,7 +45,7 @@ describe('BrnAccordionDirective', () => {
 	const setupMulti = async () => {
 		const container = await render(
 			`
-      <div brnAccordion type="multi" orientation="horizontal" aria-label="acco">
+      <div brnAccordion type="multiple" orientation="horizontal" aria-label="acco">
         <div brnAccordionItem>
           <button brnAccordionTrigger aria-label="trigger">
             Is it accessible?
@@ -75,6 +75,31 @@ describe('BrnAccordionDirective', () => {
 			container,
 			triggers: screen.getAllByLabelText('trigger'),
 			accordion: screen.getByLabelText('acco'),
+		};
+	};
+	const setupWithInput = async () => {
+		const container = await render(
+			`
+      <div brnAccordion aria-label="acco">
+        <div brnAccordionItem>
+          <button brnAccordionTrigger aria-label="trigger">
+           	Enter your name
+          </button>
+
+          <input data-testid="accordion-input" />
+        </div>
+      </div>
+    `,
+			{
+				imports: [BrnAccordionDirective, BrnAccordionItemDirective, BrnAccordionTriggerDirective],
+			},
+		);
+		return {
+			user: userEvent.setup(),
+			container,
+			trigger: screen.getByLabelText('trigger'),
+			accordion: screen.getByLabelText('acco'),
+			input: screen.getByTestId('accordion-input'),
 		};
 	};
 	const validateOpenClosed = async (triggers: HTMLElement[], accordion: HTMLElement, openedTriggers: boolean[]) => {
@@ -151,6 +176,30 @@ describe('BrnAccordionDirective', () => {
 			await validateOpenClosed(triggers, accordion, [true, false, true]);
 			await user.click(triggers[1]);
 			await validateOpenClosed(triggers, accordion, [true, true, true]);
+		});
+	});
+	describe('accordion with input', () => {
+		it('should allow typing space', async () => {
+			const { user, trigger, input } = await setupWithInput();
+
+			// Open the accordion and tab to the input
+			await user.click(trigger);
+			await user.tab();
+
+			expect(trigger).toHaveAttribute('data-state', 'open');
+			expect(input).toHaveFocus();
+
+			// Type a name with a space
+			await user.type(input, 'John Doe');
+			expect(input).toHaveValue('John Doe');
+
+			// Go back to the trigger and hit space
+			await user.tab({shift: true})
+			await user.keyboard('[Space]');
+
+			// Trigger should be closed
+			expect(trigger).toHaveAttribute('data-state', 'closed');
+			expect(trigger).toHaveFocus();
 		});
 	});
 });
