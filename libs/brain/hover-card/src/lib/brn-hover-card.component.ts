@@ -1,4 +1,4 @@
-import {type AfterContentInit, Component, contentChild} from '@angular/core';
+import { type AfterContentInit, Component, contentChild } from '@angular/core';
 import {
 	BrnHoverCardContentDirective,
 	BrnHoverCardContentService,
@@ -10,7 +10,7 @@ import {
 	standalone: true,
 	providers: [BrnHoverCardContentService],
 	template: `
-		<ng-content/>
+		<ng-content />
 	`,
 })
 export class BrnHoverCardComponent implements AfterContentInit {

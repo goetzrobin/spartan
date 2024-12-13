@@ -1,4 +1,4 @@
-import {FocusMonitor} from '@angular/cdk/a11y';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
 	type ConnectedOverlayPositionChange,
 	type ConnectedPosition,
@@ -8,7 +8,7 @@ import {
 	OverlayPositionBuilder,
 	type OverlayRef,
 } from '@angular/cdk/overlay';
-import {TemplatePortal} from '@angular/cdk/portal';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
 	computed,
 	Directive,
@@ -25,16 +25,16 @@ import {
 	TemplateRef,
 	ViewContainerRef,
 } from '@angular/core';
-import {toSignal} from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
 	type ExposesSide,
 	type ExposesState,
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
-import {BehaviorSubject, fromEvent, merge, Observable, of, Subject} from 'rxjs';
-import {delay, distinctUntilChanged, filter, map, share, switchMap, takeUntil, tap} from 'rxjs/operators';
-import {createHoverObservable} from './createHoverObservable';
+import { BehaviorSubject, fromEvent, merge, Observable, of, Subject } from 'rxjs';
+import { delay, distinctUntilChanged, filter, map, share, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { createHoverObservable } from './createHoverObservable';
 
 @Directive({
 	selector: '[brnHoverCardContent]',
@@ -135,7 +135,7 @@ export class BrnHoverCardContentService {
 					: change.connectionPair.originY,
 			),
 		),
-		{initialValue: 'bottom'},
+		{ initialValue: 'bottom' },
 	);
 
 	public setConfig(config: BrnHoverCardOptions) {
@@ -250,12 +250,12 @@ export class BrnHoverCardTriggerDirective implements OnInit, OnDestroy {
 					this._contentService.setContent(value, this._vcr);
 				}
 			},
-			{allowSignalWrites: true},
+			{ allowSignalWrites: true },
 		);
 	}
 
 	public ngOnInit() {
-		this._contentService.setConfig({attachTo: this._el, align: this.align(), sideOffset: this.sideOffset()});
+		this._contentService.setConfig({ attachTo: this._el, align: this.align(), sideOffset: this.sideOffset() });
 		this.showing$.subscribe((isHovered) => {
 			if (isHovered) {
 				this._contentService.show();
