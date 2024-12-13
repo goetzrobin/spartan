@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
 	type ConnectedOverlayPositionChange,
 	type ConnectedPosition,
@@ -9,14 +10,20 @@ import {
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
+	computed,
+	Directive,
+	effect,
 	ElementRef,
+	inject,
 	Injectable,
+	input,
 	NgZone,
+	type OnDestroy,
+	type OnInit,
 	type Signal,
+	signal,
 	TemplateRef,
 	ViewContainerRef,
-	inject,
-	signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
@@ -25,8 +32,8 @@ import {
 	provideExposedSideProviderExisting,
 	provideExposesStateProviderExisting,
 } from '@spartan-ng/ui-core';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, merge, Observable, of, Subject } from 'rxjs';
+import { delay, distinctUntilChanged, filter, map, share, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { createHoverObservable } from './createHoverObservable';
 
 @Directive({
@@ -50,11 +57,6 @@ export class BrnHoverCardContentDirective implements ExposesState, ExposesSide {
  * team: https://github.com/taiga-family/taiga-ui/blob/main/projects/core/directives/dropdown/dropdown-hover.directive.ts
  * Check them out! Give them a try! Leave a star! Their work is incredible!
  */
-
-import { FocusMonitor } from '@angular/cdk/a11y';
-import { Directive, Input, type OnDestroy, type OnInit } from '@angular/core';
-import { fromEvent, merge } from 'rxjs';
-import { delay, distinctUntilChanged, share, takeUntil, tap } from 'rxjs/operators';
 
 export type BrnHoverCardOptions = Partial<
 	{
@@ -213,7 +215,7 @@ export class BrnHoverCardTriggerDirective implements OnInit, OnDestroy {
 		tap((visible) => visible && this._contentService.setState('open')),
 		switchMap((visible) => {
 			// we are delaying based on the configure-able input
-			return of(visible).pipe(delay(visible ? this.showDelay : this.hideDelay));
+			return of(visible).pipe(delay(visible ? this.showDelay() : this.hideDelay()));
 		}),
 		switchMap((visible) => {
 			// don't do anything when we are in the process of showing the content
@@ -221,32 +223,39 @@ export class BrnHoverCardTriggerDirective implements OnInit, OnDestroy {
 			// we set the state to closed here to trigger any animations for the element leaving
 			this._contentService.setState('closed');
 			// then delay to wait for the leaving animation to finish
-			return of(visible).pipe(delay(this.animationDelay));
+			return of(visible).pipe(delay(this.animationDelay()));
 		}),
 		distinctUntilChanged(),
 		share(),
 		takeUntil(this._destroy$),
 	);
 
-	@Input()
-	public showDelay = 300;
-	@Input()
-	public hideDelay = 500;
-	@Input()
-	public animationDelay = 100;
-	@Input()
-	public sideOffset = 5;
+	public showDelay = input(300);
+	public hideDelay = input(500);
+	public animationDelay = input(100);
+	public sideOffset = input(5);
+	public align = input<'top' | 'bottom'>('bottom');
 
-	@Input()
-	public align: 'top' | 'bottom' = 'bottom';
+	public readonly brnHoverCardTriggerFor = input<TemplateRef<unknown> | BrnHoverCardContentDirective | undefined>(
+		undefined,
+	);
+	public readonly mutableBrnHoverCardTriggerFor = computed(() => signal(this.brnHoverCardTriggerFor()));
+	private readonly _brnHoverCardTriggerForState = computed(() => this.mutableBrnHoverCardTriggerFor()());
 
-	@Input()
-	public set brnHoverCardTriggerFor(value: TemplateRef<unknown> | BrnHoverCardContentDirective) {
-		this._contentService.setContent(value, this._vcr);
+	constructor() {
+		effect(
+			() => {
+				const value = this._brnHoverCardTriggerForState();
+				if (value) {
+					this._contentService.setContent(value, this._vcr);
+				}
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	public ngOnInit() {
-		this._contentService.setConfig({ attachTo: this._el, align: this.align, sideOffset: this.sideOffset });
+		this._contentService.setConfig({ attachTo: this._el, align: this.align(), sideOffset: this.sideOffset() });
 		this.showing$.subscribe((isHovered) => {
 			if (isHovered) {
 				this._contentService.show();
