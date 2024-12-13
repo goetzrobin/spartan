@@ -28,7 +28,6 @@ export const BRN_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
 	providers: [BRN_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, provideBrnRadioGroupToken(BrnRadioGroupDirective)],
 	host: {
 		role: 'radiogroup',
-		tabindex: '0',
 		'[dir]': 'direction()',
 		'(focusout)': 'onTouched()',
 	},
