@@ -4,18 +4,18 @@ import { Component, type TrackByFunction, computed, effect, signal } from '@angu
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { lucideArrowUpDown, lucideChevronDown, lucideEllipsis } from '@ng-icons/lucide';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
+import { BrnSelectModule } from '@spartan-ng/brain/select';
+import { BrnTableModule, type PaginatorState, useBrnColumnManager } from '@spartan-ng/brain/table';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
-import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
-import { BrnSelectModule } from '@spartan-ng/ui-select-brain';
 import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
-import { BrnTableModule, type PaginatorState, useBrnColumnManager } from '@spartan-ng/ui-table-brain';
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
-import { debounceTime, map } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 export type Payment = {
 	id: string;
@@ -405,11 +405,11 @@ import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
-import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
-import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng/ui-table-brain';
+import { BrnTableModule, PaginatorState, useBrnColumnManager } from '@spartan-ng/brain/table';
 import { HlmTableModule } from '@spartan-ng/ui-table-helm';
-import { BrnSelectModule } from '@spartan-ng/ui-select-brain';
+import { BrnSelectModule } from '@spartan-ng/brain/select';
 import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
 import { hlmMuted } from '@spartan-ng/ui-typography-helm';
 import { debounceTime, map } from 'rxjs';

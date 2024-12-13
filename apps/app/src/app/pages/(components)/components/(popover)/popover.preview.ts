@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
-import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import {
 	BrnPopoverCloseDirective,
 	BrnPopoverComponent,
 	BrnPopoverContentDirective,
 	BrnPopoverTriggerDirective,
-} from '@spartan-ng/ui-popover-brain';
+} from '@spartan-ng/brain/popover';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmPopoverCloseDirective, HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 
 @Component({
@@ -64,7 +64,7 @@ import {
   BrnPopoverComponent,
   BrnPopoverContentDirective,
   BrnPopoverTriggerDirective,
-} from '@spartan-ng/ui-popover-brain';
+} from '@spartan-ng/brain/popover';
 import { HlmPopoverCloseDirective, HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
@@ -124,7 +124,7 @@ import {
   BrnPopoverComponent,
   BrnPopoverContentDirective,
   BrnPopoverTriggerDirective,
-} from '@spartan-ng/ui-popover-brain';
+} from '@spartan-ng/brain/popover';
 import { HlmPopoverCloseDirective, HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 `;
 export const defaultSkeleton = `

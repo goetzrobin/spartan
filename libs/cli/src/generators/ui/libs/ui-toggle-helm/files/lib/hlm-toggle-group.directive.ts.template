@@ -11,7 +11,7 @@ import type { ClassValue } from 'clsx';
 })
 export class HlmToggleGroupDirective {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected _computedClass = computed(() =>
+	protected readonly _computedClass = computed(() =>
 		hlm(
 			'inline-flex items-center rounded-md [&>[hlm][brnToggle][variant="outline"]]:-mx-[0.5px] [&>[hlm][brnToggle]]:rounded-none focus:[&>[hlm][brnToggle]]:z-10 first-of-type:[&>[hlm][brnToggle]]:rounded-l-md last-of-type:[&>[hlm][brnToggle]]:rounded-r-md',
 			this.userClass(),

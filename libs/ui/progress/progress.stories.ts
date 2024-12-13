@@ -1,6 +1,6 @@
+import { BrnProgressComponent, BrnProgressImports } from '@spartan-ng/brain/progress';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmLabelDirective } from '../label/helm/src';
-import { BrnProgressComponent, BrnProgressImports } from './brain/src';
 import { HlmProgressImports } from './helm/src';
 
 const meta: Meta<BrnProgressComponent> = {

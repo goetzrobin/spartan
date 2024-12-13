@@ -1,6 +1,6 @@
 import { Component, Input, computed, input, signal } from '@angular/core';
+import { BrnMenuDirective } from '@spartan-ng/brain/menu';
 import { hlm } from '@spartan-ng/ui-core';
-import { BrnMenuDirective } from '@spartan-ng/ui-menu-brain';
 import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 

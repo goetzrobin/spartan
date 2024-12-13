@@ -4,6 +4,11 @@
 			"factory": "./src/generators/hlm-to-cli-generator/generator",
 			"schema": "./src/generators/hlm-to-cli-generator/schema.json",
 			"description": "hlm-to-cli-generator generator"
+		},
+		"brain-secondary-entrypoint": {
+			"factory": "./src/generators/brain-secondary-entrypoint/generator",
+			"schema": "./src/generators/brain-secondary-entrypoint/schema.json",
+			"description": "Add a secondary entrypoint to the Brain library"
 		}
 	}
 }

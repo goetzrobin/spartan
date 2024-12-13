@@ -1,15 +1,9 @@
-import { Directive, inject } from '@angular/core';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { Directive } from '@angular/core';
+import { provideHlmIconConfig } from '@spartan-ng/ui-icon-helm';
 
 @Directive({
 	selector: '[hlmAlertIcon]',
 	standalone: true,
+	providers: [provideHlmIconConfig({ size: 'sm' })],
 })
-export class HlmAlertIconDirective {
-	private _icon = inject(HlmIconComponent, { host: true, optional: true });
-
-	constructor() {
-		if (!this._icon) return;
-		this._icon.size = 'sm';
-	}
-}
+export class HlmAlertIconDirective {}

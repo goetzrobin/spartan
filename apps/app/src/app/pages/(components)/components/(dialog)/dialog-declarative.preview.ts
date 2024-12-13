@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { BrnDialogContentDirective } from '@spartan-ng/brain/dialog';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnDialogContentDirective } from '@spartan-ng/ui-dialog-brain';
 import {
 	HlmDialogComponent,
 	HlmDialogContentComponent,
@@ -15,7 +15,7 @@ import {
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmH4Directive, HlmMutedDirective } from '@spartan-ng/ui-typography-helm';
-import { debounceTime, map } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
 	selector: 'spartan-dialog-declarative-preview',
@@ -78,7 +78,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { BrnDialogContentDirective } from '@spartan-ng/ui-dialog-brain';
+import { BrnDialogContentDirective } from '@spartan-ng/brain/dialog';
 import {
 	HlmDialogComponent,
 	HlmDialogContentComponent,

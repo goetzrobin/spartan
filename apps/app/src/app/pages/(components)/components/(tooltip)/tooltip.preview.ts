@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { lucidePlus } from '@ng-icons/lucide';
+import { BrnTooltipContentDirective } from '@spartan-ng/brain/tooltip';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { BrnTooltipContentDirective } from '@spartan-ng/ui-tooltip-brain';
 import { HlmTooltipComponent, HlmTooltipTriggerDirective } from '@spartan-ng/ui-tooltip-helm';
 
 @Component({
@@ -35,7 +35,7 @@ import { Component } from '@angular/core';
 import { lucidePlus } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { BrnTooltipContentDirective } from '@spartan-ng/ui-tooltip-brain';
+import { BrnTooltipContentDirective } from '@spartan-ng/brain/tooltip';
 import { HlmTooltipComponent, HlmTooltipTriggerDirective } from '@spartan-ng/ui-tooltip-helm';
 
 @Component({
@@ -63,7 +63,7 @@ export class TooltipPreviewComponent {}
 `;
 
 export const defaultImports = `
-import { BrnTooltipContentDirective } from '@spartan-ng/ui-tooltip-brain';
+import { BrnTooltipContentDirective } from '@spartan-ng/brain/tooltip';
 import { HlmTooltipComponent, HlmTooltipTriggerDirective } from '@spartan-ng/ui-tooltip-helm';
 `;
 export const defaultSkeleton = `
