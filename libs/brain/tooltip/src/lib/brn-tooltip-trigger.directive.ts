@@ -11,9 +11,9 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { AriaDescriber, FocusMonitor } from '@angular/cdk/a11y';
-import { Directionality } from '@angular/cdk/bidi';
-import { hasModifierKey } from '@angular/cdk/keycodes';
+import {AriaDescriber, FocusMonitor} from '@angular/cdk/a11y';
+import {Directionality} from '@angular/cdk/bidi';
+import {hasModifierKey} from '@angular/cdk/keycodes';
 import {
 	type ConnectedPosition,
 	type ConnectionPositionPair,
@@ -27,9 +27,9 @@ import {
 	type ScrollStrategy,
 	type VerticalConnectionPos,
 } from '@angular/cdk/overlay';
-import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+import {normalizePassiveListenerOptions, Platform} from '@angular/cdk/platform';
+import {ComponentPortal} from '@angular/cdk/portal';
+import {DOCUMENT} from '@angular/common';
 import {
 	type AfterViewInit,
 	booleanAttribute,
@@ -49,11 +49,11 @@ import {
 	untracked,
 	ViewContainerRef,
 } from '@angular/core';
-import { brnDevMode, computedPrevious } from '@spartan-ng/ui-core';
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import { BrnTooltipContentComponent } from './brn-tooltip-content.component';
-import { BrnTooltipDirective } from './brn-tooltip.directive';
+import {brnDevMode, computedPrevious} from '@spartan-ng/ui-core';
+import {Subject} from 'rxjs';
+import {take, takeUntil} from 'rxjs/operators';
+import {BrnTooltipContentComponent} from './brn-tooltip-content.component';
+import {BrnTooltipDirective} from './brn-tooltip.directive';
 
 export type TooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before' | 'after';
 export type TooltipTouchGestures = 'auto' | 'on' | 'off';
@@ -72,8 +72,8 @@ export const BRN_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 	deps: [Overlay],
 	useFactory:
 		(overlay: Overlay): (() => ScrollStrategy) =>
-		() =>
-			overlay.scrollStrategies.reposition({ scrollThrottle: SCROLL_THROTTLE_MS }),
+			() =>
+				overlay.scrollStrategies.reposition({scrollThrottle: SCROLL_THROTTLE_MS}),
 };
 
 export function BRN_TOOLTIP_DEFAULT_OPTIONS_FACTORY(): BrnTooltipOptions {
@@ -112,7 +112,7 @@ export interface BrnTooltipOptions {
 const PANEL_CLASS = 'tooltip-panel';
 
 /** Options used to bind passive event listeners. */
-const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true });
+const passiveListenerOptions = normalizePassiveListenerOptions({passive: true});
 
 /**
  * Time between the user putting the pointer on a tooltip
@@ -135,12 +135,12 @@ const UNBOUNDED_ANCHOR_GAP = 8;
 	},
 })
 export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
-	private readonly _tooltipDirective = inject(BrnTooltipDirective, { optional: true });
+	private readonly _tooltipDirective = inject(BrnTooltipDirective, {optional: true});
 	private readonly _tooltipComponent = BrnTooltipContentComponent;
 	private readonly _cssClassPrefix: string = 'brn';
 	private readonly _destroyed = new Subject<void>();
 	private readonly _passiveListeners: (readonly [string, EventListenerOrEventListenerObject])[] = [];
-	private readonly _defaultOptions = inject(BRN_TOOLTIP_DEFAULT_OPTIONS, { optional: true });
+	private readonly _defaultOptions = inject(BRN_TOOLTIP_DEFAULT_OPTIONS, {optional: true});
 	private readonly _overlay = inject(Overlay);
 	private readonly _elementRef = inject(ElementRef<HTMLElement>);
 	private readonly _scrollDispatcher = inject(ScrollDispatcher);
@@ -174,31 +174,31 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	 * instead of outside the element bounding box.
 	 */
 
-	public readonly positionAtOrigin = input(false, { transform: booleanAttribute });
+	public readonly positionAtOrigin = input(false, {transform: booleanAttribute});
 	private readonly _writeablePositionAtOrigin = computed(() => signal(this.positionAtOrigin()));
 	public readonly positionAtOriginState = computed(() => this._writeablePositionAtOrigin()());
 
 	/** Disables the display of the tooltip. */
 
-	public readonly brnTooltipDisabled = input(false, { transform: booleanAttribute });
+	public readonly brnTooltipDisabled = input(false, {transform: booleanAttribute});
 	private readonly _mutableBrnTooltipDisabled = computed(() => signal(this.brnTooltipDisabled()));
 	public readonly brnTooltipDisabledState = computed(() => this._mutableBrnTooltipDisabled()());
 
 	/** The default delay in ms before showing the tooltip after show is called */
 
-	public readonly showDelay = input(0, { transform: numberAttribute });
+	public readonly showDelay = input(0, {transform: numberAttribute});
 	public readonly mutableShowDelay = computed(() => signal(this.showDelay()));
 	public readonly showDelayState = computed(() => this.mutableShowDelay()());
 
 	/** The default delay in ms before hiding the tooltip after hide is called */
 
-	public readonly hideDelay = input(0, { transform: numberAttribute });
+	public readonly hideDelay = input(0, {transform: numberAttribute});
 	public readonly mutableHideDelay = computed(() => signal(this.hideDelay()));
 	public readonly hideDelayState = computed(() => this.mutableHideDelay()());
 
 	/** The default duration in ms that exit animation takes before hiding */
 
-	public readonly exitAnimationDuration = input(0, { transform: numberAttribute });
+	public readonly exitAnimationDuration = input(0, {transform: numberAttribute});
 	public readonly mutableExitAnimationDuration = computed(() => signal(this.exitAnimationDuration()));
 	public readonly exitAnimationDurationState = computed(() => this.mutableExitAnimationDuration()());
 
@@ -229,14 +229,14 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	/** The message to be used to describe the aria in the tooltip */
 
-	public readonly ariaDescribedBy = input('', { alias: 'aria-describedby' });
+	public readonly ariaDescribedBy = input('', {alias: 'aria-describedby'});
 	public readonly mutableAriaDescribedBy = computed(() => signal(this.ariaDescribedBy()));
 	public readonly ariaDescribedByState = computed(() => this.mutableAriaDescribedBy()());
 	public readonly ariaDescribedByPrevious = computedPrevious(this.mutableAriaDescribedBy());
 
 	/** The content to be displayed in the tooltip */
 
-	public readonly brnTooltipTrigger = input<string | TemplateRef<unknown> | null>(null, { alias: 'brnTooltipTrigger' });
+	public readonly brnTooltipTrigger = input<string | TemplateRef<unknown> | null>(null);
 	public readonly mutableBrnTooltipTrigger = computed(() => signal(this.brnTooltipTrigger()));
 	public readonly brnTooltipTriggerState = computed(() => this.mutableBrnTooltipTrigger()());
 
@@ -273,7 +273,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 						this.mutableBrnTooltipTrigger().set(this._tooltipDirective.tooltipTemplate());
 					}
 				},
-				{ allowSignalWrites: true },
+				{allowSignalWrites: true},
 			);
 		}
 		this._initBrnTooltipTriggerEffect();
@@ -351,7 +351,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 					});
 				}
 			},
-			{ allowSignalWrites: true },
+			{allowSignalWrites: true},
 		);
 	}
 
@@ -365,7 +365,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 					this._updateTooltipContent();
 				}
 			},
-			{ allowSignalWrites: true },
+			{allowSignalWrites: true},
 		);
 	}
 
@@ -560,8 +560,8 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		const overlay = this._getOverlayPosition();
 
 		position.withPositions([
-			this._addOffset({ ...origin.main, ...overlay.main }),
-			this._addOffset({ ...origin.fallback, ...overlay.fallback }),
+			this._addOffset({...origin.main, ...overlay.main}),
+			this._addOffset({...origin.fallback, ...overlay.fallback}),
 		]);
 	}
 
@@ -593,20 +593,20 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		let originPosition: OriginConnectionPosition;
 
 		if (position === 'above' || position === 'below') {
-			originPosition = { originX: 'center', originY: position === 'above' ? 'top' : 'bottom' };
+			originPosition = {originX: 'center', originY: position === 'above' ? 'top' : 'bottom'};
 		} else if (position === 'before' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
-			originPosition = { originX: 'start', originY: 'center' };
+			originPosition = {originX: 'start', originY: 'center'};
 		} else if (position === 'after' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
-			originPosition = { originX: 'end', originY: 'center' };
+			originPosition = {originX: 'end', originY: 'center'};
 		} else if (typeof isDevMode() === 'undefined' || isDevMode()) {
 			throw getBrnTooltipInvalidPositionError(position);
 		}
 
-		const { x, y } = this._invertPosition(originPosition!.originX, originPosition!.originY);
+		const {x, y} = this._invertPosition(originPosition!.originX, originPosition!.originY);
 
 		return {
 			main: originPosition!,
-			fallback: { originX: x, originY: y },
+			fallback: {originX: x, originY: y},
 		};
 	}
 
@@ -617,22 +617,22 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		let overlayPosition: OverlayConnectionPosition;
 
 		if (position === 'above') {
-			overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
+			overlayPosition = {overlayX: 'center', overlayY: 'bottom'};
 		} else if (position === 'below') {
-			overlayPosition = { overlayX: 'center', overlayY: 'top' };
+			overlayPosition = {overlayX: 'center', overlayY: 'top'};
 		} else if (position === 'before' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
-			overlayPosition = { overlayX: 'end', overlayY: 'center' };
+			overlayPosition = {overlayX: 'end', overlayY: 'center'};
 		} else if (position === 'after' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
-			overlayPosition = { overlayX: 'start', overlayY: 'center' };
+			overlayPosition = {overlayX: 'start', overlayY: 'center'};
 		} else if (typeof isDevMode() === 'undefined' || isDevMode()) {
 			throw getBrnTooltipInvalidPositionError(position);
 		}
 
-		const { x, y } = this._invertPosition(overlayPosition!.overlayX, overlayPosition!.overlayY);
+		const {x, y} = this._invertPosition(overlayPosition!.overlayX, overlayPosition!.overlayY);
 
 		return {
 			main: overlayPosition!,
-			fallback: { overlayX: x, overlayY: y },
+			fallback: {overlayX: x, overlayY: y},
 		};
 	}
 
@@ -668,12 +668,12 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 			}
 		}
 
-		return { x, y };
+		return {x, y};
 	}
 
 	/** Updates the class on the overlay panel based on the current position of the tooltip. */
 	private _updateCurrentPositionClass(connectionPair: ConnectionPositionPair): void {
-		const { overlayY, originX, originY } = connectionPair;
+		const {overlayY, originX, originY} = connectionPair;
 		let newPosition: TooltipPosition;
 
 		// If the overlay is in the middle along the Y axis,
@@ -730,7 +730,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 				'touchstart',
 				(event) => {
 					const touch = (event as TouchEvent).targetTouches?.[0];
-					const origin = touch ? { x: touch.clientX, y: touch.clientY } : undefined;
+					const origin = touch ? {x: touch.clientX, y: touch.clientY} : undefined;
 					// Note that it's important that we don't `preventDefault` here,
 					// because it can prevent click events from firing on the element.
 					this._setupPointerExitEventsIfNeeded();
