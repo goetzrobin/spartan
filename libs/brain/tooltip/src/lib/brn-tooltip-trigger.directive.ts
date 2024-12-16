@@ -44,7 +44,6 @@ import {
 	NgZone,
 	numberAttribute,
 	type OnDestroy,
-	signal,
 	type TemplateRef,
 	untracked,
 	ViewContainerRef,
@@ -54,6 +53,7 @@ import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { BrnTooltipContentComponent } from './brn-tooltip-content.component';
 import { BrnTooltipDirective } from './brn-tooltip.directive';
+import { injectBrnTooltipDefaultOptions } from './brn-tooltip.token';
 
 export type TooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before' | 'after';
 export type TooltipTouchGestures = 'auto' | 'on' | 'off';
@@ -75,39 +75,6 @@ export const BRN_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 		() =>
 			overlay.scrollStrategies.reposition({ scrollThrottle: SCROLL_THROTTLE_MS }),
 };
-
-export function BRN_TOOLTIP_DEFAULT_OPTIONS_FACTORY(): BrnTooltipOptions {
-	return {
-		showDelay: 0,
-		hideDelay: 0,
-		touchendHideDelay: 1500,
-	};
-}
-
-export const BRN_TOOLTIP_DEFAULT_OPTIONS = new InjectionToken<BrnTooltipOptions>('mat-tooltip-default-options', {
-	providedIn: 'root',
-	factory: BRN_TOOLTIP_DEFAULT_OPTIONS_FACTORY,
-});
-
-export interface BrnTooltipOptions {
-	/** Default delay when the tooltip is shown. */
-	showDelay: number;
-	/** Default delay when the tooltip is hidden. */
-	hideDelay: number;
-	/** Default delay when hiding the tooltip on a touch device. */
-	touchendHideDelay: number;
-	/** Default touch gesture handling for tooltips. */
-	touchGestures?: TooltipTouchGestures;
-	/** Default position for tooltips. */
-	position?: TooltipPosition;
-	/**
-	 * Default value for whether tooltips should be positioned near the click or touch origin
-	 * instead of outside the element bounding box.
-	 */
-	positionAtOrigin?: boolean;
-	/** Disables the ability for the user to interact with the tooltip element. */
-	disableTooltipInteractivity?: boolean;
-}
 
 const PANEL_CLASS = 'tooltip-panel';
 
@@ -131,7 +98,7 @@ const UNBOUNDED_ANCHOR_GAP = 8;
 	providers: [BRN_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
 	host: {
 		class: 'brn-tooltip-trigger',
-		'[class.brn-tooltip-disabled]': 'brnTooltipDisabledState()',
+		'[class.brn-tooltip-disabled]': 'brnTooltipDisabled()',
 	},
 })
 export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
@@ -140,7 +107,8 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	private readonly _cssClassPrefix: string = 'brn';
 	private readonly _destroyed = new Subject<void>();
 	private readonly _passiveListeners: (readonly [string, EventListenerOrEventListenerObject])[] = [];
-	private readonly _defaultOptions = inject(BRN_TOOLTIP_DEFAULT_OPTIONS, { optional: true });
+	private readonly _defaultOptions = injectBrnTooltipDefaultOptions();
+
 	private readonly _overlay = inject(Overlay);
 	private readonly _elementRef = inject(ElementRef<HTMLElement>);
 	private readonly _scrollDispatcher = inject(ScrollDispatcher);
@@ -165,48 +133,38 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	/** Allows the user to define the position of the tooltip relative to the parent element */
 
-	public readonly position = input<TooltipPosition>('above');
-	private readonly _writeablePosition = computed(() => signal(this.position()));
-	public readonly positionState = computed(() => this._writeablePosition()());
+	public readonly position = input<TooltipPosition>(this._defaultOptions?.position ?? 'above');
 
 	/**
 	 * Whether tooltip should be relative to the click or touch origin
 	 * instead of outside the element bounding box.
 	 */
 
-	public readonly positionAtOrigin = input(false, { transform: booleanAttribute });
-	private readonly _writeablePositionAtOrigin = computed(() => signal(this.positionAtOrigin()));
-	public readonly positionAtOriginState = computed(() => this._writeablePositionAtOrigin()());
+	public readonly positionAtOrigin = input(this._defaultOptions?.positionAtOrigin ?? false, {
+		transform: booleanAttribute,
+	});
 
 	/** Disables the display of the tooltip. */
 
 	public readonly brnTooltipDisabled = input(false, { transform: booleanAttribute });
-	private readonly _mutableBrnTooltipDisabled = computed(() => signal(this.brnTooltipDisabled()));
-	public readonly brnTooltipDisabledState = computed(() => this._mutableBrnTooltipDisabled()());
 
 	/** The default delay in ms before showing the tooltip after show is called */
 
-	public readonly showDelay = input(0, { transform: numberAttribute });
-	public readonly mutableShowDelay = computed(() => signal(this.showDelay()));
-	public readonly showDelayState = computed(() => this.mutableShowDelay()());
+	public readonly showDelay = input(this._defaultOptions?.showDelay ?? 0, { transform: numberAttribute });
 
 	/** The default delay in ms before hiding the tooltip after hide is called */
 
-	public readonly hideDelay = input(0, { transform: numberAttribute });
-	public readonly mutableHideDelay = computed(() => signal(this.hideDelay()));
-	public readonly hideDelayState = computed(() => this.mutableHideDelay()());
+	public readonly hideDelay = input(this._defaultOptions?.hideDelay ?? 0, { transform: numberAttribute });
 
 	/** The default duration in ms that exit animation takes before hiding */
 
-	public readonly exitAnimationDuration = input(0, { transform: numberAttribute });
-	public readonly mutableExitAnimationDuration = computed(() => signal(this.exitAnimationDuration()));
-	public readonly exitAnimationDurationState = computed(() => this.mutableExitAnimationDuration()());
+	public readonly exitAnimationDuration = input(this._defaultOptions?.exitAnimationDuration ?? 0, {
+		transform: numberAttribute,
+	});
 
 	/** The default delay in ms before hiding the tooltip after hide is called */
 
-	public readonly tooltipContentClasses = input<string>('');
-	public readonly mutableTooltipContentClasses = computed(() => signal(this.tooltipContentClasses()));
-	public readonly tooltipContentClassesState = computed(() => this.mutableTooltipContentClasses()());
+	public readonly tooltipContentClasses = input<string>(this._defaultOptions?.tooltipContentClasses ?? '');
 
 	/**
 	 * How touch gestures should be handled by the tooltip. On touch devices the tooltip directive
@@ -223,41 +181,31 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	 *   showing on touch devices.
 	 */
 
-	public readonly touchGestures = input<TooltipTouchGestures>('auto');
-	public readonly mutableTouchGestures = computed(() => signal(this.touchGestures()));
-	public readonly touchGesturesState = computed(() => this.mutableTouchGestures()());
+	public readonly touchGestures = input<TooltipTouchGestures>(this._defaultOptions?.touchGestures ?? 'auto');
 
 	/** The message to be used to describe the aria in the tooltip */
 
 	public readonly ariaDescribedBy = input('', { alias: 'aria-describedby' });
-	public readonly mutableAriaDescribedBy = computed(() => signal(this.ariaDescribedBy()));
-	public readonly ariaDescribedByState = computed(() => this.mutableAriaDescribedBy()());
-	public readonly ariaDescribedByPrevious = computedPrevious(this.mutableAriaDescribedBy());
+	public readonly ariaDescribedByState = computed(() => {
+		// If the message is not a string (e.g. number), convert it to a string and trim it.
+		// Must convert with `String(value)`, not `${value}`, otherwise Closure Compiler optimises
+		// away the string-conversion: https://github.com/angular/components/issues/20684
+		const value = untracked(() => this.ariaDescribedBy());
+		return value !== null ? String(value).trim() : '';
+	});
+	public readonly ariaDescribedByPrevious = computedPrevious(() => this.ariaDescribedBy());
 
 	/** The content to be displayed in the tooltip */
 
 	public readonly brnTooltipTrigger = input<string | TemplateRef<unknown> | null>(null);
-	public readonly mutableBrnTooltipTrigger = computed(() => signal(this.brnTooltipTrigger()));
-	public readonly brnTooltipTriggerState = computed(() => this.mutableBrnTooltipTrigger()());
+	public readonly brnTooltipTriggerState = computed(() => {
+		if (this._tooltipDirective) {
+			return this._tooltipDirective.tooltipTemplate();
+		}
+		return this.brnTooltipTrigger();
+	});
 
 	constructor() {
-		if (this._defaultOptions) {
-			this.mutableShowDelay().set(this._defaultOptions.showDelay);
-			this.mutableHideDelay().set(this._defaultOptions.hideDelay);
-
-			if (this._defaultOptions.position) {
-				this._writeablePosition().set(this._defaultOptions.position);
-			}
-
-			if (this._defaultOptions.positionAtOrigin) {
-				this._writeablePositionAtOrigin().set(this._defaultOptions.positionAtOrigin);
-			}
-
-			if (this._defaultOptions.touchGestures) {
-				this.mutableTouchGestures().set(this._defaultOptions.touchGestures);
-			}
-		}
-
 		this._dir.change.pipe(takeUntil(this._destroyed)).subscribe(() => {
 			if (this._overlayRef) {
 				this._updatePosition(this._overlayRef);
@@ -266,16 +214,6 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 		this._viewportMargin = MIN_VIEWPORT_TOOLTIP_THRESHOLD;
 
-		if (this._tooltipDirective) {
-			effect(
-				() => {
-					if (this._tooltipDirective) {
-						this.mutableBrnTooltipTrigger().set(this._tooltipDirective.tooltipTemplate());
-					}
-				},
-				{ allowSignalWrites: true },
-			);
-		}
 		this._initBrnTooltipTriggerEffect();
 		this._initAriaDescribedByPreviousEffect();
 		this._initTooltipContentClassesEffect();
@@ -298,7 +236,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	private _initBrnTooltipDisabledEffect(): void {
 		effect(() => {
-			if (this.brnTooltipDisabledState()) {
+			if (this.brnTooltipDisabled()) {
 				this.hide(0);
 			} else {
 				this._setupPointerEnterEventsIfNeeded();
@@ -310,7 +248,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		effect(() => {
 			// Needed that the effect got triggered
 			// eslint-disable-next-line @typescript-eslint/naming-convention
-			const _ = this.positionAtOriginState();
+			const _ = this.positionAtOrigin();
 			this._detach();
 			this._overlayRef = null;
 		});
@@ -319,40 +257,31 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	private _initTooltipContentClassesEffect(): void {
 		effect(() => {
 			if (this._tooltipInstance) {
-				this._tooltipInstance._tooltipClasses.set(this.tooltipContentClassesState() ?? '');
+				this._tooltipInstance._tooltipClasses.set(this.tooltipContentClasses() ?? '');
 			}
 		});
 	}
 
 	private _initAriaDescribedByPreviousEffect(): void {
-		effect(
-			() => {
-				this._ariaDescriber.removeDescription(
-					this._elementRef.nativeElement,
-					untracked(() => this.ariaDescribedByPrevious()),
-					'tooltip',
-				);
-				// If the message is not a string (e.g. number), convert it to a string and trim it.
+		effect(() => {
+			this._ariaDescriber.removeDescription(
+				this._elementRef.nativeElement,
+				untracked(() => this.ariaDescribedByPrevious()),
+				'tooltip',
+			);
 
-				// Must convert with `String(value)`, not `${value}`, otherwise Closure Compiler optimises
-				// away the string-conversion: https://github.com/angular/components/issues/20684
-				const value = untracked(() => this.ariaDescribedByState());
-				this.mutableAriaDescribedBy().set(value !== null ? String(value).trim() : '');
-
-				if (this.ariaDescribedByState() && !this._isTooltipVisible()) {
-					this._ngZone.runOutsideAngular(() => {
-						// The `AriaDescriber` has some functionality that avoids adding a description if it's the
-						// same as the `aria-label` of an element, however we can't know whether the tooltip trigger
-						// has a data-bound `aria-label` or when it'll be set for the first time. We can avoid the
-						// issue by deferring the description by a tick so Angular has time to set the `aria-label`.
-						Promise.resolve().then(() => {
-							this._ariaDescriber.describe(this._elementRef.nativeElement, this.ariaDescribedByState(), 'tooltip');
-						});
+			if (this.ariaDescribedByState() && !this._isTooltipVisible()) {
+				this._ngZone.runOutsideAngular(() => {
+					// The `AriaDescriber` has some functionality that avoids adding a description if it's the
+					// same as the `aria-label` of an element, however we can't know whether the tooltip trigger
+					// has a data-bound `aria-label` or when it'll be set for the first time. We can avoid the
+					// issue by deferring the description by a tick so Angular has time to set the `aria-label`.
+					Promise.resolve().then(() => {
+						this._ariaDescriber.describe(this._elementRef.nativeElement, this.ariaDescribedByState(), 'tooltip');
 					});
-				}
-			},
-			{ allowSignalWrites: true },
-		);
+				});
+			}
+		});
 	}
 
 	private _initBrnTooltipTriggerEffect(): void {
@@ -372,7 +301,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	private _initExitAnimationDurationEffect(): void {
 		effect(() => {
 			if (this._tooltipInstance) {
-				this._tooltipInstance._exitAnimationDuration = this.exitAnimationDurationState();
+				this._tooltipInstance._exitAnimationDuration = this.exitAnimationDuration();
 			}
 		});
 	}
@@ -380,7 +309,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	private _initHideDelayEffect(): void {
 		effect(() => {
 			if (this._tooltipInstance) {
-				this._tooltipInstance._mouseLeaveHideDelay = this.hideDelayState();
+				this._tooltipInstance._mouseLeaveHideDelay = this.hideDelay();
 			}
 		});
 	}
@@ -434,8 +363,8 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	}
 
 	/** Shows the tooltip after the delay in ms, defaults to tooltip-delay-show or 0ms if no input */
-	show(delay: number = this.showDelayState(), origin?: { x: number; y: number }): void {
-		if (this.brnTooltipDisabledState() || this._isTooltipVisible()) {
+	show(delay: number = this.showDelay(), origin?: { x: number; y: number }): void {
+		if (this.brnTooltipDisabled() || this._isTooltipVisible()) {
 			this._tooltipInstance?._cancelPendingAnimations();
 			return;
 		}
@@ -445,9 +374,9 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		this._portal = this._portal || new ComponentPortal(this._tooltipComponent, this._viewContainerRef);
 		const instance = (this._tooltipInstance = overlayRef.attach(this._portal).instance);
 		instance._triggerElement = this._elementRef.nativeElement;
-		instance._mouseLeaveHideDelay = this.hideDelayState();
-		instance._tooltipClasses.set(this.tooltipContentClassesState());
-		instance._exitAnimationDuration = this.exitAnimationDurationState();
+		instance._mouseLeaveHideDelay = this.hideDelay();
+		instance._tooltipClasses.set(this.tooltipContentClasses());
+		instance._exitAnimationDuration = this.exitAnimationDuration();
 		instance.side.set(this._currentPosition ?? 'above');
 		instance.afterHidden.pipe(takeUntil(this._destroyed)).subscribe(() => this._detach());
 		this._updateTooltipContent();
@@ -455,7 +384,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	}
 
 	/** Hides the tooltip after the delay in ms, defaults to tooltip-delay-hide or 0ms if no input */
-	hide(delay: number = this.hideDelayState(), exitAnimationDuration: number = this.exitAnimationDurationState()): void {
+	hide(delay: number = this.hideDelay(), exitAnimationDuration: number = this.exitAnimationDuration()): void {
 		const instance = this._tooltipInstance;
 		if (instance) {
 			if (instance.isVisible()) {
@@ -479,7 +408,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		if (this._overlayRef) {
 			const existingStrategy = this._overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
 
-			if ((!this.positionAtOriginState() || !origin) && existingStrategy._origin instanceof ElementRef) {
+			if ((!this.positionAtOrigin() || !origin) && existingStrategy._origin instanceof ElementRef) {
 				return this._overlayRef;
 			}
 
@@ -491,7 +420,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		// Create connected position strategy that listens for scroll events to reposition.
 		const strategy = this._overlay
 			.position()
-			.flexibleConnectedTo(this.positionAtOriginState() ? origin || this._elementRef : this._elementRef)
+			.flexibleConnectedTo(this.positionAtOrigin() ? origin || this._elementRef : this._elementRef)
 			.withTransformOriginOn(`.${this._cssClassPrefix}-tooltip`)
 			.withFlexibleDimensions(false)
 			.withViewportMargin(this._viewportMargin)
@@ -589,7 +518,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	 */
 	_getOrigin(): { main: OriginConnectionPosition; fallback: OriginConnectionPosition } {
 		const isLtr = !this._dir || this._dir.value === 'ltr';
-		const position = this.positionState();
+		const position = this.position();
 		let originPosition: OriginConnectionPosition;
 
 		if (position === 'above' || position === 'below') {
@@ -613,7 +542,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** Returns the overlay position and a fallback position based on the user's preference */
 	_getOverlayPosition(): { main: OverlayConnectionPosition; fallback: OverlayConnectionPosition } {
 		const isLtr = !this._dir || this._dir.value === 'ltr';
-		const position = this.positionState();
+		const position = this.position();
 		let overlayPosition: OverlayConnectionPosition;
 
 		if (position === 'above') {
@@ -654,7 +583,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	/** Inverts an overlay position. */
 	private _invertPosition(x: HorizontalConnectionPos, y: VerticalConnectionPos) {
-		if (this.positionState() === 'above' || this.positionState() === 'below') {
+		if (this.position() === 'above' || this.position() === 'below') {
 			if (y === 'top') {
 				y = 'bottom';
 			} else if (y === 'bottom') {
@@ -701,7 +630,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	private _setupPointerEnterEventsIfNeeded(): void {
 		// Optimization: Defer hooking up events if there's no content or the tooltip is disabled.
 		if (
-			this.brnTooltipDisabledState() ||
+			this.brnTooltipDisabled() ||
 			!this.brnTooltipTriggerState ||
 			!this._viewInitialized ||
 			this._passiveListeners.length
@@ -723,7 +652,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 					this.show(undefined, point);
 				},
 			]);
-		} else if (this.touchGesturesState() !== 'off') {
+		} else if (this.touchGestures() !== 'off') {
 			this._disableNativeGesturesIfNecessary();
 
 			this._passiveListeners.push([
@@ -763,7 +692,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 				],
 				['wheel', (event) => this._wheelListener(event as WheelEvent)],
 			);
-		} else if (this.touchGesturesState() !== 'off') {
+		} else if (this.touchGestures() !== 'off') {
 			this._disableNativeGesturesIfNecessary();
 			const touchendListener = () => {
 				clearTimeout(this._touchstartTimeout);
@@ -805,7 +734,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	/** Disables the native browser gestures, based on how the tooltip has been configured. */
 	private _disableNativeGesturesIfNecessary(): void {
-		const gestures = this.touchGesturesState();
+		const gestures = this.touchGestures();
 
 		if (gestures !== 'off') {
 			const element = this._elementRef.nativeElement;

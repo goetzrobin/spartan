@@ -1,44 +1,32 @@
-import { Component, signal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { computedPrevious } from './computed-previous';
 
 describe(computedPrevious.name, () => {
-	@Component({ standalone: true, template: '{{previous()}}' })
-	class TestComponent {
-		public readonly value = signal(0);
-		public readonly previous = computedPrevious(this.value);
-	}
-
-	function setup() {
-		const fixture = TestBed.createComponent(TestComponent);
-		fixture.detectChanges();
-		return fixture.componentInstance;
-	}
-
 	it('should work properly', () => {
-		const cmp = setup();
+		const value = signal(0);
+		const previous = computedPrevious(() => value());
 
-		expect(cmp.value()).toEqual(0);
-		expect(cmp.previous()).toEqual(0);
+		expect(value()).toEqual(0);
+		expect(previous()).toEqual(0);
 
-		cmp.value.set(1);
+		value.set(1);
 
-		expect(cmp.value()).toEqual(1);
-		expect(cmp.previous()).toEqual(0);
+		expect(value()).toEqual(1);
+		expect(previous()).toEqual(0);
 
-		cmp.value.set(2);
+		value.set(2);
 
-		expect(cmp.value()).toEqual(2);
-		expect(cmp.previous()).toEqual(1);
+		expect(value()).toEqual(2);
+		expect(previous()).toEqual(1);
 
-		cmp.value.set(2);
+		value.set(2);
 
-		expect(cmp.value()).toEqual(2);
-		expect(cmp.previous()).toEqual(1);
+		expect(value()).toEqual(2);
+		expect(previous()).toEqual(1);
 
-		cmp.value.set(3);
+		value.set(3);
 
-		expect(cmp.value()).toEqual(3);
-		expect(cmp.previous()).toEqual(2);
+		expect(value()).toEqual(3);
+		expect(previous()).toEqual(2);
 	});
 });

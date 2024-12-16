@@ -31,15 +31,15 @@ import { computed, type Signal, untracked } from '@angular/core';
  * // Previous value: 1
  *```
  *
- * @param s Signal to compute previous value for
- * @returns Signal that emits previous value of `s`
+ * @param computation Computation to compute previous value for
+ * @returns Signal that emits previous value of `computation`
  */
-export function computedPrevious<T>(s: Signal<T>): Signal<T> {
+export function computedPrevious<T>(computation: () => T): Signal<T> {
 	let current = null as T;
-	let previous = untracked(() => s()); // initial value is the current value
+	let previous = untracked(() => computation()); // initial value is the current value
 
 	return computed(() => {
-		current = s();
+		current = computation();
 		const result = previous;
 		previous = current;
 		return result;
