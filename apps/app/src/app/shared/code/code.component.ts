@@ -9,8 +9,6 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideClipboard } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { HlmScrollAreaDirective } from '@spartan-ng/ui-scrollarea-helm';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-css';
@@ -24,7 +22,7 @@ declare const Prism: typeof import('prismjs');
 @Component({
 	selector: 'spartan-code',
 	standalone: true,
-	imports: [HlmScrollAreaDirective, NgScrollbarModule, HlmButtonDirective, HlmIconComponent, NgIf],
+	imports: [HlmButtonDirective, HlmIconComponent, NgIf],
 	providers: [provideIcons({ lucideClipboard, lucideCheck })],
 	host: {
 		class: 'spartan-scroll relative block font-mono rounded-md text-sm text-white bg-zinc-950 dark:bg-zinc-900',
