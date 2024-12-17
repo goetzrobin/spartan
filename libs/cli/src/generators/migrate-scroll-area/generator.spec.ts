@@ -1,13 +1,29 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { applicationGenerator, E2eTestRunner, UnitTestRunner } from '@nx/angular/generators';
 import { Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { migrateScrollAreaGenerator } from './generator';
+
+// patch some imports to avoid running the actual code
+jest.mock('enquirer');
+jest.mock('@nx/devkit', () => {
+	const original = jest.requireActual('@nx/devkit');
+	return {
+		...original,
+		ensurePackage: (pkg: string) => jest.requireActual(pkg),
+		createProjectGraphAsync: jest.fn().mockResolvedValue({
+			nodes: {},
+			dependencies: {},
+		}),
+	};
+});
 
 describe('migrate-scroll-area generator', () => {
 	let tree: Tree;
 
 	beforeEach(async () => {
 		tree = createTreeWithEmptyWorkspace();
+
 		await applicationGenerator(tree, {
 			name: 'app',
 			directory: 'app',
