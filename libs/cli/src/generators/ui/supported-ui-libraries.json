@@ -202,7 +202,7 @@
 			"@angular/core": ">=18.0.0",
 			"@angular/cdk": ">=18.0.0",
 			"clsx": "^2.1.1",
-			"ngx-scrollbar": "^13.0.3"
+			"ngx-scrollbar": ">=16.0.0"
 		}
 	},
 	"separator": {

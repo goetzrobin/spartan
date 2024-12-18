@@ -18,7 +18,7 @@ import {
 	HlmMenuSeparatorComponent,
 	HlmSubMenuComponent,
 } from '@spartan-ng/ui-menu-helm';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
+import { HlmScrollAreaDirective } from '@spartan-ng/ui-scrollarea-helm';
 import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
 import {
 	HlmTabsComponent,
@@ -26,6 +26,7 @@ import {
 	HlmTabsListComponent,
 	HlmTabsTriggerDirective,
 } from '@spartan-ng/ui-tabs-helm';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SideMusicMenuComponent } from './components/side-menu/side-menu.component';
 import { FallbackImageDirective } from './directives/fallback-img.directive';
 
@@ -44,7 +45,7 @@ export const routeMeta: RouteMeta = {
 	},
 	imports: [
 		TopMusicMenuComponent,
-		HlmScrollAreaComponent,
+		HlmScrollAreaDirective,
 		SideMusicMenuComponent,
 
 		HlmTabsComponent,
@@ -56,7 +57,7 @@ export const routeMeta: RouteMeta = {
 		HlmIconComponent,
 
 		HlmSeparatorDirective,
-		HlmScrollAreaComponent,
+		NgScrollbarModule,
 
 		BrnMenuTriggerDirective,
 		BrnContextMenuTriggerDirective,

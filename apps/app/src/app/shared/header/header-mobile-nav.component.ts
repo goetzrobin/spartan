@@ -5,8 +5,9 @@ import { lucideMenu, lucideX } from '@ng-icons/lucide';
 import { BrnSheetContentDirective, BrnSheetTriggerDirective } from '@spartan-ng/brain/sheet';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
+import { HlmScrollAreaDirective } from '@spartan-ng/ui-scrollarea-helm';
 import { HlmSheetImports } from '@spartan-ng/ui-sheet-helm';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SideNavContentComponent } from '../layout/side-nav/side-nav-content.component';
 import { SideNavLinkDirective } from '../layout/side-nav/side-nav-link.directive';
 import { SpartanLogoComponent } from '../spartan-logo.component';
@@ -23,7 +24,8 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 		HlmButtonDirective,
 		HlmIconComponent,
 		SideNavContentComponent,
-		HlmScrollAreaComponent,
+		HlmScrollAreaDirective,
+		NgScrollbarModule,
 		RouterLink,
 		NavLinkDirective,
 		SideNavLinkDirective,
@@ -47,7 +49,7 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 					</a>
 					<span>spartan/ui</span>
 				</div>
-				<hlm-scroll-area class="h-[calc(100vh-8rem)]">
+				<ng-scrollbar hlm class="h-[calc(100vh-8rem)]">
 					<div class="flex flex-col space-y-1 p-2 pb-4">
 						<a (click)="ctx.close()" class="text-foreground px-2 py-1 hover:underline" routerLink="/documentation">
 							Documentation
@@ -61,7 +63,7 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 						</a>
 					</div>
 					<spartan-side-nav-content (linkClicked)="ctx.close()" />
-				</hlm-scroll-area>
+				</ng-scrollbar>
 			</hlm-sheet-content>
 		</hlm-sheet>
 	`,
