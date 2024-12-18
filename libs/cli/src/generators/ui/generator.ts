@@ -10,7 +10,9 @@ export default async function hlmUIGenerator(tree: Tree, options: HlmUIGenerator
 	const config = await getOrCreateConfig(tree, {
 		componentsPath: options.directory,
 	});
-	const availablePrimitives: ComponentDefintions = await import('./supported-ui-libraries.json').then((m) => m.default);
+	const availablePrimitives: PrimitiveDefinitions = await import('./supported-ui-libraries.json').then(
+		(m) => m.default,
+	);
 	const availablePrimitiveNames = [...Object.keys(availablePrimitives), 'collapsible', 'menubar', 'contextmenu'];
 	let response: { primitives: string[] } = { primitives: [] };
 	if (options.name && availablePrimitiveNames.includes(options.name)) {
@@ -36,7 +38,7 @@ async function createPrimitiveLibraries(
 		primitives: string[];
 	},
 	availablePrimitiveNames: string[],
-	availablePrimitives: ComponentDefintions,
+	availablePrimitives: PrimitiveDefinitions,
 	tree: Tree,
 	options: HlmUIGeneratorSchema & { angularCli?: boolean },
 	config: Config,
@@ -65,7 +67,7 @@ async function createPrimitiveLibraries(
 			if (primitiveName === 'collapsible') return;
 
 			const internalName = availablePrimitives[primitiveName].internalName;
-			const peerDependencies = availablePrimitives[primitiveName].peerDependencies;
+			const peerDependencies = removeHelmKeys(availablePrimitives[primitiveName].peerDependencies);
 			const { generator } = await import(
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
@@ -115,7 +117,10 @@ const replaceContextAndMenuBar = async (primtivesToCreate: string[], silent = fa
 	}
 };
 
-interface ComponentDefintions {
+const removeHelmKeys = (obj: Record<string, string>) =>
+	Object.fromEntries(Object.entries(obj).filter(([key]) => !key.toLowerCase().includes('helm')));
+
+interface PrimitiveDefinitions {
 	[componentName: string]: {
 		internalName: string;
 		peerDependencies: Record<string, string>;
