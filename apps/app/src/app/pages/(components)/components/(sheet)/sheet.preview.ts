@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCross } from '@ng-icons/lucide';
 import { BrnSheetContentDirective, BrnSheetTriggerDirective } from '@spartan-ng/brain/sheet';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import {
@@ -29,7 +29,8 @@ import {
 		HlmSheetDescriptionDirective,
 		HlmButtonDirective,
 		HlmInputDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmLabelDirective,
 	],
 	providers: [provideIcons({ lucideCross })],
@@ -65,7 +66,7 @@ import { Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCross } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { BrnSheetContentDirective, BrnSheetTriggerDirective } from '@spartan-ng/brain/sheet';
@@ -92,7 +93,7 @@ import {
     HlmSheetDescriptionDirective,
     HlmButtonDirective,
     HlmInputDirective,
-    HlmIconComponent,
+    HlmIconDirective,
     HlmLabelDirective,
   ],
   providers: [provideIcons({ lucideCross })],

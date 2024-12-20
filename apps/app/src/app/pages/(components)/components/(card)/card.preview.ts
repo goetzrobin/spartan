@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideChevronDown } from '@ng-icons/lucide';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { BrnPopoverComponent, BrnPopoverContentDirective, BrnPopoverTriggerDirective } from '@spartan-ng/brain/popover';
@@ -12,7 +13,7 @@ import {
 	HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
@@ -25,7 +26,8 @@ type Framework = { label: string; value: string };
 	imports: [
 		BrnCommandImports,
 		HlmCommandImports,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		BrnPopoverComponent,
 		BrnPopoverTriggerDirective,
 		BrnPopoverContentDirective,
@@ -66,7 +68,7 @@ type Framework = { label: string; value: string };
 							hlmBtn
 						>
 							{{ currentFramework() ? currentFramework()?.label : 'Select' }}
-							<hlm-icon size="sm" name="lucideChevronDown" />
+							<ng-icon hlm size="sm" name="lucideChevronDown" />
 						</button>
 						<brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="w-[270px] p-0">
 							<div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
@@ -74,7 +76,8 @@ type Framework = { label: string; value: string };
 								<brn-cmd-group hlm>
 									@for (framework of frameworks; track framework) {
 										<button brnCmdItem [value]="framework.value" (selected)="commandSelected(framework)" hlm>
-											<hlm-icon
+											<ng-icon
+												hlm
 												[class.opacity-0]="currentFramework()?.value !== framework.value"
 												name="lucideCheck"
 												hlmCmdIcon
@@ -154,7 +157,7 @@ import {
 } from '@spartan-ng/ui-card-helm';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
@@ -172,7 +175,7 @@ type Framework = { label: string; value: string };
   imports: [
     BrnCommandImports,
     HlmCommandImports,
-    HlmIconComponent,
+    HlmIconDirective,
     BrnPopoverComponent,
     BrnPopoverTriggerDirective,
     BrnPopoverContentDirective,
@@ -213,7 +216,7 @@ type Framework = { label: string; value: string };
                               hlmBtn
                       >
                           {{ currentFramework() ? currentFramework()?.label : 'Select' }}
-                          <hlm-icon size="sm" name="lucideChevronDown" />
+                          <ng-icon hlm size="sm" name="lucideChevronDown" />
                       </button>
                       <brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="w-[270px] p-0">
                           <div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
@@ -222,7 +225,7 @@ type Framework = { label: string; value: string };
                                   @for (framework of frameworks;track framework) {
                                       <button brnCmdItem [value]="framework.value"
                                               (selected)="commandSelected(framework)" hlm>
-                                          <hlm-icon
+                                          <ng-icon hlm
                                                   [class.opacity-0]="currentFramework()?.value !== framework.value"
                                                   name="lucideCheck"
                                                   hlmCmdIcon

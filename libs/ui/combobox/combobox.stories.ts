@@ -1,6 +1,6 @@
 import { NgForOf } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import * as lucide from '@ng-icons/lucide';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { BrnPopoverImports } from '@spartan-ng/brain/popover';
@@ -8,7 +8,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmCommandImports } from '../command/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmPopoverContentDirective } from '../popover/helm/src';
 
 const meta: Meta<{}> = {
@@ -16,7 +16,7 @@ const meta: Meta<{}> = {
 	decorators: [
 		moduleMetadata({
 			providers: [provideIcons(lucide)],
-			imports: [BrnCommandImports, HlmCommandImports, HlmIconComponent, HlmButtonDirective],
+			imports: [BrnCommandImports, HlmCommandImports, NgIcon, HlmIconDirective, HlmButtonDirective],
 		}),
 	],
 };
@@ -34,7 +34,8 @@ type Framework = { label: string; value: string };
 		HlmCommandImports,
 		BrnPopoverImports,
 		HlmPopoverContentDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmButtonDirective,
 	],
 	template: `
@@ -48,11 +49,11 @@ type Framework = { label: string; value: string };
 				hlmBtn
 			>
 				{{ currentFramework() ? currentFramework().label : 'Select framework...' }}
-				<hlm-icon size="sm" name="lucideChevronsUpDown" />
+				<ng-icon hlm size="sm" name="lucideChevronsUpDown" />
 			</button>
 			<brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="w-[200px] p-0">
 				<hlm-cmd-input-wrapper>
-					<hlm-icon name="lucideSearch" />
+					<ng-icon hlm name="lucideSearch" />
 					<input placeholder="Search framework..." brnCmdInput hlm />
 				</hlm-cmd-input-wrapper>
 				<div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
@@ -60,7 +61,8 @@ type Framework = { label: string; value: string };
 					<brn-cmd-group hlm>
 						@for (framework of frameworks; track framework) {
 							<button brnCmdItem [value]="framework.value" (selected)="commandSelected(framework)" hlm>
-								<hlm-icon
+								<ng-icon
+									hlm
 									[class.opacity-0]="currentFramework()?.value !== framework.value"
 									name="lucideCheck"
 									hlmCmdIcon

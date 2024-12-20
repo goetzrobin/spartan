@@ -23,7 +23,7 @@ describe('dialog--default', () => {
 			cy.findByRole('dialog').should('have.attr', 'aria-modal', 'true');
 			cy.findByRole('dialog').should('have.attr', 'tabindex', '-1');
 
-			cy.findByRole('dialog').get('hlm-icon').click();
+			cy.findByRole('dialog').get('ng-icon').click();
 			cy.findAllByText(/edit profile/i).should('have.length', 1);
 			cy.findAllByText(/edit profile/i).should('have.focus');
 			cy.findByText(/edit profile/i).click();
@@ -157,7 +157,7 @@ describe('dialog--dynamic-component', () => {
 			cy.get('dynamic-content');
 
 			// close on click close button
-			cy.findByRole('dialog').get('hlm-icon').click();
+			cy.findByRole('dialog').get('ng-icon').click();
 			cy.findAllByText(/select user/i).should('have.length', 1);
 			cy.findAllByText(/select user/i).should('have.focus');
 			cy.findByText(/select user/i).click();

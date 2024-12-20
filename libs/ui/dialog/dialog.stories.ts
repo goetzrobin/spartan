@@ -1,5 +1,5 @@
 import { Component, HostBinding, inject } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck } from '@ng-icons/lucide';
 import {
 	BrnDialogContentDirective,
@@ -10,7 +10,7 @@ import {
 } from '@spartan-ng/brain/dialog';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { HlmTableComponent, HlmTdComponent, HlmThComponent, HlmTrowComponent } from '../table/helm/src';
@@ -192,7 +192,8 @@ class DialogDynamicComponentStory {
 		HlmTrowComponent,
 		HlmTdComponent,
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	providers: [provideIcons({ lucideCheck })],
 	template: `

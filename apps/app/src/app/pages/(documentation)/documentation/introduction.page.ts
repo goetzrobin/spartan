@@ -1,7 +1,7 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
 import {
 	HlmAccordionContentComponent,
@@ -11,7 +11,7 @@ import {
 	HlmAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
 import { MainSectionDirective } from '../../../shared/layout/main-section.directive';
 import { PageBottomNavPlaceholderComponent } from '../../../shared/layout/page-bottom-nav-placeholder.component';
@@ -50,7 +50,8 @@ export const routeMeta: RouteMeta = {
 		PageBottomNavComponent,
 		PageBottomNavPlaceholderComponent,
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	providers: [provideIcons({ lucideChevronRight })],
 	template: `
@@ -89,7 +90,7 @@ export const routeMeta: RouteMeta = {
 			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/stack" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/stack
-					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
+					<ng-icon hlm name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 			<spartan-section-sub-heading id="spartan-ui">spartan/ui</spartan-section-sub-heading>
@@ -110,7 +111,7 @@ export const routeMeta: RouteMeta = {
 			<div class="mt-6 flex items-center justify-end">
 				<a routerLink="/documentation/installation" variant="outline" size="sm" hlmBtn outline="">
 					Check out spartan/ui
-					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
+					<ng-icon hlm name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 			<spartan-section-sub-heading id="faq">FAQ</spartan-section-sub-heading>
@@ -118,7 +119,7 @@ export const routeMeta: RouteMeta = {
 				<div hlmAccordionItem>
 					<button hlmAccordionTrigger>
 						<span>What is spartan/stack</span>
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						It is a collection of full-stack technologies that power end-to-end type-safe Angular development.
@@ -128,7 +129,7 @@ export const routeMeta: RouteMeta = {
 				<div hlmAccordionItem>
 					<button hlmAccordionTrigger>
 						<span>What is spartan/ui</span>
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						A collection of Angular UI primitives that are both beautiful and accessible.
@@ -137,7 +138,7 @@ export const routeMeta: RouteMeta = {
 				<div hlmAccordionItem>
 					<button hlmAccordionTrigger>
 						<span>What is spartan/ui/brain</span>
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						A collection of unstyled UI primitives that provide accessibility out of the box.
@@ -146,7 +147,7 @@ export const routeMeta: RouteMeta = {
 				<div hlmAccordionItem>
 					<button hlmAccordionTrigger>
 						<span>What is spartan/ui/helm</span>
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Directives, sometimes additional components, that give spartan/brain a shadcn look.

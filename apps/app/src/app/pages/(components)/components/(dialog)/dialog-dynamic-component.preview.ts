@@ -1,4 +1,5 @@
 import { Component, HostBinding, inject } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck } from '@ng-icons/lucide';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -8,7 +9,7 @@ import {
 	HlmDialogService,
 	HlmDialogTitleDirective,
 } from '@spartan-ng/ui-dialog-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmTableComponent, HlmTdComponent, HlmThComponent, HlmTrowComponent } from '@spartan-ng/ui-table-helm';
 
 type ExampleUser = {
@@ -80,7 +81,8 @@ export class DialogDynamicComponentPreviewComponent {
 		HlmTrowComponent,
 		HlmTdComponent,
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	providers: [provideIcons({ lucideCheck })],
 	template: `
@@ -127,7 +129,7 @@ import {
 	HlmDialogService,
 	HlmDialogTitleDirective,
 } from '@spartan-ng/ui-dialog-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmTableComponent, HlmTdComponent, HlmThComponent, HlmTrowComponent } from '@spartan-ng/ui-table-helm';
 
 type ExampleUser = {
@@ -198,7 +200,7 @@ export class DialogDynamicComponentPreviewComponent {
 		HlmTrowComponent,
 		HlmTdComponent,
 		HlmButtonDirective,
-		HlmIconComponent,
+		HlmIconDirective,
 	],
 	providers: [provideIcons({ lucideCheck })],
 	template: \`

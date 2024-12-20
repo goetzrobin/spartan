@@ -1,7 +1,8 @@
+import { NgIcon } from '@ng-icons/core';
 import { BrnPopoverComponent, BrnPopoverImports } from '@spartan-ng/brain/popover';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { HlmPopoverImports } from './helm/src';
@@ -26,7 +27,8 @@ const meta: Meta<BrnPopoverComponent> = {
 				HlmButtonDirective,
 				HlmLabelDirective,
 				HlmInputDirective,
-				HlmIconComponent,
+				NgIcon,
+				HlmIconDirective,
 			],
 		}),
 	],

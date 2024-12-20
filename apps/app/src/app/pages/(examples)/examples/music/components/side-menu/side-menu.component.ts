@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
 	lucideCirclePlay,
 	lucideLayoutGrid,
@@ -11,7 +11,7 @@ import {
 	lucideRadio,
 	lucideUser,
 } from '@ng-icons/lucide';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmScrollAreaDirective } from '@spartan-ng/ui-scrollarea-helm';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SideMenuButtonComponent } from './side-menu-button.component';
@@ -29,7 +29,7 @@ interface ListItem {
 	host: {
 		class: 'block',
 	},
-	imports: [SideMenuButtonComponent, HlmIconComponent, HlmScrollAreaDirective, NgScrollbarModule, NgClass],
+	imports: [SideMenuButtonComponent, NgIcon, HlmIconDirective, HlmScrollAreaDirective, NgScrollbarModule, NgClass],
 	providers: [
 		provideIcons({
 			lucideCirclePlay,
@@ -50,7 +50,7 @@ interface ListItem {
 					<div class="space-y-1">
 						@for (item of discover; track item) {
 							<music-side-button class="font-medium" [ngClass]="{ 'bg-secondary': !!item.selected }">
-								<hlm-icon size="sm" [name]="item.icon" class="mr-2 h-4 w-4" />
+								<ng-icon hlm size="sm" [name]="item.icon" class="mr-2 h-4 w-4" />
 								{{ item.text }}
 							</music-side-button>
 						}
@@ -62,7 +62,7 @@ interface ListItem {
 					<div class="space-y-1">
 						@for (item of library; track item) {
 							<music-side-button class="font-medium">
-								<hlm-icon size="sm" [name]="item.icon" class="mr-2 h-4 w-4" />
+								<ng-icon hlm size="sm" [name]="item.icon" class="mr-2 h-4 w-4" />
 								{{ item.text }}
 							</music-side-button>
 						}
@@ -75,7 +75,7 @@ interface ListItem {
 						<ng-scrollbar hlm class="h-[300px]" visibility="hover">
 							@for (item of playlists; track item) {
 								<music-side-button class="px-4">
-									<hlm-icon size="sm" [name]="item.icon" class="mr-2 h-4 w-4" />
+									<ng-icon hlm size="sm" [name]="item.icon" class="mr-2 h-4 w-4" />
 									{{ item.text }}
 								</music-side-button>
 							}

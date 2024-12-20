@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucidePlus } from '@ng-icons/lucide';
 import { BrnTooltipContentDirective } from '@spartan-ng/brain/tooltip';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmTooltipComponent, HlmTooltipTriggerDirective } from './helm/src';
 
 const meta: Meta<HlmTooltipComponent> = {
@@ -19,7 +19,8 @@ const meta: Meta<HlmTooltipComponent> = {
 				HlmTooltipComponent,
 				BrnTooltipContentDirective,
 				HlmTooltipTriggerDirective,
-				HlmIconComponent,
+				NgIcon,
+				HlmIconDirective,
 			],
 			providers: [provideIcons({ lucidePlus })],
 		}),
@@ -43,7 +44,7 @@ export const Default: Story = {
   <hlm-tooltip>
     <button hlmTooltipTrigger ${argsToTemplate(args)} aria-describedby='Hello world' hlmBtn variant='outline'>Test</button>
     <span *brnTooltipContent class='flex items-center'>
-      Add to library <hlm-icon class='ml-2' size='sm' name='lucidePlus'/>
+      Add to library <ng-icon hlm class='ml-2' size='sm' name='lucidePlus'/>
      </span>
   </hlm-tooltip>
 </div>
@@ -59,7 +60,8 @@ export const Default: Story = {
 		HlmTooltipComponent,
 		BrnTooltipContentDirective,
 		HlmTooltipTriggerDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	providers: [provideIcons({ lucidePlus })],
 	template: `
@@ -72,7 +74,7 @@ export const Default: Story = {
 				hlmBtn
 				variant="icon"
 			>
-				<hlm-icon name="lucidePlus" size="sm" />
+				<ng-icon hlm name="lucidePlus" size="sm" />
 			</button>
 		</div>
 	`,
@@ -98,7 +100,8 @@ export const Simple: Story = {
 		HlmTooltipComponent,
 		BrnTooltipContentDirective,
 		HlmTooltipTriggerDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	providers: [provideIcons({ lucidePlus })],
 	template: `
@@ -116,7 +119,7 @@ export const Simple: Story = {
 				</button>
 				<span *brnTooltipContent class="flex items-center">
 					Add to library
-					<hlm-icon class="ml-2" size="sm" name="lucidePlus" />
+					<ng-icon hlm class="ml-2" size="sm" name="lucidePlus" />
 				</span>
 			</hlm-tooltip>
 			<p>{{ disabled() ? 'disabled' : 'enabled' }}</p>

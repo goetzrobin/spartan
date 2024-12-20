@@ -19,6 +19,11 @@
 			"factory": "./src/generators/migrate-scroll-area/generator",
 			"schema": "./src/generators/migrate-scroll-area/schema.json",
 			"description": "Migrate hlm-scroll-area to ngx-scrollbar"
+		},
+		"migrate-icon": {
+			"factory": "./src/generators/migrate-icon/generator",
+			"schema": "./src/generators/migrate-icon/schema.json",
+			"description": "Migrate hlm-icon to ng-icon"
 		}
 	},
 	"schematics": {
@@ -41,6 +46,11 @@
 			"factory": "./src/generators/migrate-scroll-area/compat",
 			"schema": "./src/generators/migrate-scroll-area/schema.json",
 			"description": "Migrate hlm-scroll-area to ngx-scrollbar"
+		},
+		"migrate-icon": {
+			"factory": "./src/generators/migrate-icon/compat",
+			"schema": "./src/generators/migrate-icon/schema.json",
+			"description": "Migrate hlm-icon to ng-icon"
 		}
 	}
 }

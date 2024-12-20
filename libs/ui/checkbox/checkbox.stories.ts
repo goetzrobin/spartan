@@ -1,10 +1,11 @@
+import { NgIcon } from '@ng-icons/core';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HlmButtonModule } from '../button/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmLabelDirective } from '../label/helm/src';
 import { HlmCheckboxComponent, HlmCheckboxImports } from './helm/src';
 
@@ -38,7 +39,7 @@ const meta: Meta<HlmCheckboxComponent> = {
 	decorators: [
 		moduleMetadata({
 			declarations: [HlmCheckboxComponentTester],
-			imports: [HlmCheckboxImports, HlmLabelDirective, HlmIconComponent, ReactiveFormsModule, HlmButtonModule],
+			imports: [HlmCheckboxImports, HlmLabelDirective, NgIcon, HlmIconDirective, ReactiveFormsModule, HlmButtonModule],
 		}),
 	],
 };

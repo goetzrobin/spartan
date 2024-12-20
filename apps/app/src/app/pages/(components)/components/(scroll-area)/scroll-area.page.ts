@@ -1,7 +1,8 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { provideIcons } from '@ng-icons/core';
 import { lucideTriangleAlert } from '@ng-icons/lucide';
-import { provideIcons } from '@spartan-ng/ui-icon-helm';
+import {} from '@spartan-ng/ui-icon-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';

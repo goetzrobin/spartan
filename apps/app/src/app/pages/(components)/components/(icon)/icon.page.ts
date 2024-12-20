@@ -1,8 +1,8 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component, computed, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import * as lucideIcons from '@ng-icons/lucide';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HoverCardPreviewComponent } from '../(hover-card)/hover-card.preview';
 import { IconPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from '../(icon)/icon.preview';
@@ -62,7 +62,7 @@ export const routeMeta: RouteMeta = {
 			>
 				@for (icon of iconsList(); track $index) {
 					<div class="flex w-full flex-col items-center gap-2 p-4">
-						<hlm-icon size="lg" [name]="icon" />
+						<ng-icon hlm size="lg" [name]="icon" />
 						<span class="whitespace-normal break-all text-center text-sm">{{ icon }}</span>
 					</div>
 				}
@@ -90,7 +90,8 @@ export const routeMeta: RouteMeta = {
 		HoverCardPreviewComponent,
 		IconPreviewComponent,
 		HlmInputDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	providers: [provideIcons(lucideIcons)],
 })

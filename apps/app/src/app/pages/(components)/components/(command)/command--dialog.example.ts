@@ -1,5 +1,5 @@
 import { Component, HostListener, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
 	lucideCalendar,
 	lucideCog,
@@ -21,7 +21,7 @@ import {
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
 import { HlmDialogOverlayDirective } from '@spartan-ng/ui-dialog-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmCodeDirective } from '@spartan-ng/ui-typography-helm';
 
 @Component({
@@ -42,7 +42,8 @@ import { HlmCodeDirective } from '@spartan-ng/ui-typography-helm';
 	imports: [
 		BrnCommandImports,
 		HlmCommandImports,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmButtonDirective,
 
 		BrnDialogComponent,
@@ -68,42 +69,42 @@ import { HlmCodeDirective } from '@spartan-ng/ui-typography-helm';
 			<brn-dialog-overlay hlm />
 			<brn-cmd *brnDialogContent="let ctx" hlmCmdDialog class="mx-auto sm:w-[400px]">
 				<hlm-cmd-input-wrapper>
-					<hlm-icon name="lucideSearch" />
+					<ng-icon hlm name="lucideSearch" />
 					<input placeholder="Type a command or search..." brnCmdInput hlm />
 					<button brnDialogClose hlmCmdDialogCloseBtn>
-						<hlm-icon name="lucideX" />
+						<ng-icon hlm name="lucideX" />
 					</button>
 				</hlm-cmd-input-wrapper>
 				<div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
 				<brn-cmd-list hlm>
 					<brn-cmd-group hlm label="Suggestions">
 						<button brnCmdItem value="calendar" (selected)="commandSelected('calendar')" hlm>
-							<hlm-icon name="lucideCalendar" hlmCmdIcon />
+							<ng-icon hlm name="lucideCalendar" hlmCmdIcon />
 							Calendar
 						</button>
 						<button brnCmdItem value="emojy" (selected)="commandSelected('emojy')" hlm>
-							<hlm-icon name="lucideSmile" hlmCmdIcon />
+							<ng-icon hlm name="lucideSmile" hlmCmdIcon />
 							Search Emoji
 						</button>
 						<button brnCmdItem value="calculator" (selected)="commandSelected('calculator')" hlm>
-							<hlm-icon name="lucidePlus" hlmCmdIcon />
+							<ng-icon hlm name="lucidePlus" hlmCmdIcon />
 							Calculator
 						</button>
 					</brn-cmd-group>
 					<brn-cmd-separator hlm></brn-cmd-separator>
 					<brn-cmd-group hlm label="Settings">
 						<button brnCmdItem value="profile" (selected)="commandSelected('profile')" hlm>
-							<hlm-icon name="lucideUser" hlmCmdIcon />
+							<ng-icon hlm name="lucideUser" hlmCmdIcon />
 							Profile
 							<hlm-cmd-shortcut>⌘P</hlm-cmd-shortcut>
 						</button>
 						<button brnCmdItem value="billing" (selected)="commandSelected('billing')" hlm>
-							<hlm-icon name="lucideLayers" hlmCmdIcon />
+							<ng-icon hlm name="lucideLayers" hlmCmdIcon />
 							Billing
 							<hlm-cmd-shortcut>⌘B</hlm-cmd-shortcut>
 						</button>
 						<button brnCmdItem value="settings" (selected)="commandSelected('settings')" hlm>
-							<hlm-icon name="lucideCog" hlmCmdIcon />
+							<ng-icon hlm name="lucideCog" hlmCmdIcon />
 							Settings
 							<hlm-cmd-shortcut>⌘S</hlm-cmd-shortcut>
 						</button>

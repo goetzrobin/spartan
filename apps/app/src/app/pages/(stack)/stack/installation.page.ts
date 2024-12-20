@@ -1,11 +1,11 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight, lucideTriangleAlert } from '@ng-icons/lucide';
 import { HlmAlertModule } from '@spartan-ng/ui-alert-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
 import { AccordionPreviewComponent } from '../../(components)/components/(accordion)/accordion.preview';
 import { CodePreviewDirective } from '../../../shared/code/code-preview.directive';
@@ -38,7 +38,8 @@ export const routeMeta: RouteMeta = {
 		CodeComponent,
 		TabsComponent,
 		HlmAlertModule,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmButtonDirective,
 		AccordionPreviewComponent,
 		CodePreviewDirective,
@@ -112,7 +113,7 @@ export const routeMeta: RouteMeta = {
 			<spartan-code class="mt-3" language="sh" code="npm install drizzle-orm postgres" />
 
 			<div class="mb-6 mt-4" hlmAlert>
-				<hlm-icon hlmAlertIcon name="lucideTriangleAlert" />
+				<ng-icon hlm hlmAlertIcon name="lucideTriangleAlert" />
 				<h4 hlmAlertTitle>Dealing with postgres & CommonJs</h4>
 				<p hlmAlertDesc>
 					<code class="${hlmCode}">postgres</code>
@@ -255,7 +256,7 @@ export const noteRouter = router({
 					/>
 
 					<div class="mt-4" hlmAlert>
-						<hlm-icon name="lucideTriangleAlert" hlmAlertIcon />
+						<ng-icon hlm name="lucideTriangleAlert" hlmAlertIcon />
 						<p hlmAlertTitle>Make sure to add .env to your .gitignore file.</p>
 						<p hlmAlertDescription>
 							You do not want to accidentally commit your secrets to GitHub. To exclude the file from git add a new line
@@ -308,7 +309,7 @@ git init"
 					<spartan-code class="mt-3" code="supabase start" />
 
 					<div class="mt-8" hlmAlert variant="destructive">
-						<hlm-icon hlmAlertIcon name="lucideTriangleAlert" />
+						<ng-icon hlm hlmAlertIcon name="lucideTriangleAlert" />
 						<h4 hlmAlertTitle>Important: Make sure Docker is running</h4>
 						<p hlmAlertDesc>
 							Make sure Docker is running and configured correctly! I had Docker already installed and running. However,
@@ -399,7 +400,7 @@ create table note (
 					hlmBtn
 				>
 					Check out the AnalogJs docs for more info
-					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
+					<ng-icon hlm name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 
