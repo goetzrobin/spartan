@@ -1,6 +1,6 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCirclePlus, lucideListMusic, lucidePodcast } from '@ng-icons/lucide';
 import { metaWith } from '@spartan-ng/app/app/shared/meta/meta.util';
 import { TopMusicMenuComponent } from './components/top-menu.component';
@@ -9,7 +9,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmCardDirective } from '@spartan-ng/ui-card-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import {
 	HlmMenuComponent,
 	HlmMenuGroupComponent,
@@ -54,7 +54,8 @@ export const routeMeta: RouteMeta = {
 		HlmTabsContentDirective,
 
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 
 		HlmSeparatorDirective,
 		NgScrollbarModule,
@@ -91,7 +92,7 @@ export const routeMeta: RouteMeta = {
 						<ng-template #playlist_submenu>
 							<hlm-sub-menu>
 								<button hlmMenuItem class="h-9">
-									<hlm-icon size="sm" name="lucideCirclePlus" class="mr-2 h-4 w-4" />
+									<ng-icon hlm size="sm" name="lucideCirclePlus" class="mr-2 h-4 w-4" />
 									Add to Library
 								</button>
 
@@ -99,7 +100,7 @@ export const routeMeta: RouteMeta = {
 
 								@for (item of contextMenuPlaylist; track item) {
 									<button hlmMenuItem class="text-left">
-										<hlm-icon size="sm" name="lucideListMusic" class="mr-2 h-4 w-4" />
+										<ng-icon hlm size="sm" name="lucideListMusic" class="mr-2 h-4 w-4" />
 										{{ item }}
 									</button>
 								}
@@ -139,7 +140,7 @@ export const routeMeta: RouteMeta = {
 									</button>
 								</hlm-tabs-list>
 								<button hlmBtn class="h-10 w-full sm:w-auto">
-									<hlm-icon size="sm" class="mr-2" name="lucideCirclePlus" />
+									<ng-icon hlm size="sm" class="mr-2" name="lucideCirclePlus" />
 									Add Music
 								</button>
 							</header>
@@ -209,7 +210,7 @@ export const routeMeta: RouteMeta = {
 
 								<div hlmCard class="flex min-h-[450px] flex-col justify-center p-6 align-middle">
 									<div class="text-center">
-										<hlm-icon size="xl" name="lucidePodcast" class="text-muted-foreground" />
+										<ng-icon hlm size="xl" name="lucidePodcast" class="text-muted-foreground" />
 										<h2 class="mt-4 text-lg font-semibold">No episodes added</h2>
 										<p class="text-muted-foreground mb-4 mt-2 text-sm">
 											You have not added any podcasts. Add one below

@@ -3,6 +3,7 @@ import { Component, type TrackByFunction, computed, effect, signal } from '@angu
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { faker } from '@faker-js/faker';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { BrnMenuModule } from '@spartan-ng/brain/menu';
 import { BrnTableModule, type PaginatorState, useBrnColumnManager } from '@spartan-ng/brain/table';
@@ -10,7 +11,7 @@ import { BrnToggleGroupModule } from '@spartan-ng/brain/toggle';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { debounceTime } from 'rxjs';
 import { HlmButtonDirective, HlmButtonModule } from '../button/helm/src';
-import { HlmIconComponent, provideIcons } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmInputDirective } from '../input/helm/src';
 import { HlmMenuModule } from '../menu/helm/src';
 import { HlmToggleGroupModule } from '../toggle/helm/src';
@@ -36,7 +37,8 @@ const createUsers = (numUsers = 5) => {
 		HlmMenuModule,
 		HlmInputDirective,
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		TitleCasePipe,
 	],
 	providers: [provideIcons({ lucideChevronDown })],
@@ -51,7 +53,7 @@ const createUsers = (numUsers = 5) => {
 
 			<button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
 				Columns
-				<hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
+				<ng-icon hlm name="lucideChevronDown" class="ml-2" size="sm" />
 			</button>
 			<ng-template #menu>
 				<hlm-menu class="w-40">

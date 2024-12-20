@@ -1,4 +1,5 @@
-import { Directive, computed, input } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Directive, ElementRef, OnDestroy, PLATFORM_ID, computed, inject, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
 import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
@@ -37,10 +38,13 @@ const isDefinedSize = (size: IconSize): size is DefinedSizes => {
 	standalone: true,
 	host: {
 		'[class]': '_computedClass()',
+		'[style.--ng-icon__size]': 'size()',
 	},
 })
-export class HlmIconDirective {
+export class HlmIconDirective implements OnDestroy {
+	private readonly _element = inject<ElementRef<HTMLElement>>(ElementRef);
 	private readonly _config = injectHlmIconConfig();
+	private readonly _platform = inject(PLATFORM_ID);
 
 	public readonly size = input<IconSize>(this._config.size);
 
@@ -51,4 +55,25 @@ export class HlmIconDirective {
 		const variant = isDefinedSize(size) ? size : 'none';
 		return hlm(iconVariants({ variant }), this.userClass());
 	});
+
+	private readonly _observer?: MutationObserver;
+
+	constructor() {
+		if (isPlatformBrowser(this._platform)) {
+			// listen for changes to the style attribute, if the size is a predefined size, remove the ng-icon size variable
+			this._observer = new MutationObserver(() => {
+				const size = this._element.nativeElement.style.getPropertyValue('--ng-icon__size');
+
+				if (isDefinedSize(size as IconSize)) {
+					this._element.nativeElement.style.setProperty('--ng-icon__size', '');
+				}
+			});
+
+			this._observer.observe(this._element.nativeElement, { attributes: true, attributeFilter: ['style'] });
+		}
+	}
+
+	ngOnDestroy() {
+		this._observer?.disconnect();
+	}
 }

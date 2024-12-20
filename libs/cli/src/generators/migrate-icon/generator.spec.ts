@@ -152,4 +152,26 @@ describe('migrate-icon generator', () => {
 		expect(content).toContain(`import { provideIcons } from '@ng-icons/core';`);
 		expect(content).toContain(`providers: [provideIcons({ lucideChevronRight })],`);
 	});
+
+	it('should add the name attribute for accordion icons', async () => {
+		tree.write(
+			'app/src/app/app.component.ts',
+			`
+			import { Component } from '@angular/core';
+
+			@Component({
+				template: \`
+					<ng-icon hlm hlmAccIcon />
+				\`
+			})
+			export class AppComponent {}
+
+			`,
+		);
+
+		await migrateIconGenerator(tree, { skipFormat: true });
+
+		const content = tree.read('app/src/app/app.component.ts', 'utf-8');
+		expect(content).toContain(`<ng-icon hlm hlmAccIcon name="lucideChevronDown" />`);
+	});
 });

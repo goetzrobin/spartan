@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideGithub, lucideTwitter } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { SpartanLogoComponent } from '../spartan-logo.component';
 import { NavLinkDirective } from '../spartan-nav-link.directive';
 import { HeaderDarkModeComponent } from './header-dark-mode.component';
@@ -16,7 +16,8 @@ import { HeaderThemePickerComponent } from './header-theme-picker.component';
 	imports: [
 		HlmButtonDirective,
 		RouterLink,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HeaderThemePickerComponent,
 		NavLinkDirective,
 		HeaderMobileNavComponent,
@@ -48,11 +49,11 @@ import { HeaderThemePickerComponent } from './header-theme-picker.component';
 			<div class="flex space-x-2">
 				<a href="https://twitter.com/goetzrobin" target="_blank" size="sm" variant="ghost" hlmBtn>
 					<span class="sr-only">Twitter</span>
-					<hlm-icon name="lucideTwitter" size="sm" />
+					<ng-icon hlm name="lucideTwitter" size="sm" />
 				</a>
 				<a href="https://github.com/goetzrobin/spartan" target="_blank" size="sm" variant="ghost" hlmBtn>
 					<span class="sr-only">Github</span>
-					<hlm-icon name="lucideGithub" size="sm" />
+					<ng-icon hlm name="lucideGithub" size="sm" />
 				</a>
 				<spartan-theme-picker />
 				<spartan-dark-mode />

@@ -8,10 +8,65 @@ export async function migrateIconGenerator(tree: Tree, { skipFormat }: MigrateIc
 	replaceImports(tree);
 	replaceSelector(tree);
 	replaceProvideIcons(tree);
+	addAccordionIcon(tree);
 
 	if (!skipFormat) {
 		await formatFiles(tree);
 	}
+}
+
+function addAccordionIcon(tree: Tree) {
+	visitNotIgnoredFiles(tree, '.', (path) => {
+		// if this is not a html or typescript file then skip
+		if (!path.endsWith('.ts') && !path.endsWith('.html')) {
+			return;
+		}
+
+		let content = tree.read(path, 'utf-8');
+
+		if (!content) {
+			return;
+		}
+
+		// if there is no hlmAccIcon or hlmAccordionIcon then skip
+		if (!content.includes('hlmAccIcon') && !content.includes('hlmAccordionIcon')) {
+			return;
+		}
+
+		const changes: StringChange[] = [];
+
+		// if an element is using hlmAccIcon or hlmAccordionIcon and has no name attribute then add the name attribute
+		const regex = /<ng-icon\b[^>]*(\bhlmAccIcon\b|\bhlmAccordionIcon\b)[^>]*>/g;
+
+		let match;
+		const results: { match: string; index: number }[] = [];
+
+		while ((match = regex.exec(content)) !== null) {
+			results.push({ match: match[0], index: match.index });
+		}
+
+		if (!results.length) {
+			return;
+		}
+
+		for (const { match, index } of results) {
+			if (!match.includes('name=')) {
+				const directive = match.includes('hlmAccIcon') ? 'hlmAccIcon' : 'hlmAccordionIcon';
+
+				const startIndex = index + match.indexOf(directive);
+
+				changes.push({
+					type: ChangeType.Insert,
+					index: startIndex + directive.length,
+					text: ` name="lucideChevronDown"`,
+				});
+			}
+		}
+
+		content = applyChangesToString(content, changes);
+
+		tree.write(path, content);
+	});
 }
 
 function replaceProvideIcons(tree: Tree) {

@@ -1,11 +1,12 @@
 import { JsonPipe, NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideItalic } from '@ng-icons/lucide';
 import { BrnToggleDirective, BrnToggleGroupModule } from '@spartan-ng/brain/toggle';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent, provideIcons } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { hlmP } from '../typography/helm/src';
 import { HlmToggleDirective, HlmToggleGroupModule } from './helm/src';
 
@@ -15,7 +16,7 @@ const meta: Meta<HlmToggleDirective> = {
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [HlmToggleDirective, BrnToggleDirective, HlmIconComponent],
+			imports: [HlmToggleDirective, BrnToggleDirective, NgIcon, HlmIconDirective],
 			providers: [provideIcons({ lucideItalic })],
 		}),
 	],
@@ -28,11 +29,11 @@ export const Default: Story = {
 	render: () => ({
 		template: `
     <div class='space-x-3'>
-    <button aria-label='Italic Toggle' size='sm' hlmToggle><hlm-icon name='lucideItalic'/></button>
-    <button aria-label='Italic Toggle' hlmToggle><hlm-icon name='lucideItalic'/></button>
-    <button aria-label='Italic Toggle' size='lg' hlmToggle><hlm-icon name='lucideItalic'/></button>
-    <button aria-label='Italic Toggle' variant='outline' hlmToggle><hlm-icon name='lucideItalic'/></button>
-    <button aria-label='Italic Toggle' disabled hlmToggle><hlm-icon name='lucideItalic'/></button>
+    <button aria-label='Italic Toggle' size='sm' hlmToggle><ng-icon hlm name='lucideItalic'/></button>
+    <button aria-label='Italic Toggle' hlmToggle><ng-icon hlm name='lucideItalic'/></button>
+    <button aria-label='Italic Toggle' size='lg' hlmToggle><ng-icon hlm name='lucideItalic'/></button>
+    <button aria-label='Italic Toggle' variant='outline' hlmToggle><ng-icon hlm name='lucideItalic'/></button>
+    <button aria-label='Italic Toggle' disabled hlmToggle><ng-icon hlm name='lucideItalic'/></button>
     </div>
     `,
 	}),
@@ -43,11 +44,11 @@ export const WithText: Story = {
 	render: () => ({
 		template: `
     <div class='space-x-3'>
-    <button size='sm' hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
-    <button hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
-    <button size='lg' hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
-    <button variant='outline' hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
-    <button disabled hlmToggle><hlm-icon name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
+    <button size='sm' hlmToggle><ng-icon hlm name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
+    <button hlmToggle><ng-icon hlm name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
+    <button size='lg' hlmToggle><ng-icon hlm name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
+    <button variant='outline' hlmToggle><ng-icon hlm name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
+    <button disabled hlmToggle><ng-icon hlm name='lucideItalic'/> <span class='ml-2'>Italic</span></button>
     </div>
 `,
 	}),

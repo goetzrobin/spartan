@@ -1,24 +1,25 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import * as lucide from '@ng-icons/lucide';
 import { lucideHouse } from '@ng-icons/lucide';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
-import { HlmIconComponent, type IconSize, provideIcons } from './helm/src';
+import { HlmIconDirective, type IconSize } from './helm/src';
 
-const meta: Meta<HlmIconComponent> = {
+const meta: Meta<HlmIconDirective> = {
 	title: 'Icon',
-	component: HlmIconComponent,
+	component: HlmIconDirective,
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [HlmIconComponent],
+			imports: [NgIcon, HlmIconDirective],
 			providers: [provideIcons(lucide)],
 		}),
 	],
 };
 
 export default meta;
-type Story = StoryObj<HlmIconComponent>;
+type Story = StoryObj<HlmIconDirective & NgIcon>;
 
 export const Default: Story = {
 	args: {
@@ -35,7 +36,7 @@ export const Default: Story = {
 	},
 	render: ({ ...args }) => ({
 		props: args,
-		template: `<hlm-icon ${argsToTemplate(args)} />`,
+		template: `<ng-icon hlm ${argsToTemplate(args)} />`,
 	}),
 };
 
@@ -49,17 +50,17 @@ export const Tailwind: Story = {
 	},
 	render: ({ ...args }) => ({
 		props: args,
-		template: `<hlm-icon ${argsToTemplate(args)} />`,
+		template: `<ng-icon hlm ${argsToTemplate(args)} />`,
 	}),
 };
 
 @Component({
 	selector: 'icon-dynamic-story',
 	standalone: true,
-	imports: [FormsModule, HlmIconComponent],
+	imports: [FormsModule, NgIcon, HlmIconDirective],
 	providers: [provideIcons({ lucideHouse })],
 	template: /* HTML */ `
-		<hlm-icon name="lucideHouse" [size]="size()" />
+		<ng-icon hlm name="lucideHouse" [size]="size()" />
 		<div>Bound property value: {{size()}}</div>
 
 		<div class="flex flex-row gap-x-2">

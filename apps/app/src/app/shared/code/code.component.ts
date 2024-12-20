@@ -1,4 +1,5 @@
 import { Component, Input, ViewEncapsulation, booleanAttribute, inject } from '@angular/core';
+import { NgIcon } from '@ng-icons/core';
 import { marked } from 'marked';
 import { gfmHeadingId } from 'marked-gfm-heading-id';
 import { markedHighlight } from 'marked-highlight';
@@ -8,7 +9,7 @@ import { NgIf } from '@angular/common';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideClipboard } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-css';
@@ -22,7 +23,7 @@ declare const Prism: typeof import('prismjs');
 @Component({
 	selector: 'spartan-code',
 	standalone: true,
-	imports: [HlmButtonDirective, HlmIconComponent, NgIf],
+	imports: [HlmButtonDirective, NgIcon, HlmIconDirective, NgIf],
 	providers: [provideIcons({ lucideClipboard, lucideCheck })],
 	host: {
 		class: 'spartan-scroll relative block font-mono rounded-md text-sm text-white bg-zinc-950 dark:bg-zinc-900',
@@ -35,7 +36,7 @@ declare const Prism: typeof import('prismjs');
 			variant="ghost"
 			class="absolute right-2 top-2 h-6 w-6 p-1"
 		>
-			<hlm-icon size="xs" [name]="copied ? 'lucideCheck' : 'lucideClipboard'" />
+			<ng-icon hlm size="xs" [name]="copied ? 'lucideCheck' : 'lucideClipboard'" />
 		</button>
 		<div class="max-h-[650px] w-full overflow-auto whitespace-nowrap p-4">
 			<div class="max-w-screen max-w-full" [innerHTML]="_content"></div>

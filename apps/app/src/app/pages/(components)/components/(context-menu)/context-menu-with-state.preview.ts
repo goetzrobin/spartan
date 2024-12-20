@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { NgIcon } from '@ng-icons/core';
 import { BrnContextMenuTriggerDirective, BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import {
 	HlmMenuComponent,
 	HlmMenuGroupComponent,
@@ -38,7 +39,8 @@ import {
 		HlmMenuGroupComponent,
 
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmMenuItemCheckboxDirective,
 		HlmMenuItemRadioDirective,
 	],

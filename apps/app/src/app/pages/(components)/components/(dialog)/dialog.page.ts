@@ -1,6 +1,6 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTriangleAlert } from '@ng-icons/lucide';
 import {
 	HlmAlertDescriptionDirective,
@@ -8,7 +8,7 @@ import {
 	HlmAlertIconDirective,
 	HlmAlertTitleDirective,
 } from '@spartan-ng/ui-alert-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
 import { CodePreviewDirective } from '../../../../shared/code/code-preview.directive';
 import { CodeComponent } from '../../../../shared/code/code.component';
@@ -54,7 +54,8 @@ export const routeMeta: RouteMeta = {
 		DialogDynamicComponentPreviewComponent,
 		HlmAlertDirective,
 		HlmAlertDescriptionDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmAlertIconDirective,
 		HlmAlertTitleDirective,
 		DialogDeclarativePreviewComponent,
@@ -117,7 +118,7 @@ export const routeMeta: RouteMeta = {
 				alternative, which takes in a reference to the brn-dialog. That way you can avoid nesting the template.
 			</p>
 			<div hlmAlert class="mb-6" variant="destructive">
-				<hlm-icon name="lucideTriangleAlert" hlmAlertIcon />
+				<ng-icon hlm name="lucideTriangleAlert" hlmAlertIcon />
 				<p hlmAlertTitle>Note</p>
 				<p hlmAlertDescription class="leading-loose">
 					Do not use the
@@ -147,7 +148,7 @@ export const routeMeta: RouteMeta = {
 				function.
 			</p>
 			<div hlmAlert class="mb-6" variant="destructive">
-				<hlm-icon name="lucideTriangleAlert" hlmAlertIcon />
+				<ng-icon hlm name="lucideTriangleAlert" hlmAlertIcon />
 				<p hlmAlertTitle>Note</p>
 				<p hlmAlertDescription class="leading-loose">
 					Avoid using the
