@@ -40,7 +40,7 @@ describe('migrate-icon generator', () => {
 			`
 			import { NgModule } from '@angular/core';
 			import { BrowserModule } from '@angular/platform-browser';
-			import { HlmIconModule } from '@spartan-ng/hlm-icon';
+			import { HlmIconModule } from '@spartan-ng/ui-icon-helm';
 
 			@NgModule({
 				imports: [BrowserModule, HlmIconModule],
@@ -52,7 +52,7 @@ describe('migrate-icon generator', () => {
 		await migrateIconGenerator(tree, { skipFormat: true });
 
 		const content = tree.read('app/src/app/app.module.ts', 'utf-8');
-		expect(content).toContain(`import { NgIcon } from '@ng-icon/core';`);
+		expect(content).toContain(`import { NgIcon } from '@ng-icons/core';`);
 		expect(content).toContain(`imports: [BrowserModule, NgIcon, HlmIconModule],`);
 	});
 
@@ -62,7 +62,7 @@ describe('migrate-icon generator', () => {
 			`
 			import { NgModule } from '@angular/core';
 			import { BrowserModule } from '@angular/platform-browser';
-			import { HlmIconComponent } from '@spartan-ng/hlm-icon';
+			import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
 			@NgModule({
 				imports: [BrowserModule, HlmIconComponent],
@@ -74,7 +74,7 @@ describe('migrate-icon generator', () => {
 		await migrateIconGenerator(tree, { skipFormat: true });
 
 		const content = tree.read('app/src/app/app.module.ts', 'utf-8');
-		expect(content).toContain(`import { NgIcon } from '@ng-icon/core';`);
+		expect(content).toContain(`import { NgIcon } from '@ng-icons/core';`);
 		expect(content).toContain(`imports: [BrowserModule, NgIcon, HlmIconDirective],`);
 	});
 
@@ -83,12 +83,12 @@ describe('migrate-icon generator', () => {
 			'app/src/app/app.component.ts',
 			`
 			import { Component } from '@angular/core';
-			import { HlmIconModule } from '@spartan-ng/hlm-icon';
+			import { HlmIconModule } from '@spartan-ng/ui-icon-helm';
 
 			@Component({
 				imports: [HlmIconModule],
 				template: \`
-					<hlm-icon size='xl' name="lucideChevronRight" />
+					<ng-icon hlm size='xl' name="lucideChevronRight" />
 				\`
 			})
 			export class AppModule {}
@@ -109,12 +109,12 @@ describe('migrate-icon generator', () => {
 			'app/src/app/app.component.ts',
 			`
 			import { Component } from '@angular/core';
-			import { HlmIconComponent } from '@spartan-ng/hlm-icon';
+			import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 
 			@Component({
 				imports: [HlmIconComponent],
 				template: \`
-					<hlm-icon size='xl' name="lucideChevronRight" />
+					<ng-icon hlm size='xl' name="lucideChevronRight" />
 				\`
 			})
 			export class AppModule {}
@@ -126,8 +126,30 @@ describe('migrate-icon generator', () => {
 
 		const content = tree.read('app/src/app/app.component.ts', 'utf-8');
 		expect(content).toContain(`import { NgIcon } from '@ng-icons/core';`);
-		expect(content).toContain(`import { HlmIconDirective } from '@spartan-ng/hlm-icon';`);
+		expect(content).toContain(`import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';`);
 		expect(content).toContain(`imports: [NgIcon, HlmIconDirective],`);
 		expect(content).toContain(`<ng-icon hlm size='xl' name="lucideChevronRight" />`);
+	});
+
+	it('should re-write the provideIcons import', async () => {
+		tree.write(
+			'app/src/app/app.component.ts',
+			`
+			import { Component } from '@angular/core';
+			import { provideIcons } from '@spartan-ng/ui-icon-helm';
+			import { lucideChevronRight } from '@ng-icons/lucide';
+
+			@Component({
+				providers: [provideIcons({ lucideChevronRight })],
+			})
+			export class AppComponent {}
+			`,
+		);
+
+		await migrateIconGenerator(tree, { skipFormat: true });
+
+		const content = tree.read('app/src/app/app.component.ts', 'utf-8');
+		expect(content).toContain(`import { provideIcons } from '@ng-icons/core';`);
+		expect(content).toContain(`providers: [provideIcons({ lucideChevronRight })],`);
 	});
 });

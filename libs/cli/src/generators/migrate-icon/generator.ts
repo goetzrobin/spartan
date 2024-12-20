@@ -7,15 +7,58 @@ import { MigrateIconGeneratorSchema } from './schema';
 export async function migrateIconGenerator(tree: Tree, { skipFormat }: MigrateIconGeneratorSchema) {
 	replaceImports(tree);
 	replaceSelector(tree);
+	replaceProvideIcons(tree);
 
 	if (!skipFormat) {
 		await formatFiles(tree);
 	}
 }
 
+function replaceProvideIcons(tree: Tree) {
+	visitNotIgnoredFiles(tree, '.', (path) => {
+		// if this is not a typescript file then skip
+		if (!path.endsWith('.ts')) {
+			return;
+		}
+
+		let content = tree.read(path, 'utf-8');
+
+		// if the user is importing `provideIcons` from '@spartan-ng/ui-icon-helm' then we need to replace it with `provideIcons` from '@ng-icons/core'
+		if (!content || !content?.includes('provideIcons')) {
+			return;
+		}
+
+		const sourceFile = ts.createSourceFile(path, content, ts.ScriptTarget.Latest, true);
+
+		if (!isImported(sourceFile, 'provideIcons', '@spartan-ng/ui-icon-helm')) {
+			return;
+		}
+
+		const changes: StringChange[] = [];
+
+		// remove the import of provideIcons from '@spartan-ng/ui-icon-helm'
+		// add the import of provideIcons from '@ng-icons/core'
+		changes.push({
+			type: ChangeType.Delete,
+			start: content.indexOf('provideIcons'),
+			length: 'provideIcons'.length,
+		});
+
+		changes.push({
+			type: ChangeType.Insert,
+			index: 0,
+			text: `import { provideIcons } from '@ng-icons/core';\n`,
+		});
+
+		content = applyChangesToString(content, changes);
+
+		tree.write(path, content);
+	});
+}
+
 function replaceSelector(tree: Tree) {
-	// if the element is `<hlm-icon` then we need to replace it with `<ng-icon hlm`
-	// we also need to replace the closing tag `</hlm-icon>` with `</ng-icon>`
+	// if the element is `<ng-icon hlm` then we need to replace it with `<ng-icon hlm`
+	// we also need to replace the closing tag `</ng-icon>` with `</ng-icon>`
 	visitNotIgnoredFiles(tree, '.', (path) => {
 		// if this is not an html file or typescript file (inline templates) then skip
 		if (!path.endsWith('.html') && !path.endsWith('.ts')) {
@@ -28,7 +71,7 @@ function replaceSelector(tree: Tree) {
 			return;
 		}
 
-		content = content.replace(/<hlm-icon/g, '<ng-icon hlm');
+		content = content.replace(/<ng-icon hlm/g, '<ng-icon hlm');
 		content = content.replace(/<\/hlm-icon>/g, '</ng-icon>');
 
 		tree.write(path, content);
