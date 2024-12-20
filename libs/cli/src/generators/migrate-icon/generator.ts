@@ -37,8 +37,8 @@ function replaceSelector(tree: Tree) {
 
 function replaceImports(tree: Tree) {
 	// ng modules or standalone components will have import arrays that may need updated.
-	// if the import is `HlmScrollAreaModule` then we need to also import `NgScrollbarModule`,
-	// if the import is `HlmScrollAreaComponent` we need to rename it to `HlmScrollAreaDirective` and add the `NgScrollbarModule` import.
+	// if the import is `HlmIconModule` then we need to also import `NgIcon`,
+	// if the import is `HlmIconComponent` we need to rename it to `HlmIconDirective` and add the `NgIcon` import.
 	visitNotIgnoredFiles(tree, '.', (path) => {
 		// if the file is not a typescript file then skip
 		if (!path.endsWith('.ts')) {
@@ -54,7 +54,7 @@ function replaceImports(tree: Tree) {
 		// convert the content to an ast
 		const sourceFile = ts.createSourceFile(path, content, ts.ScriptTarget.Latest, true);
 
-		// find all imports of HlmScrollAreaModule or HlmScrollAreaComponent
+		// find all imports of HlmIconModule or HlmIconComponent
 		const imports = findHlmIconImports(sourceFile);
 
 		// if no imports are found then skip
@@ -65,7 +65,7 @@ function replaceImports(tree: Tree) {
 		const changes: StringChange[] = [];
 
 		for (const identifier of imports) {
-			// if the identifier is HlmScrollAreaModule then we need to add NgIcon to the imports
+			// if the identifier is HlmIconModule then we need to add NgIcon to the imports
 			if (identifier.getText() === 'HlmIconModule') {
 				changes.push({
 					type: ChangeType.Insert,
@@ -83,7 +83,7 @@ function replaceImports(tree: Tree) {
 				});
 			}
 
-			// check if the NgScrollbarModule import is already present
+			// check if the NgIcon import is already present
 			if (!hasImport(content, 'NgIcon', '@ng-icons/core')) {
 				changes.push({
 					type: ChangeType.Insert,
@@ -96,7 +96,7 @@ function replaceImports(tree: Tree) {
 		content = applyChangesToString(content, changes);
 
 		// if there are any remaining uses of HlmIconComponent then replace them with HlmIconDirective
-		content = content.replace(/HlmIconomponent/g, 'HlmIconDirective');
+		content = content.replace(/HlmIconComponent/g, 'HlmIconDirective');
 
 		tree.write(path, content);
 	});
