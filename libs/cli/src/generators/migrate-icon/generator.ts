@@ -39,6 +39,11 @@ function replaceTailwindClasses(tree: Tree) {
 		while ((match = regex.exec(content)) !== null) {
 			const startIndex = match.index;
 
+			// if there already is a size attribute then skip
+			if (match[0].includes('size=')) {
+				continue;
+			}
+
 			// get the class attribute
 			const classMatch = match[0].match(/class="([^"]*)"/);
 
