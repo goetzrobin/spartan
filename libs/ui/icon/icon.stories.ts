@@ -26,7 +26,6 @@ export const Default: Story = {
 		name: 'lucideCheck',
 		size: 'sm',
 		color: 'red',
-		userClass: '',
 		strokeWidth: 1,
 	},
 	argTypes: {
@@ -42,7 +41,6 @@ export const Default: Story = {
 
 export const Tailwind: Story = {
 	args: {
-		userClass: 'text-red-600 text-5xl',
 		name: 'lucideCheck',
 	},
 	argTypes: {
@@ -50,7 +48,7 @@ export const Tailwind: Story = {
 	},
 	render: ({ ...args }) => ({
 		props: args,
-		template: `<ng-icon hlm ${argsToTemplate(args)} />`,
+		template: `<ng-icon hlm ${argsToTemplate(args)} class="text-red-600 text-5xl" />`,
 	}),
 };
 
