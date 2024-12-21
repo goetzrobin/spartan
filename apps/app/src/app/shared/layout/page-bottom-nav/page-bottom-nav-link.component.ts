@@ -13,9 +13,9 @@ import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 	providers: [provideIcons({ lucideChevronRight, lucideChevronLeft })],
 	template: `
 		<a hlmBtn variant="outline" [routerLink]="routerLink" [relativeTo]="isAbsolute ? undefined : activatedRoute">
-			<ng-icon hlm class="mr-2 h-4 w-4" name="lucideChevronLeft" *ngIf="direction === 'previous'" />
+			<ng-icon hlm size="sm" class="mr-2" name="lucideChevronLeft" *ngIf="direction === 'previous'" />
 			{{ label }}
-			<ng-icon hlm class="ml-2 h-4 w-4" name="lucideChevronRight" *ngIf="direction === 'next'" />
+			<ng-icon hlm size="sm" class="ml-2" name="lucideChevronRight" *ngIf="direction === 'next'" />
 		</a>
 	`,
 })

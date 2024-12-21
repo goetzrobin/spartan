@@ -252,7 +252,7 @@ const PAYMENT_DATA: Payment[] = [
 				<hlm-th *brnHeaderDef></hlm-th>
 				<hlm-td *brnCellDef="let element">
 					<button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-						<ng-icon hlm class="h-4 w-4" name="lucideEllipsis" />
+						<ng-icon hlm size="sm" name="lucideEllipsis" />
 					</button>
 
 					<ng-template #menu>
@@ -649,7 +649,7 @@ const PAYMENT_DATA: Payment[] = [
         <hlm-th *brnHeaderDef></hlm-th>
         <hlm-td *brnCellDef="let element">
           <button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-            <ng-icon hlm class="w-4 h-4" name="lucideEllipsis" />
+            <ng-icon hlm size="sm" name="lucideEllipsis" />
           </button>
 
           <ng-template #menu>

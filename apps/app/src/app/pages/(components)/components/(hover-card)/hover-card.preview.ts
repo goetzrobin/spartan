@@ -25,7 +25,7 @@ import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 						<h4 class="text-sm font-semibold">&#64;analogjs</h4>
 						<p class="text-sm">The Angular meta-framework – build Angular applications faster.</p>
 						<div class="flex items-center pt-2">
-							<ng-icon hlm name="lucideCalendar" class="mr-2 h-4 w-4 opacity-70" />
+							<ng-icon hlm size="sm" name="lucideCalendar" class="mr-2 opacity-70" />
 							<span class="text-muted-foreground text-xs">Joined December 2021</span>
 						</div>
 					</div>
@@ -64,7 +64,7 @@ import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
             <h4 class="text-sm font-semibold">&#64;analogjs</h4>
             <p class="text-sm">The Angular meta-framework – build Angular applications faster.</p>
             <div class="flex items-center pt-2">
-              <ng-icon hlm name="lucideCalendar" class="w-4 h-4 mr-2 opacity-70" />
+              <ng-icon hlm size="sm" name="lucideCalendar" class="mr-2 opacity-70" />
               <span class="text-xs text-muted-foreground">Joined December 2021</span>
             </div>
           </div>

@@ -12,7 +12,7 @@ import type { ClassValue } from 'clsx';
 	providers: [provideIcons({ lucideEllipsis })],
 	template: `
 		<span role="presentation" aria-hidden="true" [class]="_computedClass()">
-			<ng-icon hlm name="lucideEllipsis" class="h-4 w-4" />
+			<ng-icon hlm size="sm" name="lucideEllipsis" />
 			<span class="sr-only">More</span>
 		</span>
 	`,

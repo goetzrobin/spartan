@@ -12,7 +12,7 @@ import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 		class: 'flex cursor-default items-center justify-center py-1',
 	},
 	template: `
-		<ng-icon hlm class="ml-2 h-4 w-4" name="lucideChevronUp" />
+		<ng-icon hlm size="sm" class="ml-2" name="lucideChevronUp" />
 	`,
 })
 export class HlmSelectScrollUpComponent {}

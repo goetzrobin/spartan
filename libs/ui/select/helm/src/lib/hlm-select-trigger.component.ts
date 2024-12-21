@@ -41,7 +41,7 @@ type SelectTriggerVariants = VariantProps<typeof selectTriggerVariants>;
 			@if (icon()) {
 				<ng-content select="ng-icon" />
 			} @else {
-				<ng-icon hlm class="ml-2 h-4 w-4 flex-none" name="lucideChevronDown" />
+				<ng-icon hlm size="sm" class="ml-2 flex-none" name="lucideChevronDown" />
 			}
 		</button>
 	`,

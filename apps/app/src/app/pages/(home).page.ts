@@ -77,7 +77,7 @@ const lead = 'leading-normal text-muted-foreground sm:text-xl sm:leading-8';
 						href="https://github.com/goetzrobin/spartan"
 					>
 						Star on GitHub
-						<ng-icon hlm class="ml-2 h-4 w-4" name="lucideStar" />
+						<ng-icon hlm size="sm" class="ml-2" name="lucideStar" />
 					</a>
 				</div>
 			</div>

@@ -42,7 +42,7 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 			<hlm-sheet-content class="pb-0 pr-0" *brnSheetContent="let ctx">
 				<button hlmSheetClose>
 					<span class="sr-only">Close</span>
-					<ng-icon hlm class="flex h-4 w-4" name="lucideX" />
+					<ng-icon hlm size="sm" class="flex" name="lucideX" />
 				</button>
 				<div class="flex items-center pb-2">
 					<a (click)="ctx.close()" hlmBtn variant="ghost" class="mr-4 p-1.5" routerLink="/">

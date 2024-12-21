@@ -38,12 +38,12 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbSeparator>
-					<ng-icon hlm name="lucideSlash" class="h-4 w-4" />
+					<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem [brnMenuTriggerFor]="breadcrumbDropdown">
 					<div class="flex items-center gap-1">
 						Components
-						<ng-icon hlm name="lucideChevronDown" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideChevronDown" />
 					</div>
 					<ng-template #breadcrumbDropdown>
 						<hlm-menu>
@@ -60,7 +60,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					</ng-template>
 				</li>
 				<li hlmBreadcrumbSeparator>
-					<ng-icon hlm name="lucideSlash" class="h-4 w-4" />
+					<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
@@ -110,12 +110,12 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbSeparator>
-						<ng-icon hlm name="lucideSlash" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem [brnMenuTriggerFor]="breadcrumbDropdown">
 					<div class="flex items-center gap-1">
 						Components
-						<ng-icon hlm name="lucideChevronDown" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideChevronDown" />
 					</div>
 					<ng-template #breadcrumbDropdown>
 						<hlm-menu>
@@ -132,7 +132,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					</ng-template>
 				</li>
 				<li hlmBreadcrumbSeparator>
-						<ng-icon hlm name="lucideSlash" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
@@ -155,7 +155,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 		<li hlmBreadcrumbItem [brnMenuTriggerFor]="breadcrumbDropdown">
 			<div class="flex items-center gap-1">
 				Components
-				<ng-icon hlm name="lucideChevronDown" class="h-4 w-4" />
+				<ng-icon hlm size="sm" name="lucideChevronDown" />
 			</div>
 			<ng-template #breadcrumbDropdown>
 				<hlm-menu>

@@ -28,7 +28,7 @@ import { BreadcrumbSharedService } from './breadcrumb-shared.service';
 					{{ breadcrumbs[0].label }}
 				</a>
 				<ng-container *ngFor="let breadcrumb of breadcrumbs.slice(1, breadcrumbs.length); let last = last">
-					<ng-icon hlm class="h-4 w-4" name="lucideChevronRight" />
+					<ng-icon hlm size="sm" name="lucideChevronRight" />
 					<a
 						class="focus-visible:ring-ring rounded focus-visible:outline-none focus-visible:ring-2"
 						[class]="last ? 'text-foreground' : 'text-muted-foreground'"

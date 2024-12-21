@@ -56,13 +56,13 @@ export const Custom: Story = {
 						<a hlmBreadcrumbLink href="/home">Home</a>
 					</li>
 					<li hlmBreadcrumbSeparator>
-						<ng-icon hlm name="lucideSlash" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideSlash" />
 					</li>
 					<li hlmBreadcrumbItem>
 						<a hlmBreadcrumbLink href="/components">Components</a>
 					</li>
 					<li hlmBreadcrumbSeparator>
-						<ng-icon hlm name="lucideSlash" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideSlash" />
 					</li>
 					<li hlmBreadcrumbItem>
 						<span hlmBreadcrumbPage>Breadcrumb</span>
