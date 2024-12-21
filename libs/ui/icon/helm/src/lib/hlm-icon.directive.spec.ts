@@ -21,23 +21,39 @@ class HlmMockComponent {
 
 describe('HlmIconDirective', () => {
 	let r: RenderResult<HlmMockComponent>;
+	let icon: HTMLElement;
 
 	beforeEach(async () => {
 		r = await render(HlmMockComponent);
+		icon = r.container.querySelector('ng-icon')!;
 	});
 
-	it('should create', () => {
-		expect(r).toBeTruthy();
+	it('should add the xs size', async () => {
+		await r.rerender({ componentInputs: { size: 'xs' } });
+		r.fixture.detectChanges();
+		expect(icon.getAttribute('style')).toContain('--ng-icon__size: 12px');
 	});
 
-	it('should add the appropriate size variant class', () => {
-		expect(r.container.querySelector('ng-icon')?.classList).toContain('h-6');
-		expect(r.container.querySelector('ng-icon')?.classList).toContain('w-6');
+	it('should add the sm size', async () => {
+		await r.rerender({ componentInputs: { size: 'sm' } });
+		r.fixture.detectChanges();
+		expect(icon.getAttribute('style')).toContain('--ng-icon__size: 16px');
 	});
 
-	it('should compose the user classes', () => {
-		expect(r.container.querySelector('ng-icon')?.classList).toContain('inline-flex');
-		expect(r.container.querySelector('ng-icon')?.classList).toContain('test');
+	it('should add the base size', () => {
+		expect(icon.getAttribute('style')).toContain('--ng-icon__size: 24px');
+	});
+
+	it('should add the lg size', async () => {
+		await r.rerender({ componentInputs: { size: 'lg' } });
+		r.fixture.detectChanges();
+		expect(icon.getAttribute('style')).toContain('--ng-icon__size: 32px');
+	});
+
+	it('should add the xl size', async () => {
+		await r.rerender({ componentInputs: { size: 'xl' } });
+		r.fixture.detectChanges();
+		expect(icon.getAttribute('style')).toContain('--ng-icon__size: 48px');
 	});
 
 	it('should forward the size property if the size is not a pre-defined size', async () => {
@@ -45,7 +61,6 @@ describe('HlmIconDirective', () => {
 		r.fixture.detectChanges();
 		const debugEl = r.fixture.debugElement.query(By.directive(NgIcon));
 		expect(debugEl.componentInstance.size()).toBe('2rem');
-		expect(r.container.querySelector('ng-icon')?.classList).not.toContain('h-6');
-		expect(r.container.querySelector('ng-icon')?.classList).not.toContain('w-6');
+		expect(icon.getAttribute('style')).toContain('--ng-icon__size: 2rem');
 	});
 });
