@@ -12,7 +12,7 @@ import { HlmIconDirective } from './hlm-icon.directive';
 	imports: [HlmIconDirective, NgIcon],
 	providers: [provideIcons({ lucideCheck })],
 	template: `
-		<ng-icon hlm class="test" ngIconClass="test2" name="lucideCheck" [size]="size" color="red" strokeWidth="2" />
+		<ng-icon hlm class="test" name="lucideCheck" [size]="size" color="red" strokeWidth="2" />
 	`,
 })
 class HlmMockComponent {
