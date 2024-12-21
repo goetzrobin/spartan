@@ -172,6 +172,36 @@ describe('migrate-icon generator', () => {
 		await migrateIconGenerator(tree, { skipFormat: true });
 
 		const content = tree.read('app/src/app/app.component.ts', 'utf-8');
-		expect(content).toContain(`<ng-icon hlm hlmAccIcon name="lucideChevronDown" />`);
+		expect(content).toContain(`<ng-icon hlmAccIcon name="lucideChevronDown" />`);
+	});
+
+	it('should convert tailwind width, height and size classes', async () => {
+		tree.write(
+			'app/src/app/app.component.ts',
+			`
+			import { Component } from '@angular/core';
+
+			@Component({
+				template: \`
+					<ng-icon hlm class="w-4" name="lucideChevronRight" />
+					<ng-icon hlm class="h-6" name="lucideChevronRight" />
+					<ng-icon hlm class="size-8" name="lucideChevronRight" />
+					<ng-icon hlm class="w-1.5" name="lucideChevronRight" />
+					<ng-icon hlm class="h-2 text-red-500" name="lucideChevronRight" />
+				\`
+			})
+			export class AppComponent {}
+
+			`,
+		);
+
+		await migrateIconGenerator(tree, { skipFormat: true });
+
+		const content = tree.read('app/src/app/app.component.ts', 'utf-8');
+		expect(content).toContain(`<ng-icon hlm size="sm" name="lucideChevronRight" />`);
+		expect(content).toContain(`<ng-icon hlm size="base" name="lucideChevronRight" />`);
+		expect(content).toContain(`<ng-icon hlm size="lg" name="lucideChevronRight" />`);
+		expect(content).toContain(`<ng-icon hlm size="6px" name="lucideChevronRight" />`);
+		expect(content).toContain(`<ng-icon hlm size="8px" class="text-red-500" name="lucideChevronRight" />`);
 	});
 });

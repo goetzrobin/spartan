@@ -9,10 +9,129 @@ export async function migrateIconGenerator(tree: Tree, { skipFormat }: MigrateIc
 	replaceSelector(tree);
 	replaceProvideIcons(tree);
 	addAccordionIcon(tree);
+	replaceTailwindClasses(tree);
 
 	if (!skipFormat) {
 		await formatFiles(tree);
 	}
+}
+
+function replaceTailwindClasses(tree: Tree) {
+	visitNotIgnoredFiles(tree, '.', (path) => {
+		// if this is not a html or typescript file then skip
+		if (!path.endsWith('.ts') && !path.endsWith('.html')) {
+			return;
+		}
+
+		let content = tree.read(path, 'utf-8');
+
+		// if there are no icons then skip
+		if (!content || !content.includes('ng-icon')) {
+			return;
+		}
+
+		const changes: StringChange[] = [];
+
+		const regex = /<ng-icon\b[^>]*>/g;
+
+		let match;
+
+		while ((match = regex.exec(content)) !== null) {
+			const startIndex = match.index;
+
+			// get the class attribute
+			const classMatch = match[0].match(/class="([^"]*)"/);
+
+			if (!classMatch) {
+				continue;
+			}
+
+			const className = classMatch[1];
+
+			// get each class in the class attribute
+			const classes = className.split(' ');
+
+			// find any known size
+			const size = classes.find((c: string) => tailwindToSize(c) !== null);
+
+			if (!size) {
+				continue;
+			}
+
+			const sizeValue = tailwindToSize(size);
+
+			// remove the size class
+			let output = match[0]
+				.replace(/\b(w|h|size)-\S+\b/g, '')
+				.replace(/class=(["'])(\s*)(.+?)(\s*)\1/g, 'class=$1$3$1')
+				.replace(/\s*class="\s*"\s*/g, ' ');
+
+			// add the size attribute
+			output = output.replace(' hlm ', ` hlm size="${sizeValue}" `);
+
+			// delete the original line
+			changes.push({
+				type: ChangeType.Delete,
+				start: startIndex,
+				length: match[0].length,
+			});
+
+			// insert the new line
+			changes.push({
+				type: ChangeType.Insert,
+				index: startIndex,
+				text: output,
+			});
+		}
+
+		content = applyChangesToString(content, changes);
+
+		tree.write(path, content);
+	});
+}
+
+function tailwindToSize(className: string): string | null {
+	const [, value] = className.split('-');
+
+	// Handle specific Tailwind keywords
+	const keywordMapping = {
+		full: '100%',
+		screen: '100vw',
+		auto: 'auto',
+		min: 'min-content',
+		max: 'max-content',
+		fit: 'fit-content',
+	};
+
+	// Check if value is a keyword
+	if (keywordMapping[value]) {
+		return `${keywordMapping[value]};`;
+	}
+
+	// Convert numeric values to a number
+	const numericValue = parseFloat(value);
+
+	if (!isNaN(numericValue)) {
+		const px = numericValue * 4;
+
+		switch (px) {
+			case 12:
+				return 'xs';
+			case 16:
+				return 'sm';
+			case 24:
+				return 'base';
+			case 32:
+				return 'lg';
+			case 48:
+				return 'xl';
+		}
+
+		return `${px}px`;
+	}
+
+	// Handle other cases
+	return null;
 }
 
 function addAccordionIcon(tree: Tree) {
@@ -59,6 +178,17 @@ function addAccordionIcon(tree: Tree) {
 					type: ChangeType.Insert,
 					index: startIndex + directive.length,
 					text: ` name="lucideChevronDown"`,
+				});
+			}
+
+			// remove the hlm attribute as the hlmAccIcon directive is used instead
+			if (match.includes(' hlm ')) {
+				const startIndex = index + match.indexOf(' hlm ') + 1;
+
+				changes.push({
+					type: ChangeType.Delete,
+					start: startIndex,
+					length: 'hlm '.length,
 				});
 			}
 		}

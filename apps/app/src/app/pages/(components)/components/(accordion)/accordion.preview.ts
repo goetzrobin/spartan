@@ -26,7 +26,7 @@ import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					Is it accessible?
-					<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
+					<ng-icon name="lucideChevronDown" hlmAccIcon />
 				</button>
 				<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 			</div>
@@ -34,7 +34,7 @@ import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					Is it styled?
-					<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
+					<ng-icon name="lucideChevronDown" hlmAccIcon />
 				</button>
 				<hlm-accordion-content>
 					Yes. It comes with default styles that match the other components' aesthetics.
@@ -44,7 +44,7 @@ import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					Is it animated?
-					<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
+					<ng-icon name="lucideChevronDown" hlmAccIcon />
 				</button>
 				<hlm-accordion-content>
 					Yes. It's animated by default, but you can disable it if you prefer.
