@@ -161,7 +161,7 @@ describe('migrate-icon generator', () => {
 
 			@Component({
 				template: \`
-					<ng-icon hlm hlmAccIcon />
+					<ng-icon hlmAccIcon name="lucideChevronDown" />
 				\`
 			})
 			export class AppComponent {}
@@ -183,12 +183,12 @@ describe('migrate-icon generator', () => {
 
 			@Component({
 				template: \`
-					<ng-icon hlm class="w-4" name="lucideChevronRight" />
-					<ng-icon hlm class="h-6" name="lucideChevronRight" />
-					<ng-icon hlm class="size-8" name="lucideChevronRight" />
-					<ng-icon hlm class="w-1.5" name="lucideChevronRight" />
-					<ng-icon hlm class="h-2 text-red-500" name="lucideChevronRight" />
-					<ng-icon hlm class="ml-2 h-4 w-4" name="lucideChevronUp" />
+					<ng-icon hlm size="sm" name="lucideChevronRight" />
+					<ng-icon hlm size="base" name="lucideChevronRight" />
+					<ng-icon hlm size="lg" name="lucideChevronRight" />
+					<ng-icon hlm size="6px" name="lucideChevronRight" />
+					<ng-icon hlm size="8px" class="text-red-500" name="lucideChevronRight" />
+					<ng-icon hlm size="sm" class="ml-2" name="lucideChevronUp" />
 				\`
 			})
 			export class AppComponent {}
