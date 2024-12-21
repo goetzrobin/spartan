@@ -188,6 +188,7 @@ describe('migrate-icon generator', () => {
 					<ng-icon hlm class="size-8" name="lucideChevronRight" />
 					<ng-icon hlm class="w-1.5" name="lucideChevronRight" />
 					<ng-icon hlm class="h-2 text-red-500" name="lucideChevronRight" />
+					<ng-icon hlm class="ml-2 h-4 w-4" name="lucideChevronUp" />
 				\`
 			})
 			export class AppComponent {}
@@ -203,5 +204,6 @@ describe('migrate-icon generator', () => {
 		expect(content).toContain(`<ng-icon hlm size="lg" name="lucideChevronRight" />`);
 		expect(content).toContain(`<ng-icon hlm size="6px" name="lucideChevronRight" />`);
 		expect(content).toContain(`<ng-icon hlm size="8px" class="text-red-500" name="lucideChevronRight" />`);
+		expect(content).toContain(`<ng-icon hlm size="sm" class="ml-2" name="lucideChevronUp" />`);
 	});
 });

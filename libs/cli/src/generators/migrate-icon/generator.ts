@@ -96,6 +96,11 @@ function replaceTailwindClasses(tree: Tree) {
 }
 
 function tailwindToSize(className: string): string | null {
+	// if this is not a width, height or size class then skip
+	if (/\b(w|h|size)-\S+\b/.test(className) === false) {
+		return null;
+	}
+
 	const [, value] = className.split('-');
 
 	// Handle specific Tailwind keywords
