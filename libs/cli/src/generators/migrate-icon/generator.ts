@@ -190,17 +190,6 @@ function addAccordionIcon(tree: Tree) {
 					text: ` name="lucideChevronDown"`,
 				});
 			}
-
-			// remove the hlm attribute as the hlmAccIcon directive is used instead
-			if (match.includes(' hlm ')) {
-				const startIndex = index + match.indexOf(' hlm ') + 1;
-
-				changes.push({
-					type: ChangeType.Delete,
-					start: startIndex,
-					length: 'hlm '.length,
-				});
-			}
 		}
 
 		content = applyChangesToString(content, changes);

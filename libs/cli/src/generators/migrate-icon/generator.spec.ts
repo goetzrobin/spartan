@@ -161,7 +161,7 @@ describe('migrate-icon generator', () => {
 
 			@Component({
 				template: \`
-					<ng-icon hlmAccIcon name="lucideChevronDown" />
+					<ng-icon hlm hlmAccIcon name="lucideChevronDown" />
 				\`
 			})
 			export class AppComponent {}
@@ -172,7 +172,7 @@ describe('migrate-icon generator', () => {
 		await migrateIconGenerator(tree, { skipFormat: true });
 
 		const content = tree.read('app/src/app/app.component.ts', 'utf-8');
-		expect(content).toContain(`<ng-icon hlmAccIcon name="lucideChevronDown" />`);
+		expect(content).toContain(`<ng-icon hlm hlmAccIcon name="lucideChevronDown" />`);
 	});
 
 	it('should convert tailwind width, height and size classes', async () => {
