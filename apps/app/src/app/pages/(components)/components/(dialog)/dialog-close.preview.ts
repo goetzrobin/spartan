@@ -56,7 +56,7 @@ import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 	`,
 })
 export class DialogClosePreviewComponent {
-	viewchildDialogRef = viewChild(BrnDialogComponent);
+	public viewchildDialogRef = viewChild(BrnDialogComponent);
 
 	closeDialog() {
 		this.viewchildDialogRef()?.close({});
@@ -122,7 +122,7 @@ import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 	\`,
 })
 export class DialogClosePreviewComponent {
-	viewchildDialogRef = viewChild(BrnDialogComponent);
+	public viewchildDialogRef = viewChild(BrnDialogComponent);
 
 	closeDialog() {
 		this.viewchildDialogRef()?.close({});

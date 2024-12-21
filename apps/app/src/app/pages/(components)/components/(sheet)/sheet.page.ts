@@ -12,8 +12,8 @@ import { SectionSubHeadingComponent } from '../../../../shared/layout/section-su
 import { TabsCliComponent } from '../../../../shared/layout/tabs-cli.component';
 import { TabsComponent } from '../../../../shared/layout/tabs.component';
 import { metaWith } from '../../../../shared/meta/meta.util';
-import { SheetClosePreviewComponent, defaultCloseCode } from './sheet-close.preview';
 import { SheetSidePreviewComponent, sideCode } from './sheet--side.preview';
+import { SheetClosePreviewComponent, defaultCloseCode } from './sheet-close.preview';
 import { SheetPreviewComponent, defaultCode, defaultImports, defaultSkeleton } from './sheet.preview';
 
 export const routeMeta: RouteMeta = {
@@ -40,7 +40,7 @@ export const routeMeta: RouteMeta = {
 		PageBottomNavLinkComponent,
 		SheetPreviewComponent,
 		SheetSidePreviewComponent,
-		SheetClosePreviewComponent
+		SheetClosePreviewComponent,
 	],
 	template: `
 		<section spartanMainSection>
@@ -83,7 +83,7 @@ export const routeMeta: RouteMeta = {
 				<div spartanCodePreview firstTab>
 					<spartan-sheet-close-preview />
 				</div>
-			<spartan-code secondTab [code]="defaultCloseCode" />
+				<spartan-code secondTab [code]="defaultCloseCode" />
 			</spartan-tabs>
 
 			<spartan-page-bottom-nav>
