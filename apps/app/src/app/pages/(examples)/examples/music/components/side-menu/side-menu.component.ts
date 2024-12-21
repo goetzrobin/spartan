@@ -12,7 +12,8 @@ import {
 	lucideUser,
 } from '@ng-icons/lucide';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
+import { HlmScrollAreaDirective } from '@spartan-ng/ui-scrollarea-helm';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SideMenuButtonComponent } from './side-menu-button.component';
 
 interface ListItem {
@@ -28,7 +29,7 @@ interface ListItem {
 	host: {
 		class: 'block',
 	},
-	imports: [SideMenuButtonComponent, HlmIconComponent, HlmScrollAreaComponent, NgClass],
+	imports: [SideMenuButtonComponent, HlmIconComponent, HlmScrollAreaDirective, NgScrollbarModule, NgClass],
 	providers: [
 		provideIcons({
 			lucideCirclePlay,
@@ -71,14 +72,14 @@ interface ListItem {
 				<div class="py-2">
 					<h2 class="mb-2 px-7 text-lg font-semibold tracking-tight">Playlists</h2>
 					<div class="space-y-1">
-						<hlm-scroll-area class="h-[300px]" visibility="hover">
+						<ng-scrollbar hlm class="h-[300px]" visibility="hover">
 							@for (item of playlists; track item) {
 								<music-side-button class="px-4">
 									<hlm-icon size="sm" [name]="item.icon" class="mr-2 h-4 w-4" />
 									{{ item.text }}
 								</music-side-button>
 							}
-						</hlm-scroll-area>
+						</ng-scrollbar>
 					</div>
 				</div>
 			</div>

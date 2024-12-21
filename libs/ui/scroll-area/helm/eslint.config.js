@@ -31,4 +31,18 @@ module.exports = [
 		// Override or add rules here
 		rules: {},
 	},
+	{
+		files: ['**/*.json'],
+		rules: {
+			'@nx/dependency-checks': [
+				'error',
+				{
+					ignoredDependencies: ['ngx-scrollbar', 'jest-preset-angular'],
+				},
+			],
+		},
+		languageOptions: {
+			parser: require('jsonc-eslint-parser'),
+		},
+	},
 ];

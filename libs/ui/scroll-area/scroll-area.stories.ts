@@ -2,15 +2,16 @@ import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate, moduleMetadata } from '@storybook/angular';
+import { NgScrollbar, NgScrollbarModule } from 'ngx-scrollbar';
 import { HlmSeparatorDirective } from '../separator/helm/src';
-import { HlmScrollAreaComponent } from './helm/src';
+import { HlmScrollAreaDirective } from './helm/src';
 
 @Component({
 	selector: 'scroll-area-stories',
 	standalone: true,
-	imports: [NgFor, HlmSeparatorDirective, HlmScrollAreaComponent],
+	imports: [NgFor, HlmSeparatorDirective, HlmScrollAreaDirective, NgScrollbarModule],
 	template: `
-		<hlm-scroll-area class="border-border h-72 w-48 rounded-md border">
+		<ng-scrollbar hlm class="border-border h-72 w-48 rounded-md border">
 			<div class="p-4">
 				<h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
 				<div class="text-sm" *ngFor="let tag of tags">
@@ -18,23 +19,21 @@ import { HlmScrollAreaComponent } from './helm/src';
 					<div hlmSeparator class="my-2"></div>
 				</div>
 			</div>
-		</hlm-scroll-area>
+		</ng-scrollbar>
 	`,
 })
 class ScrollAreaStoriesComponent {
 	tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 }
 
-const meta: Meta<HlmScrollAreaComponent> = {
+const meta: Meta<NgScrollbar> = {
 	title: 'Scroll Area',
-	component: HlmScrollAreaComponent,
+	component: NgScrollbar,
 	tags: ['autodocs'],
 	args: {
 		track: 'all',
-		autoHeightDisabled: false,
-		autoWidthDisabled: false,
 		visibility: 'native',
-	},
+	} as any, // this is required as storybook isn't inferring types from signals
 	argTypes: {
 		track: {
 			options: ['vertical', 'horizontal', 'all'],
@@ -54,32 +53,16 @@ const meta: Meta<HlmScrollAreaComponent> = {
 				defaultValue: { summary: 'native' },
 			},
 		},
-		autoHeightDisabled: {
-			control: {
-				type: 'boolean',
-			},
-			table: {
-				defaultValue: { summary: 'true' },
-			},
-		},
-		autoWidthDisabled: {
-			control: {
-				type: 'boolean',
-			},
-			table: {
-				defaultValue: { summary: 'true' },
-			},
-		},
-	},
+	} as any,
 	decorators: [
 		moduleMetadata({
-			imports: [HlmScrollAreaComponent, ScrollAreaStoriesComponent],
+			imports: [HlmScrollAreaDirective, NgScrollbarModule, ScrollAreaStoriesComponent],
 		}),
 	],
 };
 
 export default meta;
-type Story = StoryObj<HlmScrollAreaComponent>;
+type Story = StoryObj<HlmScrollAreaDirective>;
 
 export const Default: Story = {
 	render: () => ({
@@ -93,12 +76,12 @@ export const Vertical: Story = {
 	render: ({ ...args }) => ({
 		props: args,
 		template: `
-        <hlm-scroll-area ${argsToTemplate(args)} class="border w-72 rounded-md border-border">
+        <ng-scrollbar hlm ${argsToTemplate(args)} class="border w-72 rounded-md border-border">
         <div class='p-6 whitespace-nowrap'>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium architecto,<br>
         asperiores beatae consequuntur dolor ducimus et exercitationem facilis fugiat magni<br>
         nisi officiis quibusdam rem repellat reprehenderit totam veritatis voluptatibus! Nobis.
         </div>
-        </hlm-scroll-area>`,
+        </ng-scrollbar>`,
 	}),
 };

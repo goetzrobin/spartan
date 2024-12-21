@@ -12,7 +12,8 @@ import {
 	isDevMode,
 	signal,
 } from '@angular/core';
-import { HlmScrollAreaComponent } from '@spartan-ng/ui-scrollarea-helm';
+import { HlmScrollAreaDirective } from '@spartan-ng/ui-scrollarea-helm';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { PageNavLinkComponent } from './page-nav-link.component';
 import { pageNavTmpl } from './page-nav-outlet.component';
 
@@ -25,13 +26,13 @@ type SamePageAnchorLink = {
 @Component({
 	selector: 'spartan-page-nav',
 	standalone: true,
-	imports: [HlmScrollAreaComponent, NgClass, PageNavLinkComponent],
+	imports: [HlmScrollAreaDirective, NgScrollbarModule, NgClass, PageNavLinkComponent],
 	host: {
 		class: 'hidden xl:block text-sm',
 	},
 	template: `
 		<ng-template #pageNav>
-			<hlm-scroll-area class="h-[calc(100vh-3.5rem)]">
+			<ng-scrollbar hlm class="h-[calc(100vh-3.5rem)]">
 				<div class="space-y-2 px-1">
 					<h3 class="font-medium">On this page</h3>
 					<ul class="m-0 flex list-none flex-col">
@@ -44,7 +45,7 @@ type SamePageAnchorLink = {
 						}
 					</ul>
 				</div>
-			</hlm-scroll-area>
+			</ng-scrollbar>
 		</ng-template>
 	`,
 })

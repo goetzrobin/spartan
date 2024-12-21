@@ -14,6 +14,11 @@
 			"factory": "./src/generators/migrate-brain-imports/generator",
 			"schema": "./src/generators/migrate-brain-imports/schema.json",
 			"description": "Migrate Brain imports to use secondary entrypoints."
+		},
+		"migrate-scroll-area": {
+			"factory": "./src/generators/migrate-scroll-area/generator",
+			"schema": "./src/generators/migrate-scroll-area/schema.json",
+			"description": "Migrate hlm-scroll-area to ngx-scrollbar"
 		}
 	},
 	"schematics": {
@@ -31,6 +36,11 @@
 			"factory": "./src/generators/migrate-brain-imports/compat",
 			"schema": "./src/generators/migrate-brain-imports/schema.json",
 			"description": "Migrate Brain imports to use secondary entrypoints."
+		},
+		"migrate-scroll-area": {
+			"factory": "./src/generators/migrate-scroll-area/compat",
+			"schema": "./src/generators/migrate-scroll-area/schema.json",
+			"description": "Migrate hlm-scroll-area to ngx-scrollbar"
 		}
 	}
 }
