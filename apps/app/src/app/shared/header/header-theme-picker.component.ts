@@ -1,21 +1,29 @@
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucidePalette } from '@ng-icons/lucide';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmMenuImports } from '@spartan-ng/ui-menu-helm';
 import { AppThemes, type Theme, ThemeService } from '../theme.service';
 
 @Component({
 	selector: 'spartan-theme-picker',
 	standalone: true,
-	imports: [BrnMenuTriggerDirective, HlmMenuImports, HlmButtonDirective, HlmIconComponent, AsyncPipe, TitleCasePipe],
+	imports: [
+		BrnMenuTriggerDirective,
+		HlmMenuImports,
+		HlmButtonDirective,
+		NgIcon,
+		HlmIconDirective,
+		AsyncPipe,
+		TitleCasePipe,
+	],
 	providers: [provideIcons({ lucidePalette })],
 	template: `
 		<button size="sm" variant="ghost" align="end" [brnMenuTriggerFor]="themes" hlmBtn>
-			<hlm-icon name="lucidePalette" size="sm" />
+			<ng-icon hlm name="lucidePalette" size="sm" />
 			<span class="sr-only">Open menu to change theme</span>
 		</button>
 		<ng-template #themes>

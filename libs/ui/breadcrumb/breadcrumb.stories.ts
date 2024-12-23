@@ -1,7 +1,8 @@
 import { RouterTestingModule } from '@angular/router/testing';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSlash } from '@ng-icons/lucide';
 import { HlmBreadCrumbImports, HlmBreadcrumbDirective } from '@spartan-ng/ui-breadcrumb-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 
@@ -11,7 +12,7 @@ const meta: Meta<HlmBreadcrumbDirective> = {
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [HlmBreadCrumbImports, HlmIconComponent, RouterTestingModule],
+			imports: [HlmBreadCrumbImports, NgIcon, HlmIconDirective, RouterTestingModule],
 			providers: [provideIcons({ lucideSlash })],
 		}),
 	],
@@ -55,13 +56,13 @@ export const Custom: Story = {
 						<a hlmBreadcrumbLink href="/home">Home</a>
 					</li>
 					<li hlmBreadcrumbSeparator>
-						<hlm-icon name="lucideSlash" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideSlash" />
 					</li>
 					<li hlmBreadcrumbItem>
 						<a hlmBreadcrumbLink href="/components">Components</a>
 					</li>
 					<li hlmBreadcrumbSeparator>
-						<hlm-icon name="lucideSlash" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideSlash" />
 					</li>
 					<li hlmBreadcrumbItem>
 						<span hlmBreadcrumbPage>Breadcrumb</span>

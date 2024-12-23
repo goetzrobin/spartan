@@ -1,9 +1,10 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { hlmCode, hlmP } from '@spartan-ng/ui-typography-helm';
 import { CodeComponent } from '../../../../shared/code/code.component';
 import { MainSectionDirective } from '../../../../shared/layout/main-section.directive';
@@ -34,7 +35,8 @@ export const routeMeta: RouteMeta = {
 		SectionSubHeadingComponent,
 		CodeComponent,
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		RouterLink,
 		TabsComponent,
 		TabsCliComponent,
@@ -132,7 +134,7 @@ module.exports = {
 			<div class="my-2 flex items-center justify-end">
 				<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
 					CLI documentation
-					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
+					<ng-icon hlm name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 			<p class="${hlmP}">
@@ -215,7 +217,7 @@ module.exports = {
 			<div class="my-2 flex items-center justify-end">
 				<a routerLink="/documentation/cli" variant="outline" size="sm" hlmBtn outline="">
 					CLI documentation
-					<hlm-icon name="lucideChevronRight" class="ml-2" size="sm" />
+					<ng-icon hlm name="lucideChevronRight" class="ml-2" size="sm" />
 				</a>
 			</div>
 

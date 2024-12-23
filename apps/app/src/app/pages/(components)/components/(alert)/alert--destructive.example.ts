@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTriangleAlert } from '@ng-icons/lucide';
 import {
 	HlmAlertDescriptionDirective,
@@ -7,7 +7,7 @@ import {
 	HlmAlertIconDirective,
 	HlmAlertTitleDirective,
 } from '@spartan-ng/ui-alert-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 
 @Component({
 	selector: 'spartan-alert-destructive',
@@ -17,12 +17,13 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 		HlmAlertDescriptionDirective,
 		HlmAlertIconDirective,
 		HlmAlertTitleDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	providers: [provideIcons({ lucideTriangleAlert })],
 	template: `
 		<div hlmAlert variant="destructive">
-			<hlm-icon hlmAlertIcon name="lucideTriangleAlert" />
+			<ng-icon hlm hlmAlertIcon name="lucideTriangleAlert" />
 			<h4 hlmAlertTitle>Unexpected Error</h4>
 			<p hlmAlertDesc>Your session has expired. Please log in again.</p>
 		</div>
@@ -38,7 +39,7 @@ import {
   HlmAlertIconDirective,
   HlmAlertTitleDirective,
 } from '@spartan-ng/ui-alert-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { provideIcons } from '@ng-icons/core';
 import { lucideTriangleAlert } from '@ng-icons/lucide';
 
@@ -50,12 +51,12 @@ import { lucideTriangleAlert } from '@ng-icons/lucide';
     HlmAlertDescriptionDirective,
     HlmAlertIconDirective,
     HlmAlertTitleDirective,
-    HlmIconComponent,
+    HlmIconDirective,
   ],
   providers: [provideIcons({ lucideTriangleAlert })],
   template: \`
     <div hlmAlert variant="destructive">
-      <hlm-icon hlmAlertIcon name="lucideTriangleAlert" />
+      <ng-icon hlm hlmAlertIcon name="lucideTriangleAlert" />
       <h4 hlmAlertTitle>Unexpected Error</h4>
       <p hlmAlertDesc>Your session has expired. Please log in again.</p>
     </div>

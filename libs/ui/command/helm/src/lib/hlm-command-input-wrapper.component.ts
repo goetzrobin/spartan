@@ -13,6 +13,6 @@ import type { ClassValue } from 'clsx';
 export class HlmCommandInputWrapperComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
-		hlm('flex space-x-2 items-center border-b border-border px-3 [&_hlm-icon]:h-5 [&_hlm-icon]:w-5', this.userClass()),
+		hlm('flex space-x-2 items-center border-b border-border px-3 [&_ng-icon]:h-5 [&_ng-icon]:w-5', this.userClass()),
 	);
 }

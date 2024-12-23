@@ -3,13 +3,14 @@ import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, type TrackByFunction, computed, effect, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUpDown, lucideChevronDown, lucideEllipsis } from '@ng-icons/lucide';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { BrnSelectModule } from '@spartan-ng/brain/select';
 import { BrnTableModule, type PaginatorState, useBrnColumnManager } from '@spartan-ng/brain/table';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
 import { HlmSelectModule } from '@spartan-ng/ui-select-helm';
@@ -163,7 +164,8 @@ const PAYMENT_DATA: Payment[] = [
 
 		DecimalPipe,
 		TitleCasePipe,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmInputDirective,
 
 		HlmCheckboxCheckIconComponent,
@@ -188,7 +190,7 @@ const PAYMENT_DATA: Payment[] = [
 
 			<button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
 				Columns
-				<hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
+				<ng-icon hlm name="lucideChevronDown" class="ml-2" size="sm" />
 			</button>
 			<ng-template #menu>
 				<hlm-menu class="w-32">
@@ -233,7 +235,7 @@ const PAYMENT_DATA: Payment[] = [
 				<hlm-th *brnHeaderDef>
 					<button hlmBtn size="sm" variant="ghost" (click)="handleEmailSortChange()">
 						Email
-						<hlm-icon class="ml-3" size="sm" name="lucideArrowUpDown" />
+						<ng-icon hlm class="ml-3" size="sm" name="lucideArrowUpDown" />
 					</button>
 				</hlm-th>
 				<hlm-td truncate *brnCellDef="let element">
@@ -250,7 +252,7 @@ const PAYMENT_DATA: Payment[] = [
 				<hlm-th *brnHeaderDef></hlm-th>
 				<hlm-td *brnCellDef="let element">
 					<button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-						<hlm-icon class="h-4 w-4" name="lucideEllipsis" />
+						<ng-icon hlm size="sm" name="lucideEllipsis" />
 					</button>
 
 					<ng-template #menu>
@@ -403,7 +405,7 @@ import { FormsModule } from '@angular/forms';
 import { lucideArrowUpDown, lucideChevronDown, lucideEllipsis } from '@ng-icons/lucide';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 import { HlmCheckboxCheckIconComponent, HlmCheckboxComponent } from '@spartan-ng/ui-checkbox-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmMenuModule } from '@spartan-ng/ui-menu-helm';
@@ -560,7 +562,7 @@ const PAYMENT_DATA: Payment[] = [
 
     DecimalPipe,
     TitleCasePipe,
-    HlmIconComponent,
+    HlmIconDirective,
     HlmInputDirective,
 
     HlmCheckboxCheckIconComponent,
@@ -585,7 +587,7 @@ const PAYMENT_DATA: Payment[] = [
 
       <button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
         Columns
-        <hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
+        <ng-icon hlm name="lucideChevronDown" class="ml-2" size="sm" />
       </button>
       <ng-template #menu>
         <hlm-menu class="w-32">
@@ -630,7 +632,7 @@ const PAYMENT_DATA: Payment[] = [
         <hlm-th *brnHeaderDef>
           <button hlmBtn size="sm" variant="ghost" (click)="handleEmailSortChange()">
             Email
-            <hlm-icon class="ml-3" size="sm" name="lucideArrowUpDown" />
+            <ng-icon hlm class="ml-3" size="sm" name="lucideArrowUpDown" />
           </button>
         </hlm-th>
         <hlm-td truncate *brnCellDef="let element">
@@ -647,7 +649,7 @@ const PAYMENT_DATA: Payment[] = [
         <hlm-th *brnHeaderDef></hlm-th>
         <hlm-td *brnCellDef="let element">
           <button hlmBtn variant="ghost" class="h-6 w-6 p-0.5" align="end" [brnMenuTriggerFor]="menu">
-            <hlm-icon class="w-4 h-4" name="lucideEllipsis" />
+            <ng-icon hlm size="sm" name="lucideEllipsis" />
           </button>
 
           <ng-template #menu>

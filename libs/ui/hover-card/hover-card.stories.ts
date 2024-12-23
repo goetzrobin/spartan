@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCalendarDays } from '@ng-icons/lucide';
 import { type BrnHoverCardComponent, BrnHoverCardModule } from '@spartan-ng/brain/hover-card';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmAvatarModule } from '../avatar/helm/src';
 import { HlmButtonDirective } from '../button/helm/src';
 import { HlmCardDirective } from '../card/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmHoverCardModule } from './helm/src';
 
 @Component({
 	selector: 'hover-card-example',
 	standalone: true,
-	imports: [BrnHoverCardModule, HlmHoverCardModule, HlmButtonDirective, HlmIconComponent, HlmAvatarModule],
+	imports: [BrnHoverCardModule, HlmHoverCardModule, HlmButtonDirective, NgIcon, HlmIconDirective, HlmAvatarModule],
 	providers: [provideIcons({ lucideCalendarDays })],
 	host: {
 		class: 'flex w-full h-full justify-center py-80',
@@ -30,7 +30,7 @@ import { HlmHoverCardModule } from './helm/src';
 						<h4 class="text-sm font-semibold">&#64;analogjs</h4>
 						<p class="text-sm">The Angular meta-framework – build Angular applications faster.</p>
 						<div class="flex items-center pt-2">
-							<hlm-icon name="lucideCalendarDays" class="mr-2 h-4 w-4 opacity-70" />
+							<ng-icon hlm size="sm" name="lucideCalendarDays" class="mr-2 opacity-70" />
 							<span class="text-muted-foreground text-xs">Joined December 2021</span>
 						</div>
 					</div>

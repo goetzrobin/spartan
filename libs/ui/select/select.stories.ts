@@ -9,7 +9,7 @@ import {
 	signal,
 } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { BrnSelectImports, BrnSelectTriggerDirective } from '@spartan-ng/brain/select';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -17,7 +17,7 @@ import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import type { ClassValue } from 'clsx';
 import { hlm } from '../core/src';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmSelectImports } from './helm/src';
 
 interface BrnSelectStoryArgs {
@@ -609,21 +609,21 @@ export const CustomTrigger: Story = {
 @Component({
 	selector: 'custom-select-trigger',
 	standalone: true,
-	imports: [BrnSelectTriggerDirective, HlmIconComponent],
+	imports: [BrnSelectTriggerDirective, NgIcon, HlmIconDirective],
 	providers: [provideIcons({ lucideChevronDown })],
 	template: `
 		<button [class]="_computedClass()" #button brnSelectTrigger type="button">
 			<ng-content />
 			@if (icon()) {
-				<ng-content select="hlm-icon" />
+				<ng-content select="ng-icon" />
 			} @else {
-				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="lucideChevronDown" />
+				<ng-icon hlm size="sm" class="ml-2 flex-none" name="lucideChevronDown" />
 			}
 		</button>
 	`,
 })
 export class CustomSelectTriggerComponent {
-	protected readonly icon = contentChild(HlmIconComponent);
+	protected readonly icon = contentChild(HlmIconDirective);
 
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected readonly _computedClass = computed(() =>

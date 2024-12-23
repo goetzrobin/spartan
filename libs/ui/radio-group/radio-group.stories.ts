@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgIcon } from '@ng-icons/core';
 import { BrnRadioGroupComponent, BrnRadioGroupImports } from '@spartan-ng/brain/radio-group';
 import { type Meta, type StoryObj, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmCodeDirective, HlmSmallDirective } from '../typography/helm/src';
 import { HlmRadioGroupImports } from './helm/src';
 
@@ -14,7 +15,8 @@ import { HlmRadioGroupImports } from './helm/src';
 		HlmRadioGroupImports,
 		BrnRadioGroupImports,
 		FormsModule,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmButtonDirective,
 		HlmCodeDirective,
 		HlmSmallDirective,

@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideGithub, lucideLoaderCircle } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
@@ -14,7 +14,8 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 	standalone: true,
 	imports: [
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmInputDirective,
 		HlmSpinnerComponent,
 		FormsModule,
@@ -44,7 +45,7 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 					/>
 					<button hlmBtn [disabled]="isLoading()" class="mt-2 w-full" type="submit">
 						@if (isLoading()) {
-							<hlm-icon name="lucideLoaderCircle" size="sm" class="mr-2 animate-spin" />
+							<ng-icon hlm name="lucideLoaderCircle" size="sm" class="mr-2 animate-spin" />
 						}
 						Sign In with Email
 					</button>
@@ -57,9 +58,9 @@ import { HlmSpinnerComponent } from '@spartan-ng/ui-spinner-helm';
 				</div>
 				<button hlmBtn variant="outline" [disabled]="isLoading()">
 					@if (isLoading()) {
-						<hlm-icon name="lucideLoaderCircle" size="sm" class="mr-2 animate-spin" />
+						<ng-icon hlm name="lucideLoaderCircle" size="sm" class="mr-2 animate-spin" />
 					} @else {
-						<hlm-icon class="mr-2" size="sm" name="lucideGithub" />
+						<ng-icon hlm class="mr-2" size="sm" name="lucideGithub" />
 					}
 					GitHub
 				</button>

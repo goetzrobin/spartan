@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideGlobe, lucideMicVocal } from '@ng-icons/lucide';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import {
 	HlmMenuBarComponent,
 	HlmMenuBarItemDirective,
@@ -50,7 +50,8 @@ import {
 		HlmMenuItemCheckboxDirective,
 		HlmMenuItemRadioDirective,
 
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	providers: [provideIcons({ lucideMicVocal, lucideGlobe })],
 	template: `
@@ -219,11 +220,11 @@ import {
 
 					<button hlmMenuItem>
 						Smart Dictation...
-						<hlm-menu-shortcut><hlm-icon size="sm" name="lucideMicVocal" /></hlm-menu-shortcut>
+						<hlm-menu-shortcut><ng-icon hlm size="sm" name="lucideMicVocal" /></hlm-menu-shortcut>
 					</button>
 					<button hlmMenuItem>
 						Emoji & Symbols
-						<hlm-menu-shortcut><hlm-icon size="sm" name="lucideGlobe" /></hlm-menu-shortcut>
+						<hlm-menu-shortcut><ng-icon hlm size="sm" name="lucideGlobe" /></hlm-menu-shortcut>
 					</button>
 				</hlm-menu-group>
 			</hlm-menu>

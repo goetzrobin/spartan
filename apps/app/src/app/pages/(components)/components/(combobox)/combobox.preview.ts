@@ -1,12 +1,12 @@
 import { NgForOf } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideChevronsUpDown, lucideSearch } from '@ng-icons/lucide';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { BrnPopoverComponent, BrnPopoverContentDirective, BrnPopoverTriggerDirective } from '@spartan-ng/brain/popover';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 
 type Framework = { label: string; value: string };
@@ -17,7 +17,8 @@ type Framework = { label: string; value: string };
 	imports: [
 		BrnCommandImports,
 		HlmCommandImports,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmButtonDirective,
 		BrnPopoverComponent,
 		BrnPopoverTriggerDirective,
@@ -37,11 +38,11 @@ type Framework = { label: string; value: string };
 				hlmBtn
 			>
 				{{ currentFramework() ? currentFramework()?.label : 'Select framework...' }}
-				<hlm-icon size="sm" name="lucideChevronsUpDown" />
+				<ng-icon hlm size="sm" name="lucideChevronsUpDown" />
 			</button>
 			<brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="w-[200px] p-0">
 				<hlm-cmd-input-wrapper>
-					<hlm-icon name="lucideSearch" />
+					<ng-icon hlm name="lucideSearch" />
 					<input placeholder="Search framework..." brnCmdInput hlm />
 				</hlm-cmd-input-wrapper>
 				<div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
@@ -49,7 +50,8 @@ type Framework = { label: string; value: string };
 					<brn-cmd-group hlm>
 						@for (framework of frameworks; track framework) {
 							<button brnCmdItem [value]="framework.value" (selected)="commandSelected(framework)" hlm>
-								<hlm-icon
+								<ng-icon
+									hlm
 									[class.opacity-0]="currentFramework()?.value !== framework.value"
 									name="lucideCheck"
 									hlmCmdIcon
@@ -111,7 +113,7 @@ export const defaultCode = `
 import { Component, signal } from '@angular/core';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   BrnPopoverComponent,
@@ -131,7 +133,7 @@ type Framework = { label: string; value: string };
   imports: [
     BrnCommandImports,
     HlmCommandImports,
-    HlmIconComponent,
+    HlmIconDirective,
     HlmButtonDirective,
     BrnPopoverComponent,
     BrnPopoverTriggerDirective,
@@ -144,11 +146,11 @@ type Framework = { label: string; value: string };
     <brn-popover [state]="state()" (stateChanged)="stateChanged($event)" sideOffset="5" closeDelay="100">
       <button class="w-[200px] justify-between" id="edit-profile" variant="outline" brnPopoverTrigger hlmBtn>
         {{ currentFramework() ? currentFramework().label : 'Select framework...' }}
-        <hlm-icon size="sm" name="lucideChevronsUpDown" />
+        <ng-icon hlm size="sm" name="lucideChevronsUpDown" />
       </button>
       <brn-cmd *brnPopoverContent="let ctx" hlmPopoverContent hlm class="p-0 w-[200px]">
         <hlm-cmd-input-wrapper>
-          <hlm-icon name="lucideSearch" />
+          <ng-icon hlm name="lucideSearch" />
           <input placeholder="Search framework..." brnCmdInput hlm />
         </hlm-cmd-input-wrapper>
         <div *brnCmdEmpty hlmCmdEmpty>No results found.</div>
@@ -161,7 +163,7 @@ type Framework = { label: string; value: string };
               (selected)="commandSelected(framework)"
               hlm
             >
-              <hlm-icon
+              <ng-icon hlm
                 [class.opacity-0]="currentFramework()?.value !== framework.value"
                 name="lucideCheck"
                 hlmCmdIcon

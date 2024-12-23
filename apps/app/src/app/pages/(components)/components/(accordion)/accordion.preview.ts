@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgIcon } from '@ng-icons/core';
 import {
 	HlmAccordionContentComponent,
 	HlmAccordionDirective,
@@ -6,7 +7,7 @@ import {
 	HlmAccordionItemDirective,
 	HlmAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 
 @Component({
 	selector: 'spartan-accordion-preview',
@@ -17,14 +18,15 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 		HlmAccordionTriggerDirective,
 		HlmAccordionIconDirective,
 		HlmAccordionContentComponent,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	template: `
 		<div hlmAccordion>
 			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					Is it accessible?
-					<hlm-icon hlmAccIcon />
+					<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 				</button>
 				<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 			</div>
@@ -32,7 +34,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					Is it styled?
-					<hlm-icon hlmAccIcon />
+					<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 				</button>
 				<hlm-accordion-content>
 					Yes. It comes with default styles that match the other components' aesthetics.
@@ -42,7 +44,7 @@ import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
 			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					Is it animated?
-					<hlm-icon hlmAccIcon />
+					<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 				</button>
 				<hlm-accordion-content>
 					Yes. It's animated by default, but you can disable it if you prefer.
@@ -61,7 +63,7 @@ import {
   HlmAccordionItemDirective,
   HlmAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 `;
 
 export const codeString = `import { Component } from '@angular/core';${codeImports}
@@ -74,14 +76,14 @@ export const codeString = `import { Component } from '@angular/core';${codeImpor
 		HlmAccordionTriggerDirective,
 		HlmAccordionContentComponent,
 		HlmAccordionIconDirective,
-		HlmIconComponent,
+		HlmIconDirective,
 	],
 	template: \`
 		<div hlmAccordion>
 			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					Is it accessible?
-					<hlm-icon hlmAccIcon />
+					<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 				</button>
 				<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 			</div>
@@ -89,7 +91,7 @@ export const codeString = `import { Component } from '@angular/core';${codeImpor
 			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					Is it styled?
-					<hlm-icon hlmAccIcon />
+					<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 				</button>
 				<hlm-accordion-content>
 					Yes. It comes with default styles that match the other components' aesthetics.
@@ -99,7 +101,7 @@ export const codeString = `import { Component } from '@angular/core';${codeImpor
 			<div hlmAccordionItem>
 				<button hlmAccordionTrigger>
 					Is it animated?
-					<hlm-icon hlmAccIcon />
+					<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 				</button>
 				<hlm-accordion-content>
 					Yes. It's animated by default, but you can disable it if you prefer.
@@ -115,7 +117,7 @@ export const codeSkeleton = `
 	<div hlmAccordionItem>
 		<button hlmAccordionTrigger>
 			Is it accessible?
-			<hlm-icon hlmAccIcon />
+			<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 		</button>
 		<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 	</div>

@@ -1,7 +1,8 @@
 import type { RouteMeta } from '@analogjs/router';
 import { Component } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTriangleAlert } from '@ng-icons/lucide';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { hlmCode, hlmH4, hlmP } from '@spartan-ng/ui-typography-helm';
 import { CodeComponent } from '../../../shared/code/code.component';
 import { ComingSoonComponent } from '../../../shared/layout/coming-soon.component';
@@ -33,7 +34,8 @@ export const routeMeta: RouteMeta = {
 		ComingSoonComponent,
 		SectionSubHeadingComponent,
 		CodeComponent,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		TabsComponent,
 		TabsCliComponent,
 	],

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideSlash } from '@ng-icons/lucide';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import {
@@ -9,7 +10,7 @@ import {
 	HlmBreadcrumbPageDirective,
 	HlmBreadcrumbSeparatorComponent,
 } from '@spartan-ng/ui-breadcrumb-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm';
 
 @Component({
@@ -24,7 +25,8 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 		HlmBreadcrumbPageDirective,
 		HlmBreadcrumbLinkDirective,
 
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		BrnMenuTriggerDirective,
 		HlmMenuComponent,
 		HlmMenuItemDirective,
@@ -36,12 +38,12 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbSeparator>
-					<hlm-icon name="lucideSlash" class="h-4 w-4" />
+					<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem [brnMenuTriggerFor]="breadcrumbDropdown">
 					<div class="flex items-center gap-1">
 						Components
-						<hlm-icon name="lucideChevronDown" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideChevronDown" />
 					</div>
 					<ng-template #breadcrumbDropdown>
 						<hlm-menu>
@@ -58,7 +60,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					</ng-template>
 				</li>
 				<li hlmBreadcrumbSeparator>
-					<hlm-icon name="lucideSlash" class="h-4 w-4" />
+					<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
@@ -80,7 +82,7 @@ import {
 	HlmBreadcrumbPageDirective,
 	HlmBreadcrumbSeparatorComponent,
 } from '@spartan-ng/ui-breadcrumb-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm';
 
@@ -96,7 +98,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 		HlmBreadcrumbPageDirective,
 		HlmBreadcrumbLinkDirective,
 
-		HlmIconComponent,
+		HlmIconDirective,
 		BrnMenuTriggerDirective,
 		HlmMenuComponent,
 		HlmMenuItemDirective,
@@ -108,12 +110,12 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbSeparator>
-						<hlm-icon name="lucideSlash" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem [brnMenuTriggerFor]="breadcrumbDropdown">
 					<div class="flex items-center gap-1">
 						Components
-						<hlm-icon name="lucideChevronDown" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideChevronDown" />
 					</div>
 					<ng-template #breadcrumbDropdown>
 						<hlm-menu>
@@ -130,7 +132,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 					</ng-template>
 				</li>
 				<li hlmBreadcrumbSeparator>
-						<hlm-icon name="lucideSlash" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
@@ -153,7 +155,7 @@ import { HlmMenuComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm
 		<li hlmBreadcrumbItem [brnMenuTriggerFor]="breadcrumbDropdown">
 			<div class="flex items-center gap-1">
 				Components
-				<hlm-icon name="lucideChevronDown" class="h-4 w-4" />
+				<ng-icon hlm size="sm" name="lucideChevronDown" />
 			</div>
 			<ng-template #breadcrumbDropdown>
 				<hlm-menu>

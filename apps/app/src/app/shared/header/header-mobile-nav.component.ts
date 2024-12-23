@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMenu, lucideX } from '@ng-icons/lucide';
 import { BrnSheetContentDirective, BrnSheetTriggerDirective } from '@spartan-ng/brain/sheet';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmScrollAreaDirective } from '@spartan-ng/ui-scrollarea-helm';
 import { HlmSheetImports } from '@spartan-ng/ui-sheet-helm';
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -22,7 +22,8 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 		HlmSheetImports,
 
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		SideNavContentComponent,
 		HlmScrollAreaDirective,
 		NgScrollbarModule,
@@ -35,13 +36,13 @@ import { NavLinkDirective } from '../spartan-nav-link.directive';
 	template: `
 		<hlm-sheet side="left" closeDelay="100">
 			<button size="sm" id="menu-trigger" variant="ghost" brnSheetTrigger hlmBtn>
-				<hlm-icon name="lucideMenu" size="sm" />
+				<ng-icon hlm name="lucideMenu" size="sm" />
 				<span class="sr-only">Open menu</span>
 			</button>
 			<hlm-sheet-content class="pb-0 pr-0" *brnSheetContent="let ctx">
 				<button hlmSheetClose>
 					<span class="sr-only">Close</span>
-					<hlm-icon class="flex h-4 w-4" name="lucideX" />
+					<ng-icon hlm size="sm" class="flex" name="lucideX" />
 				</button>
 				<div class="flex items-center pb-2">
 					<a (click)="ctx.close()" hlmBtn variant="ghost" class="mr-4 p-1.5" routerLink="/">

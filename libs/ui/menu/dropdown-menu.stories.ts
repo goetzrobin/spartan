@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import * as lucide from '@ng-icons/lucide';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { type Meta, type StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 import { HlmButtonDirective } from '../button/helm/src';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmMenuComponent, HlmMenuImports, HlmMenuItemCheckComponent, HlmMenuItemRadioComponent } from './helm/src';
 
 const meta: Meta<HlmMenuComponent> = {
@@ -25,7 +25,7 @@ const meta: Meta<HlmMenuComponent> = {
 	decorators: [
 		moduleMetadata({
 			providers: [provideIcons(lucide)],
-			imports: [BrnMenuTriggerDirective, HlmMenuImports, HlmButtonDirective, HlmIconComponent],
+			imports: [BrnMenuTriggerDirective, HlmMenuImports, HlmButtonDirective, NgIcon, HlmIconDirective],
 		}),
 	],
 };
@@ -46,25 +46,25 @@ export const Default: Story = {
         <hlm-menu-separator />
         <hlm-menu-group>
           <button hlmMenuItem>
-            <hlm-icon name='lucideUser' hlmMenuIcon />
+            <ng-icon hlm name='lucideUser' hlmMenuIcon />
             <span>Profile</span>
             <hlm-menu-shortcut>⇧⌘P</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name='lucideCreditCard' hlmMenuIcon />
+            <ng-icon hlm name='lucideCreditCard' hlmMenuIcon />
             <span>Billing</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name='lucideSettings' hlmMenuIcon />
+            <ng-icon hlm name='lucideSettings' hlmMenuIcon />
             <span>Settings</span>
             <hlm-menu-shortcut>⌘S</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name='lucideKeyboard' hlmMenuIcon />
+            <ng-icon hlm name='lucideKeyboard' hlmMenuIcon />
             <span>Keyboard Shortcuts</span>
             <hlm-menu-shortcut>⌘K</hlm-menu-shortcut>
           </button>
@@ -74,19 +74,19 @@ export const Default: Story = {
 
         <hlm-menu-group>
           <button hlmMenuItem>
-            <hlm-icon name='lucideUsers' hlmMenuIcon />
+            <ng-icon hlm name='lucideUsers' hlmMenuIcon />
             <span>Team</span>
             <hlm-menu-shortcut>⌘B</hlm-menu-shortcut>
           </button>
 
           <button hlmMenuItem [brnMenuTriggerFor]='invite'>
-            <hlm-icon name='lucideUserPlus' hlmMenuIcon />
+            <ng-icon hlm name='lucideUserPlus' hlmMenuIcon />
             <span>Invite Users</span>
             <hlm-menu-item-sub-indicator />
           </button>
 
           <button hlmMenuItem>
-            <hlm-icon name='lucidePlus' hlmMenuIcon />
+            <ng-icon hlm name='lucidePlus' hlmMenuIcon />
             <span>New Team</span>
             <hlm-menu-shortcut>⌘+T</hlm-menu-shortcut>
           </button>
@@ -96,17 +96,17 @@ export const Default: Story = {
 
         <hlm-menu-group>
           <button hlmMenuItem [disabled]='false'>
-            <hlm-icon name='lucideGithub' hlmMenuIcon />
+            <ng-icon hlm name='lucideGithub' hlmMenuIcon />
             <span>Github</span>
           </button>
 
           <button hlmMenuItem [disabled]='true'>
-            <hlm-icon name='lucideLifeBuoy' hlmMenuIcon />
+            <ng-icon hlm name='lucideLifeBuoy' hlmMenuIcon />
             <span>Support</span>
           </button>
 
           <button hlmMenuItem disabled>
-            <hlm-icon name='lucideCloud' hlmMenuIcon />
+            <ng-icon hlm name='lucideCloud' hlmMenuIcon />
             <span>API</span>
           </button>
         </hlm-menu-group>
@@ -114,7 +114,7 @@ export const Default: Story = {
         <hlm-menu-separator />
 
         <button hlmMenuItem>
-          <hlm-icon name='lucideLogOut' hlmMenuIcon />
+          <ng-icon hlm name='lucideLogOut' hlmMenuIcon />
           <span>Logout</span>
           <hlm-menu-shortcut>⇧⌘Q</hlm-menu-shortcut>
         </button>
@@ -125,17 +125,17 @@ export const Default: Story = {
     <ng-template #invite>
       <hlm-sub-menu>
         <button hlmMenuItem>
-          <hlm-icon name='lucideMail' hlmMenuIcon />
+          <ng-icon hlm name='lucideMail' hlmMenuIcon />
           Email
         </button>
 
         <button hlmMenuItem>
-          <hlm-icon name='lucideMessageSquare' hlmMenuIcon />
+          <ng-icon hlm name='lucideMessageSquare' hlmMenuIcon />
           Message
         </button>
         <hlm-menu-separator />
         <button hlmMenuItem>
-          <hlm-icon name='lucideCirclePlus' hlmMenuIcon />
+          <ng-icon hlm name='lucideCirclePlus' hlmMenuIcon />
           <span>More</span>
         </button>
       </hlm-sub-menu>
@@ -151,7 +151,8 @@ export const Default: Story = {
 		BrnMenuTriggerDirective,
 		HlmMenuImports,
 		HlmButtonDirective,
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 		HlmMenuItemCheckComponent,
 		HlmMenuItemRadioComponent,
 	],
@@ -196,7 +197,7 @@ export const Default: Story = {
 				<hlm-menu-separator />
 
 				<button hlmMenuItem (triggered)="reset()">
-					<hlm-icon name="lucideUndo2" hlmMenuIcon />
+					<ng-icon hlm name="lucideUndo2" hlmMenuIcon />
 					Reset
 				</button>
 			</hlm-menu>

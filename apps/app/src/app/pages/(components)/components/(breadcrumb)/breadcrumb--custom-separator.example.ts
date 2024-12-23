@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSlash } from '@ng-icons/lucide';
 import {
 	HlmBreadcrumbDirective,
@@ -8,7 +9,7 @@ import {
 	HlmBreadcrumbPageDirective,
 	HlmBreadcrumbSeparatorComponent,
 } from '@spartan-ng/ui-breadcrumb-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 
 @Component({
 	selector: 'spartan-breadcrumb-custom-separator',
@@ -22,7 +23,8 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 		HlmBreadcrumbPageDirective,
 		HlmBreadcrumbLinkDirective,
 
-		HlmIconComponent,
+		NgIcon,
+		HlmIconDirective,
 	],
 	template: `
 		<nav hlmBreadcrumb>
@@ -31,13 +33,13 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbSeparator>
-					<hlm-icon name="lucideSlash" class="h-4 w-4" />
+					<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
 				<li hlmBreadcrumbSeparator>
-					<hlm-icon name="lucideSlash" class="h-4 w-4" />
+					<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
@@ -59,7 +61,7 @@ import {
 	HlmBreadcrumbPageDirective,
 	HlmBreadcrumbSeparatorComponent,
 } from '@spartan-ng/ui-breadcrumb-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective, provideIcons } from '@spartan-ng/ui-icon-helm';
 
 @Component({
 	selector: 'spartan-breadcrumb-custom-separator',
@@ -73,7 +75,7 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 		HlmBreadcrumbPageDirective,
 		HlmBreadcrumbLinkDirective,
 
-		HlmIconComponent,
+		HlmIconDirective,
 	],
 	template: \`
 		<nav hlmBreadcrumb>
@@ -82,13 +84,13 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 					<a hlmBreadcrumbLink link="/home">Home</a>
 				</li>
 				<li hlmBreadcrumbSeparator>
-					<hlm-icon name="lucideSlash" class="h-4 w-4" />
+					<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 				</li>
 				<li hlmBreadcrumbSeparator>
-						<hlm-icon name="lucideSlash" class="h-4 w-4" />
+						<ng-icon hlm size="sm" name="lucideSlash" />
 				</li>
 				<li hlmBreadcrumbItem>
 					<span hlmBreadcrumbPage>Breadcrumb</span>
@@ -102,7 +104,7 @@ export class BreadcrumbCustomSeparatorComponent {}
 
 export const breadcrumbCustomSeparatorSkeleton = `
 import { lucideSlash } from '@ng-icons/lucide';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective, provideIcons } from '@spartan-ng/ui-icon-helm';
 
 ...
 
@@ -112,13 +114,13 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 			<a hlmBreadcrumbLink link="/home">Home</a>
 		</li>
 		<li hlmBreadcrumbSeparator>
-			<hlm-icon name="lucideSlash" class="h-4 w-4" />
+			<ng-icon hlm size="sm" name="lucideSlash" />
 		</li>
 		<li hlmBreadcrumbItem>
 			<a hlmBreadcrumbLink hlmL link="/components">Components</a>
 		</li>
 		<li hlmBreadcrumbSeparator>
-				<hlm-icon name="lucideSlash" class="h-4 w-4" />
+				<ng-icon hlm size="sm" name="lucideSlash" />
 		</li>
 		<li hlmBreadcrumbItem>
 			<span hlmBreadcrumbPage>Breadcrumb</span>

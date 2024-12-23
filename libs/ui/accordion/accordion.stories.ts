@@ -1,8 +1,9 @@
+import { NgIcon } from '@ng-icons/core';
 import { BrnAccordionDirective, BrnAccordionImports } from '@spartan-ng/brain/accordion';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { HlmIconComponent } from '../icon/helm/src';
+import { HlmIconDirective } from '../icon/helm/src';
 import { HlmAccordionImports } from './helm/src';
 
 const meta: Meta<BrnAccordionDirective> = {
@@ -11,7 +12,7 @@ const meta: Meta<BrnAccordionDirective> = {
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [BrnAccordionImports, HlmAccordionImports, HlmIconComponent, HlmInputDirective],
+			imports: [BrnAccordionImports, HlmAccordionImports, NgIcon, HlmIconDirective, HlmInputDirective],
 		}),
 	],
 };
@@ -26,7 +27,7 @@ export const Default: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it accessible?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 				</hlm-accordion-item>
@@ -34,7 +35,7 @@ export const Default: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it styled?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Yes. It comes with default styles that match the other components' aesthetics.
@@ -44,7 +45,7 @@ export const Default: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it animated?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Yes. It's animated by default, but you can disable it if you prefer.
@@ -62,7 +63,7 @@ export const TwoAccordions: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it accessible?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 				</hlm-accordion-item>
@@ -70,7 +71,7 @@ export const TwoAccordions: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it styled?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Yes. It comes with default styles that match the other components' aesthetics.
@@ -80,7 +81,7 @@ export const TwoAccordions: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it animated?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Yes. It's animated by default, but you can disable it if you prefer.
@@ -92,7 +93,7 @@ export const TwoAccordions: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it accessible?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 				</hlm-accordion-item>
@@ -100,7 +101,7 @@ export const TwoAccordions: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it styled?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Yes. It comes with default styles that match the other components' aesthetics.
@@ -110,7 +111,7 @@ export const TwoAccordions: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it styled?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Yes. It comes with default styles that match the other components' aesthetics.
@@ -120,7 +121,7 @@ export const TwoAccordions: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it styled?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Yes. It comes with default styles that match the other components' aesthetics.
@@ -137,7 +138,7 @@ export const SetOpenState: Story = {
 				<hlm-accordion-item isOpened>
 					<button hlmAccordionTrigger>
 						Is it accessible?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</hlm-accordion-content>
 				</hlm-accordion-item>
@@ -145,7 +146,7 @@ export const SetOpenState: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is it styled?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Yes. It comes with default styles that match the other components' aesthetics.
@@ -155,7 +156,7 @@ export const SetOpenState: Story = {
 				<hlm-accordion-item isOpened>
 					<button hlmAccordionTrigger>
 						Is it animated?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						Yes. It's animated by default, but you can disable it if you prefer.
@@ -172,7 +173,7 @@ export const WithTapable: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is the button tapable when closed?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						<button data-testid="not-tapable-when-closed">It should not be when closed</button>
@@ -182,7 +183,7 @@ export const WithTapable: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Is the button tapable when open?
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						<button data-testid="tapable-when-open">It should be when open</button>
@@ -200,7 +201,7 @@ export const AccordionWithInput: Story = {
 				<hlm-accordion-item>
 					<button hlmAccordionTrigger>
 						Enter your name
-						<hlm-icon hlmAccIcon />
+						<ng-icon name="lucideChevronDown" hlm hlmAccIcon />
 					</button>
 					<hlm-accordion-content>
 						<div class="px-1">
