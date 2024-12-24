@@ -49,12 +49,13 @@ import {
 	untracked,
 	ViewContainerRef,
 } from '@angular/core';
-import { brnDevMode, computedPrevious } from '@spartan-ng/ui-core';
+import { brnDevMode } from '@spartan-ng/ui-core';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { BrnTooltipContentComponent } from './brn-tooltip-content.component';
 import { BrnTooltipDirective } from './brn-tooltip.directive';
 import { injectBrnTooltipDefaultOptions } from './brn-tooltip.token';
+import { computedPrevious } from './computed-previous';
 
 export type TooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before' | 'after';
 export type TooltipTouchGestures = 'auto' | 'on' | 'off';
@@ -187,13 +188,6 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 	/** The message to be used to describe the aria in the tooltip */
 
 	public readonly ariaDescribedBy = input('', { alias: 'aria-describedby' });
-	public readonly ariaDescribedByState = computed(() => {
-		// If the message is not a string (e.g. number), convert it to a string and trim it.
-		// Must convert with `String(value)`, not `${value}`, otherwise Closure Compiler optimises
-		// away the string-conversion: https://github.com/angular/components/issues/20684
-		const value = untracked(() => this.ariaDescribedBy());
-		return value !== null ? String(value).trim() : '';
-	});
 	public readonly ariaDescribedByPrevious = computedPrevious(this.ariaDescribedBy);
 
 	/** The content to be displayed in the tooltip */
@@ -265,20 +259,21 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 
 	private _initAriaDescribedByPreviousEffect(): void {
 		effect(() => {
+			const ariaDescribedBy = this.ariaDescribedBy();
 			this._ariaDescriber.removeDescription(
 				this._elementRef.nativeElement,
 				untracked(() => this.ariaDescribedByPrevious()),
 				'tooltip',
 			);
 
-			if (this.ariaDescribedByState() && !this._isTooltipVisible()) {
+			if (ariaDescribedBy && !this._isTooltipVisible()) {
 				this._ngZone.runOutsideAngular(() => {
 					// The `AriaDescriber` has some functionality that avoids adding a description if it's the
 					// same as the `aria-label` of an element, however we can't know whether the tooltip trigger
 					// has a data-bound `aria-label` or when it'll be set for the first time. We can avoid the
 					// issue by deferring the description by a tick so Angular has time to set the `aria-label`.
 					Promise.resolve().then(() => {
-						this._ariaDescriber.describe(this._elementRef.nativeElement, this.ariaDescribedByState(), 'tooltip');
+						this._ariaDescriber.describe(this._elementRef.nativeElement, ariaDescribedBy, 'tooltip');
 					});
 				});
 			}
@@ -332,7 +327,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 				}
 			});
 
-		if (brnDevMode && !this.ariaDescribedByState()) {
+		if (brnDevMode && !this.ariaDescribedBy()) {
 			console.warn('BrnTooltip: "aria-describedby" attribute is required for accessibility');
 		}
 	}
@@ -359,7 +354,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		this._destroyed.next();
 		this._destroyed.complete();
 
-		this._ariaDescriber.removeDescription(nativeElement, this.ariaDescribedByState(), 'tooltip');
+		this._ariaDescriber.removeDescription(nativeElement, this.ariaDescribedBy(), 'tooltip');
 		this._focusMonitor.stopMonitoring(nativeElement);
 	}
 
