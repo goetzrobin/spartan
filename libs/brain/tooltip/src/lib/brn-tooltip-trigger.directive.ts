@@ -11,9 +11,9 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { AriaDescriber, FocusMonitor } from '@angular/cdk/a11y';
-import { Directionality } from '@angular/cdk/bidi';
-import { hasModifierKey } from '@angular/cdk/keycodes';
+import {AriaDescriber, FocusMonitor} from '@angular/cdk/a11y';
+import {Directionality} from '@angular/cdk/bidi';
+import {hasModifierKey} from '@angular/cdk/keycodes';
 import {
 	type ConnectedPosition,
 	type ConnectionPositionPair,
@@ -27,9 +27,9 @@ import {
 	type ScrollStrategy,
 	type VerticalConnectionPos,
 } from '@angular/cdk/overlay';
-import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+import {normalizePassiveListenerOptions, Platform} from '@angular/cdk/platform';
+import {ComponentPortal} from '@angular/cdk/portal';
+import {DOCUMENT} from '@angular/common';
 import {
 	type AfterViewInit,
 	booleanAttribute,
@@ -49,13 +49,13 @@ import {
 	untracked,
 	ViewContainerRef,
 } from '@angular/core';
-import { brnDevMode } from '@spartan-ng/ui-core';
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import { BrnTooltipContentComponent } from './brn-tooltip-content.component';
-import { BrnTooltipDirective } from './brn-tooltip.directive';
-import { injectBrnTooltipDefaultOptions } from './brn-tooltip.token';
-import { computedPrevious } from './computed-previous';
+import {brnDevMode} from '@spartan-ng/ui-core';
+import {Subject} from 'rxjs';
+import {take, takeUntil} from 'rxjs/operators';
+import {BrnTooltipContentComponent} from './brn-tooltip-content.component';
+import {BrnTooltipDirective} from './brn-tooltip.directive';
+import {injectBrnTooltipDefaultOptions} from './brn-tooltip.token';
+import {computedPrevious} from './computed-previous';
 
 export type TooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before' | 'after';
 export type TooltipTouchGestures = 'auto' | 'on' | 'off';
@@ -627,7 +627,7 @@ export class BrnTooltipTriggerDirective implements OnDestroy, AfterViewInit {
 		// Optimization: Defer hooking up events if there's no content or the tooltip is disabled.
 		if (
 			this.brnTooltipDisabled() ||
-			!this.brnTooltipTriggerState ||
+			!this.brnTooltipTriggerState() ||
 			!this._viewInitialized ||
 			this._passiveListeners.length
 		) {
