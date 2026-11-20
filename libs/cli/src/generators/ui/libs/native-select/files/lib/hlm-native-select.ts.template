@@ -16,7 +16,7 @@ import { lucideChevronDown } from '@ng-icons/lucide';
 import { BrnFieldControl, provideBrnLabelable } from '@spartan-ng/brain/field';
 import { type ChangeFn, type TouchFn } from '@spartan-ng/brain/forms';
 import { classes, hlm } from '<%- importAlias %>/utils';
-import type { ClassValue } from 'clsx';
+import type { ClassValue } from 'cn';
 
 export const HLM_NATIVE_SELECT_VALUE_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
@@ -46,7 +46,7 @@ export const HLM_NATIVE_SELECT_VALUE_ACCESSOR = {
 			[class]="_computedSelectClass()"
 			[attr.data-size]="size()"
 			[attr.aria-invalid]="_ariaInvalid() ? 'true' : null"
-			[attr.data-invalid]="_ariaInvalid() ? 'true' : null"
+			[attr.data-invalid]="_invalid?.() ? 'true' : null"
 			[attr.data-dirty]="_dirty?.() ? 'true' : null"
 			[attr.data-touched]="_touched?.() ? 'true' : null"
 			[attr.data-matches-spartan-invalid]="_spartanInvalid() ? 'true' : null"
@@ -103,7 +103,7 @@ export class HlmNativeSelect implements ControlValueAccessor {
 		alias: 'aria-invalid',
 	});
 
-	protected readonly _ariaInvalid = computed(() => this.ariaInvalidInput() ?? this._invalid?.());
+	protected readonly _ariaInvalid = computed(() => this.ariaInvalidInput() ?? !!this._spartanInvalid());
 
 	public readonly valueInput = input<string | undefined | null>('', { alias: 'value' });
 	public readonly value = linkedSignal(this.valueInput);
