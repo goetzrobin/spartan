@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Turns a Playwright run into the proof a reviewer reads instead of the code.
 //
-//   node tools/verify/proof.mjs [--results <results.json>] [--baseline <results.json>] [--out <dir>]
+//   node tools/verify/proof.mjs [--results <results.json>[,<more.json>]] [--baseline <results.json>] [--out <dir>]
 //
 // Writes two files into the output folder:
 //   proof.md     short summary for a pull request comment
@@ -263,11 +263,17 @@ ${sections}
 }
 
 function main() {
-	const resultsFile = option('--results', path.join(DEFAULT_DIR, 'results.json'));
+	// Several runs can be given as a comma-separated list; their tests are shown together.
+	const resultsIndex = process.argv.indexOf('--results');
+	const resultsFiles =
+		resultsIndex > -1
+			? process.argv[resultsIndex + 1].split(',').map((file) => path.resolve(file))
+			: [path.join(DEFAULT_DIR, 'results.json')];
 	const baselineFile = option('--baseline', null);
 	const outDir = option('--out', path.join(DEFAULT_DIR, 'proof'));
 
-	const run = readRun(resultsFile);
+	const runs = resultsFiles.map(readRun);
+	const run = { tests: runs.flatMap((item) => item.tests), stats: runs[0].stats };
 	const baseline = baselineFile ? readRun(baselineFile) : null;
 	mkdirSync(outDir, { recursive: true });
 	writeFileSync(path.join(outDir, 'proof.md'), buildMarkdown(run, baseline));
