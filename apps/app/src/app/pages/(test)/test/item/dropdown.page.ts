@@ -70,7 +70,7 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class ItemDropdownTestPage {
-	protected people = [
+	protected people: any = [
 		{
 			username: 'spartan-ng',
 			avatar: 'https://github.com/spartan-ng.png',

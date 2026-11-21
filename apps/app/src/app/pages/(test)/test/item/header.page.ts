@@ -62,7 +62,7 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class ItemHeaderTestPage {
-	protected models = [
+	protected models: any = [
 		{
 			name: 'v0-1.5-sm',
 			description: 'Everyday tasks and UI generation.',

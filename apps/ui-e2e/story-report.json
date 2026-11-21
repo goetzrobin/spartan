@@ -29,6 +29,12 @@
 			"pages": ["breadcrumb--default", "breadcrumb--custom"],
 			"skipped": []
 		},
+		"button-group": {
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"title": "button-group",
+			"pages": ["button-group--default", "button-group--split", "button-group--nested", "button-group--with-text"],
+			"skipped": []
+		},
 		"combobox": {
 			"source": "apps/ui-storybook/stories/combobox.stories.ts",
 			"title": "combobox",
@@ -194,7 +200,34 @@
 			"title": "sheet",
 			"pages": ["sheet--default"],
 			"skipped": []
+		},
+		"switch": {
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"title": "switch",
+			"pages": [
+				"switch--default",
+				"switch--inside-label",
+				"switch--labeled-with-aria-labeled-by",
+				"switch--disabled",
+				"switch--form",
+				"switch--form-true",
+				"switch--with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"tabs": {
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"title": "tabs",
+			"pages": [
+				"tabs--default",
+				"tabs--vertical",
+				"tabs--paginated",
+				"tabs--lazy-loading",
+				"tabs--brn-only",
+				"tabs--disabled"
+			],
+			"skipped": []
 		}
 	},
-	"totals": { "files": 17, "pages": 92, "skippedStories": 0, "skippedFiles": 0 }
+	"totals": { "files": 20, "pages": 109, "skippedStories": 0, "skippedFiles": 0 }
 }

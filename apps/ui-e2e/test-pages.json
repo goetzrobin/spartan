@@ -86,6 +86,34 @@
 			"args": []
 		},
 		{
+			"id": "button-group--default",
+			"route": "/test/button-group/default",
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "button-group--nested",
+			"route": "/test/button-group/nested",
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"story": "Nested",
+			"args": []
+		},
+		{
+			"id": "button-group--split",
+			"route": "/test/button-group/split",
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"story": "Split",
+			"args": []
+		},
+		{
+			"id": "button-group--with-text",
+			"route": "/test/button-group/with-text",
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"story": "WithText",
+			"args": []
+		},
+		{
 			"id": "combobox--default",
 			"route": "/test/combobox/default",
 			"source": "apps/ui-storybook/stories/combobox.stories.ts",
@@ -645,6 +673,97 @@
 			"source": "apps/ui-storybook/stories/sheet.stories.ts",
 			"story": "Default",
 			"args": ["side"]
+		},
+		{
+			"id": "switch--default",
+			"route": "/test/switch/default",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "switch--disabled",
+			"route": "/test/switch/disabled",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "Disabled",
+			"args": []
+		},
+		{
+			"id": "switch--form",
+			"route": "/test/switch/form",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "Form",
+			"args": []
+		},
+		{
+			"id": "switch--form-true",
+			"route": "/test/switch/form-true",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "FormTrue",
+			"args": ["switchValue"]
+		},
+		{
+			"id": "switch--inside-label",
+			"route": "/test/switch/inside-label",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "InsideLabel",
+			"args": []
+		},
+		{
+			"id": "switch--labeled-with-aria-labeled-by",
+			"route": "/test/switch/labeled-with-aria-labeled-by",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "LabeledWithAriaLabeledBy",
+			"args": []
+		},
+		{
+			"id": "switch--with-hint-and-error",
+			"route": "/test/switch/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "tabs--brn-only",
+			"route": "/test/tabs/brn-only",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "BrnOnly",
+			"args": []
+		},
+		{
+			"id": "tabs--default",
+			"route": "/test/tabs/default",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "Default",
+			"args": ["activationMode", "disabled"]
+		},
+		{
+			"id": "tabs--disabled",
+			"route": "/test/tabs/disabled",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "Disabled",
+			"args": ["activationMode", "disabled"]
+		},
+		{
+			"id": "tabs--lazy-loading",
+			"route": "/test/tabs/lazy-loading",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "LazyLoading",
+			"args": ["activationMode"]
+		},
+		{
+			"id": "tabs--paginated",
+			"route": "/test/tabs/paginated",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "Paginated",
+			"args": ["activationMode"]
+		},
+		{
+			"id": "tabs--vertical",
+			"route": "/test/tabs/vertical",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "Vertical",
+			"args": ["activationMode"]
 		}
 	]
 }

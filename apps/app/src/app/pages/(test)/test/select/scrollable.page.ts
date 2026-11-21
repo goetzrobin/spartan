@@ -96,7 +96,7 @@ export default class SelectScrollableTestPage {
 	protected disabled: any = false;
 	protected value: any = '';
 	protected placeholder: any = 'Select an option';
-	protected myform = new FormGroup({ timezone: new FormControl() });
+	protected myform: any = new FormGroup({ timezone: new FormControl() });
 
 	constructor() {
 		applyTestArgs(this, ['disabled', 'value', 'placeholder']);

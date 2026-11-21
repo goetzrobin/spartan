@@ -63,6 +63,16 @@ export const routeMeta: RouteMeta = {
 				</section>
 
 				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">button-group</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/button-group/default">button-group--default</a></li>
+						<li><a class="underline" href="/test/button-group/nested">button-group--nested</a></li>
+						<li><a class="underline" href="/test/button-group/split">button-group--split</a></li>
+						<li><a class="underline" href="/test/button-group/with-text">button-group--with-text</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
 					<h2 class="text-lg font-semibold">combobox</h2>
 					<ul class="list-disc space-y-1 pl-6">
 						<li><a class="underline" href="/test/combobox/default">combobox--default</a></li>
@@ -263,6 +273,35 @@ export const routeMeta: RouteMeta = {
 					<h2 class="text-lg font-semibold">sheet</h2>
 					<ul class="list-disc space-y-1 pl-6">
 						<li><a class="underline" href="/test/sheet/default">sheet--default</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">switch</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/switch/default">switch--default</a></li>
+						<li><a class="underline" href="/test/switch/disabled">switch--disabled</a></li>
+						<li><a class="underline" href="/test/switch/form">switch--form</a></li>
+						<li><a class="underline" href="/test/switch/form-true">switch--form-true</a></li>
+						<li><a class="underline" href="/test/switch/inside-label">switch--inside-label</a></li>
+						<li>
+							<a class="underline" href="/test/switch/labeled-with-aria-labeled-by">
+								switch--labeled-with-aria-labeled-by
+							</a>
+						</li>
+						<li><a class="underline" href="/test/switch/with-hint-and-error">switch--with-hint-and-error</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">tabs</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/tabs/brn-only">tabs--brn-only</a></li>
+						<li><a class="underline" href="/test/tabs/default">tabs--default</a></li>
+						<li><a class="underline" href="/test/tabs/disabled">tabs--disabled</a></li>
+						<li><a class="underline" href="/test/tabs/lazy-loading">tabs--lazy-loading</a></li>
+						<li><a class="underline" href="/test/tabs/paginated">tabs--paginated</a></li>
+						<li><a class="underline" href="/test/tabs/vertical">tabs--vertical</a></li>
 					</ul>
 				</section>
 			</main>

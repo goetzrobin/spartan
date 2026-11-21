@@ -53,7 +53,7 @@ export default class SelectFalsyValueTestPage {
 	protected disabled: any = false;
 	protected value: any = '';
 	protected placeholder: any = 'Select an option';
-	protected allowPayments = new FormControl<boolean | null>(null);
+	protected allowPayments: any = new FormControl<boolean | null>(null);
 
 	constructor() {
 		applyTestArgs(this, ['disabled', 'value', 'placeholder']);

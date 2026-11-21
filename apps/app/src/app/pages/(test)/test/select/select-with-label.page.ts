@@ -59,7 +59,7 @@ export default class SelectSelectWithLabelTestPage {
 	protected disabled: any = false;
 	protected value: any = '';
 	protected placeholder: any = 'Select an option';
-	protected fruitGroup = new FormGroup({ fruit: new FormControl() });
+	protected fruitGroup: any = new FormGroup({ fruit: new FormControl() });
 
 	constructor() {
 		applyTestArgs(this, ['disabled', 'value', 'placeholder']);

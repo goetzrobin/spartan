@@ -70,7 +70,7 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class ItemImageTestPage {
-	protected songs = [
+	protected songs: any = [
 		{
 			title: 'Midnight City Lights',
 			artist: 'Neon Dreams',

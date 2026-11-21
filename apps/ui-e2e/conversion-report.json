@@ -15,6 +15,159 @@
 				"unsupported": []
 			}
 		},
+		"autocomplete/autocomplete": {
+			"source": "apps/ui-storybook-e2e/src/integration/autocomplete/autocomplete.cy.ts",
+			"output": "apps/ui-e2e/src/autocomplete/autocomplete.spec.ts",
+			"converted": 3,
+			"skipped": [
+				{
+					"title": "should show options when typing",
+					"describePath": ["autocomplete", "Default"],
+					"reasons": ["unsupported assertion 'have.length.gt'"]
+				},
+				{
+					"title": "should close popup when tabbing out",
+					"describePath": ["autocomplete", "Default"],
+					"reasons": ["unsupported command .realPress"]
+				},
+				{
+					"title": "should not select the highlighted option on tab out",
+					"describePath": ["autocomplete", "Default"],
+					"reasons": ["unsupported assertion 'have.length.gt'", "unsupported command .realPress"]
+				},
+				{
+					"title": "should select highlighted option on enter",
+					"describePath": ["autocomplete", "Default"],
+					"reasons": ["unsupported assertion 'have.length.gt'", "unsupported command .realPress"]
+				},
+				{
+					"title": "should pass accessibility checks when opened",
+					"describePath": ["autocomplete", "Default"],
+					"reasons": ["unsupported assertion 'have.length.gt'"]
+				},
+				{
+					"title": "should work within a form",
+					"describePath": ["autocomplete", "Form"],
+					"reasons": ["unsupported command .contains"]
+				},
+				{
+					"title": "should show loading state",
+					"describePath": ["autocomplete", "Async"],
+					"reasons": ["unsupported assertion 'have.length.gt'"]
+				}
+			],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"breadcrumb/breadcrumb": {
+			"source": "apps/ui-storybook-e2e/src/integration/breadcrumb/breadcrumb.cy.ts",
+			"output": "apps/ui-e2e/src/breadcrumb/breadcrumb.spec.ts",
+			"converted": 3,
+			"skipped": [
+				{
+					"title": "should contain the correct breadcrumb items",
+					"describePath": ["Breadcrumb Directive"],
+					"reasons": ["unsupported command .contains"]
+				}
+			],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"button-group/button-group": {
+			"source": "apps/ui-storybook-e2e/src/integration/button-group/button-group.cy.ts",
+			"output": "apps/ui-e2e/src/button-group/button-group.spec.ts",
+			"converted": 14,
+			"skipped": [
+				{
+					"title": "should render the default button group correctly",
+					"describePath": ["button-group", "Default Button Group"],
+					"reasons": ["unsupported command .contains"]
+				},
+				{
+					"title": "should have outline variant buttons",
+					"describePath": ["button-group", "Default Button Group"],
+					"reasons": ["unsupported command .each"]
+				},
+				{
+					"title": "should have secondary variant buttons",
+					"describePath": ["button-group", "Split Button Group"],
+					"reasons": ["unsupported command .each"]
+				},
+				{
+					"title": "should have separator between buttons",
+					"describePath": ["button-group", "Split Button Group"],
+					"reasons": ["unsupported command .within"]
+				},
+				{
+					"title": "should support interactions in nested groups",
+					"describePath": ["button-group", "Nested Button Group"],
+					"reasons": ["uses helper verifyButtonInteraction (argument 1 is not a simple value)", "unsupported loop"]
+				},
+				{
+					"title": "should maintain proper keyboard navigation in nested structure",
+					"describePath": ["button-group", "Nested Button Group"],
+					"reasons": ["unsupported loop"]
+				},
+				{
+					"title": "should maintain proper grouping semantics",
+					"describePath": ["button-group", "Nested Button Group"],
+					"reasons": ["unsupported command .within"]
+				},
+				{
+					"title": "should have proper structure with text group",
+					"describePath": ["button-group", "WithText Button Group"],
+					"reasons": ["unsupported command .within"]
+				},
+				{
+					"title": "should have proper visual styling",
+					"describePath": ["button-group", "Button Group Visual and Layout Tests"],
+					"reasons": ["unsupported command .each"]
+				},
+				{
+					"title": "should have proper focus indicators",
+					"describePath": ["button-group", "Button Group Accessibility Tests"],
+					"reasons": ["unsupported command .each"]
+				}
+			],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyButtonGroupSetup", "verifyButtonInteraction", "testKeyboardNavigation"],
+				"unsupported": []
+			}
+		},
+		"combobox/combobox": {
+			"source": "apps/ui-storybook-e2e/src/integration/combobox/combobox.cy.ts",
+			"output": "apps/ui-e2e/src/combobox/combobox.spec.ts",
+			"converted": 5,
+			"skipped": [
+				{
+					"title": "should open the framework dropdown, and the list should be scrollable",
+					"describePath": ["combobox--default", "default"],
+					"reasons": ["unsupported assertion callback .should(fn)"]
+				},
+				{
+					"title": "clicking outside should close the content",
+					"describePath": ["combobox--default", "default"],
+					"reasons": ["unsupported arguments to .realClick"]
+				},
+				{
+					"title": "clicking outside should close the content",
+					"describePath": ["combobox--popup"],
+					"reasons": ["unsupported arguments to .realClick"]
+				}
+			],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
 		"command/command--default": {
 			"source": "apps/ui-storybook-e2e/src/integration/command/command--default.cy.ts",
 			"output": "apps/ui-e2e/src/command/command--default.spec.ts",
@@ -48,6 +201,121 @@
 			"output": "apps/ui-e2e/src/dialog/dialog.spec.ts",
 			"converted": 8,
 			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"empty/empty": {
+			"source": "apps/ui-storybook-e2e/src/integration/empty/empty.cy.ts",
+			"output": "apps/ui-e2e/src/empty/empty.spec.ts",
+			"converted": 16,
+			"skipped": [
+				{
+					"title": "should have proper structure",
+					"describePath": ["Empty", "Default Story"],
+					"reasons": ["unsupported command .within"]
+				},
+				{
+					"title": "`should match visual snapshot for ${story}`",
+					"describePath": ["Empty", "Visual Regression"],
+					"reasons": [
+						"test defined inside unsupported statement (stories.forEach)",
+						"non-literal test title",
+						"non-literal URL in cy.visit"
+					]
+				}
+			],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"field/field": {
+			"source": "apps/ui-storybook-e2e/src/integration/field/field.cy.ts",
+			"output": "apps/ui-e2e/src/field/field.spec.ts",
+			"converted": 13,
+			"skipped": [
+				{
+					"title": "should render field with label, input, and description",
+					"describePath": ["field", "default"],
+					"reasons": ["unsupported command cy.contains"]
+				},
+				{
+					"title": "should render multiple fields with descriptions",
+					"describePath": ["field", "with input"],
+					"reasons": ["unsupported command cy.contains"]
+				},
+				{
+					"title": "should render checkbox with field content",
+					"describePath": ["field", "with checkbox"],
+					"reasons": ["unsupported command cy.contains"]
+				},
+				{
+					"title": "should render field with switch in horizontal orientation",
+					"describePath": ["field", "with switch"],
+					"reasons": ["unsupported command cy.contains"]
+				},
+				{
+					"title": "should render fieldset with radio group",
+					"describePath": ["field", "with radio"],
+					"reasons": ["unsupported command cy.contains"]
+				},
+				{
+					"title": "should allow selecting an option",
+					"describePath": ["field", "with select"],
+					"reasons": ["unsupported command cy.contains"]
+				},
+				{
+					"title": "should render field with textarea",
+					"describePath": ["field", "with textarea"],
+					"reasons": ["unsupported command cy.contains"]
+				},
+				{
+					"title": "should allow typing in textarea",
+					"describePath": ["field", "with textarea"],
+					"reasons": ["type with special key sequences", "unsupported assertion 'contain.value'"]
+				},
+				{
+					"title": "should render fields with error states",
+					"describePath": ["field", "with error"],
+					"reasons": ["unsupported command cy.contains", "unsupported command .filter"]
+				},
+				{
+					"title": "should render field content with label and description",
+					"describePath": ["field", "with field content"],
+					"reasons": ["unsupported command cy.contains"]
+				},
+				{
+					"title": "should render field title above fieldset",
+					"describePath": ["field", "with field title"],
+					"reasons": ["unsupported command cy.contains"]
+				}
+			],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"item/item": {
+			"source": "apps/ui-storybook-e2e/src/integration/item/item.cy.ts",
+			"output": "apps/ui-e2e/src/item/item.spec.ts",
+			"converted": 18,
+			"skipped": [
+				{
+					"title": "should render items with avatars",
+					"describePath": ["item", "Avatar"],
+					"reasons": ["unsupported assertion 'have.length.at.least'"]
+				},
+				{
+					"title": "should pass accessibility checks",
+					"describePath": ["item", "Group"],
+					"reasons": ["unsupported arguments to cy.checkA11y"]
+				}
+			],
 			"ported": [],
 			"helpers": {
 				"emitted": [],
@@ -176,6 +444,75 @@
 				"unsupported": []
 			}
 		},
+		"select/select": {
+			"source": "apps/ui-storybook-e2e/src/integration/select/select.cy.ts",
+			"output": "apps/ui-e2e/src/select/select.spec.ts",
+			"converted": 7,
+			"skipped": [
+				{
+					"title": "click on trigger should open and close it content",
+					"describePath": ["select", "default"],
+					"reasons": ["uses helper verifySelectSetup (unsupported command .each)"]
+				},
+				{
+					"title": "click outside should close the content",
+					"describePath": ["select", "default"],
+					"reasons": ["uses helper verifySelectSetup (unsupported command .each)"]
+				},
+				{
+					"title": "second click on trigger should close the content",
+					"describePath": ["select", "default"],
+					"reasons": ["uses helper verifySelectSetup (unsupported command .each)"]
+				},
+				{
+					"title": "should close after selecting an option in single mode",
+					"describePath": ["select", "default"],
+					"reasons": ["uses helper verifySelectSetup (unsupported command .each)", "unsupported command .then"]
+				},
+				{
+					"title": "should stay open after selecting an option in multi mode",
+					"describePath": ["select", "multiple"],
+					"reasons": ["uses helper verifySelectSetup (unsupported command .each)", "unsupported command .then"]
+				},
+				{
+					"title": "should stay open after selecting an option in multi mode",
+					"describePath": ["select", "multiple"],
+					"reasons": ["uses helper verifySelectSetup (unsupported command .each)", "unsupported command .then"]
+				},
+				{
+					"title": "should toggle an item on keypress",
+					"describePath": ["select", "multiple"],
+					"reasons": [
+						"uses helper verifySelectSetup (unsupported command .each)",
+						"unsupported command .realType",
+						"unsupported command .contains"
+					]
+				},
+				{
+					"title": "should not open if disabled",
+					"describePath": ["select", "disabled"],
+					"reasons": ["uses helper verifySelectSetup (unsupported command .each)"]
+				},
+				{
+					"title": "should be scrollable",
+					"describePath": ["select", "scrollable"],
+					"reasons": [
+						"uses helper verifySelectSetup (unsupported command .each)",
+						"unsupported command .realMouseWheel"
+					]
+				}
+			],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "verifySelectSetup",
+						"reasons": ["unsupported command .each"]
+					}
+				]
+			}
+		},
 		"separator/separator": {
 			"source": "apps/ui-storybook-e2e/src/integration/separator/separator.cy.ts",
 			"output": "apps/ui-e2e/src/separator/separator.spec.ts",
@@ -197,13 +534,123 @@
 				"emitted": [],
 				"unsupported": []
 			}
+		},
+		"switch/switch": {
+			"source": "apps/ui-storybook-e2e/src/integration/switch/switch.cy.ts",
+			"output": "apps/ui-e2e/src/switch/switch.spec.ts",
+			"converted": 12,
+			"skipped": [
+				{
+					"title": "should toggle switch state on component click",
+					"describePath": ["brn-switch accessibility and functionality tests", "default"],
+					"reasons": ["uses helper executeClickOnComponent (unsupported arguments to .click)"]
+				},
+				{
+					"title": "should show visible focus indication for keyboard users",
+					"describePath": ["brn-switch accessibility and functionality tests", "default"],
+					"reasons": ["unsupported assertion callback .and(fn)"]
+				},
+				{
+					"title": "should toggle switch state on component click",
+					"describePath": ["brn-switch accessibility and functionality tests", "inside label"],
+					"reasons": ["uses helper executeClickOnComponent (unsupported arguments to .click)"]
+				},
+				{
+					"title": "should toggle switch state on component click",
+					"describePath": ["brn-switch accessibility and functionality tests", "labeled with aria-labelledby"],
+					"reasons": ["uses helper executeClickOnComponent (unsupported arguments to .click)"]
+				},
+				{
+					"title": "should not be interactive when disabled",
+					"describePath": ["brn-switch accessibility and functionality tests", "disabled switch"],
+					"reasons": ["unsupported command .closest"]
+				}
+			],
+			"ported": [],
+			"helpers": {
+				"emitted": [
+					"verifySwitchSetup",
+					"verifySwitchOff",
+					"verifySwitchOn",
+					"verifySwitchValueTrue",
+					"verifySwitchValueFalse",
+					"verifyChangedValueTrue",
+					"verifyChangedValueFalse",
+					"verifySwitchTouched",
+					"executeTabEnterTests",
+					"executeTabSpaceTests",
+					"executeClickOnLabelTests",
+					"executeClickOnThumb"
+				],
+				"unsupported": [
+					{
+						"name": "executeClickOnComponent",
+						"reasons": ["unsupported arguments to .click"]
+					}
+				]
+			}
+		},
+		"tabs/tabs--brnonly": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--brnonly.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--brnonly.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
+		},
+		"tabs/tabs--default": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--default.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--default.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
+		},
+		"tabs/tabs--default--manual": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--default--manual.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--default--manual.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
+		},
+		"tabs/tabs--disabled": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--disabled.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--disabled.spec.ts",
+			"converted": 3,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
+		},
+		"tabs/tabs--vertical": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--vertical.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--vertical.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
 		}
 	},
 	"totals": {
-		"files": 12,
-		"tests": 41,
-		"converted": 31,
-		"skipped": 4,
+		"files": 26,
+		"tests": 193,
+		"converted": 133,
+		"skipped": 54,
 		"ported": 6
 	}
 }

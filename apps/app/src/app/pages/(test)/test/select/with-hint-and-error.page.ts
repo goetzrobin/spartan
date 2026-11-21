@@ -70,7 +70,7 @@ export default class SelectWithHintAndErrorTestPage {
 	protected disabled: any = false;
 	protected value: any = '';
 	protected placeholder: any = 'Select an option';
-	protected form = new FormGroup({
+	protected form: any = new FormGroup({
 		fruit: new FormControl('', { validators: [Validators.required] }),
 	});
 

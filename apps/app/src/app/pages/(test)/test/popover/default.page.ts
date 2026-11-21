@@ -61,7 +61,7 @@ export const routeMeta: RouteMeta = {
 export default class PopoverDefaultTestPage {
 	protected align: any = 'center';
 	protected sideOffset: any = 4;
-	protected outsideClicks = 0;
+	protected outsideClicks: any = 0;
 
 	constructor() {
 		applyTestArgs(this, ['align', 'sideOffset']);
