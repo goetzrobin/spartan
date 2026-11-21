@@ -123,13 +123,19 @@ if (!ok) {
 	process.exit(1);
 }
 
-const testsPassed = run('Playwright tests', node, [
-	'node_modules/@playwright/test/cli.js',
-	'test',
-	'--config',
-	'apps/ui-e2e/playwright.config.ts',
-	...components.map((c) => `src/${c}/`),
-	...passthrough,
-]);
+const testsPassed = run(
+	'Playwright tests',
+	node,
+	[
+		'node_modules/@playwright/test/cli.js',
+		'test',
+		'--config',
+		'apps/ui-e2e/playwright.config.ts',
+		...components.map((c) => `src/${c}/`),
+		'src/_pages/',
+		...passthrough,
+	],
+	{ env: { ...process.env, VERIFY_TITLES: pageTitles } },
+);
 run('Proof', node, ['tools/verify/proof.mjs']);
 process.exit(testsPassed ? 0 : 1);

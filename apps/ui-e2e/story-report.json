@@ -7,6 +7,41 @@
 			"pages": ["alert-dialog--default"],
 			"skipped": []
 		},
+		"autocomplete": {
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"title": "autocomplete",
+			"pages": [
+				"autocomplete--default",
+				"autocomplete--async",
+				"autocomplete--config",
+				"autocomplete--countries",
+				"autocomplete--form",
+				"autocomplete--transform-option-value",
+				"autocomplete--with-reactive-form",
+				"autocomplete--with-hint-and-error",
+				"autocomplete--search-with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"breadcrumb": {
+			"source": "apps/ui-storybook/stories/breadcrumb.stories.ts",
+			"title": "breadcrumb",
+			"pages": ["breadcrumb--default", "breadcrumb--custom"],
+			"skipped": []
+		},
+		"combobox": {
+			"source": "apps/ui-storybook/stories/combobox.stories.ts",
+			"title": "combobox",
+			"pages": [
+				"combobox--default",
+				"combobox--popup",
+				"combobox--with-reactive-form",
+				"combobox--with-hint-and-error",
+				"combobox--multiple-with-hint-and-error",
+				"combobox--popup-with-hint-and-error"
+			],
+			"skipped": []
+		},
 		"command": {
 			"source": "apps/ui-storybook/stories/command.stories.ts",
 			"title": "command",
@@ -44,6 +79,57 @@
 			"pages": ["dropdown-menu--default", "dropdown-menu--stateful", "dropdown-menu--submenu"],
 			"skipped": []
 		},
+		"empty": {
+			"source": "apps/ui-storybook/stories/empty.stories.ts",
+			"title": "empty",
+			"pages": [
+				"empty--default",
+				"empty--with-action",
+				"empty--search-results",
+				"empty--no-connection",
+				"empty--file-not-found",
+				"empty--minimal-text",
+				"empty--custom-layout"
+			],
+			"skipped": []
+		},
+		"field": {
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"title": "field",
+			"pages": [
+				"field--default",
+				"field--with-input",
+				"field--with-checkbox",
+				"field--with-switch",
+				"field--with-radio",
+				"field--with-select",
+				"field--with-textarea",
+				"field--with-error",
+				"field--field-group",
+				"field--complex-form",
+				"field--horizontal-orientation",
+				"field--with-field-content",
+				"field--with-field-title"
+			],
+			"skipped": []
+		},
+		"hlm-item": {
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"title": "item",
+			"pages": [
+				"item--default",
+				"item--avatar",
+				"item--dropdown",
+				"item--group",
+				"item--header",
+				"item--icon",
+				"item--image",
+				"item--link",
+				"item--size",
+				"item--variants"
+			],
+			"skipped": []
+		},
 		"menubar": {
 			"source": "apps/ui-storybook/stories/menubar.stories.ts",
 			"title": "menubar",
@@ -72,6 +158,31 @@
 			],
 			"skipped": []
 		},
+		"select": {
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"title": "select",
+			"pages": [
+				"select--default",
+				"select--multiple",
+				"select--reactive-form-control",
+				"select--disabled-option",
+				"select--select-item-to-string",
+				"select--reactive-form-control-with-for-and-initial-value",
+				"select--reactive-form-control-with-for-and-initial-value-and-multiple",
+				"select--reactive-form-control-with-validation",
+				"select--reactive-form-control-with-validation-with-label",
+				"select--with-hint-and-error",
+				"select--ng-model-form-control",
+				"select--ng-model-form-control-initial-value",
+				"select--select-with-label",
+				"select--scrollable",
+				"select--custom-placeholder",
+				"select--with-label-and-form",
+				"select--dynamic-options-multi-select",
+				"select--falsy-value"
+			],
+			"skipped": []
+		},
 		"separator": {
 			"source": "apps/ui-storybook/stories/separator.stories.ts",
 			"title": "separator",
@@ -85,5 +196,5 @@
 			"skipped": []
 		}
 	},
-	"totals": { "files": 10, "pages": 27, "skippedStories": 0, "skippedFiles": 0 }
+	"totals": { "files": 17, "pages": 92, "skippedStories": 0, "skippedFiles": 0 }
 }

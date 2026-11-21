@@ -34,10 +34,13 @@ const IMPORT =
 export function listComponents(root) {
 	const directory = path.join(root, E2E_SRC);
 	if (!existsSync(directory)) return [];
-	return readdirSync(directory, { withFileTypes: true })
-		.filter((entry) => entry.isDirectory() && entry.name !== 'support')
-		.map((entry) => entry.name)
-		.sort();
+	return (
+		readdirSync(directory, { withFileTypes: true })
+			// `support` holds helpers and folders starting with `_` hold suites that are not one component.
+			.filter((entry) => entry.isDirectory() && entry.name !== 'support' && !entry.name.startsWith('_'))
+			.map((entry) => entry.name)
+			.sort()
+	);
 }
 
 function walk(root, directory) {
