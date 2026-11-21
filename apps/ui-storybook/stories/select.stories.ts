@@ -652,7 +652,7 @@ export const WithLabelAndForm: Story = {
 	template: `
 		<form class="space-y-5" (ngSubmit)="handleSubmit()">
 			<label hlmLabel>Select a Fruit*</label>
-			<hlm-select class="w-56" [(ngModel)]="fruit">
+			<hlm-select class="w-56" [(ngModel)]="fruit" name="fruit">
 				<hlm-select-trigger>
 					<hlm-select-value placeholder="Select a fruit" />
 				</hlm-select-trigger>
