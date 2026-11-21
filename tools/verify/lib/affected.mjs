@@ -109,3 +109,19 @@ export function affectedComponents(root, changedFiles) {
 	}
 	return { all: false, components: Object.keys(reasons).sort(), reasons };
 }
+
+/**
+ * File paths from `git status --porcelain` output. Each line is two status letters, a space and
+ * the path; a rename is `old -> new` and only the new path counts.
+ */
+export function parseStatus(output) {
+	return output
+		.split('\n')
+		.filter((line) => line.length > 3)
+		.map((line) =>
+			line
+				.slice(3)
+				.replace(/^.* -> /, '')
+				.replace(/^"|"$/g, ''),
+		);
+}

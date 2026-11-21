@@ -9,15 +9,17 @@
 //                accessibility results. With --baseline (a run of the same tests on the base
 //                commit) each test shows before and after side by side and says what changed.
 
-import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { comparePng } from './lib/png.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DEFAULT_DIR = path.join(ROOT, 'dist/.playwright/ui-e2e');
 /** Videos above this total are linked by file name instead of embedded, to keep the page openable. */
 const EMBED_LIMIT = 40 * 1024 * 1024;
+/** Final screenshots that differ in at most this many pixels count as the same picture. */
+const MIN_CHANGED_PIXELS = 25;
 
 function option(name, fallback) {
 	const index = process.argv.indexOf(name);
@@ -63,17 +65,19 @@ export function readRun(resultsFile) {
 	return { tests, stats: report.stats ?? {} };
 }
 
-function hash(file) {
-	return file && existsSync(file) ? createHash('sha256').update(readFileSync(file)).digest('hex') : null;
-}
-
 /** What a reviewer needs to know about one test compared with the base commit. */
 export function compare(test, before) {
 	if (!before) return 'new';
 	if (before.status !== test.status) return `${before.status} → ${test.status}`;
-	const now = hash(test.screenshot);
-	const then = hash(before.screenshot);
-	if (now && then && now !== then) return 'looks different';
+	if (test.screenshot && before.screenshot && existsSync(test.screenshot) && existsSync(before.screenshot)) {
+		const now = readFileSync(test.screenshot);
+		const then = readFileSync(before.screenshot);
+		if (!now.equals(then)) {
+			const { sameSize, changedPixels } = comparePng(now, then);
+			// A handful of pixels is rendering noise, not a change someone made.
+			if (!sameSize || changedPixels > MIN_CHANGED_PIXELS) return 'looks different';
+		}
+	}
 	return 'unchanged';
 }
 

@@ -15,7 +15,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { affectedComponents, listComponents } from './lib/affected.mjs';
+import { affectedComponents, listComponents, parseStatus } from './lib/affected.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const node = process.execPath;
@@ -27,15 +27,12 @@ function git(...args) {
 function changedFiles(base) {
 	const mergeBase = git('merge-base', base, 'HEAD');
 	const committed = git('diff', '--name-only', mergeBase, 'HEAD');
-	const working = git('status', '--porcelain', '--untracked-files=all')
-		.split('\n')
-		.filter(Boolean)
-		.map((line) =>
-			line
-				.slice(3)
-				.replace(/^.* -> /, '')
-				.replace(/^"|"$/g, ''),
-		);
+	// Not through git(): that trims the output, and the first line of a status can start with a space.
+	const status = execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], {
+		cwd: ROOT,
+		encoding: 'utf8',
+	});
+	const working = parseStatus(status);
 	return [...new Set([...committed.split('\n').filter(Boolean), ...working])].sort();
 }
 
