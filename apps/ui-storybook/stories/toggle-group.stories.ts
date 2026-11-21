@@ -1,5 +1,5 @@
 import type { BooleanInput } from '@angular/cdk/coercion';
-import { Component, input, signal } from '@angular/core';
+import { booleanAttribute, Component, input, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBold, lucideItalic, lucideUnderline } from '@ng-icons/lucide';
@@ -166,13 +166,7 @@ const CITIES = [
 	imports: [HlmToggleGroupImports, HlmButton, FormsModule],
 	template: `
 		<div class="flex space-x-4 p-4">
-			<hlm-toggle-group
-				[disabled]="disabled()"
-				[nullable]="nullable()"
-				[type]="type()"
-				[(ngModel)]="selected"
-				variant="merged"
-			>
+			<hlm-toggle-group [disabled]="disabled()" [nullable]="nullable()" [type]="type()" [(ngModel)]="selected">
 				@for (city of cities; track city.name; let last = $last) {
 					<button [value]="city" hlmToggleGroupItem>
 						{{ city.name }}
@@ -189,12 +183,12 @@ const CITIES = [
 })
 class HlmToggleGroupStory {
 	public readonly type = input<ToggleType>('single');
-	public readonly nullable = input<BooleanInput>(true);
-	public readonly disabled = input<BooleanInput>(false);
+	public readonly nullable = input<boolean, BooleanInput>(true, { transform: booleanAttribute });
+	public readonly disabled = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 	public readonly defaultValue = input<City | City[] | undefined>(undefined);
 	public readonly selected = signal<City | City[] | undefined>(undefined);
 
-	private _cities: City[] = [...CITIES];
+	private readonly _cities: City[] = [...CITIES];
 	public get cities(): City[] {
 		return this._cities;
 	}

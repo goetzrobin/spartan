@@ -123,14 +123,22 @@ export const WithFormInputs: Story = {
 
 							<div>
 								<label class="mb-1 block text-sm font-medium">ARIA Combobox</label>
-								<div role="combobox" tabindex="0" aria-expanded="false" class="rounded border p-2">ARIA combobox</div>
+								<div
+									role="combobox"
+									tabindex="0"
+									aria-expanded="false"
+									aria-controls="aria-listbox"
+									class="rounded border p-2"
+								>
+									ARIA combobox
+								</div>
 							</div>
 
 							<div>
 								<label class="mb-1 block text-sm font-medium">ARIA Listbox</label>
-								<div role="listbox" tabindex="0" class="rounded border p-2">
-									<div role="option" class="p-1">Option A</div>
-									<div role="option" class="p-1">Option B</div>
+								<div id="aria-listbox" role="listbox" tabindex="0" class="rounded border p-2">
+									<div role="option" aria-selected="false" class="p-1">Option A</div>
+									<div role="option" aria-selected="false" class="p-1">Option B</div>
 								</div>
 							</div>
 						</div>

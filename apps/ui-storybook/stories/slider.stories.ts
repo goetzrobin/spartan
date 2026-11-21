@@ -1,3 +1,4 @@
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrnSliderImports } from '@spartan-ng/brain/slider';
@@ -68,6 +69,8 @@ const meta: Meta<BrnSliderStoryArgs> = {
 	decorators: [
 		moduleMetadata({
 			imports: [
+				AsyncPipe,
+				JsonPipe,
 				FormsModule,
 				ReactiveFormsModule,
 				HlmSliderImports,

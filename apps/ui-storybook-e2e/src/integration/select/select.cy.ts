@@ -238,7 +238,7 @@ describe('select', () => {
 		});
 
 		it('should have initial value set correctly when options are provided in a for loop', () => {
-			cy.visit('/iframe.html?id=select--reactive-form-control-with-for-and-initial-value&args=initialValue:banana');
+			cy.visit('/iframe.html?id=select--reactive-form-control-with-for-and-initial-value');
 
 			// initial
 			cy.get('[brnselecttrigger]').should('not.have.attr', 'data-touched');

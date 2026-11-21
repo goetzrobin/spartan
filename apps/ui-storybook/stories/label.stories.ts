@@ -8,23 +8,7 @@ const meta: Meta<{}> = {
 	title: 'Label',
 	component: HlmLabel,
 	tags: ['autodocs'],
-	args: {
-		variant: 'default',
-		error: 'auto',
-	},
 	argTypes: {
-		variant: {
-			options: ['default'],
-			control: {
-				type: 'select',
-			},
-		},
-		error: {
-			options: ['auto', 'true'],
-			control: {
-				type: 'select',
-			},
-		},
 		id: {
 			control: 'text',
 		},
@@ -56,6 +40,19 @@ export const InputRequired: Story = {
 		template: `
     <label hlmLabel ${argsToTemplate(args)}>E-Mail *
         <input [(ngModel)]="value" class='w-80' hlmInput  type='email' placeholder='Email *' required/>
+    </label>
+    `,
+	}),
+};
+
+export const CustomId: Story = {
+	name: 'Custom Id',
+	args: { id: 'my-id' },
+	render: ({ ...args }) => ({
+		props: args,
+		template: `
+    <label hlmLabel ${argsToTemplate(args)}>E-Mail
+        <input class='w-80' hlmInput  type='email' placeholder='Email'/>
     </label>
     `,
 	}),

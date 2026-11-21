@@ -178,7 +178,7 @@ class NavigationMenuExample {
 
 @Component({
 	selector: 'navigation-menu-click-to-open-example',
-	imports: [HlmNavigationMenuImports],
+	imports: [HlmNavigationMenuImports, NgIcon],
 	providers: [provideIcons({ lucideLink, lucideCircle, lucideCircleHelp, lucideCircleCheck })],
 	template: `
 		<nav hlmNavigationMenu openOn="click">
@@ -352,7 +352,7 @@ export default {
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [HlmNavigationMenuImports, NavigationMenuClickToOpenExample],
+			imports: [HlmNavigationMenuImports, NavigationMenuExample, NavigationMenuClickToOpenExample],
 		}),
 	],
 } as Meta<NavigationMenuExample>;

@@ -10,17 +10,6 @@ export default {
 	title: 'Textarea',
 	component: HlmTextarea,
 	tags: ['autodocs'],
-	args: {
-		error: 'auto',
-	},
-	argTypes: {
-		error: {
-			options: ['auto', 'true'],
-			control: {
-				type: 'select',
-			},
-		},
-	},
 	decorators: [
 		moduleMetadata({
 			imports: [HlmTextarea, HlmLabel, HlmButton, FormsModule, ReactiveFormsModule, HlmFieldImports],
@@ -59,9 +48,9 @@ export const Required: Story = {
 
 export const Error: Story = {
 	render: ({ ...args }) => ({
-		props: { ...args, error: 'true' },
+		props: args,
 		template: `
-			<textarea hlmTextarea class="w-80" placeholder="Type your message here.*" ${argsToTemplate(args)}></textarea>
+			<textarea hlmTextarea aria-invalid="true" class="w-80" placeholder="Type your message here.*" ${argsToTemplate(args)}></textarea>
 		`,
 	}),
 };
