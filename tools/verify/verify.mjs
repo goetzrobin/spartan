@@ -12,10 +12,11 @@
 // written to dist/.playwright/ui-e2e/proof. Extra arguments after `--` go to Playwright.
 
 import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { affectedComponents, listComponents, parseStatus, storyTitlesOf } from './lib/affected.mjs';
+import { groupUnits, joinResults } from './lib/groups.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const node = process.execPath;
@@ -123,19 +124,69 @@ if (!ok) {
 	process.exit(1);
 }
 
-const testsPassed = run(
-	'Playwright tests',
-	node,
-	[
-		'node_modules/@playwright/test/cli.js',
-		'test',
-		'--config',
-		'apps/ui-e2e/playwright.config.ts',
-		...components.map((c) => `src/${c}/`),
-		'src/_pages/',
-		...passthrough,
-	],
-	{ env: { ...process.env, VERIFY_TITLES: pageTitles } },
-);
+// One Playwright run serves every page it opens from one dev server, and the server keeps each
+// page it has built in memory. Past a certain number of pages it runs out. So a large selection is
+// run in groups, each with a fresh server, and the results are joined afterwards.
+const everyTitle = [...new Set(manifest.map((page) => page.id.split('--')[0]))];
+const pagesOf = (unitTitles) => manifest.filter((page) => unitTitles.includes(page.id.split('--')[0])).length;
+const units = components.map((component) => {
+	const unitTitles = [...new Set([component, ...storyTitlesOf(ROOT, component)])];
+	return { dirs: [`src/${component}/`], titles: unitTitles, pages: pagesOf(unitTitles) };
+});
+if (flag('--all')) {
+	// Pages no test folder opens still get the render check.
+	for (const title of everyTitle.filter((t) => !titles.has(t))) {
+		units.push({ dirs: [], titles: [title], pages: pagesOf([title]) });
+	}
+}
+const groups = groupUnits(units, Number(process.env['VERIFY_MAX_PAGES'] ?? 60));
+
+const outDir = path.join(ROOT, 'dist/.playwright/ui-e2e');
+const resultFiles = [];
+// Leftovers of an earlier grouped run must not end up in this run's proof.
+if (existsSync(outDir)) {
+	for (const name of readdirSync(outDir)) {
+		if (/^(results|output|report)-\d+(\.json)?$/.test(name)) rmSync(path.join(outDir, name), { recursive: true });
+	}
+}
+let testsPassed = true;
+groups.forEach((group, index) => {
+	const many = groups.length > 1;
+	const label = many ? `Playwright tests, group ${index + 1} of ${groups.length}` : 'Playwright tests';
+	const env = { ...process.env, VERIFY_TITLES: [...new Set(group.flatMap((unit) => unit.titles))].join(',') };
+	const extra = [];
+	if (many) {
+		// Each run clears its output folder, so every group gets its own.
+		const results = path.join(outDir, `results-${index + 1}.json`);
+		resultFiles.push(results);
+		env['PLAYWRIGHT_JSON_OUTPUT_FILE'] = results;
+		env['PLAYWRIGHT_HTML_OUTPUT_DIR'] = path.join(outDir, `report-${index + 1}`);
+		extra.push('--output', path.join(outDir, `output-${index + 1}`));
+	}
+	const passed = run(
+		label,
+		node,
+		[
+			'node_modules/@playwright/test/cli.js',
+			'test',
+			'--config',
+			'apps/ui-e2e/playwright.config.ts',
+			...group.flatMap((unit) => unit.dirs),
+			'src/_pages/',
+			...extra,
+			...passthrough,
+		],
+		{ env },
+	);
+	testsPassed = passed && testsPassed;
+});
+if (resultFiles.length > 0) {
+	const found = resultFiles.filter((file) => existsSync(file));
+	writeFileSync(path.join(outDir, 'results.json'), JSON.stringify(joinResults(found.map(readJson))));
+}
 run('Proof', node, ['tools/verify/proof.mjs']);
 process.exit(testsPassed ? 0 : 1);
+
+function readJson(file) {
+	return JSON.parse(readFileSync(file, 'utf8'));
+}

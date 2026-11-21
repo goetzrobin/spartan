@@ -19,6 +19,10 @@ pnpm verify popover -- --headed --workers=1    # anything after -- goes to Playw
 It checks that the generated files match their sources, runs the Playwright tests, and writes
 the proof to `dist/.playwright/ui-e2e/proof/` (`index.html` to look at, `proof.md` for a comment).
 The docs dev server is started for you, or reused if `pnpm nx serve app` is already running.
+
+A large selection runs in groups of at most 60 test pages, each with a fresh dev server, because
+the server keeps every page it has built in memory. The results are joined into one proof. Set
+`VERIFY_MAX_PAGES` to change the group size.
 First-time setup: `pnpm exec playwright install chromium ffmpeg`.
 
 ## Where things live
@@ -50,8 +54,10 @@ report with the reason:
 - A skipped **story** needs either a small change to the story so it fits a shape the tool
   handles, or a new shape taught to the tool (`tools/verify/lib/story-parse.mjs`).
 - A skipped **test** appears in `<component>.spec.ts` as `test.fixme` with the original Cypress
-  code in a comment. Port it by hand in `<component>.manual.spec.ts`, keeping the same test
-  title, and run the tool again: it then counts the test as ported and drops the placeholder.
+  code in a comment. Port it by hand in `<file>.manual.spec.ts` next to the generated spec,
+  inside the same `test.describe` blocks and with the same test title, and run the tool again:
+  it then counts the test as ported and drops the placeholder. A manual test also replaces a
+  test the tool did convert, which is how a test that is wrong as written gets corrected.
 
 Do not edit generated files (they start with `// @generated`). `pnpm verify` fails when they
 differ from what the tools produce.

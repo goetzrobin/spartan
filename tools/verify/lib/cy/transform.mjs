@@ -1,5 +1,6 @@
 import ts from 'typescript';
 import { convertChain, flattenCyChain } from './chain.mjs';
+import { manualKey } from './manual.mjs';
 import {
 	calleeText,
 	dedent,
@@ -1237,7 +1238,10 @@ class FileTransformer {
 
 		// A test with the same title in `<name>.manual.spec.ts` takes its place, whether the tool could
 		// convert it or not. That is how a test whose literal translation is wrong gets corrected.
-		if (staticTitle !== null && this.options.manualTitles?.has(staticTitle)) {
+		// The title as the spec file would carry it: a repeat within one group is numbered, and the
+		// number is taken whether or not the test ends up in the spec, so it never shifts.
+		const unique = this.uniqueTitle(describePath, title);
+		if (this.options.manualTitles?.has(manualKey(describePath, unique))) {
 			this.uses = uses;
 			this.tests.push({ title, describePath, status: 'ported', reasons: [] });
 			return { lines: [], refs: new Set() };
@@ -1250,7 +1254,7 @@ class FileTransformer {
 			return {
 				lines: [
 					...head,
-					`${ind}${opener}(${quote(this.uniqueTitle(describePath, title))}, async (${usesPage ? '{ page }' : ''}) => {`,
+					`${ind}${opener}(${quote(unique)}, async (${usesPage ? '{ page }' : ''}) => {`,
 					...lines,
 					`${ind}});`,
 				],
@@ -1266,7 +1270,7 @@ class FileTransformer {
 			lines: [
 				...head,
 				`${ind}// SKIPPED by the transform: ${reasons.join('; ').replace(/\s*\n\s*/g, ' ')}`,
-				`${ind}test.fixme(${quote(this.uniqueTitle(describePath, title))}, async () => {`,
+				`${ind}test.fixme(${quote(unique)}, async () => {`,
 				`${ind}\t/* Original Cypress code:`,
 				...original.map((l) => (l ? `${ind}\t${l}` : '')),
 				`${ind}\t*/`,

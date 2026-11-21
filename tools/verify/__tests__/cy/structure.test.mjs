@@ -4,6 +4,7 @@ import path from 'node:path';
 import { describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { format } from '../../lib/cy/format.mjs';
+import { manualKey } from '../../lib/cy/manual.mjs';
 import { transformSource } from '../../lib/cy/transform.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -155,20 +156,50 @@ describe('manual ports', () => {
 	const src = `describe('a', () => { it('needs work', () => { cy.get('a').then(() => {}); }); it('fine', () => { cy.get('a').click(); }); });`;
 
 	it('a skipped test with a manual port of the same title is not emitted and is recorded as ported', () => {
-		const r = t(src, new Set(['needs work']));
+		const r = t(src, new Set([manualKey(['a'], 'needs work')]));
 		assert.equal(r.tests[0].status, 'ported');
 		assert.ok(!r.code.includes('needs work'));
 		assert.ok(!r.code.includes('fixme'));
 	});
 
+	it('a manual port in another group, or of the bare title alone, does not match', () => {
+		for (const key of [manualKey(['b'], 'needs work'), manualKey([], 'needs work'), 'needs work']) {
+			assert.equal(t(src, new Set([key])).tests[0].status, 'skipped');
+		}
+	});
+
+	it('a repeated title keeps its number when the first one is ported', () => {
+		const twice = `describe('a', () => { it('same', () => { cy.get('a').click(); }); it('same', () => { cy.get('b').click(); }); });`;
+		const first = t(twice, new Set([manualKey(['a'], 'same')]));
+		assert.deepEqual(
+			first.tests.map((test) => test.status),
+			['ported', 'converted'],
+		);
+		assert.ok(first.code.includes("test('same (2)'"));
+		const second = t(twice, new Set([manualKey(['a'], 'same (2)')]));
+		assert.deepEqual(
+			second.tests.map((test) => test.status),
+			['converted', 'ported'],
+		);
+	});
+
+	it('a test whose title is built in a loop is matched by how the title is written', () => {
+		const looped =
+			"describe('a', () => { ['x', 'y'].forEach((s) => { it(`renders ${s}`, () => { cy.get('a').click(); }); }); });";
+		assert.equal(t(looped).tests[0].status, 'skipped');
+		const r = t(looped, new Set([manualKey(['a'], '`renders ${s}`')]));
+		assert.equal(r.tests[0].status, 'ported');
+		assert.ok(!r.code.includes('fixme'));
+	});
+
 	it('without a matching manual port the fixme is emitted', () => {
-		const r = t(src, new Set(['other title']));
+		const r = t(src, new Set([manualKey(['a'], 'other title')]));
 		assert.equal(r.tests[0].status, 'skipped');
 		assert.ok(r.code.includes("test.fixme('needs work'"));
 	});
 
 	it('a manual port also takes the place of a test the tool could convert', () => {
-		const r = t(src, new Set(['fine']));
+		const r = t(src, new Set([manualKey(['a'], 'fine')]));
 		assert.equal(r.tests[1].status, 'ported');
 	});
 });
@@ -201,7 +232,11 @@ describe('kept', () => {
 		cy.get('#y').click();
 	});
 });`;
-		const r = transformSource(src, { sourcePath: 'x.cy.ts', basename: 'x', manualTitles: new Set(['one']) });
+		const r = transformSource(src, {
+			sourcePath: 'x.cy.ts',
+			basename: 'x',
+			manualTitles: new Set([manualKey(['ported'], 'one')]),
+		});
 		assert.doesNotMatch(r.code, /ported/);
 		assert.doesNotMatch(r.code, /beforeEach/);
 		assert.match(r.code, /test\.describe\('kept'/);
@@ -301,7 +336,7 @@ describe('a manual port of a test the tool can convert', () => {
 		const r = transformSource(src, {
 			sourcePath: 'x.cy.ts',
 			basename: 'x',
-			manualTitles: new Set(['wrong as written']),
+			manualTitles: new Set([manualKey(['g'], 'wrong as written')]),
 		});
 		assert.doesNotMatch(r.code, /wrong as written/);
 		assert.match(r.code, /test\('fine'/);

@@ -79,11 +79,11 @@ describe('cli', () => {
 		assert.equal(runCli('slider', '--out-dir', out, '--report', report).status, 0);
 		const before = JSON.parse(readFileSync(report, 'utf8')).files['slider/slider'];
 		assert.ok(before.skipped.length > 0, 'slider has skipped tests to port');
-		const title = before.skipped[0].title;
+		const { title, describePath } = before.skipped[0];
 		mkdirSync(path.join(out, 'slider'), { recursive: true });
 		writeFileSync(
 			path.join(out, 'slider/slider.manual.spec.ts'),
-			`import { test } from '../support';\ntest.describe('x', () => {\n\ttest(${JSON.stringify(title)}, async () => {});\n});\n`,
+			`import { test } from '../support';\n${describePath.map((d) => `test.describe(${JSON.stringify(d)}, () => {`).join('\n')}\n\ttest(${JSON.stringify(title)}, async () => {});\n${describePath.map(() => '});').join('\n')}\n`,
 		);
 		assert.equal(runCli('slider', '--out-dir', out, '--report', report).status, 0);
 		const afterEntry = JSON.parse(readFileSync(report, 'utf8')).files['slider/slider'];
@@ -103,13 +103,22 @@ describe('cli', () => {
 });
 
 describe('manual titles', () => {
-	it('reads single, double and template-literal titles, ignoring templates with substitutions', () => {
+	it('reads single, double and template-literal titles, and keeps templates with substitutions as written', () => {
 		const f = path.join(tmp, 'm.manual.spec.ts');
 		writeFileSync(
 			f,
 			"test('a', async () => {});\ntest(\"b\", async () => {});\ntest(`c`, async () => {});\ntest(`d ${x}`, async () => {});\ntest.fixme('e', async () => {});\n",
 		);
-		assert.deepEqual([...readManualTitles(f)].sort(), ['a', 'b', 'c', 'e']);
+		assert.deepEqual([...readManualTitles(f)].sort(), ['["`d ${x}`"]', '["a"]', '["b"]', '["c"]', '["e"]']);
+	});
+
+	it('includes the describe blocks around a test', () => {
+		const f = path.join(tmp, 'n.manual.spec.ts');
+		writeFileSync(
+			f,
+			"test.describe('g', () => {\n\ttest.describe.serial('h', () => {\n\t\ttest('a', async () => {});\n\t});\n\ttest('b', async () => {});\n});\nfor (const s of list) test.describe(`${s}`, () => { test('c', async () => {}); });\n",
+		);
+		assert.deepEqual([...readManualTitles(f)].sort(), ['["g","b"]', '["g","h","a"]']);
 	});
 });
 
