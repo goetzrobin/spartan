@@ -3,41 +3,6 @@
 import { STORY_ROOT, byText, checkA11y, expect, gotoStory, test } from '../support';
 
 test.describe('command', () => {
-	test.describe('dynamic with ngModel', () => {
-		test.beforeEach(async ({ page }) => {
-			await gotoStory(page, 'command--dynamic-options');
-		});
-
-		// SKIPPED by the transform: key sequence '{backspace}' in .type depends on the caret position
-		test.fixme('should show items based on input value without error.', async () => {
-			/* Original Cypress code:
-			cy.checkA11y('#storybook-root', {
-				rules: {
-					'page-has-heading-one': { enabled: false },
-					'landmark-one-main': { enabled: false },
-				},
-			});
-
-			/**       TEST initially it should only show Profiles   *\/
-			cy.get('button[hlm-command-item]:not([data-hidden])').should('have.length', 1);
-
-			/**       TEST after deleting search input it should show all items    *\/
-			cy.findByText('Profile').should('have.length', 1);
-			cy.get('input').type('{backspace}');
-			cy.get('button[hlm-command-item]:not([data-hidden])').should('have.length', 4);
-			cy.get('button[hlm-command-item][data-selected]').should('include.text', 'Profile');
-
-			/**       TEST Focusing first if selected item is not visible          *\/
-			cy.get('input').type('s');
-			cy.get('button[hlm-command-item][data-selected]').should('include.text', 'Search Emoji');
-			cy.get('input').type('e');
-			cy.get('input').type('t');
-			cy.get('button[hlm-command-item][data-selected]').should('have.length', 1);
-			cy.get('button[hlm-command-item][data-selected]').should('include.text', 'Settings');
-			*/
-		});
-	});
-
 	test.describe('dynamic with reactive form', () => {
 		test.beforeEach(async ({ page }) => {
 			await gotoStory(page, 'command--reactive-form');

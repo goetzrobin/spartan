@@ -26,42 +26,6 @@ test.describe('autocomplete', () => {
 			await expect(page.locator('input[hlmInputGroupInput]').first()).toHaveValue('Marty McFly');
 		});
 
-		// SKIPPED by the transform: unsupported command .realPress
-		test.fixme('should close popup when tabbing out', async () => {
-			/* Original Cypress code:
-			cy.get('input[hlmInputGroupInput]').type('Mar');
-			cy.get('hlm-autocomplete-content').should('exist');
-			cy.get('input[hlmInputGroupInput]').realPress('Tab');
-			cy.get('hlm-autocomplete-content').should('not.exist');
-			*/
-		});
-
-		// SKIPPED by the transform: unsupported command .realPress
-		test.fixme('should not select the highlighted option on tab out', async () => {
-			/* Original Cypress code:
-			cy.get('input[hlmInputGroupInput]').type('Mar');
-			cy.get('hlm-autocomplete-item').should('have.length.gt', 1);
-			cy.get('input[hlmInputGroupInput]').realPress('ArrowDown');
-			cy.get('input[hlmInputGroupInput]').realPress('Tab');
-			cy.get('hlm-autocomplete-content').should('not.exist');
-			// Tab only dismisses the popup; it leaves focus to the next control without
-			// committing the highlighted suggestion, so the typed search value remains.
-			cy.get('input[hlmInputGroupInput]').should('have.value', 'Mar');
-			*/
-		});
-
-		// SKIPPED by the transform: unsupported command .realPress
-		test.fixme('should select highlighted option on enter', async () => {
-			/* Original Cypress code:
-			cy.get('input[hlmInputGroupInput]').type('Mar');
-			cy.get('hlm-autocomplete-item').should('have.length.gt', 1);
-			cy.get('input[hlmInputGroupInput]').realPress('ArrowDown');
-			cy.get('input[hlmInputGroupInput]').realPress('Enter');
-			cy.get('hlm-autocomplete-content').should('not.exist');
-			cy.get('input[hlmInputGroupInput]').should('have.value', 'Marty McFly');
-			*/
-		});
-
 		test('should pass accessibility checks', async ({ page }) => {
 			// Wait for the story to render before auditing; running axe immediately after
 			// cy.visit scans an empty root and falsely passes.

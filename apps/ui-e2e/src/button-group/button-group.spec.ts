@@ -60,15 +60,6 @@ test.describe('button-group', () => {
 			).not.toHaveCount(0);
 		});
 
-		// SKIPPED by the transform: unsupported command .each
-		test.fixme('should have outline variant buttons', async () => {
-			/* Original Cypress code:
-			cy.get('[hlmButtonGroup] button').each(($btn) => {
-				cy.wrap($btn).should('have.attr', 'hlmbtn');
-			});
-			*/
-		});
-
 		test('should support button interactions', async ({ page }) => {
 			await verifyButtonInteraction(page, 0, 'Button 1');
 			await verifyButtonInteraction(page, 1, 'Button 2');
@@ -101,29 +92,6 @@ test.describe('button-group', () => {
 			// Verify separator exists
 			await expect(page.locator('hlm-button-group-separator')).not.toHaveCount(0);
 			await expect(page.locator('hlm-button-group-separator')).toBeVisible();
-		});
-
-		// SKIPPED by the transform: unsupported command .each
-		test.fixme('should have secondary variant buttons', async () => {
-			/* Original Cypress code:
-			cy.get('[hlmButtonGroup] button').each(($btn) => {
-				cy.wrap($btn).should('have.attr', 'hlmbtn');
-				// Note: The actual variant attribute might not be directly visible in DOM,
-				// but we can verify the buttons have the expected styling
-			});
-			*/
-		});
-
-		// SKIPPED by the transform: unsupported command .within
-		test.fixme('should have separator between buttons', async () => {
-			/* Original Cypress code:
-			// Check that separator is positioned between buttons
-			cy.get('[hlmButtonGroup]').within(() => {
-				cy.get('button').first().should('contain.text', 'Button 1');
-				cy.get('hlm-button-group-separator').should('exist');
-				cy.get('button').last().should('contain.text', 'Button 2');
-			});
-			*/
 		});
 
 		test('should maintain accessibility with separator', async ({ page }) => {
@@ -160,52 +128,6 @@ test.describe('button-group', () => {
 			await expect(page.locator('[hlmButtonGroup] button').nth(2)).toContainText('Button 3');
 			await expect(page.locator('[hlmButtonGroup] button').nth(3)).toContainText('Button 4');
 		});
-
-		// SKIPPED by the transform: uses helper verifyButtonInteraction (argument 1 is not a simple value); unsupported loop
-		test.fixme('should support interactions in nested groups', async () => {
-			/* Original Cypress code:
-			// Test each button in nested groups
-			for (let i = 0; i < 4; i++) {
-				verifyButtonInteraction(i, `Button ${i + 1}`);
-			}
-			*/
-		});
-
-		// SKIPPED by the transform: unsupported loop
-		test.fixme('should maintain proper keyboard navigation in nested structure', async () => {
-			/* Original Cypress code:
-			// Focus first button
-			cy.get('[hlmButtonGroup] button').first().focus();
-
-			// Navigate through all buttons
-			for (let i = 1; i < 4; i++) {
-				cy.realPress('Tab');
-				cy.get('[hlmButtonGroup] button').eq(i).should('be.focused');
-			}
-			*/
-		});
-
-		// SKIPPED by the transform: unsupported command .within
-		test.fixme('should maintain proper grouping semantics', async () => {
-			/* Original Cypress code:
-			// Verify that nested groups maintain their individual identity
-			cy.get('[hlmButtonGroup] [hlmButtonGroup]')
-				.first()
-				.within(() => {
-					cy.get('button').should('have.length', 2);
-					cy.get('button').first().should('contain.text', 'Button 1');
-					cy.get('button').last().should('contain.text', 'Button 2');
-				});
-
-			cy.get('[hlmButtonGroup] [hlmButtonGroup]')
-				.last()
-				.within(() => {
-					cy.get('button').should('have.length', 2);
-					cy.get('button').first().should('contain.text', 'Button 3');
-					cy.get('button').last().should('contain.text', 'Button 4');
-				});
-			*/
-		});
 	});
 
 	test.describe('WithText Button Group', () => {
@@ -235,32 +157,6 @@ test.describe('button-group', () => {
 			await expect(page.locator('[hlmButtonGroupText]')).not.toHaveCount(0);
 			await expect(page.locator('[hlmButtonGroupText]')).toBeVisible();
 			await expect(page.locator('[hlmButtonGroupText]').filter({ hasText: /Text/ })).not.toHaveCount(0);
-		});
-
-		// SKIPPED by the transform: unsupported command .within
-		test.fixme('should have proper structure with text group', async () => {
-			/* Original Cypress code:
-			cy.get('[hlmButtonGroup]')
-				.first()
-				.within(() => {
-					// First nested group should have buttons
-					cy.get('[hlmButtonGroup]')
-						.first()
-						.within(() => {
-							cy.get('button').should('have.length', 2);
-						});
-
-					// Separator should exist
-					cy.get('hlm-button-group-separator').should('exist');
-
-					// Second nested group should have text
-					cy.get('[hlmButtonGroup]')
-						.last()
-						.within(() => {
-							cy.get('[hlmButtonGroupText]').should('exist').should('contain.text', 'Text');
-						});
-				});
-			*/
 		});
 
 		test('should support button interactions with text element', async ({ page }) => {
@@ -305,20 +201,6 @@ test.describe('button-group', () => {
 			await gotoStory(page, 'button-group--default');
 		});
 
-		// SKIPPED by the transform: unsupported command .each
-		test.fixme('should have proper visual styling', async () => {
-			/* Original Cypress code:
-			// Verify buttons are visually grouped together
-			cy.get('[hlmButtonGroup]').should('be.visible');
-
-			// Check that buttons appear as a cohesive group
-			cy.get('[hlmButtonGroup] button').each(($btn) => {
-				cy.wrap($btn).should('be.visible');
-				cy.wrap($btn).should('have.css', 'display').and('not.equal', 'none');
-			});
-			*/
-		});
-
 		test('should be responsive', async ({ page }) => {
 			// Test on different viewport sizes
 			await page.setViewportSize({ width: 1200, height: 800 });
@@ -347,18 +229,6 @@ test.describe('button-group', () => {
 					'landmark-one-main': { enabled: false },
 				},
 			});
-		});
-
-		// SKIPPED by the transform: unsupported command .each
-		test.fixme('should have proper focus indicators', async () => {
-			/* Original Cypress code:
-			cy.get('[hlmButtonGroup] button').each(($btn) => {
-				cy.wrap($btn).focus();
-				cy.wrap($btn).should('be.focused');
-				// Verify focus is visible (this would typically check for focus ring styles)
-				cy.wrap($btn).should('have.focus');
-			});
-			*/
 		});
 	});
 });

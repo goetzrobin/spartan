@@ -180,15 +180,6 @@ test.describe('field', () => {
 			await expect(page.getByLabel('Comments', { exact: true })).toHaveAttribute('id', 'field-comments');
 			await expect(page.getByText(/Please\s+provide\s+any\s+additional\s+information\./).first()).toBeVisible();
 		});
-
-		// SKIPPED by the transform: type with special key sequences; unsupported assertion 'contain.value'
-		test.fixme('should allow typing in textarea', async () => {
-			/* Original Cypress code:
-			const testText = 'This is a test comment with multiple lines.\nSecond line here.';
-			cy.findByLabelText('Comments').type(testText);
-			cy.findByLabelText('Comments').should('contain.value', 'This is a test comment');
-			*/
-		});
 	});
 
 	test.describe('with error', () => {

@@ -187,3 +187,29 @@ export async function forceClick(locator: Locator): Promise<void> {
 		element.dispatchEvent(new MouseEvent('click', init));
 	});
 }
+
+/**
+ * Puts the caret at the end of an input, textarea or editable element without pressing a key.
+ * Cypress's `.type()` does this after it clicks an element that was not focused. Pressing End
+ * would do the same to the caret, but components that listen for keys (a command list, a
+ * combobox) treat End as "go to the last option", which the Cypress test never asked for.
+ */
+export async function caretToEnd(locator: Locator): Promise<void> {
+	await locator.evaluate((element) => {
+		if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) {
+			try {
+				element.setSelectionRange(element.value.length, element.value.length);
+			} catch {
+				// Inputs such as type="email" or "number" have no selection to set; a click has
+				// already left the caret where the browser puts it.
+			}
+			return;
+		}
+		const range = document.createRange();
+		range.selectNodeContents(element);
+		range.collapse(false);
+		const selection = window.getSelection();
+		selection?.removeAllRanges();
+		selection?.addRange(range);
+	});
+}

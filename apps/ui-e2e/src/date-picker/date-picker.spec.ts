@@ -13,22 +13,6 @@ test.describe('date picker', () => {
 			await gotoStory(page, 'date-picker--default');
 		});
 
-		// SKIPPED by the transform: unsupported callback in .filter
-		test.fixme('opens the calendar and selects a date', async () => {
-			/* Original Cypress code:
-			cy.get('#date').should('have.attr', 'data-placeholder');
-			cy.get('#date').click();
-			cy.get('hlm-calendar').should('exist');
-
-			cy.get('[brnCalendarCellButton]')
-				.filter((_, el) => el.textContent.trim() === '15' && !el.hasAttribute('data-outside'))
-				.first()
-				.click();
-
-			cy.get('#date').should('not.have.attr', 'data-placeholder');
-			*/
-		});
-
 		test('passes accessibility checks', async ({ page }) => {
 			await checkA11y(page, undefined, {
 				rules: {
@@ -36,65 +20,6 @@ test.describe('date picker', () => {
 					'landmark-one-main': { enabled: false },
 				},
 			});
-		});
-	});
-
-	test.describe('single - trigger - navigating from a month-end date', () => {
-		test.beforeEach(async ({ page }) => {
-			await gotoStory(page, 'date-picker--preselected-end-of-month');
-		});
-
-		// SKIPPED by the transform: unsupported variable declaration; unsupported call monthTrigger(); unsupported callback in .filter
-		test.fixme('keeps the focused month when navigating to a shorter month via the dropdown', async () => {
-			/* Original Cypress code:
-			// The picker is preseeded with the 31st of August.
-			cy.get('#date').should('not.have.attr', 'data-placeholder');
-			cy.get('#date').click();
-			cy.get('hlm-calendar').should('exist');
-
-			const monthTrigger = () => cy.get('hlm-calendar [brnCalendarMonthSelect] [data-slot="select-trigger"]');
-
-			monthTrigger().should('contain.text', 'Aug');
-			cy.get('hlm-calendar [brnCalendarCellButton]:not([data-outside])').should('have.length', 31);
-
-			// Navigate to November, which only has 30 days. Regression for
-			// https://github.com/spartan-ng/spartan/issues/1720 - the 31st must be clamped to
-			// the last day of the target month, not rolled over into December.
-			monthTrigger().click();
-			cy.get('hlm-select-content').find('hlm-select-item').contains('Nov').click();
-
-			monthTrigger().should('contain.text', 'Nov');
-			cy.get('hlm-calendar [brnCalendarCellButton]:not([data-outside])').should('have.length', 30);
-			cy.get('hlm-calendar [brnCalendarCellButton]:not([data-outside])')
-				.filter((_, element) => element.textContent.trim() === '30')
-				.should('exist');
-			*/
-		});
-	});
-
-	test.describe('single - trigger - navigating to a month whose same day is before min', () => {
-		test.beforeEach(async ({ page }) => {
-			await gotoStory(page, 'date-picker--preselected-with-min-date');
-		});
-
-		// SKIPPED by the transform: unsupported variable declaration; unsupported call monthTrigger(); unsupported command .invoke
-		test.fixme('shows the picked month and focuses the min date instead of staying on the old month', async () => {
-			/* Original Cypress code:
-			// The picker is preseeded with the 19th of October, min is the 22nd of August.
-			cy.get('#date').click();
-			cy.get('hlm-calendar').should('exist');
-
-			const monthTrigger = () => cy.get('hlm-calendar [brnCalendarMonthSelect] [data-slot="select-trigger"]');
-
-			monthTrigger().click();
-			cy.get('hlm-select-content').find('hlm-select-item').contains('Aug').click();
-
-			// The 19th of August is before min: the focus is constrained to the 22nd, like the
-			// previous/next buttons do, and the grid shows August.
-			monthTrigger().should('contain.text', 'Aug');
-			cy.get('hlm-calendar [brnCalendarCellButton]:not([data-outside])').should('have.length', 31);
-			cy.get('hlm-calendar [brnCalendarCellButton][tabindex="0"]').invoke('text').invoke('trim').should('equal', '22');
-			*/
 		});
 	});
 
@@ -107,98 +32,6 @@ test.describe('date picker', () => {
 			await expect(page.locator('#date-input')).not.toHaveCount(0);
 			await modelIsEmpty(page);
 		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences); unsupported key sequence '{moveToStart}' in .type; unsupported command .then
-		test.fixme('keeps the caret position while editing in the middle', async () => {
-			/* Original Cypress code:
-			type('15/06/2024');
-			cy.get('#date-input').type('{moveToStart}9');
-			cy.get('#date-input').should('have.value', '915/06/2024');
-			cy.get('#date-input').then(($el) => {
-				expect(($el[0] as HTMLInputElement).selectionStart).to.eq(1);
-			});
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('commits a typed date on blur and shows the display format', async () => {
-			/* Original Cypress code:
-			type('15/06/2024');
-			blurInput();
-			cy.get('#date-input').should('have.value', 'Sat Jun 15 2024');
-			modelIsSet();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('commits on Enter and keeps focus, then blur shows the display format', async () => {
-			/* Original Cypress code:
-			cy.get('#date-input').focus();
-			cy.get('#date-input').type('{downArrow}');
-			cy.get('hlm-calendar').should('exist');
-			type('15/06/2024{enter}');
-			cy.get('hlm-calendar').should('not.exist');
-			// Still focused after Enter: the edit format is kept so a later blur re-parses correctly.
-			cy.get('#date-input').should('have.value', '15/06/2024');
-			modelIsSet();
-			blurInput();
-			cy.get('#date-input').should('have.value', 'Sat Jun 15 2024');
-			modelIsSet();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('keeps the value when blurring after Enter (regression)', async () => {
-			/* Original Cypress code:
-			type('15/06/2024{enter}');
-			// After Enter the field keeps focus and the edit format - blur must re-parse it, not clear.
-			cy.get('#date-input').should('have.value', '15/06/2024');
-			blurInput();
-			cy.get('#date-input').should('have.value', 'Sat Jun 15 2024');
-			modelIsSet();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('clears the value with the clear button', async () => {
-			/* Original Cypress code:
-			type('15/06/2024');
-			blurInput();
-			modelIsSet();
-			cy.get('button[aria-label="Clear date"]').click();
-			cy.get('#date-input').should('have.value', '');
-			modelIsEmpty();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('keeps invalid text but leaves the model empty', async () => {
-			/* Original Cypress code:
-			type('not a date');
-			blurInput();
-			cy.get('#date-input').should('have.value', 'not a date');
-			modelIsEmpty();
-			*/
-		});
-	});
-
-	test.describe('multi - trigger', () => {
-		test.beforeEach(async ({ page }) => {
-			await gotoStory(page, 'date-picker-multi--default');
-		});
-
-		// SKIPPED by the transform: unsupported callback in .filter
-		test.fixme('opens the calendar and selects a date', async () => {
-			/* Original Cypress code:
-			cy.get('#date').click();
-			cy.get('hlm-calendar-multi').should('exist');
-			cy.get('[brnCalendarCellButton]')
-				.filter((_, el) => el.textContent.trim() === '15' && !el.hasAttribute('data-outside'))
-				.first()
-				.click();
-			cy.get('#date').should('not.have.attr', 'data-placeholder');
-			*/
-		});
 	});
 
 	test.describe('multi - input', () => {
@@ -210,74 +43,6 @@ test.describe('date picker', () => {
 			await expect(page.locator('#date-input')).not.toHaveCount(0);
 			await modelIsEmpty(page);
 		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences); unsupported key sequence '{moveToStart}' in .type; unsupported command .then
-		test.fixme('keeps the caret position while editing in the middle', async () => {
-			/* Original Cypress code:
-			type('15/06/2024');
-			cy.get('#date-input').type('{moveToStart}9');
-			cy.get('#date-input').should('have.value', '915/06/2024');
-			cy.get('#date-input').then(($el) => {
-				expect(($el[0] as HTMLInputElement).selectionStart).to.eq(1);
-			});
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('commits typed dates on blur and shows the display format', async () => {
-			/* Original Cypress code:
-			type('15/06/2024');
-			blurInput();
-			cy.get('#date-input').should('have.value', 'Sat Jun 15 2024');
-			modelIsSet();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('keeps the value when blurring after Enter (regression)', async () => {
-			/* Original Cypress code:
-			type('15/06/2024{enter}');
-			cy.get('#date-input').should('have.value', '15/06/2024');
-			blurInput();
-			cy.get('#date-input').should('have.value', 'Sat Jun 15 2024');
-			modelIsSet();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('keeps invalid text but leaves the model empty', async () => {
-			/* Original Cypress code:
-			type('not a date');
-			blurInput();
-			cy.get('#date-input').should('have.value', 'not a date');
-			modelIsEmpty();
-			*/
-		});
-	});
-
-	test.describe('range - trigger', () => {
-		test.beforeEach(async ({ page }) => {
-			await gotoStory(page, 'date-range-picker--default');
-		});
-
-		// SKIPPED by the transform: unsupported callback in .filter
-		test.fixme('opens the calendar and selects a range', async () => {
-			/* Original Cypress code:
-			cy.get('#date').click();
-			cy.get('hlm-calendar-range').should('exist');
-
-			cy.get('[brnCalendarCellButton]')
-				.filter((_, el) => el.textContent.trim() === '15' && !el.hasAttribute('data-outside'))
-				.first()
-				.click();
-			cy.get('[brnCalendarCellButton]')
-				.filter((_, el) => el.textContent.trim() === '20' && !el.hasAttribute('data-outside'))
-				.first()
-				.click();
-
-			cy.get('#date').should('not.have.attr', 'data-placeholder');
-			*/
-		});
 	});
 
 	test.describe('range - input', () => {
@@ -288,49 +53,6 @@ test.describe('date picker', () => {
 		test('renders the input', async ({ page }) => {
 			await expect(page.locator('#date-input')).not.toHaveCount(0);
 			await modelIsEmpty(page);
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences); unsupported key sequence '{moveToStart}' in .type; unsupported command .then
-		test.fixme('keeps the caret position while editing in the middle', async () => {
-			/* Original Cypress code:
-			type('15/06/2024 - 20/06/2024');
-			cy.get('#date-input').type('{moveToStart}9');
-			cy.get('#date-input').should('have.value', '915/06/2024 - 20/06/2024');
-			cy.get('#date-input').then(($el) => {
-				expect(($el[0] as HTMLInputElement).selectionStart).to.eq(1);
-			});
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('commits a typed range on blur and shows the display format', async () => {
-			/* Original Cypress code:
-			type('15/06/2024 - 20/06/2024');
-			blurInput();
-			cy.get('#date-input').should('have.value', 'Sat Jun 15 2024 to Thu Jun 20 2024');
-			modelIsSet();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('keeps the value when blurring after Enter (regression)', async () => {
-			/* Original Cypress code:
-			type('15/06/2024 - 20/06/2024{enter}');
-			cy.get('#date-input').should('have.value', '15/06/2024 - 20/06/2024');
-			blurInput();
-			cy.get('#date-input').should('have.value', 'Sat Jun 15 2024 to Thu Jun 20 2024');
-			modelIsSet();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('keeps invalid text but leaves the model empty', async () => {
-			/* Original Cypress code:
-			type('not a range');
-			blurInput();
-			cy.get('#date-input').should('have.value', 'not a range');
-			modelIsEmpty();
-			*/
 		});
 	});
 
@@ -353,49 +75,6 @@ test.describe('date picker', () => {
 		test('renders the input', async ({ page }) => {
 			await expect(page.locator('#date-input')).not.toHaveCount(0);
 			await modelIsEmpty(page);
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences); unsupported key sequence '{moveToStart}' in .type; unsupported command .then
-		test.fixme('keeps the caret position while editing in the middle', async () => {
-			/* Original Cypress code:
-			type('06/2024');
-			cy.get('#date-input').type('{moveToStart}9');
-			cy.get('#date-input').should('have.value', '906/2024');
-			cy.get('#date-input').then(($el) => {
-				expect(($el[0] as HTMLInputElement).selectionStart).to.eq(1);
-			});
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('commits a typed month/year on blur and shows the display format', async () => {
-			/* Original Cypress code:
-			type('06/2024');
-			blurInput();
-			cy.get('#date-input').should('have.value', '06.2024');
-			modelIsSet();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('keeps the value when blurring after Enter (regression)', async () => {
-			/* Original Cypress code:
-			type('06/2024{enter}');
-			cy.get('#date-input').should('have.value', '06/2024');
-			blurInput();
-			cy.get('#date-input').should('have.value', '06.2024');
-			modelIsSet();
-			*/
-		});
-
-		// SKIPPED by the transform: uses helper type (type with special key sequences)
-		test.fixme('keeps invalid text but leaves the model empty', async () => {
-			/* Original Cypress code:
-			type('13/2024');
-			blurInput();
-			cy.get('#date-input').should('have.value', '13/2024');
-			modelIsEmpty();
-			*/
 		});
 	});
 });

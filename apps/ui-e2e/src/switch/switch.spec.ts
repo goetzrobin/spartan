@@ -165,13 +165,6 @@ test.describe('brn-switch accessibility and functionality tests', () => {
 			await gotoStory(page, 'switch--default');
 		});
 
-		// SKIPPED by the transform: uses helper executeClickOnComponent (unsupported arguments to .click)
-		test.fixme('should toggle switch state on component click', async () => {
-			/* Original Cypress code:
-			executeClickOnComponent(labelText)
-			*/
-		});
-
 		test('should toggle switch state on thumb click', async ({ page }) => {
 			await executeClickOnThumb(page, labelText);
 		});
@@ -182,39 +175,6 @@ test.describe('brn-switch accessibility and functionality tests', () => {
 
 		test('should toggle switch state using [Tab][Space] keys', async ({ page }) => {
 			await executeTabSpaceTests(page, labelText);
-		});
-
-		// SKIPPED by the transform: unsupported assertion callback .and(fn)
-		test.fixme('should show visible focus indication for keyboard users', async () => {
-			/* Original Cypress code:
-			const labelText = /Test Switch/i;
-
-			// Start with no element focused
-			cy.findByRole('switch', { name: labelText }).should('not.have.focus');
-
-			// Move focus to the switch using keyboard navigation (how keyboard users would interact)
-			cy.realPress('Tab');
-
-			// The switch must have visible focus indicator that meets WCAG requirements
-			// This ensures keyboard users can see which element they're interacting with
-			cy.findByRole('switch', { name: labelText })
-				.should('have.focus')
-				// Focus styles should be visible - check for outline, ring, or other focus indicators
-				// We're checking a few common CSS properties used for focus styling
-				.and(($el) => {
-					const styles = window.getComputedStyle($el[0]);
-					const hasOutline = styles.outline !== 'none' && styles.outline !== '';
-					const hasBoxShadow = styles.boxShadow !== 'none' && styles.boxShadow !== '';
-					const hasBorder = styles.borderColor !== 'transparent';
-
-					// At least one focus indicator should be present
-					expect(hasOutline || hasBoxShadow || hasBorder).to.be.true;
-				});
-
-			// Ensure focus styles disappear when focus moves away
-			cy.realPress('Tab');
-			cy.findByRole('switch', { name: labelText }).should('not.have.focus');
-			*/
 		});
 	});
 
@@ -227,13 +187,6 @@ test.describe('brn-switch accessibility and functionality tests', () => {
 
 		test('should toggle switch state by clicking on the label', async ({ page }) => {
 			await executeClickOnLabelTests(page, labelText);
-		});
-
-		// SKIPPED by the transform: uses helper executeClickOnComponent (unsupported arguments to .click)
-		test.fixme('should toggle switch state on component click', async () => {
-			/* Original Cypress code:
-			executeClickOnComponent(labelText)
-			*/
 		});
 
 		test('should toggle switch state on thumb click', async ({ page }) => {
@@ -258,13 +211,6 @@ test.describe('brn-switch accessibility and functionality tests', () => {
 
 		test('should toggle switch state by clicking on the label', async ({ page }) => {
 			await executeClickOnLabelTests(page, labelText);
-		});
-
-		// SKIPPED by the transform: uses helper executeClickOnComponent (unsupported arguments to .click)
-		test.fixme('should toggle switch state on component click', async () => {
-			/* Original Cypress code:
-			executeClickOnComponent(labelText)
-			*/
 		});
 
 		test('should toggle switch state on thumb click', async ({ page }) => {
@@ -307,39 +253,6 @@ test.describe('brn-switch accessibility and functionality tests', () => {
 			await page.keyboard.press('Tab');
 			await page.keyboard.press('Tab');
 			await verifySwitchTouched(page);
-		});
-	});
-
-	test.describe('disabled switch', () => {
-		test.beforeEach(async ({ page }) => {
-			await gotoStory(page, 'switch--disabled');
-		});
-
-		// SKIPPED by the transform: unsupported command .closest
-		test.fixme('should not be interactive when disabled', async () => {
-			/* Original Cypress code:
-			// Verify basic setup still applies to disabled switch
-			verifySwitchSetup(labelText);
-			verifySwitchOff(labelText);
-
-			// A disabled switch must have proper attributes for screen readers
-			cy.findByRole('switch', { name: labelText }).should('be.disabled');
-
-			// The hidden input should also have the disabled attribute
-			cy.findByLabelText(labelText).should('be.disabled');
-
-			// Clicking should not toggle the switch when disabled (force: true bypasses Cypress's built-in disabled element detection)
-			cy.get('brn-switch').find('button').click({ force: true });
-			verifySwitchOff(labelText);
-
-			// Keyboard users should not be able to focus disabled controls
-			// First tab should skip the disabled control and go to next focusable element
-			cy.realPress('Tab');
-			cy.findByRole('switch', { name: labelText }).should('not.have.focus');
-
-			// Label should also indicate the switch is disabled via data-disabled attribute
-			cy.findByText(labelText).closest('label').should('have.attr', 'data-disabled', 'true');
-			*/
 		});
 	});
 });

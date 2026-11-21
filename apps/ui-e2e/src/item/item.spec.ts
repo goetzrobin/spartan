@@ -105,16 +105,6 @@ test.describe('item', () => {
 			await expect(page.locator('hlm-item-group')).not.toHaveCount(0);
 			await expect(page.locator('hlm-item')).toHaveCount(3);
 		});
-
-		// SKIPPED by the transform: unsupported arguments to cy.checkA11y
-		test.fixme('should pass accessibility checks', async () => {
-			/* Original Cypress code:
-			cy.get('hlm-item-group').should('exist');
-			cy.checkA11y('hlm-item-group', undefined, (violations) => {
-				cy.log(JSON.stringify(violations, null, 2));
-			});
-			*/
-		});
 	});
 
 	test.describe('Header', () => {

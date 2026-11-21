@@ -20,17 +20,6 @@ test.describe('Empty', () => {
 					.filter({ hasText: /You don't have any items yet\. Create your first item to get started\./ }),
 			).not.toHaveCount(0);
 		});
-
-		// SKIPPED by the transform: unsupported command .within
-		test.fixme('should have proper structure', async () => {
-			/* Original Cypress code:
-			cy.get('[hlmEmpty]').within(() => {
-				cy.get('[hlmEmptyMedia]').should('exist');
-				cy.get('[hlmEmptyContent]').should('exist');
-				cy.get('[hlmEmptyHeader]').should('exist');
-			});
-			*/
-		});
 	});
 
 	test.describe('With Action Story', () => {
@@ -191,18 +180,6 @@ test.describe('Empty', () => {
 			await expect(page.locator('button[hlmBtn]')).toBeVisible();
 			await page.locator('button[hlmBtn]').focus();
 			await expect(page.locator(':focus')).toHaveAttribute('hlmBtn');
-		});
-	});
-
-	test.describe('Visual Regression', () => {
-		// SKIPPED by the transform: test defined inside unsupported statement (stories.forEach); non-literal test title; non-literal URL in cy.visit
-		test.fixme('`should match visual snapshot for ${story}`', async () => {
-			/* Original Cypress code:
-			cy.visit(`/iframe.html?id=empty--${story}`);
-			cy.get('[hlmEmpty]').should('be.visible');
-			// Add visual regression testing if supported
-			// cy.matchImageSnapshot(`empty-${story}`);
-			*/
 		});
 	});
 });

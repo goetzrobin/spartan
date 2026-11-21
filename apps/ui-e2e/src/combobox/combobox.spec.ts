@@ -34,27 +34,6 @@ test.describe('combobox--default', () => {
 			await expect(byText(page, 'Angular')).toBeHidden();
 		});
 
-		// SKIPPED by the transform: unsupported assertion callback .should(fn)
-		test.fixme('should open the framework dropdown, and the list should be scrollable', async () => {
-			/* Original Cypress code:
-			cy.findByText(/Angular/i).should('not.exist');
-			cy.get('input[placeholder="Select framework..."]').should('be.visible').realClick();
-			cy.get('[role="listbox"]').should(($el) => {
-				expect($el[0].scrollHeight).to.be.greaterThan($el[0].clientHeight);
-			});
-			*/
-		});
-
-		// SKIPPED by the transform: unsupported arguments to .realClick
-		test.fixme('clicking outside should close the content', async () => {
-			/* Original Cypress code:
-			cy.get('input[placeholder="Select framework..."]').should('be.visible').realClick();
-			cy.findByText('Angular').should('be.visible');
-			cy.get('body').realClick({ position: 'topLeft' });
-			cy.findByText('Angular').should('not.exist');
-			*/
-		});
-
 		test('clicking the input while open keeps it open (closeOnTriggerClick is false)', async ({ page }) => {
 			await expect(page.locator('input[placeholder="Select framework..."]')).toBeVisible();
 			await page.locator('input[placeholder="Select framework..."]').click({ force: true });
@@ -96,15 +75,5 @@ test.describe('combobox--popup', () => {
 		await expect(byText(page, 'Angular')).toBeVisible();
 		await page.locator('hlm-combobox-trigger button').click({ force: true });
 		await expect(byText(page, 'Angular')).toHaveCount(0);
-	});
-
-	// SKIPPED by the transform: unsupported arguments to .realClick
-	test.fixme('clicking outside should close the content', async () => {
-		/* Original Cypress code:
-		cy.get('hlm-combobox-trigger button').realClick();
-		cy.findByText('Angular').should('be.visible');
-		cy.get('body').realClick({ position: 'topLeft' });
-		cy.findByText('Angular').should('not.exist');
-		*/
 	});
 });

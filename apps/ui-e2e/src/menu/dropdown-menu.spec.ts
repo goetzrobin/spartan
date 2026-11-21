@@ -53,42 +53,6 @@ test.describe('dropdown-menu', () => {
 			await byText(page, /open/i).click({ force: true });
 			await expect(byText(page, /open/i)).toHaveAttribute('aria-expanded', 'false');
 		});
-
-		// SKIPPED by the transform: unsupported command .realPress; unsupported loop
-		test.fixme('down on open button should open, up and down should navigate, right over sub menu should open submenu, and left on sub should close it, and escape open should close dropdown completely', async () => {
-			/* Original Cypress code:
-			cy.checkA11y('#storybook-root', {
-				rules: {
-					'page-has-heading-one': { enabled: false },
-					'landmark-one-main': { enabled: false },
-				},
-			});
-
-			cy.findByText(/open/i).should('have.attr', 'aria-expanded', 'false');
-
-			cy.realPress('Tab');
-
-			cy.findByText(/open/i).should('have.focus').realPress('ArrowDown');
-
-			cy.findByText(/open/i).should('have.attr', 'aria-expanded', 'true');
-
-			cy.findByRole('menu');
-
-			// Navigate down multiple times
-			for (let i = 0; i < 5; i++) {
-				cy.realPress('ArrowDown');
-			}
-
-			cy.realPress('ArrowRight');
-			cy.findAllByRole('menu').should('have.length', 2);
-
-			cy.realPress('ArrowDown');
-			cy.realPress('ArrowLeft');
-			cy.realPress('Escape');
-
-			cy.findByText(/open/i).should('have.focus').should('have.attr', 'aria-expanded', 'false');
-			*/
-		});
 	});
 
 	// Regression for https://github.com/spartan-ng/spartan/issues/1333
