@@ -13,14 +13,11 @@ test.describe('autocomplete', () => {
 			await expect(page.locator('input[hlmInputGroupInput]')).not.toHaveCount(0);
 		});
 
-		// SKIPPED by the transform: unsupported assertion 'have.length.gt'
-		test.fixme('should show options when typing', async () => {
-			/* Original Cypress code:
-			cy.get('input[hlmInputGroupInput]').type('Mar');
-			cy.get('[hlmAutocompleteList]').should('exist');
-			cy.get('hlm-autocomplete-item').should('have.length.gt', 0);
-			cy.get('hlm-autocomplete-item').first().should('contain.text', 'Marty McFly');
-			*/
+		test('should show options when typing', async ({ page }) => {
+			await page.locator('input[hlmInputGroupInput]').pressSequentially('Mar');
+			await expect(page.locator('[hlmAutocompleteList]')).not.toHaveCount(0);
+			await expect(page.locator('hlm-autocomplete-item')).not.toHaveCount(0);
+			await expect(page.locator('hlm-autocomplete-item').first()).toContainText('Marty McFly');
 		});
 
 		test('should select an option', async ({ page }) => {
@@ -39,7 +36,7 @@ test.describe('autocomplete', () => {
 			*/
 		});
 
-		// SKIPPED by the transform: unsupported assertion 'have.length.gt'; unsupported command .realPress
+		// SKIPPED by the transform: unsupported command .realPress
 		test.fixme('should not select the highlighted option on tab out', async () => {
 			/* Original Cypress code:
 			cy.get('input[hlmInputGroupInput]').type('Mar');
@@ -53,7 +50,7 @@ test.describe('autocomplete', () => {
 			*/
 		});
 
-		// SKIPPED by the transform: unsupported assertion 'have.length.gt'; unsupported command .realPress
+		// SKIPPED by the transform: unsupported command .realPress
 		test.fixme('should select highlighted option on enter', async () => {
 			/* Original Cypress code:
 			cy.get('input[hlmInputGroupInput]').type('Mar');
@@ -77,18 +74,15 @@ test.describe('autocomplete', () => {
 			});
 		});
 
-		// SKIPPED by the transform: unsupported assertion 'have.length.gt'
-		test.fixme('should pass accessibility checks when opened', async () => {
-			/* Original Cypress code:
+		test('should pass accessibility checks when opened', async ({ page }) => {
 			// Wait for the story to render before typing to open the popup and auditing.
-			cy.get('input[hlmInputGroupInput]').should('be.visible');
-			cy.get('input[hlmInputGroupInput]').type('Mar');
-			cy.get('hlm-autocomplete-item').should('have.length.gt', 0);
+			await expect(page.locator('input[hlmInputGroupInput]')).toBeVisible();
+			await page.locator('input[hlmInputGroupInput]').pressSequentially('Mar');
+			await expect(page.locator('hlm-autocomplete-item')).not.toHaveCount(0);
 			// Let the popup's fade-in/zoom-in animation settle; scanning mid-animation
 			// blends the text with the background and falsely fails color-contrast.
-			// eslint-disable-next-line cypress/no-unnecessary-waiting
-			cy.wait(600);
-			cy.checkA11y(undefined, {
+			await page.waitForTimeout(600);
+			await checkA11y(page, undefined, {
 				rules: {
 					'page-has-heading-one': { enabled: false },
 					'landmark-one-main': { enabled: false },
@@ -98,7 +92,6 @@ test.describe('autocomplete', () => {
 					region: { enabled: false },
 				},
 			});
-			*/
 		});
 	});
 
@@ -107,15 +100,16 @@ test.describe('autocomplete', () => {
 			await gotoStory(page, 'autocomplete--form');
 		});
 
-		// SKIPPED by the transform: unsupported command .contains
-		test.fixme('should work within a form', async () => {
-			/* Original Cypress code:
-			cy.get('form').should('exist');
-			cy.get('input[hlmInputGroupInput]').clear();
-			cy.get('input[hlmInputGroupInput]').type('Doc');
-			cy.get('hlm-autocomplete-item').contains('Doc Brown').click();
-			cy.get('input[hlmInputGroupInput]').should('have.value', 'Doc Brown');
-			*/
+		test('should work within a form', async ({ page }) => {
+			await expect(page.locator('form')).not.toHaveCount(0);
+			await page.locator('input[hlmInputGroupInput]').clear();
+			await page.locator('input[hlmInputGroupInput]').pressSequentially('Doc');
+			await page
+				.locator('hlm-autocomplete-item')
+				.getByText(/Doc\s+Brown/)
+				.first()
+				.click();
+			await expect(page.locator('input[hlmInputGroupInput]').first()).toHaveValue('Doc Brown');
 		});
 	});
 
@@ -124,12 +118,9 @@ test.describe('autocomplete', () => {
 			await gotoStory(page, 'autocomplete--async');
 		});
 
-		// SKIPPED by the transform: unsupported assertion 'have.length.gt'
-		test.fixme('should show loading state', async () => {
-			/* Original Cypress code:
-			cy.get('input[hlmInputGroupInput]').type('test');
-			cy.get('hlm-autocomplete-item').should('have.length.gt', 0);
-			*/
+		test('should show loading state', async ({ page }) => {
+			await page.locator('input[hlmInputGroupInput]').pressSequentially('test');
+			await expect(page.locator('hlm-autocomplete-item')).not.toHaveCount(0);
 		});
 	});
 });

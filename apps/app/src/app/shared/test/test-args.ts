@@ -18,7 +18,10 @@ export function applyTestArgs(page: object, keys: readonly string[]): void {
 		const separator = pair.indexOf(':');
 		if (separator < 1) continue;
 		const key = pair.slice(0, separator);
-		if (!keys.includes(key)) continue;
+		if (!keys.includes(key)) {
+			// A test that sets something the page ignores would pass without testing it.
+			throw new Error(`Test page does not take the arg "${key}". It takes: ${keys.join(', ') || 'none'}.`);
+		}
 		target[key] = coerce(pair.slice(separator + 1), target[key]);
 	}
 }

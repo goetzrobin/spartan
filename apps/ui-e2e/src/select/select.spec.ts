@@ -119,7 +119,7 @@ test.describe('select', () => {
 			*/
 		});
 
-		// SKIPPED by the transform: uses helper verifySelectSetup (unsupported command .each); unsupported command .realType; unsupported command .contains
+		// SKIPPED by the transform: uses helper verifySelectSetup (unsupported command .each); unsupported command .realType; unsupported arguments to .contains
 		test.fixme('should toggle an item on keypress', async () => {
 			/* Original Cypress code:
 			cy.visit('/iframe.html?id=select--multiple');
@@ -219,9 +219,7 @@ test.describe('select', () => {
 		});
 
 		test('should have initial value set correctly when options are provided in a for loop', async ({ page }) => {
-			await gotoStory(page, 'select--reactive-form-control-with-for-and-initial-value', {
-				args: 'initialValue:banana',
-			});
+			await gotoStory(page, 'select--reactive-form-control-with-for-and-initial-value');
 
 			// initial
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');

@@ -45,13 +45,16 @@ test.describe('item', () => {
 			await gotoStory(page, 'item--avatar');
 		});
 
-		// SKIPPED by the transform: unsupported assertion 'have.length.at.least'
-		test.fixme('should render items with avatars', async () => {
-			/* Original Cypress code:
-			cy.get('hlm-item').should('have.length.at.least', 2);
-			cy.get('hlm-item').first().find('hlm-avatar').should('exist');
-			cy.get('hlm-item').first().find('hlm-item-title').should('contain.text', 'Evil Rabbit');
-			*/
+		test('should render items with avatars', async ({ page }) => {
+			await expect(page.locator('hlm-item').nth(1)).toBeAttached();
+			await expect(page.locator('hlm-item').first().locator('hlm-avatar')).not.toHaveCount(0);
+			await expect(
+				page
+					.locator('hlm-item')
+					.first()
+					.locator('hlm-item-title')
+					.filter({ hasText: /Evil Rabbit/ }),
+			).not.toHaveCount(0);
 		});
 
 		test('should pass accessibility checks', async ({ page }) => {

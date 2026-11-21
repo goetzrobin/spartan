@@ -40,15 +40,24 @@ test.describe('button-group', () => {
 			await gotoStory(page, 'button-group--default');
 		});
 
-		// SKIPPED by the transform: unsupported command .contains
-		test.fixme('should render the default button group correctly', async () => {
-			/* Original Cypress code:
-			verifyButtonGroupSetup();
+		test('should render the default button group correctly', async ({ page }) => {
+			await verifyButtonGroupSetup(page);
 
 			// Verify button text content
-			cy.get('[hlmButtonGroup] button').first().contains('Button 1');
-			cy.get('[hlmButtonGroup] button').last().contains('Button 2');
-			*/
+			await expect(
+				page
+					.locator('[hlmButtonGroup] button')
+					.first()
+					.getByText(/Button\s+1/)
+					.first(),
+			).not.toHaveCount(0);
+			await expect(
+				page
+					.locator('[hlmButtonGroup] button')
+					.last()
+					.getByText(/Button\s+2/)
+					.first(),
+			).not.toHaveCount(0);
 		});
 
 		// SKIPPED by the transform: unsupported command .each

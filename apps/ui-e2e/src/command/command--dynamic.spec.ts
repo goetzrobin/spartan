@@ -8,7 +8,7 @@ test.describe('command', () => {
 			await gotoStory(page, 'command--dynamic-options');
 		});
 
-		// SKIPPED by the transform: type with special key sequences
+		// SKIPPED by the transform: key sequence '{backspace}' in .type depends on the caret position
 		test.fixme('should show items based on input value without error.', async () => {
 			/* Original Cypress code:
 			cy.checkA11y('#storybook-root', {

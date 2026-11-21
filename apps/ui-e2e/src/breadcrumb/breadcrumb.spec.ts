@@ -11,14 +11,23 @@ test.describe('Breadcrumb Directive', () => {
 		await expect(page.locator('[hlmBreadcrumb]')).not.toHaveCount(0);
 	});
 
-	// SKIPPED by the transform: unsupported command .contains
-	test.fixme('should contain the correct breadcrumb items', async () => {
-		/* Original Cypress code:
-		cy.get('[hlmBreadcrumb] ol li').should('have.length', 7);
-		cy.get('[hlmBreadcrumb] ol li').eq(0).contains('Home');
-		cy.get('[hlmBreadcrumb] ol li').eq(4).contains('Components');
-		cy.get('[hlmBreadcrumb] ol li').eq(6).contains('Breadcrumb');
-		*/
+	test('should contain the correct breadcrumb items', async ({ page }) => {
+		await expect(page.locator('[hlmBreadcrumb] ol li')).toHaveCount(7);
+		await expect(page.locator('[hlmBreadcrumb] ol li').nth(0).getByText(/Home/).first()).not.toHaveCount(0);
+		await expect(
+			page
+				.locator('[hlmBreadcrumb] ol li')
+				.nth(4)
+				.getByText(/Components/)
+				.first(),
+		).not.toHaveCount(0);
+		await expect(
+			page
+				.locator('[hlmBreadcrumb] ol li')
+				.nth(6)
+				.getByText(/Breadcrumb/)
+				.first(),
+		).not.toHaveCount(0);
 	});
 
 	test('should contain breadcrumb separators', async ({ page }) => {

@@ -28,31 +28,30 @@ test.describe('dropdown-menu', () => {
 			await expect(byText(page, /support/i).locator('..')).toBeDisabled();
 		});
 
-		// SKIPPED by the transform: command .realClick after subject-changing assertion 'have.attr'
-		test.fixme('click on open button should open, hover over sub menu should open submenu, and click on open button again should close', async () => {
-			/* Original Cypress code:
-			cy.checkA11y('#storybook-root', {
+		test('click on open button should open, hover over sub menu should open submenu, and click on open button again should close', async ({
+			page,
+		}) => {
+			await checkA11y(page, STORY_ROOT, {
 				rules: {
 					'page-has-heading-one': { enabled: false },
 					'landmark-one-main': { enabled: false },
 				},
 			});
 
-			cy.findByText(/open/i)
-				.should('have.attr', 'aria-expanded', 'false')
-				.realClick()
-				.should('have.attr', 'aria-expanded', 'true');
+			await expect(byText(page, /open/i)).toHaveAttribute('aria-expanded', 'false');
+			await byText(page, /open/i).click({ force: true });
+			await expect(byText(page, /open/i)).toHaveAttribute('aria-expanded', 'true');
 
-			cy.findByRole('menu');
+			await expect(page.getByRole('menu')).toHaveCount(1);
 
-			cy.findByText(/invite users/i).realHover();
+			await byText(page, /invite users/i).hover({ force: true });
 
-			cy.findAllByRole('menu').should('have.length', 2);
+			await expect(page.getByRole('menu')).toHaveCount(2);
 
-			cy.findByText(/more/i).realHover();
+			await byText(page, /more/i).hover({ force: true });
 
-			cy.findByText(/open/i).realClick().should('have.attr', 'aria-expanded', 'false');
-			*/
+			await byText(page, /open/i).click({ force: true });
+			await expect(byText(page, /open/i)).toHaveAttribute('aria-expanded', 'false');
 		});
 
 		// SKIPPED by the transform: unsupported command .realPress; unsupported loop
