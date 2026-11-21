@@ -22,7 +22,7 @@ test.describe('widget--default', () => {
 			await expect(page.getByRole('dialog')).toHaveCount(1);
 			await forceClick(page.locator('button.close'));
 			await expect(byText(page, /open/i)).toHaveCount(1);
-			await expect(byText(page, /open/i)).toBeFocused();
+			await expect(byText(page, /open/i).and(page.locator(':focus'))).toHaveCount(1);
 		});
 
 		// SKIPPED by the transform: uses helper openMenu

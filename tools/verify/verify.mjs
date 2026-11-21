@@ -12,10 +12,10 @@
 // written to dist/.playwright/ui-e2e/proof. Extra arguments after `--` go to Playwright.
 
 import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { affectedComponents, listComponents, parseStatus } from './lib/affected.mjs';
+import { affectedComponents, listComponents, parseStatus, storyTitlesOf } from './lib/affected.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const node = process.execPath;
@@ -89,9 +89,19 @@ if (components.length === 0) {
 }
 console.log(`Verifying: ${components.join(', ')}${note ? ` (${note})` : ''}`);
 
-// A component's story file and Cypress file do not always share its folder name, so only the
-// ones that exist are checked. Both checks stop once Storybook and Cypress are removed.
-const stories = components.filter((c) => existsSync(path.join(ROOT, `apps/ui-storybook/stories/${c}.stories.ts`)));
+// The story files behind a component's tests come from the test page list, because a test
+// folder can cover several story files (`menu` covers context-menu, dropdown-menu and menubar).
+// Both checks stop once Storybook and Cypress are removed.
+const manifestFile = path.join(ROOT, 'apps/ui-e2e/test-pages.json');
+const manifest = existsSync(manifestFile) ? JSON.parse(readFileSync(manifestFile, 'utf8')).pages : [];
+const titles = new Set(components.flatMap((component) => [component, ...storyTitlesOf(ROOT, component)]));
+const stories = [
+	...new Set(
+		manifest
+			.filter((page) => titles.has(page.id.split('--')[0]))
+			.map((page) => path.basename(page.source, '.stories.ts')),
+	),
+].sort();
 const cypress = components.filter((c) => existsSync(path.join(ROOT, `apps/ui-storybook-e2e/src/integration/${c}`)));
 
 let ok = true;

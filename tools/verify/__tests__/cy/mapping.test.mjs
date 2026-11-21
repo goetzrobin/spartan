@@ -145,14 +145,14 @@ describe('actions', () => {
 		skips(`${L}.click({ multiple: true });`, 'unsupported arguments to .click');
 		skips(`${L}.click('topLeft');`, 'unsupported arguments to .click');
 	});
-	it('realClick', () => converts(`${L}.realClick();`, `await ${P}.click();`));
+	it('realClick', () => converts(`${L}.realClick();`, `await ${P}.click({ force: true });`));
 	it('realClick right / rightclick', () => {
-		converts(`${L}.realClick({ button: 'right' });`, `await ${P}.click({ button: 'right' });`);
+		converts(`${L}.realClick({ button: 'right' });`, `await ${P}.click({ button: 'right', force: true });`);
 		converts(`${L}.rightclick();`, `await ${P}.click({ button: 'right' });`);
 	});
 	it('realClick with position is unsupported', () => skips(`${L}.realClick({ position: 'top' });`, 'realClick'));
 	it('dblclick', () => converts(`${L}.dblclick();`, `await ${P}.dblclick();`));
-	it('realHover', () => converts(`${L}.realHover();`, `await ${P}.hover();`));
+	it('realHover', () => converts(`${L}.realHover();`, `await ${P}.hover({ force: true });`));
 	it('focus, blur, clear, check, uncheck', () =>
 		converts(
 			['focus', 'blur', 'clear', 'check', 'uncheck'].map((a) => `${L}.${a}();`).join('\n'),

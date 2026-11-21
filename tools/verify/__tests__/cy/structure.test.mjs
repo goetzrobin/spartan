@@ -167,9 +167,9 @@ describe('manual ports', () => {
 		assert.ok(r.code.includes("test.fixme('needs work'"));
 	});
 
-	it('a converted test stays converted even if a manual port exists', () => {
+	it('a manual port also takes the place of a test the tool could convert', () => {
 		const r = t(src, new Set(['fine']));
-		assert.equal(r.tests[1].status, 'converted');
+		assert.equal(r.tests[1].status, 'ported');
 	});
 });
 
@@ -225,5 +225,77 @@ describe('duplicate titles', () => {
 		assert.match(r.code, /test\('same', /);
 		assert.match(r.code, /test\('same \(2\)', /);
 		assert.match(r.code, /test\.fixme\('same \(3\)', /);
+	});
+});
+
+describe('assertions on a subject that can hold several elements', () => {
+	const body = (line) => t(`describe('g', () => { it('x', () => { ${line} }); });`).code;
+
+	it('reads attributes from the first element, as jQuery does', () => {
+		assert.match(
+			body(`cy.findAllByRole('none').should('not.have.attr', 'aria-orientation', 'vertical');`),
+			/expect\(page\.getByRole\('none'\)\.first\(\)\)\.not\.toHaveAttribute\('aria-orientation', 'vertical'\)/,
+		);
+		assert.match(
+			body(`cy.get('.item').should('have.attr', 'data-x', '1');`),
+			/page\.locator\('\.item'\)\.first\(\)\)\.toHaveAttribute/,
+		);
+	});
+
+	it('treats focus as "any of them has focus"', () => {
+		assert.match(
+			body(`cy.findAllByText(/save/i).should('have.focus');`),
+			/expect\(byText\(page, \/save\/i\)\.and\(page\.locator\(':focus'\)\)\)\.toHaveCount\(1\)/,
+		);
+		assert.match(
+			body(`cy.findAllByText(/save/i).should('not.have.focus');`),
+			/\.and\(page\.locator\(':focus'\)\)\)\.toHaveCount\(0\)/,
+		);
+	});
+
+	it('leaves single-element subjects alone', () => {
+		assert.match(
+			body(`cy.findByText(/save/i).should('have.focus');`),
+			/expect\(byText\(page, \/save\/i\)\)\.toBeFocused\(\)/,
+		);
+		assert.match(
+			body(`cy.get('#one').should('have.attr', 'a', 'b');`),
+			/expect\(page\.locator\('#one'\)\)\.toHaveAttribute/,
+		);
+		assert.match(
+			body(`cy.get('.item').first().should('have.attr', 'a', 'b');`),
+			/locator\('\.item'\)\.first\(\)\)\.toHaveAttribute/,
+		);
+		assert.match(
+			body(`cy.findAllByRole('tab').should('have.length', 3);`),
+			/expect\(page\.getByRole\('tab'\)\)\.toHaveCount\(3\)/,
+		);
+	});
+});
+
+describe('a manual port of a test the tool can convert', () => {
+	it('replaces the generated test', () => {
+		const src = `describe('g', () => {
+	it('wrong as written', () => {
+		cy.get('#a').click();
+	});
+	it('fine', () => {
+		cy.get('#b').click();
+	});
+});`;
+		const r = transformSource(src, {
+			sourcePath: 'x.cy.ts',
+			basename: 'x',
+			manualTitles: new Set(['wrong as written']),
+		});
+		assert.doesNotMatch(r.code, /wrong as written/);
+		assert.match(r.code, /test\('fine'/);
+		assert.deepEqual(
+			r.tests.map((test) => [test.title, test.status]),
+			[
+				['wrong as written', 'ported'],
+				['fine', 'converted'],
+			],
+		);
 	});
 });

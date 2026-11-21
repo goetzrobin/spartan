@@ -107,6 +107,22 @@ describe('buildTestPages', () => {
 		assert.match(content, /imports: \[SpartanTestShell, HlmButton, MyCase\]/);
 	});
 
+	it('reads moduleMetadata returned from render like the decorator', () => {
+		const built = buildTestPages(
+			'stories/alert-dialog.stories.ts',
+			story(
+				`@Component({ selector: 'my-case', template: 'x' })
+				class MyCase {}
+				export const Inline: Story = {
+					render: () => ({ moduleMetadata: { imports: [MyCase], providers: [provideThing()] }, template: '<my-case />' }),
+				};`,
+			),
+		);
+		assert.deepEqual(built.skipped, []);
+		assert.match(page(built, 'inline'), /imports: \[SpartanTestShell, HlmButton, MyCase\]/);
+		assert.match(page(built, 'inline'), /providers: \[provideThing\(\)\]/);
+	});
+
 	it('puts applicationConfig providers on the route and notes it', () => {
 		const built = buildTestPages(
 			'stories/alert-dialog.stories.ts',

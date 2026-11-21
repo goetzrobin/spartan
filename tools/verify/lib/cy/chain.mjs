@@ -303,15 +303,21 @@ function standalone(link, env) {
 	return `unsupported command cy.${name}`;
 }
 
+/** `'#edit-profile'` can only match one element; any other selector may match several. */
+function isPlainId(selectorCode) {
+	return /^['"`]#[\w-]+['"`]$/.test(selectorCode) || selectorCode === 'STORY_ROOT';
+}
+
 /**
  * Convert `.should(chainer, ...args)` on locator `loc`. Returns the statement or a reason.
  * @param {string} cmd should | and
  * @param {ts.Expression[]} args
  * @param {string} loc
  * @param {Env} env
+ * @param {boolean} [many] the subject can hold several elements
  * @returns {{ statement: string, chainer: string } | string}
  */
-function assertion(cmd, args, loc, env) {
+function assertion(cmd, args, loc, env, many = false) {
 	if (!args.length) return `unsupported arguments to .${cmd}`;
 	if (ts.isArrowFunction(args[0]) || ts.isFunctionExpression(args[0]))
 		return `unsupported assertion callback .${cmd}(fn)`;
@@ -329,11 +335,15 @@ function assertion(cmd, args, loc, env) {
 	const arity = (n, ...kinds) => vals.length === n && vals.every((v) => kinds.includes(v.kind));
 	/** @param {string} matcher @param {string} [prefix] */
 	const out = (matcher, prefix = not) => ({ statement: `await expect(${loc})${prefix}.${matcher};`, chainer });
+	// jQuery reads an attribute, property, value, id or style from the FIRST matched element.
+	const first = many ? `${loc}.first()` : loc;
+	/** @param {string} matcher */
+	const onFirst = (matcher) => ({ statement: `await expect(${first})${not}.${matcher};`, chainer });
 	env.uses.add('expect');
 	switch (chainer) {
 		case 'have.attr':
-			if (arity(1, 'string')) return out(`toHaveAttribute(${vals[0].text})`);
-			if (arity(2, 'string')) return out(`toHaveAttribute(${vals[0].text}, ${vals[1].text})`);
+			if (arity(1, 'string')) return onFirst(`toHaveAttribute(${vals[0].text})`);
+			if (arity(2, 'string')) return onFirst(`toHaveAttribute(${vals[0].text}, ${vals[1].text})`);
 			return bad;
 		case 'have.length':
 			if (arity(1, 'number') && Number.isInteger(vals[0].value) && /** @type {number} */ (vals[0].value) >= 0)
@@ -341,7 +351,15 @@ function assertion(cmd, args, loc, env) {
 			return bad;
 		case 'have.focus':
 		case 'be.focused':
-			return arity(0) ? out('toBeFocused()') : bad;
+			if (!arity(0)) return bad;
+			// With several elements jQuery asks whether ANY of them has focus.
+			if (many) {
+				return {
+					statement: `await expect(${loc}.and(page.locator(':focus'))).toHaveCount(${negated ? 0 : 1});`,
+					chainer,
+				};
+			}
+			return out('toBeFocused()');
 		case 'be.visible':
 			if (!arity(0)) return bad;
 			return negated ? out('toBeHidden()', '') : out('toBeVisible()');
@@ -355,9 +373,9 @@ function assertion(cmd, args, loc, env) {
 		case 'include.text':
 			return arity(1, 'string') ? out(`toContainText(${vals[0].text})`) : bad;
 		case 'have.value':
-			return arity(1, 'string') ? out(`toHaveValue(${vals[0].text})`) : bad;
+			return arity(1, 'string') ? onFirst(`toHaveValue(${vals[0].text})`) : bad;
 		case 'have.id':
-			return arity(1, 'string') ? out(`toHaveId(${vals[0].text})`) : bad;
+			return arity(1, 'string') ? onFirst(`toHaveId(${vals[0].text})`) : bad;
 		case 'have.class': {
 			if (!arity(1, 'string')) return bad;
 			const cls = /** @type {string} */ (vals[0].value);
@@ -374,10 +392,10 @@ function assertion(cmd, args, loc, env) {
 		case 'be.empty':
 			return arity(0) ? out('toBeEmpty()') : bad;
 		case 'have.css':
-			return arity(2, 'string') ? out(`toHaveCSS(${vals[0].text}, ${vals[1].text})`) : bad;
+			return arity(2, 'string') ? onFirst(`toHaveCSS(${vals[0].text}, ${vals[1].text})`) : bad;
 		case 'have.prop':
 			return vals.length === 2 && vals[0].kind === 'string' && vals[1].kind !== 'regex' && vals[1].kind !== 'undefined'
-				? out(`toHaveJSProperty(${vals[0].text}, ${vals[1].text})`)
+				? onFirst(`toHaveJSProperty(${vals[0].text}, ${vals[1].text})`)
 				: bad;
 	}
 	return bad;
@@ -413,13 +431,16 @@ function action(link, loc, env) {
 			return fail('unsupported arguments to .click');
 		}
 		case 'realClick': {
-			if (noArgs()) return `await ${loc}.click();`;
+			// A real click from cypress-real-events moves the pointer to the element and presses, whatever
+			// state the element is in (tests use it to click disabled controls). Playwright's click waits
+			// for the element to be enabled unless forced, so `force` keeps the meaning.
+			if (noArgs()) return `await ${loc}.click({ force: true });`;
 			const o = args[0];
 			if (args.length === 1 && ts.isObjectLiteralExpression(o) && o.properties.length === 1) {
 				const p = o.properties[0];
 				const v = ts.isPropertyAssignment(p) ? literal(p.initializer) : null;
 				if (ts.isPropertyAssignment(p) && propName(p.name) === 'button' && v?.value === 'right')
-					return `await ${loc}.click({ button: 'right' });`;
+					return `await ${loc}.click({ button: 'right', force: true });`;
 			}
 			return fail('unsupported arguments to .realClick');
 		}
@@ -428,7 +449,7 @@ function action(link, loc, env) {
 		case 'dblclick':
 			return noArgs() ? `await ${loc}.dblclick();` : fail('unsupported arguments to .dblclick');
 		case 'realHover':
-			return noArgs() ? `await ${loc}.hover();` : fail('unsupported arguments to .realHover');
+			return noArgs() ? `await ${loc}.hover({ force: true });` : fail('unsupported arguments to .realHover');
 		case 'focus':
 		case 'blur':
 		case 'clear':
@@ -497,6 +518,12 @@ export function convertChain(links, env) {
 	let loc;
 	/** Whether the last query yields at most one element per Testing Library (findBy*). */
 	let singular = false;
+	/**
+	 * Whether the subject can hold several elements (findAll*, or a selector that is not a plain
+	 * id). Cypress assertions then follow jQuery: an attribute is read from the first element and
+	 * focus is true when any element has it. Playwright would refuse the locator as ambiguous.
+	 */
+	let many = false;
 	/** A query was added and nothing has used it yet: a bare query is an existence assertion. */
 	let pending = true;
 	/** Set after an assertion that makes Cypress yield a value instead of the element. */
@@ -506,6 +533,7 @@ export function convertChain(links, env) {
 		const r = selectorArg(first.args, env, 'cy.get');
 		if (typeof r === 'string') return fail(r);
 		loc = `page.locator(${r.code})`;
+		many = !isPlainId(r.code);
 	} else if (first.name === 'focused') {
 		if (first.args.length) return fail('unsupported arguments to cy.focused');
 		loc = `page.locator(':focus')`;
@@ -514,6 +542,7 @@ export function convertChain(links, env) {
 		if (typeof r === 'string') return fail(r);
 		loc = queryOn('page', r, env);
 		singular = r.singular;
+		many = !r.singular;
 	} else {
 		return fail(`unsupported command cy.${first.name}`);
 	}
@@ -522,7 +551,7 @@ export function convertChain(links, env) {
 		const { name, args } = link;
 		if (changedBy) return fail(`command .${name} after subject-changing assertion '${changedBy}'`);
 		if (name === 'should' || name === 'and') {
-			const r = assertion(name, args, loc, env);
+			const r = assertion(name, args, loc, env, many);
 			if (typeof r === 'string') return fail(r);
 			statements.push(r.statement);
 			if (SUBJECT_CHANGING.has(r.chainer)) changedBy = r.chainer;
@@ -543,26 +572,31 @@ export function convertChain(links, env) {
 			if (typeof r === 'string') return fail(r);
 			loc = `page.locator(${r.code})`;
 			singular = false;
+			many = !isPlainId(r.code);
 		} else if (name === 'find') {
 			const r = selectorArg(args, env, '.find');
 			if (typeof r === 'string') return fail(r);
 			loc = `${loc}.locator(${r.code})`;
 			singular = false;
+			many = !isPlainId(r.code);
 		} else if (TL_QUERY.test(name)) {
 			const r = tlQuery(name, args, env);
 			if (typeof r === 'string') return fail(r);
 			loc = queryOn(loc, r, env);
 			singular = r.singular;
+			many = !r.singular;
 		} else if (name === 'first' || name === 'last') {
 			if (args.length) return fail(`unsupported arguments to .${name}`);
 			loc = `${loc}.${name}()`;
 			singular = false;
+			many = false;
 		} else if (name === 'eq') {
 			const n = literal(args[0], env.localConsts);
 			if (args.length !== 1 || n?.kind !== 'number' || !Number.isInteger(n.value))
 				return fail('unsupported arguments to .eq');
 			loc = `${loc}.nth(${n.text})`;
 			singular = false;
+			many = false;
 		} else if (name === 'parent') {
 			if (args.length) return fail('unsupported arguments to .parent');
 			loc = `${loc}.locator('..')`;

@@ -133,8 +133,8 @@ export function parseStoryFile(fileName, sourceText) {
 			exportName,
 			args,
 			props: render.props,
-			imports: [...metaDecorators.imports, ...decorators.imports],
-			providers: [...metaDecorators.providers, ...decorators.providers],
+			imports: [...metaDecorators.imports, ...decorators.imports, ...render.imports],
+			providers: [...metaDecorators.providers, ...decorators.providers, ...render.providers],
 			routeProviders: [...metaDecorators.routeProviders, ...decorators.routeProviders],
 			template: render.template,
 			reasons,
@@ -267,7 +267,7 @@ function readDecorators(node, label, reasons, text) {
  * interpolation in it is `argsToTemplate(args)`.
  */
 function readRender(node, args, reasons, text) {
-	const result = { props: [], template: '' };
+	const result = { props: [], template: '', imports: [], providers: [] };
 	if (!node) {
 		reasons.push('story has no render function (component-only stories are not supported yet)');
 		return result;
@@ -310,8 +310,30 @@ function readRender(node, args, reasons, text) {
 
 	for (const member of returned.properties) {
 		const key = member.name && ts.isIdentifier(member.name) ? member.name.text : undefined;
-		if (key !== 'props' && key !== 'template') {
-			reasons.push(`render returns \`${key ?? text(member).slice(0, 30)}\`, only props and template are supported`);
+		if (key !== 'props' && key !== 'template' && key !== 'moduleMetadata') {
+			reasons.push(
+				`render returns \`${key ?? text(member).slice(0, 30)}\`, only props, template and moduleMetadata are supported`,
+			);
+		}
+	}
+
+	// `moduleMetadata: { imports, providers }` returned from render means the same as the decorator.
+	const metadata = property(returned, 'moduleMetadata');
+	if (metadata) {
+		const config = unwrap(metadata);
+		if (!ts.isObjectLiteralExpression(config)) {
+			reasons.push('render moduleMetadata is not an object literal');
+		} else {
+			for (const member of config.properties) {
+				const key = ts.isPropertyAssignment(member) && ts.isIdentifier(member.name) ? member.name.text : undefined;
+				const list = key ? unwrap(member.initializer) : undefined;
+				const plain = list && ts.isArrayLiteralExpression(list) && !list.elements.some(ts.isSpreadElement);
+				if ((key !== 'imports' && key !== 'providers') || !plain) {
+					reasons.push(`render moduleMetadata member \`${text(member).slice(0, 40)}\` is not supported`);
+					continue;
+				}
+				result[key].push(...list.elements.map((item) => text(item)));
+			}
 		}
 	}
 

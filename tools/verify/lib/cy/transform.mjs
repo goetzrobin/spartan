@@ -496,6 +496,14 @@ class FileTransformer {
 		const head = stmt === call ? [] : this.comments(stmt, depth);
 		const describePath = scope.describePath;
 
+		// A test with the same title in `<name>.manual.spec.ts` takes its place, whether the tool could
+		// convert it or not. That is how a test whose literal translation is wrong gets corrected.
+		if (staticTitle !== null && this.options.manualTitles?.has(staticTitle)) {
+			this.uses = uses;
+			this.tests.push({ title, describePath, status: 'ported', reasons: [] });
+			return [];
+		}
+
 		if (!reasons.length) {
 			this.uses.add('test');
 			this.tests.push({ title, describePath, status: 'converted', reasons: [] });
@@ -509,10 +517,6 @@ class FileTransformer {
 		}
 		// Skipped: undo any imports only this test's conversion would have needed.
 		this.uses = uses;
-		if (staticTitle !== null && this.options.manualTitles?.has(staticTitle)) {
-			this.tests.push({ title, describePath, status: 'ported', reasons: [] });
-			return [];
-		}
 		this.tests.push({ title, describePath, status: 'skipped', reasons });
 		this.uses.add('test');
 		const original = this.originalBody(call);

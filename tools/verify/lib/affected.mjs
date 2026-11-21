@@ -67,12 +67,28 @@ function createResolver(root) {
 	};
 }
 
+/**
+ * The story titles a component's tests open (`gotoStory(page, 'context-menu--default')`).
+ * A test folder does not always share its name with the stories it covers: `menu` holds the
+ * tests for context-menu, dropdown-menu and menubar.
+ */
+export function storyTitlesOf(root, component) {
+	const titles = new Set();
+	for (const file of walk(root, `${E2E_SRC}/${component}`)) {
+		const text = readFileSync(path.join(root, file), 'utf8');
+		for (const match of text.matchAll(/gotoStory\(\s*page\s*,\s*['"`]([a-z0-9-]+?)--/g)) titles.add(match[1]);
+	}
+	return [...titles].sort();
+}
+
 /** Every repo file a component's pages and tests reach through imports. */
 export function closureOf(root, component, resolve = createResolver(root)) {
 	const seen = new Set();
-	const queue = [...walk(root, `${PAGES}/${component}`), ...walk(root, `${E2E_SRC}/${component}`)].filter((file) =>
-		/\.(ts|mts|js|mjs)$/.test(file),
-	);
+	const pageFolders = new Set([component, ...storyTitlesOf(root, component)]);
+	const queue = [
+		...[...pageFolders].flatMap((folder) => walk(root, `${PAGES}/${folder}`)),
+		...walk(root, `${E2E_SRC}/${component}`),
+	].filter((file) => /\.(ts|mts|js|mjs)$/.test(file));
 	while (queue.length > 0) {
 		const file = queue.pop();
 		if (seen.has(file)) continue;
