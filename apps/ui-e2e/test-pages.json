@@ -2,6 +2,55 @@
 	"generatedBy": "tools/verify/story-to-test-pages.mjs",
 	"pages": [
 		{
+			"id": "alert-dialog--default",
+			"route": "/test/alert-dialog/default",
+			"source": "apps/ui-storybook/stories/alert-dialog.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "command--bound-value",
+			"route": "/test/command/bound-value",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "BoundValue",
+			"args": []
+		},
+		{
+			"id": "command--default",
+			"route": "/test/command/default",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "command--dialog",
+			"route": "/test/command/dialog",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "Dialog",
+			"args": []
+		},
+		{
+			"id": "command--dynamic-options",
+			"route": "/test/command/dynamic-options",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "DynamicOptions",
+			"args": []
+		},
+		{
+			"id": "command--reactive-form",
+			"route": "/test/command/reactive-form",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "ReactiveForm",
+			"args": []
+		},
+		{
+			"id": "context-menu--default",
+			"route": "/test/context-menu/default",
+			"source": "apps/ui-storybook/stories/context-menu.stories.ts",
+			"story": "Default",
+			"args": ["sideOffset"]
+		},
+		{
 			"id": "dialog--context-menu",
 			"route": "/test/dialog/context-menu",
 			"source": "apps/ui-storybook/stories/dialog.stories.ts",
@@ -45,6 +94,34 @@
 			"args": []
 		},
 		{
+			"id": "dropdown-menu--default",
+			"route": "/test/dropdown-menu/default",
+			"source": "apps/ui-storybook/stories/dropdown-menu.stories.ts",
+			"story": "Default",
+			"args": ["sideOffset"]
+		},
+		{
+			"id": "dropdown-menu--stateful",
+			"route": "/test/dropdown-menu/stateful",
+			"source": "apps/ui-storybook/stories/dropdown-menu.stories.ts",
+			"story": "Stateful",
+			"args": ["sideOffset"]
+		},
+		{
+			"id": "dropdown-menu--submenu",
+			"route": "/test/dropdown-menu/submenu",
+			"source": "apps/ui-storybook/stories/dropdown-menu.stories.ts",
+			"story": "Submenu",
+			"args": ["sideOffset"]
+		},
+		{
+			"id": "menubar--default",
+			"route": "/test/menubar/default",
+			"source": "apps/ui-storybook/stories/menubar.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
 			"id": "popover--close-on-scroll",
 			"route": "/test/popover/close-on-scroll",
 			"source": "apps/ui-storybook/stories/popover.stories.ts",
@@ -71,6 +148,48 @@
 			"source": "apps/ui-storybook/stories/popover.stories.ts",
 			"story": "ScrollContainer",
 			"args": ["align", "sideOffset"]
+		},
+		{
+			"id": "radio-group--default",
+			"route": "/test/radio-group/default",
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "radio-group--label-for",
+			"route": "/test/radio-group/label-for",
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"story": "LabelFor",
+			"args": []
+		},
+		{
+			"id": "radio-group--validation",
+			"route": "/test/radio-group/validation",
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"story": "Validation",
+			"args": []
+		},
+		{
+			"id": "radio-group--with-hint-and-error",
+			"route": "/test/radio-group/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "separator--default",
+			"route": "/test/separator/default",
+			"source": "apps/ui-storybook/stories/separator.stories.ts",
+			"story": "Default",
+			"args": ["orientation", "decorative"]
+		},
+		{
+			"id": "sheet--default",
+			"route": "/test/sheet/default",
+			"source": "apps/ui-storybook/stories/sheet.stories.ts",
+			"story": "Default",
+			"args": ["side"]
 		}
 	]
 }

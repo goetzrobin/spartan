@@ -21,6 +21,31 @@ export const routeMeta: RouteMeta = {
 				</p>
 
 				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">alert-dialog</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/alert-dialog/default">alert-dialog--default</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">command</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/command/bound-value">command--bound-value</a></li>
+						<li><a class="underline" href="/test/command/default">command--default</a></li>
+						<li><a class="underline" href="/test/command/dialog">command--dialog</a></li>
+						<li><a class="underline" href="/test/command/dynamic-options">command--dynamic-options</a></li>
+						<li><a class="underline" href="/test/command/reactive-form">command--reactive-form</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">context-menu</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/context-menu/default">context-menu--default</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
 					<h2 class="text-lg font-semibold">dialog</h2>
 					<ul class="list-disc space-y-1 pl-6">
 						<li><a class="underline" href="/test/dialog/context-menu">dialog--context-menu</a></li>
@@ -39,12 +64,54 @@ export const routeMeta: RouteMeta = {
 				</section>
 
 				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">dropdown-menu</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/dropdown-menu/default">dropdown-menu--default</a></li>
+						<li><a class="underline" href="/test/dropdown-menu/stateful">dropdown-menu--stateful</a></li>
+						<li><a class="underline" href="/test/dropdown-menu/submenu">dropdown-menu--submenu</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">menubar</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/menubar/default">menubar--default</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
 					<h2 class="text-lg font-semibold">popover</h2>
 					<ul class="list-disc space-y-1 pl-6">
 						<li><a class="underline" href="/test/popover/close-on-scroll">popover--close-on-scroll</a></li>
 						<li><a class="underline" href="/test/popover/default">popover--default</a></li>
 						<li><a class="underline" href="/test/popover/near-viewport-edge">popover--near-viewport-edge</a></li>
 						<li><a class="underline" href="/test/popover/scroll-container">popover--scroll-container</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">radio-group</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/radio-group/default">radio-group--default</a></li>
+						<li><a class="underline" href="/test/radio-group/label-for">radio-group--label-for</a></li>
+						<li><a class="underline" href="/test/radio-group/validation">radio-group--validation</a></li>
+						<li>
+							<a class="underline" href="/test/radio-group/with-hint-and-error">radio-group--with-hint-and-error</a>
+						</li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">separator</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/separator/default">separator--default</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">sheet</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/sheet/default">sheet--default</a></li>
 					</ul>
 				</section>
 			</main>

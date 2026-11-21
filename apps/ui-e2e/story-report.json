@@ -1,6 +1,30 @@
 {
 	"generatedBy": "tools/verify/story-to-test-pages.mjs",
 	"files": {
+		"alert-dialog": {
+			"source": "apps/ui-storybook/stories/alert-dialog.stories.ts",
+			"title": "alert-dialog",
+			"pages": ["alert-dialog--default"],
+			"skipped": []
+		},
+		"command": {
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"title": "command",
+			"pages": [
+				"command--default",
+				"command--dialog",
+				"command--dynamic-options",
+				"command--reactive-form",
+				"command--bound-value"
+			],
+			"skipped": []
+		},
+		"context-menu": {
+			"source": "apps/ui-storybook/stories/context-menu.stories.ts",
+			"title": "context-menu",
+			"pages": ["context-menu--default"],
+			"skipped": []
+		},
 		"dialog": {
 			"source": "apps/ui-storybook/stories/dialog.stories.ts",
 			"title": "dialog",
@@ -14,6 +38,18 @@
 			],
 			"skipped": []
 		},
+		"dropdown-menu": {
+			"source": "apps/ui-storybook/stories/dropdown-menu.stories.ts",
+			"title": "dropdown-menu",
+			"pages": ["dropdown-menu--default", "dropdown-menu--stateful", "dropdown-menu--submenu"],
+			"skipped": []
+		},
+		"menubar": {
+			"source": "apps/ui-storybook/stories/menubar.stories.ts",
+			"title": "menubar",
+			"pages": ["menubar--default"],
+			"skipped": []
+		},
 		"popover": {
 			"source": "apps/ui-storybook/stories/popover.stories.ts",
 			"title": "popover",
@@ -24,7 +60,30 @@
 				"popover--scroll-container"
 			],
 			"skipped": []
+		},
+		"radio-group": {
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"title": "radio-group",
+			"pages": [
+				"radio-group--default",
+				"radio-group--label-for",
+				"radio-group--validation",
+				"radio-group--with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"separator": {
+			"source": "apps/ui-storybook/stories/separator.stories.ts",
+			"title": "separator",
+			"pages": ["separator--default"],
+			"skipped": []
+		},
+		"sheet": {
+			"source": "apps/ui-storybook/stories/sheet.stories.ts",
+			"title": "sheet",
+			"pages": ["sheet--default"],
+			"skipped": []
 		}
 	},
-	"totals": { "files": 2, "pages": 10, "skippedStories": 0, "skippedFiles": 0 }
+	"totals": { "files": 10, "pages": 27, "skippedStories": 0, "skippedFiles": 0 }
 }

@@ -28,7 +28,7 @@ test.describe('popover--default', () => {
 			// click outside of dialog
 			await forceClick(page.locator(STORY_ROOT));
 			await expect(byText(page, /open popover/i)).toHaveCount(1);
-			await expect(byText(page, /open popover/i)).toBeFocused();
+			await expect(byText(page, /open popover/i).and(page.locator(':focus'))).toHaveCount(1);
 		});
 
 		test('clicking an outside button should close the popover and activate the button', async ({ page }) => {
@@ -61,7 +61,7 @@ test.describe('popover--default', () => {
 
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /open popover/i)).toHaveCount(1);
-			await expect(byText(page, /open popover/i)).toBeFocused();
+			await expect(byText(page, /open popover/i).and(page.locator(':focus'))).toHaveCount(1);
 			await page.keyboard.press('Enter');
 		});
 
@@ -88,13 +88,13 @@ test.describe('popover--default', () => {
 			await page.keyboard.press('Tab');
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /open popover/i)).toHaveCount(1);
-			await expect(byText(page, /open popover/i)).toBeFocused();
+			await expect(byText(page, /open popover/i).and(page.locator(':focus'))).toHaveCount(1);
 			await page.keyboard.press('Space');
 
 			// click escape when dialog open
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /open popover/i)).toHaveCount(1);
-			await expect(byText(page, /open popover/i)).toBeFocused();
+			await expect(byText(page, /open popover/i).and(page.locator(':focus'))).toHaveCount(1);
 		});
 	});
 });

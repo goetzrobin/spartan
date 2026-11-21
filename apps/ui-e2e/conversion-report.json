@@ -1,11 +1,86 @@
 {
 	"generatedBy": "tools/verify/cypress-to-playwright.mjs",
 	"files": {
+		"alert-dialog/alert-dialog": {
+			"source": "apps/ui-storybook-e2e/src/integration/alert-dialog/alert-dialog.cy.ts",
+			"output": "apps/ui-e2e/src/alert-dialog/alert-dialog.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": [
+				"tab and enter on trigger should open, enter on cancel should close, escape should not close",
+				"tab and space on trigger should open, tabs should wrap, space on cancel should close"
+			]
+		},
+		"command/command--default": {
+			"source": "apps/ui-storybook-e2e/src/integration/command/command--default.cy.ts",
+			"output": "apps/ui-e2e/src/command/command--default.spec.ts",
+			"converted": 3,
+			"skipped": [],
+			"ported": []
+		},
+		"command/command--dynamic": {
+			"source": "apps/ui-storybook-e2e/src/integration/command/command--dynamic.cy.ts",
+			"output": "apps/ui-e2e/src/command/command--dynamic.spec.ts",
+			"converted": 2,
+			"skipped": [
+				{
+					"title": "should show items based on input value without error.",
+					"describePath": ["command", "dynamic with ngModel"],
+					"reasons": ["type with special key sequences"]
+				}
+			],
+			"ported": []
+		},
 		"dialog/dialog": {
 			"source": "apps/ui-storybook-e2e/src/integration/dialog/dialog.cy.ts",
 			"output": "apps/ui-e2e/src/dialog/dialog.spec.ts",
 			"converted": 8,
 			"skipped": [],
+			"ported": []
+		},
+		"menu/context-menu": {
+			"source": "apps/ui-storybook-e2e/src/integration/menu/context-menu.cy.ts",
+			"output": "apps/ui-e2e/src/menu/context-menu.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": []
+		},
+		"menu/dropdown-menu": {
+			"source": "apps/ui-storybook-e2e/src/integration/menu/dropdown-menu.cy.ts",
+			"output": "apps/ui-e2e/src/menu/dropdown-menu.spec.ts",
+			"converted": 3,
+			"skipped": [
+				{
+					"title": "click on open button should open, hover over sub menu should open submenu, and click on open button again should close",
+					"describePath": ["dropdown-menu", "default"],
+					"reasons": ["command .realClick after subject-changing assertion 'have.attr'"]
+				},
+				{
+					"title": "down on open button should open, up and down should navigate, right over sub menu should open submenu, and left on sub should close it, and escape open should close dropdown completely",
+					"describePath": ["dropdown-menu", "default"],
+					"reasons": ["unsupported command .realPress", "unsupported loop"]
+				}
+			],
+			"ported": []
+		},
+		"menu/dropdown-menu-data-side": {
+			"source": "apps/ui-storybook-e2e/src/integration/menu/dropdown-menu-data-side.cy.ts",
+			"output": "apps/ui-e2e/src/menu/dropdown-menu-data-side.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": []
+		},
+		"menu/menubar": {
+			"source": "apps/ui-storybook-e2e/src/integration/menu/menubar.cy.ts",
+			"output": "apps/ui-e2e/src/menu/menubar.spec.ts",
+			"converted": 1,
+			"skipped": [
+				{
+					"title": "arrowdown on file should open menu and arrow left/right around should open/close appropriate menus",
+					"describePath": ["menubar", "default"],
+					"reasons": ["uses helper pressArrow"]
+				}
+			],
 			"ported": []
 		},
 		"popover/popover": {
@@ -19,13 +94,34 @@
 				"honours the scroll strategy the wrapper now forwards",
 				"keeps the panel on its trigger when the enclosing container scrolls"
 			]
+		},
+		"radio-group/radio-group": {
+			"source": "apps/ui-storybook-e2e/src/integration/radio-group/radio-group.cy.ts",
+			"output": "apps/ui-e2e/src/radio-group/radio-group.spec.ts",
+			"converted": 3,
+			"skipped": [],
+			"ported": []
+		},
+		"separator/separator": {
+			"source": "apps/ui-storybook-e2e/src/integration/separator/separator.cy.ts",
+			"output": "apps/ui-e2e/src/separator/separator.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": []
+		},
+		"sheet/sheet": {
+			"source": "apps/ui-storybook-e2e/src/integration/sheet/sheet.cy.ts",
+			"output": "apps/ui-e2e/src/sheet/sheet.spec.ts",
+			"converted": 3,
+			"skipped": [],
+			"ported": []
 		}
 	},
 	"totals": {
-		"files": 2,
-		"tests": 16,
-		"converted": 12,
-		"skipped": 0,
-		"ported": 4
+		"files": 12,
+		"tests": 41,
+		"converted": 31,
+		"skipped": 4,
+		"ported": 6
 	}
 }

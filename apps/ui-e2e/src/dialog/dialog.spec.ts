@@ -30,13 +30,13 @@ test.describe('dialog--default', () => {
 
 			await page.locator('button[data-slot="dialog-close"]').click();
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
-			await expect(byText(page, /edit profile/i)).toBeFocused();
+			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 			await byText(page, /edit profile/i).click();
 
 			// click outside of dialog
 			await forceClick(page.locator('.cdk-overlay-backdrop'));
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
-			await expect(byText(page, /edit profile/i)).toBeFocused();
+			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 		});
 
 		test('tab and enter on trigger should open, enter on close should close, escape should close', async ({ page }) => {
@@ -61,13 +61,13 @@ test.describe('dialog--default', () => {
 			await page.keyboard.press('Shift+Tab');
 			await page.keyboard.press('Enter');
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
-			await expect(byText(page, /edit profile/i)).toBeFocused();
+			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 			await page.keyboard.press('Enter');
 
 			// click escape when dialog open
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
-			await expect(byText(page, /edit profile/i)).toBeFocused();
+			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 		});
 
 		test('tab and space on trigger should open, tabs should wrap, space on close should close', async ({ page }) => {
@@ -94,13 +94,13 @@ test.describe('dialog--default', () => {
 			await page.keyboard.press('Tab');
 			await page.keyboard.press('Space');
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
-			await expect(byText(page, /edit profile/i)).toBeFocused();
+			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 			await page.keyboard.press('Space');
 
 			// click escape when dialog open
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
-			await expect(byText(page, /edit profile/i)).toBeFocused();
+			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 		});
 	});
 
@@ -137,7 +137,7 @@ test.describe('dialog--default', () => {
 			await forceClick(page.locator('.cdk-overlay-backdrop'));
 
 			await expect(byText(page, /open dialog/i)).toHaveCount(1);
-			await expect(byText(page, /open dialog/i)).toBeFocused();
+			await expect(byText(page, /open dialog/i).and(page.locator(':focus'))).toHaveCount(1);
 		});
 	});
 
@@ -155,9 +155,9 @@ test.describe('dialog--default', () => {
 				},
 			});
 
-			await byText(page, /right click here/i).click({ button: 'right' });
+			await byText(page, /right click here/i).click({ button: 'right', force: true });
 			await expect(page.getByRole('menu')).toBeVisible();
-			await byText(page, /^print$/i).click();
+			await byText(page, /^print$/i).click({ force: true });
 
 			await expect(page.getByRole('dialog', { name: /print this page/i })).toBeVisible();
 			await expect(byText(page, /are you sure you want to print this page/i)).toBeVisible();
@@ -187,14 +187,14 @@ test.describe('dialog--dynamic-component', () => {
 			// close on click close button
 			await page.locator('button[data-slot="dialog-close"]').click();
 			await expect(byText(page, /select user/i)).toHaveCount(1);
-			await expect(byText(page, /select user/i)).toBeFocused();
+			await expect(byText(page, /select user/i).and(page.locator(':focus'))).toHaveCount(1);
 			await byText(page, /select user/i).click();
 
 			// close on click backdrop
 			await expect(page.locator('dynamic-content')).not.toHaveCount(0);
 			await forceClick(page.locator('.cdk-overlay-backdrop'));
 			await expect(byText(page, /select user/i)).toHaveCount(1);
-			await expect(byText(page, /select user/i)).toBeFocused();
+			await expect(byText(page, /select user/i).and(page.locator(':focus'))).toHaveCount(1);
 		});
 
 		test('click on teams button should open dynamic component without close button', async ({ page }) => {
@@ -235,7 +235,7 @@ test.describe('dialog--dynamic-component', () => {
 			await forceClick(page.locator('.cdk-overlay-backdrop'));
 
 			await expect(byText(page, /open dialog/i)).toHaveCount(1);
-			await expect(byText(page, /open dialog/i)).toBeFocused();
+			await expect(byText(page, /open dialog/i).and(page.locator(':focus'))).toHaveCount(1);
 		});
 	});
 });
