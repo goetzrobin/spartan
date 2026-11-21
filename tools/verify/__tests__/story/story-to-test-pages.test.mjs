@@ -157,6 +157,11 @@ describe('buildTestPages', () => {
 			/render parameter/,
 		],
 		[
+			'a prop computed from the args',
+			`export const S: Story = { args: { a: 1 }, render: (args) => ({ props: { ...args, b: args.a + 1 }, template: '' }) };`,
+			/computes its value from the args/,
+		],
+		[
 			'spread in args',
 			`const base = {}; export const S: Story = { args: { ...base }, render: () => ({ template: '' }) };`,
 			/not `key: value`/,

@@ -246,6 +246,21 @@ class FileTransformer {
 		this.uses = new Set();
 		/** @type {TestRecord[]} */
 		this.tests = [];
+		/** @type {Map<string, number>} */
+		this.titleCounts = new Map();
+	}
+
+	/**
+	 * Cypress allows two tests with the same title in one group, Playwright refuses the file.
+	 * The second one gets " (2)", the third " (3)", in source order.
+	 * @param {string[]} describePath
+	 * @param {string} title
+	 */
+	uniqueTitle(describePath, title) {
+		const key = JSON.stringify([...describePath, title]);
+		const count = (this.titleCounts.get(key) ?? 0) + 1;
+		this.titleCounts.set(key, count);
+		return count === 1 ? title : `${title} (${count})`;
 	}
 
 	/** @returns {TransformResult} */
@@ -487,7 +502,7 @@ class FileTransformer {
 			const opener = modifier === 'skip' ? 'test.skip' : 'test';
 			return [
 				...head,
-				`${ind}${opener}(${quote(title)}, async (${usesPage ? '{ page }' : ''}) => {`,
+				`${ind}${opener}(${quote(this.uniqueTitle(describePath, title))}, async (${usesPage ? '{ page }' : ''}) => {`,
 				...lines,
 				`${ind}});`,
 			];
@@ -504,7 +519,7 @@ class FileTransformer {
 		return [
 			...head,
 			`${ind}// SKIPPED by the transform: ${reasons.join('; ').replace(/\s*\n\s*/g, ' ')}`,
-			`${ind}test.fixme(${quote(title)}, async () => {`,
+			`${ind}test.fixme(${quote(this.uniqueTitle(describePath, title))}, async () => {`,
 			`${ind}\t/* Original Cypress code:`,
 			...original.map((l) => (l ? `${ind}\t${l}` : '')),
 			`${ind}\t*/`,

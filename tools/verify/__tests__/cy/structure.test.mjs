@@ -207,3 +207,23 @@ describe('kept', () => {
 		assert.match(r.code, /test\.describe\('kept'/);
 	});
 });
+
+describe('duplicate titles', () => {
+	it('numbers the later ones, because Playwright refuses two tests with one title', () => {
+		const src = `describe('g', () => {
+	it('same', () => {
+		cy.get('#a').click();
+	});
+	it('same', () => {
+		cy.get('#b').click();
+	});
+	it('same', () => {
+		cy.get('#c').then(() => {});
+	});
+});`;
+		const r = transformSource(src, { sourcePath: 'x.cy.ts', basename: 'x' });
+		assert.match(r.code, /test\('same', /);
+		assert.match(r.code, /test\('same \(2\)', /);
+		assert.match(r.code, /test\.fixme\('same \(3\)', /);
+	});
+});

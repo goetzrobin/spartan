@@ -333,6 +333,10 @@ function readRender(node, args, reasons, text) {
 					continue;
 				}
 				const initializer = unwrap(member.initializer);
+				if (argsName && identifiersIn(text(member.initializer)).has(argsName)) {
+					reasons.push(`props member \`${member.name.text}\` computes its value from the args`);
+					continue;
+				}
 				result.props.push({
 					key: member.name.text,
 					value: text(member.initializer),
