@@ -68,7 +68,7 @@ describe('buildTestPages', () => {
 		assert.match(content, /<button hlmBtn \[variant\]="variant" \[size\]="size" \(clicked\)="clicked\(\$event\)">/);
 		assert.match(content, /protected variant: any = 'outline';/);
 		assert.match(content, /protected size: any = 'lg';/, 'the story overrides the meta default');
-		assert.match(content, /protected count = 0;/);
+		assert.match(content, /protected count: any = 0;/);
 		assert.match(content, /applyTestArgs\(this, \['variant', 'size', 'clicked', 'hidden'\]\)/);
 		assert.deepEqual(built.pages[0].args, ['variant', 'size', 'clicked', 'hidden']);
 	});
@@ -154,6 +154,30 @@ describe('buildTestPages', () => {
 		);
 	});
 
+	it('handles args taken by name in the render parameters', () => {
+		const built = buildTestPages(
+			'stories/alert-dialog.stories.ts',
+			story(
+				`export const Named: Story = {
+					render: ({ disabled, ...args }) => ({
+						props: { disabled, ...args, isDisabled: disabled },
+						template: \`<button hlmBtn \${argsToTemplate(args)} [disabled]="isDisabled">x</button>\`,
+					}),
+				};`,
+				`args: { variant: 'outline', disabled: true },`,
+			),
+		);
+		assert.deepEqual(built.skipped, []);
+		const content = page(built, 'named');
+		assert.match(
+			content,
+			/<button hlmBtn \[variant\]="variant" \[disabled\]="isDisabled">/,
+			'the named arg is left out of the spread',
+		);
+		assert.match(content, /protected disabled: any = true;/);
+		assert.match(content, /const \{ disabled \} = this as any;\s+this\.isDisabled = disabled;/);
+	});
+
 	it('leaves out stories named in the skip list and records the reason', () => {
 		const built = buildTestPages(
 			'stories/alert-dialog.stories.ts',
@@ -209,9 +233,9 @@ describe('buildTestPages', () => {
 			/does not end in a single return/,
 		],
 		[
-			'destructured render parameters',
-			`export const S: Story = { render: ({ size }) => ({ template: '' }) };`,
-			/render parameter/,
+			'renamed destructured render parameters',
+			`export const S: Story = { render: ({ size: s }) => ({ template: '' }) };`,
+			/renames or defaults/,
 		],
 		[
 			'spread in args',

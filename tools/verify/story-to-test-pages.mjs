@@ -97,7 +97,9 @@ export function buildTestPages(sourcePath, sourceText, skipList = {}) {
 			// The story builds its props from local values or from the args, so the page does the same
 			// in its constructor: the story's own statements first, then one assignment per prop.
 			const body = [...story.setup, ...story.props.map((field) => field.value)].join('\n');
-			const needsArgs = story.argsName && identifiersIn(`(() => { ${body} })`).has(story.argsName);
+			const used = identifiersIn(`(() => { ${body} })`);
+			const needsArgs = story.argsName && used.has(story.argsName);
+			const named = story.namedArgs.filter((name) => used.has(name));
 			fields = [
 				...args.map((field) => `\tprotected ${field.key}: any = ${field.value};`),
 				...story.props.map((field) => `\tprotected ${field.key}: any;`),
@@ -107,6 +109,7 @@ export function buildTestPages(sourcePath, sourceText, skipList = {}) {
 				'\tconstructor() {',
 				...(args.length > 0 ? [`\t\tapplyTestArgs(this, [${argKeys}]);`] : []),
 				...(needsArgs ? [`\t\tconst ${story.argsName} = this as any;`] : []),
+				...(named.length > 0 ? [`\t\tconst { ${named.join(', ')} } = this as any;`] : []),
 				...story.setup.map((statement) => `\t\t${statement}`),
 				...story.props.map((field) => `\t\tthis.${field.key} = ${field.value};`),
 				'\t}',
@@ -114,7 +117,9 @@ export function buildTestPages(sourcePath, sourceText, skipList = {}) {
 		} else {
 			fields = [
 				...args.map((field) => `\tprotected ${field.key}: any = ${field.value};`),
-				...story.props.map((field) => `\tprotected ${field.key} = ${field.value};`),
+				// Typed loosely like the args: Storybook never checked a story's props against the inputs
+				// they are bound to (`activationMode: 'automatic'` would be a plain string here).
+				...story.props.map((field) => `\tprotected ${field.key}: any = ${field.value};`),
 			];
 			constructor = args.length > 0 ? ['', '\tconstructor() {', `\t\tapplyTestArgs(this, [${argKeys}]);`, '\t}'] : [];
 		}

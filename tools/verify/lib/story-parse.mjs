@@ -18,6 +18,7 @@ import ts from 'typescript';
  *   template: string,
  *   setup: string[],
  *   argsName: string | undefined,
+ *   namedArgs: string[],
  *   inConstructor: boolean,
  *   reasons: string[],
  * }} Story
@@ -126,6 +127,7 @@ export function parseStoryFile(fileName, sourceText) {
 			template: '',
 			setup: [],
 			argsName: undefined,
+			namedArgs: [],
 			inConstructor: false,
 		};
 		const object = initializer && unwrap(initializer);
@@ -142,6 +144,11 @@ export function parseStoryFile(fileName, sourceText) {
 		const args = mergeFields(metaArgs, readFields(property(object, 'args'), 'args', reasons, text));
 		const decorators = readDecorators(property(object, 'decorators'), 'story', reasons, text);
 		const render = readRender(property(object, 'render'), args, reasons, text);
+		// An arg the story takes by name but never sets is `undefined` in Storybook; here it becomes
+		// a field with that value so the template and the address bar can still use it.
+		for (const name of render.namedArgs) {
+			if (!args.some((field) => field.key === name)) args.push({ key: name, value: 'undefined', isFunction: false });
+		}
 
 		return {
 			exportName,
@@ -153,6 +160,7 @@ export function parseStoryFile(fileName, sourceText) {
 			template: render.template,
 			setup: render.setup,
 			argsName: render.argsName,
+			namedArgs: render.namedArgs,
 			inConstructor: render.inConstructor,
 			reasons,
 		};
@@ -292,6 +300,8 @@ function readRender(node, args, reasons, text) {
 		/** statements that run before the returned object is built, kept as written */
 		setup: [],
 		argsName: undefined,
+		/** args the render function takes by name: `({ disabled, ...args })` -> ['disabled'] */
+		namedArgs: [],
 		/** props are assigned in the page's constructor because they need the setup or the args */
 		inConstructor: false,
 	};
@@ -312,13 +322,17 @@ function readRender(node, args, reasons, text) {
 			argsName = parameter.name.text;
 		} else if (
 			ts.isObjectBindingPattern(parameter.name) &&
-			parameter.name.elements.length === 1 &&
-			parameter.name.elements[0].dotDotDotToken &&
-			ts.isIdentifier(parameter.name.elements[0].name)
+			parameter.name.elements.every(
+				(element) => ts.isIdentifier(element.name) && !element.propertyName && !element.initializer,
+			)
 		) {
-			argsName = parameter.name.elements[0].name.text;
+			// `({ disabled, ...args })`: `disabled` is one arg by name, `args` is all the others.
+			for (const element of parameter.name.elements) {
+				if (element.dotDotDotToken) argsName = element.name.text;
+				else result.namedArgs.push(element.name.text);
+			}
 		} else {
-			reasons.push(`render parameter \`${text(parameter)}\` is not \`args\` or \`{ ...args }\``);
+			reasons.push(`render parameter \`${text(parameter)}\` renames or defaults a destructured arg`);
 		}
 	}
 
@@ -387,6 +401,8 @@ function readRender(node, args, reasons, text) {
 					continue;
 				}
 				if (ts.isShorthandPropertyAssignment(member)) {
+					// `props: { disabled }` for an arg taken by name: the arg is a field of the page already.
+					if (result.namedArgs.includes(member.name.text)) continue;
 					// `props: { form }` only makes sense with setup statements that declare `form`.
 					result.props.push({ key: member.name.text, value: member.name.text, isFunction: false });
 					result.inConstructor = true;
@@ -398,7 +414,10 @@ function readRender(node, args, reasons, text) {
 				}
 				const initializer = unwrap(member.initializer);
 				// A value computed from the args has to be built after the args are known.
-				if (argsName && identifiersIn(text(member.initializer)).has(argsName)) result.inConstructor = true;
+				const used = identifiersIn(text(member.initializer));
+				if ((argsName && used.has(argsName)) || result.namedArgs.some((name) => used.has(name))) {
+					result.inConstructor = true;
+				}
 				result.props.push({
 					key: member.name.text,
 					value: text(member.initializer),
@@ -421,7 +440,8 @@ function readRender(node, args, reasons, text) {
 	} else if (ts.isTemplateExpression(literal)) {
 		let built = literal.head.text;
 		for (const span of literal.templateSpans) {
-			const bindings = readArgsToTemplate(span.expression, argsName, args, reasons, text);
+			const rest = args.filter((field) => !result.namedArgs.includes(field.key));
+			const bindings = readArgsToTemplate(span.expression, argsName, rest, reasons, text);
 			built += bindings + span.literal.text;
 		}
 		result.template = built;
