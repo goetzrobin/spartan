@@ -16,6 +16,9 @@ import ts from 'typescript';
  *   providers: string[],
  *   routeProviders: string[],
  *   template: string,
+ *   setup: string[],
+ *   argsName: string | undefined,
+ *   inConstructor: boolean,
  *   reasons: string[],
  * }} Story
  */
@@ -113,7 +116,18 @@ export function parseStoryFile(fileName, sourceText) {
 	/** @type {Story[]} */
 	const stories = storyNodes.map(({ exportName, initializer }) => {
 		const reasons = [...metaReasons];
-		const empty = { exportName, args: [], props: [], imports: [], providers: [], routeProviders: [], template: '' };
+		const empty = {
+			exportName,
+			args: [],
+			props: [],
+			imports: [],
+			providers: [],
+			routeProviders: [],
+			template: '',
+			setup: [],
+			argsName: undefined,
+			inConstructor: false,
+		};
 		const object = initializer && unwrap(initializer);
 		if (!object || !ts.isObjectLiteralExpression(object)) {
 			return { ...empty, reasons: [...reasons, 'story is not an object literal'] };
@@ -137,6 +151,9 @@ export function parseStoryFile(fileName, sourceText) {
 			providers: [...metaDecorators.providers, ...decorators.providers, ...render.providers],
 			routeProviders: [...metaDecorators.routeProviders, ...decorators.routeProviders],
 			template: render.template,
+			setup: render.setup,
+			argsName: render.argsName,
+			inConstructor: render.inConstructor,
 			reasons,
 		};
 	});
@@ -267,7 +284,17 @@ function readDecorators(node, label, reasons, text) {
  * interpolation in it is `argsToTemplate(args)`.
  */
 function readRender(node, args, reasons, text) {
-	const result = { props: [], template: '', imports: [], providers: [] };
+	const result = {
+		props: [],
+		template: '',
+		imports: [],
+		providers: [],
+		/** statements that run before the returned object is built, kept as written */
+		setup: [],
+		argsName: undefined,
+		/** props are assigned in the page's constructor because they need the setup or the args */
+		inConstructor: false,
+	};
 	if (!node) {
 		reasons.push('story has no render function (component-only stories are not supported yet)');
 		return result;
@@ -295,11 +322,20 @@ function readRender(node, args, reasons, text) {
 		}
 	}
 
+	result.argsName = argsName;
 	let returned;
 	if (ts.isBlock(node.body)) {
-		const only = node.body.statements.length === 1 ? node.body.statements[0] : undefined;
-		if (only && ts.isReturnStatement(only) && only.expression) returned = unwrap(only.expression);
-		else reasons.push('render body has more than a single return');
+		// `render: () => { const form = new FormGroup(...); return { props: { form }, template }; }`
+		// The statements before the return become the start of the page's constructor.
+		const statements = [...node.body.statements];
+		const last = statements.pop();
+		if (last && ts.isReturnStatement(last) && last.expression && !statements.some(returnsEarly)) {
+			returned = unwrap(last.expression);
+			result.setup = statements.map((statement) => text(statement));
+			if (statements.length > 0) result.inConstructor = true;
+		} else {
+			reasons.push('render body does not end in a single return');
+		}
 	} else {
 		returned = unwrap(node.body);
 	}
@@ -350,15 +386,19 @@ function readRender(node, args, reasons, text) {
 					}
 					continue;
 				}
+				if (ts.isShorthandPropertyAssignment(member)) {
+					// `props: { form }` only makes sense with setup statements that declare `form`.
+					result.props.push({ key: member.name.text, value: member.name.text, isFunction: false });
+					result.inConstructor = true;
+					continue;
+				}
 				if (!ts.isPropertyAssignment(member) || !ts.isIdentifier(member.name)) {
 					reasons.push(`props member \`${text(member).slice(0, 40)}\` is not \`key: value\``);
 					continue;
 				}
 				const initializer = unwrap(member.initializer);
-				if (argsName && identifiersIn(text(member.initializer)).has(argsName)) {
-					reasons.push(`props member \`${member.name.text}\` computes its value from the args`);
-					continue;
-				}
+				// A value computed from the args has to be built after the args are known.
+				if (argsName && identifiersIn(text(member.initializer)).has(argsName)) result.inConstructor = true;
 				result.props.push({
 					key: member.name.text,
 					value: text(member.initializer),
@@ -430,6 +470,13 @@ function readArgsToTemplate(expression, argsName, args, reasons, text) {
 		.filter((field) => !exclude || !exclude.includes(field.key))
 		.map((field) => (field.isFunction ? `(${field.key})="${field.key}($event)"` : `[${field.key}]="${field.key}"`))
 		.join(' ');
+}
+
+/** Whether a statement can return from the function it is in (returns inside nested functions do not count). */
+function returnsEarly(node) {
+	if (ts.isReturnStatement(node)) return true;
+	if (ts.isFunctionLike(node)) return false;
+	return ts.forEachChild(node, returnsEarly) ?? false;
 }
 
 /** Every identifier used as a value or a type inside a piece of TypeScript. */

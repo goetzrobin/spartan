@@ -123,6 +123,47 @@ describe('buildTestPages', () => {
 		assert.match(page(built, 'inline'), /providers: \[provideThing\(\)\]/);
 	});
 
+	it('builds props in the constructor when the story computes them from local values or the args', () => {
+		const built = buildTestPages(
+			'stories/alert-dialog.stories.ts',
+			story(
+				`export const Local: Story = {
+					render: () => {
+						const form = new FormGroup({ email: new FormControl('') });
+						return { props: { form }, template: '<b></b>' };
+					},
+				};
+				export const FromArgs: Story = {
+					args: { value: 'apple' },
+					render: (args) => ({ props: { ...args, group: new FormGroup({ fruit: new FormControl(args.value) }) }, template: '<b></b>' }),
+				};`,
+			),
+		);
+		assert.deepEqual(built.skipped, []);
+		const local = page(built, 'local');
+		assert.match(local, /protected form: any;/);
+		assert.match(
+			local,
+			/constructor\(\) \{\s+const form = new FormGroup\(\{ email: new FormControl\(''\) \}\);\s+this\.form = form;\s+\}/,
+		);
+		const fromArgs = page(built, 'from-args');
+		assert.match(fromArgs, /protected value: any = 'apple';/);
+		assert.match(
+			fromArgs,
+			/applyTestArgs\(this, \['value'\]\);\s+const args = this as any;\s+this\.group = new FormGroup/,
+		);
+	});
+
+	it('leaves out stories named in the skip list and records the reason', () => {
+		const built = buildTestPages(
+			'stories/alert-dialog.stories.ts',
+			story(`export const Stale: Story = { render: () => ({ template: '<b></b>' }) };`),
+			{ Stale: 'binds to an input that no longer exists' },
+		);
+		assert.equal(built.pages.length, 0);
+		assert.match(built.skipped[0].reasons.join(), /story-skip\.json: binds to an input/);
+	});
+
 	it('puts applicationConfig providers on the route and notes it', () => {
 		const built = buildTestPages(
 			'stories/alert-dialog.stories.ts',
@@ -164,18 +205,13 @@ describe('buildTestPages', () => {
 		],
 		[
 			'a render with logic',
-			`export const S: Story = { render: () => { const x = 1; return { template: '' }; } };`,
-			/more than a single return/,
+			`export const S: Story = { render: () => { if (Math.random()) return { template: 'a' }; return { template: '' }; } };`,
+			/does not end in a single return/,
 		],
 		[
 			'destructured render parameters',
 			`export const S: Story = { render: ({ size }) => ({ template: '' }) };`,
 			/render parameter/,
-		],
-		[
-			'a prop computed from the args',
-			`export const S: Story = { args: { a: 1 }, render: (args) => ({ props: { ...args, b: args.a + 1 }, template: '' }) };`,
-			/computes its value from the args/,
 		],
 		[
 			'spread in args',
