@@ -1,0 +1,180 @@
+name: verify
+
+# Runs the Playwright tests for the components a change can affect, against the test pages in the
+# docs app, and attaches the proof: a video and final screenshot of every test, the accessibility
+# results, and a comparison with the same tests on the base commit.
+#
+# Runs next to the Storybook + Cypress `e2e` job in ci.yml until every component has moved over.
+
+on:
+  pull_request: {}
+  # Lets this workflow gate a merge queue once one is switched on for the repo.
+  merge_group: {}
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NODE_OPTIONS: --max-old-space-size=6000
+
+jobs:
+  affected:
+    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):') }}
+    runs-on: ubuntu-latest
+    outputs:
+      components: ${{ steps.pick.outputs.components }}
+      any: ${{ steps.pick.outputs.any }}
+      base: ${{ steps.pick.outputs.base }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          filter: blob:none
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+      - name: Pick the affected components
+        id: pick
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          QUEUE_BASE: ${{ github.event.merge_group.base_sha }}
+          PUSH_BASE: ${{ github.event.before }}
+        run: |
+          BASE="${PR_BASE:-${QUEUE_BASE:-$PUSH_BASE}}"
+          # A first push to a branch has no previous commit to compare with.
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then BASE=origin/main; fi
+          # The selection only reads files and follows imports, so it needs no install.
+          node tools/verify/verify.mjs --affected --list --base "$BASE" | tee affected.json
+          COMPONENTS=$(node -p "JSON.parse(require('fs').readFileSync('affected.json','utf8')).components.join(' ')")
+          echo "components=$COMPONENTS" >> "$GITHUB_OUTPUT"
+          echo "any=$([ -n "$COMPONENTS" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "base=$(git rev-parse "$BASE")" >> "$GITHUB_OUTPUT"
+
+  verify:
+    needs: affected
+    if: ${{ needs.affected.outputs.any == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # To post the proof as a comment. Pull requests from forks get a read-only token, so for
+      # those the comment step is skipped and the proof is in the job summary and the artifact.
+      pull-requests: write
+    env:
+      COMPONENTS: ${{ needs.affected.outputs.components }}
+      BASE_SHA: ${{ needs.affected.outputs.base }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Cache Playwright browsers
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: playwright-${{ runner.os }}-
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium ffmpeg
+
+      # "Before": the same components on the base commit, so the proof can show what changed.
+      # Skipped when the base commit does not have this suite yet. A failure here never fails the
+      # job: the base is only the comparison, the change under review is judged on its own run.
+      - name: Run the base commit for comparison
+        id: base
+        continue-on-error: true
+        run: |
+          if ! git cat-file -e "$BASE_SHA:tools/verify/verify.mjs" 2>/dev/null; then
+            echo "The base commit has no verification suite yet; skipping the comparison."
+            exit 0
+          fi
+          git worktree add ../base "$BASE_SHA"
+          cd ../base
+          pnpm install --frozen-lockfile
+          KNOWN=$(node tools/verify/verify.mjs --all --list | node -p "JSON.parse(require('fs').readFileSync(0,'utf8')).components.join(' ')")
+          WANTED=""
+          for component in $COMPONENTS; do
+            case " $KNOWN " in *" $component "*) WANTED="$WANTED $component" ;; esac
+          done
+          if [ -n "$WANTED" ]; then node tools/verify/verify.mjs $WANTED || true; fi
+          if [ -f dist/.playwright/ui-e2e/results.json ]; then
+            echo "results=$(pwd)/dist/.playwright/ui-e2e/results.json" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Verify
+        id: verify
+        run: pnpm verify $COMPONENTS
+
+      - name: Build the proof
+        if: ${{ !cancelled() }}
+        env:
+          BASE_RESULTS: ${{ steps.base.outputs.results }}
+        run: |
+          if [ -n "$BASE_RESULTS" ]; then
+            node tools/verify/proof.mjs --baseline "$BASE_RESULTS"
+          else
+            node tools/verify/proof.mjs
+          fi
+          cat dist/.playwright/ui-e2e/proof/proof.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the proof
+        if: ${{ !cancelled() }}
+        id: upload
+        uses: actions/upload-artifact@v5
+        with:
+          name: verification-proof
+          path: |
+            dist/.playwright/ui-e2e/proof
+            dist/.playwright/ui-e2e/report
+          retention-days: 14
+
+      - name: Upload traces of failed tests
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: verification-traces
+          path: dist/.playwright/ui-e2e/output
+          retention-days: 7
+
+      - name: Comment on the pull request
+        if: ${{ !cancelled() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+        run: |
+          {
+            echo '<!-- verification-proof -->'
+            cat dist/.playwright/ui-e2e/proof/proof.md
+            echo
+            echo "[Download the proof (videos, screenshots, accessibility results)]($ARTIFACT_URL) · components: \`$COMPONENTS\` · commit ${GITHUB_SHA::7}"
+          } > comment.md
+          EXISTING=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate \
+            --jq '[.[] | select(.body | startswith("<!-- verification-proof -->")) | .id][0] // empty')
+          if [ -n "$EXISTING" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$EXISTING" -F body=@comment.md > /dev/null
+          else
+            gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -F body=@comment.md > /dev/null
+          fi
+
+  # One stable check to mark as required: green when the affected components pass, and also
+  # green when a change affects no component at all.
+  verified:
+    needs: [affected, verify]
+    if: ${{ always() && (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):')) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the result
+        env:
+          AFFECTED: ${{ needs.affected.result }}
+          VERIFY: ${{ needs.verify.result }}
+        run: |
+          echo "affected: $AFFECTED, verify: $VERIFY"
+          [ "$AFFECTED" = "success" ] || exit 1
+          [ "$VERIFY" = "success" ] || [ "$VERIFY" = "skipped" ] || exit 1
