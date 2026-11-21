@@ -312,66 +312,13 @@
 		"hlm-message-scroller": {
 			"source": "apps/ui-storybook/stories/hlm-message-scroller.stories.ts",
 			"title": "message-scroller",
-			"pages": [],
-			"skipped": [
-				{
-					"story": "Default",
-					"reasons": [
-						"template interpolates `frameStart`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('1', 'me', 'Deploying to prod real quick.', t`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('2', 'ai', \"It's 4:55 PM. On a Friday. Messag`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('3', 'me', \"It's a one-line change.\", true)`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('4', 'ai', \"It's always a one-line change.\")`, only argsToTemplate(args) is supported",
-						"template interpolates `frameEnd`, only argsToTemplate(args) is supported"
-					]
-				},
-				{
-					"story": "AutoScroll",
-					"reasons": [
-						"template interpolates `frameStart`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('1', 'me', 'Can you summarize the last five c`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('2', 'ai', 'Sure — starting from the oldest.'`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('3', 'ai', '1. Add message-scroller Brain ent`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('4', 'ai', '2. Wire Helm hostDirectives and r`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('5', 'ai', '3. Register the CLI generator and`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('6', 'ai', '4. Ship docs previews for anchori`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('7', 'ai', '5. Expand Storybook coverage for `, only argsToTemplate(args) is supported",
-						"template interpolates `turn('8', 'me', 'Perfect — keep following new repl`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('9', 'ai', 'AutoScroll stays pinned to the en`, only argsToTemplate(args) is supported",
-						"template interpolates `frameEnd`, only argsToTemplate(args) is supported"
-					]
-				},
-				{
-					"story": "ScrollAnchors",
-					"reasons": [
-						"template interpolates `frameStart`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('1', 'me', 'First user turn — marked as a scr`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('2', 'ai', 'Assistant reply under that turn.'`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('3', 'me', 'Second user turn — also an anchor`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('4', 'ai', 'Another reply. Jump commands can `, only argsToTemplate(args) is supported",
-						"template interpolates `turn('5', 'me', 'Third anchor near the bottom.', t`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('6', 'ai', 'Previous-item peek keeps context `, only argsToTemplate(args) is supported",
-						"template interpolates `frameEnd`, only argsToTemplate(args) is supported"
-					]
-				},
-				{
-					"story": "OpeningStart",
-					"reasons": [
-						"template interpolates `frameStart`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('1', 'me', 'Opening at the start of a long tr`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('2', 'ai', 'Row one — you should land near th`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('3', 'ai', 'Row two.')`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('4', 'ai', 'Row three.')`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('5', 'ai', 'Row four.')`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('6', 'ai', 'Row five.')`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('7', 'ai', 'Row six.')`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('8', 'ai', 'Row seven — scroll down for newer`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('9', 'me', 'Still more history below.', true)`, only argsToTemplate(args) is supported",
-						"template interpolates `turn('10', 'ai', 'defaultScrollPosition=\"start\" ap`, only argsToTemplate(args) is supported",
-						"template interpolates `frameEnd`, only argsToTemplate(args) is supported"
-					]
-				}
-			]
+			"pages": [
+				"message-scroller--default",
+				"message-scroller--auto-scroll",
+				"message-scroller--scroll-anchors",
+				"message-scroller--opening-start"
+			],
+			"skipped": []
 		},
 		"hlm-native-select": {
 			"source": "apps/ui-storybook/stories/hlm-native-select.stories.ts",
@@ -663,22 +610,9 @@
 		"typography": {
 			"source": "apps/ui-storybook/stories/typography.stories.ts",
 			"title": "typography",
-			"pages": [],
-			"skipped": [
-				{
-					"story": "Default",
-					"reasons": [
-						"template interpolates `hlmH1`, only argsToTemplate(args) is supported",
-						"template interpolates `hlmLead`, only argsToTemplate(args) is supported",
-						"template interpolates `hlmH2`, only argsToTemplate(args) is supported",
-						"template interpolates `hlmP`, only argsToTemplate(args) is supported",
-						"template interpolates `hlmBlockquote`, only argsToTemplate(args) is supported",
-						"template interpolates `hlmH3`, only argsToTemplate(args) is supported",
-						"template interpolates `hlmUl`, only argsToTemplate(args) is supported"
-					]
-				}
-			]
+			"pages": ["typography--default"],
+			"skipped": []
 		}
 	},
-	"totals": { "files": 67, "pages": 254, "skippedStories": 5, "skippedFiles": 0 }
+	"totals": { "files": 67, "pages": 259, "skippedStories": 0, "skippedFiles": 0 }
 }

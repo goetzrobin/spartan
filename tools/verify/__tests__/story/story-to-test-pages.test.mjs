@@ -217,6 +217,51 @@ describe('buildTestPages', () => {
 		assert.match(page(built, 'repeated'), /<ul>\s*<li>1<\/li>\s*<li>2<\/li>\s*<li>3<\/li>\s*<\/ul>/);
 	});
 
+	it('works out markup built from constants and functions of the story file', () => {
+		const built = buildTestPages(
+			'stories/alert-dialog.stories.ts',
+			story(
+				"const open = `<ul class=\"x\">`; function item(text: string, last = false) { const mark = last ? ' data-last' : ''; return `<li${mark}>${text}</li>`; } export const S: Story = { render: () => ({ template: `${open}${item('a')}${item('b', true)}</ul>` }) };",
+			),
+		);
+		assert.deepEqual(built.skipped, []);
+		assert.match(page(built, 's'), /<ul class="x">\s*<li>a<\/li>\s*<li data-last>b<\/li>\s*<\/ul>/);
+	});
+
+	it('works out an imported string constant only when the caller can look it up', () => {
+		const source = story(
+			'export const S: Story = { render: () => ({ template: `<b class="${cls}">x</b>` }) };',
+		).replace(/^/, "import { cls } from '@lib/styles';\n");
+		assert.equal(buildTestPages('stories/alert-dialog.stories.ts', source).pages.length, 0);
+		const calls = [];
+		const built = buildTestPages(
+			'stories/alert-dialog.stories.ts',
+			source,
+			{},
+			{
+				resolveConstant: (name, module) => (calls.push([name, module]), 'bold'),
+			},
+		);
+		assert.deepEqual(calls, [['cls', '@lib/styles']]);
+		assert.match(page(built, 's'), /<b class="bold">x<\/b>/);
+	});
+
+	it('does not work out markup that leans on anything that can change', () => {
+		for (const prelude of [
+			'let n = 1; const f = () => String(n);',
+			'const f = () => String(Math.random());',
+			'const f = () => String(Date.now());',
+			'const f = () => g(); const g = () => f2();',
+			'class C {} const f = () => String(new C());',
+		]) {
+			const built = buildTestPages(
+				'stories/alert-dialog.stories.ts',
+				story(prelude + ' export const S: Story = { render: () => ({ template: `<b>${f()}</b>` }) };'),
+			);
+			assert.equal(built.pages.length, 0, prelude);
+		}
+	});
+
 	it('does not work out markup that depends on anything outside the expression', () => {
 		for (const expression of ['Math.random()', 'items.map((i) => i).join("")', 'new Date().toString()']) {
 			const built = buildTestPages(

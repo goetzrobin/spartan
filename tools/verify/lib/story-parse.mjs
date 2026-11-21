@@ -27,7 +27,7 @@ import ts from 'typescript';
 
 const STORYBOOK = /^@storybook\//;
 
-export function parseStoryFile(fileName, sourceText) {
+export function parseStoryFile(fileName, sourceText, options = {}) {
 	const source = ts.createSourceFile(fileName, sourceText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
 	const text = (node) => node.getText(source);
 
@@ -115,6 +115,10 @@ export function parseStoryFile(fileName, sourceText) {
 	// A render on the meta is the one stories use when they do not bring their own.
 	const metaRender = property(metaNode, 'render');
 
+	const helpersByName = new Map();
+	for (const helper of helpers) for (const name of declaredNames(helper)) helpersByName.set(name, helper);
+	pureScope = { helpers: helpersByName, imported: importedNames, resolveConstant: options.resolveConstant };
+
 	/** @type {Story[]} */
 	const stories = storyNodes.map(({ exportName, initializer }) => {
 		const reasons = [...metaReasons];
@@ -167,6 +171,7 @@ export function parseStoryFile(fileName, sourceText) {
 		};
 	});
 
+	pureScope = null;
 	return { fileReasons, title, stories, helpers, helperNames, importStatements, importedNames, source };
 }
 
@@ -522,15 +527,20 @@ function readArgsToTemplate(expression, argsName, args, reasons, text) {
 const PURE_GLOBALS = new Set(['Array', 'String', 'Number', 'Object', 'JSON', 'undefined']);
 
 /**
- * The text of an expression that depends on nothing outside itself, or undefined when it does
- * (it reads the args, a variable of the story file, the clock, a random number, ...).
+ * What a template expression may lean on besides itself, set while one story file is parsed:
+ * the file's own top-level declarations, its imports, and a way to look up an imported string.
+ * @type {{ helpers: Map<string, ts.Statement>, imported: Map<string, ts.ImportDeclaration>, resolveConstant?: (name: string, module: string) => string | undefined } | null}
  */
-function constantText(expression, text) {
+let pureScope = null;
+
+/** Names a piece of code reads that it does not declare itself. */
+function freeNames(root) {
 	const declared = new Set();
 	const used = new Set();
 	const visit = (node) => {
 		if (ts.isParameter(node) && ts.isIdentifier(node.name)) declared.add(node.name.text);
 		if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name)) declared.add(node.name.text);
+		if (ts.isFunctionDeclaration(node) && node.name) declared.add(node.name.text);
 		if (ts.isIdentifier(node)) {
 			const parent = node.parent;
 			const isMember = parent && ts.isPropertyAccessExpression(parent) && parent.name === node;
@@ -539,12 +549,75 @@ function constantText(expression, text) {
 		}
 		ts.forEachChild(node, visit);
 	};
-	visit(expression);
-	for (const name of used) {
-		if (!declared.has(name) && !PURE_GLOBALS.has(name)) return undefined;
+	visit(root);
+	return [...used].filter((name) => !declared.has(name));
+}
+
+/**
+ * Whether a `const` holds something no other code can change: text, a number, true or false, or a
+ * function. A list or an object can be added to after it is declared, so those do not count.
+ */
+function isFixedValue(initializer) {
+	if (!initializer) return false;
+	const value = unwrap(initializer);
+	return (
+		ts.isStringLiteralLike(value) ||
+		ts.isTemplateExpression(value) ||
+		ts.isNumericLiteral(value) ||
+		value.kind === ts.SyntaxKind.TrueKeyword ||
+		value.kind === ts.SyntaxKind.FalseKeyword ||
+		ts.isArrowFunction(value) ||
+		ts.isFunctionExpression(value)
+	);
+}
+
+/**
+ * Code that defines `name` for evaluation, or undefined when `name` is not something whose value
+ * is the same on every run. That is: a `const` or a function at the top of the story file that
+ * itself only leans on such names, or an imported string constant the caller can look up.
+ */
+function pureDefinition(name, text, seen, out) {
+	if (PURE_GLOBALS.has(name) || out.has(name)) return true;
+	if (!pureScope || seen.has(name)) return false;
+	seen.add(name);
+	const helper = pureScope.helpers.get(name);
+	if (helper) {
+		const isConst =
+			ts.isVariableStatement(helper) &&
+			(helper.declarationList.flags & ts.NodeFlags.Const) !== 0 &&
+			helper.declarationList.declarations.every((d) => ts.isIdentifier(d.name) && isFixedValue(d.initializer));
+		if (!isConst && !ts.isFunctionDeclaration(helper)) return false;
+		for (const inner of freeNames(helper)) {
+			if (!pureDefinition(inner, text, seen, out)) return false;
+		}
+		out.set(name, text(helper).replace(/^export\s+/, ''));
+		return true;
+	}
+	const imported = pureScope.imported.get(name);
+	if (imported && pureScope.resolveConstant) {
+		const value = pureScope.resolveConstant(name, imported.moduleSpecifier.text);
+		if (typeof value !== 'string') return false;
+		out.set(name, `const ${name} = ${JSON.stringify(value)};`);
+		return true;
+	}
+	return false;
+}
+
+/**
+ * The text of an expression whose value is the same on every run, or undefined when it is not
+ * (it reads the args, a variable that can change, the clock, a random number, ...).
+ */
+function constantText(expression, text) {
+	/** @type {Map<string, string>} definitions the expression needs, in the order they must run */
+	const definitions = new Map();
+	for (const name of freeNames(expression)) {
+		if (!pureDefinition(name, text, new Set(), definitions)) return undefined;
 	}
 	try {
-		const value = runInNewContext(`(${text(expression)})`, Object.create(null), { timeout: 1000 });
+		const code = ts.transpile(`${[...definitions.values()].join('\n')}\nvar __value = (${text(expression)});`, {
+			target: ts.ScriptTarget.ES2022,
+		});
+		const value = runInNewContext(`${code}\n__value`, Object.create(null), { timeout: 1000 });
 		return typeof value === 'string' ? value : undefined;
 	} catch {
 		return undefined;

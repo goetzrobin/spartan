@@ -461,6 +461,20 @@ export const routeMeta: RouteMeta = {
 				</section>
 
 				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">message-scroller</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/message-scroller/auto-scroll">message-scroller--auto-scroll</a></li>
+						<li><a class="underline" href="/test/message-scroller/default">message-scroller--default</a></li>
+						<li>
+							<a class="underline" href="/test/message-scroller/opening-start">message-scroller--opening-start</a>
+						</li>
+						<li>
+							<a class="underline" href="/test/message-scroller/scroll-anchors">message-scroller--scroll-anchors</a>
+						</li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
 					<h2 class="text-lg font-semibold">month-year-picker</h2>
 					<ul class="list-disc space-y-1 pl-6">
 						<li><a class="underline" href="/test/month-year-picker/default">month-year-picker--default</a></li>
@@ -777,6 +791,13 @@ export const routeMeta: RouteMeta = {
 					<h2 class="text-lg font-semibold">trace</h2>
 					<ul class="list-disc space-y-1 pl-6">
 						<li><a class="underline" href="/test/trace/default">trace--default</a></li>
+					</ul>
+				</section>
+
+				<section class="space-y-2">
+					<h2 class="text-lg font-semibold">typography</h2>
+					<ul class="list-disc space-y-1 pl-6">
+						<li><a class="underline" href="/test/typography/default">typography--default</a></li>
 					</ul>
 				</section>
 			</main>
