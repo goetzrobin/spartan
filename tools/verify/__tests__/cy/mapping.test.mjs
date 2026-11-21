@@ -122,10 +122,7 @@ describe('queries', () => {
 				`await byText(page, /x/).locator('..').click();`,
 			],
 		));
-	it('alias selectors are unsupported', () => {
-		skips(`cy.get('@item').click();`, 'alias selector');
-		skips(`cy.get('li').as('item');`, 'unsupported command .as');
-	});
+	it('an alias that was never defined is unsupported', () => skips(`cy.get('@item').click();`, 'alias selector'));
 	it('jQuery-only selectors are unsupported', () => skips(`cy.get('li:first').click();`, 'jQuery-only selector'));
 	it('a bare singular query asserts exactly one match', () =>
 		converts(`cy.findByRole('dialog');`, `await expect(page.getByRole('dialog')).toHaveCount(1);`));
@@ -161,10 +158,7 @@ describe('actions', () => {
 	it('scrollIntoView', () => converts(`${L}.scrollIntoView();`, `await ${P}.scrollIntoViewIfNeeded();`));
 	it('select', () => converts(`${L}.select('apple');`, `await ${P}.selectOption('apple');`));
 	it('type plain text', () => converts(`${L}.type('John Doe');`, `await ${P}.pressSequentially('John Doe');`));
-	it('type with special sequences is unsupported', () => {
-		skips(`${L}.type('{enter}');`, 'special key sequences');
-		skips(`${L}.type('a\\nb');`, 'special key sequences');
-	});
+	it('type with a newline is unsupported', () => skips(`${L}.type('a\\nb');`, 'special key sequences'));
 	it('trigger with one event name', () =>
 		converts(`${L}.trigger('mouseenter');`, `await ${P}.dispatchEvent('mouseenter');`));
 	it('trigger with more arguments is unsupported', () =>
@@ -232,8 +226,6 @@ describe('assertions', () => {
 	});
 	/** @type {[string, string][]} */
 	const unsupported = [
-		[`'have.length.greaterThan', 1`, 'have.length.greaterThan'],
-		[`'have.length.gt', 1`, 'have.length.gt'],
 		[`'have.data', 'k', 'v'`, 'have.data'],
 		[`'match', /x/`, 'match'],
 		[`'equal', 1`, 'equal'],
@@ -247,8 +239,11 @@ describe('assertions', () => {
 	}
 	it('should(callback) is unsupported', () =>
 		skips(`${L}.should(($el) => expect($el).to.exist);`, 'assertion callback'));
-	it('assertions after a subject-changing chainer are unsupported', () =>
-		skips(`${L}.should('have.attr', 'href').and('include', 'x');`, 'subject-changing'));
+	it('commands after a subject-changing chainer are unsupported', () => {
+		skips(`${L}.should('have.attr', 'href').click();`, 'subject-changing');
+		// Negated, the attribute is absent and the subject is undefined.
+		skips(`${L}.should('not.have.attr', 'href').and('equal', 'x');`, 'subject-changing');
+	});
 });
 
 describe('unsupported constructs', () => {
@@ -262,7 +257,6 @@ describe('unsupported constructs', () => {
 		[`cy.window().then(() => {});`, 'unsupported command cy.window'],
 		[`cy.document().then(() => {});`, 'unsupported command cy.document'],
 		[`cy.scrollTo(0, 100);`, 'unsupported command cy.scrollTo'],
-		[`cy.contains('x').click();`, 'unsupported command cy.contains'],
 		[`Cypress.$('a');`, 'unsupported Cypress.$'],
 		[`expect(1).to.equal(1);`, 'unsupported call expect()'],
 		[`const el = document.body;`, 'unsupported variable declaration'],
@@ -291,8 +285,11 @@ describe('literal consts', () => {
 			`const name = 'John';`,
 			`await page.locator('#a').pressSequentially(name);`,
 		]));
-	it('a const that resolves to a special type sequence is still unsupported', () =>
-		skips(`const k = '{enter}';\ncy.get('#a').type(k);`, 'special key sequences'));
+	it('a const that resolves to a special type sequence is typed as keys', () =>
+		converts(`const k = '{enter}';\ncy.get('#a').type(k);`, [
+			`const k = '{enter}';`,
+			`await page.locator('#a').press('Enter');`,
+		]));
 	it('a const string used in findByText still gets exact', () =>
 		converts(`const t = 'Open';\ncy.findByText(t).click();`, [`const t = 'Open';`, `await byText(page, t).click();`]));
 });

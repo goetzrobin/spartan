@@ -1,3 +1,4 @@
+import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
 
 /**
@@ -111,8 +112,8 @@ export function parseStoryFile(fileName, sourceText) {
 	const metaReasons = [];
 	const metaArgs = readFields(property(metaNode, 'args'), 'meta.args', metaReasons, text);
 	const metaDecorators = readDecorators(property(metaNode, 'decorators'), 'meta', metaReasons, text);
-	const hasMetaRender = Boolean(property(metaNode, 'render'));
-	if (hasMetaRender) metaReasons.push('meta.render is not supported');
+	// A render on the meta is the one stories use when they do not bring their own.
+	const metaRender = property(metaNode, 'render');
 
 	/** @type {Story[]} */
 	const stories = storyNodes.map(({ exportName, initializer }) => {
@@ -143,7 +144,7 @@ export function parseStoryFile(fileName, sourceText) {
 
 		const args = mergeFields(metaArgs, readFields(property(object, 'args'), 'args', reasons, text));
 		const decorators = readDecorators(property(object, 'decorators'), 'story', reasons, text);
-		const render = readRender(property(object, 'render'), args, reasons, text);
+		const render = readRender(property(object, 'render') ?? metaRender, args, reasons, text);
 		// An arg the story takes by name but never sets is `undefined` in Storybook; here it becomes
 		// a field with that value so the template and the address bar can still use it.
 		for (const name of [...render.namedArgs, ...render.readArgs]) {
@@ -458,6 +459,13 @@ function readRender(node, args, reasons, text) {
 	} else if (ts.isTemplateExpression(literal)) {
 		let built = literal.head.text;
 		for (const span of literal.templateSpans) {
+			// Markup the story builds with plain code, such as `Array.from({ length: 5 }, ...).join('')`,
+			// is the same on every run, so it is worked out here and written into the page.
+			const constant = constantText(span.expression, text);
+			if (constant !== undefined) {
+				built += constant + span.literal.text;
+				continue;
+			}
 			const rest = args.filter((field) => !result.namedArgs.includes(field.key));
 			const bindings = readArgsToTemplate(span.expression, argsName, rest, reasons, text);
 			built += bindings + span.literal.text;
@@ -508,6 +516,39 @@ function readArgsToTemplate(expression, argsName, args, reasons, text) {
 		.filter((field) => !exclude || !exclude.includes(field.key))
 		.map((field) => (field.isFunction ? `(${field.key})="${field.key}($event)"` : `[${field.key}]="${field.key}"`))
 		.join(' ');
+}
+
+/** Globals a template expression may use and still give the same text on every run. */
+const PURE_GLOBALS = new Set(['Array', 'String', 'Number', 'Object', 'JSON', 'undefined']);
+
+/**
+ * The text of an expression that depends on nothing outside itself, or undefined when it does
+ * (it reads the args, a variable of the story file, the clock, a random number, ...).
+ */
+function constantText(expression, text) {
+	const declared = new Set();
+	const used = new Set();
+	const visit = (node) => {
+		if (ts.isParameter(node) && ts.isIdentifier(node.name)) declared.add(node.name.text);
+		if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name)) declared.add(node.name.text);
+		if (ts.isIdentifier(node)) {
+			const parent = node.parent;
+			const isMember = parent && ts.isPropertyAccessExpression(parent) && parent.name === node;
+			const isKey = parent && ts.isPropertyAssignment(parent) && parent.name === node;
+			if (!isMember && !isKey) used.add(node.text);
+		}
+		ts.forEachChild(node, visit);
+	};
+	visit(expression);
+	for (const name of used) {
+		if (!declared.has(name) && !PURE_GLOBALS.has(name)) return undefined;
+	}
+	try {
+		const value = runInNewContext(`(${text(expression)})`, Object.create(null), { timeout: 1000 });
+		return typeof value === 'string' ? value : undefined;
+	} catch {
+		return undefined;
+	}
 }
 
 /** Whether a statement can return from the function it is in (returns inside nested functions do not count). */

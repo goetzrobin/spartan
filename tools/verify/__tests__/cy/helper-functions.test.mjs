@@ -388,9 +388,12 @@ describe('simple values as arguments', () => {
 	it('eq with an integer parameter', () =>
 		emits('i: number', "cy.get('li').eq(i).click();", '1', ["await page.locator('li').nth(i).click();"]));
 
-	it('key names and typed text stay literal-only', () => {
-		refuses('k: string', 'cy.realPress(k);', "'Tab'", 'non-literal key in realPress');
-		refuses('s: string', "cy.get('#a').type(s);", "'abc'", 'unsupported arguments to .type');
+	it('key names stay literal-only', () =>
+		refuses('k: string', 'cy.realPress(k);', "'Tab'", 'non-literal key in realPress'));
+
+	it('typed text may be a parameter when every value it gets is plain text', () => {
+		emits('s: string', "cy.get('#a').type(s);", "'abc'", ["await page.locator('#a').pressSequentially(s);"]);
+		refuses('s: string', "cy.get('#a').type(s);", "'abc{enter}'", 'type with special key sequences');
 	});
 
 	it('an argument that is not a simple value refuses the call', () => {

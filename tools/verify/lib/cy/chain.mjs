@@ -18,10 +18,28 @@ import { isLiteralTree, literal, propName, quote } from './util.mjs';
  */
 
 /**
+ * A Cypress alias of a query (`cy.get(sel).as('name')`), emitted as `const name = <locator>;`.
+ * `code` is the locator expression the const holds, `uses` the support-module names it needs.
+ * @typedef {{ code: string, many: boolean, singular: boolean, uses: string[] }} Alias
+ */
+
+/**
+ * Aliases one body can see.
+ * @typedef {object} AliasScope
+ * @property {Map<string, Alias>} local defined earlier in the same test, hook or helper body
+ * @property {Map<string, Alias | string>} inherited defined by a `beforeEach` of an enclosing describe, by name;
+ *   a string is the reason the hook's alias cannot be used in a test
+ * @property {string[]} usedInherited inherited aliases the body used, in order of first use
+ * @property {Map<string, Alias>} exported aliases a hook defines with a plain query of literals
+ * @property {(name: string) => string | null} problem why `name` cannot be a const in the output, or null
+ */
+
+/**
  * @typedef {object} Env
  * @property {import('./util.mjs').ConstLookup} localConsts `const`s with a literal value that the output declares too
  * @property {Set<string>} uses support-module names used by the emitted code
  * @property {(expr: ts.Expression) => ValueInfo | null} [value] resolves a simple value, null when it is not one
+ * @property {AliasScope} [aliases] aliases; without it `.as` and `cy.get('@name')` are unsupported
  */
 
 /**
@@ -101,8 +119,71 @@ const JQUERY_PSEUDO =
 /** Commands that stand alone on `cy` and do not yield a subject we model. */
 const STANDALONE = new Set(['visit', 'injectAxe', 'checkA11y', 'viewport', 'wait', 'realPress', 'realType']);
 
-/** Assertions after which Cypress changes the subject to a value (attribute, property, css). */
+/**
+ * Assertions after which Cypress changes the subject to a value (attribute, property, css).
+ * For `have.attr` that is only so with one argument: Cypress's chai-jquery `attr` sets the subject
+ * to the attribute's value when called with a name alone and keeps the element when also given a
+ * value (packages/driver/src/cypress/chai_jquery.ts, `if (arguments.length === 1) this._obj = actual`).
+ */
 const SUBJECT_CHANGING = new Set(['have.attr', 'have.prop', 'have.css']);
+
+/** Cypress `.type()` key sequences whose Playwright key name is certain. */
+const TYPE_KEYS = /** @type {Record<string, string>} */ ({
+	enter: 'Enter',
+	esc: 'Escape',
+	backspace: 'Backspace',
+	del: 'Delete',
+	downarrow: 'ArrowDown',
+	downArrow: 'ArrowDown',
+	uparrow: 'ArrowUp',
+	upArrow: 'ArrowUp',
+	leftarrow: 'ArrowLeft',
+	leftArrow: 'ArrowLeft',
+	rightarrow: 'ArrowRight',
+	rightArrow: 'ArrowRight',
+	home: 'Home',
+	end: 'End',
+	pageup: 'PageUp',
+	pageUp: 'PageUp',
+	pagedown: 'PageDown',
+	pageDown: 'PageDown',
+});
+
+/**
+ * Keys whose effect in a text field depends on where the caret is. When `.type()` focuses a field,
+ * Cypress puts the caret at the end of its text, Playwright's `press` and `pressSequentially` at
+ * the start (`setSelectionRange(0, 0)` on an input that was not focused), so `{backspace}` on a
+ * filled input deletes the last character in Cypress and nothing in Playwright.
+ */
+const CARET_KEYS = new Set(['backspace', 'del', 'leftarrow', 'leftArrow', 'rightarrow', 'rightArrow']);
+
+/** @param {string} s */
+const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+
+/**
+ * A selector made of one compound selector: no combinator, comma or whitespace outside brackets,
+ * parentheses and quotes. `:scope > ` in front of it then means "a child that matches it".
+ * @param {string} sel
+ */
+function isCompound(sel) {
+	let depth = 0;
+	/** @type {string | null} */
+	let q = null;
+	for (let i = 0; i < sel.length; i++) {
+		const c = sel[i];
+		if (q) {
+			if (c === '\\') i++;
+			else if (c === q) q = null;
+			continue;
+		}
+		if (c === '\\') i++;
+		else if (c === '"' || c === "'") q = c;
+		else if (c === '[' || c === '(') depth++;
+		else if (c === ']' || c === ')') depth--;
+		else if (depth === 0 && /[\s,>+~]/.test(c)) return false;
+	}
+	return depth === 0 && q === null;
+}
 
 /**
  * @typedef {{ name: string, args: ts.Expression[], node: ts.CallExpression }} Link
@@ -241,6 +322,138 @@ function tlQuery(name, args, env) {
 		code: arg.kind === 'string' ? `${method}(${arg.text}, { exact: true })` : `${method}(${arg.text})`,
 		singular,
 	};
+}
+
+/**
+ * Convert `.contains(text)` on `scope` (`page` for `cy.contains`). Returns the locator or a reason.
+ *
+ * Cypress's `contains` tests each element's text (textContent with runs of whitespace collapsed to
+ * one space) and yields the first match in document order, then the deepest match inside it.
+ * Playwright's `getByText(regex)` tests each element's raw text, keeps the scope element and the
+ * elements in it that match while no child element matches, so `.first()` is that same element as
+ * long as an element's text matching implies its parent's text matches too. That holds when the
+ * pattern does not depend on whitespace, anchors or word boundaries: a string becomes a case-
+ * sensitive substring pattern with each space matching a run of whitespace; a RegExp is only taken
+ * when it is plain text (letters, digits, `_`, `-`, escaped punctuation), optionally with `i`.
+ *
+ * One known difference: Cypress yields an enclosing `button`, `a`, `label` or submit input instead
+ * of the deepest element when there is one. Only a click and the checks for existence and
+ * visibility may follow, where that difference does not change the outcome: a click on the text
+ * inside a button lands on the same control.
+ * @param {string} scope
+ * @param {ts.Expression[]} args
+ * @param {Env} env
+ * @param {string} name
+ * @returns {string | { reason: string }}
+ */
+function contains(scope, args, env, name) {
+	if (args.length !== 1) return { reason: `unsupported arguments to ${name}` };
+	const lit = literal(args[0], env.localConsts);
+	if (!lit || (lit.kind !== 'string' && lit.kind !== 'regex')) return { reason: `non-literal text in ${name}` };
+	if (lit.kind === 'string') {
+		const text = /** @type {string} */ (lit.value);
+		if (!text || /[^\S ]| {2}/.test(text)) return { reason: `unsupported text in ${name} ${quote(text)}` };
+		return `${scope}.getByText(/${escapeRegex(text).replace(/ /g, '\\s+')}/).first()`;
+	}
+	const src = /** @type {string} */ (lit.value);
+	const slash = src.lastIndexOf('/');
+	const body = src.slice(1, slash);
+	const flags = src.slice(slash + 1);
+	if (!/^(?:[A-Za-z0-9_-]|\\[^A-Za-z0-9\s])+$/.test(body) || !/^i?$/.test(flags))
+		return { reason: `unsupported pattern in ${name} ${src}` };
+	return `${scope}.getByText(${lit.text}).first()`;
+}
+
+/**
+ * What may follow `.contains` (see `contains`).
+ * @param {Link} link
+ */
+function allowedAfterContains(link) {
+	if (link.name === 'click') return link.args.length === 0;
+	if (link.name !== 'should' && link.name !== 'and') return false;
+	const ch = link.args.length === 1 ? literal(link.args[0]) : null;
+	return !!ch && (ch.value === 'be.visible' || ch.value === 'exist');
+}
+
+/**
+ * Convert `.type(text)`. Plain text is typed; Cypress's special sequences (`{enter}`) become key
+ * presses, in order. Returns the statements or a reason.
+ * @param {ts.Expression[]} args
+ * @param {string} loc
+ * @param {Env} env
+ * @returns {string[] | { reason: string }}
+ */
+function typeText(args, loc, env) {
+	const fail = { reason: 'unsupported arguments to .type' };
+	if (args.length !== 1) return fail;
+	const lit = literal(args[0], env.localConsts);
+	/** @param {unknown} s */
+	const plain = (s) => typeof s === 'string' && s.length > 0 && !/[{}\n\r]/.test(s);
+	if (!lit) {
+		// A parameter or const: only when every value it can have is plain text.
+		const v = argOf(args[0], env);
+		if (!v || !only(v, ['string']) || !v.values) return fail;
+		if (!v.values.every(plain)) return { reason: 'type with special key sequences' };
+		return [`await ${loc}.pressSequentially(${v.text});`];
+	}
+	if (lit.kind !== 'string') return fail;
+	const text = /** @type {string} */ (lit.value);
+	if (plain(text)) return [`await ${loc}.pressSequentially(${lit.text});`];
+	if (!text || /[\n\r]/.test(text)) return { reason: 'type with special key sequences' };
+	/** @type {string[]} */
+	const out = [];
+	const re = /\{([^{}]*)\}|([^{}]+)|([{}])/g;
+	for (let m = re.exec(text); m; m = re.exec(text)) {
+		if (m[2] !== undefined) out.push(`await ${loc}.pressSequentially(${quote(m[2])});`);
+		else if (m[1] !== undefined && CARET_KEYS.has(m[1]))
+			return { reason: `key sequence ${quote(m[0])} in .type depends on the caret position` };
+		else if (m[1] !== undefined && Object.hasOwn(TYPE_KEYS, m[1]))
+			out.push(`await ${loc}.press(${quote(TYPE_KEYS[m[1]])});`);
+		else return { reason: `unsupported key sequence ${quote(m[0])} in .type` };
+	}
+	return out;
+}
+
+/**
+ * Convert an assertion on an attribute's value, after `should('have.attr', name)` made it the
+ * subject. The attribute is read from `first`. Returns the statement or a reason.
+ * @param {ts.Expression[]} args
+ * @param {{ name: string, first: string }} attr
+ * @param {Env} env
+ * @returns {string | { reason: string }}
+ */
+function attrValueAssertion(args, attr, env) {
+	const ch = args.length ? literal(args[0]) : null;
+	if (!ch || ch.kind !== 'string') return { reason: 'unsupported assertion on an attribute value' };
+	const chainer = /** @type {string} */ (ch.value);
+	const bad = { reason: `unsupported assertion '${chainer}' on an attribute value` };
+	const rest = args.slice(1);
+	/** @param {string} value */
+	const out = (value) => `await expect(${attr.first}).toHaveAttribute(${attr.name}, ${value});`;
+	env.uses.add('expect');
+	if (chainer === 'not.be.empty') return rest.length === 0 ? out('/[\\s\\S]/') : bad;
+	if (rest.length !== 1) return bad;
+	switch (chainer) {
+		case 'equal':
+		case 'equals':
+		case 'eq': {
+			const v = argOf(rest[0], env);
+			return v && only(v, ['string']) ? out(v.text) : bad;
+		}
+		case 'match': {
+			const re = literal(rest[0], env.localConsts);
+			if (!re || re.kind !== 'regex' || /[gy]/.test(String(re.value).slice(String(re.value).lastIndexOf('/'))))
+				return bad;
+			return out(re.text);
+		}
+		case 'contain':
+		case 'include': {
+			const s = literal(rest[0], env.localConsts);
+			if (!s || s.kind !== 'string' || !s.value || /[\n\r\u2028\u2029]/.test(String(s.value))) return bad;
+			return out(`/${escapeRegex(/** @type {string} */ (s.value))}/`);
+		}
+	}
+	return bad;
 }
 
 /**
@@ -389,7 +602,7 @@ function isPlainId(selectorCode) {
  * @param {string} loc
  * @param {Env} env
  * @param {boolean} [many] the subject can hold several elements
- * @returns {{ statement: string, chainer: string } | string}
+ * @returns {{ statement: string, chainer: string, attr?: { name: string, first: string } } | string}
  */
 function assertion(cmd, args, loc, env, many = false) {
 	if (!args.length) return `unsupported arguments to .${cmd}`;
@@ -416,8 +629,21 @@ function assertion(cmd, args, loc, env, many = false) {
 	env.uses.add('expect');
 	switch (chainer) {
 		case 'have.attr':
-			if (arity(1, 'string')) return onFirst(`toHaveAttribute(${vals[0].text})`);
+			if (arity(1, 'string'))
+				return {
+					...onFirst(`toHaveAttribute(${vals[0].text})`),
+					attr: negated ? undefined : { name: vals[0].text, first },
+				};
 			if (arity(2, 'string')) return onFirst(`toHaveAttribute(${vals[0].text}, ${vals[1].text})`);
+			// Cypress compares an attribute with a finite number as the number's string
+			// (chai_jquery.ts: `if (acc === 'attr') val = maybeCastNumberToString(val)`).
+			if (
+				vals.length === 2 &&
+				only(vals[0], ['string']) &&
+				vals[1].lit?.kind === 'number' &&
+				Number.isFinite(vals[1].lit.value)
+			)
+				return onFirst(`toHaveAttribute(${vals[0].text}, ${quote(String(vals[1].lit.value))})`);
 			return bad;
 		case 'have.length':
 			if (
@@ -427,6 +653,24 @@ function assertion(cmd, args, loc, env, many = false) {
 			)
 				return out(`toHaveCount(${vals[0].text})`);
 			return bad;
+		case 'have.length.gt':
+		case 'have.length.greaterThan':
+		case 'have.length.above':
+		case 'have.length.gte':
+		case 'have.length.at.least':
+		case 'have.length.least': {
+			// "more than n" is "element n (counted from 0) exists", which retries like Cypress does.
+			// Only the positive forms: the negated ones allow zero elements, where Cypress's own
+			// check that the query found something may also apply.
+			const n = vals.length === 1 ? vals[0].lit : null;
+			if (negated || !n || n.kind !== 'number') return bad;
+			const count = /** @type {number} */ (n.value);
+			const atLeast = /gte|least/.test(chainer);
+			const index = atLeast ? count - 1 : count;
+			if (!Number.isInteger(count) || index < 0) return bad;
+			if (index === 0) return { statement: `await expect(${loc}).not.toHaveCount(0);`, chainer };
+			return { statement: `await expect(${loc}.nth(${index})).toBeAttached();`, chainer };
+		}
 		case 'have.focus':
 		case 'be.focused':
 			if (!arity(0)) return bad;
@@ -498,7 +742,7 @@ function assertion(cmd, args, loc, env, many = false) {
  * @param {Link} link
  * @param {string} loc
  * @param {Env} env
- * @returns {string | { reason: string }}
+ * @returns {string | string[] | { reason: string }}
  */
 function action(link, loc, env) {
 	const { name, args } = link;
@@ -555,12 +799,8 @@ function action(link, loc, env) {
 			if (args.length !== 1 || v?.kind !== 'string') return fail('unsupported arguments to .select');
 			return `await ${loc}.selectOption(${v.text});`;
 		}
-		case 'type': {
-			const v = literal(args[0], env.localConsts);
-			if (args.length !== 1 || v?.kind !== 'string') return fail('unsupported arguments to .type');
-			if (/[{\n\r]/.test(String(v.value))) return fail('type with special key sequences');
-			return `await ${loc}.pressSequentially(${v.text});`;
-		}
+		case 'type':
+			return typeText(args, loc, env);
 		case 'trigger': {
 			const v = literal(args[0], env.localConsts);
 			if (args.length !== 1 || v?.kind !== 'string') return fail('unsupported arguments to .trigger');
@@ -620,12 +860,55 @@ export function convertChain(links, env) {
 	let pending = true;
 	/** Set after an assertion that makes Cypress yield a value instead of the element. */
 	let changedBy = null;
+	/** Set after `should('have.attr', name)`: the subject is that attribute's value. */
+	/** @type {{ name: string, first: string } | null} */
+	let attrValue = null;
+	/** Set after `.contains`: only what `allowedAfterContains` accepts may follow. */
+	let afterContains = false;
+	/** An action or assertion was emitted: an alias here would not be a plain query. */
+	let acted = false;
+	/** Every query so far has literal arguments only (an alias a hook can hand to its tests). */
+	let literalQuery = true;
+
+	/**
+	 * `cy.get('@name')` / `.get('@name')`: the const the alias was emitted as, a reason, or null
+	 * when the argument is not an alias.
+	 * @param {ts.Expression[]} args
+	 * @returns {Alias | string | null}
+	 */
+	const aliasRef = (args) => {
+		const lit = args.length === 1 ? literal(args[0], env.localConsts) : null;
+		if (!lit || lit.kind !== 'string' || !String(lit.value).startsWith('@')) return null;
+		const name = String(lit.value).slice(1);
+		const a = env.aliases;
+		const local = a?.local.get(name);
+		if (local) return { ...local, code: name };
+		const inherited = a?.inherited.get(name);
+		if (typeof inherited === 'string') return inherited;
+		if (inherited && a) {
+			if (!a.usedInherited.includes(name)) a.usedInherited.push(name);
+			for (const u of inherited.uses) env.uses.add(u);
+			return { ...inherited, code: name };
+		}
+		return `alias selector ${quote(String(lit.value))}`;
+	};
+	/** @param {Link} link */
+	const isLiteralLink = (link) => link.args.every((a) => isLiteralTree(a));
 
 	if (first.name === 'get') {
-		const r = selectorArg(first.args, env, 'cy.get');
-		if (typeof r === 'string') return fail(r);
-		loc = `page.locator(${r.code})`;
-		many = r.many;
+		const alias = aliasRef(first.args);
+		if (typeof alias === 'string') return fail(alias);
+		if (alias) {
+			loc = alias.code;
+			many = alias.many;
+			singular = alias.singular;
+			literalQuery = false;
+		} else {
+			const r = selectorArg(first.args, env, 'cy.get');
+			if (typeof r === 'string') return fail(r);
+			loc = `page.locator(${r.code})`;
+			many = r.many;
+		}
 	} else if (first.name === 'focused') {
 		if (first.args.length) return fail('unsupported arguments to cy.focused');
 		loc = `page.locator(':focus')`;
@@ -635,36 +918,93 @@ export function convertChain(links, env) {
 		loc = queryOn('page', r, env);
 		singular = r.singular;
 		many = !r.singular;
+	} else if (first.name === 'contains') {
+		const r = contains('page', first.args, env, 'cy.contains');
+		if (typeof r !== 'string') return fail(r.reason);
+		loc = r;
+		afterContains = true;
 	} else {
 		return fail(`unsupported command cy.${first.name}`);
 	}
+	if (!isLiteralLink(first)) literalQuery = false;
 
 	for (const link of links.slice(1)) {
 		const { name, args } = link;
+		if (afterContains && !allowedAfterContains(link))
+			return fail(`command .${name} after .contains (Cypress may yield the enclosing button, link or label)`);
+		if (attrValue) {
+			if (name !== 'should' && name !== 'and')
+				return fail(`command .${name} after subject-changing assertion 'have.attr'`);
+			const r = attrValueAssertion(args, attrValue, env);
+			if (typeof r !== 'string') return fail(r.reason);
+			statements.push(r);
+			continue;
+		}
 		if (changedBy) return fail(`command .${name} after subject-changing assertion '${changedBy}'`);
 		if (name === 'should' || name === 'and') {
 			const r = assertion(name, args, loc, env, many);
 			if (typeof r === 'string') return fail(r);
 			statements.push(r.statement);
-			if (SUBJECT_CHANGING.has(r.chainer)) changedBy = r.chainer;
+			if (r.chainer === 'have.attr') {
+				// One argument: the subject becomes the attribute's value (see SUBJECT_CHANGING).
+				if (args.length === 2) {
+					if (r.attr) attrValue = r.attr;
+					else changedBy = r.chainer;
+				}
+			} else if (SUBJECT_CHANGING.has(r.chainer)) changedBy = r.chainer;
 			pending = false;
+			acted = true;
 			continue;
 		}
 		if (ACTIONS.has(name)) {
 			const r = action(link, loc, env);
-			if (typeof r !== 'string') return fail(r.reason);
-			statements.push(r);
+			if (typeof r === 'object' && !Array.isArray(r)) return fail(r.reason);
+			statements.push(...(Array.isArray(r) ? r : [r]));
 			pending = false;
+			acted = true;
 			continue;
 		}
+		if (name === 'as') {
+			const a = env.aliases;
+			const lit = args.length === 1 ? literal(args[0]) : null;
+			if (!a || !lit || lit.kind !== 'string') return fail('unsupported arguments to .as');
+			const alias = String(lit.value);
+			if (acted) return fail(`alias '${alias}' of a subject after an action or assertion`);
+			if (a.local.has(alias) || a.inherited.has(alias)) return fail(`alias '${alias}' defined twice`);
+			const problem = a.problem(alias);
+			if (problem) return fail(problem);
+			/** @type {Alias} */
+			const info = {
+				code: loc,
+				many,
+				singular,
+				uses: ['STORY_ROOT', 'byText'].filter((u) => new RegExp(`\\b${u}\\b`).test(loc)),
+			};
+			a.local.set(alias, info);
+			if (literalQuery) a.exported.set(alias, info);
+			statements.push(`const ${alias} = ${loc};`);
+			// Cypress re-runs an alias's query each time it is used, as a Playwright locator does.
+			loc = alias;
+			continue;
+		}
+		if (!isLiteralLink(link)) literalQuery = false;
 		// Queries on the subject.
 		if (name === 'get') {
 			// `.get()` ignores the subject and queries the whole document.
-			const r = selectorArg(args, env, '.get');
-			if (typeof r === 'string') return fail(r);
-			loc = `page.locator(${r.code})`;
-			singular = false;
-			many = r.many;
+			const alias = aliasRef(args);
+			if (typeof alias === 'string') return fail(alias);
+			if (alias) {
+				loc = alias.code;
+				singular = alias.singular;
+				many = alias.many;
+				literalQuery = false;
+			} else {
+				const r = selectorArg(args, env, '.get');
+				if (typeof r === 'string') return fail(r);
+				loc = `page.locator(${r.code})`;
+				singular = false;
+				many = r.many;
+			}
 		} else if (name === 'find') {
 			const r = selectorArg(args, env, '.find');
 			if (typeof r === 'string') return fail(r);
@@ -692,6 +1032,43 @@ export function convertChain(links, env) {
 		} else if (name === 'parent') {
 			if (args.length) return fail('unsupported arguments to .parent');
 			loc = `${loc}.locator('..')`;
+			singular = false;
+		} else if (name === 'contains') {
+			const r = contains(loc, args, env, '.contains');
+			if (typeof r !== 'string') return fail(r.reason);
+			loc = r;
+			singular = false;
+			many = false;
+			afterContains = true;
+		} else if (name === 'children') {
+			// jQuery's `.children(sel)`: the child elements of each subject that match `sel`.
+			if (args.length === 0) {
+				loc = `${loc}.locator(':scope > *')`;
+			} else {
+				const sel = args.length === 1 ? literal(args[0], env.localConsts) : null;
+				if (!sel || sel.kind !== 'string') return fail('unsupported arguments to .children');
+				const value = String(sel.value);
+				const problem = selectorProblem(value);
+				if (problem) return fail(problem);
+				if (value.includes('storybook-root') || value.includes(':scope') || !isCompound(value))
+					return fail(`unsupported selector in .children ${quote(value)}`);
+				loc = `${loc}.locator(${quote(`:scope > ${value}`)})`;
+			}
+			singular = false;
+			many = true;
+		} else if (name === 'filter') {
+			// jQuery's `.filter(sel)` keeps the subjects that match `sel`, which is what intersecting
+			// with every element of the page that matches it does.
+			if (args.length === 1 && (ts.isArrowFunction(args[0]) || ts.isFunctionExpression(args[0])))
+				return fail('unsupported callback in .filter');
+			const sel = args.length === 1 ? literal(args[0], env.localConsts) : null;
+			if (!sel || sel.kind !== 'string') return fail('unsupported arguments to .filter');
+			const value = String(sel.value);
+			const problem = selectorProblem(value);
+			if (problem) return fail(problem);
+			if (value.includes('storybook-root') || value.includes(':scope'))
+				return fail(`unsupported selector in .filter ${quote(value)}`);
+			loc = `${loc}.and(page.locator(${sel.text}))`;
 			singular = false;
 		} else {
 			return fail(`unsupported command .${name}`);

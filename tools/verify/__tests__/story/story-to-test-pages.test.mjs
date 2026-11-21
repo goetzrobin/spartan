@@ -191,6 +191,46 @@ describe('buildTestPages', () => {
 		assert.match(page(built, 'reads'), /applyTestArgs\(this, \['initialValue'\]\)/);
 	});
 
+	it('uses the render on the meta for stories without their own', () => {
+		const built = buildTestPages(
+			'stories/alert-dialog.stories.ts',
+			story(
+				`export const Default: Story = { args: { size: 'lg' } };
+				 export const Own: Story = { render: () => ({ template: '<i></i>' }) };`,
+				`args: { size: 'sm' }, render: (args) => ({ props: args, template: \`<button hlmBtn \${argsToTemplate(args)}>x</button>\` }),`,
+			),
+		);
+		assert.deepEqual(built.skipped, []);
+		assert.match(page(built, 'default'), /<button hlmBtn \[size\]="size">x<\/button>/);
+		assert.match(page(built, 'default'), /protected size: any = 'lg';/);
+		assert.match(page(built, 'own'), /<i><\/i>/);
+	});
+
+	it('writes out markup a template builds with code that gives the same text every time', () => {
+		const built = buildTestPages(
+			'stories/alert-dialog.stories.ts',
+			story(
+				"export const Repeated: Story = { render: () => ({ template: `<ul>${Array.from({ length: 3 }, (_, i) => `<li>${i + 1}</li>`).join('')}</ul>` }) };",
+			),
+		);
+		assert.deepEqual(built.skipped, []);
+		assert.match(page(built, 'repeated'), /<ul>\s*<li>1<\/li>\s*<li>2<\/li>\s*<li>3<\/li>\s*<\/ul>/);
+	});
+
+	it('does not work out markup that depends on anything outside the expression', () => {
+		for (const expression of ['Math.random()', 'items.map((i) => i).join("")', 'new Date().toString()']) {
+			const built = buildTestPages(
+				'stories/alert-dialog.stories.ts',
+				story(
+					'const items = ["a"]; export const S: Story = { render: () => ({ template: `<b>${' +
+						expression +
+						'}</b>` }) };',
+				),
+			);
+			assert.equal(built.pages.length, 0, expression);
+		}
+	});
+
 	it('leaves out stories named in the skip list and records the reason', () => {
 		const built = buildTestPages(
 			'stories/alert-dialog.stories.ts',

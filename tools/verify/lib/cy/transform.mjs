@@ -15,6 +15,7 @@ import {
 
 /** @typedef {import('./chain.mjs').ValueInfo} ValueInfo */
 /** @typedef {import('./chain.mjs').Env} Env */
+/** @typedef {import('./chain.mjs').Alias} Alias */
 
 /**
  * @typedef {object} TestRecord
@@ -64,6 +65,7 @@ import {
  * @property {boolean} usesPage
  * @property {boolean} hasStatements
  * @property {Set<ts.Node>} refs file/describe-level declarations the code uses
+ * @property {import('./chain.mjs').AliasScope} aliases the aliases the body defined and used
  */
 
 /**
@@ -77,6 +79,8 @@ import {
  * @typedef {object} Scope
  * @property {string[]} describePath
  * @property {string[]} skipReasons reasons that skip every test in the scope
+ * @property {Map<string, Alias | string>} aliases aliases the scope's `beforeEach` hooks define for its
+ *   tests; a string is why a test cannot use that alias
  */
 
 const SUPPORT_NAMES = ['STORY_ROOT', 'byText', 'checkA11y', 'expect', 'forceClick', 'gotoStory', 'test'];
@@ -99,6 +103,14 @@ const CONDITION_OPERATORS = new Set([
 /** More possible values than this and a value counts as unknown. */
 const MAX_VALUES = 64;
 const IT_NAMES = new Set(['it', 'specify', 'test']);
+/** Words a `const` cannot be named. */
+const JS_RESERVED = new Set(
+	(
+		'break case catch class const continue debugger default delete do else enum export extends false finally for ' +
+		'function if import in instanceof new null return super switch this throw true try typeof var void while with ' +
+		'yield let static implements interface package private protected public await async of arguments eval undefined'
+	).split(' '),
+);
 const DESCRIBE_NAMES = new Set(['describe', 'context', 'suite']);
 const HOOK_NAMES = new Set(['beforeEach', 'afterEach', 'before', 'after']);
 
@@ -418,6 +430,14 @@ class FileTransformer {
 		this.helperResults = new Map();
 		/** @type {Map<ts.Node, ValueInfo>} what each helper parameter can be, from the call sites */
 		this.paramValues = new Map();
+		/** @type {Set<string>} every identifier written in the file, so an alias const cannot clash */
+		this.identifierNames = new Set();
+		/** @param {ts.Node} n */
+		const names = (n) => {
+			if (ts.isIdentifier(n)) this.identifierNames.add(n.text);
+			ts.forEachChild(n, names);
+		};
+		names(this.sf);
 		this.analyse();
 	}
 
@@ -436,7 +456,8 @@ class FileTransformer {
 
 	/** @returns {TransformResult} */
 	run() {
-		const scope = { describePath: [], skipReasons: [] };
+		/** @type {Scope} */
+		const scope = { describePath: [], skipReasons: [], aliases: new Map() };
 		const { lines: body, refs } = this.block(this.sf.statements, scope, 0, this.sf.endOfFileToken.pos);
 		const emitted = this.helperList.filter((h) => refs.has(h.decl));
 		for (const h of emitted) for (const u of this.helperResult(h).uses) this.uses.add(u);
@@ -725,10 +746,33 @@ class FileTransformer {
 
 	/**
 	 * @param {Set<string>} uses
+	 * @param {Map<string, Alias | string>} [inherited] aliases from `beforeEach` hooks the body may use
 	 * @returns {Env}
 	 */
-	makeEnv(uses) {
-		return { localConsts: this.constLookup(), uses, value: (e) => this.valueOf(e) };
+	makeEnv(uses, inherited = new Map()) {
+		return {
+			localConsts: this.constLookup(),
+			uses,
+			value: (e) => this.valueOf(e),
+			aliases: {
+				local: new Map(),
+				inherited,
+				usedInherited: [],
+				exported: new Map(),
+				problem: (name) => this.aliasProblem(name),
+			},
+		};
+	}
+
+	/**
+	 * Why a Cypress alias name cannot become a `const` of the same name in the output, or null.
+	 * @param {string} name
+	 */
+	aliasProblem(name) {
+		if (!/^[A-Za-z_$][\w$]*$/.test(name)) return `alias name ${quote(name)} is not an identifier`;
+		if (JS_RESERVED.has(name) || RESERVED.has(name) || this.identifierNames.has(name))
+			return `alias name ${quote(name)} clashes with a name in the file`;
+		return null;
 	}
 
 	// ---------------------------------------------------------------- helpers
@@ -945,6 +989,7 @@ class FileTransformer {
 		const scope = {
 			describePath: parent.describePath,
 			skipReasons: [...parent.skipReasons],
+			aliases: new Map(parent.aliases),
 		};
 		const kinds = statements.map((s) => classify(s));
 		/** @param {ts.Expression} e */
@@ -993,6 +1038,16 @@ class FileTransformer {
 				this.uses = before;
 				pushReason(scope.skipReasons, `unsupported ${name}: ${r.reasons.join(', ')}`);
 				return;
+			}
+			if (name === 'beforeEach') {
+				// A test can use an alias of a plain query of literals: it declares the same locator.
+				for (const alias of r.aliases.local.keys()) {
+					const exported = r.aliases.exported.get(alias);
+					scope.aliases.set(
+						alias,
+						exported ?? `alias '@${alias}' from beforeEach is not a plain query of literal arguments`,
+					);
+				}
 			}
 			if (!r.hasStatements) {
 				hookOut.set(i, { lines: [], refs: new Set() });
@@ -1166,9 +1221,14 @@ class FileTransformer {
 		if (!fn || usesThis(fn)) {
 			pushReason(reasons, 'unsupported test callback');
 		} else {
-			const r = this.convertBody(fn, depth + 1, this.uses, false);
+			const r = this.convertBody(fn, depth + 1, this.uses, false, scope.aliases);
 			for (const reason of r.reasons) pushReason(reasons, reason);
-			lines = r.lines;
+			// Aliases from a beforeEach: the same locator, declared where the test starts.
+			const declared = r.aliases.usedInherited.map((name) => {
+				const alias = /** @type {Alias} */ (scope.aliases.get(name));
+				return `${ind}\tconst ${name} = ${alias.code};`;
+			});
+			lines = [...declared, ...r.lines];
 			usesPage = r.usesPage;
 			refs = r.refs;
 		}
@@ -1244,18 +1304,20 @@ class FileTransformer {
 	 * @param {number} depth
 	 * @param {Set<string>} uses support-module names the code uses (added to)
 	 * @param {boolean} inHelper `if` statements are allowed
+	 * @param {Map<string, Alias | string>} [inherited] aliases from `beforeEach` hooks the body may use
 	 * @returns {BodyResult}
 	 */
-	convertBody(fn, depth, uses, inHelper) {
+	convertBody(fn, depth, uses, inHelper, inherited) {
 		const { reasons, refs } = this.outerUses(fn);
 		const body = /** @type {ts.ConciseBody} */ (fn.body);
 		const isBlock = ts.isBlock(body);
 		/** @type {ts.Statement[]} */
 		const statements = isBlock ? [...body.statements] : [ts.factory.createExpressionStatement(body)];
-		const env = this.makeEnv(uses);
+		const env = this.makeEnv(uses, inherited);
 		const r = this.statementList(statements, depth, env, inHelper, isBlock ? body.statements.end : null);
 		for (const reason of r.reasons) pushReason(reasons, reason);
-		return { lines: r.lines, reasons, usesPage: r.usesPage, hasStatements: r.hasStatements, refs };
+		const aliases = /** @type {import('./chain.mjs').AliasScope} */ (env.aliases);
+		return { lines: r.lines, reasons, usesPage: r.usesPage, hasStatements: r.hasStatements, refs, aliases };
 	}
 
 	/**
@@ -1265,7 +1327,7 @@ class FileTransformer {
 	 * @param {Env} env
 	 * @param {boolean} inHelper
 	 * @param {number | null} endPos end of the enclosing block, for comments; null for an expression body
-	 * @returns {Omit<BodyResult, 'refs'>}
+	 * @returns {Omit<BodyResult, 'refs' | 'aliases'>}
 	 */
 	statementList(statements, depth, env, inHelper, endPos) {
 		const ind = '\t'.repeat(depth);
@@ -1364,17 +1426,21 @@ class FileTransformer {
 	 * @param {ts.IfStatement} stmt
 	 * @param {number} depth
 	 * @param {Env} env
-	 * @returns {Omit<BodyResult, 'refs' | 'hasStatements'>}
+	 * @returns {Omit<BodyResult, 'refs' | 'hasStatements' | 'aliases'>}
 	 */
 	ifStatement(stmt, depth, env) {
 		const ind = '\t'.repeat(depth);
 		if (!this.plainCondition(stmt.expression))
 			return { lines: [], reasons: ['unsupported if condition'], usesPage: false };
 		/** @param {ts.Statement} s */
-		const branch = (s) =>
-			ts.isBlock(s)
-				? this.statementList([...s.statements], depth + 1, env, true, s.statements.end)
-				: this.statementList([s], depth + 1, env, true, null);
+		const branch = (s) => {
+			// An alias defined in a branch is a const inside its block: unknown after the branch.
+			const a = /** @type {import('./chain.mjs').AliasScope} */ (env.aliases);
+			const inner = { ...env, aliases: { ...a, local: new Map(a.local), exported: new Map() } };
+			return ts.isBlock(s)
+				? this.statementList([...s.statements], depth + 1, inner, true, s.statements.end)
+				: this.statementList([s], depth + 1, inner, true, null);
+		};
 		const then = branch(stmt.thenStatement);
 		const reasons = [...then.reasons];
 		let usesPage = then.usesPage;

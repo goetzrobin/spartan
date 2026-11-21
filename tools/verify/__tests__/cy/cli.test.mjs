@@ -76,21 +76,21 @@ describe('cli', () => {
 	it('records manual ports from <basename>.manual.spec.ts', () => {
 		const out = path.join(tmp, 'manual/src');
 		const report = path.join(tmp, 'manual/r.json');
-		assert.equal(runCli('label', '--out-dir', out, '--report', report).status, 0);
-		const before = JSON.parse(readFileSync(report, 'utf8')).files['label/label'];
-		assert.ok(before.skipped.length > 0, 'label has skipped tests to port');
+		assert.equal(runCli('slider', '--out-dir', out, '--report', report).status, 0);
+		const before = JSON.parse(readFileSync(report, 'utf8')).files['slider/slider'];
+		assert.ok(before.skipped.length > 0, 'slider has skipped tests to port');
 		const title = before.skipped[0].title;
-		mkdirSync(path.join(out, 'label'), { recursive: true });
+		mkdirSync(path.join(out, 'slider'), { recursive: true });
 		writeFileSync(
-			path.join(out, 'label/label.manual.spec.ts'),
+			path.join(out, 'slider/slider.manual.spec.ts'),
 			`import { test } from '../support';\ntest.describe('x', () => {\n\ttest(${JSON.stringify(title)}, async () => {});\n});\n`,
 		);
-		assert.equal(runCli('label', '--out-dir', out, '--report', report).status, 0);
-		const afterEntry = JSON.parse(readFileSync(report, 'utf8')).files['label/label'];
+		assert.equal(runCli('slider', '--out-dir', out, '--report', report).status, 0);
+		const afterEntry = JSON.parse(readFileSync(report, 'utf8')).files['slider/slider'];
 		assert.deepEqual(afterEntry.ported, [title]);
 		assert.equal(afterEntry.skipped.length, before.skipped.length - 1);
 		assert.ok(
-			!readFileSync(path.join(out, 'label/label.spec.ts'), 'utf8').includes(
+			!readFileSync(path.join(out, 'slider/slider.spec.ts'), 'utf8').includes(
 				`test.fixme(${JSON.stringify(title).replace(/"/g, "'")}`,
 			),
 		);
