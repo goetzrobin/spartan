@@ -9,14 +9,22 @@
 			"ported": [
 				"tab and enter on trigger should open, enter on cancel should close, escape should not close",
 				"tab and space on trigger should open, tabs should wrap, space on cancel should close"
-			]
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		},
 		"command/command--default": {
 			"source": "apps/ui-storybook-e2e/src/integration/command/command--default.cy.ts",
 			"output": "apps/ui-e2e/src/command/command--default.spec.ts",
 			"converted": 3,
 			"skipped": [],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		},
 		"command/command--dynamic": {
 			"source": "apps/ui-storybook-e2e/src/integration/command/command--dynamic.cy.ts",
@@ -29,21 +37,33 @@
 					"reasons": ["type with special key sequences"]
 				}
 			],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		},
 		"dialog/dialog": {
 			"source": "apps/ui-storybook-e2e/src/integration/dialog/dialog.cy.ts",
 			"output": "apps/ui-e2e/src/dialog/dialog.spec.ts",
 			"converted": 8,
 			"skipped": [],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		},
 		"menu/context-menu": {
 			"source": "apps/ui-storybook-e2e/src/integration/menu/context-menu.cy.ts",
 			"output": "apps/ui-e2e/src/menu/context-menu.spec.ts",
 			"converted": 1,
 			"skipped": [],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		},
 		"menu/dropdown-menu": {
 			"source": "apps/ui-storybook-e2e/src/integration/menu/dropdown-menu.cy.ts",
@@ -61,14 +81,22 @@
 					"reasons": ["unsupported command .realPress", "unsupported loop"]
 				}
 			],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		},
 		"menu/dropdown-menu-data-side": {
 			"source": "apps/ui-storybook-e2e/src/integration/menu/dropdown-menu-data-side.cy.ts",
 			"output": "apps/ui-e2e/src/menu/dropdown-menu-data-side.spec.ts",
 			"converted": 1,
 			"skipped": [],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		},
 		"menu/menubar": {
 			"source": "apps/ui-storybook-e2e/src/integration/menu/menubar.cy.ts",
@@ -78,10 +106,19 @@
 				{
 					"title": "arrowdown on file should open menu and arrow left/right around should open/close appropriate menus",
 					"describePath": ["menubar", "default"],
-					"reasons": ["uses helper pressArrow"]
+					"reasons": ["uses helper pressArrow (unsupported variable declaration, unsupported arguments to .trigger)"]
 				}
 			],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "pressArrow",
+						"reasons": ["unsupported variable declaration", "unsupported arguments to .trigger"]
+					}
+				]
+			}
 		},
 		"popover/popover": {
 			"source": "apps/ui-storybook-e2e/src/integration/popover/popover.cy.ts",
@@ -93,28 +130,73 @@
 				"follows a trigger that scrolls out of view instead of holding itself against the edge",
 				"honours the scroll strategy the wrapper now forwards",
 				"keeps the panel on its trigger when the enclosing container scrolls"
-			]
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "settled",
+						"reasons": ["unsupported command .then"]
+					},
+					{
+						"name": "geometry",
+						"reasons": ["unsupported command .then"]
+					},
+					{
+						"name": "expectGeometry",
+						"reasons": ["unsupported parameter type (boxes: { trigger: DOMRect; content: DOMRect }) => void"]
+					},
+					{
+						"name": "scrollTo",
+						"reasons": ["unsupported command cy.scrollTo", "unsupported command cy.document"]
+					},
+					{
+						"name": "settled",
+						"reasons": ["unsupported command .then"]
+					},
+					{
+						"name": "scrollContainer",
+						"reasons": ["unsupported command .then"]
+					},
+					{
+						"name": "gap",
+						"reasons": ["unsupported parameter type JQuery<Element>"]
+					}
+				]
+			}
 		},
 		"radio-group/radio-group": {
 			"source": "apps/ui-storybook-e2e/src/integration/radio-group/radio-group.cy.ts",
 			"output": "apps/ui-e2e/src/radio-group/radio-group.spec.ts",
 			"converted": 3,
 			"skipped": [],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		},
 		"separator/separator": {
 			"source": "apps/ui-storybook-e2e/src/integration/separator/separator.cy.ts",
 			"output": "apps/ui-e2e/src/separator/separator.spec.ts",
 			"converted": 1,
 			"skipped": [],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		},
 		"sheet/sheet": {
 			"source": "apps/ui-storybook-e2e/src/integration/sheet/sheet.cy.ts",
 			"output": "apps/ui-e2e/src/sheet/sheet.spec.ts",
 			"converted": 3,
 			"skipped": [],
-			"ported": []
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
 		}
 	},
 	"totals": {

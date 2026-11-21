@@ -67,7 +67,11 @@ export async function convertComponent(repoRoot, component, outDir) {
 		const sourcePath = displayPath(repoRoot, file);
 		const outputPath = path.join(outDir, component, `${basename}.spec.ts`);
 		const manualTitles = readManualTitles(path.join(outDir, component, `${basename}.manual.spec.ts`));
-		const { code, tests } = transformSource(readFileSync(file, 'utf8'), { sourcePath, basename, manualTitles });
+		const { code, tests, helpers } = transformSource(readFileSync(file, 'utf8'), {
+			sourcePath,
+			basename,
+			manualTitles,
+		});
 		const f = await format(code, repoRoot, `apps/ui-e2e/src/${component}/${basename}.spec.ts`);
 		results.push({
 			key: `${component}/${basename}`,
@@ -82,6 +86,7 @@ export async function convertComponent(repoRoot, component, outDir) {
 					.filter((t) => t.status === 'skipped')
 					.map((t) => ({ title: t.title, describePath: t.describePath, reasons: t.reasons })),
 				ported: tests.filter((t) => t.status === 'ported').map((t) => t.title),
+				helpers,
 			},
 		});
 	}

@@ -85,23 +85,23 @@ describe.only('b', () => { it('c', () => { cy.get('a'); }); });`);
 });
 
 describe('helpers and scope-wide skips', () => {
-	it('a test that calls a file-level helper is skipped and the helper is not emitted', () => {
-		const r = t(`const open = () => cy.get('a').click();
+	it('a test that calls an unsupported file-level helper is skipped and the helper is not emitted', () => {
+		const r = t(`const open = () => cy.get('a').then(() => {});
 describe('a', () => { it('x', () => { open(); }); it('y', () => { cy.get('a').click(); }); });`);
-		assert.deepEqual(r.tests[0].reasons, ['uses helper open']);
+		assert.deepEqual(r.tests[0].reasons, ['uses helper open (unsupported command .then)']);
 		assert.equal(r.tests[1].status, 'converted');
 		assert.ok(!r.code.includes('const open'));
 	});
 
-	it('a test that reads a describe-level const is skipped', () => {
-		const r = t(`describe('a', () => { const label = /x/; it('x', () => { cy.findByText(label).click(); }); });`);
+	it('a test that reads a describe-level const that is not a simple value is skipped', () => {
+		const r = t(`describe('a', () => { const label = [/x/]; it('x', () => { cy.findByText(label).click(); }); });`);
 		assert.ok(r.tests[0].reasons.includes('uses helper label'));
 	});
 
-	it('an expression-bodied test calling a helper is skipped', () => {
-		const r = t(`describe('a', () => { const run = (id) => cy.get(id); it('x', () => run('#a')); });`);
-		assert.deepEqual(r.tests[0].reasons, ['uses helper run']);
-		assert.ok(r.code.includes("run('#a')"));
+	it('an expression-bodied test calling a helper with a chained result is skipped', () => {
+		const r = t(`describe('a', () => { const run = (id) => cy.get(id); it('x', () => run('#a').click()); });`);
+		assert.deepEqual(r.tests[0].reasons, ['uses helper run (call result is chained)']);
+		assert.ok(r.code.includes("run('#a').click()"));
 	});
 
 	it('an unsupported beforeEach skips every test in the describe and nested describes', () => {
@@ -119,11 +119,11 @@ describe('b', () => { it('z', () => { cy.get('a').click(); }); });`);
 		assert.ok(!r.code.includes("gotoStory(page, 'a--b')"), 'the unsupported beforeEach is not emitted');
 	});
 
-	it('a beforeEach that uses a helper is unsupported', () => {
+	it('a beforeEach that uses an unsupported helper is unsupported', () => {
 		const r = t(
-			`describe('a', () => { const settle = () => cy.get('a'); beforeEach(() => { settle(); }); it('x', () => { cy.get('a'); }); });`,
+			`describe('a', () => { const settle = () => cy.get('a').then(() => {}); beforeEach(() => { settle(); }); it('x', () => { cy.get('a'); }); });`,
 		);
-		assert.deepEqual(r.tests[0].reasons, ['unsupported beforeEach: uses helper settle']);
+		assert.deepEqual(r.tests[0].reasons, ['unsupported beforeEach: uses helper settle (unsupported command .then)']);
 	});
 
 	it('before/after hooks skip the scope', () => {

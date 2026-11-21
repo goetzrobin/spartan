@@ -11,10 +11,45 @@ import { isLiteralTree, literal, propName, quote } from './util.mjs';
 /** @typedef {import('./util.mjs').Literal} Literal */
 
 /**
- * @typedef {object} Env
- * @property {Map<string, ts.Expression>} localConsts test-local `const` literals
- * @property {Set<string>} uses support-module names used by the emitted code
+ * What is known about a "simple value" (a helper parameter, a const, a template or object built
+ * from those): the kinds of value it can have and, when known, every value it can have. A helper
+ * parameter's values are the arguments passed at its call sites. `null` means not known.
+ * @typedef {{ kinds: Set<string> | null, values: Literal[] | null }} ValueInfo
  */
+
+/**
+ * @typedef {object} Env
+ * @property {import('./util.mjs').ConstLookup} localConsts `const`s with a literal value that the output declares too
+ * @property {Set<string>} uses support-module names used by the emitted code
+ * @property {(expr: ts.Expression) => ValueInfo | null} [value] resolves a simple value, null when it is not one
+ */
+
+/**
+ * An argument that is a literal (possibly through a const) or a simple value of known kind.
+ * @typedef {{ kinds: Set<string>, values: unknown[] | null, text: string, lit: Literal | null }} Arg
+ */
+
+/**
+ * @param {ts.Expression} node
+ * @param {Env} env
+ * @returns {Arg | null}
+ */
+function argOf(node, env) {
+	const lit = literal(node, env.localConsts);
+	if (lit) return { kinds: new Set([lit.kind]), values: [lit.value], text: lit.text, lit };
+	const v = env.value?.(node);
+	if (!v || !v.kinds) return null;
+	return { kinds: v.kinds, values: v.values && v.values.map((l) => l.value), text: node.getText(), lit: null };
+}
+
+/**
+ * Every kind the argument can have is one of `kinds`.
+ * @param {Arg} arg
+ * @param {string[]} kinds
+ */
+function only(arg, kinds) {
+	return [...arg.kinds].every((k) => kinds.includes(k));
+}
 
 /**
  * @typedef {object} ChainResult
@@ -154,6 +189,13 @@ function tlQuery(name, args, env) {
 			if (!ts.isPropertyAssignment(p)) return `unsupported option syntax in ${name}`;
 			const key = propName(p.name);
 			const val = literal(p.initializer, env.localConsts);
+			if (key === 'name' && !val) {
+				// A parameter or const: `exact` makes a string match exactly and is ignored for a RegExp.
+				const v = argOf(p.initializer, env);
+				if (!v || !only(v, ['string', 'regex'])) return `non-literal option in ${name}`;
+				parts.push(`name: ${v.text}`, 'exact: true');
+				continue;
+			}
 			if (key === null || !val) return `non-literal option in ${name}`;
 			if (key === 'name') {
 				if (val.kind === 'string') parts.push(`name: ${val.text}`, 'exact: true');
@@ -179,7 +221,16 @@ function tlQuery(name, args, env) {
 	}
 	if (args.length !== 1) return `unsupported arguments to ${name}`;
 	const arg = literal(args[0], env.localConsts);
-	if (!arg || (arg.kind !== 'string' && arg.kind !== 'regex')) return `non-literal argument to ${name}`;
+	if (!arg) {
+		// A parameter or const holding a string or a RegExp. `byText` takes both; Playwright ignores
+		// `exact` for a RegExp, so `exact: true` is right for either.
+		const v = argOf(args[0], env);
+		if (!v || !only(v, ['string', 'regex'])) return `non-literal argument to ${name}`;
+		if (kind === 'TestId') return { code: `getByTestId(${v.text})`, singular };
+		if (kind === 'Text') return { helper: 'byText', code: v.text, singular };
+		return { code: `${TEXT_QUERIES[kind]}(${v.text}, { exact: true })`, singular };
+	}
+	if (arg.kind !== 'string' && arg.kind !== 'regex') return `non-literal argument to ${name}`;
 	if (kind === 'TestId') return { code: `getByTestId(${arg.text})`, singular };
 	// Testing Library matches an element by its OWN text ("Print" in `<button>Print <kbd>P</kbd></button>`),
 	// Playwright's getByText by the element's whole text. `byText` in the support module keeps the
@@ -193,18 +244,41 @@ function tlQuery(name, args, env) {
 }
 
 /**
+ * A selector argument. `many` is set when it can match several elements.
  * @param {ts.Expression[]} args
  * @param {Env} env
  * @param {string} name
- * @returns {{ code: string } | string}
+ * @returns {{ code: string, many: boolean } | string}
  */
 function selectorArg(args, env, name) {
 	if (args.length !== 1) return `unsupported arguments to ${name}`;
 	const lit = literal(args[0], env.localConsts);
-	if (!lit || lit.kind !== 'string') return `non-literal selector in ${name}`;
-	const problem = selectorProblem(/** @type {string} */ (lit.value));
-	if (problem) return problem;
-	return { code: selectorCode(lit, env) };
+	if (lit) {
+		if (lit.kind !== 'string') return `non-literal selector in ${name}`;
+		const problem = selectorProblem(/** @type {string} */ (lit.value));
+		if (problem) return problem;
+		const code = selectorCode(lit, env);
+		return { code, many: !isPlainId(code) };
+	}
+	// A parameter or const: every value it can have (from the call sites) must be a usable
+	// selector. That also refuses a helper that some call site passes a Cypress alias.
+	const v = argOf(args[0], env);
+	if (!v || !only(v, ['string']) || !v.values) return `non-literal selector in ${name}`;
+	for (const value of v.values) {
+		const sel = String(value);
+		const problem = selectorProblem(sel);
+		if (problem) return problem;
+		if (sel === STORYBOOK_ROOT) return `selector ${quote(sel)} passed as a value`;
+	}
+	// `#${id}` can only match one element when every id it is built from is a plain id.
+	const node = args[0];
+	const single =
+		ts.isTemplateExpression(node) &&
+		node.head.text === '#' &&
+		node.templateSpans.length === 1 &&
+		node.templateSpans[0].literal.text === '' &&
+		v.values.every((value) => /^#[\w-]+$/.test(String(value)));
+	return { code: v.text, many: !single };
 }
 
 /**
@@ -326,13 +400,13 @@ function assertion(cmd, args, loc, env, many = false) {
 	let chainer = /** @type {string} */ (ch.value);
 	const negated = chainer.startsWith('not.');
 	if (negated) chainer = chainer.slice(4);
-	const rest = args.slice(1).map((a) => literal(a, env.localConsts));
+	const rest = args.slice(1).map((a) => argOf(a, env));
 	if (rest.some((r) => !r)) return `non-literal argument in assertion '${ch.value}'`;
-	const vals = /** @type {Literal[]} */ (rest);
+	const vals = /** @type {Arg[]} */ (rest);
 	const not = negated ? '.not' : '';
 	const bad = `unsupported assertion '${ch.value}'`;
 	/** @param {number} n @param {...string} kinds */
-	const arity = (n, ...kinds) => vals.length === n && vals.every((v) => kinds.includes(v.kind));
+	const arity = (n, ...kinds) => vals.length === n && vals.every((v) => only(v, kinds));
 	/** @param {string} matcher @param {string} [prefix] */
 	const out = (matcher, prefix = not) => ({ statement: `await expect(${loc})${prefix}.${matcher};`, chainer });
 	// jQuery reads an attribute, property, value, id or style from the FIRST matched element.
@@ -346,7 +420,11 @@ function assertion(cmd, args, loc, env, many = false) {
 			if (arity(2, 'string')) return onFirst(`toHaveAttribute(${vals[0].text}, ${vals[1].text})`);
 			return bad;
 		case 'have.length':
-			if (arity(1, 'number') && Number.isInteger(vals[0].value) && /** @type {number} */ (vals[0].value) >= 0)
+			if (
+				arity(1, 'number') &&
+				vals[0].values !== null &&
+				vals[0].values.every((n) => Number.isInteger(n) && /** @type {number} */ (n) >= 0)
+			)
 				return out(`toHaveCount(${vals[0].text})`);
 			return bad;
 		case 'have.focus':
@@ -377,8 +455,9 @@ function assertion(cmd, args, loc, env, many = false) {
 		case 'have.id':
 			return arity(1, 'string') ? onFirst(`toHaveId(${vals[0].text})`) : bad;
 		case 'have.class': {
-			if (!arity(1, 'string')) return bad;
-			const cls = /** @type {string} */ (vals[0].value);
+			// The class goes into a regex literal, so it must be known here.
+			if (!arity(1, 'string') || !vals[0].lit) return bad;
+			const cls = /** @type {string} */ (vals[0].lit.value);
 			if (!cls || /\s/.test(cls)) return bad;
 			const escaped = cls.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
 			return out(`toHaveClass(/(^|\\s)${escaped}(\\s|$)/)`);
@@ -394,7 +473,7 @@ function assertion(cmd, args, loc, env, many = false) {
 		case 'have.css':
 			return arity(2, 'string') ? onFirst(`toHaveCSS(${vals[0].text}, ${vals[1].text})`) : bad;
 		case 'have.prop':
-			return vals.length === 2 && vals[0].kind === 'string' && vals[1].kind !== 'regex' && vals[1].kind !== 'undefined'
+			return vals.length === 2 && only(vals[0], ['string']) && only(vals[1], ['string', 'number', 'boolean', 'null'])
 				? onFirst(`toHaveJSProperty(${vals[0].text}, ${vals[1].text})`)
 				: bad;
 	}
@@ -533,7 +612,7 @@ export function convertChain(links, env) {
 		const r = selectorArg(first.args, env, 'cy.get');
 		if (typeof r === 'string') return fail(r);
 		loc = `page.locator(${r.code})`;
-		many = !isPlainId(r.code);
+		many = r.many;
 	} else if (first.name === 'focused') {
 		if (first.args.length) return fail('unsupported arguments to cy.focused');
 		loc = `page.locator(':focus')`;
@@ -572,13 +651,13 @@ export function convertChain(links, env) {
 			if (typeof r === 'string') return fail(r);
 			loc = `page.locator(${r.code})`;
 			singular = false;
-			many = !isPlainId(r.code);
+			many = r.many;
 		} else if (name === 'find') {
 			const r = selectorArg(args, env, '.find');
 			if (typeof r === 'string') return fail(r);
 			loc = `${loc}.locator(${r.code})`;
 			singular = false;
-			many = !isPlainId(r.code);
+			many = r.many;
 		} else if (TL_QUERY.test(name)) {
 			const r = tlQuery(name, args, env);
 			if (typeof r === 'string') return fail(r);
@@ -591,8 +670,8 @@ export function convertChain(links, env) {
 			singular = false;
 			many = false;
 		} else if (name === 'eq') {
-			const n = literal(args[0], env.localConsts);
-			if (args.length !== 1 || n?.kind !== 'number' || !Number.isInteger(n.value))
+			const n = args.length === 1 ? argOf(args[0], env) : null;
+			if (!n || !only(n, ['number']) || !n.values || !n.values.every((v) => Number.isInteger(v)))
 				return fail('unsupported arguments to .eq');
 			loc = `${loc}.nth(${n.text})`;
 			singular = false;

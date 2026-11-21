@@ -10,6 +10,7 @@ export const GENERATED_BY = 'tools/verify/cypress-to-playwright.mjs';
  * @property {number} converted
  * @property {{ title: string, describePath: string[], reasons: string[] }[]} skipped
  * @property {string[]} ported
+ * @property {{ emitted: string[], unsupported: { name: string, reasons: string[] }[] }} [helpers]
  */
 
 /**
@@ -50,6 +51,10 @@ function normaliseEntry(e) {
 			reasons: [...s.reasons],
 		})),
 		ported: [...(e.ported ?? [])],
+		helpers: {
+			emitted: [...(e.helpers?.emitted ?? [])],
+			unsupported: (e.helpers?.unsupported ?? []).map((u) => ({ name: u.name, reasons: [...u.reasons] })),
+		},
 	};
 }
 

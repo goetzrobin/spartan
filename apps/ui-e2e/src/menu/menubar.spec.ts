@@ -59,7 +59,7 @@ test.describe('menubar', () => {
 			await expect(byText(page, 'Profiles')).toHaveAttribute('aria-expanded', 'false');
 		});
 
-		// SKIPPED by the transform: uses helper pressArrow
+		// SKIPPED by the transform: uses helper pressArrow (unsupported variable declaration, unsupported arguments to .trigger)
 		test.fixme('arrowdown on file should open menu and arrow left/right around should open/close appropriate menus', async () => {
 			/* Original Cypress code:
 			cy.checkA11y('#storybook-root', {

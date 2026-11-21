@@ -44,10 +44,16 @@ export function staticString(node) {
  */
 
 /**
- * Resolve a node to a literal. Identifiers naming a test-local `const` with a literal initializer
+ * Looks up the initializer of a `const` an identifier refers to. A plain Map works (by name);
+ * the transform passes an object that resolves the identifier node to its real declaration.
+ * @typedef {{ get(name: string, node?: ts.Identifier): ts.Expression | undefined }} ConstLookup
+ */
+
+/**
+ * Resolve a node to a literal. Identifiers naming an emitted `const` with a literal initializer
  * resolve to that literal's value but keep the identifier as emitted text.
  * @param {ts.Node | undefined} node
- * @param {Map<string, ts.Expression>} [localConsts]
+ * @param {ConstLookup} [localConsts]
  * @returns {Literal | null}
  */
 export function literal(node, localConsts) {
@@ -69,7 +75,7 @@ export function literal(node, localConsts) {
 	if (node.kind === ts.SyntaxKind.NullKeyword) return { kind: 'null', value: null, text: 'null' };
 	if (ts.isIdentifier(node)) {
 		if (node.text === 'undefined') return { kind: 'undefined', value: undefined, text: 'undefined' };
-		const init = localConsts?.get(node.text);
+		const init = localConsts?.get(node.text, node);
 		if (init) {
 			const resolved = literal(init);
 			if (resolved) return { ...resolved, text: node.text };
