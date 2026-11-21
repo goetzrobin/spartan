@@ -146,7 +146,7 @@ export const Default: Story = {
 
 @Component({
 	selector: 'stateful-dropdown-story',
-	imports: [HlmDropdownMenuImports, HlmButtonImports],
+	imports: [HlmDropdownMenuImports, HlmButtonImports, NgIcon],
 	template: `
 		<div class="flex w-full items-center justify-center pt-[20%]">
 			<button hlmBtn variant="outline" align="center" [hlmDropdownMenuTrigger]="menu">Open</button>
