@@ -163,21 +163,31 @@ groups.forEach((group, index) => {
 		env['PLAYWRIGHT_HTML_OUTPUT_DIR'] = path.join(outDir, `report-${index + 1}`);
 		extra.push('--output', path.join(outDir, `output-${index + 1}`));
 	}
-	const passed = run(
-		label,
-		node,
-		[
-			'node_modules/@playwright/test/cli.js',
-			'test',
-			'--config',
-			'apps/ui-e2e/playwright.config.ts',
-			...group.flatMap((unit) => unit.dirs),
-			'src/_pages/',
-			...extra,
-			...passthrough,
-		],
-		{ env },
-	);
+	const attempt = (attemptLabel) =>
+		run(
+			attemptLabel,
+			node,
+			[
+				'node_modules/@playwright/test/cli.js',
+				'test',
+				'--config',
+				'apps/ui-e2e/playwright.config.ts',
+				...group.flatMap((unit) => unit.dirs),
+				'src/_pages/',
+				...extra,
+				...passthrough,
+			],
+			{ env },
+		);
+	let passed = attempt(label);
+	// A dev server that died (out of memory, usually) fails every test after it with a refused
+	// connection. That says nothing about the components, so the group gets one more go with a
+	// fresh server. Any other failure stands.
+	const resultsFile = env['PLAYWRIGHT_JSON_OUTPUT_FILE'] ?? path.join(outDir, 'results.json');
+	if (!passed && existsSync(resultsFile) && readFileSync(resultsFile, 'utf8').includes('ERR_CONNECTION_REFUSED')) {
+		console.log('  The dev server stopped answering during this group. Running the group once more.');
+		passed = attempt(`${label}, second attempt`);
+	}
 	testsPassed = passed && testsPassed;
 });
 if (resultFiles.length > 0) {
