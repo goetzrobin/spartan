@@ -1,0 +1,30 @@
+{
+	"generatedBy": "tools/verify/story-to-test-pages.mjs",
+	"files": {
+		"dialog": {
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"title": "dialog",
+			"pages": [
+				"dialog--default",
+				"dialog--nested-dialog",
+				"dialog--context-menu",
+				"dialog--dynamic-component",
+				"dialog--dynamic-component-with-default-options",
+				"dialog--nested-dynamic-component"
+			],
+			"skipped": []
+		},
+		"popover": {
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"title": "popover",
+			"pages": [
+				"popover--default",
+				"popover--near-viewport-edge",
+				"popover--close-on-scroll",
+				"popover--scroll-container"
+			],
+			"skipped": []
+		}
+	},
+	"totals": { "files": 2, "pages": 10, "skippedStories": 0, "skippedFiles": 0 }
+}

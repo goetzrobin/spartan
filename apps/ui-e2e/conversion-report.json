@@ -1,0 +1,31 @@
+{
+	"generatedBy": "tools/verify/cypress-to-playwright.mjs",
+	"files": {
+		"dialog/dialog": {
+			"source": "apps/ui-storybook-e2e/src/integration/dialog/dialog.cy.ts",
+			"output": "apps/ui-e2e/src/dialog/dialog.spec.ts",
+			"converted": 8,
+			"skipped": [],
+			"ported": []
+		},
+		"popover/popover": {
+			"source": "apps/ui-storybook-e2e/src/integration/popover/popover.cy.ts",
+			"output": "apps/ui-e2e/src/popover/popover.spec.ts",
+			"converted": 4,
+			"skipped": [],
+			"ported": [
+				"keeps content at its own width rather than squeezing it into the space left",
+				"follows a trigger that scrolls out of view instead of holding itself against the edge",
+				"honours the scroll strategy the wrapper now forwards",
+				"keeps the panel on its trigger when the enclosing container scrolls"
+			]
+		}
+	},
+	"totals": {
+		"files": 2,
+		"tests": 16,
+		"converted": 12,
+		"skipped": 0,
+		"ported": 4
+	}
+}

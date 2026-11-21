@@ -1,0 +1,76 @@
+{
+	"generatedBy": "tools/verify/story-to-test-pages.mjs",
+	"pages": [
+		{
+			"id": "dialog--context-menu",
+			"route": "/test/dialog/context-menu",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "ContextMenu",
+			"args": []
+		},
+		{
+			"id": "dialog--default",
+			"route": "/test/dialog/default",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "dialog--dynamic-component",
+			"route": "/test/dialog/dynamic-component",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "DynamicComponent",
+			"args": []
+		},
+		{
+			"id": "dialog--dynamic-component-with-default-options",
+			"route": "/test/dialog/dynamic-component-with-default-options",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "DynamicComponentWithDefaultOptions",
+			"args": [],
+			"note": "applicationConfig providers were placed on the route"
+		},
+		{
+			"id": "dialog--nested-dialog",
+			"route": "/test/dialog/nested-dialog",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "NestedDialog",
+			"args": []
+		},
+		{
+			"id": "dialog--nested-dynamic-component",
+			"route": "/test/dialog/nested-dynamic-component",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "NestedDynamicComponent",
+			"args": []
+		},
+		{
+			"id": "popover--close-on-scroll",
+			"route": "/test/popover/close-on-scroll",
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"story": "CloseOnScroll",
+			"args": ["align", "sideOffset"]
+		},
+		{
+			"id": "popover--default",
+			"route": "/test/popover/default",
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"story": "Default",
+			"args": ["align", "sideOffset"]
+		},
+		{
+			"id": "popover--near-viewport-edge",
+			"route": "/test/popover/near-viewport-edge",
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"story": "NearViewportEdge",
+			"args": ["align", "sideOffset"]
+		},
+		{
+			"id": "popover--scroll-container",
+			"route": "/test/popover/scroll-container",
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"story": "ScrollContainer",
+			"args": ["align", "sideOffset"]
+		}
+	]
+}
