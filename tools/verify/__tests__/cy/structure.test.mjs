@@ -253,6 +253,21 @@ describe('assertions on a subject that can hold several elements', () => {
 		);
 	});
 
+	it('treats contained text as "any of them contains it"', () => {
+		assert.match(
+			body(`cy.get('[hlmFieldDescription]').should('contain.text', 'Select (a) item.');`),
+			/expect\(page\.locator\('\[hlmFieldDescription\]'\)\.filter\(\{ hasText: \/Select \\\(a\\\) item\\\.\/ \}\)\)\.not\.toHaveCount\(0\)/,
+		);
+		assert.match(
+			body(`cy.get('.a').should('not.contain', 'x');`),
+			/\.filter\(\{ hasText: \/x\/ \}\)\)\.toHaveCount\(0\)/,
+		);
+		assert.match(
+			body(`cy.get('#one').should('contain', 'x');`),
+			/expect\(page\.locator\('#one'\)\)\.toContainText\('x'\)/,
+		);
+	});
+
 	it('leaves single-element subjects alone', () => {
 		assert.match(
 			body(`cy.findByText(/save/i).should('have.focus');`),
@@ -297,5 +312,19 @@ describe('a manual port of a test the tool can convert', () => {
 				['fine', 'converted'],
 			],
 		);
+	});
+});
+
+describe('comments', () => {
+	it('drops eslint directives for cypress rules and keeps other comments', () => {
+		const r = t(`describe('g', () => {
+	it('x', () => {
+		// wait for the debounce
+		// eslint-disable-next-line cypress/no-unnecessary-waiting
+		cy.wait(300);
+	});
+});`);
+		assert.match(r.code, /\/\/ wait for the debounce\n\s+await page\.waitForTimeout\(300\);/);
+		assert.doesNotMatch(r.code, /eslint-disable/);
 	});
 });

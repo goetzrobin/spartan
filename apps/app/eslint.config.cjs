@@ -38,6 +38,7 @@ module.exports = [
 		files: ['**/pages/[(]test[)]/**/*.ts'],
 		rules: {
 			'@angular-eslint/component-selector': 'off',
+			'@typescript-eslint/consistent-type-imports': 'off',
 			'@typescript-eslint/explicit-member-accessibility': 'off',
 			'@typescript-eslint/naming-convention': 'off',
 			'@typescript-eslint/no-explicit-any': 'off',

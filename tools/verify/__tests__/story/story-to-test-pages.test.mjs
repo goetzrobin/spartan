@@ -178,6 +178,19 @@ describe('buildTestPages', () => {
 		assert.match(content, /const \{ disabled \} = this as any;\s+this\.isDisabled = disabled;/);
 	});
 
+	it('declares an arg the story reads but never sets, so a test can still set it', () => {
+		const built = buildTestPages(
+			'stories/alert-dialog.stories.ts',
+			story(
+				`export const Reads: Story = {
+					render: (args) => ({ props: { ...args, control: new FormControl(args.initialValue) }, template: '<b></b>' }),
+				};`,
+			),
+		);
+		assert.match(page(built, 'reads'), /protected initialValue: any = undefined;/);
+		assert.match(page(built, 'reads'), /applyTestArgs\(this, \['initialValue'\]\)/);
+	});
+
 	it('leaves out stories named in the skip list and records the reason', () => {
 		const built = buildTestPages(
 			'stories/alert-dialog.stories.ts',

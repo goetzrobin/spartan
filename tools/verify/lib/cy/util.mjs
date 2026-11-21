@@ -115,14 +115,17 @@ export function propName(name) {
 
 /**
  * Comments that sit before `node` on their own lines (TypeScript's "leading" comments).
- * `// prettier-ignore` is dropped: it was a formatting directive for the Cypress source.
+ * Directives meant for the Cypress source are dropped: `// prettier-ignore`, and eslint comments
+ * that name a `cypress/` rule (the rule does not exist where the Playwright tests are linted).
  * @param {string} text full source text
  * @param {number} pos
  * @returns {string[]}
  */
 export function leadingComments(text, pos) {
 	const ranges = ts.getLeadingCommentRanges(text, pos) ?? [];
-	return ranges.map((r) => text.slice(r.pos, r.end)).filter((c) => c.trim() !== '// prettier-ignore');
+	return ranges
+		.map((r) => text.slice(r.pos, r.end))
+		.filter((c) => c.trim() !== '// prettier-ignore' && !/eslint-(disable|enable)[^\n]*\bcypress\//.test(c));
 }
 
 /**

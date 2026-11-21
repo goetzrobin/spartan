@@ -448,8 +448,21 @@ function assertion(cmd, args, loc, env, many = false) {
 			return arity(1, 'string') ? out(`toHaveText(${vals[0].text})`) : bad;
 		case 'contain':
 		case 'contain.text':
-		case 'include.text':
-			return arity(1, 'string') ? out(`toContainText(${vals[0].text})`) : bad;
+		case 'include.text': {
+			if (!arity(1, 'string')) return bad;
+			// With several elements jQuery joins their text, so the assertion holds when any of them
+			// contains the string. Playwright would refuse the locator as ambiguous.
+			const wanted = vals[0].lit?.value;
+			if (many && typeof wanted === 'string' && wanted.length > 0) {
+				const escaped = wanted.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+				const filtered = `${loc}.filter({ hasText: /${escaped}/ })`;
+				return {
+					statement: `await expect(${filtered})${negated ? '' : '.not'}.toHaveCount(0);`,
+					chainer,
+				};
+			}
+			return out(`toContainText(${vals[0].text})`);
+		}
 		case 'have.value':
 			return arity(1, 'string') ? onFirst(`toHaveValue(${vals[0].text})`) : bad;
 		case 'have.id':

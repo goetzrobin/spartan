@@ -146,7 +146,7 @@ export function parseStoryFile(fileName, sourceText) {
 		const render = readRender(property(object, 'render'), args, reasons, text);
 		// An arg the story takes by name but never sets is `undefined` in Storybook; here it becomes
 		// a field with that value so the template and the address bar can still use it.
-		for (const name of render.namedArgs) {
+		for (const name of [...render.namedArgs, ...render.readArgs]) {
 			if (!args.some((field) => field.key === name)) args.push({ key: name, value: 'undefined', isFunction: false });
 		}
 
@@ -302,6 +302,8 @@ function readRender(node, args, reasons, text) {
 		argsName: undefined,
 		/** args the render function takes by name: `({ disabled, ...args })` -> ['disabled'] */
 		namedArgs: [],
+		/** args the story's code reads as `args.name`; they must exist as fields even without a default */
+		readArgs: [],
 		/** props are assigned in the page's constructor because they need the setup or the args */
 		inConstructor: false,
 	};
@@ -427,6 +429,22 @@ function readRender(node, args, reasons, text) {
 		} else {
 			reasons.push('props is neither the args nor an object literal');
 		}
+	}
+
+	if (argsName) {
+		const code = [...result.setup, ...result.props.map((field) => field.value)].join('\n');
+		const snippet = ts.createSourceFile('args.ts', `(() => { ${code} })`, ts.ScriptTarget.Latest, true);
+		const visit = (child) => {
+			if (
+				ts.isPropertyAccessExpression(child) &&
+				ts.isIdentifier(child.expression) &&
+				child.expression.text === argsName
+			) {
+				if (!result.readArgs.includes(child.name.text)) result.readArgs.push(child.name.text);
+			}
+			ts.forEachChild(child, visit);
+		};
+		visit(snippet);
 	}
 
 	const template = property(returned, 'template');
