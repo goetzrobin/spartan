@@ -57,7 +57,7 @@ export function provideBrnCalendarI18n(configuration?: Partial<BrnCalendarI18n>)
 const defaultCalendarI18n: Required<BrnCalendarI18n> = {
 	formatWeekdayName: (index: number) => {
 		const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-		return weekdays[index];
+		return weekdays[index] ?? '';
 	},
 	months: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 	years: (startYear?: number, endYear?: number) => {
@@ -90,7 +90,7 @@ const defaultCalendarI18n: Required<BrnCalendarI18n> = {
 	labelNextYears: () => 'Go to the next years',
 	labelWeekday: (index: number) => {
 		const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-		return weekdays[index];
+		return weekdays[index] ?? '';
 	},
 	firstDayOfWeek: () => 0,
 };

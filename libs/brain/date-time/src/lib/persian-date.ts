@@ -9,7 +9,7 @@ export const PersianDate = {
 
 		let jalaliDayNo =
 			365 * jalaliYearDelta + Math.floor(jalaliYearDelta / 33) * 8 + Math.floor(((jalaliYearDelta % 33) + 3) / 4);
-		for (let i = 0; i < jalaliMonthIdx; ++i) jalaliDayNo += this.jalaliDaysInMonth[i];
+		for (let i = 0; i < jalaliMonthIdx; ++i) jalaliDayNo += this.jalaliDaysInMonth[i] ?? Number.NaN;
 
 		jalaliDayNo += jalaliDayIdx;
 
@@ -39,8 +39,8 @@ export const PersianDate = {
 		}
 
 		let i = 0;
-		for (; gregorianDayNo >= this.gregorianDaysInMonth[i] + (i === 1 && leap ? 1 : 0); i++) {
-			gregorianDayNo -= this.gregorianDaysInMonth[i] + (i === 1 && leap ? 1 : 0);
+		for (; gregorianDayNo >= (this.gregorianDaysInMonth[i] ?? Number.NaN) + (i === 1 && leap ? 1 : 0); i++) {
+			gregorianDayNo -= (this.gregorianDaysInMonth[i] ?? Number.NaN) + (i === 1 && leap ? 1 : 0);
 		}
 
 		const gregorianMonth = i + 1;
@@ -64,7 +64,7 @@ export const PersianDate = {
 			Math.floor((gregorianYearDelta + 99) / 100) +
 			Math.floor((gregorianYearDelta + 399) / 400);
 
-		for (let i = 0; i < gregorianMonthIdx; ++i) gregorianDayNo += this.gregorianDaysInMonth[i];
+		for (let i = 0; i < gregorianMonthIdx; ++i) gregorianDayNo += this.gregorianDaysInMonth[i] ?? Number.NaN;
 
 		if (
 			gregorianMonthIdx > 1 &&
@@ -88,8 +88,8 @@ export const PersianDate = {
 		}
 
 		let i = 0;
-		for (; i < 11 && jalaliDayNo >= this.jalaliDaysInMonth[i]; ++i) {
-			jalaliDayNo -= this.jalaliDaysInMonth[i];
+		for (; i < 11 && jalaliDayNo >= (this.jalaliDaysInMonth[i] ?? Number.NaN); ++i) {
+			jalaliDayNo -= this.jalaliDaysInMonth[i] ?? Number.NaN;
 		}
 
 		const jalaliMonth = i + 1;

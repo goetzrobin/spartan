@@ -178,7 +178,7 @@ export class BrnNavigationMenu implements OnDestroy {
 
 		for (let i = idx + delta; i >= 0 && i < items.length; i += delta) {
 			const candidate = items[i];
-			if (!candidate.disabled) {
+			if (candidate && !candidate.disabled) {
 				this._keyManager().setActiveItem(candidate);
 				return true;
 			}

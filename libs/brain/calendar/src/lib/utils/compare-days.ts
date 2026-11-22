@@ -4,5 +4,8 @@ export const compareDays = <T>(a: T[], b: T[], dateAdapter: BrnDateAdapter<T>): 
 	if (a === b) return true;
 	if (!a || !b) return false;
 	if (a.length !== b.length) return false;
-	return a.every((day, i) => dateAdapter.isSameDay(day, b[i]));
+	return a.every((day, i) => {
+		const other = b[i];
+		return other !== undefined && dateAdapter.isSameDay(day, other);
+	});
 };

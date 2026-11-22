@@ -70,12 +70,15 @@ describe('HlmComboboxMultiple accessibility', () => {
 
 		const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
 		const options = document.querySelectorAll<HTMLElement>('[role="option"]');
-		expect(input.getAttribute('aria-activedescendant')).toBe(options[0].id);
+		const firstOption = options[0];
+		const secondOption = options[1];
+		if (!firstOption || !secondOption) throw new Error('missing option');
+		expect(input.getAttribute('aria-activedescendant')).toBe(firstOption.id);
 
 		combobox.keyManager.setActiveItem(1);
 		fixture.detectChanges();
 
-		expect(input.getAttribute('aria-activedescendant')).toBe(options[1].id);
+		expect(input.getAttribute('aria-activedescendant')).toBe(secondOption.id);
 		fixture.destroy();
 	});
 });

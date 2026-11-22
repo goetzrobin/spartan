@@ -112,13 +112,16 @@ describe('HlmSheet', () => {
 			await flush();
 
 			const [outerContent, closingContent] = contents();
+			if (!outerContent || !closingContent) throw new Error('missing content');
 			expect(closingContent.getAttribute('data-state')).toBe('closed');
 			expect(outerContent.getAttribute('data-state')).toBe('open');
 
 			await new Promise((resolve) => setTimeout(resolve, 300));
 
 			expect(contents()).toHaveLength(1);
-			expect(contents()[0].getAttribute('data-side')).toBe('top');
+			const remainingContent = contents()[0];
+			if (!remainingContent) throw new Error('missing content');
+			expect(remainingContent.getAttribute('data-side')).toBe('top');
 		} finally {
 			style.remove();
 		}
