@@ -207,7 +207,7 @@ jobs:
           ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
         run: |
           sed -i "s#__IMAGES__#https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$IMAGES_SHA#g" comment.md
-          echo "[Videos and full results]($ARTIFACT_URL) · commit ${GITHUB_SHA::7}" >> comment.md
+          printf '\n[Videos and full results](%s) · commit %s\n' "$ARTIFACT_URL" "${GITHUB_SHA::7}" >> comment.md
           cat comment.md >> "$GITHUB_STEP_SUMMARY"
       - name: Comment on the pull request
         if: ${{ github.event_name == 'pull_request' && env.SAME_REPO == 'true' }}
