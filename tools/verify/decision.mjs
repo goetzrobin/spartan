@@ -128,6 +128,59 @@ export function countUnselected(pagesFile, tests) {
 	return [...all].filter((title) => !ran.has(title)).length;
 }
 
+function fileName(component) {
+	return `${component.replace(/[^a-z0-9-]/gi, '-').replace(/^-+/, '')}.md`;
+}
+
+export function writePages(directory, compared) {
+	mkdirSync(directory, { recursive: true });
+	const groups = new Map();
+	for (const item of compared) {
+		if (!groups.has(item.test.component)) groups.set(item.test.component, []);
+		groups.get(item.test.component).push(item);
+	}
+	const sorted = [...groups].sort(([a], [b]) => label(a).localeCompare(label(b)));
+	const violationsOf = (item) => item.test.a11y.flatMap((check) => check.violations);
+	const index = [
+		'# Proof',
+		'',
+		'| Check | Passed | Failed | Accessibility violations | Screenshots changed |',
+		'| --- | --- | --- | --- | --- |',
+	];
+	for (const [component, items] of sorted) {
+		const count = (pick) => items.filter(pick).length;
+		index.push(
+			`| [${label(component)}](${fileName(component)}) | ${count((item) => item.test.status === 'passed')} | ${count((item) => item.test.status === 'failed')} | ${items.reduce((total, item) => total + violationsOf(item).length, 0)} | ${count((item) => item.state === 'changed')} |`,
+		);
+		const page = [`# ${label(component)}`, '', '[All checks](README.md)', ''];
+		for (const item of items) {
+			const id = screenshotId(item.test.key);
+			const mark = item.test.status === 'passed' ? '✅' : '❌';
+			page.push(`## ${mark} ${[...item.test.path, item.test.title].join(' › ')}`, '');
+			if (item.test.error) page.push('```', item.test.error.split('\n').slice(0, 12).join('\n'), '```', '');
+			for (const violation of violationsOf(item)) {
+				page.push(
+					`- Accessibility: **${violation.id}** (${violation.impact ?? 'unrated'}), ${violation.help}. ${violation.nodes?.length ?? 0} elements.`,
+				);
+			}
+			if (violationsOf(item).length > 0) page.push('');
+			if (item.state === 'changed') {
+				page.push(
+					'| Before | After | Difference |',
+					'| --- | --- | --- |',
+					`| ![before](${id}.before.png) | ![after](${id}.after.png) | ![difference](${id}.diff.png) |`,
+					'',
+				);
+			} else if (item.state !== 'none') {
+				copyFileSync(item.test.screenshot, path.join(directory, `${id}.png`));
+				page.push(`<img width="480" alt="screenshot" src="${id}.png">`, '');
+			}
+		}
+		writeFileSync(path.join(directory, fileName(component)), page.join('\n'));
+	}
+	writeFileSync(path.join(directory, 'README.md'), `${index.join('\n')}\n`);
+}
+
 function main() {
 	const args = process.argv.slice(2);
 	const value = (name, fallback = null) => (args.includes(name) ? args[args.indexOf(name) + 1] : fallback);
@@ -155,6 +208,7 @@ function main() {
 			writeFileSync(path.join(changedDir, `${id}.diff.png`), diffPng(item.before, item.after));
 		}
 	}
+	if (changedDir) writePages(changedDir, compared);
 	writeFileSync(
 		out,
 		buildComment({

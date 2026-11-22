@@ -178,13 +178,12 @@ jobs:
           name: verification-proof
           path: dist/.playwright/ui-e2e/proof
           retention-days: 14
-      - name: Publish the changed screenshots
+      - name: Publish the proof pages
         id: images
         if: ${{ env.SAME_REPO == 'true' && github.event_name == 'pull_request' }}
         env:
           PR: ${{ github.event.pull_request.number }}
         run: |
-          [ -n "$(ls proof/changed 2>/dev/null)" ] || exit 0
           cd proof/changed
           git init --quiet
           git add .
@@ -207,7 +206,12 @@ jobs:
           ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
         run: |
           sed -i "s#__IMAGES__#https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$IMAGES_SHA#g" comment.md
-          printf '\n[Videos and full results](%s) · commit %s\n' "$ARTIFACT_URL" "${GITHUB_SHA::7}" >> comment.md
+          if [ -n "$IMAGES_SHA" ]; then
+            printf '\n[Every test with its screenshot](https://github.com/%s/tree/%s#readme) · [videos (download)](%s) · commit %s\n' \
+              "$GITHUB_REPOSITORY" "$IMAGES_SHA" "$ARTIFACT_URL" "${GITHUB_SHA::7}" >> comment.md
+          else
+            printf '\n[Videos and full results (download)](%s) · commit %s\n' "$ARTIFACT_URL" "${GITHUB_SHA::7}" >> comment.md
+          fi
           cat comment.md >> "$GITHUB_STEP_SUMMARY"
       - name: Comment on the pull request
         if: ${{ github.event_name == 'pull_request' && env.SAME_REPO == 'true' }}
