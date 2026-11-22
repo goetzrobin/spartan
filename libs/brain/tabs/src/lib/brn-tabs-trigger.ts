@@ -55,7 +55,9 @@ export class BrnTabsTrigger implements OnDestroy {
 	constructor() {
 		effect(() => {
 			const triggerFor = this.triggerFor();
-			untracked(() => this._root.registerTrigger(triggerFor, this));
+			untracked(() => {
+				this._root.registerTrigger(triggerFor, this);
+			});
 		});
 	}
 

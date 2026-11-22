@@ -40,7 +40,9 @@ export class HlmCarouselPrevious {
 	constructor() {
 		effect(() => {
 			const computedClass = this._computedClass();
-			untracked(() => this._button.setClass(computedClass));
+			untracked(() => {
+				this._button.setClass(computedClass);
+			});
 		});
 	}
 }

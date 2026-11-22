@@ -24,7 +24,9 @@ export class BrnTabsContent implements OnDestroy {
 	constructor() {
 		effect(() => {
 			const contentFor = this.contentFor();
-			untracked(() => this._root.registerContent(contentFor, this));
+			untracked(() => {
+				this._root.registerContent(contentFor, this);
+			});
 		});
 	}
 

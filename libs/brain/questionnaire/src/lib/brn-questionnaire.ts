@@ -183,7 +183,9 @@ export class BrnQuestionnaire {
 			});
 
 			observer.observe(form, { childList: true, subtree: true });
-			onCleanup(() => observer.disconnect());
+			onCleanup(() => {
+				observer.disconnect();
+			});
 		});
 
 		effect(() => {
@@ -257,7 +259,7 @@ export class BrnQuestionnaire {
 			const activeItemChanged = this._previousActiveItemName !== activeItemName;
 			this._previousActiveItemName = activeItemName;
 
-			if (!pendingFocus || pendingFocus.name !== activeItemName) {
+			if (pendingFocus?.name !== activeItemName) {
 				if (activeItemChanged) {
 					this._pendingFocus.set(null);
 					activeItem.focus();

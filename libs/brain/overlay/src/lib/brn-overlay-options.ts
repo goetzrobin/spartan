@@ -7,7 +7,7 @@ import type {
 } from '@angular/cdk/overlay';
 import type { StaticProvider } from '@angular/core';
 
-export type BrnOverlayOptions = {
+export interface BrnOverlayOptions {
 	attachPositions: ConnectedPosition[];
 	attachTo: FlexibleConnectedPositionStrategyOrigin | null | undefined;
 	ariaModal: boolean;
@@ -24,4 +24,4 @@ export type BrnOverlayOptions = {
 	providers?: StaticProvider[] | (() => StaticProvider[]);
 	role: string | null;
 	scrollStrategy: ScrollStrategy | 'close' | 'reposition' | null | undefined;
-};
+}

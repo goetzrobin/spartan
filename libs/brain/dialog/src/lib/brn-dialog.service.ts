@@ -64,10 +64,12 @@ export class BrnDialogService {
 		let brnDialogRef!: BrnDialogRef<DialogResult>;
 		const contextOrData: BrnDialogContext<DialogContext> = {
 			...(context as DialogContext),
-			close: (result: unknown = undefined) => brnDialogRef.close(result as DialogResult),
+			close: (result: unknown = undefined) => {
+				brnDialogRef.close(result as DialogResult);
+			},
 		};
 
-		const cdkDialogRef = this._cdkDialog.open<DialogResult, BrnDialogContext<DialogContext>, unknown>(content, {
+		const cdkDialogRef = this._cdkDialog.open<DialogResult, BrnDialogContext<DialogContext>>(content, {
 			id: mergedOptions.id,
 			role: mergedOptions.role,
 			viewContainerRef: vcr,

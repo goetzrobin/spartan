@@ -98,7 +98,7 @@ export class BrnTooltipStringTemplateOutlet<T = unknown> implements OnDestroy {
 		}
 
 		if (!isTemplateRef(stringTemplateOutlet)) {
-			this._context['$implicit'] = stringTemplateOutlet as T;
+			this._context['$implicit'] = stringTemplateOutlet;
 		}
 
 		const recreateView = this._shouldViewBeRecreated(stringTemplateOutlet, stringTemplateOutletContext);

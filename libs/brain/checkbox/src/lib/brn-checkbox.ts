@@ -245,7 +245,7 @@ export class BrnCheckbox implements ControlValueAccessor, AfterContentInit, OnDe
 	 * Event emitted when checkbox is blurred (loses focus).
 	 * Used for form validation.
 	 */
-	public readonly touched = output<void>();
+	public readonly touched = output();
 
 	constructor() {
 		afterRenderEffect(() => {
@@ -304,7 +304,9 @@ export class BrnCheckbox implements ControlValueAccessor, AfterContentInit, OnDe
 					// A focused element can blur synchronously while Angular is rendering when it becomes disabled,
 					// so defer form-state writes until the next microtask. See angular/angular#17793.
 					// The checkbox may be destroyed before that microtask runs. See spartan-ng/spartan#1630.
-					Promise.resolve().then(() => this._handleBlur());
+					Promise.resolve().then(() => {
+						this._handleBlur();
+					});
 				}
 			});
 	}

@@ -118,7 +118,9 @@ export function brnClasses(computed: () => BrnClassValue[] | string, options: Br
 
 			// Setup global observer if needed and register this element. Created outside the zone so
 			// class mutations don't trigger app-wide change detection (and loop if CD writes a class).
-			manager.zone.runOutsideAngular(() => setupGlobalObserver(platformId));
+			manager.zone.runOutsideAngular(() => {
+				setupGlobalObserver(platformId);
+			});
 			observedElements.add(element);
 
 			// Suppress transitions until the first effect writes correct classes and
@@ -163,25 +165,25 @@ export function brnClasses(computed: () => BrnClassValue[] | string, options: Br
 
 		// Register cleanup with DestroyRef
 		destroyRef.onDestroy(() => {
-			if (pendingTransitionRestores.delete(manager!)) {
-				restoreTransitionSuppression(manager!);
+			if (pendingTransitionRestores.delete(manager)) {
+				restoreTransitionSuppression(manager);
 			}
 
-			if (manager!.transitionsSuppressed) {
-				manager!.transitionsSuppressed = false;
-				restoreTransitionSuppression(manager!);
+			if (manager.transitionsSuppressed) {
+				manager.transitionsSuppressed = false;
+				restoreTransitionSuppression(manager);
 			}
 
 			// Remove this source from the manager
-			manager!.sources.delete(sourceId);
-			manager!.sortedSources = null;
+			manager.sources.delete(sourceId);
+			manager.sortedSources = null;
 
 			// If no more sources, clean up the manager
-			if (manager!.sources.size === 0) {
+			if (manager.sources.size === 0) {
 				cleanupManager(element);
 			} else {
 				// Update element without this source's classes
-				updateElement(manager!);
+				updateElement(manager);
 			}
 		});
 
@@ -326,16 +328,26 @@ function trackClassList(manager: ElementClassManager): void {
 		scheduleUpdate(manager);
 	};
 
-	const add = (...tokens: string[]) =>
+	const add = (...tokens: string[]) => {
 		write(
-			() => tokens.forEach((token) => (wanted.delete(token), wanted.add(token))),
-			() => native.add.apply(list, tokens),
+			() => {
+				tokens.forEach((token) => (wanted.delete(token), wanted.add(token)));
+			},
+			() => {
+				native.add.apply(list, tokens);
+			},
 		);
-	const remove = (...tokens: string[]) =>
+	};
+	const remove = (...tokens: string[]) => {
 		write(
-			() => tokens.forEach((token) => wanted.delete(token)),
-			() => native.remove.apply(list, tokens),
+			() => {
+				tokens.forEach((token) => wanted.delete(token));
+			},
+			() => {
+				native.remove.apply(list, tokens);
+			},
 		);
+	};
 	const toggle = (token: string, force?: boolean) => {
 		const on = force ?? !list.contains(token);
 		if (on) add(token);
@@ -374,14 +386,14 @@ function scheduleUpdate(manager: ElementClassManager): void {
 
 	// Tracked writes come from the renderer inside the zone; a microtask queued there would make zone.js
 	// fire onMicrotaskEmpty again and run a second change detection pass for every class binding change
-	manager.zone.runOutsideAngular(() =>
+	manager.zone.runOutsideAngular(() => {
 		queueMicrotask(() => {
 			// A source update or cleanup in between already handled it
 			if (!manager.updateQueued || elementClassManagers.get(manager.element) !== manager) return;
 
 			updateElementOutsideAngular(manager);
-		}),
-	);
+		});
+	});
 }
 
 /** For batched updates (tracked writes and the observer), where nothing in Angular would catch a throwing merge */

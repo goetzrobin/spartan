@@ -224,7 +224,9 @@ export class HlmNumberedPaginationQueryParams {
 
 		if (correctedCurrentPage !== this.currentPage()) {
 			// update the current page
-			untracked(() => this.currentPage.set(correctedCurrentPage));
+			untracked(() => {
+				this.currentPage.set(correctedCurrentPage);
+			});
 		}
 
 		return createPageArray(correctedCurrentPage, this.itemsPerPage(), this.totalItems(), this.maxSize());

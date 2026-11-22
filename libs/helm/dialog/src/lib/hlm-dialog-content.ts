@@ -10,12 +10,12 @@ import { HlmButton } from '@spartan-ng/helm/button';
 import { classes } from '@spartan-ng/helm/utils';
 import { HlmDialogClose } from './hlm-dialog-close';
 
-type HlmDialogContentContext = {
+interface HlmDialogContentContext {
 	$component?: ComponentType<unknown>;
 	$dynamicComponentClass?: string;
 	$showCloseButton?: boolean;
 	$closeLabel?: string;
-};
+}
 
 @Component({
 	selector: 'hlm-dialog-content',

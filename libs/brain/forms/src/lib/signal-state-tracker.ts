@@ -55,9 +55,9 @@ export class SignalStateTracker implements StateTracker {
 		private readonly _parentFormGroup: FormGroupDirective | null,
 		private readonly _parentForm: NgForm | null,
 	) {
-		this._submitSubscription = onParentFormSubmitOrReset(this._controlParent, () =>
-			this._submitVersion.update((v) => v + 1),
-		);
+		this._submitSubscription = onParentFormSubmitOrReset(this._controlParent, () => {
+			this._submitVersion.update((v) => v + 1);
+		});
 	}
 
 	public destroy(): void {

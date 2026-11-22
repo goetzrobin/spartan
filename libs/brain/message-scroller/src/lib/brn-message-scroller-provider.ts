@@ -64,6 +64,8 @@ export class BrnMessageScrollerProvider {
 			});
 		});
 
-		inject(DestroyRef).onDestroy(() => scroller.destroy());
+		inject(DestroyRef).onDestroy(() => {
+			scroller.destroy();
+		});
 	}
 }

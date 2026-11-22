@@ -45,7 +45,9 @@ export class BrnAccordionTrigger implements FocusableOption {
 
 		this._accordion.registerTrigger(this);
 
-		this._destroyRef.onDestroy(() => this._accordion.unregisterTrigger(this));
+		this._destroyRef.onDestroy(() => {
+			this._accordion.unregisterTrigger(this);
+		});
 
 		this.validateAriaStructure();
 
@@ -54,7 +56,9 @@ export class BrnAccordionTrigger implements FocusableOption {
 			.subscribe(() => {
 				// Focus can land here mid-render, and setActiveItem writes the key manager's signals.
 				// untracked keeps that from throwing NG0600 (those signals aren't read by any view). #1371
-				untracked(() => this._accordion.setActiveItem(this));
+				untracked(() => {
+					this._accordion.setActiveItem(this);
+				});
 			});
 	}
 

@@ -196,7 +196,7 @@ export class BrnSwitch implements AfterContentInit, OnDestroy, ControlValueAcces
 	 * Event emitted when switch is blurred (loses focus).
 	 * Used for form validation.
 	 */
-	public readonly touched = output<void>();
+	public readonly touched = output();
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	protected _onChange: ChangeFn<boolean> = () => {};

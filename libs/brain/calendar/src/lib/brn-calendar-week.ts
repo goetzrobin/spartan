@@ -54,7 +54,9 @@ export class BrnCalendarWeek<T> implements OnDestroy {
 		// this should use `afterRenderEffect` but it's not available in the current version
 		effect(() => {
 			const weeks = this._weeks();
-			untracked(() => this._renderWeeks(weeks));
+			untracked(() => {
+				this._renderWeeks(weeks);
+			});
 		});
 	}
 

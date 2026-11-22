@@ -46,7 +46,12 @@ export class BrnDialogRef<DialogResult = unknown> {
 
 		// The container's `aria-describedby` host binding writes `null` on its first pass, which can
 		// wipe the attribute set while the declarative content view is created. Re-assert once after.
-		afterNextRender(() => this._syncAriaDescribedBy(), { injector: this._injector });
+		afterNextRender(
+			() => {
+				this._syncAriaDescribedBy();
+			},
+			{ injector: this._injector },
+		);
 
 		this._cdkDialogRef.closed.subscribe((result) => {
 			this._phase.set('closed');

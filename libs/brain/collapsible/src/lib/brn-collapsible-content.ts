@@ -31,7 +31,9 @@ export class BrnCollapsibleContent {
 			const id = this.id();
 			const collapsible = this._collapsible;
 			if (!id || !collapsible) return;
-			untracked(() => collapsible.contentId.set(id));
+			untracked(() => {
+				collapsible.contentId.set(id);
+			});
 		});
 	}
 }

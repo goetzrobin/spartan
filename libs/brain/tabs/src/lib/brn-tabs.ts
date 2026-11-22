@@ -6,7 +6,10 @@ import type { BrnTabsTrigger } from './brn-tabs-trigger';
 export type BrnTabsOrientation = 'horizontal' | 'vertical';
 export type BrnTabsDirection = 'ltr' | 'rtl';
 export type BrnActivationMode = 'automatic' | 'manual';
-export type TabEntry = { trigger: BrnTabsTrigger; content: BrnTabsContent };
+export interface TabEntry {
+	trigger: BrnTabsTrigger;
+	content: BrnTabsContent;
+}
 
 @Directive({
 	selector: '[brnTabs]',

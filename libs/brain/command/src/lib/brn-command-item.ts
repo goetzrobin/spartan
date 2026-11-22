@@ -72,7 +72,7 @@ export class BrnCommandItem implements Highlightable, OnInit {
 	protected readonly _active = signal(false);
 
 	/** Emits when the item is selected. */
-	public readonly selected = output<void>();
+	public readonly selected = output();
 
 	private _activatedByPointer = false;
 

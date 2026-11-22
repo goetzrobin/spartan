@@ -5,11 +5,11 @@ import type {
 } from './brn-questionnaire.types';
 import { getShortcutKeys } from './brn-questionnaire.utils';
 
-export type BrnQuestionnaireCollection = {
+export interface BrnQuestionnaireCollection {
 	enabledItems: readonly BrnQuestionnaireItemDefinition[];
 	itemByName: ReadonlyMap<string, BrnQuestionnaireItemDefinition>;
 	items: readonly BrnQuestionnaireItemDefinition[];
-};
+}
 
 export function createQuestionnaireCollection(
 	items: readonly BrnQuestionnaireItemDefinition[] | undefined,

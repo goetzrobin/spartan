@@ -47,7 +47,9 @@ export class BrnCommandInput {
 	constructor() {
 		this._command.keyManager.change
 			.pipe(startWith(this._command.keyManager.activeItemIndex), takeUntilDestroyed())
-			.subscribe(() => this._activeDescendant.set(this._command.keyManager.activeItem?.id()));
+			.subscribe(() => {
+				this._activeDescendant.set(this._command.keyManager.activeItem?.id());
+			});
 
 		effect(() => {
 			const search = this._command.search();

@@ -324,7 +324,9 @@ export class BrnSonnerToast implements AfterViewInit, OnDestroy {
 				}
 			}
 
-			onCleanup(() => clearTimeout(this._timeoutId));
+			onCleanup(() => {
+				clearTimeout(this._timeoutId);
+			});
 		});
 
 		effect(() => {

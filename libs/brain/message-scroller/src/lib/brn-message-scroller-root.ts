@@ -10,6 +10,8 @@ export class BrnMessageScrollerRoot {
 		const scroller = injectBrnMessageScroller();
 		const root = inject<ElementRef<HTMLDivElement>>(ElementRef).nativeElement;
 		scroller.setRootElement(root);
-		inject(DestroyRef).onDestroy(() => scroller.clearRootElement(root));
+		inject(DestroyRef).onDestroy(() => {
+			scroller.clearRootElement(root);
+		});
 	}
 }

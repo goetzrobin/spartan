@@ -45,10 +45,10 @@ export class BrnResizableGroup {
 	public readonly panels = contentChildren(BrnResizablePanel);
 
 	/** event when resize starts */
-	public readonly dragStart = output<void>();
+	public readonly dragStart = output();
 
 	/** event when resize ends */
-	public readonly dragEnd = output<void>();
+	public readonly dragEnd = output();
 
 	/** Resize panel group to the specified layout ([1 - 100, ...]). */
 	public readonly layout = model<number[]>([]);
@@ -79,7 +79,9 @@ export class BrnResizableGroup {
 			// Track both membership and external model updates, but not the writes performed while reconciling them.
 			const panels = this.panels();
 			const layout = this.layout();
-			untracked(() => this._synchronizePanelSizes(panels, layout));
+			untracked(() => {
+				this._synchronizePanelSizes(panels, layout);
+			});
 		});
 	}
 
@@ -214,7 +216,9 @@ export class BrnResizableGroup {
 		};
 
 		const handleEnd = () => {
-			this._zone.run(() => this._endResize());
+			this._zone.run(() => {
+				this._endResize();
+			});
 			cleanup();
 		};
 
@@ -338,7 +342,7 @@ export class BrnResizableGroup {
 		const panels = this.panels();
 		const panel = panels[index];
 
-		if (!panel || !panel.collapsible()) return;
+		if (!panel?.collapsible()) return;
 
 		const sizes = [...this.layout()];
 		const isCollapsed = sizes[index] === 0;

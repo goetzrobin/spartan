@@ -130,7 +130,9 @@ export abstract class BrnDateInput<V> {
 	protected readonly _showClearButton = computed(() => this.showClear() && this._inputValue().length > 0);
 
 	constructor() {
-		effect(() => this._popover()?.setOrigin(this._host.nativeElement));
+		effect(() => {
+			this._popover()?.setOrigin(this._host.nativeElement);
+		});
 
 		// Re-applying `[value]` on each keystroke moves the caret to the end. Restore the caret to
 		// where the user was typing after Angular has written the value back to the DOM.

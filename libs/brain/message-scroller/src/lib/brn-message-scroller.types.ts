@@ -46,34 +46,34 @@ type BrnMessageScrollerButtonDirection = 'start' | 'end';
 type BrnMessageScrollerScrollAlign = 'start' | 'center' | 'end' | 'nearest';
 
 // Options for scrollToMessage, scrollToEnd, and scrollToStart.
-type BrnMessageScrollerScrollOptions = {
+interface BrnMessageScrollerScrollOptions {
 	// Viewport edge or center to align the target to.
 	align?: BrnMessageScrollerScrollAlign;
 	// Native scroll behavior.
 	behavior?: ScrollBehavior;
 	// Margin on the aligned edge, in pixels. Defaults to the provider scrollMargin.
 	scrollMargin?: number;
-};
+}
 
 // Scroll snapshot: which edges the viewport can still scroll toward.
-type BrnMessageScrollerScrollable = {
+interface BrnMessageScrollerScrollable {
 	// The viewport can scroll toward the start (content is hidden above).
 	start: boolean;
 	// The viewport can scroll toward the end (content is hidden below).
 	end: boolean;
-};
+}
 
 // Visibility snapshot for the transcript.
-type BrnMessageScrollerVisibilityState = {
+interface BrnMessageScrollerVisibilityState {
 	// The anchored turn the reader is in, or null. Stays set after the anchor
 	// scrolls above the viewport.
 	currentAnchorId: string | null;
 	// messageId values intersecting the viewport, in document order.
 	visibleMessageIds: string[];
-};
+}
 
 // Headless provider configuration for a chat transcript scroller.
-type BrnMessageScrollerProviderProps = {
+interface BrnMessageScrollerProviderProps {
 	// Follow new content at the bottom while the viewport is already at the end.
 	autoScroll?: boolean;
 	// Opening position on the first non-empty render, applied once.
@@ -84,7 +84,7 @@ type BrnMessageScrollerProviderProps = {
 	scrollPreviousItemPeek?: number;
 	// Default margin on the aligned edge for commands and visibility. Defaults to 0.
 	scrollMargin?: number;
-};
+}
 
 // Registers (or, with removedElement, unregisters) a MessageScrollerItem node by
 // messageId.

@@ -54,7 +54,9 @@ export class BrnMessageScrollerButton {
 
 	constructor() {
 		afterNextRender(() => {
-			requestAnimationFrame(() => this._pending.set(false));
+			requestAnimationFrame(() => {
+				this._pending.set(false);
+			});
 		});
 	}
 

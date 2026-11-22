@@ -99,7 +99,7 @@ export class BrnCommand implements ControlValueAccessor {
 			const searchInput = this.search();
 			untracked(() => {
 				const activeItemIsVisible = this.keyManager.activeItem?.visible();
-				if ((searchInput !== undefined && searchInput.length === 0) || !activeItemIsVisible) {
+				if (searchInput?.length === 0 || !activeItemIsVisible) {
 					this.keyManager.setFirstItemActive();
 				}
 			});

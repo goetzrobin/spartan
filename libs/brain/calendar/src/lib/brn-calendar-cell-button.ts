@@ -59,7 +59,9 @@ export class BrnCalendarCellButton<T> {
 	constructor() {
 		this._calendar.registerCalendarCell(this);
 
-		this._destroyRef.onDestroy(() => this._calendar.unregisterCalendarCell(this));
+		this._destroyRef.onDestroy(() => {
+			this._calendar.unregisterCalendarCell(this);
+		});
 	}
 
 	/** Whether this date is focusable */

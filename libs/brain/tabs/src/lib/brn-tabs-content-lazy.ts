@@ -16,7 +16,9 @@ export class BrnTabsContentLazy {
 	private _hasBeenActivated = false;
 
 	constructor() {
-		this._destroyRef.onDestroy(() => this._viewContainerRef.clear());
+		this._destroyRef.onDestroy(() => {
+			this._viewContainerRef.clear();
+		});
 
 		effect(() => {
 			const activeTab = this._root.$activeTab();

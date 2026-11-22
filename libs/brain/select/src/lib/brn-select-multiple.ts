@@ -154,7 +154,7 @@ export class BrnSelectMultiple<T> implements BrnSelectBase<T>, ControlValueAcces
 	}
 
 	public registerSelectTrigger(input: BrnSelectTrigger): void {
-		return this._selectTrigger.set(input);
+		this._selectTrigger.set(input);
 	}
 
 	/** @internal Register the select list. Called by BrnSelectList in its constructor. */

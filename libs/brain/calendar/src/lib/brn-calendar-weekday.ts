@@ -51,7 +51,9 @@ export class BrnCalendarWeekday<T> implements OnDestroy {
 			// Get the weekdays to display
 			const weekdays = this._weekdays();
 			// Render the weekdays
-			untracked(() => this._renderWeekdays(weekdays));
+			untracked(() => {
+				this._renderWeekdays(weekdays);
+			});
 		});
 	}
 

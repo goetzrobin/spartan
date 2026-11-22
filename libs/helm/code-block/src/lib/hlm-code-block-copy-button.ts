@@ -46,8 +46,12 @@ export class HlmCodeBlockCopyButton {
 		effect((onCleanup) => {
 			if (!this._copied()) return;
 
-			const timeout = setTimeout(() => this._copied.set(false), 2000);
-			onCleanup(() => clearTimeout(timeout));
+			const timeout = setTimeout(() => {
+				this._copied.set(false);
+			}, 2000);
+			onCleanup(() => {
+				clearTimeout(timeout);
+			});
 		});
 	}
 

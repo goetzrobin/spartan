@@ -54,9 +54,9 @@ export class ReactiveStateTracker implements StateTracker {
 			});
 		}
 		// the matcher may depend on the parent's `submitted` state
-		this._submitSubscription = onParentFormSubmitOrReset(this._controlParent, () =>
-			this._stateVersion.update((v) => v + 1),
-		);
+		this._submitSubscription = onParentFormSubmitOrReset(this._controlParent, () => {
+			this._stateVersion.update((v) => v + 1);
+		});
 	}
 
 	public destroy(): void {

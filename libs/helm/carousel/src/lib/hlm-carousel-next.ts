@@ -39,7 +39,9 @@ export class HlmCarouselNext {
 		effect(() => {
 			const computedClass = this._computedClass();
 
-			untracked(() => this._button.setClass(computedClass));
+			untracked(() => {
+				this._button.setClass(computedClass);
+			});
 		});
 	}
 }
