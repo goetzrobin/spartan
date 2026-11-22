@@ -11,7 +11,7 @@ import { ToastActionTemplateContext } from '../types';
 })
 export class BrnToastAction {
 	public readonly templateRef = inject<TemplateRef<ToastActionTemplateContext>>(TemplateRef);
-	static ngTemplateContextGuard(_directive: BrnToastAction, context: unknown): context is ToastActionTemplateContext {
+	static ngTemplateContextGuard(_directive: BrnToastAction, _context: unknown): _context is ToastActionTemplateContext {
 		return true;
 	}
 }
