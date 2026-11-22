@@ -26,7 +26,8 @@
 		"test": "nx run-many --target test --all",
 		"update-contributors": "nx generate @spartan-ng/tools:update-contributors",
 		"update-hlm-component-preview": "nx generate @spartan-ng/tools:generate-hlm-component-preview",
-		"update-ui-docs-snapshot": "nx run tools:generate-ui-docs && nx test tools --skip-nx-cache -- --update"
+		"update-ui-docs-snapshot": "nx run tools:generate-ui-docs && nx test tools --skip-nx-cache -- --update",
+		"verify": "node tools/verify/verify.mjs"
 	},
 	"dependencies": {
 		"@algolia/client-search": "^5.40.0",
@@ -122,6 +123,7 @@
 		"@nx/web": "22.7.5",
 		"@nx/workspace": "22.7.5",
 		"@phenomnomnominal/tsquery": "^6.1.3",
+		"@playwright/test": "1.65.1",
 		"@rollup/plugin-replace": "^6.0.1",
 		"@schematics/angular": "21.2.14",
 		"@semantic-release/changelog": "^6.0.3",

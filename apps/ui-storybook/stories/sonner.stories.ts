@@ -40,6 +40,7 @@ export class SonnerStory {
 }
 
 export const Default: Story = {
+	decorators: [moduleMetadata({ imports: [SonnerStory] })],
 	render: () => ({
 		template: '<sonner-story />',
 	}),

@@ -1,0 +1,711 @@
+{
+	"generatedBy": "tools/verify/cypress-to-playwright.mjs",
+	"files": {
+		"accordion/accordion": {
+			"source": "apps/ui-storybook-e2e/src/integration/accordion/accordion.cy.ts",
+			"output": "apps/ui-e2e/src/accordion/accordion.spec.ts",
+			"converted": 0,
+			"skipped": [],
+			"ported": [
+				"buttons act as headers with proper ARIA attributes",
+				"header button is wrapped in semantic heading",
+				"panel uses role=\"region\" with aria-labelledby when open",
+				"starts closed and is vertical by default",
+				"only one open at a time (click)",
+				"Space/Enter toggles like a button",
+				"allows multiple items to remain open",
+				"ArrowDown/ArrowUp move focus between headers (vertical)",
+				"Home to first; End to last",
+				"Tab/Shift+Tab include inner focusables in page order",
+				"typing in an input does not toggle accordion",
+				"textarea accepts newlines and accordion stays open",
+				"select changes with arrows and does not toggle",
+				"contenteditable text edits do not toggle",
+				"modifier combos (Ctrl/Meta/Alt) do not toggle",
+				"button should not be focusable when panel is closed (inert)",
+				"should have the first item open by default, toggle all 3 items by pressing on them, close third item on button click, open third item on button click, close third item on click on its own trigger",
+				"`should have no accessibility violations in ${story} story`"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "verifyAccordionSetup",
+						"reasons": ["unsupported command .next", "alias selector '@secondItem'", "alias selector '@thirdItem'"]
+					},
+					{
+						"name": "verifyStateOpen",
+						"reasons": ["alias selector '@firstItem'"]
+					},
+					{
+						"name": "verifyStateClosed",
+						"reasons": ["alias selector '@firstItem'"]
+					}
+				]
+			}
+		},
+		"alert-dialog/alert-dialog": {
+			"source": "apps/ui-storybook-e2e/src/integration/alert-dialog/alert-dialog.cy.ts",
+			"output": "apps/ui-e2e/src/alert-dialog/alert-dialog.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": [
+				"tab and enter on trigger should open, enter on cancel should close, escape should not close",
+				"tab and space on trigger should open, tabs should wrap, space on cancel should close"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"autocomplete/autocomplete": {
+			"source": "apps/ui-storybook-e2e/src/integration/autocomplete/autocomplete.cy.ts",
+			"output": "apps/ui-e2e/src/autocomplete/autocomplete.spec.ts",
+			"converted": 7,
+			"skipped": [],
+			"ported": [
+				"should close popup when tabbing out",
+				"should not select the highlighted option on tab out",
+				"should select highlighted option on enter"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"breadcrumb/breadcrumb": {
+			"source": "apps/ui-storybook-e2e/src/integration/breadcrumb/breadcrumb.cy.ts",
+			"output": "apps/ui-e2e/src/breadcrumb/breadcrumb.spec.ts",
+			"converted": 4,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"button-group/button-group": {
+			"source": "apps/ui-storybook-e2e/src/integration/button-group/button-group.cy.ts",
+			"output": "apps/ui-e2e/src/button-group/button-group.spec.ts",
+			"converted": 15,
+			"skipped": [],
+			"ported": [
+				"should have outline variant buttons",
+				"should have secondary variant buttons",
+				"should have separator between buttons",
+				"should support interactions in nested groups",
+				"should maintain proper keyboard navigation in nested structure",
+				"should maintain proper grouping semantics",
+				"should have proper structure with text group",
+				"should have proper visual styling",
+				"should have proper focus indicators"
+			],
+			"helpers": {
+				"emitted": ["verifyButtonGroupSetup", "verifyButtonInteraction", "testKeyboardNavigation"],
+				"unsupported": []
+			}
+		},
+		"calendar/calendar": {
+			"source": "apps/ui-storybook-e2e/src/integration/calendar/calendar.cy.ts",
+			"output": "apps/ui-e2e/src/calendar/calendar.spec.ts",
+			"converted": 3,
+			"skipped": [],
+			"ported": [
+				"should select the date",
+				"should select a date when clicked",
+				"should select the date when the enter key is pressed",
+				"should allow keyboard navigation on arrow right",
+				"should allow keyboard navigation on arrow left",
+				"should allow keyboard navigation on arrow up",
+				"should allow keyboard navigation on arrow down",
+				"should allow keyboard navigation on home and end"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"carousel/carousel": {
+			"source": "apps/ui-storybook-e2e/src/integration/carousel/carousel.cy.ts",
+			"output": "apps/ui-e2e/src/carousel/carousel.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"checkbox/checkbox": {
+			"source": "apps/ui-storybook-e2e/src/integration/checkbox/checkbox.cy.ts",
+			"output": "apps/ui-e2e/src/checkbox/checkbox.spec.ts",
+			"converted": 12,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [
+					"verifyCheckboxSetup",
+					"verifyCheckboxOff",
+					"verifyCheckboxOn",
+					"verifyIndeterminateAttr",
+					"executeTabEnterTests",
+					"executeTabSpaceTests",
+					"executeClickOnLabelTests"
+				],
+				"unsupported": []
+			}
+		},
+		"combobox/combobox": {
+			"source": "apps/ui-storybook-e2e/src/integration/combobox/combobox.cy.ts",
+			"output": "apps/ui-e2e/src/combobox/combobox.spec.ts",
+			"converted": 5,
+			"skipped": [],
+			"ported": [
+				"should open the framework dropdown, and the list should be scrollable",
+				"clicking outside should close the content",
+				"clicking outside should close the content"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"command/command--default": {
+			"source": "apps/ui-storybook-e2e/src/integration/command/command--default.cy.ts",
+			"output": "apps/ui-e2e/src/command/command--default.spec.ts",
+			"converted": 3,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"command/command--dynamic": {
+			"source": "apps/ui-storybook-e2e/src/integration/command/command--dynamic.cy.ts",
+			"output": "apps/ui-e2e/src/command/command--dynamic.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": ["should show items based on input value without error."],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"date-picker/date-picker": {
+			"source": "apps/ui-storybook-e2e/src/integration/date-picker/date-picker.cy.ts",
+			"output": "apps/ui-e2e/src/date-picker/date-picker.spec.ts",
+			"converted": 6,
+			"skipped": [],
+			"ported": [
+				"opens the calendar and selects a date",
+				"keeps the focused month when navigating to a shorter month via the dropdown",
+				"shows the picked month and focuses the min date instead of staying on the old month",
+				"keeps the caret position while editing in the middle",
+				"commits a typed date on blur and shows the display format",
+				"commits on Enter and keeps focus, then blur shows the display format",
+				"keeps the value when blurring after Enter (regression)",
+				"clears the value with the clear button",
+				"keeps invalid text but leaves the model empty",
+				"opens the calendar and selects a date",
+				"keeps the caret position while editing in the middle",
+				"commits typed dates on blur and shows the display format",
+				"keeps the value when blurring after Enter (regression)",
+				"keeps invalid text but leaves the model empty",
+				"opens the calendar and selects a range",
+				"keeps the caret position while editing in the middle",
+				"commits a typed range on blur and shows the display format",
+				"keeps the value when blurring after Enter (regression)",
+				"keeps invalid text but leaves the model empty",
+				"keeps the caret position while editing in the middle",
+				"commits a typed month/year on blur and shows the display format",
+				"keeps the value when blurring after Enter (regression)",
+				"keeps invalid text but leaves the model empty"
+			],
+			"helpers": {
+				"emitted": ["modelIsEmpty"],
+				"unsupported": [
+					{
+						"name": "type",
+						"reasons": ["type with special key sequences"]
+					}
+				]
+			}
+		},
+		"dialog/dialog": {
+			"source": "apps/ui-storybook-e2e/src/integration/dialog/dialog.cy.ts",
+			"output": "apps/ui-e2e/src/dialog/dialog.spec.ts",
+			"converted": 8,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"empty/empty": {
+			"source": "apps/ui-storybook-e2e/src/integration/empty/empty.cy.ts",
+			"output": "apps/ui-e2e/src/empty/empty.spec.ts",
+			"converted": 16,
+			"skipped": [],
+			"ported": ["should have proper structure", "`should match visual snapshot for ${story}`"],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"field/field": {
+			"source": "apps/ui-storybook-e2e/src/integration/field/field.cy.ts",
+			"output": "apps/ui-e2e/src/field/field.spec.ts",
+			"converted": 23,
+			"skipped": [],
+			"ported": ["should allow typing in textarea"],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"item/item": {
+			"source": "apps/ui-storybook-e2e/src/integration/item/item.cy.ts",
+			"output": "apps/ui-e2e/src/item/item.spec.ts",
+			"converted": 19,
+			"skipped": [],
+			"ported": ["should pass accessibility checks"],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"label/label": {
+			"source": "apps/ui-storybook-e2e/src/integration/label/label.cy.ts",
+			"output": "apps/ui-e2e/src/label/label.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": ["should override default id if one is defined"],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"menu/context-menu": {
+			"source": "apps/ui-storybook-e2e/src/integration/menu/context-menu.cy.ts",
+			"output": "apps/ui-e2e/src/menu/context-menu.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"menu/dropdown-menu": {
+			"source": "apps/ui-storybook-e2e/src/integration/menu/dropdown-menu.cy.ts",
+			"output": "apps/ui-e2e/src/menu/dropdown-menu.spec.ts",
+			"converted": 4,
+			"skipped": [],
+			"ported": [
+				"down on open button should open, up and down should navigate, right over sub menu should open submenu, and left on sub should close it, and escape open should close dropdown completely"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"menu/dropdown-menu-data-side": {
+			"source": "apps/ui-storybook-e2e/src/integration/menu/dropdown-menu-data-side.cy.ts",
+			"output": "apps/ui-e2e/src/menu/dropdown-menu-data-side.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"menu/menubar": {
+			"source": "apps/ui-storybook-e2e/src/integration/menu/menubar.cy.ts",
+			"output": "apps/ui-e2e/src/menu/menubar.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": ["arrowdown on file should open menu and arrow left/right around should open/close appropriate menus"],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "pressArrow",
+						"reasons": ["unsupported variable declaration", "unsupported arguments to .trigger"]
+					}
+				]
+			}
+		},
+		"navigation-menu/navigation-menu": {
+			"source": "apps/ui-storybook-e2e/src/integration/navigation-menu/navigation-menu.cy.ts",
+			"output": "apps/ui-e2e/src/navigation-menu/navigation-menu.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [
+				"has no a11y violations and wires aria-expanded/controls only while open",
+				"enters the panel with ArrowDown",
+				"enters the panel when tabbing from the trigger",
+				"walks through the panel items with Tab / Shift+Tab",
+				"keeps focus in the menu when tabbing past the last item (issue #1484)",
+				"returns focus to the trigger on Shift+Tab from the first item",
+				"closes on Escape and restores focus to the trigger"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "pressKey",
+						"reasons": ["unsupported parameter type KeyboardEventInit"]
+					},
+					{
+						"name": "checkA11y",
+						"reasons": ["name checkA11y clashes with a name the generated file uses"]
+					}
+				]
+			}
+		},
+		"popover/popover": {
+			"source": "apps/ui-storybook-e2e/src/integration/popover/popover.cy.ts",
+			"output": "apps/ui-e2e/src/popover/popover.spec.ts",
+			"converted": 4,
+			"skipped": [],
+			"ported": [
+				"keeps content at its own width rather than squeezing it into the space left",
+				"follows a trigger that scrolls out of view instead of holding itself against the edge",
+				"honours the scroll strategy the wrapper now forwards",
+				"keeps the panel on its trigger when the enclosing container scrolls"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "settled",
+						"reasons": ["unsupported command .then"]
+					},
+					{
+						"name": "geometry",
+						"reasons": ["unsupported command .then"]
+					},
+					{
+						"name": "expectGeometry",
+						"reasons": ["unsupported parameter type (boxes: { trigger: DOMRect; content: DOMRect }) => void"]
+					},
+					{
+						"name": "scrollTo",
+						"reasons": ["unsupported command cy.scrollTo", "unsupported command cy.document"]
+					},
+					{
+						"name": "settled",
+						"reasons": ["unsupported command .then"]
+					},
+					{
+						"name": "scrollContainer",
+						"reasons": ["unsupported command .then"]
+					},
+					{
+						"name": "gap",
+						"reasons": ["unsupported parameter type JQuery<Element>"]
+					}
+				]
+			}
+		},
+		"progress/progress": {
+			"source": "apps/ui-storybook-e2e/src/integration/progress/progress.cy.ts",
+			"output": "apps/ui-e2e/src/progress/progress.spec.ts",
+			"converted": 4,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"radio-group/radio-group": {
+			"source": "apps/ui-storybook-e2e/src/integration/radio-group/radio-group.cy.ts",
+			"output": "apps/ui-e2e/src/radio-group/radio-group.spec.ts",
+			"converted": 3,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"select/select": {
+			"source": "apps/ui-storybook-e2e/src/integration/select/select.cy.ts",
+			"output": "apps/ui-e2e/src/select/select.spec.ts",
+			"converted": 7,
+			"skipped": [],
+			"ported": [
+				"click on trigger should open and close it content",
+				"click outside should close the content",
+				"second click on trigger should close the content",
+				"should close after selecting an option in single mode",
+				"should stay open after selecting an option in multi mode",
+				"should stay open after selecting an option in multi mode",
+				"should toggle an item on keypress",
+				"should not open if disabled",
+				"should be scrollable"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "verifySelectSetup",
+						"reasons": ["unsupported command .each"]
+					}
+				]
+			}
+		},
+		"separator/separator": {
+			"source": "apps/ui-storybook-e2e/src/integration/separator/separator.cy.ts",
+			"output": "apps/ui-e2e/src/separator/separator.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"sheet/sheet": {
+			"source": "apps/ui-storybook-e2e/src/integration/sheet/sheet.cy.ts",
+			"output": "apps/ui-e2e/src/sheet/sheet.spec.ts",
+			"converted": 3,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"slider/slider": {
+			"source": "apps/ui-storybook-e2e/src/integration/slider/slider.cy.ts",
+			"output": "apps/ui-e2e/src/slider/slider.spec.ts",
+			"converted": 1,
+			"skipped": [],
+			"ported": [
+				"should allow dragging to change the value",
+				"should support keyboard interactions",
+				"should drag the whole range when draggableRange is enabled",
+				"should drag all thumbs together when draggableRangeOnly is enabled"
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": []
+			}
+		},
+		"switch/switch": {
+			"source": "apps/ui-storybook-e2e/src/integration/switch/switch.cy.ts",
+			"output": "apps/ui-e2e/src/switch/switch.spec.ts",
+			"converted": 12,
+			"skipped": [],
+			"ported": [
+				"should toggle switch state on component click",
+				"should show visible focus indication for keyboard users",
+				"should toggle switch state on component click",
+				"should toggle switch state on component click",
+				"should not be interactive when disabled"
+			],
+			"helpers": {
+				"emitted": [
+					"verifySwitchSetup",
+					"verifySwitchOff",
+					"verifySwitchOn",
+					"verifySwitchValueTrue",
+					"verifySwitchValueFalse",
+					"verifyChangedValueTrue",
+					"verifyChangedValueFalse",
+					"verifySwitchTouched",
+					"executeTabEnterTests",
+					"executeTabSpaceTests",
+					"executeClickOnLabelTests",
+					"executeClickOnThumb"
+				],
+				"unsupported": [
+					{
+						"name": "executeClickOnComponent",
+						"reasons": ["unsupported arguments to .click"]
+					}
+				]
+			}
+		},
+		"tabs/tabs--brnonly": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--brnonly.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--brnonly.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
+		},
+		"tabs/tabs--default": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--default.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--default.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
+		},
+		"tabs/tabs--default--manual": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--default--manual.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--default--manual.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
+		},
+		"tabs/tabs--disabled": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--disabled.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--disabled.spec.ts",
+			"converted": 3,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
+		},
+		"tabs/tabs--vertical": {
+			"source": "apps/ui-storybook-e2e/src/integration/tabs/tabs--vertical.cy.ts",
+			"output": "apps/ui-e2e/src/tabs/tabs--vertical.spec.ts",
+			"converted": 2,
+			"skipped": [],
+			"ported": [],
+			"helpers": {
+				"emitted": ["verifyTabsSetup"],
+				"unsupported": []
+			}
+		},
+		"toggle-group/toggle--toggle-group-form": {
+			"source": "apps/ui-storybook-e2e/src/integration/toggle-group/toggle--toggle-group-form.cy.ts",
+			"output": "apps/ui-e2e/src/toggle-group/toggle--toggle-group-form.spec.ts",
+			"converted": 0,
+			"skipped": [],
+			"ported": [
+				"\n    1. should sparta selected by default.\n    2. should have toggle-group with role=group and 3 buttons toggled off and sparta toggled on.\n    3. click on sparta should not unselect sparta.\n    4. click on syracuse should unselect sparta and select syracuse\n    "
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "verifyToggleGroupSetup",
+						"reasons": ["unsupported command .not"]
+					}
+				]
+			}
+		},
+		"toggle-group/toggle--toggle-group-multiple": {
+			"source": "apps/ui-storybook-e2e/src/integration/toggle-group/toggle--toggle-group-multiple.cy.ts",
+			"output": "apps/ui-e2e/src/toggle-group/toggle--toggle-group-multiple.spec.ts",
+			"converted": 0,
+			"skipped": [],
+			"ported": [
+				"\n    1. should have sparta selected by default.\n    2. should have toggle-group with role=group and 3 buttons toggled off and sparta toggled on.\n    3. click on sparta should not unselect sparta.\n    4. click on syracuse should keep sparta selected and select syracuse\n    5. click on athens should keep sparta, syracuse selected and select athens\n    6. click on syracuse should unselect syracuse, but keep sparta and athens selected\n    7. click on set-to-syracuse button should unselect all others but syracuse\n    8. click on syracuse should not unselect syracuse\n    ",
+				"\n    1. should have sparta selected by default.\n    2. should have toggle-group with role=group and 3 buttons toggled off and sparta toggled on.\n    3. tab to and space on sparta should select sparta.\n    4. tab to and enter on syracuse should keep sparta selected and select syracuse\n    5. tab to and space on athens should keep sparta, syracuse selected and select athens\n    6. tab to and enter on syracuse should unselect syracuse, but keep sparta and athens selected\n    7. tab to and space on set-to-syracuse button should unselect all others but syracuse\n    8. tab to and enter syracuse should not unselect syracuse\n    "
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "verifyToggleGroupSetup",
+						"reasons": ["unsupported command .not"]
+					}
+				]
+			}
+		},
+		"toggle-group/toggle--toggle-group-multiple-nullable": {
+			"source": "apps/ui-storybook-e2e/src/integration/toggle-group/toggle--toggle-group-multiple-nullable.cy.ts",
+			"output": "apps/ui-e2e/src/toggle-group/toggle--toggle-group-multiple-nullable.spec.ts",
+			"converted": 0,
+			"skipped": [],
+			"ported": [
+				"\n    1. should have no city selected by default.\n    2. should have toggle-group with role=group and 4 buttons all toggled off.\n    3. click on sparta should select sparta.\n    4. click on syracuse should keep sparta selected and select syracuse\n    5. click on athens should keep sparta, syracuse selected and select athens\n    6. click on syracuse should unselect syracuse, but keep sparta and athens selected\n    7. click on set-to-syracuse button should unselect all others but syracuse\n    ",
+				"\n    1. should have no city selected by default.\n    2. should have toggle-group with role=group and 4 buttons all toggled off.\n    3. tab to and space on sparta should select sparta.\n    4. tab to and enter on syracuse should keep sparta selected and select syracuse\n    5. tab to and space on athens should keep sparta, syracuse selected and select athens\n    6. tab to and enter on syracuse should unselect syracuse, but keep sparta and athens selected\n    7. tab to and space on set-to-syracuse button should unselect all others but syracuse\n    "
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "verifyToggleGroupSetup",
+						"reasons": ["unsupported pattern in .contains /no cities/i", "unsupported command .each"]
+					}
+				]
+			}
+		},
+		"toggle-group/toggle--toggle-group-single": {
+			"source": "apps/ui-storybook-e2e/src/integration/toggle-group/toggle--toggle-group-single.cy.ts",
+			"output": "apps/ui-e2e/src/toggle-group/toggle--toggle-group-single.spec.ts",
+			"converted": 0,
+			"skipped": [],
+			"ported": [
+				"\n    1. should sparta selected by default.\n    2. should have toggle-group with role=group and 3 buttons toggled off and sparta toggled on.\n    3. click on sparta should not unselect sparta.\n    4. click on syracuse should unselect sparta and select syracuse\n    5. click on athens should unselect syracuse and select athens\n    6. click on set-to-syracuse button should unselect athens and select syracuse\n    7. click on syracuse should not unselect syracuse\n    ",
+				"\n    1. should sparta selected by default.\n    2. should have toggle-group with role=group and 3 buttons toggled off and sparta toggled on.\n    3. tab to and space on sparta should not unselect sparta.\n    4. tab to and enter on syracuse should unselect sparta and select syracuse\n    5. tab to and space on athens should unselect syracuse and select athens\n    6. tab to and enter on set-to-syracuse button should unselect athens and select syracuse\n    7. tab to and space on syracuse should not unselect syracuse\n    "
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "verifyToggleGroupSetup",
+						"reasons": ["unsupported command .not"]
+					}
+				]
+			}
+		},
+		"toggle-group/toggle--toggle-group-single--dynamic-options": {
+			"source": "apps/ui-storybook-e2e/src/integration/toggle-group/toggle--toggle-group-single--dynamic-options.cy.ts",
+			"output": "apps/ui-e2e/src/toggle-group/toggle--toggle-group-single--dynamic-options.spec.ts",
+			"converted": 0,
+			"skipped": [],
+			"ported": [
+				"\n    1. should sparta selected by default.\n    2. should have toggle-group with role=group and 3 buttons toggled off and sparta toggled on.\n    3. click on sparta should not unselect sparta.\n    4. click on syracuse should unselect sparta and select syracuse\n    5. click on athens should unselect syracuse and select athens\n    6. click on set-to-syracuse button should unselect athens and select syracuse\n    7. click on syracuse should not unselect syracuse\n    8. click on add piraeus should dynamically add the city\n    9. click on piraeus should unselect syracuse and select piraeus\n    10. click on piraeus should not unselect piraeus\n    ",
+				"\n    1. should sparta selected by default.\n    2. should have toggle-group with role=group and 3 buttons toggled off and sparta toggled on.\n    3. tab to and space on sparta should not unselect sparta.\n    4. tab to and enter on syracuse should unselect sparta and select syracuse\n    5. tab to and space on athens should unselect syracuse and select athens\n    6. tab to and enter on set-to-syracuse button should unselect athens and select syracuse\n    7. tab to and space on syracuse should not unselect syracuse\n    8. tab to and enter on add piraeus should dynamically add the city\n    9. tab to and space on piraeus should unselect syracuse and select piraeus\n    10. tab to and enter on piraeus should not unselect piraeus\n    "
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "verifyToggleGroupSetup",
+						"reasons": ["unsupported command .not"]
+					}
+				]
+			}
+		},
+		"toggle-group/toggle--toggle-group-single-nullable": {
+			"source": "apps/ui-storybook-e2e/src/integration/toggle-group/toggle--toggle-group-single-nullable.cy.ts",
+			"output": "apps/ui-e2e/src/toggle-group/toggle--toggle-group-single-nullable.spec.ts",
+			"converted": 0,
+			"skipped": [],
+			"ported": [
+				"\n    1. should have no city selected by default.\n    2. should have toggle-group with role=group and 4 buttons all toggled off.\n    3. click on sparta should select sparta.\n    4. click on syracuse should unselect sparta and select syracuse\n    5. click on athens should unselect syracuse and select athens\n    6. click on set-to-syracuse button should unselect athens and select syracuse\n    ",
+				"\n    1. should have no city selected by default.\n    2. should have toggle-group with role=group and 4 buttons all toggled off.\n    3. tab to and space on sparta should select sparta.\n    4. tab to and enter on syracuse should unselect sparta and select syracuse\n    5. tab to and space on athens should unselect syracuse and select athens\n    6. tab to and enter on set-to-syracuse button should unselect athens and select syracuse\n    "
+			],
+			"helpers": {
+				"emitted": [],
+				"unsupported": [
+					{
+						"name": "verifyToggleGroupSetup",
+						"reasons": ["unsupported pattern in .contains /no city/i", "unsupported command .each"]
+					}
+				]
+			}
+		}
+	},
+	"totals": {
+		"files": 41,
+		"tests": 296,
+		"converted": 182,
+		"skipped": 0,
+		"ported": 114
+	}
+}

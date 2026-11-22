@@ -81,7 +81,7 @@ export default {
 	tags: ['autodocs'],
 	decorators: [
 		moduleMetadata({
-			imports: [HlmResizableImports, ResizableDynamicPanelsExample],
+			imports: [HlmResizableImports, ResizableExample, ResizableDynamicPanelsExample],
 		}),
 	],
 } as Meta<ResizableExample>;

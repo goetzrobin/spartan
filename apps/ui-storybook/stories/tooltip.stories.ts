@@ -32,7 +32,6 @@ export const Default: Story = {
 		props: args,
 		template: `
 <div class='p-40'>
-  <hlm-tooltip>
     <button [hlmTooltip]="tooltip" ${argsToTemplate(args)}  hlmBtn variant='outline'>Test</button>
     <ng-template #tooltip>
 
@@ -40,7 +39,6 @@ export const Default: Story = {
       Add to library <ng-icon  class='ml-2'  name='lucidePlus'/>
      </span>
 </ng-template>
-  </hlm-tooltip>
 </div>
 `,
 	}),

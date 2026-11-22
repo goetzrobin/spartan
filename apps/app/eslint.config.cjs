@@ -31,6 +31,21 @@ module.exports = [
 		},
 	},
 	{
+		// Test pages are generated from the Storybook stories (tools/verify/story-to-test-pages.mjs)
+		// and keep the stories' code as it is: their selectors, their member names (which have to
+		// match the inputs they bind to) and their loosely typed args. Stories were never linted, so
+		// the naming and ordering rules of the docs app do not apply here. Template rules still do.
+		files: ['**/pages/[(]test[)]/**/*.ts'],
+		rules: {
+			'@angular-eslint/component-selector': 'off',
+			'@typescript-eslint/consistent-type-imports': 'off',
+			'@typescript-eslint/explicit-member-accessibility': 'off',
+			'@typescript-eslint/naming-convention': 'off',
+			'@typescript-eslint/no-explicit-any': 'off',
+			'@nx/workspace-component-directive-key-order': 'off',
+		},
+	},
+	{
 		files: ['**/*.html'],
 		// Override or add rules here
 		rules: {

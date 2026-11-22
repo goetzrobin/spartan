@@ -81,7 +81,7 @@ export const Default: Story = {
 
 @Component({
 	selector: 'command-dialog-component',
-	imports: [HlmCommandImports, HlmCode],
+	imports: [HlmCommandImports, HlmCode, NgIcon],
 	host: {
 		'(window:keydown)': 'onKeyDown($event)',
 	},

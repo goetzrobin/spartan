@@ -1,0 +1,618 @@
+{
+	"generatedBy": "tools/verify/story-to-test-pages.mjs",
+	"files": {
+		"accordion": {
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"title": "accordion",
+			"pages": [
+				"accordion--default",
+				"accordion--multiple",
+				"accordion--with-form-inputs",
+				"accordion--with-tapable",
+				"accordion--two-accordions",
+				"accordion--set-open-state",
+				"accordion--accordion-with-input",
+				"accordion--test-aria-valid-with-icon",
+				"accordion--button-state-sync"
+			],
+			"skipped": []
+		},
+		"alert": {
+			"source": "apps/ui-storybook/stories/alert.stories.ts",
+			"title": "alert",
+			"pages": ["alert--default", "alert--destructive"],
+			"skipped": []
+		},
+		"alert-dialog": {
+			"source": "apps/ui-storybook/stories/alert-dialog.stories.ts",
+			"title": "alert-dialog",
+			"pages": ["alert-dialog--default"],
+			"skipped": []
+		},
+		"aspect-ratio": {
+			"source": "apps/ui-storybook/stories/aspect-ratio.stories.ts",
+			"title": "aspect-ratio",
+			"pages": ["aspect-ratio--default"],
+			"skipped": []
+		},
+		"autocomplete": {
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"title": "autocomplete",
+			"pages": [
+				"autocomplete--default",
+				"autocomplete--async",
+				"autocomplete--config",
+				"autocomplete--countries",
+				"autocomplete--form",
+				"autocomplete--transform-option-value",
+				"autocomplete--with-reactive-form",
+				"autocomplete--with-hint-and-error",
+				"autocomplete--search-with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"avatar": {
+			"source": "apps/ui-storybook/stories/avatar.stories.ts",
+			"title": "avatar",
+			"pages": ["avatar--default"],
+			"skipped": []
+		},
+		"badge": {
+			"source": "apps/ui-storybook/stories/badge.stories.ts",
+			"title": "badge",
+			"pages": ["badge--default", "badge--destructive", "badge--outline", "badge--secondary"],
+			"skipped": []
+		},
+		"breadcrumb": {
+			"source": "apps/ui-storybook/stories/breadcrumb.stories.ts",
+			"title": "breadcrumb",
+			"pages": ["breadcrumb--default", "breadcrumb--custom"],
+			"skipped": []
+		},
+		"button": {
+			"source": "apps/ui-storybook/stories/button.stories.ts",
+			"title": "button",
+			"pages": [
+				"button--default",
+				"button--destructive",
+				"button--outline",
+				"button--secondary",
+				"button--ghost",
+				"button--link"
+			],
+			"skipped": []
+		},
+		"button-group": {
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"title": "button-group",
+			"pages": ["button-group--default", "button-group--split", "button-group--nested", "button-group--with-text"],
+			"skipped": []
+		},
+		"calendar": {
+			"source": "apps/ui-storybook/stories/calendar.stories.ts",
+			"title": "calendar",
+			"pages": ["calendar--default"],
+			"skipped": []
+		},
+		"card": {
+			"source": "apps/ui-storybook/stories/card.stories.ts",
+			"title": "card",
+			"pages": ["card--default", "card--transposed"],
+			"skipped": []
+		},
+		"carousel": {
+			"source": "apps/ui-storybook/stories/carousel.stories.ts",
+			"title": "carousel",
+			"pages": [
+				"carousel--default",
+				"carousel--sizes",
+				"carousel--spacing",
+				"carousel--orientation",
+				"carousel--plugins"
+			],
+			"skipped": []
+		},
+		"checkbox": {
+			"source": "apps/ui-storybook/stories/checkbox.stories.ts",
+			"title": "checkbox",
+			"pages": [
+				"checkbox--default",
+				"checkbox--inside-label",
+				"checkbox--labeled-with-aria-labeled-by",
+				"checkbox--disabled",
+				"checkbox--disabled-with-forms",
+				"checkbox--indeterminate",
+				"checkbox--with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"collapsible": {
+			"source": "apps/ui-storybook/stories/collapsible.stories.ts",
+			"title": "collapsible",
+			"pages": ["collapsible--default"],
+			"skipped": []
+		},
+		"combobox": {
+			"source": "apps/ui-storybook/stories/combobox.stories.ts",
+			"title": "combobox",
+			"pages": [
+				"combobox--default",
+				"combobox--popup",
+				"combobox--with-reactive-form",
+				"combobox--with-hint-and-error",
+				"combobox--multiple-with-hint-and-error",
+				"combobox--popup-with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"command": {
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"title": "command",
+			"pages": [
+				"command--default",
+				"command--dialog",
+				"command--dynamic-options",
+				"command--reactive-form",
+				"command--bound-value"
+			],
+			"skipped": []
+		},
+		"context-menu": {
+			"source": "apps/ui-storybook/stories/context-menu.stories.ts",
+			"title": "context-menu",
+			"pages": ["context-menu--default"],
+			"skipped": []
+		},
+		"date-picker": {
+			"source": "apps/ui-storybook/stories/date-picker.stories.ts",
+			"title": "date-picker",
+			"pages": [
+				"date-picker--default",
+				"date-picker--input",
+				"date-picker--preselected-end-of-month",
+				"date-picker--preselected-with-min-date",
+				"date-picker--with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"date-picker-jalali": {
+			"source": "apps/ui-storybook/stories/date-picker-jalali.stories.ts",
+			"title": "date-picker-jalali-persian",
+			"pages": ["date-picker-jalali-persian--default"],
+			"skipped": []
+		},
+		"date-picker-multi": {
+			"source": "apps/ui-storybook/stories/date-picker-multi.stories.ts",
+			"title": "date-picker-multi",
+			"pages": ["date-picker-multi--default", "date-picker-multi--input", "date-picker-multi--with-hint-and-error"],
+			"skipped": []
+		},
+		"date-range-picker": {
+			"source": "apps/ui-storybook/stories/date-range-picker.stories.ts",
+			"title": "date-range-picker",
+			"pages": ["date-range-picker--default", "date-range-picker--input", "date-range-picker--with-hint-and-error"],
+			"skipped": []
+		},
+		"dialog": {
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"title": "dialog",
+			"pages": [
+				"dialog--default",
+				"dialog--nested-dialog",
+				"dialog--context-menu",
+				"dialog--dynamic-component",
+				"dialog--dynamic-component-with-default-options",
+				"dialog--nested-dynamic-component"
+			],
+			"skipped": []
+		},
+		"dropdown-menu": {
+			"source": "apps/ui-storybook/stories/dropdown-menu.stories.ts",
+			"title": "dropdown-menu",
+			"pages": ["dropdown-menu--default", "dropdown-menu--stateful", "dropdown-menu--submenu"],
+			"skipped": []
+		},
+		"empty": {
+			"source": "apps/ui-storybook/stories/empty.stories.ts",
+			"title": "empty",
+			"pages": [
+				"empty--default",
+				"empty--with-action",
+				"empty--search-results",
+				"empty--no-connection",
+				"empty--file-not-found",
+				"empty--minimal-text",
+				"empty--custom-layout"
+			],
+			"skipped": []
+		},
+		"field": {
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"title": "field",
+			"pages": [
+				"field--default",
+				"field--with-input",
+				"field--with-checkbox",
+				"field--with-switch",
+				"field--with-radio",
+				"field--with-select",
+				"field--with-textarea",
+				"field--with-error",
+				"field--field-group",
+				"field--complex-form",
+				"field--horizontal-orientation",
+				"field--with-field-content",
+				"field--with-field-title"
+			],
+			"skipped": []
+		},
+		"hlm-attachment": {
+			"source": "apps/ui-storybook/stories/hlm-attachment.stories.ts",
+			"title": "attachment",
+			"pages": ["attachment--default"],
+			"skipped": []
+		},
+		"hlm-bubble": {
+			"source": "apps/ui-storybook/stories/hlm-bubble.stories.ts",
+			"title": "bubble",
+			"pages": ["bubble--demo", "bubble--variants"],
+			"skipped": []
+		},
+		"hlm-code-block": {
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"title": "code-block",
+			"pages": [
+				"code-block--default",
+				"code-block--basic",
+				"code-block--header",
+				"code-block--line-numbers",
+				"code-block--highlighted-lines",
+				"code-block--diff",
+				"code-block--size",
+				"code-block--destructive",
+				"code-block--actions"
+			],
+			"skipped": []
+		},
+		"hlm-item": {
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"title": "item",
+			"pages": [
+				"item--default",
+				"item--avatar",
+				"item--dropdown",
+				"item--group",
+				"item--header",
+				"item--icon",
+				"item--image",
+				"item--link",
+				"item--size",
+				"item--variants"
+			],
+			"skipped": []
+		},
+		"hlm-kbd": {
+			"source": "apps/ui-storybook/stories/hlm-kbd.stories.ts",
+			"title": "kbd",
+			"pages": ["kbd--default"],
+			"skipped": []
+		},
+		"hlm-marker": {
+			"source": "apps/ui-storybook/stories/hlm-marker.stories.ts",
+			"title": "marker",
+			"pages": ["marker--default"],
+			"skipped": []
+		},
+		"hlm-message": {
+			"source": "apps/ui-storybook/stories/hlm-message.stories.ts",
+			"title": "message",
+			"pages": ["message--conversation"],
+			"skipped": []
+		},
+		"hlm-message-scroller": {
+			"source": "apps/ui-storybook/stories/hlm-message-scroller.stories.ts",
+			"title": "message-scroller",
+			"pages": [
+				"message-scroller--default",
+				"message-scroller--auto-scroll",
+				"message-scroller--scroll-anchors",
+				"message-scroller--opening-start"
+			],
+			"skipped": []
+		},
+		"hlm-native-select": {
+			"source": "apps/ui-storybook/stories/hlm-native-select.stories.ts",
+			"title": "native-select",
+			"pages": ["native-select--default", "native-select--with-hint-and-error"],
+			"skipped": []
+		},
+		"hlm-questionnaire": {
+			"source": "apps/ui-storybook/stories/hlm-questionnaire.stories.ts",
+			"title": "questionnaire",
+			"pages": ["questionnaire--default", "questionnaire--multiple", "questionnaire--freeform"],
+			"skipped": []
+		},
+		"hlm-trace": {
+			"source": "apps/ui-storybook/stories/hlm-trace.stories.ts",
+			"title": "trace",
+			"pages": ["trace--default"],
+			"skipped": []
+		},
+		"hover-card": {
+			"source": "apps/ui-storybook/stories/hover-card.stories.ts",
+			"title": "hover-card",
+			"pages": ["hover-card--default"],
+			"skipped": []
+		},
+		"input": {
+			"source": "apps/ui-storybook/stories/input.stories.ts",
+			"title": "input",
+			"pages": [
+				"input--default",
+				"input--file",
+				"input--disabled",
+				"input--required",
+				"input--error",
+				"input--with-button",
+				"input--with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"input-group": {
+			"source": "apps/ui-storybook/stories/input-group.stories.ts",
+			"title": "input-group",
+			"pages": ["input-group--default"],
+			"skipped": []
+		},
+		"input-otp": {
+			"source": "apps/ui-storybook/stories/input-otp.stories.ts",
+			"title": "input-otp",
+			"pages": ["input-otp--default", "input-otp--masked"],
+			"skipped": []
+		},
+		"label": {
+			"source": "apps/ui-storybook/stories/label.stories.ts",
+			"title": "label",
+			"pages": ["label--default", "label--input-required", "label--custom-id"],
+			"skipped": []
+		},
+		"menubar": {
+			"source": "apps/ui-storybook/stories/menubar.stories.ts",
+			"title": "menubar",
+			"pages": ["menubar--default"],
+			"skipped": []
+		},
+		"month-year-picker": {
+			"source": "apps/ui-storybook/stories/month-year-picker.stories.ts",
+			"title": "month-year-picker",
+			"pages": ["month-year-picker--default", "month-year-picker--input"],
+			"skipped": []
+		},
+		"navigation-menu": {
+			"source": "apps/ui-storybook/stories/navigation-menu.stories.ts",
+			"title": "navigation-menu",
+			"pages": ["navigation-menu--default", "navigation-menu--click-to-open"],
+			"skipped": []
+		},
+		"pagination": {
+			"source": "apps/ui-storybook/stories/pagination.stories.ts",
+			"title": "pagination",
+			"pages": ["pagination--default"],
+			"skipped": []
+		},
+		"popover": {
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"title": "popover",
+			"pages": [
+				"popover--default",
+				"popover--near-viewport-edge",
+				"popover--close-on-scroll",
+				"popover--scroll-container"
+			],
+			"skipped": []
+		},
+		"progress": {
+			"source": "apps/ui-storybook/stories/progress.stories.ts",
+			"title": "progress",
+			"pages": [
+				"progress--loading-not-started",
+				"progress--loading-started",
+				"progress--indeterminate",
+				"progress--complete"
+			],
+			"skipped": []
+		},
+		"radio-group": {
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"title": "radio-group",
+			"pages": [
+				"radio-group--default",
+				"radio-group--label-for",
+				"radio-group--validation",
+				"radio-group--with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"resizable": {
+			"source": "apps/ui-storybook/stories/resizable.stories.ts",
+			"title": "resizable",
+			"pages": ["resizable--default", "resizable--dynamic-panels"],
+			"skipped": []
+		},
+		"scroll-area": {
+			"source": "apps/ui-storybook/stories/scroll-area.stories.ts",
+			"title": "scroll-area",
+			"pages": ["scroll-area--default", "scroll-area--vertical"],
+			"skipped": []
+		},
+		"select": {
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"title": "select",
+			"pages": [
+				"select--default",
+				"select--multiple",
+				"select--reactive-form-control",
+				"select--disabled-option",
+				"select--select-item-to-string",
+				"select--reactive-form-control-with-for-and-initial-value",
+				"select--reactive-form-control-with-for-and-initial-value-and-multiple",
+				"select--reactive-form-control-with-validation",
+				"select--reactive-form-control-with-validation-with-label",
+				"select--with-hint-and-error",
+				"select--ng-model-form-control",
+				"select--ng-model-form-control-initial-value",
+				"select--select-with-label",
+				"select--scrollable",
+				"select--custom-placeholder",
+				"select--with-label-and-form",
+				"select--dynamic-options-multi-select",
+				"select--falsy-value"
+			],
+			"skipped": []
+		},
+		"separator": {
+			"source": "apps/ui-storybook/stories/separator.stories.ts",
+			"title": "separator",
+			"pages": ["separator--default"],
+			"skipped": []
+		},
+		"sheet": {
+			"source": "apps/ui-storybook/stories/sheet.stories.ts",
+			"title": "sheet",
+			"pages": ["sheet--default"],
+			"skipped": []
+		},
+		"sidebar": {
+			"source": "apps/ui-storybook/stories/sidebar.stories.ts",
+			"title": "sidebar",
+			"pages": ["sidebar--default", "sidebar--right-side"],
+			"skipped": []
+		},
+		"skeleton": {
+			"source": "apps/ui-storybook/stories/skeleton.stories.ts",
+			"title": "skeleton",
+			"pages": ["skeleton--default"],
+			"skipped": []
+		},
+		"slider": {
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"title": "slider",
+			"pages": [
+				"slider--default",
+				"slider--range",
+				"slider--disabled",
+				"slider--min",
+				"slider--max",
+				"slider--min-max",
+				"slider--step",
+				"slider--min-steps-between-thumbs",
+				"slider--inverted",
+				"slider--vertical",
+				"slider--ticks",
+				"slider--tick-label-interval",
+				"slider--draggable-range",
+				"slider--draggable-range-only",
+				"slider--template-driven-form",
+				"slider--reactive-form-control",
+				"slider--reactive-form-control-with-initial-value",
+				"slider--validation"
+			],
+			"skipped": []
+		},
+		"sonner": {
+			"source": "apps/ui-storybook/stories/sonner.stories.ts",
+			"title": "sonner",
+			"pages": ["sonner--default"],
+			"skipped": []
+		},
+		"spinner": {
+			"source": "apps/ui-storybook/stories/spinner.stories.ts",
+			"title": "spinner",
+			"pages": ["spinner--default"],
+			"skipped": []
+		},
+		"switch": {
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"title": "switch",
+			"pages": [
+				"switch--default",
+				"switch--inside-label",
+				"switch--labeled-with-aria-labeled-by",
+				"switch--disabled",
+				"switch--form",
+				"switch--form-true",
+				"switch--with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"table": {
+			"source": "apps/ui-storybook/stories/table.stories.ts",
+			"title": "table",
+			"pages": ["table--default"],
+			"skipped": []
+		},
+		"tabs": {
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"title": "tabs",
+			"pages": [
+				"tabs--default",
+				"tabs--vertical",
+				"tabs--paginated",
+				"tabs--lazy-loading",
+				"tabs--brn-only",
+				"tabs--disabled"
+			],
+			"skipped": []
+		},
+		"textarea": {
+			"source": "apps/ui-storybook/stories/textarea.stories.ts",
+			"title": "textarea",
+			"pages": [
+				"textarea--default",
+				"textarea--disabled",
+				"textarea--required",
+				"textarea--error",
+				"textarea--with-button",
+				"textarea--with-hint-and-error"
+			],
+			"skipped": []
+		},
+		"toggle": {
+			"source": "apps/ui-storybook/stories/toggle.stories.ts",
+			"title": "toggle",
+			"pages": ["toggle--default", "toggle--with-text"],
+			"skipped": []
+		},
+		"toggle-group": {
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"title": "toggle-group",
+			"pages": [
+				"toggle-group--default",
+				"toggle-group--outline",
+				"toggle-group--small",
+				"toggle-group--large",
+				"toggle-group--disabled",
+				"toggle-group--toggle-group-single-nullable",
+				"toggle-group--toggle-group-multiple-nullable",
+				"toggle-group--toggle-group-single",
+				"toggle-group--toggle-group-disabled",
+				"toggle-group--toggle-group-multiple",
+				"toggle-group--toggle-group-form"
+			],
+			"skipped": []
+		},
+		"tooltip": {
+			"source": "apps/ui-storybook/stories/tooltip.stories.ts",
+			"title": "tooltip",
+			"pages": ["tooltip--default", "tooltip--simple", "tooltip--disabled"],
+			"skipped": []
+		},
+		"typography": {
+			"source": "apps/ui-storybook/stories/typography.stories.ts",
+			"title": "typography",
+			"pages": ["typography--default"],
+			"skipped": []
+		}
+	},
+	"totals": { "files": 67, "pages": 259, "skippedStories": 0, "skippedFiles": 0 }
+}

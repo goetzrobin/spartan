@@ -1,0 +1,55 @@
+const openMenu = () => cy.findByRole('button', { name: /menu/i }).click();
+
+describe('widget--default', () => {
+	describe('default', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=widget--default');
+			cy.injectAxe();
+		});
+
+		afterEach(() => {
+			cy.realPress('Escape');
+		});
+
+		it('opens with a click', () => {
+			cy.checkA11y('#storybook-root', {
+				rules: { 'landmark-one-main': { enabled: false } },
+			});
+
+			// open it
+			cy.findByText('Open').click();
+			cy.findByRole('dialog');
+			cy.findByRole('dialog').get('button.close').click({ force: true });
+			cy.findAllByText(/open/i).should('have.length', 1).and('have.focus');
+		});
+
+		it.only('uses a helper', () => {
+			openMenu();
+		});
+
+		it.skip('is skipped in Cypress too', () => {
+			cy.get('#x').should('be.visible');
+		});
+
+		it('reads a value', () => {
+			cy.get('input').then(($el) => cy.wrap($el).should('have.value', ''));
+		});
+	});
+
+	describe.skip('needs geometry', () => {
+		beforeEach(() => {
+			cy.visit('/iframe.html?id=widget--edge');
+			cy.window().then((win) => win.scrollTo(0, 100));
+		});
+
+		it('measures', () => {
+			cy.get('#edge').should('exist');
+		});
+
+		describe('nested', () => {
+			it('also measures', () => {
+				cy.get('#edge').should('be.visible');
+			});
+		});
+	});
+});

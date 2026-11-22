@@ -9,17 +9,6 @@ const meta: Meta<HlmInput> = {
 	title: 'Input',
 	component: HlmInput,
 	tags: ['autodocs'],
-	args: {
-		error: 'auto',
-	},
-	argTypes: {
-		error: {
-			options: ['auto', 'true'],
-			control: {
-				type: 'select',
-			},
-		},
-	},
 	decorators: [
 		moduleMetadata({
 			imports: [HlmInput, HlmLabel, HlmButton, FormsModule, ReactiveFormsModule, HlmFieldImports],
@@ -70,9 +59,9 @@ export const Required: Story = {
 
 export const Error: Story = {
 	render: ({ ...args }) => ({
-		props: { ...args, error: 'true' },
+		props: args,
 		template: `
-    <input aria-label='Email' class='w-80' hlmInput ${argsToTemplate(args)} type='email' placeholder='Email' />
+    <input aria-label='Email' aria-invalid='true' class='w-80' hlmInput ${argsToTemplate(args)} type='email' placeholder='Email' />
     `,
 	}),
 };

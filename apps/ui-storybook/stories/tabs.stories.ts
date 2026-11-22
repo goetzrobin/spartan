@@ -10,6 +10,9 @@ const meta: Meta<BrnTabs & { disabled: boolean }> = {
 	title: 'Tabs',
 	component: BrnTabs,
 	tags: ['autodocs'],
+	args: {
+		activationMode: 'automatic',
+	},
 	argTypes: {
 		activationMode: {
 			options: ['manual', 'automatic'],
@@ -295,7 +298,15 @@ export const Disabled: Story = {
 			</hlm-tabs>
 
 			<div class="mt-6 flex justify-center">
-				<button (click)="isDisabled = !isDisabled" name="disabled-toggle" hlmBtn role="switch">Toggle disabled</button>
+				<button
+					(click)="isDisabled = !isDisabled"
+					name="disabled-toggle"
+					hlmBtn
+					role="switch"
+					[attr.aria-checked]="isDisabled"
+				>
+					Toggle disabled
+				</button>
 			</div>
 		`,
 	}),

@@ -31,17 +31,17 @@ const meta: Meta<NgScrollbar> = {
 	component: NgScrollbar,
 	tags: ['autodocs'],
 	args: {
-		track: 'all',
+		orientation: 'auto',
 		visibility: 'native',
 	} as any, // this is required as storybook isn't inferring types from signals
 	argTypes: {
-		track: {
-			options: ['vertical', 'horizontal', 'all'],
+		orientation: {
+			options: ['vertical', 'horizontal', 'auto'],
 			control: {
 				type: 'select',
 			},
 			table: {
-				defaultValue: { summary: 'all' },
+				defaultValue: { summary: 'auto' },
 			},
 		},
 		visibility: {

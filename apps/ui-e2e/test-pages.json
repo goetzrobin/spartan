@@ -1,0 +1,2073 @@
+{
+	"generatedBy": "tools/verify/story-to-test-pages.mjs",
+	"pages": [
+		{
+			"id": "accordion--accordion-with-input",
+			"route": "/test/accordion/accordion-with-input",
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"story": "AccordionWithInput",
+			"args": []
+		},
+		{
+			"id": "accordion--button-state-sync",
+			"route": "/test/accordion/button-state-sync",
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"story": "ButtonStateSync",
+			"args": []
+		},
+		{
+			"id": "accordion--default",
+			"route": "/test/accordion/default",
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "accordion--multiple",
+			"route": "/test/accordion/multiple",
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"story": "Multiple",
+			"args": []
+		},
+		{
+			"id": "accordion--set-open-state",
+			"route": "/test/accordion/set-open-state",
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"story": "SetOpenState",
+			"args": []
+		},
+		{
+			"id": "accordion--test-aria-valid-with-icon",
+			"route": "/test/accordion/test-aria-valid-with-icon",
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"story": "TestAriaValidWithIcon",
+			"args": []
+		},
+		{
+			"id": "accordion--two-accordions",
+			"route": "/test/accordion/two-accordions",
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"story": "TwoAccordions",
+			"args": []
+		},
+		{
+			"id": "accordion--with-form-inputs",
+			"route": "/test/accordion/with-form-inputs",
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"story": "WithFormInputs",
+			"args": []
+		},
+		{
+			"id": "accordion--with-tapable",
+			"route": "/test/accordion/with-tapable",
+			"source": "apps/ui-storybook/stories/accordion.stories.ts",
+			"story": "WithTapable",
+			"args": []
+		},
+		{
+			"id": "alert--default",
+			"route": "/test/alert/default",
+			"source": "apps/ui-storybook/stories/alert.stories.ts",
+			"story": "Default",
+			"args": ["variant"]
+		},
+		{
+			"id": "alert--destructive",
+			"route": "/test/alert/destructive",
+			"source": "apps/ui-storybook/stories/alert.stories.ts",
+			"story": "Destructive",
+			"args": ["variant"]
+		},
+		{
+			"id": "alert-dialog--default",
+			"route": "/test/alert-dialog/default",
+			"source": "apps/ui-storybook/stories/alert-dialog.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "aspect-ratio--default",
+			"route": "/test/aspect-ratio/default",
+			"source": "apps/ui-storybook/stories/aspect-ratio.stories.ts",
+			"story": "Default",
+			"args": ["ratio"]
+		},
+		{
+			"id": "attachment--default",
+			"route": "/test/attachment/default",
+			"source": "apps/ui-storybook/stories/hlm-attachment.stories.ts",
+			"story": "Default",
+			"args": [],
+			"note": "applicationConfig providers were placed on the route"
+		},
+		{
+			"id": "autocomplete--async",
+			"route": "/test/autocomplete/async",
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"story": "Async",
+			"args": []
+		},
+		{
+			"id": "autocomplete--config",
+			"route": "/test/autocomplete/config",
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"story": "Config",
+			"args": []
+		},
+		{
+			"id": "autocomplete--countries",
+			"route": "/test/autocomplete/countries",
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"story": "Countries",
+			"args": []
+		},
+		{
+			"id": "autocomplete--default",
+			"route": "/test/autocomplete/default",
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "autocomplete--form",
+			"route": "/test/autocomplete/form",
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"story": "Form",
+			"args": []
+		},
+		{
+			"id": "autocomplete--search-with-hint-and-error",
+			"route": "/test/autocomplete/search-with-hint-and-error",
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"story": "SearchWithHintAndError",
+			"args": []
+		},
+		{
+			"id": "autocomplete--transform-option-value",
+			"route": "/test/autocomplete/transform-option-value",
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"story": "TransformOptionValue",
+			"args": []
+		},
+		{
+			"id": "autocomplete--with-hint-and-error",
+			"route": "/test/autocomplete/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "autocomplete--with-reactive-form",
+			"route": "/test/autocomplete/with-reactive-form",
+			"source": "apps/ui-storybook/stories/autocomplete.stories.ts",
+			"story": "WithReactiveForm",
+			"args": []
+		},
+		{
+			"id": "avatar--default",
+			"route": "/test/avatar/default",
+			"source": "apps/ui-storybook/stories/avatar.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "badge--default",
+			"route": "/test/badge/default",
+			"source": "apps/ui-storybook/stories/badge.stories.ts",
+			"story": "Default",
+			"args": ["variant"]
+		},
+		{
+			"id": "badge--destructive",
+			"route": "/test/badge/destructive",
+			"source": "apps/ui-storybook/stories/badge.stories.ts",
+			"story": "Destructive",
+			"args": ["variant"]
+		},
+		{
+			"id": "badge--outline",
+			"route": "/test/badge/outline",
+			"source": "apps/ui-storybook/stories/badge.stories.ts",
+			"story": "Outline",
+			"args": ["variant"]
+		},
+		{
+			"id": "badge--secondary",
+			"route": "/test/badge/secondary",
+			"source": "apps/ui-storybook/stories/badge.stories.ts",
+			"story": "Secondary",
+			"args": ["variant"]
+		},
+		{
+			"id": "breadcrumb--custom",
+			"route": "/test/breadcrumb/custom",
+			"source": "apps/ui-storybook/stories/breadcrumb.stories.ts",
+			"story": "Custom",
+			"args": []
+		},
+		{
+			"id": "breadcrumb--default",
+			"route": "/test/breadcrumb/default",
+			"source": "apps/ui-storybook/stories/breadcrumb.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "bubble--demo",
+			"route": "/test/bubble/demo",
+			"source": "apps/ui-storybook/stories/hlm-bubble.stories.ts",
+			"story": "Demo",
+			"args": []
+		},
+		{
+			"id": "bubble--variants",
+			"route": "/test/bubble/variants",
+			"source": "apps/ui-storybook/stories/hlm-bubble.stories.ts",
+			"story": "Variants",
+			"args": []
+		},
+		{
+			"id": "button--default",
+			"route": "/test/button/default",
+			"source": "apps/ui-storybook/stories/button.stories.ts",
+			"story": "Default",
+			"args": ["variant", "size"]
+		},
+		{
+			"id": "button--destructive",
+			"route": "/test/button/destructive",
+			"source": "apps/ui-storybook/stories/button.stories.ts",
+			"story": "Destructive",
+			"args": ["variant", "size"]
+		},
+		{
+			"id": "button--ghost",
+			"route": "/test/button/ghost",
+			"source": "apps/ui-storybook/stories/button.stories.ts",
+			"story": "Ghost",
+			"args": ["variant", "size"]
+		},
+		{
+			"id": "button--link",
+			"route": "/test/button/link",
+			"source": "apps/ui-storybook/stories/button.stories.ts",
+			"story": "Link",
+			"args": ["variant", "size"]
+		},
+		{
+			"id": "button--outline",
+			"route": "/test/button/outline",
+			"source": "apps/ui-storybook/stories/button.stories.ts",
+			"story": "Outline",
+			"args": ["variant", "size"]
+		},
+		{
+			"id": "button--secondary",
+			"route": "/test/button/secondary",
+			"source": "apps/ui-storybook/stories/button.stories.ts",
+			"story": "Secondary",
+			"args": ["variant", "size"]
+		},
+		{
+			"id": "button-group--default",
+			"route": "/test/button-group/default",
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "button-group--nested",
+			"route": "/test/button-group/nested",
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"story": "Nested",
+			"args": []
+		},
+		{
+			"id": "button-group--split",
+			"route": "/test/button-group/split",
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"story": "Split",
+			"args": []
+		},
+		{
+			"id": "button-group--with-text",
+			"route": "/test/button-group/with-text",
+			"source": "apps/ui-storybook/stories/button-group.stories.ts",
+			"story": "WithText",
+			"args": []
+		},
+		{
+			"id": "calendar--default",
+			"route": "/test/calendar/default",
+			"source": "apps/ui-storybook/stories/calendar.stories.ts",
+			"story": "Default",
+			"args": ["date", "min", "max"]
+		},
+		{
+			"id": "card--default",
+			"route": "/test/card/default",
+			"source": "apps/ui-storybook/stories/card.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "card--transposed",
+			"route": "/test/card/transposed",
+			"source": "apps/ui-storybook/stories/card.stories.ts",
+			"story": "Transposed",
+			"args": []
+		},
+		{
+			"id": "carousel--default",
+			"route": "/test/carousel/default",
+			"source": "apps/ui-storybook/stories/carousel.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "carousel--orientation",
+			"route": "/test/carousel/orientation",
+			"source": "apps/ui-storybook/stories/carousel.stories.ts",
+			"story": "Orientation",
+			"args": []
+		},
+		{
+			"id": "carousel--plugins",
+			"route": "/test/carousel/plugins",
+			"source": "apps/ui-storybook/stories/carousel.stories.ts",
+			"story": "Plugins",
+			"args": ["plugins"]
+		},
+		{
+			"id": "carousel--sizes",
+			"route": "/test/carousel/sizes",
+			"source": "apps/ui-storybook/stories/carousel.stories.ts",
+			"story": "Sizes",
+			"args": []
+		},
+		{
+			"id": "carousel--spacing",
+			"route": "/test/carousel/spacing",
+			"source": "apps/ui-storybook/stories/carousel.stories.ts",
+			"story": "Spacing",
+			"args": []
+		},
+		{
+			"id": "checkbox--default",
+			"route": "/test/checkbox/default",
+			"source": "apps/ui-storybook/stories/checkbox.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "checkbox--disabled",
+			"route": "/test/checkbox/disabled",
+			"source": "apps/ui-storybook/stories/checkbox.stories.ts",
+			"story": "Disabled",
+			"args": []
+		},
+		{
+			"id": "checkbox--disabled-with-forms",
+			"route": "/test/checkbox/disabled-with-forms",
+			"source": "apps/ui-storybook/stories/checkbox.stories.ts",
+			"story": "disabledWithForms",
+			"args": []
+		},
+		{
+			"id": "checkbox--indeterminate",
+			"route": "/test/checkbox/indeterminate",
+			"source": "apps/ui-storybook/stories/checkbox.stories.ts",
+			"story": "Indeterminate",
+			"args": []
+		},
+		{
+			"id": "checkbox--inside-label",
+			"route": "/test/checkbox/inside-label",
+			"source": "apps/ui-storybook/stories/checkbox.stories.ts",
+			"story": "InsideLabel",
+			"args": []
+		},
+		{
+			"id": "checkbox--labeled-with-aria-labeled-by",
+			"route": "/test/checkbox/labeled-with-aria-labeled-by",
+			"source": "apps/ui-storybook/stories/checkbox.stories.ts",
+			"story": "LabeledWithAriaLabeledBy",
+			"args": []
+		},
+		{
+			"id": "checkbox--with-hint-and-error",
+			"route": "/test/checkbox/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/checkbox.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "code-block--actions",
+			"route": "/test/code-block/actions",
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"story": "Actions",
+			"args": []
+		},
+		{
+			"id": "code-block--basic",
+			"route": "/test/code-block/basic",
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"story": "Basic",
+			"args": []
+		},
+		{
+			"id": "code-block--default",
+			"route": "/test/code-block/default",
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "code-block--destructive",
+			"route": "/test/code-block/destructive",
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"story": "Destructive",
+			"args": []
+		},
+		{
+			"id": "code-block--diff",
+			"route": "/test/code-block/diff",
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"story": "Diff",
+			"args": []
+		},
+		{
+			"id": "code-block--header",
+			"route": "/test/code-block/header",
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"story": "Header",
+			"args": []
+		},
+		{
+			"id": "code-block--highlighted-lines",
+			"route": "/test/code-block/highlighted-lines",
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"story": "HighlightedLines",
+			"args": []
+		},
+		{
+			"id": "code-block--line-numbers",
+			"route": "/test/code-block/line-numbers",
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"story": "LineNumbers",
+			"args": []
+		},
+		{
+			"id": "code-block--size",
+			"route": "/test/code-block/size",
+			"source": "apps/ui-storybook/stories/hlm-code-block.stories.ts",
+			"story": "Size",
+			"args": []
+		},
+		{
+			"id": "collapsible--default",
+			"route": "/test/collapsible/default",
+			"source": "apps/ui-storybook/stories/collapsible.stories.ts",
+			"story": "Default",
+			"args": ["disabled"]
+		},
+		{
+			"id": "combobox--default",
+			"route": "/test/combobox/default",
+			"source": "apps/ui-storybook/stories/combobox.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "combobox--multiple-with-hint-and-error",
+			"route": "/test/combobox/multiple-with-hint-and-error",
+			"source": "apps/ui-storybook/stories/combobox.stories.ts",
+			"story": "MultipleWithHintAndError",
+			"args": []
+		},
+		{
+			"id": "combobox--popup",
+			"route": "/test/combobox/popup",
+			"source": "apps/ui-storybook/stories/combobox.stories.ts",
+			"story": "Popup",
+			"args": []
+		},
+		{
+			"id": "combobox--popup-with-hint-and-error",
+			"route": "/test/combobox/popup-with-hint-and-error",
+			"source": "apps/ui-storybook/stories/combobox.stories.ts",
+			"story": "PopupWithHintAndError",
+			"args": []
+		},
+		{
+			"id": "combobox--with-hint-and-error",
+			"route": "/test/combobox/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/combobox.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "combobox--with-reactive-form",
+			"route": "/test/combobox/with-reactive-form",
+			"source": "apps/ui-storybook/stories/combobox.stories.ts",
+			"story": "WithReactiveForm",
+			"args": []
+		},
+		{
+			"id": "command--bound-value",
+			"route": "/test/command/bound-value",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "BoundValue",
+			"args": []
+		},
+		{
+			"id": "command--default",
+			"route": "/test/command/default",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "command--dialog",
+			"route": "/test/command/dialog",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "Dialog",
+			"args": []
+		},
+		{
+			"id": "command--dynamic-options",
+			"route": "/test/command/dynamic-options",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "DynamicOptions",
+			"args": []
+		},
+		{
+			"id": "command--reactive-form",
+			"route": "/test/command/reactive-form",
+			"source": "apps/ui-storybook/stories/command.stories.ts",
+			"story": "ReactiveForm",
+			"args": []
+		},
+		{
+			"id": "context-menu--default",
+			"route": "/test/context-menu/default",
+			"source": "apps/ui-storybook/stories/context-menu.stories.ts",
+			"story": "Default",
+			"args": ["sideOffset"]
+		},
+		{
+			"id": "date-picker--default",
+			"route": "/test/date-picker/default",
+			"source": "apps/ui-storybook/stories/date-picker.stories.ts",
+			"story": "Default",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "date-picker--input",
+			"route": "/test/date-picker/input",
+			"source": "apps/ui-storybook/stories/date-picker.stories.ts",
+			"story": "Input",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "date-picker--preselected-end-of-month",
+			"route": "/test/date-picker/preselected-end-of-month",
+			"source": "apps/ui-storybook/stories/date-picker.stories.ts",
+			"story": "PreselectedEndOfMonth",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "date-picker--preselected-with-min-date",
+			"route": "/test/date-picker/preselected-with-min-date",
+			"source": "apps/ui-storybook/stories/date-picker.stories.ts",
+			"story": "PreselectedWithMinDate",
+			"args": ["captionLayout", "maxDate"]
+		},
+		{
+			"id": "date-picker--with-hint-and-error",
+			"route": "/test/date-picker/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/date-picker.stories.ts",
+			"story": "WithHintAndError",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "date-picker-jalali-persian--default",
+			"route": "/test/date-picker-jalali-persian/default",
+			"source": "apps/ui-storybook/stories/date-picker-jalali.stories.ts",
+			"story": "Default",
+			"args": ["captionLayout"]
+		},
+		{
+			"id": "date-picker-multi--default",
+			"route": "/test/date-picker-multi/default",
+			"source": "apps/ui-storybook/stories/date-picker-multi.stories.ts",
+			"story": "Default",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "date-picker-multi--input",
+			"route": "/test/date-picker-multi/input",
+			"source": "apps/ui-storybook/stories/date-picker-multi.stories.ts",
+			"story": "Input",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "date-picker-multi--with-hint-and-error",
+			"route": "/test/date-picker-multi/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/date-picker-multi.stories.ts",
+			"story": "WithHintAndError",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "date-range-picker--default",
+			"route": "/test/date-range-picker/default",
+			"source": "apps/ui-storybook/stories/date-range-picker.stories.ts",
+			"story": "Default",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "date-range-picker--input",
+			"route": "/test/date-range-picker/input",
+			"source": "apps/ui-storybook/stories/date-range-picker.stories.ts",
+			"story": "Input",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "date-range-picker--with-hint-and-error",
+			"route": "/test/date-range-picker/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/date-range-picker.stories.ts",
+			"story": "WithHintAndError",
+			"args": ["captionLayout", "minDate", "maxDate"]
+		},
+		{
+			"id": "dialog--context-menu",
+			"route": "/test/dialog/context-menu",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "ContextMenu",
+			"args": []
+		},
+		{
+			"id": "dialog--default",
+			"route": "/test/dialog/default",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "dialog--dynamic-component",
+			"route": "/test/dialog/dynamic-component",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "DynamicComponent",
+			"args": []
+		},
+		{
+			"id": "dialog--dynamic-component-with-default-options",
+			"route": "/test/dialog/dynamic-component-with-default-options",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "DynamicComponentWithDefaultOptions",
+			"args": [],
+			"note": "applicationConfig providers were placed on the route"
+		},
+		{
+			"id": "dialog--nested-dialog",
+			"route": "/test/dialog/nested-dialog",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "NestedDialog",
+			"args": []
+		},
+		{
+			"id": "dialog--nested-dynamic-component",
+			"route": "/test/dialog/nested-dynamic-component",
+			"source": "apps/ui-storybook/stories/dialog.stories.ts",
+			"story": "NestedDynamicComponent",
+			"args": []
+		},
+		{
+			"id": "dropdown-menu--default",
+			"route": "/test/dropdown-menu/default",
+			"source": "apps/ui-storybook/stories/dropdown-menu.stories.ts",
+			"story": "Default",
+			"args": ["sideOffset"]
+		},
+		{
+			"id": "dropdown-menu--stateful",
+			"route": "/test/dropdown-menu/stateful",
+			"source": "apps/ui-storybook/stories/dropdown-menu.stories.ts",
+			"story": "Stateful",
+			"args": ["sideOffset"]
+		},
+		{
+			"id": "dropdown-menu--submenu",
+			"route": "/test/dropdown-menu/submenu",
+			"source": "apps/ui-storybook/stories/dropdown-menu.stories.ts",
+			"story": "Submenu",
+			"args": ["sideOffset"]
+		},
+		{
+			"id": "empty--custom-layout",
+			"route": "/test/empty/custom-layout",
+			"source": "apps/ui-storybook/stories/empty.stories.ts",
+			"story": "CustomLayout",
+			"args": []
+		},
+		{
+			"id": "empty--default",
+			"route": "/test/empty/default",
+			"source": "apps/ui-storybook/stories/empty.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "empty--file-not-found",
+			"route": "/test/empty/file-not-found",
+			"source": "apps/ui-storybook/stories/empty.stories.ts",
+			"story": "FileNotFound",
+			"args": []
+		},
+		{
+			"id": "empty--minimal-text",
+			"route": "/test/empty/minimal-text",
+			"source": "apps/ui-storybook/stories/empty.stories.ts",
+			"story": "MinimalText",
+			"args": []
+		},
+		{
+			"id": "empty--no-connection",
+			"route": "/test/empty/no-connection",
+			"source": "apps/ui-storybook/stories/empty.stories.ts",
+			"story": "NoConnection",
+			"args": []
+		},
+		{
+			"id": "empty--search-results",
+			"route": "/test/empty/search-results",
+			"source": "apps/ui-storybook/stories/empty.stories.ts",
+			"story": "SearchResults",
+			"args": []
+		},
+		{
+			"id": "empty--with-action",
+			"route": "/test/empty/with-action",
+			"source": "apps/ui-storybook/stories/empty.stories.ts",
+			"story": "WithAction",
+			"args": []
+		},
+		{
+			"id": "field--complex-form",
+			"route": "/test/field/complex-form",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "ComplexForm",
+			"args": []
+		},
+		{
+			"id": "field--default",
+			"route": "/test/field/default",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "field--field-group",
+			"route": "/test/field/field-group",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "FieldGroup",
+			"args": []
+		},
+		{
+			"id": "field--horizontal-orientation",
+			"route": "/test/field/horizontal-orientation",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "HorizontalOrientation",
+			"args": []
+		},
+		{
+			"id": "field--with-checkbox",
+			"route": "/test/field/with-checkbox",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "WithCheckbox",
+			"args": []
+		},
+		{
+			"id": "field--with-error",
+			"route": "/test/field/with-error",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "WithError",
+			"args": []
+		},
+		{
+			"id": "field--with-field-content",
+			"route": "/test/field/with-field-content",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "WithFieldContent",
+			"args": []
+		},
+		{
+			"id": "field--with-field-title",
+			"route": "/test/field/with-field-title",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "WithFieldTitle",
+			"args": []
+		},
+		{
+			"id": "field--with-input",
+			"route": "/test/field/with-input",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "WithInput",
+			"args": []
+		},
+		{
+			"id": "field--with-radio",
+			"route": "/test/field/with-radio",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "WithRadio",
+			"args": []
+		},
+		{
+			"id": "field--with-select",
+			"route": "/test/field/with-select",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "WithSelect",
+			"args": []
+		},
+		{
+			"id": "field--with-switch",
+			"route": "/test/field/with-switch",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "WithSwitch",
+			"args": []
+		},
+		{
+			"id": "field--with-textarea",
+			"route": "/test/field/with-textarea",
+			"source": "apps/ui-storybook/stories/field.stories.ts",
+			"story": "WithTextarea",
+			"args": []
+		},
+		{
+			"id": "hover-card--default",
+			"route": "/test/hover-card/default",
+			"source": "apps/ui-storybook/stories/hover-card.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "input--default",
+			"route": "/test/input/default",
+			"source": "apps/ui-storybook/stories/input.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "input--disabled",
+			"route": "/test/input/disabled",
+			"source": "apps/ui-storybook/stories/input.stories.ts",
+			"story": "Disabled",
+			"args": []
+		},
+		{
+			"id": "input--error",
+			"route": "/test/input/error",
+			"source": "apps/ui-storybook/stories/input.stories.ts",
+			"story": "Error",
+			"args": []
+		},
+		{
+			"id": "input--file",
+			"route": "/test/input/file",
+			"source": "apps/ui-storybook/stories/input.stories.ts",
+			"story": "File",
+			"args": []
+		},
+		{
+			"id": "input--required",
+			"route": "/test/input/required",
+			"source": "apps/ui-storybook/stories/input.stories.ts",
+			"story": "Required",
+			"args": []
+		},
+		{
+			"id": "input--with-button",
+			"route": "/test/input/with-button",
+			"source": "apps/ui-storybook/stories/input.stories.ts",
+			"story": "WithButton",
+			"args": []
+		},
+		{
+			"id": "input--with-hint-and-error",
+			"route": "/test/input/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/input.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "input-group--default",
+			"route": "/test/input-group/default",
+			"source": "apps/ui-storybook/stories/input-group.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "input-otp--default",
+			"route": "/test/input-otp/default",
+			"source": "apps/ui-storybook/stories/input-otp.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "input-otp--masked",
+			"route": "/test/input-otp/masked",
+			"source": "apps/ui-storybook/stories/input-otp.stories.ts",
+			"story": "Masked",
+			"args": []
+		},
+		{
+			"id": "item--avatar",
+			"route": "/test/item/avatar",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Avatar",
+			"args": []
+		},
+		{
+			"id": "item--default",
+			"route": "/test/item/default",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "item--dropdown",
+			"route": "/test/item/dropdown",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Dropdown",
+			"args": []
+		},
+		{
+			"id": "item--group",
+			"route": "/test/item/group",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Group",
+			"args": []
+		},
+		{
+			"id": "item--header",
+			"route": "/test/item/header",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Header",
+			"args": []
+		},
+		{
+			"id": "item--icon",
+			"route": "/test/item/icon",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Icon",
+			"args": []
+		},
+		{
+			"id": "item--image",
+			"route": "/test/item/image",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Image",
+			"args": []
+		},
+		{
+			"id": "item--link",
+			"route": "/test/item/link",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Link",
+			"args": []
+		},
+		{
+			"id": "item--size",
+			"route": "/test/item/size",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Size",
+			"args": []
+		},
+		{
+			"id": "item--variants",
+			"route": "/test/item/variants",
+			"source": "apps/ui-storybook/stories/hlm-item.stories.ts",
+			"story": "Variants",
+			"args": []
+		},
+		{
+			"id": "kbd--default",
+			"route": "/test/kbd/default",
+			"source": "apps/ui-storybook/stories/hlm-kbd.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "label--custom-id",
+			"route": "/test/label/custom-id",
+			"source": "apps/ui-storybook/stories/label.stories.ts",
+			"story": "CustomId",
+			"args": ["id"]
+		},
+		{
+			"id": "label--default",
+			"route": "/test/label/default",
+			"source": "apps/ui-storybook/stories/label.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "label--input-required",
+			"route": "/test/label/input-required",
+			"source": "apps/ui-storybook/stories/label.stories.ts",
+			"story": "InputRequired",
+			"args": []
+		},
+		{
+			"id": "marker--default",
+			"route": "/test/marker/default",
+			"source": "apps/ui-storybook/stories/hlm-marker.stories.ts",
+			"story": "Default",
+			"args": [],
+			"note": "applicationConfig providers were placed on the route"
+		},
+		{
+			"id": "menubar--default",
+			"route": "/test/menubar/default",
+			"source": "apps/ui-storybook/stories/menubar.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "message--conversation",
+			"route": "/test/message/conversation",
+			"source": "apps/ui-storybook/stories/hlm-message.stories.ts",
+			"story": "Conversation",
+			"args": []
+		},
+		{
+			"id": "message-scroller--auto-scroll",
+			"route": "/test/message-scroller/auto-scroll",
+			"source": "apps/ui-storybook/stories/hlm-message-scroller.stories.ts",
+			"story": "AutoScroll",
+			"args": []
+		},
+		{
+			"id": "message-scroller--default",
+			"route": "/test/message-scroller/default",
+			"source": "apps/ui-storybook/stories/hlm-message-scroller.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "message-scroller--opening-start",
+			"route": "/test/message-scroller/opening-start",
+			"source": "apps/ui-storybook/stories/hlm-message-scroller.stories.ts",
+			"story": "OpeningStart",
+			"args": []
+		},
+		{
+			"id": "message-scroller--scroll-anchors",
+			"route": "/test/message-scroller/scroll-anchors",
+			"source": "apps/ui-storybook/stories/hlm-message-scroller.stories.ts",
+			"story": "ScrollAnchors",
+			"args": []
+		},
+		{
+			"id": "month-year-picker--default",
+			"route": "/test/month-year-picker/default",
+			"source": "apps/ui-storybook/stories/month-year-picker.stories.ts",
+			"story": "Default",
+			"args": ["minDate", "maxDate"]
+		},
+		{
+			"id": "month-year-picker--input",
+			"route": "/test/month-year-picker/input",
+			"source": "apps/ui-storybook/stories/month-year-picker.stories.ts",
+			"story": "Input",
+			"args": ["minDate", "maxDate"]
+		},
+		{
+			"id": "native-select--default",
+			"route": "/test/native-select/default",
+			"source": "apps/ui-storybook/stories/hlm-native-select.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "native-select--with-hint-and-error",
+			"route": "/test/native-select/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/hlm-native-select.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "navigation-menu--click-to-open",
+			"route": "/test/navigation-menu/click-to-open",
+			"source": "apps/ui-storybook/stories/navigation-menu.stories.ts",
+			"story": "ClickToOpen",
+			"args": []
+		},
+		{
+			"id": "navigation-menu--default",
+			"route": "/test/navigation-menu/default",
+			"source": "apps/ui-storybook/stories/navigation-menu.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "pagination--default",
+			"route": "/test/pagination/default",
+			"source": "apps/ui-storybook/stories/pagination.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "popover--close-on-scroll",
+			"route": "/test/popover/close-on-scroll",
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"story": "CloseOnScroll",
+			"args": ["align", "sideOffset"]
+		},
+		{
+			"id": "popover--default",
+			"route": "/test/popover/default",
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"story": "Default",
+			"args": ["align", "sideOffset"]
+		},
+		{
+			"id": "popover--near-viewport-edge",
+			"route": "/test/popover/near-viewport-edge",
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"story": "NearViewportEdge",
+			"args": ["align", "sideOffset"]
+		},
+		{
+			"id": "popover--scroll-container",
+			"route": "/test/popover/scroll-container",
+			"source": "apps/ui-storybook/stories/popover.stories.ts",
+			"story": "ScrollContainer",
+			"args": ["align", "sideOffset"]
+		},
+		{
+			"id": "progress--complete",
+			"route": "/test/progress/complete",
+			"source": "apps/ui-storybook/stories/progress.stories.ts",
+			"story": "Complete",
+			"args": ["value"]
+		},
+		{
+			"id": "progress--indeterminate",
+			"route": "/test/progress/indeterminate",
+			"source": "apps/ui-storybook/stories/progress.stories.ts",
+			"story": "Indeterminate",
+			"args": ["value"]
+		},
+		{
+			"id": "progress--loading-not-started",
+			"route": "/test/progress/loading-not-started",
+			"source": "apps/ui-storybook/stories/progress.stories.ts",
+			"story": "LoadingNotStarted",
+			"args": ["value"]
+		},
+		{
+			"id": "progress--loading-started",
+			"route": "/test/progress/loading-started",
+			"source": "apps/ui-storybook/stories/progress.stories.ts",
+			"story": "LoadingStarted",
+			"args": ["value"]
+		},
+		{
+			"id": "questionnaire--default",
+			"route": "/test/questionnaire/default",
+			"source": "apps/ui-storybook/stories/hlm-questionnaire.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "questionnaire--freeform",
+			"route": "/test/questionnaire/freeform",
+			"source": "apps/ui-storybook/stories/hlm-questionnaire.stories.ts",
+			"story": "Freeform",
+			"args": []
+		},
+		{
+			"id": "questionnaire--multiple",
+			"route": "/test/questionnaire/multiple",
+			"source": "apps/ui-storybook/stories/hlm-questionnaire.stories.ts",
+			"story": "Multiple",
+			"args": []
+		},
+		{
+			"id": "radio-group--default",
+			"route": "/test/radio-group/default",
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "radio-group--label-for",
+			"route": "/test/radio-group/label-for",
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"story": "LabelFor",
+			"args": []
+		},
+		{
+			"id": "radio-group--validation",
+			"route": "/test/radio-group/validation",
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"story": "Validation",
+			"args": []
+		},
+		{
+			"id": "radio-group--with-hint-and-error",
+			"route": "/test/radio-group/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/radio-group.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "resizable--default",
+			"route": "/test/resizable/default",
+			"source": "apps/ui-storybook/stories/resizable.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "resizable--dynamic-panels",
+			"route": "/test/resizable/dynamic-panels",
+			"source": "apps/ui-storybook/stories/resizable.stories.ts",
+			"story": "DynamicPanels",
+			"args": []
+		},
+		{
+			"id": "scroll-area--default",
+			"route": "/test/scroll-area/default",
+			"source": "apps/ui-storybook/stories/scroll-area.stories.ts",
+			"story": "Default",
+			"args": ["orientation", "visibility"]
+		},
+		{
+			"id": "scroll-area--vertical",
+			"route": "/test/scroll-area/vertical",
+			"source": "apps/ui-storybook/stories/scroll-area.stories.ts",
+			"story": "Vertical",
+			"args": ["orientation", "visibility"]
+		},
+		{
+			"id": "select--custom-placeholder",
+			"route": "/test/select/custom-placeholder",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "CustomPlaceholder",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--default",
+			"route": "/test/select/default",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "Default",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--disabled-option",
+			"route": "/test/select/disabled-option",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "DisabledOption",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--dynamic-options-multi-select",
+			"route": "/test/select/dynamic-options-multi-select",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "DynamicOptionsMultiSelect",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--falsy-value",
+			"route": "/test/select/falsy-value",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "FalsyValue",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--multiple",
+			"route": "/test/select/multiple",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "Multiple",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--ng-model-form-control",
+			"route": "/test/select/ng-model-form-control",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "NgModelFormControl",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--ng-model-form-control-initial-value",
+			"route": "/test/select/ng-model-form-control-initial-value",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "NgModelFormControlInitialValue",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--reactive-form-control",
+			"route": "/test/select/reactive-form-control",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "ReactiveFormControl",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--reactive-form-control-with-for-and-initial-value",
+			"route": "/test/select/reactive-form-control-with-for-and-initial-value",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "ReactiveFormControlWithForAndInitialValue",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--reactive-form-control-with-for-and-initial-value-and-multiple",
+			"route": "/test/select/reactive-form-control-with-for-and-initial-value-and-multiple",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "ReactiveFormControlWithForAndInitialValueAndMultiple",
+			"args": ["disabled", "value", "placeholder", "initialFormValue", "options"]
+		},
+		{
+			"id": "select--reactive-form-control-with-validation",
+			"route": "/test/select/reactive-form-control-with-validation",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "ReactiveFormControlWithValidation",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--reactive-form-control-with-validation-with-label",
+			"route": "/test/select/reactive-form-control-with-validation-with-label",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "ReactiveFormControlWithValidationWithLabel",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--scrollable",
+			"route": "/test/select/scrollable",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "Scrollable",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--select-item-to-string",
+			"route": "/test/select/select-item-to-string",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "SelectItemToString",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--select-with-label",
+			"route": "/test/select/select-with-label",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "SelectWithLabel",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--with-hint-and-error",
+			"route": "/test/select/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "WithHintAndError",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "select--with-label-and-form",
+			"route": "/test/select/with-label-and-form",
+			"source": "apps/ui-storybook/stories/select.stories.ts",
+			"story": "WithLabelAndForm",
+			"args": ["disabled", "value", "placeholder"]
+		},
+		{
+			"id": "separator--default",
+			"route": "/test/separator/default",
+			"source": "apps/ui-storybook/stories/separator.stories.ts",
+			"story": "Default",
+			"args": ["orientation", "decorative"]
+		},
+		{
+			"id": "sheet--default",
+			"route": "/test/sheet/default",
+			"source": "apps/ui-storybook/stories/sheet.stories.ts",
+			"story": "Default",
+			"args": ["side"]
+		},
+		{
+			"id": "sidebar--default",
+			"route": "/test/sidebar/default",
+			"source": "apps/ui-storybook/stories/sidebar.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "sidebar--right-side",
+			"route": "/test/sidebar/right-side",
+			"source": "apps/ui-storybook/stories/sidebar.stories.ts",
+			"story": "RightSide",
+			"args": []
+		},
+		{
+			"id": "skeleton--default",
+			"route": "/test/skeleton/default",
+			"source": "apps/ui-storybook/stories/skeleton.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "slider--default",
+			"route": "/test/slider/default",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Default",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--disabled",
+			"route": "/test/slider/disabled",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Disabled",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--draggable-range",
+			"route": "/test/slider/draggable-range",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "DraggableRange",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--draggable-range-only",
+			"route": "/test/slider/draggable-range-only",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "DraggableRangeOnly",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--inverted",
+			"route": "/test/slider/inverted",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Inverted",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--max",
+			"route": "/test/slider/max",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Max",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--min",
+			"route": "/test/slider/min",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Min",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--min-max",
+			"route": "/test/slider/min-max",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "MinMax",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--min-steps-between-thumbs",
+			"route": "/test/slider/min-steps-between-thumbs",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "MinStepsBetweenThumbs",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--range",
+			"route": "/test/slider/range",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Range",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--reactive-form-control",
+			"route": "/test/slider/reactive-form-control",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "ReactiveFormControl",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--reactive-form-control-with-initial-value",
+			"route": "/test/slider/reactive-form-control-with-initial-value",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "ReactiveFormControlWithInitialValue",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--step",
+			"route": "/test/slider/step",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Step",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--template-driven-form",
+			"route": "/test/slider/template-driven-form",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "TemplateDrivenForm",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--tick-label-interval",
+			"route": "/test/slider/tick-label-interval",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "TickLabelInterval",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--ticks",
+			"route": "/test/slider/ticks",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Ticks",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--validation",
+			"route": "/test/slider/validation",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Validation",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "slider--vertical",
+			"route": "/test/slider/vertical",
+			"source": "apps/ui-storybook/stories/slider.stories.ts",
+			"story": "Vertical",
+			"args": [
+				"value",
+				"disabled",
+				"min",
+				"max",
+				"step",
+				"minStepsBetweenThumbs",
+				"inverted",
+				"orientation",
+				"showTicks",
+				"maxTicks",
+				"tickLabelInterval",
+				"draggableRange",
+				"draggableRangeOnly"
+			]
+		},
+		{
+			"id": "sonner--default",
+			"route": "/test/sonner/default",
+			"source": "apps/ui-storybook/stories/sonner.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "spinner--default",
+			"route": "/test/spinner/default",
+			"source": "apps/ui-storybook/stories/spinner.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "switch--default",
+			"route": "/test/switch/default",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "switch--disabled",
+			"route": "/test/switch/disabled",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "Disabled",
+			"args": []
+		},
+		{
+			"id": "switch--form",
+			"route": "/test/switch/form",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "Form",
+			"args": []
+		},
+		{
+			"id": "switch--form-true",
+			"route": "/test/switch/form-true",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "FormTrue",
+			"args": ["switchValue"]
+		},
+		{
+			"id": "switch--inside-label",
+			"route": "/test/switch/inside-label",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "InsideLabel",
+			"args": []
+		},
+		{
+			"id": "switch--labeled-with-aria-labeled-by",
+			"route": "/test/switch/labeled-with-aria-labeled-by",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "LabeledWithAriaLabeledBy",
+			"args": []
+		},
+		{
+			"id": "switch--with-hint-and-error",
+			"route": "/test/switch/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/switch.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "table--default",
+			"route": "/test/table/default",
+			"source": "apps/ui-storybook/stories/table.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "tabs--brn-only",
+			"route": "/test/tabs/brn-only",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "BrnOnly",
+			"args": []
+		},
+		{
+			"id": "tabs--default",
+			"route": "/test/tabs/default",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "Default",
+			"args": ["activationMode", "disabled"]
+		},
+		{
+			"id": "tabs--disabled",
+			"route": "/test/tabs/disabled",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "Disabled",
+			"args": ["activationMode", "disabled"]
+		},
+		{
+			"id": "tabs--lazy-loading",
+			"route": "/test/tabs/lazy-loading",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "LazyLoading",
+			"args": ["activationMode"]
+		},
+		{
+			"id": "tabs--paginated",
+			"route": "/test/tabs/paginated",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "Paginated",
+			"args": ["activationMode"]
+		},
+		{
+			"id": "tabs--vertical",
+			"route": "/test/tabs/vertical",
+			"source": "apps/ui-storybook/stories/tabs.stories.ts",
+			"story": "Vertical",
+			"args": ["activationMode"]
+		},
+		{
+			"id": "textarea--default",
+			"route": "/test/textarea/default",
+			"source": "apps/ui-storybook/stories/textarea.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "textarea--disabled",
+			"route": "/test/textarea/disabled",
+			"source": "apps/ui-storybook/stories/textarea.stories.ts",
+			"story": "Disabled",
+			"args": []
+		},
+		{
+			"id": "textarea--error",
+			"route": "/test/textarea/error",
+			"source": "apps/ui-storybook/stories/textarea.stories.ts",
+			"story": "Error",
+			"args": []
+		},
+		{
+			"id": "textarea--required",
+			"route": "/test/textarea/required",
+			"source": "apps/ui-storybook/stories/textarea.stories.ts",
+			"story": "Required",
+			"args": []
+		},
+		{
+			"id": "textarea--with-button",
+			"route": "/test/textarea/with-button",
+			"source": "apps/ui-storybook/stories/textarea.stories.ts",
+			"story": "WithButton",
+			"args": []
+		},
+		{
+			"id": "textarea--with-hint-and-error",
+			"route": "/test/textarea/with-hint-and-error",
+			"source": "apps/ui-storybook/stories/textarea.stories.ts",
+			"story": "WithHintAndError",
+			"args": []
+		},
+		{
+			"id": "toggle--default",
+			"route": "/test/toggle/default",
+			"source": "apps/ui-storybook/stories/toggle.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "toggle--with-text",
+			"route": "/test/toggle/with-text",
+			"source": "apps/ui-storybook/stories/toggle.stories.ts",
+			"story": "WithText",
+			"args": []
+		},
+		{
+			"id": "toggle-group--default",
+			"route": "/test/toggle-group/default",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "toggle-group--disabled",
+			"route": "/test/toggle-group/disabled",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "Disabled",
+			"args": []
+		},
+		{
+			"id": "toggle-group--large",
+			"route": "/test/toggle-group/large",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "Large",
+			"args": []
+		},
+		{
+			"id": "toggle-group--outline",
+			"route": "/test/toggle-group/outline",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "Outline",
+			"args": []
+		},
+		{
+			"id": "toggle-group--small",
+			"route": "/test/toggle-group/small",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "Small",
+			"args": []
+		},
+		{
+			"id": "toggle-group--toggle-group-disabled",
+			"route": "/test/toggle-group/toggle-group-disabled",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "ToggleGroupDisabled",
+			"args": []
+		},
+		{
+			"id": "toggle-group--toggle-group-form",
+			"route": "/test/toggle-group/toggle-group-form",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "ToggleGroupForm",
+			"args": []
+		},
+		{
+			"id": "toggle-group--toggle-group-multiple",
+			"route": "/test/toggle-group/toggle-group-multiple",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "ToggleGroupMultiple",
+			"args": ["defaultValue"]
+		},
+		{
+			"id": "toggle-group--toggle-group-multiple-nullable",
+			"route": "/test/toggle-group/toggle-group-multiple-nullable",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "ToggleGroupMultipleNullable",
+			"args": []
+		},
+		{
+			"id": "toggle-group--toggle-group-single",
+			"route": "/test/toggle-group/toggle-group-single",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "ToggleGroupSingle",
+			"args": ["defaultValue"]
+		},
+		{
+			"id": "toggle-group--toggle-group-single-nullable",
+			"route": "/test/toggle-group/toggle-group-single-nullable",
+			"source": "apps/ui-storybook/stories/toggle-group.stories.ts",
+			"story": "ToggleGroupSingleNullable",
+			"args": []
+		},
+		{
+			"id": "tooltip--default",
+			"route": "/test/tooltip/default",
+			"source": "apps/ui-storybook/stories/tooltip.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "tooltip--disabled",
+			"route": "/test/tooltip/disabled",
+			"source": "apps/ui-storybook/stories/tooltip.stories.ts",
+			"story": "Disabled",
+			"args": []
+		},
+		{
+			"id": "tooltip--simple",
+			"route": "/test/tooltip/simple",
+			"source": "apps/ui-storybook/stories/tooltip.stories.ts",
+			"story": "Simple",
+			"args": []
+		},
+		{
+			"id": "trace--default",
+			"route": "/test/trace/default",
+			"source": "apps/ui-storybook/stories/hlm-trace.stories.ts",
+			"story": "Default",
+			"args": []
+		},
+		{
+			"id": "typography--default",
+			"route": "/test/typography/default",
+			"source": "apps/ui-storybook/stories/typography.stories.ts",
+			"story": "Default",
+			"args": []
+		}
+	]
+}
