@@ -1,17 +1,4 @@
 #!/usr/bin/env node
-// One command to check a component end to end.
-//
-//   pnpm verify popover            one or more components
-//   pnpm verify --affected         whatever the current changes can affect (compared with origin/main)
-//   pnpm verify --affected --base <ref>
-//   pnpm verify --all
-//   pnpm verify --all --build     test the production build instead of the dev server
-//   pnpm verify --all --prebuilt  the same, with a build that already exists in dist/apps/app/client
-//   pnpm verify --list --affected  print the affected components as JSON and stop
-//
-// Steps: (1) the generated test pages and tests match their sources, (2) the Playwright tests
-// for the chosen components pass, (3) the proof (videos, screenshots, accessibility results) is
-// written to dist/.playwright/ui-e2e/proof. Extra arguments after `--` go to Playwright.
 
 import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -30,7 +17,7 @@ function git(...args) {
 function changedFiles(base) {
 	const mergeBase = git('merge-base', base, 'HEAD');
 	const committed = git('diff', '--name-only', mergeBase, 'HEAD');
-	// Not through git(): that trims the output, and the first line of a status can start with a space.
+	// `git status --porcelain` lines can start with a space, so this output must not be trimmed.
 	const status = execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], {
 		cwd: ROOT,
 		encoding: 'utf8',
@@ -103,9 +90,6 @@ console.log(
 	`Verifying: ${[...components, ...pageOnly.map((title) => `${title} (page only)`)].join(', ')}${note ? ` (${note})` : ''}`,
 );
 
-// The story files behind a component's tests come from the test page list, because a test
-// folder can cover several story files (`menu` covers context-menu, dropdown-menu and menubar).
-// The check stops once Storybook is removed.
 const manifest = testPages();
 const titles = new Set([
 	...components.flatMap((component) => [component, ...storyTitlesOf(ROOT, component)]),
@@ -129,18 +113,12 @@ if (!ok) {
 	process.exit(1);
 }
 
-// One Playwright run serves every page it opens from one dev server, and the server keeps each
-// page it has built in memory. Past a certain number of pages it runs out. So a large selection is
-// run in groups, each with a fresh server, and the results are joined afterwards.
 const pagesOf = (unitTitles) => manifest.filter((page) => unitTitles.includes(page.id.split('--')[0])).length;
 const units = components.map((component) => {
 	const unitTitles = [...new Set([component, ...storyTitlesOf(ROOT, component)])];
 	return { dirs: [`src/${component}/`], titles: unitTitles, pages: pagesOf(unitTitles) };
 });
 for (const title of pageOnly) units.push({ dirs: [], titles: [title], pages: pagesOf([title]) });
-// `--build` tests the production browser bundle instead of the dev server: the app is built once
-// and served as plain files, so nothing is compiled while the tests run and a selection of any
-// size fits in one run.
 const prebuilt = flag('--prebuilt');
 const useBuild = flag('--build') || prebuilt;
 if (useBuild && !prebuilt) {
@@ -153,7 +131,6 @@ const groups = groupUnits(units, useBuild ? Infinity : Number(process.env['VERIF
 
 const outDir = path.join(ROOT, 'dist/.playwright/ui-e2e');
 const resultFiles = [];
-// Leftovers of an earlier grouped run must not end up in this run's proof.
 if (existsSync(outDir)) {
 	for (const name of readdirSync(outDir)) {
 		if (/^(results|output|report)-\d+(\.json)?$/.test(name)) rmSync(path.join(outDir, name), { recursive: true });
@@ -167,7 +144,6 @@ groups.forEach((group, index) => {
 	if (useBuild) env['VERIFY_TARGET'] = 'build';
 	const extra = [];
 	if (many) {
-		// Each run clears its output folder, so every group gets its own.
 		const results = path.join(outDir, `results-${index + 1}.json`);
 		resultFiles.push(results);
 		env['PLAYWRIGHT_JSON_OUTPUT_FILE'] = results;
@@ -191,9 +167,6 @@ groups.forEach((group, index) => {
 			{ env },
 		);
 	let passed = attempt(label);
-	// A dev server that died (out of memory, usually) fails every test after it with a refused
-	// connection. That says nothing about the components, so the group gets one more go with a
-	// fresh server. Any other failure stands.
 	const resultsFile = env['PLAYWRIGHT_JSON_OUTPUT_FILE'] ?? path.join(outDir, 'results.json');
 	if (!passed && existsSync(resultsFile) && readFileSync(resultsFile, 'utf8').includes('ERR_CONNECTION_REFUSED')) {
 		console.log('  The dev server stopped answering during this group. Running the group once more.');

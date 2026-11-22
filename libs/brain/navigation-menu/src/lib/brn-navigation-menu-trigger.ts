@@ -40,7 +40,7 @@ import { injectBrnNavigationMenu } from './brn-navigation-menu.token';
 interface TriggerEvent {
 	type: 'click' | 'hover' | 'set';
 	visible: boolean;
-	relatedTarget?: EventTarget | null;
+	relatedTarget?: EventTarget | null | undefined;
 }
 
 @Directive({

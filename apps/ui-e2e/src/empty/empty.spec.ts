@@ -164,7 +164,6 @@ test.describe('Empty', () => {
 			await gotoStory(page, 'empty--default');
 			await expect(page.locator('[hlmEmpty]')).toBeVisible();
 
-			// Check that content is readable by screen readers
 			await expect(page.locator('[hlmEmptyTitle]')).not.toBeEmpty();
 			await expect(page.locator('[hlmEmptyTitle]').filter({ hasText: /No items found/ })).not.toHaveCount(0);
 			await expect(page.locator('[hlmEmptyDescription]')).not.toBeEmpty();

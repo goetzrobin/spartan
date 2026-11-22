@@ -55,10 +55,9 @@ export class BrnTabs {
 		this.updateEntry(key, { content: undefined });
 	}
 
-	private updateEntry(key: string, patch: Partial<TabEntry>) {
+	private updateEntry(key: string, patch: { [K in keyof TabEntry]?: TabEntry[K] | undefined }) {
 		this._tabs.update((tabs) => {
-			const existing = tabs[key] ?? {};
-			const merged = { ...existing, ...patch };
+			const merged = Object.assign({}, tabs[key], patch);
 			const entryEmpty = !merged.trigger && !merged.content;
 			if (entryEmpty) {
 				const { [key]: removed, ...rest } = tabs;

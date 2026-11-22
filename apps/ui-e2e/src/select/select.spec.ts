@@ -19,13 +19,11 @@ test.describe('select', () => {
 		test('should have form validation classes and reflect control status', async ({ page }) => {
 			await gotoStory(page, 'select--reactive-form-control-with-validation');
 
-			// initial
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('aria-invalid');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 
-			// on open
 			await page.locator('[brnselecttrigger]').click();
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
@@ -33,7 +31,6 @@ test.describe('select', () => {
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 			await page.locator('body').click();
 
-			// no selection
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('aria-invalid', 'true');
@@ -51,7 +48,6 @@ test.describe('select', () => {
 				'true',
 			);
 
-			// on real selection
 			await page.locator('[brnselecttrigger]').click();
 			await page.locator('hlm-select-item').nth(0).click();
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
@@ -63,13 +59,11 @@ test.describe('select', () => {
 		test('should have initial value set correctly when options are provided in a for loop', async ({ page }) => {
 			await gotoStory(page, 'select--reactive-form-control-with-for-and-initial-value');
 
-			// initial
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('aria-invalid');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 
-			// on open
 			await page.locator('[brnselecttrigger]').click();
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
@@ -77,13 +71,11 @@ test.describe('select', () => {
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 			await page.locator('[brnselecttrigger]').click();
 
-			// no selection
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('aria-invalid');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 
-			// on real selection
 			await page.locator('[brnselecttrigger]').click();
 			await page.locator('hlm-select-item').nth(0).click();
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
@@ -95,13 +87,11 @@ test.describe('select', () => {
 		test('should have form validation classes and reflect control status with label', async ({ page }) => {
 			await gotoStory(page, 'select--reactive-form-control-with-validation-with-label');
 
-			// initial
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('aria-invalid');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 
-			// on open
 			await page.locator('[brnselecttrigger]').click();
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
@@ -109,13 +99,11 @@ test.describe('select', () => {
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 			await page.locator('[brnselecttrigger]').click();
 
-			// no selection
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('aria-invalid', 'true');
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-matches-spartan-invalid', 'true');
 
-			// on real selection
 			await page.locator('[brnselecttrigger]').click();
 			await page.locator('hlm-select-item').nth(0).click();
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
@@ -129,13 +117,11 @@ test.describe('select', () => {
 		}) => {
 			await gotoStory(page, 'select--reactive-form-control-with-validation', { args: 'value:apple' });
 
-			// initial
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('aria-invalid');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 
-			// on open
 			await page.locator('[brnselecttrigger]').click();
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
@@ -143,13 +129,11 @@ test.describe('select', () => {
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 			await page.locator('[brnselecttrigger]').click();
 
-			// no selection
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('aria-invalid');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 
-			// on real selection
 			await page.locator('[brnselecttrigger]').click();
 			await page.locator('hlm-select-item').nth(0).click();
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
@@ -161,13 +145,11 @@ test.describe('select', () => {
 		test('should have form validation classes and reflect control status (2)', async ({ page }) => {
 			await gotoStory(page, 'select--reactive-form-control');
 
-			// initial
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('aria-invalid');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 
-			// on open
 			await page.locator('[brnselecttrigger]').click();
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-touched');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
@@ -175,13 +157,11 @@ test.describe('select', () => {
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 			await page.locator('[brnselecttrigger]').click();
 
-			// no selection
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-dirty');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('aria-invalid');
 			await expect(page.locator('[brnselecttrigger]').first()).not.toHaveAttribute('data-matches-spartan-invalid');
 
-			// on real selection
 			await page.locator('[brnselecttrigger]').click();
 			await page.locator('hlm-select-item').nth(0).click();
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('data-touched', 'true');
@@ -202,7 +182,6 @@ test.describe('select', () => {
 			await page.keyboard.press('ArrowDown');
 			await page.keyboard.press('Enter');
 
-			// the falsy value is committed and the panel closes
 			await expect(page.locator('hlm-select-content')).toHaveCount(0);
 			await expect(page.locator('[brnselecttrigger]').first()).toHaveAttribute('aria-expanded', 'false');
 			await expect(page.locator('[data-testid="value"]').filter({ hasText: /false/ })).not.toHaveCount(0);

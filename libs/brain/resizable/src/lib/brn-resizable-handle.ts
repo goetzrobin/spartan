@@ -151,14 +151,18 @@ export class BrnResizableHandle {
 		const ctx = this._getPanelContext();
 		if (!ctx) return;
 
-		let newLeftSize = ctx.sizes[ctx.li] + delta;
-		let newRightSize = ctx.sizes[ctx.ri] - delta;
+		const leftSize = ctx.sizes[ctx.li];
+		const rightSize = ctx.sizes[ctx.ri];
+		if (leftSize === undefined || rightSize === undefined) return;
+
+		let newLeftSize = leftSize + delta;
+		let newRightSize = rightSize - delta;
 
 		newLeftSize = Math.max(ctx.leftMin, Math.min(ctx.leftMax, newLeftSize));
 		newRightSize = Math.max(ctx.rightMin, Math.min(ctx.rightMax, newRightSize));
 
 		const totalSize = newLeftSize + newRightSize;
-		const originalTotal = ctx.sizes[ctx.li] + ctx.sizes[ctx.ri];
+		const originalTotal = leftSize + rightSize;
 
 		if (Math.abs(totalSize - originalTotal) < 0.01) {
 			ctx.sizes[ctx.li] = newLeftSize;
@@ -173,7 +177,11 @@ export class BrnResizableHandle {
 		const ctx = this._getPanelContext();
 		if (!ctx) return;
 
-		const totalSize = ctx.sizes[ctx.li] + ctx.sizes[ctx.ri];
+		const leftSize = ctx.sizes[ctx.li];
+		const rightSize = ctx.sizes[ctx.ri];
+		if (leftSize === undefined || rightSize === undefined) return;
+
+		const totalSize = leftSize + rightSize;
 
 		if (toMin) {
 			ctx.sizes[ctx.li] = ctx.leftMin;

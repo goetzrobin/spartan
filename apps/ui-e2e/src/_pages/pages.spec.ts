@@ -1,8 +1,3 @@
-// Opens every test page and fails if it throws or logs an error while rendering.
-//
-// A page can exist without a test that uses it, and a story can be broken in ways the type check
-// does not see. This catches both. `pnpm verify <component>` limits it to that component's pages
-// through VERIFY_TITLES.
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,7 +10,6 @@ const pages: TestPage[] = JSON.parse(readFileSync(manifest, 'utf8')).pages;
 const only = process.env['VERIFY_TITLES']?.split(',').filter(Boolean);
 const selected = only ? pages.filter((page) => only.includes(page.id.split('--')[0])) : pages;
 
-/** Requests the sandbox or a flaky network blocks say nothing about the page itself. */
 const NETWORK_NOISE = /Failed to load resource|net::ERR_/;
 const LONGEST_TIMER_THAT_FIRES_MS = 2500;
 

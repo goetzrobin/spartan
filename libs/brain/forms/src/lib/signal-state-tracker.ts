@@ -8,7 +8,7 @@ import { controlStateEqual, type StateTracker } from './state-tracker';
 
 export class SignalStateTracker implements StateTracker {
 	private readonly _submitVersion = signal(0);
-	private readonly _submitSubscription?: Subscription;
+	private readonly _submitSubscription?: Subscription | undefined;
 	private readonly _control = computed(() => {
 		const control = this._ngControl.control as AbstractControl | null | undefined;
 		if (!control) return null;

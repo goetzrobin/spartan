@@ -7,8 +7,6 @@ test.describe('combobox--default', () => {
 		});
 
 		test('click on combobox should open, click on Angular option should closed', async ({ page }) => {
-			// Wait for the story to render before auditing; running axe immediately after
-			// cy.visit scans an empty root and falsely passes.
 			await expect(page.locator('input[placeholder="Select framework..."]')).toBeVisible();
 			await checkA11y(page, STORY_ROOT, {
 				rules: {
@@ -41,20 +39,15 @@ test.describe('combobox--default', () => {
 		});
 
 		test('should pass accessibility checks when opened', async ({ page }) => {
-			// Wait for the story to render before opening and auditing.
 			await expect(page.locator('input[placeholder="Select framework..."]')).toBeVisible();
 			await page.locator('input[placeholder="Select framework..."]').click({ force: true });
 			await expect(byText(page, 'Angular')).toBeVisible();
-			// Let the popup's fade-in/zoom-in animation settle; scanning mid-animation
-			// blends the text with the background and falsely fails color-contrast.
 			await page.waitForTimeout(600);
 			await checkA11y(page, undefined, {
 				rules: {
 					'page-has-heading-one': { enabled: false },
 					'landmark-one-main': { enabled: false },
-					// The open popup is a CDK overlay appended to <body>, outside any landmark.
-					// This is a Storybook-host artifact (same root cause as landmark-one-main),
-					// not a WCAG rule (region is best-practice).
+					// Angular CDK overlays are appended to <body>, outside any landmark, which fails axe's region rule.
 					region: { enabled: false },
 				},
 			});

@@ -3,7 +3,6 @@ import { STORY_ROOT, checkA11y, expect, gotoStory, test } from '../support';
 
 test.describe('button-group', () => {
 	const verifyButtonGroupSetup = async (page: Page) => {
-		// Verify that the button group container exists
 		await expect(page.locator('[hlmButtonGroup]')).not.toHaveCount(0);
 	};
 
@@ -11,24 +10,19 @@ test.describe('button-group', () => {
 		await expect(page.locator('[hlmButtonGroup] button').nth(buttonIndex)).toContainText(expectedText);
 		await expect(page.locator('[hlmButtonGroup] button').nth(buttonIndex)).not.toBeDisabled();
 		await page.locator('[hlmButtonGroup] button').nth(buttonIndex).click();
-		// Verify button can be focused and activated
 		await expect(page.locator('[hlmButtonGroup] button').nth(buttonIndex)).toBeFocused();
 	};
 
 	const testKeyboardNavigation = async (page: Page) => {
-		// Focus first button
 		await page.locator('[hlmButtonGroup] button').first().focus();
 		await expect(page.locator('[hlmButtonGroup] button').first()).toBeFocused();
 
-		// Navigate with Tab key
 		await page.keyboard.press('Tab');
 		await expect(page.locator('[hlmButtonGroup] button').nth(1)).toBeFocused();
 
-		// Test Enter key activation
 		await page.keyboard.press('Enter');
 		await expect(page.locator('[hlmButtonGroup] button').nth(1)).toBeFocused();
 
-		// Test Space key activation
 		await page.keyboard.press('Space');
 		await expect(page.locator('[hlmButtonGroup] button').nth(1)).toBeFocused();
 	};
@@ -41,7 +35,6 @@ test.describe('button-group', () => {
 		test('should render the default button group correctly', async ({ page }) => {
 			await verifyButtonGroupSetup(page);
 
-			// Verify button text content
 			await expect(
 				page
 					.locator('[hlmButtonGroup] button')
@@ -68,12 +61,10 @@ test.describe('button-group', () => {
 		});
 
 		test('should maintain proper focus management', async ({ page }) => {
-			// Test focus trap within button group
 			await page.locator('[hlmButtonGroup] button').first().focus();
 			await page.keyboard.press('Tab');
 			await expect(page.locator('[hlmButtonGroup] button').nth(1)).toBeFocused();
 
-			// Test Shift+Tab navigation
 			await page.keyboard.press('Shift+Tab');
 			await expect(page.locator('[hlmButtonGroup] button').first()).toBeFocused();
 		});
@@ -87,13 +78,11 @@ test.describe('button-group', () => {
 		test('should render the split button group correctly', async ({ page }) => {
 			await verifyButtonGroupSetup(page);
 
-			// Verify separator exists
 			await expect(page.locator('hlm-button-group-separator')).not.toHaveCount(0);
 			await expect(page.locator('hlm-button-group-separator')).toBeVisible();
 		});
 
 		test('should maintain accessibility with separator', async ({ page }) => {
-			// Verify separator doesn't create accessibility issues
 			await checkA11y(page, STORY_ROOT, {
 				rules: {
 					'page-has-heading-one': { enabled: false },
@@ -111,16 +100,13 @@ test.describe('button-group', () => {
 		test('should render nested button groups correctly', async ({ page }) => {
 			await verifyButtonGroupSetup(page);
 
-			// Verify nested structure
-			await expect(page.locator('[hlmButtonGroup]')).toHaveCount(3); // Parent + 2 nested groups
+			await expect(page.locator('[hlmButtonGroup]')).toHaveCount(3);
 			await expect(page.locator('[hlmButtonGroup] [hlmButtonGroup]')).toHaveCount(2);
 		});
 
 		test('should have all buttons in nested groups', async ({ page }) => {
-			// Verify total button count across all nested groups
 			await expect(page.locator('[hlmButtonGroup] button')).toHaveCount(4);
 
-			// Verify button content
 			await expect(page.locator('[hlmButtonGroup] button').nth(0)).toContainText('Button 1');
 			await expect(page.locator('[hlmButtonGroup] button').nth(1)).toContainText('Button 2');
 			await expect(page.locator('[hlmButtonGroup] button').nth(2)).toContainText('Button 3');
@@ -136,22 +122,18 @@ test.describe('button-group', () => {
 		test('should render button group with text correctly', async ({ page }) => {
 			await verifyButtonGroupSetup(page);
 
-			// Verify nested structure with text
-			await expect(page.locator('[hlmButtonGroup]')).toHaveCount(3); // Parent + 2 nested groups
+			await expect(page.locator('[hlmButtonGroup]')).toHaveCount(3);
 			await expect(page.locator('[hlmButtonGroup] [hlmButtonGroup]')).toHaveCount(2);
 
-			// Verify buttons exist
 			await expect(page.locator('[hlmButtonGroup] button')).toHaveCount(2);
 			await expect(page.locator('[hlmButtonGroup] button').first()).toContainText('Button 1');
 			await expect(page.locator('[hlmButtonGroup] button').last()).toContainText('Button 2');
 		});
 
 		test('should have separator and text element', async ({ page }) => {
-			// Verify separator exists
 			await expect(page.locator('hlm-button-group-separator')).not.toHaveCount(0);
 			await expect(page.locator('hlm-button-group-separator')).toBeVisible();
 
-			// Verify text element exists and has correct content
 			await expect(page.locator('[hlmButtonGroupText]')).not.toHaveCount(0);
 			await expect(page.locator('[hlmButtonGroupText]')).toBeVisible();
 			await expect(page.locator('[hlmButtonGroupText]').filter({ hasText: /Text/ })).not.toHaveCount(0);
@@ -161,26 +143,21 @@ test.describe('button-group', () => {
 			await verifyButtonInteraction(page, 0, 'Button 1');
 			await verifyButtonInteraction(page, 1, 'Button 2');
 
-			// Verify text element is not interactive
 			await expect(page.locator('[hlmButtonGroupText]').first()).not.toHaveAttribute('tabindex');
 			await expect(page.locator('[hlmButtonGroupText]').first()).not.toHaveAttribute('role', 'button');
 		});
 
 		test('should maintain proper keyboard navigation with text', async ({ page }) => {
-			// Focus first button
 			await page.locator('[hlmButtonGroup] button').first().focus();
 			await expect(page.locator('[hlmButtonGroup] button').first()).toBeFocused();
 
-			// Navigate to second button (text should not be focusable)
 			await page.keyboard.press('Tab');
 			await expect(page.locator('[hlmButtonGroup] button').last()).toBeFocused();
 
-			// Text element should not receive focus
 			await expect(page.locator('[hlmButtonGroupText]').and(page.locator(':focus'))).toHaveCount(0);
 		});
 
 		test('should maintain accessibility with text element', async ({ page }) => {
-			// Check accessibility
 			await checkA11y(page, STORY_ROOT, {
 				rules: {
 					'page-has-heading-one': { enabled: false },
@@ -188,7 +165,6 @@ test.describe('button-group', () => {
 				},
 			});
 
-			// Verify text element has appropriate semantics
 			await expect(page.locator('[hlmButtonGroupText]')).toBeVisible();
 			await expect(page.locator('[hlmButtonGroupText]').first()).not.toHaveAttribute('aria-hidden', 'true');
 		});
@@ -200,7 +176,6 @@ test.describe('button-group', () => {
 		});
 
 		test('should be responsive', async ({ page }) => {
-			// Test on different viewport sizes
 			await page.setViewportSize({ width: 1200, height: 800 });
 			await expect(page.locator('[hlmButtonGroup]')).toBeVisible();
 			await expect(page.locator('[hlmButtonGroup] button')).toHaveCount(2);

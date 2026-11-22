@@ -28,8 +28,12 @@ export class BrnSliderRange {
 		const inverted = this._slider.inverted();
 		const isHorizontal = this._slider.isHorizontal();
 
-		const start = thumbs[0].percentage();
-		const end = thumbs[thumbs.length - 1].percentage();
+		const firstThumb = thumbs[0];
+		const lastThumb = thumbs[thumbs.length - 1];
+		if (!firstThumb || !lastThumb) return;
+
+		const start = firstThumb.percentage();
+		const end = lastThumb.percentage();
 
 		const inset = thumbs.length > 1 ? [`${start}%`, `${100 - end}%`] : ['0px', `${100 - start}%`];
 

@@ -14,7 +14,6 @@ test.describe('command', () => {
 				},
 			});
 
-			/**       TEST initially it should only show Profile and Search Emoji    */
 			await expect(page.locator('button[hlm-command-item]:not([data-hidden])')).toHaveCount(2);
 
 			await expect(byText(page, 'Profile')).toHaveCount(1);
@@ -35,7 +34,6 @@ test.describe('command', () => {
 				},
 			});
 
-			/**       TEST initially it should only show Search and Settings   */
 			await expect(page.locator('button[hlm-command-item]:not([data-hidden])')).toHaveCount(2);
 			await expect(byText(page, 'Search Emoji')).toHaveCount(1);
 			await expect(byText(page, 'Settings')).toHaveCount(1);

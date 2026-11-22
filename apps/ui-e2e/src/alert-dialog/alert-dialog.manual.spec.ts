@@ -1,13 +1,3 @@
-// Two tests from apps/ui-storybook-e2e/src/integration/alert-dialog/alert-dialog.cy.ts, corrected
-// by hand. Titles match the originals so the transform leaves them out of alert-dialog.spec.ts.
-//
-// The originals end with: press Escape, then expect the dialog text to still be there, with the
-// comment "escape is disabled for alert dialogs, so it should stay open". That is not what
-// happens. Escape closes an alert dialog (as it does in Radix and Base UI; only a click outside is
-// ignored). The Cypress assertions ran in the instant before the closing animation removed the
-// dialog, so they passed without checking what the comment says.
-//
-// These versions assert what the component does: Escape closes it and focus returns to the trigger.
 import type { Page } from '@playwright/test';
 import { STORY_ROOT, byText, checkA11y, expect, gotoStory, test } from '../support';
 
@@ -39,7 +29,6 @@ test.describe('alert-dialog', () => {
 				await expect(dialog).toHaveAttribute('aria-modal', 'true');
 				await expect(dialog).toHaveAttribute('tabindex', '-1');
 
-				// Cancel has focus when the dialog opens, so the same key closes it again.
 				await expect(dialog.getByRole('button', { name: 'Cancel' })).toBeFocused();
 				await page.keyboard.press(key);
 				await expect(dialog).toHaveCount(0);

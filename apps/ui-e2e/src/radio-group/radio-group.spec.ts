@@ -16,22 +16,17 @@ test.describe('radio-group', () => {
 				},
 			});
 
-			//1
 			await expect(page.getByTestId('currentVersion')).toHaveText('16.1.4');
-			//2
 			await byText(page, 'Set to v16.0.0').click({ force: true });
 			await expect(page.getByTestId('currentVersion')).toHaveText('16.0.0');
 			await expect(page.getByLabel('v16.0.0', { exact: true })).toBeChecked();
-			//3
 			await byText(page, 'Reset').click({ force: true });
 			await expect(page.getByTestId('currentVersion')).toHaveText('none');
 			await expect(page.getByLabel('v16.0.0', { exact: true })).not.toBeChecked();
-			//4
 			await byText(page, 'v15.8.0').click({ force: true });
 			await expect(page.getByLabel('v15.8.0', { exact: true })).toBeChecked();
 			await expect(page.getByLabel('v16.0.0', { exact: true })).not.toBeChecked();
 			await expect(page.getByTestId('currentVersion')).toHaveText('15.8.0');
-			//5
 			await byText(page, 'v15.2.0').click({ force: true });
 
 			await expect(page.getByLabel('v15.2.0', { exact: true })).not.toBeChecked();
@@ -50,9 +45,7 @@ test.describe('radio-group', () => {
 				},
 			});
 
-			//1
 			await expect(page.getByTestId('currentVersion')).toHaveText('16.1.4');
-			//2
 			await page.keyboard.press('Tab');
 			await expect(page.getByLabel('v16.1.4', { exact: true })).toBeFocused();
 			await page.keyboard.press('Tab');
@@ -60,7 +53,6 @@ test.describe('radio-group', () => {
 			await page.keyboard.press('Enter');
 			await expect(page.getByTestId('currentVersion')).toHaveText('16.0.0');
 			await expect(page.getByLabel('v16.0.0', { exact: true })).toBeChecked();
-			//3
 			await page.keyboard.press('Shift+Tab');
 			await expect(page.getByLabel('v16.0.0', { exact: true })).toBeFocused();
 			await page.keyboard.press('ArrowUp');
@@ -69,14 +61,12 @@ test.describe('radio-group', () => {
 			await page.keyboard.press('ArrowDown');
 			await expect(page.getByLabel('v16.0.0', { exact: true })).toBeChecked();
 			await expect(page.getByLabel('v16.0.0', { exact: true })).toBeFocused();
-			//4
 			await page.keyboard.press('ArrowLeft');
 			await expect(page.getByLabel('v16.1.4', { exact: true })).toBeFocused();
 			await expect(page.getByLabel('v16.1.4', { exact: true })).toBeChecked();
 			await page.keyboard.press('ArrowRight');
 			await expect(page.getByLabel('v16.0.0', { exact: true })).toBeChecked();
 			await expect(page.getByLabel('v16.0.0', { exact: true })).toBeFocused();
-			//5
 			await page.keyboard.press('ArrowDown');
 			await page.keyboard.press('ArrowDown');
 

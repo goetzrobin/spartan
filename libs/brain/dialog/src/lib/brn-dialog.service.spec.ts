@@ -38,7 +38,9 @@ describe('BrnDialogService', () => {
 	it('closes a dialog when its backdrop is clicked', () => {
 		const dialog = TestBed.inject(BrnDialogService).open(DialogContent);
 
-		pointerClick(backdrops()[0]);
+		const backdrop = backdrops()[0];
+		if (!backdrop) throw new Error('missing backdrop');
+		pointerClick(backdrop);
 
 		expect(dialog.state()).toBe('closed');
 	});
@@ -48,7 +50,9 @@ describe('BrnDialogService', () => {
 		const below = service.open(DialogContent);
 		const above = service.open(DialogContent);
 
-		pointerClick(backdrops()[1]);
+		const backdrop = backdrops()[1];
+		if (!backdrop) throw new Error('missing backdrop');
+		pointerClick(backdrop);
 
 		expect(above.state()).toBe('closed');
 		expect(below.state()).toBe('open');

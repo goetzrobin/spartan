@@ -271,7 +271,10 @@ describe('classes() with external class bindings', () => {
 			expect(classList(element)).toEqual(['bg-red-500', 'border-solid']);
 		} finally {
 			for (const [i, method] of methods.entries()) {
-				Object.defineProperty(DOMTokenList.prototype, method, originals[i]);
+				const original = originals[i];
+				if (original) {
+					Object.defineProperty(DOMTokenList.prototype, method, original);
+				}
 			}
 		}
 	});

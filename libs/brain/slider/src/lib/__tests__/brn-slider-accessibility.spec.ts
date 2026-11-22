@@ -85,8 +85,12 @@ describe('Slider Accessibility', () => {
 		const { container } = await render(SliderWithDefaultAriaLabels);
 		const thumbs = container.querySelectorAll('[role="slider"]');
 
-		expect(thumbs[0].getAttribute('aria-label')).toBe('Value 1 of 2');
-		expect(thumbs[1].getAttribute('aria-label')).toBe('Value 2 of 2');
+		const firstThumb = thumbs[0];
+		const secondThumb = thumbs[1];
+		if (!firstThumb || !secondThumb) throw new Error('missing thumb');
+
+		expect(firstThumb.getAttribute('aria-label')).toBe('Value 1 of 2');
+		expect(secondThumb.getAttribute('aria-label')).toBe('Value 2 of 2');
 	});
 
 	it('should not set aria-labelledby when not provided', async () => {
@@ -99,8 +103,11 @@ describe('Slider Accessibility', () => {
 	it('should generate unique IDs for multiple slider instances', async () => {
 		const { container } = await render(TwoSliders);
 		const sliders = container.querySelectorAll('[data-slot="slider"]');
-		const id1 = sliders[0].getAttribute('id');
-		const id2 = sliders[1].getAttribute('id');
+		const firstSlider = sliders[0];
+		const secondSlider = sliders[1];
+		if (!firstSlider || !secondSlider) throw new Error('missing slider');
+		const id1 = firstSlider.getAttribute('id');
+		const id2 = secondSlider.getAttribute('id');
 
 		expect(id1).toBeTruthy();
 		expect(id2).toBeTruthy();

@@ -1,16 +1,9 @@
-// Works out which components a set of changed files can affect, by following imports from each
-// component's test pages and test files into the libraries.
-//
-// `brain` and `helm` are each one Nx project with many entry points, so Nx's own "affected"
-// cannot tell a popover change from a tabs change. This can.
-
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 
 const E2E_SRC = 'apps/ui-e2e/src';
 const PAGES = 'apps/app/src/app/pages/(test)/test';
 
-/** A change to any of these can affect every component, so everything is verified. */
 const GLOBAL = [
 	/^apps\/ui-e2e\/src\/support\//,
 	/^apps\/ui-e2e\/playwright\.config\.ts$/,
@@ -34,13 +27,10 @@ const IMPORT =
 export function listComponents(root) {
 	const directory = path.join(root, E2E_SRC);
 	if (!existsSync(directory)) return [];
-	return (
-		readdirSync(directory, { withFileTypes: true })
-			// `support` holds helpers and folders starting with `_` hold suites that are not one component.
-			.filter((entry) => entry.isDirectory() && entry.name !== 'support' && !entry.name.startsWith('_'))
-			.map((entry) => entry.name)
-			.sort()
-	);
+	return readdirSync(directory, { withFileTypes: true })
+		.filter((entry) => entry.isDirectory() && entry.name !== 'support' && !entry.name.startsWith('_'))
+		.map((entry) => entry.name)
+		.sort();
 }
 
 function walk(root, directory) {
@@ -70,11 +60,6 @@ function createResolver(root) {
 	};
 }
 
-/**
- * The story titles a component's tests open (`gotoStory(page, 'context-menu--default')`).
- * A test folder does not always share its name with the stories it covers: `menu` holds the
- * tests for context-menu, dropdown-menu and menubar.
- */
 export function storyTitlesOf(root, component) {
 	const titles = new Set();
 	for (const file of walk(root, `${E2E_SRC}/${component}`)) {
@@ -129,9 +114,6 @@ function hitsIn(closure, changedFiles) {
 	);
 }
 
-/**
- * @returns {{ all: boolean, components: string[], pages: string[], reasons: Record<string, string[]> }}
- */
 export function affectedComponents(root, changedFiles) {
 	const components = listComponents(root);
 	const pageOnly = listPageOnlyTitles(root);
@@ -162,10 +144,6 @@ export function affectedComponents(root, changedFiles) {
 	};
 }
 
-/**
- * File paths from `git status --porcelain` output. Each line is two status letters, a space and
- * the path; a rename is `old -> new` and only the new path counts.
- */
 export function parseStatus(output) {
 	return output
 		.split('\n')

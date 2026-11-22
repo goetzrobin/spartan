@@ -3,13 +3,6 @@ import { expect, gotoStory, test } from '../support';
 
 test.describe('tabs--disabled', () => {
 	const verifyTabsSetup = async (page: Page) => {
-		// TODO: investigate why this fails
-		// cy.checkA11y('#storybook-root', {
-		//   rules: {
-		//     'page-has-heading-one': { enabled: false },
-		//     'landmark-one-main': { enabled: false },
-		//   },
-		// });
 		await expect(page.getByRole('tablist')).not.toHaveCount(0);
 		await expect(page.getByRole('tablist')).toHaveAttribute('aria-label');
 		await expect(page.getByRole('tablist')).toHaveAttribute('data-orientation', 'horizontal');
@@ -37,7 +30,6 @@ test.describe('tabs--disabled', () => {
 
 			await page.getByRole('switch').click();
 
-			// Now we can test the tab interactions
 			await page.getByRole('tab', { name: /password/i }).click();
 
 			await expect(page.getByRole('tab', { name: /password/i })).toHaveAttribute('aria-selected', 'true');
@@ -60,15 +52,12 @@ test.describe('tabs--disabled', () => {
 		test('should toggle to active with no disabled attributes or classes', async ({ page }) => {
 			await verifyTabsSetup(page);
 
-			// Click the toggle button to enable the tabs
 			await page.getByRole('switch').click();
-			// Verify tabs are no longer disabled
 			await expect(page.getByRole('tab', { name: /account/i })).not.toBeDisabled();
 			await expect(page.getByRole('tab', { name: /account/i })).toHaveAttribute('aria-disabled', 'false');
 			await expect(page.getByRole('tab', { name: /password/i })).not.toBeDisabled();
 			await expect(page.getByRole('tab', { name: /password/i })).toHaveAttribute('aria-disabled', 'false');
 
-			// Verify tabs are now interactive
 			await page.getByRole('tab', { name: /password/i }).click();
 			await expect(page.getByRole('tab', { name: /password/i })).toHaveAttribute('aria-selected', 'true');
 			await expect(page.getByRole('tab', { name: /account/i })).toHaveAttribute('aria-selected', 'false');

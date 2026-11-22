@@ -571,7 +571,9 @@ describe('brnClasses', () => {
 			expect(first.style.getPropertyPriority('transition')).toBe('important');
 			expect(second.style.getPropertyValue('transition')).toBe('none');
 
-			frames[0](performance.now());
+			const frame = frames[0];
+			if (!frame) throw new Error('missing frame');
+			frame(performance.now());
 			expect(second.style.getPropertyValue('transition')).toBe('color 0.2s');
 			expect(second.style.getPropertyPriority('transition')).toBe('');
 		} finally {

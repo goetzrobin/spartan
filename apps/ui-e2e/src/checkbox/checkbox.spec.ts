@@ -153,7 +153,6 @@ test.describe('checkbox', () => {
 		test('click interactions should render as indeterminate, become checked on label click, become unchecked on checkbox click', async ({
 			page,
 		}) => {
-			// click to get to the default state of unchecked
 			await verifyCheckboxSetup(page, 'testCheckboxIndeterminate');
 			await verifyIndeterminateAttr(page);
 
@@ -167,8 +166,6 @@ test.describe('checkbox', () => {
 		test('[Tab][Enter] interactions should render as indeterminate, become checked when pressing enter, become unchecked when pressing enter again', async ({
 			page,
 		}) => {
-			// this is the same as label does not change keyboard interaction
-			// click to get to the default state of unchecked
 			await verifyCheckboxSetup(page, 'testCheckboxIndeterminate');
 			await verifyIndeterminateAttr(page);
 
@@ -183,7 +180,6 @@ test.describe('checkbox', () => {
 		test('[Tab][Space] interactions should render as indeterminate, become checked when pressing space, become unchecked when pressing enter space', async ({
 			page,
 		}) => {
-			// click to get to the default state of unchecked
 			await verifyCheckboxSetup(page, 'testCheckboxIndeterminate');
 			await verifyIndeterminateAttr(page);
 

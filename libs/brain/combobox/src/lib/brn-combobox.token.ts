@@ -31,7 +31,7 @@ export interface BrnComboboxBase<T> {
 	isExpanded: Signal<boolean>;
 	searchInputWrapperWidth: Signal<number | null>;
 	mode: Signal<ComboboxInputMode>;
-	controlState?: Signal<ControlState | null>;
+	controlState?: Signal<ControlState | null> | undefined;
 	hasValue: Signal<boolean>;
 	listId: Signal<string | undefined>;
 	contentId: Signal<string | undefined>;
@@ -118,7 +118,6 @@ function getDefaultConfig<T>(): BrnComboboxConfig<T> {
 			comboboxContainsFilter(itemValue, search, collator, itemToString),
 		isItemEqualToValue: (itemValue: T, selectedValue: T | undefined | null) => Object.is(itemValue, selectedValue),
 		isSingleValuePresent: (value: T | undefined | null) => value !== undefined && value !== null && value !== '',
-		itemToString: undefined,
 		autoHighlight: false,
 		closeOnSelect: true,
 	};

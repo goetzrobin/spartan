@@ -1,11 +1,7 @@
-// Just enough PNG to compare two screenshots without adding a dependency: decodes 8-bit RGB and
-// RGBA images (what browsers write) and counts the pixels that really differ.
-
 import { crc32, deflateSync, inflateSync } from 'node:zlib';
 
 const SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
-/** @returns {{ width: number, height: number, channels: number, data: Buffer }} */
 export function decodePng(buffer) {
 	if (!buffer.subarray(0, 8).equals(SIGNATURE)) throw new Error('not a PNG file');
 	let width = 0;
@@ -56,12 +52,7 @@ export function decodePng(buffer) {
 	return { width, height, channels, data };
 }
 
-/**
- * Counts pixels whose colour differs by more than `tolerance` in any channel (0 to 255).
- * Rendering is not bit-exact from run to run: the edge of a focus ring can come out one shade
- * lighter. A tolerance keeps that from being reported as a visual change.
- * @returns {{ sameSize: boolean, changedPixels: number, totalPixels: number }}
- */
+// Chromium screenshots are not bit-exact between runs: an antialiased edge can differ by a shade.
 export function comparePng(first, second, tolerance = 16) {
 	const a = decodePng(first);
 	const b = decodePng(second);

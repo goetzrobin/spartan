@@ -418,8 +418,12 @@ describe('Toaster', () => {
 
 		const observed = lists.filter((list) => vi.mocked(list.addEventListener).mock.calls.length > 0);
 		expect(observed).toHaveLength(1);
-		const [type, listener] = vi.mocked(observed[0].addEventListener).mock.calls[0];
-		expect(observed[0].removeEventListener).toHaveBeenCalledWith(type, listener);
+		const list = observed[0];
+		if (!list) throw new Error('missing observed list');
+		const call = vi.mocked(list.addEventListener).mock.calls[0];
+		if (!call) throw new Error('missing addEventListener call');
+		const [type, listener] = call;
+		expect(list.removeEventListener).toHaveBeenCalledWith(type, listener);
 	});
 
 	it('should render the custom action when provided', async () => {

@@ -152,10 +152,14 @@ describe('HlmPopover overlay behaviour', () => {
 			.queryAll(By.directive(HlmPopover))
 			.map((d) => d.injector.get(BrnPopover));
 
+		const firstPopover = popovers[0];
+		const secondPopover = popovers[1];
+		if (!firstPopover || !secondPopover) throw new Error('missing popover');
+
 		expect(() => {
-			popovers[0].open();
+			firstPopover.open();
 			view.detectChanges();
-			popovers[1].open();
+			secondPopover.open();
 			view.detectChanges();
 		}).not.toThrow();
 

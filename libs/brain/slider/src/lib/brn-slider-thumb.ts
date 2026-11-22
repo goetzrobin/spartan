@@ -62,7 +62,10 @@ export class BrnSliderThumb {
 		const range = this._slider.max() - this._slider.min();
 		if (range === 0) return 0;
 
-		return ((this._slider.normalizedValue()[this._index()] - this._slider.min()) / range) * 100;
+		const value = this._slider.normalizedValue()[this._index()];
+		if (value === undefined) return Number.NaN;
+
+		return ((value - this._slider.min()) / range) * 100;
 	});
 
 	private readonly _thumbInBoundsOffset = computed(() => {
@@ -149,9 +152,10 @@ export class BrnSliderThumb {
 		// Home/End keys
 		if (event.key === 'Home') {
 			if (this._slider.isDraggableRangeOnly()) {
-				const range = this._slider.normalizedValue();
-				const delta = min - range[0];
-				this._slider.setAllValuesByDelta(delta);
+				const first = this._slider.normalizedValue()[0];
+				if (first !== undefined) {
+					this._slider.setAllValuesByDelta(min - first);
+				}
 			} else {
 				this._slider.setValue(min, this._index());
 			}
@@ -162,8 +166,10 @@ export class BrnSliderThumb {
 		if (event.key === 'End') {
 			if (this._slider.isDraggableRangeOnly()) {
 				const range = this._slider.normalizedValue();
-				const delta = max - range[range.length - 1];
-				this._slider.setAllValuesByDelta(delta);
+				const last = range[range.length - 1];
+				if (last !== undefined) {
+					this._slider.setAllValuesByDelta(max - last);
+				}
 			} else {
 				this._slider.setValue(max, this._index());
 			}
@@ -179,7 +185,9 @@ export class BrnSliderThumb {
 		} else {
 			const index = this._index();
 			const value = this._slider.normalizedValue()[index];
-			this._slider.setValue(Math.min(max, Math.max(min, value + delta)), index);
+			if (value !== undefined) {
+				this._slider.setValue(Math.min(max, Math.max(min, value + delta)), index);
+			}
 		}
 
 		event.preventDefault();

@@ -1,8 +1,6 @@
 import { STORY_ROOT, byText, checkA11y, expect, gotoStory, test } from '../support';
 
 test.describe('context-menu', () => {
-	// we are using the angular cdk so we are just doing some sanity testing that all directives
-	// were ported over correctly
 	test.describe('default', () => {
 		test.beforeEach(async ({ page }) => {
 			await gotoStory(page, 'context-menu--default');

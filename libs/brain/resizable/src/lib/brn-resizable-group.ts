@@ -139,7 +139,12 @@ export class BrnResizableGroup {
 			}
 		}
 
-		panels.forEach((panel, index) => panel.setSize(sizes[index]));
+		panels.forEach((panel, index) => {
+			const size = sizes[index];
+			if (size !== undefined) {
+				panel.setSize(size);
+			}
+		});
 		this._knownPanels = panels;
 		this._appliedLayout = [...sizes];
 
@@ -152,7 +157,13 @@ export class BrnResizableGroup {
 	// floating-point drift from a rescale round-trip can't feed back into the model (NG0103).
 	private _layoutsEquivalent(first: readonly number[], second: readonly number[]): boolean {
 		const epsilon = 1e-9;
-		return first.length === second.length && first.every((size, index) => Math.abs(size - second[index]) < epsilon);
+		return (
+			first.length === second.length &&
+			first.every((size, index) => {
+				const other = second[index];
+				return other !== undefined && Math.abs(size - other) < epsilon;
+			})
+		);
 	}
 
 	private _panelsEqual(first: readonly BrnResizablePanel[], second: readonly BrnResizablePanel[]): boolean {
@@ -171,6 +182,7 @@ export class BrnResizableGroup {
 		this.dragStart.emit();
 
 		const startPosition = this._getEventPosition(event);
+		if (startPosition === undefined) return;
 		const startSizes = [...sizes];
 		// Horizontal resizing is mirrored under RTL: the panel order is reversed, so the pixel
 		// delta is inverted in _handleResize to keep the handle tracking the pointer correctly.
@@ -227,6 +239,7 @@ export class BrnResizableGroup {
 		isRtl = false,
 	): void {
 		const currentPosition = this._getEventPosition(event);
+		if (currentPosition === undefined) return;
 		const delta = (currentPosition - startPosition) * (isRtl ? -1 : 1);
 		const containerSize = this._getContainerSize();
 		const deltaPercentage = (delta / containerSize) * 100;
@@ -244,14 +257,18 @@ export class BrnResizableGroup {
 		const rightMin = rightPanel.minSize();
 		const rightMax = rightPanel.maxSize();
 
-		let newLeftSize = startSizes[handleIndex] + deltaPercentage;
-		let newRightSize = startSizes[handleIndex + 1] - deltaPercentage;
+		const startLeftSize = startSizes[handleIndex];
+		const startRightSize = startSizes[handleIndex + 1];
+		if (startLeftSize === undefined || startRightSize === undefined) return;
+
+		let newLeftSize = startLeftSize + deltaPercentage;
+		let newRightSize = startRightSize - deltaPercentage;
 
 		newLeftSize = Math.max(leftMin, Math.min(leftMax, newLeftSize));
 		newRightSize = Math.max(rightMin, Math.min(rightMax, newRightSize));
 
 		const totalSize = newLeftSize + newRightSize;
-		const originalTotal = startSizes[handleIndex] + startSizes[handleIndex + 1];
+		const originalTotal = startLeftSize + startRightSize;
 
 		if (Math.abs(totalSize - originalTotal) < 0.01) {
 			newSizes[handleIndex] = newLeftSize;
@@ -300,12 +317,13 @@ export class BrnResizableGroup {
 		this._appliedLayout = [...sizes];
 	}
 
-	private _getEventPosition(event: MouseEvent | TouchEvent): number {
+	private _getEventPosition(event: MouseEvent | TouchEvent): number | undefined {
 		const layout = this.direction();
 		if (event instanceof MouseEvent) {
 			return layout === 'vertical' ? event.clientY : event.clientX;
 		} else {
 			const touch = event.touches[0];
+			if (!touch) return undefined;
 			return layout === 'vertical' ? touch.clientY : touch.clientX;
 		}
 	}
@@ -340,6 +358,7 @@ export class BrnResizableGroup {
 			});
 		} else {
 			const collapsedSize = sizes[index];
+			if (collapsedSize === undefined) return;
 			sizes[index] = 0;
 
 			const totalOthers = sizes.reduce((sum, size, i) => (i !== index ? sum + size : sum), 0);

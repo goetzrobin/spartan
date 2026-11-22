@@ -1,7 +1,3 @@
-// One test from apps/ui-storybook-e2e/src/integration/menu/dropdown-menu.cy.ts, ported by hand. It
-// presses keys with realPress, some of them in a loop, which the transform does not convert.
-// realPress sends the key to whatever has focus, as page.keyboard.press does. The title matches
-// the original so the transform leaves it out of dropdown-menu.spec.ts.
 import { STORY_ROOT, byText, checkA11y, expect, gotoStory, test } from '../support';
 
 test.describe('dropdown-menu', () => {
@@ -32,7 +28,6 @@ test.describe('dropdown-menu', () => {
 
 			await expect(page.getByRole('menu')).toHaveCount(1);
 
-			// Navigate down multiple times
 			for (let i = 0; i < 5; i++) {
 				await page.keyboard.press('ArrowDown');
 			}

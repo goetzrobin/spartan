@@ -1,43 +1,15 @@
 import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
 
-/**
- * Reads one `*.stories.ts` file into a plain description of what it contains.
- *
- * The transform never guesses. Whatever does not match one of the shapes handled here is
- * returned as a reason on the story (or on the file), and that story is left out of the
- * generated pages and listed in the report instead.
- *
- * @typedef {{ key: string, value: string, isFunction: boolean }} Field
- * @typedef {{
- *   exportName: string,
- *   args: Field[],
- *   props: Field[],
- *   imports: string[],
- *   providers: string[],
- *   routeProviders: string[],
- *   template: string,
- *   setup: string[],
- *   argsName: string | undefined,
- *   namedArgs: string[],
- *   inConstructor: boolean,
- *   reasons: string[],
- * }} Story
- */
-
 const STORYBOOK = /^@storybook\//;
 
 export function parseStoryFile(fileName, sourceText, options = {}) {
 	const source = ts.createSourceFile(fileName, sourceText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
 	const text = (node) => node.getText(source);
 
-	/** @type {string[]} */
 	const fileReasons = [];
-	/** import declarations from anything but Storybook, kept verbatim */
 	const importStatements = [];
-	/** local name -> import statement that brings it in */
 	const importedNames = new Map();
-	/** top-level declarations that are neither meta nor a story */
 	const helpers = [];
 	const helperNames = new Set();
 	const storyNodes = [];
@@ -60,7 +32,6 @@ export function parseStoryFile(fileName, sourceText, options = {}) {
 		}
 
 		if (ts.isExportAssignment(statement)) {
-			// `export default meta;` or `export default { ... } as Meta<...>;`
 			const expression = unwrap(statement.expression);
 			if (ts.isIdentifier(expression)) metaName = expression.text;
 			else if (ts.isObjectLiteralExpression(expression)) metaNode = expression;
@@ -112,14 +83,12 @@ export function parseStoryFile(fileName, sourceText, options = {}) {
 	const metaReasons = [];
 	const metaArgs = readFields(property(metaNode, 'args'), 'meta.args', metaReasons, text);
 	const metaDecorators = readDecorators(property(metaNode, 'decorators'), 'meta', metaReasons, text);
-	// A render on the meta is the one stories use when they do not bring their own.
 	const metaRender = property(metaNode, 'render');
 
 	const helpersByName = new Map();
 	for (const helper of helpers) for (const name of declaredNames(helper)) helpersByName.set(name, helper);
 	pureScope = { helpers: helpersByName, imported: importedNames, resolveConstant: options.resolveConstant };
 
-	/** @type {Story[]} */
 	const stories = storyNodes.map(({ exportName, initializer }) => {
 		const reasons = [...metaReasons];
 		const empty = {
@@ -149,8 +118,6 @@ export function parseStoryFile(fileName, sourceText, options = {}) {
 		const args = mergeFields(metaArgs, readFields(property(object, 'args'), 'args', reasons, text));
 		const decorators = readDecorators(property(object, 'decorators'), 'story', reasons, text);
 		const render = readRender(property(object, 'render') ?? metaRender, args, reasons, text);
-		// An arg the story takes by name but never sets is `undefined` in Storybook; here it becomes
-		// a field with that value so the template and the address bar can still use it.
 		for (const name of [...render.namedArgs, ...render.readArgs]) {
 			if (!args.some((field) => field.key === name)) args.push({ key: name, value: 'undefined', isFunction: false });
 		}
@@ -220,7 +187,6 @@ function property(object, name) {
 	return undefined;
 }
 
-/** `{ align: 'center', sideOffset: 4 }` -> fields. Spreads, shorthand and computed keys are refused. */
 function readFields(node, label, reasons, text) {
 	if (!node) return [];
 	const object = unwrap(node);
@@ -259,7 +225,6 @@ function mergeFields(base, override) {
 	return [...merged.values()];
 }
 
-/** Only `moduleMetadata({ imports, providers })` and `applicationConfig({ providers })` are understood. */
 function readDecorators(node, label, reasons, text) {
 	const result = { imports: [], providers: [], routeProviders: [] };
 	if (!node) return result;
@@ -293,24 +258,16 @@ function readDecorators(node, label, reasons, text) {
 	return result;
 }
 
-/**
- * Handles `render: (args) => ({ props, template })` where the template is a string and the only
- * interpolation in it is `argsToTemplate(args)`.
- */
 function readRender(node, args, reasons, text) {
 	const result = {
 		props: [],
 		template: '',
 		imports: [],
 		providers: [],
-		/** statements that run before the returned object is built, kept as written */
 		setup: [],
 		argsName: undefined,
-		/** args the render function takes by name: `({ disabled, ...args })` -> ['disabled'] */
 		namedArgs: [],
-		/** args the story's code reads as `args.name`; they must exist as fields even without a default */
 		readArgs: [],
-		/** props are assigned in the page's constructor because they need the setup or the args */
 		inConstructor: false,
 	};
 	if (!node) {
@@ -334,7 +291,6 @@ function readRender(node, args, reasons, text) {
 				(element) => ts.isIdentifier(element.name) && !element.propertyName && !element.initializer,
 			)
 		) {
-			// `({ disabled, ...args })`: `disabled` is one arg by name, `args` is all the others.
 			for (const element of parameter.name.elements) {
 				if (element.dotDotDotToken) argsName = element.name.text;
 				else result.namedArgs.push(element.name.text);
@@ -347,8 +303,6 @@ function readRender(node, args, reasons, text) {
 	result.argsName = argsName;
 	let returned;
 	if (ts.isBlock(node.body)) {
-		// `render: () => { const form = new FormGroup(...); return { props: { form }, template }; }`
-		// The statements before the return become the start of the page's constructor.
 		const statements = [...node.body.statements];
 		const last = statements.pop();
 		if (last && ts.isReturnStatement(last) && last.expression && !statements.some(returnsEarly)) {
@@ -375,7 +329,6 @@ function readRender(node, args, reasons, text) {
 		}
 	}
 
-	// `moduleMetadata: { imports, providers }` returned from render means the same as the decorator.
 	const metadata = property(returned, 'moduleMetadata');
 	if (metadata) {
 		const config = unwrap(metadata);
@@ -398,9 +351,8 @@ function readRender(node, args, reasons, text) {
 	const props = property(returned, 'props');
 	if (props) {
 		const value = unwrap(props);
-		if (ts.isIdentifier(value) && value.text === argsName) {
-			// `props: args` adds nothing beyond the args themselves
-		} else if (ts.isObjectLiteralExpression(value)) {
+		const isArgsItself = ts.isIdentifier(value) && value.text === argsName;
+		if (ts.isObjectLiteralExpression(value)) {
 			for (const member of value.properties) {
 				if (ts.isSpreadAssignment(member)) {
 					if (!ts.isIdentifier(member.expression) || member.expression.text !== argsName) {
@@ -409,9 +361,7 @@ function readRender(node, args, reasons, text) {
 					continue;
 				}
 				if (ts.isShorthandPropertyAssignment(member)) {
-					// `props: { disabled }` for an arg taken by name: the arg is a field of the page already.
 					if (result.namedArgs.includes(member.name.text)) continue;
-					// `props: { form }` only makes sense with setup statements that declare `form`.
 					result.props.push({ key: member.name.text, value: member.name.text, isFunction: false });
 					result.inConstructor = true;
 					continue;
@@ -421,7 +371,6 @@ function readRender(node, args, reasons, text) {
 					continue;
 				}
 				const initializer = unwrap(member.initializer);
-				// A value computed from the args has to be built after the args are known.
 				const used = identifiersIn(text(member.initializer));
 				if ((argsName && used.has(argsName)) || result.namedArgs.some((name) => used.has(name))) {
 					result.inConstructor = true;
@@ -432,7 +381,7 @@ function readRender(node, args, reasons, text) {
 					isFunction: ts.isArrowFunction(initializer) || ts.isFunctionExpression(initializer),
 				});
 			}
-		} else {
+		} else if (!isArgsItself) {
 			reasons.push('props is neither the args nor an object literal');
 		}
 	}
@@ -464,8 +413,6 @@ function readRender(node, args, reasons, text) {
 	} else if (ts.isTemplateExpression(literal)) {
 		let built = literal.head.text;
 		for (const span of literal.templateSpans) {
-			// Markup the story builds with plain code, such as `Array.from({ length: 5 }, ...).join('')`,
-			// is the same on every run, so it is worked out here and written into the page.
 			const constant = constantText(span.expression, text);
 			if (constant !== undefined) {
 				built += constant + span.literal.text;
@@ -482,7 +429,6 @@ function readRender(node, args, reasons, text) {
 	return result;
 }
 
-/** `argsToTemplate(args)` or `argsToTemplate(args, { include | exclude: [...] })` -> `[a]="a" (b)="b($event)"` */
 function readArgsToTemplate(expression, argsName, args, reasons, text) {
 	const call = unwrap(expression);
 	const isCall =
@@ -523,17 +469,10 @@ function readArgsToTemplate(expression, argsName, args, reasons, text) {
 		.join(' ');
 }
 
-/** Globals a template expression may use and still give the same text on every run. */
 const PURE_GLOBALS = new Set(['Array', 'String', 'Number', 'Object', 'JSON', 'undefined']);
 
-/**
- * What a template expression may lean on besides itself, set while one story file is parsed:
- * the file's own top-level declarations, its imports, and a way to look up an imported string.
- * @type {{ helpers: Map<string, ts.Statement>, imported: Map<string, ts.ImportDeclaration>, resolveConstant?: (name: string, module: string) => string | undefined } | null}
- */
 let pureScope = null;
 
-/** Names a piece of code reads that it does not declare itself. */
 function freeNames(root) {
 	const declared = new Set();
 	const used = new Set();
@@ -553,10 +492,6 @@ function freeNames(root) {
 	return [...used].filter((name) => !declared.has(name));
 }
 
-/**
- * Whether a `const` holds something no other code can change: text, a number, true or false, or a
- * function. A list or an object can be added to after it is declared, so those do not count.
- */
 function isFixedValue(initializer) {
 	if (!initializer) return false;
 	const value = unwrap(initializer);
@@ -571,11 +506,6 @@ function isFixedValue(initializer) {
 	);
 }
 
-/**
- * Code that defines `name` for evaluation, or undefined when `name` is not something whose value
- * is the same on every run. That is: a `const` or a function at the top of the story file that
- * itself only leans on such names, or an imported string constant the caller can look up.
- */
 function pureDefinition(name, text, seen, out) {
 	if (PURE_GLOBALS.has(name) || out.has(name)) return true;
 	if (!pureScope || seen.has(name)) return false;
@@ -603,12 +533,7 @@ function pureDefinition(name, text, seen, out) {
 	return false;
 }
 
-/**
- * The text of an expression whose value is the same on every run, or undefined when it is not
- * (it reads the args, a variable that can change, the clock, a random number, ...).
- */
 function constantText(expression, text) {
-	/** @type {Map<string, string>} definitions the expression needs, in the order they must run */
 	const definitions = new Map();
 	for (const name of freeNames(expression)) {
 		if (!pureDefinition(name, text, new Set(), definitions)) return undefined;
@@ -624,14 +549,12 @@ function constantText(expression, text) {
 	}
 }
 
-/** Whether a statement can return from the function it is in (returns inside nested functions do not count). */
 function returnsEarly(node) {
 	if (ts.isReturnStatement(node)) return true;
 	if (ts.isFunctionLike(node)) return false;
 	return ts.forEachChild(node, returnsEarly) ?? false;
 }
 
-/** Every identifier used as a value or a type inside a piece of TypeScript. */
 export function identifiersIn(code) {
 	const source = ts.createSourceFile('snippet.ts', `const __x = [\n${code}\n];`, ts.ScriptTarget.Latest, true);
 	const names = new Set();
@@ -644,14 +567,12 @@ export function identifiersIn(code) {
 	return names;
 }
 
-/** Source of a helper declaration with `export` added when it is missing. */
 export function exportedHelperText(statement, source) {
 	const full = statement.getFullText(source).replace(/^\s*\n/, '');
 	if (isExported(statement)) return full;
 	const names = declaredNames(statement);
 	if (names.length === 0) return full;
 
-	// For a decorated class the keyword goes after the decorators, not before them.
 	let insertAt = statement.getStart(source);
 	if (ts.isClassDeclaration(statement)) {
 		const decorators = (statement.modifiers ?? []).filter(ts.isDecorator);

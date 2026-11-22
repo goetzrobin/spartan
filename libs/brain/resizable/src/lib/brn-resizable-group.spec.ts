@@ -175,7 +175,9 @@ describe('BrnResizableGroup', () => {
 		expectLayout(view.fixture.componentInstance.layout(), [30, 45, 25]);
 
 		const handles = view.container.querySelectorAll<HTMLElement>('brn-resizable-handle');
-		handles[1].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+		const handle = handles[1];
+		if (!handle) throw new Error('missing handle');
+		handle.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
 		view.detectChanges();
 
 		expectLayout(view.fixture.componentInstance.layout(), [30, 46, 24]);
@@ -196,7 +198,9 @@ describe('BrnResizableGroup', () => {
 		expectLayout(view.fixture.componentInstance.layout(), [100 / 3, (40 * 2) / 3, 40]);
 
 		const handles = view.container.querySelectorAll<HTMLElement>('brn-resizable-handle');
-		handles[1].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+		const handle = handles[1];
+		if (!handle) throw new Error('missing handle');
+		handle.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
 		view.detectChanges();
 
 		expectLayout(view.fixture.componentInstance.layout(), [100 / 3, (40 * 2) / 3 + 1, 39]);

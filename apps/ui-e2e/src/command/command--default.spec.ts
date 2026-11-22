@@ -144,8 +144,6 @@ test.describe('command', () => {
 		test('\n\tInput, list, and items should be accessible and have no WCAG A/AA violations.\n\t  ', async ({
 			page,
 		}) => {
-			// Wait for the story to render before auditing; running axe immediately after
-			// cy.visit scans an empty root and falsely passes.
 			await expect(page.locator('input')).toBeVisible();
 			await expect(page.locator('[role="listbox"]')).toBeVisible();
 			await page.keyboard.press('Tab');

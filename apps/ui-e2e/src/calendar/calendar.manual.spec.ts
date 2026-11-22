@@ -1,11 +1,6 @@
-// Ported by hand from apps/ui-storybook-e2e/src/integration/calendar/calendar.cy.ts.
-// The originals pick a day cell with a `.filter` callback (the cell's trimmed text, and not a day
-// from another month) and keep it under an alias, which the transform cannot convert. Titles match
-// the originals so the transform leaves them out of calendar.spec.ts.
 import type { Page } from '@playwright/test';
 import { expect, gotoStory, test } from '../support';
 
-/** The day cell whose trimmed text is `day` and that has no `data-outside` attribute. */
 const dayCell = (page: Page, day: string) =>
 	page.locator('[brnCalendarCellButton]:not([data-outside])').filter({ hasText: new RegExp(`^\\s*${day}\\s*$`) });
 

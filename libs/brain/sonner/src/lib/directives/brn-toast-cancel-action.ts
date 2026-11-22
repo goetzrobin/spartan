@@ -13,8 +13,8 @@ export class BrnToastCancelAction {
 	public readonly templateRef = inject<TemplateRef<ToastActionTemplateContext>>(TemplateRef);
 	static ngTemplateContextGuard(
 		_directive: BrnToastCancelAction,
-		context: unknown,
-	): context is ToastActionTemplateContext {
+		_context: unknown,
+	): _context is ToastActionTemplateContext {
 		return true;
 	}
 }

@@ -100,26 +100,30 @@ describe('BrnTabsDirective', () => {
 	it('should register trigger and content on init', () => {
 		const tabs = renderResult.fixture.componentInstance.tabsDir().$tabs();
 		expect(Object.keys(tabs)).toContain('tab1');
-		expect(tabs['tab1'].trigger).toBeInstanceOf(BrnTabsTrigger);
-		expect(tabs['tab1'].content).toBeInstanceOf(BrnTabsContent);
+		const tab = tabs['tab1'];
+		if (!tab) throw new Error('missing tab1');
+		expect(tab.trigger).toBeInstanceOf(BrnTabsTrigger);
+		expect(tab.content).toBeInstanceOf(BrnTabsContent);
 	});
 
 	it('should unregister only the trigger when it is removed', async () => {
 		renderResult.fixture.componentRef.setInput('showTrigger', false);
 		renderResult.fixture.detectChanges();
 		const tabsAfter = renderResult.fixture.componentInstance.tabsDir().$tabs();
-		expect(tabsAfter['tab1']).toBeDefined();
-		expect(tabsAfter['tab1'].trigger).toBeUndefined();
-		expect(tabsAfter['tab1'].content).toBeInstanceOf(BrnTabsContent);
+		const tab = tabsAfter['tab1'];
+		if (!tab) throw new Error('missing tab1');
+		expect(tab.trigger).toBeUndefined();
+		expect(tab.content).toBeInstanceOf(BrnTabsContent);
 	});
 
 	it('should unregister only the content when it is removed', async () => {
 		renderResult.fixture.componentRef.setInput('showContent', false);
 		renderResult.fixture.detectChanges();
 		const tabsAfter = renderResult.fixture.componentInstance.tabsDir().$tabs();
-		expect(tabsAfter['tab1']).toBeDefined();
-		expect(tabsAfter['tab1'].content).toBeUndefined();
-		expect(tabsAfter['tab1'].trigger).toBeInstanceOf(BrnTabsTrigger);
+		const tab = tabsAfter['tab1'];
+		if (!tab) throw new Error('missing tab1');
+		expect(tab.content).toBeUndefined();
+		expect(tab.trigger).toBeInstanceOf(BrnTabsTrigger);
 	});
 
 	it('should remove the entire tab entry when both trigger and content are gone', async () => {

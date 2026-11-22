@@ -16,12 +16,10 @@ test.describe('separator', () => {
 		await expect(page.locator('hlm-separator')).toHaveCount(3);
 		await expect(page.getByRole('separator')).toHaveCount(1);
 		await expect(page.getByRole('separator').first()).toHaveAttribute('data-orientation', 'horizontal');
-		// not needed since it's the default
 		await expect(page.getByRole('none').first()).not.toHaveAttribute('aria-orientation', 'horizontal');
 
 		await expect(page.getByRole('none')).toHaveCount(2);
 		await expect(page.getByRole('none').first()).toHaveAttribute('data-orientation', 'vertical');
-		// horizontals are decorative so no aria functionality included
 		await expect(page.getByRole('none').first()).not.toHaveAttribute('aria-orientation', 'vertical');
 	});
 });

@@ -184,12 +184,14 @@ describe('getElementScrollTop', () => {
 			contentPaddingEnd: 10,
 			items: [{ messageId: 'a', top: 100, height: 50 }],
 		});
+		const element = items[0];
+		if (!element) throw new Error('missing item');
 
 		// elementTop = 100; minus padding.start (10) minus scrollMargin (5).
 		expect(
 			getElementScrollTop({
 				align: 'start',
-				element: items[0],
+				element,
 				scrollMargin: 5,
 				spacer,
 				viewport,
@@ -206,13 +208,15 @@ describe('getElementScrollTop', () => {
 			contentPaddingEnd: 20,
 			items: [{ messageId: 'a', top: 300, height: 40 }],
 		});
+		const element = items[0];
+		if (!element) throw new Error('missing item');
 
 		// insetHeight = 200 - 20 - 20 = 160; offset = (160 - 40) / 2 = 60.
 		// elementTop (300) - padding.start (20) - 60 - scrollMargin (0) = 220.
 		expect(
 			getElementScrollTop({
 				align: 'center',
-				element: items[0],
+				element,
 				scrollMargin: 0,
 				spacer,
 				viewport,
@@ -229,13 +233,15 @@ describe('getElementScrollTop', () => {
 			contentPaddingEnd: 8,
 			items: [{ messageId: 'a', top: 300, height: 50 }],
 		});
+		const element = items[0];
+		if (!element) throw new Error('missing item');
 
 		// elementTop (300) - clientHeight (200) + height (50) + padding.end (8)
 		//   + scrollMargin (0) = 158.
 		expect(
 			getElementScrollTop({
 				align: 'end',
-				element: items[0],
+				element,
 				scrollMargin: 0,
 				spacer,
 				viewport,
@@ -255,11 +261,13 @@ describe('getElementScrollTop', () => {
 			// scrollTop (50) + 60 = 110, fully inside [50, 250].
 			items: [{ messageId: 'a', top: 60, height: 40 }],
 		});
+		const element = items[0];
+		if (!element) throw new Error('missing item');
 
 		expect(
 			getElementScrollTop({
 				align: 'nearest',
-				element: items[0],
+				element,
 				scrollMargin: 0,
 				spacer,
 				viewport,
@@ -279,11 +287,13 @@ describe('getElementScrollTop', () => {
 			// is above viewportTop (scrollTop 300), so it must scroll up to 200.
 			items: [{ messageId: 'a', top: -100, height: 40 }],
 		});
+		const element = items[0];
+		if (!element) throw new Error('missing item');
 
 		expect(
 			getElementScrollTop({
 				align: 'nearest',
-				element: items[0],
+				element,
 				scrollMargin: 0,
 				spacer,
 				viewport,

@@ -77,14 +77,13 @@ describe('parseStatus', () => {
 });
 
 describe('png comparison', () => {
-	/** A PNG of one colour per pixel, built by hand: RGBA, filter 0 on every row. */
 	const png = (width, height, pixel) => {
 		const chunk = (type, body) => {
 			const out = Buffer.alloc(12 + body.length);
 			out.writeUInt32BE(body.length, 0);
 			out.write(type, 4, 'latin1');
 			body.copy(out, 8);
-			return out; // the checksum is not read by the decoder
+			return out;
 		};
 		const header = Buffer.alloc(13);
 		header.writeUInt32BE(width, 0);
