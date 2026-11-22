@@ -58,7 +58,7 @@ export class BrnMessageScroller {
 	private _pendingScrollFrame: number | null = null;
 	private _pendingScrollToMessage: {
 		messageId: string;
-		options?: BrnMessageScrollerScrollOptions;
+		options?: BrnMessageScrollerScrollOptions | undefined;
 	} | null = null;
 	private _prependRestore: {
 		element: HTMLElement;

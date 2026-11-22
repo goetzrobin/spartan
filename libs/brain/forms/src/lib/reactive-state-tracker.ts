@@ -9,7 +9,7 @@ import { controlStateEqual, type StateTracker } from './state-tracker';
 export class ReactiveStateTracker implements StateTracker {
 	private readonly _stateVersion = signal(0);
 	private readonly _eventsSubscription?: Subscription;
-	private readonly _submitSubscription?: Subscription;
+	private readonly _submitSubscription?: Subscription | undefined;
 
 	public readonly controlState = computed<ControlState | null>(
 		() => {

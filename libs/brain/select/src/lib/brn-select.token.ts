@@ -22,7 +22,7 @@ export interface BrnSelectBase<T> {
 	hasValue: Signal<boolean>;
 	isExpanded: Signal<boolean>;
 	triggerWidth: Signal<number | null>;
-	controlState?: Signal<ControlState | null>;
+	controlState?: Signal<ControlState | null> | undefined;
 	listId: Signal<string | undefined>;
 
 	isSelected: (itemValue: T) => boolean;
@@ -69,7 +69,6 @@ function getDefaultConfig<T>(): BrnSelectConfig<T> {
 	return {
 		isItemEqualToValue: (itemValue: T, selectedValue: T | undefined | null) => Object.is(itemValue, selectedValue),
 		isSingleValuePresent: (value: T | undefined | null) => value !== undefined && value !== null && value !== '',
-		itemToString: undefined,
 	};
 }
 

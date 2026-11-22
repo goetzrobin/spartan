@@ -63,7 +63,6 @@ export interface BrnAutocompleteConfig<T> {
 function getDefaultConfig<T>(): BrnAutocompleteConfig<T> {
 	return {
 		isItemEqualToValue: (itemValue: T, selectedValue: T | undefined | null) => Object.is(itemValue, selectedValue),
-		itemToString: undefined,
 		autoHighlight: false,
 	};
 }

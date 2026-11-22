@@ -1,8 +1,8 @@
 import type { BrnDateAdapter } from '@spartan-ng/brain/date-time';
 
 export interface EnabledDateBounds<T> {
-	min?: T;
-	max?: T;
+	min?: T | undefined;
+	max?: T | undefined;
 }
 
 /** Find the first enabled day from the target, moving in the requested direction. */

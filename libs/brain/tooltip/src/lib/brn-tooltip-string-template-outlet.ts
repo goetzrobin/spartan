@@ -33,7 +33,7 @@ export class BrnTooltipStringTemplateOutlet<T = unknown> implements OnDestroy {
 	private _isFirstChange = true;
 	private _lastOutletWasTemplate = false;
 	private _lastTemplateRef: TemplateRef<void> | null = null;
-	private _lastContext?: BrnTemplateOutletContext;
+	private _lastContext?: BrnTemplateOutletContext | undefined;
 
 	public readonly brnTooltipStringTemplateOutletContext = input<BrnTemplateOutletContext | undefined>(undefined);
 	public readonly brnTooltipStringTemplateOutlet = input.required<T | TemplateRef<void>>();
