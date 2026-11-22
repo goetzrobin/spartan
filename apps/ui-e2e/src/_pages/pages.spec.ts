@@ -17,6 +17,7 @@ const selected = only ? pages.filter((page) => only.includes(page.id.split('--')
 
 /** Requests the sandbox or a flaky network blocks say nothing about the page itself. */
 const NETWORK_NOISE = /Failed to load resource|net::ERR_/;
+const LONGEST_TIMER_THAT_FIRES_MS = 2500;
 
 test.describe('test pages render without errors', () => {
 	for (const { id } of selected) {
@@ -26,6 +27,20 @@ test.describe('test pages render without errors', () => {
 			page.on('console', (message) => {
 				if (message.type() === 'error' && !NETWORK_NOISE.test(message.text())) errors.push(message.text());
 			});
+
+			await page.addInitScript((longestTimerThatFires) => {
+				const nativeSetTimeout = window.setTimeout.bind(window);
+				const nativeSetInterval = window.setInterval.bind(window);
+				const neverFires = () => nativeSetTimeout(() => undefined, 0);
+				window.setTimeout = ((handler: TimerHandler, delay?: number, ...rest: unknown[]) =>
+					(delay ?? 0) > longestTimerThatFires
+						? neverFires()
+						: nativeSetTimeout(handler, delay, ...rest)) as typeof window.setTimeout;
+				window.setInterval = ((handler: TimerHandler, delay?: number, ...rest: unknown[]) =>
+					(delay ?? 0) > longestTimerThatFires
+						? neverFires()
+						: nativeSetInterval(handler, delay, ...rest)) as typeof window.setInterval;
+			}, LONGEST_TIMER_THAT_FIRES_MS);
 
 			await gotoStory(page, id);
 			await recordA11y(page, STORY_ROOT);
