@@ -420,7 +420,9 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 		}
 
 		if (this.items()?.length) {
-			this.items()[tabIndex].focus();
+			const item = this.items()[tabIndex];
+			if (!item) return;
+			item.focus();
 
 			// Do not let the browser manage scrolling to focus the element, this will be handled
 			// by using translation. In LTR, the scroll left should be 0. In RTL, the scroll width

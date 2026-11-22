@@ -72,17 +72,20 @@ describe('BrnToggleGroupDirective', () => {
 	it('should allow only a single selected toggle button when type is single', async () => {
 		const { getAllByRole } = await render(BrnToggleGroupDirectiveSpec);
 		const buttons = getAllByRole('button');
+		const firstButton = buttons[0];
+		const secondButton = buttons[1];
+		if (!firstButton || !secondButton) throw new Error('missing button');
 
 		expect(buttons[0]).toHaveAttribute('data-state', 'off');
 		expect(buttons[1]).toHaveAttribute('data-state', 'off');
 		expect(buttons[2]).toHaveAttribute('data-state', 'off');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
 		expect(buttons[1]).toHaveAttribute('data-state', 'off');
 		expect(buttons[2]).toHaveAttribute('data-state', 'off');
 
-		await fireEvent.click(buttons[1]);
+		await fireEvent.click(secondButton);
 		expect(buttons[0]).toHaveAttribute('data-state', 'off');
 		expect(buttons[1]).toHaveAttribute('data-state', 'on');
 		expect(buttons[2]).toHaveAttribute('data-state', 'off');
@@ -95,18 +98,21 @@ describe('BrnToggleGroupDirective', () => {
 			},
 		});
 		const buttons = getAllByRole('button');
+		const firstButton = buttons[0];
+		const secondButton = buttons[1];
+		if (!firstButton || !secondButton) throw new Error('missing button');
 
 		expect(buttons[0]).toHaveAttribute('data-state', 'off');
 		expect(buttons[1]).toHaveAttribute('data-state', 'off');
 		expect(buttons[2]).toHaveAttribute('data-state', 'off');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		detectChanges();
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
 		expect(buttons[1]).toHaveAttribute('data-state', 'off');
 		expect(buttons[2]).toHaveAttribute('data-state', 'off');
 
-		await fireEvent.click(buttons[1]);
+		await fireEvent.click(secondButton);
 		detectChanges();
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
 		expect(buttons[1]).toHaveAttribute('data-state', 'on');
@@ -206,11 +212,13 @@ describe('BrnToggleGroupDirective', () => {
 	it('should deselect a selected toggle when clicked again (type = single, nullable by default)', async () => {
 		const { getAllByRole } = await render(BrnToggleGroupDirectiveSpec);
 		const buttons = getAllByRole('button');
+		const firstButton = buttons[0];
+		if (!firstButton) throw new Error('missing button');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		expect(buttons[0]).toHaveAttribute('data-state', 'off');
 		expect(buttons[1]).toHaveAttribute('data-state', 'off');
 		expect(buttons[2]).toHaveAttribute('data-state', 'off');
@@ -223,12 +231,14 @@ describe('BrnToggleGroupDirective', () => {
 			},
 		});
 		const buttons = getAllByRole('button');
+		const firstButton = buttons[0];
+		if (!firstButton) throw new Error('missing button');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		detectChanges();
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		detectChanges();
 		expect(buttons[0]).toHaveAttribute('data-state', 'off');
 		expect(buttons[1]).toHaveAttribute('data-state', 'off');
@@ -238,11 +248,13 @@ describe('BrnToggleGroupDirective', () => {
 	it('should not deselect a selected toggle when nullable is false (type = single)', async () => {
 		const { getAllByRole } = await render(BrnToggleGroupNonNullableSpec);
 		const buttons = getAllByRole('button');
+		const firstButton = buttons[0];
+		if (!firstButton) throw new Error('missing button');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
 		expect(buttons[1]).toHaveAttribute('data-state', 'off');
 		expect(buttons[2]).toHaveAttribute('data-state', 'off');
@@ -255,12 +267,14 @@ describe('BrnToggleGroupDirective', () => {
 			},
 		});
 		const buttons = getAllByRole('button');
+		const firstButton = buttons[0];
+		if (!firstButton) throw new Error('missing button');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		detectChanges();
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
 
-		await fireEvent.click(buttons[0]);
+		await fireEvent.click(firstButton);
 		detectChanges();
 		expect(buttons[0]).toHaveAttribute('data-state', 'on');
 		expect(buttons[1]).toHaveAttribute('data-state', 'off');

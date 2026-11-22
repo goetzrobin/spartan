@@ -70,8 +70,11 @@ describe('HlmInputOtp', () => {
 		await user.keyboard('123456');
 
 		expect(input.value).toBe('123456');
-		expect(container.querySelectorAll('brn-input-otp-slot')[0]).toHaveTextContent('1');
-		expect(container.querySelectorAll('brn-input-otp-slot')[5]).toHaveTextContent('6');
+		const firstSlot = container.querySelectorAll('brn-input-otp-slot')[0];
+		const lastSlot = container.querySelectorAll('brn-input-otp-slot')[5];
+		if (!firstSlot || !lastSlot) throw new Error('missing slot');
+		expect(firstSlot).toHaveTextContent('1');
+		expect(lastSlot).toHaveTextContent('6');
 	});
 
 	it('applies the default input classes and merges custom classes', async () => {
@@ -110,8 +113,11 @@ describe('HlmInputOtp', () => {
 		const slots = container.querySelectorAll('brn-input-otp-slot');
 
 		expect(input.value).toBe('123456');
-		expect(slots[0]).toHaveTextContent('*');
-		expect(slots[5]).toHaveTextContent('*');
+		const firstSlot = slots[0];
+		const lastSlot = slots[5];
+		if (!firstSlot || !lastSlot) throw new Error('missing slot');
+		expect(firstSlot).toHaveTextContent('*');
+		expect(lastSlot).toHaveTextContent('*');
 	});
 
 	it('filters characters using the slotPattern input', async () => {

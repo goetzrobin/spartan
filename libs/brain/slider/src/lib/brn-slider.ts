@@ -299,9 +299,12 @@ export class BrnSlider implements ControlValueAccessor, OnInit {
 
 		if (this.preventStepOverThumb() && currentValue.length > 1) {
 			const gap = this.minStepsBetweenThumbs() * this.step();
-			const lowerBound = atIndex > 0 ? Math.max(this.min(), currentValue[atIndex - 1] + gap) : this.min();
+			const lowerBound =
+				atIndex > 0 ? Math.max(this.min(), (currentValue[atIndex - 1] ?? Number.NaN) + gap) : this.min();
 			const upperBound =
-				atIndex < currentValue.length - 1 ? Math.min(this.max(), currentValue[atIndex + 1] - gap) : this.max();
+				atIndex < currentValue.length - 1
+					? Math.min(this.max(), (currentValue[atIndex + 1] ?? Number.NaN) - gap)
+					: this.max();
 			value = clamp(value, [lowerBound, upperBound]);
 		}
 
@@ -311,7 +314,9 @@ export class BrnSlider implements ControlValueAccessor, OnInit {
 
 		let newValIndex = 0;
 		for (let i = 0; i < newValue.length; i++) {
-			if (newValue[i] < value || (newValue[i] === value && i < atIndex)) {
+			const current = newValue[i];
+			if (current === undefined) continue;
+			if (current < value || (current === value && i < atIndex)) {
 				newValIndex = i + 1;
 			}
 		}
@@ -331,8 +336,9 @@ export class BrnSlider implements ControlValueAccessor, OnInit {
 		this._onChange?.(newValue);
 		this.valueChange.emit(newValue);
 
-		if (this.thumbs()[newValIndex]) {
-			this.thumbs()[newValIndex].elementRef.nativeElement.focus();
+		const thumb = this.thumbs()[newValIndex];
+		if (thumb) {
+			thumb.elementRef.nativeElement.focus();
 		}
 	}
 
@@ -425,8 +431,9 @@ function isGapAtIndexWithinBounds(values: number[], index: number, bound: number
 		return true;
 	}
 
-	const leftGap = index > 0 ? values[index] - values[index - 1] : undefined;
-	const rightGap = index < values.length - 1 ? values[index + 1] - values[index] : undefined;
+	const current = values[index] ?? Number.NaN;
+	const leftGap = index > 0 ? current - (values[index - 1] ?? Number.NaN) : undefined;
+	const rightGap = index < values.length - 1 ? (values[index + 1] ?? Number.NaN) - current : undefined;
 
 	for (const gap of [leftGap, rightGap]) {
 		if (gap === undefined) continue;

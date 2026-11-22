@@ -45,6 +45,8 @@ describe(updateMenuPosition.name, () => {
 
 		expect(trigger.menuPosition).toBe(position);
 		expect(ngOnChanges).toHaveBeenCalledTimes(1);
-		expect(ngOnChanges.mock.calls[0][0]).toMatchObject({ menuPosition: { currentValue: position } });
+		const call = ngOnChanges.mock.calls[0];
+		if (!call) throw new Error('missing ngOnChanges call');
+		expect(call[0]).toMatchObject({ menuPosition: { currentValue: position } });
 	});
 });

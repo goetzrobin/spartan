@@ -26,7 +26,7 @@ export const MENU_SIDE = new InjectionToken<MenuSideProvider>('SpartanMenuSide')
 export const deriveMenuSideFromTransformOrigin = (transformOrigin: string, side: MenuSide): MenuSide => {
 	const [x, y] = transformOrigin.trim().split(/\s+/);
 	const anchor = side === 'top' || side === 'bottom' ? y : x;
-	return OPPOSITE_SIDE[anchor] ?? side;
+	return anchor ? (OPPOSITE_SIDE[anchor] ?? side) : side;
 };
 
 export const createMenuPosition = (align: MenuAlign, side: MenuSide): ConnectedPosition[] => {

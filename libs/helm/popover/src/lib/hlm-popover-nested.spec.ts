@@ -70,6 +70,7 @@ describe('HlmPopover nested content', () => {
 		await flush();
 
 		const [outerContent, nestedContent] = contents();
+		if (!outerContent || !nestedContent) throw new Error('missing content');
 		expect(nestedContent.getAttribute('data-state')).toBe('closed');
 		expect(outerContent.getAttribute('data-state')).toBe('open');
 	});

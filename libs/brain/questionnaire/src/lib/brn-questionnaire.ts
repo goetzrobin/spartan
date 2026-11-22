@@ -235,7 +235,10 @@ export class BrnQuestionnaire {
 			}
 
 			if (currentIndex < 0) {
-				this.setItem(logicalItems[0].name);
+				const firstItem = logicalItems[0];
+				if (firstItem) {
+					this.setItem(firstItem.name);
+				}
 				return;
 			}
 
@@ -275,12 +278,13 @@ export class BrnQuestionnaire {
 	private getRecoveryItemName(currentIndex: number): string | null {
 		const ordered = this._orderedRegistrations();
 
-		if (!ordered.length) {
+		const firstRegistration = ordered[0];
+		if (!firstRegistration) {
 			return null;
 		}
 
 		const logicalNames = this._logicalItems().map((logicalItem) => logicalItem.name);
-		let recoveryName = ordered[0].name;
+		let recoveryName = firstRegistration.name;
 
 		for (const registration of ordered) {
 			const registrationIndex = logicalNames.indexOf(registration.name);
@@ -330,7 +334,12 @@ export class BrnQuestionnaire {
 			return;
 		}
 
-		this.setItem(this._logicalItems()[currentIndex - 1].name);
+		const previousItem = this._logicalItems()[currentIndex - 1];
+		if (!previousItem) {
+			return;
+		}
+
+		this.setItem(previousItem.name);
 	}
 
 	public goNext(): void {
@@ -347,7 +356,12 @@ export class BrnQuestionnaire {
 			return;
 		}
 
-		this.setItem(this._logicalItems()[currentIndex + 1].name);
+		const nextItem = this._logicalItems()[currentIndex + 1];
+		if (!nextItem) {
+			return;
+		}
+
+		this.setItem(nextItem.name);
 	}
 
 	public confirmCurrent(): void {
@@ -367,7 +381,12 @@ export class BrnQuestionnaire {
 			return;
 		}
 
-		this.setItem(this._logicalItems()[this._currentIndex() + 1].name);
+		const nextItem = this._logicalItems()[this._currentIndex() + 1];
+		if (!nextItem) {
+			return;
+		}
+
+		this.setItem(nextItem.name);
 	}
 
 	public skipCurrent(): void {
@@ -380,7 +399,10 @@ export class BrnQuestionnaire {
 		activeItem.skip();
 
 		if (!this.last()) {
-			this.setItem(this._logicalItems()[this._currentIndex() + 1].name);
+			const nextItem = this._logicalItems()[this._currentIndex() + 1];
+			if (nextItem) {
+				this.setItem(nextItem.name);
+			}
 			return;
 		}
 

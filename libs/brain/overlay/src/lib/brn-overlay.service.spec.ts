@@ -75,7 +75,9 @@ const open = async (host: Type<ScrollContainerHost>, scrollStrategy: BrnOverlayO
 			scrollStrategy,
 		},
 	);
-	const overlayRef = createSpy.mock.results[0].value as OverlayRef;
+	const result = createSpy.mock.results[0];
+	if (!result) throw new Error('missing overlay ref');
+	const overlayRef = result.value as OverlayRef;
 	const updatePosition = vi.spyOn(overlayRef, 'updatePosition');
 	// The CDK positions an attached overlay after the next render; only scroll-driven calls are counted.
 	TestBed.inject(ApplicationRef).tick();
@@ -113,7 +115,9 @@ describe('BrnOverlayService aria-modal', () => {
 			},
 		);
 
-		return (createSpy.mock.results[0].value as OverlayRef).overlayElement;
+		const result = createSpy.mock.results[0];
+		if (!result) throw new Error('missing overlay ref');
+		return (result.value as OverlayRef).overlayElement;
 	};
 
 	it('sets aria-modal when ariaModal is true', () => {
@@ -151,7 +155,9 @@ describe('BrnOverlayService escape', () => {
 			},
 		);
 
-		return { ref, pane: (createSpy.mock.results[0].value as OverlayRef).overlayElement };
+		const result = createSpy.mock.results[0];
+		if (!result) throw new Error('missing overlay ref');
+		return { ref, pane: (result.value as OverlayRef).overlayElement };
 	};
 
 	const pressEscape = (pane: HTMLElement) => {
