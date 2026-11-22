@@ -1,7 +1,7 @@
 // Just enough PNG to compare two screenshots without adding a dependency: decodes 8-bit RGB and
 // RGBA images (what browsers write) and counts the pixels that really differ.
 
-import { inflateSync } from 'node:zlib';
+import { crc32, deflateSync, inflateSync } from 'node:zlib';
 
 const SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
@@ -77,4 +77,60 @@ export function comparePng(first, second, tolerance = 16) {
 		}
 	}
 	return { sameSize: true, changedPixels, totalPixels };
+}
+
+function chunk(type, body) {
+	const head = Buffer.alloc(8);
+	head.writeUInt32BE(body.length, 0);
+	head.write(type, 4, 'latin1');
+	const tail = Buffer.alloc(4);
+	tail.writeUInt32BE(crc32(Buffer.concat([head.subarray(4), body])), 0);
+	return Buffer.concat([head, body, tail]);
+}
+
+export function encodePng(width, height, rgb) {
+	const header = Buffer.alloc(13);
+	header.writeUInt32BE(width, 0);
+	header.writeUInt32BE(height, 4);
+	header.set([8, 2, 0, 0, 0], 8);
+	const stride = width * 3;
+	const raw = Buffer.alloc((stride + 1) * height);
+	for (let y = 0; y < height; y++) rgb.copy(raw, y * (stride + 1) + 1, y * stride, (y + 1) * stride);
+	return Buffer.concat([
+		SIGNATURE,
+		chunk('IHDR', header),
+		chunk('IDAT', deflateSync(raw)),
+		chunk('IEND', Buffer.alloc(0)),
+	]);
+}
+
+export function diffPng(before, after, tolerance = 16) {
+	const a = decodePng(before);
+	const b = decodePng(after);
+	const width = Math.max(a.width, b.width);
+	const height = Math.max(a.height, b.height);
+	const out = Buffer.alloc(width * height * 3);
+	for (let y = 0; y < height; y++) {
+		for (let x = 0; x < width; x++) {
+			const inA = x < a.width && y < a.height;
+			const inB = x < b.width && y < b.height;
+			const at = (image) => (y * image.width + x) * image.channels;
+			let changed = inA !== inB;
+			if (inA && inB) {
+				for (let channel = 0; channel < 3; channel++) {
+					if (Math.abs(a.data[at(a) + channel] - b.data[at(b) + channel]) > tolerance) changed = true;
+				}
+			}
+			const target = (y * width + x) * 3;
+			if (changed) {
+				out.set([225, 29, 72], target);
+			} else {
+				const source = inB ? b : a;
+				for (let channel = 0; channel < 3; channel++) {
+					out[target + channel] = 255 - ((255 - source.data[at(source) + channel]) >> 2);
+				}
+			}
+		}
+	}
+	return encodePng(width, height, out);
 }

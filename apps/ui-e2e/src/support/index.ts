@@ -59,7 +59,27 @@ type AxeViolation = {
 
 type A11yRecord = { context: string; violations: AxeViolation[]; passes: number };
 
-export const test = base.extend<{ a11yLog: A11yRecord[] }, { ownTextSelector: void }>({
+const PLACEHOLDER_IMAGE = Buffer.from(
+	'iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAD0lEQVR4nGNYgAMwDC0JAON6eAHQIWnvAAAAAElFTkSuQmCC',
+	'base64',
+);
+
+export const test = base.extend<{ a11yLog: A11yRecord[]; ownNetworkOnly: void }, { ownTextSelector: void }>({
+	ownNetworkOnly: [
+		async ({ context, baseURL }, use) => {
+			const own = new URL(baseURL ?? 'http://localhost').host;
+			await context.route(
+				(url) => url.protocol.startsWith('http') && url.host !== own,
+				(route) =>
+					route.request().resourceType() === 'image'
+						? route.fulfill({ contentType: 'image/png', body: PLACEHOLDER_IMAGE })
+						: route.abort(),
+			);
+			await use();
+		},
+		{ auto: true },
+	],
+
 	ownTextSelector: [
 		async ({}, use) => {
 			await ownTextRegistered;
@@ -84,7 +104,12 @@ export const test = base.extend<{ a11yLog: A11yRecord[] }, { ownTextSelector: vo
 			try {
 				await settle(page);
 				const file = testInfo.outputPath('final.png');
-				await page.screenshot({ path: file, animations: 'disabled', caret: 'hide' });
+				await page.screenshot({
+					path: file,
+					animations: 'disabled',
+					caret: 'hide',
+					style: 'x-pw-glass { display: none !important; }',
+				});
 				await testInfo.attach('final', { path: file, contentType: 'image/png' });
 			} catch {
 				// The page can already be gone when a test failed hard; the failure itself is reported.
@@ -127,7 +152,7 @@ export async function gotoStory(page: Page, storyId: string, options: { args?: s
  * Runs axe on the page, or on the part of it matched by `selector`, and fails on any violation.
  * `options` are axe's run options, the same object the Cypress tests passed to `cy.checkA11y`.
  */
-export async function checkA11y(page: Page, selector?: string, options: Record<string, unknown> = {}): Promise<void> {
+async function runAxe(page: Page, selector: string | undefined, options: Record<string, unknown>) {
 	const loaded = await page.evaluate(() => 'axe' in window);
 	if (!loaded) await page.addScriptTag({ path: AXE_SOURCE });
 
@@ -152,6 +177,15 @@ export async function checkA11y(page: Page, selector?: string, options: Record<s
 
 	a11yLogs.get(test.info().testId)?.push({ context: selector ?? 'document', ...result });
 
+	return result;
+}
+
+export async function recordA11y(page: Page, selector?: string, options: Record<string, unknown> = {}): Promise<void> {
+	await runAxe(page, selector, options);
+}
+
+export async function checkA11y(page: Page, selector?: string, options: Record<string, unknown> = {}): Promise<void> {
+	const result = await runAxe(page, selector, options);
 	const summary = result.violations
 		.map(
 			(violation: AxeViolation) =>
