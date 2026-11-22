@@ -4,8 +4,8 @@ Every change to a component should prove itself: the tests for that component ru
 browser against a page in the docs app, and the run leaves behind a video and screenshot of each
 test plus its accessibility results. A reviewer reads that proof.
 
-This replaces Storybook + Cypress one component at a time. Both keep running until the last
-component has moved.
+The tests were Cypress tests run against Storybook. All of them now run here, and Cypress is gone.
+The stories remain as the source of the test pages.
 
 ## One command
 
@@ -33,51 +33,40 @@ First-time setup: `pnpm exec playwright install chromium ffmpeg`.
 
 ## Where things live
 
-| What                                | Where                                                                                   |
-| ----------------------------------- | --------------------------------------------------------------------------------------- |
-| Test pages (generated)              | `apps/app/src/app/pages/(test)/test/<component>/` served at `/test/<component>/<story>` |
-| Tests                               | `apps/ui-e2e/src/<component>/`                                                          |
-| Test helpers                        | `apps/ui-e2e/src/support/`                                                              |
-| What was converted and what was not | `apps/ui-e2e/story-report.json`, `apps/ui-e2e/conversion-report.json`                   |
-| CI                                  | `.github/workflows/verify.yml`                                                          |
+| What                           | Where                                                                                   |
+| ------------------------------ | --------------------------------------------------------------------------------------- |
+| Test pages (generated)         | `apps/app/src/app/pages/(test)/test/<component>/` served at `/test/<component>/<story>` |
+| Tests                          | `apps/ui-e2e/src/<component>/`                                                          |
+| Test helpers                   | `apps/ui-e2e/src/support/`                                                              |
+| Stories turned into test pages | `apps/ui-e2e/story-report.json`                                                         |
+| CI                             | `.github/workflows/verify.yml`                                                          |
 
 Open `/test` in the running docs app for a list of every test page.
 
-## Moving a component over
-
-Conversions are done by tools, so the same input always gives the same output and nobody
-re-types a test.
+## Test pages come from the stories
 
 ```sh
 node tools/verify/story-to-test-pages.mjs tabs       # stories  -> test pages
-node tools/verify/cypress-to-playwright.mjs tabs     # Cypress  -> Playwright
 pnpm verify tabs
 ```
 
-Neither tool guesses. A story or test it does not fully understand is left out and listed in the
-report with the reason:
+The tool does not guess. A story it does not fully understand is left out and listed in the report
+with the reason. It needs either a small change to the story so it fits a shape the tool handles,
+or a new shape taught to the tool (`tools/verify/lib/story-parse.mjs`).
 
-- A skipped **story** needs either a small change to the story so it fits a shape the tool
-  handles, or a new shape taught to the tool (`tools/verify/lib/story-parse.mjs`).
-- A skipped **test** appears in `<component>.spec.ts` as `test.fixme` with the original Cypress
-  code in a comment. Port it by hand in `<file>.manual.spec.ts` next to the generated spec,
-  inside the same `test.describe` blocks and with the same test title, and run the tool again:
-  it then counts the test as ported and drops the placeholder. A manual test also replaces a
-  test the tool did convert, which is how a test that is wrong as written gets corrected.
+Do not edit generated test pages. `pnpm verify` fails when they differ from what the tool produces.
 
-Do not edit generated files (they start with `// @generated`). `pnpm verify` fails when they
-differ from what the tools produce.
+Tests are written by hand in `apps/ui-e2e/src/<component>/`.
 
-## What the tools keep the same
+## What the test pages keep the same
 
 - **Story ids.** `export const NearViewportEdge` in a file titled `Popover` is
   `popover--near-viewport-edge` in Storybook and `/test/popover/near-viewport-edge` here.
 - **Args in the address bar.** `?args=disabled:true;value:apple` works on a test page as it
   did in Storybook.
-- **Text queries.** Testing Library's `findByText` matches an element's own text. The converted
+- **Text queries.** Testing Library's `findByText` matches an element's own text. The
   tests use `byText`, which does the same. Playwright's `getByText` matches differently.
-- **Forced clicks.** Cypress's `click({ force: true })` fires the events on the element itself.
-  The converted tests use `forceClick` for that.
+- **Forced clicks.** `forceClick` fires the click events on the element itself, wherever it is.
 
 ## Only what a change can affect
 

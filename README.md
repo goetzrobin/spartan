@@ -284,13 +284,14 @@ pnpm run test
 
 ### e2e testing
 
-Cypress e2e testing is set up to run on the storybook. You can run it with:
+Browser tests run with Playwright against test pages built from the stories. You can run them with:
 
 ```
 pnpm run e2e
 ```
 
-To add your own `e2e` tests add them to the `apps/ui-storybook-e2e` application.
+To add your own browser tests add them to the `apps/ui-e2e` application. `pnpm verify <component>`
+runs the tests of one component.
 
 ## spartan/stack
 

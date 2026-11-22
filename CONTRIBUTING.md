@@ -47,7 +47,8 @@ folder:
 pnpm run test
 ```
 
-We also have e2e tests set up with Cypress that run against our storybook. Run them with:
+We also have browser tests in `apps/ui-e2e`. They run with Playwright against test pages built
+from the stories. Run them with:
 
 ```shell
 pnpm run e2e

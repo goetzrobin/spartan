@@ -105,7 +105,7 @@ console.log(
 
 // The story files behind a component's tests come from the test page list, because a test
 // folder can cover several story files (`menu` covers context-menu, dropdown-menu and menubar).
-// Both checks stop once Storybook and Cypress are removed.
+// The check stops once Storybook is removed.
 const manifest = testPages();
 const titles = new Set([
 	...components.flatMap((component) => [component, ...storyTitlesOf(ROOT, component)]),
@@ -118,23 +118,13 @@ const stories = [
 			.map((page) => path.basename(page.source, '.stories.ts')),
 	),
 ].sort();
-const cypress = components.filter((c) => existsSync(path.join(ROOT, `apps/ui-storybook-e2e/src/integration/${c}`)));
-
 let ok = true;
 if (stories.length > 0) {
 	ok = run('Test pages match the stories', node, ['tools/verify/story-to-test-pages.mjs', ...stories, '--check']) && ok;
 }
-if (cypress.length > 0) {
-	ok =
-		run('Converted tests match the Cypress sources', node, [
-			'tools/verify/cypress-to-playwright.mjs',
-			...cypress,
-			'--check',
-		]) && ok;
-}
 if (!ok) {
 	console.error(
-		'\nGenerated files are out of date. Re-run the transforms (see tools/verify/README.md) and commit the result.',
+		'\nGenerated files are out of date. Re-run tools/verify/story-to-test-pages.mjs (see tools/verify/README.md) and commit the result.',
 	);
 	process.exit(1);
 }

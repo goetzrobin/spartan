@@ -102,9 +102,6 @@ importers:
       '@tanstack/charts':
         specifier: 0.16.0
         version: 0.16.0(@angular/core@21.2.16(@angular/compiler@21.2.16)(rxjs@7.8.2)(zone.js@0.16.2))(@angular/platform-browser@21.2.16(@angular/animations@21.2.16(@angular/core@21.2.16(@angular/compiler@21.2.16)(rxjs@7.8.2)(zone.js@0.16.2)))(@angular/common@21.2.16(@angular/core@21.2.16(@angular/compiler@21.2.16)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2))(@angular/core@21.2.16(@angular/compiler@21.2.16)(rxjs@7.8.2)(zone.js@0.16.2)))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@testing-library/cypress':
-        specifier: ^10.0.2
-        version: 10.1.3(cypress@14.3.2)
       '@trpc/client':
         specifier: 10.45.2
         version: 10.45.2(@trpc/server@10.45.2)
@@ -256,9 +253,6 @@ importers:
       '@ng-icons/tabler-icons':
         specifier: ^32.2.0
         version: 32.4.0
-      '@nx/cypress':
-        specifier: 22.7.5
-        version: 22.7.5(afa56f6386778f44b63bd3f4bc6e0c16)
       '@nx/eslint':
         specifier: 22.7.5
         version: 22.7.5(aedb2675c584410d65a04131c31abe93)
@@ -391,15 +385,6 @@ importers:
       conventional-changelog-cli:
         specifier: ^5.0.0
         version: 5.0.0(conventional-commits-filter@5.0.0)
-      cypress:
-        specifier: 14.3.2
-        version: 14.3.2
-      cypress-axe:
-        specifier: ^1.5.0
-        version: 1.7.0(axe-core@4.10.3)(cypress@14.3.2)
-      cypress-real-events:
-        specifier: ^1.13.0
-        version: 1.15.0(cypress@14.3.2)
       drizzle-kit:
         specifier: 0.24.2
         version: 0.24.2
@@ -415,9 +400,6 @@ importers:
       eslint-config-prettier:
         specifier: 10.1.2
         version: 10.1.2(eslint@9.30.0(jiti@2.4.2))
-      eslint-plugin-cypress:
-        specifier: ^3.5.0
-        version: 3.6.0(eslint@9.30.0(jiti@2.4.2))
       eslint-plugin-storybook:
         specifier: 10.4.2
         version: 10.4.2(eslint@9.30.0(jiti@2.4.2))(storybook@10.4.2(@testing-library/dom@10.4.0)(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)
@@ -5771,12 +5753,6 @@ packages:
       '@angular/router': '>= 21.0.0'
       '@testing-library/dom': ^10.0.0
 
-  '@testing-library/cypress@10.1.3':
-    resolution: {integrity: sha512-rVCH92TmU8idROHqCdTSp/bosIIUezihSwFfR/J2GZD0EAwyzRuYNseh54eziKJWjJ64BCXPT3X3jLO7v4yenQ==}
-    engines: {node: '>=12', npm: '>=6'}
-    peerDependencies:
-      cypress: '>=12'
-
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
     engines: {node: '>=18'}
@@ -7862,18 +7838,6 @@ packages:
   cuint@0.2.2:
     resolution: {integrity: sha512-d4ZVpCW31eWwCMe1YT3ur7mUDnTXbgwyzaL320DrcRT45rfjYxkt5QWLrmOJ+/UEAI2+fQgKe/fCjR8l4TpRgw==}
 
-  cypress-axe@1.7.0:
-    resolution: {integrity: sha512-zzJpvAAjauEB3GZl0KYXb8i3w6MztWAt2WM3czYTFyNVC30alDmqCm9E7GwZ4bgkldZJlmHakaVEyu73R5St4w==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      axe-core: ^3 || ^4
-      cypress: ^10 || ^11 || ^12 || ^13 || ^14 || ^15
-
-  cypress-real-events@1.15.0:
-    resolution: {integrity: sha512-in98xxTnnM9Z7lZBvvVozm99PBT2eEOjXRG5LKWyYvQnj9mGWXMiPNpfw7e7WiraBFh7XlXIxnE9Cu5o+52kQQ==}
-    peerDependencies:
-      cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x || ^14.x || ^15.x
-
   cypress@14.3.2:
     resolution: {integrity: sha512-n+yGD2ZFFKgy7I3YtVpZ7BcFYrrDMcKj713eOZdtxPttpBjCyw/R8dLlFSsJPouneGN7A/HOSRyPJ5+3/gKDoA==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
@@ -8664,11 +8628,6 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-plugin-cypress@3.6.0:
-    resolution: {integrity: sha512-7IAMcBbTVu5LpWeZRn5a9mQ30y4hKp3AfTz+6nSD/x/7YyLMoBI6X7XjDLYI6zFvuy4Q4QVGl563AGEXGW/aSA==}
-    peerDependencies:
-      eslint: '>=7'
-
   eslint-plugin-storybook@10.4.2:
     resolution: {integrity: sha512-l3/vzLRmb8VSi3X1Bo6/Pa+64naw1jFsZE5jPPA4izvVdNhH1rF4rGuOC3kDTU926qKVBQtKua8D24XWQtvcGg==}
     peerDependencies:
@@ -9260,10 +9219,6 @@ packages:
   global-prefix@1.0.2:
     resolution: {integrity: sha512-5lsx1NUDHtSjfg0eHlmYvZKv8/nVqX4ckFbM+FrGcQ+04KWcWFo9P5MxPZYSzUvyzmdTbI7Eix8Q4IbELDqzKg==}
     engines: {node: '>=0.10.0'}
-
-  globals@13.24.0:
-    resolution: {integrity: sha512-AhO5QUcj8llrbG09iWhPU2B204J1xnPeL8kQmVorSsy+Sjj1sk8gIyh6cUocGmH4L0UuhAJy+hJMRA4mgA4mFQ==}
-    engines: {node: '>=8'}
 
   globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
@@ -13597,10 +13552,6 @@ packages:
     resolution: {integrity: sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==}
     engines: {node: '>=4'}
 
-  type-fest@0.20.2:
-    resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==}
-    engines: {node: '>=10'}
-
   type-fest@0.21.3:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
@@ -16388,6 +16339,7 @@ snapshots:
       lodash.once: 4.1.1
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   '@discoveryjs/json-ext@0.6.3': {}
 
@@ -20204,12 +20156,6 @@ snapshots:
       '@testing-library/dom': 10.4.0
       tslib: 2.8.1
 
-  '@testing-library/cypress@10.1.3(cypress@14.3.2)':
-    dependencies:
-      '@babel/runtime': 7.29.2
-      '@testing-library/dom': 10.4.0
-      cypress: 14.3.2
-
   '@testing-library/dom@10.4.0':
     dependencies:
       '@babel/code-frame': 7.29.7
@@ -20589,9 +20535,11 @@ snapshots:
     dependencies:
       '@types/node': 22.6.2
 
-  '@types/sinonjs__fake-timers@8.1.1': {}
+  '@types/sinonjs__fake-timers@8.1.1':
+    optional: true
 
-  '@types/sizzle@2.3.9': {}
+  '@types/sizzle@2.3.9':
+    optional: true
 
   '@types/sockjs@0.3.36':
     dependencies:
@@ -21501,7 +21449,8 @@ snapshots:
 
   apache-md5@1.1.8: {}
 
-  arch@2.2.0: {}
+  arch@2.2.0:
+    optional: true
 
   arch@3.0.0: {}
 
@@ -21567,7 +21516,8 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  astral-regex@2.0.0: {}
+  astral-regex@2.0.0:
+    optional: true
 
   async-sema@3.1.1: {}
 
@@ -21798,7 +21748,8 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 3.6.2
 
-  blob-util@2.0.2: {}
+  blob-util@2.0.2:
+    optional: true
 
   bluebird@3.7.2: {}
 
@@ -21962,7 +21913,8 @@ snapshots:
       normalize-url: 6.1.0
       responselike: 2.0.1
 
-  cachedir@2.4.0: {}
+  cachedir@2.4.0:
+    optional: true
 
   call-bind-apply-helpers@1.0.2:
     dependencies:
@@ -22132,6 +22084,7 @@ snapshots:
     dependencies:
       slice-ansi: 3.0.0
       string-width: 4.2.3
+    optional: true
 
   cli-truncate@5.2.0:
     dependencies:
@@ -22227,7 +22180,8 @@ snapshots:
 
   common-path-prefix@3.0.0: {}
 
-  common-tags@1.8.2: {}
+  common-tags@1.8.2:
+    optional: true
 
   commondir@1.0.1: {}
 
@@ -22693,15 +22647,6 @@ snapshots:
 
   cuint@0.2.2: {}
 
-  cypress-axe@1.7.0(axe-core@4.10.3)(cypress@14.3.2):
-    dependencies:
-      axe-core: 4.10.3
-      cypress: 14.3.2
-
-  cypress-real-events@1.15.0(cypress@14.3.2):
-    dependencies:
-      cypress: 14.3.2
-
   cypress@14.3.2:
     dependencies:
       '@cypress/request': 3.0.10
@@ -22747,6 +22692,7 @@ snapshots:
       tree-kill: 1.2.2
       untildify: 4.0.0
       yauzl: 2.10.0
+    optional: true
 
   cytoscape-cose-bilkent@4.1.0(cytoscape@3.32.0):
     dependencies:
@@ -22967,6 +22913,7 @@ snapshots:
       ms: 2.1.3
     optionalDependencies:
       supports-color: 8.1.1
+    optional: true
 
   debug@4.4.1:
     dependencies:
@@ -23534,11 +23481,6 @@ snapshots:
     dependencies:
       eslint: 9.30.0(jiti@2.4.2)
 
-  eslint-plugin-cypress@3.6.0(eslint@9.30.0(jiti@2.4.2)):
-    dependencies:
-      eslint: 9.30.0(jiti@2.4.2)
-      globals: 13.24.0
-
   eslint-plugin-storybook@10.4.2(eslint@9.30.0(jiti@2.4.2))(storybook@10.4.2(@testing-library/dom@10.4.0)(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/utils': 8.60.1(eslint@9.30.0(jiti@2.4.2))(typescript@5.9.3)
@@ -23661,7 +23603,8 @@ snapshots:
 
   event-target-shim@5.0.1: {}
 
-  eventemitter2@6.4.7: {}
+  eventemitter2@6.4.7:
+    optional: true
 
   eventemitter3@4.0.7: {}
 
@@ -23686,6 +23629,7 @@ snapshots:
       onetime: 5.1.2
       signal-exit: 3.0.7
       strip-final-newline: 2.0.0
+    optional: true
 
   execa@5.1.1:
     dependencies:
@@ -23729,6 +23673,7 @@ snapshots:
   executable@4.1.1:
     dependencies:
       pify: 2.3.0
+    optional: true
 
   exit-x@0.2.2: {}
 
@@ -23847,6 +23792,7 @@ snapshots:
       '@types/yauzl': 2.10.3
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   extsprintf@1.3.0: {}
 
@@ -23895,6 +23841,7 @@ snapshots:
   fd-slicer@1.1.0:
     dependencies:
       pend: 1.2.0
+    optional: true
 
   fdir@6.5.0(picomatch@4.0.4):
     optionalDependencies:
@@ -24191,6 +24138,7 @@ snapshots:
   getos@3.2.1:
     dependencies:
       async: 3.2.6
+    optional: true
 
   getpass@0.1.7:
     dependencies:
@@ -24278,6 +24226,7 @@ snapshots:
   global-dirs@3.0.1:
     dependencies:
       ini: 2.0.0
+    optional: true
 
   global-modules@1.0.0:
     dependencies:
@@ -24292,10 +24241,6 @@ snapshots:
       ini: 1.3.8
       is-windows: 1.0.2
       which: 1.3.1
-
-  globals@13.24.0:
-    dependencies:
-      type-fest: 0.20.2
 
   globals@14.0.0: {}
 
@@ -24653,7 +24598,8 @@ snapshots:
 
   httpxy@0.5.0: {}
 
-  human-signals@1.1.1: {}
+  human-signals@1.1.1:
+    optional: true
 
   human-signals@2.1.0: {}
 
@@ -24737,7 +24683,8 @@ snapshots:
 
   ini@1.3.8: {}
 
-  ini@2.0.0: {}
+  ini@2.0.0:
+    optional: true
 
   ini@4.1.1: {}
 
@@ -24829,6 +24776,7 @@ snapshots:
     dependencies:
       global-dirs: 3.0.1
       is-path-inside: 3.0.3
+    optional: true
 
   is-interactive@1.0.0: {}
 
@@ -24844,7 +24792,8 @@ snapshots:
 
   is-obj@2.0.0: {}
 
-  is-path-inside@3.0.3: {}
+  is-path-inside@3.0.3:
+    optional: true
 
   is-path-inside@4.0.0: {}
 
@@ -25630,6 +25579,7 @@ snapshots:
       wrap-ansi: 7.0.0
     optionalDependencies:
       enquirer: 2.4.1
+    optional: true
 
   listr2@9.0.5:
     dependencies:
@@ -25770,6 +25720,7 @@ snapshots:
       cli-cursor: 3.1.0
       slice-ansi: 4.0.0
       wrap-ansi: 6.2.0
+    optional: true
 
   log-update@6.1.0:
     dependencies:
@@ -26749,7 +26700,8 @@ snapshots:
   ordered-binary@1.6.0:
     optional: true
 
-  ospath@1.2.2: {}
+  ospath@1.2.2:
+    optional: true
 
   outvariant@1.4.3: {}
 
@@ -26847,6 +26799,7 @@ snapshots:
   p-map@4.0.0:
     dependencies:
       aggregate-error: 3.1.0
+    optional: true
 
   p-map@7.0.3: {}
 
@@ -27626,7 +27579,8 @@ snapshots:
 
   prettier@3.8.1: {}
 
-  pretty-bytes@5.6.0: {}
+  pretty-bytes@5.6.0:
+    optional: true
 
   pretty-bytes@7.1.0: {}
 
@@ -27678,7 +27632,8 @@ snapshots:
 
   proxy-agent-negotiate@1.1.0: {}
 
-  proxy-from-env@1.0.0: {}
+  proxy-from-env@1.0.0:
+    optional: true
 
   proxy-from-env@2.1.0: {}
 
@@ -27899,6 +27854,7 @@ snapshots:
   request-progress@3.0.0:
     dependencies:
       throttleit: 1.0.1
+    optional: true
 
   require-directory@2.1.1: {}
 
@@ -28473,12 +28429,14 @@ snapshots:
       ansi-styles: 4.3.0
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
+    optional: true
 
   slice-ansi@4.0.0:
     dependencies:
       ansi-styles: 4.3.0
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
+    optional: true
 
   slice-ansi@7.1.0:
     dependencies:
@@ -29007,7 +28965,8 @@ snapshots:
     dependencies:
       real-require: 0.2.0
 
-  throttleit@1.0.1: {}
+  throttleit@1.0.1:
+    optional: true
 
   through2@2.0.5:
     dependencies:
@@ -29061,7 +29020,8 @@ snapshots:
 
   tmp@0.2.6: {}
 
-  tmp@0.2.7: {}
+  tmp@0.2.7:
+    optional: true
 
   tmpl@1.0.5: {}
 
@@ -29213,8 +29173,6 @@ snapshots:
       prelude-ls: 1.2.1
 
   type-detect@4.0.8: {}
-
-  type-fest@0.20.2: {}
 
   type-fest@0.21.3: {}
 
@@ -29415,7 +29373,8 @@ snapshots:
 
   until-async@3.0.2: {}
 
-  untildify@4.0.0: {}
+  untildify@4.0.0:
+    optional: true
 
   untun@0.1.3:
     dependencies:
@@ -30096,6 +30055,7 @@ snapshots:
     dependencies:
       buffer-crc32: 0.2.13
       fd-slicer: 1.1.0
+    optional: true
 
   yauzl@3.2.0:
     dependencies:
