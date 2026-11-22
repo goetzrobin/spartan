@@ -60,20 +60,23 @@ jobs:
           fetch-depth: 0
       # Sets NX_BASE/NX_HEAD from git history (no install needed - it's a standalone action).
       - uses: nrwl/nx-set-shas@v5
-      # Cheap gate BEFORE the expensive `pnpm install`: if this push/PR changed nothing that could
-      # affect the CLI, skip the rest of the job (it goes green in seconds). The path list is
-      # deliberately broad - CLI sources plus global dependency/config files - and errs towards running:
-      # when relevant, the in-runner isSmokeAffected() check still makes the precise nx-affected call.
       - name: Detect CLI-relevant changes
         id: changes
+        env:
+          EVENT: ${{ github.event_name }}
+          CELL: ${{ matrix.cell }}
         run: |
-          if git diff --name-only "$NX_BASE" "$NX_HEAD" \
-            | grep -qE '^(libs/cli/|libs/brain/|libs/helm/|apps/cli-smoke/|package\.json$|pnpm-lock\.yaml$|nx\.json$|tsconfig\.base\.json$|\.verdaccio/)'; then
-            echo "relevant=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "relevant=false" >> "$GITHUB_OUTPUT"
-            echo "No CLI-relevant changes; skipping the smoke run for ${{ matrix.cell }}."
+          CHANGED=$(git diff --name-only "$NX_BASE" "$NX_HEAD")
+          CLI='^(libs/cli/|apps/cli-smoke/|package\.json$|pnpm-lock\.yaml$|nx\.json$|tsconfig\.base\.json$|\.verdaccio/|\.github/workflows/cli-smoke\.yml$)'
+          COMPONENTS='^(libs/brain/|libs/helm/)'
+          RELEVANT=false
+          if echo "$CHANGED" | grep -qE "$CLI"; then
+            RELEVANT=true
+          elif echo "$CHANGED" | grep -qE "$COMPONENTS"; then
+            if [ "$EVENT" != "pull_request" ] || [ "$CELL" = "all-components" ]; then RELEVANT=true; fi
           fi
+          echo "relevant=$RELEVANT" >> "$GITHUB_OUTPUT"
+          [ "$RELEVANT" = "true" ] || echo "Skipping the smoke run for $CELL."
       - uses: ./.github/actions/setup
         if: steps.changes.outputs.relevant == 'true'
       # Each cell builds + publishes the packages to its own local verdaccio registry (in globalSetup),

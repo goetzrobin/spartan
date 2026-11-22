@@ -3,7 +3,7 @@ import path from 'node:path';
 import { describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { deflateSync } from 'node:zlib';
-import { affectedComponents, closureOf, listComponents, parseStatus } from '../../lib/affected.mjs';
+import { affectedComponents, closureOf, listComponents, listPageOnlyTitles, parseStatus } from '../../lib/affected.mjs';
 import { comparePng, decodePng } from '../../lib/png.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
@@ -43,6 +43,24 @@ describe('affected components (against this repo)', () => {
 		assert.deepEqual(affectedComponents(root, ['apps/ui-e2e/src/popover/popover.manual.spec.ts']).components, [
 			'popover',
 		]);
+	});
+
+	it('selects a page that has no test folder when its component changes', () => {
+		const result = affectedComponents(root, ['libs/helm/badge/src/lib/hlm-badge.ts']);
+		assert.ok(result.pages.includes('badge'));
+		assert.ok(result.reasons['page:badge'].length > 0);
+		assert.ok(!result.components.includes('badge'));
+	});
+
+	it('selects every page without a test folder when a global file changes', () => {
+		const result = affectedComponents(root, ['pnpm-lock.yaml']);
+		assert.deepEqual(result.pages, listPageOnlyTitles(root));
+		assert.ok(result.pages.includes('badge'));
+		assert.ok(!result.pages.includes('popover'));
+	});
+
+	it('selects no page for a change nothing reaches', () => {
+		assert.deepEqual(affectedComponents(root, ['README.md']).pages, []);
 	});
 });
 

@@ -29,6 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       components: ${{ steps.pick.outputs.components }}
+      pages: ${{ steps.pick.outputs.pages }}
       any: ${{ steps.pick.outputs.any }}
     steps:
       - uses: actions/checkout@v6
@@ -51,8 +52,10 @@ jobs:
           # The selection only reads files and follows imports, so it needs no install.
           node tools/verify/verify.mjs --affected --list --base "$BASE" | tee affected.json
           COMPONENTS=$(node -p "JSON.parse(require('fs').readFileSync('affected.json','utf8')).components.join(' ')")
+          PAGES=$(node -p "JSON.parse(require('fs').readFileSync('affected.json','utf8')).pages.join(',')")
           echo "components=$COMPONENTS" >> "$GITHUB_OUTPUT"
-          echo "any=$([ -n "$COMPONENTS" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "pages=$PAGES" >> "$GITHUB_OUTPUT"
+          echo "any=$([ -n "$COMPONENTS$PAGES" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
   build:
     needs: affected
@@ -82,6 +85,7 @@ jobs:
     name: test (${{ matrix.shard }}/4)
     env:
       COMPONENTS: ${{ needs.affected.outputs.components }}
+      PAGES: ${{ needs.affected.outputs.pages }}
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
@@ -99,7 +103,7 @@ jobs:
           name: test-app
           path: dist/apps/app/client
       - name: Verify
-        run: pnpm verify $COMPONENTS --prebuilt -- --shard=${{ matrix.shard }}/4
+        run: pnpm verify $COMPONENTS ${PAGES:+--pages $PAGES} --prebuilt -- --shard=${{ matrix.shard }}/4
       - name: Name the results after the shard
         if: ${{ !cancelled() }}
         run: mv dist/.playwright/ui-e2e/results.json dist/.playwright/ui-e2e/results-${{ matrix.shard }}.json
