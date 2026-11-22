@@ -259,7 +259,7 @@ export class BrnSwitch implements AfterContentInit, OnDestroy, ControlValueAcces
 		this._onTouched();
 		this.touched.emit();
 
-		this.checked.update((checked) => !checked);
+		this.checked.update((checked) => checked);
 		this._onChange(this.checked());
 		this.checkedChange.emit(this.checked());
 	}
