@@ -127,7 +127,7 @@ export async function gotoStory(page: Page, storyId: string, options: { args?: s
  * Runs axe on the page, or on the part of it matched by `selector`, and fails on any violation.
  * `options` are axe's run options, the same object the Cypress tests passed to `cy.checkA11y`.
  */
-export async function checkA11y(page: Page, selector?: string, options: Record<string, unknown> = {}): Promise<void> {
+async function runAxe(page: Page, selector: string | undefined, options: Record<string, unknown>) {
 	const loaded = await page.evaluate(() => 'axe' in window);
 	if (!loaded) await page.addScriptTag({ path: AXE_SOURCE });
 
@@ -152,6 +152,15 @@ export async function checkA11y(page: Page, selector?: string, options: Record<s
 
 	a11yLogs.get(test.info().testId)?.push({ context: selector ?? 'document', ...result });
 
+	return result;
+}
+
+export async function recordA11y(page: Page, selector?: string, options: Record<string, unknown> = {}): Promise<void> {
+	await runAxe(page, selector, options);
+}
+
+export async function checkA11y(page: Page, selector?: string, options: Record<string, unknown> = {}): Promise<void> {
+	const result = await runAxe(page, selector, options);
 	const summary = result.violations
 		.map(
 			(violation: AxeViolation) =>

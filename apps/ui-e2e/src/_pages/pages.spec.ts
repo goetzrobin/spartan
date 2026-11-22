@@ -6,7 +6,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { expect, gotoStory, test } from '../support';
+import { expect, gotoStory, recordA11y, STORY_ROOT, test } from '../support';
 
 type TestPage = { id: string; route: string };
 
@@ -28,6 +28,7 @@ test.describe('test pages render without errors', () => {
 			});
 
 			await gotoStory(page, id);
+			await recordA11y(page, STORY_ROOT);
 
 			expect(errors, `${id} logged errors while rendering`).toEqual([]);
 		});

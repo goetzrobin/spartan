@@ -137,12 +137,13 @@ jobs:
     if: ${{ !cancelled() && needs.affected.outputs.any == 'true' }}
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      # To post the proof as a comment. Pull requests from forks get a read-only token, so for
-      # those the comment step is skipped and the proof is in the job summary and the artifact.
+      contents: write
       pull-requests: write
     env:
-      COMPONENTS: ${{ needs.affected.outputs.components }}
+      SAME_REPO: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+      HEAD_BRANCH: ${{ github.head_ref || github.ref_name }}
+      BASE_BRANCH: ${{ github.base_ref || github.ref_name }}
+      TESTS_PASSED: ${{ needs.test.result == 'success' }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -154,11 +155,22 @@ jobs:
           pattern: results-*
           merge-multiple: true
           path: dist/.playwright/ui-e2e
+      - name: Fetch the reference screenshots
+        run: |
+          mkdir -p proof/baseline proof/own
+          fetch() {
+            git fetch --quiet --depth=1 origin "refs/heads/ci-proof/baseline/$1" 2>/dev/null || return 1
+            git archive FETCH_HEAD | tar -x -C "$2"
+          }
+          fetch "$BASE_BRANCH" proof/baseline || fetch main proof/baseline || echo "No reference screenshots for $BASE_BRANCH or main"
+          fetch "$HEAD_BRANCH" proof/own || cp -r proof/baseline/. proof/own/
       - name: Build the proof
         run: |
           RESULTS=$(ls dist/.playwright/ui-e2e/results-*.json | paste -sd, -)
           node tools/verify/proof.mjs --results "$RESULTS"
-          cat dist/.playwright/ui-e2e/proof/proof.md >> "$GITHUB_STEP_SUMMARY"
+          node tools/verify/decision.mjs --results "$RESULTS" --baseline-dir proof/baseline \
+            --save-screenshots proof/own --changed-dir proof/changed --image-base __IMAGES__ \
+            --base-name "$BASE_BRANCH" --pages-file apps/ui-e2e/test-pages.json --out comment.md
       - name: Upload the proof
         id: upload
         uses: actions/upload-artifact@v5
@@ -166,19 +178,43 @@ jobs:
           name: verification-proof
           path: dist/.playwright/ui-e2e/proof
           retention-days: 14
+      - name: Publish the changed screenshots
+        id: images
+        if: ${{ env.SAME_REPO == 'true' && github.event_name == 'pull_request' }}
+        env:
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          [ -n "$(ls proof/changed 2>/dev/null)" ] || exit 0
+          cd proof/changed
+          git init --quiet
+          git add .
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com \
+            commit --quiet -m "ci: screenshots for pull request $PR"
+          git push --quiet --force "https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY" "HEAD:refs/heads/ci-proof/pr-$PR"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Save the reference screenshots for this branch
+        if: ${{ env.SAME_REPO == 'true' && env.TESTS_PASSED == 'true' && github.event_name != 'merge_group' }}
+        run: |
+          cd proof/own
+          git init --quiet
+          git add .
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com \
+            commit --quiet -m "ci: reference screenshots for $HEAD_BRANCH at ${GITHUB_SHA::7}"
+          git push --quiet --force "https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY" "HEAD:refs/heads/ci-proof/baseline/$HEAD_BRANCH"
+      - name: Write the decision
+        env:
+          IMAGES_SHA: ${{ steps.images.outputs.sha }}
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+        run: |
+          sed -i "s#__IMAGES__#https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$IMAGES_SHA#g" comment.md
+          echo "[Videos and full results]($ARTIFACT_URL) · commit ${GITHUB_SHA::7}" >> comment.md
+          cat comment.md >> "$GITHUB_STEP_SUMMARY"
       - name: Comment on the pull request
-        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        if: ${{ github.event_name == 'pull_request' && env.SAME_REPO == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number }}
-          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
         run: |
-          {
-            echo '<!-- verification-proof -->'
-            cat dist/.playwright/ui-e2e/proof/proof.md
-            echo
-            echo "[Download the proof (videos, screenshots, accessibility results)]($ARTIFACT_URL) · components: \`$COMPONENTS\` · commit ${GITHUB_SHA::7}"
-          } > comment.md
           EXISTING=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate \
             --jq '[.[] | select(.body | startswith("<!-- verification-proof -->")) | .id][0] // empty')
           if [ -n "$EXISTING" ]; then
