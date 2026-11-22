@@ -31,7 +31,6 @@ test.describe('dialog--default', () => {
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 			await byText(page, /edit profile/i).click();
 
-			// click outside of dialog
 			await forceClick(page.locator('.cdk-overlay-backdrop'));
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
@@ -62,7 +61,6 @@ test.describe('dialog--default', () => {
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 			await page.keyboard.press('Enter');
 
-			// click escape when dialog open
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
@@ -95,7 +93,6 @@ test.describe('dialog--default', () => {
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 			await page.keyboard.press('Space');
 
-			// click escape when dialog open
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
@@ -182,13 +179,11 @@ test.describe('dialog--dynamic-component', () => {
 			await expect(page.getByRole('dialog').getByRole('button', { name: /^close$/i })).not.toHaveCount(0);
 			await expect(page.locator('dynamic-content')).not.toHaveCount(0);
 
-			// close on click close button
 			await page.locator('button[data-slot="dialog-close"]').click();
 			await expect(byText(page, /select user/i)).toHaveCount(1);
 			await expect(byText(page, /select user/i).and(page.locator(':focus'))).toHaveCount(1);
 			await byText(page, /select user/i).click();
 
-			// close on click backdrop
 			await expect(page.locator('dynamic-content')).not.toHaveCount(0);
 			await forceClick(page.locator('.cdk-overlay-backdrop'));
 			await expect(byText(page, /select user/i)).toHaveCount(1);

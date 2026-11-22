@@ -62,26 +62,22 @@ test.describe('tabs--brnonly', () => {
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
 			await expect(page.locator('#brn-tabs-content-account')).not.toHaveCount(0);
 
-			// should ignore up and down
 			await page.keyboard.press('ArrowUp');
 			await expect(page.locator('#brn-tabs-content-account')).not.toHaveCount(0);
 
 			await page.keyboard.press('ArrowDown');
 			await expect(page.locator('#brn-tabs-content-account')).not.toHaveCount(0);
 
-			// should jump to last on end
 			await page.keyboard.press('End');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'brn-tabs-label-password');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
 			await expect(page.locator('#brn-tabs-content-password')).not.toHaveCount(0);
 
-			// should wrap around
 			await page.keyboard.press('ArrowRight');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'brn-tabs-label-account');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
 			await expect(page.locator('#brn-tabs-content-account')).not.toHaveCount(0);
 
-			// jump between list and panel on tab
 			await page.keyboard.press('Tab');
 			await expect(page.getByRole('tabpanel')).toBeFocused();
 			await page.keyboard.press('Shift+Tab');

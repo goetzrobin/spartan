@@ -1,21 +1,12 @@
-// Ported by hand from apps/ui-storybook-e2e/src/integration/navigation-menu/navigation-menu.cy.ts.
-// The originals use two small helpers the transform does not convert: one runs axe under a name the
-// generated file already uses, the other sends a key by dispatching a KeyboardEvent on the focused
-// element. Titles match the originals so the transform leaves them out of navigation-menu.spec.ts.
-//
-// pressKey is kept as it was: the event is dispatched on the focused element, not typed on the
-// keyboard. The original explains why: the menu moves focus itself from its Tab and arrow key
-// handlers, and a dispatched event reaches those handlers without the browser moving focus too.
 import type { Page } from '@playwright/test';
 import { STORY_ROOT, checkA11y, expect, gotoStory, test } from '../support';
 
-/** The parts of KeyboardEventInit the tests use; a full init cannot be passed into the page. */
 type KeyInit = { key: string; shiftKey?: boolean };
 
 const TAB: KeyInit = { key: 'Tab' };
 
+// A dispatched keydown event gets no browser default action, such as moving focus.
 async function pressKey(page: Page, init: KeyInit): Promise<void> {
-	// cy.focused() waits until an element has focus.
 	await expect(page.locator(':focus')).toHaveCount(1);
 	await page.evaluate((eventInit) => {
 		const focused = document.activeElement;
@@ -85,7 +76,6 @@ test.describe('navigation-menu', () => {
 		test('keeps focus in the menu when tabbing past the last item (issue #1484)', async ({ page }) => {
 			await openHome(page);
 
-			// Tab once more after the final dropdown link - this used to drop focus out of the nav.
 			await page.getByRole('link', { name: /typography/i }).focus();
 			await pressKey(page, TAB);
 

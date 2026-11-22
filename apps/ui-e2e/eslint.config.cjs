@@ -5,7 +5,7 @@ module.exports = [
 	{
 		files: ['**/*.ts'],
 		rules: {
-			// Playwright fixtures are declared as `async ({}, use) => ...`.
+			// Playwright fixtures must destructure their first argument, as in `async ({}, use) => ...`.
 			'no-empty-pattern': 'off',
 		},
 	},

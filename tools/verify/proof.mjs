@@ -1,13 +1,4 @@
 #!/usr/bin/env node
-// Turns a Playwright run into the proof a reviewer reads instead of the code.
-//
-//   node tools/verify/proof.mjs [--results <results.json>[,<more.json>]] [--baseline <results.json>] [--out <dir>]
-//
-// Writes two files into the output folder:
-//   proof.md     short summary for a pull request comment
-//   index.html   one self-contained page: every test with its video, final screenshot and
-//                accessibility results. With --baseline (a run of the same tests on the base
-//                commit) each test shows before and after side by side and says what changed.
 
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -16,9 +7,7 @@ import { comparePng } from './lib/png.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DEFAULT_DIR = path.join(ROOT, 'dist/.playwright/ui-e2e');
-/** Videos above this total are linked by file name instead of embedded, to keep the page openable. */
 const EMBED_LIMIT = 40 * 1024 * 1024;
-/** Final screenshots that differ in at most this many pixels count as the same picture. */
 const MIN_CHANGED_PIXELS = 25;
 
 function option(name, fallback) {
@@ -26,7 +15,6 @@ function option(name, fallback) {
 	return index > -1 ? path.resolve(process.argv[index + 1]) : fallback;
 }
 
-/** Flattens Playwright's JSON report into one record per test. */
 export function readRun(resultsFile) {
 	const report = JSON.parse(readFileSync(resultsFile, 'utf8'));
 	const tests = [];
@@ -35,7 +23,7 @@ export function readRun(resultsFile) {
 			for (const test of spec.tests ?? []) {
 				const result = test.results?.[test.results.length - 1];
 				const attachment = (name) => result?.attachments?.find((item) => item.name === name)?.path;
-				// Small attachments are stored inline in the report (base64), larger ones as files.
+				// Playwright's JSON report stores small attachments inline as base64 and larger ones as files.
 				const a11yFile = result?.attachments?.find((item) => item.name === 'a11y.json');
 				const a11y = a11yFile?.body
 					? JSON.parse(Buffer.from(a11yFile.body, 'base64').toString('utf8'))
@@ -66,7 +54,6 @@ export function readRun(resultsFile) {
 	return { tests, stats: report.stats ?? {} };
 }
 
-/** What a reviewer needs to know about one test compared with the base commit. */
 export function compare(test, before) {
 	if (!before) return 'new';
 	if (before.status !== test.status) return `${before.status} → ${test.status}`;
@@ -75,7 +62,6 @@ export function compare(test, before) {
 		const then = readFileSync(before.screenshot);
 		if (!now.equals(then)) {
 			const { sameSize, changedPixels } = comparePng(now, then);
-			// A handful of pixels is rendering noise, not a change someone made.
 			if (!sameSize || changedPixels > MIN_CHANGED_PIXELS) return 'looks different';
 		}
 	}
@@ -264,7 +250,6 @@ ${sections}
 }
 
 function main() {
-	// Several runs can be given as a comma-separated list; their tests are shown together.
 	const resultsIndex = process.argv.indexOf('--results');
 	const resultsFiles =
 		resultsIndex > -1

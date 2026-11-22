@@ -1,8 +1,6 @@
 import { STORY_ROOT, byText, checkA11y, expect, gotoStory, test } from '../support';
 
 test.describe('dropdown-menu', () => {
-	// We are using the Angular CDK, so we are just doing some sanity testing
-	// that all directives were ported over correctly
 	test.describe('default', () => {
 		test.beforeEach(async ({ page }) => {
 			await gotoStory(page, 'dropdown-menu--default');
@@ -53,8 +51,6 @@ test.describe('dropdown-menu', () => {
 		});
 	});
 
-	// Regression for https://github.com/spartan-ng/spartan/issues/1333
-	// Closing a submenu must not collapse the whole dropdown when focus was inside the submenu.
 	test.describe('submenu (issue #1333)', () => {
 		test.beforeEach(async ({ page }) => {
 			await gotoStory(page, 'dropdown-menu--submenu');
@@ -70,7 +66,6 @@ test.describe('dropdown-menu', () => {
 			await byText(page, /submenu trigger/i).hover({ force: true });
 			await expect(page.getByRole('menu')).toHaveCount(2);
 
-			// move onto a sibling of the sub-trigger: the submenu should close but the dropdown stay open
 			await byText(page, /bottom item/i).hover({ force: true });
 			await expect(page.getByRole('menu')).toHaveCount(1);
 			await expect(byText(page, /open/i)).toHaveAttribute('aria-expanded', 'true');
@@ -80,17 +75,11 @@ test.describe('dropdown-menu', () => {
 			await byText(page, /open/i).click({ force: true });
 			await expect(byText(page, /open/i)).toHaveAttribute('aria-expanded', 'true');
 
-			// open the submenu via the keyboard so focus lands inside the submenu overlay. before the fix,
-			// the next pointer-driven submenu close dropped that focus to <body>, the menu stack reported
-			// no focus, and the entire dropdown collapsed.
 			await page.locator('[data-slot="dropdown-menu-sub-trigger"]').focus();
 			await page.keyboard.press('ArrowRight');
 			await expect(page.getByRole('menu')).toHaveCount(2);
-			// wait until focus has actually settled in the submenu before moving the mouse
 			await expect(byText(page, /sub item one/i)).toBeFocused();
 
-			// moving the mouse onto a parent sibling closes the submenu; focus follows the pointer into the
-			// parent menu, so the dropdown must stay open rather than collapse.
 			await byText(page, /bottom item/i).hover({ force: true });
 			await expect(page.getByRole('menu')).toHaveCount(1);
 			await expect(byText(page, /open/i)).toHaveAttribute('aria-expanded', 'true');

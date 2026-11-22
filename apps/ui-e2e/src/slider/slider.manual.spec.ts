@@ -1,20 +1,9 @@
-// Ported by hand from apps/ui-storybook-e2e/src/integration/slider/slider.cy.ts.
-// The transform could not convert these tests: they keep values in variables between commands,
-// read attributes with `.invoke(...).then(...)` and fire pointer events at measured positions.
-// Titles match the originals so the transform knows they are covered.
-//
-// The drags use the real mouse; the note on `trigger` below says why.
 import type { Locator } from '@playwright/test';
 import { expect, gotoStory, test } from '../support';
 
 type PointerInit = { pointerId: number; clientX: number; clientY: number };
 
-/**
- * The originals fire made-up pointer events on the thumb with `cy.trigger`. The slider only
- * follows a pointer it has captured, and under Playwright the browser does not grant capture
- * for a made-up event, so the value never moves. A real mouse makes the same gesture at the same
- * points and is what a person does, so the drags here use the real mouse.
- */
+// Chromium does not grant pointer capture to synthetic pointer events, so drags use the real mouse.
 async function trigger(locator: Locator, type: string, init: PointerInit): Promise<void> {
 	const mouse = locator.page().mouse;
 	if (type === 'pointerup') {
@@ -25,7 +14,6 @@ async function trigger(locator: Locator, type: string, init: PointerInit): Promi
 	if (type === 'pointerdown') await mouse.down();
 }
 
-/** The centre of the element in viewport coordinates, rounded as the originals round it. */
 async function centre(locator: Locator): Promise<{ x: number; y: number }> {
 	return locator.evaluate((element) => {
 		const rect = element.getBoundingClientRect();
@@ -33,7 +21,6 @@ async function centre(locator: Locator): Promise<{ x: number; y: number }> {
 	});
 }
 
-/** Cypress's `scrollIntoView()`: the element's own `scrollIntoView`. */
 async function scrollIntoView(locator: Locator): Promise<void> {
 	await locator.evaluate((element) => element.scrollIntoView());
 }
@@ -76,27 +63,21 @@ test.describe('Slider', () => {
 
 		await slider.focus();
 
-		// The slider has focus, so Cypress's type presses the keys without clicking it first.
 		await page.keyboard.press('ArrowRight');
 		await expect(slider).toHaveAttribute('aria-valuenow', '1');
 
-		// Press left arrow key
 		await page.keyboard.press('ArrowLeft');
 		await expect(slider).toHaveAttribute('aria-valuenow', '0');
 
-		// Press Shift + right arrow key
 		await page.keyboard.press('Shift+ArrowRight');
 		await expect(slider).toHaveAttribute('aria-valuenow', '10');
 
-		// Press Shift + left arrow key
 		await page.keyboard.press('Shift+ArrowLeft');
 		await expect(slider).toHaveAttribute('aria-valuenow', '0');
 
-		// Press End key
 		await page.keyboard.press('End');
 		await expect(slider).toHaveAttribute('aria-valuenow', '100');
 
-		// Press Home key
 		await page.keyboard.press('Home');
 		await expect(slider).toHaveAttribute('aria-valuenow', '0');
 	});
@@ -118,7 +99,6 @@ test.describe('Slider', () => {
 		const x1 = x0 + 80;
 		const x2 = x0 + 160;
 
-		// Keep pointer events targeted on the RANGE so event.target stays range
 		await trigger(range, 'pointerdown', { pointerId: 1, clientX: x0, clientY: y0 });
 		await trigger(range, 'pointermove', { pointerId: 1, clientX: x1, clientY: y0 });
 		await trigger(range, 'pointermove', { pointerId: 1, clientX: x2, clientY: y0 });
@@ -142,7 +122,6 @@ test.describe('Slider', () => {
 
 		await expect(sliders).toHaveCount(3);
 		await expect(thumbs).toHaveCount(3);
-		// Cypress's be.visible on several elements looks at the first one.
 		await expect(thumbs.first()).toBeVisible();
 
 		const start0 = await valueNow(sliders.nth(0));
@@ -153,7 +132,6 @@ test.describe('Slider', () => {
 		await scrollIntoView(middle);
 		await expect(middle).toBeVisible();
 
-		// Drag the middle thumb; in draggableRangeOnly mode this should move the whole set [v0,v1,v2].
 		const { x: x0Viewport, y: yViewport } = await centre(middle);
 		const x1Viewport = x0Viewport + 80;
 		const x2Viewport = x0Viewport + 160;
@@ -173,7 +151,6 @@ test.describe('Slider', () => {
 			const end2 = await valueNow(sliders.nth(2));
 			expect(end2).not.toBe(start2);
 
-			// spacing preserved for 3 thumbs
 			expect(end1 - end0).toBe(start1 - start0);
 			expect(end2 - end1).toBe(start2 - start1);
 		}).toPass();

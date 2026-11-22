@@ -3,13 +3,6 @@ import { expect, gotoStory, test } from '../support';
 
 test.describe('tabs--default--manual', () => {
 	const verifyTabsSetup = async (page: Page) => {
-		// TODO: investigate why this fails
-		// cy.checkA11y('#storybook-root', {
-		//   rules: {
-		//     'page-has-heading-one': { enabled: false },
-		//     'landmark-one-main': { enabled: false },
-		//   },
-		// });
 		await expect(page.getByRole('tablist')).not.toHaveCount(0);
 		await expect(page.getByRole('tablist')).toHaveAttribute('aria-label');
 		await expect(page.getByRole('tablist')).toHaveAttribute('data-orientation', 'horizontal');
@@ -72,7 +65,6 @@ test.describe('tabs--default--manual', () => {
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
 			await expect(page.getByRole('heading', { name: /account/i })).not.toHaveCount(0);
 
-			// should ignore up and down
 			await page.keyboard.press('ArrowUp');
 			await page.keyboard.press('Enter');
 			await expect(page.getByRole('heading', { name: /account/i })).not.toHaveCount(0);
@@ -81,21 +73,18 @@ test.describe('tabs--default--manual', () => {
 			await page.keyboard.press('Enter');
 			await expect(page.getByRole('heading', { name: /account/i })).not.toHaveCount(0);
 
-			// should jump to last on end
 			await page.keyboard.press('End');
 			await page.keyboard.press('Space');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'brn-tabs-label-password');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
 			await expect(page.getByRole('heading', { name: /password/i })).not.toHaveCount(0);
 
-			// should wrap around
 			await page.keyboard.press('ArrowRight');
 			await page.keyboard.press('Enter');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'brn-tabs-label-account');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
 			await expect(page.getByRole('heading', { name: /account/i })).not.toHaveCount(0);
 
-			// jump between list and panel on tab
 			await page.keyboard.press('Tab');
 			await expect(page.getByRole('tabpanel')).toBeFocused();
 			await page.keyboard.press('Shift+Tab');

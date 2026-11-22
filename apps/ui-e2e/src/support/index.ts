@@ -3,18 +3,9 @@ import { createRequire } from 'node:module';
 
 export { expect };
 
-/** The element every test page wraps its case in. Replaces Storybook's `#storybook-root`. */
 export const STORY_ROOT = '#test-root';
 
-/**
- * Finds elements the way Testing Library's `ByText` queries do: by an element's OWN text (its
- * direct text nodes, trimmed, with runs of whitespace collapsed). A string must match that text
- * exactly; a regular expression is tested against it.
- *
- * Playwright's `getByText` looks at an element's whole text instead, so `/^print$/i` would not
- * find `<button>Print <kbd>Cmd+P</kbd></button>`. The Cypress tests were written against the
- * Testing Library meaning, and the converted tests keep it.
- */
+// Testing Library's ByText matches an element's own text; Playwright's getByText matches its whole text.
 export function byText(scope: Page | Locator, text: string | RegExp): Locator {
 	const matcher = typeof text === 'string' ? { text } : { source: text.source, flags: text.flags.replace(/[gy]/g, '') };
 	return scope.locator(`own-text=${encodeURIComponent(JSON.stringify(matcher))}`);
@@ -88,10 +79,6 @@ export const test = base.extend<{ a11yLog: A11yRecord[]; ownNetworkOnly: void },
 		{ scope: 'worker', auto: true },
 	],
 
-	// Collects every accessibility check a test makes and attaches the results, so the proof
-	// posted on a pull request can show what was checked and not only that nothing failed.
-	// Also takes the test's final screenshot once the page has stopped moving, so the same code
-	// gives the same picture on every run and a difference from the base commit means something.
 	a11yLog: [
 		async ({ page }, use, testInfo) => {
 			const log: A11yRecord[] = [];
@@ -112,7 +99,7 @@ export const test = base.extend<{ a11yLog: A11yRecord[]; ownNetworkOnly: void },
 				});
 				await testInfo.attach('final', { path: file, contentType: 'image/png' });
 			} catch {
-				// The page can already be gone when a test failed hard; the failure itself is reported.
+				// Playwright may have closed the page already when a test failed hard.
 			}
 		},
 		{ auto: true },
@@ -121,7 +108,6 @@ export const test = base.extend<{ a11yLog: A11yRecord[]; ownNetworkOnly: void },
 
 const a11yLogs = new Map<string, A11yRecord[]>();
 
-/** Waits until running animations and transitions have finished and the page has painted. */
 export async function settle(page: Page): Promise<void> {
 	await page.evaluate(async () => {
 		const finished = Promise.all(
@@ -132,11 +118,6 @@ export async function settle(page: Page): Promise<void> {
 	});
 }
 
-/**
- * Opens the test page for a story id in Storybook's format (`popover--near-viewport-edge`)
- * and waits until the page has rendered in the browser and its fonts have loaded.
- * `args` uses the old Storybook URL format: `disabled:true;value:apple`.
- */
 export async function gotoStory(page: Page, storyId: string, options: { args?: string } = {}): Promise<void> {
 	const separator = storyId.indexOf('--');
 	if (separator < 1) throw new Error(`Not a story id: ${storyId}`);
@@ -148,10 +129,6 @@ export async function gotoStory(page: Page, storyId: string, options: { args?: s
 	await page.evaluate(() => document.fonts.ready);
 }
 
-/**
- * Runs axe on the page, or on the part of it matched by `selector`, and fails on any violation.
- * `options` are axe's run options, the same object the Cypress tests passed to `cy.checkA11y`.
- */
 async function runAxe(page: Page, selector: string | undefined, options: Record<string, unknown>) {
 	const loaded = await page.evaluate(() => 'axe' in window);
 	if (!loaded) await page.addScriptTag({ path: AXE_SOURCE });
@@ -196,12 +173,7 @@ export async function checkA11y(page: Page, selector?: string, options: Record<s
 	expect(result.violations, `Accessibility violations in ${selector ?? 'the document'}:\n${summary}`).toHaveLength(0);
 }
 
-/**
- * Cypress's `click({ force: true })` fires the click events on the element itself, wherever it
- * is and whatever covers it. Playwright's `force` still clicks a point on screen, which lands
- * on whatever is on top there (for a backdrop, that is the dialog). This reproduces the Cypress
- * behaviour so converted tests keep their meaning.
- */
+// Playwright's force click still clicks a point on screen, so it lands on whatever covers the element.
 export async function forceClick(locator: Locator): Promise<void> {
 	await locator.evaluate((element) => {
 		const box = element.getBoundingClientRect();
@@ -222,20 +194,13 @@ export async function forceClick(locator: Locator): Promise<void> {
 	});
 }
 
-/**
- * Puts the caret at the end of an input, textarea or editable element without pressing a key.
- * Cypress's `.type()` does this after it clicks an element that was not focused. Pressing End
- * would do the same to the caret, but components that listen for keys (a command list, a
- * combobox) treat End as "go to the last option", which the Cypress test never asked for.
- */
 export async function caretToEnd(locator: Locator): Promise<void> {
 	await locator.evaluate((element) => {
 		if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) {
 			try {
 				element.setSelectionRange(element.value.length, element.value.length);
 			} catch {
-				// Inputs such as type="email" or "number" have no selection to set; a click has
-				// already left the caret where the browser puts it.
+				// Chromium throws on setSelectionRange for input types such as email and number.
 			}
 			return;
 		}

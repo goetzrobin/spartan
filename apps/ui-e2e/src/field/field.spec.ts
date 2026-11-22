@@ -7,21 +7,17 @@ test.describe('field', () => {
 		});
 
 		test('should render field with label, input, and description', async ({ page }) => {
-			// Verify field structure
 			await expect(page.locator('[hlmfield]')).not.toHaveCount(0);
 			await expect(page.locator('[hlmfieldlabel]')).not.toHaveCount(0);
 			await expect(page.locator('[hlminput]')).not.toHaveCount(0);
 			await expect(page.locator('[hlmfielddescription]')).not.toHaveCount(0);
 
-			// Verify label text
 			await expect(page.getByLabel('Full name', { exact: true })).not.toHaveCount(0);
 			await expect(page.getByLabel('Username', { exact: true })).not.toHaveCount(0);
 
-			// Verify inputs are accessible
 			await expect(page.getByLabel('Full name', { exact: true })).toHaveAttribute('id', 'field-fullname');
 			await expect(page.getByLabel('Username', { exact: true })).toHaveAttribute('id', 'field-username');
 
-			// Verify description is visible
 			await expect(page.getByText(/This\s+appears\s+on\s+invoices\s+and\s+emails\./).first()).toBeVisible();
 		});
 
@@ -68,7 +64,6 @@ test.describe('field', () => {
 		});
 
 		test('should render fieldset with legend and checkboxes', async ({ page }) => {
-			// Verify fieldset structure
 			await expect(page.locator('[hlmfieldset]')).not.toHaveCount(0);
 			await expect(
 				page.locator('[hlmfieldlegend]').filter({ hasText: /Show these items on the desktop/ }),
@@ -77,7 +72,6 @@ test.describe('field', () => {
 				page.locator('[hlmfielddescription]').filter({ hasText: /Select the items you want to show on the desktop\./ }),
 			).not.toHaveCount(0);
 
-			// Verify all checkboxes are rendered with horizontal orientation
 			await expect(page.getByLabel('Hard disks', { exact: true })).not.toHaveCount(0);
 			await expect(page.getByLabel('External disks', { exact: true })).not.toHaveCount(0);
 			await expect(page.getByLabel('CDs, DVDs, and IPods', { exact: true })).not.toHaveCount(0);
@@ -116,7 +110,6 @@ test.describe('field', () => {
 			await expect(page.getByLabel('Multi-factor authentication', { exact: true })).not.toHaveCount(0);
 			await expect(page.getByRole('switch', { name: /multi-factor authentication/i })).not.toHaveCount(0);
 
-			// Verify description is visible
 			await expect(page.getByText(/Enable\s+multi-factor\s+authentication/).first()).toBeVisible();
 			await expect(page.getByText(/If\s+you\s+do\s+not\s+have\s+a\s+two-factor\s+device/).first()).toBeVisible();
 		});
@@ -146,7 +139,6 @@ test.describe('field', () => {
 				page.getByText(/Yearly\s+and\s+lifetime\s+plans\s+offer\s+significant\s+savings/).first(),
 			).toBeVisible();
 
-			// Verify all radio options
 			await expect(page.getByLabel(/Monthly/i)).not.toHaveCount(0);
 			await expect(page.getByLabel(/Yearly/i)).not.toHaveCount(0);
 			await expect(page.getByLabel(/Lifetime/i)).not.toHaveCount(0);
@@ -186,7 +178,6 @@ test.describe('field', () => {
 		});
 
 		test('should render fields with error states', async ({ page }) => {
-			// Note: We need to disable color-contrast check as error states might affect contrast
 			await checkA11y(page, STORY_ROOT, {
 				rules: {
 					'page-has-heading-one': { enabled: false },
@@ -197,15 +188,12 @@ test.describe('field', () => {
 
 			await page.locator('button#validate').click();
 
-			// Verify error messages are displayed
 			await expect(page.getByText(/Email\s+must\s+be\s+entered\./).first()).toBeVisible();
 			await expect(page.getByText(/Username\s+must\s+be\s+entered\./).first()).toBeVisible();
 
-			// Verify fields have error attributes
 			await expect(page.getByLabel('Email', { exact: true })).toHaveAttribute('aria-invalid', 'true');
 			await expect(page.getByLabel('Username', { exact: true })).toHaveAttribute('aria-invalid', 'true');
 
-			// Verify error component exists
 			await expect(page.locator('hlm-field-error').and(page.locator(':not(:empty)'))).toHaveCount(2);
 		});
 
@@ -230,13 +218,10 @@ test.describe('field', () => {
 		});
 
 		test('should render fields with horizontal layout', async ({ page }) => {
-			// All fields should have horizontal orientation
 			await expect(page.locator('[hlmfield][orientation="horizontal"]')).toHaveCount(3);
 
-			// Verify switch
 			await expect(page.getByRole('switch', { name: /Enable notifications/i })).not.toHaveCount(0);
 
-			// Verify checkboxes
 			await expect(page.getByLabel(/Receive marketing emails/i)).not.toHaveCount(0);
 			await expect(page.getByLabel(/Product updates/i)).not.toHaveCount(0);
 		});
@@ -256,14 +241,11 @@ test.describe('field', () => {
 		});
 
 		test('should render field content with label and description', async ({ page }) => {
-			// Verify field content elements exist
 			await expect(page.locator('[hlmfieldcontent]')).toHaveCount(2);
 
-			// Verify first field content
 			await expect(page.getByText(/Security\s+Updates/).first()).toBeVisible();
 			await expect(page.getByText(/Receive\s+emails\s+about\s+your\s+account\s+security/).first()).toBeVisible();
 
-			// Verify second field content
 			await expect(page.getByText(/Two-Factor\s+Authentication/).first()).toBeVisible();
 			await expect(
 				page.getByText(/Add\s+an\s+extra\s+layer\s+of\s+security\s+to\s+your\s+account/).first(),
@@ -281,16 +263,13 @@ test.describe('field', () => {
 		});
 
 		test('should render field title above fieldset', async ({ page }) => {
-			// Verify field title exists
 			await expect(page.locator('[hlmfieldtitle]')).not.toHaveCount(0);
 			await expect(page.locator('[hlmfieldtitle]').filter({ hasText: /Account Settings/ })).not.toHaveCount(0);
 
-			// Verify description
 			await expect(
 				page.getByText(/Manage\s+your\s+account\s+preferences\s+and\s+security\s+settings/).first(),
 			).toBeVisible();
 
-			// Verify fields
 			await expect(page.getByLabel('Username', { exact: true })).not.toHaveCount(0);
 			await expect(page.getByLabel('Email', { exact: true })).not.toHaveCount(0);
 		});

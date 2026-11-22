@@ -1,16 +1,5 @@
-// Splitting a large selection into Playwright runs that one dev server can serve.
-
-/**
- * Packs units into groups of at most `maxPages` pages, keeping the order. A unit larger than
- * the limit gets a group to itself.
- * @template {{ pages: number }} T
- * @param {T[]} units
- * @param {number} maxPages
- * @returns {T[][]}
- */
 export function groupUnits(units, maxPages) {
 	const limit = Number.isFinite(maxPages) && maxPages > 0 ? maxPages : Infinity;
-	/** @type {T[][]} */
 	const groups = [];
 	let count = 0;
 	for (const unit of units) {
@@ -26,10 +15,6 @@ export function groupUnits(units, maxPages) {
 	return groups;
 }
 
-/**
- * Joins the JSON reports of several Playwright runs into one report of the same shape.
- * @param {any[]} reports
- */
 export function joinResults(reports) {
 	const [first] = reports;
 	if (!first) return { suites: [], errors: [], stats: {} };

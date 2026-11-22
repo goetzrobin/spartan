@@ -1,7 +1,3 @@
-// Ported by hand from apps/ui-storybook-e2e/src/integration/combobox/combobox.cy.ts.
-// One test checks the list with an assertion callback, and two click the top left corner of the
-// page with realClick({ position: 'topLeft' }). The transform converts neither. Titles match the
-// originals so the transform leaves them out of combobox.spec.ts.
 import { byText, expect, gotoStory, test } from '../support';
 
 test.describe('combobox--default', () => {

@@ -3,13 +3,6 @@ import { expect, gotoStory, test } from '../support';
 
 test.describe('tabs--vertical', () => {
 	const verifyTabsSetup = async (page: Page) => {
-		// TODO: investigate why this fails
-		// cy.checkA11y('#storybook-root', {
-		//   rules: {
-		//     'page-has-heading-one': { enabled: false },
-		//     'landmark-one-main': { enabled: false },
-		//   },
-		// });
 		await expect(page.getByRole('tablist')).not.toHaveCount(0);
 		await expect(page.getByRole('tablist')).toHaveAttribute('aria-label');
 		await expect(page.getByRole('tablist')).toHaveAttribute('data-orientation', 'vertical');
@@ -73,26 +66,22 @@ test.describe('tabs--vertical', () => {
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
 			await expect(page.getByRole('heading', { name: /account/i })).not.toHaveCount(0);
 
-			// should ignore left and right
 			await page.keyboard.press('ArrowLeft');
 			await expect(page.getByRole('heading', { name: /account/i })).not.toHaveCount(0);
 
 			await page.keyboard.press('ArrowRight');
 			await expect(page.getByRole('heading', { name: /account/i })).not.toHaveCount(0);
 
-			// should jump to last on end
 			await page.keyboard.press('End');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'brn-tabs-label-danger');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
 			await expect(page.getByRole('heading', { name: /delete account/i })).not.toHaveCount(0);
 
-			// should wrap around
 			await page.keyboard.press('ArrowDown');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'brn-tabs-label-account');
 			await expect(page.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
 			await expect(page.getByRole('heading', { name: /account/i })).not.toHaveCount(0);
 
-			// jump between list and panel on tab
 			await page.keyboard.press('Tab');
 			await expect(page.getByRole('tabpanel')).toBeFocused();
 			await page.keyboard.press('Shift+Tab');

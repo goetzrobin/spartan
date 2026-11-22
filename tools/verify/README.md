@@ -19,17 +19,21 @@ pnpm verify popover -- --headed --workers=1    # anything after -- goes to Playw
 It checks that the generated files match their sources, runs the Playwright tests, and writes
 the proof to `dist/.playwright/ui-e2e/proof/` (`index.html` to look at, `proof.md` for a comment).
 The docs dev server is started for you, or reused if `pnpm nx serve app` is already running.
+`node tools/verify/proof.mjs --results <run.json> --baseline <base.json>` puts each test next to
+the same test run on the base commit and says what changed.
 
 `pnpm verify --all --build` tests the production build instead. It builds the browser bundle once
 (`VERIFY_BUILD=1 nx build app`, which leaves out the server bundle, the prerendered docs pages and
 the Nitro server) and serves it as plain files with `tools/verify/serve.mjs`. Nothing is compiled
 while the tests run, so a selection of any size runs in one go, and the tests see the code users
 get. Use the dev server while working on a component and the build in CI.
+`pnpm verify --all --prebuilt` does the same with a build already in `dist/apps/app/client`.
 
 Against the dev server, a large selection runs in groups of at most 60 test pages, each with a fresh dev server, because
 the server keeps every page it has built in memory. The results are joined into one proof. Set
 `VERIFY_MAX_PAGES` to change the group size.
 First-time setup: `pnpm exec playwright install chromium ffmpeg`.
+Where Playwright's own browser cannot be downloaded, set `PW_CHANNEL=chrome` to use an installed Chrome.
 
 ## Where things live
 
@@ -55,6 +59,10 @@ with the reason. It needs either a small change to the story so it fits a shape 
 or a new shape taught to the tool (`tools/verify/lib/story-parse.mjs`).
 
 Do not edit generated test pages. `pnpm verify` fails when they differ from what the tool produces.
+`node tools/verify/story-to-test-pages.mjs --all --check` exits 1 if anything would change.
+
+A story that is broken as written and that no test uses can be left out, with the reason, in
+`apps/ui-e2e/story-skip.json`.
 
 Tests are written by hand in `apps/ui-e2e/src/<component>/`.
 
@@ -82,5 +90,5 @@ pnpm verify --affected --list     # show the selection and the reason for each c
 ## Tests for the tools
 
 ```sh
-node --test tools/verify/__tests__/cy/ tools/verify/__tests__/story/
+node --test "tools/verify/__tests__/**/*.test.mjs"
 ```

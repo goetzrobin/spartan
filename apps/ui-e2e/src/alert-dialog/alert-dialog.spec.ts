@@ -29,12 +29,10 @@ test.describe('alert-dialog', () => {
 			await expect(byText(page, /delete account/i).and(page.locator(':focus'))).toHaveCount(1);
 			await byText(page, /delete account/i).click();
 
-			// click outside of dialog
 			await forceClick(page.locator('.cdk-overlay-backdrop'));
 			await expect(byText(page, /delete account/i)).toHaveCount(2);
 			await expect(byText(page, /delete account/i).and(page.locator(':focus'))).toHaveCount(0);
 
-			// click cancel button
 			await byText(page, /cancel/i).click();
 			await expect(byText(page, /delete account/i)).toHaveCount(1);
 			await expect(byText(page, /delete account/i).and(page.locator(':focus'))).toHaveCount(1);

@@ -29,7 +29,6 @@ test.describe('sheet--default', () => {
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 			await byText(page, /edit profile/i).click();
 
-			// click outside of dialog
 			await forceClick(page.locator('.cdk-overlay-backdrop'));
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
@@ -60,7 +59,6 @@ test.describe('sheet--default', () => {
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 			await page.keyboard.press('Enter');
 
-			// click escape when dialog open
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
@@ -93,7 +91,6 @@ test.describe('sheet--default', () => {
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);
 			await page.keyboard.press('Space');
 
-			// click escape when dialog open
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /edit profile/i)).toHaveCount(1);
 			await expect(byText(page, /edit profile/i).and(page.locator(':focus'))).toHaveCount(1);

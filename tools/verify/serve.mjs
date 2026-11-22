@@ -1,9 +1,4 @@
 #!/usr/bin/env node
-// Serves the browser-only production build of the docs app (`VERIFY_BUILD=1 nx build app`) as
-// plain files. Any address that is not a file gets index.html, so the app's own router can show
-// the page, the way a static host does for a single-page app.
-//
-// Usage: node tools/verify/serve.mjs [--dir dist/apps/app/client] [--port 4300]
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import path from 'node:path';
@@ -35,7 +30,6 @@ if (!existsSync(path.join(dir, 'index.html'))) {
 	process.exit(1);
 }
 
-/** The file a request path names, or null when it names none or points outside the build. */
 export function fileFor(root, urlPath) {
 	const file = path.join(root, decodeURIComponent(urlPath.split('?')[0]));
 	if (file !== root && !file.startsWith(root + path.sep)) return null;
@@ -47,9 +41,8 @@ createServer((request, response) => {
 	try {
 		file = fileFor(dir, request.url ?? '/');
 	} catch {
-		// A malformed address is treated like any other unknown one.
+		// decodeURIComponent throws a URIError on a malformed address.
 	}
-	// A missing asset must stay a 404: answering it with index.html would hide a broken build.
 	const isAsset = path.extname((request.url ?? '').split('?')[0]) !== '';
 	if (!file && isAsset) {
 		response.writeHead(404).end('Not found');

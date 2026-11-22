@@ -1,11 +1,3 @@
-// Ported by hand from apps/ui-storybook-e2e/src/integration/date-picker/date-picker.cy.ts.
-// The transform could not convert these tests: they pick a day cell with a `.filter` callback,
-// read text through `.invoke`, use local helper functions, or type with `{moveToStart}` and
-// `{enter}` through a helper. Titles and describe blocks match the originals so the transform
-// leaves them out of date-picker.spec.ts.
-//
-// The Input pages render a hidden `#date-trigger` next to the input. Its `data-placeholder`
-// attribute mirrors the picker's model: present means empty, absent means a date is committed.
 import type { Page } from '@playwright/test';
 import { caretToEnd, expect, gotoStory, test } from '../support';
 
@@ -16,10 +8,6 @@ const modelIsEmpty = async (page: Page) => {
 	await expect(page.locator('#date-trigger')).toHaveAttribute('data-placeholder');
 };
 
-/**
- * Cypress's `.type()`: clicks the input first when it does not have focus (which puts the caret at
- * the end of its text), otherwise types at the caret. `{enter}` at the end becomes a key press.
- */
 const type = async (page: Page, value: string) => {
 	const input = page.locator('#date-input');
 	if (!(await input.evaluate((element) => element === document.activeElement))) {
@@ -35,7 +23,6 @@ const blurInput = async (page: Page) => {
 	await page.locator('#date-input').blur();
 };
 
-/** Cypress's `.type('{moveToStart}9')` on the focused input: caret to the start, then type `9`. */
 const typeNineAtStart = async (page: Page) => {
 	const input = page.locator('#date-input');
 	await input.evaluate((element: HTMLInputElement) => element.setSelectionRange(0, 0));
@@ -44,7 +31,6 @@ const typeNineAtStart = async (page: Page) => {
 const selectionStart = (page: Page) =>
 	page.locator('#date-input').evaluate((element: HTMLInputElement) => element.selectionStart);
 
-/** A day cell whose trimmed text is `day` and that is not a day from another month. */
 const dayCell = (page: Page, day: string) =>
 	page.locator('[brnCalendarCellButton]:not([data-outside])').filter({ hasText: new RegExp(`^\\s*${day}\\s*$`) });
 
@@ -74,7 +60,6 @@ test.describe('date picker', () => {
 		});
 
 		test('keeps the focused month when navigating to a shorter month via the dropdown', async ({ page }) => {
-			// The picker is preseeded with the 31st of August.
 			await expect(page.locator('#date')).not.toHaveAttribute('data-placeholder');
 			await page.locator('#date').click();
 			await expect(page.locator('hlm-calendar')).not.toHaveCount(0);
@@ -82,9 +67,6 @@ test.describe('date picker', () => {
 			await expect(monthTrigger(page).filter({ hasText: /Aug/ })).not.toHaveCount(0);
 			await expect(daysInMonth(page)).toHaveCount(31);
 
-			// Navigate to November, which only has 30 days. Regression for
-			// https://github.com/spartan-ng/spartan/issues/1720 - the 31st must be clamped to
-			// the last day of the target month, not rolled over into December.
 			await monthTrigger(page).click();
 			await page.locator('hlm-select-content').locator('hlm-select-item').getByText(/Nov/).first().click();
 
@@ -100,18 +82,14 @@ test.describe('date picker', () => {
 		});
 
 		test('shows the picked month and focuses the min date instead of staying on the old month', async ({ page }) => {
-			// The picker is preseeded with the 19th of October, min is the 22nd of August.
 			await page.locator('#date').click();
 			await expect(page.locator('hlm-calendar')).not.toHaveCount(0);
 
 			await monthTrigger(page).click();
 			await page.locator('hlm-select-content').locator('hlm-select-item').getByText(/Aug/).first().click();
 
-			// The 19th of August is before min: the focus is constrained to the 22nd, like the
-			// previous/next buttons do, and the grid shows August.
 			await expect(monthTrigger(page).filter({ hasText: /Aug/ })).not.toHaveCount(0);
 			await expect(daysInMonth(page)).toHaveCount(31);
-			// jQuery's `.text()` joins the text of every matched element.
 			await expect
 				.poll(() =>
 					page.locator('hlm-calendar [brnCalendarCellButton][tabindex="0"]').evaluateAll((elements) =>
@@ -150,7 +128,6 @@ test.describe('date picker', () => {
 			await expect(page.locator('hlm-calendar')).not.toHaveCount(0);
 			await type(page, '15/06/2024{enter}');
 			await expect(page.locator('hlm-calendar')).toHaveCount(0);
-			// Still focused after Enter: the edit format is kept so a later blur re-parses correctly.
 			await expect(page.locator('#date-input')).toHaveValue('15/06/2024');
 			await modelIsSet(page);
 			await blurInput(page);
@@ -160,7 +137,6 @@ test.describe('date picker', () => {
 
 		test('keeps the value when blurring after Enter (regression)', async ({ page }) => {
 			await type(page, '15/06/2024{enter}');
-			// After Enter the field keeps focus and the edit format - blur must re-parse it, not clear.
 			await expect(page.locator('#date-input')).toHaveValue('15/06/2024');
 			await blurInput(page);
 			await expect(page.locator('#date-input')).toHaveValue('Sat Jun 15 2024');

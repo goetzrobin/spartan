@@ -23,7 +23,6 @@ test.describe('popover--default', () => {
 			await expect(page.getByRole('dialog')).not.toHaveAttribute('aria-modal');
 			await expect(page.getByRole('dialog')).toHaveAttribute('tabindex', '-1');
 
-			// click outside of dialog
 			await forceClick(page.locator(STORY_ROOT));
 			await expect(byText(page, /open popover/i)).toHaveCount(1);
 			await expect(byText(page, /open popover/i).and(page.locator(':focus'))).toHaveCount(1);
@@ -89,7 +88,6 @@ test.describe('popover--default', () => {
 			await expect(byText(page, /open popover/i).and(page.locator(':focus'))).toHaveCount(1);
 			await page.keyboard.press('Space');
 
-			// click escape when dialog open
 			await page.keyboard.press('Escape');
 			await expect(byText(page, /open popover/i)).toHaveCount(1);
 			await expect(byText(page, /open popover/i).and(page.locator(':focus'))).toHaveCount(1);
