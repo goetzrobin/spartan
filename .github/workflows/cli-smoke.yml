@@ -5,16 +5,6 @@ name: cli-smoke
 # generated component, and builds it - so the cells are slow individually. We fan each one out to its own
 # runner via the job matrix so they run in parallel from the start of the workflow; wall-clock is roughly
 # the slowest single cell rather than the sum.
-#
-# This runs unconditionally (no path filter) so the `cli-smoke result` job can be a required check that
-# never sits pending. Cheapness on unrelated PRs comes in two layers:
-#   1. A `git diff` gate before `pnpm install` - if nothing CLI-relevant changed, the job goes green in
-#      seconds without installing anything (the common case for unrelated PRs).
-#   2. When it does install, the in-runner isSmokeAffected() check (global-setup + the spec) makes the
-#      precise nx-affected call and still short-circuits to a pass if cli-smoke is not actually affected
-#      (e.g. a global dependency changed but not in a way nx attributes to the CLI). See
-#      apps/cli-smoke/src/support/affected.ts.
-
 on:
   push:
     branches:
@@ -26,64 +16,71 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  setup-matrix:
-    # Skip release commits pushed to main; always run on pull_request so `cli-smoke result` reports
-    # (a `[skip ci]` token would skip the whole workflow, leaving the required check pending forever).
+  gate:
     if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):') }}
+    runs-on: ubuntu-latest
+    outputs:
+      cells: ${{ steps.pick.outputs.cells }}
+      any: ${{ steps.pick.outputs.any }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          filter: blob:none
+      - uses: nrwl/nx-set-shas@v5
+      - name: Pick the cells this change needs
+        id: pick
+        env:
+          EVENT: ${{ github.event_name }}
+          CELLS: |
+            nx-lib-buildable
+            nx-lib-nonbuildable
+            nx-entry-buildable
+            nx-entry-nonbuildable
+            nx-standalone
+            acli
+            all-components
+            all-components-nx-entry
+            style-acli-nova
+            style-nx-lyra
+            style-acli-maia
+            style-nx-mira
+            style-acli-luma
+        run: |
+          CHANGED=$(git diff --name-only "$NX_BASE" "$NX_HEAD")
+          CLI='^(libs/cli/|apps/cli-smoke/|package\.json$|pnpm-lock\.yaml$|nx\.json$|tsconfig\.base\.json$|\.verdaccio/|\.github/workflows/cli-smoke\.yml$)'
+          COMPONENTS='^(libs/brain/|libs/helm/)'
+          PICKED=""
+          if echo "$CHANGED" | grep -qE "$CLI"; then
+            PICKED="$CELLS"
+          elif echo "$CHANGED" | grep -qE "$COMPONENTS"; then
+            if [ "$EVENT" = "pull_request" ]; then PICKED="all-components"; else PICKED="$CELLS"; fi
+          fi
+          JSON=$(printf '%s\n' $PICKED | jq -R . | jq -sc 'map(select(length > 0))')
+          echo "cells=$JSON" >> "$GITHUB_OUTPUT"
+          echo "any=$([ "$JSON" != "[]" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "Cells: $JSON"
+
+  setup-matrix:
+    needs: gate
+    if: ${{ needs.gate.outputs.any == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       # Don't cancel the other cells when one fails - we want the full picture of which setups broke.
       fail-fast: false
       matrix:
-        # Keep in sync with apps/cli-smoke/src/matrix.ts. The drift-guard job below fails CI if a cell
-        # in matrix.ts is missing here.
-        cell:
-          - nx-lib-buildable
-          - nx-lib-nonbuildable
-          - nx-entry-buildable
-          - nx-entry-nonbuildable
-          - nx-standalone
-          - acli
-          - all-components
-          - all-components-nx-entry
-          # Style coverage: one cell per non-default style, split across angular-cli and nx. Keep in sync
-          # with the style-* cells in matrix.ts.
-          - style-acli-nova
-          - style-nx-lyra
-          - style-acli-maia
-          - style-nx-mira
-          - style-acli-luma
+        cell: ${{ fromJSON(needs.gate.outputs.cells) }}
     name: ${{ matrix.cell }}
     steps:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      # Sets NX_BASE/NX_HEAD from git history (no install needed - it's a standalone action).
       - uses: nrwl/nx-set-shas@v5
-      - name: Detect CLI-relevant changes
-        id: changes
-        env:
-          EVENT: ${{ github.event_name }}
-          CELL: ${{ matrix.cell }}
-        run: |
-          CHANGED=$(git diff --name-only "$NX_BASE" "$NX_HEAD")
-          CLI='^(libs/cli/|apps/cli-smoke/|package\.json$|pnpm-lock\.yaml$|nx\.json$|tsconfig\.base\.json$|\.verdaccio/|\.github/workflows/cli-smoke\.yml$)'
-          COMPONENTS='^(libs/brain/|libs/helm/)'
-          RELEVANT=false
-          if echo "$CHANGED" | grep -qE "$CLI"; then
-            RELEVANT=true
-          elif echo "$CHANGED" | grep -qE "$COMPONENTS"; then
-            if [ "$EVENT" != "pull_request" ] || [ "$CELL" = "all-components" ]; then RELEVANT=true; fi
-          fi
-          echo "relevant=$RELEVANT" >> "$GITHUB_OUTPUT"
-          [ "$RELEVANT" = "true" ] || echo "Skipping the smoke run for $CELL."
       - uses: ./.github/actions/setup
-        if: steps.changes.outputs.relevant == 'true'
       # Each cell builds + publishes the packages to its own local verdaccio registry (in globalSetup),
       # so this is self-contained and not gated on any build job. --testNamePattern matches against the
       # full test name, so the trailing space anchors the pattern to this exact cell.
       - name: smoke (${{ matrix.cell }})
-        if: steps.changes.outputs.relevant == 'true'
         run: pnpm nx run cli-smoke:smoke --testNamePattern="${{ matrix.cell }} "
 
   drift-guard:
@@ -115,7 +112,7 @@ jobs:
           echo "matrix.ts cells: $CELLS"
           MISSING=0
           for cell in $(echo "$CELLS" | jq -r '.[]'); do
-            if ! grep -q "          - ${cell}\$" .github/workflows/cli-smoke.yml; then
+            if ! grep -q "^            ${cell}\$" .github/workflows/cli-smoke.yml; then
               echo "::error::Cell '${cell}' from apps/cli-smoke/src/matrix.ts is missing from the cli-smoke.yml matrix"
               MISSING=1
             fi
@@ -127,7 +124,7 @@ jobs:
     # runs, this always reports a status (it never sits pending), and it is green quickly on PRs that
     # don't affect the CLI (every cell short-circuits to a pass).
     name: cli-smoke result
-    needs: [setup-matrix, drift-guard]
+    needs: [gate, setup-matrix, drift-guard]
     # always() so it still reports when cells short-circuit, but carry the same release-commit guard so
     # it isn't left evaluating skipped needs into a failure on a `chore(release):` push to main.
     if: ${{ always() && (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):')) }}
@@ -135,6 +132,9 @@ jobs:
     steps:
       - name: Verify all cells and the drift guard passed
         run: |
+          echo "gate:         ${{ needs.gate.result }}"
           echo "setup-matrix: ${{ needs.setup-matrix.result }}"
           echo "drift-guard:  ${{ needs.drift-guard.result }}"
-          [ "${{ needs.setup-matrix.result }}" = "success" ] && [ "${{ needs.drift-guard.result }}" = "success" ]
+          [ "${{ needs.gate.result }}" = "success" ] || exit 1
+          [ "${{ needs.setup-matrix.result }}" = "success" ] || [ "${{ needs.setup-matrix.result }}" = "skipped" ] || exit 1
+          [ "${{ needs.drift-guard.result }}" = "success" ]
