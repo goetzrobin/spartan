@@ -41,7 +41,10 @@ export default defineConfig({
 		// The final screenshot of every test is taken by the support fixture once the page has
 		// settled. Playwright's own is kept for failures, where it shows the moment of the error.
 		screenshot: 'only-on-failure',
-		video: process.env['PW_VIDEO'] === 'off' ? 'off' : 'on',
+		video:
+			process.env['PW_VIDEO'] === 'off'
+				? 'off'
+				: { mode: 'on', show: { actions: { duration: 300, position: 'bottom' } } },
 		trace: 'retain-on-failure',
 	},
 	projects: [

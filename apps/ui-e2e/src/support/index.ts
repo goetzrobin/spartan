@@ -84,7 +84,12 @@ export const test = base.extend<{ a11yLog: A11yRecord[] }, { ownTextSelector: vo
 			try {
 				await settle(page);
 				const file = testInfo.outputPath('final.png');
-				await page.screenshot({ path: file, animations: 'disabled', caret: 'hide' });
+				await page.screenshot({
+					path: file,
+					animations: 'disabled',
+					caret: 'hide',
+					style: 'x-pw-glass { display: none !important; }',
+				});
 				await testInfo.attach('final', { path: file, contentType: 'image/png' });
 			} catch {
 				// The page can already be gone when a test failed hard; the failure itself is reported.
