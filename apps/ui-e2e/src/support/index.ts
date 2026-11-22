@@ -59,7 +59,27 @@ type AxeViolation = {
 
 type A11yRecord = { context: string; violations: AxeViolation[]; passes: number };
 
-export const test = base.extend<{ a11yLog: A11yRecord[] }, { ownTextSelector: void }>({
+const PLACEHOLDER_IMAGE = Buffer.from(
+	'iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAD0lEQVR4nGNYgAMwDC0JAON6eAHQIWnvAAAAAElFTkSuQmCC',
+	'base64',
+);
+
+export const test = base.extend<{ a11yLog: A11yRecord[]; ownNetworkOnly: void }, { ownTextSelector: void }>({
+	ownNetworkOnly: [
+		async ({ context, baseURL }, use) => {
+			const own = new URL(baseURL ?? 'http://localhost').host;
+			await context.route(
+				(url) => url.protocol.startsWith('http') && url.host !== own,
+				(route) =>
+					route.request().resourceType() === 'image'
+						? route.fulfill({ contentType: 'image/png', body: PLACEHOLDER_IMAGE })
+						: route.abort(),
+			);
+			await use();
+		},
+		{ auto: true },
+	],
+
 	ownTextSelector: [
 		async ({}, use) => {
 			await ownTextRegistered;
