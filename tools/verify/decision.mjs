@@ -10,7 +10,7 @@ import { readRun } from './proof.mjs';
 const MIN_CHANGED_PIXELS = 25;
 const SHOWN_INLINE = 6;
 const MAX_RECORDINGS = 12;
-const SLOW_MOTION = 2.5;
+const MAX_RECORDING_FRAMES = 45;
 const MAX_CHECK_LINES = 4;
 const LABELS = { _pages: 'Every page loads' };
 
@@ -108,7 +108,11 @@ export function writeRecordings(directory, compared) {
 			'-i',
 			item.test.video,
 			'-vf',
-			`setpts=${SLOW_MOTION}*PTS,fps=10,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=stats_mode=diff[p];[b][p]paletteuse=dither=none`,
+			'mpdecimate,setpts=N/TB,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=stats_mode=diff[p];[b][p]paletteuse=dither=none',
+			'-r',
+			'1',
+			'-frames:v',
+			String(MAX_RECORDING_FRAMES),
 			'-loop',
 			'0',
 			target,
