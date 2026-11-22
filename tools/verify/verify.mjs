@@ -6,6 +6,7 @@
 //   pnpm verify --affected --base <ref>
 //   pnpm verify --all
 //   pnpm verify --all --build     test the production build instead of the dev server
+//   pnpm verify --all --prebuilt  the same, with a build that already exists in dist/apps/app/client
 //   pnpm verify --list --affected  print the affected components as JSON and stop
 //
 // Steps: (1) the generated test pages and tests match their sources, (2) the Playwright tests
@@ -143,8 +144,9 @@ if (flag('--all')) {
 // `--build` tests the production browser bundle instead of the dev server: the app is built once
 // and served as plain files, so nothing is compiled while the tests run and a selection of any
 // size fits in one run.
-const useBuild = flag('--build');
-if (useBuild) {
+const prebuilt = flag('--prebuilt');
+const useBuild = flag('--build') || prebuilt;
+if (useBuild && !prebuilt) {
 	const built = run('Production build of the test pages', 'pnpm', ['nx', 'build', 'app', '--skip-nx-cache'], {
 		env: { ...process.env, VERIFY_BUILD: '1' },
 	});
