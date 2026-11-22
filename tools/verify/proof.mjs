@@ -52,6 +52,7 @@ export function readRun(resultsFile) {
 					status: test.status === 'expected' ? 'passed' : test.status === 'unexpected' ? 'failed' : test.status,
 					duration: result?.duration ?? 0,
 					error: result?.errors?.[0]?.message?.replace(/\u001b\[[0-9;]*m/g, '') ?? null,
+					errorAt: result?.errorLocation ?? result?.errors?.[0]?.location ?? null,
 					video: attachment('video'),
 					screenshot: attachment('final') ?? attachment('screenshot'),
 					a11y,

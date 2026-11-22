@@ -12,7 +12,7 @@ const halfBlack = encodePng(8, 8, Buffer.concat([Buffer.alloc(96, 0), Buffer.all
 function testWith(directory, key, image, extra = {}) {
 	const screenshot = path.join(directory, `${key}.png`);
 	writeFileSync(screenshot, image);
-	return { key, component: 'badge', title: key, status: 'passed', a11y: [], screenshot, ...extra };
+	return { key, component: 'badge', path: [], title: key, status: 'passed', a11y: [], screenshot, ...extra };
 }
 
 describe('png', () => {
@@ -51,7 +51,9 @@ describe('decision', () => {
 		const failed = {
 			...testWith(run, 'broken', white),
 			status: 'failed',
-			error: 'expected 1\nmore',
+			error:
+				'Error: expect(locator).toHaveAttribute(expected) failed\n\nLocator: locator(\'button\')\nExpected: "true"\nReceived: "false"',
+			path: ['group'],
 			component: '_pages',
 		};
 		const tests = [same, changed, fresh, failed];
@@ -60,7 +62,9 @@ describe('decision', () => {
 		const top = comment.split('<details><summary>All results')[0];
 		assert.match(top, /\*\*3 passed, 1 failed\.\*\* 1 of 4 screenshots changed against `main`\. 2 are new\./);
 		assert.match(top, new RegExp(`https://images/${screenshotId('changed')}\\.diff\\.png`));
-		assert.match(top, /\*\*Every page loads\*\* · broken: `expected 1`/);
+		assert.match(top, /### 1 failed, 1 cause/);
+		assert.match(top, /Expected `"true"`, got `"false"` on `locator\('button'\)`\./);
+		assert.match(top, /- Every page loads › group › broken/);
 		assert.doesNotMatch(top, /_pages|· same/);
 		assert.match(top, /2 components were not selected/);
 	});

@@ -32,6 +32,44 @@ export function classify(test, baselineDir) {
 	return { state: 'changed', before, after, changedPixels, sameSize };
 }
 
+export function describeFailure(test) {
+	const message = String(test.error ?? '');
+	const field = (name) => message.match(new RegExp(`^\\s*${name}[^:\\n]*:\\s*(.+)$`, 'm'))?.[1]?.trim() ?? null;
+	let check = null;
+	let where = null;
+	if (test.errorAt?.file && existsSync(test.errorAt.file)) {
+		check = readFileSync(test.errorAt.file, 'utf8').split('\n')[test.errorAt.line - 1]?.trim() ?? null;
+		where = `${path.relative(process.cwd(), test.errorAt.file)}:${test.errorAt.line}`;
+	}
+	const first =
+		message
+			.split('\n')
+			.find((line) => line.trim())
+			?.trim() ?? 'failed';
+	return {
+		check: check ?? first,
+		expected: field('Expected'),
+		received: field('Received'),
+		locator: field('Locator'),
+		where,
+	};
+}
+
+export function groupFailures(failed) {
+	const groups = new Map();
+	for (const test of failed) {
+		const failure = describeFailure(test);
+		const signature = [failure.check, failure.expected, failure.received].join('|');
+		if (!groups.has(signature)) groups.set(signature, { failure, tests: [] });
+		groups.get(signature).tests.push(test);
+	}
+	return [...groups.values()].sort((a, b) => b.tests.length - a.tests.length);
+}
+
+function fullTitle(test) {
+	return `${label(test.component)} › ${[...test.path, test.title].join(' › ')}`;
+}
+
 export function needsRecording(item) {
 	return (
 		(item.test.status === 'failed' || item.state === 'changed') && !!item.test.video && existsSync(item.test.video)
@@ -39,7 +77,15 @@ export function needsRecording(item) {
 }
 
 export function writeRecordings(directory, compared) {
-	const wanted = compared.filter(needsRecording).slice(0, MAX_RECORDINGS);
+	const firstOfEachCause = new Set(
+		groupFailures(compared.filter((item) => item.test.status === 'failed').map((item) => item.test)).map(
+			(group) => group.tests.find((test) => test.video && existsSync(test.video)) ?? group.tests[0],
+		),
+	);
+	const wanted = compared
+		.filter(needsRecording)
+		.filter((item) => item.test.status !== 'failed' || firstOfEachCause.has(item.test))
+		.slice(0, MAX_RECORDINGS);
 	if (wanted.length === 0) return 'none';
 	if (spawnSync('ffmpeg', ['-version']).status !== 0) return 'missing';
 	mkdirSync(directory, { recursive: true });
@@ -80,18 +126,42 @@ export function buildComment({ tests, compared, baseName, imageBase, unselected,
 	const lines = ['<!-- verification-proof -->', verdict.join(' '), ''];
 
 	if (failed.length > 0) {
-		lines.push('### Failed', '');
-		for (const test of failed) {
-			const first =
-				String(test.error ?? '')
-					.split('\n')
-					.find((line) => line.trim()) ?? '';
-			lines.push(`- **${label(test.component)}** · ${test.title}: \`${first.trim().slice(0, 160)}\``);
-			if (compared.find((item) => item.test === test)?.recording) {
-				lines.push('', `  <img width="480" alt="recording" src="${imageBase}/${screenshotId(test.key)}.gif">`, '');
+		const groups = groupFailures(failed);
+		lines.push(`### ${failed.length} failed, ${groups.length} ${groups.length === 1 ? 'cause' : 'causes'}`, '');
+		groups.forEach(({ failure, tests: members }, index) => {
+			lines.push(
+				`**${index + 1}. This check fails in ${members.length} ${members.length === 1 ? 'test' : 'tests'}**`,
+				'',
+				'```ts',
+				failure.check,
+				'```',
+				'',
+			);
+			if (failure.expected || failure.received) {
+				lines.push(
+					`Expected \`${failure.expected ?? '?'}\`, got \`${failure.received ?? '?'}\`${failure.locator ? ` on \`${failure.locator}\`` : ''}.`,
+					'',
+				);
 			}
-		}
-		lines.push('');
+			const recorded = members.find((test) => compared.find((item) => item.test === test)?.recording);
+			if (recorded) {
+				lines.push(
+					`<img width="480" alt="recording" src="${imageBase}/${screenshotId(recorded.key)}.gif">`,
+					'',
+					`Recording: ${fullTitle(recorded)}`,
+					'',
+				);
+			}
+			lines.push(
+				`<details><summary>${members.length === 1 ? 'The test' : `All ${members.length} tests`}</summary>`,
+				'',
+			);
+			for (const test of members) {
+				const at = describeFailure(test).where;
+				lines.push(`- ${fullTitle(test)}${at ? ` (\`${at}\`)` : ''}`);
+			}
+			lines.push('', '</details>', '');
+		});
 	}
 
 	if (changed.length > 0) {
@@ -125,7 +195,10 @@ export function buildComment({ tests, compared, baseName, imageBase, unselected,
 
 	const gaps = [];
 	if (!hasBaseline) gaps.push(`there are no reference screenshots for \`${baseName}\` yet, so nothing was compared`);
-	if (unselected > 0) gaps.push(`${unselected} components were not selected by this change and did not run`);
+	if (unselected > 0)
+		gaps.push(
+			`${unselected} ${unselected === 1 ? 'component was' : 'components were'} not selected by this change and did not run`,
+		);
 	const unchecked = tests.filter((test) => test.a11y.length === 0).length;
 	if (unchecked > 0) gaps.push(`${unchecked} of ${tests.length} tests make no accessibility check`);
 	gaps.push('unit tests and the CLI are checked by other workflows');
