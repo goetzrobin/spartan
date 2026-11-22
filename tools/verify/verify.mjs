@@ -70,7 +70,12 @@ if (flag('--all')) {
 	pageOnly = result.pages;
 	note = result.all ? `everything, because of ${result.reasons['*'].join(', ')}` : '';
 	if (flag('--list')) {
-		console.log(JSON.stringify(result, null, 2));
+		const selected = new Set([
+			...result.components.flatMap((component) => [component, ...storyTitlesOf(ROOT, component)]),
+			...result.pages,
+		]);
+		const pageCount = testPages().filter((page) => selected.has(page.id.split('--')[0])).length;
+		console.log(JSON.stringify({ ...result, pageCount }, null, 2));
 		process.exit(0);
 	}
 } else {
@@ -101,8 +106,7 @@ console.log(
 // The story files behind a component's tests come from the test page list, because a test
 // folder can cover several story files (`menu` covers context-menu, dropdown-menu and menubar).
 // Both checks stop once Storybook and Cypress are removed.
-const manifestFile = path.join(ROOT, 'apps/ui-e2e/test-pages.json');
-const manifest = existsSync(manifestFile) ? JSON.parse(readFileSync(manifestFile, 'utf8')).pages : [];
+const manifest = testPages();
 const titles = new Set([
 	...components.flatMap((component) => [component, ...storyTitlesOf(ROOT, component)]),
 	...pageOnly,
@@ -213,6 +217,11 @@ if (resultFiles.length > 0) {
 }
 run('Proof', node, ['tools/verify/proof.mjs']);
 process.exit(testsPassed ? 0 : 1);
+
+function testPages() {
+	const file = path.join(ROOT, 'apps/ui-e2e/test-pages.json');
+	return existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')).pages : [];
+}
 
 function readJson(file) {
 	return JSON.parse(readFileSync(file, 'utf8'));
