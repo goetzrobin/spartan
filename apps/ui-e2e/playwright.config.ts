@@ -4,7 +4,12 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const out = path.join(root, 'dist/.playwright/ui-e2e');
-const baseURL = process.env['TEST_BASE_URL'] ?? 'http://localhost:4200';
+// `VERIFY_TARGET=build` tests the production browser bundle (`VERIFY_BUILD=1 nx build app`) served
+// as plain files. Without it the tests run against the dev server, which suits work on one
+// component: it picks up an edit in seconds, but it is slow to start and holds every page it
+// has built in memory.
+const useBuild = process.env['VERIFY_TARGET'] === 'build';
+const baseURL = process.env['TEST_BASE_URL'] ?? (useBuild ? 'http://localhost:4300' : 'http://localhost:4200');
 
 /**
  * Runs against the test pages under `/test` in the docs app (generated from the stories by
@@ -52,10 +57,11 @@ export default defineConfig({
 	webServer: process.env['TEST_BASE_URL']
 		? undefined
 		: {
-				command: 'pnpm nx serve app',
+				command: useBuild ? 'node tools/verify/serve.mjs --port 4300' : 'pnpm nx serve app',
 				cwd: root,
 				url: `${baseURL}/test`,
-				reuseExistingServer: !process.env['CI'],
+				// A file server left over from an earlier build would serve stale files.
+				reuseExistingServer: !useBuild && !process.env['CI'],
 				timeout: 300_000,
 			},
 });

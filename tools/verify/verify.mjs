@@ -5,6 +5,7 @@
 //   pnpm verify --affected         whatever the current changes can affect (compared with origin/main)
 //   pnpm verify --affected --base <ref>
 //   pnpm verify --all
+//   pnpm verify --all --build     test the production build instead of the dev server
 //   pnpm verify --list --affected  print the affected components as JSON and stop
 //
 // Steps: (1) the generated test pages and tests match their sources, (2) the Playwright tests
@@ -139,7 +140,17 @@ if (flag('--all')) {
 		units.push({ dirs: [], titles: [title], pages: pagesOf([title]) });
 	}
 }
-const groups = groupUnits(units, Number(process.env['VERIFY_MAX_PAGES'] ?? 60));
+// `--build` tests the production browser bundle instead of the dev server: the app is built once
+// and served as plain files, so nothing is compiled while the tests run and a selection of any
+// size fits in one run.
+const useBuild = flag('--build');
+if (useBuild) {
+	const built = run('Production build of the test pages', 'pnpm', ['nx', 'build', 'app', '--skip-nx-cache'], {
+		env: { ...process.env, VERIFY_BUILD: '1' },
+	});
+	if (!built) process.exit(1);
+}
+const groups = groupUnits(units, useBuild ? Infinity : Number(process.env['VERIFY_MAX_PAGES'] ?? 60));
 
 const outDir = path.join(ROOT, 'dist/.playwright/ui-e2e');
 const resultFiles = [];
@@ -154,6 +165,7 @@ groups.forEach((group, index) => {
 	const many = groups.length > 1;
 	const label = many ? `Playwright tests, group ${index + 1} of ${groups.length}` : 'Playwright tests';
 	const env = { ...process.env, VERIFY_TITLES: [...new Set(group.flatMap((unit) => unit.titles))].join(',') };
+	if (useBuild) env['VERIFY_TARGET'] = 'build';
 	const extra = [];
 	if (many) {
 		// Each run clears its output folder, so every group gets its own.

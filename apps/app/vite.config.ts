@@ -15,6 +15,10 @@ export default defineConfig(({ command, mode }) => {
 	// generated into src/public (Vite's publicDir) instead. Point Nitro at the same source dir so a
 	// server-side $fetch('/data/..') from our page loaders resolves without a prior production build.
 	const isServe = command === 'serve';
+	// `VERIFY_BUILD=1` builds only what the browser tests need: the production browser bundle,
+	// served as plain files. The server bundle, the prerendered docs pages and the Nitro server
+	// are for the public site; building them takes several times as long and about 6 GB of memory.
+	const isVerifyBuild = !!process.env['VERIFY_BUILD'];
 
 	return {
 		root: __dirname,
@@ -87,11 +91,14 @@ export default defineConfig(({ command, mode }) => {
 				},
 			},
 			analog({
+				ssr: !isVerifyBuild,
+				static: isVerifyBuild,
 				content: {
 					highlighter: 'prism',
 				},
 				prerender: {
 					routes: async () => {
+						if (isVerifyBuild) return [];
 						const staticRoutes = [
 							'/',
 							'/colors',

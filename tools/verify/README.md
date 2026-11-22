@@ -20,7 +20,13 @@ It checks that the generated files match their sources, runs the Playwright test
 the proof to `dist/.playwright/ui-e2e/proof/` (`index.html` to look at, `proof.md` for a comment).
 The docs dev server is started for you, or reused if `pnpm nx serve app` is already running.
 
-A large selection runs in groups of at most 60 test pages, each with a fresh dev server, because
+`pnpm verify --all --build` tests the production build instead. It builds the browser bundle once
+(`VERIFY_BUILD=1 nx build app`, which leaves out the server bundle, the prerendered docs pages and
+the Nitro server) and serves it as plain files with `tools/verify/serve.mjs`. Nothing is compiled
+while the tests run, so a selection of any size runs in one go, and the tests see the code users
+get. Use the dev server while working on a component and the build in CI.
+
+Against the dev server, a large selection runs in groups of at most 60 test pages, each with a fresh dev server, because
 the server keeps every page it has built in memory. The results are joined into one proof. Set
 `VERIFY_MAX_PAGES` to change the group size.
 First-time setup: `pnpm exec playwright install chromium ffmpeg`.
