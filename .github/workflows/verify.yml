@@ -168,9 +168,17 @@ jobs:
         run: |
           RESULTS=$(ls dist/.playwright/ui-e2e/results-*.json | paste -sd, -)
           node tools/verify/proof.mjs --results "$RESULTS"
-          node tools/verify/decision.mjs --results "$RESULTS" --baseline-dir proof/baseline \
-            --save-screenshots proof/own --changed-dir proof/changed --image-base __IMAGES__ \
-            --base-name "$BASE_BRANCH" --pages-file apps/ui-e2e/test-pages.json --out comment.md
+          decide() {
+            node tools/verify/decision.mjs --results "$RESULTS" --baseline-dir proof/baseline \
+              --save-screenshots proof/own --changed-dir proof/changed --image-base __IMAGES__ \
+              --base-name "$BASE_BRANCH" --pages-file apps/ui-e2e/test-pages.json --out comment.md \
+              --need-converter proof/need-converter
+          }
+          decide
+          if [ -e proof/need-converter ]; then
+            sudo apt-get install -y --no-install-recommends ffmpeg > /dev/null
+            decide
+          fi
       - name: Upload the proof
         id: upload
         uses: actions/upload-artifact@v5

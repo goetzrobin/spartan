@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -8,6 +9,7 @@ import { readRun } from './proof.mjs';
 
 const MIN_CHANGED_PIXELS = 25;
 const SHOWN_INLINE = 6;
+const MAX_RECORDINGS = 12;
 const LABELS = { _pages: 'Every page loads' };
 
 export function screenshotId(key) {
@@ -28,6 +30,36 @@ export function classify(test, baselineDir) {
 	const { sameSize, changedPixels } = comparePng(before, after);
 	if (sameSize && changedPixels <= MIN_CHANGED_PIXELS) return { state: 'same' };
 	return { state: 'changed', before, after, changedPixels, sameSize };
+}
+
+export function needsRecording(item) {
+	return (
+		(item.test.status === 'failed' || item.state === 'changed') && !!item.test.video && existsSync(item.test.video)
+	);
+}
+
+export function writeRecordings(directory, compared) {
+	const wanted = compared.filter(needsRecording).slice(0, MAX_RECORDINGS);
+	if (wanted.length === 0) return 'none';
+	if (spawnSync('ffmpeg', ['-version']).status !== 0) return 'missing';
+	mkdirSync(directory, { recursive: true });
+	for (const item of wanted) {
+		const target = path.join(directory, `${screenshotId(item.test.key)}.gif`);
+		const made = spawnSync('ffmpeg', [
+			'-y',
+			'-loglevel',
+			'error',
+			'-i',
+			item.test.video,
+			'-vf',
+			'fps=8,scale=480:-1:flags=lanczos',
+			'-loop',
+			'0',
+			target,
+		]);
+		item.recording = made.status === 0 && existsSync(target);
+	}
+	return 'written';
 }
 
 export function buildComment({ tests, compared, baseName, imageBase, unselected, proofUrl }) {
@@ -55,6 +87,9 @@ export function buildComment({ tests, compared, baseName, imageBase, unselected,
 					.split('\n')
 					.find((line) => line.trim()) ?? '';
 			lines.push(`- **${label(test.component)}** · ${test.title}: \`${first.trim().slice(0, 160)}\``);
+			if (compared.find((item) => item.test === test)?.recording) {
+				lines.push('', `  <img width="480" alt="recording" src="${imageBase}/${screenshotId(test.key)}.gif">`, '');
+			}
 		}
 		lines.push('');
 	}
@@ -72,6 +107,9 @@ export function buildComment({ tests, compared, baseName, imageBase, unselected,
 				`| ${cell('before')} | ${cell('after')} | ${cell('diff')} |`,
 				'',
 			);
+			if (item.recording && item.test.status !== 'failed') {
+				lines.push(`<img width="480" alt="recording" src="${imageBase}/${id}.gif">`, '');
+			}
 		}
 		if (changed.length > SHOWN_INLINE) {
 			lines.push(`<details><summary>${changed.length - SHOWN_INLINE} more changed screenshots</summary>`, '');
@@ -164,6 +202,7 @@ export function writePages(directory, compared) {
 				);
 			}
 			if (violationsOf(item).length > 0) page.push('');
+			if (item.recording) page.push(`<img width="480" alt="recording" src="${id}.gif">`, '');
 			if (item.state === 'changed') {
 				page.push(
 					'| Before | After | Difference |',
@@ -208,7 +247,11 @@ function main() {
 			writeFileSync(path.join(changedDir, `${id}.diff.png`), diffPng(item.before, item.after));
 		}
 	}
-	if (changedDir) writePages(changedDir, compared);
+	if (changedDir) {
+		const recordings = writeRecordings(changedDir, compared);
+		if (recordings === 'missing' && value('--need-converter')) writeFileSync(value('--need-converter'), '');
+		writePages(changedDir, compared);
+	}
 	writeFileSync(
 		out,
 		buildComment({
