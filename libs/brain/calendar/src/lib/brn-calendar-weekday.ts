@@ -41,7 +41,7 @@ export class BrnCalendarWeekday<T> implements OnDestroy {
 
 	// Make sure the template checker knows the type of the context with which the
 	// template of this directive will be rendered
-	static ngTemplateContextGuard<T>(_: BrnCalendarWeekday<T>, ctx: unknown): ctx is BrnWeekdayContext {
+	static ngTemplateContextGuard<T>(_: BrnCalendarWeekday<T>, _ctx: unknown): _ctx is BrnWeekdayContext {
 		return true;
 	}
 
