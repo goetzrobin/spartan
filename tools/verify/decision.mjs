@@ -10,6 +10,8 @@ import { readRun } from './proof.mjs';
 const MIN_CHANGED_PIXELS = 25;
 const SHOWN_INLINE = 6;
 const MAX_RECORDINGS = 12;
+const SLOW_MOTION = 2.5;
+const MAX_CHECK_LINES = 4;
 const LABELS = { _pages: 'Every page loads' };
 
 export function screenshotId(key) {
@@ -38,7 +40,15 @@ export function describeFailure(test) {
 	let check = null;
 	let where = null;
 	if (test.errorAt?.file && existsSync(test.errorAt.file)) {
-		check = readFileSync(test.errorAt.file, 'utf8').split('\n')[test.errorAt.line - 1]?.trim() ?? null;
+		const source = readFileSync(test.errorAt.file, 'utf8').split('\n');
+		const statement = [];
+		let depth = 0;
+		for (const line of source.slice(test.errorAt.line - 1, test.errorAt.line - 1 + MAX_CHECK_LINES)) {
+			statement.push(line.trim());
+			depth += (line.match(/[([{]/g)?.length ?? 0) - (line.match(/[)\]}]/g)?.length ?? 0);
+			if (depth <= 0) break;
+		}
+		check = statement.length > 0 ? statement.join('\n') : null;
 		where = `${path.relative(process.cwd(), test.errorAt.file)}:${test.errorAt.line}`;
 	}
 	const first =
@@ -98,7 +108,7 @@ export function writeRecordings(directory, compared) {
 			'-i',
 			item.test.video,
 			'-vf',
-			'fps=8,scale=480:-1:flags=lanczos',
+			`setpts=${SLOW_MOTION}*PTS,fps=10,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=stats_mode=diff[p];[b][p]paletteuse=dither=none`,
 			'-loop',
 			'0',
 			target,
@@ -146,7 +156,7 @@ export function buildComment({ tests, compared, baseName, imageBase, unselected,
 			const recorded = members.find((test) => compared.find((item) => item.test === test)?.recording);
 			if (recorded) {
 				lines.push(
-					`<img width="480" alt="recording" src="${imageBase}/${screenshotId(recorded.key)}.gif">`,
+					`<img width="720" alt="recording" src="${imageBase}/${screenshotId(recorded.key)}.gif">`,
 					'',
 					`Recording: ${fullTitle(recorded)}`,
 					'',
@@ -178,7 +188,7 @@ export function buildComment({ tests, compared, baseName, imageBase, unselected,
 				'',
 			);
 			if (item.recording && item.test.status !== 'failed') {
-				lines.push(`<img width="480" alt="recording" src="${imageBase}/${id}.gif">`, '');
+				lines.push(`<img width="720" alt="recording" src="${imageBase}/${id}.gif">`, '');
 			}
 		}
 		if (changed.length > SHOWN_INLINE) {
@@ -275,7 +285,7 @@ export function writePages(directory, compared) {
 				);
 			}
 			if (violationsOf(item).length > 0) page.push('');
-			if (item.recording) page.push(`<img width="480" alt="recording" src="${id}.gif">`, '');
+			if (item.recording) page.push(`<img width="720" alt="recording" src="${id}.gif">`, '');
 			if (item.state === 'changed') {
 				page.push(
 					'| Before | After | Difference |',

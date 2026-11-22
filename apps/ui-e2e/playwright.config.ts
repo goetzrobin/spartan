@@ -44,7 +44,7 @@ export default defineConfig({
 		video:
 			process.env['PW_VIDEO'] === 'off'
 				? 'off'
-				: { mode: 'on', show: { actions: { duration: 300, position: 'bottom' } } },
+				: { mode: 'on', show: { actions: { duration: 200, position: 'bottom' } } },
 		trace: 'retain-on-failure',
 	},
 	projects: [
