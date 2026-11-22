@@ -29,6 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       components: ${{ steps.pick.outputs.components }}
+      pages: ${{ steps.pick.outputs.pages }}
+      shards: ${{ steps.pick.outputs.shards }}
+      total: ${{ steps.pick.outputs.total }}
       any: ${{ steps.pick.outputs.any }}
     steps:
       - uses: actions/checkout@v6
@@ -51,8 +54,15 @@ jobs:
           # The selection only reads files and follows imports, so it needs no install.
           node tools/verify/verify.mjs --affected --list --base "$BASE" | tee affected.json
           COMPONENTS=$(node -p "JSON.parse(require('fs').readFileSync('affected.json','utf8')).components.join(' ')")
+          PAGES=$(node -p "JSON.parse(require('fs').readFileSync('affected.json','utf8')).pages.join(',')")
           echo "components=$COMPONENTS" >> "$GITHUB_OUTPUT"
-          echo "any=$([ -n "$COMPONENTS" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "pages=$PAGES" >> "$GITHUB_OUTPUT"
+          echo "any=$([ -n "$COMPONENTS$PAGES" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          COUNT=$(node -p "JSON.parse(require('fs').readFileSync('affected.json','utf8')).pageCount")
+          if [ "$COUNT" -le 40 ]; then TOTAL=1; elif [ "$COUNT" -le 120 ]; then TOTAL=2; else TOTAL=4; fi
+          echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
+          echo "shards=$(node -p "JSON.stringify(Array.from({ length: $TOTAL }, (_, i) => i + 1))")" >> "$GITHUB_OUTPUT"
+          echo "$COUNT test pages selected, $TOTAL test machine(s)"
 
   build:
     needs: affected
@@ -60,8 +70,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Restore a build of the same sources
+        id: cache
+        uses: actions/cache@v5
+        with:
+          path: dist/apps/app/client
+          key: test-app-${{ runner.os }}-${{ hashFiles('libs/**', 'apps/app/**', 'pnpm-lock.yaml', 'package.json', 'tsconfig.base.json', 'nx.json', '.node-version') }}
       - uses: ./.github/actions/setup
+        if: steps.cache.outputs.cache-hit != 'true'
       - name: Build the test pages
+        if: steps.cache.outputs.cache-hit != 'true'
         env:
           VERIFY_BUILD: '1'
         run: pnpm nx build app --skip-nx-cache
@@ -78,10 +96,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3, 4]
-    name: test (${{ matrix.shard }}/4)
+        shard: ${{ fromJSON(needs.affected.outputs.shards) }}
+    name: test (${{ matrix.shard }}/${{ needs.affected.outputs.total }})
     env:
       COMPONENTS: ${{ needs.affected.outputs.components }}
+      PAGES: ${{ needs.affected.outputs.pages }}
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
@@ -99,7 +118,7 @@ jobs:
           name: test-app
           path: dist/apps/app/client
       - name: Verify
-        run: pnpm verify $COMPONENTS --prebuilt -- --shard=${{ matrix.shard }}/4
+        run: pnpm verify $COMPONENTS ${PAGES:+--pages $PAGES} --prebuilt -- --shard=${{ matrix.shard }}/${{ needs.affected.outputs.total }}
       - name: Name the results after the shard
         if: ${{ !cancelled() }}
         run: mv dist/.playwright/ui-e2e/results.json dist/.playwright/ui-e2e/results-${{ matrix.shard }}.json

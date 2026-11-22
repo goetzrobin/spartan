@@ -84,14 +84,9 @@ export function storyTitlesOf(root, component) {
 	return [...titles].sort();
 }
 
-/** Every repo file a component's pages and tests reach through imports. */
-export function closureOf(root, component, resolve = createResolver(root)) {
+function reach(root, entryFiles, resolve) {
 	const seen = new Set();
-	const pageFolders = new Set([component, ...storyTitlesOf(root, component)]);
-	const queue = [
-		...[...pageFolders].flatMap((folder) => walk(root, `${PAGES}/${folder}`)),
-		...walk(root, `${E2E_SRC}/${component}`),
-	].filter((file) => /\.(ts|mts|js|mjs)$/.test(file));
+	const queue = entryFiles.filter((file) => /\.(ts|mts|js|mjs)$/.test(file));
 	while (queue.length > 0) {
 		const file = queue.pop();
 		if (seen.has(file)) continue;
@@ -105,28 +100,66 @@ export function closureOf(root, component, resolve = createResolver(root)) {
 	return seen;
 }
 
+export function closureOf(root, component, resolve = createResolver(root)) {
+	const pageFolders = new Set([component, ...storyTitlesOf(root, component)]);
+	return reach(
+		root,
+		[
+			...[...pageFolders].flatMap((folder) => walk(root, `${PAGES}/${folder}`)),
+			...walk(root, `${E2E_SRC}/${component}`),
+		],
+		resolve,
+	);
+}
+
+export function listPageOnlyTitles(root) {
+	const directory = path.join(root, PAGES);
+	if (!existsSync(directory)) return [];
+	const claimed = new Set(listComponents(root).flatMap((component) => [component, ...storyTitlesOf(root, component)]));
+	return readdirSync(directory, { withFileTypes: true })
+		.filter((entry) => entry.isDirectory() && !claimed.has(entry.name))
+		.map((entry) => entry.name)
+		.sort();
+}
+
+function hitsIn(closure, changedFiles) {
+	const directories = new Set([...closure].map((file) => path.posix.dirname(file)));
+	return changedFiles.filter(
+		(file) => closure.has(file) || (!/\.(ts|mts|js|mjs)$/.test(file) && directories.has(path.posix.dirname(file))),
+	);
+}
+
 /**
- * @returns {{ all: boolean, components: string[], reasons: Record<string, string[]> }}
- * `reasons` maps each affected component to the changed files that reach it; when a global file
- * changed, `all` is true and the reason is listed under `*`.
+ * @returns {{ all: boolean, components: string[], pages: string[], reasons: Record<string, string[]> }}
  */
 export function affectedComponents(root, changedFiles) {
 	const components = listComponents(root);
+	const pageOnly = listPageOnlyTitles(root);
 	const globalHits = changedFiles.filter((file) => GLOBAL.some((pattern) => pattern.test(file)));
-	if (globalHits.length > 0) return { all: true, components, reasons: { '*': globalHits } };
+	if (globalHits.length > 0) return { all: true, components, pages: pageOnly, reasons: { '*': globalHits } };
 
 	const resolve = createResolver(root);
 	const reasons = {};
 	for (const component of components) {
-		const closure = closureOf(root, component, resolve);
-		// A template or style file next to an imported file belongs to it too.
-		const directories = new Set([...closure].map((file) => path.posix.dirname(file)));
-		const hits = changedFiles.filter(
-			(file) => closure.has(file) || (!/\.(ts|mts|js|mjs)$/.test(file) && directories.has(path.posix.dirname(file))),
-		);
+		const hits = hitsIn(closureOf(root, component, resolve), changedFiles);
 		if (hits.length > 0) reasons[component] = hits;
 	}
-	return { all: false, components: Object.keys(reasons).sort(), reasons };
+	const pages = [];
+	for (const title of pageOnly) {
+		const hits = hitsIn(reach(root, walk(root, `${PAGES}/${title}`), resolve), changedFiles);
+		if (hits.length > 0) {
+			pages.push(title);
+			reasons[`page:${title}`] = hits;
+		}
+	}
+	return {
+		all: false,
+		components: Object.keys(reasons)
+			.filter((key) => !key.startsWith('page:'))
+			.sort(),
+		pages,
+		reasons,
+	};
 }
 
 /**

@@ -68,9 +68,21 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: ./.github/actions/setup
       - uses: nrwl/nx-set-shas@v5
+      - name: Detect changes that need this job
+        id: changes
+        run: |
+          TEXT='^([^/]+\.md|LICENSE|\.github/[^/]+\.md|\.github/ISSUE_TEMPLATE/.*|(.*/)?README\.md)$'
+          if git diff --name-only "$NX_BASE" "$NX_HEAD" | grep -qvE "$TEXT"; then
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+            echo "Only text files changed; nothing to do."
+          fi
+      - uses: ./.github/actions/setup
+        if: steps.changes.outputs.needed == 'true'
       - name: Build
+        if: steps.changes.outputs.needed == 'true'
         run: pnpm nx affected -t build --parallel=1
 
   unit:
@@ -85,12 +97,24 @@ jobs:
           # affected projects' files, fetched lazily.
           fetch-depth: 0
           filter: blob:none
-      - uses: ./.github/actions/setup
       - uses: nrwl/nx-set-shas@v5
+      - name: Detect changes that need this job
+        id: changes
+        run: |
+          TEXT='^([^/]+\.md|LICENSE|\.github/[^/]+\.md|\.github/ISSUE_TEMPLATE/.*|(.*/)?README\.md)$'
+          if git diff --name-only "$NX_BASE" "$NX_HEAD" | grep -qvE "$TEXT"; then
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+            echo "Only text files changed; nothing to do."
+          fi
+      - uses: ./.github/actions/setup
+        if: steps.changes.outputs.needed == 'true'
       # The brain/helm suites run in a real browser via Vitest browser mode (Playwright/Chromium),
       # so the Chromium binary must be present. Cache it across runs (keyed on the lockfile, which
       # pins the playwright version) to avoid re-downloading ~150 MB each time.
       - name: Cache Playwright browsers
+        if: steps.changes.outputs.needed == 'true'
         id: playwright-cache
         uses: actions/cache@v5
         with:
@@ -98,10 +122,12 @@ jobs:
           key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: playwright-${{ runner.os }}-
       - name: Install Playwright Chromium
+        if: steps.changes.outputs.needed == 'true'
         # On a cache hit the browser is already present; still run install to pull any missing OS
         # libraries (--with-deps), which are not part of the cached browser directory.
         run: pnpm exec playwright install --with-deps chromium
       - name: Test
+        if: steps.changes.outputs.needed == 'true'
         run: pnpm nx affected -t test --parallel=3
 
   e2e:
@@ -121,11 +147,24 @@ jobs:
           path: ~/.cache/Cypress
           key: cypress-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: cypress-${{ runner.os }}-
-      - uses: ./.github/actions/setup
       - uses: nrwl/nx-set-shas@v5
+      - name: Detect changes that need this job
+        id: changes
+        run: |
+          TEXT='^([^/]+\.md|LICENSE|\.github/[^/]+\.md|\.github/ISSUE_TEMPLATE/.*|(.*/)?README\.md)$'
+          if git diff --name-only "$NX_BASE" "$NX_HEAD" | grep -qvE "$TEXT"; then
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+            echo "Only text files changed; nothing to do."
+          fi
+      - uses: ./.github/actions/setup
+        if: steps.changes.outputs.needed == 'true'
       - name: Install Cypress
+        if: steps.changes.outputs.needed == 'true'
         run: npx cypress install
       - name: End-to-end test
+        if: steps.changes.outputs.needed == 'true'
         # Exclude trpc-app-e2e: it is not tagged scope:e2e and was never run in CI (it needs a
         # database/health endpoint that is not provisioned here). Only the storybook e2e runs.
         run: pnpm nx affected -t e2e --exclude=trpc-app-e2e --parallel=1 --outputStyle=stream
