@@ -3,7 +3,6 @@ name: verify
 # Runs the Playwright tests for the components a change can affect and attaches the proof: a video
 # and final screenshot of every test and the accessibility results.
 #
-# Runs next to the Storybook + Cypress `e2e` job in ci.yml until every component has moved over.
 
 on:
   pull_request: {}
