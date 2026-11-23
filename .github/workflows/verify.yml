@@ -171,7 +171,7 @@ jobs:
             node tools/verify/decision.mjs --results "$RESULTS" --baseline-dir proof/baseline \
               --save-screenshots proof/own --changed-dir proof/changed --image-base __IMAGES__ \
               --base-name "$BASE_BRANCH" --pages-file apps/ui-e2e/test-pages.json --out comment.md \
-              --need-converter proof/need-converter
+              --need-converter proof/need-converter --a11y-baseline tools/ratchet/a11y-baseline.json
           }
           decide
           if [ -e proof/need-converter ]; then
@@ -233,11 +233,15 @@ jobs:
           else
             gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -F body=@comment.md > /dev/null
           fi
+      - name: Fail when accessibility got worse
+        run: |
+          [ -e a11y-raised.json ] || exit 0
+          node -e 'const { raised, unknown } = JSON.parse(require("fs").readFileSync("a11y-raised.json", "utf8")); process.exit(raised.length + unknown.length > 0 ? 1 : 0)'
 
   # One stable check to mark as required: green when the affected components pass, and also
   # green when a change affects no component at all.
   verified:
-    needs: [affected, build, test]
+    needs: [affected, build, test, proof]
     if: ${{ always() && (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):')) }}
     runs-on: ubuntu-latest
     steps:
@@ -246,8 +250,10 @@ jobs:
           AFFECTED: ${{ needs.affected.result }}
           BUILD: ${{ needs.build.result }}
           TEST: ${{ needs.test.result }}
+          PROOF: ${{ needs.proof.result }}
         run: |
-          echo "affected: $AFFECTED, build: $BUILD, test: $TEST"
+          echo "affected: $AFFECTED, build: $BUILD, test: $TEST, proof: $PROOF"
           [ "$AFFECTED" = "success" ] || exit 1
           [ "$BUILD" = "success" ] || [ "$BUILD" = "skipped" ] || exit 1
           [ "$TEST" = "success" ] || [ "$TEST" = "skipped" ] || exit 1
+          [ "$PROOF" != "failure" ] || exit 1
