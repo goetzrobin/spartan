@@ -22,6 +22,8 @@ module.exports = [
 			'@typescript-eslint/no-unnecessary-type-assertion': 'error',
 			'@typescript-eslint/no-confusing-void-expression': 'error',
 			'@typescript-eslint/prefer-optional-chain': 'error',
+			'@typescript-eslint/no-non-null-assertion': 'error',
+			'@typescript-eslint/no-floating-promises': 'error',
 			'@typescript-eslint/no-extraneous-class': ['error', { allowWithDecorator: true }],
 			'@angular-eslint/use-injectable-provided-in': 'off',
 			'@angular-eslint/prefer-signal-model': 'off',

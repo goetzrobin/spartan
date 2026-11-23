@@ -137,31 +137,31 @@ export function brnClasses(computed: () => BrnClassValue[] | string, options: Br
 		// Assign order once at registration time
 		const sourceOrder = manager.nextOrder++;
 
-		function updateClasses(): void {
+		const updateClasses = (): void => {
 			// Get the new classes from the computed function, the merge function resolves arrays and objects
 			const value = computed();
 			const newClasses = toClassList(typeof value === 'string' ? value : options.merge(value));
 
 			// Update this source's classes, keeping the original order
-			const source = manager!.sources.get(sourceId);
+			const source = manager.sources.get(sourceId);
 			if (source) {
 				source.classes = new Set(newClasses);
 			} else {
-				manager!.sources.set(sourceId, { classes: new Set(newClasses), order: sourceOrder });
-				manager!.sortedSources = null;
+				manager.sources.set(sourceId, { classes: new Set(newClasses), order: sourceOrder });
+				manager.sortedSources = null;
 			}
 
 			// Update the element
-			updateElement(manager!);
+			updateElement(manager);
 
 			// Re-enable transitions after the first effect writes correct classes.
 			// Deferred to next animation frame so the browser paints the class change
 			// with transitions disabled first, then re-enables them.
-			if (manager!.transitionsSuppressed) {
-				manager!.transitionsSuppressed = false;
-				scheduleTransitionRestore(manager!);
+			if (manager.transitionsSuppressed) {
+				manager.transitionsSuppressed = false;
+				scheduleTransitionRestore(manager);
 			}
-		}
+		};
 
 		// Register cleanup with DestroyRef
 		destroyRef.onDestroy(() => {
@@ -429,8 +429,9 @@ const classListCache = new Map<string, string[]>();
 
 function toClassList(className: string): string[] {
 	// Use the cache to avoid repeated parsing
-	if (classListCache.has(className)) {
-		return classListCache.get(className)!;
+	const cached = classListCache.get(className);
+	if (cached) {
+		return cached;
 	}
 
 	const result = cssClassesToArray(className);

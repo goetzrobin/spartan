@@ -139,8 +139,9 @@ export class BrnDialogService {
 		const index = overlays.indexOf(overlayRef);
 		if (index === overlays.length - 1) return true;
 		// A modal overlay above (one with a backdrop) blocks outside-dismissal of everything below it.
-		if (overlays.at(-1)?.backdropElement) return false;
-		return overlays.length > 1 && !this._isNested(overlayRef, overlays.at(-1)!);
+		const topmost = overlays.at(-1);
+		if (topmost?.backdropElement) return false;
+		return overlays.length > 1 && topmost !== undefined && !this._isNested(overlayRef, topmost);
 	}
 
 	private _isNested(parent: OverlayRef, child: OverlayRef): boolean {

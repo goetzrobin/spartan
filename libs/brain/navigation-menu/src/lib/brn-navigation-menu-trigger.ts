@@ -222,7 +222,7 @@ export class BrnNavigationMenuTrigger implements OnInit, OnDestroy, FocusableOpt
 					this._contentService.show();
 				}
 			} else {
-				this._contentService.hide();
+				void this._contentService.hide();
 			}
 		});
 

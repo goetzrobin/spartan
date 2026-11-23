@@ -1,0 +1,36 @@
+{
+	"lint": {
+		"@typescript-eslint/no-unsafe-member-access": {
+			"brain": 61,
+			"helm": 4
+		},
+		"@typescript-eslint/no-unsafe-argument": {
+			"brain": 33,
+			"helm": 16
+		},
+		"@typescript-eslint/no-unsafe-assignment": {
+			"brain": 36,
+			"helm": 4
+		},
+		"@typescript-eslint/no-unsafe-call": {
+			"brain": 25,
+			"helm": 1
+		},
+		"@typescript-eslint/no-unsafe-return": {
+			"brain": 1,
+			"helm": 0
+		},
+		"@typescript-eslint/no-explicit-any": {
+			"brain": 6,
+			"helm": 0
+		},
+		"@typescript-eslint/no-unnecessary-condition": {
+			"brain": 76,
+			"helm": 7
+		},
+		"@typescript-eslint/restrict-template-expressions": {
+			"brain": 0,
+			"helm": 8
+		}
+	}
+}
