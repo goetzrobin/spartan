@@ -43,14 +43,18 @@ export const createMenuPosition = (align: MenuAlign, side: MenuSide): ConnectedP
 	];
 
 	switch (side) {
-		case 'top':
+		case 'top': {
 			return createPositions(align, 'top', align, 'bottom');
-		case 'bottom':
+		}
+		case 'bottom': {
 			return createPositions(align, 'bottom', align, 'top');
-		case 'left':
+		}
+		case 'left': {
 			return createPositions('start', verticalAlign, 'end', verticalAlign);
-		case 'right':
+		}
+		case 'right': {
 			return createPositions('end', verticalAlign, 'start', verticalAlign);
+		}
 	}
 };
 

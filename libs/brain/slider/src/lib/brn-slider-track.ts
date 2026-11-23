@@ -117,18 +117,22 @@ export class BrnSliderTrack {
 		let relativePosition: number;
 
 		switch (source) {
-			case 'left':
+			case 'left': {
 				relativePosition = pointerPosition - rect.left;
 				break;
-			case 'right':
+			}
+			case 'right': {
 				relativePosition = rect.right - pointerPosition;
 				break;
-			case 'top':
+			}
+			case 'top': {
 				relativePosition = pointerPosition - rect.top;
 				break;
-			case 'bottom':
+			}
+			case 'bottom': {
 				relativePosition = rect.bottom - pointerPosition;
 				break;
+			}
 		}
 
 		return value(relativePosition);
@@ -144,13 +148,15 @@ export class BrnSliderTrack {
 		let direction = 1;
 		switch (this._slider.slidingSource()) {
 			case 'right':
-			case 'bottom':
+			case 'bottom': {
 				direction = -1;
 				break;
+			}
 			case 'left':
-			case 'top':
+			case 'top': {
 				direction = 1;
 				break;
+			}
 		}
 
 		return scale(pixelDelta * direction) - scale(0);

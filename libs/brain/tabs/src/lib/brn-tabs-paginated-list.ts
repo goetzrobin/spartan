@@ -341,7 +341,7 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 
 		switch (event.key) {
 			case 'Enter':
-			case ' ':
+			case ' ': {
 				if (this.focusIndex !== this._selectedItemIndex()) {
 					const item = this.items()[this.focusIndex];
 
@@ -351,8 +351,10 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 					}
 				}
 				break;
-			default:
+			}
+			default: {
 				this._keyManager.onKeydown(event);
+			}
 		}
 	}
 

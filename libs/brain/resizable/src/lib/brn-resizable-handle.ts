@@ -85,36 +85,44 @@ export class BrnResizableHandle {
 		const step = event.shiftKey ? 10 : 1;
 
 		switch (event.key) {
-			case 'ArrowLeft':
+			case 'ArrowLeft': {
 				if (layout === 'horizontal') delta = -step;
 				break;
-			case 'ArrowRight':
+			}
+			case 'ArrowRight': {
 				if (layout === 'horizontal') delta = step;
 				break;
-			case 'ArrowUp':
+			}
+			case 'ArrowUp': {
 				if (layout === 'vertical') delta = -step;
 				break;
-			case 'ArrowDown':
+			}
+			case 'ArrowDown': {
 				if (layout === 'vertical') delta = step;
 				break;
-			case 'Home':
+			}
+			case 'Home': {
 				event.preventDefault();
 				this._moveToExtreme(true);
 				return;
-			case 'End':
+			}
+			case 'End': {
 				event.preventDefault();
 				this._moveToExtreme(false);
 				return;
+			}
 			case 'Enter':
-			case ' ':
+			case ' ': {
 				event.preventDefault();
 				if (panels[handleIndex]?.collapsible() || panels[handleIndex + 1]?.collapsible()) {
 					const collapsibleIndex = panels[handleIndex]?.collapsible() ? handleIndex : handleIndex + 1;
 					this._resizable.collapsePanel(collapsibleIndex);
 				}
 				return;
-			default:
+			}
+			default: {
 				return;
+			}
 		}
 
 		if (delta !== 0) {

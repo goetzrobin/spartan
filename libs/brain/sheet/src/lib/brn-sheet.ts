@@ -18,14 +18,18 @@ export class BrnSheet extends BrnDialog {
 
 	protected override getPositionStrategy() {
 		switch (this.sideState()) {
-			case 'bottom':
+			case 'bottom': {
 				return this._positionBuilder.global().bottom();
-			case 'left':
+			}
+			case 'left': {
 				return this._positionBuilder.global().left();
-			case 'right':
+			}
+			case 'right': {
 				return this._positionBuilder.global().right();
-			case 'top':
+			}
+			case 'top': {
 				return this._positionBuilder.global().top();
+			}
 		}
 	}
 }

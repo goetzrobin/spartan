@@ -17,14 +17,18 @@ export class BrnDrawer extends BrnDialog {
 
 	protected override getPositionStrategy() {
 		switch (this.direction()) {
-			case 'bottom':
+			case 'bottom': {
 				return this._positionBuilder.global().bottom();
-			case 'top':
+			}
+			case 'top': {
 				return this._positionBuilder.global().top();
-			case 'left':
+			}
+			case 'left': {
 				return this._positionBuilder.global().left();
-			case 'right':
+			}
+			case 'right': {
 				return this._positionBuilder.global().right();
+			}
 		}
 	}
 }
