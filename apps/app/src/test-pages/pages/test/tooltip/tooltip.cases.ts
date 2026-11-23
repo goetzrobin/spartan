@@ -19,6 +19,7 @@ import { HlmTooltip } from '@spartan-ng/helm/tooltip';
 				[tooltipDisabled]="_disabled()"
 				hlmBtn
 				size="icon"
+				aria-label="Add to library"
 			>
 				<ng-icon name="lucidePlus" />
 			</button>

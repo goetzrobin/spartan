@@ -38,9 +38,9 @@ export const routeMeta: RouteMeta = {
 				<div class="mb-3">
 					<pre>Form Control Value: {{ fruit() | json }}</pre>
 				</div>
-				<label hlmLabel>Select a Fruit</label>
+				<label hlmLabel for="ng-model-fruit">Select a Fruit</label>
 				<hlm-select class="w-56" [disabled]="disabled" [(ngModel)]="fruit" name="fruit">
-					<hlm-select-trigger>
+					<hlm-select-trigger buttonId="ng-model-fruit">
 						<hlm-select-value [placeholder]="placeholder" />
 					</hlm-select-trigger>
 					<hlm-select-content *hlmSelectPortal>

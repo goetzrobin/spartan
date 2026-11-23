@@ -59,7 +59,7 @@ type Story = StoryObj<{}>;
 				<div hlmSidebarContent>
 					<div hlmSidebarGroup>
 						<div hlmSidebarGroupLabel>Application</div>
-						<button hlmSidebarGroupAction>
+						<button hlmSidebarGroupAction aria-label="Application actions">
 							<ng-icon name="lucideEllipsis" />
 						</button>
 
@@ -92,7 +92,7 @@ type Story = StoryObj<{}>;
 										<ng-icon name="lucideHouse" />
 										<span>Home</span>
 									</button>
-									<button hlmSidebarMenuAction aria-describedby="Home">
+									<button hlmSidebarMenuAction aria-label="More Home actions" aria-describedby="Home">
 										<ng-icon name="lucideEllipsis" />
 									</button>
 								</li>
@@ -251,7 +251,7 @@ export const Default: Story = {
 				<div hlmSidebarContent>
 					<div hlmSidebarGroup>
 						<div hlmSidebarGroupLabel>Application</div>
-						<button hlmSidebarGroupAction>
+						<button hlmSidebarGroupAction aria-label="Application actions">
 							<ng-icon name="lucideEllipsis" />
 						</button>
 
@@ -284,7 +284,7 @@ export const Default: Story = {
 										<ng-icon name="lucideHouse" />
 										<span>Home</span>
 									</button>
-									<button hlmSidebarMenuAction aria-describedby="Home">
+									<button hlmSidebarMenuAction aria-label="More Home actions" aria-describedby="Home">
 										<ng-icon name="lucideEllipsis" />
 									</button>
 								</li>

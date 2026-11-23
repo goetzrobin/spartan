@@ -34,6 +34,7 @@ export const routeMeta: RouteMeta = {
 	providers: [provideIcons({ lucideCitrus })],
 	template: `
 		<spartan-test-shell>
+			<label hlmLabel for="hlm-select-trigger-0" class="sr-only">Fruit</label>
 			<hlm-select [disabled]="disabled">
 				<hlm-select-trigger class="w-56">
 					<hlm-select-value [placeholder]="placeholder" />

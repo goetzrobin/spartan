@@ -57,7 +57,7 @@ export const routeMeta: RouteMeta = {
 									<div hlmField>
 										<label hlmFieldLabel for="field-complex-expiration-month">Month</label>
 										<hlm-select class="inline-block">
-											<hlm-select-trigger class="w-full" id="field-complex-expiration-month">
+											<hlm-select-trigger class="w-full" buttonId="field-complex-expiration-month">
 												<hlm-select-value placeholder="MM" />
 											</hlm-select-trigger>
 											<hlm-select-content *hlmSelectPortal>
@@ -81,7 +81,7 @@ export const routeMeta: RouteMeta = {
 									<div hlmField>
 										<label hlmFieldLabel for="field-complex-expiration-year">Year</label>
 										<hlm-select class="inline-block">
-											<hlm-select-trigger class="w-full" id="field-complex-expiration-year">
+											<hlm-select-trigger class="w-full" buttonId="field-complex-expiration-year">
 												<hlm-select-value placeholder="YYYY" />
 											</hlm-select-trigger>
 											<hlm-select-content *hlmSelectPortal>

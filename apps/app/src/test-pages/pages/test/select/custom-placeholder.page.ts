@@ -34,8 +34,9 @@ export const routeMeta: RouteMeta = {
 	providers: [provideIcons({ lucideCitrus })],
 	template: `
 		<spartan-test-shell>
+			<label hlmLabel for="custom-placeholder-fruit" class="sr-only">Fruit</label>
 			<hlm-select class="inline-block" [disabled]="disabled">
-				<hlm-select-trigger class="w-56">
+				<hlm-select-trigger class="w-56" buttonId="custom-placeholder-fruit">
 					<hlm-select-placeholder>
 						<ng-icon name="lucideCitrus" />
 						Select a fruit

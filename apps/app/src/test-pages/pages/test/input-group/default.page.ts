@@ -46,6 +46,7 @@ export const routeMeta: RouteMeta = {
 							hlmInputGroupButton
 							class="rounded-full"
 							size="icon-xs"
+							aria-label="Info"
 							[hlmTooltip]="'This is content in a tooltip.'"
 						>
 							<ng-icon name="lucideInfo" />
@@ -55,7 +56,7 @@ export const routeMeta: RouteMeta = {
 				<div hlmInputGroup>
 					<textarea hlmInputGroupTextarea placeholder="Ask, Search or Chat..."></textarea>
 					<div hlmInputGroupAddon align="block-end">
-						<button hlmInputGroupButton variant="outline" class="rounded-full" size="icon-xs">
+						<button hlmInputGroupButton variant="outline" class="rounded-full" size="icon-xs" aria-label="Add">
 							<ng-icon name="lucidePlus" />
 						</button>
 						<span hlmInputGroupText class="ml-auto">52% used</span>

@@ -39,8 +39,9 @@ export const routeMeta: RouteMeta = {
 				<pre>Form Control Value: {{ initialFormValue?.controls.fruit.value | json }}</pre>
 			</div>
 			<form [formGroup]="initialFormValue">
+				<label hlmLabel for="initial-value-fruits" class="sr-only">Fruits</label>
 				<hlm-select-multiple class="w-56" [disabled]="disabled" formControlName="fruit">
-					<hlm-select-trigger>
+					<hlm-select-trigger buttonId="initial-value-fruits">
 						<hlm-select-placeholder>Select fruits</hlm-select-placeholder>
 						<ng-template hlmSelectValues let-values>
 							<hlm-select-values-content>

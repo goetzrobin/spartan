@@ -56,6 +56,7 @@ export const Default: Story = {
 				[tooltipDisabled]="_disabled()"
 				hlmBtn
 				size="icon"
+				aria-label="Add to library"
 			>
 				<ng-icon name="lucidePlus" />
 			</button>
