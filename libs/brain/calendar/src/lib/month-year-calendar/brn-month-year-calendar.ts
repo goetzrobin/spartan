@@ -79,11 +79,6 @@ export class BrnMonthYearCalendar<T> implements BrnMonthYearCalendarBase<T> {
 	/** Emits whenever the focused date changes. */
 	public readonly focusedDateChange = output<T>();
 
-	private _setFocusedDate(date: T): void {
-		this.focusedDate.set(date);
-		this.focusedDateChange.emit(date);
-	}
-
 	private readonly _cells: BrnMonthYearCalendarCell<T>[] = [];
 
 	/** The 12 months of the currently focused year. */
@@ -109,6 +104,11 @@ export class BrnMonthYearCalendar<T> implements BrnMonthYearCalendarBase<T> {
 			this._dateAdapter.startOfMonth(this._dateAdapter.set(focused, { year: start + i, month: 0, day: 1 })),
 		);
 	});
+
+	private _setFocusedDate(date: T): void {
+		this.focusedDate.set(date);
+		this.focusedDateChange.emit(date);
+	}
 
 	/** @internal Constrain a date to the min and max boundaries. */
 	constrainDate(date: T): T {

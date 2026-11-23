@@ -60,6 +60,8 @@ jobs:
         run: pnpm nx format:check --base=$NX_BASE --head=$NX_HEAD
       - name: lint
         run: pnpm nx affected -t lint --parallel=3
+      - name: ratchet
+        run: pnpm ratchet
 
   build:
     if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):') }}

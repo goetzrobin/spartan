@@ -56,12 +56,6 @@ export class BrnCalendarCellButton<T> {
 		this._calendar.highlightDays().some((d) => this._dateAdapter.isSameDay(this.date(), d)),
 	);
 
-	constructor() {
-		this._calendar.registerCalendarCell(this);
-
-		this._destroyRef.onDestroy(() => this._calendar.unregisterCalendarCell(this));
-	}
-
 	/** Whether this date is focusable */
 	public readonly focusable = computed(
 		() => !this.disabled() && this._dateAdapter.isSameDay(this._calendar.focusedDate(), this.date()),
@@ -77,6 +71,14 @@ export class BrnCalendarCellButton<T> {
 
 	/** Whether this date is disabled */
 	public readonly disabled = computed(() => this._calendar.isDateDisabled(this.date()) || this._calendar.disabled());
+
+	constructor() {
+		this._calendar.registerCalendarCell(this);
+
+		this._destroyRef.onDestroy(() => {
+			this._calendar.unregisterCalendarCell(this);
+		});
+	}
 
 	/**
 	 * Focus the previous cell.

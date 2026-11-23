@@ -57,7 +57,9 @@ export class BrnMonthYearCalendarMonthButton<T> {
 
 	constructor() {
 		this._monthYear.registerCell(this);
-		this._destroyRef.onDestroy(() => this._monthYear.unregisterCell(this));
+		this._destroyRef.onDestroy(() => {
+			this._monthYear.unregisterCell(this);
+		});
 	}
 
 	protected focusOffset(event: Event, offset: number): void {

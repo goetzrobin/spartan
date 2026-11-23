@@ -94,7 +94,7 @@ export class BrnCalendarRange<T> implements BrnCalendarBase<T> {
 				previous.source.min === source.min &&
 				previous.source.max === source.max &&
 				previous.source.disabled === source.disabled;
-			const target: T = preserveFocus ? (previous.value as T) : source.initialDate;
+			const target: T = preserveFocus ? previous.value : source.initialDate;
 			return findInitialFocusedDate(target, this._dateAdapter, (day) => this.isDateDisabled(day), {
 				min: source.min,
 				max: source.max,
@@ -104,11 +104,6 @@ export class BrnCalendarRange<T> implements BrnCalendarBase<T> {
 
 	/** Emits whenever the focused date changes. */
 	public readonly focusedDateChange = output<T>();
-
-	private _setFocusedDate(date: T): void {
-		this.focusedDate.set(date);
-		this.focusedDateChange.emit(date);
-	}
 
 	/**
 	 * The selected start date
@@ -158,6 +153,11 @@ export class BrnCalendarRange<T> implements BrnCalendarBase<T> {
 			equal: (a, b) => compareDays(a, b, this._dateAdapter),
 		},
 	);
+
+	private _setFocusedDate(date: T): void {
+		this.focusedDate.set(date);
+		this.focusedDateChange.emit(date);
+	}
 
 	isSelected(date: T): boolean {
 		const start = this.startDate();

@@ -25,14 +25,6 @@ export class BrnDialogRef<DialogResult = unknown> {
 	private _backdropClasses: string[];
 	private readonly _descriptionIds = new Set<string>();
 
-	public get open(): boolean {
-		return this._phase() === 'open';
-	}
-
-	public get id(): string {
-		return this.initialOptions.id;
-	}
-
 	constructor(
 		private readonly _cdkDialogRef: DialogRef<DialogResult>,
 		private readonly _injector: Injector,
@@ -46,7 +38,12 @@ export class BrnDialogRef<DialogResult = unknown> {
 
 		// The container's `aria-describedby` host binding writes `null` on its first pass, which can
 		// wipe the attribute set while the declarative content view is created. Re-assert once after.
-		afterNextRender(() => this._syncAriaDescribedBy(), { injector: this._injector });
+		afterNextRender(
+			() => {
+				this._syncAriaDescribedBy();
+			},
+			{ injector: this._injector },
+		);
 
 		this._cdkDialogRef.closed.subscribe((result) => {
 			this._phase.set('closed');
@@ -55,6 +52,14 @@ export class BrnDialogRef<DialogResult = unknown> {
 			this._closing.complete();
 			this._stateChanged.complete();
 		});
+	}
+
+	public get open(): boolean {
+		return this._phase() === 'open';
+	}
+
+	public get id(): string {
+		return this.initialOptions.id;
 	}
 
 	public close(result?: DialogResult): void {

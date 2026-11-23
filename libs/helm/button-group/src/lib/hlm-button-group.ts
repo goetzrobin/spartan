@@ -29,9 +29,9 @@ const buttonGroupVariants = cva(
 	},
 })
 export class HlmButtonGroup {
+	public readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
+
 	constructor() {
 		classes(() => buttonGroupVariants({ orientation: this.orientation() }));
 	}
-
-	public readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
 }

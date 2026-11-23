@@ -301,7 +301,9 @@ export class BrnHoverCardTrigger implements OnInit, OnDestroy {
 	).pipe(distinctUntilChanged());
 	public readonly showing$: Observable<boolean> = this.hovered$.pipe(
 		// we set the state to open here because we are about to open show the content
-		tap((visible) => visible && this._contentService.setState('open')),
+		tap((visible) => {
+			if (visible) this._contentService.setState('open');
+		}),
 		switchMap((visible) => {
 			// we are delaying based on the configure-able input
 			return of(visible).pipe(delay(visible ? this.showDelay() : this.hideDelay()));

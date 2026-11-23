@@ -64,10 +64,12 @@ export class BrnDialogService {
 		let brnDialogRef!: BrnDialogRef<DialogResult>;
 		const contextOrData: BrnDialogContext<DialogContext> = {
 			...(context as DialogContext),
-			close: (result: unknown = undefined) => brnDialogRef.close(result as DialogResult),
+			close: (result: unknown = undefined) => {
+				brnDialogRef.close(result as DialogResult);
+			},
 		};
 
-		const cdkDialogRef = this._cdkDialog.open<DialogResult, BrnDialogContext<DialogContext>, unknown>(content, {
+		const cdkDialogRef = this._cdkDialog.open<DialogResult, BrnDialogContext<DialogContext>>(content, {
 			id: mergedOptions.id,
 			role: mergedOptions.role,
 			viewContainerRef: vcr,
@@ -137,8 +139,9 @@ export class BrnDialogService {
 		const index = overlays.indexOf(overlayRef);
 		if (index === overlays.length - 1) return true;
 		// A modal overlay above (one with a backdrop) blocks outside-dismissal of everything below it.
-		if (overlays.at(-1)?.backdropElement) return false;
-		return overlays.length > 1 && !this._isNested(overlayRef, overlays.at(-1)!);
+		const topmost = overlays.at(-1);
+		if (topmost?.backdropElement) return false;
+		return overlays.length > 1 && topmost !== undefined && !this._isNested(overlayRef, topmost);
 	}
 
 	private _isNested(parent: OverlayRef, child: OverlayRef): boolean {

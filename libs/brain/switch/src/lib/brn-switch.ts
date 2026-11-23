@@ -196,12 +196,7 @@ export class BrnSwitch implements AfterContentInit, OnDestroy, ControlValueAcces
 	 * Event emitted when switch is blurred (loses focus).
 	 * Used for form validation.
 	 */
-	public readonly touched = output<void>();
-
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	protected _onChange: ChangeFn<boolean> = () => {};
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private _onTouched: TouchFn = () => {};
+	public readonly touched = output();
 
 	public readonly switch = viewChild.required<ElementRef<HTMLInputElement>>('switch');
 
@@ -249,6 +244,11 @@ export class BrnSwitch implements AfterContentInit, OnDestroy, ControlValueAcces
 		});
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	protected _onChange: ChangeFn<boolean> = () => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	private _onTouched: TouchFn = () => {};
+
 	/**
 	 * Toggles switch between checked/unchecked states.
 	 * Does nothing if switch is disabled.
@@ -280,7 +280,7 @@ export class BrnSwitch implements AfterContentInit, OnDestroy, ControlValueAcces
 					// change (such as a form control's ng-touched) will cause a changed-after-checked error.
 					// See https://github.com/angular/angular/issues/17793. To work around this, we defer
 					// telling the form control it has been touched until the next tick.
-					Promise.resolve().then(() => {
+					queueMicrotask(() => {
 						this._focusVisible.set(false);
 						this._focused.set(false);
 						this._onTouched();

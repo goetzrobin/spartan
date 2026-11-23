@@ -32,36 +32,6 @@ export class BrnCalendarMulti<T> implements BrnCalendarBase<T> {
 
 	private readonly _cells: BrnCalendarCellButton<T>[] = [];
 
-	/**
-	 * Determine if a date is the start of a range. In a date picker, this is always false.
-	 * @param date The date to check.
-	 * @returns Always false.
-	 * @internal
-	 */
-	isStartOfRange(_: T): boolean {
-		return false;
-	}
-
-	/**
-	 * Determine if a date is the end of a range. In a date picker, this is always false.
-	 * @param date The date to check.
-	 * @returns Always false.
-	 * @internal
-	 */
-	isEndOfRange(_: T): boolean {
-		return false;
-	}
-
-	/**
-	 * Determine if a date is between the start and end dates. In a date picker, this is always false.
-	 * @param date The date to check.
-	 * @returns True if the date is between the start and end dates, false otherwise.
-	 * @internal
-	 */
-	isBetweenRange(_: T): boolean {
-		return false;
-	}
-
 	// /** Access the date adapter */
 	protected readonly _dateAdapter = injectDateAdapter<T>();
 
@@ -138,7 +108,7 @@ export class BrnCalendarMulti<T> implements BrnCalendarBase<T> {
 				previous.source.min === source.min &&
 				previous.source.max === source.max &&
 				previous.source.disabled === source.disabled;
-			const target: T = preserveFocus ? (previous.value as T) : source.initialDate;
+			const target: T = preserveFocus ? previous.value : source.initialDate;
 			return findInitialFocusedDate(target, this._dateAdapter, (day) => this.isDateDisabled(day), {
 				min: source.min,
 				max: source.max,
@@ -148,11 +118,6 @@ export class BrnCalendarMulti<T> implements BrnCalendarBase<T> {
 
 	/** Emits whenever the focused date changes. */
 	public readonly focusedDateChange = output<T>();
-
-	private _setFocusedDate(date: T): void {
-		this.focusedDate.set(date);
-		this.focusedDateChange.emit(date);
-	}
 
 	/**
 	 * Get all the days to display, this is the days of the current month
@@ -193,12 +158,47 @@ export class BrnCalendarMulti<T> implements BrnCalendarBase<T> {
 		},
 	);
 
+	/**
+	 * Determine if a date is the start of a range. In a date picker, this is always false.
+	 * @param date The date to check.
+	 * @returns Always false.
+	 * @internal
+	 */
+	isStartOfRange(_: T): boolean {
+		return false;
+	}
+
+	/**
+	 * Determine if a date is the end of a range. In a date picker, this is always false.
+	 * @param date The date to check.
+	 * @returns Always false.
+	 * @internal
+	 */
+	isEndOfRange(_: T): boolean {
+		return false;
+	}
+
+	/**
+	 * Determine if a date is between the start and end dates. In a date picker, this is always false.
+	 * @param date The date to check.
+	 * @returns True if the date is between the start and end dates, false otherwise.
+	 * @internal
+	 */
+	isBetweenRange(_: T): boolean {
+		return false;
+	}
+
+	private _setFocusedDate(date: T): void {
+		this.focusedDate.set(date);
+		this.focusedDateChange.emit(date);
+	}
+
 	isSelected(date: T): boolean {
 		return this.date()?.some((d) => this._dateAdapter.isSameDay(d, date)) ?? false;
 	}
 
 	selectDate(date: T): void {
-		const selected = this.date() as T[] | undefined;
+		const selected = this.date();
 		if (this.isSelected(date)) {
 			const minSelection = this.minSelection();
 			if (selected?.length === minSelection) {

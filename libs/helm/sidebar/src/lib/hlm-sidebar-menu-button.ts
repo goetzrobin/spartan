@@ -78,7 +78,9 @@ export class HlmSidebarMenuButton {
 
 	constructor() {
 		classes(() => sidebarMenuButtonVariants({ variant: this.variant(), size: this.size() }));
-		effect(() => this._brnTooltip.mutableTooltipDisabled.set(this._isTooltipHidden()));
+		effect(() => {
+			this._brnTooltip.mutableTooltipDisabled.set(this._isTooltipHidden());
+		});
 	}
 
 	protected onClick(): void {

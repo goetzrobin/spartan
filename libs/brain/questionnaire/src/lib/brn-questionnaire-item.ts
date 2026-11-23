@@ -89,9 +89,6 @@ export class BrnQuestionnaireItem implements ControlValueAccessor {
 	private readonly _cvaDisabled = signal(false);
 	public readonly disabled = computed(() => this._hostDisabled || this.disabledInput() || this._cvaDisabled());
 
-	protected onChange: ChangeFn<BrnQuestionnaireItemValue> = () => undefined;
-	protected onTouched: TouchFn = () => undefined;
-
 	private _pendingControlValue: BrnQuestionnaireItemValue | undefined = undefined;
 	private readonly _writtenInputValues = signal<Readonly<Record<string, string>>>({});
 
@@ -217,15 +214,23 @@ export class BrnQuestionnaireItem implements ControlValueAccessor {
 				),
 				disabled: this._hostDisabled || this.disabledInput(),
 				element: this._elementRef.nativeElement,
-				focus: () => this.focus(),
-				focusInvalid: () => this.focusInvalid(),
+				focus: () => {
+					this.focus();
+				},
+				focusInvalid: () => {
+					this.focusInvalid();
+				},
 				getAnswerByElement: (element: Element) => this.getAnswerByElement(element),
 				getAnswerByShortcut: (shortcut: string) => this.getAnswerByShortcut(shortcut),
 				moveAnswerFocus: (element: Element, direction: 'next' | 'previous') => this.moveAnswerFocus(element, direction),
 				name: this.name(),
 				required: this.required(),
-				reset: () => this.reset(),
-				skip: () => this.skip(),
+				reset: () => {
+					this.reset();
+				},
+				skip: () => {
+					this.skip();
+				},
 				status: this.status(),
 				validate: () => this.validate(),
 			};
@@ -253,9 +258,14 @@ export class BrnQuestionnaireItem implements ControlValueAccessor {
 		effect(() => {
 			this._answers();
 			this.multiple();
-			untracked(() => this.applyPendingControlValue());
+			untracked(() => {
+				this.applyPendingControlValue();
+			});
 		});
 	}
+
+	protected onChange: ChangeFn<BrnQuestionnaireItemValue> = () => undefined;
+	protected onTouched: TouchFn = () => undefined;
 
 	public writeValue(value: BrnQuestionnaireItemValue | null): void {
 		this._pendingControlValue = this.normalizeControlValue(value);
@@ -345,12 +355,16 @@ export class BrnQuestionnaireItem implements ControlValueAccessor {
 
 	public registerDescription(descriptionId: string): () => void {
 		this._descriptionIds.update((ids) => (ids.includes(descriptionId) ? ids : [...ids, descriptionId]));
-		return () => this._descriptionIds.update((ids) => ids.filter((id) => id !== descriptionId));
+		return () => {
+			this._descriptionIds.update((ids) => ids.filter((id) => id !== descriptionId));
+		};
 	}
 
 	public registerError(errorId: string): () => void {
 		this._errorIds.update((ids) => (ids.includes(errorId) ? ids : [...ids, errorId]));
-		return () => this._errorIds.update((ids) => ids.filter((id) => id !== errorId));
+		return () => {
+			this._errorIds.update((ids) => ids.filter((id) => id !== errorId));
+		};
 	}
 
 	public validate(): boolean {

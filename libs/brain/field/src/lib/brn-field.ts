@@ -37,7 +37,7 @@ export class BrnField {
 		if (this.forceInvalid() || this.dataInvalid()) return true;
 
 		const control = this._brnFieldControl();
-		if (!control || !control.ngControl) return false;
+		if (!control?.ngControl) return false;
 
 		return control.controlState()?.invalid;
 	});

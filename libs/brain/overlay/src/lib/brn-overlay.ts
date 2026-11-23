@@ -125,8 +125,14 @@ export class BrnOverlay<TResult = unknown, TContext extends Record<string, unkno
 			effect(
 				() => {
 					const state = this.state();
-					if (state === 'open') untracked(() => this.open());
-					if (state === 'closed') untracked(() => this.close());
+					if (state === 'open')
+						untracked(() => {
+							this.open();
+						});
+					if (state === 'closed')
+						untracked(() => {
+							this.close();
+						});
 				},
 				{ injector: this._injector },
 			);
@@ -231,7 +237,7 @@ export class BrnOverlay<TResult = unknown, TContext extends Record<string, unkno
 		}
 
 		const activeElement = this._document.activeElement;
-		const shouldRestoreFocus = activeElement === this._document.body || !activeElement || !activeElement.isConnected;
+		const shouldRestoreFocus = activeElement === this._document.body || !activeElement?.isConnected;
 
 		if (shouldRestoreFocus) element.focus({ preventScroll: true });
 	}
@@ -243,7 +249,9 @@ export class BrnOverlay<TResult = unknown, TContext extends Record<string, unkno
 				if (!overlayRef) return;
 
 				const panelClass = this._resolvedPanelClass();
-				untracked(() => overlayRef.setPanelClass(panelClass));
+				untracked(() => {
+					overlayRef.setPanelClass(panelClass);
+				});
 			},
 			{ injector: this._injector },
 		);
@@ -256,7 +264,9 @@ export class BrnOverlay<TResult = unknown, TContext extends Record<string, unkno
 				if (!overlayRef) return;
 
 				const backdropClass = this._resolvedBackdropClass();
-				untracked(() => overlayRef.setBackdropClass(backdropClass));
+				untracked(() => {
+					overlayRef.setBackdropClass(backdropClass);
+				});
 			},
 			{ injector: this._injector },
 		);

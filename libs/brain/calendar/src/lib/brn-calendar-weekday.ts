@@ -39,20 +39,22 @@ export class BrnCalendarWeekday<T> implements OnDestroy {
 	/** Store the view refs */
 	private _viewRefs: EmbeddedViewRef<BrnWeekdayContext>[] = [];
 
-	// Make sure the template checker knows the type of the context with which the
-	// template of this directive will be rendered
-	static ngTemplateContextGuard<T>(_: BrnCalendarWeekday<T>, _ctx: unknown): _ctx is BrnWeekdayContext {
-		return true;
-	}
-
 	constructor() {
 		// Create a new view for each day
 		effect(() => {
 			// Get the weekdays to display
 			const weekdays = this._weekdays();
 			// Render the weekdays
-			untracked(() => this._renderWeekdays(weekdays));
+			untracked(() => {
+				this._renderWeekdays(weekdays);
+			});
 		});
+	}
+
+	// Make sure the template checker knows the type of the context with which the
+	// template of this directive will be rendered
+	static ngTemplateContextGuard<T>(_: BrnCalendarWeekday<T>, _ctx: unknown): _ctx is BrnWeekdayContext {
+		return true;
 	}
 
 	private _renderWeekdays(weekdays: T[]): void {

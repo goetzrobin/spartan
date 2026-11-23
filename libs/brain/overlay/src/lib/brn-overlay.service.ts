@@ -98,7 +98,9 @@ export class BrnOverlayService {
 
 		const contextOrData: BrnOverlayContext<OverlayContext> = {
 			...(context as OverlayContext),
-			close: (result: unknown = undefined) => brnOverlayRef.close(result as OverlayResult),
+			close: (result: unknown = undefined) => {
+				brnOverlayRef.close(result as OverlayResult);
+			},
 		};
 		const portalInjector = Injector.create({
 			parent: vcr?.injector ?? this._injector,
@@ -112,7 +114,9 @@ export class BrnOverlayService {
 		overlayRef
 			.detachments()
 			.pipe(takeUntil(destroyed))
-			.subscribe(() => brnOverlayRef.forceClose());
+			.subscribe(() => {
+				brnOverlayRef.forceClose();
+			});
 
 		try {
 			if (content instanceof TemplateRef) {
@@ -155,7 +159,9 @@ export class BrnOverlayService {
 
 		const onScroll =
 			scrollStrategy instanceof RepositionScrollStrategy
-				? () => overlayRef.updatePosition()
+				? () => {
+						overlayRef.updatePosition();
+					}
 				: scrollStrategy instanceof CloseScrollStrategy
 					? () => {
 							if (overlayRef.hasAttached()) this._ngZone.run(() => overlayRef.detach());
@@ -254,7 +260,9 @@ export class BrnOverlayService {
 			),
 		)
 			.pipe(takeUntil(destroyed))
-			.subscribe(({ event, reason }) => this._requestDismissal(ref, overlayRef, reason, event));
+			.subscribe(({ event, reason }) => {
+				this._requestDismissal(ref, overlayRef, reason, event);
+			});
 	}
 
 	private _requestDismissal<Result>(

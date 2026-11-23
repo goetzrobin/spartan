@@ -98,7 +98,7 @@ export class BrnCalendar<T> implements BrnCalendarBase<T> {
 				previous.source.min === source.min &&
 				previous.source.max === source.max &&
 				previous.source.disabled === source.disabled;
-			const target: T = preserveFocus ? (previous.value as T) : source.initialDate;
+			const target: T = preserveFocus ? previous.value : source.initialDate;
 			return findInitialFocusedDate(target, this._dateAdapter, (day) => this.isDateDisabled(day), {
 				min: source.min,
 				max: source.max,
@@ -108,11 +108,6 @@ export class BrnCalendar<T> implements BrnCalendarBase<T> {
 
 	/** Emits whenever the focused date changes. */
 	public readonly focusedDateChange = output<T>();
-
-	private _setFocusedDate(date: T): void {
-		this.focusedDate.set(date);
-		this.focusedDateChange.emit(date);
-	}
 
 	/**
 	 * Get all the days to display, this is the days of the current month
@@ -152,6 +147,11 @@ export class BrnCalendar<T> implements BrnCalendarBase<T> {
 			equal: (a, b) => compareDays(a, b, this._dateAdapter),
 		},
 	);
+
+	private _setFocusedDate(date: T): void {
+		this.focusedDate.set(date);
+		this.focusedDateChange.emit(date);
+	}
 
 	/** @internal Constrain a date to the min and max boundaries */
 	constrainDate(date: T): T {
@@ -207,7 +207,7 @@ export class BrnCalendar<T> implements BrnCalendarBase<T> {
 	}
 
 	isSelected(date: T): boolean {
-		const selected = this.date() as T | undefined;
+		const selected = this.date();
 		return selected !== undefined && this._dateAdapter.isSameDay(date, selected);
 	}
 

@@ -134,8 +134,14 @@ export class BrnDialog<TResult = unknown, TContext extends Record<string, unknow
 			effect(
 				() => {
 					const state = this.state();
-					if (state === 'open') untracked(() => this.open());
-					if (state === 'closed') untracked(() => this.close());
+					if (state === 'open')
+						untracked(() => {
+							this.open();
+						});
+					if (state === 'closed')
+						untracked(() => {
+							this.close();
+						});
 				},
 				{ injector: this._injector },
 			);
@@ -225,7 +231,9 @@ export class BrnDialog<TResult = unknown, TContext extends Record<string, unknow
 				if (!dialogRef) return;
 
 				const panelClass = this._resolvedPanelClass();
-				untracked(() => dialogRef.setPanelClass(panelClass));
+				untracked(() => {
+					dialogRef.setPanelClass(panelClass);
+				});
 			},
 			{ injector: this._injector },
 		);
@@ -238,7 +246,9 @@ export class BrnDialog<TResult = unknown, TContext extends Record<string, unknow
 				if (!dialogRef) return;
 
 				const overlayClass = this._resolvedBackdropClass();
-				untracked(() => dialogRef.setOverlayClass(overlayClass));
+				untracked(() => {
+					dialogRef.setOverlayClass(overlayClass);
+				});
 			},
 			{ injector: this._injector },
 		);

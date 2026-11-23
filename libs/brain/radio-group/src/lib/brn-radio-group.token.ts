@@ -1,7 +1,7 @@
 import { type ExistingProvider, inject, InjectionToken, type Type } from '@angular/core';
 import type { BrnRadioGroup } from './brn-radio-group';
 
-const BrnRadioGroupToken = new InjectionToken<BrnRadioGroup<unknown>>('BrnRadioGroupToken');
+const BrnRadioGroupToken = new InjectionToken<BrnRadioGroup>('BrnRadioGroupToken');
 
 export function provideBrnRadioGroupToken<T>(directive: Type<BrnRadioGroup<T>>): ExistingProvider {
 	return { provide: BrnRadioGroupToken, useExisting: directive };

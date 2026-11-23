@@ -89,8 +89,8 @@ export class BrnTooltip {
 	public readonly hideDelay = input<number, number>(this._config.hideDelay, { transform: numberAttribute });
 	public readonly sideOffset = input<number, NumberInput>(this._config.sideOffset ?? 8, { transform: numberAttribute });
 
-	public readonly show = output<void>();
-	public readonly hide = output<void>();
+	public readonly show = output();
+	public readonly hide = output();
 
 	private readonly _tooltipText = computed<string | TemplateRef<void>>(() => {
 		let tooltipText = this.brnTooltip();
@@ -104,7 +104,9 @@ export class BrnTooltip {
 
 	constructor() {
 		afterNextRender(() => {
-			this._dir.change.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this._refreshOverlayPosition());
+			this._dir.change.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+				this._refreshOverlayPosition();
+			});
 
 			runInInjectionContext(this._injector, () => {
 				this._setupDelayMechanism();
@@ -113,7 +115,9 @@ export class BrnTooltip {
 
 				effect(() => {
 					this.sideOffset();
-					untracked(() => this._refreshOverlayPosition());
+					untracked(() => {
+						this._refreshOverlayPosition();
+					});
 				});
 
 				/**
@@ -286,8 +290,12 @@ export class BrnTooltip {
 			this._renderer.listen(this._elementRef.nativeElement, 'pointerleave', (event: PointerEvent) => {
 				if (this._isHoverPointer(event)) this.delay(false, this.hideDelay());
 			}),
-			this._renderer.listen(this._elementRef.nativeElement, 'focus', () => this._requestShow()),
-			this._renderer.listen(this._elementRef.nativeElement, 'blur', () => this.delay(false, this.hideDelay())),
+			this._renderer.listen(this._elementRef.nativeElement, 'focus', () => {
+				this._requestShow();
+			}),
+			this._renderer.listen(this._elementRef.nativeElement, 'blur', () => {
+				this.delay(false, this.hideDelay());
+			}),
 		];
 	}
 
@@ -305,7 +313,9 @@ export class BrnTooltip {
 	private _initScrollListener(): void {
 		this._listenersRefs = [
 			...this._listenersRefs,
-			this._renderer.listen(this._document.defaultView, 'scroll', () => this._hide()),
+			this._renderer.listen(this._document.defaultView, 'scroll', () => {
+				this._hide();
+			}),
 		];
 	}
 

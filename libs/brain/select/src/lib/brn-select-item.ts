@@ -44,17 +44,17 @@ export class BrnSelectItem<T> implements Highlightable {
 		transform: booleanAttribute,
 	});
 
-	/** Expose disabled as a value - used by the Highlightable interface */
-	public get disabled() {
-		return this._disabled() || this._select.disabledState();
-	}
-
 	/** Whether the item is selected. */
 	public readonly active = computed(() => this._select.isSelected(this.value()));
 
 	protected readonly _highlighted = signal(false);
 
 	private _activatedByPointer = false;
+
+	/** Expose disabled as a value - used by the Highlightable interface */
+	public get disabled() {
+		return this._disabled() || this._select.disabledState();
+	}
 
 	public setActiveStyles(): void {
 		this._highlighted.set(true);

@@ -122,7 +122,9 @@ export class BrnNavigationMenuTrigger implements OnInit, OnDestroy, FocusableOpt
 		this._contentService.hovered$.pipe(map((v) => ({ hover: v, relatedTarget: null }))),
 	).pipe(
 		// Report hover state to parent for coordination
-		tap((e) => this._navigationMenu.setTriggerHovered(e.hover)),
+		tap((e) => {
+			this._navigationMenu.setTriggerHovered(e.hover);
+		}),
 		// Hover event is NOT allowed when a sub-navigation is currently visible, AND the current hover event is false.
 		filter((e) => !(this._isSubNavVisible() && !e.hover)),
 		// Block hover-open when openOn='click' and no menu is currently open
@@ -167,10 +169,6 @@ export class BrnNavigationMenuTrigger implements OnInit, OnDestroy, FocusableOpt
 		takeUntil(this._destroy$),
 	);
 
-	public get disabled() {
-		return this._navigationMenuItem.disabled();
-	}
-
 	constructor() {
 		effect(() => {
 			const value = this._contentTemplate();
@@ -203,6 +201,10 @@ export class BrnNavigationMenuTrigger implements OnInit, OnDestroy, FocusableOpt
 		});
 	}
 
+	public get disabled() {
+		return this._navigationMenuItem.disabled();
+	}
+
 	public ngOnInit() {
 		this._contentService.setConfig({
 			attachTo: this._el,
@@ -220,7 +222,7 @@ export class BrnNavigationMenuTrigger implements OnInit, OnDestroy, FocusableOpt
 					this._contentService.show();
 				}
 			} else {
-				this._contentService.hide();
+				void this._contentService.hide();
 			}
 		});
 
@@ -230,7 +232,9 @@ export class BrnNavigationMenuTrigger implements OnInit, OnDestroy, FocusableOpt
 			this._deactivate();
 		});
 
-		this._contentService.tabPressed$.pipe(takeUntil(this._destroy$)).subscribe((e) => this._handleContentTab(e));
+		this._contentService.tabPressed$.pipe(takeUntil(this._destroy$)).subscribe((e) => {
+			this._handleContentTab(e);
+		});
 	}
 
 	public ngOnDestroy() {

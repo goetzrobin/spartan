@@ -16,6 +16,7 @@
 		"lint": "nx run-many --target=lint --parallel",
 		"pre-manual-release": "pnpm run prepare-manual-release && pnpm run format && nx run tools:lint --fix",
 		"prepare-manual-release": "nx g @spartan-ng/tools:set-release-version && nx run-many --target=lint --parallel --fix && nx g @spartan-ng/tools:hlm-to-cli-generator",
+		"ratchet": "node tools/ratchet/ratchet.mjs",
 		"release": "pnpm run release-ui && pnpm run release-cli && pnpm run release-mcp",
 		"release-cli": "nx run-many --target=release --projects=tag:scope:cli --parallel=1",
 		"release-mcp": "nx run-many --target=release --projects=tag:scope:mcp --parallel=1",

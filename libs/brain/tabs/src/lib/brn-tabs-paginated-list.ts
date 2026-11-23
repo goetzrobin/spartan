@@ -241,7 +241,7 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 				// the element dimensions. The call has to be wrapped in `NgZone.run`,
 				// because the viewport change handler runs outside of Angular.
 				this._ngZone.run(() => {
-					Promise.resolve().then(() => {
+					queueMicrotask(() => {
 						// Clamp the scroll distance, because it can change with the number of tabs.
 						this._scrollDistance = Math.max(0, Math.min(this._getMaxScrollDistance(), this._scrollDistance));
 						realign();
@@ -271,7 +271,9 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 				(tabItems: ReadonlyArray<BrnPaginatedTabHeaderItem>) =>
 					new Observable((observer: Observer<ResizeObserverEntry[]>) =>
 						this._ngZone.runOutsideAngular(() => {
-							const resizeObserver = new ResizeObserver((entries) => observer.next(entries));
+							const resizeObserver = new ResizeObserver((entries) => {
+								observer.next(entries);
+							});
 							for (const tabItem of tabItems) {
 								resizeObserver.observe(tabItem.elementRef.nativeElement);
 							}
@@ -440,7 +442,7 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 
 	/** The layout direction of the containing app. */
 	_getLayoutDirection(): Direction {
-		return this._dir && this._dir.value === 'rtl' ? 'rtl' : 'ltr';
+		return this._dir?.value === 'rtl' ? 'rtl' : 'ltr';
 	}
 
 	/** Performs the CSS transformation on the tab list that will cause the list to scroll. */

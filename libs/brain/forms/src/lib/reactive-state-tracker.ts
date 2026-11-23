@@ -37,10 +37,6 @@ export class ReactiveStateTracker implements StateTracker {
 	public readonly spartanInvalid = computed(() => this.controlState()?.spartanInvalid ?? null);
 	public readonly touched = computed(() => this.controlState()?.touched ?? null);
 
-	private get _controlParent() {
-		return this._parentFormGroup || this._parentForm;
-	}
-
 	constructor(
 		private readonly _ngControl: NgControl,
 		private readonly _matcher: ErrorStateMatcher | null,
@@ -54,9 +50,13 @@ export class ReactiveStateTracker implements StateTracker {
 			});
 		}
 		// the matcher may depend on the parent's `submitted` state
-		this._submitSubscription = onParentFormSubmitOrReset(this._controlParent, () =>
-			this._stateVersion.update((v) => v + 1),
-		);
+		this._submitSubscription = onParentFormSubmitOrReset(this._controlParent, () => {
+			this._stateVersion.update((v) => v + 1);
+		});
+	}
+
+	private get _controlParent() {
+		return this._parentFormGroup || this._parentForm;
 	}
 
 	public destroy(): void {

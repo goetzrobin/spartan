@@ -15,7 +15,9 @@ export function injectSkipDelay(skipDelayDuration: () => number): SkipDelay {
 	const isOpenDelayed = signal(true);
 	let timer: ReturnType<typeof setTimeout> | undefined;
 
-	inject(DestroyRef).onDestroy(() => clearTimeout(timer));
+	inject(DestroyRef).onDestroy(() => {
+		clearTimeout(timer);
+	});
 
 	return {
 		isOpenDelayed: isOpenDelayed.asReadonly(),
@@ -27,7 +29,9 @@ export function injectSkipDelay(skipDelayDuration: () => number): SkipDelay {
 			clearTimeout(timer);
 			const duration = skipDelayDuration();
 			if (duration > 0) {
-				timer = setTimeout(() => isOpenDelayed.set(true), duration);
+				timer = setTimeout(() => {
+					isOpenDelayed.set(true);
+				}, duration);
 			}
 		},
 	};

@@ -75,7 +75,9 @@ export class BrnMessageScrollerContent {
 				// "ResizeObserver loop completed with undelivered notifications".
 				resizeObserver = new ResizeObserver(() => {
 					window.cancelAnimationFrame(resizeFrame);
-					resizeFrame = window.requestAnimationFrame(() => scroller.handleResize());
+					resizeFrame = window.requestAnimationFrame(() => {
+						scroller.handleResize();
+					});
 				});
 				resizeObserver.observe(content);
 			}

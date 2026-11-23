@@ -55,7 +55,7 @@ export class BrnFieldControl implements OnInit, DoCheck {
 		// asynchronously by Angular's directives after our ngOnInit/ngDoCheck.
 		// Schedule a one-time microtask to catch the initial resolution.
 		if (this.ngControl) {
-			Promise.resolve().then(() => {
+			queueMicrotask(() => {
 				this._syncTracker();
 			});
 		}

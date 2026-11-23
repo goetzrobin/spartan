@@ -35,11 +35,6 @@ export class BrnResizableHandle {
 	/** Computed layout orientation based on the parent group. */
 	protected readonly _layout = computed(() => this._resizable?.direction() || 'horizontal');
 
-	/** Always-current index of this handle relative to panels in the group. */
-	private get _handleIndex(): number {
-		return this._getHandleIndex();
-	}
-
 	constructor() {
 		afterNextRender(() => {
 			this._el.nativeElement.onpointerdown = (e: PointerEvent) => {
@@ -50,6 +45,11 @@ export class BrnResizableHandle {
 				this._el.nativeElement.releasePointerCapture(e.pointerId);
 			};
 		});
+	}
+
+	/** Always-current index of this handle relative to panels in the group. */
+	private get _handleIndex(): number {
+		return this._getHandleIndex();
 	}
 
 	private _getHandleIndex(): number {

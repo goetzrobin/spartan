@@ -33,13 +33,16 @@ export class HlmCarouselNext {
 				: '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
 		),
 	);
-	protected readonly isDisabled = () => !this._carousel.canScrollNext();
 
 	constructor() {
 		effect(() => {
 			const computedClass = this._computedClass();
 
-			untracked(() => this._button.setClass(computedClass));
+			untracked(() => {
+				this._button.setClass(computedClass);
+			});
 		});
 	}
+
+	protected readonly isDisabled = () => !this._carousel.canScrollNext();
 }

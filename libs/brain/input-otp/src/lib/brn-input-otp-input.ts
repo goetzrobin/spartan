@@ -42,7 +42,9 @@ export class BrnInputOtpInput {
 
 	constructor() {
 		this._otp.registerInput(this);
-		this._destroyRef.onDestroy(() => this._otp.unregisterInput(this));
+		this._destroyRef.onDestroy(() => {
+			this._otp.unregisterInput(this);
+		});
 	}
 
 	/** Focus the underlying input element. */

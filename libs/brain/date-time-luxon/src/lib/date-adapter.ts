@@ -88,7 +88,7 @@ export class BrnLuxonDateAdapter implements BrnDateAdapter<DateTime> {
 		return date.millisecond;
 	}
 
-	getTime(date: DateTime<boolean>): number {
+	getTime(date: DateTime): number {
 		return date.toMillis();
 	}
 

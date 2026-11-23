@@ -231,11 +231,6 @@ export class BrnCheckbox implements ControlValueAccessor, AfterContentInit, OnDe
 	);
 	protected readonly _controlTouched = this._fieldControl?.touched;
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	protected _onChange: ChangeFn<boolean> = () => {};
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private _onTouched: TouchFn = () => {};
-
 	/**
 	 * Reference to the checkbox button element in the template.
 	 */
@@ -245,7 +240,7 @@ export class BrnCheckbox implements ControlValueAccessor, AfterContentInit, OnDe
 	 * Event emitted when checkbox is blurred (loses focus).
 	 * Used for form validation.
 	 */
-	public readonly touched = output<void>();
+	public readonly touched = output();
 
 	constructor() {
 		afterRenderEffect(() => {
@@ -271,6 +266,11 @@ export class BrnCheckbox implements ControlValueAccessor, AfterContentInit, OnDe
 			}
 		});
 	}
+
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	protected _onChange: ChangeFn<boolean> = () => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	private _onTouched: TouchFn = () => {};
 
 	/**
 	 * Toggles checkbox between checked/unchecked states.
@@ -304,7 +304,9 @@ export class BrnCheckbox implements ControlValueAccessor, AfterContentInit, OnDe
 					// A focused element can blur synchronously while Angular is rendering when it becomes disabled,
 					// so defer form-state writes until the next microtask. See angular/angular#17793.
 					// The checkbox may be destroyed before that microtask runs. See spartan-ng/spartan#1630.
-					Promise.resolve().then(() => this._handleBlur());
+					queueMicrotask(() => {
+						this._handleBlur();
+					});
 				}
 			});
 	}

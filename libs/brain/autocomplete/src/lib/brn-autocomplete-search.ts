@@ -148,7 +148,7 @@ export class BrnAutocompleteSearch<T> implements BrnAutocompleteBase<T>, Control
 	}
 
 	public registerAutocompleteInput(input: BrnAutocompleteInput<T>): void {
-		return this._autocompleteInput.set(input);
+		this._autocompleteInput.set(input);
 	}
 
 	/** @internal Register the autocomplete list. Called by BrnAutocompleteList in its constructor. */
