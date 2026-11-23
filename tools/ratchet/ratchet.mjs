@@ -6,6 +6,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { compare, countLint, lower, missing } from './lib/compare.mjs';
+import { countDependencies, formatDependencyReport, PUBLISHED } from './lib/dependencies.mjs';
 import { compareParts, extractApply, extractMarkedClasses, formatReport, mergeParts, STYLE } from './lib/parity.mjs';
 import { aggregateStructure, countStructure, isLibrarySource } from './lib/structure.mjs';
 import { countCompilerErrors, errorLines } from './lib/types.mjs';
@@ -15,6 +16,7 @@ const BASELINE = path.join(ROOT, 'tools/ratchet/baseline.json');
 const CONFIG = path.join(ROOT, 'tools/ratchet/eslint.ratchet.config.cjs');
 const SHADCN = path.join(ROOT, 'tools/ratchet/shadcn-classes.json');
 const ALLOW = path.join(ROOT, 'tools/ratchet/shadcn-allow.json');
+const REQUIREMENTS = path.join(ROOT, 'tools/ratchet/published-requirements.json');
 const REGISTRY_CSS = path.join(ROOT, `libs/registry/src/styles/style-${STYLE}.css`);
 const NGC = path.join(ROOT, 'node_modules/.bin/ngc');
 const LIBRARIES = ['brain', 'helm'];
@@ -107,11 +109,25 @@ function parityCounts() {
 	return parityResult.counts;
 }
 
+let dependencyResult;
+
+function dependencyCounts() {
+	const manifests = Object.fromEntries(
+		PUBLISHED.map((library) => [
+			library,
+			JSON.parse(readFileSync(path.join(ROOT, 'libs', library, 'package.json'), 'utf8')),
+		]),
+	);
+	dependencyResult = countDependencies(manifests, JSON.parse(readFileSync(REQUIREMENTS, 'utf8')));
+	return dependencyResult.counts;
+}
+
 const SECTIONS = [
 	{ name: 'lint', count: lintCounts },
 	{ name: 'structure', count: structureCounts },
 	{ name: 'types', count: typeCounts },
 	{ name: 'shadcnParity', count: parityCounts, report: () => formatReport(parityResult) },
+	{ name: 'dependencies', count: dependencyCounts, report: () => formatDependencyReport(dependencyResult) },
 ];
 
 function readBaseline() {
