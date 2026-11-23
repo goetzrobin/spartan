@@ -32,8 +32,8 @@
 		"isomorphic-fetch": "^3.0.0",
 		"rxjs": "~7.8.1",
 		"superjson": "^2.2.1",
-		"ufo": "1.5.4",
-		"vite": "6.2.1"
+		"ufo": ">=1.5.4 <2.0.0",
+		"vite": ">=6.2.1 <7.0.0"
 	},
 	"publishConfig": {
 		"access": "public"
