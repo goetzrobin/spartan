@@ -21,6 +21,6 @@ export class BrnSeparator {
 
 	protected readonly _role = computed(() => (this.decorative() ? 'none' : 'separator'));
 	protected readonly _ariaOrientation = computed(() =>
-		this.decorative() ? undefined : this.orientation() === 'vertical' ? 'vertical' : undefined,
+		!this.decorative() && this.orientation() === 'vertical' ? 'vertical' : undefined,
 	);
 }

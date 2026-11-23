@@ -65,7 +65,8 @@ export class BrnJalaliDateAdapter implements BrnDateAdapter<JalaliDate> {
 
 	compare(a: JalaliDate, b: JalaliDate): number {
 		const diff = a.valueOf() - b.valueOf();
-		return diff === 0 ? 0 : diff > 0 ? 1 : -1;
+		if (diff === 0) return 0;
+		return diff > 0 ? 1 : -1;
 	}
 
 	isEqual(a: JalaliDate, b: JalaliDate): boolean {

@@ -45,7 +45,8 @@ export class BrnProgress implements OnChanges {
 		const value = this.value();
 		const max = this.max();
 
-		return value === null || value === undefined ? 'indeterminate' : value === max ? 'complete' : 'loading';
+		if (value === null || value === undefined) return 'indeterminate';
+		return value === max ? 'complete' : 'loading';
 	});
 
 	ngOnChanges(changes: SimpleChanges): void {

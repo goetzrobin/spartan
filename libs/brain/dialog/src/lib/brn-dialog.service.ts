@@ -54,12 +54,7 @@ export class BrnDialogService {
 				? this._positionBuilder.flexibleConnectedTo(mergedOptions.attachTo).withPositions(mergedOptions.attachPositions)
 				: this._positionBuilder.global().centerHorizontally().centerVertically());
 
-		const scrollStrategy =
-			mergedOptions.scrollStrategy === 'close'
-				? this._scrollStrategies.close()
-				: mergedOptions.scrollStrategy === 'reposition'
-					? this._scrollStrategies.reposition()
-					: (mergedOptions.scrollStrategy ?? this._scrollStrategies.block());
+		const scrollStrategy = this._scrollStrategyFor(mergedOptions.scrollStrategy);
 
 		let brnDialogRef!: BrnDialogRef<DialogResult>;
 		const contextOrData: BrnDialogContext<DialogContext> = {
@@ -160,5 +155,11 @@ export class BrnDialogService {
 
 		const element = childOrigin instanceof ElementRef ? childOrigin.nativeElement : childOrigin;
 		return typeof Node !== 'undefined' && element instanceof Node ? parent.hostElement.contains(element) : false;
+	}
+
+	private _scrollStrategyFor(strategy: BrnDialogOptions['scrollStrategy']) {
+		if (strategy === 'close') return this._scrollStrategies.close();
+		if (strategy === 'reposition') return this._scrollStrategies.reposition();
+		return strategy ?? this._scrollStrategies.block();
 	}
 }
