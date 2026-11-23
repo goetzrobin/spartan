@@ -86,6 +86,17 @@ jobs:
       - name: Build
         if: steps.changes.outputs.needed == 'true'
         run: pnpm nx affected -t build --parallel=1
+      - name: Public site leaves out the test pages
+        if: steps.changes.outputs.needed == 'true'
+        run: |
+          if [ ! -d dist/apps/app ]; then
+            echo "The docs app was not built; nothing to check."
+            exit 0
+          fi
+          if grep -rlE 'data-test-ready|src/test-pages/' dist/apps/app; then
+            echo "::error::The public site build contains the test pages (files above)."
+            exit 1
+          fi
 
   unit:
     if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):') }}

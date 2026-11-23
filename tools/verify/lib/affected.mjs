@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 
 const E2E_SRC = 'apps/ui-e2e/src';
-const PAGES = 'apps/app/src/app/pages/(test)/test';
+const PAGES = 'apps/app/src/test-pages/pages/test';
 
 const GLOBAL = [
 	/^apps\/ui-e2e\/src\/support\//,
