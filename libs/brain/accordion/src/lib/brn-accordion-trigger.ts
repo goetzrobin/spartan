@@ -35,10 +35,6 @@ export class BrnAccordionTrigger implements FocusableOption {
 	public readonly id = `brn-accordion-trigger-${this._item.id}`;
 	public readonly ariaControls = `brn-accordion-content-${this._item.id}`;
 
-	public get disabled() {
-		return this._disabled();
-	}
-
 	constructor() {
 		if (!this._accordion) throw Error('Accordion trigger requires a parent Accordion.');
 		if (!this._item) throw Error('Accordion trigger requires a parent AccordionItem.');
@@ -60,6 +56,10 @@ export class BrnAccordionTrigger implements FocusableOption {
 					this._accordion.setActiveItem(this);
 				});
 			});
+	}
+
+	public get disabled() {
+		return this._disabled();
 	}
 
 	protected toggle(event: Event): void {

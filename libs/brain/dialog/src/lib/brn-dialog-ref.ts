@@ -25,14 +25,6 @@ export class BrnDialogRef<DialogResult = unknown> {
 	private _backdropClasses: string[];
 	private readonly _descriptionIds = new Set<string>();
 
-	public get open(): boolean {
-		return this._phase() === 'open';
-	}
-
-	public get id(): string {
-		return this.initialOptions.id;
-	}
-
 	constructor(
 		private readonly _cdkDialogRef: DialogRef<DialogResult>,
 		private readonly _injector: Injector,
@@ -60,6 +52,14 @@ export class BrnDialogRef<DialogResult = unknown> {
 			this._closing.complete();
 			this._stateChanged.complete();
 		});
+	}
+
+	public get open(): boolean {
+		return this._phase() === 'open';
+	}
+
+	public get id(): string {
+		return this.initialOptions.id;
 	}
 
 	public close(result?: DialogResult): void {

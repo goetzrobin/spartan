@@ -45,17 +45,17 @@ export class BrnAutocompleteItem<T> implements Highlightable {
 		transform: booleanAttribute,
 	});
 
-	/** Expose disabled as a value - used by the Highlightable interface */
-	public get disabled() {
-		return this._disabled() || this._autocomplete.disabledState();
-	}
-
 	/** Whether the item is selected. */
 	public readonly active = computed(() => this._autocomplete.isSelected(this.value()));
 
 	protected readonly _highlighted = signal(false);
 
 	private _activatedByPointer = false;
+
+	/** Expose disabled as a value - used by the Highlightable interface */
+	public get disabled() {
+		return this._disabled() || this._autocomplete.disabledState();
+	}
 
 	setActiveStyles(): void {
 		this._highlighted.set(true);

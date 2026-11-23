@@ -35,7 +35,6 @@ export class HlmCarouselPrevious {
 				: '-top-12 left-1/2 -translate-x-1/2 rotate-90',
 		),
 	);
-	protected readonly isDisabled = () => !this._carousel.canScrollPrev();
 
 	constructor() {
 		effect(() => {
@@ -45,4 +44,6 @@ export class HlmCarouselPrevious {
 			});
 		});
 	}
+
+	protected readonly isDisabled = () => !this._carousel.canScrollPrev();
 }

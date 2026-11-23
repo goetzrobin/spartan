@@ -1,5 +1,10 @@
 const path = require('node:path');
 
+const classMemberOrder = {
+	memberTypes: [['signature', 'field', 'accessor'], 'constructor', ['get', 'set', 'method']],
+	order: 'as-written',
+};
+
 module.exports = [
 	{
 		files: ['**/*.ts'],
@@ -25,6 +30,16 @@ module.exports = [
 			'@typescript-eslint/no-non-null-assertion': 'error',
 			'@typescript-eslint/no-floating-promises': 'error',
 			'@typescript-eslint/no-extraneous-class': ['error', { allowWithDecorator: true }],
+			'@typescript-eslint/member-ordering': [
+				'error',
+				{
+					default: 'never',
+					classes: classMemberOrder,
+					classExpressions: classMemberOrder,
+					interfaces: 'never',
+					typeLiterals: 'never',
+				},
+			],
 			'@angular-eslint/use-injectable-provided-in': 'off',
 			'@angular-eslint/prefer-signal-model': 'off',
 		},

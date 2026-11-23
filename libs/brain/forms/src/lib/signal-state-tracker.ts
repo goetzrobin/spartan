@@ -45,10 +45,6 @@ export class SignalStateTracker implements StateTracker {
 		{ equal: controlStateEqual },
 	);
 
-	private get _controlParent() {
-		return this._parentFormGroup || this._parentForm;
-	}
-
 	constructor(
 		private readonly _ngControl: NgControl,
 		private readonly _matcher: ErrorStateMatcher | null,
@@ -58,6 +54,10 @@ export class SignalStateTracker implements StateTracker {
 		this._submitSubscription = onParentFormSubmitOrReset(this._controlParent, () => {
 			this._submitVersion.update((v) => v + 1);
 		});
+	}
+
+	private get _controlParent() {
+		return this._parentFormGroup || this._parentForm;
 	}
 
 	public destroy(): void {

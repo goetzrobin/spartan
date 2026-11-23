@@ -44,12 +44,6 @@ export class BrnCalendarWeek<T> implements OnDestroy {
 	/** Store the view refs */
 	private _viewRefs: EmbeddedViewRef<BrnWeekContext<T>>[] = [];
 
-	// Make sure the template checker knows the type of the context with which the
-	// template of this directive will be rendered
-	static ngTemplateContextGuard<T>(_: BrnCalendarWeek<T>, _ctx: unknown): _ctx is BrnWeekContext<T> {
-		return true;
-	}
-
 	constructor() {
 		// this should use `afterRenderEffect` but it's not available in the current version
 		effect(() => {
@@ -58,6 +52,12 @@ export class BrnCalendarWeek<T> implements OnDestroy {
 				this._renderWeeks(weeks);
 			});
 		});
+	}
+
+	// Make sure the template checker knows the type of the context with which the
+	// template of this directive will be rendered
+	static ngTemplateContextGuard<T>(_: BrnCalendarWeek<T>, _ctx: unknown): _ctx is BrnWeekContext<T> {
+		return true;
 	}
 
 	private _renderWeeks(weeks: T[][]): void {

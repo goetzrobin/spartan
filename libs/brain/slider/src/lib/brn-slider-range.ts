@@ -17,10 +17,6 @@ export class BrnSliderRange {
 	protected readonly _slider = injectBrnSlider();
 	public readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	constructor() {
-		this._slider.range.set(this);
-	}
-
 	protected readonly _rangeInset = computed(() => {
 		const thumbs = this._slider.thumbs();
 		if (!thumbs.length) return;
@@ -47,4 +43,8 @@ export class BrnSliderRange {
 
 		return inset.join(' ');
 	});
+
+	constructor() {
+		this._slider.range.set(this);
+	}
 }

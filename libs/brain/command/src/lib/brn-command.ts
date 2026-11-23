@@ -79,11 +79,6 @@ export class BrnCommand implements ControlValueAccessor {
 	/** @internal The id of the command list, registered by BrnCommandList. Used by the input for aria-controls. */
 	public readonly listId = computed(() => this._commandList()?.id());
 
-	/** @internal Register the command list. Called by BrnCommandList in its constructor. */
-	public registerCommandList(list: BrnCommandList): void {
-		this._commandList.set(list);
-	}
-
 	protected _onChange?: ChangeFn<string | null>;
 	protected _onTouched?: TouchFn;
 
@@ -117,6 +112,11 @@ export class BrnCommand implements ControlValueAccessor {
 				this.keyManager.setActiveItem(0);
 			}
 		});
+	}
+
+	/** @internal Register the command list. Called by BrnCommandList in its constructor. */
+	public registerCommandList(list: BrnCommandList): void {
+		this._commandList.set(list);
 	}
 
 	protected selectActiveItem(): void {

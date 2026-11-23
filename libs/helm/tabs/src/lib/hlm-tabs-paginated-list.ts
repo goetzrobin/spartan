@@ -68,11 +68,6 @@ import { listVariants } from './hlm-tabs-list';
 	`,
 })
 export class HlmTabsPaginatedList extends BrnTabsPaginatedList {
-	constructor() {
-		super();
-		classes(() => 'relative flex flex-shrink-0 items-center gap-1 overflow-hidden');
-	}
-
 	public readonly items = contentChildren(BrnTabsTrigger, { descendants: false });
 	/** Explicitly annotating type to avoid non-portable inferred type */
 	public readonly itemsChanges: Observable<ReadonlyArray<BrnPaginatedTabHeaderItem>> = toObservable(this.items);
@@ -95,6 +90,11 @@ export class HlmTabsPaginatedList extends BrnTabsPaginatedList {
 			this.showPaginationControls() ? 'inline-flex' : 'hidden',
 		),
 	);
+
+	constructor() {
+		super();
+		classes(() => 'relative flex flex-shrink-0 items-center gap-1 overflow-hidden');
+	}
 
 	protected _itemSelected(_event: KeyboardEvent) {
 		/* noop - the native button activation selects the focused tab */

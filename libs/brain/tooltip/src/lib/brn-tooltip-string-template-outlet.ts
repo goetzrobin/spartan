@@ -38,6 +38,28 @@ export class BrnTooltipStringTemplateOutlet<T = unknown> implements OnDestroy {
 	public readonly brnTooltipStringTemplateOutletContext = input<BrnTemplateOutletContext | undefined>(undefined);
 	public readonly brnTooltipStringTemplateOutlet = input.required<T | TemplateRef<void>>();
 
+	private readonly _viewEffect: EffectRef = effect(() => {
+		const stringTemplateOutlet = this.brnTooltipStringTemplateOutlet();
+		const stringTemplateOutletContext = this.brnTooltipStringTemplateOutletContext();
+
+		if (!this._isFirstChange && isTemplateRef(stringTemplateOutlet)) {
+			this._isFirstChange = true;
+		}
+
+		if (!isTemplateRef(stringTemplateOutlet)) {
+			this._context['$implicit'] = stringTemplateOutlet;
+		}
+
+		const recreateView = this._shouldViewBeRecreated(stringTemplateOutlet, stringTemplateOutletContext);
+		this._updateTrackingState(stringTemplateOutlet, stringTemplateOutletContext);
+
+		if (recreateView) {
+			this._recreateView(stringTemplateOutlet as TemplateRef<BrnTemplateOutletContext>, stringTemplateOutletContext);
+		} else {
+			this._updateContext(stringTemplateOutlet, stringTemplateOutletContext);
+		}
+	});
+
 	_hasContextShapeChanged(context: BrnTemplateOutletContext | undefined): boolean {
 		if (!context) {
 			return false;
@@ -88,28 +110,6 @@ export class BrnTooltipStringTemplateOutlet<T = unknown> implements OnDestroy {
 		this._lastOutletWasTemplate = isTemplate;
 		this._lastTemplateRef = isTemplate ? stringTemplateOutlet : null;
 	}
-
-	private readonly _viewEffect: EffectRef = effect(() => {
-		const stringTemplateOutlet = this.brnTooltipStringTemplateOutlet();
-		const stringTemplateOutletContext = this.brnTooltipStringTemplateOutletContext();
-
-		if (!this._isFirstChange && isTemplateRef(stringTemplateOutlet)) {
-			this._isFirstChange = true;
-		}
-
-		if (!isTemplateRef(stringTemplateOutlet)) {
-			this._context['$implicit'] = stringTemplateOutlet;
-		}
-
-		const recreateView = this._shouldViewBeRecreated(stringTemplateOutlet, stringTemplateOutletContext);
-		this._updateTrackingState(stringTemplateOutlet, stringTemplateOutletContext);
-
-		if (recreateView) {
-			this._recreateView(stringTemplateOutlet as TemplateRef<BrnTemplateOutletContext>, stringTemplateOutletContext);
-		} else {
-			this._updateContext(stringTemplateOutlet, stringTemplateOutletContext);
-		}
-	});
 
 	private _recreateView(
 		outlet: TemplateRef<BrnTemplateOutletContext>,

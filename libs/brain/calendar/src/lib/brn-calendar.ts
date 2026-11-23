@@ -109,11 +109,6 @@ export class BrnCalendar<T> implements BrnCalendarBase<T> {
 	/** Emits whenever the focused date changes. */
 	public readonly focusedDateChange = output<T>();
 
-	private _setFocusedDate(date: T): void {
-		this.focusedDate.set(date);
-		this.focusedDateChange.emit(date);
-	}
-
 	/**
 	 * Get all the days to display, this is the days of the current month
 	 * and the days of the previous and next month to fill the grid.
@@ -152,6 +147,11 @@ export class BrnCalendar<T> implements BrnCalendarBase<T> {
 			equal: (a, b) => compareDays(a, b, this._dateAdapter),
 		},
 	);
+
+	private _setFocusedDate(date: T): void {
+		this.focusedDate.set(date);
+		this.focusedDateChange.emit(date);
+	}
 
 	/** @internal Constrain a date to the min and max boundaries */
 	constrainDate(date: T): T {

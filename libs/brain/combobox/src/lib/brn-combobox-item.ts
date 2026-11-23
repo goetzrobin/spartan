@@ -46,11 +46,6 @@ export class BrnComboboxItem<T> implements Highlightable {
 		transform: booleanAttribute,
 	});
 
-	/** Expose disabled as a value - used by the Highlightable interface */
-	public get disabled() {
-		return this._disabled();
-	}
-
 	/** Whether the item is selected. */
 	public readonly active = computed(() => this._combobox.isSelected(this.value()));
 
@@ -67,6 +62,11 @@ export class BrnComboboxItem<T> implements Highlightable {
 			this._combobox.itemToString(),
 		);
 	});
+
+	/** Expose disabled as a value - used by the Highlightable interface */
+	public get disabled() {
+		return this._disabled();
+	}
 
 	public setActiveStyles(): void {
 		this._highlighted.set(true);

@@ -80,19 +80,6 @@ export abstract class BrnDateInput<V> {
 	public readonly placeholder = input<string>('');
 
 	/**
-	 * Parse user-entered text into the picker value. Return `null` for
-	 * invalid input - the picker's value is cleared while the text is preserved
-	 * so the user can fix it.
-	 */
-	protected abstract parseValue(value: string): V | null;
-
-	/**
-	 * Format the committed value into the input/edit format shown while the
-	 * input is focused. On blur the picker's display format is restored.
-	 */
-	protected abstract formatInputValue(value: V): string;
-
-	/**
 	 * Text shown in the input. Mirrors the picker's `formattedDate` and the
 	 * parent's `inputValue`, and accepts user writes via `_handleInputChange`.
 	 * Commits only happen on blur / Enter, so in-progress text isn't clobbered.
@@ -147,6 +134,19 @@ export abstract class BrnDateInput<V> {
 			}
 		});
 	}
+
+	/**
+	 * Parse user-entered text into the picker value. Return `null` for
+	 * invalid input - the picker's value is cleared while the text is preserved
+	 * so the user can fix it.
+	 */
+	protected abstract parseValue(value: string): V | null;
+
+	/**
+	 * Format the committed value into the input/edit format shown while the
+	 * input is focused. On blur the picker's display format is restored.
+	 */
+	protected abstract formatInputValue(value: V): string;
 
 	protected _handleInputChange(event: Event) {
 		const target = event.target as HTMLInputElement;

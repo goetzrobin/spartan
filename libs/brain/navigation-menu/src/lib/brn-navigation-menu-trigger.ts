@@ -169,10 +169,6 @@ export class BrnNavigationMenuTrigger implements OnInit, OnDestroy, FocusableOpt
 		takeUntil(this._destroy$),
 	);
 
-	public get disabled() {
-		return this._navigationMenuItem.disabled();
-	}
-
 	constructor() {
 		effect(() => {
 			const value = this._contentTemplate();
@@ -203,6 +199,10 @@ export class BrnNavigationMenuTrigger implements OnInit, OnDestroy, FocusableOpt
 				this._contentService.updateDirection(dir);
 			});
 		});
+	}
+
+	public get disabled() {
+		return this._navigationMenuItem.disabled();
 	}
 
 	public ngOnInit() {

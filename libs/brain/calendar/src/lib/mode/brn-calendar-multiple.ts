@@ -32,36 +32,6 @@ export class BrnCalendarMulti<T> implements BrnCalendarBase<T> {
 
 	private readonly _cells: BrnCalendarCellButton<T>[] = [];
 
-	/**
-	 * Determine if a date is the start of a range. In a date picker, this is always false.
-	 * @param date The date to check.
-	 * @returns Always false.
-	 * @internal
-	 */
-	isStartOfRange(_: T): boolean {
-		return false;
-	}
-
-	/**
-	 * Determine if a date is the end of a range. In a date picker, this is always false.
-	 * @param date The date to check.
-	 * @returns Always false.
-	 * @internal
-	 */
-	isEndOfRange(_: T): boolean {
-		return false;
-	}
-
-	/**
-	 * Determine if a date is between the start and end dates. In a date picker, this is always false.
-	 * @param date The date to check.
-	 * @returns True if the date is between the start and end dates, false otherwise.
-	 * @internal
-	 */
-	isBetweenRange(_: T): boolean {
-		return false;
-	}
-
 	// /** Access the date adapter */
 	protected readonly _dateAdapter = injectDateAdapter<T>();
 
@@ -149,11 +119,6 @@ export class BrnCalendarMulti<T> implements BrnCalendarBase<T> {
 	/** Emits whenever the focused date changes. */
 	public readonly focusedDateChange = output<T>();
 
-	private _setFocusedDate(date: T): void {
-		this.focusedDate.set(date);
-		this.focusedDateChange.emit(date);
-	}
-
 	/**
 	 * Get all the days to display, this is the days of the current month
 	 * and the days of the previous and next month to fill the grid.
@@ -192,6 +157,41 @@ export class BrnCalendarMulti<T> implements BrnCalendarBase<T> {
 			equal: (a, b) => compareDays(a, b, this._dateAdapter),
 		},
 	);
+
+	/**
+	 * Determine if a date is the start of a range. In a date picker, this is always false.
+	 * @param date The date to check.
+	 * @returns Always false.
+	 * @internal
+	 */
+	isStartOfRange(_: T): boolean {
+		return false;
+	}
+
+	/**
+	 * Determine if a date is the end of a range. In a date picker, this is always false.
+	 * @param date The date to check.
+	 * @returns Always false.
+	 * @internal
+	 */
+	isEndOfRange(_: T): boolean {
+		return false;
+	}
+
+	/**
+	 * Determine if a date is between the start and end dates. In a date picker, this is always false.
+	 * @param date The date to check.
+	 * @returns True if the date is between the start and end dates, false otherwise.
+	 * @internal
+	 */
+	isBetweenRange(_: T): boolean {
+		return false;
+	}
+
+	private _setFocusedDate(date: T): void {
+		this.focusedDate.set(date);
+		this.focusedDateChange.emit(date);
+	}
 
 	isSelected(date: T): boolean {
 		return this.date()?.some((d) => this._dateAdapter.isSameDay(d, date)) ?? false;

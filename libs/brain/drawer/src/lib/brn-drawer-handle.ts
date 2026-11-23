@@ -32,25 +32,6 @@ export class BrnDrawerHandle {
 	private readonly _destroyRef = inject(DestroyRef);
 	private _pointerId = -1;
 
-	constructor() {
-		this._destroyRef.onDestroy(() => {
-			this._cleanup();
-			// Cancel any pending reset timeout: on destroy its target elements are gone, so the
-			// deferred style write is a stale no-op that also retains this directive for ~500ms.
-			this._clearResetTimeout();
-		});
-		effect(() => {
-			const state = this._brnDialogRef?.state();
-			untracked(() => {
-				if (state === 'open') {
-					this._openTime = Date.now();
-				} else if (state === 'closed') {
-					this._openTime = null;
-				}
-			});
-		});
-	}
-
 	private _drawerEl: HTMLElement | null = null;
 	private _backdropEl: HTMLElement | null = null;
 	private _direction: 'bottom' | 'top' | 'left' | 'right' = 'bottom';
@@ -70,6 +51,25 @@ export class BrnDrawerHandle {
 	private _resetTimeout: ReturnType<typeof setTimeout> | null = null;
 
 	public readonly closeThreshold = input<number>(DEFAULT_CLOSE_THRESHOLD);
+
+	constructor() {
+		this._destroyRef.onDestroy(() => {
+			this._cleanup();
+			// Cancel any pending reset timeout: on destroy its target elements are gone, so the
+			// deferred style write is a stale no-op that also retains this directive for ~500ms.
+			this._clearResetTimeout();
+		});
+		effect(() => {
+			const state = this._brnDialogRef?.state();
+			untracked(() => {
+				if (state === 'open') {
+					this._openTime = Date.now();
+				} else if (state === 'closed') {
+					this._openTime = null;
+				}
+			});
+		});
+	}
 
 	private get _isVertical(): boolean {
 		return this._direction === 'bottom' || this._direction === 'top';

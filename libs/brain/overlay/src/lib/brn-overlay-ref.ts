@@ -23,14 +23,6 @@ export class BrnOverlayRef<OverlayResult = unknown> {
 	private _panelClasses: string[];
 	private _backdropClasses: string[];
 
-	public get open(): boolean {
-		return this._phase() === 'open';
-	}
-
-	public get id(): string {
-		return this.initialOptions.id;
-	}
-
 	constructor(
 		private readonly _overlayRef: OverlayRef,
 		private readonly _injector: Injector,
@@ -42,6 +34,14 @@ export class BrnOverlayRef<OverlayResult = unknown> {
 		this._backdropClasses = cssClassesToArray(initialOptions.backdropClass);
 		this._setDataState('open');
 		this._stateChanged.next('open');
+	}
+
+	public get open(): boolean {
+		return this._phase() === 'open';
+	}
+
+	public get id(): string {
+		return this.initialOptions.id;
 	}
 
 	public close(result?: OverlayResult): void {

@@ -58,11 +58,6 @@ export class BrnCommandItem implements Highlightable, OnInit {
 		transform: booleanAttribute,
 	});
 
-	/** Expose disabled as a value - used by the Highlightable interface */
-	public get disabled() {
-		return this._disabled();
-	}
-
 	/** Whether the item is initialized, this is to prevent accessing the value-input before the component is initialized.
 	 * The brn-command-empty directive accesses the value before the component is initialized, which causes an error.
 	 */
@@ -88,6 +83,11 @@ export class BrnCommandItem implements Highlightable, OnInit {
 		}
 		return this.value();
 	});
+
+	/** Expose disabled as a value - used by the Highlightable interface */
+	public get disabled() {
+		return this._disabled();
+	}
 
 	/** @internal Get the display value */
 	public getLabel(): string {

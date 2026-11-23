@@ -45,10 +45,6 @@ export class BrnRadioGroup<T = unknown> implements ControlValueAccessor {
 	private readonly _fieldControl = inject(BrnFieldControl, { optional: true });
 	private static _nextUniqueId = 0;
 
-	protected onChange: ChangeFn<T> = () => {};
-
-	protected onTouched: TouchFn = () => {};
-
 	public readonly name = input<string>(`brn-radio-group-${++BrnRadioGroup._nextUniqueId}`);
 
 	/**
@@ -112,6 +108,10 @@ export class BrnRadioGroup<T = unknown> implements ControlValueAccessor {
 	 * @internal
 	 */
 	public readonly radioButtons = contentChildren(BrnRadio, { descendants: true });
+
+	protected onChange: ChangeFn<T> = () => {};
+
+	protected onTouched: TouchFn = () => {};
 
 	writeValue(value: T): void {
 		this.value.set(value);

@@ -231,11 +231,6 @@ export class BrnCheckbox implements ControlValueAccessor, AfterContentInit, OnDe
 	);
 	protected readonly _controlTouched = this._fieldControl?.touched;
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	protected _onChange: ChangeFn<boolean> = () => {};
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private _onTouched: TouchFn = () => {};
-
 	/**
 	 * Reference to the checkbox button element in the template.
 	 */
@@ -271,6 +266,11 @@ export class BrnCheckbox implements ControlValueAccessor, AfterContentInit, OnDe
 			}
 		});
 	}
+
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	protected _onChange: ChangeFn<boolean> = () => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	private _onTouched: TouchFn = () => {};
 
 	/**
 	 * Toggles checkbox between checked/unchecked states.

@@ -198,11 +198,6 @@ export class BrnSwitch implements AfterContentInit, OnDestroy, ControlValueAcces
 	 */
 	public readonly touched = output();
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	protected _onChange: ChangeFn<boolean> = () => {};
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private _onTouched: TouchFn = () => {};
-
 	public readonly switch = viewChild.required<ElementRef<HTMLInputElement>>('switch');
 
 	protected readonly _state = computed(() => {
@@ -248,6 +243,11 @@ export class BrnSwitch implements AfterContentInit, OnDestroy, ControlValueAcces
 			}
 		});
 	}
+
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	protected _onChange: ChangeFn<boolean> = () => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	private _onTouched: TouchFn = () => {};
 
 	/**
 	 * Toggles switch between checked/unchecked states.

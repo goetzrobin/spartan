@@ -89,9 +89,6 @@ export class BrnQuestionnaireItem implements ControlValueAccessor {
 	private readonly _cvaDisabled = signal(false);
 	public readonly disabled = computed(() => this._hostDisabled || this.disabledInput() || this._cvaDisabled());
 
-	protected onChange: ChangeFn<BrnQuestionnaireItemValue> = () => undefined;
-	protected onTouched: TouchFn = () => undefined;
-
 	private _pendingControlValue: BrnQuestionnaireItemValue | undefined = undefined;
 	private readonly _writtenInputValues = signal<Readonly<Record<string, string>>>({});
 
@@ -266,6 +263,9 @@ export class BrnQuestionnaireItem implements ControlValueAccessor {
 			});
 		});
 	}
+
+	protected onChange: ChangeFn<BrnQuestionnaireItemValue> = () => undefined;
+	protected onTouched: TouchFn = () => undefined;
 
 	public writeValue(value: BrnQuestionnaireItemValue | null): void {
 		this._pendingControlValue = this.normalizeControlValue(value);

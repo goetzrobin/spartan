@@ -48,10 +48,6 @@ export class BrnTabsTrigger implements OnDestroy {
 		transform: booleanAttribute,
 	});
 
-	public get disabled(): boolean {
-		return this._disabled();
-	}
-
 	constructor() {
 		effect(() => {
 			const triggerFor = this.triggerFor();
@@ -59,6 +55,10 @@ export class BrnTabsTrigger implements OnDestroy {
 				this._root.registerTrigger(triggerFor, this);
 			});
 		});
+	}
+
+	public get disabled(): boolean {
+		return this._disabled();
 	}
 
 	public focus() {
