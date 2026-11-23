@@ -75,5 +75,20 @@
 		"partsMissingInHelm": {
 			"helm": 58
 		}
+	},
+	"dependencies": {
+		"installedPackages": {
+			"brain": 0,
+			"helm": 0,
+			"cli": 18,
+			"mcp": 3,
+			"trpc": 0,
+			"registry": 1
+		},
+		"requirementChanges": {
+			"brain": 0,
+			"helm": 0,
+			"cli": 0
+		}
 	}
 }

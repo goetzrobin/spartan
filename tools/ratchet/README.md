@@ -37,6 +37,15 @@ All counts cover library source only. Specs, tests, stories, `test-setup.ts` and
   | `data-[state=open]:`, `data-[orientation=vertical]:` | `data-open:`, `data-vertical:` | brain writes state as a value, Base UI as a bare marker |
   | `ms-2`, `pe-8`, `text-start`                         | `ml-2`, `pr-8`, `text-left`    | helm supports right to left                             |
 
+- `dependencies`, the published packages:
+  - `installedPackages`: entries in `dependencies` of each package's `package.json`, which is what a user
+    downloads on top of the package itself. A pull request that adds one fails until it removes another.
+  - `requirementChanges`, for brain, helm and the CLI: requirements (`dependencies` and
+    `peerDependencies`) that are new, or whose lowest allowed major version went up, compared with
+    `published-requirements.json`. The baseline is 0, so such a change fails. A wider upper bound or a
+    removed requirement does not count. To make one on purpose, in a release that may ask users to
+    change something, edit `published-requirements.json` in the same pull request.
+
 ## Lowering a baseline
 
 When you fix something, the run says which baseline can come down. Run `pnpm ratchet --update` and commit the

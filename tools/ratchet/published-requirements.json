@@ -1,0 +1,50 @@
+{
+	"brain": {
+		"@angular/cdk": 21,
+		"@angular/common": 21,
+		"@angular/core": 21,
+		"@angular/forms": 21,
+		"luxon": 3,
+		"rxjs": 6,
+		"tailwindcss": 4,
+		"tw-animate-css": 1
+	},
+	"helm": {
+		"@angular/cdk": 21,
+		"@angular/common": 21,
+		"@angular/core": 21,
+		"@angular/forms": 21,
+		"@angular/router": 21,
+		"@ng-icons/core": 32,
+		"@ng-icons/lucide": 32,
+		"@tanstack/angular-charts": 0,
+		"@tanstack/charts": 0,
+		"class-variance-authority": 0,
+		"cn": 0,
+		"embla-carousel": 8,
+		"embla-carousel-angular": 21,
+		"ngx-scrollbar": 19,
+		"rxjs": 7
+	},
+	"cli": {
+		"@angular/core": 21,
+		"@nx/angular": 21,
+		"@nx/devkit": 21,
+		"@nx/js": 21,
+		"@nx/workspace": 21,
+		"@phenomnomnominal/tsquery": 6,
+		"@schematics/angular": 21,
+		"cn": 0,
+		"enquirer": 2,
+		"jsonc-eslint-parser": 2,
+		"node-html-parser": 7,
+		"nx": 21,
+		"picocolors": 1,
+		"postcss": 8,
+		"postcss-selector-parser": 7,
+		"semver": 7,
+		"ts-morph": 25,
+		"tslib": 2,
+		"typescript": 5
+	}
+}
