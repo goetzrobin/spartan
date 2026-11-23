@@ -323,7 +323,7 @@ function collectMembers(cls: ClassDeclaration, componentInfo: MemberCollection, 
 					const outputName = readAliasFromOptions(callArgs[0]) ?? name;
 					if (seen.has(`output:${outputName}`)) return;
 					seen.add(`output:${outputName}`);
-					componentInfo.outputs.push({ name: outputName, type: inferredType, description });
+					componentInfo.outputs.push({ name: outputName, type: typeArg ? inferredType : 'void', description });
 				} else if (exprText === 'model' || isModelRequired) {
 					const modelName = readAliasFromOptions(optionsArg) ?? name;
 					if (seen.has(`model:${modelName}`)) return;
