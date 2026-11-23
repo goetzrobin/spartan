@@ -24,7 +24,7 @@ export class BrnCollapsibleContent {
 
 	constructor() {
 		if (!this._collapsible) {
-			throw Error('Collapsible content directive can only be used inside a brn-collapsible element.');
+			throw new Error('Collapsible content directive can only be used inside a brn-collapsible element.');
 		}
 
 		effect(() => {

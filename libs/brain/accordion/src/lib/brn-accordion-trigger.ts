@@ -36,8 +36,8 @@ export class BrnAccordionTrigger implements FocusableOption {
 	public readonly ariaControls = `brn-accordion-content-${this._item.id}`;
 
 	constructor() {
-		if (!this._accordion) throw Error('Accordion trigger requires a parent Accordion.');
-		if (!this._item) throw Error('Accordion trigger requires a parent AccordionItem.');
+		if (!this._accordion) throw new Error('Accordion trigger requires a parent Accordion.');
+		if (!this._item) throw new Error('Accordion trigger requires a parent AccordionItem.');
 
 		this._accordion.registerTrigger(this);
 
@@ -82,7 +82,7 @@ export class BrnAccordionTrigger implements FocusableOption {
 		const hasButtonRole = element.getAttribute('role') === 'button';
 
 		if (!isButton && !hasButtonRole) {
-			throw Error(
+			throw new Error(
 				`BrnAccordionTrigger: The trigger element must be a <button> or have role="button". ` +
 					`Found: <${element.tagName.toLowerCase()}>`,
 			);
@@ -92,7 +92,7 @@ export class BrnAccordionTrigger implements FocusableOption {
 		if (!parent) {
 			const message = 'BrnAccordionTrigger: The trigger button must be wrapped in a heading element.';
 			if (isDevMode()) {
-				throw Error(message);
+				throw new Error(message);
 			} else {
 				console.warn(message);
 			}
@@ -102,14 +102,14 @@ export class BrnAccordionTrigger implements FocusableOption {
 		const hasHeadingRole = parent.getAttribute('role') === 'heading';
 
 		if (!isNativeHeading && !hasHeadingRole) {
-			throw Error(
+			throw new Error(
 				`BrnAccordionTrigger: The trigger button must be wrapped in a heading element ` +
 					`(h1-h6) or an element with role="heading". Found parent: <${parent.tagName.toLowerCase()}>`,
 			);
 		}
 
 		if (hasHeadingRole && !parent.hasAttribute('aria-level')) {
-			throw Error('BrnAccordionTrigger: Elements with role="heading" must have an aria-level attribute.');
+			throw new Error('BrnAccordionTrigger: Elements with role="heading" must have an aria-level attribute.');
 		}
 	}
 }

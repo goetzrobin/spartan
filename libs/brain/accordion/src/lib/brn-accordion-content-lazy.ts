@@ -15,7 +15,9 @@ export class BrnAccordionContentLazy {
 
 	constructor() {
 		if (!this._item) {
-			throw Error('Accordion Content Lazy can only be used inside an AccordionItem. Add brnAccordionItem to parent.');
+			throw new Error(
+				'Accordion Content Lazy can only be used inside an AccordionItem. Add brnAccordionItem to parent.',
+			);
 		}
 
 		this._destroyRef.onDestroy(() => {

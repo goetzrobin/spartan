@@ -42,7 +42,7 @@ export class BrnAccordionItem {
 
 	constructor() {
 		if (!this._accordion) {
-			throw Error('Accordion item can only be used inside an Accordion. Add brnAccordion to ancestor.');
+			throw new Error('Accordion item can only be used inside an Accordion. Add brnAccordion to ancestor.');
 		}
 
 		effect(() => {

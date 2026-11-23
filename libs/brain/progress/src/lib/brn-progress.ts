@@ -64,11 +64,11 @@ export class BrnProgress implements OnChanges {
 		}
 
 		if (value > max || value < 0) {
-			throw Error('Value must be 0 or greater and less or equal to max');
+			throw new Error('Value must be 0 or greater and less or equal to max');
 		}
 
 		if (max < 0) {
-			throw Error('max must be greater than 0');
+			throw new Error('max must be greater than 0');
 		}
 	}
 }
