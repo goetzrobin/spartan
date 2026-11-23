@@ -1,7 +1,6 @@
 import { readJson, type Tree, updateJson } from '@nx/devkit';
 
 import { prompt } from 'enquirer';
-import z, { ZodError } from 'zod';
 import { type GenerateAs, generateOptions } from '../generators/base/lib/generate-as';
 import { type Style, STYLES } from './supported-styles';
 
@@ -10,59 +9,113 @@ const configPath = 'components.json';
 // Default style used when components.json does not set one.
 const FALLBACK_STYLE: Style = 'vega';
 
-export const AngularCliConfigSchema = z.object({
-	componentsPath: z.string().optional().default('libs/ui'),
-	style: z.enum(STYLES).optional().default(FALLBACK_STYLE),
-	importAlias: z
-		.string()
-		.optional()
-		.default('@spartan-ng/helm')
-		.refine((val) => !val.endsWith('/'), { message: 'importAlias should not end with a slash' }),
-});
-
-export const NXConfigSchema = z.object({
-	componentsPath: z.string().optional().default('libs/ui'),
-	buildable: z.boolean().optional().default(true),
-	generateAs: z.enum(generateOptions).optional().default('library'),
-	style: z.enum(STYLES).optional().default(FALLBACK_STYLE),
-	importAlias: z
-		.string()
-		.optional()
-		.default('@spartan-ng/helm')
-		.refine((val) => !val.endsWith('/'), { message: 'importAlias should not end with a slash' }),
-});
-
 // buildable and generateAs only exist for NX configs; an Angular CLI config omits them.
-export type Config = z.infer<typeof AngularCliConfigSchema> &
-	Partial<Pick<z.infer<typeof NXConfigSchema>, 'buildable' | 'generateAs'>>;
+export type Config = {
+	componentsPath: string;
+	style: Style;
+	importAlias: string;
+	buildable?: boolean;
+	generateAs?: GenerateAs;
+};
+
+export interface ConfigIssue {
+	path: string;
+	expected: string;
+	message: string;
+}
+
+export class ConfigValidationError extends Error {
+	constructor(readonly issues: ConfigIssue[]) {
+		super(issues.map((issue) => `${issue.path}: ${issue.message}`).join('\n'));
+		this.name = 'ConfigValidationError';
+	}
+}
+
+function typeName(value: unknown): string {
+	if (value === null) return 'null';
+	if (Array.isArray(value)) return 'array';
+	return typeof value;
+}
+
+function quoted(options: readonly string[]): string {
+	return options.map((option) => `'${option}'`).join(' | ');
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+	return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function typeIssue(path: string, value: unknown, type: string): ConfigIssue {
+	return { path, expected: type, message: `Expected ${type}, received ${typeName(value)}` };
+}
+
+export function parseConfig(raw: unknown, isAngularCli: boolean): Config {
+	if (!isRecord(raw)) {
+		throw new ConfigValidationError([typeIssue('root', raw, 'object')]);
+	}
+
+	const issues: ConfigIssue[] = [];
+
+	function readString(key: string, fallback: string): string {
+		const value = raw[key];
+		if (value === undefined) return fallback;
+		if (typeof value === 'string') return value;
+		issues.push(typeIssue(key, value, 'string'));
+		return fallback;
+	}
+
+	function readBoolean(key: string, fallback: boolean): boolean {
+		const value = raw[key];
+		if (value === undefined) return fallback;
+		if (typeof value === 'boolean') return value;
+		issues.push(typeIssue(key, value, 'boolean'));
+		return fallback;
+	}
+
+	function readOption<T extends string>(key: string, fallback: T, options: readonly T[]): T {
+		const value = raw[key];
+		if (value === undefined) return fallback;
+		const match = options.find((option) => option === value);
+		if (match !== undefined) return match;
+		issues.push(
+			typeof value === 'string'
+				? {
+						path: key,
+						expected: options.join(' | '),
+						message: `Invalid enum value. Expected ${quoted(options)}, received '${value}'`,
+					}
+				: typeIssue(key, value, quoted(options)),
+		);
+		return fallback;
+	}
+
+	const componentsPath = readString('componentsPath', 'libs/ui');
+	const nxFields = isAngularCli
+		? {}
+		: {
+				buildable: readBoolean('buildable', true),
+				generateAs: readOption('generateAs', 'library', generateOptions),
+			};
+	const style = readOption('style', FALLBACK_STYLE, STYLES);
+	const importAlias = readString('importAlias', '@spartan-ng/helm');
+	if (importAlias.endsWith('/')) {
+		issues.push({ path: 'importAlias', expected: '-', message: 'importAlias should not end with a slash' });
+	}
+
+	if (issues.length > 0) {
+		throw new ConfigValidationError(issues);
+	}
+
+	return { componentsPath, ...nxFields, style, importAlias };
+}
 
 const getConfig = async (tree: Tree, isAngularCli: boolean): Promise<Config> => {
 	const raw = await readJson(tree, configPath);
 	try {
-		if (isAngularCli) {
-			return AngularCliConfigSchema.parse(raw);
-		} else {
-			return NXConfigSchema.parse(raw);
-		}
+		return parseConfig(raw, isAngularCli);
 	} catch (e) {
-		if (e instanceof ZodError) {
-			const rows = e.issues.map((issue) => {
-				let expected: string | undefined;
-
-				if ('expected' in issue) {
-					expected = String(issue.expected);
-				} else if ('options' in issue) {
-					expected = issue.options.join(' | ');
-				}
-
-				return {
-					path: issue.path.join('.') || 'root',
-					message: issue.message,
-					expected: expected ?? '-',
-				};
-			});
-
-			console.table(rows, ['path', 'expected', 'message']);
+		if (e instanceof ConfigValidationError) {
+			console.table(e.issues, ['path', 'expected', 'message']);
 			throw new Error('Config validation failed. Please fix the issues above.');
 		} else {
 			throw e;

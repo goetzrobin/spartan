@@ -1,12 +1,23 @@
 import postcss from 'postcss';
 import selectorParser, { type ClassName, type Selector as SelectorNodeRoot } from 'postcss-selector-parser';
-import { z } from 'zod';
 
 const SPARTAN_PREFIX = 'spartan-';
 
-export const styleMapSchema = z.record(z.string().startsWith(SPARTAN_PREFIX), z.string());
+export type StyleMap = Record<string, string>;
 
-export type StyleMap = z.infer<typeof styleMapSchema>;
+export function parseStyleMap(record: Record<string, unknown>): StyleMap {
+	const styleMap: StyleMap = {};
+	for (const [key, value] of Object.entries(record)) {
+		if (!key.startsWith(SPARTAN_PREFIX)) {
+			throw new Error(`Invalid style map key "${key}": expected it to start with "${SPARTAN_PREFIX}"`);
+		}
+		if (typeof value !== 'string') {
+			throw new Error(`Invalid style map value for "${key}": expected a string, received ${typeof value}`);
+		}
+		styleMap[key] = value;
+	}
+	return styleMap;
+}
 
 export function createStyleMap(input: string) {
 	const root = postcss.parse(input);
@@ -49,7 +60,7 @@ export function createStyleMap(input: string) {
 		}
 	});
 
-	return styleMapSchema.parse(result);
+	return parseStyleMap(result);
 }
 
 function normalizeSelector(selector: string) {

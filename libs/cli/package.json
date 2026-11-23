@@ -25,8 +25,7 @@
 		"postcss-selector-parser": "^7.2.1",
 		"semver": "7.5.4",
 		"ts-morph": "25.0.1",
-		"typescript": ">=5.0.0 <7.0.0",
-		"zod": "^3.25.76"
+		"typescript": ">=5.0.0 <7.0.0"
 	},
 	"peerDependencies": {
 		"tslib": "^2.3.0"

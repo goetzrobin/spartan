@@ -1,5 +1,5 @@
 import { readJson, type Tree, visitNotIgnoredFiles } from '@nx/devkit';
-import { AngularCliConfigSchema, NXConfigSchema } from '../../../utils/config';
+import { type Config, ConfigValidationError, parseConfig } from '../../../utils/config';
 
 export interface SpartanInfo {
 	/** The kind of workspace the project lives in. */
@@ -49,16 +49,23 @@ const STYLE_FILE_CANDIDATES = [
 
 const normalize = (value: string): string => value.toLowerCase().replace(/[^a-z0-9]/g, '');
 
+function safeParseConfig(raw: unknown, angularCli: boolean): Config | undefined {
+	try {
+		return parseConfig(raw, angularCli);
+	} catch (e) {
+		if (e instanceof ConfigValidationError) return undefined;
+		throw e;
+	}
+}
+
 function readConfig(tree: Tree, angularCli: boolean): SpartanInfo['config'] {
 	if (!tree.exists('components.json')) {
 		return { found: false, componentsPath: DEFAULT_COMPONENTS_PATH, importAlias: DEFAULT_IMPORT_ALIAS };
 	}
 
 	const raw = readJson(tree, 'components.json');
-	const schema = angularCli ? AngularCliConfigSchema : NXConfigSchema;
-	const parsed = schema.safeParse(raw);
 	// When validation succeeds use the parsed (defaulted) values, otherwise surface whatever we can read.
-	const source: Record<string, unknown> = parsed.success ? parsed.data : (raw ?? {});
+	const source: Record<string, unknown> = safeParseConfig(raw, angularCli) ?? raw ?? {};
 
 	return {
 		found: true,
