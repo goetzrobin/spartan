@@ -1,4 +1,4 @@
-import { createStyleMap } from './create-style-map';
+import { createStyleMap, parseStyleMap } from './create-style-map';
 
 describe('parseStyle', () => {
 	it('extracts tailwind classes from @apply directives', () => {
@@ -161,5 +161,21 @@ describe('parseStyle', () => {
         "spartan-button": "px-4",
       }
     `);
+	});
+});
+
+describe('parseStyleMap', () => {
+	it('accepts spartan- keys with string values', () => {
+		const map = { 'spartan-button': 'px-4', 'spartan-card': 'rounded-xl' };
+
+		expect(parseStyleMap(map)).toEqual(map);
+	});
+
+	it('rejects a key without the spartan- prefix and names it', () => {
+		expect(() => parseStyleMap({ 'spartan-button': 'px-4', button: 'px-2' })).toThrow('"button"');
+	});
+
+	it('rejects a non-string value and names its key', () => {
+		expect(() => parseStyleMap({ 'spartan-button': 4 })).toThrow('"spartan-button"');
 	});
 });
