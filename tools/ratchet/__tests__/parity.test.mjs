@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { compareParts, extractApply, extractMarkedClasses, mergeParts, RENAMES } from '../lib/parity.mjs';
+import { compareParts, extractApply, extractMarkedClasses, mergeParts, translate } from '../lib/parity.mjs';
 
 describe('extractApply', () => {
 	it('reads @apply lists of bare cn- rules and skips compound selectors', () => {
@@ -116,7 +116,55 @@ describe('compareParts', () => {
 		assert.deepEqual(result.counts.classesOnlyInShadcn, { helm: 1 });
 	});
 
-	it('does not hide the transform-origin rename', () => {
-		assert.deepEqual(RENAMES, []);
+	it('leaves a missing part out of the count when it is marked out of scope', () => {
+		const result = compareParts({ 'checkbox-aria': ['flex'] }, {}, { 'checkbox-aria': { outOfScope: 'React Aria' } });
+		assert.deepEqual(result.counts.partsMissingInHelm, { helm: 0 });
+		assert.deepEqual(result.outOfScope, ['checkbox-aria']);
+	});
+
+	it('reports the class as each side wrote it', () => {
+		const result = compareParts({ item: ['pl-2', 'ml-auto'] }, { item: ['ps-2', 'me-auto'] });
+		assert.deepEqual(result.parts, [{ part: 'item', onlyInHelm: ['me-auto'], onlyInShadcn: ['ml-auto'] }]);
+	});
+});
+
+describe('translate', () => {
+	const equal = [
+		['data-[matches-spartan-invalid=true]:ring-3', 'aria-invalid:ring-3'],
+		[
+			'dark:has-data-[matches-spartan-invalid=true]:border-destructive/50',
+			'dark:has-aria-invalid:border-destructive/50',
+		],
+		["[&_ng-icon:not([class*='text-'])]:text-[length:--spacing(4)]", "[&_svg:not([class*='size-'])]:size-4"],
+		['[&>ng-icon]:shrink-0', '[&>svg]:shrink-0'],
+		['data-[state=open]:animate-in', 'data-open:animate-in'],
+		['group-data-[orientation=vertical]/tabs:flex-col', 'group-data-vertical/tabs:flex-col'],
+		['data-[disabled=true]:opacity-50', 'data-disabled:opacity-50'],
+		['text-left', 'text-start'],
+		['data-inset:pl-8', 'data-inset:ps-8'],
+		['-ml-1', '-ms-1'],
+		['rounded-tl-md', 'rounded-ss-md'],
+	];
+	for (const [one, other] of equal) {
+		it(`counts ${one} and ${other} as equal`, () => {
+			assert.equal(translate(one), translate(other));
+		});
+	}
+
+	const different = [
+		['data-starting-style:opacity-0', 'data-open:fade-in-0'],
+		['data-[side=left]:slide-in-from-right-2', 'data-[side=inline-start]:slide-in-from-right-2'],
+		['origin-(--transform-origin)', 'origin-(--brn-popover-transform-origin)'],
+		['ml-2', 'me-2'],
+		['data-[slot=input-group]:h-8', 'data-slot:h-8'],
+	];
+	for (const [one, other] of different) {
+		it(`keeps ${one} and ${other} apart`, () => {
+			assert.notEqual(translate(one), translate(other));
+		});
+	}
+
+	it('leaves the selector inside a variant alone', () => {
+		assert.equal(translate('[&_[data-pos=left]]:flex'), '[&_[data-pos=left]]:flex');
 	});
 });

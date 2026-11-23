@@ -1,1 +1,98 @@
-{}
+{
+	"alert-dialog-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"alert-dialog-overlay-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"checkbox-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"combobox-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"combobox-item-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"command-item-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"command-shortcut-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"context-menu-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"context-menu-sub-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"dialog-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"dialog-overlay-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"dropdown-menu-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"dropdown-menu-sub-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"field-label-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"hover-card-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"label-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"menu-translucent-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"popover-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"radio-group-item-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"select-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"select-empty-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"select-item-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"select-value-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"sidebar-menu-button-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"switch-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"switch-thumb-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"table-cell-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"table-head-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"table-row-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"tabs-trigger-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"toggle-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	},
+	"tooltip-content-aria": {
+		"outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant"
+	}
+}
