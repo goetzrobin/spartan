@@ -15,7 +15,7 @@ describe('compare', () => {
 			lint({ [rule]: { brain: 3, helm: 0 } }),
 			lint({ [rule]: { brain: 4, helm: 0 } }),
 		);
-		assert.deepEqual(raised, [{ kind: 'lint', rule, library: 'brain', baseline: 3, current: 4 }]);
+		assert.deepEqual(raised, [{ section: 'lint', metric: rule, library: 'brain', baseline: 3, current: 4 }]);
 		assert.deepEqual(lowered, []);
 	});
 
@@ -30,7 +30,7 @@ describe('compare', () => {
 			lint({ [rule]: { brain: 3, helm: 1 } }),
 		);
 		assert.deepEqual(raised, []);
-		assert.deepEqual(lowered, [{ kind: 'lint', rule, library: 'helm', baseline: 2, current: 1 }]);
+		assert.deepEqual(lowered, [{ section: 'lint', metric: rule, library: 'helm', baseline: 2, current: 1 }]);
 	});
 
 	it('does not count a rule missing from the baseline as raised or lowered', () => {
@@ -38,8 +38,8 @@ describe('compare', () => {
 		const current = lint({ [rule]: { brain: 1, helm: 1 }, [other]: { brain: 5, helm: 0 } });
 		assert.deepEqual(compare(baseline, current), { raised: [], lowered: [] });
 		assert.deepEqual(missing(baseline, current), [
-			{ kind: 'lint', rule: other, library: 'brain', current: 5 },
-			{ kind: 'lint', rule: other, library: 'helm', current: 0 },
+			{ section: 'lint', metric: other, library: 'brain', current: 5 },
+			{ section: 'lint', metric: other, library: 'helm', current: 0 },
 		]);
 	});
 });

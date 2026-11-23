@@ -1,8 +1,8 @@
 function* entries(counts) {
-	for (const [kind, rules] of Object.entries(counts)) {
-		for (const [rule, libraries] of Object.entries(rules)) {
+	for (const [section, metrics] of Object.entries(counts)) {
+		for (const [metric, libraries] of Object.entries(metrics)) {
 			for (const [library, count] of Object.entries(libraries)) {
-				yield { kind, rule, library, count };
+				yield { section, metric, library, count };
 			}
 		}
 	}
@@ -11,10 +11,10 @@ function* entries(counts) {
 export function compare(baseline, current) {
 	const raised = [];
 	const lowered = [];
-	for (const { kind, rule, library, count } of entries(current)) {
-		const allowed = baseline[kind]?.[rule]?.[library];
+	for (const { section, metric, library, count } of entries(current)) {
+		const allowed = baseline[section]?.[metric]?.[library];
 		if (allowed === undefined) continue;
-		const entry = { kind, rule, library, baseline: allowed, current: count };
+		const entry = { section, metric, library, baseline: allowed, current: count };
 		if (count > allowed) raised.push(entry);
 		else if (count < allowed) lowered.push(entry);
 	}
@@ -23,34 +23,34 @@ export function compare(baseline, current) {
 
 export function missing(baseline, current) {
 	const result = [];
-	for (const { kind, rule, library, count } of entries(current)) {
-		if (baseline[kind]?.[rule]?.[library] === undefined) result.push({ kind, rule, library, current: count });
+	for (const { section, metric, library, count } of entries(current)) {
+		if (baseline[section]?.[metric]?.[library] === undefined) result.push({ section, metric, library, current: count });
 	}
 	return result;
 }
 
 export function lower(baseline, current) {
 	const next = structuredClone(baseline);
-	for (const { kind, rule, library, count } of entries(current)) {
-		next[kind] ??= {};
-		next[kind][rule] ??= {};
-		const allowed = next[kind][rule][library];
-		next[kind][rule][library] = allowed === undefined ? count : Math.min(allowed, count);
+	for (const { section, metric, library, count } of entries(current)) {
+		next[section] ??= {};
+		next[section][metric] ??= {};
+		const allowed = next[section][metric][library];
+		next[section][metric][library] = allowed === undefined ? count : Math.min(allowed, count);
 	}
 	return next;
 }
 
-export function countLint(results, rules, libraries, libraryOf) {
+export function countLint(results, metrics, libraries, libraryOf) {
 	const counts = {};
-	for (const rule of rules) {
-		counts[rule] = {};
-		for (const library of libraries) counts[rule][library] = 0;
+	for (const metric of metrics) {
+		counts[metric] = {};
+		for (const library of libraries) counts[metric][library] = 0;
 	}
 	for (const result of results) {
 		const library = libraryOf(result.filePath);
 		if (!libraries.includes(library)) continue;
 		for (const message of result.messages) {
-			if (rules.includes(message.ruleId)) counts[message.ruleId][library] += 1;
+			if (metrics.includes(message.ruleId)) counts[message.ruleId][library] += 1;
 		}
 	}
 	return counts;

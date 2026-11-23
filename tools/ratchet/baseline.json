@@ -32,5 +32,48 @@
 			"brain": 0,
 			"helm": 8
 		}
+	},
+	"structure": {
+		"commentLines": {
+			"brain": 707,
+			"helm": 87
+		},
+		"cdkImportFiles": {
+			"brain": 83,
+			"helm": 53
+		},
+		"filesOver300Lines": {
+			"brain": 21,
+			"helm": 1
+		},
+		"classesThatExtend": {
+			"brain": 17,
+			"helm": 11
+		},
+		"lintDisables": {
+			"brain": 17,
+			"helm": 12
+		},
+		"privateGetters": {
+			"brain": 7,
+			"helm": 0
+		}
+	},
+	"types": {
+		"exactOptionalPropertyTypes": {
+			"brain": 7,
+			"helm": 0
+		}
+	},
+	"shadcnParity": {
+		"classesOnlyInHelm": {
+			"helm": 535
+		},
+		"classesOnlyInShadcn": {
+			"helm": 796
+		},
+		"partsMissingInHelm": {
+			"helm": 90
+		}
 	}
 }
