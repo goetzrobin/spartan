@@ -27,6 +27,16 @@ All counts cover library source only. Specs, tests, stories, `test-setup.ts` and
   helm, classes only in shadcn, and shadcn parts with no helm marker.
   `pnpm ratchet --only shadcnParity --report` lists the differences part by part.
 
+  Four differences are naming only and count as equal (`TRANSLATIONS` in `lib/parity.mjs`). The report
+  prints the rules and still shows each class as its side wrote it.
+
+  | Helm                                                 | shadcn                         | Why                                                     |
+  | ---------------------------------------------------- | ------------------------------ | ------------------------------------------------------- |
+  | `data-[matches-spartan-invalid=true]:`               | `aria-invalid:`                | brain sets its own marker for invalid controls          |
+  | `ng-icon`, `text-[length:--spacing(4)]`              | `svg`, `size-4`                | helm icons are `ng-icon` elements sized by font size    |
+  | `data-[state=open]:`, `data-[orientation=vertical]:` | `data-open:`, `data-vertical:` | brain writes state as a value, Base UI as a bare marker |
+  | `ms-2`, `pe-8`, `text-start`                         | `ml-2`, `pr-8`, `text-left`    | helm supports right to left                             |
+
 ## Lowering a baseline
 
 When you fix something, the run says which baseline can come down. Run `pnpm ratchet --update` and commit the
@@ -67,5 +77,15 @@ the baseline afterwards with `pnpm ratchet --update`.
 		"onlyInShadcn": [],
 		"reason": "Long tooltips wrap more evenly."
 	}
+}
+```
+
+A shadcn part that helm will not have is marked `outOfScope` with the reason, and is then left out of
+`partsMissingInHelm`. The 32 `-aria` parts are marked this way: they belong to shadcn's React Aria
+variant, and helm follows the Base UI variant.
+
+```json
+{
+	"checkbox-aria": { "outOfScope": "React Aria variant of shadcn; helm follows the Base UI variant" }
 }
 ```
