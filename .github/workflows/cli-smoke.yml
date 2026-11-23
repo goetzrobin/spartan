@@ -4,16 +4,9 @@ name: cli-smoke
 # library/entrypoint x buildable). Each cell scaffolds a real workspace, runs the generators, consumes a
 # generated component, and builds it - so the cells are slow individually. We fan each one out to its own
 # runner via the job matrix so they run in parallel from the start of the workflow; wall-clock is roughly
-# the slowest single cell rather than the sum.
+# the slowest single cell rather than the sum. Called by ci.yml once the quick checks pass.
 on:
-  push:
-    branches:
-      - main
-  pull_request: {}
-
-concurrency:
-  group: cli-smoke-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_call: {}
 
 jobs:
   gate:

@@ -5,16 +5,7 @@ name: verify
 #
 
 on:
-  pull_request: {}
-  # Lets this workflow gate a merge queue once one is switched on for the repo.
-  merge_group: {}
-  push:
-    branches:
-      - main
-
-concurrency:
-  group: verify-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_call: {}
 
 permissions:
   contents: read
@@ -63,7 +54,7 @@ jobs:
           echo "shards=$(node -p "JSON.stringify(Array.from({ length: $TOTAL }, (_, i) => i + 1))")" >> "$GITHUB_OUTPUT"
           echo "$COUNT test pages selected, $TOTAL test machine(s)"
 
-  build:
+  build-test-pages:
     needs: affected
     if: ${{ needs.affected.outputs.any == 'true' }}
     runs-on: ubuntu-latest
@@ -90,7 +81,7 @@ jobs:
           retention-days: 1
 
   test:
-    needs: [affected, build]
+    needs: [affected, build-test-pages]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -241,14 +232,14 @@ jobs:
   # One stable check to mark as required: green when the affected components pass, and also
   # green when a change affects no component at all.
   verified:
-    needs: [affected, build, test, proof]
+    needs: [affected, build-test-pages, test, proof]
     if: ${{ always() && (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):')) }}
     runs-on: ubuntu-latest
     steps:
       - name: Check the result
         env:
           AFFECTED: ${{ needs.affected.result }}
-          BUILD: ${{ needs.build.result }}
+          BUILD: ${{ needs.build-test-pages.result }}
           TEST: ${{ needs.test.result }}
           PROOF: ${{ needs.proof.result }}
         run: |

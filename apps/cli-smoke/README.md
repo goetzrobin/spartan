@@ -63,16 +63,16 @@ single-threaded (one shared local registry). On failure the scaffolded workspace
 ## CI
 
 - **`.github/workflows/cli-smoke.yml`** runs the matrix, fanning **each cell out to its own runner** so
-  they run in parallel from the start - wall-clock is roughly the slowest single cell, not the sum.
-  - It runs on **every** push/PR (no path filter) so the `cli-smoke result` job can be a **required
-    check** that never sits pending. Cheapness on unrelated PRs comes in two layers: (1) a `git diff`
+  they run in parallel - wall-clock is roughly the slowest single cell, not the sum.
+  - `.github/workflows/ci.yml` calls it once commitlint and format-and-lint pass, on **every** push/PR
+    (no path filter), so `cli-smoke / cli-smoke result` can be a **required check**. Cheapness on unrelated PRs comes in two layers: (1) a `git diff`
     gate before `pnpm install` skips the job in seconds when nothing CLI-relevant changed; (2) when it
     does install, the in-runner `isSmokeAffected()` check (`src/support/affected.ts`) makes the precise
     nx-affected call and still short-circuits to a pass if cli-smoke isn't actually affected.
     `nrwl/nx-set-shas` provides the base/head both layers use.
   - A fast `drift-guard` job fails CI if `matrix.ts` grows a cell the workflow's static matrix doesn't
     list (keep the two in sync).
-  - `cli-smoke result` aggregates the matrix + drift-guard into one status to require in branch
+  - `cli-smoke / cli-smoke result` aggregates the matrix + drift-guard into one status to require in branch
     protection.
 - **nightly-release.yml** runs the full matrix unconditionally every night (single job; no base/head,
   so the affected check always runs it).

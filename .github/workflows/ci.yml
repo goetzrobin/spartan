@@ -5,11 +5,12 @@ on:
     branches:
       - main
   pull_request: {}
+  merge_group: {}
 
 # Cancel superseded runs on the same ref (e.g. rapid pushes / force-pushes to a PR) so CI minutes
 # are not spent finishing builds that are already out of date.
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 env:
@@ -21,7 +22,7 @@ jobs:
     # Skip release commits pushed to main (already validated during the release), but always run on
     # pull_request so this required check reports and never blocks a promotion/sync PR whose tip is a
     # `chore(release):` commit. Replaces the old `[skip ci]` token, which skipped PR checks too.
-    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):') }}
+    if: ${{ github.event_name == 'pull_request' || (github.event_name == 'push' && !startsWith(github.event.head_commit.message, 'chore(release):')) }}
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -60,11 +61,20 @@ jobs:
         run: pnpm nx format:check --base=$NX_BASE --head=$NX_HEAD
       - name: lint
         run: pnpm nx affected -t lint --parallel=3
+
+  ratchet:
+    needs: [commitlint, format-and-lint]
+    if: ${{ !cancelled() && !failure() && (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):')) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
       - name: ratchet
         run: pnpm ratchet
 
   build:
-    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):') }}
+    needs: [commitlint, format-and-lint]
+    if: ${{ !cancelled() && !failure() && (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):')) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -99,7 +109,8 @@ jobs:
           fi
 
   unit:
-    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):') }}
+    needs: [commitlint, format-and-lint]
+    if: ${{ !cancelled() && !failure() && (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):')) }}
     runs-on: ubuntu-latest
     # No longer gated on `build`: vitest runs against source, so unit tests start immediately and
     # run in parallel with the build instead of waiting ~13 min for it.
@@ -142,3 +153,17 @@ jobs:
       - name: Test
         if: steps.changes.outputs.needed == 'true'
         run: pnpm nx affected -t test --parallel=3
+
+  verify:
+    needs: [commitlint, format-and-lint]
+    if: ${{ !cancelled() && !failure() }}
+    # A called workflow gets at most the permissions of the job that calls it.
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: ./.github/workflows/verify.yml
+
+  cli-smoke:
+    needs: [commitlint, format-and-lint]
+    if: ${{ !cancelled() && !failure() }}
+    uses: ./.github/workflows/cli-smoke.yml
