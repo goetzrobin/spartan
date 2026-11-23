@@ -407,11 +407,13 @@ export class BrnTooltip {
 		runInInjectionContext(this._injector, () => {
 			this._ariaEffectRef = effect(() => {
 				const tooltipId = this._componentRef?.instance.id();
-				if (tooltipId) {
-					this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-describedby', tooltipId);
-					this._ariaEffectRef?.destroy();
-					this._ariaEffectRef = undefined;
+				if (!tooltipId) {
+					return;
 				}
+
+				this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-describedby', tooltipId);
+				this._ariaEffectRef?.destroy();
+				this._ariaEffectRef = undefined;
 			});
 		});
 		this.show.emit();
@@ -472,9 +474,11 @@ export class BrnTooltip {
 	}
 
 	private _clearAriaDescribedBy(): void {
-		if (this._ariaEffectRef) {
-			this._ariaEffectRef.destroy();
-			this._ariaEffectRef = undefined;
+		if (!this._ariaEffectRef) {
+			return;
 		}
+
+		this._ariaEffectRef.destroy();
+		this._ariaEffectRef = undefined;
 	}
 }

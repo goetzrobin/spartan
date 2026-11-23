@@ -45,6 +45,7 @@ module.exports = [
 			'unicorn/throw-new-error': 'error',
 			'unicorn/switch-case-braces': 'error',
 			'unicorn/no-for-each': 'error',
+			'unicorn/prefer-early-return': 'error',
 			'@angular-eslint/use-injectable-provided-in': 'off',
 			'@angular-eslint/prefer-signal-model': 'off',
 		},

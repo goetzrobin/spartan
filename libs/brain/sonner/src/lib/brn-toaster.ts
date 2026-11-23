@@ -239,13 +239,19 @@ export class BrnSonnerToaster {
 	}
 
 	handleBlur(event: FocusEvent) {
-		if (this._isFocusWithinRef() && !(event.target as HTMLOListElement).contains(event.relatedTarget as HTMLElement)) {
-			this._isFocusWithinRef.set(false);
-			if (this._lastFocusedElementRef()) {
-				this._lastFocusedElementRef()?.focus({ preventScroll: true });
-				this._lastFocusedElementRef.set(null);
-			}
+		if (
+			!(this._isFocusWithinRef() && !(event.target as HTMLOListElement).contains(event.relatedTarget as HTMLElement))
+		) {
+			return;
 		}
+
+		this._isFocusWithinRef.set(false);
+		if (!this._lastFocusedElementRef()) {
+			return;
+		}
+
+		this._lastFocusedElementRef()?.focus({ preventScroll: true });
+		this._lastFocusedElementRef.set(null);
 	}
 
 	handleFocus(event: FocusEvent) {
@@ -253,10 +259,12 @@ export class BrnSonnerToaster {
 
 		if (isNotDismissible) return;
 
-		if (!this._isFocusWithinRef()) {
-			this._isFocusWithinRef.set(true);
-			this._lastFocusedElementRef.set(event.relatedTarget as HTMLElement);
+		if (this._isFocusWithinRef()) {
+			return;
 		}
+
+		this._isFocusWithinRef.set(true);
+		this._lastFocusedElementRef.set(event.relatedTarget as HTMLElement);
 	}
 
 	handlePointerDown(event: MouseEvent) {

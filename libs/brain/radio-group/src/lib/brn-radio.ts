@@ -169,10 +169,12 @@ export class BrnRadio<T = unknown> implements OnDestroy {
 		// emit its event object to the `change` output.
 		event.stopPropagation();
 
-		if (!this._checked() && !this._disabledState()) {
-			this.emitChangeEvent();
-			this._radioGroup.select(this, this.value());
+		if (this._checked() || this._disabledState()) {
+			return;
 		}
+
+		this.emitChangeEvent();
+		this._radioGroup.select(this, this.value());
 	}
 
 	/** Triggered when the user clicks on the touch target. */

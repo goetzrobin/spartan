@@ -77,13 +77,15 @@ export class HlmCarousel {
 			return;
 		}
 
-		if (event === 'select' || event === 'init' || event === 'reInit') {
-			this._canScrollPrev.set(emblaApi.canScrollPrev());
-			this._canScrollNext.set(emblaApi.canScrollNext());
-
-			this._currentSlide.set(emblaApi.selectedScrollSnap());
-			this._slideCount.set(emblaApi.scrollSnapList().length);
+		if (event !== 'select' && event !== 'init' && event !== 'reInit') {
+			return;
 		}
+
+		this._canScrollPrev.set(emblaApi.canScrollPrev());
+		this._canScrollNext.set(emblaApi.canScrollNext());
+
+		this._currentSlide.set(emblaApi.selectedScrollSnap());
+		this._slideCount.set(emblaApi.scrollSnapList().length);
 	}
 
 	protected onKeydown(event: KeyboardEvent) {

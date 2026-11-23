@@ -125,10 +125,12 @@ export class BrnResizableHandle {
 			}
 		}
 
-		if (delta !== 0) {
-			event.preventDefault();
-			this._adjustSizes(delta);
+		if (delta === 0) {
+			return;
 		}
+
+		event.preventDefault();
+		this._adjustSizes(delta);
 	}
 
 	private _getPanelContext() {
@@ -172,13 +174,15 @@ export class BrnResizableHandle {
 		const totalSize = newLeftSize + newRightSize;
 		const originalTotal = leftSize + rightSize;
 
-		if (Math.abs(totalSize - originalTotal) < 0.01) {
-			ctx.sizes[ctx.li] = newLeftSize;
-			ctx.sizes[ctx.ri] = newRightSize;
-
-			this._resizable.layout.set(ctx.sizes);
-			this._resizable.updatePanelStyles();
+		if (!(Math.abs(totalSize - originalTotal) < 0.01)) {
+			return;
 		}
+
+		ctx.sizes[ctx.li] = newLeftSize;
+		ctx.sizes[ctx.ri] = newRightSize;
+
+		this._resizable.layout.set(ctx.sizes);
+		this._resizable.updatePanelStyles();
 	}
 
 	private _moveToExtreme(toMin: boolean): void {

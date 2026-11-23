@@ -255,10 +255,12 @@ export class BrnNavigationMenuTrigger implements OnInit, OnDestroy, FocusableOpt
 	protected onTab(e: Event) {
 		const contentEl = this._contentService.contentEl();
 
-		if (contentEl && !hasModifierKey(e as KeyboardEvent)) {
-			e.preventDefault();
-			this._focusFirstContent();
+		if (!contentEl || hasModifierKey(e as KeyboardEvent)) {
+			return;
 		}
+
+		e.preventDefault();
+		this._focusFirstContent();
 	}
 
 	/** Arrow-key entry into the open content: ArrowDown (horizontal) or ArrowRight/Left (vertical, dir-aware). */

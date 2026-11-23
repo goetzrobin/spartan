@@ -167,10 +167,12 @@ export class BrnDialogRef<DialogResult = unknown> {
 		}
 		await waitForAnimations(exitAnimations);
 
-		if (generation === this._closeGeneration && this._phase() === 'closing') {
-			this._phase.set('closed');
-			this._cdkDialogRef.close(result);
+		if (generation !== this._closeGeneration || this._phase() !== 'closing') {
+			return;
 		}
+
+		this._phase.set('closed');
+		this._cdkDialogRef.close(result);
 	}
 
 	private _getActiveAnimations(): Animation[] {

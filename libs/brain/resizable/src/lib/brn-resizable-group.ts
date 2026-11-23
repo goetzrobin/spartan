@@ -274,13 +274,15 @@ export class BrnResizableGroup {
 		const totalSize = newLeftSize + newRightSize;
 		const originalTotal = startLeftSize + startRightSize;
 
-		if (Math.abs(totalSize - originalTotal) < 0.01) {
-			newSizes[handleIndex] = newLeftSize;
-			newSizes[handleIndex + 1] = newRightSize;
-
-			// batch update
-			this._queueResize(newSizes);
+		if (!(Math.abs(totalSize - originalTotal) < 0.01)) {
+			return;
 		}
+
+		newSizes[handleIndex] = newLeftSize;
+		newSizes[handleIndex + 1] = newRightSize;
+
+		// batch update
+		this._queueResize(newSizes);
 	}
 
 	private _queueResize(sizes: number[]): void {
@@ -290,11 +292,13 @@ export class BrnResizableGroup {
 
 		this._resizeRaf = requestAnimationFrame(() => {
 			this._resizeRaf = null;
-			if (this._pendingSizes) {
-				this._setLayout(this._pendingSizes);
-				this.updatePanelStyles();
-				this._pendingSizes = null;
+			if (!this._pendingSizes) {
+				return;
 			}
+
+			this._setLayout(this._pendingSizes);
+			this.updatePanelStyles();
+			this._pendingSizes = null;
 		});
 	}
 

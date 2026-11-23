@@ -29,10 +29,12 @@ export class HlmFieldDescription implements OnDestroy {
 					a11y.unregisterDescription(this._registeredId);
 				}
 
-				if (this._registeredId !== id) {
-					a11y.registerDescription(id);
-					this._registeredId = id;
+				if (this._registeredId === id) {
+					return;
 				}
+
+				a11y.registerDescription(id);
+				this._registeredId = id;
 			})
 		: null;
 

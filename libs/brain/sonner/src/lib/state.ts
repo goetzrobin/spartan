@@ -123,13 +123,15 @@ function createToastState() {
 			}
 		})
 			.catch((error) => {
-				if (data.error !== undefined) {
-					shouldDismiss = false;
-					const message =
-						// @ts-expect-error: TODO: Better function checking
-						typeof data.error === 'function' ? data.error(error) : data.error;
-					create({ id, type: 'error', message });
+				if (data.error === undefined) {
+					return;
 				}
+
+				shouldDismiss = false;
+				const message =
+					// @ts-expect-error: TODO: Better function checking
+					typeof data.error === 'function' ? data.error(error) : data.error;
+				create({ id, type: 'error', message });
 			})
 			.finally(() => {
 				if (shouldDismiss) {

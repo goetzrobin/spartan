@@ -244,19 +244,19 @@ export class BrnSlider implements ControlValueAccessor, OnInit {
 
 		// If bound to an Angular form control, writeValue() will run after ngOnInit,
 		// so avoid initializing defaults here to prevent a transient min-value override.
-		if (!this.ngControl) {
-			if (!this.value().length) {
-				const defaultValue = [this.min()];
-				this.value.set(defaultValue);
-			}
+		if (this.ngControl) return;
 
-			const normalizedValue = this.value()
-				.map((v) => clamp(v, [this.min(), this.max()]))
-				.sort((a, b) => a - b);
+		if (!this.value().length) {
+			const defaultValue = [this.min()];
+			this.value.set(defaultValue);
+		}
 
-			if (!areArrsEqual(normalizedValue, this.value())) {
-				this.value.set(normalizedValue);
-			}
+		const normalizedValue = this.value()
+			.map((v) => clamp(v, [this.min(), this.max()]))
+			.sort((a, b) => a - b);
+
+		if (!areArrsEqual(normalizedValue, this.value())) {
+			this.value.set(normalizedValue);
 		}
 	}
 

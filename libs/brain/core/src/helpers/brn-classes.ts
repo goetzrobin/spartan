@@ -157,10 +157,12 @@ export function brnClasses(computed: () => BrnClassValue[] | string, options: Br
 			// Re-enable transitions after the first effect writes correct classes.
 			// Deferred to next animation frame so the browser paints the class change
 			// with transitions disabled first, then re-enables them.
-			if (manager.transitionsSuppressed) {
-				manager.transitionsSuppressed = false;
-				scheduleTransitionRestore(manager);
+			if (!manager.transitionsSuppressed) {
+				return;
 			}
+
+			manager.transitionsSuppressed = false;
+			scheduleTransitionRestore(manager);
 		};
 
 		// Register cleanup with DestroyRef
@@ -221,33 +223,35 @@ function restoreTransitionSuppression(manager: ElementClassManager): void {
 
 // eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
 function setupGlobalObserver(platformId: Object): void {
-	if (isPlatformBrowser(platformId) && !globalObserver) {
-		// Create single global observer that watches the entire document
-		globalObserver = new MutationObserver((mutations) => {
-			for (const mutation of mutations) {
-				if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-					const element = mutation.target as HTMLElement;
-					const manager = elementClassManagers.get(element);
+	if (!isPlatformBrowser(platformId) || globalObserver) {
+		return;
+	}
 
-					// Only process elements we're managing
-					if (manager && observedElements.has(element)) {
-						// Wait for the first source (it adopts the live classes), and skip our own writes:
-						// the callback runs after they're done, so only the written value tells them apart
-						if (manager.writtenClassName === null || element.className === manager.writtenClassName) continue;
+	// Create single global observer that watches the entire document
+	globalObserver = new MutationObserver((mutations) => {
+		for (const mutation of mutations) {
+			if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+				const element = mutation.target as HTMLElement;
+				const manager = elementClassManagers.get(element);
 
-						scheduleUpdate(manager);
-					}
+				// Only process elements we're managing
+				if (manager && observedElements.has(element)) {
+					// Wait for the first source (it adopts the live classes), and skip our own writes:
+					// the callback runs after they're done, so only the written value tells them apart
+					if (manager.writtenClassName === null || element.className === manager.writtenClassName) continue;
+
+					scheduleUpdate(manager);
 				}
 			}
-		});
+		}
+	});
 
-		// Start observing the entire document for class attribute changes
-		globalObserver.observe(document, {
-			attributes: true,
-			attributeFilter: ['class'],
-			subtree: true, // Watch all descendants
-		});
-	}
+	// Start observing the entire document for class attribute changes
+	globalObserver.observe(document, {
+		attributes: true,
+		attributeFilter: ['class'],
+		subtree: true, // Watch all descendants
+	});
 }
 
 function updateElement(manager: ElementClassManager): void {
@@ -418,10 +422,12 @@ function cleanupManager(element: HTMLElement): void {
 	untrackClassList(element);
 
 	// If no more elements being tracked, cleanup global observer
-	if (observedElements.size === 0 && globalObserver) {
-		globalObserver.disconnect();
-		globalObserver = null;
+	if (observedElements.size !== 0 || !globalObserver) {
+		return;
 	}
+
+	globalObserver.disconnect();
+	globalObserver = null;
 }
 
 // Cache for parsed class lists to avoid repeated string operations

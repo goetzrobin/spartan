@@ -59,10 +59,12 @@ export function injectElementSize(
 					observerMap.delete(element);
 
 					// Disconnect global observer if no elements left
-					if (observerMap.size === 0 && sharedObserver) {
-						sharedObserver.disconnect();
-						sharedObserver = undefined;
+					if (observerMap.size !== 0 || !sharedObserver) {
+						return;
 					}
+
+					sharedObserver.disconnect();
+					sharedObserver = undefined;
 				});
 			},
 		});

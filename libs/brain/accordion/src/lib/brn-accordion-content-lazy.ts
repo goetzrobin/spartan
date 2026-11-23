@@ -28,10 +28,12 @@ export class BrnAccordionContentLazy {
 			const state = this._item.state();
 
 			untracked(() => {
-				if (state === 'open' && !this._hasBeenActivated) {
-					this._viewContainerRef.createEmbeddedView(this._templateRef);
-					this._hasBeenActivated = true;
+				if (state !== 'open' || this._hasBeenActivated) {
+					return;
 				}
+
+				this._viewContainerRef.createEmbeddedView(this._templateRef);
+				this._hasBeenActivated = true;
 			});
 		});
 	}

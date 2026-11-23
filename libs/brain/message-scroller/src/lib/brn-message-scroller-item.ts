@@ -39,11 +39,13 @@ export class BrnMessageScrollerItem {
 					registeredElement = null;
 				}
 
-				if (messageId) {
-					scroller.registerMessage(messageId, element);
-					registeredMessageId = messageId;
-					registeredElement = element;
+				if (!messageId) {
+					return;
 				}
+
+				scroller.registerMessage(messageId, element);
+				registeredMessageId = messageId;
+				registeredElement = element;
 			});
 		});
 

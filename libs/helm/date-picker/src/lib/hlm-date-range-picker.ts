@@ -132,10 +132,12 @@ export class HlmDateRangePicker<T> implements BrnDatePickerBase<[T, T]>, Control
 
 	protected _onStateChange(state: BrnOverlayState) {
 		this._popoverState.set(state);
-		if (state === 'closed') {
-			this._onClose();
-			this._onTouched?.();
+		if (state !== 'closed') {
+			return;
 		}
+
+		this._onClose();
+		this._onTouched?.();
 	}
 
 	protected _handleStartDayChange(value: T | undefined) {
@@ -147,15 +149,15 @@ export class HlmDateRangePicker<T> implements BrnDatePickerBase<[T, T]>, Control
 		if (this._disabled()) return;
 
 		const start = this._start();
-		if (start && value) {
-			const transformedDates = this.transformDates()([start, value]);
-			this._mutableDate.set(transformedDates);
-			this.dateChange.emit(transformedDates);
-			this._onChange?.(transformedDates);
+		if (!start || !value) return;
 
-			if (this.autoCloseOnEndSelection()) {
-				this._popoverState.set('closed');
-			}
+		const transformedDates = this.transformDates()([start, value]);
+		this._mutableDate.set(transformedDates);
+		this.dateChange.emit(transformedDates);
+		this._onChange?.(transformedDates);
+
+		if (this.autoCloseOnEndSelection()) {
+			this._popoverState.set('closed');
 		}
 	}
 
@@ -229,9 +231,11 @@ export class HlmDateRangePicker<T> implements BrnDatePickerBase<[T, T]>, Control
 
 	protected _onClose(): void {
 		const dates = this._mutableDate();
-		if (this._start() && !this._end() && dates) {
-			this._start.set(dates[0]);
-			this._end.set(dates[1]);
+		if (!this._start() || this._end() || !dates) {
+			return;
 		}
+
+		this._start.set(dates[0]);
+		this._end.set(dates[1]);
 	}
 }
