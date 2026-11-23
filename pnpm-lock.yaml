@@ -83,7 +83,7 @@ importers:
         version: 5.3.0
       '@modelcontextprotocol/sdk':
         specifier: ^1.32.2
-        version: 1.32.2(zod@3.25.76)
+        version: 1.32.2(zod@4.6.6)
       '@ng-icons/core':
         specifier: ^32.5.0
         version: 32.5.0(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2)
@@ -208,8 +208,8 @@ importers:
         specifier: 1.6.4
         version: 1.6.4
       zod:
-        specifier: ^3.25.76
-        version: 3.25.76
+        specifier: ^4.6.6
+        version: 4.6.6
       zone.js:
         specifier: 0.16.3
         version: 0.16.3
@@ -19272,7 +19272,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@modelcontextprotocol/sdk@1.32.2(zod@3.25.76)':
+  '@modelcontextprotocol/sdk@1.32.2(zod@4.6.6)':
     dependencies:
       '@hono/node-server': 2.1.11(hono@4.13.21)
       ajv: 8.20.0
@@ -19289,8 +19289,8 @@ snapshots:
       json-schema-typed: 8.0.2
       pkce-challenge: 5.0.1
       raw-body: 3.0.2
-      zod: 3.25.76
-      zod-to-json-schema: 3.25.1(zod@3.25.76)
+      zod: 4.6.6
+      zod-to-json-schema: 3.25.1(zod@4.6.6)
     transitivePeerDependencies:
       - supports-color
 
@@ -32504,10 +32504,6 @@ snapshots:
       compress-commons: 7.0.1
       normalize-path: 3.0.0
       readable-stream: 4.8.0
-
-  zod-to-json-schema@3.25.1(zod@3.25.76):
-    dependencies:
-      zod: 3.25.76
 
   zod-to-json-schema@3.25.1(zod@4.6.6):
     dependencies:

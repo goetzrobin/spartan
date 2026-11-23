@@ -41,6 +41,11 @@ export const rawConfigSchema = z
 	})
 	.strict();
 
+const partialRawConfigSchema = rawConfigSchema.partial().extend({
+	tailwind: rawConfigSchema.shape.tailwind.partial().optional(),
+	aliases: rawConfigSchema.shape.aliases.partial().optional(),
+});
+
 export const configSchema = rawConfigSchema.extend({
 	resolvedPaths: z.object({
 		cwd: z.string(),
@@ -56,7 +61,7 @@ export const configSchema = rawConfigSchema.extend({
 
 // TODO: type the key.
 // Okay for now since I don't want a breaking change.
-export const workspaceConfigSchema = z.record(configSchema);
+export const workspaceConfigSchema = z.record(z.string(), configSchema);
 
 export const registryItemTypeSchema = z.enum([
 	'registry:lib',
@@ -137,7 +142,7 @@ export const registryItemCommonSchema = z.object({
 export const registryItemSchema = z.discriminatedUnion('type', [
 	registryItemCommonSchema.extend({
 		type: z.literal('registry:base'),
-		config: rawConfigSchema.deepPartial().optional(),
+		config: partialRawConfigSchema.optional(),
 	}),
 	registryItemCommonSchema.extend({
 		type: z.literal('registry:font'),
