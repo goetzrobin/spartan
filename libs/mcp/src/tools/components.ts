@@ -103,7 +103,7 @@ export function registerComponentTools(server: McpServer): void {
 			const noCache = Boolean(args.noCache);
 
 			let snapshot: ComponentSnapshot;
-			let cacheInfo = '';
+			let cacheInfo: string;
 
 			if (!noCache) {
 				const cached = await cacheManager.getComponent(name, 'full');

@@ -79,7 +79,7 @@ export function registerBlockTools(server: McpServer): void {
 			// two formats can never drift for the same block/version.
 			const cacheKey = `${name}__html`;
 			let html: string;
-			let cacheInfo = '';
+			let cacheInfo: string;
 
 			if (!noCache) {
 				const cached = await cacheManager.getBlock(cacheKey);

@@ -14,14 +14,13 @@ export interface StateTracker {
 }
 
 export function controlStateEqual(a: ControlState | null, b: ControlState | null): boolean {
+	if (a === b) return true;
+	if (a == null || b == null) return false;
 	return (
-		a === b ||
-		(a != null &&
-			b != null &&
-			a.dirty === b.dirty &&
-			a.invalid === b.invalid &&
-			a.touched === b.touched &&
-			a.spartanInvalid === b.spartanInvalid &&
-			a.errors === b.errors)
+		a.dirty === b.dirty &&
+		a.invalid === b.invalid &&
+		a.touched === b.touched &&
+		a.spartanInvalid === b.spartanInvalid &&
+		a.errors === b.errors
 	);
 }

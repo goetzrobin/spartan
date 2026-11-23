@@ -75,5 +75,5 @@ export function provideBrnAutocompleteConfig<T>(config: Partial<BrnAutocompleteC
 
 export function injectBrnAutocompleteConfig<T>(): BrnAutocompleteConfig<T> {
 	const injectedConfig = inject(BrnAutocompleteConfigToken, { optional: true });
-	return injectedConfig ? (injectedConfig as BrnAutocompleteConfig<T>) : getDefaultConfig();
+	return injectedConfig ?? getDefaultConfig();
 }
