@@ -1,10 +1,10 @@
 import { type InjectOptions, InjectionToken, type Provider, type Type, forwardRef, inject } from '@angular/core';
 
-interface InjectFn<TTokenValue> {
+type InjectFn<TTokenValue> = {
 	(): TTokenValue;
 	(injectOptions: InjectOptions & { optional?: false }): TTokenValue;
 	(injectOptions: InjectOptions & { optional: true }): TTokenValue | null;
-}
+};
 
 type ProvideFn<TTokenValue> = (value: TTokenValue) => Provider;
 

@@ -18,7 +18,6 @@ module.exports = [
 			},
 		},
 		rules: {
-			'@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
 			'@typescript-eslint/no-unnecessary-type-arguments': 'error',
 			'@typescript-eslint/no-unnecessary-type-assertion': 'error',
 			'@typescript-eslint/no-confusing-void-expression': 'error',

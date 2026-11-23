@@ -1,24 +1,24 @@
 export type BrnQuestionnaireItemStatus = 'unanswered' | 'answered' | 'skipped';
 export type BrnQuestionnaireShortcutMode = 'letters' | 'numbers';
 
-export interface BrnQuestionnaireChoiceDefinition {
+export type BrnQuestionnaireChoiceDefinition = {
 	disabled?: boolean;
 	value: string;
-}
+};
 
-export interface BrnQuestionnaireItemDefinition {
+export type BrnQuestionnaireItemDefinition = {
 	choices?: readonly BrnQuestionnaireChoiceDefinition[];
 	disabled?: boolean;
 	name: string;
 	required?: boolean;
-}
+};
 
-export interface BrnQuestionnaireRootState {
+export type BrnQuestionnaireRootState = {
 	current: number;
 	first: boolean;
 	last: boolean;
 	total: number;
-}
+};
 
 export type BrnQuestionnaireInputType =
 	| 'date'
@@ -49,12 +49,12 @@ export type BrnAnswerControlRegistration = {
 	  }
 );
 
-export interface BrnChoiceRegistration {
+export type BrnChoiceRegistration = {
 	disabled: boolean;
 	value: string;
-}
+};
 
-export interface BrnItemRegistration {
+export type BrnItemRegistration = {
 	choices: readonly BrnChoiceRegistration[];
 	disabled: boolean;
 	element: HTMLFieldSetElement;
@@ -69,9 +69,9 @@ export interface BrnItemRegistration {
 	skip: () => void;
 	status: BrnQuestionnaireItemStatus;
 	validate: () => boolean;
-}
+};
 
-export interface BrnPendingFocus {
+export type BrnPendingFocus = {
 	name: string;
 	target: 'invalid' | 'item';
-}
+};

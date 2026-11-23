@@ -30,11 +30,11 @@ import { BrnOverlayService } from './brn-overlay.service';
 
 let overlayIdSequence = 0;
 
-interface OverlayContentRegistration<TContext> {
+type OverlayContentRegistration<TContext> = {
 	template: TemplateRef<unknown>;
 	context: Signal<TContext | undefined>;
 	panelClass: Signal<string | null | undefined>;
-}
+};
 
 @Directive({
 	selector: '[brnOverlay],brn-overlay',

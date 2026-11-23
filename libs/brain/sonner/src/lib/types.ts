@@ -13,7 +13,7 @@ export type PromiseData<ToastData = unknown> = ExternalToast & {
 	finally?: () => void | Promise<void>;
 };
 
-export interface ToastT {
+export type ToastT = {
 	/**
 	 * Custom id for the toast.
 	 *
@@ -114,28 +114,28 @@ export interface ToastT {
 	 * Test id for the toast for reliable e2e testing with data-testid attributes.
 	 */
 	testId?: string;
-}
+};
 
 export type Position = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' | 'bottom-center';
 
-export interface HeightT {
+export type HeightT = {
 	height: number;
 	toastId: number | string;
 	position: Position;
-}
+};
 
 export type Theme = 'light' | 'dark' | 'system';
 
-export interface ToastToDismiss {
+export type ToastToDismiss = {
 	id: number | string;
 	dismiss: boolean;
-}
+};
 
 export type ExternalToast = Omit<ToastT, 'id' | 'type' | 'title'> & {
 	id?: number | string;
 };
 
-export interface ToasterProps {
+export type ToasterProps = {
 	/**
 	 * Dark toasts in light mode and vice versa.
 	 *
@@ -226,9 +226,9 @@ export interface ToasterProps {
 	 * @default -
 	 */
 	loadingIcon: TemplateRef<unknown>;
-}
+};
 
-export interface ToastOptions {
+export type ToastOptions = {
 	/**
 	 * The classes applied to the toast element.
 	 */
@@ -268,7 +268,7 @@ export interface ToastOptions {
 	 * Classes to apply to the various elements of the toast.
 	 */
 	classes?: Expand<ToastClassnames>;
-}
+};
 
 /**
  * The classes applied to the various elements of the toast.
@@ -285,7 +285,7 @@ export type ToastClassnames = {
 
 type ToastTypeClasses = Partial<Record<ToastTypes, string>>;
 
-export interface ToastProps {
+export type ToastProps = {
 	toast: ToastT;
 	index: number;
 	expanded: boolean;
@@ -301,15 +301,12 @@ export interface ToastProps {
 	descriptionClass: string;
 	classes: ToastClassnames;
 	unstyled: boolean;
-}
+};
 
-export interface ToastAction {
+export type ToastAction = {
 	label: string;
 	onClick: (event: MouseEvent) => void;
-}
+};
 
-export interface ToastActionTemplateContext {
-	$implicit: ToastAction;
-	toast: ToastT;
-}
+export type ToastActionTemplateContext = { $implicit: ToastAction; toast: ToastT };
 export type ToastActionTemplateRef = TemplateRef<ToastActionTemplateContext>;

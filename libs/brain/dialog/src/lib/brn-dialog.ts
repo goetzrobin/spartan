@@ -27,11 +27,11 @@ import { injectBrnDialogDefaultOptions } from './brn-dialog-token';
 import { cssClassesToArray } from './brn-dialog-utils';
 import { BrnDialogService } from './brn-dialog.service';
 
-interface DialogContentRegistration<TContext> {
+type DialogContentRegistration<TContext> = {
 	template: TemplateRef<unknown>;
 	context: Signal<TContext | undefined>;
 	panelClass: Signal<string | null | undefined>;
-}
+};
 
 @Directive({
 	selector: '[brnDialog],brn-dialog',

@@ -8,7 +8,7 @@ import type {
 } from '@angular/cdk/overlay';
 import type { StaticProvider } from '@angular/core';
 
-export interface BrnDialogOptions {
+export type BrnDialogOptions = {
 	ariaDescribedBy: string | null | undefined;
 	ariaLabel: string | null | undefined;
 	ariaLabelledBy: string | null | undefined;
@@ -28,4 +28,4 @@ export interface BrnDialogOptions {
 	restoreFocus: RestoreFocusValue;
 	role: 'dialog' | 'alertdialog';
 	scrollStrategy: ScrollStrategy | 'close' | 'reposition' | null | undefined;
-}
+};
