@@ -43,7 +43,7 @@ Where Playwright's own browser cannot be downloaded, set `PW_CHANNEL=chrome` to 
 | Tests                          | `apps/ui-e2e/src/<component>/`                                                          |
 | Test helpers                   | `apps/ui-e2e/src/support/`                                                              |
 | Stories turned into test pages | `apps/ui-e2e/story-report.json`                                                         |
-| CI                             | `.github/workflows/verify.yml`                                                          |
+| CI (called by `ci.yml`)        | `.github/workflows/verify.yml`                                                          |
 
 The test pages are not part of the public site. `apps/app/vite.config.ts` adds their folder to
 Analog's pages (`additionalPagesDirs`) only when `VERIFY_BUILD` or `TEST_PAGES` is set, so
