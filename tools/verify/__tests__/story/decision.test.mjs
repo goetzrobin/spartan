@@ -3,6 +3,7 @@ import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
+import { compareA11y, pageViolations } from '../../../ratchet/lib/a11y.mjs';
 import { buildComment, classify, countUnselected, screenshotId } from '../../decision.mjs';
 import { comparePng, decodePng, diffPng, encodePng } from '../../lib/png.mjs';
 
@@ -88,5 +89,57 @@ describe('decision', () => {
 		);
 		const tests = [same, { ...same, component: '_pages', title: 'card--default' }];
 		assert.equal(countUnselected(pages, tests), 1);
+	});
+});
+
+describe('accessibility in the comment', () => {
+	const scan = (...ids) => [
+		{ context: 'root', violations: ids.map((id) => ({ id, impact: 'serious', help: id, nodes: [] })), passes: 1 },
+	];
+	const pageTest = (title, a11y) => ({
+		key: title,
+		component: '_pages',
+		path: [],
+		title,
+		status: 'passed',
+		a11y,
+		screenshot: null,
+	});
+	const tests = [
+		pageTest('tooltip--default', scan('aria-allowed-role', 'color-contrast')),
+		pageTest('menu--default', scan('region')),
+		pageTest('badge--default', scan()),
+	];
+	const compared = tests.map((test) => ({ test, state: 'none' }));
+	const comment = (a11y) => buildComment({ tests, compared, baseName: 'main', imageBase: '.', unselected: 0, a11y });
+
+	it('lists pages that got worse and pages not in the baseline', () => {
+		const a11y = compareA11y({ 'tooltip--default': 1, 'badge--default': 0 }, pageViolations(tests));
+		const text = comment(a11y);
+		assert.match(
+			text.split('\n')[1],
+			/\*\*3 passed, 0 failed\.\*\* 1 page has more accessibility violations than before\./,
+		);
+		assert.match(text, /### Accessibility got worse on 2 pages/);
+		assert.match(text, /- tooltip--default: 1 → 2: `aria-allowed-role`, `color-contrast`/);
+		assert.match(text, /- new page, not in the baseline: menu--default has 1: `region`/);
+		assert.doesNotMatch(text, /badge--default/);
+	});
+
+	it('shows at most ten pages', () => {
+		const many = Object.fromEntries(Array.from({ length: 12 }, (_, index) => [`page-${index}--default`, 1]));
+		const a11y = compareA11y(Object.fromEntries(Object.keys(many).map((page) => [page, 0])), many);
+		const text = comment(a11y);
+		assert.match(text, /12 pages have more accessibility violations than before\./);
+		assert.match(text, /- and 2 more/);
+		assert.equal(text.match(/^- page-/gm).length, 10);
+	});
+
+	it('adds nothing when no page got worse', () => {
+		const a11y = compareA11y({ 'tooltip--default': 2, 'menu--default': 3, 'badge--default': 0 }, pageViolations(tests));
+		assert.deepEqual(a11y.raised, []);
+		const text = comment(a11y);
+		assert.doesNotMatch(text, /Accessibility got worse|more accessibility violations/);
+		assert.equal(text, comment(null));
 	});
 });

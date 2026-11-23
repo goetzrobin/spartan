@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { compareA11y, lowerA11y, pageViolations } from '../ratchet/lib/a11y.mjs';
 import { comparePng, diffPng } from './lib/png.mjs';
 import { readRun } from './proof.mjs';
 
@@ -12,6 +13,7 @@ const SHOWN_INLINE = 6;
 const MAX_RECORDINGS = 12;
 const MAX_RECORDING_FRAMES = 45;
 const MAX_CHECK_LINES = 4;
+const MAX_A11Y_PAGES = 10;
 const LABELS = { _pages: 'Every page loads' };
 
 export function screenshotId(key) {
@@ -122,7 +124,32 @@ export function writeRecordings(directory, compared) {
 	return 'written';
 }
 
-export function buildComment({ tests, compared, baseName, imageBase, unselected, proofUrl }) {
+export function a11yRules(tests, page) {
+	const ids = tests
+		.filter((test) => test.component === '_pages' && test.title === page)
+		.flatMap((test) => test.a11y.flatMap((check) => check.violations.map((violation) => violation.id)));
+	return [...new Set(ids)];
+}
+
+export function a11ySection(tests, a11y) {
+	if (!a11y || (a11y.raised.length === 0 && a11y.unknown.length === 0)) return [];
+	const counts = pageViolations(tests);
+	const rules = (page) => {
+		const ids = a11yRules(tests, page);
+		return ids.length > 0 ? `: ${ids.map((id) => `\`${id}\``).join(', ')}` : '';
+	};
+	const entries = [
+		...a11y.raised.map(({ page, baseline, current }) => `- ${page}: ${baseline} → ${current}${rules(page)}`),
+		...a11y.unknown.map((page) => `- new page, not in the baseline: ${page} has ${counts[page]}${rules(page)}`),
+	];
+	const lines = [`### Accessibility got worse on ${entries.length} ${entries.length === 1 ? 'page' : 'pages'}`, ''];
+	lines.push(...entries.slice(0, MAX_A11Y_PAGES));
+	if (entries.length > MAX_A11Y_PAGES) lines.push(`- and ${entries.length - MAX_A11Y_PAGES} more`);
+	lines.push('');
+	return lines;
+}
+
+export function buildComment({ tests, compared, baseName, imageBase, unselected, proofUrl, a11y = null }) {
 	const count = (status) => tests.filter((test) => test.status === status).length;
 	const failed = tests.filter((test) => test.status === 'failed');
 	const changed = compared.filter((item) => item.state === 'changed');
@@ -136,6 +163,10 @@ export function buildComment({ tests, compared, baseName, imageBase, unselected,
 	if (hasBaseline) {
 		verdict.push(`${changed.length} of ${withShot.length} screenshots changed against \`${baseName}\`.`);
 		if (fresh.length > 0) verdict.push(`${fresh.length} are new.`);
+	}
+	const worse = a11y?.raised.length ?? 0;
+	if (worse > 0) {
+		verdict.push(`${worse} ${worse === 1 ? 'page has' : 'pages have'} more accessibility violations than before.`);
 	}
 	const lines = ['<!-- verification-proof -->', verdict.join(' '), ''];
 
@@ -177,6 +208,8 @@ export function buildComment({ tests, compared, baseName, imageBase, unselected,
 			lines.push('', '</details>', '');
 		});
 	}
+
+	lines.push(...a11ySection(tests, a11y));
 
 	if (changed.length > 0) {
 		lines.push('### Changed screenshots', '');
@@ -315,9 +348,19 @@ function main() {
 	const saveDir = value('--save-screenshots');
 	const changedDir = value('--changed-dir');
 	const out = value('--out', 'comment.md');
+	const a11yBaseline = value('--a11y-baseline');
+	const a11yUpdate = value('--a11y-update');
 
 	const tests = results.flatMap((file) => readRun(path.resolve(file)).tests);
 	const compared = tests.map((test) => ({ test, ...classify(test, baselineDir) }));
+	const violations = pageViolations(tests);
+	const allowed = a11yBaseline ? JSON.parse(readFileSync(a11yBaseline, 'utf8')) : null;
+	const a11y = allowed ? compareA11y(allowed, violations) : null;
+	if (a11y) writeFileSync(path.join(path.dirname(out), 'a11y-raised.json'), `${JSON.stringify(a11y, null, '\t')}\n`);
+	if (a11yUpdate) {
+		const next = lowerA11y(allowed ?? {}, violations);
+		writeFileSync(a11yUpdate, `${JSON.stringify(next, null, '\t')}\n`);
+	}
 
 	if (saveDir) {
 		mkdirSync(saveDir, { recursive: true });
@@ -348,10 +391,16 @@ function main() {
 			imageBase: value('--image-base', '.'),
 			unselected: countUnselected(value('--pages-file'), tests),
 			proofUrl: value('--proof-url'),
+			a11y,
 		}),
 	);
 	const changed = compared.filter((item) => item.state === 'changed').length;
 	console.log(`${tests.length} tests, ${changed} changed screenshots. Comment written to ${out}`);
+	if (a11y) {
+		console.log(
+			`Accessibility: ${a11y.raised.length} pages above the baseline, ${a11y.unknown.length} not in it, ${a11y.lowered.length} below it.`,
+		);
+	}
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

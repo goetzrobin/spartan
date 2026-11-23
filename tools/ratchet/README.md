@@ -32,6 +32,18 @@ All counts cover library source only. Specs, tests, stories, `test-setup.ts` and
 When you fix something, the run says which baseline can come down. Run `pnpm ratchet --update` and commit the
 new `baseline.json`. `--update` only lowers numbers (and adds new metrics). It never raises one.
 
+## Accessibility baseline
+
+`a11y-baseline.json` holds, for every test page, the number of axe violations (rules, not elements) the
+page check in `apps/ui-e2e` records. `pnpm ratchet` does not read it. The `proof` job of the verify workflow
+compares it with the pages that ran in that pull request and fails if a page has more violations or is not in
+the baseline. Pages that did not run are not judged. After fixing violations, lower it from a results file
+that covers the fixed pages (numbers only go down; new pages are added):
+
+```sh
+node tools/verify/decision.mjs --results <file> --a11y-baseline tools/ratchet/a11y-baseline.json --a11y-update tools/ratchet/a11y-baseline.json
+```
+
 ## Refreshing the shadcn snapshot
 
 The shadcn side is read from `shadcn-classes.json`, so CI does not need a shadcn checkout. To refresh it:
