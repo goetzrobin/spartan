@@ -62,8 +62,9 @@ export class BrnPopover extends BrnOverlay {
 		// the viewport. Without these, every candidate shares one align axis, the CDK finds
 		// none that fits, and it confines the overlay to the gap that is left — which reads as
 		// content squeezed to a fraction of its width rather than as content moved.
-		const opposite = align === 'start' ? 'end' : align === 'end' ? 'start' : null;
-		return opposite ? [...positionsFor(align), ...positionsFor(opposite)] : positionsFor(align);
+		if (align === 'center') return positionsFor(align);
+		const opposite = align === 'start' ? 'end' : 'start';
+		return [...positionsFor(align), ...positionsFor(opposite)];
 	}
 
 	protected override getPositionStrategy() {

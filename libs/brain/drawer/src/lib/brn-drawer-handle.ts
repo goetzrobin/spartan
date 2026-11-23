@@ -321,10 +321,12 @@ export class BrnDrawerHandle {
 	}
 
 	private _clearResetTimeout(): void {
-		if (this._resetTimeout !== null) {
-			clearTimeout(this._resetTimeout);
-			this._resetTimeout = null;
+		if (this._resetTimeout === null) {
+			return;
 		}
+
+		clearTimeout(this._resetTimeout);
+		this._resetTimeout = null;
 	}
 
 	private _animateAndClose(): void {
@@ -335,10 +337,12 @@ export class BrnDrawerHandle {
 		this._drawerEl.style.transition = 'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)';
 		this._drawerEl.style.transform = `${prop}(${targetClose}px)`;
 		this._drawerEl.style.animation = 'none';
-		if (this._backdropEl) {
-			this._backdropEl.style.transition = 'opacity 0.3s cubic-bezier(0.32, 0.72, 0, 1)';
-			this._backdropEl.style.opacity = '0';
+		if (!this._backdropEl) {
+			return;
 		}
+
+		this._backdropEl.style.transition = 'opacity 0.3s cubic-bezier(0.32, 0.72, 0, 1)';
+		this._backdropEl.style.opacity = '0';
 	}
 
 	private _cleanup(): void {

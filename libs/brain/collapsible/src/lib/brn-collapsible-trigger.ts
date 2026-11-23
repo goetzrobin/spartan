@@ -20,7 +20,7 @@ export class BrnCollapsibleTrigger {
 
 	constructor() {
 		if (!this._collapsible) {
-			throw Error('Collapsible trigger directive can only be used inside a brn-collapsible element.');
+			throw new Error('Collapsible trigger directive can only be used inside a brn-collapsible element.');
 		}
 	}
 

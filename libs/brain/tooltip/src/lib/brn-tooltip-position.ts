@@ -31,14 +31,18 @@ export const BRN_TOOLTIP_POSITIONS_MAP: Record<BrnTooltipPosition, ConnectedPosi
 
 export function getTooltipSideOffset(position: BrnTooltipPosition, sideOffset: number): { x: number; y: number } {
 	switch (position) {
-		case 'top':
+		case 'top': {
 			return { x: 0, y: -sideOffset };
-		case 'bottom':
+		}
+		case 'bottom': {
 			return { x: 0, y: sideOffset };
-		case 'left':
+		}
+		case 'left': {
 			return { x: -sideOffset, y: 0 };
-		case 'right':
+		}
+		case 'right': {
 			return { x: sideOffset, y: 0 };
+		}
 	}
 }
 

@@ -62,7 +62,8 @@ export class BrnUtcDateAdapter implements BrnDateAdapter<Date> {
 
 	compare(a: Date, b: Date): number {
 		const diff = a.getTime() - b.getTime();
-		return diff === 0 ? 0 : diff > 0 ? 1 : -1;
+		if (diff === 0) return 0;
+		return diff > 0 ? 1 : -1;
 	}
 
 	isEqual(a: Date, b: Date): boolean {

@@ -15,7 +15,9 @@ export class BrnAccordionContentLazy {
 
 	constructor() {
 		if (!this._item) {
-			throw Error('Accordion Content Lazy can only be used inside an AccordionItem. Add brnAccordionItem to parent.');
+			throw new Error(
+				'Accordion Content Lazy can only be used inside an AccordionItem. Add brnAccordionItem to parent.',
+			);
 		}
 
 		this._destroyRef.onDestroy(() => {
@@ -26,10 +28,12 @@ export class BrnAccordionContentLazy {
 			const state = this._item.state();
 
 			untracked(() => {
-				if (state === 'open' && !this._hasBeenActivated) {
-					this._viewContainerRef.createEmbeddedView(this._templateRef);
-					this._hasBeenActivated = true;
+				if (state !== 'open' || this._hasBeenActivated) {
+					return;
 				}
+
+				this._viewContainerRef.createEmbeddedView(this._templateRef);
+				this._hasBeenActivated = true;
 			});
 		});
 	}

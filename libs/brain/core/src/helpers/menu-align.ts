@@ -29,8 +29,14 @@ export const deriveMenuSideFromTransformOrigin = (transformOrigin: string, side:
 	return anchor ? (OPPOSITE_SIDE[anchor] ?? side) : side;
 };
 
+const VERTICAL_ALIGN: Record<MenuAlign, 'top' | 'center' | 'bottom'> = {
+	start: 'top',
+	center: 'center',
+	end: 'bottom',
+};
+
 export const createMenuPosition = (align: MenuAlign, side: MenuSide): ConnectedPosition[] => {
-	const verticalAlign = align === 'start' ? 'top' : align === 'end' ? 'bottom' : 'center';
+	const verticalAlign = VERTICAL_ALIGN[align];
 
 	const createPositions = (
 		originX: 'start' | 'center' | 'end',
@@ -43,14 +49,18 @@ export const createMenuPosition = (align: MenuAlign, side: MenuSide): ConnectedP
 	];
 
 	switch (side) {
-		case 'top':
+		case 'top': {
 			return createPositions(align, 'top', align, 'bottom');
-		case 'bottom':
+		}
+		case 'bottom': {
 			return createPositions(align, 'bottom', align, 'top');
-		case 'left':
+		}
+		case 'left': {
 			return createPositions('start', verticalAlign, 'end', verticalAlign);
-		case 'right':
+		}
+		case 'right': {
 			return createPositions('end', verticalAlign, 'start', verticalAlign);
+		}
 	}
 };
 

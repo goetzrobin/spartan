@@ -29,6 +29,11 @@ import {
 
 export type BrnQuestionnaireItemValue = string | string[];
 
+function valuesOf(value: BrnQuestionnaireItemValue): string[] {
+	if (Array.isArray(value)) return value;
+	return hasInputValue(value) ? [value] : [];
+}
+
 export const BRN_QUESTIONNAIRE_ITEM_VALUE_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
 	useExisting: forwardRef(() => BrnQuestionnaireItem),
@@ -509,7 +514,7 @@ export class BrnQuestionnaireItem implements ControlValueAccessor {
 
 	private applyControlValue(value: BrnQuestionnaireItemValue): void {
 		const answers = this._answers();
-		const selectedValues = new Set(Array.isArray(value) ? value : hasInputValue(value) ? [value] : []);
+		const selectedValues = new Set(valuesOf(value));
 		const scalar = Array.isArray(value) ? (value[0] ?? '') : value;
 		const choiceMatch = answers.find((answer) => answer.type === 'choice' && answer.value === scalar);
 		const nextInputValues: Record<string, string> = {};

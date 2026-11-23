@@ -305,14 +305,16 @@ export class BrnSonnerToast implements AfterViewInit, OnDestroy {
 
 	constructor() {
 		effect(() => {
-			if (this.toast().updated) {
-				// if the toast has been updated after the initial render,
-				// we want to reset the timer and set the remaining time to the
-				// new duration
-				clearTimeout(this._timeoutId);
-				this._remainingTime = this.toast().duration ?? this.duration() ?? this._config.toastLifetime;
-				this.startTimer();
+			if (!this.toast().updated) {
+				return;
 			}
+
+			// if the toast has been updated after the initial render,
+			// we want to reset the timer and set the remaining time to the
+			// new duration
+			clearTimeout(this._timeoutId);
+			this._remainingTime = this.toast().duration ?? this.duration() ?? this._config.toastLifetime;
+			this.startTimer();
 		});
 
 		afterRenderEffect((onCleanup) => {

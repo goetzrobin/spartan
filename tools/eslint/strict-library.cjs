@@ -1,4 +1,5 @@
 const path = require('node:path');
+const unicorn = require('eslint-plugin-unicorn');
 
 const classMemberOrder = {
 	memberTypes: [['signature', 'field', 'accessor'], 'constructor', ['get', 'set', 'method']],
@@ -22,6 +23,7 @@ module.exports = [
 				tsconfigRootDir: path.resolve(__dirname, '../..'),
 			},
 		},
+		plugins: { unicorn: unicorn.default ?? unicorn },
 		rules: {
 			'@typescript-eslint/no-unnecessary-type-arguments': 'error',
 			'@typescript-eslint/no-unnecessary-type-assertion': 'error',
@@ -40,6 +42,11 @@ module.exports = [
 					typeLiterals: 'never',
 				},
 			],
+			'unicorn/throw-new-error': 'error',
+			'unicorn/switch-case-braces': 'error',
+			'unicorn/no-for-each': 'error',
+			'unicorn/prefer-early-return': 'error',
+			'no-nested-ternary': 'error',
 			'@angular-eslint/use-injectable-provided-in': 'off',
 			'@angular-eslint/prefer-signal-model': 'off',
 		},

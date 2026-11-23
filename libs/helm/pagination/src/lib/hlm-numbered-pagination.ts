@@ -272,7 +272,7 @@ export function keepPaginationFocus(...watched: Signal<unknown>[]): void {
 
 	afterRenderEffect(() => {
 		// re-check after any render that can remove a focused control
-		watched.forEach((signal) => signal());
+		for (const signal of watched) signal();
 		if (!lastFocused || lastFocused.isConnected) return;
 		lastFocused = null;
 

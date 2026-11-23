@@ -69,18 +69,20 @@ export class BrnMessageScrollerContent {
 				mutationObserver.observe(content, { childList: true });
 			}
 
-			if (typeof ResizeObserver !== 'undefined') {
-				// Coalesce into rAF: handleResize mutates the spacer inside this observed
-				// element, and resizing an observed element during delivery fires
-				// "ResizeObserver loop completed with undelivered notifications".
-				resizeObserver = new ResizeObserver(() => {
-					window.cancelAnimationFrame(resizeFrame);
-					resizeFrame = window.requestAnimationFrame(() => {
-						scroller.handleResize();
-					});
-				});
-				resizeObserver.observe(content);
+			if (typeof ResizeObserver === 'undefined') {
+				return;
 			}
+
+			// Coalesce into rAF: handleResize mutates the spacer inside this observed
+			// element, and resizing an observed element during delivery fires
+			// "ResizeObserver loop completed with undelivered notifications".
+			resizeObserver = new ResizeObserver(() => {
+				window.cancelAnimationFrame(resizeFrame);
+				resizeFrame = window.requestAnimationFrame(() => {
+					scroller.handleResize();
+				});
+			});
+			resizeObserver.observe(content);
 		});
 
 		inject(DestroyRef).onDestroy(() => {

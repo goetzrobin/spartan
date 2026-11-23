@@ -283,12 +283,14 @@ export class BrnComboboxMultiple<T> implements BrnComboboxBase<T>, ControlValueA
 		const focusedEl = event.relatedTarget as HTMLElement | null;
 		const contentEl = this._content()?.el.nativeElement;
 
-		if (!currentTarget.contains(focusedEl) && !contentEl?.contains(focusedEl)) {
-			if (this.isExpanded()) {
-				this._brnPopover?.close();
-			}
-			this._onTouched?.();
+		if (currentTarget.contains(focusedEl) || contentEl?.contains(focusedEl)) {
+			return;
 		}
+
+		if (this.isExpanded()) {
+			this._brnPopover?.close();
+		}
+		this._onTouched?.();
 	}
 
 	public close(): void {

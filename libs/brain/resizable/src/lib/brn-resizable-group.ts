@@ -141,12 +141,12 @@ export class BrnResizableGroup {
 			}
 		}
 
-		panels.forEach((panel, index) => {
+		for (const [index, panel] of panels.entries()) {
 			const size = sizes[index];
 			if (size !== undefined) {
 				panel.setSize(size);
 			}
-		});
+		}
 		this._knownPanels = panels;
 		this._appliedLayout = [...sizes];
 
@@ -274,13 +274,15 @@ export class BrnResizableGroup {
 		const totalSize = newLeftSize + newRightSize;
 		const originalTotal = startLeftSize + startRightSize;
 
-		if (Math.abs(totalSize - originalTotal) < 0.01) {
-			newSizes[handleIndex] = newLeftSize;
-			newSizes[handleIndex + 1] = newRightSize;
-
-			// batch update
-			this._queueResize(newSizes);
+		if (!(Math.abs(totalSize - originalTotal) < 0.01)) {
+			return;
 		}
+
+		newSizes[handleIndex] = newLeftSize;
+		newSizes[handleIndex + 1] = newRightSize;
+
+		// batch update
+		this._queueResize(newSizes);
 	}
 
 	private _queueResize(sizes: number[]): void {
@@ -290,11 +292,13 @@ export class BrnResizableGroup {
 
 		this._resizeRaf = requestAnimationFrame(() => {
 			this._resizeRaf = null;
-			if (this._pendingSizes) {
-				this._setLayout(this._pendingSizes);
-				this.updatePanelStyles();
-				this._pendingSizes = null;
+			if (!this._pendingSizes) {
+				return;
 			}
+
+			this._setLayout(this._pendingSizes);
+			this.updatePanelStyles();
+			this._pendingSizes = null;
 		});
 	}
 
@@ -311,12 +315,12 @@ export class BrnResizableGroup {
 		const panels = this.panels();
 		const sizes = this.layout();
 
-		panels.forEach((panel, index) => {
+		for (const [index, panel] of panels.entries()) {
 			const size = sizes[index];
 			if (size !== undefined) {
 				panel.setSize(size);
 			}
-		});
+		}
 		// Keyboard resizing writes to the public model directly, so capture the applied value here as well.
 		this._appliedLayout = [...sizes];
 	}
@@ -355,11 +359,11 @@ export class BrnResizableGroup {
 			const totalOthers = sizes.reduce((sum, size, i) => (i !== index ? sum + size : sum), 0);
 			const scale = (100 - defaultSize) / totalOthers;
 
-			sizes.forEach((size, i) => {
+			for (const [i, size] of sizes.entries()) {
 				if (i !== index) {
 					sizes[i] = size * scale;
 				}
-			});
+			}
 		} else {
 			const collapsedSize = sizes[index];
 			if (collapsedSize === undefined) return;
@@ -368,11 +372,11 @@ export class BrnResizableGroup {
 			const totalOthers = sizes.reduce((sum, size, i) => (i !== index ? sum + size : sum), 0);
 			const scale = (totalOthers + collapsedSize) / totalOthers;
 
-			sizes.forEach((size, i) => {
+			for (const [i, size] of sizes.entries()) {
 				if (i !== index) {
 					sizes[i] = size * scale;
 				}
-			});
+			}
 		}
 
 		this._setLayout(sizes);

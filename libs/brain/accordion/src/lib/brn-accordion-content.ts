@@ -33,7 +33,7 @@ export class BrnAccordionContent {
 
 	constructor() {
 		if (!this._item) {
-			throw Error('Accordion Content can only be used inside an AccordionItem. Add brnAccordionItem to parent.');
+			throw new Error('Accordion Content can only be used inside an AccordionItem. Add brnAccordionItem to parent.');
 		}
 	}
 }

@@ -445,10 +445,12 @@ export class BrnQuestionnaire {
 		event.preventDefault();
 		this.setItem(firstInvalidItem.name, 'invalid');
 
-		if (firstInvalidItem.name === this.item()) {
-			firstInvalidItem.focusInvalid();
-			this._pendingFocus.set(null);
+		if (firstInvalidItem.name !== this.item()) {
+			return;
 		}
+
+		firstInvalidItem.focusInvalid();
+		this._pendingFocus.set(null);
 	}
 
 	protected onKeyDown(event: KeyboardEvent): void {

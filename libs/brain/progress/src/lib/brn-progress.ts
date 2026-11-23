@@ -45,7 +45,8 @@ export class BrnProgress implements OnChanges {
 		const value = this.value();
 		const max = this.max();
 
-		return value === null || value === undefined ? 'indeterminate' : value === max ? 'complete' : 'loading';
+		if (value === null || value === undefined) return 'indeterminate';
+		return value === max ? 'complete' : 'loading';
 	});
 
 	ngOnChanges(changes: SimpleChanges): void {
@@ -64,11 +65,11 @@ export class BrnProgress implements OnChanges {
 		}
 
 		if (value > max || value < 0) {
-			throw Error('Value must be 0 or greater and less or equal to max');
+			throw new Error('Value must be 0 or greater and less or equal to max');
 		}
 
 		if (max < 0) {
-			throw Error('max must be greater than 0');
+			throw new Error('max must be greater than 0');
 		}
 	}
 }

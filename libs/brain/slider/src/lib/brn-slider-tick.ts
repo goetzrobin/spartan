@@ -31,14 +31,14 @@ export class BrnSliderTick {
 			const tickLabelInterval = this._slider.tickLabelInterval();
 
 			// Remove any existing ticks
-			this._ticks.forEach((tick) => {
+			for (const tick of this._ticks) {
 				this._viewContainer.remove(this._viewContainer.indexOf(tick));
-			});
+			}
 
 			// Create new ticks
 			this._ticks = [];
 
-			ticks.forEach((tick, index) => {
+			for (const [index, tick] of ticks.entries()) {
 				const view = this._viewContainer.createEmbeddedView(this._templateRef, {
 					$implicit: tick,
 					index,
@@ -51,13 +51,13 @@ export class BrnSliderTick {
 				}
 
 				this._ticks.push(view);
-			});
+			}
 		});
 
 		this._destroyRef.onDestroy(() => {
-			this._ticks.forEach((tick) => {
+			for (const tick of this._ticks) {
 				this._viewContainer.remove(this._viewContainer.indexOf(tick));
-			});
+			}
 		});
 	}
 }

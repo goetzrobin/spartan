@@ -24,13 +24,13 @@ export class BrnComboboxClear {
 	constructor() {
 		effect(() => {
 			this._viewContainerRef.clear();
-			if (this._shouldShowClear()) {
-				const view = this._viewContainerRef.createEmbeddedView(this._templateRef);
-				view.rootNodes.forEach((node) => {
-					this._renderer.listen(node, 'click', (e) => {
-						e.preventDefault();
-						this.clear();
-					});
+			if (!this._shouldShowClear()) return;
+
+			const view = this._viewContainerRef.createEmbeddedView(this._templateRef);
+			for (const node of view.rootNodes) {
+				this._renderer.listen(node, 'click', (e) => {
+					e.preventDefault();
+					this.clear();
 				});
 			}
 		});

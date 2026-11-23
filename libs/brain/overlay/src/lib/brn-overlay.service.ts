@@ -66,12 +66,7 @@ export class BrnOverlayService {
 			throw new Error(`Overlay with ID: ${mergedOptions.id} already exists`);
 		}
 
-		const scrollStrategy =
-			mergedOptions.scrollStrategy === 'close'
-				? this._scrollStrategies.close()
-				: mergedOptions.scrollStrategy === 'reposition'
-					? this._scrollStrategies.reposition()
-					: (mergedOptions.scrollStrategy ?? this._scrollStrategies.block());
+		const scrollStrategy = this._scrollStrategyFor(mergedOptions.scrollStrategy);
 
 		const overlayRef = this._overlay.create({
 			positionStrategy:
@@ -154,19 +149,19 @@ export class BrnOverlayService {
 	): void {
 		if (!this._isBrowser || !attachTo) return;
 
-		const anchor = attachTo instanceof Element ? attachTo : 'nativeElement' in attachTo ? attachTo.nativeElement : null;
+		const anchor = 'nativeElement' in attachTo ? attachTo.nativeElement : attachTo;
 		if (!(anchor instanceof Element)) return;
 
-		const onScroll =
-			scrollStrategy instanceof RepositionScrollStrategy
-				? () => {
-						overlayRef.updatePosition();
-					}
-				: scrollStrategy instanceof CloseScrollStrategy
-					? () => {
-							if (overlayRef.hasAttached()) this._ngZone.run(() => overlayRef.detach());
-						}
-					: null;
+		let onScroll: (() => void) | null = null;
+		if (scrollStrategy instanceof RepositionScrollStrategy) {
+			onScroll = () => {
+				overlayRef.updatePosition();
+			};
+		} else if (scrollStrategy instanceof CloseScrollStrategy) {
+			onScroll = () => {
+				if (overlayRef.hasAttached()) this._ngZone.run(() => overlayRef.detach());
+			};
+		}
 		if (!onScroll) return;
 
 		// Containers registered as `cdkScrollable` already reach the strategy through the ScrollDispatcher.
@@ -278,5 +273,11 @@ export class BrnOverlayService {
 	private _removeFromStack(overlayRef: OverlayRef): void {
 		const index = this._overlayStack.indexOf(overlayRef);
 		if (index !== -1) this._overlayStack.splice(index, 1);
+	}
+
+	private _scrollStrategyFor(strategy: BrnOverlayOptions['scrollStrategy']) {
+		if (strategy === 'close') return this._scrollStrategies.close();
+		if (strategy === 'reposition') return this._scrollStrategies.reposition();
+		return strategy ?? this._scrollStrategies.block();
 	}
 }

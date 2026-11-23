@@ -163,6 +163,7 @@
 		"eslint": "^10.15.0",
 		"eslint-config-prettier": "10.1.8",
 		"eslint-plugin-storybook": "10.6.8",
+		"eslint-plugin-unicorn": "^80.0.0",
 		"jiti": "2.7.0",
 		"jsdom": "^26.1.0",
 		"jsonc-eslint-parser": "^2.4.2",

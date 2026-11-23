@@ -272,12 +272,14 @@ export class BrnMessageScroller {
 			return;
 		}
 
-		if (removedElement && this._messageElements.get(messageId) === removedElement) {
-			this._messageElements.delete(messageId);
-			this._visibleMessageIds.delete(messageId);
-			this._visibilityObserver?.unobserve(removedElement);
-			this.scheduleVisibilitySync();
+		if (!removedElement || this._messageElements.get(messageId) !== removedElement) {
+			return;
 		}
+
+		this._messageElements.delete(messageId);
+		this._visibleMessageIds.delete(messageId);
+		this._visibilityObserver?.unobserve(removedElement);
+		this.scheduleVisibilitySync();
 	};
 
 	/** @internal */
@@ -421,11 +423,15 @@ export class BrnMessageScroller {
 			return;
 		}
 
-		if (this._mode === 'following-bottom' || this._mode === 'anchored-to-message' || this._mode === 'settling-jump') {
-			// User gesture wins over follow / anchor / in-flight jump.
-			this._streamingTurn = null;
-			this._mode = 'free-scrolling';
+		if (
+			!(this._mode === 'following-bottom' || this._mode === 'anchored-to-message' || this._mode === 'settling-jump')
+		) {
+			return;
 		}
+
+		// User gesture wins over follow / anchor / in-flight jump.
+		this._streamingTurn = null;
+		this._mode = 'free-scrolling';
 	}
 
 	/**
@@ -526,11 +532,13 @@ export class BrnMessageScroller {
 		this.writeStateAttributes(this._scrollable());
 
 		// Visibility may have been requested before the viewport mounted.
-		if (this._visibilityTracking) {
-			this._visibilityObserver?.disconnect();
-			this._visibilityObserver = null;
-			this.observeVisibility();
+		if (!this._visibilityTracking) {
+			return;
 		}
+
+		this._visibilityObserver?.disconnect();
+		this._visibilityObserver = null;
+		this.observeVisibility();
 	}
 
 	/** @internal */
@@ -576,21 +584,23 @@ export class BrnMessageScroller {
 		this._spacer = element;
 		this._spacerGap = getFlexGap(element.parentElement ?? null);
 
-		if (this._pendingSpacerHeight !== null) {
-			const pendingHeight = this._pendingSpacerHeight;
-			this._pendingSpacerHeight = null;
-			// Force apply even when the logical height already matches.
-			this._spacerHeight = -1;
-			this.setTailSpacerHeight(pendingHeight);
-		}
+		if (this._pendingSpacerHeight === null) return;
+
+		const pendingHeight = this._pendingSpacerHeight;
+		this._pendingSpacerHeight = null;
+		// Force apply even when the logical height already matches.
+		this._spacerHeight = -1;
+		this.setTailSpacerHeight(pendingHeight);
 	}
 
 	/** @internal */
 	public clearSpacerElement(element: HTMLDivElement): void {
-		if (this._spacer === element) {
-			this._spacer = null;
-			this._spacerGap = 0;
+		if (this._spacer !== element) {
+			return;
 		}
+
+		this._spacer = null;
+		this._spacerGap = 0;
 	}
 
 	private resetForContentMount(): void {

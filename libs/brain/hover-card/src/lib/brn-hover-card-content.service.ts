@@ -169,6 +169,12 @@ const POSITION_MAP: Record<'top' | 'bottom' | 'left' | 'right', ConnectedPositio
 	right: rightFirstPositions,
 };
 
+// todo: better translation or adjusting hlm to take that into account
+function sideOf(pair: ConnectedOverlayPositionChange['connectionPair']): 'top' | 'bottom' | 'left' | 'right' {
+	if (pair.originY !== 'center') return pair.originY;
+	return pair.originX === 'start' ? 'left' : 'right';
+}
+
 @Injectable()
 export class BrnHoverCardContentService {
 	private readonly _overlay = inject(Overlay);
@@ -201,12 +207,7 @@ export class BrnHoverCardContentService {
 	public readonly side: Signal<'top' | 'bottom' | 'left' | 'right'> = toSignal(
 		this.positionChanges$.pipe(
 			map<ConnectedOverlayPositionChange, 'top' | 'bottom' | 'left' | 'right'>((change) =>
-				// todo: better translation or adjusting hlm to take that into account
-				change.connectionPair.originY === 'center'
-					? change.connectionPair.originX === 'start'
-						? 'left'
-						: 'right'
-					: change.connectionPair.originY,
+				sideOf(change.connectionPair),
 			),
 		),
 		{ initialValue: 'bottom' },

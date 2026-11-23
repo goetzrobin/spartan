@@ -175,10 +175,12 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 		effect(() => {
 			const selectedIndex = this._selectedItemIndex();
 
-			if (selectedIndex !== undefined) {
-				this._selectedIndexChanged = true;
-				this._keyManager?.updateActiveItem(selectedIndex);
+			if (selectedIndex === undefined) {
+				return;
 			}
+
+			this._selectedIndexChanged = true;
+			this._keyManager?.updateActiveItem(selectedIndex);
 		});
 	}
 
@@ -311,11 +313,13 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 
 		// If the scroll distance has been changed (tab selected, focused, scroll controls activated),
 		// then translate the header to reflect this.
-		if (this._scrollDistanceChanged) {
-			this._updateTabScrollPosition();
-			this._scrollDistanceChanged = false;
-			this._changeDetectorRef.markForCheck();
+		if (!this._scrollDistanceChanged) {
+			return;
 		}
+
+		this._updateTabScrollPosition();
+		this._scrollDistanceChanged = false;
+		this._changeDetectorRef.markForCheck();
 	}
 
 	ngOnDestroy() {
@@ -341,7 +345,7 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 
 		switch (event.key) {
 			case 'Enter':
-			case ' ':
+			case ' ': {
 				if (this.focusIndex !== this._selectedItemIndex()) {
 					const item = this.items()[this.focusIndex];
 
@@ -351,8 +355,10 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 					}
 				}
 				break;
-			default:
+			}
+			default: {
 				this._keyManager.onKeydown(event);
+			}
 		}
 	}
 
@@ -365,16 +371,18 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 		// We need to diff the text content of the header, because the MutationObserver callback
 		// will fire even if the text content didn't change which is inefficient and is prone
 		// to infinite loops if a poorly constructed expression is passed in (see #14249).
-		if (textContent !== this._currentTextContent) {
-			this._currentTextContent = textContent || '';
-
-			// The content observer runs outside the `NgZone` by default, which
-			// means that we need to bring the callback back in ourselves.
-			this._ngZone.run(() => {
-				this.updatePagination();
-				this._changeDetectorRef.markForCheck();
-			});
+		if (textContent === this._currentTextContent) {
+			return;
 		}
+
+		this._currentTextContent = textContent || '';
+
+		// The content observer runs outside the `NgZone` by default, which
+		// means that we need to bring the callback back in ourselves.
+		this._ngZone.run(() => {
+			this.updatePagination();
+			this._changeDetectorRef.markForCheck();
+		});
 	}
 
 	/**
@@ -421,22 +429,22 @@ export abstract class BrnTabsPaginatedList implements AfterContentChecked, After
 			this._scrollToLabel(tabIndex);
 		}
 
-		if (this.items()?.length) {
-			const item = this.items()[tabIndex];
-			if (!item) return;
-			item.focus();
+		if (!this.items()?.length) return;
 
-			// Do not let the browser manage scrolling to focus the element, this will be handled
-			// by using translation. In LTR, the scroll left should be 0. In RTL, the scroll width
-			// should be the full width minus the offset width.
-			const containerEl = this.tabListContainer().nativeElement;
-			const dir = this._getLayoutDirection();
+		const item = this.items()[tabIndex];
+		if (!item) return;
+		item.focus();
 
-			if (dir === 'ltr') {
-				containerEl.scrollLeft = 0;
-			} else {
-				containerEl.scrollLeft = containerEl.scrollWidth - containerEl.offsetWidth;
-			}
+		// Do not let the browser manage scrolling to focus the element, this will be handled
+		// by using translation. In LTR, the scroll left should be 0. In RTL, the scroll width
+		// should be the full width minus the offset width.
+		const containerEl = this.tabListContainer().nativeElement;
+		const dir = this._getLayoutDirection();
+
+		if (dir === 'ltr') {
+			containerEl.scrollLeft = 0;
+		} else {
+			containerEl.scrollLeft = containerEl.scrollWidth - containerEl.offsetWidth;
 		}
 	}
 

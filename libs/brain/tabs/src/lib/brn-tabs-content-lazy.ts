@@ -25,10 +25,12 @@ export class BrnTabsContentLazy {
 			const contentFor = this._content.contentFor();
 
 			untracked(() => {
-				if (activeTab === contentFor && !this._hasBeenActivated) {
-					this._viewContainerRef.createEmbeddedView(this._templateRef);
-					this._hasBeenActivated = true;
+				if (activeTab !== contentFor || this._hasBeenActivated) {
+					return;
 				}
+
+				this._viewContainerRef.createEmbeddedView(this._templateRef);
+				this._hasBeenActivated = true;
 			});
 		});
 	}

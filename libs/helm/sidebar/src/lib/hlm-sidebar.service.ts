@@ -57,13 +57,17 @@ export class HlmSidebarService {
 			// Add keyboard shortcut listener
 			const keydownHandler = (event: KeyboardEvent) => {
 				if (
-					event.key === this._config.sidebarKeyboardShortcut &&
-					(event.ctrlKey || event.metaKey) &&
-					!isEditableTarget(originalTarget(event))
+					!(
+						event.key === this._config.sidebarKeyboardShortcut &&
+						(event.ctrlKey || event.metaKey) &&
+						!isEditableTarget(originalTarget(event))
+					)
 				) {
-					event.preventDefault();
-					this.toggleSidebar();
+					return;
 				}
+
+				event.preventDefault();
+				this.toggleSidebar();
 			};
 			this._window.addEventListener('keydown', keydownHandler);
 

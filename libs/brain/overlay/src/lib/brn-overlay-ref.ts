@@ -82,7 +82,7 @@ export class BrnOverlayRef<OverlayResult = unknown> {
 	private _isWithinOrigin(target?: EventTarget | null): boolean {
 		const origin = this.initialOptions.attachTo;
 		if (!origin || !(target instanceof Node)) return false;
-		const element = origin instanceof Element ? origin : 'nativeElement' in origin ? origin.nativeElement : null;
+		const element = 'nativeElement' in origin ? origin.nativeElement : origin;
 		return element instanceof Element && element.contains(target);
 	}
 

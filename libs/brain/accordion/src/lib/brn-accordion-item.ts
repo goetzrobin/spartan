@@ -42,7 +42,7 @@ export class BrnAccordionItem {
 
 	constructor() {
 		if (!this._accordion) {
-			throw Error('Accordion item can only be used inside an Accordion. Add brnAccordion to ancestor.');
+			throw new Error('Accordion item can only be used inside an Accordion. Add brnAccordion to ancestor.');
 		}
 
 		effect(() => {
@@ -68,18 +68,22 @@ export class BrnAccordionItem {
 	private _triggerOpen(emitEvent: boolean): void {
 		if (this.disabled() || this.state() === 'open') return;
 		this._accordion.openItem(this.id);
-		if (emitEvent) {
-			this.stateChange.emit('open');
-			this.openedChange.emit(true);
+		if (!emitEvent) {
+			return;
 		}
+
+		this.stateChange.emit('open');
+		this.openedChange.emit(true);
 	}
 
 	private _triggerClose(emitEvent: boolean): void {
 		if (this.disabled() || this.state() !== 'open') return;
 		this._accordion.closeItem(this.id);
-		if (emitEvent) {
-			this.stateChange.emit('closed');
-			this.openedChange.emit(false);
+		if (!emitEvent) {
+			return;
 		}
+
+		this.stateChange.emit('closed');
+		this.openedChange.emit(false);
 	}
 }
