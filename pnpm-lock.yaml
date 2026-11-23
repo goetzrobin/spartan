@@ -386,8 +386,8 @@ importers:
         specifier: 21.4.0
         version: 21.4.0(@angular/cli@21.2.31(@types/node@22.20.5)(chokidar@5.0.0))(chokidar@5.0.0)(eslint@9.30.0(jiti@2.7.0))(typescript-eslint@8.46.3(eslint@9.30.0(jiti@2.7.0))(typescript@5.9.3))(typescript@5.9.3)
       axe-core:
-        specifier: ^4.14.1
-        version: 4.14.1
+        specifier: 4.10.3
+        version: 4.10.3
       conventional-changelog:
         specifier: ^6.0.0
         version: 6.0.0(conventional-commits-filter@5.0.0)
@@ -7362,8 +7362,8 @@ packages:
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
 
-  axe-core@4.14.1:
-    resolution: {integrity: sha512-FHfa+lmNjQZfJz1q8wKqIDwC6DExcHt/pkjNQb09a3NPjCKg2rhu5qb2S4r76ASyFNNtuFooJpZe37OgudVGtQ==}
+  axe-core@4.10.3:
+    resolution: {integrity: sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==}
     engines: {node: '>=4'}
 
   axios@1.21.1:
@@ -21579,7 +21579,7 @@ snapshots:
   '@storybook/addon-a11y@10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
       '@storybook/global': 5.0.0
-      axe-core: 4.14.1
+      axe-core: 4.10.3
       storybook: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
   '@storybook/addon-docs@10.6.8(@types/react@18.3.23)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
@@ -23424,7 +23424,7 @@ snapshots:
 
   aws4@1.13.2: {}
 
-  axe-core@4.14.1: {}
+  axe-core@4.10.3: {}
 
   axios@1.21.1:
     dependencies:
