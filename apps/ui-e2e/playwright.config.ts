@@ -46,6 +46,7 @@ export default defineConfig({
 		: {
 				command: useBuild ? 'node tools/verify/serve.mjs --port 4300' : 'pnpm nx serve app',
 				cwd: root,
+				env: { TEST_PAGES: '1' },
 				url: `${baseURL}/test`,
 				reuseExistingServer: !useBuild && !process.env['CI'],
 				timeout: 300_000,

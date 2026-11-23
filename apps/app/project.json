@@ -9,6 +9,7 @@
 		"build": {
 			"dependsOn": ["^build", "generate-docs-and-snippets", "generate-hlm-component-preview"],
 			"executor": "@analogjs/platform:vite",
+			"inputs": ["production", "^production", { "env": "VERIFY_BUILD" }, { "env": "TEST_PAGES" }],
 			"outputs": [
 				"{options.outputPath}",
 				"{workspaceRoot}/dist/apps/app/.nitro",

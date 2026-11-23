@@ -19,6 +19,7 @@ export default defineConfig(({ command, mode }) => {
 	// served as plain files. The server bundle, the prerendered docs pages and the Nitro server
 	// are for the public site; building them takes several times as long and about 6 GB of memory.
 	const isVerifyBuild = !!process.env['VERIFY_BUILD'];
+	const withTestPages = isVerifyBuild || !!process.env['TEST_PAGES'];
 
 	return {
 		root: __dirname,
@@ -93,6 +94,7 @@ export default defineConfig(({ command, mode }) => {
 			analog({
 				ssr: !isVerifyBuild,
 				static: isVerifyBuild,
+				additionalPagesDirs: withTestPages ? ['/apps/app/src/test-pages/pages'] : [],
 				content: {
 					highlighter: 'prism',
 				},

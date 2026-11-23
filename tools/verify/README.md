@@ -18,7 +18,7 @@ pnpm verify popover -- --headed --workers=1    # anything after -- goes to Playw
 
 It checks that the generated files match their sources, runs the Playwright tests, and writes
 the proof to `dist/.playwright/ui-e2e/proof/` (`index.html` to look at, `proof.md` for a comment).
-The docs dev server is started for you, or reused if `pnpm nx serve app` is already running.
+The docs dev server is started for you, or reused if `TEST_PAGES=1 pnpm nx serve app` is already running.
 `node tools/verify/proof.mjs --results <run.json> --baseline <base.json>` puts each test next to
 the same test run on the base commit and says what changed.
 
@@ -39,13 +39,19 @@ Where Playwright's own browser cannot be downloaded, set `PW_CHANNEL=chrome` to 
 
 | What                           | Where                                                                                   |
 | ------------------------------ | --------------------------------------------------------------------------------------- |
-| Test pages (generated)         | `apps/app/src/app/pages/(test)/test/<component>/` served at `/test/<component>/<story>` |
+| Test pages (generated)         | `apps/app/src/test-pages/pages/test/<component>/` served at `/test/<component>/<story>` |
 | Tests                          | `apps/ui-e2e/src/<component>/`                                                          |
 | Test helpers                   | `apps/ui-e2e/src/support/`                                                              |
 | Stories turned into test pages | `apps/ui-e2e/story-report.json`                                                         |
 | CI                             | `.github/workflows/verify.yml`                                                          |
 
-Open `/test` in the running docs app for a list of every test page.
+The test pages are not part of the public site. `apps/app/vite.config.ts` adds their folder to
+Analog's pages (`additionalPagesDirs`) only when `VERIFY_BUILD` or `TEST_PAGES` is set, so
+`pnpm nx build app` leaves them out and the `build` job in `.github/workflows/ci.yml` fails if they
+show up in it. The folder has a `pages` segment because Analog takes a page's route from the
+part of its path after `/pages/`. Playwright sets `TEST_PAGES=1` when it starts the dev server. A dev server you start
+yourself serves them only with `TEST_PAGES=1 pnpm nx serve app`; open `/test` there for a list of
+every test page.
 
 ## Test pages come from the stories
 

@@ -10,8 +10,9 @@ import { exportedHelperText, identifiersIn, parseStoryFile } from './lib/story-p
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const STORIES_DIR = 'apps/ui-storybook/stories';
-const PAGES_DIR = 'apps/app/src/app/pages/(test)/test';
-const SHARED_FROM_PAGE = '../../../../shared/test';
+const PAGES_DIR = 'apps/app/src/test-pages/pages/test';
+const SHARED_FROM_INDEX = '../../../app/shared/test';
+const SHARED_FROM_PAGE = `../${SHARED_FROM_INDEX}`;
 const REPORT = 'apps/ui-e2e/story-report.json';
 const MANIFEST = 'apps/ui-e2e/test-pages.json';
 const SKIP_LIST = 'apps/ui-e2e/story-skip.json';
@@ -181,7 +182,7 @@ function buildIndexPage(pages) {
 		'// Do not edit. Re-run the tool.',
 		`import type { RouteMeta } from '@analogjs/router';`,
 		`import { Component } from '@angular/core';`,
-		`import { SpartanTestShell } from '../../../shared/test/test-shell';`,
+		`import { SpartanTestShell } from '${SHARED_FROM_INDEX}/test-shell';`,
 		'',
 		'export const routeMeta: RouteMeta = {',
 		`\ttitle: 'Test pages',`,

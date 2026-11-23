@@ -35,7 +35,7 @@ module.exports = [
 		// and keep the stories' code as it is: their selectors, their member names (which have to
 		// match the inputs they bind to) and their loosely typed args. Stories were never linted, so
 		// the naming and ordering rules of the docs app do not apply here. Template rules still do.
-		files: ['**/pages/[(]test[)]/**/*.ts'],
+		files: ['**/src/test-pages/**/*.ts'],
 		rules: {
 			'@angular-eslint/component-selector': 'off',
 			'@typescript-eslint/consistent-type-imports': 'off',
