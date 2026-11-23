@@ -158,7 +158,7 @@ export async function fetchContent(url: string, format: 'html' | 'text' = 'html'
 		});
 	} catch (err) {
 		if (err instanceof DOMException && err.name === 'AbortError') {
-			throw new Error(`Request timed out: ${url}`);
+			throw new Error(`Request timed out: ${url}`, { cause: err });
 		}
 		throw err;
 	} finally {

@@ -987,7 +987,7 @@ export class BrnMessageScroller {
 			return false;
 		}
 
-		let handled = false;
+		let handled: boolean;
 
 		if (this._defaultScrollPosition === 'last-anchor') {
 			const content = this._content;

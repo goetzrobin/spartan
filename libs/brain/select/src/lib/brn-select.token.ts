@@ -80,5 +80,5 @@ export function provideBrnSelectConfig<T>(config: Partial<BrnSelectConfig<T>>): 
 
 export function injectBrnSelectConfig<T>(): BrnSelectConfig<T> {
 	const injectedConfig = inject(BrnSelectConfigToken, { optional: true });
-	return injectedConfig ? (injectedConfig as BrnSelectConfig<T>) : getDefaultConfig();
+	return injectedConfig ?? getDefaultConfig();
 }

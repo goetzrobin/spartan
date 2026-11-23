@@ -116,7 +116,7 @@ const getConfig = async (tree: Tree, isAngularCli: boolean): Promise<Config> => 
 	} catch (e) {
 		if (e instanceof ConfigValidationError) {
 			console.table(e.issues, ['path', 'expected', 'message']);
-			throw new Error('Config validation failed. Please fix the issues above.');
+			throw new Error('Config validation failed. Please fix the issues above.', { cause: e });
 		} else {
 			throw e;
 		}

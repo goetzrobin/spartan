@@ -46,7 +46,7 @@ export function registerDocsTools(server: McpServer): void {
 					: `${SPARTAN_DOCS_BASE}/${encodeURIComponent(topic)}`;
 
 			let content: string;
-			let cacheInfo = '';
+			let cacheInfo: string;
 			const cacheKey = `${topic}__${format}`;
 
 			if (!noCache && topic !== 'analog-dark-mode') {
