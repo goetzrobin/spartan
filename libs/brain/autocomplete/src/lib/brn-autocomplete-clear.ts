@@ -22,12 +22,12 @@ export class BrnAutocompleteClear {
 			this._viewContainerRef.clear();
 			if (this._shouldShowClear()) {
 				const view = this._viewContainerRef.createEmbeddedView(this._templateRef);
-				view.rootNodes.forEach((node) => {
+				for (const node of view.rootNodes) {
 					this._renderer.listen(node, 'click', (e) => {
 						e.preventDefault();
 						this.clear();
 					});
-				});
+				}
 			}
 		});
 	}

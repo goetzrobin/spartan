@@ -95,7 +95,7 @@ export function brnClasses(computed: () => BrnClassValue[] | string, options: Br
 			const initialBaseClasses = new Set<string>();
 
 			if (baseClasses) {
-				toClassList(baseClasses).forEach((cls) => initialBaseClasses.add(cls));
+				for (const cls of toClassList(baseClasses)) initialBaseClasses.add(cls);
 			}
 
 			manager = {
@@ -331,7 +331,7 @@ function trackClassList(manager: ElementClassManager): void {
 	const add = (...tokens: string[]) => {
 		write(
 			() => {
-				tokens.forEach((token) => (wanted.delete(token), wanted.add(token)));
+				for (const token of tokens) (wanted.delete(token), wanted.add(token));
 			},
 			() => {
 				native.add.apply(list, tokens);
@@ -341,7 +341,7 @@ function trackClassList(manager: ElementClassManager): void {
 	const remove = (...tokens: string[]) => {
 		write(
 			() => {
-				tokens.forEach((token) => wanted.delete(token));
+				for (const token of tokens) wanted.delete(token);
 			},
 			() => {
 				native.remove.apply(list, tokens);
