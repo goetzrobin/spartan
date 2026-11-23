@@ -38,8 +38,9 @@ export const routeMeta: RouteMeta = {
 				<pre>Form Control Value: {{ fruitGroup.controls.fruit.value | json }}</pre>
 			</div>
 			<form [formGroup]="fruitGroup">
+				<label hlmLabel for="item-to-string-fruit" class="sr-only">Fruit</label>
 				<hlm-select class="w-56" [disabled]="disabled" formControlName="fruit" [itemToString]="itemToString">
-					<hlm-select-trigger>
+					<hlm-select-trigger buttonId="item-to-string-fruit">
 						<hlm-select-value [placeholder]="placeholder" />
 					</hlm-select-trigger>
 					<hlm-select-content *hlmSelectPortal>

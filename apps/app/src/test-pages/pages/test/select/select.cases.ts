@@ -29,9 +29,9 @@ export const appleAndBlueberry = new FormGroup({
 	},
 	template: `
 		<form class="space-y-5" (ngSubmit)="handleSubmit()">
-			<label hlmLabel>Select a Fruit*</label>
+			<label hlmLabel for="label-and-form-fruit">Select a Fruit*</label>
 			<hlm-select class="w-56" [(ngModel)]="fruit" name="fruit">
-				<hlm-select-trigger>
+				<hlm-select-trigger buttonId="label-and-form-fruit">
 					<hlm-select-value placeholder="Select a fruit" />
 				</hlm-select-trigger>
 				<hlm-select-content *hlmSelectPortal>
@@ -71,9 +71,9 @@ export class LabelAndForm {
 			<div class="mb-3">
 				<pre>Form Control Value: {{ fruit.value | json }}</pre>
 			</div>
-			<label hlmLabel>Select a Fruit*</label>
+			<label hlmLabel for="dynamic-options-fruits">Select a Fruit*</label>
 			<hlm-select-multiple class="w-56" [formControl]="fruit">
-				<hlm-select-trigger>
+				<hlm-select-trigger buttonId="dynamic-options-fruits">
 					<hlm-select-placeholder>Select an option</hlm-select-placeholder>
 					<ng-template hlmSelectValues let-values>
 						<hlm-select-values-content>

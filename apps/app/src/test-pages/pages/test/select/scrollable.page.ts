@@ -35,6 +35,7 @@ export const routeMeta: RouteMeta = {
 	template: `
 		<spartan-test-shell>
 			<form [formGroup]="myform">
+				<label hlmLabel for="hlm-select-trigger-0" class="sr-only">Time zone</label>
 				<hlm-select formControlName="timezone" [disabled]="disabled">
 					<hlm-select-trigger class="w-[280px]">
 						<hlm-select-value [placeholder]="placeholder" />

@@ -37,8 +37,9 @@ export const routeMeta: RouteMeta = {
 			<div class="mb-3">
 				<pre data-testid="value">Form Control Value: {{ allowPayments.value | json }}</pre>
 			</div>
+			<label hlmLabel for="falsy-value-payments" class="sr-only">Payments</label>
 			<hlm-select class="w-56" [formControl]="allowPayments">
-				<hlm-select-trigger>
+				<hlm-select-trigger buttonId="falsy-value-payments">
 					<hlm-select-value placeholder="Select an option" />
 				</hlm-select-trigger>
 				<hlm-select-content *hlmSelectPortal>

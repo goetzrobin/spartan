@@ -46,7 +46,7 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 				<div hlmSidebarContent>
 					<div hlmSidebarGroup>
 						<div hlmSidebarGroupLabel>Application</div>
-						<button hlmSidebarGroupAction>
+						<button hlmSidebarGroupAction aria-label="Application actions">
 							<ng-icon name="lucideEllipsis" />
 						</button>
 
@@ -79,7 +79,7 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 										<ng-icon name="lucideHouse" />
 										<span>Home</span>
 									</button>
-									<button hlmSidebarMenuAction aria-describedby="Home">
+									<button hlmSidebarMenuAction aria-label="More Home actions" aria-describedby="Home">
 										<ng-icon name="lucideEllipsis" />
 									</button>
 								</li>
@@ -227,7 +227,7 @@ export class Sidebar {}
 				<div hlmSidebarContent>
 					<div hlmSidebarGroup>
 						<div hlmSidebarGroupLabel>Application</div>
-						<button hlmSidebarGroupAction>
+						<button hlmSidebarGroupAction aria-label="Application actions">
 							<ng-icon name="lucideEllipsis" />
 						</button>
 
@@ -260,7 +260,7 @@ export class Sidebar {}
 										<ng-icon name="lucideHouse" />
 										<span>Home</span>
 									</button>
-									<button hlmSidebarMenuAction aria-describedby="Home">
+									<button hlmSidebarMenuAction aria-label="More Home actions" aria-describedby="Home">
 										<ng-icon name="lucideEllipsis" />
 									</button>
 								</li>
