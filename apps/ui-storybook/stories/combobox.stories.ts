@@ -109,8 +109,7 @@ class ComboboxPopupStory {
 		<pre class="mt-4 text-xs">
 Touched: {{ form.get('framework')?.touched }}  |  Invalid: {{ form.get('framework')?.invalid }}  |  Value: {{
 				form.get('framework')?.value | json
-			}}</pre
-		>
+			}}</pre>
 	`,
 })
 class ComboboxReactiveFormStory {

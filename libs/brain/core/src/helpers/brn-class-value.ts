@@ -3,11 +3,4 @@
  * `clsx`, so brain can accept them without depending on a class merging package.
  */
 export type BrnClassValue =
-	| BrnClassValue[]
-	| Record<string, unknown>
-	| string
-	| number
-	| bigint
-	| null
-	| boolean
-	| undefined;
+	BrnClassValue[] | Record<string, unknown> | string | number | bigint | null | boolean | undefined;

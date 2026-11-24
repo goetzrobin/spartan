@@ -8,7 +8,7 @@ export function decodePng(buffer) {
 	let height = 0;
 	let channels = 0;
 	const chunks = [];
-	for (let offset = 8; offset < buffer.length; ) {
+	for (let offset = 8; offset < buffer.length;) {
 		const length = buffer.readUInt32BE(offset);
 		const type = buffer.toString('latin1', offset + 4, offset + 8);
 		const body = buffer.subarray(offset + 8, offset + 8 + length);
