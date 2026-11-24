@@ -2,6 +2,7 @@
 
 import angular from '@analogjs/vite-plugin-angular';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
@@ -31,8 +32,9 @@ export default defineConfig(({ mode }) => ({
 		browser: {
 			enabled: true,
 			headless: true,
-			provider: 'playwright',
-			name: 'chromium',
+			provider: playwright(),
+			isolate: true,
+			instances: [{ browser: 'chromium' }],
 		},
 	},
 	define: {
