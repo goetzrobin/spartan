@@ -82,7 +82,7 @@
 		"node-html-parser": "^7.1.0",
 		"ofetch": "^1.4.0",
 		"postcss-selector-parser": "^7.2.1",
-		"postgres": "^3.4.9",
+		"postgres": "^4.1.1",
 		"prismjs": "^1.29.0",
 		"rxjs": "~7.8.2",
 		"semver": "7.8.6",
