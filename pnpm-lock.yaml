@@ -25,17 +25,17 @@ importers:
         specifier: ^5.65.0
         version: 5.65.0
       '@analogjs/content':
-        specifier: 2.1.3
-        version: 2.1.3(6e838190d4e19d60afcc5021d302bc2b)
+        specifier: 2.9.8
+        version: 2.9.8(847887bbf3253de7fd1d419d51d2720a)
       '@analogjs/router':
-        specifier: 2.1.3
-        version: 2.1.3(@analogjs/content@2.1.3(6e838190d4e19d60afcc5021d302bc2b))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/router@21.2.26(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/platform-browser@21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(rxjs@7.8.2))
+        specifier: 2.9.8
+        version: 2.9.8(@analogjs/content@2.9.8(847887bbf3253de7fd1d419d51d2720a))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/router@21.2.26(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/platform-browser@21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(rxjs@7.8.2))
       '@analogjs/trpc':
         specifier: ~0.5.0
         version: 0.5.0(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@trpc/client@10.45.4(@trpc/server@10.45.4))(@trpc/server@10.45.4)(isomorphic-fetch@3.0.0(encoding@0.1.13))(superjson@2.2.7)
       '@analogjs/vite-plugin-angular':
-        specifier: 2.1.3
-        version: 2.1.3(@angular-devkit/build-angular@21.2.31(827ce8f70d04531bd9f752bb872fc197))(@angular/build@21.2.31(bed820f8c2af033c8bec1543bf85242f))
+        specifier: 2.9.8
+        version: 2.9.8(@angular-devkit/build-angular@21.2.31(827ce8f70d04531bd9f752bb872fc197))(@angular/build@21.2.31(bed820f8c2af033c8bec1543bf85242f))(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))
       '@angular/animations':
         specifier: 21.2.26
         version: 21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))
@@ -148,17 +148,17 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       marked:
-        specifier: 15.0.9
-        version: 15.0.9
+        specifier: 15.0.12
+        version: 15.0.12
       marked-gfm-heading-id:
         specifier: 4.1.4
-        version: 4.1.4(marked@15.0.9)
+        version: 4.1.4(marked@15.0.12)
       marked-highlight:
         specifier: 2.2.4
-        version: 2.2.4(marked@15.0.9)
+        version: 2.2.4(marked@15.0.12)
       marked-mangle:
         specifier: 1.1.14
-        version: 1.1.14(marked@15.0.9)
+        version: 1.1.14(marked@15.0.12)
       ngx-scrollbar:
         specifier: 19.1.5
         version: 19.1.5(@angular/cdk@21.2.14(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/platform-browser@21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(rxjs@7.8.2))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2)
@@ -212,8 +212,11 @@ importers:
         version: 0.16.3
     devDependencies:
       '@analogjs/platform':
-        specifier: 2.1.3
-        version: 2.1.3(68677b8b00a718b3a84d098a6b104b07)
+        specifier: 2.9.8
+        version: 2.9.8(de3332e414678baadd02a1390b4e4c8d)
+      '@analogjs/vitest-angular':
+        specifier: 2.9.8
+        version: 2.9.8(@analogjs/vite-plugin-angular@2.9.8(@angular-devkit/build-angular@21.2.31(827ce8f70d04531bd9f752bb872fc197))(@angular/build@21.2.31(bed820f8c2af033c8bec1543bf85242f))(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1)))(@angular-devkit/architect@0.2102.31(chokidar@5.0.0))(@angular-devkit/schematics@21.2.31(chokidar@5.0.0))(vitest@4.1.12)(zone.js@0.16.3)
       '@angular-devkit/build-angular':
         specifier: 21.2.31
         version: 21.2.31(827ce8f70d04531bd9f752bb872fc197)
@@ -601,14 +604,14 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@analogjs/content@2.1.3':
-    resolution: {integrity: sha512-CKtAbGwp+Psy+iECtKI/YjJ5ZYlgfcvoVyXCEXlVI8gDW2Vbj+zHqQTEkUmOOqi/JX80cLj+Q0fAaR4e1Kl+jw==}
+  '@analogjs/content@2.9.8':
+    resolution: {integrity: sha512-qMa0Uhv4pdEj7CgpxhIJ/lE0q59QFgPgNJvAjhAV3Omec7Vao9hQgODNtu75QjazL8eSFzcgWc7EkSeFyyZmJw==}
     peerDependencies:
-      '@angular/common': ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@angular/core': ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@angular/platform-browser': ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@angular/router': ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@nx/devkit': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
+      '@angular/common': ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
+      '@angular/core': ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
+      '@angular/platform-browser': ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
+      '@angular/router': ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
+      '@nx/devkit': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0 || ^23.0.0 || ^23 || ^24.0.0
       front-matter: ^4.0.2
       marked: ^15.0.7
       marked-gfm-heading-id: ^4.1.1
@@ -629,19 +632,19 @@ packages:
       sharp:
         optional: true
 
-  '@analogjs/platform@2.1.3':
-    resolution: {integrity: sha512-bm+w9s+mcoFsPM9qBlWamEvf/FLe/0LyCoFZGTEt5GA9DzwjL4yg27Xk9/DJ9jQqdIJ0gFZFUpYQLIkL/Z8f8w==}
+  '@analogjs/platform@2.9.8':
+    resolution: {integrity: sha512-jZ8EJcfHYaLOPKQnHs5xrax/M6j8T6ry1io7rrmUhopNMq3EoijJoEez1tfu6G3Sz+Gpvw0g3v1ujI2D8gwYpg==}
     peerDependencies:
-      '@nx/angular': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
-      '@nx/devkit': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
-      '@nx/vite': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
-      marked: ^15.0.7
-      marked-gfm-heading-id: ^4.1.1
-      marked-highlight: ^2.2.1
-      marked-mangle: ^1.1.10
-      marked-shiki: ^1.1.0
+      '@nx/angular': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0 || ^23.0.0 || ^23 || ^24.0.0
+      '@nx/devkit': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0 || ^23.0.0 || ^23 || ^24.0.0
+      '@nx/vite': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0 || ^23.0.0 || ^23 || ^24.0.0
+      marked: ^15.0.12
+      marked-gfm-heading-id: ^4.1.3
+      marked-highlight: ^2.2.3
+      marked-mangle: ^1.1.12
+      marked-shiki: ^1.2.1
       prismjs: '*'
-      shiki: ^1.6.1
+      shiki: ^1.29.2
       vite: '>=5.4.21 <6'
     peerDependenciesMeta:
       '@nx/angular':
@@ -659,12 +662,16 @@ packages:
       shiki:
         optional: true
 
-  '@analogjs/router@2.1.3':
-    resolution: {integrity: sha512-g1W1/KUerzqBhSiTCbJKfvoaeIc/AUJaKQiUzdnrpGTVcD6l35flAF/W3oguRf/W5g2OQuGx47f6hffUjZrotQ==}
+  '@analogjs/router@2.9.8':
+    resolution: {integrity: sha512-0v2zDJSREiWMXdKhqg64xYcsCtWQXXBhHoVZIDu+0MSGqOIgrsodq7CboI7cZm9QIpyC94+QsC/b0UkfHW67tQ==}
     peerDependencies:
-      '@analogjs/content': ^2.1.3
-      '@angular/core': ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@angular/router': ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
+      '@analogjs/content': ^2.9.8
+      '@angular/core': ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
+      '@angular/router': ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
+      '@tanstack/angular-query-experimental': ^5.80.0
+    peerDependenciesMeta:
+      '@tanstack/angular-query-experimental':
+        optional: true
 
   '@analogjs/trpc@0.5.0':
     resolution: {integrity: sha512-FPYTTAqWKS4LfOYVl9proioSwS/EEA7M1HhX4VRjzxp3hyVky0upPgqg/LWPCsQa1ieT6WAvshYOKdj9/i1E9Q==}
@@ -676,19 +683,34 @@ packages:
       isomorphic-fetch: ^3.0.0
       superjson: ^2.2.1
 
-  '@analogjs/vite-plugin-angular@2.1.3':
-    resolution: {integrity: sha512-mXL3LPMRC0nEWzSLP6sguXYUm+J4l+qRZmR9czhTQKWFP+PbNas6UHF6txe1fQs1pc/tMb7HQPZCEoaPMlol9Q==}
+  '@analogjs/vite-plugin-angular@2.9.8':
+    resolution: {integrity: sha512-r3J7uNVo9T9LTonY5hr/Df8nRM1APJa8laQ3IM14HahBa4WZ1vYVCpDb4xfP1yTn0UPVgJg56e7EkIAfXeX/wQ==}
     peerDependencies:
-      '@angular-devkit/build-angular': ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@angular/build': ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
+      '@angular-devkit/build-angular': ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
+      '@angular/build': ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
+      vite: ^6.0.0 || ^7.0.0 || ^8.0.0
     peerDependenciesMeta:
       '@angular-devkit/build-angular':
         optional: true
       '@angular/build':
         optional: true
+      vite:
+        optional: true
 
-  '@analogjs/vite-plugin-nitro@2.6.0':
-    resolution: {integrity: sha512-ygT4xlRQKc5DUQx3qXNGY3RMHYhzZWs6YKZBMZlPDnks7YjzBB2A5UrdtsAObK191ku6QWLh2nuTu0kzRzjFBQ==}
+  '@analogjs/vite-plugin-nitro@2.9.8':
+    resolution: {integrity: sha512-ueC4gakm9/sPBilxCn7763IEQt3Qlc/n/OVf1+19qrty5OE10499iy7RsPHq2f5f2qC120w9MBBNa+zK7jHeiQ==}
+
+  '@analogjs/vitest-angular@2.9.8':
+    resolution: {integrity: sha512-j6lLAvspnYagxkNmFDclZqTtwdv4uS+pwE8jK4n2gvt2Yx1PWCkFF7HnjrjUPQQSeR6EVtnAIlxgRpAQ84o/2w==}
+    peerDependencies:
+      '@analogjs/vite-plugin-angular': '*'
+      '@angular-devkit/architect': '>=0.1700.0 < 0.2300.0 || >=0.2200.0 < 0.2300.0'
+      '@angular-devkit/schematics': '>=17.0.0'
+      vitest: ^1.3.1 || ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
+      zone.js: '>=0.14.0'
+    peerDependenciesMeta:
+      zone.js:
+        optional: true
 
   '@angular-devkit/architect@0.2102.31':
     resolution: {integrity: sha512-BBge+XU4CGHBCf1BhWWhSS9MjLCRiCmVgWlVR8insbPqtyfHpsPzlsN8VqHFTydJeucIaE3wpfh6xQkLxq5fOA==}
@@ -4367,10 +4389,22 @@ packages:
   '@open-draft/until@2.1.0':
     resolution: {integrity: sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg==}
 
+  '@oxc-parser/binding-android-arm-eabi@0.121.0':
+    resolution: {integrity: sha512-n07FQcySwOlzap424/PLMtOkbS7xOu8nsJduKL8P3COGHKgKoDYXwoAHCbChfgFpHnviehrLWIPX0lKGtbEk/A==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [android]
+
   '@oxc-parser/binding-android-arm-eabi@0.127.0':
     resolution: {integrity: sha512-0LC7ye4hvqbIKxAzThzvswgHLFu2AURKzYLeSVvLdu2TBOYWQDmHnTqPLeA597BcUCxiLqLsS4CJ5uoI5WYWCQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm]
+    os: [android]
+
+  '@oxc-parser/binding-android-arm64@0.121.0':
+    resolution: {integrity: sha512-/Dd1xIXboYAicw+twT2utxPD7bL8qh7d3ej0qvaYIMj3/EgIrGR+tSnjCUkiCT6g6uTC0neSS4JY8LxhdSU/sA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
     os: [android]
 
   '@oxc-parser/binding-android-arm64@0.127.0':
@@ -4379,10 +4413,22 @@ packages:
     cpu: [arm64]
     os: [android]
 
+  '@oxc-parser/binding-darwin-arm64@0.121.0':
+    resolution: {integrity: sha512-A0jNEvv7QMtCO1yk205t3DWU9sWUjQ2KNF0hSVO5W9R9r/R1BIvzG01UQAfmtC0dQm7sCrs5puixurKSfr2bRQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [darwin]
+
   '@oxc-parser/binding-darwin-arm64@0.127.0':
     resolution: {integrity: sha512-obCE8B7ISKkJidjlhv9xRGJPOSDG2Yu6PRga9Ruaz35uintHxbp1Ki/Yc71wx4rj3Edrm0a1kzG1TAwit0wFpg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
+    os: [darwin]
+
+  '@oxc-parser/binding-darwin-x64@0.121.0':
+    resolution: {integrity: sha512-SsHzipdxTKUs3I9EOAPmnIimEeJOemqRlRDOp9LIj+96wtxZejF51gNibmoGq8KoqbT1ssAI5po/E3J+vEtXGA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
     os: [darwin]
 
   '@oxc-parser/binding-darwin-x64@0.127.0':
@@ -4391,14 +4437,32 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@oxc-parser/binding-freebsd-x64@0.121.0':
+    resolution: {integrity: sha512-v1APOTkCp+RWOIDAHRoaeW/UoaHF15a60E8eUL6kUQXh+i4K7PBwq2Wi7jm8p0ymID5/m/oC1w3W31Z/+r7HQw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [freebsd]
+
   '@oxc-parser/binding-freebsd-x64@0.127.0':
     resolution: {integrity: sha512-SDQ/3MQFw58fqQz3Z1PhSKFF3JoCF4gmlNjziDm8X02tTahCw0qJbd7FGPDKw1i4VTBZene9JPyC3mHtSvi+wA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [freebsd]
 
+  '@oxc-parser/binding-linux-arm-gnueabihf@0.121.0':
+    resolution: {integrity: sha512-PmqPQuqHZyFVWA4ycr0eu4VnTMmq9laOHZd+8R359w6kzuNZPvmmunmNJ8ybkm769A0nCoVp3TJ6dUz7B3FYIQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
   '@oxc-parser/binding-linux-arm-gnueabihf@0.127.0':
     resolution: {integrity: sha512-Av+D1MIqzV0YMGPT9we2SIZaMKD7Cxs4CvXSx/yxaWHewZjYEjScpOf5igc8IILASViw4WTnjlwUdI1KzVtDHQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-arm-musleabihf@0.121.0':
+    resolution: {integrity: sha512-vF24htj+MOH+Q7y9A8NuC6pUZu8t/C2Fr/kDOi2OcNf28oogr2xadBPXAbml802E8wRAVfbta6YLDQTearz+jw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm]
     os: [linux]
@@ -4409,12 +4473,26 @@ packages:
     cpu: [arm]
     os: [linux]
 
+  '@oxc-parser/binding-linux-arm64-gnu@0.121.0':
+    resolution: {integrity: sha512-wjH8cIG2Lu/3d64iZpbYr73hREMgKAfu7fqpXjgM2S16y2zhTfDIp8EQjxO8vlDtKP5Rc7waZW72lh8nZtWrpA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
   '@oxc-parser/binding-linux-arm64-gnu@0.127.0':
     resolution: {integrity: sha512-qdOfTcT6SY8gsJrrV92uyEUyjqMGPpIB5JZUG6QN5dukYd+7/j0kX6MwK1DgQj39jtUYixxPiaRUiEN1+0CXgQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
+
+  '@oxc-parser/binding-linux-arm64-musl@0.121.0':
+    resolution: {integrity: sha512-qT663J/W8yQFw3dtscbEi9LKJevr20V7uWs2MPGTnvNZ3rm8anhhE16gXGpxDOHeg9raySaSHKhd4IGa3YZvuw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
 
   '@oxc-parser/binding-linux-arm64-musl@0.127.0':
     resolution: {integrity: sha512-EoTCZneNFU/P2qrpEM+RHmQwt+CvDkyGESG6qhr7KaegXLZwePfbrkCDfAk8/rhxbDUVGsZILX+2tqPzFtoFWA==}
@@ -4423,10 +4501,24 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@oxc-parser/binding-linux-ppc64-gnu@0.121.0':
+    resolution: {integrity: sha512-mYNe4NhVvDBbPkAP8JaVS8lC1dsoJZWH5WCjpw5E+sjhk1R08wt3NnXYUzum7tIiWPfgQxbCMcoxgeemFASbRw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
+
   '@oxc-parser/binding-linux-ppc64-gnu@0.127.0':
     resolution: {integrity: sha512-zALjmZYgxFLHjXeudcDF0xFGNydTAtkAeXAr2EuC17ywCyFxcmQra4w0BMde0Yi/re4Bi4iwEoEXtYN7l6eBLQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-parser/binding-linux-riscv64-gnu@0.121.0':
+    resolution: {integrity: sha512-+QiFoGxhAbaI/amqX567784cDyyuZIpinBrJNxUzb+/L2aBRX67mN6Jv40pqduHf15yYByI+K5gUEygCuv0z9w==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [riscv64]
     os: [linux]
     libc: [glibc]
 
@@ -4437,6 +4529,13 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@oxc-parser/binding-linux-riscv64-musl@0.121.0':
+    resolution: {integrity: sha512-9ykEgyTa5JD/Uhv2sttbKnCfl2PieUfOjyxJC/oDL2UO0qtXOtjPLl7H8Kaj5G7p3hIvFgu3YWvAxvE0sqY+hQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [riscv64]
+    os: [linux]
+    libc: [musl]
+
   '@oxc-parser/binding-linux-riscv64-musl@0.127.0':
     resolution: {integrity: sha512-7IcC4Ao02oGpfnjt+X/oF4U2mllo2qoSkw5xxiXNKL9MCTsTiAC6616beOuehdxGcnz1bRoPC1RQ2f1GQDdN+g==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -4444,10 +4543,24 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@oxc-parser/binding-linux-s390x-gnu@0.121.0':
+    resolution: {integrity: sha512-DB1EW5VHZdc1lIRjOI3bW/wV6R6y0xlfvdVrqj6kKi7Ayu2U3UqUBdq9KviVkcUGd5Oq+dROqvUEEFRXGAM7EQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
+
   '@oxc-parser/binding-linux-s390x-gnu@0.127.0':
     resolution: {integrity: sha512-pbXIhiNFHoqWeqDNLiJ9JkpHz1IM9k4DXa66x+1GTWMG7iLxtkXgE53iiuKSXwmk3zIYmaPVfBvgcAhS583K4Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-parser/binding-linux-x64-gnu@0.121.0':
+    resolution: {integrity: sha512-s4lfobX9p4kPTclvMiH3gcQUd88VlnkMTF6n2MTMDAyX5FPNRhhRSFZK05Ykhf8Zy5NibV4PbGR6DnK7FGNN6A==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
     os: [linux]
     libc: [glibc]
 
@@ -4458,6 +4571,13 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@oxc-parser/binding-linux-x64-musl@0.121.0':
+    resolution: {integrity: sha512-P9KlyTpuBuMi3NRGpJO8MicuGZfOoqZVRP1WjOecwx8yk4L/+mrCRNc5egSi0byhuReblBF2oVoDSMgV9Bj4Hw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
   '@oxc-parser/binding-linux-x64-musl@0.127.0':
     resolution: {integrity: sha512-5eY0B/bxf1xIUxb4NOTvOI3KWtBQfPWYyKAzgcrCt0mDibSZygVpO1Pz8bkeiSZ5Jj9+M09dkggG3H8I5d0Uyg==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -4465,16 +4585,33 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@oxc-parser/binding-openharmony-arm64@0.121.0':
+    resolution: {integrity: sha512-R+4jrWOfF2OAPPhj3Eb3U5CaKNAH9/btMveMULIrcNW/hjfysFQlF8wE0GaVBr81dWz8JLgQlsxwctoL78JwXw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [openharmony]
+
   '@oxc-parser/binding-openharmony-arm64@0.127.0':
     resolution: {integrity: sha512-Gld0ajrFTUXNtdw20fVBuTQx66FA75nIVg+//pPfR3sXkuABB4mTBhl3r9JNzrJpgW//qiwxf0nWXUWGJSL3UQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [openharmony]
 
+  '@oxc-parser/binding-wasm32-wasi@0.121.0':
+    resolution: {integrity: sha512-5TFISkPTymKvsmIlKasPVTPuWxzCcrT8pM+p77+mtQbIZDd1UC8zww4CJcRI46kolmgrEX6QpKO8AvWMVZ+ifw==}
+    engines: {node: '>=14.0.0'}
+    cpu: [wasm32]
+
   '@oxc-parser/binding-wasm32-wasi@0.127.0':
     resolution: {integrity: sha512-T6KVD7rhLzFlwGRXMnxUFfkCZD8FHnb968wVXW1mXzgRFc5RNXOBY2mPPDZ77x5Ln76ltLMgtPg0cOkU1NSrEQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [wasm32]
+
+  '@oxc-parser/binding-win32-arm64-msvc@0.121.0':
+    resolution: {integrity: sha512-V0pxh4mql4XTt3aiEtRNUeBAUFOw5jzZNxPABLaOKAWrVzSr9+XUaB095lY7jqMf5t8vkfh8NManGB28zanYKw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [win32]
 
   '@oxc-parser/binding-win32-arm64-msvc@0.127.0':
     resolution: {integrity: sha512-Ujvw4X+LD1CCGULcsQcvb4YNVoBGqt+JHgNNzGGaCImELiZLk477ifUH53gIbE7EKd933NdTi25JWEr9K2HwXw==}
@@ -4482,10 +4619,22 @@ packages:
     cpu: [arm64]
     os: [win32]
 
+  '@oxc-parser/binding-win32-ia32-msvc@0.121.0':
+    resolution: {integrity: sha512-4Ob1qvYMPnlF2N9rdmKdkQFdrq16QVcQwBsO8yiPZXof0fHKFF+LmQV501XFbi7lHyrKm8rlJRfQ/M8bZZPVLw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ia32]
+    os: [win32]
+
   '@oxc-parser/binding-win32-ia32-msvc@0.127.0':
     resolution: {integrity: sha512-0cwxKO7KHQQQfo4Uf4B2SQrhgm+cJaP9OvFFhx52Tkg4bezsacu83GB2/In5bC415Ueeym+kXdnge/57rbSfTw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ia32]
+    os: [win32]
+
+  '@oxc-parser/binding-win32-x64-msvc@0.121.0':
+    resolution: {integrity: sha512-BOp1KCzdboB1tPqoCPXgntgFs0jjeSyOXHzgxVFR7B/qfr3F8r4YDacHkTOUNXtDgM8YwKnkf3rE5gwALYX7NA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
     os: [win32]
 
   '@oxc-parser/binding-win32-x64-msvc@0.127.0':
@@ -4496,6 +4645,9 @@ packages:
 
   '@oxc-project/types@0.113.0':
     resolution: {integrity: sha512-Tp3XmgxwNQ9pEN9vxgJBAqdRamHibi76iowQ38O2I4PMpcvNRQNVsU2n1x1nv9yh0XoTrGFzf7cZSGxmixxrhA==}
+
+  '@oxc-project/types@0.121.0':
+    resolution: {integrity: sha512-CGtOARQb9tyv7ECgdAlFxi0Fv7lmzvmlm2rpD/RdijOO9rfk/JvB1CjT8EnoD+tjna/IYgKKw3IV7objRb+aYw==}
 
   '@oxc-project/types@0.127.0':
     resolution: {integrity: sha512-aIYXQBo4lCbO4z0R3FHeucQHpF46l2LbMdxRvqvuRuW2OxdnSkcng5B8+K12spgLDj93rtN3+J2Vac/TIO+ciQ==}
@@ -5787,9 +5939,6 @@ packages:
 
   '@trpc/server@10.45.4':
     resolution: {integrity: sha512-5MuyK5sDuFVGHOT9EMVHgRjP5I5j3RqGymcb5D47UOp8tzn6LH0g1lEgYrAsOZ12vmk1gpxMw/v/y4xHHK/Qdg==}
-
-  '@ts-morph/common@0.22.0':
-    resolution: {integrity: sha512-HqNBuV/oIlMKdkLshXd1zKBqNQCsuPEsgQOkfFQ/eUKjRlwndXW1AjN9LVkBEIukm00gGXSRmfkl0Wv5VXLnlw==}
 
   '@ts-morph/common@0.26.1':
     resolution: {integrity: sha512-Sn28TGl/4cFpcM+jwsH1wLncYq3FtN/BIpem+HOygfBWPT5pAeS5dB4VFVzV8FbnOKHpDLZmvAl4AjPEev5idA==}
@@ -7275,9 +7424,6 @@ packages:
   co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
-
-  code-block-writer@12.0.0:
-    resolution: {integrity: sha512-q4dMFMlXtKR3XNBHyMHt/3pwYNA69EDk00lloMOaaUMKPUXBw6lpXtbu3MMVG6/uOihGnRDOlkyqsONEUj60+w==}
 
   code-block-writer@13.0.3:
     resolution: {integrity: sha512-Oofo0pq3IKnsFtuHqSF7TqBfr71aeyZDVJ0HpmqB7FBM2qEigL0iPONSCZSO9pE9dZTAxANe5XHG9Uy0YMv8cg==}
@@ -10420,8 +10566,8 @@ packages:
     peerDependencies:
       marked: '>=1 <16'
 
-  marked@15.0.9:
-    resolution: {integrity: sha512-9AW/bn9DxQeZVjR52l5jsc0W2pwuhP04QaQewPvylil12Cfr2GBfWmgp6mu8i9Jy8UlBjqDZ9uMTDuJ8QOGZJA==}
+  marked@15.0.12:
+    resolution: {integrity: sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -10670,11 +10816,6 @@ packages:
 
   mkdirp@1.0.4:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
-    engines: {node: '>=10'}
-    hasBin: true
-
-  mkdirp@3.0.1:
-    resolution: {integrity: sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -11145,6 +11286,10 @@ packages:
 
   outvariant@1.4.3:
     resolution: {integrity: sha512-+Sl2UErvtsoajRDKCE5/dBz4DIvHXQQnAxtQTF04OJxY0+DyZXSo5P5Bb7XYWOh81syohlYL24hbDwxedPUJCA==}
+
+  oxc-parser@0.121.0:
+    resolution: {integrity: sha512-ek9o58+SCv6AV7nchiAcUJy1DNE2CC5WRdBcO0mF+W4oRjNQfPO7b3pLjTHSFECpHkKGOZSQxx3hk8viIL5YCg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
 
   oxc-parser@0.127.0:
     resolution: {integrity: sha512-bkgD4qHlN7WxLdX8bLXdaU54TtQtAIg/ZBAfm0aje/mo3MRDo3P0hZSgr4U7O3xfX+fQmR5AP04JS/TGcZLcFA==}
@@ -13392,9 +13537,6 @@ packages:
       typescript: '*'
       webpack: ^5.0.0
 
-  ts-morph@21.0.1:
-    resolution: {integrity: sha512-dbDtVdEAncKctzrVZ+Nr7kHpHkv+0JDJb2MjjpBaj8bFeCkePU9rHfMklmhuLFnpeq/EJZk2IhStY6NzqgjOkg==}
-
   ts-morph@25.0.1:
     resolution: {integrity: sha512-QJEiTdnz1YjrB3JFhd626gX4rKHDLSjSVMvGGG4v7ONc3RBwa0Eei98G9AT9uNFDMtV54JyuXsFeC+OH0n6bXQ==}
 
@@ -14501,38 +14643,39 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
 
-  '@analogjs/content@2.1.3(6e838190d4e19d60afcc5021d302bc2b)':
+  '@analogjs/content@2.9.8(847887bbf3253de7fd1d419d51d2720a)':
     dependencies:
       '@angular/common': 21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2)
       '@angular/core': 21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)
       '@angular/platform-browser': 21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))
       '@angular/router': 21.2.26(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/platform-browser@21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(rxjs@7.8.2)
       front-matter: 4.0.2
-      marked: 15.0.9
-      marked-gfm-heading-id: 4.1.4(marked@15.0.9)
-      marked-highlight: 2.2.4(marked@15.0.9)
-      marked-mangle: 1.1.14(marked@15.0.9)
+      marked: 15.0.12
+      marked-gfm-heading-id: 4.1.4(marked@15.0.12)
+      marked-highlight: 2.2.4(marked@15.0.12)
+      marked-mangle: 1.1.14(marked@15.0.12)
       prismjs: 1.30.0
       rxjs: 7.8.2
       tslib: 2.9.1
     optionalDependencies:
       '@nx/devkit': 22.7.12(nx@22.7.12(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24)))
 
-  '@analogjs/platform@2.1.3(68677b8b00a718b3a84d098a6b104b07)':
+  '@analogjs/platform@2.9.8(de3332e414678baadd02a1390b4e4c8d)':
     dependencies:
-      '@analogjs/vite-plugin-angular': 2.1.3(@angular-devkit/build-angular@21.2.31(827ce8f70d04531bd9f752bb872fc197))(@angular/build@21.2.31(bed820f8c2af033c8bec1543bf85242f))
-      '@analogjs/vite-plugin-nitro': 2.6.0(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(oxc-parser@0.127.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))
-      marked: 15.0.9
-      marked-gfm-heading-id: 4.1.4(marked@15.0.9)
-      marked-mangle: 1.1.14(marked@15.0.9)
-      nitropack: 2.13.6(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(oxc-parser@0.127.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))
+      '@analogjs/vite-plugin-angular': 2.9.8(@angular-devkit/build-angular@21.2.31(827ce8f70d04531bd9f752bb872fc197))(@angular/build@21.2.31(bed820f8c2af033c8bec1543bf85242f))(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))
+      '@analogjs/vite-plugin-nitro': 2.9.8(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))
+      marked: 15.0.12
+      marked-gfm-heading-id: 4.1.4(marked@15.0.12)
+      marked-mangle: 1.1.14(marked@15.0.12)
+      nitropack: 2.13.6(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(oxc-parser@0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0))(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))
+      oxc-parser: 0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
       vite: 6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1)
       vitefu: 1.1.3(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))
     optionalDependencies:
       '@nx/angular': 22.7.12(003ad57d685ad3d58d85ae114bd6e7d4)
       '@nx/devkit': 22.7.12(nx@22.7.12(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24)))
       '@nx/vite': 22.7.12(@babel/traverse@7.29.15)(@nx/eslint@22.7.12(ad59fb76332ebc1107045cc170109c40))(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24))(nx@22.7.12(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24)))(typescript@5.9.3)(verdaccio@6.11.3(bare-buffer@3.7.3)(encoding@0.1.13)(typanion@3.14.0))(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(vitest@4.1.12)
-      marked-highlight: 2.2.4(marked@15.0.9)
+      marked-highlight: 2.2.4(marked@15.0.12)
       prismjs: 1.30.0
     transitivePeerDependencies:
       - '@angular-devkit/build-angular'
@@ -14546,6 +14689,8 @@ snapshots:
       - '@capacitor/preferences'
       - '@deno/kv'
       - '@electric-sql/pglite'
+      - '@emnapi/core'
+      - '@emnapi/runtime'
       - '@farmfe/core'
       - '@libsql/client'
       - '@netlify/blobs'
@@ -14566,7 +14711,6 @@ snapshots:
       - encoding
       - idb-keyval
       - mysql2
-      - oxc-parser
       - react-native-b4a
       - rolldown
       - sqlite3
@@ -14577,9 +14721,9 @@ snapshots:
       - webpack
       - xml2js
 
-  '@analogjs/router@2.1.3(@analogjs/content@2.1.3(6e838190d4e19d60afcc5021d302bc2b))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/router@21.2.26(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/platform-browser@21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(rxjs@7.8.2))':
+  '@analogjs/router@2.9.8(@analogjs/content@2.9.8(847887bbf3253de7fd1d419d51d2720a))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/router@21.2.26(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/platform-browser@21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(rxjs@7.8.2))':
     dependencies:
-      '@analogjs/content': 2.1.3(6e838190d4e19d60afcc5021d302bc2b)
+      '@analogjs/content': 2.9.8(847887bbf3253de7fd1d419d51d2720a)
       '@angular/core': 21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)
       '@angular/router': 21.2.26(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/platform-browser@21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(rxjs@7.8.2)
       tslib: 2.9.1
@@ -14594,18 +14738,27 @@ snapshots:
       superjson: 2.2.7
       tslib: 2.9.1
 
-  '@analogjs/vite-plugin-angular@2.1.3(@angular-devkit/build-angular@21.2.31(827ce8f70d04531bd9f752bb872fc197))(@angular/build@21.2.31(bed820f8c2af033c8bec1543bf85242f))':
+  '@analogjs/vite-plugin-angular@2.9.8(@angular-devkit/build-angular@21.2.31(827ce8f70d04531bd9f752bb872fc197))(@angular/build@21.2.31(bed820f8c2af033c8bec1543bf85242f))(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))':
     dependencies:
-      ts-morph: 21.0.1
+      magic-string: 0.30.21
+      obug: 2.2.1
+      oxc-parser: 0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
+      tinyglobby: 0.2.17
     optionalDependencies:
       '@angular-devkit/build-angular': 21.2.31(827ce8f70d04531bd9f752bb872fc197)
       '@angular/build': 21.2.31(bed820f8c2af033c8bec1543bf85242f)
+      vite: 6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
-  '@analogjs/vite-plugin-nitro@2.6.0(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(oxc-parser@0.127.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))':
+  '@analogjs/vite-plugin-nitro@2.9.8(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))':
     dependencies:
       defu: 6.1.7
       esbuild: 0.27.7
-      nitropack: 2.13.6(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(oxc-parser@0.127.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))
+      magic-string: 0.30.21
+      nitropack: 2.13.6(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(oxc-parser@0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0))(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))
+      oxc-parser: 0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
       radix3: 1.1.2
       xmlbuilder2: 4.0.3
     transitivePeerDependencies:
@@ -14618,6 +14771,8 @@ snapshots:
       - '@capacitor/preferences'
       - '@deno/kv'
       - '@electric-sql/pglite'
+      - '@emnapi/core'
+      - '@emnapi/runtime'
       - '@farmfe/core'
       - '@libsql/client'
       - '@netlify/blobs'
@@ -14638,7 +14793,6 @@ snapshots:
       - encoding
       - idb-keyval
       - mysql2
-      - oxc-parser
       - react-native-b4a
       - rolldown
       - sqlite3
@@ -14649,6 +14803,15 @@ snapshots:
       - vite
       - webpack
       - xml2js
+
+  '@analogjs/vitest-angular@2.9.8(@analogjs/vite-plugin-angular@2.9.8(@angular-devkit/build-angular@21.2.31(827ce8f70d04531bd9f752bb872fc197))(@angular/build@21.2.31(bed820f8c2af033c8bec1543bf85242f))(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1)))(@angular-devkit/architect@0.2102.31(chokidar@5.0.0))(@angular-devkit/schematics@21.2.31(chokidar@5.0.0))(vitest@4.1.12)(zone.js@0.16.3)':
+    dependencies:
+      '@analogjs/vite-plugin-angular': 2.9.8(@angular-devkit/build-angular@21.2.31(827ce8f70d04531bd9f752bb872fc197))(@angular/build@21.2.31(bed820f8c2af033c8bec1543bf85242f))(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))
+      '@angular-devkit/architect': 0.2102.31(chokidar@5.0.0)
+      '@angular-devkit/schematics': 21.2.31(chokidar@5.0.0)
+      vitest: 4.1.12(@types/node@22.20.5)(@vitest/browser-playwright@4.1.12)(@vitest/coverage-v8@4.1.12)(@vitest/ui@4.1.12)(jsdom@26.1.0)(msw@2.14.6(@types/node@22.20.5)(typescript@5.9.3))(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))
+    optionalDependencies:
+      zone.js: 0.16.3
 
   '@angular-devkit/architect@0.2102.31(chokidar@5.0.0)':
     dependencies:
@@ -19634,52 +19797,108 @@ snapshots:
   '@open-draft/until@2.1.0':
     optional: true
 
+  '@oxc-parser/binding-android-arm-eabi@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-android-arm-eabi@0.127.0':
+    optional: true
+
+  '@oxc-parser/binding-android-arm64@0.121.0':
     optional: true
 
   '@oxc-parser/binding-android-arm64@0.127.0':
     optional: true
 
+  '@oxc-parser/binding-darwin-arm64@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-darwin-arm64@0.127.0':
+    optional: true
+
+  '@oxc-parser/binding-darwin-x64@0.121.0':
     optional: true
 
   '@oxc-parser/binding-darwin-x64@0.127.0':
     optional: true
 
+  '@oxc-parser/binding-freebsd-x64@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-freebsd-x64@0.127.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm-gnueabihf@0.121.0':
     optional: true
 
   '@oxc-parser/binding-linux-arm-gnueabihf@0.127.0':
     optional: true
 
+  '@oxc-parser/binding-linux-arm-musleabihf@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-linux-arm-musleabihf@0.127.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm64-gnu@0.121.0':
     optional: true
 
   '@oxc-parser/binding-linux-arm64-gnu@0.127.0':
     optional: true
 
+  '@oxc-parser/binding-linux-arm64-musl@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-linux-arm64-musl@0.127.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-ppc64-gnu@0.121.0':
     optional: true
 
   '@oxc-parser/binding-linux-ppc64-gnu@0.127.0':
     optional: true
 
+  '@oxc-parser/binding-linux-riscv64-gnu@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-linux-riscv64-gnu@0.127.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-riscv64-musl@0.121.0':
     optional: true
 
   '@oxc-parser/binding-linux-riscv64-musl@0.127.0':
     optional: true
 
+  '@oxc-parser/binding-linux-s390x-gnu@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-linux-s390x-gnu@0.127.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-x64-gnu@0.121.0':
     optional: true
 
   '@oxc-parser/binding-linux-x64-gnu@0.127.0':
     optional: true
 
+  '@oxc-parser/binding-linux-x64-musl@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-linux-x64-musl@0.127.0':
     optional: true
 
+  '@oxc-parser/binding-openharmony-arm64@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-openharmony-arm64@0.127.0':
+    optional: true
+
+  '@oxc-parser/binding-wasm32-wasi@0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)':
+    dependencies:
+      '@napi-rs/wasm-runtime': 1.2.7(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
     optional: true
 
   '@oxc-parser/binding-wasm32-wasi@0.127.0':
@@ -19689,16 +19908,27 @@ snapshots:
       '@napi-rs/wasm-runtime': 1.2.7(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)
     optional: true
 
+  '@oxc-parser/binding-win32-arm64-msvc@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-win32-arm64-msvc@0.127.0':
     optional: true
 
+  '@oxc-parser/binding-win32-ia32-msvc@0.121.0':
+    optional: true
+
   '@oxc-parser/binding-win32-ia32-msvc@0.127.0':
+    optional: true
+
+  '@oxc-parser/binding-win32-x64-msvc@0.121.0':
     optional: true
 
   '@oxc-parser/binding-win32-x64-msvc@0.127.0':
     optional: true
 
   '@oxc-project/types@0.113.0': {}
+
+  '@oxc-project/types@0.121.0': {}
 
   '@oxc-project/types@0.127.0': {}
 
@@ -20954,13 +21184,6 @@ snapshots:
       '@trpc/server': 10.45.4
 
   '@trpc/server@10.45.4': {}
-
-  '@ts-morph/common@0.22.0':
-    dependencies:
-      fast-glob: 3.3.3
-      minimatch: 9.0.9
-      mkdirp: 3.0.1
-      path-browserify: 1.0.1
 
   '@ts-morph/common@0.26.1':
     dependencies:
@@ -22845,8 +23068,6 @@ snapshots:
   cn@0.5.2: {}
 
   co@4.6.0: {}
-
-  code-block-writer@12.0.0: {}
 
   code-block-writer@13.0.3: {}
 
@@ -26466,31 +26687,31 @@ snapshots:
 
   map-stream@0.1.0: {}
 
-  marked-gfm-heading-id@4.1.4(marked@15.0.9):
+  marked-gfm-heading-id@4.1.4(marked@15.0.12):
     dependencies:
       github-slugger: 2.0.0
-      marked: 15.0.9
+      marked: 15.0.12
 
-  marked-highlight@2.2.4(marked@15.0.9):
+  marked-highlight@2.2.4(marked@15.0.12):
     dependencies:
-      marked: 15.0.9
+      marked: 15.0.12
 
-  marked-mangle@1.1.14(marked@15.0.9):
+  marked-mangle@1.1.14(marked@15.0.12):
     dependencies:
-      marked: 15.0.9
+      marked: 15.0.12
 
-  marked-terminal@7.3.0(marked@15.0.9):
+  marked-terminal@7.3.0(marked@15.0.12):
     dependencies:
       ansi-escapes: 7.0.0
       ansi-regex: 6.2.2
       chalk: 5.6.2
       cli-highlight: 2.1.11
       cli-table3: 0.6.5
-      marked: 15.0.9
+      marked: 15.0.12
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
-  marked@15.0.9: {}
+  marked@15.0.12: {}
 
   math-intrinsics@1.1.0: {}
 
@@ -26690,8 +26911,6 @@ snapshots:
 
   mkdirp@1.0.4: {}
 
-  mkdirp@3.0.1: {}
-
   mlly@1.8.2:
     dependencies:
       acorn: 8.19.0
@@ -26856,7 +27075,7 @@ snapshots:
       rxjs: 7.8.2
       tslib: 2.9.1
 
-  nitropack@2.13.6(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(oxc-parser@0.127.0)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33)):
+  nitropack@2.13.6(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@rspack/core@1.6.8(@swc/helpers@0.5.24))(bare-buffer@3.7.3)(drizzle-orm@0.45.4(postgres@3.4.9))(encoding@0.1.13)(oxc-parser@0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0))(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33)):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.2
       '@rollup/plugin-alias': 6.0.1(rollup@4.68.8)
@@ -26921,7 +27140,7 @@ snapshots:
       uncrypto: 0.1.3
       unctx: 2.5.0
       unenv: 2.0.0-rc.24
-      unimport: 6.5.0(@rspack/core@1.6.8(@swc/helpers@0.5.24))(esbuild@0.28.2)(oxc-parser@0.127.0)(rollup@4.68.8)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))
+      unimport: 6.5.0(@rspack/core@1.6.8(@swc/helpers@0.5.24))(esbuild@0.28.2)(oxc-parser@0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0))(rollup@4.68.8)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))
       unplugin-utils: 0.3.2
       unstorage: 1.17.6(@netlify/blobs@9.1.2)(db0@0.3.4(drizzle-orm@0.45.4(postgres@3.4.9)))(ioredis@5.11.1)
       untyped: 2.0.0
@@ -27389,6 +27608,34 @@ snapshots:
 
   outvariant@1.4.3:
     optional: true
+
+  oxc-parser@0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0):
+    dependencies:
+      '@oxc-project/types': 0.121.0
+    optionalDependencies:
+      '@oxc-parser/binding-android-arm-eabi': 0.121.0
+      '@oxc-parser/binding-android-arm64': 0.121.0
+      '@oxc-parser/binding-darwin-arm64': 0.121.0
+      '@oxc-parser/binding-darwin-x64': 0.121.0
+      '@oxc-parser/binding-freebsd-x64': 0.121.0
+      '@oxc-parser/binding-linux-arm-gnueabihf': 0.121.0
+      '@oxc-parser/binding-linux-arm-musleabihf': 0.121.0
+      '@oxc-parser/binding-linux-arm64-gnu': 0.121.0
+      '@oxc-parser/binding-linux-arm64-musl': 0.121.0
+      '@oxc-parser/binding-linux-ppc64-gnu': 0.121.0
+      '@oxc-parser/binding-linux-riscv64-gnu': 0.121.0
+      '@oxc-parser/binding-linux-riscv64-musl': 0.121.0
+      '@oxc-parser/binding-linux-s390x-gnu': 0.121.0
+      '@oxc-parser/binding-linux-x64-gnu': 0.121.0
+      '@oxc-parser/binding-linux-x64-musl': 0.121.0
+      '@oxc-parser/binding-openharmony-arm64': 0.121.0
+      '@oxc-parser/binding-wasm32-wasi': 0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
+      '@oxc-parser/binding-win32-arm64-msvc': 0.121.0
+      '@oxc-parser/binding-win32-ia32-msvc': 0.121.0
+      '@oxc-parser/binding-win32-x64-msvc': 0.121.0
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   oxc-parser@0.127.0:
     dependencies:
@@ -28903,8 +29150,8 @@ snapshots:
       hosted-git-info: 8.1.0
       import-from-esm: 2.0.0
       lodash-es: 4.18.1
-      marked: 15.0.9
-      marked-terminal: 7.3.0(marked@15.0.9)
+      marked: 15.0.12
+      marked-terminal: 7.3.0(marked@15.0.12)
       micromatch: 4.0.8
       p-each-series: 3.0.0
       p-reduce: 3.0.0
@@ -29786,11 +30033,6 @@ snapshots:
       typescript: 5.9.3
       webpack: 5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33)
 
-  ts-morph@21.0.1:
-    dependencies:
-      '@ts-morph/common': 0.22.0
-      code-block-writer: 12.0.0
-
   ts-morph@25.0.1:
     dependencies:
       '@ts-morph/common': 0.26.1
@@ -29969,7 +30211,7 @@ snapshots:
 
   unicorn-magic@0.4.1: {}
 
-  unimport@6.5.0(@rspack/core@1.6.8(@swc/helpers@0.5.24))(esbuild@0.28.2)(oxc-parser@0.127.0)(rollup@4.68.8)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33)):
+  unimport@6.5.0(@rspack/core@1.6.8(@swc/helpers@0.5.24))(esbuild@0.28.2)(oxc-parser@0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0))(rollup@4.68.8)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33)):
     dependencies:
       acorn: 8.19.0
       escape-string-regexp: 5.0.0
@@ -29986,7 +30228,7 @@ snapshots:
       unplugin: 3.7.0(@rspack/core@1.6.8(@swc/helpers@0.5.24))(esbuild@0.28.2)(rollup@4.68.8)(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.32.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.24.2)(lightningcss@1.32.0)(postcss@8.5.33))
       unplugin-utils: 0.3.2
     optionalDependencies:
-      oxc-parser: 0.127.0
+      oxc-parser: 0.121.0(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
     transitivePeerDependencies:
       - '@farmfe/core'
       - '@rsbuild/core'
