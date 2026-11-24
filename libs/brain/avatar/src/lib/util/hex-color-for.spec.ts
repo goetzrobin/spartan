@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import { hexColorFor } from './hex-color-for';
 
 describe('hexColorFor', () => {
@@ -13,11 +12,11 @@ describe('hexColorFor', () => {
 	});
 
 	it('should return different colors for different names', () => {
-		expect(hexColorFor(faker.person.fullName())).not.toBe(hexColorFor(faker.person.fullName()));
+		expect(hexColorFor('Monica Gutmann')).not.toBe(hexColorFor('Brad Williamson'));
 	});
 
 	it('should return the same style when given the same name', () => {
-		const name = faker.person.fullName();
+		const name = 'Monica Gutmann';
 		expect(hexColorFor(name)).toBe(hexColorFor(name));
 	});
 });
