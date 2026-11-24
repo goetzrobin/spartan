@@ -80,7 +80,7 @@
 		"installedPackages": {
 			"brain": 0,
 			"helm": 0,
-			"cli": 18,
+			"cli": 17,
 			"mcp": 3,
 			"trpc": 0,
 			"registry": 1

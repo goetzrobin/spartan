@@ -36,7 +36,6 @@
 		"@schematics/angular": 21,
 		"cn": 0,
 		"enquirer": 2,
-		"jsonc-eslint-parser": 2,
 		"node-html-parser": 7,
 		"nx": 21,
 		"picocolors": 1,
