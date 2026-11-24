@@ -239,9 +239,9 @@ export class BrnSonnerToaster {
 	}
 
 	handleBlur(event: FocusEvent) {
-		if (
-			!(this._isFocusWithinRef() && !(event.target as HTMLOListElement).contains(event.relatedTarget as HTMLElement))
-		) {
+		if (!(
+			this._isFocusWithinRef() && !(event.target as HTMLOListElement).contains(event.relatedTarget as HTMLElement)
+		)) {
 			return;
 		}
 

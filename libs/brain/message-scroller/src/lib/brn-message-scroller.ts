@@ -423,9 +423,11 @@ export class BrnMessageScroller {
 			return;
 		}
 
-		if (
-			!(this._mode === 'following-bottom' || this._mode === 'anchored-to-message' || this._mode === 'settling-jump')
-		) {
+		if (!(
+			this._mode === 'following-bottom' ||
+			this._mode === 'anchored-to-message' ||
+			this._mode === 'settling-jump'
+		)) {
 			return;
 		}
 

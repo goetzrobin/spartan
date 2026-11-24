@@ -56,13 +56,11 @@ export class HlmSidebarService {
 
 			// Add keyboard shortcut listener
 			const keydownHandler = (event: KeyboardEvent) => {
-				if (
-					!(
-						event.key === this._config.sidebarKeyboardShortcut &&
-						(event.ctrlKey || event.metaKey) &&
-						!isEditableTarget(originalTarget(event))
-					)
-				) {
+				if (!(
+					event.key === this._config.sidebarKeyboardShortcut &&
+					(event.ctrlKey || event.metaKey) &&
+					!isEditableTarget(originalTarget(event))
+				)) {
 					return;
 				}
 

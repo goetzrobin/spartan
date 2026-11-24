@@ -36,8 +36,7 @@ export class TemplateDrivenFormSlider {
 		<div>
 			<pre data-testid="value-indicator-pre">
 				Temperature: {{ _temperatureGroup.controls.temperature.getRawValue()?.[0] }}
-			</pre
-			>
+			</pre>
 		</div>
 		<form [formGroup]="_temperatureGroup">
 			<div brnSlider aria-label="fallback-label" [min]="0" formControlName="temperature">

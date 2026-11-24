@@ -191,7 +191,7 @@ importers:
         version: 7.8.6
       storybook:
         specifier: 10.6.8
-        version: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       superjson:
         specifier: ^2.2.7
         version: 2.2.7
@@ -270,7 +270,7 @@ importers:
         version: 22.7.12(@babel/traverse@7.29.15)(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24))(nx@22.7.12(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24)))(verdaccio@6.11.3(bare-buffer@3.7.3)(encoding@0.1.13)(typanion@3.14.0))
       '@nx/storybook':
         specifier: 22.7.12
-        version: 22.7.12(d51bad75f688bf1d6548b3d55e8080c7)
+        version: 22.7.12(f457e6a7369fbe6afd18b9ede2b5d3b3)
       '@nx/vite':
         specifier: 22.7.12
         version: 22.7.12(@babel/traverse@7.29.15)(@nx/eslint@22.7.12(388ae7eeae63596c6cd8304877925020))(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24))(nx@22.7.12(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24)))(typescript@5.9.3)(verdaccio@6.11.3(bare-buffer@3.7.3)(encoding@0.1.13)(typanion@3.14.0))(vite@6.4.6(@types/node@22.20.5)(jiti@2.7.0)(less@4.9.1)(lightningcss@1.33.0)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.51.4)(tsx@4.23.15)(yaml@2.9.1))(vitest@4.1.12)
@@ -318,16 +318,16 @@ importers:
         version: 14.1.1(semantic-release@24.2.6(typescript@5.9.3))
       '@storybook/addon-a11y':
         specifier: 10.6.8
-        version: 10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+        version: 10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@storybook/addon-docs':
         specifier: 10.6.8
-        version: 10.6.8(@types/react@18.3.23)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+        version: 10.6.8(@types/react@18.3.23)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@storybook/addon-themes':
         specifier: 10.6.8
-        version: 10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+        version: 10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@storybook/angular':
         specifier: 10.6.8
-        version: 10.6.8(abdfe8808930b97e18cc1a0d83c6fd68)
+        version: 10.6.8(78cb5a02b29560a14bf38464e148a15c)
       '@swc-node/register':
         specifier: 1.12.1
         version: 1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3)
@@ -452,17 +452,17 @@ importers:
         specifier: ~10.1.4
         version: 10.1.4(postcss@8.5.33)
       prettier:
-        specifier: ^3.8.1
-        version: 3.8.1
+        specifier: ^3.10.1
+        version: 3.10.1
       prettier-plugin-organize-imports:
         specifier: ^4.3.0
-        version: 4.3.0(prettier@3.8.1)(typescript@5.9.3)
+        version: 4.3.0(prettier@3.10.1)(typescript@5.9.3)
       prettier-plugin-packagejson:
         specifier: ^3.1.0
-        version: 3.1.0(prettier@3.8.1)
+        version: 3.1.0(prettier@3.10.1)
       prettier-plugin-tailwindcss:
         specifier: ^0.8.1
-        version: 0.8.1(prettier-plugin-organize-imports@4.3.0(prettier@3.8.1)(typescript@5.9.3))(prettier@3.8.1)
+        version: 0.8.1(prettier-plugin-organize-imports@4.3.0(prettier@3.10.1)(typescript@5.9.3))(prettier@3.10.1)
       rollup:
         specifier: ^4.68.8
         version: 4.68.8
@@ -11919,8 +11919,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.8.1:
-    resolution: {integrity: sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==}
+  prettier@3.10.1:
+    resolution: {integrity: sha512-70vp3ZUYoPlFbF9uiTdXHUUCGEIp7d4+6p+8DYbkm2jP7x/3i/paXVF6dopSI3zd/CEitrZN1rc4i85xWmmXlg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -19186,7 +19186,7 @@ snapshots:
       - webpack-cli
       - webpack-hot-middleware
 
-  '@nx/storybook@22.7.12(d51bad75f688bf1d6548b3d55e8080c7)':
+  '@nx/storybook@22.7.12(f457e6a7369fbe6afd18b9ede2b5d3b3)':
     dependencies:
       '@nx/cypress': 22.7.12(a8b38d1ccc07e272dbc8b3713fb75276)
       '@nx/devkit': 22.7.12(nx@22.7.12(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24)))
@@ -19194,7 +19194,7 @@ snapshots:
       '@nx/js': 22.7.12(@babel/traverse@7.29.15)(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24))(nx@22.7.12(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.24))(@swc/types@0.1.28)(typescript@5.9.3))(@swc/core@1.16.22(@swc/helpers@0.5.24)))(verdaccio@6.11.3(bare-buffer@3.7.3)(encoding@0.1.13)(typanion@3.14.0))
       '@phenomnomnominal/tsquery': 6.2.0(typescript@5.9.3)
       semver: 7.8.6
-      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       tslib: 2.9.1
     optionalDependencies:
       '@nx/web': 22.7.12(0dd4fd60c6a305a24e951b1f13942c5e)
@@ -20413,20 +20413,20 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@storybook/addon-a11y@10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
+  '@storybook/addon-a11y@10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
       '@storybook/global': 5.0.0
       axe-core: 4.10.3
-      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
-  '@storybook/addon-docs@10.6.8(@types/react@18.3.23)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
+  '@storybook/addon-docs@10.6.8(@types/react@18.3.23)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
       '@mdx-js/react': 3.1.0(@types/react@18.3.23)(react@19.1.0)
       '@storybook/icons': 2.0.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@storybook/react-dom-shim': 10.6.8(@types/react@18.3.23)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+      '@storybook/react-dom-shim': 10.6.8(@types/react@18.3.23)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       ts-dedent: 2.2.0
       unplugin: 2.3.11
     optionalDependencies:
@@ -20434,12 +20434,12 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react-dom'
 
-  '@storybook/addon-themes@10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
+  '@storybook/addon-themes@10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
-      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       ts-dedent: 2.2.0
 
-  '@storybook/angular@10.6.8(abdfe8808930b97e18cc1a0d83c6fd68)':
+  '@storybook/angular@10.6.8(78cb5a02b29560a14bf38464e148a15c)':
     dependencies:
       '@angular-devkit/architect': 0.2102.31(chokidar@5.0.0)
       '@angular-devkit/build-angular': 21.2.31(49194c5edfa88af1546e81457eddc347)
@@ -20450,10 +20450,10 @@ snapshots:
       '@angular/core': 21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)
       '@angular/platform-browser': 21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))
       '@angular/platform-browser-dynamic': 21.2.26(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/compiler@21.2.26)(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/platform-browser@21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))
-      '@storybook/builder-webpack5': 10.6.8(@rspack/core@1.6.8(@swc/helpers@0.5.24))(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.33)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)
+      '@storybook/builder-webpack5': 10.6.8(@rspack/core@1.6.8(@swc/helpers@0.5.24))(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.33)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)
       '@storybook/global': 5.0.0
       rxjs: 7.8.2
-      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       telejson: 8.0.0
       ts-dedent: 2.2.0
       tsconfig-paths-webpack-plugin: 4.2.0
@@ -20483,9 +20483,9 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/builder-webpack5@10.6.8(@rspack/core@1.6.8(@swc/helpers@0.5.24))(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.33)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)':
+  '@storybook/builder-webpack5@10.6.8(@rspack/core@1.6.8(@swc/helpers@0.5.24))(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.33)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)':
     dependencies:
-      '@storybook/core-webpack': 10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+      '@storybook/core-webpack': 10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       case-sensitive-paths-webpack-plugin: 2.4.0
       cjs-module-lexer: 1.4.3
       css-loader: 7.1.3(@rspack/core@1.6.8(@swc/helpers@0.5.24))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.33))
@@ -20494,7 +20494,7 @@ snapshots:
       html-webpack-plugin: 5.6.3(@rspack/core@1.6.8(@swc/helpers@0.5.24))(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.33))
       magic-string: 1.4.5
       semver: 7.8.6
-      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       style-loader: 4.0.0(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.33))
       terser-webpack-plugin: 5.4.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.28.2)(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.24))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.33))
       ts-dedent: 2.2.0
@@ -20524,9 +20524,9 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/core-webpack@10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
+  '@storybook/core-webpack@10.6.8(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
-      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       ts-dedent: 2.2.0
 
   '@storybook/global@5.0.0': {}
@@ -20536,11 +20536,11 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@storybook/react-dom-shim@10.6.8(@types/react@18.3.23)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
+  '@storybook/react-dom-shim@10.6.8(@types/react@18.3.23)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      storybook: 10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
     optionalDependencies:
       '@types/react': 18.3.23
 
@@ -28066,24 +28066,24 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-organize-imports@4.3.0(prettier@3.8.1)(typescript@5.9.3):
+  prettier-plugin-organize-imports@4.3.0(prettier@3.10.1)(typescript@5.9.3):
     dependencies:
-      prettier: 3.8.1
+      prettier: 3.10.1
       typescript: 5.9.3
 
-  prettier-plugin-packagejson@3.1.0(prettier@3.8.1):
+  prettier-plugin-packagejson@3.1.0(prettier@3.10.1):
     dependencies:
       sort-package-json: 4.1.0
     optionalDependencies:
-      prettier: 3.8.1
+      prettier: 3.10.1
 
-  prettier-plugin-tailwindcss@0.8.1(prettier-plugin-organize-imports@4.3.0(prettier@3.8.1)(typescript@5.9.3))(prettier@3.8.1):
+  prettier-plugin-tailwindcss@0.8.1(prettier-plugin-organize-imports@4.3.0(prettier@3.10.1)(typescript@5.9.3))(prettier@3.10.1):
     dependencies:
-      prettier: 3.8.1
+      prettier: 3.10.1
     optionalDependencies:
-      prettier-plugin-organize-imports: 4.3.0(prettier@3.8.1)(typescript@5.9.3)
+      prettier-plugin-organize-imports: 4.3.0(prettier@3.10.1)(typescript@5.9.3)
 
-  prettier@3.8.1: {}
+  prettier@3.10.1: {}
 
   pretty-bytes@5.6.0:
     optional: true
@@ -29118,7 +29118,7 @@ snapshots:
     dependencies:
       graceful-fs: 4.2.12
 
-  storybook@10.6.8(@types/react@18.3.23)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  storybook@10.6.8(@types/react@18.3.23)(prettier@3.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       '@storybook/global': 5.0.0
       '@storybook/icons': 2.0.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -29139,7 +29139,7 @@ snapshots:
       ws: 8.23.0
     optionalDependencies:
       '@types/react': 18.3.23
-      prettier: 3.8.1
+      prettier: 3.10.1
     transitivePeerDependencies:
       - bufferutil
       - react
