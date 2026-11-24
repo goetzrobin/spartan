@@ -34,6 +34,7 @@ module.exports = [
 						'semver',
 						'tslib',
 					],
+					ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs}', '{projectRoot}/**/*.spec.ts'],
 				},
 			],
 		},
