@@ -184,7 +184,6 @@
 		"rollup-plugin-typescript-paths": "^1.5.0",
 		"rollup-plugin-visualizer": "^5.12.0",
 		"semantic-release": "^24.1.2",
-		"start-server-and-test": "^2.1.5",
 		"tailwindcss": "^4.3.3",
 		"tinyglobby": "^0.2.17",
 		"ts-morph": "^25.0.1",
