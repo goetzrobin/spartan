@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import { InitialsPipe } from './initials.pipe';
 
 describe('InitialsPipe', () => {
@@ -16,7 +15,7 @@ describe('InitialsPipe', () => {
 	it.skip('should return the uppercased initials of a provided name', () => {
 		const name = 'John Doe';
 		const otherName = 'Mary Ann Smith';
-		const randomName = faker.person.fullName();
+		const randomName = 'Monica Gutmann';
 
 		expect(pipe.transform(name)).toBe('JD');
 		expect(pipe.transform(otherName)).toBe('MS');
@@ -28,7 +27,7 @@ describe('InitialsPipe', () => {
 	it('should not capitalize the initials, when the capitalize flag is set to false', () => {
 		const name = 'john Doe';
 		const otherName = 'mary ann smith';
-		const randomName = `${faker.person.firstName()} ${faker.person.lastName()}`;
+		const randomName = 'Monica Gutmann';
 
 		expect(pipe.transform(name, false)).toBe('jD');
 		expect(pipe.transform(otherName, false)).toBe('ms');
