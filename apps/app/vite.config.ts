@@ -1,6 +1,8 @@
 /// <reference types="vitest" />
 
 import analog from '@analogjs/platform';
+import angular from '@analogjs/vite-plugin-angular';
+import nitro from '@analogjs/vite-plugin-nitro';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import * as path from 'node:path';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -47,14 +49,7 @@ export default defineConfig(({ command, mode }) => {
 			],
 		},
 		ssr: {
-			noExternal: [
-				'@spartan-ng/**',
-				'@angular/cdk/**',
-				'@ng-icons/**',
-				'ngx-scrollbar/**',
-				'@analogjs/trpc',
-				'@trpc/server',
-			],
+			noExternal: ['@spartan-ng/**', '@angular/cdk/**', '@ng-icons/**', 'ngx-scrollbar/**', '@trpc/server'],
 		},
 		build: {
 			outDir: '../../dist/apps/app/client',
@@ -147,21 +142,22 @@ export default defineConfig(({ command, mode }) => {
 						host: 'https://www.spartan.ng',
 					},
 				},
-				nitro: {
-					logLevel: 4,
-					...(isServe ? { output: { publicDir: path.resolve(__dirname, 'src/public') } } : {}),
-					prerender: {
-						concurrency: 1,
+			}),
+			angular(),
+			nitro({
+				logLevel: 4,
+				...(isServe ? { output: { publicDir: path.resolve(__dirname, 'src/public') } } : {}),
+				prerender: {
+					concurrency: 1,
+				},
+				serverAssets: [
+					{
+						baseName: 'data',
+						dir: './src/public/data',
 					},
-					serverAssets: [
-						{
-							baseName: 'data',
-							dir: './src/public/data',
-						},
-					],
-					rollupConfig: {
-						plugins: [],
-					},
+				],
+				rollupConfig: {
+					plugins: [],
 				},
 			}),
 			nxViteTsPaths(),
