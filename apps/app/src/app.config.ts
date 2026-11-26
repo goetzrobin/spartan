@@ -1,6 +1,6 @@
-import { provideFileRouter, requestContextInterceptor } from '@analogjs/router';
+import { provideFileRouter } from '@analogjs/router';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import type { ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PreloadAllModules, withInMemoryScrolling, withNavigationErrorHandler, withPreloading } from '@angular/router';
@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
 		),
 		provideClientHydration(),
 		provideTrpcClient(),
-		provideHttpClient(withFetch(), withInterceptors([requestContextInterceptor])),
+		provideHttpClient(withFetch()),
 		// Overlays inherit the style of their trigger's island instead of one global value (see the class).
 		{ provide: OverlayContainer, useClass: StyleAwareOverlayContainer },
 	],
