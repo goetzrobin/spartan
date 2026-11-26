@@ -239,7 +239,7 @@ export class DocsDialog {
 	private readonly _cache = new Map<string, SearchHits<AlgoliaHits>>();
 
 	private readonly _algoliaResource = resource<SearchHits<AlgoliaHits> | undefined, string>({
-		params: () => this._searchVal(),
+		params: () => (this._state() === 'open' ? this._searchVal() : undefined),
 		loader: async ({ params }) => {
 			const cache = this._cache.get(params);
 			if (cache) return cache;
