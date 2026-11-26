@@ -1,6 +1,12 @@
 name: Setup
 description: Install pnpm, Node and dependencies, and restore the Nx computation cache
 
+inputs:
+  node-version:
+    description: Node version to use instead of the one in .node-version
+    required: false
+    default: ''
+
 runs:
   using: composite
   steps:
@@ -10,7 +16,8 @@ runs:
     - name: Install Node
       uses: actions/setup-node@v6
       with:
-        node-version-file: .node-version
+        node-version: ${{ inputs.node-version }}
+        node-version-file: ${{ inputs.node-version == '' && '.node-version' || '' }}
         cache: pnpm
 
     - name: Install dependencies

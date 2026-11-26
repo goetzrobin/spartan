@@ -70,6 +70,9 @@ jobs:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v5
       - uses: ./.github/actions/setup
+        with:
+          # Development runs on Node 24. One cell keeps proving the CLI on Node 22, which users still run.
+          node-version: ${{ matrix.cell == 'all-components' && '22' || '' }}
       # Each cell builds + publishes the packages to its own local verdaccio registry (in globalSetup),
       # so this is self-contained and not gated on any build job. --testNamePattern matches against the
       # full test name, so the trailing space anchors the pattern to this exact cell.
