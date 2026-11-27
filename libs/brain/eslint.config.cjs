@@ -1,6 +1,7 @@
 const nx = require('@nx/eslint-plugin');
 const baseConfig = require('../../eslint.config.cjs');
 const strictLibrary = require('../../tools/eslint/strict-library.cjs');
+const nextGeneration = require('../../tools/eslint/next-generation.cjs');
 
 module.exports = [
 	...baseConfig,
@@ -83,4 +84,5 @@ module.exports = [
 		},
 	},
 	...strictLibrary,
+	...nextGeneration,
 ];
