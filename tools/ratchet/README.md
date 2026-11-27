@@ -14,6 +14,7 @@ All counts cover library source only. Specs, tests, stories, `test-setup.ts` and
     exported interface or type alias does not count, and neither do directives (`eslint-disable`,
     `prettier-ignore`, `@ts-...`).
   - `cdkImportFiles`: files that import from `@angular/cdk`.
+  - `brnOverlayImportFiles`: files that import `@spartan-ng/brain/overlay`, the 1.x overlay base that 2.0 retires.
   - `filesOver300Lines`: files longer than 300 lines.
   - `classesThatExtend`: classes with an `extends` clause.
   - `lintDisables`: `eslint-disable`, `eslint-disable-next-line` and `eslint-disable-line` comments.

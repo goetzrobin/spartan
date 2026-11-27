@@ -3,6 +3,7 @@ import ts from 'typescript';
 export const STRUCTURE_METRICS = [
 	'commentLines',
 	'cdkImportFiles',
+	'brnOverlayImportFiles',
 	'filesOver300Lines',
 	'classesThatExtend',
 	'lintDisables',
@@ -102,12 +103,14 @@ function countCommentLines(sourceFile, comments, owners) {
 	return { commentLines: lines.size, lintDisables };
 }
 
-function isCdk(specifier) {
-	return (
-		specifier !== undefined &&
-		ts.isStringLiteral(specifier) &&
-		(specifier.text === '@angular/cdk' || specifier.text.startsWith('@angular/cdk/'))
-	);
+function moduleName(node) {
+	if (!ts.isImportDeclaration(node) && !ts.isExportDeclaration(node)) return undefined;
+	const specifier = node.moduleSpecifier;
+	return specifier !== undefined && ts.isStringLiteral(specifier) ? specifier.text : undefined;
+}
+
+function isCdk(name) {
+	return name === '@angular/cdk' || name?.startsWith('@angular/cdk/') === true;
 }
 
 function isPrivateGetter(node) {
@@ -117,11 +120,11 @@ function isPrivateGetter(node) {
 }
 
 function countNodes(sourceFile) {
-	const counts = { cdkImport: false, classesThatExtend: 0, privateGetters: 0 };
+	const counts = { cdkImport: false, brnOverlayImport: false, classesThatExtend: 0, privateGetters: 0 };
 	const visit = (node) => {
-		if ((ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) && isCdk(node.moduleSpecifier)) {
-			counts.cdkImport = true;
-		}
+		const name = moduleName(node);
+		if (isCdk(name)) counts.cdkImport = true;
+		if (name === '@spartan-ng/brain/overlay') counts.brnOverlayImport = true;
 		if (
 			ts.isClassLike(node) &&
 			(node.heritageClauses ?? []).some((clause) => clause.token === ts.SyntaxKind.ExtendsKeyword)
@@ -145,10 +148,11 @@ export function countStructure(filePath, text) {
 	const sourceFile = ts.createSourceFile(filePath, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
 	const { comments, owners } = collectComments(sourceFile);
 	const { commentLines, lintDisables } = countCommentLines(sourceFile, comments, owners);
-	const { cdkImport, classesThatExtend, privateGetters } = countNodes(sourceFile);
+	const { cdkImport, brnOverlayImport, classesThatExtend, privateGetters } = countNodes(sourceFile);
 	return {
 		commentLines,
 		cdkImportFiles: cdkImport ? 1 : 0,
+		brnOverlayImportFiles: brnOverlayImport ? 1 : 0,
 		filesOver300Lines: lineCount(text) > LINE_LIMIT ? 1 : 0,
 		classesThatExtend,
 		lintDisables,

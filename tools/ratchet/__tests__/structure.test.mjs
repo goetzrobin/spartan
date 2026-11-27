@@ -126,6 +126,16 @@ describe('countStructure declarations', () => {
 		assert.equal(counts.privateGetters, 2);
 	});
 
+	it('counts files that import the 1.x overlay, once per file', () => {
+		const source = [
+			"import { BrnOverlay } from '@spartan-ng/brain/overlay';",
+			"export type { BrnOverlayState } from '@spartan-ng/brain/overlay';",
+			"import { BrnPopover } from '@spartan-ng/brain/popover';",
+		].join('\n');
+		assert.equal(count(source).brnOverlayImportFiles, 1);
+		assert.equal(count("import { BrnPopover } from '@spartan-ng/brain/popover';").brnOverlayImportFiles, 0);
+	});
+
 	it('does not count cdk-like module names or implements clauses', () => {
 		const source = ["import { a } from '@angular/cdk-experimental';", 'export class A implements B {}'].join('\n');
 		const counts = count(source);

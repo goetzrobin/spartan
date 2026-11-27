@@ -57,6 +57,10 @@
 		"privateGetters": {
 			"brain": 7,
 			"helm": 0
+		},
+		"brnOverlayImportFiles": {
+			"brain": 8,
+			"helm": 6
 		}
 	},
 	"types": {
